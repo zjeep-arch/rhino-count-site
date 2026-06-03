@@ -112,7 +112,7 @@ echo "你的域名.com" > CNAME
 ## 上线 checklist
 
 - [ ] `data.js` 里 `meta.siteUrl` 改成真实域名
-- [ ] `sitemap.xml` 里 `yourdomain.com` 替换成真实域名
+- [x] `sitemap.xml` 里 `yourdomain.com` 替换成 GitHub Pages 域名
 - [ ] `robots.txt` 里 sitemap 链接替换成真实域名
 - [ ] DNS 已解析到 GitHub Pages IP
 - [ ] HTTPS 自动生效
