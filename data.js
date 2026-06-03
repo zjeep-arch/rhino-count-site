@@ -91,36 +91,42 @@ window.SITE_DATA = {
         cat: "AI 趋势", num: "N° 01",
         title: "当大模型开始替你思考，先学会问对问题",
         excerpt: "为什么 prompt 是 2026 年最被低估的核心技能。",
+        img: "assets/note-01.svg",
         href: "notes/prompt-is-the-skill.html"
       },
       {
         cat: "学习方法", num: "N° 02",
         title: "高考数学满分的人，怎么学一门新技术？",
         excerpt: "把陌生学科拆成三层：直觉、框架、推演。",
+        img: "assets/note-02.svg",
         href: "notes/how-to-learn-new-tech.html"
       },
       {
         cat: "大厂手记", num: "N° 03",
         title: "在 AI 大厂的第 365 天，我删掉了 47 个工具",
         excerpt: "工具越多，越要警惕被工具反向定义。",
+        img: "assets/note-03.svg",
         href: "notes/deleted-47-tools.html"
       },
       {
         cat: "踩坑实录", num: "N° 04",
         title: "用 Agent 写代码三个月，省下的时间都去哪儿了？",
         excerpt: "答案：花在 review、改 prompt 和向同事解释上。",
+        img: "assets/note-04.svg",
         href: "notes/agent-coding-three-months.html"
       },
       {
         cat: "AI 趋势", num: "N° 05",
         title: "Agent 不是产品，是新一代操作系统",
         excerpt: "从 App 思维迁移到 Agent 思维需要的 5 个转变。",
+        img: "assets/note-05.svg",
         href: "notes/agent-is-operating-system.html"
       },
       {
         cat: "随笔", num: "N° 06",
         title: "北大那四年没教我的事",
         excerpt: "毕业之后才明白，专业不是身份，是工具箱。",
+        img: "assets/note-06.svg",
         href: "notes/what-pku-didnt-teach-me.html"
       }
     ]

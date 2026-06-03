@@ -113,6 +113,13 @@
     }
     .article-footer .back-link:hover { gap: var(--s-3); }
 
+    .giscus-wrapper {
+      max-width: var(--maxw);
+      margin-inline: auto;
+      padding-inline: var(--pad);
+      padding-bottom: var(--s-7);
+    }
+
     .site-footer {
       border-top: 1px solid var(--line);
       padding: var(--s-5) 0;
@@ -180,6 +187,10 @@
 <p>AI 是很好的执行者，但还不是一个好的判断者。</p>
     </div>
 
+    <div class="giscus-wrapper">
+      <div class="giscus"></div>
+    </div>
+
     <footer class="article-footer">
       <a class="back-link" href="../">&larr; 回到犀牛伯爵首页</a>
     </footer>
@@ -197,6 +208,21 @@
       if (saved) { root.setAttribute('data-theme', saved); }
       else if (sysDark) { root.setAttribute('data-theme', 'dark'); }
     })();
+  </script>
+  <script src="https://giscus.app/client.js"
+    data-repo="zjeep-arch/rhino-count-site"
+    data-repo-id="R_kgDOOZx3aA"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOOZx3aM4CqRVM"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="preferred_color_scheme"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async>
   </script>
 </body>
 </html>

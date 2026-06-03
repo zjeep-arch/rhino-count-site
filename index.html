@@ -416,13 +416,32 @@
       background: var(--surface);
       border: 1px solid var(--line);
       border-radius: var(--radius);
-      padding: var(--s-6);
+      padding: 0;
       display: flex; flex-direction: column;
-      gap: var(--s-4);
+      gap: 0;
       position: relative;
       overflow: hidden;
       transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
       min-height: 240px;
+    }
+    .note-cover {
+      width: 100%;
+      aspect-ratio: 400 / 260;
+      overflow: hidden;
+      background: var(--bg-soft);
+      border-bottom: 1px solid var(--line);
+    }
+    .note-cover img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .note-body {
+      padding: var(--s-6);
+      display: flex; flex-direction: column;
+      gap: var(--s-4);
+      flex: 1;
     }
     .note::before {
       content: ""; position: absolute;
@@ -710,6 +729,68 @@
     /* =========================================================
      * Back to top
      * ========================================================= */
+    .subscribe-section {
+      background: var(--bg-soft);
+      border-top: 1px solid var(--line);
+      padding: var(--s-10) 0;
+      text-align: center;
+    }
+    .subscribe-inner {
+      max-width: 480px;
+      margin-inline: auto;
+    }
+    .subscribe-inner h2 {
+      font-family: var(--serif); font-weight: 700;
+      font-size: clamp(24px, 3vw, 32px);
+      margin: 0 0 var(--s-3);
+    }
+    .subscribe-inner p {
+      color: var(--muted);
+      font-size: 14px;
+      margin: 0 0 var(--s-6);
+      line-height: 1.7;
+    }
+    .subscribe-form {
+      display: flex;
+      gap: var(--s-3);
+      max-width: 400px;
+      margin-inline: auto;
+    }
+    .subscribe-form input {
+      flex: 1;
+      padding: 12px 16px;
+      border: 1px solid var(--line-2);
+      border-radius: 999px;
+      background: var(--surface);
+      color: var(--ink);
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .subscribe-form input:focus {
+      border-color: var(--accent);
+    }
+    .subscribe-form button {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 999px;
+      background: var(--ink);
+      color: var(--bg);
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: opacity 0.2s;
+      white-space: nowrap;
+    }
+    .subscribe-form button:hover {
+      opacity: 0.85;
+    }
+    .subscribe-note {
+      font-size: 12px !important;
+      color: var(--muted) !important;
+      margin-top: var(--s-4) !important;
+      opacity: 0.7;
+    }
     .back-to-top {
       position: fixed;
       right: 24px;
@@ -803,6 +884,7 @@
         <a href="#notes">笔记</a>
         <a href="#commentary">时评</a>
         <a href="#manifesto">主张</a>
+        <a href="#subscribe">订阅</a>
         <a href="#contact">联络</a>
       </nav>
       <div class="nav-actions">
@@ -840,6 +922,21 @@
     <section id="contact"></section>
   </main>
 
+  <!-- Subscription -->
+  <section id="subscribe" class="subscribe-section">
+    <div class="container">
+      <div class="subscribe-inner">
+        <h2>订阅每日时评</h2>
+        <p>每周 7 篇宏观闲聊，送到你的邮箱。纯属瞎扯，不垃圾、不营销。</p>
+        <form class="subscribe-form" action="https://formspree.io/f/meoekkrv" method="POST">
+          <input type="email" name="email" placeholder="你的邮箱" required />
+          <button type="submit">订阅</button>
+        </form>
+        <p class="subscribe-note">每周不超过 7 封，随时可退订。</p>
+      </div>
+    </div>
+  </section>
+
   <!-- Back to top -->
   <button id="backToTop" class="back-to-top" aria-label="回到顶部">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
@@ -853,6 +950,7 @@
   </footer>
 
   <script src="data.js"></script>
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
   <script>
     (function () {
       'use strict';
@@ -1022,13 +1120,16 @@
           <div class="journal-grid">
             ${j.notes.map((n, i) => `
               <article class="note fade-in fade-in-delay-${Math.min(i, 3)}">
-                <div class="note-meta">
-                  <span class="cat">${esc(n.cat)}</span>
-                  <span>${esc(n.num)}</span>
+                ${n.img ? `<div class="note-cover"><img src="${esc(n.img)}" alt="" loading="lazy"/></div>` : ''}
+                <div class="note-body">
+                  <div class="note-meta">
+                    <span class="cat">${esc(n.cat)}</span>
+                    <span>${esc(n.num)}</span>
+                  </div>
+                  <h3>${esc(n.title)}</h3>
+                  <p>${esc(n.excerpt)}</p>
+                  <a class="note-cta" href="${esc(n.href)}">READ</a>
                 </div>
-                <h3>${esc(n.title)}</h3>
-                <p>${esc(n.excerpt)}</p>
-                <a class="note-cta" href="${esc(n.href)}">READ</a>
               </article>
             `).join('')}
           </div>

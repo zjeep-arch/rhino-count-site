@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260" width="400" height="260">
+  <defs>
+    <linearGradient id="bg1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1C1410;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3B2E24;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#B8862F;stop-opacity:0.25" />
+      <stop offset="100%" style="stop-color:#8B3A2E;stop-opacity:0.15" />
+    </linearGradient>
+  </defs>
+  <rect width="400" height="260" fill="url(#bg1)" rx="0"/>
+  <circle cx="320" cy="60" r="120" fill="url(#g1)"/>
+  <circle cx="80" cy="200" r="80" fill="url(#g1)"/>
+  <circle cx="200" cy="130" r="50" fill="none" stroke="#B8862F" stroke-width="0.5" opacity="0.3"/>
+  <circle cx="200" cy="130" r="70" fill="none" stroke="#B8862F" stroke-width="0.3" opacity="0.2"/>
+  <circle cx="200" cy="130" r="90" fill="none" stroke="#B8862F" stroke-width="0.3" opacity="0.15"/>
+  <text x="200" y="138" text-anchor="middle" font-family="Georgia,serif" font-size="16" fill="#E8C77A" opacity="0.4" letter-spacing="4">？</text>
+</svg>
