@@ -135,7 +135,7 @@ window.SITE_DATA = {
     label: "COMMENTARY · 每日时评",
     headingLine1: "在喧嚣里，",
     headingLine2: "闲聊世界。",
-    blurb: "每晚 7 点，用「肖磊看世界」的闲聊体聊一聊当天最值得关注的宏观事件。纯属个人瞎扯，供大家打发空闲时间。",
+    blurb: "每晚 7 点，闲聊拆解当天宏观大事。纯属瞎扯，打发时间刚好。",
     defaultFeatured: [
       {
         cat: "地缘博弈", date: "2026-06-01",
