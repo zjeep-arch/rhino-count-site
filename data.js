@@ -60,9 +60,8 @@ window.SITE_DATA = {
       caption: "OIL ON SILICON · 2026 N° 001"
     },
     stats: [
-      { num: "6+", label: "笔记" },
-      { num: "30+", label: "时评文章" },
-      { num: "1K+", label: "获赞与收藏" }
+      { num: "50000+", label: "followers" },
+      { num: "10000+", label: "likes" }
     ]
   },
 
