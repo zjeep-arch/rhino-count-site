@@ -14,7 +14,7 @@ window.SITE_DATA = {
 
   /* ---------- 站点配置 ---------- */
   siteConfig: {
-    domain: "yourdomain.com",           // ← 上线时改成你的真实域名
+    domain: "zjeep-arch.github.io",           // ← 上线时改成你的真实域名
     repo: "rhino-count-site",           // GitHub 仓库名
     articlesFeed: "articles/feed.json",  // 文章列表数据源
   },
@@ -25,7 +25,7 @@ window.SITE_DATA = {
     description: "犀牛伯爵 — 北大本科、AI 大厂从业者。记录 AI 与趋势变化，分享学习方法与踩过的坑。每日时评，宏观视野。",
     keywords: "犀牛伯爵, AI, 大模型, 学习方法, 北大, 小红书, AI 大厂, Prompt, Agent, 时评, 宏观分析",
     author: "犀牛伯爵",
-    siteUrl: "https://yourdomain.com/",
+    siteUrl: "https://zjeep-arch.github.io/rhino-count-site/",
     ogImage: "https://count-rhino-ai.lovable.app/assets/rhino-count-hero-B4tc0a8K.jpg"
   },
 
