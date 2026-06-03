@@ -60,8 +60,8 @@ window.SITE_DATA = {
       caption: "OIL ON SILICON · 2026 N° 001"
     },
     stats: [
-      { num: "50000+", label: "followers" },
-      { num: "10000+", label: "likes" }
+      { num: "50000+", lbl: "followers" },
+      { num: "10000+", lbl: "likes" }
     ]
   },
 
@@ -137,10 +137,10 @@ window.SITE_DATA = {
     blurb: "每晚 7 点，闲聊拆解当天宏观大事。纯属瞎扯，打发时间刚好。",
     defaultFeatured: [
       {
-        cat: "地缘博弈", date: "2026-06-01",
-        title: "这就是今晚第一篇时评文章了",
-        excerpt: "今晚 7 点第一篇自动生成，敬请期待。",
-        href: "articles/2026-06-01-welcome.html"
+        cat: "地缘 · 宏观", date: "2026-06-03",
+        title: "（瞎聊）伊朗战争打到第96天，油价没涨、中国没急、英国跑来北京",
+        excerpt: "美国在波斯湾打到第96天——但国际油价没涨、中国没有乱、英国外相反而跑去北京。这里面有几个大的背景。",
+        href: "articles/2026-06-03-iran-war-uk-china-thaw.html"
       }
     ]
   },
