@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="color-scheme" content="light dark" />
+  <title>每日时评 · 犀牛伯爵</title>
+  <meta name="description" content="犀牛伯爵的每日时评文章合集 — 用「肖磊看世界」的闲聊体聊国际政经，纯属个人瞎扯。" />
+  <link rel="canonical" href="https://yourdomain.com/articles/" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="每日时评 · 犀牛伯爵" />
+  <meta property="og:description" content="用「肖磊看世界」的闲聊体聊国际政经，纯属个人瞎扯闲聊。" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,400;1,500&family=Inter:wght@400;500;600&family=Noto+Serif+SC:wght@500;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #F5EFE6; --bg-soft: #ECE3D2; --surface: #FBF7EE;
+      --ink: #1C1410; --ink-soft: #3B2E24; --muted: #7A6B5B;
+      --line: rgba(28,20,16,0.10); --line-2: rgba(28,20,16,0.22);
+      --accent: #8B3A2E; --gold: #B8862F;
+      --serif: "Playfair Display","Noto Serif SC","Songti SC",Georgia,serif;
+      --sans: "Inter",-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+      --maxw: 820px; --pad: clamp(20px,4vw,32px);
+      --radius: 14px;
+    }
+    [data-theme="dark"] {
+      --bg: #14100C; --bg-soft: #1A1510; --surface: #1F1813;
+      --ink: #F1E8DA; --ink-soft: #DCCEB8; --muted: #9B8B77;
+      --line: rgba(241,232,218,0.10); --line-2: rgba(241,232,218,0.22);
+      --accent: #D4825F; --gold: #E8C77A;
+    }
+    *,*::before,*::after { box-sizing: border-box; }
+    body {
+      margin: 0; background: var(--bg); color: var(--ink);
+      font-family: var(--sans); font-size: 16px; line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    .container { max-width: var(--maxw); margin-inline: auto; padding-inline: var(--pad); }
+
+    .page-header {
+      padding: var(--s-8) 0 var(--s-6);
+      border-bottom: 1px solid var(--line);
+      margin-bottom: var(--s-6);
+    }
+    .page-header h1 {
+      font-family: var(--serif); font-weight: 700;
+      font-size: clamp(28px,5vw,42px); line-height: 1.15;
+      margin: 0 0 var(--s-3);
+    }
+    .page-header .sub {
+      color: var(--muted); font-size: 14px;
+    }
+    .page-header .back {
+      display: inline-flex; align-items: center; gap: var(--s-2);
+      font-size: 13px; color: var(--accent); font-weight: 500;
+      margin-bottom: var(--s-5);
+    }
+
+    .article-list { display: grid; grid-template-columns: 1fr; gap: var(--s-4); }
+    .article-card {
+      background: var(--surface); border: 1px solid var(--line);
+      border-radius: var(--radius); padding: var(--s-5) var(--s-6);
+      display: block;
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+      position: relative; overflow: hidden;
+    }
+    .article-card:hover {
+      transform: translateY(-2px); border-color: var(--line-2);
+      box-shadow: 0 20px 50px -30px rgba(28,20,16,0.24);
+    }
+    .article-card::before {
+      content: ""; position: absolute; left: 0; top: 0; bottom: 0;
+      width: 3px; background: var(--accent);
+      transform: scaleY(0); transform-origin: top;
+      transition: transform 0.35s ease;
+    }
+    .article-card:hover::before { transform: scaleY(1); }
+    .art-meta {
+      display: flex; align-items: center; gap: var(--s-3);
+      font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: var(--s-2);
+    }
+    .art-meta .cat { color: var(--accent); font-weight: 600; }
+    .art-meta .date::before { content: "\00B7"; margin-right: var(--s-3); }
+    .article-card h2 {
+      font-family: var(--serif); font-weight: 700;
+      font-size: clamp(17px,1.6vw,19px); line-height: 1.4;
+      margin: 0 0 var(--s-2);
+    }
+    .article-card p { margin: 0; color: var(--ink-soft); font-size: 14px; line-height: 1.7; }
+
+    .loading, .empty {
+      padding: var(--s-8); text-align: center; color: var(--muted); font-size: 15px;
+    }
+    .empty p { line-height: 2; font-style: italic; }
+
+    .footer {
+      margin-top: var(--s-8); padding: var(--s-6) 0;
+      border-top: 1px solid var(--line);
+      text-align: center; color: var(--muted); font-size: 12px;
+    }
+
+    @media (max-width: 520px) {
+      .article-card { padding: var(--s-4) var(--s-5); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container" style="--pad: clamp(20px, 4vw, 32px)">
+    <header class="page-header">
+      <a class="back" href="../">&larr; 回到首页</a>
+      <h1>每日时评</h1>
+      <p class="sub">每晚 7 点，用「肖磊看世界」的闲聊体聊一聊当天最值得关注的宏观事件。</p>
+    </header>
+    <div id="articleList" class="article-list">
+      <div class="loading">读取文章中……</div>
+    </div>
+    <footer class="footer">
+      &copy; 2026 犀牛伯爵 &middot; 纯属个人瞎扯闲聊，供大家打发空闲时间
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      const esc = s => String(s).replace(/[&<>"']/g, function(c) {
+        return { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c];
+      });
+
+      var list = document.getElementById('articleList');
+
+      function render(articles) {
+        if (!articles || articles.length === 0) {
+          list.innerHTML = '<div class="empty"><p>还没有时评文章。<br/>每晚 7 点自动生成第一篇后就会显示在这里。</p></div>';
+          return;
+        }
+        list.innerHTML = articles.map(function(a) {
+          return '<a class="article-card" href="' + esc(a.href) + '">' +
+            '<div class="art-meta">' +
+            '<span class="cat">' + esc(a.cat || '时评') + '</span>' +
+            '<span class="date">' + esc(a.date || '') + '</span>' +
+            '</div>' +
+            '<h2>' + esc(a.title) + '</h2>' +
+            '<p>' + esc(a.excerpt) + '</p>' +
+            '</a>';
+        }).join('');
+      }
+
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', 'feed.json', true);
+      xhr.onload = function() {
+        if (xhr.status === 200) {
+          try {
+            var feed = JSON.parse(xhr.responseText);
+            var items = feed.articles || feed;
+            // Sort by date descending
+            items.sort(function(a, b) { return (b.date || '').localeCompare(a.date || ''); });
+            render(items);
+          } catch(e) { render(null); }
+        } else { render(null); }
+      };
+      xhr.onerror = function() { render(null); };
+      xhr.send();
+    })();
+  </script>
+</body>
+</html>

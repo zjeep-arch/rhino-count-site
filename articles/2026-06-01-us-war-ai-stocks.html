@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="color-scheme" content="light dark" />
+  <title>（闲聊）美国在中东开打，股市凭什么还在涨？ · 犀牛伯爵时评</title>
+  <meta name="description" content="美国在波斯湾对伊朗发动新一轮打击的同一天，Nvidia发布了划时代的AI芯片，美股标普500站上7580点。战争与牛市并行，这里面有几个大的背景值得我们瞎聊一下。" />
+  <meta name="author" content="犀牛伯爵" />
+  <meta name="robots" content="index,follow" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="（闲聊）美国在中东开打，股市凭什么还在涨？" />
+  <meta property="og:description" content="美国在波斯湾对伊朗发动新一轮打击的同一天，Nvidia发布了划时代的AI芯片，美股标普500站上7580点。战争与牛市并行，这里面有几个大的背景值得我们瞎聊一下。" />
+  <meta property="article:published_time" content="2026-06-01" />
+  <meta property="article:author" content="犀牛伯爵" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,400;1,500&family=Inter:wght@400;500;600&family=Noto+Serif+SC:wght@500;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #F5EFE6; --bg-soft: #ECE3D2; --surface: #FBF7EE;
+      --ink: #1C1410; --ink-soft: #3B2E24; --muted: #7A6B5B;
+      --line: rgba(28,20,16,0.10); --line-2: rgba(28,20,16,0.22);
+      --accent: #8B3A2E; --gold: #B8862F;
+      --serif: "Playfair Display","Noto Serif SC","Songti SC",Georgia,serif;
+      --sans: "Inter",-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+      --maxw: 740px; --pad: clamp(20px,4vw,32px);
+      --radius: 14px;
+      --s-1:4px;--s-2:8px;--s-3:12px;--s-4:16px;--s-5:24px;--s-6:32px;--s-7:48px;--s-8:64px;
+    }
+    [data-theme="dark"] {
+      --bg: #14100C; --bg-soft: #1A1510; --surface: #1F1813;
+      --ink: #F1E8DA; --ink-soft: #DCCEB8; --muted: #9B8B77;
+      --line: rgba(241,232,218,0.10); --line-2: rgba(241,232,218,0.22);
+      --accent: #D4825F; --gold: #E8C77A;
+    }
+    *,*::before,*::after { box-sizing: border-box; }
+    body {
+      margin: 0; background: var(--bg); color: var(--ink);
+      font-family: var(--sans); font-size: 17px; line-height: 1.8;
+      -webkit-font-smoothing: antialiased;
+    }
+    body::before {
+      content:"";position:fixed;inset:0;
+      background-image:radial-gradient(700px 400px at 10% 0%,rgba(184,134,47,0.06),transparent 60%);
+      pointer-events:none;z-index:0;
+    }
+    .container { max-width: var(--maxw); margin-inline: auto; padding-inline: var(--pad); position: relative; z-index: 1; }
+
+    .article-header {
+      padding: var(--s-8) 0 var(--s-6);
+      border-bottom: 1px solid var(--line);
+      margin-bottom: var(--s-7);
+    }
+    .article-header .back {
+      display: inline-flex; align-items: center; gap: var(--s-2);
+      font-size: 13px; color: var(--accent); font-weight: 500;
+      margin-bottom: var(--s-5);
+      transition: gap 0.2s ease;
+    }
+    .article-header .back:hover { gap: var(--s-3); }
+    .article-header .meta {
+      display: flex; align-items: center; gap: var(--s-3);
+      font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: var(--s-4);
+    }
+    .article-header .meta .cat { color: var(--accent); font-weight: 600; }
+    .article-header .meta .date::before { content: "\00B7"; margin-right: var(--s-3); }
+    .article-header h1 {
+      font-family: var(--serif); font-weight: 700;
+      font-size: clamp(26px,4vw,40px); line-height: 1.2;
+      margin: 0; letter-spacing: 0.01em;
+    }
+
+    .article-body {
+      padding-bottom: var(--s-8);
+    }
+    .article-body p {
+      margin: 0 0 1.4em;
+    }
+    .article-body h2 {
+      font-family: var(--serif); font-weight: 700;
+      font-size: clamp(20px,2.5vw,26px);
+      margin: 2em 0 0.8em; line-height: 1.3;
+    }
+    .article-body h3 {
+      font-family: var(--serif); font-weight: 600;
+      font-size: clamp(17px,1.8vw,20px);
+      margin: 1.6em 0 0.6em;
+    }
+    .article-body blockquote {
+      margin: 1.5em 0; padding: var(--s-4) var(--s-5);
+      border-left: 3px solid var(--accent);
+      background: var(--surface);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      color: var(--ink-soft);
+      font-style: italic;
+    }
+    .article-body strong { color: var(--ink); font-weight: 600; }
+    .article-body a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+
+    .article-footer {
+      border-top: 1px solid var(--line);
+      padding: var(--s-6) 0 var(--s-8);
+      text-align: center;
+    }
+    .article-footer .disclaimer {
+      font-size: 13px; color: var(--muted);
+      line-height: 1.8; font-style: italic;
+    }
+    .article-footer .back-link {
+      display: inline-flex; align-items: center; gap: var(--s-2);
+      margin-top: var(--s-5);
+      font-size: 13px; color: var(--accent); font-weight: 500;
+    }
+
+    .site-footer {
+      border-top: 1px solid var(--line);
+      padding: var(--s-5) 0;
+      text-align: center;
+      font-size: 12px; color: var(--muted);
+    }
+
+    @media (max-width: 520px) {
+      body { font-size: 16px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,*::before,*::after { animation:none!important; transition:none!important; }
+    }
+  </style>
+</head>
+<body>
+  <article class="container">
+    <header class="article-header">
+      <a class="back" href="../articles/">&larr; 全部时评</a>
+      <div class="meta">
+        <span class="cat">地缘 · 宏观</span>
+        <span class="date">2026-06-01</span>
+      </div>
+      <h1>（闲聊）美国在中东开打，股市凭什么还在涨？</h1>
+    </header>
+
+    <div class="article-body">
+
+<p>最近看到一则消息，让我觉得值得瞎聊几句。</p>
+
+<p>消息是这样的：美国在波斯湾对伊朗雷达阵地进行了新一轮打击，伊朗也回射了导弹和无人机，据报打到了科威特。几乎是同一时间，Nvidia的老板黄仁勋在台北电脑展上宣布了一款为个人电脑设计的新AI芯片，和微软、戴尔、惠普一起联手，股价应声大涨。美股三大指数——道琼斯51000多点，标普500到了7580点，纳斯达克也是一样的节奏——都创出了接近历史高位的水平。</p>
+
+<p>很多人可能会说，美国在中东打仗，股市凭什么还在涨？这不是矛盾吗？</p>
+
+<p>其实还真不矛盾。这里面的关键，有几个大的背景，一个一个来聊。</p>
+
+<p><strong>第一个是，美国这个国家，你得把它看成"两个系统"在同时运行。</strong></p>
+
+<p>很多人习惯把美国当成一个国家来理解，一打仗就觉得油价要起飞了、全球经济要崩了。但请注意，美国的"战争机器"和它的"商业机器"是两套完全独立的运转体系。白宫和五角大楼在中东扔导弹，不影响硅谷和华尔街在算AI和芯片的账。恰恰相反——中东打得越厉害，全球资本越往美国跑，这是近百年来从来没有变过的规律。</p>
+
+<p>我举个简单的例子大家就明白了。二战时期，欧洲打得稀巴烂，美国本土却在加班加点地生产，股市也在涨。不是说战争好，而是说美国的物理位置和产业结构，决定了它不太容易被自己的战争拖累。这是地缘结构的红利，跟谁当总统没关系。</p>
+
+<p><strong>第二个是，Nvidia这一波，才是真正需要下功夫看的。</strong></p>
+
+<p>大家注意一下时间线。就在美国对伊朗发动打击的同一天，黄仁勋发布了基于Arm架构的AI个人电脑芯片。他说了一句很有意思的话——"这是电脑的重生"。这话说得有点大，但我不觉得是瞎说。</p>
+
+<p>我们在聊战争、油价、地缘冲突的时候，觉得世界乱得很。但硅谷那条线是完全不受影响的：融资、研发、生产、推广，该干嘛干嘛。这就是我过去聊过的——美国的"商业模式"在国际冲突面前，依然在高速运转。什么意思呢？</p>
+
+<p>假设你是一家全球对冲基金的经理。中东在打仗，你肯定有避险需求。但你往哪儿跑？欧洲？欧洲在中东问题上比美国还乱。中国？资金跨境没那么自由。日本？日元波动大。最后一看，还是美债和美股最靠谱。这就是为什么战争的新闻越炸，纳斯达克越稳。</p>
+
+<p>这里我再说一个历史例子。彼得大帝当年化名去荷兰学造船，不是因为俄国打不过谁，而是他知道只有在技术源头才能看到未来。今天全球技术源头在哪？在硅谷、在台北、在班加罗尔。美国之所以能在中东和科技之间"两头吃"，不是因为它有多聪明，而是因为全球创新体系本身就是以它为中心运转的。说这个什么意思呢？——美国的"技术根"比它的"战争根"要深得多。</p>
+
+<p><strong>第三个，也是最重要的——"发展的正义"。</strong></p>
+
+<p>什么意思呢？当一个体系无法给其内部成员带来持续发展的时候，它就失去了存在的"正义性"。美国现在在中东打仗，看起来是个麻烦事，但请注意一个更底层的逻辑：美国正在做的事情，本质上是在"回归自身的发展"——制造业回流的政策在推，AI基础设施在砸钱，芯片法案的补贴在发。</p>
+
+<p>很多人可能不爱听，但我可以肯定的说，美国恰恰在践行"发展的正义"——它不是在为打仗而打仗，而是通过战争和外交手段，为主流商业和创新体系争取时间和空间。白宫到处惹事和星舰、ChatGPT、Nvidia的全球扩张并行不悖——这才是理解美国真正困难的地方。</p>
+
+<p>那这对其他国家意味着什么？这就涉及到"外溢效应"了。</p>
+
+<p>强大文明的技术创新，会产生无意但不可逆的外溢，对弱势体系构成系统性压制。当年东印度公司的纺织技术碾压了印度本土手工业，橡胶工业改变了南美的命运。今天的AI芯片、星链、大型语言模型，就是新版本的外溢。伊朗的导弹技术再强，打不赢一场由AI和卫星链支撑的信息化战争。这不是道德问题，是体系差距问题。</p>
+
+<p>说了这么说，那这意味着什么呢？</p>
+
+<p>我想说的其实是，如果我们只看"美国在中东打仗"这一个维度，很容易得出"美国要完了"的结论，而且确实很多人这么想。但如果你把Nvidia的新芯片、伯克希尔花六十多亿美元买泰勒莫里森地产公司、标普500站上7580这几个事情放在一起看，你会发现美国的底牌远比表面丰富。</p>
+
+<p>美国有两个底牌是很多国家没有的：第一是自下而上的组织体系，下决定上；第二是商业主导的国家体系。这两个底牌让它能在打仗的同时完成科技创新层面的跃迁。这不是说美国就无敌了，而是说我们在分析国际局势的时候，不能只盯着导弹和油价看——那些都是短期变量，真正的长期变量是谁在定义下一代计算平台。</p>
+
+<p>人类历史从来都是这样：会打仗的不如会生产的，会生产的不如会重新定义生产工具的。一个国家如果只想在存量里博弈，那不管它拥有多少核弹头、多少军队，都挡不住一场不请自来的技术外溢。</p>
+
+    </div>
+
+    <footer class="article-footer">
+      <p class="disclaimer">
+        纯属个人瞎扯闲聊，供大家打发空闲时间。不对的地方尽管反驳。
+      </p>
+      <a class="back-link" href="../">&larr; 回到犀牛伯爵首页</a>
+    </footer>
+  </article>
+
+  <footer class="site-footer">
+    <div class="container">&copy; 2026 犀牛伯爵</div>
+  </footer>
+
+  <script>
+    (function() {
+      var root = document.documentElement;
+      var saved = localStorage.getItem('rhino-theme');
+      var sysDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (saved) { root.setAttribute('data-theme', saved); }
+      else if (sysDark) { root.setAttribute('data-theme', 'dark'); }
+    })();
+  </script>
+</body>
+</html>
