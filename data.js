@@ -51,7 +51,7 @@ window.SITE_DATA = {
     eyebrow: "AI · 趋势 · 记录",
     titleMain: "一只阅读时代的",
     titleAccent: "犀牛伯爵",
-    lede: "北大本科，高考数学满分。如今在 AI 大厂打工，把每一次模型的呼吸、每一条趋势的暗涌，写成可以慢慢咀嚼的笔记。每晚一篇宏观时评，用肖磊的闲聊体陪你理解这个世界。",
+    lede: "北大本科，高考数学满分。如今在 AI 大厂打工，把每一次模型的呼吸、每一条趋势的暗涌，写成可以慢慢咀嚼的笔记。每晚一篇宏观时评，闲聊陪你理解这个世界。",
     ctaPrimary:   { label: "阅读最新笔记 →", href: "#notes" },
     ctaSecondary: { label: "每日时评",         href: "#commentary" },
     portrait: {
