@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>鸭骗战争：真鸭假鹅</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+@import url('https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&family=Noto+Sans+SC:wght@400;700;900&display=swap');
+
+body {
+  font-family: 'Noto Sans SC', sans-serif;
+  background: #2C1810;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* 路灯灯光背景 */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background:
+    radial-gradient(ellipse 60vw 50vh at 50% 30%, rgba(255,200,80,0.15) 0%, transparent 70%),
+    radial-gradient(ellipse 40vw 30vh at 50% 10%, rgba(255,230,150,0.08) 0%, transparent 60%),
+    linear-gradient(180deg, #1a0e08 0%, #2C1810 40%, #3d2218 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.game-container {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 480px;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: linear-gradient(180deg, #3d2218 0%, #2C1810 50%, #1a0e08 100%);
+  box-shadow: 0 0 80px rgba(0,0,0,0.8);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+/* 手绘纹理 */
+.game-container::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.5' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='60' height='60' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* 路灯顶部光晕 */
+.lamp-glow {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 180px;
+  height: 120px;
+  background: radial-gradient(ellipse at center, rgba(255,220,100,0.2) 0%, transparent 70%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ============ 顶部状态栏 ============ */
+.status-bar {
+  position: relative;
+  z-index: 10;
+  padding: 12px 16px;
+  padding-top: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+  background: linear-gradient(180deg, rgba(30,16,10,0.9) 0%, transparent 100%);
+}
+
+.status-item {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,200,80,0.15);
+  border-radius: 12px;
+  padding: 8px 6px;
+  text-align: center;
+  backdrop-filter: blur(4px);
+}
+
+.status-label {
+  font-size: 10px;
+  color: rgba(255,200,80,0.6);
+  letter-spacing: 0.5px;
+  margin-bottom: 2px;
+}
+
+.status-value {
+  font-size: 18px;
+  font-weight: 900;
+  color: #FFE0A0;
+}
+
+.status-value.income { color: #FFD700; }
+.status-value.cred { color: #FF9F7A; }
+.status-value.legs { color: #B8D4E3; }
+
+/* ============ 小推车装饰 ============ */
+.cart-deco {
+  position: absolute;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, rgba(139,90,43,0.4), rgba(139,90,43,0.6), rgba(139,90,43,0.4), transparent);
+  border-radius: 2px;
+  z-index: 0;
+}
+
+/* ============ 阿姨头像 ============ */
+.auntie-area {
+  position: relative;
+  z-index: 5;
+  padding: 16px 16px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.auntie-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,200,80,0.12);
+  border-radius: 16px;
+  padding: 8px 16px 8px 8px;
+  backdrop-filter: blur(4px);
+}
+
+.auntie-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #5C3A28;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 2px solid rgba(255,200,80,0.3);
+}
+
+/* SVG鹅腿阿姨 */
+.auntie-avatar svg { width: 100%; height: 100%; display: block; }
+
+.auntie-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: #FFE0A0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.auntie-name .badge {
+  font-size: 9px;
+  background: rgba(255,200,80,0.15);
+  color: #FFD700;
+  padding: 2px 8px;
+  border-radius: 999px;
+  text-decoration: line-through;
+  text-decoration-color: #FF6B6B;
+}
+
+.auntie-slogan {
+  font-size: 11px;
+  color: rgba(255,200,80,0.5);
+  margin-top: 2px;
+}
+
+/* ============ 倒计时 ============ */
+.timer-area {
+  padding: 2px 16px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  position: relative;
+  z-index: 5;
+}
+
+.timer-bar-wrap {
+  flex: 1;
+  max-width: 280px;
+  height: 10px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 999px;
+  overflow: hidden;
+  border: 1px solid rgba(255,200,80,0.1);
+}
+
+.timer-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #FF6B6B, #FFD700);
+  border-radius: 999px;
+  transition: width 0.5s linear;
+  width: 100%;
+}
+
+.timer-text {
+  font-size: 20px;
+  font-weight: 900;
+  color: #FFE0A0;
+  min-width: 40px;
+  text-align: center;
+}
+
+.timer-text.warning { color: #FF6B6B; animation: pulse 0.5s infinite; }
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* ============ 学生区域 ============ */
+.student-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  position: relative;
+  z-index: 5;
+  min-height: 240px;
+}
+
+/* 等待状态 */
+.waiting-state {
+  text-align: center;
+  color: rgba(255,200,80,0.3);
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.waiting-state .emoji-big {
+  font-size: 64px;
+  display: block;
+  margin-bottom: 12px;
+  animation: float 2s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* 学生气泡 */
+.student-scene {
+  width: 100%;
+  max-width: 400px;
+  animation: slideUp 0.4s ease-out;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.student-avatar {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 8px;
+  border-radius: 50%;
+  background: #4a2a1a;
+  border: 3px solid rgba(255,200,80,0.2);
+  overflow: hidden;
+  position: relative;
+}
+
+.student-avatar svg { width: 100%; height: 100%; display: block; }
+
+.student-name {
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: #FFE0A0;
+  margin-bottom: 4px;
+}
+
+.student-type-tag {
+  text-align: center;
+  font-size: 10px;
+  color: rgba(255,200,80,0.4);
+  margin-bottom: 12px;
+}
+
+/* 对话气泡 */
+.speech-bubble {
+  background: rgba(255,255,245,0.95);
+  border: 2px solid #D4A050;
+  border-radius: 20px;
+  padding: 16px 20px;
+  position: relative;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+.speech-bubble::before {
+  content: '';
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-bottom: 14px solid #D4A050;
+}
+
+.speech-bubble::after {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 12px solid rgba(255,255,245,0.95);
+}
+
+.speech-text {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #3d2218;
+  font-weight: 500;
+  text-align: center;
+}
+
+/* 特殊事件标记 */
+.special-tag {
+  display: inline-block;
+  background: linear-gradient(135deg, #FFD700, #FFA500);
+  color: #2C1810;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 999px;
+  margin-bottom: 8px;
+}
+
+/* ============ 选项按钮 ============ */
+.options-area {
+  padding: 8px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+  z-index: 10;
+}
+
+.option-btn {
+  width: 100%;
+  padding: 14px 16px;
+  border: 2px solid rgba(255,200,80,0.2);
+  border-radius: 14px;
+  background: rgba(255,255,255,0.06);
+  color: #FFE0A0;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  backdrop-filter: blur(4px);
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+.option-btn .opt-key {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: rgba(255,200,80,0.15);
+  color: #FFD700;
+  font-size: 12px;
+  font-weight: 900;
+  flex-shrink: 0;
+}
+
+.option-btn:active { transform: scale(0.97); background: rgba(255,200,80,0.12); }
+
+.option-btn:hover:not(:disabled) {
+  border-color: rgba(255,200,80,0.5);
+  background: rgba(255,200,80,0.08);
+}
+
+.option-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ============ 反馈弹出 ============ */
+.feedback-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  pointer-events: none;
+  animation: popIn 0.5s ease-out forwards;
+}
+
+.feedback-content {
+  background: rgba(30,16,10,0.92);
+  border: 2px solid rgba(255,200,80,0.3);
+  border-radius: 16px;
+  padding: 20px 28px;
+  text-align: center;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+}
+
+.feedback-line {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.8;
+  white-space: nowrap;
+}
+
+.feedback-line.positive { color: #FFD700; }
+.feedback-line.negative { color: #FF6B6B; }
+.feedback-line.neutral { color: #B8D4E3; }
+
+@keyframes popIn {
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+  40% { transform: translate(-50%, -50%) scale(1.1); }
+  100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+.feedback-popup.fade-out {
+  animation: fadeOut 0.3s ease-out forwards;
+}
+
+@keyframes fadeOut {
+  to { opacity: 0; transform: translate(-50%, -60%) scale(0.8); }
+}
+
+/* ============ 数字飘字 ============ */
+.float-text {
+  position: fixed;
+  pointer-events: none;
+  z-index: 99;
+  font-weight: 900;
+  font-size: 20px;
+  animation: floatUp 1.2s ease-out forwards;
+}
+
+@keyframes floatUp {
+  0% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-60px); }
+}
+
+/* ============ 开始/结束界面 ============ */
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 24px;
+  background: rgba(20,10,6,0.92);
+  backdrop-filter: blur(12px);
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.overlay-title {
+  font-size: 36px;
+  font-weight: 900;
+  color: #FFD700;
+  text-align: center;
+  line-height: 1.2;
+  margin-bottom: 8px;
+  text-shadow: 0 2px 20px rgba(255,200,80,0.3);
+}
+
+.overlay-title .sub {
+  display: block;
+  font-size: 16px;
+  font-weight: 400;
+  color: rgba(255,200,80,0.5);
+  margin-top: 6px;
+}
+
+.overlay-icon {
+  font-size: 80px;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.overlay-desc {
+  font-size: 14px;
+  color: rgba(255,200,80,0.6);
+  text-align: center;
+  line-height: 1.8;
+  margin-bottom: 24px;
+  max-width: 340px;
+}
+
+.overlay-desc strong { color: #FFE0A0; }
+
+.start-btn {
+  padding: 16px 48px;
+  border: 2px solid #FFD700;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #FFD700, #FFA500);
+  color: #2C1810;
+  font-size: 18px;
+  font-weight: 900;
+  cursor: pointer;
+  transition: all 0.2s;
+  -webkit-tap-highlight-color: transparent;
+  font-family: inherit;
+  letter-spacing: 1px;
+}
+
+.start-btn:active { transform: scale(0.95); }
+
+.start-btn:hover {
+  box-shadow: 0 0 30px rgba(255,200,80,0.3);
+  transform: translateY(-2px);
+}
+
+/* 结束界面 */
+.end-title {
+  font-size: 28px;
+  text-align: center;
+  line-height: 1.3;
+  margin-bottom: 12px;
+}
+
+.end-stat {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+  width: 100%;
+  max-width: 360px;
+  margin-bottom: 20px;
+}
+
+.end-stat-item {
+  text-align: center;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,200,80,0.1);
+  border-radius: 12px;
+  padding: 10px;
+}
+
+.end-stat-item .v {
+  font-size: 24px;
+  font-weight: 900;
+  color: #FFD700;
+}
+
+.end-stat-item .l {
+  font-size: 10px;
+  color: rgba(255,200,80,0.4);
+  margin-top: 2px;
+}
+
+.end-story {
+  font-size: 14px;
+  color: rgba(255,200,80,0.7);
+  text-align: center;
+  line-height: 1.8;
+  margin-bottom: 20px;
+  max-width: 360px;
+}
+
+.restart-btn {
+  padding: 14px 40px;
+  border: 2px solid rgba(255,200,80,0.3);
+  border-radius: 999px;
+  background: rgba(255,255,255,0.06);
+  color: #FFE0A0;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  -webkit-tap-highlight-color: transparent;
+  font-family: inherit;
+}
+
+.restart-btn:active { transform: scale(0.95); }
+.restart-btn:hover {
+  border-color: rgba(255,200,80,0.5);
+  background: rgba(255,255,255,0.1);
+}
+
+/* ============ 返回链接 ============ */
+.back-link {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 20;
+  color: rgba(255,200,80,0.4);
+  font-size: 11px;
+  text-decoration: none;
+  padding: 4px 10px;
+  border: 1px solid rgba(255,200,80,0.1);
+  border-radius: 999px;
+  transition: all 0.2s;
+}
+
+.back-link:hover { color: rgba(255,200,80,0.7); border-color: rgba(255,200,80,0.2); }
+
+/* ============ 响应式 ============ */
+@media (min-width: 768px) {
+  .game-container { min-height: 100vh; border-radius: 0; }
+  .option-btn { padding: 16px 20px; font-size: 15px; }
+  .speech-text { font-size: 16px; }
+}
+
+@media (max-height: 700px) {
+  .auntie-area { padding: 8px 16px 4px; }
+  .auntie-card { padding: 6px 12px 6px 6px; }
+  .auntie-avatar { width: 44px; height: 44px; }
+  .auntie-name { font-size: 11px; }
+  .student-area { min-height: 180px; padding: 4px 16px; }
+  .student-avatar { width: 64px; height: 64px; }
+  .options-area { padding: 4px 16px 8px; gap: 6px; }
+  .option-btn { padding: 10px 14px; font-size: 12px; }
+  .status-bar { padding: 8px 12px; padding-top: 14px; }
+  .status-value { font-size: 15px; }
+}
+
+</style>
+</head>
+<body>
+
+<div class="game-container" id="app">
+  <div class="lamp-glow"></div>
+  <div class="cart-deco"></div>
+
+  <!-- 返回链接 -->
+  <a class="back-link" href="https://zjeep-arch.github.io/rhino-count-site/" target="_blank">← 犀牛伯爵</a>
+
+  <!-- 顶部状态栏 -->
+  <div class="status-bar">
+    <div class="status-item">
+      <div class="status-label">💰 今日收入</div>
+      <div class="status-value income" id="incomeDisplay">0</div>
+    </div>
+    <div class="status-item">
+      <div class="status-label">⭐ 信誉值</div>
+      <div class="status-value cred" id="credDisplay">80</div>
+    </div>
+    <div class="status-item">
+      <div class="status-label">🍗 剩余鸭腿</div>
+      <div class="status-value legs" id="legsDisplay">30</div>
+    </div>
+  </div>
+
+  <!-- 阿姨 -->
+  <div class="auntie-area">
+    <div class="auntie-card">
+      <div class="auntie-avatar">
+        <svg viewBox="0 0 100 100">
+          <!-- 头巾 -->
+          <path d="M20 35 Q20 15 50 12 Q80 15 80 35 L78 30 Q50 25 22 30Z" fill="#D4543A"/>
+          <path d="M18 33 Q18 28 50 24 Q82 28 82 33 L80 36 Q50 32 20 36Z" fill="#B8442E"/>
+          <!-- 脸 -->
+          <ellipse cx="50" cy="52" rx="26" ry="24" fill="#D4A574"/>
+          <!-- 口罩 -->
+          <path d="M30 55 Q50 65 70 55 L68 64 Q50 72 32 64Z" fill="#8B9DC4"/>
+          <!-- 眼睛 -->
+          <circle cx="38" cy="46" r="4" fill="#1a0e08"/>
+          <circle cx="62" cy="46" r="4" fill="#1a0e08"/>
+          <circle cx="38" cy="46" r="1.5" fill="white"/>
+          <circle cx="62" cy="46" r="1.5" fill="white"/>
+          <!-- 狡黠眉毛 -->
+          <path d="M32 40 Q38 37 44 40" stroke="#1a0e08" stroke-width="2" fill="none"/>
+          <path d="M56 40 Q62 37 68 40" stroke="#1a0e08" stroke-width="2" fill="none"/>
+          <!-- 围裙 -->
+          <path d="M26 68 Q50 78 74 68 L78 95 Q50 100 22 95Z" fill="#E8D5B8" stroke="#C4A882" stroke-width="1"/>
+          <text x="50" y="86" text-anchor="middle" font-size="6" fill="#8B4513" font-weight="bold">纯正东北大鹅</text>
+          <line x1="35" y1="80" x2="65" y2="80" stroke="#FF6B6B" stroke-width="2"/>
+          <text x="50" y="90" text-anchor="middle" font-size="5" fill="#FF6B6B" font-weight="bold">可能是鹅</text>
+        </svg>
+      </div>
+      <div>
+        <div class="auntie-name">
+          鹅腿阿姨
+          <span class="badge">纯正东北大鹅</span>
+        </div>
+        <div class="auntie-slogan">"这真的是鹅，骗你我是鸭"</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 倒计时 -->
+  <div class="timer-area">
+    <div class="timer-bar-wrap">
+      <div class="timer-bar" id="timerBar"></div>
+    </div>
+    <div class="timer-text" id="timerDisplay">60</div>
+  </div>
+
+  <!-- 学生 -->
+  <div class="student-area" id="studentArea">
+    <div class="waiting-state">
+      <span class="emoji-big">🦆</span>
+      <div>深夜的大学门口...</div>
+      <div style="font-size:12px;margin-top:8px;color:rgba(255,200,80,0.2)">点击下方按钮开始摆摊</div>
+    </div>
+  </div>
+
+  <!-- 选项 -->
+  <div class="options-area" id="optionsArea">
+    <button class="start-btn" id="startBtn" style="width:100%;text-align:center">开始摆摊 🛒</button>
+  </div>
+</div>
+
+<script>
+// ========== 游戏数据 ==========
+const STUDENT_TYPES = {
+  foodie: {
+    name: '美食博主',
+    emoji: '📸',
+    avatar: 1,
+    weight: 25,
+    question: '"阿姨，这腿骨头这么细，是鸭骨吧？"',
+    options: [
+      { key: 'A', text: '"傻孩子，这是童子鹅，骨头嫩！"', effects: { income: 15, cred: 5, legs: -1, msg: '+15元，信誉+5 ✅' } },
+      { key: 'B', text: '"你爱吃不吃。"', effects: { income: 0, cred: -10, legs: 0, msg: '学生走了，信誉-10 ❌', leave: true } },
+      { key: 'C', text: '"给你加个鸭…不是，加个鹅翅。"', effects: { income: 10, cred: 0, legs: -2, msg: '+10元，卖了两根腿 🍗' } },
+    ]
+  },
+  northeast: {
+    name: '东北学生',
+    emoji: '⛄',
+    avatar: 2,
+    weight: 20,
+    question: '"我吃过真鹅腿，这味道不对。"',
+    options: [
+      { key: 'A', text: '"你吃的是家鹅，阿姨这是雁鹅，野生的！"', effects: { income: 20, cred: 10, legs: -1, msg: '+20元，信誉+10 💪' } },
+      { key: 'B', text: '"退钱！"', effects: { income: -10, cred: -5, legs: 0, msg: '退款啦！收入-10 💸' } },
+      { key: 'C', text: '"加两串烤韭菜堵住你的嘴。"', effects: { income: 3, cred: 0, legs: -1, msg: '+3元(韭菜成本扣了2块) 🧄' } },
+    ]
+  },
+  scholar: {
+    name: '较真学霸',
+    emoji: '🤓',
+    avatar: 3,
+    weight: 20,
+    question: '"鹅掌是圆的，你这个有蹼！"',
+    options: [
+      { key: 'A', text: '"阿姨特意修剪过，为了美观。"', effects: { income: 15, cred: 0, legs: -1, msg: '+15元，他居然信了 ✂️' } },
+      { key: 'B', text: '"你眼花了。"', effects: { income: 0, cred: -15, legs: 0, msg: '学生气走了，信誉-15 💀', leave: true } },
+      { key: 'C', text: '"免费送你一根，别乱说。"', effects: { income: -5, cred: 5, legs: -1, msg: '-5元，但信誉+5 😬' } },
+    ]
+  },
+  newbie: {
+    name: '单纯萌新',
+    emoji: '🐣',
+    avatar: 4,
+    weight: 20,
+    question: '"阿姨，这腿怎么比别家小？"',
+    options: [
+      { key: 'A', text: '"这是鹅宝宝，肉更嫩！"', effects: { income: 15, cred: 5, legs: -1, msg: '+15元，信誉+5 🐤' } },
+      { key: 'B', text: '"小就便宜你5块。"', effects: { income: 10, cred: 0, legs: -1, msg: '+10元，薄利多销 💰' } },
+      { key: 'C', text: '"嫌小你去隔壁买鸵鸟腿啊。"', effects: { income: 0, cred: -5, legs: 0, msg: '学生被怼走了，信誉-5 🚶', leave: true } },
+    ]
+  },
+  crusader: {
+    name: '打假斗士',
+    emoji: '🔍',
+    avatar: 5,
+    weight: 10,
+    question: '"我举报你用鸭腿冒充！"',
+    options: [
+      { key: 'A', text: '"你拿出DNA鉴定报告来呀～"', effects: { income: 10, cred: 15, legs: -1, msg: '+10元，够无赖，信誉+15 🧬' } },
+      { key: 'B', text: '"别喊别喊，这20块你拿去喝茶。"', effects: { income: -20, cred: 0, legs: -1, msg: '哦豁，-20块 🥲' } },
+      { key: 'C', text: '慌张收摊', effects: { income: 0, cred: 0, legs: 0, msg: '', gameOver: 'caught' } },
+    ]
+  }
+};
+
+// 特殊学生类型名称列表
+const STUDENT_KEYS = ['foodie', 'northeast', 'scholar', 'newbie', 'crusader'];
+
+// ========== 游戏状态 ==========
+let state = {
+  income: 0,
+  cred: 80,
+  legs: 30,
+  time: 60,
+  maxTime: 60,
+  running: false,
+  gameOver: false,
+  timerInterval: null,
+  spawnTimeout: null,
+  studentActive: false,
+  processing: false,
+  totalStudents: 0,
+  totalSales: 0,
+};
+
+// ========== DOM引用 ==========
+const $ = id => document.getElementById(id);
+const incomeD = $('incomeDisplay');
+const credD = $('credDisplay');
+const legsD = $('legsDisplay');
+const timerD = $('timerDisplay');
+const timerBar = $('timerBar');
+const studentArea = $('studentArea');
+const optionsArea = $('optionsArea');
+
+// ========== 工具 ==========
+function clamp(v, min, max) { return Math.max(min, Math.min(max, v)); }
+
+function weightedPick() {
+  let baseWeight;
+  if (state.cred < 50) {
+    // 打假斗士概率翻倍
+    baseWeight = {
+      foodie: 25,
+      northeast: 20,
+      scholar: 20,
+      newbie: 20,
+      crusader: 20, // 翻倍
+    };
+  } else {
+    baseWeight = {
+      foodie: 25,
+      northeast: 20,
+      scholar: 20,
+      newbie: 20,
+      crusader: 10,
+    };
+  }
+
+  // 信誉>80时，30%概率直接购买事件
+  if (state.cred > 80 && Math.random() < 0.3) {
+    return 'directBuy';
+  }
+
+  const total = Object.values(baseWeight).reduce((a, b) => a + b, 0);
+  let r = Math.random() * total;
+  for (const key of STUDENT_KEYS) {
+    r -= baseWeight[key];
+    if (r <= 0) return key;
+  }
+  return 'foodie';
+}
+
+// ========== 渲染 ==========
+function updateStatus() {
+  incomeD.textContent = state.income;
+  credD.textContent = state.cred;
+  legsD.textContent = state.legs;
+}
+
+function updateTimer() {
+  timerD.textContent = Math.ceil(state.time);
+  const pct = Math.max(0, (state.time / state.maxTime) * 100);
+  timerBar.style.width = pct + '%';
+  timerD.classList.toggle('warning', state.time <= 10);
+}
+
+function showStudent(typeKey) {
+  if (!typeKey || typeKey === 'directBuy') return showDirectBuy();
+
+  const type = STUDENT_TYPES[typeKey];
+  if (!type) return;
+
+  state.studentActive = true;
+  state.currentStudentKey = typeKey;
+
+  const avatarSvgs = {
+    1: `<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#F5D6B8"/><path d="M30 30 L70 30 L65 20 L35 20Z" fill="#4A90D9"/><circle cx="35" cy="45" r="5" fill="#1a0e08"/><circle cx="65" cy="45" r="5" fill="#1a0e08"/><circle cx="35" cy="45" r="2" fill="white"/><circle cx="65" cy="45" r="2" fill="white"/><path d="M35 60 Q50 70 65 60" stroke="#E8766B" stroke-width="3" fill="none"/><rect x="30" y="68" width="40" height="30" rx="5" fill="#FFF"/><circle cx="50" cy="75" r="8" fill="#333"/></svg>`,
+    2: `<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#F0CFA0"/><path d="M25 35 Q50 20 75 35" stroke="#1a0e08" stroke-width="3" fill="none"/><circle cx="35" cy="48" r="4" fill="#1a0e08"/><circle cx="65" cy="48" r="4" fill="#1a0e08"/><circle cx="35" cy="48" r="1.5" fill="white"/><circle cx="65" cy="48" r="1.5" fill="white"/><path d="M38 65 Q50 75 62 65" stroke="#1a0e08" stroke-width="2" fill="none"/><rect x="28" y="72" width="44" height="28" rx="4" fill="#D44"/><text x="50" y="90" text-anchor="middle" font-size="6" fill="white" font-weight="bold">东北</text></svg>`,
+    3: `<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#E8D8C8"/><rect x="30" y="28" width="40" height="16" rx="4" fill="#333"/><circle cx="35" cy="48" r="5" fill="#1a0e08"/><circle cx="65" cy="48" r="5" fill="#1a0e08"/><circle cx="35" cy="48" r="2" fill="white"/><circle cx="65" cy="48" r="2" fill="white"/><rect x="38" y="52" width="24" height="20" rx="3" fill="#FFF"/><text x="50" y="65" text-anchor="middle" font-size="7" fill="#333" font-weight="bold">?</text></svg>`,
+    4: `<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#FFE4C4"/><path d="M30 40 Q50 35 70 40" stroke="#1a0e08" stroke-width="2" fill="none"/><circle cx="38" cy="50" r="6" fill="#1a0e08"/><circle cx="62" cy="50" r="6" fill="#1a0e08"/><circle cx="38" cy="50" r="2.5" fill="white"/><circle cx="62" cy="50" r="2.5" fill="white"/><ellipse cx="50" cy="64" rx="8" ry="5" fill="#FF9999"/><rect x="32" y="72" width="36" height="28" rx="3" fill="#FFC0CB"/></svg>`,
+    5: `<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#D4A574"/><path d="M25 30 L75 30 L70 18 L30 18Z" fill="#333"/><circle cx="33" cy="45" r="4" fill="#1a0e08"/><circle cx="67" cy="45" r="4" fill="#1a0e08"/><circle cx="33" cy="45" r="1.5" fill="white"/><circle cx="67" cy="45" r="1.5" fill="white"/><path d="M30 56 L70 56" stroke="#1a0e08" stroke-width="2.5" fill="none"/><rect x="28" y="65" width="44" height="10" rx="2" fill="#FFD700"/><text x="50" y="73" text-anchor="middle" font-size="7" fill="#333" font-weight="bold">打假</text></svg>`
+  };
+
+  studentArea.innerHTML = `
+    <div class="student-scene">
+      <div class="student-avatar">${avatarSvgs[type.avatar] || ''}</div>
+      <div class="student-name">${type.emoji} ${type.name}</div>
+      <div class="speech-bubble">
+        <div class="speech-text">${type.question}</div>
+      </div>
+    </div>
+  `;
+
+  // 渲染选项
+  optionsArea.innerHTML = type.options.map((opt, i) => `
+    <button class="option-btn" data-opt-index="${i}" onclick="handleOption('${typeKey}', ${i})">
+      <span class="opt-key">${opt.key}</span>
+      <span>${opt.text}</span>
+    </button>
+  `).join('');
+}
+
+function showDirectBuy() {
+  state.studentActive = true;
+  state.currentStudentKey = 'directBuy';
+
+  studentArea.innerHTML = `
+    <div class="student-scene">
+      <div class="student-avatar">
+        <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#F5E6D0"/><path d="M35 38 Q50 32 65 38" stroke="#1a0e08" stroke-width="2" fill="none"/><circle cx="38" cy="48" r="4" fill="#1a0e08"/><circle cx="62" cy="48" r="4" fill="#1a0e08"/><circle cx="38" cy="48" r="1.5" fill="white"/><circle cx="62" cy="48" r="1.5" fill="white"/><path d="M38 58 Q50 68 62 58" stroke="#1a0e08" stroke-width="2" fill="none"/><rect x="30" y="68" width="40" height="30" rx="3" fill="#FFC0CB"/><text x="50" y="85" text-anchor="middle" font-size="6" fill="#333">普通学生</text></svg>
+      </div>
+      <div class="student-name">😊 普通学生</div>
+      <div class="special-tag">🎉 直接购买</div>
+      <div class="speech-bubble">
+        <div class="speech-text">"阿姨，来两个鹅腿！不用找了！"</div>
+      </div>
+    </div>
+  `;
+
+  optionsArea.innerHTML = `
+    <button class="option-btn" onclick="handleDirectBuy()">
+      <span class="opt-key">✓</span>
+      <span>"好嘞！拿好，趁热吃！"</span>
+    </button>
+  `;
+}
+
+function showFeedback(msg, isPositive = true) {
+  const popup = document.createElement('div');
+  popup.className = 'feedback-popup';
+  popup.innerHTML = `<div class="feedback-content"><div class="feedback-line ${isPositive ? 'positive' : msg.includes('❌') || msg.includes('💀') || msg.includes('💸') || msg.includes('🥲') ? 'negative' : 'neutral'}">${msg}</div></div>`;
+  document.body.appendChild(popup);
+
+  setTimeout(() => {
+    popup.classList.add('fade-out');
+    setTimeout(() => popup.remove(), 300);
+  }, 800);
+}
+
+// ========== 游戏逻辑 ==========
+function handleOption(typeKey, optIndex) {
+  if (!state.running || state.gameOver || state.processing || !state.studentActive) return;
+  state.processing = true;
+
+  const type = STUDENT_TYPES[typeKey];
+  const opt = type.options[optIndex];
+  const ef = opt.effects;
+
+  // 检查C选项——打假斗士的慌张收摊
+  if (ef.gameOver === 'caught') {
+    endGame('caught');
+    return;
+  }
+
+  state.income += ef.income;
+  state.cred = clamp(state.cred + ef.cred, 0, 100);
+  if (ef.legs !== 0) {
+    state.legs += ef.legs;
+    if (state.legs < 0) state.legs = 0;
+  }
+
+  // 卖出了鸭腿（legs变化为负），倒计时+2秒
+  if (ef.legs < 0) {
+    state.time += 2;
+    state.totalSales++;
+  }
+
+  updateStatus();
+  updateTimer();
+
+  // 反馈
+  if (ef.msg) showFeedback(ef.msg, ef.income >= 0 && ef.cred >= 0);
+  state.totalStudents++;
+
+  // 检查结束条件
+  if (state.legs <= 0) { endGame('soldOut'); return; }
+  if (state.cred <= 0) { endGame('credZero'); return; }
+
+  // 学生离开（不消耗腿）或选项B的leave
+  if (ef.leave) {
+    state.studentActive = false;
+    state.processing = false;
+    setTimeout(spawnStudent, 600);
+    return;
+  }
+
+  // 正常卖出，学生消失
+  state.studentActive = false;
+  state.processing = false;
+  setTimeout(spawnStudent, 500);
+}
+
+function handleDirectBuy() {
+  if (!state.running || state.gameOver || state.processing || !state.studentActive) return;
+  state.processing = true;
+
+  state.income += 15;
+  state.legs -= 1;
+  if (state.legs < 0) state.legs = 0;
+  state.time += 2;
+  state.totalSales++;
+  state.totalStudents++;
+
+  updateStatus();
+  updateTimer();
+  showFeedback('+15元，信誉不变 🎉', true);
+
+  if (state.legs <= 0) { endGame('soldOut'); return; }
+
+  state.studentActive = false;
+  state.processing = false;
+  setTimeout(spawnStudent, 500);
+}
+
+function spawnStudent() {
+  if (!state.running || state.gameOver) return;
+  if (state.studentActive) return;
+
+  const key = weightedPick();
+  showStudent(key);
+}
+
+function startTimer() {
+  if (state.timerInterval) clearInterval(state.timerInterval);
+  state.timerInterval = setInterval(() => {
+    if (!state.running || state.gameOver) return;
+    state.time -= 1;
+    updateTimer();
+
+    if (state.time <= 0) {
+      if (state.cred > 60) endGame('success');
+      else endGame('timeUp');
+    }
+  }, 1000);
+}
+
+// ========== 结束 ==========
+function endGame(reason) {
+  if (state.gameOver) return;
+  state.gameOver = true;
+  state.running = false;
+  if (state.timerInterval) clearInterval(state.timerInterval);
+  if (state.spawnTimeout) clearTimeout(state.spawnTimeout);
+  state.studentActive = false;
+
+  updateStatus();
+  updateTimer();
+
+  let title, story, icon;
+  let titleColor = '#FFD700';
+
+  switch (reason) {
+    case 'success':
+      title = '🎉 明年开真鹅腿店！';
+      story = '阿姨数着钱，嘴角上扬。"明年开个真鹅腿店，<br>还特么用鸭腿。"<br>—— 你赢了，但良心呢？';
+      icon = '💰';
+      break;
+    case 'timeUp':
+      title = '🍠 改行卖烤红薯';
+      story = '倒计时归零，信誉不够，学生散了。<br>阿姨默默收起小推车："改行卖烤红薯。<br>这次是真的红薯。"';
+      icon = '🍠';
+      break;
+    case 'soldOut':
+      title = '🏃 躲进小胡同';
+      story = '鸭腿卖光了！学生们追着问：<br>"还有没有鹅腿？"阿姨拔腿就跑，<br>钻进小胡同，掏出手机刷拼多多。<br>"下次买鹅嘴套。"';
+      icon = '🦆';
+      break;
+    case 'credZero':
+      title = '💀 信誉破产';
+      story = '没有学生再相信你了。<br>小推车被砸，围裙被撕。<br>阿姨蹲在路灯下："我到底是卖鸭的还是卖鹅的？"<br>—— 你自己都分不清了。';
+      icon = '😭';
+      break;
+    case 'caught':
+      title = '🚔 阿姨被带走调查';
+      story = '"别喊别喊——"<br>已经晚了。市场监督管理局的同志到了。<br>阿姨被带走时还在喊："那真是鹅！<br>你们相信我——"<br>远远地，路灯下的小推车孤零零地亮着。';
+      icon = '😨';
+      break;
+    default:
+      title = '游戏结束';
+      story = '故事结束了，但生活还要继续。';
+      icon = '🦆';
+  }
+
+  studentArea.innerHTML = `<div class="waiting-state"><span class="emoji-big">${icon}</span></div>`;
+
+  optionsArea.innerHTML = `
+    <div class="overlay" style="position:relative;background:none;backdrop-filter:none;padding:0;">
+      <div class="overlay-icon" style="font-size:56px;margin-bottom:8px">${icon}</div>
+      <div class="end-title" style="color:${titleColor}">${title}</div>
+      <div class="end-stat">
+        <div class="end-stat-item"><div class="v">${state.income}</div><div class="l">收入</div></div>
+        <div class="end-stat-item"><div class="v">${state.cred}</div><div class="l">最终信誉</div></div>
+        <div class="end-stat-item"><div class="v">${state.totalSales}</div><div class="l">卖出鸭腿</div></div>
+      </div>
+      <div class="end-story">${story}</div>
+      <button class="restart-btn" onclick="initGame()">再来一局 🔄</button>
+    </div>
+  `;
+}
+
+// ========== 开始/初始化 ==========
+function initGame() {
+  // 重置状态
+  if (state.timerInterval) clearInterval(state.timerInterval);
+  if (state.spawnTimeout) clearTimeout(state.spawnTimeout);
+
+  state = {
+    income: 0,
+    cred: 80,
+    legs: 30,
+    time: 60,
+    maxTime: 60,
+    running: false,
+    gameOver: false,
+    timerInterval: null,
+    spawnTimeout: null,
+    studentActive: false,
+    processing: false,
+    totalStudents: 0,
+    totalSales: 0,
+  };
+
+  updateStatus();
+  updateTimer();
+
+  studentArea.innerHTML = `
+    <div class="waiting-state">
+      <span class="emoji-big">🦆</span>
+      <div>深夜的大学门口...</div>
+      <div style="font-size:12px;margin-top:8px;color:rgba(255,200,80,0.2)">点击下方按钮开始摆摊</div>
+    </div>
+  `;
+
+  optionsArea.innerHTML = `
+    <button class="start-btn" id="startBtn" style="width:100%;text-align:center" onclick="startGame()">
+      开始摆摊 🛒
+    </button>
+  `;
+}
+
+function startGame() {
+  state.running = true;
+  startTimer();
+  spawnStudent();
+}
+
+// 页面加载自动初始化
+document.addEventListener('DOMContentLoaded', initGame);
+
+</script>
+</body>
+</html>

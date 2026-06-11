@@ -38,6 +38,7 @@ window.SITE_DATA = {
       { label: "笔记",  href: "#notes" },
       { label: "时评",  href: "#commentary" },
       { label: "主张",  href: "#manifesto" },
+      { label: "游戏",  href: "games/duck-scare-war.html" },
       { label: "联络",  href: "#contact" }
     ],
     cta: {
@@ -128,6 +129,13 @@ window.SITE_DATA = {
         excerpt: "毕业之后才明白，专业不是身份，是工具箱。",
         img: "assets/note-06.svg",
         href: "notes/what-pku-didnt-teach-me.html"
+      },
+      {
+        cat: "小游戏", num: "🎮",
+        title: "鸭骗战争：真鸭假鹅",
+        excerpt: "扮演鹅腿阿姨，用鸭腿冒充鹅腿！荒诞答题小游戏，你能骗过几个学生？",
+        img: null,
+        href: "games/duck-scare-war.html"
       }
     ]
   },
