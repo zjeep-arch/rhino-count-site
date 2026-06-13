@@ -1,11 +1,11 @@
 {
-  "updated": "2026-06-13T10:42:15+08:00",
+  "updated": "2026-06-13T10:45:11+08:00",
   "articles": [
     {
       "cat": "科技/地缘",
       "date": "2026-06-13",
-      "title": "（闲聊）Claude 5被禁了：假新闻先到，真禁令随后——到底发生了什么？",
-      "excerpt": "先有假新闻说Anthropic要停掉Claude 5封禁非美国公民，CEO辟谣说假的。结果辟谣不到48小时，美国政府真的下了禁令。这剧情比编剧写的还离谱。",
+      "title": "（闲聊）美国政府出手了：Anthropic被迫下线Fable 5和Mythos 5，外国人禁访问",
+      "excerpt": "特朗普政府援引国家安全权力，向Anthropic下达出口管制指令：暂停所有外国国民访问其最先进AI模型。Anthropic宣布暂时下线Fable 5和Mythos 5，全球AI监管进入新阶段。",
       "href": "articles/2026-06-13-claude-5-fake-news.html"
     },
     {
