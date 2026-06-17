@@ -1,0 +1,1118 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>百度 DuMate 从 0 到 1 保姆级上手教程</title>
+  <style>
+    :root {
+      --ink: #111827;
+      --text: #243040;
+      --muted: #667085;
+      --line: #d9e2ef;
+      --paper: #ffffff;
+      --wash: #f6f8fb;
+      --blue: #3157ff;
+      --teal: #098c8c;
+      --green: #16845b;
+      --amber: #b26b00;
+      --coral: #c24d3a;
+      --violet: #6b4edb;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--text);
+      background: #edf1f5;
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+      line-height: 1.72;
+    }
+
+    a { color: var(--blue); text-decoration: none; border-bottom: 1px solid rgba(49, 87, 255, .25); }
+
+    .page {
+      max-width: 1180px;
+      margin: 0 auto;
+      background: var(--paper);
+      box-shadow: 0 22px 90px rgba(20, 33, 55, .13);
+    }
+
+    .hero {
+      min-height: 680px;
+      position: relative;
+      display: grid;
+      align-content: end;
+      padding: 78px 72px 54px;
+      color: #fff;
+      background:
+        linear-gradient(90deg, rgba(13, 20, 38, .90), rgba(22, 37, 72, .64) 48%, rgba(22, 37, 72, .24)),
+        url("assets/official_home.png") center / cover no-repeat;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0;
+      height: 150px;
+      background: linear-gradient(0deg, rgba(17, 24, 39, .50), rgba(17, 24, 39, 0));
+      pointer-events: none;
+    }
+
+    .hero > * { position: relative; z-index: 1; }
+
+    .eyebrow {
+      width: fit-content;
+      padding: 6px 12px;
+      border: 1px solid rgba(255, 255, 255, .34);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .12);
+      font-weight: 800;
+      font-size: 13px;
+    }
+
+    h1 {
+      margin: 18px 0 16px;
+      max-width: 840px;
+      color: inherit;
+      font-size: 54px;
+      line-height: 1.12;
+    }
+
+    .subtitle {
+      max-width: 840px;
+      margin: 0 0 28px;
+      color: rgba(255, 255, 255, .90);
+      font-size: 21px;
+    }
+
+    .hero-strip {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      max-width: 980px;
+    }
+
+    .hero-item {
+      min-height: 94px;
+      padding: 15px 16px;
+      border: 1px solid rgba(255, 255, 255, .26);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .12);
+      backdrop-filter: blur(7px);
+    }
+
+    .hero-item b {
+      display: block;
+      margin-bottom: 4px;
+      color: rgba(255, 255, 255, .72);
+      font-size: 12px;
+    }
+
+    .hero-item span {
+      display: block;
+      font-weight: 900;
+      line-height: 1.35;
+    }
+
+    .toc-band {
+      padding: 20px 72px;
+      background: #101828;
+      color: #fff;
+    }
+
+    .toc {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      font-size: 14px;
+    }
+
+    .toc a {
+      display: block;
+      padding: 9px 11px;
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, .17);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .06);
+    }
+
+    .section {
+      padding: 58px 72px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section.alt { background: var(--wash); }
+
+    h2 {
+      margin: 0 0 18px;
+      color: var(--ink);
+      font-size: 34px;
+      line-height: 1.25;
+    }
+
+    h3 {
+      margin: 30px 0 12px;
+      color: var(--ink);
+      font-size: 23px;
+      line-height: 1.35;
+    }
+
+    h4 {
+      margin: 20px 0 8px;
+      color: var(--ink);
+      font-size: 18px;
+    }
+
+    p { margin: 10px 0; }
+
+    ul, ol {
+      margin: 12px 0;
+      padding-left: 24px;
+    }
+
+    li { margin: 8px 0; }
+
+    strong { color: var(--ink); }
+
+    .lead {
+      max-width: 860px;
+      color: #435066;
+      font-size: 19px;
+    }
+
+    .grid-2,
+    .grid-3,
+    .grid-4 {
+      display: grid;
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+    .card,
+    .note,
+    .prompt,
+    figure,
+    .checklist,
+    table {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .card {
+      padding: 20px;
+    }
+
+    .card h3,
+    .card h4 { margin-top: 0; }
+
+    .label {
+      display: inline-block;
+      margin-bottom: 10px;
+      padding: 3px 9px;
+      border-radius: 999px;
+      color: #fff;
+      background: var(--blue);
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .label.teal { background: var(--teal); }
+    .label.green { background: var(--green); }
+    .label.amber { background: var(--amber); }
+    .label.coral { background: var(--coral); }
+    .label.violet { background: var(--violet); }
+
+    .note {
+      padding: 18px 20px;
+      margin: 18px 0;
+      background: #f9fbff;
+      border-left: 5px solid var(--blue);
+    }
+
+    .note.green { border-left-color: var(--green); background: #f7fcfa; }
+    .note.amber { border-left-color: var(--amber); background: #fffaf2; }
+    .note.coral { border-left-color: var(--coral); background: #fff7f5; }
+
+    .prompt {
+      margin: 16px 0;
+      padding: 18px;
+      background: #101828;
+      color: #eef4ff;
+      overflow: auto;
+    }
+
+    .prompt b {
+      display: block;
+      margin-bottom: 8px;
+      color: #a8d4ff;
+    }
+
+    pre {
+      margin: 0;
+      white-space: pre-wrap;
+      word-break: break-word;
+      font: 15px/1.65 "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    }
+
+    figure {
+      margin: 22px 0;
+      overflow: hidden;
+    }
+
+    figure img {
+      display: block;
+      width: 100%;
+      height: auto;
+      background: #f2f5fa;
+    }
+
+    figcaption {
+      padding: 10px 14px;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+      font-size: 13px;
+    }
+
+    .wide-shot img {
+      max-height: 520px;
+      object-fit: contain;
+    }
+
+    .two-shots {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    .checklist {
+      padding: 22px;
+      background: #fff;
+    }
+
+    .checklist ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .checklist li {
+      position: relative;
+      padding-left: 26px;
+    }
+
+    .checklist li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--green);
+      font-weight: 900;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      overflow: hidden;
+      margin: 18px 0;
+    }
+
+    th,
+    td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      color: var(--ink);
+      background: #f2f5fa;
+      font-weight: 900;
+    }
+
+    tr:last-child td { border-bottom: 0; }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 16px 0;
+    }
+
+    .pill {
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: #eef4ff;
+      color: #2044c8;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+      margin: 22px 0;
+    }
+
+    .flow div {
+      min-height: 112px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .flow b {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--blue);
+      font-size: 13px;
+    }
+
+    @media print {
+      body { background: #fff; }
+      .page { box-shadow: none; max-width: none; }
+      .hero { min-height: 520px; }
+      .toc-band { display: none; }
+      .section { break-inside: avoid; }
+      figure, .card, .note, .prompt { break-inside: avoid; }
+      a { color: inherit; border: 0; }
+    }
+
+    @media (max-width: 900px) {
+      .hero,
+      .section,
+      .toc-band { padding-left: 24px; padding-right: 24px; }
+      h1 { font-size: 38px; }
+      h2 { font-size: 28px; }
+      .hero-strip,
+      .toc,
+      .grid-2,
+      .grid-3,
+      .grid-4,
+      .flow,
+      .two-shots { grid-template-columns: 1fr; }
+      .hero { min-height: 620px; }
+    }
+  </style>
+</head>
+<body>
+<main class="page">
+
+  <!-- ========== HERO ========== -->
+  <div style="padding: 16px 72px 0; background: #101828; position: relative; z-index: 2;">
+    <a href="../" style="color: rgba(255,255,255,.7); font-size: 14px; display: inline-flex; align-items: center; gap: 6px; border: none;">&larr; 犀牛伯爵</a>
+  </div>
+  <header class="hero">
+    <div class="eyebrow">第一次打开 DuMate，就从这篇开始</div>
+    <h1>百度 DuMate 从 0 到 1 保姆级上手教程</h1>
+    <p class="subtitle">这不是概念介绍，是一份可以照着操作的完整教程。从下载安装到工作区设置、第一个任务、文件整理、数据分析、浏览器自动化和定时报告，每一步都有操作路径和可复制的提示词。</p>
+    <div class="hero-strip">
+      <div class="hero-item"><b>适合谁</b><span>第一次使用 DuMate 的普通办公用户</span></div>
+      <div class="hero-item"><b>你会学到</b><span>读文件、做表格、出报告、跑自动化</span></div>
+      <div class="hero-item"><b>学习方式</b><span>每一步都有操作路径和可复制提示词</span></div>
+      <div class="hero-item"><b>最终结果</b><span>能独立完成一次真实办公任务</span></div>
+    </div>
+  </header>
+
+  <!-- ========== TOC ========== -->
+  <nav class="toc-band">
+    <ul class="toc">
+      <li><a href="#what">1. DuMate 是什么</a></li>
+      <li><a href="#setup">2. 安装与准备</a></li>
+      <li><a href="#interface">3. 界面与权限</a></li>
+      <li><a href="#first-task">4. 第一个任务</a></li>
+      <li><a href="#files">5. 本地文件处理</a></li>
+      <li><a href="#data">6. 数据分析报告</a></li>
+      <li><a href="#browser">7. 浏览器自动化</a></li>
+      <li><a href="#skills">8. Skills 技能</a></li>
+      <li><a href="#schedule">9. 定时任务</a></li>
+      <li><a href="#channels">10. 微信/飞书接入</a></li>
+      <li><a href="#safety">11. 安全与积分</a></li>
+      <li><a href="#troubleshooting">12. 常见排障</a></li>
+      <li><a href="#practice">13. 完整实战</a></li>
+      <li><a href="#cheatsheet">14. 提示词速查</a></li>
+    </ul>
+  </nav>
+
+  <!-- ========== 1. 产品讲清楚 ========== -->
+  <section class="section" id="what">
+    <h2>1. DuMate 是什么：把「问答」变成「交付」</h2>
+    <p class="lead">DuMate 是百度推出的桌面级 AI 办公智能体。和普通聊天 AI 不同，它的重点是完成流程。你告诉它目标，它自动拆解步骤、执行操作、产出文件。</p>
+
+    <div class="grid-3">
+      <div class="card">
+        <span class="label">一句话定义</span>
+        <h3>把「问答」变成「交付」</h3>
+        <p>DuMate 不是多一个聊天窗口。它读材料、整理文件、生成 Excel/PPT/PDF、操作浏览器、定时执行任务——这些才是它的核心能力。</p>
+      </div>
+      <div class="card">
+        <span class="label teal">用户价值</span>
+        <h3>减少重复操作</h3>
+        <p>适合处理「材料很多、步骤很碎、人工很烦」的工作：年中汇报、竞品调研、日报周报、表格清洗、资料归档、网页信息抓取。</p>
+      </div>
+      <div class="card">
+        <span class="label green">学习方法</span>
+        <h3>先做小任务，再做复杂任务</h3>
+        <p>第一次使用时先从一个测试文件夹开始，确认它怎么读文件、怎么申请权限、怎么保存结果，再逐步尝试数据分析和自动化任务。</p>
+      </div>
+    </div>
+
+    <figure>
+      <img src="assets/home_scenario.png" alt="DuMate 官网场景图">
+      <figcaption>DuMate 常用场景：文件管理、数据分析、自动化流程。本教程会按这三类能力一步步展开。</figcaption>
+    </figure>
+
+    <div class="note">
+      <strong>使用原则：</strong>把资料放进工作区 → 明确告诉 DuMate 要读哪些文件 → 说明要完成什么结果 → 指定输出到哪里。它会先拆解步骤，再逐步执行。
+    </div>
+  </section>
+
+  <!-- ========== 2. 安装与准备 ========== -->
+  <section class="section alt" id="setup">
+    <h2>2. 安装与准备：先把环境搭好</h2>
+    <p class="lead">DuMate 的上手很简单：下载安装、登录账号、创建工作区、完成第一个任务。</p>
+
+    <h3>2.1 下载并安装</h3>
+    <ol>
+      <li>打开官网：<a href="https://www.dumate.cn/">https://www.dumate.cn/</a>。</li>
+      <li>下载桌面端。当前支持 <strong>macOS M 系列芯片</strong> 与 <strong>Windows 10 及以上</strong>。</li>
+      <li>按系统提示完成安装。</li>
+      <li>启动后使用百度账号或百度智能云账号登录。没有账号可以用手机号注册。</li>
+    </ol>
+
+    <figure class="wide-shot">
+      <img src="assets/quick_login.png" alt="DuMate 登录界面">
+      <figcaption>首次使用需要完成登录。</figcaption>
+    </figure>
+
+    <h3>2.2 创建工作区</h3>
+    <p>工作区是 DuMate 访问本地文件的边界范围。建议新手不要一开始就授权整个电脑，而是先新建一个专用文件夹，把要处理的资料放进去。</p>
+    <div class="grid-2">
+      <div class="card">
+        <h4>推荐文件夹结构</h4>
+        <pre>DuMate_Workspace/
+  01_输入资料/
+  02_中间过程/
+  03_最终交付/
+  04_归档备份/</pre>
+      </div>
+      <div class="card">
+        <h4>为什么要这样做</h4>
+        <p>方便 DuMate 批量读取材料，也方便你检查结果。涉及客户资料、合同、财务数据时，先把任务范围收窄，后面再按需扩大。</p>
+      </div>
+    </div>
+
+    <figure class="wide-shot">
+      <img src="assets/newtask_workspace.png" alt="设置工作区">
+      <figcaption>在新建任务时设置工作区。</figcaption>
+    </figure>
+
+    <h3>2.3 Windows 安全提示处理</h3>
+    <p>Windows 端如果提示「未检测到安全工作区」，需要以管理员身份打开 PowerShell，启用虚拟化/容器相关能力，然后重启电脑：</p>
+    <div class="prompt">
+      <b>PowerShell 管理员模式执行</b>
+      <pre>dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+dism.exe /online /enable-feature /featurename:Containers /all /norestart</pre>
+    </div>
+    <div class="note amber">
+      <strong>注意：</strong>大多数用户可以按正常流程先装先试，遇到这个提示再回来执行上面的命令。不用一开始就做。
+    </div>
+  </section>
+
+  <!-- ========== 3. 界面与权限 ========== -->
+  <section class="section" id="interface">
+    <h2>3. 界面布局与权限操作</h2>
+    <p class="lead">主界面有四个关键区域，先把它们的位置和用途记清楚，后面操作时才不会迷路。</p>
+
+    <figure class="wide-shot">
+      <img src="assets/quick_main.png" alt="DuMate 主界面">
+      <figcaption>主界面包含左侧导航、主对话区、工作区设置、积分入口。</figcaption>
+    </figure>
+
+    <div class="grid-4">
+      <div class="card">
+        <span class="label">左侧导航</span>
+        <h3>新任务</h3>
+        <p>创建一段新的任务对话。每个复杂任务建议独立开一个新任务，避免上下文混杂干扰。</p>
+      </div>
+      <div class="card">
+        <span class="label teal">左侧导航</span>
+        <h3>技能</h3>
+        <p>查看内置技能和用户安装的技能。常用技能可以开启，不常用的可以关闭以节省上下文空间。</p>
+      </div>
+      <div class="card">
+        <span class="label green">左侧导航</span>
+        <h3>定时任务</h3>
+        <p>查看自动执行的任务、历史运行状态，也可以立即执行、关闭或删除已有任务。</p>
+      </div>
+      <div class="card">
+        <span class="label amber">底部区域</span>
+        <h3>积分</h3>
+        <p>查看当前可用积分。复杂任务、模型调用和部分官方技能会消耗积分。</p>
+      </div>
+    </div>
+
+    <h3>3.1 主对话区：一句话下任务</h3>
+    <p>在输入框里直接描述目标。涉及具体文件时，点「+」添加文件，或先把文件放到工作区里再告诉 DuMate 去读取。</p>
+
+    <h3>3.2 澄清表单：认真填写，减少返工</h3>
+    <p>当你下达复杂任务时，DuMate 可能会弹出一个澄清表单，让你补充输出格式、风格、数据范围等。</p>
+    <figure>
+      <img src="assets/quick_clarify.png" alt="澄清表单">
+      <figcaption>复杂任务可能触发澄清表单，务必逐项填写。</figcaption>
+    </figure>
+
+    <h3>3.3 权限确认：风险操作看清楚再允许</h3>
+    <p>当任务涉及编辑、删除、本地文件操作、外部发送等风险行为时，DuMate 会弹出权限确认框。三个选项的用法如下：</p>
+    <table>
+      <thead>
+        <tr><th>选项</th><th>适合场景</th><th>操作说明</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>拒绝</td><td>你不确定它要改什么、删什么、发到哪里</td><td>先拒绝，然后让 DuMate 解释其操作计划，确认后再重新执行</td></tr>
+        <tr><td>本次允许</td><td>只允许这一步执行</td><td>新手最推荐，每次风险操作都会单独确认，风险可控</td></tr>
+        <tr><td>本轮对话均允许</td><td>你已经确认整轮任务都在同一范围内执行</td><td>适合重复读写同一个工作区的任务，减少反复确认的打扰</td></tr>
+      </tbody>
+    </table>
+    <figure>
+      <img src="assets/quick_permission.png" alt="权限确认">
+      <figcaption>涉及风险操作时会出现权限确认。</figcaption>
+    </figure>
+  </section>
+
+  <!-- ========== 4. 第一个任务 ========== -->
+  <section class="section alt" id="first-task">
+    <h2>4. 第一个任务：从整理一个文件夹开始</h2>
+    <p class="lead">新手不要一上来就做全公司经营分析。最好的第一个任务是低风险、材料明确、结果容易检查的任务。下面示范一个「整理测试文件夹」的完整流程。</p>
+
+    <div class="flow">
+      <div><b>Step 1</b>准备一个测试文件夹，放入少量 Word、PDF、Excel、图片。</div>
+      <div><b>Step 2</b>在 DuMate 新建任务，设置这个测试文件夹为工作区。</div>
+      <div><b>Step 3</b>输入下面的提示词，明确输出格式和保存位置。</div>
+      <div><b>Step 4</b>查看它的任务计划，必要时补充规则。</div>
+      <div><b>Step 5</b>检查输出文件，指出问题，让它修订。</div>
+    </div>
+
+    <div class="prompt">
+      <b>新手第一个任务提示词（可直接复制使用）</b>
+      <pre>请帮我整理当前工作区里的文件。
+目标：
+1. 按文件类型和内容主题分成 3 到 5 个文件夹。
+2. 对文件名不清楚的文件，改成"日期_主题_文件类型"的命名。
+3. 不要删除任何文件，只移动和重命名。
+4. 先给我一个整理规则和待操作清单，等我确认后再执行。
+5. 完成后生成一份"整理说明.md"，写清楚每个文件夹放了什么。</pre>
+    </div>
+
+    <div class="note green">
+      <strong>提示词结构说明：</strong>目标清楚 + 权限边界清楚 + 禁止删除 + 先列清单。这样既能感受 DuMate 的做事能力，又不会因为不确定操作而担心。
+    </div>
+
+    <figure>
+      <img src="assets/newtask_process.png" alt="任务进程面板">
+      <figcaption>右侧面板可查看任务进程、任务文件和 DuMate 调用的能力。</figcaption>
+    </figure>
+
+    <h3>4.1 让 DuMate 先规划再执行</h3>
+    <p>在提示词里固定加一句「先给我计划，等我确认再执行」。这个习惯对文件改名、批量移动、生成对外材料等容易返工的任务特别有用。</p>
+
+    <h3>4.2 检查结果时重点看三件事</h3>
+    <div class="checklist">
+      <ul>
+        <li>输出文件是否在你指定的文件夹里。</li>
+        <li>文件名、目录、格式是否符合你一开始说的规则。</li>
+        <li>有没有删除、覆盖、外发等你没有明确允许的动作。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ========== 5. 本地文件处理 ========== -->
+  <section class="section" id="files">
+    <h2>5. 本地文件处理：让 DuMate 读懂你的资料</h2>
+    <p class="lead">本地文件处理是最适合新手练习的能力。先让 DuMate 整理文件夹、提取信息、汇总周报，再进阶到生成 PPT、Excel、PDF 等交付物。</p>
+
+    <h3>5.1 场景：年中汇报资料整理</h3>
+    <p>把半年周报、项目纪要、销售数据、竞品资料放进工作区，让 DuMate 先读资料、再提炼成果、最后输出汇报材料。</p>
+    <div class="prompt">
+      <b>年中汇报提示词</b>
+      <pre>请读取工作区"01_输入资料"中的周报、会议纪要、项目复盘和数据表。
+请帮我生成一份年中汇报材料：
+1. 先按项目归类，提炼每个项目的目标、动作、结果、问题。
+2. 汇总成"核心成绩、关键数据、典型案例、风险问题、下半年计划"五个部分。
+3. 输出一份 Word 文档和一份 12 页以内的 PPT 大纲。
+4. 所有结论后面标明来自哪个文件，方便我复核。</pre>
+    </div>
+
+    <h3>5.2 场景：合同、纪要、报告的关键信息提取</h3>
+    <p>适合行政、法务、销售、咨询岗位。不要只说「总结一下」，要指定字段。</p>
+    <div class="prompt">
+      <b>结构化提取提示词</b>
+      <pre>请读取工作区里的合同 PDF，并提取成 Excel：
+字段包括：合同名称、客户名称、签署日期、金额、付款节点、交付物、违约条款、续约日期、需要我关注的风险。
+如果某个字段缺失，请写"原文未找到"，不要猜测。
+完成后再生成一份 800 字以内的风险摘要。</pre>
+    </div>
+
+    <h3>5.3 场景：文件夹清理与批量命名</h3>
+    <p>文件夹清理一定要按「先扫描 → 给清单 → 再动手」的顺序来做。</p>
+    <table>
+      <thead>
+        <tr><th>任务</th><th>推荐提示词方向</th><th>风险控制</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>下载文件夹分类</td><td>按文件内容和用途分类，不只按后缀名</td><td>不删除，只移动</td></tr>
+        <tr><td>图片重命名</td><td>按图片内容、日期、项目名命名</td><td>保留原文件副本</td></tr>
+        <tr><td>重复文件整理</td><td>先列出疑似重复项和判断依据</td><td>人工确认后再删除</td></tr>
+      </tbody>
+    </table>
+
+    <h3>5.4 场景：生成可交付文件</h3>
+    <p>需要正式交付时，直接指定交付物类型、保存位置、页数、字段、格式。</p>
+    <div class="grid-3">
+      <div class="card"><span class="label">PPT</span><p>适合方案汇报、产品介绍、调研结论。写清页数、受众、风格、必须包含的页面。</p></div>
+      <div class="card"><span class="label teal">Excel</span><p>适合数据台账、清洗结果、指标对比。写清字段、口径、分组方式和排序规则。</p></div>
+      <div class="card"><span class="label green">PDF/Word</span><p>适合正式报告、纪要、手册。写清目录结构、字数、证据来源和图表要求。</p></div>
+    </div>
+  </section>
+
+  <!-- ========== 6. 数据分析 ========== -->
+  <section class="section alt" id="data">
+    <h2>6. 数据分析：从 Excel 到可视化报告</h2>
+    <p class="lead">数据分析任务的关键是「讲清口径」。把 Excel、CSV、数据说明放进工作区后，告诉 DuMate 字段含义、指标公式、分析目标和输出格式。</p>
+
+    <h3>6.1 标准操作流程</h3>
+    <div class="flow">
+      <div><b>准备</b>把 Excel/CSV/数据说明放入工作区。</div>
+      <div><b>说明</b>告诉它字段含义、业务口径、时间范围。</div>
+      <div><b>清洗</b>让它处理缺失、重复、异常和格式不统一。</div>
+      <div><b>分析</b>指定指标、分组、对比、趋势和异常。</div>
+      <div><b>交付</b>输出 Excel、图表、PPT、PDF 或 HTML 报告。</div>
+    </div>
+
+    <h3>6.2 运营复盘模板</h3>
+    <div class="prompt">
+      <b>电商/活动复盘提示词</b>
+      <pre>请读取工作区里的销售表、投放表、商品表和用户评论表，帮我做一次活动复盘。
+请完成：
+1. 清洗数据：统一日期、商品 ID、渠道名称，处理重复和缺失。
+2. 核心指标：GMV、订单数、客单价、转化率、ROI、退款率、毛利率。
+3. 找出表现最好的 10 个 SKU 和最需要优化的 10 个 SKU。
+4. 结合评论内容，提炼用户喜欢点、差评点和下一轮卖点。
+5. 输出一份 Excel 明细表和一份可视化报告。
+6. 报告里每个结论都要说明依据，不确定的地方单独列为"待人工确认"。</pre>
+    </div>
+
+    <h3>6.3 市场调研模板</h3>
+    <div class="prompt">
+      <b>竞品调研提示词</b>
+      <pre>请基于工作区中的竞品资料、官网链接清单和已有表格，生成一份市场调研报告。
+报告结构：
+1. 竞品基本信息对比。
+2. 价格、功能、用户评价、渠道打法对比。
+3. 我们可借鉴的 5 个动作。
+4. 我们需要避开的 5 个风险。
+5. 最后输出 PPT 大纲和 Excel 对比表。</pre>
+    </div>
+
+    <h3>6.4 数据任务一定要验算</h3>
+    <div class="note coral">
+      <strong>不要把 AI 结果直接发出去。</strong>数据分析类任务至少检查：行数是否一致、关键字段是否缺失、计算公式是否合理、口径是否和业务一致、图表是否误导。可以要求 DuMate 把计算过程、代码或公式写进附录。
+    </div>
+
+    <table>
+      <thead>
+        <tr><th>检查项</th><th>可以追问 DuMate 的话</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>数据是否读全</td><td>请告诉我读取了哪些文件、每个文件多少行、是否有读取失败。</td></tr>
+        <tr><td>指标口径</td><td>请列出 GMV、ROI、退款率的计算公式，并指出用到哪些字段。</td></tr>
+        <tr><td>异常值</td><td>请列出被你判定为异常的数据，以及为什么判定异常。</td></tr>
+        <tr><td>结论依据</td><td>请把每个结论对应的数据表、字段、计算过程列出来。</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ========== 7. 浏览器自动化 ========== -->
+  <section class="section" id="browser">
+    <h2>7. 浏览器自动化：让 DuMate 操作网页</h2>
+    <p class="lead">浏览器能力适合网页搜索、后台填报、页面截图、评论采集、竞品信息整理等任务。官方浏览器插件配合 Chrome 使用，并复用用户已登录状态。</p>
+
+    <h3>7.1 什么时候用到浏览器插件</h3>
+    <div class="grid-3">
+      <div class="card"><span class="label">网页资料</span><p>让 DuMate 打开网页、搜索信息、截图、整理结果。</p></div>
+      <div class="card"><span class="label teal">登录后台</span><p>在你已登录的浏览器里执行操作，减少重复登录验证。</p></div>
+      <div class="card"><span class="label amber">竞品采集</span><p>读取商品页、评论页、内容页，把信息整理成表格。</p></div>
+    </div>
+
+    <h3>7.2 插件安装步骤</h3>
+    <ol>
+      <li>确认电脑已安装 Chrome，且 DuMate 客户端正在运行。</li>
+      <li>从官方文档提供的链接下载 DuMate Browser Extension 压缩包。</li>
+      <li>解压到本地固定目录（如 Windows 的 <code>C:\dumate-browser-extension</code> 或 macOS 的用户目录）。</li>
+      <li>打开 Chrome 的 <code>chrome://extensions/</code>。</li>
+      <li>开启「开发者模式」，点击「加载已解压的扩展程序」，选择解压目录。</li>
+      <li>点击扩展图标，确认状态显示为「已连接」。</li>
+    </ol>
+
+    <div class="note amber">
+      <strong>注意事项：</strong>Chrome 可能显示「扩展正在调试此浏览器」。这是插件通过浏览器调试能力操作页面时的正常提示，不用担心。
+    </div>
+
+    <h3>7.3 浏览器任务提示词</h3>
+    <div class="prompt">
+      <b>网页信息采集提示词</b>
+      <pre>请使用已连接的 Chrome 浏览器，帮我收集这 5 个竞品链接的信息。
+需要提取：产品名称、价格、核心卖点、用户差评、页面促销信息、截图。
+请先打开第一个链接做样例，给我确认字段格式。
+确认后再批量处理剩余链接，最后输出 Excel 和一份简短分析报告。</pre>
+    </div>
+
+    <div class="note coral">
+      <strong>边界说明：</strong>不要让 DuMate 绕过验证码、支付、风控、权限校验。涉及外发、提交、购买、删除等操作，必须人工确认。
+    </div>
+  </section>
+
+  <!-- ========== 8. Skills 技能 ========== -->
+  <section class="section alt" id="skills">
+    <h2>8. Skills 技能：把经验打包成可复用能力</h2>
+    <p class="lead">Skills 是 DuMate 从「会聊天」走向「会干专门活」的关键。你可以把特定领域的知识、流程、工具调用方式打包起来，反复调用。</p>
+
+    <div class="two-shots">
+      <figure>
+        <img src="assets/skills_view.png" alt="技能页面">
+        <figcaption>在左侧「技能」入口查看内置技能和已安装技能。</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/skills_install.png" alt="安装技能">
+        <figcaption>支持通过 URL 导入，或上传 zip/md 格式文件。</figcaption>
+      </figure>
+    </div>
+
+    <h3>8.1 技能管理的三个操作</h3>
+    <table>
+      <thead>
+        <tr><th>操作</th><th>入口</th><th>说明</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>查看技能</td><td>左侧「技能」</td><td>看内置技能和已安装技能，判断哪些适合当前任务。</td></tr>
+        <tr><td>安装技能</td><td>技能页右上角「安装技能」</td><td>可用 URL、zip 或 md 文件导入。</td></tr>
+        <tr><td>启用/禁用/更新/删除</td><td>技能卡片详情</td><td>预置技能通常不支持删除或更新，自定义技能可以自由管理。</td></tr>
+      </tbody>
+    </table>
+
+    <h3>8.2 什么任务适合做成 Skill</h3>
+    <div class="grid-3">
+      <div class="card"><span class="label">重复型</span><p>每周都做的工作：周报、竞品监控、日报汇总。</p></div>
+      <div class="card"><span class="label green">标准型</span><p>有固定输入、固定步骤、固定输出格式的工作流程。</p></div>
+      <div class="card"><span class="label violet">专业型</span><p>需要特定行业知识或分析框架的任务，如广告投放复盘、财务指标解读。</p></div>
+    </div>
+
+    <div class="prompt">
+      <b>让 DuMate 帮你沉淀 Skill 的提示词</b>
+      <pre>请把我们刚才完成"竞品月度监控报告"的过程整理成一个可复用 Skill。
+要求：
+1. 写清输入材料：竞品链接表、历史价格表、评论导出表。
+2. 写清执行步骤：采集、清洗、归类、分析、生成报告。
+3. 写清输出标准：Excel 明细、PPT 大纲、800 字摘要。
+4. 写清质量检查：数据行数、重复项、异常价格、来源链接。
+5. 以后我只要说"执行竞品月报 Skill"，就能按这个流程跑。</pre>
+    </div>
+  </section>
+
+  <!-- ========== 9. 定时任务 ========== -->
+  <section class="section" id="schedule">
+    <h2>9. 定时任务：把一次性任务变成自动流程</h2>
+    <p class="lead">定时任务适合每天/每周都要做的工作。需要注意的是：定时任务在本地运行，需要电脑开机并保持客户端运行。</p>
+
+    <div class="two-shots">
+      <figure>
+        <img src="assets/schedule_create.png" alt="创建定时任务">
+        <figcaption>可以用自然语言描述任务内容和执行时间。</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/schedule_manage.png" alt="管理定时任务">
+        <figcaption>在定时任务页面查看、关闭、删除或立即执行。</figcaption>
+      </figure>
+    </div>
+
+    <h3>9.1 推荐先从这四类任务开始</h3>
+    <div class="grid-2">
+      <div class="card">
+        <h4>每日资讯摘要</h4>
+        <p>每天早上 9 点抓取 AI、行业、竞品新闻，生成 500 字摘要和 5 条重点链接。</p>
+      </div>
+      <div class="card">
+        <h4>竞品价格监控</h4>
+        <p>每周一读取指定竞品链接，记录价格、促销、差评变化，输出 Excel。</p>
+      </div>
+      <div class="card">
+        <h4>销售日报整理</h4>
+        <p>每天晚上读取当天销售表，汇总 GMV、转化、异常商品，生成日报。</p>
+      </div>
+      <div class="card">
+        <h4>舆情与评论监测</h4>
+        <p>每天定时查看品牌关键词、用户评论、平台反馈，提炼风险和机会。</p>
+      </div>
+    </div>
+
+    <div class="prompt">
+      <b>创建定时任务的提示词</b>
+      <pre>请创建一个定时任务：
+任务名称：AI 行业早报
+执行时间：每个工作日早上 8:30
+任务内容：
+1. 搜索过去 24 小时 AI 办公、智能体、营销自动化相关资讯。
+2. 去重后选出 10 条最值得关注的内容。
+3. 生成 500 字摘要、3 条机会判断、3 条风险提醒。
+4. 保存到工作区"03_最终交付/AI早报"文件夹。
+5. 完成后通知我查看。</pre>
+    </div>
+
+    <div class="note">
+      <strong>定时任务选择原则：</strong>高频、重复、规则明确、有固定交付格式的工作最适合自动化。第一次设置后，建议手动点一次「立即执行」来验证结果。
+    </div>
+  </section>
+
+  <!-- ========== 10. 消息渠道 ========== -->
+  <section class="section alt" id="channels">
+    <h2>10. 微信、飞书等消息渠道：不只在桌面里工作</h2>
+    <p class="lead">消息渠道适合接收任务通知、在移动端触发简单任务、把报告推送到常用办公工具。当前支持微信、飞书、如流、钉钉。</p>
+
+    <h3>10.1 微信接入步骤</h3>
+    <ol>
+      <li>在 DuMate 左下角点击用户名。</li>
+      <li>进入「消息渠道」。</li>
+      <li>选择微信渠道，点击接入。</li>
+      <li>用手机微信扫码完成绑定。</li>
+    </ol>
+
+    <div class="two-shots">
+      <figure>
+        <img src="assets/wechat_channel.png" alt="微信渠道">
+        <figcaption>在消息渠道里选择微信接入。</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/wechat_qr.png" alt="微信扫码">
+        <figcaption>通过扫码完成绑定。</figcaption>
+      </figure>
+    </div>
+
+    <h3>10.2 飞书接入</h3>
+    <p>飞书接入有扫码和手动两种方式。</p>
+    <table>
+      <thead>
+        <tr><th>方式</th><th>适合谁</th><th>注意点</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>扫码接入</td><td>个人用户</td><td>步骤少，扫码即可完成。</td></tr>
+        <tr><td>手动接入</td><td>企业用户、有飞书开放平台权限的人</td><td>需要创建应用、配置权限、事件与回调、发布应用。</td></tr>
+      </tbody>
+    </table>
+
+    <h3>10.3 渠道接入后的典型用法</h3>
+    <div class="grid-3">
+      <div class="card"><span class="label">通知</span><p>任务完成后，推送摘要或提醒你回到电脑查看。</p></div>
+      <div class="card"><span class="label teal">触发</span><p>在微信/飞书里发一句话，触发简单查询或固定流程。</p></div>
+      <div class="card"><span class="label amber">协作</span><p>把定时报告发给自己或团队相关成员，减少手动同步。</p></div>
+    </div>
+  </section>
+
+  <!-- ========== 11. 安全与积分 ========== -->
+  <section class="section" id="safety">
+    <h2>11. 安全、审计与积分</h2>
+    <p class="lead">你真正需要关心的不是「AI 会不会聪明」，而是「它会不会乱动我的电脑、泄露我的资料、乱扣我的额度」。</p>
+
+    <h3>11.1 三重安全边界</h3>
+    <div class="grid-3">
+      <div class="card">
+        <span class="label">工作区边界</span>
+        <p>DuMate 主要围绕你授权的工作区处理文件。新手只授权任务需要的文件夹即可。</p>
+      </div>
+      <div class="card">
+        <span class="label coral">风险确认</span>
+        <p>涉及删除、编辑、外发等高风险操作时，会让 DuMate 先列计划，由你确认后再执行。</p>
+      </div>
+      <div class="card">
+        <span class="label green">过程可查</span>
+        <p>任务执行过程可在流式输出中实时查看，包括文件处理、脚本执行、网页浏览等。</p>
+      </div>
+    </div>
+
+    <h3>11.2 积分与订阅方案</h3>
+    <table>
+      <thead>
+        <tr><th>方案</th><th>适合用户</th><th>推荐用途</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>免费版</td><td>初次体验、轻量任务</td><td>先用来跑文件整理、摘要、简单报告。</td></tr>
+        <tr><td>Pro 版</td><td>日常高频办公用户</td><td>适合经常做汇报、数据分析、资料整理的人。</td></tr>
+        <tr><td>Max 版</td><td>更重度的自动化和分析用户</td><td>适合长任务、多文件、多图表、多报告输出。</td></tr>
+      </tbody>
+    </table>
+
+    <h3>11.3 交付前自查模板</h3>
+    <div class="prompt">
+      <b>让 DuMate 自查结果的提示词</b>
+      <pre>请在交付前做一次自查：
+1. 哪些文件被读取、移动、修改或新建？
+2. 是否存在删除、覆盖、外发、提交表单等风险操作？
+3. 输出结论里哪些是确定的，哪些需要人工复核？
+4. 数据分析中使用了哪些字段和计算公式？
+5. 请把以上内容写成"交付说明.md"。</pre>
+    </div>
+  </section>
+
+  <!-- ========== 12. 常见排障 ========== -->
+  <section class="section alt" id="troubleshooting">
+    <h2>12. 常见问题与处理方法</h2>
+    <table>
+      <thead>
+        <tr><th>问题</th><th>可能原因</th><th>处理方法</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>任务跑偏</td><td>目标太宽、材料太多、输出格式没讲清</td><td>让它暂停，重新补充任务范围、样例和验收标准。</td></tr>
+        <tr><td>浏览器插件未连接</td><td>DuMate 未启动、扩展未正确加载</td><td>启动 DuMate，重启客户端，在 Chrome 扩展页禁用再启用插件。</td></tr>
+        <tr><td>定时任务没执行</td><td>电脑关机、客户端未运行、本地网络异常</td><td>保持电脑开机和 DuMate 运行，进入定时任务页查看历史状态。</td></tr>
+        <tr><td>生成文件打不开</td><td>本地没有对应应用，或文件格式异常</td><td>让 DuMate 重新导出为通用格式（PDF、Markdown、CSV）。</td></tr>
+        <tr><td>数据结论不可信</td><td>数据源不完整、口径不清、公式有误</td><td>追问读取行数、字段、公式、异常值，并要求输出复核清单。</td></tr>
+        <tr><td>积分用完</td><td>长任务或多轮复杂任务消耗较多</td><td>先拆小任务，减少反复生成大文件，查看订阅和积分页面按需升级。</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ========== 13. 完整实战 ========== -->
+  <section class="section" id="practice">
+    <h2>13. 完整实战：用 DuMate 做一份年中汇报</h2>
+    <p class="lead">这一章把前面学到的能力串起来，完整跑一次真实任务：从准备资料，到让 DuMate 读取文件、提炼内容、生成报告，再到检查和修订。</p>
+
+    <h3>13.1 准备资料文件夹</h3>
+    <p>在工作区建一个「年中汇报实战」文件夹，把资料按类型放好。</p>
+    <div class="card">
+      <pre>年中汇报实战/
+  01_周报和月报/
+  02_项目资料/
+  03_销售和运营数据/
+  04_会议纪要/
+  05_历史汇报模板/
+  06_最终输出/</pre>
+    </div>
+
+    <h3>13.2 第一步：让 DuMate 先盘点资料</h3>
+    <div class="prompt">
+      <b>资料盘点提示词</b>
+      <pre>请读取当前工作区"年中汇报实战"文件夹。
+先不要生成正式报告，请先帮我做资料盘点：
+1. 列出你读取到的文件清单。
+2. 按"周报月报、项目资料、数据表、会议纪要、历史模板"分类。
+3. 标出可能重复、缺失、打不开或内容不清楚的文件。
+4. 给我一份建议的汇报结构，等我确认后再进入下一步。</pre>
+    </div>
+
+    <h3>13.3 第二步：确认报告结构</h3>
+    <p>看到 DuMate 的资料清单后，先检查有没有漏文件。确认无误后，再让它按你的受众调整汇报结构。汇报给老板，重点突出结果、数据、风险和计划；汇报给客户，重点突出进展、价值和下一步安排。</p>
+    <div class="prompt">
+      <b>结构确认提示词</b>
+      <pre>请按"管理层汇报"的标准调整结构。
+我的报告需要包括：
+1. 上半年目标回顾
+2. 核心成果和关键数据
+3. 重点项目进展
+4. 典型案例
+5. 当前问题和风险
+6. 下半年计划
+请每一部分写清需要使用哪些文件和数据。</pre>
+    </div>
+
+    <h3>13.4 第三步：生成初稿和数据表</h3>
+    <div class="prompt">
+      <b>生成初稿提示词</b>
+      <pre>请基于确认后的结构，生成两份文件：
+1. "年中汇报初稿.docx"：正文控制在 3000 字以内，表达正式、清晰。
+2. "年中汇报数据台账.xlsx"：整理所有关键数据，包含来源文件、指标名称、数值、时间范围、备注。
+要求：
+- 不确定的数据不要猜，标为"待确认"。
+- 所有重要结论都要标明来源文件。
+- 文件保存到"06_最终输出"。</pre>
+    </div>
+
+    <h3>13.5 第四步：把初稿改成 PPT 大纲</h3>
+    <div class="prompt">
+      <b>PPT 大纲提示词</b>
+      <pre>请把"年中汇报初稿.docx"改成一份 12 页以内的 PPT 大纲。
+每页包含：
+1. 页面标题
+2. 3 到 5 个要点
+3. 建议使用的数据或图表
+4. 需要放入的来源文件
+请先输出大纲，不要直接生成 PPT，等我确认页面结构后再继续。</pre>
+    </div>
+
+    <h3>13.6 第五步：检查和修订</h3>
+    <p>正式交付前，让 DuMate 自查一次，再人工复核关键数据。不要跳过这一步。</p>
+    <div class="prompt">
+      <b>交付前自查提示词</b>
+      <pre>请对最终输出做交付前检查：
+1. 检查报告中的数字是否都能在数据台账中找到。
+2. 检查每个结论是否有来源文件。
+3. 列出所有"待确认"的地方。
+4. 检查是否有空泛表述，帮我改成更具体的表达。
+5. 生成一份"交付前检查清单.md"。</pre>
+    </div>
+
+    <div class="note green">
+      <strong>完成标准：</strong>最后你应该至少得到 4 个文件：汇报初稿、数据台账、PPT 大纲、交付前检查清单。确认这些文件都可打开、内容可追溯，再进入最终美化或正式提交。
+    </div>
+  </section>
+
+  <!-- ========== 14. 提示词速查 ========== -->
+  <section class="section alt" id="cheatsheet">
+    <h2>14. 一页速查：DuMate 提示词公式</h2>
+    <p class="lead">遇到新任务时，可以直接套用这套通用公式。</p>
+
+    <div class="prompt">
+      <b>通用提示词公式（可直接复制修改）</b>
+      <pre>请你扮演【角色】。
+我的目标是【任务目标】。
+你可以使用的材料在【工作区/文件/链接】。
+请先做【计划/清单/字段设计】，等我确认后再执行。
+执行时请注意【权限边界/不要删除/不要外发/保留原文件】。
+最终交付【文件格式/页数/字段/保存位置】。
+完成后请输出【交付说明/数据来源/风险提醒/复核清单】。</pre>
+    </div>
+
+    <div class="grid-3">
+      <div class="card">
+        <span class="label">文件类</span>
+        <p>重点写清：读哪些文件、按什么规则整理、是否允许移动/重命名/删除。</p>
+      </div>
+      <div class="card">
+        <span class="label teal">数据类</span>
+        <p>重点写清：字段口径、指标公式、输出图表、验算方式。</p>
+      </div>
+      <div class="card">
+        <span class="label green">自动化类</span>
+        <p>重点写清：执行频率、触发条件、通知方式、失败时怎么处理。</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+</body>
+</html>
