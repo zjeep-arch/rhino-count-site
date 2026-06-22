@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="color-scheme" content="light dark" />
   <title>每日时评 · 犀牛伯爵</title>
-  <meta name="description" content="犀牛伯爵的每日时评文章合集 — 用「肖磊看世界」的闲聊体聊国际政经，纯属个人瞎扯。" />
+  <meta name="description" content="犀牛伯爵的每日时评文章合集 — 用闲聊体聊国际政经，纯属个人瞎扯。" />
   <link rel="canonical" href="https://zjeep-arch.github.io/rhino-count-site/articles/" />
 
   <meta property="og:type" content="website" />
   <meta property="og:title" content="每日时评 · 犀牛伯爵" />
-  <meta property="og:description" content="用「肖磊看世界」的闲聊体聊国际政经，纯属个人瞎扯闲聊。" />
+  <meta property="og:description" content="用闲聊体聊国际政经，纯属个人瞎扯闲聊。" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -24,8 +24,10 @@
       --accent: #8B3A2E; --gold: #B8862F;
       --serif: "Playfair Display","Noto Serif SC","Songti SC",Georgia,serif;
       --sans: "Inter",-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
-      --maxw: 820px; --pad: clamp(20px,4vw,32px);
-      --radius: 14px;
+      --maxw: 720px; --pad: clamp(20px,5vw,40px);
+      --radius: 14px; --s-1: 4px; --s-2: 8px; --s-3: 12px;
+      --s-4: 16px; --s-5: 20px; --s-6: 24px; --s-7: 32px;
+      --s-8: 40px; --s-9: 56px; --s-10: 80px;
     }
     [data-theme="dark"] {
       --bg: #14100C; --bg-soft: #1A1510; --surface: #1F1813;
@@ -41,36 +43,50 @@
     }
     .container { max-width: var(--maxw); margin-inline: auto; padding-inline: var(--pad); }
 
+    /* ─── Header ─── */
     .page-header {
-      padding: var(--s-8) 0 var(--s-6);
-      border-bottom: 1px solid var(--line);
-      margin-bottom: var(--s-6);
+      padding: var(--s-10) 0 var(--s-8);
     }
+    .back-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 13px; color: var(--muted); font-weight: 500;
+      text-decoration: none; letter-spacing: 0.02em;
+      margin-bottom: var(--s-6);
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--accent); }
     .page-header h1 {
       font-family: var(--serif); font-weight: 700;
-      font-size: clamp(28px,5vw,42px); line-height: 1.15;
+      font-size: clamp(30px,5vw,44px); line-height: 1.1;
       margin: 0 0 var(--s-3);
     }
     .page-header .sub {
-      color: var(--muted); font-size: 14px;
-    }
-    .page-header .back {
-      display: inline-flex; align-items: center; gap: var(--s-2);
-      font-size: 13px; color: var(--accent); font-weight: 500;
-      margin-bottom: var(--s-5);
+      color: var(--muted); font-size: 15px; line-height: 1.6;
+      margin: 0; max-width: 480px;
     }
 
-    .article-list { display: grid; grid-template-columns: 1fr; gap: var(--s-4); }
+    /* ─── Article List ─── */
+    .article-list { display: grid; gap: var(--s-4); }
+
     .article-card {
-      background: var(--surface); border: 1px solid var(--line);
-      border-radius: var(--radius); padding: var(--s-5) var(--s-6);
-      display: block;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--s-3);
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: var(--s-6);
+      text-decoration: none; color: inherit;
       transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
       position: relative; overflow: hidden;
     }
     .article-card:hover {
-      transform: translateY(-2px); border-color: var(--line-2);
-      box-shadow: 0 20px 50px -30px rgba(28,20,16,0.24);
+      transform: translateY(-2px);
+      border-color: var(--line-2);
+      box-shadow: 0 24px 48px -24px rgba(28,20,16,0.20);
+    }
+    .article-card:active {
+      transform: translateY(0);
     }
     .article-card::before {
       content: ""; position: absolute; left: 0; top: 0; bottom: 0;
@@ -79,65 +95,138 @@
       transition: transform 0.35s ease;
     }
     .article-card:hover::before { transform: scaleY(1); }
+
     .art-meta {
-      display: flex; align-items: center; gap: var(--s-3);
-      font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
-      color: var(--muted); margin-bottom: var(--s-2);
+      display: flex; align-items: center; gap: var(--s-2);
+      font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--muted);
     }
-    .art-meta .cat { color: var(--accent); font-weight: 600; }
-    .art-meta .date::before { content: "\00B7"; margin-right: var(--s-3); }
+    .art-meta .cat {
+      color: var(--accent); font-weight: 600;
+      background: color-mix(in srgb, var(--accent) 8%, transparent);
+      padding: 2px 10px; border-radius: 20px;
+      letter-spacing: 0.04em;
+    }
+    .art-meta .date {
+      color: var(--muted);
+    }
+    .art-meta .date::before {
+      content: "·"; margin-right: var(--s-2);
+    }
+
     .article-card h2 {
       font-family: var(--serif); font-weight: 700;
-      font-size: clamp(17px,1.6vw,19px); line-height: 1.4;
-      margin: 0 0 var(--s-2);
+      font-size: clamp(17px,1.5vw,19px); line-height: 1.45;
+      margin: 0; letter-spacing: 0.01em;
     }
-    .article-card p { margin: 0; color: var(--ink-soft); font-size: 14px; line-height: 1.7; }
+    .article-card p {
+      margin: 0; color: var(--ink-soft);
+      font-size: 14px; line-height: 1.7;
+      display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
 
+    .art-arrow {
+      justify-self: end;
+      color: var(--accent);
+      font-size: 18px;
+      transition: transform 0.25s ease, opacity 0.25s ease;
+      opacity: 0;
+      grid-row: 2 / 4; grid-column: 2;
+      align-self: center;
+    }
+    .article-card:hover .art-arrow {
+      opacity: 1;
+      transform: translateX(4px);
+    }
+
+    /* ─── Loading & Empty ─── */
     .loading, .empty {
-      padding: var(--s-8); text-align: center; color: var(--muted); font-size: 15px;
+      padding: var(--s-10); text-align: center;
     }
-    .empty p { line-height: 2; font-style: italic; }
+    .loading {
+      color: var(--muted); font-size: 13px; letter-spacing: 0.1em;
+    }
+    .loading span { animation: pulse 1.4s ease-in-out infinite; }
+    .loading span:nth-child(2) { animation-delay: 0.2s; }
+    .loading span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes pulse {
+      0%,80%,100% { opacity: 0.3; }
+      40% { opacity: 1; }
+    }
+    .empty {
+      color: var(--muted); font-size: 14px; line-height: 2;
+    }
+    .empty strong { color: var(--ink); display: block; margin-bottom: var(--s-2); }
 
-    .footer {
-      margin-top: var(--s-8); padding: var(--s-6) 0;
+    /* ─── Footer ─── */
+    .page-footer {
+      margin-top: var(--s-9); padding: var(--s-6) 0 var(--s-8);
       border-top: 1px solid var(--line);
       text-align: center; color: var(--muted); font-size: 12px;
+      letter-spacing: 0.03em;
     }
+    .page-footer a {
+      color: var(--accent); text-decoration: none;
+    }
+    .page-footer a:hover { text-decoration: underline; }
 
+    /* ─── Responsive ─── */
     @media (max-width: 520px) {
       .article-card { padding: var(--s-4) var(--s-5); }
+      .page-header { padding: var(--s-8) 0 var(--s-6); }
+    }
+
+    @media (min-width: 640px) {
+      .article-card {
+        grid-template-columns: 1fr auto;
+        align-items: start;
+      }
+      .article-card p { -webkit-line-clamp: 2; }
     }
   </style>
 </head>
 <body>
-  <div class="container" style="--pad: clamp(20px, 4vw, 32px)">
+  <div class="container">
     <header class="page-header">
-      <a class="back" href="../">&larr; 回到首页</a>
+      <a class="back-link" href="../">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><polyline points="12 19 5 12 12 5"/></svg>
+        回到首页
+      </a>
       <h1>每日时评</h1>
       <p class="sub">每晚 7 点，闲聊拆解当天宏观大事。纯属瞎扯，打发时间刚好。</p>
     </header>
+
     <div id="articleList" class="article-list">
-      <div class="loading">读取文章中……</div>
+      <div class="loading">
+        <span>读</span><span>取</span><span>中</span> ……
+      </div>
     </div>
-    <footer class="footer">
-      &copy; 2026 犀牛伯爵 &middot; 纯属个人瞎扯闲聊，供大家打发空闲时间
+
+    <footer class="page-footer">
+      © 2026 <a href="../">犀牛伯爵</a> · 纯属个人瞎扯闲聊，供大家打发空闲时间
     </footer>
   </div>
 
   <script>
     (function () {
-      const esc = s => String(s).replace(/[&<>"']/g, function(c) {
-        return { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c];
-      });
-
       var list = document.getElementById('articleList');
+
+      function esc(s) {
+        return String(s).replace(/[&<>"']/g, function(c) {
+          return { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c];
+        });
+      }
 
       function render(articles) {
         if (!articles || articles.length === 0) {
-          list.innerHTML = '<div class="empty"><p>还没有时评文章。<br/>每晚 7 点自动生成第一篇后就会显示在这里。</p></div>';
+          list.innerHTML = '<div class="empty">' +
+            '<strong>还没有时评文章</strong>' +
+            '每晚 7 点自动生成第一篇后就会显示在这里。<br/>' +
+            '“纯属个人瞎扯闲聊，供大家打发空闲时间。”</div>';
           return;
         }
-        list.innerHTML = articles.map(function(a) {
+        list.innerHTML = articles.map(function(a, i) {
           return '<a class="article-card" href="' + esc(a.href) + '">' +
             '<div class="art-meta">' +
             '<span class="cat">' + esc(a.cat || '时评') + '</span>' +
@@ -145,6 +234,7 @@
             '</div>' +
             '<h2>' + esc(a.title) + '</h2>' +
             '<p>' + esc(a.excerpt) + '</p>' +
+            '<span class="art-arrow" aria-hidden="true">→</span>' +
             '</a>';
         }).join('');
       }
@@ -156,7 +246,6 @@
           try {
             var feed = JSON.parse(xhr.responseText);
             var items = feed.articles || feed;
-            // Sort by date descending
             items.sort(function(a, b) { return (b.date || '').localeCompare(a.date || ''); });
             render(items);
           } catch(e) { render(null); }
