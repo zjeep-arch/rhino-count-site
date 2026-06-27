@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="zh-CN" data-theme="light">
+<html lang="zh-CN" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="color-scheme" content="light dark" />
-  <meta name="theme-color" content="#F5EFE6" media="(prefers-color-scheme: light)" />
-  <meta name="theme-color" content="#14100C" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#05050A" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#05050A" media="(prefers-color-scheme: dark)" />
 
   <title>犀牛伯爵 · AI 时代的记录者</title>
   <meta name="description" content="犀牛伯爵 — 北大本科、AI 大厂从业者。记录 AI 与趋势变化，分享学习方法与踩过的坑。每晚一篇宏观时评。纯属个人瞎扯闲聊。" />
@@ -19,7 +19,7 @@
   <meta property="og:title" content="犀牛伯爵 · AI 时代的记录者" />
   <meta property="og:description" content="犀牛伯爵 — 北大本科、AI 大厂从业者。记录 AI 与趋势，分享学习方法。每晚一篇宏观时评。" />
   <meta property="og:url" content="https://zjeep-arch.github.io/rhino-count-site/" />
-  <meta property="og:image" content="https://count-rhino-ai.lovable.app/assets/rhino-count-hero-B4tc0a8K.jpg" />
+  <meta property="og:image" content="https://zjeep-arch.github.io/rhino-count-site/assets/og-card.svg" />
   <meta property="og:locale" content="zh_CN" />
 
   <meta name="twitter:card" content="summary_large_image" />
@@ -31,7 +31,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,400;1,500&family=Inter:wght@400;500;600&family=Noto+Serif+SC:wght@500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet" />
 
   <script type="application/ld+json">
   {
@@ -40,7 +40,7 @@
     "name": "犀牛伯爵",
     "description": "北大本科、AI 大厂从业者，记录 AI 与趋势变化。",
     "url": "https://zjeep-arch.github.io/rhino-count-site/",
-    "image": "https://count-rhino-ai.lovable.app/assets/rhino-count-hero-B4tc0a8K.jpg",
+    "image": "https://zjeep-arch.github.io/rhino-count-site/assets/og-card.svg",
     "alumniOf": { "@type": "CollegeOrUniversity", "name": "北京大学" },
     "sameAs": ["https://www.xiaohongshu.com/user/profile/60572004000000000101ce41"]
   }
@@ -1366,12 +1366,631 @@
       padding: var(--s-6); border: 1px solid var(--line-2);
       border-radius: var(--radius); margin: var(--s-5) 0;
     }
+
+    /* =========================================================
+     * 2026 neon systems redesign
+     * ========================================================= */
+    :root {
+      --maxw: 1240px;
+      --radius: 8px;
+      --radius-sm: 6px;
+      --bg: #05050A;
+      --bg-soft: #0B0D16;
+      --surface: rgba(10, 13, 24, 0.72);
+      --surface-strong: #101421;
+      --ink: #F6F7FB;
+      --ink-soft: #CAD1E4;
+      --muted: #7F879F;
+      --line: rgba(230, 244, 255, 0.12);
+      --line-2: rgba(230, 244, 255, 0.28);
+      --accent: #2FF7E8;
+      --accent-2: #FF2EA6;
+      --gold: #D7FF55;
+      --electric: #7B5CFF;
+      --glow: rgba(47,247,232,0.34);
+      --shadow-1: inset 0 1px 0 rgba(255,255,255,0.07);
+      --shadow-2: 0 24px 80px -44px rgba(0,0,0,0.95);
+      --shadow-glow: 0 0 38px -22px rgba(47,247,232,0.86), 0 0 58px -42px rgba(255,46,166,0.95);
+      --serif: "Bebas Neue", "Noto Sans SC", Impact, sans-serif;
+      --sans: "Inter", "Noto Sans SC", -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+    [data-theme="light"] {
+      --bg: #F6F8FF;
+      --bg-soft: #EAF0FF;
+      --surface: rgba(255,255,255,0.76);
+      --surface-strong: #FFFFFF;
+      --ink: #080B15;
+      --ink-soft: #2C344A;
+      --muted: #667088;
+      --line: rgba(8, 11, 21, 0.10);
+      --line-2: rgba(8, 11, 21, 0.22);
+      --glow: rgba(0, 184, 220, 0.22);
+    }
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 18% 0%, rgba(47, 247, 232, 0.16), transparent 26%),
+        radial-gradient(circle at 82% 18%, rgba(255, 46, 166, 0.15), transparent 24%),
+        linear-gradient(135deg, #030307 0%, var(--bg) 46%, #090616 100%);
+      letter-spacing: 0;
+    }
+    body::before {
+      background-image:
+        radial-gradient(circle, rgba(246,247,251,0.18) 1px, transparent 1.6px),
+        linear-gradient(90deg, rgba(47,247,232,0.08), transparent 32%, rgba(255,46,166,0.08) 72%, transparent);
+      background-size: 20px 20px, 100% 100%;
+      mask-image: linear-gradient(to bottom, black 0 78%, transparent 100%);
+      opacity: 0.72;
+      animation: gridDrift 28s linear infinite;
+    }
+    body::after {
+      background:
+        linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(110deg, transparent 0 42%, rgba(47,247,232,0.08) 48%, transparent 54%);
+      background-size: 100% 4px, 100% 100%;
+      mix-blend-mode: screen;
+      opacity: 0.45;
+    }
+    .cursor-aura,
+    .gesture-trail {
+      display: none !important;
+    }
+    .ambient-canvas {
+      opacity: 0.34;
+      mix-blend-mode: screen;
+    }
+    .site-header {
+      background: rgba(5, 5, 10, 0.78);
+      border-bottom: 1px solid rgba(255,255,255,0.10);
+      box-shadow: 0 12px 44px rgba(0,0,0,0.34);
+    }
+    [data-theme="light"] .site-header {
+      background: rgba(246, 248, 255, 0.84);
+    }
+    .nav {
+      min-height: 72px;
+    }
+    .brand {
+      font-family: var(--sans);
+      font-weight: 800;
+      font-size: 15px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+    .brand::before {
+      width: 10px;
+      height: 10px;
+      background: var(--accent);
+      border: 0;
+      box-shadow: 0 0 18px var(--accent), 0 0 38px rgba(255,46,166,0.35);
+    }
+    .brand .badge {
+      border-radius: 5px;
+      color: var(--gold);
+    }
+    .nav-links {
+      background: rgba(255,255,255,0.045);
+      border-color: rgba(255,255,255,0.11);
+      border-radius: 8px;
+      padding: 4px;
+    }
+    .nav-links a {
+      border-radius: 6px;
+      color: var(--ink-soft);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .nav-links a:hover,
+    .nav-links a.active {
+      background: rgba(47,247,232,0.12);
+      color: var(--accent);
+      box-shadow: inset 0 0 0 1px rgba(47,247,232,0.34);
+    }
+    .btn,
+    .subscribe-form button {
+      border-radius: 6px;
+      border-color: rgba(47,247,232,0.62);
+      background:
+        linear-gradient(135deg, rgba(47,247,232,0.18), rgba(255,46,166,0.22)),
+        #101421;
+      color: var(--ink);
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.06), 0 18px 52px -34px var(--accent);
+    }
+    .btn.ghost {
+      color: var(--ink);
+      background: rgba(255,255,255,0.035);
+      border-color: rgba(255,255,255,0.16);
+    }
+    .icon-btn {
+      border-radius: 7px;
+      background: rgba(255,255,255,0.045);
+    }
+    section {
+      padding-block: clamp(72px, 9vw, 118px);
+    }
+    section + section {
+      border-top-color: rgba(255,255,255,0.08);
+    }
+    .section-head .label,
+    .eyebrow,
+    .note-meta,
+    .article-card .art-meta,
+    .quote-attr {
+      font-weight: 800;
+      letter-spacing: 0.28em;
+      color: var(--accent);
+    }
+    .section-head h2 {
+      font-family: var(--serif);
+      font-size: clamp(44px, 8vw, 96px);
+      line-height: 0.9;
+      font-weight: 400;
+      text-transform: uppercase;
+    }
+    .section-head .blurb,
+    .note p,
+    .article-card .art-excerpt,
+    .contact-card p,
+    .subscribe-inner p {
+      color: var(--ink-soft);
+    }
+    .hero {
+      min-height: auto;
+      padding-top: clamp(18px, 2.4vw, 30px);
+      padding-bottom: clamp(20px, 3vw, 32px);
+      display: grid;
+      align-items: center;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.04), transparent 22%),
+        radial-gradient(circle at 50% 50%, rgba(47,247,232,0.10), transparent 42%);
+    }
+    .hero::before {
+      inset: 5% 5% auto auto;
+      width: min(76vw, 960px);
+      height: min(76vw, 960px);
+      filter: blur(8px);
+      opacity: 0.36;
+    }
+    .hero-shell {
+      min-height: auto;
+      display: grid;
+      grid-template-rows: auto 1fr auto auto;
+      gap: clamp(12px, 1.8vw, 18px);
+    }
+    .hero-navline {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: var(--s-4);
+      color: rgba(246,247,251,0.80);
+      font-size: clamp(12px, 1.35vw, 24px);
+      font-weight: 800;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+    }
+    .hero-navline span {
+      position: relative;
+      min-width: 0;
+      white-space: nowrap;
+    }
+    .hero-stage {
+      position: relative;
+      min-height: clamp(286px, 30vw, 344px);
+      display: grid;
+      place-items: center;
+      isolation: isolate;
+    }
+    h1.hero-title {
+      margin: 0;
+      width: 100%;
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(84px, 17vw, 224px);
+      line-height: 0.74;
+      letter-spacing: 0;
+      text-align: center;
+      color: rgba(246,247,251,0.78);
+      text-transform: uppercase;
+      text-shadow: 0 2px 0 rgba(255,255,255,0.18), 0 0 42px rgba(47,247,232,0.12);
+      animation: titlePunch 900ms cubic-bezier(.18,.86,.22,1) both;
+    }
+    h1.hero-title span,
+    h1.hero-title strong {
+      display: block;
+      font-weight: 400;
+    }
+    h1.hero-title strong {
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(246,247,251,0.62);
+      background: linear-gradient(180deg, #ffffff 0%, #9EA4B4 72%, #53596B 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+    .motion-orbit {
+      position: absolute;
+      left: 50%;
+      top: 52%;
+      z-index: 2;
+      width: clamp(208px, 24.5vw, 314px);
+      aspect-ratio: 1;
+      transform: translate(-50%, -50%);
+      border: 1px solid rgba(47,247,232,0.36);
+      border-radius: 8px;
+      background:
+        linear-gradient(135deg, rgba(47,247,232,0.10), rgba(255,46,166,0.10)),
+        rgba(5,5,10,0.72);
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.05), 0 0 80px -26px rgba(47,247,232,0.96), 0 0 90px -46px rgba(255,46,166,0.96);
+      overflow: hidden;
+      animation: videoArrival 1100ms 180ms cubic-bezier(.16,.84,.28,1) both, panelFloat 6s ease-in-out 1.4s infinite;
+    }
+    .motion-orbit::before,
+    .motion-orbit::after {
+      content: "";
+      position: absolute;
+      inset: 14px;
+      border: 1px solid rgba(255,255,255,0.15);
+      z-index: 2;
+      pointer-events: none;
+    }
+    .motion-orbit::after {
+      inset: 0;
+      border: 0;
+      background:
+        linear-gradient(100deg, transparent 0 42%, rgba(255,255,255,0.30) 50%, transparent 58%),
+        repeating-linear-gradient(to bottom, transparent 0 9px, rgba(47,247,232,0.12) 10px, transparent 11px);
+      mix-blend-mode: screen;
+      opacity: 0.55;
+      animation: scanSweep 3.8s ease-in-out infinite;
+    }
+    .hero-video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: contrast(1.08) saturate(1.22);
+      transform: scale(1.02);
+    }
+    .motion-caption {
+      position: absolute;
+      left: 16px;
+      right: 16px;
+      bottom: 14px;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 30px;
+      padding: 6px 10px;
+      border: 1px solid rgba(47,247,232,0.26);
+      background: rgba(5,5,10,0.64);
+      color: var(--accent);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      backdrop-filter: blur(12px);
+    }
+    .orbit-readout {
+      position: absolute;
+      z-index: 4;
+      min-width: 86px;
+      padding: 10px 12px;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 6px;
+      background: rgba(5,5,10,0.78);
+      box-shadow: 0 18px 38px -28px #000;
+      backdrop-filter: blur(14px);
+    }
+    .orbit-readout b,
+    .orbit-readout span {
+      display: block;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+    .orbit-readout b {
+      color: var(--gold);
+      font-size: 12px;
+      letter-spacing: 0.12em;
+    }
+    .orbit-readout span {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 10px;
+      letter-spacing: 0.22em;
+    }
+    .readout-a {
+      left: -34px;
+      top: 18%;
+    }
+    .readout-b {
+      right: -30px;
+      bottom: 22%;
+    }
+    .hero-bottom {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: end;
+      gap: clamp(22px, 5vw, 72px);
+    }
+    .hero-lede {
+      max-width: 590px;
+      margin: 0;
+      color: rgba(246,247,251,0.82);
+      font-size: clamp(14px, 1.3vw, 16px);
+      line-height: 1.75;
+    }
+    .hero-actions {
+      display: grid;
+      justify-items: end;
+      gap: var(--s-5);
+    }
+    .cta-row {
+      margin: 0;
+      justify-content: flex-end;
+    }
+    .stats {
+      max-width: none;
+      min-width: min(330px, 40vw);
+      gap: 0;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.035);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .stat {
+      padding: 10px 14px;
+      border-left-color: rgba(255,255,255,0.10);
+    }
+    .stat .num {
+      font-family: var(--serif);
+      font-weight: 400;
+      color: var(--ink);
+      font-size: clamp(26px, 3.3vw, 42px);
+      letter-spacing: 0;
+    }
+    .stat .lbl {
+      color: var(--muted);
+      font-weight: 800;
+      letter-spacing: 0.22em;
+    }
+    .signal-strip {
+      max-width: none;
+      width: 100%;
+      margin: 0;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.10);
+      box-shadow: none;
+    }
+    .hero-shell > .signal-strip {
+      display: none;
+    }
+    .signal {
+      min-height: 62px;
+      padding: 12px 16px;
+      background: rgba(255,255,255,0.035);
+      border-radius: 0;
+    }
+    .signal b {
+      color: var(--accent);
+      font-weight: 900;
+    }
+    .signal span {
+      color: var(--ink-soft);
+    }
+    .profile-grid,
+    .journal-grid,
+    .article-list {
+      gap: 14px;
+      background: transparent;
+      border: 0;
+      box-shadow: none;
+    }
+    .profile-cell,
+    .note,
+    .article-card,
+    .contact-card,
+    .curation-board,
+    .subscribe-form input {
+      border-radius: 8px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.025)),
+        rgba(10,13,24,0.70);
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: var(--shadow-1), var(--shadow-2);
+    }
+    .profile-cell {
+      position: relative;
+      overflow: hidden;
+    }
+    .profile-cell::before,
+    .note::before,
+    .article-card::before,
+    .contact-card::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: auto;
+      width: auto;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--electric), var(--accent-2), var(--gold));
+      opacity: 0.9;
+      transform: none;
+    }
+    .profile-cell .k {
+      color: var(--accent);
+      font-weight: 900;
+    }
+    .profile-cell .v,
+    .note h3,
+    .article-card h3,
+    .contact-card h3,
+    .subscribe-inner h2,
+    blockquote.pull {
+      font-family: var(--sans);
+      font-weight: 800;
+    }
+    .note-cover {
+      background: #090B14;
+    }
+    .note:hover,
+    .article-card:hover,
+    .profile-cell:hover {
+      transform: translateY(-6px);
+      border-color: rgba(47,247,232,0.42);
+      box-shadow: var(--shadow-1), var(--shadow-2), var(--shadow-glow);
+    }
+    .note-cta,
+    .commentary-footer a,
+    .contact-channel .ch-name {
+      color: var(--accent);
+      font-weight: 900;
+    }
+    .quote-section::before {
+      inset: 14% 4%;
+      border-color: rgba(47,247,232,0.18);
+      background:
+        linear-gradient(90deg, transparent, rgba(47,247,232,0.14), transparent),
+        radial-gradient(circle, rgba(246,247,251,0.12) 1px, transparent 1.4px);
+      background-size: 100% 100%, 18px 18px;
+    }
+    .quote-mark {
+      font-family: var(--serif);
+      color: var(--accent-2);
+    }
+    .contact-card,
+    .subscribe-section {
+      background:
+        linear-gradient(135deg, rgba(47,247,232,0.10), rgba(255,46,166,0.10)),
+        rgba(10,13,24,0.72);
+    }
+    .contact-channel {
+      border-radius: 8px;
+      border-color: rgba(47,247,232,0.42);
+    }
+    .site-footer {
+      background: rgba(5,5,10,0.72);
+    }
+    .back-to-top {
+      border-radius: 8px;
+      background: rgba(10,13,24,0.86);
+    }
+    @keyframes titlePunch {
+      from {
+        opacity: 0;
+        transform: translateY(26px) scale(0.985);
+        filter: blur(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+      }
+    }
+    @keyframes videoArrival {
+      from {
+        opacity: 0;
+        transform: translate(-50%, -46%) scale(0.86);
+        filter: blur(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+        filter: blur(0);
+      }
+    }
+    @keyframes panelFloat {
+      0%, 100% { translate: 0 0; }
+      50% { translate: 0 -10px; }
+    }
+    @keyframes scanSweep {
+      0%, 100% { transform: translateX(-52%); opacity: 0.24; }
+      45%, 58% { opacity: 0.62; }
+      100% { transform: translateX(52%); }
+    }
+    @media (max-width: 860px) {
+      .hero {
+        min-height: auto;
+      }
+      .hero-shell {
+        min-height: auto;
+      }
+      .hero-navline {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        row-gap: 10px;
+        font-size: 12px;
+      }
+      .hero-stage {
+        min-height: clamp(360px, 90vw, 580px);
+      }
+      h1.hero-title {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 10px;
+        z-index: 1;
+        font-size: clamp(96px, 33vw, 140px);
+      }
+      .motion-orbit {
+        top: 58%;
+        z-index: 2;
+        width: clamp(220px, 64vw, 360px);
+      }
+      .hero-bottom {
+        grid-template-columns: 1fr;
+      }
+      .hero-actions {
+        justify-items: stretch;
+      }
+      .cta-row {
+        justify-content: flex-start;
+      }
+      .stats {
+        width: 100%;
+        min-width: 0;
+      }
+      .signal-strip {
+        grid-template-columns: 1fr;
+      }
+    }
+    @media (max-width: 520px) {
+      .hero-navline {
+        letter-spacing: 0.18em;
+      }
+      .readout-a {
+        left: 8px;
+      }
+      .readout-b {
+        right: 8px;
+      }
+      .motion-caption {
+        letter-spacing: 0.12em;
+      }
+      .hero-lede {
+        font-size: 14px;
+      }
+      .btn {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .motion-orbit,
+      h1.hero-title,
+      .motion-orbit::after {
+        animation: none !important;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
   <canvas class="ambient-canvas" id="ambientCanvas" aria-hidden="true"></canvas>
-  <div class="cursor-aura" id="cursorAura" aria-hidden="true"></div>
 
   <noscript>
     <div class="container">
@@ -1387,7 +2006,7 @@
         <span class="badge" data-bind="badge">EST · BJ</span>
       </a>
       <nav class="nav-links" id="navLinks" aria-label="主导航">
-        <a href="#about">关于</a>
+        <a href="#profile">关于</a>
         <a href="#notes">笔记</a>
         <a href="#commentary">时评</a>
         <a href="#manifesto">主张</a>
@@ -1481,8 +2100,7 @@
         if (moon) moon.style.display = dark ? '' : 'none';
       }
       const saved = localStorage.getItem(KEY);
-      const sysDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      applyTheme(saved || (sysDark ? 'dark' : 'light'));
+      applyTheme(saved || 'dark');
       themeBtn && themeBtn.addEventListener('click', () => {
         const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
         applyTheme(next);
@@ -1563,67 +2181,58 @@
       const h = D.hero;
       document.getElementById('hero-section').innerHTML = `
         <div class="container">
-          <div class="hero-grid fade-in">
-            <div>
-              <div class="eyebrow fade-in fade-in-delay-1">${esc(h.eyebrow)}</div>
+          <div class="hero-shell fade-in">
+            <div class="hero-navline fade-in fade-in-delay-1" aria-label="视觉栏目">
+              ${esc(h.eyebrow).split(' · ').map(item => `<span>${esc(item)}</span>`).join('')}
+            </div>
+            <div class="hero-stage" aria-label="首屏动态视觉">
               <h1 class="hero-title fade-in fade-in-delay-2">
-                ${esc(h.titleMain)}
-                <span class="accent">${esc(h.titleAccent)}</span>
+                <span>${esc(h.titleMain)}</span>
+                <strong>${esc(h.titleAccent)}</strong>
               </h1>
-              <p class="hero-lede fade-in fade-in-delay-3">${esc(h.lede)}</p>
-              <div class="signal-strip fade-in fade-in-delay-3" aria-label="站点信号">
-                <div class="signal">
-                  <b>MODEL WATCH</b>
-                  <span>追踪模型、产品与产业拐点</span>
+              <div class="motion-orbit fade-in fade-in-delay-1">
+                <video class="hero-video" src="${esc((h.motion && h.motion.src) || 'assets/hero-motion.mp4')}" autoplay muted loop playsinline preload="metadata" aria-label="首屏动态视频"></video>
+                <div class="motion-caption">${esc((h.motion && h.motion.caption) || 'LIVE SIGNAL')}</div>
+                <div class="orbit-readout readout-a">
+                  <b>MODEL</b>
+                  <span>watch</span>
                 </div>
-                <div class="signal">
-                  <b>TREND RADAR</b>
-                  <span>把宏观变化拆成可读线索</span>
+                <div class="orbit-readout readout-b">
+                  <b>19:00</b>
+                  <span>daily</span>
                 </div>
-                <div class="signal">
-                  <b>NIGHT NOTES</b>
-                  <span>每晚一篇，不追热闹追脉络</span>
-                </div>
-              </div>
-              <div class="cta-row fade-in fade-in-delay-3">
-                <a class="btn" href="${esc(h.ctaPrimary.href)}">${esc(h.ctaPrimary.label)}</a>
-                <a class="btn ghost" href="${esc(h.ctaSecondary.href)}">${esc(h.ctaSecondary.label)}</a>
-              </div>
-              <div class="stats fade-in fade-in-delay-3">
-                ${h.stats.map(s => `
-                  <div class="stat">
-                    <span class="num">${esc(s.num)}</span>
-                    <span class="lbl">${esc(s.lbl)}</span>
-                  </div>
-                `).join('')}
-              </div>
-              <div class="curation-board fade-in fade-in-delay-3" aria-label="精选内容">
-                <div class="curation-head">
-                  <span><b>Selected</b> radar</span>
-                  <span>AI / Macro / Play</span>
-                </div>
-                ${[
-                  { kicker: 'Latest note', title: D.journal.notes[0].title, href: D.journal.notes[0].href, score: '9.3' },
-                  { kicker: 'Daily signal', title: D.commentary.headingLine2.replace('。', ''), href: '#commentary', score: '8.9' },
-                  { kicker: 'Interactive lab', title: D.journal.notes[D.journal.notes.length - 1].title, href: D.journal.notes[D.journal.notes.length - 1].href, score: '8.6' }
-                ].map((item, i) => `
-                  <a class="curation-item" href="${esc(item.href)}">
-                    <span class="curation-num">${String(i + 1).padStart(2, '0')}</span>
-                    <span class="curation-copy">
-                      <span class="curation-kicker">${esc(item.kicker)}</span>
-                      <span class="curation-title">${esc(item.title)}</span>
-                    </span>
-                    <span class="curation-score">${esc(item.score)}</span>
-                  </a>
-                `).join('')}
               </div>
             </div>
-            <div class="portrait-wrap fade-in fade-in-delay-1">
-              <div class="portrait-frame">
-                <img src="${esc(h.portrait.src)}" alt="${esc(h.portrait.alt)}" width="800" height="1000" fetchpriority="high" />
-                <div class="portrait-caption">${esc(h.portrait.caption)}</div>
+            <div class="hero-bottom fade-in fade-in-delay-3">
+              <p class="hero-lede">${esc(h.lede)}</p>
+              <div class="hero-actions">
+                <div class="cta-row">
+                  <a class="btn" href="${esc(h.ctaPrimary.href)}">${esc(h.ctaPrimary.label)}</a>
+                  <a class="btn ghost" href="${esc(h.ctaSecondary.href)}">${esc(h.ctaSecondary.label)}</a>
+                </div>
+                <div class="stats">
+                  ${h.stats.map(s => `
+                    <div class="stat">
+                      <span class="num">${esc(s.num)}</span>
+                      <span class="lbl">${esc(s.lbl)}</span>
+                    </div>
+                  `).join('')}
+                </div>
               </div>
-              <div class="portrait-score" aria-hidden="true"><span><b>9.1</b>Signal</span></div>
+            </div>
+            <div class="signal-strip fade-in fade-in-delay-3" aria-label="站点信号">
+              <div class="signal">
+                <b>MODEL WATCH</b>
+                <span>追踪模型、产品与产业拐点</span>
+              </div>
+              <div class="signal">
+                <b>TREND RADAR</b>
+                <span>把宏观变化拆成可读线索</span>
+              </div>
+              <div class="signal">
+                <b>NIGHT NOTES</b>
+                <span>每晚一篇，不追热闹追脉络</span>
+              </div>
             </div>
           </div>
         </div>
@@ -1814,11 +2423,9 @@
       document.querySelector('main').classList.add('ready');
       observeFadeIns();
 
-      /* Ambient motion, section state, and gesture feedback */
+      /* Ambient motion and section state */
       const heroSection = document.getElementById('hero-section');
-      const portrait = document.querySelector('.portrait-frame');
       const progress = document.getElementById('scrollProgress');
-      const aura = document.getElementById('cursorAura');
       const motionOK = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
       function updateScrollProgress() {
@@ -1844,31 +2451,11 @@
       updateActiveNav();
       window.addEventListener('scroll', updateActiveNav, { passive: true });
 
-      if (heroSection && portrait && motionOK) {
-        let lastTrail = 0;
+      if (heroSection && motionOK) {
         window.addEventListener('mousemove', (event) => {
           const x = (event.clientX / window.innerWidth - 0.5) * 2;
-          const y = (event.clientY / window.innerHeight - 0.5) * 2;
-          portrait.style.setProperty('--px', (x * 4).toFixed(2));
-          portrait.style.setProperty('--py', (y * 3).toFixed(2));
           heroSection.style.setProperty('--mx', `${(x * 8).toFixed(2)}deg`);
-          if (aura) {
-            aura.style.opacity = '1';
-            aura.style.transform = `translate3d(${event.clientX - 140}px, ${event.clientY - 140}px, 0)`;
-          }
-          if (Date.now() - lastTrail > 90 && event.buttons === 1) {
-            lastTrail = Date.now();
-            const dot = document.createElement('span');
-            dot.className = 'gesture-trail';
-            dot.style.left = `${event.clientX}px`;
-            dot.style.top = `${event.clientY}px`;
-            document.body.appendChild(dot);
-            setTimeout(() => dot.remove(), 760);
-          }
         }, { passive: true });
-        window.addEventListener('mouseleave', () => {
-          if (aura) aura.style.opacity = '0';
-        });
       }
 
       function attachSpotlight(selector) {

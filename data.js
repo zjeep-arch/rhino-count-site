@@ -26,7 +26,7 @@ window.SITE_DATA = {
     keywords: "犀牛伯爵, AI, 大模型, 学习方法, 北大, 小红书, AI 大厂, Prompt, Agent, 时评, 宏观分析",
     author: "犀牛伯爵",
     siteUrl: "https://zjeep-arch.github.io/rhino-count-site/",
-    ogImage: "https://count-rhino-ai.lovable.app/assets/rhino-count-hero-B4tc0a8K.jpg"
+    ogImage: "assets/og-card.svg"
   },
 
   /* ---------- 顶栏 ---------- */
@@ -34,7 +34,7 @@ window.SITE_DATA = {
     brand: "犀牛伯爵",
     badge: "EST · BJ",
     nav: [
-      { label: "关于",  href: "#about" },
+      { label: "关于",  href: "#profile" },
       { label: "笔记",  href: "#notes" },
       { label: "时评",  href: "#commentary" },
       { label: "主张",  href: "#manifesto" },
@@ -49,16 +49,15 @@ window.SITE_DATA = {
 
   /* ---------- 首屏 Hero ---------- */
   hero: {
-    eyebrow: "AI · 趋势 · 记录",
-    titleMain: "一只阅读时代的",
-    titleAccent: "犀牛伯爵",
-    lede: "北大本科，高考数学满分。如今在 AI 大厂打工，把每一次模型的呼吸、每一条趋势的暗涌，写成可以慢慢咀嚼的笔记。每晚一篇宏观时评，闲聊陪你理解这个世界。",
+    eyebrow: "PROFILES · INSIGHTS · CAMPAIGNS · CONTACT",
+    titleMain: "HI, I'M",
+    titleAccent: "RHINO",
+    lede: "北大本科，高考数学满分。AI 大厂从业者。每晚把模型、产业和宏观世界的暗涌，压缩成一篇可以慢慢咀嚼的笔记。",
     ctaPrimary:   { label: "阅读最新笔记 →", href: "#notes" },
     ctaSecondary: { label: "每日时评",         href: "#commentary" },
-    portrait: {
-      src: "https://count-rhino-ai.lovable.app/assets/rhino-count-hero-B4tc0a8K.jpg",
-      alt: "犀牛伯爵 — 巴洛克风格肖像",
-      caption: "OIL ON SILICON · 2026 N° 001"
+    motion: {
+      src: "assets/hero-motion.mp4",
+      caption: "LIVE SIGNAL · AI / MACRO / NOTES"
     },
     stats: [
       { num: "50000+", lbl: "followers" },
