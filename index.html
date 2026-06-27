@@ -1669,10 +1669,10 @@
     .motion-orbit {
       position: absolute;
       left: 50%;
-      top: 52%;
+      top: 50%;
       z-index: 2;
-      width: clamp(290px, 36vw, 500px);
-      aspect-ratio: 1;
+      width: clamp(360px, 44vw, 650px);
+      aspect-ratio: 1.08;
       transform: translate(-50%, -50%) rotateX(2deg) rotateY(-8deg);
       border: 0;
       border-radius: 0;
@@ -1686,73 +1686,78 @@
     .motion-orbit::after {
       content: "";
       position: absolute;
-      z-index: 1;
       pointer-events: none;
     }
     .motion-orbit::before {
-      inset: 8% -18% -2%;
+      left: 50%;
+      top: 50%;
+      z-index: 1;
+      width: 92%;
+      height: 70%;
       border: 1px solid rgba(47,247,232,0.24);
-      transform: translateZ(-70px) rotateX(68deg);
-      box-shadow: 0 0 70px -34px var(--accent), inset 0 0 42px rgba(47,247,232,0.08);
+      background:
+        linear-gradient(90deg, rgba(47,247,232,0.12), rgba(123,92,255,0.10), rgba(255,46,166,0.10)),
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.06) 0 1px, transparent 1px 18px),
+        repeating-linear-gradient(90deg, rgba(47,247,232,0.08) 0 1px, transparent 1px 24px);
+      clip-path: polygon(10% 0, 90% 0, 100% 100%, 0 100%);
+      transform: translate3d(-50%, -46%, -160px) rotateX(64deg);
+      box-shadow:
+        0 0 90px -30px var(--accent),
+        inset 0 0 52px rgba(47,247,232,0.12);
+      opacity: 0.78;
     }
     .motion-orbit::after {
-      inset: -18%;
+      inset: -28% -34% -14%;
+      z-index: 4;
       border: 0;
       background:
-        radial-gradient(circle at 50% 38%, rgba(255,255,255,0.30), transparent 7%),
-        radial-gradient(circle at 50% 50%, rgba(47,247,232,0.28), transparent 40%),
-        linear-gradient(100deg, transparent 0 42%, rgba(255,255,255,0.34) 50%, transparent 58%);
+        radial-gradient(ellipse at 50% 40%, rgba(255,255,255,0.34), transparent 7%),
+        radial-gradient(ellipse at 50% 52%, rgba(47,247,232,0.26), transparent 34%),
+        linear-gradient(105deg, transparent 0 44%, rgba(255,255,255,0.32) 49%, transparent 56%),
+        linear-gradient(70deg, transparent 0 34%, rgba(255,46,166,0.16) 42%, transparent 50%);
       mix-blend-mode: screen;
       opacity: 0.75;
-      transform: translateZ(35px);
+      transform: translateZ(120px);
       animation: scanSweep 3.8s ease-in-out infinite;
     }
     .motion-shadow {
       position: absolute;
-      inset: 4% 2%;
+      inset: 11% 8% 6%;
       z-index: 0;
-      border-radius: 24px;
+      border-radius: 50%;
       background: linear-gradient(135deg, rgba(47,247,232,0.20), rgba(255,46,166,0.16));
-      filter: blur(24px);
-      opacity: 0.72;
-      transform: translate3d(-28px, 18px, -120px) rotateZ(-8deg) scale(0.96);
+      filter: blur(34px);
+      opacity: 0.86;
+      transform: translate3d(-34px, 28px, -120px) rotateZ(-8deg) scale(0.98);
     }
     .shadow-b {
       background: rgba(215,255,85,0.13);
-      filter: blur(34px);
-      transform: translate3d(30px, -18px, -160px) rotateZ(11deg) scale(0.86);
+      filter: blur(42px);
+      transform: translate3d(46px, -26px, -170px) rotateZ(11deg) scale(0.88);
     }
     .hero-video {
       position: relative;
       z-index: 3;
-      width: 112%;
-      height: 112%;
-      margin: -6%;
+      width: 128%;
+      height: 128%;
+      margin: -14%;
       object-fit: cover;
-      border-radius: 26px;
-      filter: contrast(1.12) saturate(1.34) drop-shadow(0 28px 48px rgba(0,0,0,0.74)) drop-shadow(0 0 40px rgba(47,247,232,0.38));
-      transform: translateZ(68px) rotateX(-2deg) rotateY(9deg) scale(1.06);
-      mask-image: radial-gradient(ellipse at 50% 46%, black 0 62%, rgba(0,0,0,0.88) 74%, transparent 96%);
-    }
-    .motion-caption {
-      position: absolute;
-      left: 7%;
-      right: 7%;
-      bottom: -2%;
-      z-index: 5;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 30px;
-      padding: 6px 10px;
-      border: 1px solid rgba(47,247,232,0.26);
-      background: rgba(5,5,10,0.76);
-      color: var(--accent);
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      backdrop-filter: blur(12px);
+      border-radius: 0;
+      filter:
+        contrast(1.15)
+        saturate(1.38)
+        drop-shadow(0 46px 46px rgba(0,0,0,0.82))
+        drop-shadow(0 0 42px rgba(47,247,232,0.42))
+        drop-shadow(0 0 72px rgba(255,46,166,0.22));
+      transform: translateZ(150px) rotateX(-3deg) rotateY(10deg) scale(1.14);
+      -webkit-mask-image:
+        radial-gradient(ellipse 46% 62% at 50% 44%, #000 0 43%, rgba(0,0,0,0.86) 54%, rgba(0,0,0,0.36) 65%, transparent 76%),
+        linear-gradient(to bottom, transparent 0%, #000 12%, #000 72%, rgba(0,0,0,0.26) 82%, transparent 100%);
+      -webkit-mask-composite: source-in;
+      mask-image:
+        radial-gradient(ellipse 46% 62% at 50% 44%, #000 0 43%, rgba(0,0,0,0.86) 54%, rgba(0,0,0,0.36) 65%, transparent 76%),
+        linear-gradient(to bottom, transparent 0%, #000 12%, #000 72%, rgba(0,0,0,0.26) 82%, transparent 100%);
+      mask-composite: intersect;
     }
     .orbit-readout {
       position: absolute;
@@ -2077,9 +2082,6 @@
       .readout-c {
         top: -6%;
       }
-      .motion-caption {
-        letter-spacing: 0.12em;
-      }
       .hero-lede {
         font-size: 14px;
       }
@@ -2087,6 +2089,19 @@
         width: 100%;
         justify-content: center;
       }
+    }
+    h1.hero-title.hero-title-sr {
+      position: absolute !important;
+      width: 1px !important;
+      height: 1px !important;
+      margin: -1px !important;
+      padding: 0 !important;
+      overflow: hidden !important;
+      clip: rect(0 0 0 0) !important;
+      clip-path: inset(50%) !important;
+      white-space: nowrap !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
     }
     @media (prefers-reduced-motion: reduce) {
       .motion-orbit,
@@ -2301,7 +2316,7 @@
                 <span class="depth-line line-b"></span>
                 <span class="depth-line line-c"></span>
               </div>
-              <h1 class="hero-title fade-in fade-in-delay-2">
+              <h1 class="hero-title hero-title-sr">
                 <span>${esc(h.titleMain)}</span>
                 <strong>${esc(h.titleAccent)}</strong>
               </h1>
@@ -2309,7 +2324,6 @@
                 <span class="motion-shadow shadow-a" aria-hidden="true"></span>
                 <span class="motion-shadow shadow-b" aria-hidden="true"></span>
                 <video class="hero-video" src="${esc((h.motion && h.motion.src) || 'assets/hero-motion.mp4')}" autoplay muted loop playsinline preload="metadata" aria-label="首屏动态视频"></video>
-                <div class="motion-caption">${esc((h.motion && h.motion.caption) || 'LIVE SIGNAL')}</div>
                 <div class="orbit-readout readout-a">
                   <b>AGENT</b>
                   <span>stack</span>

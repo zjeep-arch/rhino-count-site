@@ -56,8 +56,7 @@ window.SITE_DATA = {
     ctaPrimary:   { label: "阅读最新笔记 →", href: "#notes" },
     ctaSecondary: { label: "每日时评",         href: "#commentary" },
     motion: {
-      src: "assets/hero-motion.mp4",
-      caption: "UNBOXED SIGNAL · AI / MACRO / NOTES"
+      src: "assets/hero-motion.mp4"
     },
     keywords: [
       "AI NATIVE",
