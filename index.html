@@ -1793,49 +1793,6 @@
         contrast(1.14);
       transform: scale(1.035);
     }
-    .orbit-readout {
-      position: absolute;
-      z-index: 6;
-      min-width: 86px;
-      padding: 10px 12px;
-      border: 1px solid rgba(255,255,255,0.15);
-      border-radius: 6px;
-      background: rgba(5,5,10,0.78);
-      box-shadow: 0 18px 38px -28px #000, 0 0 24px -18px var(--accent);
-      backdrop-filter: blur(14px);
-    }
-    .orbit-readout b,
-    .orbit-readout span {
-      display: block;
-      line-height: 1;
-      text-transform: uppercase;
-    }
-    .orbit-readout b {
-      color: var(--gold);
-      font-size: 12px;
-      letter-spacing: 0.12em;
-    }
-    .orbit-readout span {
-      margin-top: 6px;
-      color: var(--muted);
-      font-size: 10px;
-      letter-spacing: 0.22em;
-    }
-    .readout-a {
-      left: -8%;
-      top: 18%;
-      transform: translateZ(120px) rotateY(-12deg);
-    }
-    .readout-b {
-      right: -10%;
-      bottom: 22%;
-      transform: translateZ(130px) rotateY(12deg);
-    }
-    .readout-c {
-      left: 50%;
-      top: -9%;
-      transform: translateX(-50%) translateZ(160px);
-    }
     .hero-bottom {
       display: grid;
       grid-template-columns: minmax(0, 1fr) auto;
@@ -2107,15 +2064,6 @@
         font-size: 10px;
         letter-spacing: 0.18em;
       }
-      .readout-a {
-        left: -2px;
-      }
-      .readout-b {
-        right: -2px;
-      }
-      .readout-c {
-        top: -6%;
-      }
       .hero-lede {
         font-size: 14px;
       }
@@ -2359,18 +2307,6 @@
                 <span class="motion-shadow shadow-b" aria-hidden="true"></span>
                 <div class="video-fusion">
                   <video class="hero-video" src="${esc((h.motion && h.motion.src) || 'assets/hero-motion.mp4')}" autoplay muted loop playsinline preload="metadata" aria-label="首屏动态视频"></video>
-                </div>
-                <div class="orbit-readout readout-a">
-                  <b>AGENT</b>
-                  <span>stack</span>
-                </div>
-                <div class="orbit-readout readout-b">
-                  <b>MACRO</b>
-                  <span>radar</span>
-                </div>
-                <div class="orbit-readout readout-c">
-                  <b>3D</b>
-                  <span>signal</span>
                 </div>
               </div>
             </div>
