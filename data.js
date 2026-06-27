@@ -49,7 +49,7 @@ window.SITE_DATA = {
 
   /* ---------- 首屏 Hero ---------- */
   hero: {
-    eyebrow: "PROFILES · INSIGHTS · CAMPAIGNS · CONTACT",
+    eyebrow: "RHINO COUNT · LIVE SIGNAL",
     titleMain: "HI, I'M",
     titleAccent: "RHINO",
     lede: "北大本科，高考数学满分。AI 大厂从业者。每晚把模型、产业和宏观世界的暗涌，压缩成一篇可以慢慢咀嚼的笔记。",
@@ -57,8 +57,18 @@ window.SITE_DATA = {
     ctaSecondary: { label: "每日时评",         href: "#commentary" },
     motion: {
       src: "assets/hero-motion.mp4",
-      caption: "LIVE SIGNAL · AI / MACRO / NOTES"
+      caption: "UNBOXED SIGNAL · AI / MACRO / NOTES"
     },
+    keywords: [
+      "AI NATIVE",
+      "AGENT WORKFLOW",
+      "MACRO RADAR",
+      "PROMPT ENGINEERING",
+      "SYSTEM THINKING",
+      "MODEL WATCH",
+      "TREND SIGNAL",
+      "DAILY BRIEF"
+    ],
     stats: [
       { num: "50000+", lbl: "followers" },
       { num: "10000+", lbl: "likes" }
@@ -166,7 +176,7 @@ window.SITE_DATA = {
 
   /* ---------- 联络 Contact ---------- */
   contact: {
-    label: "CONTACT · 联络",
+    label: "REACH · 联络",
     headingLine1: "递一张",
     headingLine2: "名片给伯爵。",
     blurb: "欢迎在小红书私信交流 AI、学习方法、职业选择，或仅仅是想吐槽今天的模型又抽风了。",

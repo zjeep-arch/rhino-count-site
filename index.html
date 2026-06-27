@@ -1559,43 +1559,99 @@
     .hero-shell {
       min-height: auto;
       display: grid;
-      grid-template-rows: auto 1fr auto auto;
+      grid-template-rows: auto auto 1fr auto auto;
       gap: clamp(12px, 1.8vw, 18px);
     }
-    .hero-navline {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: var(--s-4);
-      color: rgba(246,247,251,0.80);
-      font-size: clamp(12px, 1.35vw, 24px);
+    .hero-kicker {
+      color: var(--accent);
+      font-size: clamp(11px, 1vw, 13px);
       font-weight: 800;
-      letter-spacing: 0.28em;
+      letter-spacing: 0.34em;
       text-transform: uppercase;
+      text-align: center;
+      text-shadow: 0 0 18px rgba(47,247,232,0.48);
     }
-    .hero-navline span {
-      position: relative;
-      min-width: 0;
-      white-space: nowrap;
+    .keyword-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      max-width: 980px;
+      margin-inline: auto;
+    }
+    .keyword {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 6px 10px;
+      border: 1px solid rgba(255,255,255,0.13);
+      border-radius: 6px;
+      background: rgba(255,255,255,0.045);
+      color: rgba(246,247,251,0.78);
+      font-size: clamp(10px, 0.95vw, 12px);
+      font-weight: 900;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
+      backdrop-filter: blur(14px);
+    }
+    .keyword-0 { color: var(--accent); border-color: rgba(47,247,232,0.28); }
+    .keyword-1 { color: var(--gold); border-color: rgba(215,255,85,0.26); }
+    .keyword-2 { color: #FF8DDA; border-color: rgba(255,46,166,0.30); }
+    .keyword-3 { color: #B9A9FF; border-color: rgba(123,92,255,0.34); }
+    .depth-field {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      overflow: visible;
+      pointer-events: none;
+      perspective: 800px;
+    }
+    .depth-line {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: clamp(340px, 58vw, 780px);
+      height: clamp(110px, 16vw, 210px);
+      border: 1px solid rgba(47,247,232,0.18);
+      transform: translate(-50%, -50%) rotateX(68deg) rotateZ(-8deg);
+      box-shadow: 0 0 42px -30px var(--accent);
+    }
+    .line-b {
+      width: clamp(460px, 74vw, 980px);
+      height: clamp(160px, 24vw, 300px);
+      border-color: rgba(255,46,166,0.14);
+      transform: translate(-50%, -50%) rotateX(68deg) rotateZ(7deg);
+    }
+    .line-c {
+      width: clamp(260px, 42vw, 600px);
+      height: clamp(260px, 34vw, 430px);
+      border-color: rgba(215,255,85,0.12);
+      transform: translate(-50%, -50%) rotateX(62deg) rotateZ(45deg);
     }
     .hero-stage {
       position: relative;
-      min-height: clamp(286px, 30vw, 344px);
+      min-height: clamp(330px, 36vw, 450px);
       display: grid;
       place-items: center;
       isolation: isolate;
+      perspective: 1000px;
+      overflow: visible;
     }
     h1.hero-title {
       margin: 0;
-      width: 100%;
+      position: relative;
+      z-index: 1;
+      width: 152%;
       font-family: var(--serif);
       font-weight: 400;
-      font-size: clamp(84px, 17vw, 224px);
+      font-size: clamp(148px, 24vw, 340px);
       line-height: 0.74;
       letter-spacing: 0;
       text-align: center;
-      color: rgba(246,247,251,0.78);
+      color: rgba(246,247,251,0.86);
       text-transform: uppercase;
-      text-shadow: 0 2px 0 rgba(255,255,255,0.18), 0 0 42px rgba(47,247,232,0.12);
+      text-shadow: 0 2px 0 rgba(255,255,255,0.20), 0 0 46px rgba(47,247,232,0.18), 0 0 80px rgba(255,46,166,0.10);
       animation: titlePunch 900ms cubic-bezier(.18,.86,.22,1) both;
     }
     h1.hero-title span,
@@ -1615,57 +1671,82 @@
       left: 50%;
       top: 52%;
       z-index: 2;
-      width: clamp(208px, 24.5vw, 314px);
+      width: clamp(290px, 36vw, 500px);
       aspect-ratio: 1;
-      transform: translate(-50%, -50%);
-      border: 1px solid rgba(47,247,232,0.36);
-      border-radius: 8px;
-      background:
-        linear-gradient(135deg, rgba(47,247,232,0.10), rgba(255,46,166,0.10)),
-        rgba(5,5,10,0.72);
-      box-shadow: 0 0 0 1px rgba(255,255,255,0.05), 0 0 80px -26px rgba(47,247,232,0.96), 0 0 90px -46px rgba(255,46,166,0.96);
-      overflow: hidden;
+      transform: translate(-50%, -50%) rotateX(2deg) rotateY(-8deg);
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
+      overflow: visible;
+      transform-style: preserve-3d;
       animation: videoArrival 1100ms 180ms cubic-bezier(.16,.84,.28,1) both, panelFloat 6s ease-in-out 1.4s infinite;
     }
     .motion-orbit::before,
     .motion-orbit::after {
       content: "";
       position: absolute;
-      inset: 14px;
-      border: 1px solid rgba(255,255,255,0.15);
-      z-index: 2;
+      z-index: 1;
       pointer-events: none;
     }
+    .motion-orbit::before {
+      inset: 8% -18% -2%;
+      border: 1px solid rgba(47,247,232,0.24);
+      transform: translateZ(-70px) rotateX(68deg);
+      box-shadow: 0 0 70px -34px var(--accent), inset 0 0 42px rgba(47,247,232,0.08);
+    }
     .motion-orbit::after {
-      inset: 0;
+      inset: -18%;
       border: 0;
       background:
-        linear-gradient(100deg, transparent 0 42%, rgba(255,255,255,0.30) 50%, transparent 58%),
-        repeating-linear-gradient(to bottom, transparent 0 9px, rgba(47,247,232,0.12) 10px, transparent 11px);
+        radial-gradient(circle at 50% 38%, rgba(255,255,255,0.30), transparent 7%),
+        radial-gradient(circle at 50% 50%, rgba(47,247,232,0.28), transparent 40%),
+        linear-gradient(100deg, transparent 0 42%, rgba(255,255,255,0.34) 50%, transparent 58%);
       mix-blend-mode: screen;
-      opacity: 0.55;
+      opacity: 0.75;
+      transform: translateZ(35px);
       animation: scanSweep 3.8s ease-in-out infinite;
     }
+    .motion-shadow {
+      position: absolute;
+      inset: 4% 2%;
+      z-index: 0;
+      border-radius: 24px;
+      background: linear-gradient(135deg, rgba(47,247,232,0.20), rgba(255,46,166,0.16));
+      filter: blur(24px);
+      opacity: 0.72;
+      transform: translate3d(-28px, 18px, -120px) rotateZ(-8deg) scale(0.96);
+    }
+    .shadow-b {
+      background: rgba(215,255,85,0.13);
+      filter: blur(34px);
+      transform: translate3d(30px, -18px, -160px) rotateZ(11deg) scale(0.86);
+    }
     .hero-video {
-      width: 100%;
-      height: 100%;
+      position: relative;
+      z-index: 3;
+      width: 112%;
+      height: 112%;
+      margin: -6%;
       object-fit: cover;
-      filter: contrast(1.08) saturate(1.22);
-      transform: scale(1.02);
+      border-radius: 26px;
+      filter: contrast(1.12) saturate(1.34) drop-shadow(0 28px 48px rgba(0,0,0,0.74)) drop-shadow(0 0 40px rgba(47,247,232,0.38));
+      transform: translateZ(68px) rotateX(-2deg) rotateY(9deg) scale(1.06);
+      mask-image: radial-gradient(ellipse at 50% 46%, black 0 62%, rgba(0,0,0,0.88) 74%, transparent 96%);
     }
     .motion-caption {
       position: absolute;
-      left: 16px;
-      right: 16px;
-      bottom: 14px;
-      z-index: 3;
+      left: 7%;
+      right: 7%;
+      bottom: -2%;
+      z-index: 5;
       display: flex;
       align-items: center;
       justify-content: center;
       min-height: 30px;
       padding: 6px 10px;
       border: 1px solid rgba(47,247,232,0.26);
-      background: rgba(5,5,10,0.64);
+      background: rgba(5,5,10,0.76);
       color: var(--accent);
       font-size: 10px;
       font-weight: 800;
@@ -1675,13 +1756,13 @@
     }
     .orbit-readout {
       position: absolute;
-      z-index: 4;
+      z-index: 6;
       min-width: 86px;
       padding: 10px 12px;
       border: 1px solid rgba(255,255,255,0.15);
       border-radius: 6px;
       background: rgba(5,5,10,0.78);
-      box-shadow: 0 18px 38px -28px #000;
+      box-shadow: 0 18px 38px -28px #000, 0 0 24px -18px var(--accent);
       backdrop-filter: blur(14px);
     }
     .orbit-readout b,
@@ -1702,12 +1783,19 @@
       letter-spacing: 0.22em;
     }
     .readout-a {
-      left: -34px;
+      left: -8%;
       top: 18%;
+      transform: translateZ(120px) rotateY(-12deg);
     }
     .readout-b {
-      right: -30px;
+      right: -10%;
       bottom: 22%;
+      transform: translateZ(130px) rotateY(12deg);
+    }
+    .readout-c {
+      left: 50%;
+      top: -9%;
+      transform: translateX(-50%) translateZ(160px);
     }
     .hero-bottom {
       display: grid;
@@ -1895,12 +1983,12 @@
     @keyframes videoArrival {
       from {
         opacity: 0;
-        transform: translate(-50%, -46%) scale(0.86);
+        transform: translate(-50%, -46%) rotateX(2deg) rotateY(-8deg) scale(0.86);
         filter: blur(10px);
       }
       to {
         opacity: 1;
-        transform: translate(-50%, -50%) scale(1);
+        transform: translate(-50%, -50%) rotateX(2deg) rotateY(-8deg) scale(1);
         filter: blur(0);
       }
     }
@@ -1909,9 +1997,9 @@
       50% { translate: 0 -10px; }
     }
     @keyframes scanSweep {
-      0%, 100% { transform: translateX(-52%); opacity: 0.24; }
+      0%, 100% { transform: translateZ(35px) translateX(-52%); opacity: 0.24; }
       45%, 58% { opacity: 0.62; }
-      100% { transform: translateX(52%); }
+      100% { transform: translateZ(35px) translateX(52%); }
     }
     @media (max-width: 860px) {
       .hero {
@@ -1920,10 +2008,22 @@
       .hero-shell {
         min-height: auto;
       }
-      .hero-navline {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        row-gap: 10px;
-        font-size: 12px;
+      .hero-kicker {
+        text-align: left;
+      }
+      .keyword-cloud {
+        justify-content: flex-start;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        max-width: calc(100vw - 40px);
+        padding-bottom: 3px;
+        scrollbar-width: none;
+      }
+      .keyword-cloud::-webkit-scrollbar {
+        display: none;
+      }
+      .keyword {
+        flex: 0 0 auto;
       }
       .hero-stage {
         min-height: clamp(360px, 90vw, 580px);
@@ -1939,7 +2039,12 @@
       .motion-orbit {
         top: 58%;
         z-index: 2;
-        width: clamp(220px, 64vw, 360px);
+        width: clamp(260px, 70vw, 380px);
+      }
+      .hero-video {
+        width: 108%;
+        height: 108%;
+        margin: -4%;
       }
       .hero-bottom {
         grid-template-columns: 1fr;
@@ -1959,14 +2064,18 @@
       }
     }
     @media (max-width: 520px) {
-      .hero-navline {
+      .hero-kicker {
+        font-size: 10px;
         letter-spacing: 0.18em;
       }
       .readout-a {
-        left: 8px;
+        left: -2px;
       }
       .readout-b {
-        right: 8px;
+        right: -2px;
+      }
+      .readout-c {
+        top: -6%;
       }
       .motion-caption {
         letter-spacing: 0.12em;
@@ -2182,24 +2291,36 @@
       document.getElementById('hero-section').innerHTML = `
         <div class="container">
           <div class="hero-shell fade-in">
-            <div class="hero-navline fade-in fade-in-delay-1" aria-label="视觉栏目">
-              ${esc(h.eyebrow).split(' · ').map(item => `<span>${esc(item)}</span>`).join('')}
+            <div class="hero-kicker fade-in fade-in-delay-1">${esc(h.eyebrow)}</div>
+            <div class="keyword-cloud fade-in fade-in-delay-1" aria-label="关键词">
+              ${(h.keywords || []).map((item, i) => `<span class="keyword keyword-${i % 4}">${esc(item)}</span>`).join('')}
             </div>
             <div class="hero-stage" aria-label="首屏动态视觉">
+              <div class="depth-field" aria-hidden="true">
+                <span class="depth-line line-a"></span>
+                <span class="depth-line line-b"></span>
+                <span class="depth-line line-c"></span>
+              </div>
               <h1 class="hero-title fade-in fade-in-delay-2">
                 <span>${esc(h.titleMain)}</span>
                 <strong>${esc(h.titleAccent)}</strong>
               </h1>
               <div class="motion-orbit fade-in fade-in-delay-1">
+                <span class="motion-shadow shadow-a" aria-hidden="true"></span>
+                <span class="motion-shadow shadow-b" aria-hidden="true"></span>
                 <video class="hero-video" src="${esc((h.motion && h.motion.src) || 'assets/hero-motion.mp4')}" autoplay muted loop playsinline preload="metadata" aria-label="首屏动态视频"></video>
                 <div class="motion-caption">${esc((h.motion && h.motion.caption) || 'LIVE SIGNAL')}</div>
                 <div class="orbit-readout readout-a">
-                  <b>MODEL</b>
-                  <span>watch</span>
+                  <b>AGENT</b>
+                  <span>stack</span>
                 </div>
                 <div class="orbit-readout readout-b">
-                  <b>19:00</b>
-                  <span>daily</span>
+                  <b>MACRO</b>
+                  <span>radar</span>
+                </div>
+                <div class="orbit-readout readout-c">
+                  <b>3D</b>
+                  <span>signal</span>
                 </div>
               </div>
             </div>
