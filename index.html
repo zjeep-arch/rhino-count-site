@@ -1735,17 +1735,14 @@
       filter: blur(42px);
       transform: translate3d(46px, -26px, -170px) rotateZ(11deg) scale(0.88);
     }
-    .hero-video {
+    .video-fusion {
       position: relative;
       z-index: 3;
       width: 128%;
       height: 128%;
       margin: -14%;
-      object-fit: cover;
       border-radius: 0;
       filter:
-        contrast(1.15)
-        saturate(1.38)
         drop-shadow(0 46px 46px rgba(0,0,0,0.82))
         drop-shadow(0 0 42px rgba(47,247,232,0.42))
         drop-shadow(0 0 72px rgba(255,46,166,0.22));
@@ -1758,6 +1755,43 @@
         radial-gradient(ellipse 46% 62% at 50% 44%, #000 0 43%, rgba(0,0,0,0.86) 54%, rgba(0,0,0,0.36) 65%, transparent 76%),
         linear-gradient(to bottom, transparent 0%, #000 12%, #000 72%, rgba(0,0,0,0.26) 82%, transparent 100%);
       mask-composite: intersect;
+    }
+    .video-fusion::before,
+    .video-fusion::after {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .video-fusion::before {
+      background:
+        radial-gradient(ellipse at 50% 34%, transparent 0 28%, rgba(5, 16, 22, 0.22) 46%, rgba(5, 10, 14, 0.70) 82%),
+        linear-gradient(115deg, rgba(47,247,232,0.16), rgba(5,5,10,0.22) 46%, rgba(5,5,10,0.64));
+      mix-blend-mode: multiply;
+      opacity: 0.64;
+    }
+    .video-fusion::after {
+      background:
+        radial-gradient(ellipse at 48% 42%, rgba(47,247,232,0.10), transparent 44%),
+        linear-gradient(90deg, rgba(3, 14, 18, 0.58), transparent 32%, transparent 58%, rgba(3, 10, 14, 0.78)),
+        linear-gradient(180deg, rgba(3, 8, 12, 0.30), transparent 28%, rgba(3, 8, 12, 0.68));
+      mix-blend-mode: color;
+      opacity: 0.48;
+    }
+    .hero-video {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter:
+        hue-rotate(-24deg)
+        saturate(0.96)
+        brightness(1.02)
+        contrast(1.14);
+      transform: scale(1.035);
     }
     .orbit-readout {
       position: absolute;
@@ -2046,7 +2080,7 @@
         z-index: 2;
         width: clamp(260px, 70vw, 380px);
       }
-      .hero-video {
+      .video-fusion {
         width: 108%;
         height: 108%;
         margin: -4%;
@@ -2323,7 +2357,9 @@
               <div class="motion-orbit fade-in fade-in-delay-1">
                 <span class="motion-shadow shadow-a" aria-hidden="true"></span>
                 <span class="motion-shadow shadow-b" aria-hidden="true"></span>
-                <video class="hero-video" src="${esc((h.motion && h.motion.src) || 'assets/hero-motion.mp4')}" autoplay muted loop playsinline preload="metadata" aria-label="首屏动态视频"></video>
+                <div class="video-fusion">
+                  <video class="hero-video" src="${esc((h.motion && h.motion.src) || 'assets/hero-motion.mp4')}" autoplay muted loop playsinline preload="metadata" aria-label="首屏动态视频"></video>
+                </div>
                 <div class="orbit-readout readout-a">
                   <b>AGENT</b>
                   <span>stack</span>
