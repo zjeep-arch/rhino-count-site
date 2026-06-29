@@ -181,10 +181,19 @@
       border-bottom: 1px solid var(--line);
     }
     .article-body .news-item:last-child { border-bottom: none; }
+    .article-body .news-item h3 a {
+      color: var(--ink);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    .article-body .news-item h3 a:hover {
+      color: var(--cat-accent);
+    }
     .article-body .news-item h3 {
-      font-family: var(--serif); font-weight: 600;
-      font-size: clamp(16px,1.8vw,19px);
-      margin: 0 0 var(--s-2); line-height: 1.4;
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin: 0 0 var(--s-2) 0;
+      line-height: 1.45;
     }
     .article-body .news-item p {
       margin: 0;

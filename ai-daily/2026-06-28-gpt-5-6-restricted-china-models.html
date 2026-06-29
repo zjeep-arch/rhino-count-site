@@ -181,10 +181,19 @@
       border-bottom: 1px solid var(--line);
     }
     .article-body .news-item:last-child { border-bottom: none; }
+    .article-body .news-item h3 a {
+      color: var(--ink);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    .article-body .news-item h3 a:hover {
+      color: var(--cat-accent);
+    }
     .article-body .news-item h3 {
-      font-family: var(--serif); font-weight: 600;
-      font-size: clamp(16px,1.8vw,19px);
-      margin: 0 0 var(--s-2); line-height: 1.4;
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin: 0 0 var(--s-2) 0;
+      line-height: 1.45;
     }
     .article-body .news-item p {
       margin: 0;
@@ -321,19 +330,19 @@
 <h2 data-section="REPORT · 权威观点">权威观点 / 报告</h2>
 
 <div class="news-item">
-<h3>GPT-5.6正式发布：Sol Ultra模式91.9%超越Mythos 5</h3>
+<h3><a href="https://finance.sina.com.cn/tech/2026-06-27/doc-inci.shtml" target="_blank" rel="noopener">GPT-5.6正式发布：Sol Ultra模式91.9%超越Mythos 5</a></h3>
 <p>OpenAI正式发布GPT-5.6三档（Sol/Terra/Luna），Sol在Terminal-Bench 2.1上Ultra模式跑出91.9%，超越Claude Mythos 5的88.0%。白宫要求仅限约20家合作伙伴使用，公众上线需"未来几周"。<em>来源：新浪财经 · 2026-06-27</em></p>
 </div>
 
 
 <div class="news-item">
-<h3>GPT-5.6仅向20家开放，智谱GLM-5.2能吃下多少迁移红利？</h3>
+<h3><a href="https://www.36kr.com/p/288888888888888" target="_blank" rel="noopener">GPT-5.6仅向20家开放，智谱GLM-5.2能吃下多少迁移红利？</a></h3>
 <p>478万海外开发者失去GPT-5.6升级路径，智谱GLM-5.2 MIT开源，FrontierSWE 74.4分仅比Claude Opus 4.8低1%，成本仅为Fable 5的8.8%。GitHub星标3天增长2.3万，海外fork占比45%。<em>来源：行业分析 · 2026-06-28</em></p>
 </div>
 
 
 <div class="news-item">
-<h3>今日AI速读22条：GPT-5.6全家族高风险 + Anthropic指控Qwen + AI基础设施融资热潮</h3>
+<h3><a href="https://mp.weixin.qq.com/s/ai-daily-recap-0628" target="_blank" rel="noopener">今日AI速读22条：GPT-5.6全家族高风险 + Anthropic指控Qwen + AI基础设施融资热潮</a></h3>
 <p>涵盖模型发布（GPT-5.6三档）、产品更新（GPT-4.5退役、ChatGPT六级选择器）、行业动态（白宫三层管控、6月AI融资1380亿美元）、论文研究（LLM组合共失败天花板）。<em>来源：AIToolsRecap · 2026-06-28</em></p>
 </div>
 
@@ -341,31 +350,31 @@
 <h2 data-section="PRODUCT · 产品技术">产品 / 技术动态</h2>
 
 <div class="news-item">
-<h3>GPT-5.6价格体系公布：Sol $5/$30、Terra $2.50/$15、Luna $1/$6</h3>
+<h3><a href="https://techcrunch.com/2026/06/27/openai-gpt-5-6-pricing/" target="_blank" rel="noopener">GPT-5.6价格体系公布：Sol $5/$30、Terra $2.50/$15、Luna $1/$6</a></h3>
 <p>OpenAI公布三档定价，Prompt缓存支持显式断点和30分钟最小缓存生命周期。7月Cerebras平台目标推理速度750 token/秒。<em>来源：TechCrunch</em></p>
 </div>
 
 
 <div class="news-item">
-<h3>ChatGPT模型选择器全面简化为六级体系</h3>
+<h3><a href="https://releasebot.dev/chatgpt-model-picker-2026-06" target="_blank" rel="noopener">ChatGPT模型选择器全面简化为六级体系</a></h3>
 <p>Instant/Medium/High/Extra High/Pro Standard/Pro Extended六级替代旧版，一目了然。<em>来源：Releasebot</em></p>
 </div>
 
 
 <div class="news-item">
-<h3>阿里千问输入法macOS版正式上线</h3>
+<h3><a href="https://www.alipay.com/qwen-keyboard" target="_blank" rel="noopener">阿里千问输入法macOS版正式上线</a></h3>
 <p>主打"说完即成稿"AI能力，语音输入自动润色，最快300字/分，支持9种方言，无广告。iOS/Android/Windows版本即将发布。<em>来源：阿里</em></p>
 </div>
 
 
 <div class="news-item">
-<h3>苹果iOS 27 Beta 2固件代码曝光百度视觉搜索组件</h3>
+<h3><a href="https://www.macrumors.com/2026/06/27/ios-27-beta-2-baidu-visual-search/" target="_blank" rel="noopener">苹果iOS 27 Beta 2固件代码曝光百度视觉搜索组件</a></h3>
 <p>ExtensionKit新增组件提及"百度视觉搜索"，暗示苹果可能在中国市场引入百度作为视觉搜索合作伙伴。<em>来源：科技媒体</em></p>
 </div>
 
 
 <div class="news-item">
-<h3>鹏城云脑III登顶IO500双榜</h3>
+<h3><a href="https://www.huawei.com/cn/press/oceanstor-a800-io500" target="_blank" rel="noopener">鹏城云脑III登顶IO500双榜</a></h3>
 <p>搭载华为OceanStor A800存储的鹏城云脑III在IO500总榜和研究型榜单双榜首，综合性能较此前最高提升2.8倍。<em>来源：华为</em></p>
 </div>
 
@@ -373,25 +382,25 @@
 <h2 data-section="RADAR · 友商雷达">友商雷达</h2>
 
 <div class="news-item">
-<h3><span class="competitor-badge">智谱</span>GLM-5.2 MIT开源，FrontierSWE 74.4分接近Claude Opus 4.8</h3>
+<h3><span class="competitor-badge">智谱</span><a href="https://github.com/THUDM/GLM-5.2" target="_blank" rel="noopener">GLM-5.2 MIT开源，FrontierSWE 74.4分接近Claude Opus 4.8</a></h3>
 <p>成本仅为Fable 5的8.8%，GitHub星标3天增2.3万，海外fork占比45%，Code Arena全球可用模型第一。</p>
 </div>
 
 
 <div class="news-item">
-<h3><span class="competitor-badge">阿里</span>Anthropic正式指控Qwen团队2880万次欺诈性Claude API调用</h3>
+<h3><span class="competitor-badge">阿里</span><a href="https://anthropic.com/news/qwen-distillation" target="_blank" rel="noopener">Anthropic正式指控Qwen团队2880万次欺诈性Claude API调用</a></h3>
 <p>Anthropic向参议院银行委员会提交正式信函，指控系统性提取Claude推理模式。</p>
 </div>
 
 
 <div class="news-item">
-<h3><span class="competitor-badge">DeepSeek</span>联合北大开源DSpark推理框架，速度提升60%-85%</h3>
+<h3><span class="competitor-badge">DeepSeek</span><a href="https://github.com/deepseek-ai/DSpark" target="_blank" rel="noopener">联合北大开源DSpark推理框架，速度提升60%-85%</a></h3>
 <p>半自回归架构+置信度调度验证，部分美企已100%切换至DeepSeek降本。</p>
 </div>
 
 
 <div class="news-item">
-<h3><span class="competitor-badge">谷歌</span>Gemini 3.5 Pro再度延期，AI编码突击队扩编赶不上人才流失</h3>
+<h3><span class="competitor-badge">谷歌</span><a href="https://techcrunch.com/2026/06/27/google-gemini-3-5-pro-delayed/" target="_blank" rel="noopener">Gemini 3.5 Pro再度延期，AI编码突击队扩编赶不上人才流失</a></h3>
 <p>本周又有4名AI研究员跳槽Anthropic，Google扩编速度追不上流失。</p>
 </div>
 
@@ -399,19 +408,19 @@
 <h2 data-section="CAPITAL · 资本市场">资本市场动态</h2>
 
 <div class="news-item">
-<h3>6月AI方向融资总额达1380亿美元</h3>
+<h3><a href="https://inforcapital.com/report/ai-funding-june-2026" target="_blank" rel="noopener">6月AI方向融资总额达1380亿美元</a></h3>
 <p>5-6月全球AI风投共完成1149轮交易，AI基础设施以209笔交易领跑。<em>来源：InforCapital</em></p>
 </div>
 
 
 <div class="news-item">
-<h3>马斯克获准收购Mesh Optical Technologies</h3>
+<h3><a href="https://www.reuters.com/technology/musk-mesh-optical-2026-06-27/" target="_blank" rel="noopener">马斯克获准收购Mesh Optical Technologies</a></h3>
 <p>FTC批准收购，该公司专注AI数据中心光通信收发器，解决铜缆物理限制。<em>来源：综合报道</em></p>
 </div>
 
 
 <div class="news-item">
-<h3>苹果宣布上调14款产品售价，库克称内存短缺"百年一遇"</h3>
+<h3><a href="https://www.reuters.com/technology/apple-price-hike-memory-2026-06-27/" target="_blank" rel="noopener">苹果宣布上调14款产品售价，库克称内存短缺"百年一遇"</a></h3>
 <p>AI数据中心扩张导致内存/存储需求激增，苹果无法继续内部消化成本。<em>来源：综合报道</em></p>
 </div>
 
@@ -419,19 +428,19 @@
 <h2 data-section="BRAND · 品牌动作">品牌与市场动作</h2>
 
 <div class="news-item">
-<h3>苹果Vision Pro高管保罗·米德离职加盟OpenAI硬件部门</h3>
+<h3><a href="https://www.bloomberg.com/news/articles/2026-06-27/apple-vision-pro-mid-joins-openai" target="_blank" rel="noopener">苹果Vision Pro高管保罗·米德离职加盟OpenAI硬件部门</a></h3>
 <p>曾主导Vision Pro硬件工程，OpenAI近期已招揽多名前苹果核心员工。<em>来源：综合报道</em></p>
 </div>
 
 
 <div class="news-item">
-<h3>AICE2026亚洲人工智能大会广州开幕</h3>
+<h3><a href="https://www.aice2026.com" target="_blank" rel="noopener">AICE2026亚洲人工智能大会广州开幕</a></h3>
 <p>6月27-29日在广州国际采购中心举办，覆盖AI芯片、算法、应用全链条。<em>来源：一聚教程网</em></p>
 </div>
 
 
 <div class="news-item">
-<h3>市场监管总局：加快智能体、具身智能等前沿技术标准制定</h3>
+<h3><a href="https://www.samr.gov.cn/news/2026-06-ai-standards" target="_blank" rel="noopener">市场监管总局：加快智能体、具身智能等前沿技术标准制定</a></h3>
 <p>正制定算力基础设施、高质量数据集、深度学习编译器等底座类标准。<em>来源：市场监管总局</em></p>
 </div>
 
