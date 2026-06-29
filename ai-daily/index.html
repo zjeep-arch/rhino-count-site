@@ -4,151 +4,344 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="color-scheme" content="light dark" />
-  <title>AI日报 · 每日AI大模型动态速览 · 犀牛伯爵</title>
-  <meta name="description" content="犀牛伯爵AI日报 — 每日早8点精选AI大模型领域关键动态。" />
+  <title>AI早报 · 每天8点读懂AI世界 · 犀牛伯爵</title>
+  <meta name="description" content="犀牛伯爵AI早报 — 每天8点精选AI大模型、产品、资本与产业关键信号。" />
   <link rel="canonical" href="https://zjeep-arch.github.io/rhino-count-site/ai-daily/" />
 
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="AI日报 · 每日AI大模型动态速览 · 犀牛伯爵" />
-  <meta property="og:description" content="每日早8点精选AI大模型领域关键动态。" />
+  <meta property="og:title" content="AI早报 · 每天8点读懂AI世界 · 犀牛伯爵" />
+  <meta property="og:description" content="每天8点精选AI大模型、产品、资本与产业关键信号。" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,400;1,500&family=Inter:wght@400;500;600&family=Noto+Serif+SC:wght@500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet" />
 
   <style>
     :root {
-      --bg: #F5EFE6; --bg-soft: #ECE3D2; --surface: #FBF7EE;
-      --ink: #1C1410; --ink-soft: #3B2E24; --muted: #7A6B5B;
-      --line: rgba(28,20,16,0.10); --line-2: rgba(28,20,16,0.22);
-      --accent: #8B3A2E; --gold: #B8862F;
-      --cat-accent: #2563eb;
-      --serif: "Playfair Display","Noto Serif SC","Songti SC",Georgia,serif;
-      --sans: "Inter",-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
-      --maxw: 720px; --pad: clamp(20px,5vw,40px);
-      --radius: 14px; --s-1: 4px; --s-2: 8px; --s-3: 12px;
-      --s-4: 16px; --s-5: 20px; --s-6: 24px; --s-7: 32px;
-      --s-8: 40px; --s-9: 56px; --s-10: 80px;
+      --bg: #F5F7FB;
+      --bg-soft: #EAF0F7;
+      --surface: rgba(255,255,255,0.78);
+      --surface-strong: #FFFFFF;
+      --ink: #111722;
+      --ink-soft: #344252;
+      --muted: #6B7686;
+      --line: rgba(17,23,34,0.10);
+      --line-2: rgba(17,23,34,0.18);
+      --accent: #00A7A7;
+      --accent-2: #6D5DF6;
+      --hot: #FF4D8D;
+      --gold: #C4932B;
+      --glow: rgba(0,167,167,0.20);
+      --shadow: 0 28px 80px -48px rgba(19,32,50,0.42);
+      --sans: "Inter", -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      --display: "Bebas Neue", "Inter", sans-serif;
+      --maxw: 1120px;
+      --pad: clamp(20px, 5vw, 40px);
+      --radius: 12px;
+      --s-2: 8px; --s-3: 12px; --s-4: 16px; --s-5: 20px;
+      --s-6: 24px; --s-7: 32px; --s-8: 44px; --s-9: 64px;
     }
     [data-theme="dark"] {
-      --bg: #14100C; --bg-soft: #1A1510; --surface: #1F1813;
-      --ink: #F1E8DA; --ink-soft: #DCCEB8; --muted: #9B8B77;
-      --line: rgba(241,232,218,0.10); --line-2: rgba(241,232,218,0.22);
-      --accent: #D4825F; --gold: #E8C77A;
-      --cat-accent: #60a5fa;
+      --bg: #080B10;
+      --bg-soft: #101820;
+      --surface: rgba(17,24,31,0.78);
+      --surface-strong: #121A22;
+      --ink: #F2F7F6;
+      --ink-soft: #C7D5D4;
+      --muted: #7F9296;
+      --line: rgba(226,247,244,0.11);
+      --line-2: rgba(226,247,244,0.22);
+      --accent: #27D7C9;
+      --accent-2: #8E7CFF;
+      --hot: #FF5FAB;
+      --gold: #E9C46A;
+      --glow: rgba(39,215,201,0.22);
+      --shadow: 0 28px 80px -42px rgba(0,0,0,0.70);
     }
     *,*::before,*::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
-      margin: 0; background: var(--bg); color: var(--ink);
-      font-family: var(--sans); font-size: 16px; line-height: 1.65;
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 12% 8%, color-mix(in oklab, var(--accent) 18%, transparent), transparent 26%),
+        radial-gradient(circle at 88% 0%, color-mix(in oklab, var(--accent-2) 16%, transparent), transparent 28%),
+        linear-gradient(135deg, var(--bg), var(--bg-soft));
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.65;
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
-    .container { max-width: var(--maxw); margin-inline: auto; padding-inline: var(--pad); }
-
-    /* --- Header --- */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(color-mix(in oklab, var(--accent) 13%, transparent) 1px, transparent 1px),
+        linear-gradient(90deg, color-mix(in oklab, var(--accent-2) 10%, transparent) 1px, transparent 1px);
+      background-size: 38px 38px;
+      mask-image: linear-gradient(to bottom, black, transparent 78%);
+      opacity: 0.72;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container {
+      width: min(100%, var(--maxw));
+      margin-inline: auto;
+      padding-inline: var(--pad);
+      position: relative;
+      z-index: 1;
+    }
     .page-header {
-      padding: var(--s-10) 0 var(--s-8);
-    }
-    .back-link {
-      display: inline-flex; align-items: center; gap: 6px;
-      font-size: 13px; color: var(--muted); font-weight: 500;
-      text-decoration: none; letter-spacing: 0.02em;
-      margin-bottom: var(--s-6);
-      transition: color 0.2s;
-    }
-    .back-link:hover { color: var(--accent); }
-    .page-header h1 {
-      font-family: var(--serif); font-weight: 700;
-      font-size: clamp(30px,5vw,44px); line-height: 1.1;
-      margin: 0 0 var(--s-3);
-    }
-    .page-header .sub {
-      color: var(--muted); font-size: 15px; line-height: 1.6;
-      margin: 0; max-width: 480px;
-    }
-
-    /* --- Article List --- */
-    .article-list { display: grid; gap: var(--s-4); }
-
-    .article-card {
+      min-height: 54vh;
       display: grid;
-      grid-template-columns: 1fr;
+      align-items: center;
+      padding: clamp(42px, 8vw, 88px) 0 var(--s-8);
+    }
+    .nav-row {
+      position: absolute;
+      top: var(--s-5);
+      left: var(--pad);
+      right: var(--pad);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--s-4);
+    }
+    .back-link,
+    .time-pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      gap: 8px;
+      padding: 7px 10px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: color-mix(in oklab, var(--surface) 84%, transparent);
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      backdrop-filter: blur(16px);
+    }
+    .back-link:hover {
+      color: var(--accent);
+      border-color: color-mix(in oklab, var(--accent) 45%, var(--line));
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(260px, 0.65fr);
+      gap: clamp(28px, 6vw, 68px);
+      align-items: end;
+    }
+    .eyebrow {
+      margin: 0 0 var(--s-4);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+    }
+    h1 {
+      margin: 0;
+      max-width: 820px;
+      font-family: var(--display);
+      font-size: clamp(54px, 11vw, 132px);
+      line-height: 0.88;
+      font-weight: 400;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+    h1 span {
+      display: block;
+      color: transparent;
+      -webkit-text-stroke: 1px color-mix(in oklab, var(--ink) 68%, transparent);
+      text-shadow: 0 0 34px color-mix(in oklab, var(--accent) 18%, transparent);
+    }
+    .sub {
+      max-width: 620px;
+      margin: var(--s-5) 0 0;
+      color: var(--ink-soft);
+      font-size: clamp(16px, 2vw, 20px);
+      line-height: 1.8;
+    }
+    .signal-panel {
+      display: grid;
       gap: var(--s-3);
-      background: var(--surface);
+      padding: var(--s-5);
       border: 1px solid var(--line);
       border-radius: var(--radius);
-      padding: var(--s-6);
-      text-decoration: none; color: inherit;
+      background:
+        linear-gradient(135deg, color-mix(in oklab, var(--surface-strong) 86%, transparent), color-mix(in oklab, var(--accent) 8%, transparent)),
+        var(--surface);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+    }
+    .signal-panel b {
+      color: var(--muted);
+      font-size: 11px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+    }
+    .signal-panel strong {
+      font-size: 30px;
+      line-height: 1;
+      color: var(--accent);
+    }
+    .signal-panel span {
+      color: var(--ink-soft);
+      font-size: 14px;
+    }
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--s-2);
+      margin-top: var(--s-3);
+    }
+    .tags i {
+      font-style: normal;
+      padding: 6px 9px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      background: color-mix(in oklab, var(--surface) 72%, transparent);
+    }
+    .section-title {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: var(--s-5);
+      padding: var(--s-7) 0 var(--s-5);
+      border-top: 1px solid var(--line);
+    }
+    .section-title h2 {
+      margin: 0;
+      font-size: clamp(24px, 3vw, 34px);
+      line-height: 1.1;
+    }
+    .section-title p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .article-list {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: var(--s-4);
+      padding-bottom: var(--s-9);
+    }
+    .article-card {
+      grid-column: span 6;
+      min-height: 210px;
+      display: grid;
+      grid-template-rows: auto auto 1fr auto;
+      gap: var(--s-3);
+      position: relative;
+      overflow: hidden;
+      padding: clamp(20px, 3vw, 28px);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(120deg, color-mix(in oklab, var(--surface-strong) 92%, transparent), color-mix(in oklab, var(--accent-2) 7%, transparent)),
+        var(--surface);
+      box-shadow: 0 1px 0 rgba(255,255,255,0.40);
       transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
-      position: relative; overflow: hidden;
+      backdrop-filter: blur(18px);
+    }
+    .article-card:first-child {
+      grid-column: span 12;
+      min-height: 250px;
     }
     .article-card:hover {
-      transform: translateY(-2px);
-      border-color: var(--line-2);
-      box-shadow: 0 24px 48px -24px rgba(28,20,16,0.20);
-    }
-    .article-card:active {
-      transform: translateY(0);
+      transform: translateY(-4px);
+      border-color: color-mix(in oklab, var(--accent) 50%, var(--line));
+      box-shadow: var(--shadow), 0 0 50px -34px var(--accent);
     }
     .article-card::before {
-      content: ""; position: absolute; left: 0; top: 0; bottom: 0;
-      width: 3px; background: var(--cat-accent);
-      transform: scaleY(0); transform-origin: top;
-      transition: transform 0.35s ease;
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(110deg, transparent 0 56%, color-mix(in oklab, var(--accent) 10%, transparent) 64%, transparent 76%);
+      opacity: 0;
+      transition: opacity 0.25s ease;
+      pointer-events: none;
     }
-    .article-card:hover::before { transform: scaleY(1); }
-
+    .article-card:hover::before { opacity: 1; }
+    .article-card > * { position: relative; z-index: 1; }
     .art-meta {
-      display: flex; align-items: center; gap: var(--s-2);
-      font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: var(--s-2);
       color: var(--muted);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
     }
     .art-meta .cat {
-      color: var(--cat-accent); font-weight: 600;
-      background: color-mix(in srgb, var(--cat-accent) 10%, transparent);
-      padding: 2px 10px; border-radius: 20px;
-      letter-spacing: 0.04em;
-    }
-    .art-meta .date {
-      color: var(--muted);
+      color: var(--accent);
+      padding: 3px 9px;
+      border: 1px solid color-mix(in oklab, var(--accent) 42%, var(--line));
+      border-radius: 6px;
+      background: color-mix(in oklab, var(--accent) 8%, transparent);
     }
     .art-meta .date::before {
-      content: "·"; margin-right: var(--s-2);
+      content: "/";
+      margin-right: var(--s-2);
+      color: var(--line-2);
     }
-
     .article-card h2 {
-      font-family: var(--serif); font-weight: 700;
-      font-size: clamp(17px,1.5vw,19px); line-height: 1.45;
-      margin: 0; letter-spacing: 0.01em;
+      margin: 0;
+      max-width: 760px;
+      font-size: clamp(20px, 2.3vw, 34px);
+      line-height: 1.24;
+      letter-spacing: 0;
+    }
+    .article-card:not(:first-child) h2 {
+      font-size: clamp(18px, 1.8vw, 24px);
     }
     .article-card p {
-      margin: 0; color: var(--ink-soft);
-      font-size: 14px; line-height: 1.7;
-      display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: 14px;
+      line-height: 1.72;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
       overflow: hidden;
     }
-
     .art-arrow {
-      justify-self: end;
-      color: var(--cat-accent);
-      font-size: 18px;
-      transition: transform 0.25s ease, opacity 0.25s ease;
-      opacity: 0;
-      grid-row: 2 / 4; grid-column: 2;
-      align-self: center;
+      justify-self: start;
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
     }
-    .article-card:hover .art-arrow {
-      opacity: 1;
-      transform: translateX(4px);
+    .art-arrow::before { content: "READ BRIEF "; }
+    .loading,
+    .empty {
+      grid-column: 1 / -1;
+      min-height: 240px;
+      display: grid;
+      place-items: center;
+      padding: var(--s-8);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+      color: var(--muted);
+      text-align: center;
     }
-
-    /* --- Loading & Empty --- */
-    .loading, .empty {
-      padding: var(--s-10); text-align: center;
-    }
-    .loading {
-      color: var(--muted); font-size: 13px; letter-spacing: 0.1em;
-    }
+    .loading { font-size: 13px; letter-spacing: 0.12em; }
     .loading span { animation: pulse 1.4s ease-in-out infinite; }
     .loading span:nth-child(2) { animation-delay: 0.2s; }
     .loading span:nth-child(3) { animation-delay: 0.4s; }
@@ -156,57 +349,101 @@
       0%,80%,100% { opacity: 0.3; }
       40% { opacity: 1; }
     }
-    .empty {
-      color: var(--muted); font-size: 14px; line-height: 2;
-    }
     .empty strong { color: var(--ink); display: block; margin-bottom: var(--s-2); }
-
-    /* --- Footer --- */
     .page-footer {
-      margin-top: var(--s-9); padding: var(--s-6) 0 var(--s-8);
+      padding: var(--s-6) 0 var(--s-8);
       border-top: 1px solid var(--line);
-      text-align: center; color: var(--muted); font-size: 12px;
-      letter-spacing: 0.03em;
+      color: var(--muted);
+      font-size: 12px;
+      text-align: center;
+      letter-spacing: 0.04em;
     }
-    .page-footer a {
-      color: var(--accent); text-decoration: none;
-    }
-    .page-footer a:hover { text-decoration: underline; }
-
-    /* --- Responsive --- */
-    @media (max-width: 520px) {
-      .article-card { padding: var(--s-4) var(--s-5); }
-      .page-header { padding: var(--s-8) 0 var(--s-6); }
-    }
-
-    @media (min-width: 640px) {
-      .article-card {
-        grid-template-columns: 1fr auto;
+    .page-footer a { color: var(--accent); }
+    @media (max-width: 860px) {
+      .page-header {
+        min-height: auto;
+        padding-top: 92px;
+      }
+      .hero-grid {
+        grid-template-columns: 1fr;
         align-items: start;
       }
-      .article-card p { -webkit-line-clamp: 2; }
+      .signal-panel {
+        max-width: 460px;
+      }
+      .article-card,
+      .article-card:first-child {
+        grid-column: 1 / -1;
+      }
+    }
+    @media (max-width: 560px) {
+      .nav-row {
+        position: relative;
+        top: auto;
+        left: auto;
+        right: auto;
+        margin-bottom: var(--s-7);
+      }
+      .page-header {
+        padding-top: var(--s-5);
+      }
+      h1 {
+        font-size: clamp(48px, 17vw, 78px);
+      }
+      .section-title {
+        display: grid;
+        align-items: start;
+      }
+      .article-card {
+        min-height: 190px;
+      }
     }
   </style>
 </head>
 <body>
   <div class="container">
     <header class="page-header">
-      <a class="back-link" href="../">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><polyline points="12 19 5 12 12 5"/></svg>
-        回到首页
-      </a>
-      <h1>AI日报</h1>
-      <p class="sub">每日早8点精选AI大模型领域关键动态</p>
+      <div class="nav-row">
+        <a class="back-link" href="../">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><polyline points="12 19 5 12 12 5"/></svg>
+          回到首页
+        </a>
+        <span class="time-pill">08:00 AM · DAILY</span>
+      </div>
+      <div class="hero-grid">
+        <div>
+          <p class="eyebrow">AI MORNING BRIEF</p>
+          <h1>每天 8 点，<span>读懂 AI 世界昨夜的新信号。</span></h1>
+          <p class="sub">精选 AI 大模型、产品更新、资本动向与产业洞察，把昨夜最值得关注的变化压缩成一份早间速览。</p>
+        </div>
+        <aside class="signal-panel" aria-label="早报定位">
+          <b>Morning Signal</b>
+          <strong>5 min</strong>
+          <span>快速建立今天的 AI 信息坐标，先看重点，再决定深挖什么。</span>
+          <div class="tags" aria-label="关注方向">
+            <i>Models</i>
+            <i>Products</i>
+            <i>Capital</i>
+            <i>Industry</i>
+          </div>
+        </aside>
+      </div>
     </header>
 
-    <div id="articleList" class="article-list">
-      <div class="loading">
-        <span>读</span><span>取</span><span>中</span> ……
+    <section aria-labelledby="latestTitle">
+      <div class="section-title">
+        <h2 id="latestTitle">最新早报</h2>
+        <p>按日期倒序更新</p>
       </div>
-    </div>
+      <div id="articleList" class="article-list">
+        <div class="loading">
+          <span>读</span><span>取</span><span>中</span> ...
+        </div>
+      </div>
+    </section>
 
     <footer class="page-footer">
-      © 2026 <a href="../">犀牛伯爵</a> · AI日报，每日早8点精选大模型领域关键动态
+      © 2026 <a href="../">犀牛伯爵</a> · AI早报，每天8点精选关键动态
     </footer>
   </div>
 
@@ -223,15 +460,15 @@
       function render(articles) {
         if (!articles || articles.length === 0) {
           list.innerHTML = '<div class="empty">' +
-            '<strong>还没有AI日报文章</strong>' +
-            '每日早8点自动生成第一篇后就会显示在这里。<br/>' +
-            '"AI日报，每日早8点精选大模型领域关键动态。"</div>';
+            '<div><strong>还没有AI早报文章</strong>' +
+            '每天8点生成第一篇后就会显示在这里。<br/>' +
+            '"AI早报，每天8点精选关键动态。"</div></div>';
           return;
         }
-        list.innerHTML = articles.map(function(a, i) {
+        list.innerHTML = articles.map(function(a) {
           return '<a class="article-card" href="' + esc(a.href) + '">' +
             '<div class="art-meta">' +
-            '<span class="cat">' + esc(a.cat || 'AI日报') + '</span>' +
+            '<span class="cat">' + esc(a.cat || 'AI早报') + '</span>' +
             '<span class="date">' + esc(a.date || '') + '</span>' +
             '</div>' +
             '<h2>' + esc(a.title) + '</h2>' +
