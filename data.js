@@ -21,9 +21,9 @@ window.SITE_DATA = {
 
   /* ---------- 浏览器标签 + SEO ---------- */
   meta: {
-    title: "犀牛伯爵 · AI 时代的记录者",
-    description: "犀牛伯爵 — 北大本科、AI 大厂从业者。记录 AI 与趋势变化，分享学习方法与踩过的坑。每日时评，宏观视野。",
-    keywords: "犀牛伯爵, AI, 大模型, 学习方法, 北大, 小红书, AI 大厂, Prompt, Agent, 时评, 宏观分析",
+    title: "犀牛伯爵 · AI 创作实验室",
+    description: "犀牛伯爵 — AI-native builder。记录 Agent 工作流、AI 写作、宏观科技观察与内容产品化实验。",
+    keywords: "犀牛伯爵, AI, Agent, AI-native, 大模型, 学习方法, 北大, 小红书, AI 大厂, Prompt, 时评, 宏观分析, 创作实验室",
     author: "犀牛伯爵",
     siteUrl: "https://zjeep-arch.github.io/rhino-count-site/",
     ogImage: "assets/og-card.svg"
@@ -36,9 +36,9 @@ window.SITE_DATA = {
     nav: [
       { label: "关于",  href: "#profile" },
       { label: "笔记",  href: "#notes" },
+      { label: "创作",  href: "#builds" },
       { label: "时评",  href: "#commentary" },
       { label: "主张",  href: "#manifesto" },
-      { label: "游戏",  href: "games/duck-scare-war.html" },
       { label: "联络",  href: "#contact" }
     ],
     cta: {
@@ -52,9 +52,9 @@ window.SITE_DATA = {
     eyebrow: "RHINO COUNT · LIVE SIGNAL",
     titleMain: "HI, I'M",
     titleAccent: "RHINO",
-    lede: "北大本科，高考数学满分。AI 大厂从业者。每晚把模型、产业和宏观世界的暗涌，压缩成一篇可以慢慢咀嚼的笔记。",
-    ctaPrimary:   { label: "阅读最新笔记 →", href: "#notes" },
-    ctaSecondary: { label: "每日时评",         href: "#commentary" },
+    lede: "北大本科，高考数学满分。AI 大厂从业者。用 AI agent 把观察、写作、产品实验和工作流，沉淀成可复用的个人创作系统。",
+    ctaPrimary:   { label: "进入创作矩阵 →", href: "#builds" },
+    ctaSecondary: { label: "阅读最新笔记",     href: "#notes" },
     motion: {
       src: "assets/hero-motion.mp4"
     },
@@ -71,6 +71,70 @@ window.SITE_DATA = {
     stats: [
       { num: "50000+", lbl: "followers" },
       { num: "10000+", lbl: "likes" }
+    ]
+  },
+
+  /* ---------- 创作矩阵 Builds / Playbooks ---------- */
+  lab: {
+    label: "CREATION MATRIX · 创作矩阵",
+    headingLine1: "把想法，",
+    headingLine2: "做成作品。",
+    blurb: "这里不只放页面，而是把每一次 AI 实验整理成可读、可复用、可继续迭代的内容资产。",
+    tracks: [
+      {
+        tag: "BUILD",
+        title: "AI Workflow Lab",
+        desc: "把日常创作、资料整理、网页生成和自动化流程拆成可复用工作流。",
+        linkLabel: "查看站点",
+        href: "https://zjeep-arch.github.io/rhino-count-site/"
+      },
+      {
+        tag: "WRITE",
+        title: "AI-native Writing",
+        desc: "记录模型变化、Agent 思维、学习方法，以及普通人如何用 AI 放大表达。",
+        linkLabel: "读 AI 笔记",
+        href: "#notes"
+      },
+      {
+        tag: "RADAR",
+        title: "Macro & Model Watch",
+        desc: "把宏观事件、科技公司、模型发布和产业信号压缩成每晚可读的判断。",
+        linkLabel: "看每日时评",
+        href: "#commentary"
+      },
+      {
+        tag: "PLAY",
+        title: "Interactive Experiments",
+        desc: "用小游戏、教程页和交互页面测试内容的新形态，让表达变得可玩。",
+        linkLabel: "玩一个实验",
+        href: "games/duck-scare-war.html"
+      }
+    ],
+    featured: [
+      {
+        type: "Essay",
+        title: "Agent 不是产品，是新一代操作系统",
+        desc: "从 App 思维迁移到 Agent 思维需要的 5 个转变。",
+        href: "notes/agent-is-operating-system.html"
+      },
+      {
+        type: "Guide",
+        title: "百度 DuMate 从 0 到 1 上手教程",
+        desc: "把一个 AI 产品拆成可操作、可复用、可传播的教程资产。",
+        href: "dumate/"
+      },
+      {
+        type: "Game",
+        title: "鸭骗战争：真鸭假鹅",
+        desc: "把内容创作做成互动玩法，测试轻量游戏化表达。",
+        href: "games/duck-scare-war.html"
+      }
+    ],
+    roadmap: [
+      "每周复盘一个 AI workflow 实验",
+      "每周沉淀一篇 AI-native 写作 / 产品观察",
+      "每月整理一个可复用 playbook",
+      "把聊天、网页、文章和自动化流程串成个人创作系统"
     ]
   },
 
@@ -94,7 +158,7 @@ window.SITE_DATA = {
     label: "JOURNAL · 笔记",
     headingLine1: "在喧嚣里，",
     headingLine2: "慢慢记。",
-    blurb: "每一篇笔记都是一次小型的田野调查 —— 关于模型、关于人、关于我们如何被这个时代重新塑形。",
+    blurb: "每一篇笔记都是一次小型田野调查：关于模型、关于人、关于我们如何被这个时代重新塑形。",
     notes: [
       {
         cat: "AI 趋势", num: "N° 01",
@@ -169,7 +233,7 @@ window.SITE_DATA = {
 
   /* ---------- 主张 Manifesto / 引用 ---------- */
   quote: {
-    text: "模型每天都在变，提问的能力不会过期。慢一点，但走得更远。",
+    text: "输出不是作品的全部。真正的工作，发生在观察、判断、拆解和反复迭代里。",
     attr: "— 犀牛伯爵 · 2026"
   },
 
@@ -190,7 +254,7 @@ window.SITE_DATA = {
 
   /* ---------- 页脚 ---------- */
   footer: {
-    left:  "© 2026 犀牛伯爵 · 一切笔记，皆可咀嚼",
-    right: "Crafted with patience · Beijing"
+    left:  "© 2026 犀牛伯爵 · AI Creation Lab",
+    right: "Build · Write · Think · Ship"
   }
 };
