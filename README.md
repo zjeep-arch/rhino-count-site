@@ -1,21 +1,65 @@
-# 犀牛伯爵 · 个人站
+# 犀牛伯爵 · AI 创作实验室
 
-**rhino-count-site** — 犀牛伯爵的个人网站。AI 时代的记录者，每晚一篇宏观时评。
+这是犀牛伯爵的个人创作站，也是一个持续迭代的 AI-native 内容实验室。
 
-## 目录结构
+我在这里记录 Agent 工作流、AI 写作、宏观科技观察、产品教程和轻量互动实验。目标不是把内容堆成目录，而是把每一次观察、写作和工具尝试沉淀成可以复用的个人创作系统。
 
-```
+> AI-native builder. Build, write, think, ship.
+
+## 在线入口
+
+- 个人站：[zjeep-arch.github.io/rhino-count-site](https://zjeep-arch.github.io/rhino-count-site/)
+- 小红书：[犀牛伯爵](https://www.xiaohongshu.com/user/profile/60572004000000000101ce41)
+- DuMate 教程：[百度 DuMate 从 0 到 1 上手教程](https://zjeep-arch.github.io/rhino-count-site/dumate/)
+- 互动实验：[鸭骗战争：真鸭假鹅](https://zjeep-arch.github.io/rhino-count-site/games/duck-scare-war.html)
+
+## 我在做什么
+
+### AI Workflow Lab
+
+把日常创作、资料整理、网页生成和自动化流程拆成可复用工作流。重点关注：Agent 如何参与真实创作，而不是停留在演示。
+
+### AI-native Writing
+
+记录模型变化、Agent 思维、学习方法，以及普通人如何用 AI 放大表达。写作不是输出结果，而是观察、判断、拆解和迭代的过程。
+
+### Macro & Model Watch
+
+把宏观事件、科技公司、模型发布和产业信号压缩成每晚可读的判断。关注世界变化如何影响技术、职业和个人选择。
+
+### Interactive Experiments
+
+用小游戏、教程页和交互页面测试内容的新形态，让表达不只是一篇文章，也可以是一段流程、一个页面、一个可玩的作品。
+
+## 精选内容
+
+| 类型 | 作品 | 说明 |
+| --- | --- | --- |
+| Essay | [Agent 不是产品，是新一代操作系统](https://zjeep-arch.github.io/rhino-count-site/notes/agent-is-operating-system.html) | 从 App 思维迁移到 Agent 思维需要的 5 个转变 |
+| Guide | [百度 DuMate 从 0 到 1 上手教程](https://zjeep-arch.github.io/rhino-count-site/dumate/) | 把一个 AI 产品拆成可操作、可复用、可传播的教程资产 |
+| Game | [鸭骗战争：真鸭假鹅](https://zjeep-arch.github.io/rhino-count-site/games/duck-scare-war.html) | 用轻量游戏化测试内容表达的新形态 |
+| Commentary | [每日时评合集](https://zjeep-arch.github.io/rhino-count-site/articles/) | 每晚拆解宏观、科技和产业信号 |
+
+## 内容结构
+
+```text
 rhino-count-site/
-├── index.html                # 首页（个人介绍 + 笔记 + 时评）
-├── data.js                   # 全站内容数据
-├── articles/
-│   ├── index.html            # 时评文章列表页
-│   ├── template.html         # 文章模板（供 cron job 使用）
-│   └── feed.json             # 文章列表数据源
-├── robots.txt
-├── sitemap.xml
-└── README.md                 # 本文件
+├── index.html                # 首页：个人介绍、创作矩阵、笔记、时评
+├── data.js                   # 全站核心内容数据
+├── notes/                    # AI 笔记与方法论文章
+├── articles/                 # 每日宏观/科技时评
+├── dumate/                   # AI 产品教程页
+├── games/                    # 互动内容实验
+├── post-to-wechat/           # 可分发到公众号/社媒的长文素材
+└── assets/                   # 首屏视频、卡片图和视觉素材
 ```
+
+## 创作路线图
+
+- 每周复盘一个 AI workflow 实验
+- 每周沉淀一篇 AI-native 写作 / 产品观察
+- 每月整理一个可复用 playbook
+- 把聊天、网页、文章和自动化流程串成个人创作系统
 
 ## 本地预览
 
@@ -24,103 +68,49 @@ cd rhino-count-site
 python3 -m http.server 8080
 ```
 
-浏览器打开 <http://localhost:8080>
+浏览器打开：
 
-## 改内容
-
-**95% 的修改只改 `data.js` 即可**。`data.js` 里按页面顺序分成了 8 大块，改字面就行。
-
-### 增加一篇笔记
-
-在 `data.js` 的 `journal.notes` 数组里复制一段 `{ ... },` 整体粘贴，改字段即可。
-
-### 增加时评文章
-
-时评文章**由每日 cron job 自动生成**。每篇文章是一个独立的 HTML 文件放在 `articles/` 目录下，同时自动追加一条记录到 `articles/feed.json`。
-
-## 部署到 GitHub Pages
-
-### 方式一：一键部署（推荐）
-
-1. 在 GitHub 上创建新仓库，比如 `rhino-count-site`
-2. 将本地项目推送到 GitHub：
-
-```bash
-cd rhino-count-site
-git init
-git add .
-git commit -m "初始提交"
-git branch -M main
-git remote add origin https://github.com/你的用户名/rhino-count-site.git
-git push -u origin main
+```text
+http://localhost:8080
 ```
 
-3. 在 GitHub 仓库页点 **Settings → Pages**：
-   - Source: **Deploy from a branch**
-   - Branch: **main**, 目录: **/ (root)**
-   - 点 Save
+## 更新内容
 
-4. 等 1-2 分钟，你的网站就是 `https://你的用户名.github.io/rhino-count-site/`
+大多数页面文案都集中在 `data.js`：
 
-> ⚠️ 如果你想把域名映射成 `https://你的用户名.github.io/`（不带仓库名），仓库名必须叫 `你的用户名.github.io`
+- 修改首页标题、介绍、关键词：更新 `meta` 和 `hero`
+- 修改导航：更新 `header.nav`
+- 修改创作矩阵：更新 `lab`
+- 修改笔记列表：更新 `journal.notes`
+- 修改时评精选：更新 `commentary.defaultFeatured`
+- 修改联络方式：更新 `contact`
 
-### 方式二：用 gh CLI
+新增长文时，优先放入对应目录：
 
-```bash
-# 安装 gh（如果没装）
-brew install gh
+- AI 方法论：`notes/`
+- 每日时评：`articles/`
+- 产品教程：独立目录，例如 `dumate/`
+- 互动实验：`games/`
 
-# 登录
-gh auth login
+## 部署
 
-# 创建远程仓库并推送
-gh repo create rhino-count-site --public --source=. --push
+本站通过 GitHub Pages 部署：
+
+- Source: `Deploy from a branch`
+- Branch: `main`
+- Folder: `/ (root)`
+
+部署地址：
+
+```text
+https://zjeep-arch.github.io/rhino-count-site/
 ```
 
-然后去 GitHub Pages 设置里开启。
+## 下一步
 
-### 自定义域名
+这个仓库会继续从“个人站”升级为“创作系统”：
 
-1. 购买域名（推荐 Namesilo / GoDaddy / 阿里云）
-2. 在域名 DNS 设置里添加一条 **CNAME 记录**：
-   - 主机记录: `@` 或 `www`
-   - 目标值: `你的用户名.github.io`
-3. 在项目根目录创建 `CNAME` 文件：
-
-```bash
-echo "你的域名.com" > CNAME
-```
-
-4. 重新推送，GitHub Pages 设置里会自动识别，或手动填入你的域名。
-
-## 更新 data.js 后的缓存处理
-
-如果改完 `data.js` 访客看到旧内容，给加载链接加版本号。在 `index.html` 里找到这一行：
-
-```html
-<script src="data.js"></script>
-```
-
-改成：
-
-```html
-<script src="data.js?v=2026-06-01"></script>
-```
-
-每次改完 `data.js` 更新日期即可强制浏览器拉新版本。
-
-## 上线 checklist
-
-- [ ] `data.js` 里 `meta.siteUrl` 改成真实域名
-- [x] `sitemap.xml` 里 `yourdomain.com` 替换成 GitHub Pages 域名
-- [ ] `robots.txt` 里 sitemap 链接替换成真实域名
-- [ ] DNS 已解析到 GitHub Pages IP
-- [ ] HTTPS 自动生效
-- [ ] 用手机打开一次检查排版
-- [ ] 检查时评区是否能正常加载 `articles/feed.json`
-
-## 每日时评生成
-
-每晚 7 点自动生成一篇「肖磊看世界」风格的宏观评论文章。文章存放在 `articles/` 目录下，同时更新 `feed.json` 和 `sitemap.xml`。
-
-如果你改动了 `template.html`，需要手动重新发布之前渲染过的文章才能生效——它只是未来文章的模板。
+- 补充更多 AI workflow playbooks
+- 把高质量聊天共创沉淀成文章或工具页
+- 为每个实验添加更清晰的 README 和复盘
+- 将 GitHub 主页、个人站和小红书内容统一成一条创作线索
