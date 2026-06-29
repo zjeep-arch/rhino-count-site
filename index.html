@@ -2531,6 +2531,132 @@
         animation: none !important;
       }
     }
+
+    /* =========================================================
+     * 悬浮小宠物 - 犀牛伯爵
+     * ========================================================= */
+    .pet-rhino {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 100;
+      pointer-events: auto;
+      animation: pet-bob 3s ease-in-out infinite;
+    }
+
+    .pet-avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--surface-strong), var(--surface));
+      box-shadow: var(--shadow-2), 0 0 20px var(--glow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s ease;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .pet-avatar svg {
+      width: 36px;
+      height: 36px;
+    }
+
+    .pet-rhino:hover .pet-avatar {
+      transform: scale(1.1);
+      box-shadow: var(--shadow-2), 0 0 30px var(--glow);
+    }
+
+    .pet-rhino:hover .pet-avatar .rhino-eye {
+      transform: scale(1.2);
+    }
+
+    .pet-rhino.clicked .pet-avatar {
+      animation: pet-jump 0.5s cubic-bezier(0.34,1.56,0.64,1);
+    }
+
+    /* 气泡对话框 */
+    .pet-bubble {
+      position: absolute;
+      bottom: calc(100% + 10px);
+      right: 0;
+      background: var(--surface-strong);
+      color: var(--ink);
+      font-size: 14px;
+      line-height: 1.4;
+      max-width: 160px;
+      padding: 8px 12px;
+      border-radius: 12px;
+      box-shadow: var(--shadow-2);
+      opacity: 0;
+      transform: translateY(6px) scale(0.9);
+      transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.34,1.56,0.64,1);
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    .pet-bubble::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      right: 18px;
+      width: 0;
+      height: 0;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-top: 6px solid var(--surface-strong);
+    }
+
+    .pet-bubble.show {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    /* 动画关键帧 */
+    @keyframes pet-bob {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    @keyframes pet-jump {
+      0%   { transform: translateY(0); }
+      40%  { transform: translateY(-20px); }
+      60%  { transform: translateY(-20px); }
+      100% { transform: translateY(0); }
+    }
+
+    /* 滚动方向翻转 */
+    .pet-rhino.scroll-up .pet-avatar svg {
+      transform: scaleX(-1);
+    }
+
+    /* 响应式：移动端缩小 */
+    @media (max-width: 768px) {
+      .pet-rhino {
+        bottom: 16px;
+        right: 16px;
+      }
+      .pet-avatar {
+        width: 40px;
+        height: 40px;
+      }
+      .pet-avatar svg {
+        width: 26px;
+        height: 26px;
+      }
+      .pet-bubble {
+        font-size: 12px;
+        max-width: 130px;
+        padding: 6px 10px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .pet-rhino {
+        animation: none !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -2618,6 +2744,45 @@
   <button id="backToTop" class="back-to-top" aria-label="回到顶部">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
   </button>
+
+  <!-- 悬浮小宠物 -->
+  <div id="petRhino" class="pet-rhino" role="img" aria-label="犀牛伯爵的小宠物">
+    <div class="pet-bubble" id="petBubble"></div>
+    <div class="pet-avatar">
+      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- 身体 -->
+        <ellipse cx="32" cy="38" rx="22" ry="18" fill="var(--accent)" opacity="0.15"/>
+        <!-- 头部 -->
+        <circle cx="32" cy="30" r="16" fill="var(--accent)" opacity="0.2"/>
+        <!-- 耳朵左 -->
+        <ellipse cx="18" cy="20" rx="5" ry="6" fill="var(--accent)" opacity="0.35"/>
+        <ellipse cx="18" cy="20" rx="3" ry="4" fill="var(--accent)" opacity="0.15"/>
+        <!-- 耳朵右 -->
+        <ellipse cx="46" cy="20" rx="5" ry="6" fill="var(--accent)" opacity="0.35"/>
+        <ellipse cx="46" cy="20" rx="3" ry="4" fill="var(--accent)" opacity="0.15"/>
+        <!-- 犀牛角 -->
+        <path d="M32 10 L29 22 L35 22 Z" fill="var(--accent)" opacity="0.9"/>
+        <!-- 小角 -->
+        <path d="M26 16 L24.5 22 L27.5 22 Z" fill="var(--accent)" opacity="0.6"/>
+        <!-- 眼睛左 -->
+        <g class="rhino-eye" style="transform-origin: 25px 28px;">
+          <circle cx="25" cy="28" r="3.5" fill="var(--ink)"/>
+          <circle cx="26" cy="27" r="1.2" fill="white"/>
+        </g>
+        <!-- 眼睛右 -->
+        <g class="rhino-eye" style="transform-origin: 39px 28px;">
+          <circle cx="39" cy="28" r="3.5" fill="var(--ink)"/>
+          <circle cx="40" cy="27" r="1.2" fill="white"/>
+        </g>
+        <!-- 鼻子 -->
+        <ellipse cx="32" cy="36" rx="7" ry="4" fill="var(--accent)" opacity="0.4"/>
+        <circle cx="29" cy="36" r="1.5" fill="var(--accent)" opacity="0.6"/>
+        <circle cx="35" cy="36" r="1.5" fill="var(--accent)" opacity="0.6"/>
+        <!-- 嘴巴 -->
+        <path d="M28 40 Q32 43 36 40" stroke="var(--accent)" stroke-width="1.2" fill="none" stroke-linecap="round" opacity="0.5"/>
+      </svg>
+    </div>
+  </div>
 
   <footer class="site-footer" id="siteFooter">
     <div class="container foot">
@@ -3140,6 +3305,82 @@
           pointer = { x: event.clientX, y: event.clientY };
         }, { passive: true });
       }
+    })();
+
+    /* =========================================================
+     * 悬浮小宠物 - 犀牛伯爵 交互逻辑
+     * ========================================================= */
+    (function () {
+      const pet = document.getElementById('petRhino');
+      const bubble = document.getElementById('petBubble');
+      if (!pet || !bubble) return;
+
+      const hoverText = '哞～';
+      const clickTexts = [
+        '今天AI圈又炸了 🤯',
+        '模型又更新了，冲！',
+        '犀牛伯爵，永不掉线',
+        '摸摸头 🦏',
+        '继续卷！💪'
+      ];
+
+      let bubbleTimer = null;
+
+      function showBubble(text, duration) {
+        clearTimeout(bubbleTimer);
+        bubble.textContent = text;
+        bubble.classList.add('show');
+        bubbleTimer = setTimeout(() => {
+          bubble.classList.remove('show');
+        }, duration || 2000);
+      }
+
+      function hideBubble() {
+        clearTimeout(bubbleTimer);
+        bubble.classList.remove('show');
+      }
+
+      // 悬停交互
+      pet.addEventListener('mouseenter', () => {
+        showBubble(hoverText, 3000);
+      });
+
+      pet.addEventListener('mouseleave', () => {
+        hideBubble();
+      });
+
+      // 点击交互
+      pet.addEventListener('click', () => {
+        pet.classList.remove('clicked');
+        void pet.offsetWidth; // 强制 reflow 以重新触发动画
+        pet.classList.add('clicked');
+        const text = clickTexts[Math.floor(Math.random() * clickTexts.length)];
+        showBubble(text, 3000);
+        setTimeout(() => pet.classList.remove('clicked'), 500);
+      });
+
+      // 滚动方向检测
+      let lastScrollY = window.scrollY;
+      let scrollDirLock = false;
+
+      window.addEventListener('scroll', () => {
+        const currentY = window.scrollY;
+        const diff = currentY - lastScrollY;
+
+        if (Math.abs(diff) > 10) {
+          if (diff < 0 && !pet.classList.contains('scroll-up')) {
+            pet.classList.add('scroll-up');
+            scrollDirLock = true;
+          } else if (diff > 0 && pet.classList.contains('scroll-up')) {
+            pet.classList.remove('scroll-up');
+            scrollDirLock = true;
+          }
+          if (scrollDirLock) {
+            setTimeout(() => { scrollDirLock = false; }, 800);
+          }
+        }
+        lastScrollY = currentY;
+      }, { passive: true });
     })();
   </script>
 </body>
