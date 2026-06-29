@@ -38,6 +38,7 @@ window.SITE_DATA = {
       { label: "笔记",  href: "#notes" },
       { label: "创作",  href: "#builds" },
       { label: "时评",  href: "#commentary" },
+      { label: "日报",  href: "#ai-daily" },
       { label: "主张",  href: "#manifesto" },
       { label: "联络",  href: "#contact" }
     ],
@@ -227,6 +228,31 @@ window.SITE_DATA = {
         title: "（瞎聊）伊朗战争打到第96天，油价没涨、中国没急、英国跑来北京",
         excerpt: "美国在波斯湾打到第96天——但国际油价没涨、中国没有乱、英国外相反而跑去北京。这里面有几个大的背景。",
         href: "articles/2026-06-03-iran-war-uk-china-thaw.html"
+      }
+    ]
+  },
+
+  /* ---------- AI日报 ---------- */
+  aiDaily: {
+    label: "AI DAILY · 每日早报",
+    headingLine1: "每天8点，",
+    headingLine2: "AI世界一夜发生了什么。",
+    blurb: "每日精选AI大模型领域关键动态：模型发布、产品更新、资本动向、行业洞察。自动追踪8个RSS源 + 4路搜索，每日早8点准时推送。",
+    feedUrl: "ai-daily/feed.json",
+    linkText: "查看全部日报 →",
+    linkHref: "ai-daily/",
+    defaultFeatured: [
+      {
+        cat: "产品 · 技术", date: "2026-06-28",
+        title: "GPT-5.6正式发布：白宫叫停公开上线，中国模型OpenRouter占比超50%",
+        excerpt: "OpenAI发布GPT-5.6三档（Sol/Terra/Luna），白宫要求仅限20家合作伙伴。Anthropic指控Qwen蒸馏。中国AI模型OpenRouter调用量18个月从1.2%飙至50%+。",
+        href: "ai-daily/2026-06-28-gpt-5-6-restricted-china-models.html"
+      },
+      {
+        cat: "产品 · 技术", date: "2026-06-27",
+        title: "GPT-5.6三模型齐发 + DeepSeek开源DSpark + Google人才大出血",
+        excerpt: "DeepSeek联合北大开源DSpark推理框架提速60%-85%。Google一周流失4名AI核心研究员投奔Anthropic，市值蒸发2700亿美元。",
+        href: "ai-daily/2026-06-27-gpt-5-6-deepseek-dspark.html"
       }
     ]
   },

@@ -29,7 +29,7 @@
       --serif: "Playfair Display","Noto Serif SC","Songti SC",Georgia,serif;
       --sans: "Inter",-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
       --maxw: 740px; --pad: clamp(20px,4vw,32px);
-      --radius: 14px;
+      --radius: 14px; --radius-sm: 10px;
       --s-1:4px;--s-2:8px;--s-3:12px;--s-4:16px;--s-5:24px;--s-6:32px;--s-7:48px;--s-8:64px;
     }
     [data-theme="dark"] {
@@ -88,11 +88,123 @@
     .article-body p {
       margin: 0 0 1.4em;
     }
+
+    /* ===== Section h2 with category pill ===== */
     .article-body h2 {
       font-family: var(--serif); font-weight: 700;
       font-size: clamp(20px,2.5vw,26px);
-      margin: 2em 0 0.8em; line-height: 1.3;
+      margin: 2.8em 0 1.2em; line-height: 1.3;
+      padding-top: var(--s-6);
+      border-top: 1px solid var(--line);
+      display: flex; align-items: center; gap: var(--s-3);
     }
+    .article-body h2::before {
+      content: attr(data-section);
+      display: inline-block;
+      font-family: var(--sans); font-weight: 600;
+      font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--cat-accent);
+      background: color-mix(in srgb, var(--cat-accent) 10%, transparent);
+      padding: 2px 10px; border-radius: 20px;
+      white-space: nowrap; flex-shrink: 0;
+      line-height: 1.5;
+    }
+    .article-body h2:first-child { border-top: none; padding-top: 0; margin-top: 0; }
+
+    /* ===== Data Highlights: Grid cards under "今日数据亮点" h2 ===== */
+    .article-body .data-highlights {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--s-3);
+      margin-bottom: var(--s-6);
+    }
+    .article-body .data-highlights p {
+      margin: 0;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      padding: var(--s-4);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .article-body .data-highlights p:hover {
+      border-color: var(--line-2);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+    .article-body .data-highlights strong {
+      display: block;
+      font-size: clamp(20px,2.5vw,28px);
+      font-weight: 800;
+      color: var(--accent);
+      margin-bottom: var(--s-1);
+      letter-spacing: -0.01em;
+    }
+    @media (max-width: 520px) {
+      .article-body .data-highlights { grid-template-columns: 1fr; }
+    }
+
+    /* ===== Insight cards: h3 + p + blockquote under "今日洞察" h2 ===== */
+    .article-body .insight-card {
+      background: var(--surface);
+      border-left: 3px solid var(--cat-accent);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      padding: var(--s-5);
+      margin-bottom: var(--s-4);
+      transition: box-shadow 0.2s ease;
+    }
+    .article-body .insight-card:hover {
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    }
+    .article-body .insight-card h3 {
+      font-family: var(--serif); font-weight: 600;
+      font-size: clamp(16px,1.8vw,19px);
+      margin: 0 0 var(--s-3); line-height: 1.4;
+      color: var(--ink);
+    }
+    .article-body .insight-card p {
+      margin: 0 0 var(--s-3);
+      font-size: 15px; color: var(--ink-soft); line-height: 1.7;
+    }
+    .article-body .insight-card blockquote {
+      margin: 0;
+      padding: var(--s-3) var(--s-4);
+      background: color-mix(in srgb, var(--cat-accent) 6%, transparent);
+      border-left: none;
+      border-radius: var(--radius-sm);
+      font-style: normal;
+      font-size: 14px;
+      color: var(--ink-soft);
+    }
+
+    /* ===== News items: h3 entries with separator ===== */
+    .article-body .news-item {
+      padding: var(--s-4) 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .article-body .news-item:last-child { border-bottom: none; }
+    .article-body .news-item h3 {
+      font-family: var(--serif); font-weight: 600;
+      font-size: clamp(16px,1.8vw,19px);
+      margin: 0 0 var(--s-2); line-height: 1.4;
+    }
+    .article-body .news-item p {
+      margin: 0;
+      font-size: 15px; color: var(--ink-soft); line-height: 1.7;
+    }
+
+    /* ===== Competitor pill badges in "友商雷达" ===== */
+    .article-body .competitor-badge {
+      display: inline-block;
+      font-family: var(--sans); font-weight: 600;
+      font-size: 12px;
+      color: var(--cat-accent);
+      background: color-mix(in srgb, var(--cat-accent) 10%, transparent);
+      padding: 2px 10px; border-radius: 20px;
+      margin-right: var(--s-1);
+      vertical-align: middle;
+      line-height: 1.5;
+    }
+
+    /* ===== Default h3 / blockquote (fallback) ===== */
     .article-body h3 {
       font-family: var(--serif); font-weight: 600;
       font-size: clamp(17px,1.8vw,20px);
@@ -140,6 +252,7 @@
 
     @media (max-width: 520px) {
       body { font-size: 16px; }
+      .article-body .insight-card { padding: var(--s-4); }
     }
 
     @media (prefers-reduced-motion: reduce) {

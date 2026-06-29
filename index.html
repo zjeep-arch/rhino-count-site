@@ -2518,6 +2518,7 @@
         <a href="#notes">笔记</a>
         <a href="#builds">创作</a>
         <a href="#commentary">时评</a>
+        <a href="#ai-daily">日报</a>
         <a href="#manifesto">主张</a>
         <a href="#contact">联络</a>
         <a href="games/duck-scare-war.html">游戏</a>
@@ -2544,6 +2545,7 @@
       <a href="#notes">笔记</a>
       <a href="#builds">创作</a>
       <a href="#commentary">时评</a>
+      <a href="#ai-daily">日报</a>
       <a href="#manifesto">主张</a>
       <a href="#contact">联络</a>
       <a href="games/duck-scare-war.html">游戏</a>
@@ -2558,6 +2560,7 @@
     <section id="notes"></section>
     <section id="builds"></section>
     <section id="commentary"></section>
+    <section id="ai-daily"></section>
     <section id="manifesto" class="quote-section"></section>
     <section id="contact"></section>
   </main>
@@ -2928,6 +2931,80 @@
         attachSpotlight('.article-card');
       };
       xhr.send();
+
+      /* AI Daily — load from ai-daily/feed.json */
+      const aiDailySection = document.getElementById('ai-daily');
+      const ad = D.aiDaily;
+
+      function renderAIDailyArticles(articles) {
+        if (!articles || articles.length === 0) {
+          return `<div class="article-empty fade-in">暂无日报。每日早8点自动生成后显示。</div>`;
+        }
+        return articles.map((a, i) => `
+          <a class="article-card fade-in fade-in-delay-${Math.min(i, 3)}" href="${esc(a.href)}">
+            <span class="art-glow" aria-hidden="true"></span>
+            <div>
+              <div class="art-meta">
+                <span class="art-cat">${esc(a.cat || 'AI日报')}</span>
+                <span class="art-date">${esc(a.date || '')}</span>
+              </div>
+              <h3>${esc(a.title)}</h3>
+              <p class="art-excerpt">${esc(a.excerpt)}</p>
+            </div>
+            <div class="art-arrow" aria-hidden="true">\u2192</div>
+          </a>
+        `).join('');
+      }
+
+      aiDailySection.innerHTML = `
+        <div class="container">
+          <div class="section-head fade-in">
+            <div>
+              <div class="label">${esc(ad.label)}</div>
+              <h2>${esc(ad.headingLine1)}<br/>${esc(ad.headingLine2)}</h2>
+            </div>
+            <p class="blurb">${esc(ad.blurb)}</p>
+          </div>
+          <div class="article-list" id="aiDailyList">
+            <div class="article-loading fade-in">
+              <span class="loader-dot">\u8BFB</span>
+              <span class="loader-dot">\u53D6</span>
+              <span class="loader-dot">\u4E2D</span>
+              ...
+            </div>
+          </div>
+          <div class="commentary-footer">
+            <a href="${esc(ad.linkHref)}">${esc(ad.linkText)}</a>
+          </div>
+        </div>
+      `;
+
+      var aiDailyXhr = new XMLHttpRequest();
+      aiDailyXhr.open('GET', ad.feedUrl, true);
+      aiDailyXhr.onload = function () {
+        var list = document.getElementById('aiDailyList');
+        if (aiDailyXhr.status === 200) {
+          try {
+            var feed = JSON.parse(aiDailyXhr.responseText);
+            var articles = feed.articles || feed;
+            if (articles.length > 5) articles = articles.slice(0, 5);
+            list.innerHTML = renderAIDailyArticles(articles);
+          } catch (e) {
+            list.innerHTML = renderAIDailyArticles(ad.defaultFeatured);
+          }
+        } else {
+          list.innerHTML = renderAIDailyArticles(ad.defaultFeatured);
+        }
+        observeFadeIns();
+        attachSpotlight('.article-card');
+      };
+      aiDailyXhr.onerror = function () {
+        var list = document.getElementById('aiDailyList');
+        list.innerHTML = renderAIDailyArticles(ad.defaultFeatured);
+        observeFadeIns();
+        attachSpotlight('.article-card');
+      };
+      aiDailyXhr.send();
 
       /* Quote */
       const q = D.quote;
