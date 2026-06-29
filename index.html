@@ -815,12 +815,6 @@
       gap: var(--s-4);
       transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     }
-    .lab-card:nth-child(2) {
-      transform: translateY(18px);
-    }
-    .lab-card:nth-child(3) {
-      transform: translateY(-18px);
-    }
     .lab-card::before,
     .lab-panel::before {
       content: "";
@@ -841,10 +835,6 @@
       transform: translateY(-6px);
       border-color: var(--line-2);
       box-shadow: var(--shadow-2), var(--shadow-glow);
-    }
-    .lab-card:nth-child(2):hover,
-    .lab-card:nth-child(3):hover {
-      transform: translateY(-6px);
     }
     .lab-tag {
       width: fit-content;
@@ -980,16 +970,6 @@
     }
     .roadmap-list {
       counter-reset: roadmap;
-    }
-    @media (max-width: 979px) {
-      .lab-card:nth-child(2),
-      .lab-card:nth-child(3) {
-        transform: none;
-      }
-      .lab-card:nth-child(2):hover,
-      .lab-card:nth-child(3):hover {
-        transform: translateY(-6px);
-      }
     }
     @media (max-width: 620px) {
       .lab-card {
