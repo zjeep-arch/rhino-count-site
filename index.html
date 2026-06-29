@@ -8,23 +8,23 @@
   <meta name="theme-color" content="#F4F8FF" media="(prefers-color-scheme: light)" />
   <meta name="theme-color" content="#05050A" media="(prefers-color-scheme: dark)" />
 
-  <title>犀牛伯爵 · AI 时代的记录者</title>
-  <meta name="description" content="犀牛伯爵 — 北大本科、AI 大厂从业者。记录 AI 与趋势变化，分享学习方法与踩过的坑。每晚一篇宏观时评。纯属个人瞎扯闲聊。" />
-  <meta name="keywords" content="犀牛伯爵, AI, 大模型, 学习方法, 北大, 小红书, AI 大厂, Prompt, Agent, 时评, 宏观分析, 肖磊看世界" />
+  <title>犀牛伯爵 · AI 创作实验室</title>
+  <meta name="description" content="犀牛伯爵 — AI-native builder。记录 Agent 工作流、AI 写作、宏观科技观察与内容产品化实验。" />
+  <meta name="keywords" content="犀牛伯爵, AI, Agent, AI-native, 大模型, 学习方法, 北大, 小红书, AI 大厂, Prompt, 时评, 宏观分析, 创作实验室" />
   <meta name="author" content="犀牛伯爵" />
   <meta name="robots" content="index,follow,max-image-preview:large" />
   <link rel="canonical" href="https://zjeep-arch.github.io/rhino-count-site/" />
 
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="犀牛伯爵 · AI 时代的记录者" />
-  <meta property="og:description" content="犀牛伯爵 — 北大本科、AI 大厂从业者。记录 AI 与趋势，分享学习方法。每晚一篇宏观时评。" />
+  <meta property="og:title" content="犀牛伯爵 · AI 创作实验室" />
+  <meta property="og:description" content="AI-native builder。记录 Agent 工作流、AI 写作、宏观科技观察与内容产品化实验。" />
   <meta property="og:url" content="https://zjeep-arch.github.io/rhino-count-site/" />
   <meta property="og:image" content="https://zjeep-arch.github.io/rhino-count-site/assets/og-card.svg" />
   <meta property="og:locale" content="zh_CN" />
 
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="犀牛伯爵 · AI 时代的记录者" />
-  <meta name="twitter:description" content="北大本科、AI 大厂从业者。记录 AI 与趋势，分享学习方法。每晚一篇宏观时评。" />
+  <meta name="twitter:title" content="犀牛伯爵 · AI 创作实验室" />
+  <meta name="twitter:description" content="AI-native builder。记录 Agent 工作流、AI 写作、宏观科技观察与内容产品化实验。" />
 
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%231C1410'/%3E%3Ctext x='50%25' y='54%25' text-anchor='middle' font-size='38' font-family='Georgia,serif' fill='%23E8C77A'%3E犀%3C/text%3E%3C/svg%3E" />
   <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='32' fill='%231C1410'/%3E%3Ctext x='50%25' y='58%25' text-anchor='middle' font-size='110' font-family='Georgia,serif' fill='%23E8C77A'%3E犀%3C/text%3E%3C/svg%3E" />
@@ -38,7 +38,7 @@
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "犀牛伯爵",
-    "description": "北大本科、AI 大厂从业者，记录 AI 与趋势变化。",
+    "description": "AI-native builder，记录 Agent 工作流、AI 写作、宏观科技观察与内容产品化实验。",
     "url": "https://zjeep-arch.github.io/rhino-count-site/",
     "image": "https://zjeep-arch.github.io/rhino-count-site/assets/og-card.svg",
     "alumniOf": { "@type": "CollegeOrUniversity", "name": "北京大学" },
@@ -765,6 +765,185 @@
       font-size: clamp(18px, 2vw, 22px);
       line-height: 1.35;
       color: var(--ink);
+    }
+
+    /* =========================================================
+     * Creation matrix
+     * ========================================================= */
+    .lab-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--s-6);
+    }
+    @media (min-width: 980px) {
+      .lab-layout {
+        grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.65fr);
+        align-items: start;
+      }
+    }
+    .lab-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: var(--s-5);
+    }
+    .lab-card,
+    .lab-panel {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      backdrop-filter: blur(18px);
+      box-shadow: var(--shadow-1);
+      position: relative;
+      overflow: hidden;
+    }
+    .lab-card {
+      min-height: 248px;
+      padding: var(--s-6);
+      display: flex;
+      flex-direction: column;
+      gap: var(--s-4);
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .lab-card::before,
+    .lab-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(135deg, color-mix(in oklab, var(--accent) 12%, transparent), transparent 38%),
+        radial-gradient(circle at 86% 12%, color-mix(in oklab, var(--electric) 16%, transparent), transparent 34%);
+      opacity: 0.6;
+      pointer-events: none;
+    }
+    .lab-card > *,
+    .lab-panel > * {
+      position: relative;
+      z-index: 1;
+    }
+    .lab-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--line-2);
+      box-shadow: var(--shadow-2), var(--shadow-glow);
+    }
+    .lab-tag {
+      width: fit-content;
+      padding: 6px 9px;
+      border: 1px solid color-mix(in oklab, var(--accent) 42%, var(--line));
+      border-radius: 999px;
+      color: var(--accent);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      background: color-mix(in oklab, var(--surface-strong) 58%, transparent);
+    }
+    .lab-card h3 {
+      margin: 0;
+      font-family: var(--serif);
+      font-size: clamp(22px, 2.6vw, 30px);
+      line-height: 1.12;
+    }
+    .lab-card p {
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: 14px;
+      line-height: 1.72;
+    }
+    .lab-link {
+      margin-top: auto;
+      display: inline-flex;
+      align-items: center;
+      gap: var(--s-2);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+    .lab-link::after {
+      content: "\2192";
+      transition: transform 0.25s ease;
+    }
+    .lab-card:hover .lab-link::after,
+    .featured-work:hover .lab-link::after {
+      transform: translateX(4px);
+    }
+    .lab-panel {
+      padding: var(--s-6);
+    }
+    .lab-panel + .lab-panel {
+      margin-top: var(--s-5);
+    }
+    .lab-panel h3 {
+      margin: 0 0 var(--s-5);
+      font-size: 12px;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .featured-work {
+      display: block;
+      padding: var(--s-4) 0;
+      border-top: 1px solid var(--line);
+    }
+    .featured-work:first-of-type {
+      border-top: 0;
+      padding-top: 0;
+    }
+    .featured-work b {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--accent);
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+    .featured-work strong {
+      display: block;
+      color: var(--ink);
+      font-family: var(--serif);
+      font-size: 18px;
+      line-height: 1.35;
+      margin-bottom: 6px;
+    }
+    .featured-work span {
+      display: block;
+      color: var(--ink-soft);
+      font-size: 13px;
+      line-height: 1.62;
+    }
+    .roadmap-list {
+      display: grid;
+      gap: var(--s-3);
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .roadmap-list li {
+      display: grid;
+      grid-template-columns: 28px 1fr;
+      gap: var(--s-3);
+      align-items: start;
+      color: var(--ink-soft);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .roadmap-list li::before {
+      content: counter(roadmap);
+      counter-increment: roadmap;
+      width: 28px;
+      height: 28px;
+      display: inline-grid;
+      place-items: center;
+      border-radius: 999px;
+      color: var(--accent);
+      border: 1px solid color-mix(in oklab, var(--accent) 42%, var(--line));
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1;
+    }
+    .roadmap-list {
+      counter-reset: roadmap;
     }
 
     /* =========================================================
@@ -2337,6 +2516,7 @@
       <nav class="nav-links" id="navLinks" aria-label="主导航">
         <a href="#profile">关于</a>
         <a href="#notes">笔记</a>
+        <a href="#builds">创作</a>
         <a href="#commentary">时评</a>
         <a href="#manifesto">主张</a>
         <a href="#contact">联络</a>
@@ -2362,6 +2542,7 @@
     <div id="mobilePanel" class="mobile-panel" aria-hidden="true">
       <a href="#profile">关于</a>
       <a href="#notes">笔记</a>
+      <a href="#builds">创作</a>
       <a href="#commentary">时评</a>
       <a href="#manifesto">主张</a>
       <a href="#contact">联络</a>
@@ -2375,6 +2556,7 @@
     <section class="hero" id="hero-section"></section>
     <section id="profile"></section>
     <section id="notes"></section>
+    <section id="builds"></section>
     <section id="commentary"></section>
     <section id="manifesto" class="quote-section"></section>
     <section id="contact"></section>
@@ -2620,6 +2802,52 @@
         </div>
       `;
 
+      /* Creation matrix */
+      const lab = D.lab;
+      if (lab) {
+        document.getElementById('builds').innerHTML = `
+          <div class="container">
+            <div class="section-head fade-in">
+              <div>
+                <div class="label">${esc(lab.label)}</div>
+                <h2>${esc(lab.headingLine1)}<br/>${esc(lab.headingLine2)}</h2>
+              </div>
+              <p class="blurb">${esc(lab.blurb)}</p>
+            </div>
+            <div class="lab-layout">
+              <div class="lab-grid">
+                ${(lab.tracks || []).map((item, i) => `
+                  <a class="lab-card fade-in fade-in-delay-${Math.min(i, 3)}" href="${esc(item.href)}">
+                    <span class="lab-tag">${esc(item.tag)}</span>
+                    <h3>${esc(item.title)}</h3>
+                    <p>${esc(item.desc)}</p>
+                    <span class="lab-link">${esc(item.linkLabel)}</span>
+                  </a>
+                `).join('')}
+              </div>
+              <aside>
+                <div class="lab-panel fade-in fade-in-delay-1">
+                  <h3>Featured Work</h3>
+                  ${(lab.featured || []).map(item => `
+                    <a class="featured-work" href="${esc(item.href)}">
+                      <b>${esc(item.type)}</b>
+                      <strong>${esc(item.title)}</strong>
+                      <span>${esc(item.desc)}</span>
+                    </a>
+                  `).join('')}
+                </div>
+                <div class="lab-panel fade-in fade-in-delay-2">
+                  <h3>Creation Roadmap</h3>
+                  <ol class="roadmap-list">
+                    ${(lab.roadmap || []).map(item => `<li>${esc(item)}</li>`).join('')}
+                  </ol>
+                </div>
+              </aside>
+            </div>
+          </div>
+        `;
+      }
+
       /* Commentary — load from feed.json + fallback */
       const commentarySection = document.getElementById('commentary');
       const cm = D.commentary;
@@ -2767,7 +2995,7 @@
       window.addEventListener('scroll', updateScrollProgress, { passive: true });
 
       function updateActiveNav() {
-        const sectionIds = ['profile', 'notes', 'commentary', 'manifesto', 'contact'];
+        const sectionIds = ['profile', 'notes', 'builds', 'commentary', 'manifesto', 'contact'];
         const anchors = document.querySelectorAll('#navLinks a[href^="#"]');
         const activeId = sectionIds.reduce((current, id) => {
           const el = document.getElementById(id);
