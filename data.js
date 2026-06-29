@@ -234,10 +234,10 @@ window.SITE_DATA = {
 
   /* ---------- AI日报 ---------- */
   aiDaily: {
-    label: "AI DAILY · 每日早报",
-    headingLine1: "每天8点，",
-    headingLine2: "AI世界一夜发生了什么。",
-    blurb: "每日精选AI大模型领域关键动态：模型发布、产品更新、资本动向、行业洞察。自动追踪8个RSS源 + 4路搜索，每日早8点准时推送。",
+    label: "AI DAILY · 早报",
+    headingLine1: "每天 8 点，",
+    headingLine2: "读懂 AI 世界昨夜的新信号。",
+    blurb: "精选 AI 大模型、产品更新、资本动向与产业洞察，把昨夜最值得关注的变化压缩成一份早间速览。",
     feedUrl: "ai-daily/feed.json",
     linkText: "查看全部日报 →",
     linkHref: "ai-daily/",
