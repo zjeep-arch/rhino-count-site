@@ -2681,6 +2681,7 @@
         <a href="#notes">笔记</a>
         <a href="#builds">创作</a>
         <a href="#commentary">时评</a>
+        <a href="#ai-daily">日报</a>
         <a href="#manifesto">主张</a>
         <a href="#contact">联络</a>
         <a href="games/duck-scare-war.html">游戏</a>
@@ -2707,6 +2708,7 @@
       <a href="#notes">笔记</a>
       <a href="#builds">创作</a>
       <a href="#commentary">时评</a>
+      <a href="#ai-daily">日报</a>
       <a href="#manifesto">主张</a>
       <a href="#contact">联络</a>
       <a href="games/duck-scare-war.html">游戏</a>
@@ -2721,6 +2723,7 @@
     <section id="notes"></section>
     <section id="builds"></section>
     <section id="commentary"></section>
+    <section id="ai-daily"></section>
     <section id="manifesto" class="quote-section"></section>
     <section id="contact"></section>
   </main>
@@ -3130,6 +3133,61 @@
         attachSpotlight('.article-card');
       };
       xhr.send();
+
+      /* AI Daily — load from ai-daily/feed.json + fallback */
+      var ad = D.aiDaily;
+      var aiDailySection = document.getElementById('ai-daily');
+      if (ad && aiDailySection) {
+        aiDailySection.innerHTML = `
+          <div class="container">
+            <div class="section-head fade-in">
+              <div>
+                <div class="label">${esc(ad.label)}</div>
+                <h2>${esc(ad.headingLine1)}<br/>${esc(ad.headingLine2)}</h2>
+              </div>
+              <p class="blurb">${esc(ad.blurb)}</p>
+            </div>
+            <div class="article-list" id="aiDailyList">
+              <div class="article-loading fade-in">
+                <span class="loader-dot">\u8bfb</span>
+                <span class="loader-dot">\u53d6</span>
+                <span class="loader-dot">\u4e2d</span>
+                ...
+              </div>
+            </div>
+            <div class="commentary-footer">
+              <a href="${esc(ad.linkHref)}">${esc(ad.linkText)}</a>
+            </div>
+          </div>
+        `;
+
+        var adXhr = new XMLHttpRequest();
+        adXhr.open('GET', ad.feedUrl || 'ai-daily/feed.json', true);
+        adXhr.onload = function () {
+          var list = document.getElementById('aiDailyList');
+          if (adXhr.status === 200) {
+            try {
+              var feed = JSON.parse(adXhr.responseText);
+              var articles = feed.articles || feed;
+              if (articles.length > 5) articles = articles.slice(0, 5);
+              list.innerHTML = renderArticles(articles);
+            } catch (e) {
+              list.innerHTML = renderArticles(ad.defaultFeatured);
+            }
+          } else {
+            list.innerHTML = renderArticles(ad.defaultFeatured);
+          }
+          observeFadeIns();
+          attachSpotlight('.article-card');
+        };
+        adXhr.onerror = function () {
+          var list = document.getElementById('aiDailyList');
+          list.innerHTML = renderArticles(ad.defaultFeatured);
+          observeFadeIns();
+          attachSpotlight('.article-card');
+        };
+        adXhr.send();
+      }
 
       /* Quote */
       const q = D.quote;
