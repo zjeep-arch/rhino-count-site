@@ -2573,7 +2573,23 @@
     }
 
     .pet-rhino.clicked .pet-avatar {
-      animation: pet-jump 0.5s cubic-bezier(0.34,1.56,0.64,1);
+      animation: pet-jump 0.6s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    .pet-rhino.clicked .pet-avatar svg {
+      animation: pet-spin-horn 0.6s ease;
+    }
+
+    /* 粒子特效 */
+    .pet-particle {
+      position: absolute;
+      pointer-events: none;
+      font-size: 16px;
+      opacity: 1;
+      animation: pet-particle-fly 1s ease-out forwards;
+    }
+    @keyframes pet-particle-fly {
+      0%   { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(-50px) translateX(var(--px, 10px)) scale(0.3); opacity: 0; }
     }
 
     /* 气泡对话框 */
@@ -2620,10 +2636,46 @@
     }
 
     @keyframes pet-jump {
-      0%   { transform: translateY(0); }
-      40%  { transform: translateY(-20px); }
-      60%  { transform: translateY(-20px); }
-      100% { transform: translateY(0); }
+      0%   { transform: translateY(0) rotate(0deg) scale(1); }
+      15%  { transform: translateY(4px) scaleX(0.85) scaleY(1.15) rotate(-3deg); }
+      35%  { transform: translateY(-28px) scaleX(1.05) scaleY(0.95) rotate(5deg); }
+      55%  { transform: translateY(-24px) scaleX(0.95) scaleY(1.05) rotate(-4deg); }
+      75%  { transform: translateY(-6px) rotate(2deg) scale(1.02); }
+      88%  { transform: translateY(3px) scaleX(1.08) scaleY(0.92) rotate(-1deg); }
+      100% { transform: translateY(0) rotate(0deg) scale(1); }
+    }
+
+    @keyframes pet-spin-horn {
+      0%   { transform: rotate(0deg); }
+      20%  { transform: rotate(-8deg); }
+      40%  { transform: rotate(10deg); }
+      60%  { transform: rotate(-5deg); }
+      80%  { transform: rotate(3deg); }
+      100% { transform: rotate(0deg); }
+    }
+
+    /* 双击旋转动画 */
+    .pet-rhino.double-clicked .pet-avatar {
+      animation: pet-twirl 0.8s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    @keyframes pet-twirl {
+      0%   { transform: rotate(0deg) scale(1); }
+      25%  { transform: rotate(180deg) translateY(-15px) scale(1.2); }
+      50%  { transform: rotate(360deg) translateY(-25px) scale(1.3); }
+      75%  { transform: rotate(540deg) translateY(-10px) scale(1.1); }
+      100% { transform: rotate(720deg) translateY(0) scale(1); }
+    }
+
+    /* 摇晃（空闲时随机触发） */
+    .pet-rhino.idle-shake .pet-avatar svg {
+      animation: pet-wiggle 0.6s ease;
+    }
+    @keyframes pet-wiggle {
+      0%, 100% { transform: rotate(0deg); }
+      20%  { transform: rotate(-12deg); }
+      40%  { transform: rotate(10deg); }
+      60%  { transform: rotate(-8deg); }
+      80%  { transform: rotate(5deg); }
     }
 
     /* 滚动方向翻转 */
@@ -3377,10 +3429,51 @@
       const clickTexts = [
         '今天AI圈又炸了 🤯',
         '模型又更新了，冲！',
-        '犀牛伯爵，永不掉线',
-        '摸摸头 🦏',
-        '继续卷！💪'
+        '犀牛伯爵，永不掉线 🦏',
+        '摸摸头～手感不错',
+        '继续卷！💪',
+        '我在这里守护你',
+        '犀牛的角，就是我的倔强',
+        'Agent 不是产品，是 OS 🔥',
+        '今天学了什么新技能？',
+        '代码写累了？歇会儿',
+        '这个 bug 我替你扛 🐛',
+        '犀牛寿命50年，比你久',
+        '深夜了，别卷了 🌙',
+        '今天也是元气满满的一天！',
+        '悄悄告诉你…GPT 又进化了',
+        '我的角比你的 prompt 还尖锐',
+        '大模型会过时，犀牛不会',
+        '点我干嘛！我在思考 🤔',
+        '北大数学满分，不服来辩 📐',
+        '每天8点，AI日报见！'
       ];
+
+      const idleTexts = [
+        '发呆中…zzZ 💤',
+        '在想今天写什么…',
+        '犀牛的梦想是飞翔 🌈',
+        '有没有人来找我玩…',
+        '在看今天的AI日报呢 📰'
+      ];
+
+      // 粒子特效
+      const particles = ['✨', '⭐', '💫', '🌟', '💚', '🦏'];
+
+      function spawnParticles() {
+        const avatar = pet.querySelector('.pet-avatar');
+        for (let i = 0; i < 5; i++) {
+          const p = document.createElement('span');
+          p.className = 'pet-particle';
+          p.textContent = particles[Math.floor(Math.random() * particles.length)];
+          p.style.setProperty('--px', (Math.random() * 40 - 20) + 'px');
+          p.style.left = (Math.random() * 36 + 10) + 'px';
+          p.style.bottom = '50px';
+          p.style.animationDelay = (Math.random() * 0.3) + 's';
+          pet.appendChild(p);
+          setTimeout(() => p.remove(), 1300);
+        }
+      }
 
       let bubbleTimer = null;
 
@@ -3401,21 +3494,63 @@
       // 悬停交互
       pet.addEventListener('mouseenter', () => {
         showBubble(hoverText, 3000);
+        clearTimeout(idleTimer);
       });
 
       pet.addEventListener('mouseleave', () => {
         hideBubble();
+        resetIdleTimer();
       });
 
       // 点击交互
-      pet.addEventListener('click', () => {
-        pet.classList.remove('clicked');
-        void pet.offsetWidth; // 强制 reflow 以重新触发动画
-        pet.classList.add('clicked');
-        const text = clickTexts[Math.floor(Math.random() * clickTexts.length)];
-        showBubble(text, 3000);
-        setTimeout(() => pet.classList.remove('clicked'), 500);
+      pet.addEventListener('click', (e) => {
+        // 区分单击和双击
+        clearTimeout(singleClickTimer);
+        singleClickTimer = setTimeout(() => {
+          pet.classList.remove('clicked');
+          void pet.offsetWidth;
+          pet.classList.add('clicked');
+          spawnParticles();
+          const text = clickTexts[Math.floor(Math.random() * clickTexts.length)];
+          showBubble(text, 3000);
+          setTimeout(() => pet.classList.remove('clicked'), 600);
+          clearTimeout(idleTimer);
+          resetIdleTimer();
+        }, 250);
       });
+
+      // 双击交互：720度旋转
+      let lastClickTime = 0;
+      let singleClickTimer = null;
+      pet.addEventListener('dblclick', (e) => {
+        e.preventDefault();
+        clearTimeout(singleClickTimer);
+        pet.classList.remove('clicked', 'double-clicked');
+        void pet.offsetWidth;
+        pet.classList.add('double-clicked');
+        spawnParticles();
+        setTimeout(() => spawnParticles(), 300);
+        showBubble('犀牛旋风！🌪️', 3000);
+        setTimeout(() => pet.classList.remove('double-clicked'), 800);
+        clearTimeout(idleTimer);
+        resetIdleTimer();
+      });
+
+      // 空闲摇晃
+      let idleTimer = null;
+      function resetIdleTimer() {
+        clearTimeout(idleTimer);
+        idleTimer = setTimeout(() => {
+          if (!pet.matches(':hover')) {
+            pet.classList.add('idle-shake');
+            const text = idleTexts[Math.floor(Math.random() * idleTexts.length)];
+            showBubble(text, 3000);
+            setTimeout(() => pet.classList.remove('idle-shake'), 600);
+          }
+          resetIdleTimer();
+        }, 15000 + Math.random() * 20000); // 15-35秒随机触发
+      }
+      resetIdleTimer();
 
       // 滚动方向检测
       let lastScrollY = window.scrollY;
