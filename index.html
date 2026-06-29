@@ -774,17 +774,28 @@
       display: grid;
       grid-template-columns: 1fr;
       gap: var(--s-6);
+      align-items: stretch;
     }
     @media (min-width: 980px) {
       .lab-layout {
-        grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.65fr);
-        align-items: start;
+        grid-template-columns: minmax(0, 1.55fr) minmax(320px, 0.75fr);
       }
     }
     .lab-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: var(--s-5);
+      grid-template-columns: 1fr;
+      gap: var(--s-4);
+      align-content: stretch;
+    }
+    @media (min-width: 720px) {
+      .lab-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+    .lab-aside {
+      display: grid;
+      gap: var(--s-4);
+      align-content: stretch;
     }
     .lab-card,
     .lab-panel {
@@ -797,12 +808,18 @@
       overflow: hidden;
     }
     .lab-card {
-      min-height: 248px;
-      padding: var(--s-6);
-      display: flex;
-      flex-direction: column;
+      min-height: 268px;
+      padding: clamp(22px, 3vw, 32px);
+      display: grid;
+      grid-template-rows: auto auto 1fr auto;
       gap: var(--s-4);
       transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .lab-card:nth-child(2) {
+      transform: translateY(18px);
+    }
+    .lab-card:nth-child(3) {
+      transform: translateY(-18px);
     }
     .lab-card::before,
     .lab-panel::before {
@@ -825,11 +842,15 @@
       border-color: var(--line-2);
       box-shadow: var(--shadow-2), var(--shadow-glow);
     }
+    .lab-card:nth-child(2):hover,
+    .lab-card:nth-child(3):hover {
+      transform: translateY(-6px);
+    }
     .lab-tag {
       width: fit-content;
       padding: 6px 9px;
       border: 1px solid color-mix(in oklab, var(--accent) 42%, var(--line));
-      border-radius: 999px;
+      border-radius: 6px;
       color: var(--accent);
       font-size: 10px;
       font-weight: 700;
@@ -840,14 +861,16 @@
     .lab-card h3 {
       margin: 0;
       font-family: var(--serif);
-      font-size: clamp(22px, 2.6vw, 30px);
-      line-height: 1.12;
+      font-size: clamp(24px, 2.9vw, 34px);
+      line-height: 1.04;
+      max-width: 9em;
     }
     .lab-card p {
       margin: 0;
       color: var(--ink-soft);
       font-size: 14px;
       line-height: 1.72;
+      max-width: 32em;
     }
     .lab-link {
       margin-top: auto;
@@ -869,20 +892,32 @@
       transform: translateX(4px);
     }
     .lab-panel {
-      padding: var(--s-6);
-    }
-    .lab-panel + .lab-panel {
-      margin-top: var(--s-5);
+      padding: clamp(22px, 3vw, 30px);
+      min-height: 0;
     }
     .lab-panel h3 {
-      margin: 0 0 var(--s-5);
+      margin: 0 0 var(--s-4);
       font-size: 12px;
       letter-spacing: 0.26em;
       text-transform: uppercase;
       color: var(--muted);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--s-3);
+    }
+    .lab-panel h3::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      min-width: 32px;
+      background: linear-gradient(90deg, color-mix(in oklab, var(--accent) 44%, transparent), transparent);
     }
     .featured-work {
-      display: block;
+      display: grid;
+      grid-template-columns: minmax(54px, 0.25fr) minmax(0, 1fr);
+      column-gap: var(--s-4);
+      row-gap: 4px;
       padding: var(--s-4) 0;
       border-top: 1px solid var(--line);
     }
@@ -897,6 +932,7 @@
       font-size: 10px;
       letter-spacing: 0.22em;
       text-transform: uppercase;
+      grid-row: 1 / span 2;
     }
     .featured-work strong {
       display: block;
@@ -944,6 +980,27 @@
     }
     .roadmap-list {
       counter-reset: roadmap;
+    }
+    @media (max-width: 979px) {
+      .lab-card:nth-child(2),
+      .lab-card:nth-child(3) {
+        transform: none;
+      }
+      .lab-card:nth-child(2):hover,
+      .lab-card:nth-child(3):hover {
+        transform: translateY(-6px);
+      }
+    }
+    @media (max-width: 620px) {
+      .lab-card {
+        min-height: 230px;
+      }
+      .featured-work {
+        grid-template-columns: 1fr;
+      }
+      .featured-work b {
+        grid-row: auto;
+      }
     }
 
     /* =========================================================
@@ -2518,7 +2575,6 @@
         <a href="#notes">笔记</a>
         <a href="#builds">创作</a>
         <a href="#commentary">时评</a>
-        <a href="#ai-daily">日报</a>
         <a href="#manifesto">主张</a>
         <a href="#contact">联络</a>
         <a href="games/duck-scare-war.html">游戏</a>
@@ -2545,7 +2601,6 @@
       <a href="#notes">笔记</a>
       <a href="#builds">创作</a>
       <a href="#commentary">时评</a>
-      <a href="#ai-daily">日报</a>
       <a href="#manifesto">主张</a>
       <a href="#contact">联络</a>
       <a href="games/duck-scare-war.html">游戏</a>
@@ -2560,7 +2615,6 @@
     <section id="notes"></section>
     <section id="builds"></section>
     <section id="commentary"></section>
-    <section id="ai-daily"></section>
     <section id="manifesto" class="quote-section"></section>
     <section id="contact"></section>
   </main>
@@ -2828,7 +2882,7 @@
                   </a>
                 `).join('')}
               </div>
-              <aside>
+              <aside class="lab-aside">
                 <div class="lab-panel fade-in fade-in-delay-1">
                   <h3>Featured Work</h3>
                   ${(lab.featured || []).map(item => `
@@ -2931,80 +2985,6 @@
         attachSpotlight('.article-card');
       };
       xhr.send();
-
-      /* AI Daily — load from ai-daily/feed.json */
-      const aiDailySection = document.getElementById('ai-daily');
-      const ad = D.aiDaily;
-
-      function renderAIDailyArticles(articles) {
-        if (!articles || articles.length === 0) {
-          return `<div class="article-empty fade-in">暂无日报。每日早8点自动生成后显示。</div>`;
-        }
-        return articles.map((a, i) => `
-          <a class="article-card fade-in fade-in-delay-${Math.min(i, 3)}" href="${esc(a.href)}">
-            <span class="art-glow" aria-hidden="true"></span>
-            <div>
-              <div class="art-meta">
-                <span class="art-cat">${esc(a.cat || 'AI日报')}</span>
-                <span class="art-date">${esc(a.date || '')}</span>
-              </div>
-              <h3>${esc(a.title)}</h3>
-              <p class="art-excerpt">${esc(a.excerpt)}</p>
-            </div>
-            <div class="art-arrow" aria-hidden="true">\u2192</div>
-          </a>
-        `).join('');
-      }
-
-      aiDailySection.innerHTML = `
-        <div class="container">
-          <div class="section-head fade-in">
-            <div>
-              <div class="label">${esc(ad.label)}</div>
-              <h2>${esc(ad.headingLine1)}<br/>${esc(ad.headingLine2)}</h2>
-            </div>
-            <p class="blurb">${esc(ad.blurb)}</p>
-          </div>
-          <div class="article-list" id="aiDailyList">
-            <div class="article-loading fade-in">
-              <span class="loader-dot">\u8BFB</span>
-              <span class="loader-dot">\u53D6</span>
-              <span class="loader-dot">\u4E2D</span>
-              ...
-            </div>
-          </div>
-          <div class="commentary-footer">
-            <a href="${esc(ad.linkHref)}">${esc(ad.linkText)}</a>
-          </div>
-        </div>
-      `;
-
-      var aiDailyXhr = new XMLHttpRequest();
-      aiDailyXhr.open('GET', ad.feedUrl, true);
-      aiDailyXhr.onload = function () {
-        var list = document.getElementById('aiDailyList');
-        if (aiDailyXhr.status === 200) {
-          try {
-            var feed = JSON.parse(aiDailyXhr.responseText);
-            var articles = feed.articles || feed;
-            if (articles.length > 5) articles = articles.slice(0, 5);
-            list.innerHTML = renderAIDailyArticles(articles);
-          } catch (e) {
-            list.innerHTML = renderAIDailyArticles(ad.defaultFeatured);
-          }
-        } else {
-          list.innerHTML = renderAIDailyArticles(ad.defaultFeatured);
-        }
-        observeFadeIns();
-        attachSpotlight('.article-card');
-      };
-      aiDailyXhr.onerror = function () {
-        var list = document.getElementById('aiDailyList');
-        list.innerHTML = renderAIDailyArticles(ad.defaultFeatured);
-        observeFadeIns();
-        attachSpotlight('.article-card');
-      };
-      aiDailyXhr.send();
 
       /* Quote */
       const q = D.quote;
