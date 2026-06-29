@@ -1455,7 +1455,7 @@
     .back-to-top {
       position: fixed;
       right: 24px;
-      bottom: 32px;
+      bottom: 24px;
       z-index: 40;
       width: 44px;
       height: 44px;
@@ -2537,7 +2537,7 @@
      * ========================================================= */
     .pet-rhino {
       position: fixed;
-      bottom: 24px;
+      bottom: 88px;
       right: 24px;
       z-index: 100;
       pointer-events: auto;
@@ -2590,6 +2590,86 @@
     @keyframes pet-particle-fly {
       0%   { transform: translateY(0) scale(1); opacity: 1; }
       100% { transform: translateY(-50px) translateX(var(--px, 10px)) scale(0.3); opacity: 0; }
+    }
+
+    /* Combo 愤怒/兴奋模式 */
+    .pet-rhino.combo .pet-avatar {
+      animation: pet-combo-shake 0.4s ease infinite;
+      box-shadow: var(--shadow-2), 0 0 35px var(--glow), 0 0 60px color-mix(in srgb, var(--accent) 30%, transparent);
+    }
+    @keyframes pet-combo-shake {
+      0%, 100% { transform: translateX(0) rotate(0deg); }
+      25%  { transform: translateX(-3px) rotate(-5deg); }
+      75%  { transform: translateX(3px) rotate(5deg); }
+    }
+    .pet-rhino.combo .pet-bubble {
+      background: color-mix(in srgb, var(--accent) 15%, var(--surface-strong));
+      border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+    }
+
+    /* 长按膨胀 */
+    .pet-rhino.long-press .pet-avatar {
+      animation: pet-bloat 0.8s ease forwards;
+    }
+    @keyframes pet-bloat {
+      0%   { transform: scale(1); }
+      50%  { transform: scale(1.35); }
+      70%  { transform: scale(1.25); }
+      100% { transform: scale(1.3); }
+    }
+    @keyframes pet-deflate {
+      0%   { transform: scale(1.3); }
+      50%  { transform: scale(0.85); }
+      70%  { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    /* 拖拽模式 */
+    .pet-rhino.dragging {
+      animation: none !important;
+      transition: none;
+    }
+    .pet-rhino.dragging .pet-avatar {
+      transform: scale(1.15) rotate(0deg);
+      box-shadow: var(--shadow-2), 0 0 40px var(--glow);
+    }
+    .pet-rhino.dragging .pet-bubble {
+      opacity: 0;
+    }
+
+    /* 惊讶表情（快速拖拽释放时） */
+    .pet-rhino.startled .pet-avatar svg {
+      animation: pet-surprised 0.5s ease;
+    }
+    @keyframes pet-surprised {
+      0%   { transform: scale(1); }
+      30%  { transform: scale(1.3) rotate(-5deg); }
+      60%  { transform: scale(0.9) rotate(3deg); }
+      100% { transform: scale(1) rotate(0deg); }
+    }
+
+    /* Combo 数字弹出 */
+    .pet-combo-num {
+      position: absolute;
+      top: -10px;
+      right: -8px;
+      background: var(--accent);
+      color: var(--surface);
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1;
+      padding: 3px 6px;
+      border-radius: 10px;
+      opacity: 0;
+      transform: scale(0.5);
+      transition: opacity 0.2s, transform 0.2s cubic-bezier(0.34,1.56,0.64,1);
+      pointer-events: none;
+      z-index: 2;
+    }
+    .pet-combo-num.show {
+      opacity: 1;
+      transform: scale(1);
     }
 
     /* 气泡对话框 */
@@ -2686,7 +2766,7 @@
     /* 响应式：移动端缩小 */
     @media (max-width: 768px) {
       .pet-rhino {
-        bottom: 16px;
+        bottom: 76px;
         right: 16px;
       }
       .pet-avatar {
@@ -2802,6 +2882,7 @@
 
   <!-- 悬浮小宠物 -->
   <div id="petRhino" class="pet-rhino" role="img" aria-label="犀牛伯爵的小宠物">
+    <span class="pet-combo-num" id="petComboNum"></span>
     <div class="pet-bubble" id="petBubble"></div>
     <div class="pet-avatar">
       <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -3423,9 +3504,11 @@
     (function () {
       const pet = document.getElementById('petRhino');
       const bubble = document.getElementById('petBubble');
+      const comboNum = document.getElementById('petComboNum');
       if (!pet || !bubble) return;
 
-      const hoverText = '哞～';
+      /* ---- 台词库 ---- */
+      const hoverTexts = ['哞～', '干嘛～', '嗯哼？', '想我啦？', '摸摸我'];
       const clickTexts = [
         '今天AI圈又炸了 🤯',
         '模型又更新了，冲！',
@@ -3446,7 +3529,20 @@
         '大模型会过时，犀牛不会',
         '点我干嘛！我在思考 🤔',
         '北大数学满分，不服来辩 📐',
-        '每天8点，AI日报见！'
+        '每天8点，AI日报见！',
+        '你今天喝水了吗 💧',
+        '犀牛的奔跑时速50km 🏃',
+        '本犀牛已接入GPT大脑 🧠'
+      ];
+
+      const comboTexts = [
+        '再点我就生气了！😤',
+        '停！停！停！🙅',
+        '你是要把我戳穿吗！💥',
+        '我报警了啊 🚨',
+        '够了够了！角要断了 😱',
+        '别碰我角！很痛的！🦏',
+        '再点一下试试？😏'
       ];
 
       const idleTexts = [
@@ -3454,27 +3550,65 @@
         '在想今天写什么…',
         '犀牛的梦想是飞翔 🌈',
         '有没有人来找我玩…',
-        '在看今天的AI日报呢 📰'
+        '在看今天的AI日报呢 📰',
+        '（偷偷看了一眼你的屏幕）👀',
+        '今天的模型测评跑了吗？',
+        '犀牛不做梦，犀牛只做事 🦏',
+        '如果你不点我，我会消失的…'
       ];
 
-      // 粒子特效
-      const particles = ['✨', '⭐', '💫', '🌟', '💚', '🦏'];
+      const dragTexts = [
+        '别拖我！要走自己走 🦏',
+        '放开我！我要掉下去了！',
+        '这是绑架！Help！🆘',
+        '我可是犀牛伯爵的宠物！',
+        '轻轻放…我怕高 😨'
+      ];
 
-      function spawnParticles() {
-        const avatar = pet.querySelector('.pet-avatar');
-        for (let i = 0; i < 5; i++) {
+      const longPressTexts = [
+        '别捏了！脸要变形了 😵',
+        '舒服…再按按…啊不，停！',
+        '我…我快喘不过气了…💨',
+        '你确定要按这么久？',
+        '犀牛的皮肤很厚的…才怪 😅'
+      ];
+
+      const dropTexts = [
+        '啊啊啊！😱',
+        '吓死我了！差点以为要摔了',
+        '下次轻一点行不行 😤',
+        '我的心跳都停了一拍 💓',
+        '我不叫"球"！我叫犀牛！'
+      ];
+
+      const twirlTexts = [
+        '犀牛旋风！🌪️',
+        '看我旋转跳跃！💃',
+        '我就知道你忍不住双击 🤭',
+        '720度无死角帅！✨',
+        '头好晕…要吐了 🤮'
+      ];
+
+      /* ---- 粒子特效 ---- */
+      const particles = ['✨', '⭐', '💫', '🌟', '💚', '🦏', '💥', '❤️'];
+
+      function spawnParticles(count, origin) {
+        count = count || 5;
+        for (let i = 0; i < count; i++) {
           const p = document.createElement('span');
           p.className = 'pet-particle';
           p.textContent = particles[Math.floor(Math.random() * particles.length)];
-          p.style.setProperty('--px', (Math.random() * 40 - 20) + 'px');
-          p.style.left = (Math.random() * 36 + 10) + 'px';
-          p.style.bottom = '50px';
-          p.style.animationDelay = (Math.random() * 0.3) + 's';
+          p.style.setProperty('--px', (Math.random() * 60 - 30) + 'px');
+          p.style.left = (origin === 'top' ? Math.random() * 36 + 10 : Math.random() * 56) + 'px';
+          p.style.bottom = (origin === 'top' ? '100px' : '30px') + '';
+          p.style.animationDelay = (Math.random() * 0.25) + 's';
+          p.style.fontSize = (12 + Math.random() * 10) + 'px';
           pet.appendChild(p);
           setTimeout(() => p.remove(), 1300);
         }
       }
 
+      /* ---- 气泡 ---- */
       let bubbleTimer = null;
 
       function showBubble(text, duration) {
@@ -3483,7 +3617,7 @@
         bubble.classList.add('show');
         bubbleTimer = setTimeout(() => {
           bubble.classList.remove('show');
-        }, duration || 2000);
+        }, duration || 2500);
       }
 
       function hideBubble() {
@@ -3491,9 +3625,13 @@
         bubble.classList.remove('show');
       }
 
-      // 悬停交互
+      function randomPick(arr) {
+        return arr[Math.floor(Math.random() * arr.length)];
+      }
+
+      /* ---- 悬停交互 ---- */
       pet.addEventListener('mouseenter', () => {
-        showBubble(hoverText, 3000);
+        showBubble(randomPick(hoverTexts), 2500);
         clearTimeout(idleTimer);
       });
 
@@ -3502,53 +3640,165 @@
         resetIdleTimer();
       });
 
-      // 点击交互
-      pet.addEventListener('click', (e) => {
-        // 区分单击和双击
+      /* ---- Combo 系统 ---- */
+      let comboCount = 0;
+      let comboTimer = null;
+      let singleClickTimer = null;
+
+      function updateCombo() {
+        clearTimeout(comboTimer);
+        comboCount++;
+        if (comboCount >= 3) {
+          pet.classList.add('combo');
+          comboNum.textContent = 'x' + comboCount;
+          comboNum.classList.add('show');
+          showBubble(randomPick(comboTexts), 2000);
+        }
+        comboTimer = setTimeout(() => {
+          comboCount = 0;
+          pet.classList.remove('combo');
+          comboNum.classList.remove('show');
+        }, 2000);
+      }
+
+      /* ---- 点击交互 ---- */
+      pet.addEventListener('click', () => {
         clearTimeout(singleClickTimer);
         singleClickTimer = setTimeout(() => {
           pet.classList.remove('clicked');
           void pet.offsetWidth;
           pet.classList.add('clicked');
-          spawnParticles();
-          const text = clickTexts[Math.floor(Math.random() * clickTexts.length)];
-          showBubble(text, 3000);
+          if (comboCount < 3) {
+            spawnParticles(5);
+            showBubble(randomPick(clickTexts), 3000);
+          } else {
+            spawnParticles(8);
+          }
+          updateCombo();
           setTimeout(() => pet.classList.remove('clicked'), 600);
           clearTimeout(idleTimer);
           resetIdleTimer();
         }, 250);
       });
 
-      // 双击交互：720度旋转
-      let lastClickTime = 0;
-      let singleClickTimer = null;
+      /* ---- 双击旋转 ---- */
       pet.addEventListener('dblclick', (e) => {
         e.preventDefault();
         clearTimeout(singleClickTimer);
         pet.classList.remove('clicked', 'double-clicked');
         void pet.offsetWidth;
         pet.classList.add('double-clicked');
-        spawnParticles();
-        setTimeout(() => spawnParticles(), 300);
-        showBubble('犀牛旋风！🌪️', 3000);
+        spawnParticles(8, 'top');
+        setTimeout(() => spawnParticles(6, 'top'), 200);
+        showBubble(randomPick(twirlTexts), 3000);
         setTimeout(() => pet.classList.remove('double-clicked'), 800);
         clearTimeout(idleTimer);
         resetIdleTimer();
       });
 
-      // 空闲摇晃
+      /* ---- 长按膨胀 ---- */
+      let longPressTimer = null;
+      let isLongPress = false;
+
+      pet.addEventListener('mousedown', () => {
+        isLongPress = false;
+        longPressTimer = setTimeout(() => {
+          isLongPress = true;
+          pet.classList.add('long-press');
+          showBubble(randomPick(longPressTexts), 2000);
+        }, 800);
+      });
+
+      pet.addEventListener('mouseup', () => {
+        clearTimeout(longPressTimer);
+        if (isLongPress) {
+          pet.classList.remove('long-press');
+          pet.querySelector('.pet-avatar').style.animation = 'pet-deflate 0.4s ease';
+          spawnParticles(10);
+          showBubble('噗～💊', 2000);
+          setTimeout(() => {
+            pet.querySelector('.pet-avatar').style.animation = '';
+          }, 400);
+          isLongPress = false;
+        }
+      });
+
+      /* ---- 拖拽互动 ---- */
+      let isDragging = false;
+      let dragStartX = 0, dragStartY = 0;
+      let petOrigX = 0, petOrigY = 0;
+
+      pet.addEventListener('pointerdown', (e) => {
+        if (isLongPress) return;
+        dragStartX = e.clientX;
+        dragStartY = e.clientY;
+        const rect = pet.getBoundingClientRect();
+        petOrigX = rect.left;
+        petOrigY = rect.top;
+        isDragging = false;
+      });
+
+      document.addEventListener('pointermove', (e) => {
+        if (!e.buttons || pet.matches('.long-press')) return;
+        const dx = e.clientX - dragStartX;
+        const dy = e.clientY - dragStartY;
+
+        if (!isDragging && Math.hypot(dx, dy) > 8) {
+          isDragging = true;
+          pet.classList.add('dragging');
+          clearTimeout(singleClickTimer);
+          clearTimeout(longPressTimer);
+          showBubble(randomPick(dragTexts), 3000);
+        }
+
+        if (isDragging) {
+          pet.style.left = (petOrigX + dx) + 'px';
+          pet.style.top = (petOrigY + dy) + 'px';
+          pet.style.right = 'auto';
+          pet.style.bottom = 'auto';
+
+          // 拖拽距离越远，台词越惊慌
+          const dist = Math.hypot(dx, dy);
+          if (dist > 150) {
+            showBubble('啊啊啊！我要飞走了！🚀', 2000);
+          }
+        }
+      });
+
+      document.addEventListener('pointerup', () => {
+        if (isDragging) {
+          pet.classList.remove('dragging');
+          // 判断是否快速甩出
+          const rect = pet.getBoundingClientRect();
+          const wasVisible = rect.bottom > 0 && rect.top < window.innerHeight &&
+                              rect.right > 0 && rect.left < window.innerWidth;
+          pet.style.left = '';
+          pet.style.top = '';
+          pet.style.right = '';
+          pet.style.bottom = '';
+
+          pet.classList.add('startled');
+          spawnParticles(6);
+          showBubble(randomPick(dropTexts), 3000);
+          setTimeout(() => pet.classList.remove('startled'), 500);
+          isDragging = false;
+          clearTimeout(idleTimer);
+          resetIdleTimer();
+        }
+      });
+
+      /* ---- 空闲摇晃 ---- */
       let idleTimer = null;
       function resetIdleTimer() {
         clearTimeout(idleTimer);
         idleTimer = setTimeout(() => {
-          if (!pet.matches(':hover')) {
+          if (!pet.matches(':hover') && !isDragging) {
             pet.classList.add('idle-shake');
-            const text = idleTexts[Math.floor(Math.random() * idleTexts.length)];
-            showBubble(text, 3000);
+            showBubble(randomPick(idleTexts), 3000);
             setTimeout(() => pet.classList.remove('idle-shake'), 600);
           }
           resetIdleTimer();
-        }, 15000 + Math.random() * 20000); // 15-35秒随机触发
+        }, 12000 + Math.random() * 20000);
       }
       resetIdleTimer();
 
