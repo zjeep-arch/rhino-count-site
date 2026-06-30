@@ -106,7 +106,7 @@ window.SITE_DATA = {
       {
         tag: "PLAY",
         title: "Interactive Experiments",
-        desc: "用小游戏、教程页和交互页面测试内容的新形态，让表达变得可玩。",
+        desc: "用小游戏和交互页面测试内容的新形态，让表达变得可玩。",
         linkLabel: "玩一个实验",
         href: "games/duck-scare-war.html"
       }
@@ -117,12 +117,6 @@ window.SITE_DATA = {
         title: "Agent 不是产品，是新一代操作系统",
         desc: "从 App 思维迁移到 Agent 思维需要的 5 个转变。",
         href: "notes/agent-is-operating-system.html"
-      },
-      {
-        type: "Guide",
-        title: "百度 DuMate 从 0 到 1 上手教程",
-        desc: "把一个 AI 产品拆成可操作、可复用、可传播的教程资产。",
-        href: "dumate/"
       },
       {
         type: "Game",
