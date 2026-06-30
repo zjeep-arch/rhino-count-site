@@ -389,7 +389,7 @@
     .section-head h2 {
       font-family: var(--serif); font-weight: 700;
       font-size: clamp(28px, 5vw, 54px);
-      line-height: 1.1; letter-spacing: -0.01em;
+      line-height: 1.18; letter-spacing: -0.01em;
       margin: 0;
     }
     .section-head .blurb {
@@ -984,6 +984,166 @@
     }
 
     /* =========================================================
+     * AI daily brief
+     * ========================================================= */
+    .daily-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--s-5);
+      align-items: stretch;
+    }
+    @media (min-width: 900px) {
+      .daily-layout {
+        grid-template-columns: minmax(0, 1.1fr) minmax(300px, 0.9fr);
+      }
+    }
+    .daily-hero-card,
+    .daily-signal-card {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+      box-shadow: var(--shadow-1);
+      backdrop-filter: blur(18px);
+    }
+    .daily-hero-card::before,
+    .daily-signal-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(120deg, color-mix(in oklab, var(--accent) 12%, transparent), transparent 42%),
+        radial-gradient(circle at 88% 12%, color-mix(in oklab, var(--electric) 14%, transparent), transparent 34%);
+      pointer-events: none;
+    }
+    .daily-hero-card > *,
+    .daily-signal-card > * {
+      position: relative;
+      z-index: 1;
+    }
+    .daily-hero-card {
+      min-height: 320px;
+      padding: clamp(24px, 4vw, 42px);
+      display: grid;
+      align-content: space-between;
+      gap: var(--s-7);
+    }
+    .daily-kicker {
+      display: inline-flex;
+      width: fit-content;
+      padding: 6px 9px;
+      border: 1px solid color-mix(in oklab, var(--accent) 42%, var(--line));
+      border-radius: 6px;
+      color: var(--accent);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      background: color-mix(in oklab, var(--surface-strong) 58%, transparent);
+    }
+    .daily-hero-card h3 {
+      margin: 0;
+      max-width: 760px;
+      font-family: var(--serif);
+      font-size: clamp(26px, 4.5vw, 58px);
+      line-height: 1.16;
+      font-weight: 700;
+      color: var(--ink);
+    }
+    .daily-hero-card p {
+      max-width: 660px;
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: 15px;
+      line-height: 1.82;
+    }
+    .daily-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--s-3);
+      align-items: center;
+    }
+    .daily-link {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--s-2);
+      min-height: 40px;
+      padding: 10px 13px;
+      border: 1px solid color-mix(in oklab, var(--accent) 44%, var(--line));
+      border-radius: 7px;
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      background: color-mix(in oklab, var(--surface-strong) 52%, transparent);
+      transition: transform 0.25s ease, border-color 0.25s ease;
+    }
+    .daily-link:hover {
+      transform: translateY(-2px);
+      border-color: var(--accent);
+    }
+    .daily-signal-card {
+      padding: clamp(22px, 3vw, 30px);
+      display: grid;
+      gap: var(--s-4);
+    }
+    .daily-stat {
+      display: grid;
+      grid-template-columns: minmax(76px, auto) 1fr;
+      gap: var(--s-4);
+      align-items: center;
+      padding: var(--s-4) 0;
+      border-top: 1px solid var(--line);
+    }
+    .daily-stat:first-child {
+      border-top: 0;
+      padding-top: 0;
+    }
+    .daily-stat b {
+      color: var(--accent);
+      font-size: clamp(22px, 3vw, 34px);
+      line-height: 1;
+      letter-spacing: 0.02em;
+    }
+    .daily-stat span {
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+    .daily-latest {
+      display: block;
+      margin-top: var(--s-3);
+      padding-top: var(--s-5);
+      border-top: 1px solid var(--line);
+    }
+    .daily-latest b {
+      display: block;
+      margin-bottom: var(--s-2);
+      color: var(--accent);
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+    .daily-latest strong {
+      display: block;
+      color: var(--ink);
+      font-family: var(--serif);
+      font-size: 20px;
+      line-height: 1.38;
+      margin-bottom: var(--s-2);
+    }
+    .daily-latest span {
+      display: block;
+      color: var(--ink-soft);
+      font-size: 13px;
+      line-height: 1.68;
+    }
+
+    /* =========================================================
      * Journal cards
      * ========================================================= */
     .journal-grid {
@@ -1455,7 +1615,7 @@
     .back-to-top {
       position: fixed;
       right: 24px;
-      bottom: 24px;
+      bottom: 32px;
       z-index: 40;
       width: 44px;
       height: 44px;
@@ -1744,7 +1904,7 @@
     .section-head h2 {
       font-family: var(--serif);
       font-size: clamp(44px, 8vw, 96px);
-      line-height: 0.9;
+      line-height: 1.04;
       font-weight: 400;
       text-transform: uppercase;
     }
@@ -2531,521 +2691,6 @@
         animation: none !important;
       }
     }
-
-    /* =========================================================
-     * AI Daily · 科技感专区
-     * ========================================================= */
-    #ai-daily {
-      position: relative;
-      padding-block: var(--s-10);
-      overflow: hidden;
-    }
-    /* 网格背景 */
-    #ai-daily::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(90deg, color-mix(in oklab, var(--electric) 6%, transparent) 1px, transparent 1px),
-        linear-gradient(0deg, color-mix(in oklab, var(--electric) 6%, transparent) 1px, transparent 1px);
-      background-size: 60px 60px;
-      mask-image: radial-gradient(ellipse 70% 50% at 50% 50%, black 30%, transparent 80%);
-      -webkit-mask-image: radial-gradient(ellipse 70% 50% at 50% 50%, black 30%, transparent 80%);
-      pointer-events: none;
-      z-index: 0;
-    }
-    /* 光晕 */
-    #ai-daily::after {
-      content: "";
-      position: absolute;
-      top: -20%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 600px;
-      height: 300px;
-      background: radial-gradient(ellipse, color-mix(in oklab, var(--electric) 12%, transparent), transparent 70%);
-      pointer-events: none;
-      z-index: 0;
-    }
-    #ai-daily > * { position: relative; z-index: 1; }
-
-    /* 标题区 */
-    .ai-daily-head {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: var(--s-4);
-      margin-bottom: var(--s-8);
-    }
-    @media (min-width: 880px) {
-      .ai-daily-head {
-        grid-template-columns: 1.4fr 1fr;
-        align-items: end;
-        gap: var(--s-8);
-      }
-    }
-    .ai-daily-head .label {
-      font-size: 11px;
-      letter-spacing: 0.32em;
-      text-transform: uppercase;
-      color: var(--electric);
-      margin-bottom: var(--s-3);
-      display: inline-flex;
-      align-items: center;
-      gap: var(--s-2);
-    }
-    .ai-daily-head .label::before {
-      content: "";
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--electric);
-      box-shadow: 0 0 8px var(--electric);
-      animation: daily-pulse 2s ease-in-out infinite;
-    }
-    @keyframes daily-pulse {
-      0%, 100% { opacity: 1; box-shadow: 0 0 8px var(--electric); }
-      50% { opacity: 0.4; box-shadow: 0 0 16px var(--electric); }
-    }
-    .ai-daily-head h2 {
-      font-family: var(--sans);
-      font-weight: 700;
-      font-size: clamp(26px, 4.5vw, 44px);
-      line-height: 1.15;
-      letter-spacing: -0.02em;
-      margin: 0;
-      background: linear-gradient(135deg, var(--ink) 0%, var(--electric) 60%, var(--accent-2) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .ai-daily-head .blurb {
-      color: var(--ink-soft);
-      font-size: 14px;
-      line-height: 1.75;
-      max-width: 420px;
-      margin: 0;
-    }
-
-    /* 日报卡片列表 */
-    .ai-daily-list {
-      display: flex;
-      flex-direction: column;
-      gap: var(--s-3);
-    }
-
-    .ai-daily-card {
-      display: grid;
-      grid-template-columns: auto 1fr auto;
-      gap: 0 var(--s-5);
-      align-items: start;
-      padding: var(--s-5) var(--s-6);
-      border-radius: var(--radius);
-      background: color-mix(in oklab, var(--surface) 85%, var(--electric) 5%);
-      border: 1px solid var(--line);
-      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-      text-decoration: none;
-      color: inherit;
-      position: relative;
-      overflow: hidden;
-    }
-    .ai-daily-card::before {
-      content: "";
-      position: absolute;
-      left: 0; top: 0; bottom: 0;
-      width: 3px;
-      background: linear-gradient(180deg, var(--electric), var(--accent-2));
-      transform: scaleY(0);
-      transform-origin: top;
-      transition: transform 0.4s ease;
-    }
-    .ai-daily-card:hover::before { transform: scaleY(1); }
-    .ai-daily-card:hover {
-      transform: translateY(-3px);
-      border-color: color-mix(in oklab, var(--electric) 30%, var(--line));
-      box-shadow: 0 8px 32px color-mix(in oklab, var(--electric) 10%, transparent);
-    }
-
-    /* 日期标签 */
-    .ai-daily-card .card-date {
-      font-family: var(--sans);
-      font-weight: 700;
-      font-size: 13px;
-      letter-spacing: 0.06em;
-      color: var(--electric);
-      background: color-mix(in oklab, var(--electric) 10%, transparent);
-      padding: var(--s-1) var(--s-3);
-      border-radius: 6px;
-      white-space: nowrap;
-      line-height: 1.5;
-      margin-top: 2px;
-    }
-
-    /* 卡片内容 */
-    .ai-daily-card .card-body h3 {
-      font-family: var(--sans);
-      font-weight: 600;
-      font-size: clamp(15px, 1.6vw, 18px);
-      line-height: 1.5;
-      margin: 0 0 var(--s-2);
-      transition: color 0.2s ease;
-    }
-    .ai-daily-card:hover .card-body h3 { color: var(--electric); }
-    .ai-daily-card .card-body .card-excerpt {
-      color: var(--ink-soft);
-      font-size: 13px;
-      line-height: 1.7;
-      margin: 0;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-
-    /* 箭头 */
-    .ai-daily-card .card-arrow {
-      font-size: 18px;
-      color: var(--muted);
-      align-self: center;
-      transition: transform 0.3s ease, color 0.3s ease;
-    }
-    .ai-daily-card:hover .card-arrow {
-      transform: translateX(4px);
-      color: var(--electric);
-    }
-
-    /* 分类标签行 */
-    .ai-daily-card .card-body .card-cat {
-      display: inline-block;
-      font-size: 10px;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--electric);
-      background: color-mix(in oklab, var(--electric) 8%, transparent);
-      padding: 2px 8px;
-      border-radius: 4px;
-      margin-bottom: var(--s-2);
-      font-weight: 600;
-    }
-
-    /* 底部查看全部 */
-    .ai-daily-footer {
-      margin-top: var(--s-6);
-      text-align: center;
-    }
-    .ai-daily-footer a {
-      display: inline-flex;
-      align-items: center;
-      gap: var(--s-2);
-      font-size: 13px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--electric);
-      font-weight: 500;
-      transition: gap 0.2s ease, color 0.2s ease;
-    }
-    .ai-daily-footer a:hover {
-      gap: var(--s-3);
-      color: var(--ink);
-    }
-
-    /* 加载状态 */
-    .ai-daily-loading {
-      text-align: center;
-      padding: var(--s-8);
-      color: var(--muted);
-      font-size: 14px;
-    }
-    .ai-daily-loading span {
-      display: inline-block;
-      animation: daily-dot-blink 1.4s ease-in-out infinite;
-    }
-    .ai-daily-loading span:nth-child(2) { animation-delay: 0.2s; }
-    .ai-daily-loading span:nth-child(3) { animation-delay: 0.4s; }
-    @keyframes daily-dot-blink {
-      0%, 80%, 100% { opacity: 0.3; }
-      40% { opacity: 1; }
-    }
-
-    /* 空状态 */
-    .ai-daily-empty {
-      text-align: center;
-      padding: var(--s-8);
-      color: var(--muted);
-      font-size: 14px;
-      font-style: italic;
-      line-height: 2;
-    }
-
-    /* 响应式 */
-    @media (max-width: 520px) {
-      .ai-daily-card {
-        grid-template-columns: 1fr;
-        gap: var(--s-2) 0;
-        padding: var(--s-4);
-      }
-      .ai-daily-card .card-date {
-        align-self: start;
-      }
-      .ai-daily-card .card-arrow { display: none; }
-    }
-
-    /* =========================================================
-     * 悬浮小宠物 - 犀牛伯爵
-     * ========================================================= */
-    .pet-rhino {
-      position: fixed;
-      bottom: 88px;
-      right: 24px;
-      z-index: 100;
-      pointer-events: auto;
-      animation: pet-bob 3s ease-in-out infinite;
-    }
-
-    .pet-avatar {
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--surface-strong), var(--surface));
-      box-shadow: var(--shadow-2), 0 0 20px var(--glow);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s ease;
-      cursor: pointer;
-      position: relative;
-    }
-
-    .pet-avatar svg {
-      width: 36px;
-      height: 36px;
-    }
-
-    .pet-rhino:hover .pet-avatar {
-      transform: scale(1.1);
-      box-shadow: var(--shadow-2), 0 0 30px var(--glow);
-    }
-
-    .pet-rhino:hover .pet-avatar .rhino-eye {
-      transform: scale(1.2);
-    }
-
-    .pet-rhino.clicked .pet-avatar {
-      animation: pet-jump 0.6s cubic-bezier(0.34,1.56,0.64,1);
-    }
-    .pet-rhino.clicked .pet-avatar svg {
-      animation: pet-spin-horn 0.6s ease;
-    }
-
-    /* 粒子特效 */
-    .pet-particle {
-      position: absolute;
-      pointer-events: none;
-      font-size: 16px;
-      opacity: 1;
-      animation: pet-particle-fly 1s ease-out forwards;
-    }
-    @keyframes pet-particle-fly {
-      0%   { transform: translateY(0) scale(1); opacity: 1; }
-      100% { transform: translateY(-50px) translateX(var(--px, 10px)) scale(0.3); opacity: 0; }
-    }
-
-    /* Combo 愤怒/兴奋模式 */
-    .pet-rhino.combo .pet-avatar {
-      animation: pet-combo-shake 0.4s ease infinite;
-      box-shadow: var(--shadow-2), 0 0 35px var(--glow), 0 0 60px color-mix(in srgb, var(--accent) 30%, transparent);
-    }
-    @keyframes pet-combo-shake {
-      0%, 100% { transform: translateX(0) rotate(0deg); }
-      25%  { transform: translateX(-3px) rotate(-5deg); }
-      75%  { transform: translateX(3px) rotate(5deg); }
-    }
-    .pet-rhino.combo .pet-bubble {
-      background: color-mix(in srgb, var(--accent) 15%, var(--surface-strong));
-      border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
-    }
-
-    /* 长按膨胀 */
-    .pet-rhino.long-press .pet-avatar {
-      animation: pet-bloat 0.8s ease forwards;
-    }
-    @keyframes pet-bloat {
-      0%   { transform: scale(1); }
-      50%  { transform: scale(1.35); }
-      70%  { transform: scale(1.25); }
-      100% { transform: scale(1.3); }
-    }
-    @keyframes pet-deflate {
-      0%   { transform: scale(1.3); }
-      50%  { transform: scale(0.85); }
-      70%  { transform: scale(1.05); }
-      100% { transform: scale(1); }
-    }
-
-    /* 拖拽模式 */
-    .pet-rhino.dragging {
-      animation: none !important;
-      transition: none;
-    }
-    .pet-rhino.dragging .pet-avatar {
-      transform: scale(1.15) rotate(0deg);
-      box-shadow: var(--shadow-2), 0 0 40px var(--glow);
-    }
-    .pet-rhino.dragging .pet-bubble {
-      opacity: 0;
-    }
-
-    /* 惊讶表情（快速拖拽释放时） */
-    .pet-rhino.startled .pet-avatar svg {
-      animation: pet-surprised 0.5s ease;
-    }
-    @keyframes pet-surprised {
-      0%   { transform: scale(1); }
-      30%  { transform: scale(1.3) rotate(-5deg); }
-      60%  { transform: scale(0.9) rotate(3deg); }
-      100% { transform: scale(1) rotate(0deg); }
-    }
-
-    /* Combo 数字弹出 */
-    .pet-combo-num {
-      position: absolute;
-      top: -10px;
-      right: -8px;
-      background: var(--accent);
-      color: var(--surface);
-      font-family: var(--sans);
-      font-size: 11px;
-      font-weight: 700;
-      line-height: 1;
-      padding: 3px 6px;
-      border-radius: 10px;
-      opacity: 0;
-      transform: scale(0.5);
-      transition: opacity 0.2s, transform 0.2s cubic-bezier(0.34,1.56,0.64,1);
-      pointer-events: none;
-      z-index: 2;
-    }
-    .pet-combo-num.show {
-      opacity: 1;
-      transform: scale(1);
-    }
-
-    /* 气泡对话框 */
-    .pet-bubble {
-      position: absolute;
-      bottom: calc(100% + 10px);
-      right: 0;
-      background: var(--surface-strong);
-      color: var(--ink);
-      font-size: 14px;
-      line-height: 1.4;
-      max-width: 160px;
-      padding: 8px 12px;
-      border-radius: 12px;
-      box-shadow: var(--shadow-2);
-      opacity: 0;
-      transform: translateY(6px) scale(0.9);
-      transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.34,1.56,0.64,1);
-      pointer-events: none;
-      white-space: nowrap;
-    }
-
-    .pet-bubble::after {
-      content: '';
-      position: absolute;
-      bottom: -6px;
-      right: 18px;
-      width: 0;
-      height: 0;
-      border-left: 6px solid transparent;
-      border-right: 6px solid transparent;
-      border-top: 6px solid var(--surface-strong);
-    }
-
-    .pet-bubble.show {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
-
-    /* 动画关键帧 */
-    @keyframes pet-bob {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-6px); }
-    }
-
-    @keyframes pet-jump {
-      0%   { transform: translateY(0) rotate(0deg) scale(1); }
-      15%  { transform: translateY(4px) scaleX(0.85) scaleY(1.15) rotate(-3deg); }
-      35%  { transform: translateY(-28px) scaleX(1.05) scaleY(0.95) rotate(5deg); }
-      55%  { transform: translateY(-24px) scaleX(0.95) scaleY(1.05) rotate(-4deg); }
-      75%  { transform: translateY(-6px) rotate(2deg) scale(1.02); }
-      88%  { transform: translateY(3px) scaleX(1.08) scaleY(0.92) rotate(-1deg); }
-      100% { transform: translateY(0) rotate(0deg) scale(1); }
-    }
-
-    @keyframes pet-spin-horn {
-      0%   { transform: rotate(0deg); }
-      20%  { transform: rotate(-8deg); }
-      40%  { transform: rotate(10deg); }
-      60%  { transform: rotate(-5deg); }
-      80%  { transform: rotate(3deg); }
-      100% { transform: rotate(0deg); }
-    }
-
-    /* 双击旋转动画 */
-    .pet-rhino.double-clicked .pet-avatar {
-      animation: pet-twirl 0.8s cubic-bezier(0.34,1.56,0.64,1);
-    }
-    @keyframes pet-twirl {
-      0%   { transform: rotate(0deg) scale(1); }
-      25%  { transform: rotate(180deg) translateY(-15px) scale(1.2); }
-      50%  { transform: rotate(360deg) translateY(-25px) scale(1.3); }
-      75%  { transform: rotate(540deg) translateY(-10px) scale(1.1); }
-      100% { transform: rotate(720deg) translateY(0) scale(1); }
-    }
-
-    /* 摇晃（空闲时随机触发） */
-    .pet-rhino.idle-shake .pet-avatar svg {
-      animation: pet-wiggle 0.6s ease;
-    }
-    @keyframes pet-wiggle {
-      0%, 100% { transform: rotate(0deg); }
-      20%  { transform: rotate(-12deg); }
-      40%  { transform: rotate(10deg); }
-      60%  { transform: rotate(-8deg); }
-      80%  { transform: rotate(5deg); }
-    }
-
-    /* 滚动方向翻转 */
-    .pet-rhino.scroll-up .pet-avatar svg {
-      transform: scaleX(-1);
-    }
-
-    /* 响应式：移动端缩小 */
-    @media (max-width: 768px) {
-      .pet-rhino {
-        bottom: 76px;
-        right: 16px;
-      }
-      .pet-avatar {
-        width: 40px;
-        height: 40px;
-      }
-      .pet-avatar svg {
-        width: 26px;
-        height: 26px;
-      }
-      .pet-bubble {
-        font-size: 12px;
-        max-width: 130px;
-        padding: 6px 10px;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .pet-rhino {
-        animation: none !important;
-      }
-    }
   </style>
 </head>
 <body>
@@ -3069,12 +2714,11 @@
         <a href="#profile">关于</a>
         <a href="#notes">笔记</a>
         <a href="#builds">创作</a>
+        <a href="#daily">日报</a>
         <a href="#commentary">时评</a>
-        <a href="#ai-daily">日报</a>
         <a href="#manifesto">主张</a>
         <a href="#contact">联络</a>
         <a href="games/duck-scare-war.html">游戏</a>
-        <a href="dumate/">教程</a>
       </nav>
       <div class="nav-actions">
         <button id="themeToggle" class="icon-btn" aria-label="切换主题" title="切换日/夜">
@@ -3096,12 +2740,11 @@
       <a href="#profile">关于</a>
       <a href="#notes">笔记</a>
       <a href="#builds">创作</a>
+      <a href="#daily">日报</a>
       <a href="#commentary">时评</a>
-      <a href="#ai-daily">日报</a>
       <a href="#manifesto">主张</a>
       <a href="#contact">联络</a>
       <a href="games/duck-scare-war.html">游戏</a>
-      <a href="dumate/">教程</a>
       <a href="https://www.xiaohongshu.com/user/profile/60572004000000000101ce41" target="_blank" rel="noopener">小红书 →</a>
     </div>
   </header>
@@ -3111,8 +2754,8 @@
     <section id="profile"></section>
     <section id="notes"></section>
     <section id="builds"></section>
+    <section id="daily"></section>
     <section id="commentary"></section>
-    <section id="ai-daily"></section>
     <section id="manifesto" class="quote-section"></section>
     <section id="contact"></section>
   </main>
@@ -3137,46 +2780,6 @@
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
   </button>
 
-  <!-- 悬浮小宠物 -->
-  <div id="petRhino" class="pet-rhino" role="img" aria-label="犀牛伯爵的小宠物">
-    <span class="pet-combo-num" id="petComboNum"></span>
-    <div class="pet-bubble" id="petBubble"></div>
-    <div class="pet-avatar">
-      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- 身体 -->
-        <ellipse cx="32" cy="38" rx="22" ry="18" fill="var(--accent)" opacity="0.15"/>
-        <!-- 头部 -->
-        <circle cx="32" cy="30" r="16" fill="var(--accent)" opacity="0.2"/>
-        <!-- 耳朵左 -->
-        <ellipse cx="18" cy="20" rx="5" ry="6" fill="var(--accent)" opacity="0.35"/>
-        <ellipse cx="18" cy="20" rx="3" ry="4" fill="var(--accent)" opacity="0.15"/>
-        <!-- 耳朵右 -->
-        <ellipse cx="46" cy="20" rx="5" ry="6" fill="var(--accent)" opacity="0.35"/>
-        <ellipse cx="46" cy="20" rx="3" ry="4" fill="var(--accent)" opacity="0.15"/>
-        <!-- 犀牛角 -->
-        <path d="M32 10 L29 22 L35 22 Z" fill="var(--accent)" opacity="0.9"/>
-        <!-- 小角 -->
-        <path d="M26 16 L24.5 22 L27.5 22 Z" fill="var(--accent)" opacity="0.6"/>
-        <!-- 眼睛左 -->
-        <g class="rhino-eye" style="transform-origin: 25px 28px;">
-          <circle cx="25" cy="28" r="3.5" fill="var(--ink)"/>
-          <circle cx="26" cy="27" r="1.2" fill="white"/>
-        </g>
-        <!-- 眼睛右 -->
-        <g class="rhino-eye" style="transform-origin: 39px 28px;">
-          <circle cx="39" cy="28" r="3.5" fill="var(--ink)"/>
-          <circle cx="40" cy="27" r="1.2" fill="white"/>
-        </g>
-        <!-- 鼻子 -->
-        <ellipse cx="32" cy="36" rx="7" ry="4" fill="var(--accent)" opacity="0.4"/>
-        <circle cx="29" cy="36" r="1.5" fill="var(--accent)" opacity="0.6"/>
-        <circle cx="35" cy="36" r="1.5" fill="var(--accent)" opacity="0.6"/>
-        <!-- 嘴巴 -->
-        <path d="M28 40 Q32 43 36 40" stroke="var(--accent)" stroke-width="1.2" fill="none" stroke-linecap="round" opacity="0.5"/>
-      </svg>
-    </div>
-  </div>
-
   <footer class="site-footer" id="siteFooter">
     <div class="container foot">
       <div data-bind="footerLeft">&copy; 2026 犀牛伯爵 \00B7 一切笔记，皆可咀嚼</div>
@@ -3184,7 +2787,7 @@
     </div>
   </footer>
 
-  <script src="data.js"></script>
+  <script src="data.js?v=20260630-dumate-daily-fix"></script>
   <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
   <script>
     (function () {
@@ -3443,6 +3046,49 @@
         `;
       }
 
+      /* AI daily brief */
+      const daily = D.daily;
+      if (daily) {
+        document.getElementById('daily').innerHTML = `
+          <div class="container">
+            <div class="section-head fade-in">
+              <div>
+                <div class="label">${esc(daily.label)}</div>
+                <h2>${esc(daily.headingLine1)}<br/>${esc(daily.headingLine2)}</h2>
+              </div>
+              <p class="blurb">${esc(daily.blurb)}</p>
+            </div>
+            <div class="daily-layout">
+              <article class="daily-hero-card fade-in fade-in-delay-1">
+                <div>
+                  <span class="daily-kicker">Morning Signal</span>
+                  <h3>${esc(daily.headingLine1)}${esc(daily.headingLine2)}</h3>
+                </div>
+                <p>${esc(daily.blurb)}</p>
+                <div class="daily-actions">
+                  <a class="daily-link" href="${esc(daily.href)}">${esc(daily.ctaLabel)} <span aria-hidden="true">\u2192</span></a>
+                </div>
+              </article>
+              <aside class="daily-signal-card fade-in fade-in-delay-2">
+                ${(daily.stats || []).map(item => `
+                  <div class="daily-stat">
+                    <b>${esc(item.k)}</b>
+                    <span>${esc(item.v)}</span>
+                  </div>
+                `).join('')}
+                ${(daily.latest || []).map(item => `
+                  <a class="daily-latest" href="${esc(item.href)}">
+                    <b>${esc(item.tag)}</b>
+                    <strong>${esc(item.title)}</strong>
+                    <span>${esc(item.desc)}</span>
+                  </a>
+                `).join('')}
+              </aside>
+            </div>
+          </div>
+        `;
+      }
+
       /* Commentary — load from feed.json + fallback */
       const commentarySection = document.getElementById('commentary');
       const cm = D.commentary;
@@ -3524,73 +3170,6 @@
       };
       xhr.send();
 
-      /* AI Daily — 科技感独立渲染 */
-      var ad = D.aiDaily;
-      var aiDailySection = document.getElementById('ai-daily');
-      if (ad && aiDailySection) {
-
-        function renderDailyCards(articles) {
-          if (!articles || articles.length === 0) {
-            return '<div class="ai-daily-empty fade-in">\u8fd8\u6ca1\u6709\u65e5\u62a5\u3002\u6bcf\u5929 8 \u70b9\u81ea\u52a8\u751f\u6210\uff0c\u656c\u8bf7\u671f\u5f85\u3002</div>';
-          }
-          return '<div class="ai-daily-list">' + articles.map(function(a, i) {
-            return '<a class="ai-daily-card fade-in fade-in-delay-' + Math.min(i, 3) + '" href="' + esc(a.href) + '">' +
-              '<span class="card-date">' + esc(a.date || '') + '</span>' +
-              '<div class="card-body">' +
-                '<span class="card-cat">' + esc(a.cat || '\u65e9\u62a5') + '</span>' +
-                '<h3>' + esc(a.title) + '</h3>' +
-                '<p class="card-excerpt">' + esc(a.excerpt) + '</p>' +
-              '</div>' +
-              '<span class="card-arrow" aria-hidden="true">\u2192</span>' +
-            '</a>';
-          }).join('') + '</div>';
-        }
-
-        aiDailySection.innerHTML =
-          '<div class="container">' +
-            '<div class="ai-daily-head fade-in">' +
-              '<div>' +
-                '<div class="label">' + esc(ad.label) + '</div>' +
-                '<h2>' + esc(ad.headingLine1) + '<br/>' + esc(ad.headingLine2) + '</h2>' +
-              '</div>' +
-              '<p class="blurb">' + esc(ad.blurb) + '</p>' +
-            '</div>' +
-            '<div id="aiDailyList">' +
-              '<div class="ai-daily-loading fade-in">' +
-                '<span>\u52a0\u8f7d</span><span>\u4e2d</span><span>...</span>' +
-              '</div>' +
-            '</div>' +
-            '<div class="ai-daily-footer">' +
-              '<a href="' + esc(ad.linkHref) + '">' + esc(ad.linkText) + '</a>' +
-            '</div>' +
-          '</div>';
-
-        var adXhr = new XMLHttpRequest();
-        adXhr.open('GET', ad.feedUrl || 'ai-daily/feed.json', true);
-        adXhr.onload = function () {
-          var list = document.getElementById('aiDailyList');
-          if (adXhr.status === 200) {
-            try {
-              var feed = JSON.parse(adXhr.responseText);
-              var articles = feed.articles || feed;
-              if (articles.length > 6) articles = articles.slice(0, 6);
-              list.innerHTML = renderDailyCards(articles);
-            } catch (e) {
-              list.innerHTML = renderDailyCards(ad.defaultFeatured);
-            }
-          } else {
-            list.innerHTML = renderDailyCards(ad.defaultFeatured);
-          }
-          observeFadeIns();
-        };
-        adXhr.onerror = function () {
-          var list = document.getElementById('aiDailyList');
-          list.innerHTML = renderDailyCards(ad.defaultFeatured);
-          observeFadeIns();
-        };
-        adXhr.send();
-      }
-
       /* Quote */
       const q = D.quote;
       document.getElementById('manifesto').innerHTML = `
@@ -3657,7 +3236,7 @@
       window.addEventListener('scroll', updateScrollProgress, { passive: true });
 
       function updateActiveNav() {
-        const sectionIds = ['profile', 'notes', 'builds', 'commentary', 'manifesto', 'contact'];
+        const sectionIds = ['profile', 'notes', 'builds', 'daily', 'commentary', 'manifesto', 'contact'];
         const anchors = document.querySelectorAll('#navLinks a[href^="#"]');
         const activeId = sectionIds.reduce((current, id) => {
           const el = document.getElementById(id);
@@ -3765,334 +3344,6 @@
           pointer = { x: event.clientX, y: event.clientY };
         }, { passive: true });
       }
-    })();
-
-    /* =========================================================
-     * 悬浮小宠物 - 犀牛伯爵 交互逻辑
-     * ========================================================= */
-    (function () {
-      const pet = document.getElementById('petRhino');
-      const bubble = document.getElementById('petBubble');
-      const comboNum = document.getElementById('petComboNum');
-      if (!pet || !bubble) return;
-
-      /* ---- 台词库 ---- */
-      const hoverTexts = ['哞～', '干嘛～', '嗯哼？', '想我啦？', '摸摸我'];
-      const clickTexts = [
-        '今天AI圈又炸了 🤯',
-        '模型又更新了，冲！',
-        '犀牛伯爵，永不掉线 🦏',
-        '摸摸头～手感不错',
-        '继续卷！💪',
-        '我在这里守护你',
-        '犀牛的角，就是我的倔强',
-        'Agent 不是产品，是 OS 🔥',
-        '今天学了什么新技能？',
-        '代码写累了？歇会儿',
-        '这个 bug 我替你扛 🐛',
-        '犀牛寿命50年，比你久',
-        '深夜了，别卷了 🌙',
-        '今天也是元气满满的一天！',
-        '悄悄告诉你…GPT 又进化了',
-        '我的角比你的 prompt 还尖锐',
-        '大模型会过时，犀牛不会',
-        '点我干嘛！我在思考 🤔',
-        '北大数学满分，不服来辩 📐',
-        '每天8点，AI日报见！',
-        '你今天喝水了吗 💧',
-        '犀牛的奔跑时速50km 🏃',
-        '本犀牛已接入GPT大脑 🧠'
-      ];
-
-      const comboTexts = [
-        '再点我就生气了！😤',
-        '停！停！停！🙅',
-        '你是要把我戳穿吗！💥',
-        '我报警了啊 🚨',
-        '够了够了！角要断了 😱',
-        '别碰我角！很痛的！🦏',
-        '再点一下试试？😏'
-      ];
-
-      const idleTexts = [
-        '发呆中…zzZ 💤',
-        '在想今天写什么…',
-        '犀牛的梦想是飞翔 🌈',
-        '有没有人来找我玩…',
-        '在看今天的AI日报呢 📰',
-        '（偷偷看了一眼你的屏幕）👀',
-        '今天的模型测评跑了吗？',
-        '犀牛不做梦，犀牛只做事 🦏',
-        '如果你不点我，我会消失的…'
-      ];
-
-      const dragTexts = [
-        '别拖我！要走自己走 🦏',
-        '放开我！我要掉下去了！',
-        '这是绑架！Help！🆘',
-        '我可是犀牛伯爵的宠物！',
-        '轻轻放…我怕高 😨'
-      ];
-
-      const longPressTexts = [
-        '别捏了！脸要变形了 😵',
-        '舒服…再按按…啊不，停！',
-        '我…我快喘不过气了…💨',
-        '你确定要按这么久？',
-        '犀牛的皮肤很厚的…才怪 😅'
-      ];
-
-      const dropTexts = [
-        '啊啊啊！😱',
-        '吓死我了！差点以为要摔了',
-        '下次轻一点行不行 😤',
-        '我的心跳都停了一拍 💓',
-        '我不叫"球"！我叫犀牛！'
-      ];
-
-      const twirlTexts = [
-        '犀牛旋风！🌪️',
-        '看我旋转跳跃！💃',
-        '我就知道你忍不住双击 🤭',
-        '720度无死角帅！✨',
-        '头好晕…要吐了 🤮'
-      ];
-
-      /* ---- 粒子特效 ---- */
-      const particles = ['✨', '⭐', '💫', '🌟', '💚', '🦏', '💥', '❤️'];
-
-      function spawnParticles(count, origin) {
-        count = count || 5;
-        for (let i = 0; i < count; i++) {
-          const p = document.createElement('span');
-          p.className = 'pet-particle';
-          p.textContent = particles[Math.floor(Math.random() * particles.length)];
-          p.style.setProperty('--px', (Math.random() * 60 - 30) + 'px');
-          p.style.left = (origin === 'top' ? Math.random() * 36 + 10 : Math.random() * 56) + 'px';
-          p.style.bottom = (origin === 'top' ? '100px' : '30px') + '';
-          p.style.animationDelay = (Math.random() * 0.25) + 's';
-          p.style.fontSize = (12 + Math.random() * 10) + 'px';
-          pet.appendChild(p);
-          setTimeout(() => p.remove(), 1300);
-        }
-      }
-
-      /* ---- 气泡 ---- */
-      let bubbleTimer = null;
-
-      function showBubble(text, duration) {
-        clearTimeout(bubbleTimer);
-        bubble.textContent = text;
-        bubble.classList.add('show');
-        bubbleTimer = setTimeout(() => {
-          bubble.classList.remove('show');
-        }, duration || 2500);
-      }
-
-      function hideBubble() {
-        clearTimeout(bubbleTimer);
-        bubble.classList.remove('show');
-      }
-
-      function randomPick(arr) {
-        return arr[Math.floor(Math.random() * arr.length)];
-      }
-
-      /* ---- 悬停交互 ---- */
-      pet.addEventListener('mouseenter', () => {
-        showBubble(randomPick(hoverTexts), 2500);
-        clearTimeout(idleTimer);
-      });
-
-      pet.addEventListener('mouseleave', () => {
-        hideBubble();
-        resetIdleTimer();
-      });
-
-      /* ---- Combo 系统 ---- */
-      let comboCount = 0;
-      let comboTimer = null;
-      let singleClickTimer = null;
-
-      function updateCombo() {
-        clearTimeout(comboTimer);
-        comboCount++;
-        if (comboCount >= 3) {
-          pet.classList.add('combo');
-          comboNum.textContent = 'x' + comboCount;
-          comboNum.classList.add('show');
-          showBubble(randomPick(comboTexts), 2000);
-        }
-        comboTimer = setTimeout(() => {
-          comboCount = 0;
-          pet.classList.remove('combo');
-          comboNum.classList.remove('show');
-        }, 2000);
-      }
-
-      /* ---- 点击交互 ---- */
-      pet.addEventListener('click', () => {
-        clearTimeout(singleClickTimer);
-        singleClickTimer = setTimeout(() => {
-          pet.classList.remove('clicked');
-          void pet.offsetWidth;
-          pet.classList.add('clicked');
-          if (comboCount < 3) {
-            spawnParticles(5);
-            showBubble(randomPick(clickTexts), 3000);
-          } else {
-            spawnParticles(8);
-          }
-          updateCombo();
-          setTimeout(() => pet.classList.remove('clicked'), 600);
-          clearTimeout(idleTimer);
-          resetIdleTimer();
-        }, 250);
-      });
-
-      /* ---- 双击旋转 ---- */
-      pet.addEventListener('dblclick', (e) => {
-        e.preventDefault();
-        clearTimeout(singleClickTimer);
-        pet.classList.remove('clicked', 'double-clicked');
-        void pet.offsetWidth;
-        pet.classList.add('double-clicked');
-        spawnParticles(8, 'top');
-        setTimeout(() => spawnParticles(6, 'top'), 200);
-        showBubble(randomPick(twirlTexts), 3000);
-        setTimeout(() => pet.classList.remove('double-clicked'), 800);
-        clearTimeout(idleTimer);
-        resetIdleTimer();
-      });
-
-      /* ---- 长按膨胀 ---- */
-      let longPressTimer = null;
-      let isLongPress = false;
-
-      pet.addEventListener('mousedown', () => {
-        isLongPress = false;
-        longPressTimer = setTimeout(() => {
-          isLongPress = true;
-          pet.classList.add('long-press');
-          showBubble(randomPick(longPressTexts), 2000);
-        }, 800);
-      });
-
-      pet.addEventListener('mouseup', () => {
-        clearTimeout(longPressTimer);
-        if (isLongPress) {
-          pet.classList.remove('long-press');
-          pet.querySelector('.pet-avatar').style.animation = 'pet-deflate 0.4s ease';
-          spawnParticles(10);
-          showBubble('噗～💊', 2000);
-          setTimeout(() => {
-            pet.querySelector('.pet-avatar').style.animation = '';
-          }, 400);
-          isLongPress = false;
-        }
-      });
-
-      /* ---- 拖拽互动 ---- */
-      let isDragging = false;
-      let dragStartX = 0, dragStartY = 0;
-      let petOrigX = 0, petOrigY = 0;
-
-      pet.addEventListener('pointerdown', (e) => {
-        if (isLongPress) return;
-        dragStartX = e.clientX;
-        dragStartY = e.clientY;
-        const rect = pet.getBoundingClientRect();
-        petOrigX = rect.left;
-        petOrigY = rect.top;
-        isDragging = false;
-      });
-
-      document.addEventListener('pointermove', (e) => {
-        if (!e.buttons || pet.matches('.long-press')) return;
-        const dx = e.clientX - dragStartX;
-        const dy = e.clientY - dragStartY;
-
-        if (!isDragging && Math.hypot(dx, dy) > 8) {
-          isDragging = true;
-          pet.classList.add('dragging');
-          clearTimeout(singleClickTimer);
-          clearTimeout(longPressTimer);
-          showBubble(randomPick(dragTexts), 3000);
-        }
-
-        if (isDragging) {
-          pet.style.left = (petOrigX + dx) + 'px';
-          pet.style.top = (petOrigY + dy) + 'px';
-          pet.style.right = 'auto';
-          pet.style.bottom = 'auto';
-
-          // 拖拽距离越远，台词越惊慌
-          const dist = Math.hypot(dx, dy);
-          if (dist > 150) {
-            showBubble('啊啊啊！我要飞走了！🚀', 2000);
-          }
-        }
-      });
-
-      document.addEventListener('pointerup', () => {
-        if (isDragging) {
-          pet.classList.remove('dragging');
-          // 判断是否快速甩出
-          const rect = pet.getBoundingClientRect();
-          const wasVisible = rect.bottom > 0 && rect.top < window.innerHeight &&
-                              rect.right > 0 && rect.left < window.innerWidth;
-          pet.style.left = '';
-          pet.style.top = '';
-          pet.style.right = '';
-          pet.style.bottom = '';
-
-          pet.classList.add('startled');
-          spawnParticles(6);
-          showBubble(randomPick(dropTexts), 3000);
-          setTimeout(() => pet.classList.remove('startled'), 500);
-          isDragging = false;
-          clearTimeout(idleTimer);
-          resetIdleTimer();
-        }
-      });
-
-      /* ---- 空闲摇晃 ---- */
-      let idleTimer = null;
-      function resetIdleTimer() {
-        clearTimeout(idleTimer);
-        idleTimer = setTimeout(() => {
-          if (!pet.matches(':hover') && !isDragging) {
-            pet.classList.add('idle-shake');
-            showBubble(randomPick(idleTexts), 3000);
-            setTimeout(() => pet.classList.remove('idle-shake'), 600);
-          }
-          resetIdleTimer();
-        }, 12000 + Math.random() * 20000);
-      }
-      resetIdleTimer();
-
-      // 滚动方向检测
-      let lastScrollY = window.scrollY;
-      let scrollDirLock = false;
-
-      window.addEventListener('scroll', () => {
-        const currentY = window.scrollY;
-        const diff = currentY - lastScrollY;
-
-        if (Math.abs(diff) > 10) {
-          if (diff < 0 && !pet.classList.contains('scroll-up')) {
-            pet.classList.add('scroll-up');
-            scrollDirLock = true;
-          } else if (diff > 0 && pet.classList.contains('scroll-up')) {
-            pet.classList.remove('scroll-up');
-            scrollDirLock = true;
-          }
-          if (scrollDirLock) {
-            setTimeout(() => { scrollDirLock = false; }, 800);
-          }
-        }
-        lastScrollY = currentY;
-      }, { passive: true });
     })();
   </script>
 </body>

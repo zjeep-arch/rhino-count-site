@@ -37,8 +37,8 @@ window.SITE_DATA = {
       { label: "关于",  href: "#profile" },
       { label: "笔记",  href: "#notes" },
       { label: "创作",  href: "#builds" },
+      { label: "日报",  href: "#daily" },
       { label: "时评",  href: "#commentary" },
-      { label: "日报",  href: "#ai-daily" },
       { label: "主张",  href: "#manifesto" },
       { label: "联络",  href: "#contact" }
     ],
@@ -106,7 +106,7 @@ window.SITE_DATA = {
       {
         tag: "PLAY",
         title: "Interactive Experiments",
-        desc: "用小游戏、教程页和交互页面测试内容的新形态，让表达变得可玩。",
+        desc: "用小游戏和交互页面测试内容的新形态，让表达变得可玩。",
         linkLabel: "玩一个实验",
         href: "games/duck-scare-war.html"
       }
@@ -117,12 +117,6 @@ window.SITE_DATA = {
         title: "Agent 不是产品，是新一代操作系统",
         desc: "从 App 思维迁移到 Agent 思维需要的 5 个转变。",
         href: "notes/agent-is-operating-system.html"
-      },
-      {
-        type: "Guide",
-        title: "百度 DuMate 从 0 到 1 上手教程",
-        desc: "把一个 AI 产品拆成可操作、可复用、可传播的教程资产。",
-        href: "dumate/"
       },
       {
         type: "Game",
@@ -136,6 +130,29 @@ window.SITE_DATA = {
       "每周沉淀一篇 AI-native 写作 / 产品观察",
       "每月整理一个可复用 playbook",
       "把聊天、网页、文章和自动化流程串成个人创作系统"
+    ]
+  },
+
+  /* ---------- AI 早报 Daily Brief ---------- */
+  daily: {
+    label: "AI MORNING BRIEF · 日报",
+    headingLine1: "每天 8 点，",
+    headingLine2: "读懂 AI 世界昨夜的新信号。",
+    blurb: "精选 AI 大模型、产品更新、资本动向与产业洞察，把昨夜最值得关注的变化压缩成一份早间速览。",
+    href: "ai-daily/",
+    ctaLabel: "查看全部早报",
+    stats: [
+      { k: "08:00", v: "DAILY UPDATE" },
+      { k: "5 MIN", v: "SIGNAL BRIEF" },
+      { k: "AI", v: "MODEL · PRODUCT · CAPITAL" }
+    ],
+    latest: [
+      {
+        tag: "LATEST",
+        title: "GPT-5.6 正式发布：中国模型、开放生态与产品分发的新信号",
+        desc: "用一份早报快速扫描模型发布、产品更新、资本动向和产业变化。",
+        href: "ai-daily/"
+      }
     ]
   },
 
@@ -228,31 +245,6 @@ window.SITE_DATA = {
         title: "（瞎聊）伊朗战争打到第96天，油价没涨、中国没急、英国跑来北京",
         excerpt: "美国在波斯湾打到第96天——但国际油价没涨、中国没有乱、英国外相反而跑去北京。这里面有几个大的背景。",
         href: "articles/2026-06-03-iran-war-uk-china-thaw.html"
-      }
-    ]
-  },
-
-  /* ---------- AI日报 ---------- */
-  aiDaily: {
-    label: "AI DAILY · 早报",
-    headingLine1: "每天 8 点，",
-    headingLine2: "读懂 AI 世界昨夜的新信号。",
-    blurb: "精选 AI 大模型、产品更新、资本动向与产业洞察，把昨夜最值得关注的变化压缩成一份早间速览。",
-    feedUrl: "ai-daily/feed.json",
-    linkText: "查看全部日报 →",
-    linkHref: "ai-daily/",
-    defaultFeatured: [
-      {
-        cat: "产品 · 技术", date: "2026-06-28",
-        title: "GPT-5.6正式发布：白宫叫停公开上线，中国模型OpenRouter占比超50%",
-        excerpt: "OpenAI发布GPT-5.6三档（Sol/Terra/Luna），白宫要求仅限20家合作伙伴。Anthropic指控Qwen蒸馏。中国AI模型OpenRouter调用量18个月从1.2%飙至50%+。",
-        href: "ai-daily/2026-06-28-gpt-5-6-restricted-china-models.html"
-      },
-      {
-        cat: "产品 · 技术", date: "2026-06-27",
-        title: "GPT-5.6三模型齐发 + DeepSeek开源DSpark + Google人才大出血",
-        excerpt: "DeepSeek联合北大开源DSpark推理框架提速60%-85%。Google一周流失4名AI核心研究员投奔Anthropic，市值蒸发2700亿美元。",
-        href: "ai-daily/2026-06-27-gpt-5-6-deepseek-dspark.html"
       }
     ]
   },
