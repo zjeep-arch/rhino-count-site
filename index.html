@@ -1649,28 +1649,31 @@
      * ========================================================= */
     .rhino-pet {
       position: fixed;
-      right: 24px;
-      bottom: 92px;
+      right: 22px;
+      bottom: 88px;
       z-index: 46;
       display: grid;
       justify-items: end;
-      gap: 10px;
+      gap: 9px;
       pointer-events: none;
       touch-action: none;
     }
     .rhino-bubble {
-      max-width: 184px;
-      padding: 10px 12px;
-      border: 1px solid color-mix(in oklab, var(--accent) 44%, var(--line-2));
-      border-radius: 8px;
+      max-width: 218px;
+      min-height: 38px;
+      padding: 10px 13px;
+      border: 1px solid color-mix(in oklab, var(--accent) 34%, var(--line-2));
+      border-radius: 14px 14px 4px 14px;
       background:
-        linear-gradient(135deg, color-mix(in oklab, var(--surface-strong) 86%, transparent), color-mix(in oklab, var(--surface) 82%, var(--electric) 18%));
+        radial-gradient(circle at 16% 0, rgba(255,255,255,0.18), transparent 38%),
+        linear-gradient(135deg, color-mix(in oklab, var(--surface-strong) 90%, var(--accent) 10%), color-mix(in oklab, var(--surface) 80%, var(--electric) 20%));
       color: var(--ink);
-      box-shadow: var(--shadow-1), var(--shadow-2), 0 0 30px -18px var(--accent);
+      box-shadow: var(--shadow-1), var(--shadow-2), 0 18px 48px -34px var(--accent);
       font-size: 12px;
-      line-height: 1.45;
+      font-weight: 700;
+      line-height: 1.5;
       opacity: 0;
-      transform: translateY(8px) scale(0.96);
+      transform: translateY(7px) scale(0.96);
       transition: opacity 0.22s ease, transform 0.22s ease;
       pointer-events: none;
       backdrop-filter: blur(16px) saturate(1.35);
@@ -1681,39 +1684,77 @@
     }
     .rhino-pet-btn {
       position: relative;
-      width: 72px;
-      height: 72px;
-      border: 1px solid color-mix(in oklab, var(--accent) 48%, var(--line-2));
-      border-radius: 16px;
+      width: 92px;
+      height: 92px;
+      border: 1px solid color-mix(in oklab, var(--accent) 34%, var(--line-2));
+      border-radius: 26px;
       background:
-        radial-gradient(circle at 36% 24%, rgba(255,255,255,0.18), transparent 34%),
-        linear-gradient(145deg, color-mix(in oklab, var(--surface-strong) 82%, var(--accent) 18%), color-mix(in oklab, var(--surface) 78%, var(--electric) 22%));
-      box-shadow: var(--shadow-1), var(--shadow-2), 0 18px 48px -30px var(--accent);
+        radial-gradient(circle at 32% 18%, rgba(255,255,255,0.30), transparent 32%),
+        radial-gradient(circle at 72% 84%, color-mix(in oklab, var(--accent-2) 18%, transparent), transparent 42%),
+        linear-gradient(145deg, color-mix(in oklab, var(--surface-strong) 82%, #ffe5f4 18%), color-mix(in oklab, var(--surface) 74%, var(--accent) 26%));
+      box-shadow: var(--shadow-1), var(--shadow-2), 0 24px 64px -36px var(--accent);
       color: var(--ink);
       display: grid;
       place-items: center;
       pointer-events: auto;
       cursor: grab;
       transform-origin: 50% 90%;
-      animation: rhinoFloat 4.8s ease-in-out infinite;
+      animation: rhinoFloat 4.6s ease-in-out infinite;
       transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
     }
     .rhino-pet-btn::before {
       content: "";
       position: absolute;
-      inset: -7px;
-      border-radius: 20px;
-      border: 1px solid color-mix(in oklab, var(--accent) 28%, transparent);
-      opacity: 0.42;
+      inset: -8px;
+      border-radius: 31px;
+      border: 1px solid color-mix(in oklab, var(--accent) 24%, transparent);
+      opacity: 0.38;
       transform: scale(0.94);
-      animation: rhinoPulse 2.8s ease-in-out infinite;
+      animation: rhinoPulse 3s ease-in-out infinite;
+    }
+    .rhino-pet-btn::after {
+      content: "";
+      position: absolute;
+      left: 19px;
+      top: 14px;
+      width: 22px;
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.42);
+      filter: blur(0.2px);
+      transform: rotate(-24deg);
+      pointer-events: none;
     }
     .rhino-pet-btn:hover,
     .rhino-pet-btn:focus-visible {
       border-color: var(--accent);
       box-shadow: var(--shadow-1), var(--shadow-2), var(--shadow-glow);
-      transform: translateY(-4px) rotate(-2deg);
+      transform: translateY(-5px) rotate(-2deg) scale(1.02);
       outline: none;
+    }
+    .rhino-pet-label {
+      position: absolute;
+      right: -5px;
+      top: -7px;
+      min-width: 28px;
+      height: 20px;
+      padding: 0 7px;
+      border-radius: 999px;
+      display: inline-grid;
+      place-items: center;
+      border: 1px solid color-mix(in oklab, var(--gold) 62%, var(--line-2));
+      background: color-mix(in oklab, var(--surface-strong) 78%, var(--gold) 22%);
+      color: var(--gold);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 0.02em;
+      opacity: 0;
+      transform: translateY(4px) scale(0.86);
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+    .rhino-pet.combo .rhino-pet-label {
+      opacity: 1;
+      transform: translateY(0) scale(1);
     }
     .rhino-pet.dragging .rhino-pet-btn {
       cursor: grabbing;
@@ -1721,48 +1762,104 @@
       transform: scale(1.04) rotate(3deg);
     }
     .rhino-pet.excited .rhino-pet-btn {
-      animation: rhinoNod 0.5s ease;
+      animation: rhinoNod 0.54s ease;
+    }
+    .rhino-pet.twirl .rhino-pet-btn {
+      animation: rhinoTwirl 0.78s cubic-bezier(.2,.9,.25,1.1);
+    }
+    .rhino-pet.sleepy .rhino-pet-btn {
+      filter: saturate(0.82);
+      transform: translateY(2px) scale(0.98);
+    }
+    .rhino-pet.squish .rhino-pet-btn {
+      animation: rhinoSquish 0.72s ease;
     }
     .rhino-svg {
-      width: 58px;
-      height: 58px;
+      width: 82px;
+      height: 82px;
       filter: drop-shadow(0 12px 14px rgba(0,0,0,0.22));
+      overflow: visible;
     }
     .rhino-eye {
       animation: rhinoBlink 5.5s linear infinite;
       transform-origin: center;
     }
+    .rhino-ear,
+    .rhino-arm {
+      transform-origin: center;
+    }
+    .rhino-pet:hover .rhino-ear {
+      animation: rhinoEarWiggle 0.7s ease;
+    }
+    .rhino-pet.excited .rhino-arm,
+    .rhino-pet.twirl .rhino-arm {
+      animation: rhinoWave 0.6s ease;
+    }
+    .rhino-cheek {
+      opacity: 0.78;
+    }
     .rhino-spark {
       position: absolute;
-      width: 7px;
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: color-mix(in oklab, var(--spark-color, var(--accent)) 90%, white 10%);
+      box-shadow: 0 0 16px var(--spark-color, var(--accent));
+      pointer-events: none;
+      animation: rhinoSpark 0.9s ease-out forwards;
+    }
+    .rhino-spark.star {
+      width: 10px;
+      height: 10px;
+      border-radius: 2px;
+      transform: rotate(45deg);
+    }
+    .rhino-spark.soft {
+      width: 11px;
       height: 7px;
       border-radius: 999px;
-      background: var(--accent);
-      box-shadow: 0 0 16px var(--accent);
-      pointer-events: none;
-      animation: rhinoSpark 0.8s ease-out forwards;
     }
     @keyframes rhinoFloat {
       0%, 100% { transform: translateY(0) rotate(0deg); }
-      50% { transform: translateY(-8px) rotate(-1.5deg); }
+      50% { transform: translateY(-9px) rotate(-1.4deg); }
     }
     @keyframes rhinoPulse {
-      0%, 100% { opacity: 0.22; transform: scale(0.94); }
-      50% { opacity: 0.58; transform: scale(1); }
+      0%, 100% { opacity: 0.18; transform: scale(0.94); }
+      50% { opacity: 0.48; transform: scale(1); }
     }
     @keyframes rhinoNod {
       0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
       35% { transform: translateY(-8px) rotate(-7deg) scale(1.05); }
       68% { transform: translateY(3px) rotate(5deg) scale(0.98); }
     }
+    @keyframes rhinoTwirl {
+      0% { transform: translateY(0) rotate(0deg) scale(1); }
+      45% { transform: translateY(-12px) rotate(18deg) scale(1.05); }
+      100% { transform: translateY(0) rotate(360deg) scale(1); }
+    }
+    @keyframes rhinoSquish {
+      0%, 100% { transform: scale(1); }
+      28% { transform: scale(1.12, 0.88) translateY(4px); }
+      62% { transform: scale(0.94, 1.08) translateY(-5px); }
+    }
     @keyframes rhinoBlink {
       0%, 92%, 100% { transform: scaleY(1); }
       94%, 96% { transform: scaleY(0.14); }
     }
+    @keyframes rhinoEarWiggle {
+      0%, 100% { transform: rotate(0deg); }
+      35% { transform: rotate(-10deg); }
+      68% { transform: rotate(8deg); }
+    }
+    @keyframes rhinoWave {
+      0%, 100% { transform: rotate(0deg); }
+      35% { transform: rotate(-16deg); }
+      70% { transform: rotate(12deg); }
+    }
     @keyframes rhinoSpark {
       to {
         opacity: 0;
-        transform: translate(var(--spark-x), var(--spark-y)) scale(0.2);
+        transform: translate(var(--spark-x), var(--spark-y)) rotate(var(--spark-r, 0deg)) scale(0.2);
       }
     }
 
@@ -1853,16 +1950,16 @@
         bottom: 84px;
       }
       .rhino-pet-btn {
-        width: 60px;
-        height: 60px;
-        border-radius: 14px;
+        width: 76px;
+        height: 76px;
+        border-radius: 22px;
       }
       .rhino-svg {
-        width: 48px;
-        height: 48px;
+        width: 66px;
+        height: 66px;
       }
       .rhino-bubble {
-        max-width: 152px;
+        max-width: 168px;
         font-size: 11px;
       }
     }
@@ -1876,6 +1973,8 @@
       .rhino-pet-btn,
       .rhino-pet-btn::before,
       .rhino-eye,
+      .rhino-ear,
+      .rhino-arm,
       .rhino-spark { animation: none !important; }
     }
 
@@ -2927,27 +3026,49 @@
   <div class="rhino-pet" id="rhinoPet" aria-live="polite">
     <div class="rhino-bubble" id="rhinoBubble">我回来了。</div>
     <button class="rhino-pet-btn" id="rhinoPetBtn" type="button" aria-label="唤醒小犀牛" title="小犀牛">
-      <svg class="rhino-svg" viewBox="0 0 120 120" aria-hidden="true">
+      <span class="rhino-pet-label" id="rhinoCombo">x2</span>
+      <svg class="rhino-svg" viewBox="0 0 160 160" aria-hidden="true">
         <defs>
-          <linearGradient id="rhinoBody" x1="18" y1="22" x2="102" y2="102" gradientUnits="userSpaceOnUse">
-            <stop stop-color="var(--accent)"/>
-            <stop offset="0.55" stop-color="var(--ink-soft)"/>
-            <stop offset="1" stop-color="var(--electric)"/>
+          <linearGradient id="rhinoVinyl" x1="28" y1="22" x2="136" y2="142" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#F7FDFF"/>
+            <stop offset="0.42" stop-color="#9FF3EA"/>
+            <stop offset="1" stop-color="#7B8DFF"/>
           </linearGradient>
-          <linearGradient id="rhinoHorn" x1="72" y1="26" x2="102" y2="34" gradientUnits="userSpaceOnUse">
-            <stop stop-color="#fff"/>
-            <stop offset="1" stop-color="var(--gold)"/>
+          <linearGradient id="rhinoFace" x1="38" y1="28" x2="122" y2="124" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#FFFFFF"/>
+            <stop offset="1" stop-color="#CBFBF5"/>
           </linearGradient>
+          <linearGradient id="rhinoHornCute" x1="84" y1="22" x2="124" y2="54" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#FFFBE9"/>
+            <stop offset="1" stop-color="#D7FF55"/>
+          </linearGradient>
+          <radialGradient id="rhinoBlush" cx="50%" cy="50%" r="50%">
+            <stop stop-color="#FF8FC5" stop-opacity="0.88"/>
+            <stop offset="1" stop-color="#FF8FC5" stop-opacity="0"/>
+          </radialGradient>
         </defs>
-        <path d="M20 67c0-20 16-35 39-35h14c16 0 28 10 28 24v24c0 8-6 14-14 14H43c-13 0-23-10-23-27Z" fill="url(#rhinoBody)" opacity="0.94"/>
-        <path d="M29 53c2-13 13-23 27-23h4L50 17c-1-2 1-4 3-3l23 16h1c14 0 25 9 25 22v7H29v-6Z" fill="color-mix(in oklab, var(--surface-strong) 72%, var(--accent) 28%)"/>
-        <path d="M81 35l27-13-10 27-17-14Z" fill="url(#rhinoHorn)"/>
-        <path d="M48 31 35 17l-3 25" fill="color-mix(in oklab, var(--electric) 64%, var(--surface-strong) 36%)"/>
-        <path d="M44 74h42c8 0 14-5 15-13l2-9 8 16-12 20c-5 8-13 12-23 12H48c-15 0-26-10-28-25 7 4 15 5 24-1Z" fill="color-mix(in oklab, var(--surface-strong) 38%, var(--accent) 62%)"/>
-        <path d="M38 93v12M78 93v12" stroke="var(--ink)" stroke-width="8" stroke-linecap="round" opacity="0.52"/>
-        <circle class="rhino-eye" cx="70" cy="49" r="4" fill="var(--bg)"/>
-        <circle cx="91" cy="67" r="3" fill="var(--bg)" opacity="0.68"/>
-        <path d="M57 69c8 5 18 5 29 0" fill="none" stroke="var(--bg)" stroke-width="4" stroke-linecap="round" opacity="0.62"/>
+        <ellipse cx="80" cy="129" rx="42" ry="10" fill="#000" opacity="0.18"/>
+        <path class="rhino-ear" d="M48 43c-13-13-24-15-31-8-8 8 0 25 18 35Z" fill="#8ADFD8"/>
+        <path class="rhino-ear" d="M112 43c13-13 24-15 31-8 8 8 0 25-18 35Z" fill="#8B9AFF"/>
+        <path d="M37 106c0-26 18-45 43-45s43 19 43 45c0 24-17 38-43 38s-43-14-43-38Z" fill="url(#rhinoVinyl)"/>
+        <path d="M24 72c0-34 24-57 56-57s56 23 56 57c0 35-23 56-56 56S24 107 24 72Z" fill="url(#rhinoFace)"/>
+        <path d="M82 18c10 8 22 18 31 31L86 58Z" fill="url(#rhinoHornCute)"/>
+        <path d="M75 19c-3 15-8 25-17 36l28 3Z" fill="#F3F7FF"/>
+        <circle cx="54" cy="74" r="15" fill="#111827"/>
+        <circle cx="106" cy="74" r="15" fill="#111827"/>
+        <circle class="rhino-eye" cx="59" cy="69" r="5" fill="#FFFFFF"/>
+        <circle class="rhino-eye" cx="111" cy="69" r="5" fill="#FFFFFF"/>
+        <circle cx="51" cy="79" r="3" fill="#FFFFFF" opacity="0.58"/>
+        <circle cx="103" cy="79" r="3" fill="#FFFFFF" opacity="0.58"/>
+        <ellipse class="rhino-cheek" cx="43" cy="92" rx="16" ry="10" fill="url(#rhinoBlush)"/>
+        <ellipse class="rhino-cheek" cx="117" cy="92" rx="16" ry="10" fill="url(#rhinoBlush)"/>
+        <path d="M66 96c4 5 8 7 14 7s10-2 14-7" fill="none" stroke="#101421" stroke-width="5" stroke-linecap="round"/>
+        <path d="M76 84h8l-4 7Z" fill="#101421" opacity="0.62"/>
+        <path class="rhino-arm" d="M36 111c-15 0-23-7-25-17" fill="none" stroke="#8ADFD8" stroke-width="14" stroke-linecap="round"/>
+        <path class="rhino-arm" d="M124 111c15 0 23-7 25-17" fill="none" stroke="#8B9AFF" stroke-width="14" stroke-linecap="round"/>
+        <path d="M59 136v11M101 136v11" stroke="#172033" stroke-width="11" stroke-linecap="round"/>
+        <circle cx="45" cy="40" r="7" fill="#FFFFFF" opacity="0.26"/>
+        <path d="M36 58c8-21 26-31 48-29" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" opacity="0.34"/>
       </svg>
     </button>
   </div>
@@ -3523,38 +3644,92 @@
       const pet = document.getElementById('rhinoPet');
       const btn = document.getElementById('rhinoPetBtn');
       const bubble = document.getElementById('rhinoBubble');
+      const comboBadge = document.getElementById('rhinoCombo');
       if (!pet || !btn || !bubble) return;
 
       const lines = [
-        '我回来了。',
+        '我变萌了。',
         '今天也要追信号。',
         '日报别忘了看。',
         '我替你守着页面。',
-        '点我干嘛，我在巡逻。',
-        '有新想法就往前冲。'
+        '点我一下，充电完成。',
+        '新想法来了就往前冲。',
+        '我正在扫描 AI 世界。',
+        '这页现在由我守护。',
+        '别急，慢慢把作品做漂亮。',
+        '小伯爵在线营业。'
       ];
-      let lineIndex = 0;
+      const idleLines = [
+        '我还在这儿。',
+        '要不要去看一眼日报？',
+        '今天也适合写点东西。',
+        '我在等你的下一个灵感。',
+        '页面巡逻中。'
+      ];
+      const comboLines = [
+        '连击成功。',
+        '手速不错。',
+        '我被点醒了。',
+        '能量上涨中。',
+        '小犀牛进入工作状态。'
+      ];
+      const holdLines = [
+        '脸要被揉圆了。',
+        '这样会更萌吗？',
+        '收到，开始蓄力。',
+        '别捏太久，我会害羞。'
+      ];
+      let lineIndex = -1;
       let bubbleTimer = null;
       let drag = null;
+      let clickTimer = null;
+      let holdTimer = null;
+      let idleTimer = null;
+      let combo = 0;
+      let comboTimer = null;
+      let longPressed = false;
 
-      function showBubble(text) {
+      function showBubble(text, duration) {
         clearTimeout(bubbleTimer);
         bubble.textContent = text;
         bubble.classList.add('show');
-        bubbleTimer = setTimeout(() => bubble.classList.remove('show'), 2400);
+        bubbleTimer = setTimeout(() => bubble.classList.remove('show'), duration || 2600);
       }
 
-      function spark(count) {
+      function resetIdle() {
+        clearTimeout(idleTimer);
+        idleTimer = setTimeout(() => {
+          if (!pet.classList.contains('dragging')) {
+            showBubble(idleLines[Math.floor(Math.random() * idleLines.length)], 3000);
+            pet.classList.add('sleepy');
+            setTimeout(() => pet.classList.remove('sleepy'), 1100);
+          }
+          resetIdle();
+        }, 11000 + Math.random() * 9000);
+      }
+
+      function pulse(className, duration) {
+        pet.classList.remove(className);
+        void pet.offsetWidth;
+        pet.classList.add(className);
+        setTimeout(() => pet.classList.remove(className), duration || 700);
+      }
+
+      function spark(count, mode) {
         const rect = btn.getBoundingClientRect();
+        const colors = ['var(--accent)', 'var(--accent-2)', 'var(--gold)', 'var(--electric)'];
         for (let i = 0; i < count; i += 1) {
           const dot = document.createElement('span');
-          dot.className = 'rhino-spark';
+          const shape = mode === 'soft' ? ' soft' : (i % 3 === 0 ? ' star' : '');
+          dot.className = 'rhino-spark' + shape;
           dot.style.left = (rect.width * (0.28 + Math.random() * 0.48)) + 'px';
           dot.style.top = (rect.height * (0.28 + Math.random() * 0.44)) + 'px';
           dot.style.setProperty('--spark-x', (Math.random() * 82 - 41) + 'px');
           dot.style.setProperty('--spark-y', (-24 - Math.random() * 56) + 'px');
+          dot.style.setProperty('--spark-r', (Math.random() * 180 - 90) + 'deg');
+          dot.style.setProperty('--spark-color', colors[i % colors.length]);
           btn.appendChild(dot);
-          setTimeout(() => dot.remove(), 900);
+          setTimeout(() => dot.remove(), 950);
         }
       }
 
@@ -3569,17 +3744,52 @@
         pet.style.bottom = 'auto';
       }
 
-      btn.addEventListener('click', () => {
+      function updateCombo() {
+        combo += 1;
+        clearTimeout(comboTimer);
+        if (comboBadge) comboBadge.textContent = 'x' + combo;
+        if (combo >= 2) pet.classList.add('combo');
+        if (combo >= 4) {
+          showBubble(comboLines[Math.floor(Math.random() * comboLines.length)], 2600);
+          spark(12, 'soft');
+        }
+        comboTimer = setTimeout(() => {
+          combo = 0;
+          pet.classList.remove('combo');
+        }, 1800);
+      }
+
+      function doClick() {
         if (drag && drag.moved) return;
-        pet.classList.remove('excited');
-        void pet.offsetWidth;
-        pet.classList.add('excited');
-        spark(7);
+        pulse('excited', 720);
+        spark(8);
+        updateCombo();
         lineIndex = (lineIndex + 1) % lines.length;
         showBubble(lines[lineIndex]);
+        resetIdle();
+      }
+
+      btn.addEventListener('click', () => {
+        clearTimeout(clickTimer);
+        if (longPressed) {
+          longPressed = false;
+          return;
+        }
+        clickTimer = setTimeout(doClick, 180);
+      });
+
+      btn.addEventListener('dblclick', event => {
+        event.preventDefault();
+        clearTimeout(clickTimer);
+        pulse('twirl', 900);
+        spark(14);
+        updateCombo();
+        showBubble('双击收到，转一圈给你看。', 2600);
+        resetIdle();
       });
 
       btn.addEventListener('pointerdown', event => {
+        longPressed = false;
         drag = {
           startX: event.clientX,
           startY: event.clientY,
@@ -3588,6 +3798,15 @@
           moved: false
         };
         btn.setPointerCapture(event.pointerId);
+        clearTimeout(holdTimer);
+        holdTimer = setTimeout(() => {
+          if (!drag || drag.moved) return;
+          longPressed = true;
+          pulse('squish', 800);
+          spark(10, 'soft');
+          showBubble(holdLines[Math.floor(Math.random() * holdLines.length)], 2800);
+          resetIdle();
+        }, 720);
       });
 
       btn.addEventListener('pointermove', event => {
@@ -3596,23 +3815,31 @@
         const dy = event.clientY - drag.startY;
         if (!drag.moved && Math.hypot(dx, dy) > 7) {
           drag.moved = true;
+          clearTimeout(holdTimer);
           pet.classList.add('dragging');
-          showBubble('换个位置守着。');
+          showBubble('换个位置继续守着。', 2200);
         }
         if (drag.moved) setPetPosition(drag.left + dx, drag.top + dy);
       });
 
       btn.addEventListener('pointerup', event => {
+        clearTimeout(holdTimer);
         if (!drag) return;
-        btn.releasePointerCapture(event.pointerId);
+        try { btn.releasePointerCapture(event.pointerId); } catch (e) {}
         pet.classList.remove('dragging');
-        if (drag.moved) spark(4);
+        if (drag.moved) {
+          spark(5);
+          showBubble('这里视野不错。', 2200);
+        }
         setTimeout(() => { drag = null; }, 0);
+        resetIdle();
       });
 
       btn.addEventListener('pointercancel', () => {
+        clearTimeout(holdTimer);
         drag = null;
         pet.classList.remove('dragging');
+        resetIdle();
       });
 
       window.addEventListener('resize', () => {
@@ -3621,7 +3848,11 @@
         }
       }, { passive: true });
 
-      setTimeout(() => showBubble('我回来了。'), 1200);
+      setTimeout(() => {
+        showBubble('我换了新造型。', 3000);
+        spark(6, 'soft');
+      }, 1200);
+      resetIdle();
     })();
   </script>
 </body>
