@@ -1644,6 +1644,128 @@
       height: 18px;
     }
 
+    /* =========================================================
+     * Floating rhino pet
+     * ========================================================= */
+    .rhino-pet {
+      position: fixed;
+      right: 24px;
+      bottom: 92px;
+      z-index: 46;
+      display: grid;
+      justify-items: end;
+      gap: 10px;
+      pointer-events: none;
+      touch-action: none;
+    }
+    .rhino-bubble {
+      max-width: 184px;
+      padding: 10px 12px;
+      border: 1px solid color-mix(in oklab, var(--accent) 44%, var(--line-2));
+      border-radius: 8px;
+      background:
+        linear-gradient(135deg, color-mix(in oklab, var(--surface-strong) 86%, transparent), color-mix(in oklab, var(--surface) 82%, var(--electric) 18%));
+      color: var(--ink);
+      box-shadow: var(--shadow-1), var(--shadow-2), 0 0 30px -18px var(--accent);
+      font-size: 12px;
+      line-height: 1.45;
+      opacity: 0;
+      transform: translateY(8px) scale(0.96);
+      transition: opacity 0.22s ease, transform 0.22s ease;
+      pointer-events: none;
+      backdrop-filter: blur(16px) saturate(1.35);
+    }
+    .rhino-bubble.show {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    .rhino-pet-btn {
+      position: relative;
+      width: 72px;
+      height: 72px;
+      border: 1px solid color-mix(in oklab, var(--accent) 48%, var(--line-2));
+      border-radius: 16px;
+      background:
+        radial-gradient(circle at 36% 24%, rgba(255,255,255,0.18), transparent 34%),
+        linear-gradient(145deg, color-mix(in oklab, var(--surface-strong) 82%, var(--accent) 18%), color-mix(in oklab, var(--surface) 78%, var(--electric) 22%));
+      box-shadow: var(--shadow-1), var(--shadow-2), 0 18px 48px -30px var(--accent);
+      color: var(--ink);
+      display: grid;
+      place-items: center;
+      pointer-events: auto;
+      cursor: grab;
+      transform-origin: 50% 90%;
+      animation: rhinoFloat 4.8s ease-in-out infinite;
+      transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+    }
+    .rhino-pet-btn::before {
+      content: "";
+      position: absolute;
+      inset: -7px;
+      border-radius: 20px;
+      border: 1px solid color-mix(in oklab, var(--accent) 28%, transparent);
+      opacity: 0.42;
+      transform: scale(0.94);
+      animation: rhinoPulse 2.8s ease-in-out infinite;
+    }
+    .rhino-pet-btn:hover,
+    .rhino-pet-btn:focus-visible {
+      border-color: var(--accent);
+      box-shadow: var(--shadow-1), var(--shadow-2), var(--shadow-glow);
+      transform: translateY(-4px) rotate(-2deg);
+      outline: none;
+    }
+    .rhino-pet.dragging .rhino-pet-btn {
+      cursor: grabbing;
+      animation-play-state: paused;
+      transform: scale(1.04) rotate(3deg);
+    }
+    .rhino-pet.excited .rhino-pet-btn {
+      animation: rhinoNod 0.5s ease;
+    }
+    .rhino-svg {
+      width: 58px;
+      height: 58px;
+      filter: drop-shadow(0 12px 14px rgba(0,0,0,0.22));
+    }
+    .rhino-eye {
+      animation: rhinoBlink 5.5s linear infinite;
+      transform-origin: center;
+    }
+    .rhino-spark {
+      position: absolute;
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 16px var(--accent);
+      pointer-events: none;
+      animation: rhinoSpark 0.8s ease-out forwards;
+    }
+    @keyframes rhinoFloat {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-8px) rotate(-1.5deg); }
+    }
+    @keyframes rhinoPulse {
+      0%, 100% { opacity: 0.22; transform: scale(0.94); }
+      50% { opacity: 0.58; transform: scale(1); }
+    }
+    @keyframes rhinoNod {
+      0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+      35% { transform: translateY(-8px) rotate(-7deg) scale(1.05); }
+      68% { transform: translateY(3px) rotate(5deg) scale(0.98); }
+    }
+    @keyframes rhinoBlink {
+      0%, 92%, 100% { transform: scaleY(1); }
+      94%, 96% { transform: scaleY(0.14); }
+    }
+    @keyframes rhinoSpark {
+      to {
+        opacity: 0;
+        transform: translate(var(--spark-x), var(--spark-y)) scale(0.2);
+      }
+    }
+
     .gesture-trail {
       position: fixed;
       width: 8px;
@@ -1726,6 +1848,23 @@
       .contact-channel { width: 100%; justify-content: space-between; }
       .subscribe-form { flex-direction: column; }
       .subscribe-form button { width: 100%; }
+      .rhino-pet {
+        right: 14px;
+        bottom: 84px;
+      }
+      .rhino-pet-btn {
+        width: 60px;
+        height: 60px;
+        border-radius: 14px;
+      }
+      .rhino-svg {
+        width: 48px;
+        height: 48px;
+      }
+      .rhino-bubble {
+        max-width: 152px;
+        font-size: 11px;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -1733,7 +1872,11 @@
       html { scroll-behavior: auto; }
       .ambient-canvas,
       .cursor-aura,
-      .gesture-trail { display: none !important; }
+      .gesture-trail,
+      .rhino-pet-btn,
+      .rhino-pet-btn::before,
+      .rhino-eye,
+      .rhino-spark { animation: none !important; }
     }
 
     .render-target { opacity: 0; transition: opacity 0.4s ease; }
@@ -2780,6 +2923,35 @@
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
   </button>
 
+  <!-- Floating rhino pet -->
+  <div class="rhino-pet" id="rhinoPet" aria-live="polite">
+    <div class="rhino-bubble" id="rhinoBubble">我回来了。</div>
+    <button class="rhino-pet-btn" id="rhinoPetBtn" type="button" aria-label="唤醒小犀牛" title="小犀牛">
+      <svg class="rhino-svg" viewBox="0 0 120 120" aria-hidden="true">
+        <defs>
+          <linearGradient id="rhinoBody" x1="18" y1="22" x2="102" y2="102" gradientUnits="userSpaceOnUse">
+            <stop stop-color="var(--accent)"/>
+            <stop offset="0.55" stop-color="var(--ink-soft)"/>
+            <stop offset="1" stop-color="var(--electric)"/>
+          </linearGradient>
+          <linearGradient id="rhinoHorn" x1="72" y1="26" x2="102" y2="34" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#fff"/>
+            <stop offset="1" stop-color="var(--gold)"/>
+          </linearGradient>
+        </defs>
+        <path d="M20 67c0-20 16-35 39-35h14c16 0 28 10 28 24v24c0 8-6 14-14 14H43c-13 0-23-10-23-27Z" fill="url(#rhinoBody)" opacity="0.94"/>
+        <path d="M29 53c2-13 13-23 27-23h4L50 17c-1-2 1-4 3-3l23 16h1c14 0 25 9 25 22v7H29v-6Z" fill="color-mix(in oklab, var(--surface-strong) 72%, var(--accent) 28%)"/>
+        <path d="M81 35l27-13-10 27-17-14Z" fill="url(#rhinoHorn)"/>
+        <path d="M48 31 35 17l-3 25" fill="color-mix(in oklab, var(--electric) 64%, var(--surface-strong) 36%)"/>
+        <path d="M44 74h42c8 0 14-5 15-13l2-9 8 16-12 20c-5 8-13 12-23 12H48c-15 0-26-10-28-25 7 4 15 5 24-1Z" fill="color-mix(in oklab, var(--surface-strong) 38%, var(--accent) 62%)"/>
+        <path d="M38 93v12M78 93v12" stroke="var(--ink)" stroke-width="8" stroke-linecap="round" opacity="0.52"/>
+        <circle class="rhino-eye" cx="70" cy="49" r="4" fill="var(--bg)"/>
+        <circle cx="91" cy="67" r="3" fill="var(--bg)" opacity="0.68"/>
+        <path d="M57 69c8 5 18 5 29 0" fill="none" stroke="var(--bg)" stroke-width="4" stroke-linecap="round" opacity="0.62"/>
+      </svg>
+    </button>
+  </div>
+
   <footer class="site-footer" id="siteFooter">
     <div class="container foot">
       <div data-bind="footerLeft">&copy; 2026 犀牛伯爵 \00B7 一切笔记，皆可咀嚼</div>
@@ -3215,48 +3387,8 @@
         if (fr && D.footer.right) fr.textContent = D.footer.right;
       }
 
-      /* Meta + SEO */
-      if (D.meta) {
-        const m = D.meta;
-        if (m.title) document.title = m.title;
-
-        // 动态更新 meta 标签
-        function setMeta(name, content) {
-          if (!content) return;
-          let el = document.querySelector(`meta[name="${name}"], meta[property="${name}"]`);
-          if (!el) {
-            el = document.createElement('meta');
-            if (name.startsWith('og:') || name.startsWith('twitter:')) {
-              el.setAttribute('property', name);
-            } else {
-              el.setAttribute('name', name);
-            }
-            document.head.appendChild(el);
-          }
-          el.setAttribute('content', content);
-        }
-        setMeta('description', m.description);
-        setMeta('keywords', m.keywords);
-        setMeta('og:title', m.title);
-        setMeta('og:description', m.description);
-        setMeta('og:url', m.siteUrl);
-        setMeta('og:image', m.siteUrl + m.ogImage);
-        setMeta('og:type', m.ogType || 'website');
-        setMeta('og:locale', m.ogLocale || 'zh_CN');
-        setMeta('twitter:title', m.title);
-        setMeta('twitter:description', m.description);
-        setMeta('twitter:image', m.siteUrl + m.ogImage);
-        if (m.twitterSite) setMeta('twitter:site', m.twitterSite);
-        if (m.twitterCreator) setMeta('twitter:creator', m.twitterCreator);
-      }
-
-      // Inject JSON-LD structured data
-      if (D.structuredData) {
-        var script = document.createElement('script');
-        script.type = 'application/ld+json';
-        script.textContent = JSON.stringify(D.structuredData, null, 2);
-        document.head.appendChild(script);
-      }
+      /* Meta */
+      if (D.meta && D.meta.title) document.title = D.meta.title;
 
       /* Reveal + observe initial */
       document.querySelector('main').classList.add('ready');
@@ -3384,6 +3516,112 @@
           pointer = { x: event.clientX, y: event.clientY };
         }, { passive: true });
       }
+    })();
+
+    /* Floating rhino pet */
+    (function () {
+      const pet = document.getElementById('rhinoPet');
+      const btn = document.getElementById('rhinoPetBtn');
+      const bubble = document.getElementById('rhinoBubble');
+      if (!pet || !btn || !bubble) return;
+
+      const lines = [
+        '我回来了。',
+        '今天也要追信号。',
+        '日报别忘了看。',
+        '我替你守着页面。',
+        '点我干嘛，我在巡逻。',
+        '有新想法就往前冲。'
+      ];
+      let lineIndex = 0;
+      let bubbleTimer = null;
+      let drag = null;
+
+      function showBubble(text) {
+        clearTimeout(bubbleTimer);
+        bubble.textContent = text;
+        bubble.classList.add('show');
+        bubbleTimer = setTimeout(() => bubble.classList.remove('show'), 2400);
+      }
+
+      function spark(count) {
+        const rect = btn.getBoundingClientRect();
+        for (let i = 0; i < count; i += 1) {
+          const dot = document.createElement('span');
+          dot.className = 'rhino-spark';
+          dot.style.left = (rect.width * (0.28 + Math.random() * 0.48)) + 'px';
+          dot.style.top = (rect.height * (0.28 + Math.random() * 0.44)) + 'px';
+          dot.style.setProperty('--spark-x', (Math.random() * 82 - 41) + 'px');
+          dot.style.setProperty('--spark-y', (-24 - Math.random() * 56) + 'px');
+          btn.appendChild(dot);
+          setTimeout(() => dot.remove(), 900);
+        }
+      }
+
+      function setPetPosition(x, y) {
+        const margin = 12;
+        const rect = pet.getBoundingClientRect();
+        const maxX = window.innerWidth - rect.width - margin;
+        const maxY = window.innerHeight - rect.height - margin;
+        pet.style.left = Math.max(margin, Math.min(maxX, x)) + 'px';
+        pet.style.top = Math.max(margin, Math.min(maxY, y)) + 'px';
+        pet.style.right = 'auto';
+        pet.style.bottom = 'auto';
+      }
+
+      btn.addEventListener('click', () => {
+        if (drag && drag.moved) return;
+        pet.classList.remove('excited');
+        void pet.offsetWidth;
+        pet.classList.add('excited');
+        spark(7);
+        lineIndex = (lineIndex + 1) % lines.length;
+        showBubble(lines[lineIndex]);
+      });
+
+      btn.addEventListener('pointerdown', event => {
+        drag = {
+          startX: event.clientX,
+          startY: event.clientY,
+          left: pet.getBoundingClientRect().left,
+          top: pet.getBoundingClientRect().top,
+          moved: false
+        };
+        btn.setPointerCapture(event.pointerId);
+      });
+
+      btn.addEventListener('pointermove', event => {
+        if (!drag) return;
+        const dx = event.clientX - drag.startX;
+        const dy = event.clientY - drag.startY;
+        if (!drag.moved && Math.hypot(dx, dy) > 7) {
+          drag.moved = true;
+          pet.classList.add('dragging');
+          showBubble('换个位置守着。');
+        }
+        if (drag.moved) setPetPosition(drag.left + dx, drag.top + dy);
+      });
+
+      btn.addEventListener('pointerup', event => {
+        if (!drag) return;
+        btn.releasePointerCapture(event.pointerId);
+        pet.classList.remove('dragging');
+        if (drag.moved) spark(4);
+        setTimeout(() => { drag = null; }, 0);
+      });
+
+      btn.addEventListener('pointercancel', () => {
+        drag = null;
+        pet.classList.remove('dragging');
+      });
+
+      window.addEventListener('resize', () => {
+        if (pet.style.left && pet.style.top) {
+          setPetPosition(parseFloat(pet.style.left), parseFloat(pet.style.top));
+        }
+      }, { passive: true });
+
+      setTimeout(() => showBubble('我回来了。'), 1200);
     })();
   </script>
 </body>
