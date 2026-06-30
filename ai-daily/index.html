@@ -465,8 +465,13 @@
             '"AI早报，每天8点精选关键动态。"</div></div>';
           return;
         }
+        function articleHref(href) {
+          href = String(href || '#');
+          if (href.indexOf('ai-daily/') === 0) return href.replace(/^ai-daily\//, '');
+          return href;
+        }
         list.innerHTML = articles.map(function(a) {
-          return '<a class="article-card" href="' + esc(a.href) + '">' +
+          return '<a class="article-card" href="' + esc(articleHref(a.href)) + '">' +
             '<div class="art-meta">' +
             '<span class="cat">' + esc(a.cat || 'AI早报') + '</span>' +
             '<span class="date">' + esc(a.date || '') + '</span>' +
