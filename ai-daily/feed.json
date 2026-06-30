@@ -1,6 +1,13 @@
 {
-  "updated": "2026-06-30T00:00:00+08:00",
+  "updated": "2026-06-30T09:30:00+08:00",
   "articles": [
+    {
+      "cat": "产品 · 技术",
+      "date": "2026-06-30",
+      "title": "Anthropic估值9650亿超OpenAI + WAIC 2026定档7月 + 诺贝尔奖得主跳槽",
+      "excerpt": "Anthropic估值9650亿美元超越OpenAI，诺贝尔奖得主John Jumper从Google DeepMind跳槽Anthropic，WAIC 2026定档7月17日上海，超300款AI产品首发。",
+      "href": "ai-daily/2026-06-30-anthropic-965b-waic-2026.html"
+    },
     {
       "cat": "产品 · 技术",
       "date": "2026-06-28",
