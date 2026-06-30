@@ -3215,8 +3215,48 @@
         if (fr && D.footer.right) fr.textContent = D.footer.right;
       }
 
-      /* Meta */
-      if (D.meta && D.meta.title) document.title = D.meta.title;
+      /* Meta + SEO */
+      if (D.meta) {
+        const m = D.meta;
+        if (m.title) document.title = m.title;
+
+        // 动态更新 meta 标签
+        function setMeta(name, content) {
+          if (!content) return;
+          let el = document.querySelector(`meta[name="${name}"], meta[property="${name}"]`);
+          if (!el) {
+            el = document.createElement('meta');
+            if (name.startsWith('og:') || name.startsWith('twitter:')) {
+              el.setAttribute('property', name);
+            } else {
+              el.setAttribute('name', name);
+            }
+            document.head.appendChild(el);
+          }
+          el.setAttribute('content', content);
+        }
+        setMeta('description', m.description);
+        setMeta('keywords', m.keywords);
+        setMeta('og:title', m.title);
+        setMeta('og:description', m.description);
+        setMeta('og:url', m.siteUrl);
+        setMeta('og:image', m.siteUrl + m.ogImage);
+        setMeta('og:type', m.ogType || 'website');
+        setMeta('og:locale', m.ogLocale || 'zh_CN');
+        setMeta('twitter:title', m.title);
+        setMeta('twitter:description', m.description);
+        setMeta('twitter:image', m.siteUrl + m.ogImage);
+        if (m.twitterSite) setMeta('twitter:site', m.twitterSite);
+        if (m.twitterCreator) setMeta('twitter:creator', m.twitterCreator);
+      }
+
+      // Inject JSON-LD structured data
+      if (D.structuredData) {
+        var script = document.createElement('script');
+        script.type = 'application/ld+json';
+        script.textContent = JSON.stringify(D.structuredData, null, 2);
+        document.head.appendChild(script);
+      }
 
       /* Reveal + observe initial */
       document.querySelector('main').classList.add('ready');
