@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#05050A"/>
+      <stop offset="0.55" stop-color="#0B0D16"/>
+      <stop offset="1" stop-color="#16061B"/>
+    </linearGradient>
+    <linearGradient id="text" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#8C93A8"/>
+    </linearGradient>
+    <pattern id="dots" width="24" height="24" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.2" fill="#FFFFFF" opacity="0.20"/>
+    </pattern>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#dots)" opacity="0.72"/>
+  <path d="M0 116H1200M0 514H1200M90 0V630M1110 0V630" stroke="#2FF7E8" stroke-opacity="0.18"/>
+  <path d="M770 90C970 78 1080 170 1128 300C1058 420 922 503 738 482C584 464 500 375 518 270C535 170 620 98 770 90Z" fill="#2FF7E8" opacity="0.16" filter="url(#glow)"/>
+  <path d="M226 508C142 432 118 326 168 222C222 112 338 84 474 128C346 188 304 274 344 388C368 456 326 502 226 508Z" fill="#FF2EA6" opacity="0.16" filter="url(#glow)"/>
+  <text x="92" y="128" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="800" letter-spacing="12" fill="#2FF7E8">AI · MACRO · NOTES</text>
+  <text x="92" y="356" font-family="Impact, Bebas Neue, Arial Black, sans-serif" font-size="166" letter-spacing="0" fill="url(#text)">RHINO</text>
+  <text x="92" y="486" font-family="Impact, Bebas Neue, Arial Black, sans-serif" font-size="166" letter-spacing="0" fill="none" stroke="#F6F7FB" stroke-opacity="0.72" stroke-width="2">COUNT</text>
+  <text x="94" y="552" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="700" fill="#F6F7FB">犀牛伯爵 · AI 时代的记录者</text>
+  <rect x="852" y="404" width="238" height="66" rx="8" fill="#05050A" fill-opacity="0.72" stroke="#2FF7E8" stroke-opacity="0.55"/>
+  <text x="890" y="447" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="800" letter-spacing="5" fill="#D7FF55">LIVE SIGNAL</text>
+</svg>

@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://zjeep-arch.github.io/rhino-count-site/sitemap.xml
+# deploy-refresh: 2026-06-30 creation-lab

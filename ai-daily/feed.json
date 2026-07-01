@@ -1,0 +1,26 @@
+{
+  "updated": "2026-06-30T09:30:00+08:00",
+  "articles": [
+    {
+      "cat": "产品 · 技术",
+      "date": "2026-06-30",
+      "title": "Anthropic估值9650亿超OpenAI + WAIC 2026定档7月 + 诺贝尔奖得主跳槽",
+      "excerpt": "Anthropic估值9650亿美元超越OpenAI，诺贝尔奖得主John Jumper从Google DeepMind跳槽Anthropic，WAIC 2026定档7月17日上海，超300款AI产品首发。",
+      "href": "2026-06-30-anthropic-965b-waic-2026.html"
+    },
+    {
+      "cat": "产品 · 技术",
+      "date": "2026-06-28",
+      "title": "GPT-5.6正式发布：白宫叫停公开上线，中国模型OpenRouter占比超50%",
+      "excerpt": "OpenAI发布GPT-5.6三档（Sol/Terra/Luna），白宫要求仅限20家合作伙伴。Anthropic指控Qwen蒸馏。中国AI模型在OpenRouter调用量18个月从1.2%飙至50%+。",
+      "href": "2026-06-28-gpt-5-6-restricted-china-models.html"
+    },
+    {
+      "cat": "产品 · 技术",
+      "date": "2026-06-27",
+      "title": "GPT-5.6三模型齐发 + DeepSeek开源DSpark + Google人才大出血",
+      "excerpt": "OpenAI发布Sol/Terra/Luna三档定位。DeepSeek联合北大开源DSpark推理框架提速60%-85%。Google一周流失4名AI核心研究员投奔Anthropic，市值蒸发2700亿美元。",
+      "href": "2026-06-27-gpt-5-6-deepseek-dspark.html"
+    }
+  ]
+}

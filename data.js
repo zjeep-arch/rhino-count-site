@@ -17,16 +17,22 @@ window.SITE_DATA = {
     domain: "zjeep-arch.github.io",           // ← 上线时改成你的真实域名
     repo: "rhino-count-site",           // GitHub 仓库名
     articlesFeed: "articles/feed.json",  // 文章列表数据源
+    publishDate: "2026-06-30",
   },
 
   /* ---------- 浏览器标签 + SEO ---------- */
   meta: {
-    title: "犀牛伯爵 · AI 时代的记录者",
-    description: "犀牛伯爵 — 北大本科、AI 大厂从业者。记录 AI 与趋势变化，分享学习方法与踩过的坑。每日时评，宏观视野。",
-    keywords: "犀牛伯爵, AI, 大模型, 学习方法, 北大, 小红书, AI 大厂, Prompt, Agent, 时评, 宏观分析",
+    title: "犀牛伯爵 · AI 创作实验室 — AI-native Builder & Agent 工作流",
+    titleShort: "犀牛伯爵 · AI 创作实验室",
+    description: "犀牛伯爵（Rhino Count）— 北大本科，AI 大厂从业者。记录 Agent 工作流、AI 写作、宏观科技观察与内容产品化实验。",
+    keywords: "犀牛伯爵, Rhino Count, AI, Agent workflow, AI-native, 大模型, AI写作, 学习方法, 北大, 小红书, AI大厂, Prompt工程, 系统思维, 宏观分析, 创作实验室, 每日时评",
     author: "犀牛伯爵",
     siteUrl: "https://zjeep-arch.github.io/rhino-count-site/",
-    ogImage: "https://count-rhino-ai.lovable.app/assets/rhino-count-hero-B4tc0a8K.jpg"
+    ogImage: "assets/og-card.svg",
+    ogType: "website",
+    ogLocale: "zh_CN",
+    twitterSite: "@rhinocount",
+    twitterCreator: "@rhinocount",
   },
 
   /* ---------- 顶栏 ---------- */
@@ -34,11 +40,12 @@ window.SITE_DATA = {
     brand: "犀牛伯爵",
     badge: "EST · BJ",
     nav: [
-      { label: "关于",  href: "#about" },
+      { label: "关于",  href: "#profile" },
       { label: "笔记",  href: "#notes" },
+      { label: "创作",  href: "#builds" },
+      { label: "日报",  href: "#daily" },
       { label: "时评",  href: "#commentary" },
       { label: "主张",  href: "#manifesto" },
-      { label: "游戏",  href: "games/duck-scare-war.html" },
       { label: "联络",  href: "#contact" }
     ],
     cta: {
@@ -49,20 +56,109 @@ window.SITE_DATA = {
 
   /* ---------- 首屏 Hero ---------- */
   hero: {
-    eyebrow: "AI · 趋势 · 记录",
-    titleMain: "一只阅读时代的",
-    titleAccent: "犀牛伯爵",
-    lede: "北大本科，高考数学满分。如今在 AI 大厂打工，把每一次模型的呼吸、每一条趋势的暗涌，写成可以慢慢咀嚼的笔记。每晚一篇宏观时评，闲聊陪你理解这个世界。",
-    ctaPrimary:   { label: "阅读最新笔记 →", href: "#notes" },
-    ctaSecondary: { label: "每日时评",         href: "#commentary" },
-    portrait: {
-      src: "https://count-rhino-ai.lovable.app/assets/rhino-count-hero-B4tc0a8K.jpg",
-      alt: "犀牛伯爵 — 巴洛克风格肖像",
-      caption: "OIL ON SILICON · 2026 N° 001"
+    eyebrow: "RHINO COUNT · LIVE SIGNAL",
+    titleMain: "HI, I'M",
+    titleAccent: "RHINO",
+    lede: "北大本科，高考数学满分。AI 大厂从业者。用 AI agent 把观察、写作、产品实验和工作流，沉淀成可复用的个人创作系统。",
+    ctaPrimary:   { label: "进入创作矩阵 →", href: "#builds" },
+    ctaSecondary: { label: "阅读最新笔记",     href: "#notes" },
+    motion: {
+      src: "assets/hero-motion.mp4"
     },
+    keywords: [
+      "AI NATIVE",
+      "AGENT WORKFLOW",
+      "MACRO RADAR",
+      "PROMPT ENGINEERING",
+      "SYSTEM THINKING",
+      "MODEL WATCH",
+      "TREND SIGNAL",
+      "DAILY BRIEF"
+    ],
     stats: [
       { num: "50000+", lbl: "followers" },
       { num: "10000+", lbl: "likes" }
+    ]
+  },
+
+  /* ---------- 创作矩阵 Builds / Playbooks ---------- */
+  lab: {
+    label: "CREATION MATRIX · 创作矩阵",
+    headingLine1: "把想法，",
+    headingLine2: "做成作品。",
+    blurb: "这里不只放页面，而是把每一次 AI 实验整理成可读、可复用、可继续迭代的内容资产。",
+    tracks: [
+      {
+        tag: "BUILD",
+        title: "AI Workflow Lab",
+        desc: "把日常创作、资料整理、网页生成和自动化流程拆成可复用工作流。",
+        linkLabel: "查看站点",
+        href: "https://zjeep-arch.github.io/rhino-count-site/"
+      },
+      {
+        tag: "WRITE",
+        title: "AI-native Writing",
+        desc: "记录模型变化、Agent 思维、学习方法，以及普通人如何用 AI 放大表达。",
+        linkLabel: "读 AI 笔记",
+        href: "#notes"
+      },
+      {
+        tag: "RADAR",
+        title: "Macro & Model Watch",
+        desc: "把宏观事件、科技公司、模型发布和产业信号压缩成每晚可读的判断。",
+        linkLabel: "看每日时评",
+        href: "#commentary"
+      },
+      {
+        tag: "PLAY",
+        title: "Interactive Experiments",
+        desc: "用小游戏和交互页面测试内容的新形态，让表达变得可玩。",
+        linkLabel: "玩一个实验",
+        href: "games/duck-scare-war.html"
+      }
+    ],
+    featured: [
+      {
+        type: "Essay",
+        title: "Agent 不是产品，是新一代操作系统",
+        desc: "从 App 思维迁移到 Agent 思维需要的 5 个转变。",
+        href: "notes/agent-is-operating-system.html"
+      },
+      {
+        type: "Game",
+        title: "鸭骗战争：真鸭假鹅",
+        desc: "把内容创作做成互动玩法，测试轻量游戏化表达。",
+        href: "games/duck-scare-war.html"
+      }
+    ],
+    roadmap: [
+      "每周复盘一个 AI workflow 实验",
+      "每周沉淀一篇 AI-native 写作 / 产品观察",
+      "每月整理一个可复用 playbook",
+      "把聊天、网页、文章和自动化流程串成个人创作系统"
+    ]
+  },
+
+  /* ---------- AI 早报 Daily Brief ---------- */
+  daily: {
+    label: "AI MORNING BRIEF · 日报",
+    headingLine1: "每天 8 点，",
+    headingLine2: "读懂 AI 世界昨夜的新信号。",
+    blurb: "精选 AI 大模型、产品更新、资本动向与产业洞察，把昨夜最值得关注的变化压缩成一份早间速览。",
+    href: "ai-daily/",
+    ctaLabel: "查看全部早报",
+    stats: [
+      { k: "08:00", v: "DAILY UPDATE" },
+      { k: "5 MIN", v: "SIGNAL BRIEF" },
+      { k: "AI", v: "MODEL · PRODUCT · CAPITAL" }
+    ],
+    latest: [
+      {
+        tag: "LATEST",
+        title: "GPT-5.6 正式发布：中国模型、开放生态与产品分发的新信号",
+        desc: "用一份早报快速扫描模型发布、产品更新、资本动向和产业变化。",
+        href: "ai-daily/"
+      }
     ]
   },
 
@@ -86,7 +182,7 @@ window.SITE_DATA = {
     label: "JOURNAL · 笔记",
     headingLine1: "在喧嚣里，",
     headingLine2: "慢慢记。",
-    blurb: "每一篇笔记都是一次小型的田野调查 —— 关于模型、关于人、关于我们如何被这个时代重新塑形。",
+    blurb: "每一篇笔记都是一次小型田野调查：关于模型、关于人、关于我们如何被这个时代重新塑形。",
     notes: [
       {
         cat: "AI 趋势", num: "N° 01",
@@ -159,15 +255,34 @@ window.SITE_DATA = {
     ]
   },
 
+  /* ---------- SEO 结构化数据 ---------- */
+  structuredData: {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "犀牛伯爵",
+    "alternateName": "Rhino Count",
+    "description": "AI-native builder。北大本科，AI 大厂从业者。记录 Agent 工作流、AI 写作、宏观科技观察与内容产品化实验。",
+    "url": "https://zjeep-arch.github.io/rhino-count-site/",
+    "image": "https://zjeep-arch.github.io/rhino-count-site/assets/og-card.svg",
+    "alumniOf": {
+      "@type": "CollegeOrUniversity",
+      "name": "北京大学"
+    },
+    "knowsAbout": ["Artificial Intelligence", "Machine Learning", "AI Agents", "Prompt Engineering", "Macroeconomics"],
+    "sameAs": [
+      "https://www.xiaohongshu.com/user/profile/60572004000000000101ce41"
+    ]
+  },
+
   /* ---------- 主张 Manifesto / 引用 ---------- */
   quote: {
-    text: "模型每天都在变，提问的能力不会过期。慢一点，但走得更远。",
+    text: "输出不是作品的全部。真正的工作，发生在观察、判断、拆解和反复迭代里。",
     attr: "— 犀牛伯爵 · 2026"
   },
 
   /* ---------- 联络 Contact ---------- */
   contact: {
-    label: "CONTACT · 联络",
+    label: "REACH · 联络",
     headingLine1: "递一张",
     headingLine2: "名片给伯爵。",
     blurb: "欢迎在小红书私信交流 AI、学习方法、职业选择，或仅仅是想吐槽今天的模型又抽风了。",
@@ -182,7 +297,7 @@ window.SITE_DATA = {
 
   /* ---------- 页脚 ---------- */
   footer: {
-    left:  "© 2026 犀牛伯爵 · 一切笔记，皆可咀嚼",
-    right: "Crafted with patience · Beijing"
+    left:  "© 2026 犀牛伯爵 · AI Creation Lab",
+    right: "Build · Write · Think · Ship"
   }
 };
