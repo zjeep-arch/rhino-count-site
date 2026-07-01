@@ -17,22 +17,16 @@ window.SITE_DATA = {
     domain: "zjeep-arch.github.io",           // ← 上线时改成你的真实域名
     repo: "rhino-count-site",           // GitHub 仓库名
     articlesFeed: "articles/feed.json",  // 文章列表数据源
-    publishDate: "2026-06-30",
   },
 
   /* ---------- 浏览器标签 + SEO ---------- */
   meta: {
-    title: "犀牛伯爵 · AI 创作实验室 — AI-native Builder & Agent 工作流",
-    titleShort: "犀牛伯爵 · AI 创作实验室",
-    description: "犀牛伯爵（Rhino Count）— 北大本科，AI 大厂从业者。记录 Agent 工作流、AI 写作、宏观科技观察与内容产品化实验。",
-    keywords: "犀牛伯爵, Rhino Count, AI, Agent workflow, AI-native, 大模型, AI写作, 学习方法, 北大, 小红书, AI大厂, Prompt工程, 系统思维, 宏观分析, 创作实验室, 每日时评",
+    title: "犀牛伯爵 · AI 创作实验室",
+    description: "犀牛伯爵 — AI-native builder。记录 Agent 工作流、AI 写作、宏观科技观察与内容产品化实验。",
+    keywords: "犀牛伯爵, AI, Agent, AI-native, 大模型, 学习方法, 北大, 小红书, AI 大厂, Prompt, 时评, 宏观分析, 创作实验室",
     author: "犀牛伯爵",
     siteUrl: "https://zjeep-arch.github.io/rhino-count-site/",
-    ogImage: "assets/og-card.svg",
-    ogType: "website",
-    ogLocale: "zh_CN",
-    twitterSite: "@rhinocount",
-    twitterCreator: "@rhinocount",
+    ogImage: "assets/og-card.svg"
   },
 
   /* ---------- 顶栏 ---------- */
@@ -63,7 +57,8 @@ window.SITE_DATA = {
     ctaPrimary:   { label: "进入创作矩阵 →", href: "#builds" },
     ctaSecondary: { label: "阅读最新笔记",     href: "#notes" },
     motion: {
-      src: "assets/hero-motion.mp4"
+      src: "assets/hero-motion.mp4",
+      atmosphere: "assets/hero-motion.mp4"
     },
     keywords: [
       "AI NATIVE",
@@ -252,25 +247,6 @@ window.SITE_DATA = {
         excerpt: "美国在波斯湾打到第96天——但国际油价没涨、中国没有乱、英国外相反而跑去北京。这里面有几个大的背景。",
         href: "articles/2026-06-03-iran-war-uk-china-thaw.html"
       }
-    ]
-  },
-
-  /* ---------- SEO 结构化数据 ---------- */
-  structuredData: {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "犀牛伯爵",
-    "alternateName": "Rhino Count",
-    "description": "AI-native builder。北大本科，AI 大厂从业者。记录 Agent 工作流、AI 写作、宏观科技观察与内容产品化实验。",
-    "url": "https://zjeep-arch.github.io/rhino-count-site/",
-    "image": "https://zjeep-arch.github.io/rhino-count-site/assets/og-card.svg",
-    "alumniOf": {
-      "@type": "CollegeOrUniversity",
-      "name": "北京大学"
-    },
-    "knowsAbout": ["Artificial Intelligence", "Machine Learning", "AI Agents", "Prompt Engineering", "Macroeconomics"],
-    "sameAs": [
-      "https://www.xiaohongshu.com/user/profile/60572004000000000101ce41"
     ]
   },
 
