@@ -63,11 +63,9 @@ window.SITE_DATA = {
     keywords: [
       "AI NATIVE",
       "AGENT WORKFLOW",
-      "MACRO RADAR",
-      "PROMPT ENGINEERING",
+      "SIGNAL RADAR",
       "SYSTEM THINKING",
       "MODEL WATCH",
-      "TREND SIGNAL",
       "DAILY BRIEF"
     ],
     stats: [
@@ -242,10 +240,10 @@ window.SITE_DATA = {
     blurb: "每晚 7 点，闲聊拆解当天宏观大事。纯属瞎扯，打发时间刚好。",
     defaultFeatured: [
       {
-        cat: "地缘 · 宏观", date: "2026-06-03",
-        title: "（瞎聊）伊朗战争打到第96天，油价没涨、中国没急、英国跑来北京",
-        excerpt: "美国在波斯湾打到第96天——但国际油价没涨、中国没有乱、英国外相反而跑去北京。这里面有几个大的背景。",
-        href: "articles/2026-06-03-iran-war-uk-china-thaw.html"
+        cat: "科技 · 商业", date: "2026-06-23",
+        title: "（闲聊）巴菲特接班人百亿砸AI基建——不是“追涨”，是“抄底”",
+        excerpt: "伯克希尔新任CEO阿贝尔向谷歌定向增发100亿美元。AI涨了三年，最保守的价值投资者为什么偏偏在这时候重仓？",
+        href: "articles/2026-06-23-berkshire-google-ai-infra.html"
       }
     ]
   },
