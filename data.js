@@ -50,23 +50,22 @@ window.SITE_DATA = {
 
   /* ---------- 首屏 Hero ---------- */
   hero: {
-    eyebrow: "RHINO COUNT · LIVE SIGNAL",
+    eyebrow: "RHINO COUNT · AI NATIVE STUDIO",
     titleMain: "HI, I'M",
     titleAccent: "RHINO",
-    lede: "北大本科，高考数学满分。AI 大厂从业者。用 AI agent 把观察、写作、产品实验和工作流，沉淀成可复用的个人创作系统。",
+    lede: "把 AI 观察、Agent 工作流、产业判断和内容实验，压缩成一套持续生长的个人创作系统。",
     ctaPrimary:   { label: "进入创作矩阵 →", href: "#builds" },
     ctaSecondary: { label: "阅读最新笔记",     href: "#notes" },
     motion: {
-      src: "assets/hero-motion.mp4",
-      atmosphere: "assets/hero-motion.mp4"
+      src: "assets/hero-subject.mp4",
+      atmosphere: "assets/hero-atmosphere.mp4"
     },
     keywords: [
       "AI NATIVE",
+      "SIGNAL CURATION",
       "AGENT WORKFLOW",
-      "SIGNAL RADAR",
-      "SYSTEM THINKING",
       "MODEL WATCH",
-      "DAILY BRIEF"
+      "CONTENT SYSTEM"
     ],
     stats: [
       { num: "50000+", lbl: "followers" },
