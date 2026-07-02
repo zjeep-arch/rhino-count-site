@@ -218,6 +218,12 @@
         });
       }
 
+      function articleHref(href) {
+        href = String(href || '#');
+        if (href.indexOf('articles/') === 0) return href.replace(/^articles\//, '');
+        return href;
+      }
+
       function render(articles) {
         if (!articles || articles.length === 0) {
           list.innerHTML = '<div class="empty">' +
@@ -227,7 +233,7 @@
           return;
         }
         list.innerHTML = articles.map(function(a, i) {
-          return '<a class="article-card" href="' + esc(a.href) + '">' +
+          return '<a class="article-card" href="' + esc(articleHref(a.href)) + '">' +
             '<div class="art-meta">' +
             '<span class="cat">' + esc(a.cat || '时评') + '</span>' +
             '<span class="date">' + esc(a.date || '') + '</span>' +
