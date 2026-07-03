@@ -2406,18 +2406,11 @@
       margin: -16%;
       border-radius: 0;
       filter:
-        drop-shadow(0 56px 48px rgba(0,0,0,0.86))
-        drop-shadow(0 0 46px rgba(47,247,232,0.46))
-        drop-shadow(0 0 80px rgba(255,46,166,0.24));
+        drop-shadow(0 40px 50px rgba(0,0,0,0.5))
+        drop-shadow(0 0 28px rgba(47,247,232,0.18))
+        drop-shadow(0 0 48px rgba(83,103,255,0.10));
       transform: translate3d(0, -3%, 260px) rotateX(-3deg) rotateY(11deg) scale(1.14);
-      -webkit-mask-image:
-        radial-gradient(ellipse 37% 64% at 50% 43%, #000 0 48%, rgba(0,0,0,0.82) 58%, rgba(0,0,0,0.32) 68%, transparent 80%),
-        linear-gradient(to bottom, transparent 0%, #000 8%, #000 76%, rgba(0,0,0,0.28) 88%, transparent 100%);
-      -webkit-mask-composite: source-in;
-      mask-image:
-        radial-gradient(ellipse 37% 64% at 50% 43%, #000 0 48%, rgba(0,0,0,0.82) 58%, rgba(0,0,0,0.32) 68%, transparent 80%),
-        linear-gradient(to bottom, transparent 0%, #000 8%, #000 76%, rgba(0,0,0,0.28) 88%, transparent 100%);
-      mask-composite: intersect;
+      /* mask removed: transparent webm video has alpha channel */
     }
     .video-fusion::before,
     .video-fusion::after {
@@ -2795,12 +2788,7 @@
         drop-shadow(0 42px 42px rgba(57, 78, 112, 0.32))
         drop-shadow(0 0 36px rgba(0,143,154,0.24))
         drop-shadow(0 0 48px rgba(83,103,255,0.12));
-      -webkit-mask-image:
-        radial-gradient(ellipse 32% 62% at 50% 43%, #000 0 50%, rgba(0,0,0,0.74) 58%, rgba(0,0,0,0.24) 66%, transparent 78%),
-        linear-gradient(to bottom, transparent 0%, #000 8%, #000 76%, rgba(0,0,0,0.24) 88%, transparent 100%);
-      mask-image:
-        radial-gradient(ellipse 32% 62% at 50% 43%, #000 0 50%, rgba(0,0,0,0.74) 58%, rgba(0,0,0,0.24) 66%, transparent 78%),
-        linear-gradient(to bottom, transparent 0%, #000 8%, #000 76%, rgba(0,0,0,0.24) 88%, transparent 100%);
+      /* mask removed: transparent webm video has alpha channel */
     }
     [data-theme="light"] .video-fusion::before {
       background:
@@ -4326,11 +4314,17 @@
               <div class="motion-orbit fade-in fade-in-delay-1">
                 <span class="motion-shadow shadow-a" aria-hidden="true"></span>
                 <span class="motion-shadow shadow-b" aria-hidden="true"></span>
-                <video class="hero-atmosphere" src="${esc((h.motion && h.motion.atmosphere) || 'assets/hero-motion.mp4')}" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
+                <video class="hero-atmosphere" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
+                    <source src="${esc((h.motion && h.motion.atmosphere) || 'assets/hero-atmosphere.webm')}" type="video/webm">
+                    <source src="assets/hero-atmosphere.mp4" type="video/mp4">
+                  </video>
                 <span class="portal-ring ring-a" aria-hidden="true"></span>
                 <span class="portal-ring ring-b" aria-hidden="true"></span>
                 <div class="video-fusion">
-                  <video class="hero-video" src="${esc((h.motion && h.motion.src) || 'assets/hero-motion.mp4')}" autoplay muted loop playsinline preload="metadata" aria-label="首屏动态视频"></video>
+                  <video class="hero-video" autoplay muted loop playsinline preload="metadata" aria-label="首屏动态视频">
+                    <source src="${esc((h.motion && h.motion.src) || 'assets/hero-atmosphere.webm')}" type="video/webm">
+                    <source src="assets/hero-atmosphere.mp4" type="video/mp4">
+                  </video>
                 </div>
               </div>
             </div>
