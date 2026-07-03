@@ -3731,10 +3731,10 @@
       opacity: 0.22;
     }
     .hero-shell {
-      min-height: calc(clamp(760px, 92svh, 980px) - 92px);
+      min-height: calc(clamp(720px, 90svh, 920px) - 92px);
       display: grid;
-      grid-template-rows: auto minmax(520px, 1fr) auto auto;
-      gap: clamp(12px, 1.8vw, 24px);
+      grid-template-rows: auto minmax(420px, 52svh) auto auto;
+      gap: clamp(10px, 1.5vw, 20px);
       isolation: isolate;
     }
     .hero-kicker {
@@ -3751,7 +3751,7 @@
       backdrop-filter: none;
     }
     .hero-stage {
-      min-height: clamp(520px, 58vw, 700px);
+      min-height: clamp(430px, 52svh, 620px);
       perspective: 1800px;
       transform-style: preserve-3d;
     }
@@ -3795,11 +3795,11 @@
     }
     .motion-orbit {
       left: 50%;
-      top: 46%;
+      top: 47%;
       z-index: 3;
-      width: clamp(520px, 55vw, 790px);
-      aspect-ratio: 0.86;
-      transform: translate(-50%, -50%) rotateX(calc(-4deg + var(--my, 0deg))) rotateY(calc(5deg + var(--mx, 0deg)));
+      width: clamp(520px, 62vw, 880px);
+      aspect-ratio: 16 / 9;
+      transform: translate(-50%, -50%) rotateX(calc(-3deg + var(--my, 0deg))) rotateY(calc(4deg + var(--mx, 0deg)));
       animation: videoArrival 1050ms 80ms cubic-bezier(.16,.84,.24,1) both, panelFloat 7.5s ease-in-out 1.1s infinite;
     }
     .motion-orbit::before {
@@ -3830,8 +3830,8 @@
     }
     .portal-ring {
       z-index: 2;
-      width: 70%;
-      height: 76%;
+      width: 78%;
+      height: 82%;
       border-radius: 50%;
       border-color: rgba(207,255,250,0.18);
       opacity: 0.58;
@@ -3840,8 +3840,8 @@
     }
     .ring-b {
       z-index: 6;
-      width: 88%;
-      height: 96%;
+      width: 96%;
+      height: 104%;
       border-color: rgba(255,255,255,0.13);
       opacity: 0.32;
       transform: translate3d(-50%, -49%, 190px) rotateX(-5deg) rotateZ(8deg);
@@ -3852,7 +3852,7 @@
       display: none;
     }
     .motion-shadow {
-      inset: 24% 14% -1%;
+      inset: 34% 10% -9%;
       z-index: 0;
       opacity: 0.50;
       background: radial-gradient(ellipse, rgba(47,247,232,0.22), rgba(83,103,255,0.12) 44%, transparent 72%);
@@ -3865,20 +3865,20 @@
       transform: translate3d(32px, -22px, -300px) scale(0.86);
     }
     .video-fusion {
-      width: 128%;
-      height: 128%;
-      margin: -14%;
+      width: 118%;
+      height: 118%;
+      margin: -9%;
       filter:
-        drop-shadow(0 70px 54px rgba(0,0,0,0.78))
+        drop-shadow(0 62px 48px rgba(0,0,0,0.74))
         drop-shadow(0 0 30px rgba(207,255,250,0.26))
         drop-shadow(0 0 74px rgba(83,103,255,0.14));
-      transform: translate3d(0, -4%, 370px) rotateX(-4deg) rotateY(6deg) scale(1.10);
+      transform: translate3d(0, -2%, 320px) rotateX(-3deg) rotateY(5deg) scale(1.02);
       -webkit-mask-image:
-        radial-gradient(ellipse 43% 70% at 50% 43%, #000 0 56%, rgba(0,0,0,0.72) 64%, rgba(0,0,0,0.22) 75%, transparent 86%),
-        linear-gradient(to bottom, transparent 0%, #000 5%, #000 80%, rgba(0,0,0,0.18) 91%, transparent 100%);
+        radial-gradient(ellipse 56% 88% at 50% 48%, #000 0 60%, rgba(0,0,0,0.72) 70%, rgba(0,0,0,0.20) 82%, transparent 93%),
+        linear-gradient(to bottom, transparent 0%, #000 5%, #000 86%, rgba(0,0,0,0.22) 94%, transparent 100%);
       mask-image:
-        radial-gradient(ellipse 43% 70% at 50% 43%, #000 0 56%, rgba(0,0,0,0.72) 64%, rgba(0,0,0,0.22) 75%, transparent 86%),
-        linear-gradient(to bottom, transparent 0%, #000 5%, #000 80%, rgba(0,0,0,0.18) 91%, transparent 100%);
+        radial-gradient(ellipse 56% 88% at 50% 48%, #000 0 60%, rgba(0,0,0,0.72) 70%, rgba(0,0,0,0.20) 82%, transparent 93%),
+        linear-gradient(to bottom, transparent 0%, #000 5%, #000 86%, rgba(0,0,0,0.22) 94%, transparent 100%);
     }
     .video-fusion::before {
       background:
@@ -3895,16 +3895,16 @@
       mix-blend-mode: screen;
     }
     .hero-video {
-      object-fit: cover;
+      object-fit: contain;
       object-position: center center;
       filter: saturate(1.04) brightness(1.08) contrast(1.10);
-      transform: translateZ(0) scale(1.006);
+      transform: translateZ(0) scale(1.02);
     }
     .hero-bottom {
       position: relative;
       z-index: 7;
       width: min(100%, 1080px);
-      margin: clamp(-72px, -6vw, -42px) auto 0;
+      margin: clamp(-116px, -9vw, -68px) auto 0;
       padding-top: 18px;
       display: grid;
       grid-template-columns: minmax(0, 560px) auto;
@@ -4027,23 +4027,23 @@
       }
       .hero-shell {
         min-height: auto;
-        grid-template-rows: auto minmax(470px, 1fr) auto auto;
+        grid-template-rows: auto minmax(360px, 1fr) auto auto;
       }
       .hero-stage {
-        min-height: clamp(470px, 118vw, 650px);
+        min-height: clamp(360px, 92vw, 520px);
       }
       .motion-orbit {
         top: 47%;
-        width: clamp(390px, 112vw, 610px);
+        width: clamp(360px, 106vw, 560px);
       }
       .video-fusion {
-        width: 132%;
-        height: 132%;
-        margin: -16%;
-        transform: translate3d(0, -3%, 320px) rotateX(-3deg) rotateY(4deg) scale(1.06);
+        width: 120%;
+        height: 120%;
+        margin: -10%;
+        transform: translate3d(0, -2%, 280px) rotateX(-3deg) rotateY(4deg) scale(1.02);
       }
       .hero-bottom {
-        margin-top: -62px;
+        margin-top: -48px;
         grid-template-columns: 1fr;
         gap: 16px;
         align-items: start;
