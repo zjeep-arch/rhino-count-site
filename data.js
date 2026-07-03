@@ -57,7 +57,7 @@ window.SITE_DATA = {
     ctaPrimary:   { label: "进入创作矩阵 →", href: "#builds" },
     ctaSecondary: { label: "阅读最新笔记",     href: "#notes" },
     motion: {
-      src: "assets/hero-subject.mp4",
+      src: "assets/hero-atmosphere.mp4",
       atmosphere: "assets/hero-atmosphere.mp4"
     },
     keywords: [
