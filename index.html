@@ -4408,15 +4408,6 @@
         <a href="games/duck-scare-war.html">游戏</a>
       </nav>
       <div class="nav-actions">
-        <button id="themeToggle" class="icon-btn" aria-label="切换主题" title="切换日/夜">
-          <svg id="iconSun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="4"/>
-            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
-          </svg>
-          <svg id="iconMoon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="display:none">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-          </svg>
-        </button>
         <a class="btn ghost" id="headerCta" href="https://www.xiaohongshu.com/user/profile/60572004000000000101ce41" target="_blank" rel="noopener">小红书 \2192</a>
         <button id="menuBtn" class="icon-btn menu-btn" aria-label="菜单" aria-expanded="false">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
@@ -4543,23 +4534,10 @@
 
       /* ---------- Theme & mobile menu ---------- */
       const root = document.documentElement;
-      const themeBtn = document.getElementById('themeToggle');
-      const sun = document.getElementById('iconSun');
-      const moon = document.getElementById('iconMoon');
+      /* Force dark-only theme */
+      root.setAttribute('data-theme', 'dark');
       const KEY = 'rhino-theme';
-      function applyTheme(theme) {
-        root.setAttribute('data-theme', theme);
-        const dark = theme === 'dark';
-        if (sun)  sun.style.display  = dark ? 'none' : '';
-        if (moon) moon.style.display = dark ? '' : 'none';
-      }
-      const saved = localStorage.getItem(KEY);
-      applyTheme(saved || 'dark');
-      themeBtn && themeBtn.addEventListener('click', () => {
-        const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-        applyTheme(next);
-        localStorage.setItem(KEY, next);
-      });
+      localStorage.removeItem(KEY);
 
       const menuBtn = document.getElementById('menuBtn');
       const panel = document.getElementById('mobilePanel');
