@@ -4314,10 +4314,10 @@
     /* Keywords — refined bottom strip */
     .hero-cine-keywords {
       display: flex;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
       align-items: center;
       gap: 0;
-      max-width: 680px;
+      max-width: 100%;
       animation: cineFadeUp 900ms 800ms cubic-bezier(.16,.84,.28,1) both;
     }
     .hero-cine-keywords span {
@@ -4565,7 +4565,7 @@
       const esc = s => String(s).replace(/[&<>"']/g, c => (
         { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]
       ));
-      const ASSET_VERSION = '20260704-rhino-scene-v3';
+      const ASSET_VERSION = '20260704-rhino-scene-v4';
       const versionAsset = src => {
         const value = String(src || '');
         if (!value || /^(?:https?:|data:)/.test(value) || /[?&]v=/.test(value)) return value;
