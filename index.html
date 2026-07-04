@@ -4524,7 +4524,7 @@
       const esc = s => String(s).replace(/[&<>"']/g, c => (
         { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]
       ));
-      const ASSET_VERSION = '20260704-rhino-scene';
+      const ASSET_VERSION = '20260704-rhino-scene-v2';
       const versionAsset = src => {
         const value = String(src || '');
         if (!value || /^(?:https?:|data:)/.test(value) || /[?&]v=/.test(value)) return value;
