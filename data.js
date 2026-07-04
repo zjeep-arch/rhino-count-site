@@ -115,30 +115,6 @@ window.SITE_DATA = {
         title: "Anthropic把最强模型送给了政府",
         desc: "Fable 5解禁背后，是一场22天的交易。Anthropic用Mythos 5的政府专属访问权，换回了Fable 5的商业自由。",
         href: "notes/2026-07-05-anthropic-mythos5-government-trade.html"
-      },
-      {
-        type: "Essay",
-        title: "Anthropic做芯片、xAI做语音Agent、Sonnet 5下放Agent能力：三件事指向同一个真相",
-        desc: "AI公司正在同时从两头挤压——让Agent更便宜、让Agent更独立。这不是产品迭代，这是战略转向。",
-        href: "notes/2026-07-04-anthropic-chip-xai-voice-sonnet5-agent.html"
-      },
-      {
-        type: "Essay",
-        title: "Agent 不是产品，是新一代操作系统",
-        desc: "从 App 思维迁移到 Agent 思维需要的 5 个转变。",
-        href: "notes/agent-is-operating-system.html"
-      },
-      {
-        type: "Game",
-        title: "鸭骗战争：真鸭假鹅",
-        desc: "荒诞答题小游戏，扮演鹅腿阿姨用鸭腿冒充鹅腿。",
-        href: "games/duck-scare-war.html"
-      },
-      {
-        type: "Site",
-        title: "AI 创作实验室",
-        desc: "Agent 驱动的个人创作系统，持续迭代中。",
-        href: "https://zjeep-arch.github.io/rhino-count-site/"
       }
     ],
     roadmap: [
