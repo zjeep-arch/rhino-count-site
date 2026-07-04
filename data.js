@@ -112,6 +112,12 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "Anthropic做芯片、xAI做语音Agent、Sonnet 5下放Agent能力：三件事指向同一个真相",
+        desc: "AI公司正在同时从两头挤压——让Agent更便宜、让Agent更独立。这不是产品迭代，这是战略转向。",
+        href: "notes/2026-07-04-anthropic-chip-xai-voice-sonnet5-agent.html"
+      },
+      {
+        type: "Essay",
         title: "Agent 不是产品，是新一代操作系统",
         desc: "从 App 思维迁移到 Agent 思维需要的 5 个转变。",
         href: "notes/agent-is-operating-system.html"
@@ -217,6 +223,13 @@ window.SITE_DATA = {
         excerpt: "毕业之后才明白，专业不是身份，是工具箱。",
         img: "assets/note-06.svg",
         href: "notes/what-pku-didnt-teach-me.html"
+      },
+      {
+        cat: "AI 趋势", num: "N° 07",
+        title: "Anthropic做芯片、xAI做语音Agent、Sonnet 5下放Agent能力：三件事指向同一个真相",
+        excerpt: "AI公司正在同时从两头挤压——让Agent更便宜、让Agent更独立。这不是产品迭代，这是战略转向。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-07-04-anthropic-chip-xai-voice-sonnet5-agent.html"
       },
       {
         cat: "小游戏", num: "🎮",
