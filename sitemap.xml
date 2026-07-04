@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- 首页 -->
   <url>
     <loc>https://zjeep-arch.github.io/rhino-count-site/</loc>
-    <lastmod>2026-06-30</lastmod>
+    <lastmod>2026-07-04</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
+  <!-- 板块入口 -->
   <url>
     <loc>https://zjeep-arch.github.io/rhino-count-site/articles/</loc>
-    <lastmod>2026-06-30</lastmod>
+    <lastmod>2026-07-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
@@ -18,6 +20,7 @@
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
+  <!-- 笔记 -->
   <url>
     <loc>https://zjeep-arch.github.io/rhino-count-site/notes/prompt-is-the-skill.html</loc>
     <lastmod>2026-06-30</lastmod>
@@ -55,12 +58,50 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://zjeep-arch.github.io/rhino-count-site/notes/2026-07-04-anthropic-chip-xai-voice-sonnet5-agent.html</loc>
+    <lastmod>2026-07-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- 游戏 / 交互实验 -->
+  <url>
     <loc>https://zjeep-arch.github.io/rhino-count-site/games/duck-scare-war.html</loc>
     <lastmod>2026-06-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
-  <!-- 每日时评静态页面 (反代) -->
+  <!-- AI 日报 -->
+  <url>
+    <loc>https://zjeep-arch.github.io/rhino-count-site/ai-daily/2026-06-30-anthropic-965b-waic-2026.html</loc>
+    <lastmod>2026-06-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://zjeep-arch.github.io/rhino-count-site/ai-daily/2026-06-28-gpt-5-6-restricted-china-models.html</loc>
+    <lastmod>2026-06-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://zjeep-arch.github.io/rhino-count-site/ai-daily/2026-06-27-gpt-5-6-deepseek-dspark.html</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- 每日时评 -->
+  <url>
+    <loc>https://zjeep-arch.github.io/rhino-count-site/articles/2026-07-01-global-compute-war.html</loc>
+    <lastmod>2026-07-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://zjeep-arch.github.io/rhino-count-site/articles/2026-06-23-berkshire-google-ai-infra.html</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
   <url>
     <loc>https://zjeep-arch.github.io/rhino-count-site/articles/2026-06-13-switzerland-population-cap.html</loc>
     <lastmod>2026-06-13</lastmod>

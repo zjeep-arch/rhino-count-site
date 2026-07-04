@@ -78,62 +78,56 @@ window.SITE_DATA = {
     label: "CREATION MATRIX · 创作矩阵",
     headingLine1: "把想法，",
     headingLine2: "做成作品。",
-    blurb: "这里不只放页面，而是把每一次 AI 实验整理成可读、可复用、可继续迭代的内容资产。",
+    blurb: "这里不放想法，放做出来的东西——网站、游戏、H5、交互实验。",
     tracks: [
       {
-        tag: "BUILD",
-        title: "AI Workflow Lab",
-        desc: "把日常创作、资料整理、网页生成和自动化流程拆成可复用工作流。",
+        tag: "SITE",
+        title: "AI 创作实验室",
+        desc: "本站本身就是一个实验：用 Agent 工作流驱动内容生产和个人品牌。",
         linkLabel: "查看站点",
         href: "https://zjeep-arch.github.io/rhino-count-site/"
       },
       {
-        tag: "WRITE",
-        title: "AI-native Writing",
-        desc: "记录模型变化、Agent 思维、学习方法，以及普通人如何用 AI 放大表达。",
-        linkLabel: "读 AI 笔记",
-        href: "#notes"
-      },
-      {
-        tag: "RADAR",
-        title: "Macro & Model Watch",
-        desc: "把宏观事件、科技公司、模型发布和产业信号压缩成每晚可读的判断。",
-        linkLabel: "看每日时评",
-        href: "#commentary"
+        tag: "GAME",
+        title: "鸭骗战争：真鸭假鹅",
+        desc: "扮演鹅腿阿姨，用鸭腿冒充鹅腿。荒诞答题小游戏，测试轻量游戏化表达。",
+        linkLabel: "玩游戏",
+        href: "games/duck-scare-war.html"
       },
       {
         tag: "PLAY",
-        title: "Interactive Experiments",
-        desc: "用小游戏和交互页面测试内容的新形态，让表达变得可玩。",
-        linkLabel: "玩一个实验",
-        href: "games/duck-scare-war.html"
+        title: "更多交互实验",
+        desc: "用小游戏和交互页面测试内容的新形态，让表达变得可玩。后续持续更新。",
+        linkLabel: "敬请期待",
+        href: "#builds"
+      },
+      {
+        tag: "WORKFLOW",
+        title: "AI Workflow Lab",
+        desc: "把日常创作、资料整理、网页生成和自动化流程拆成可复用工作流。",
+        linkLabel: "查看站点",
+        href: "https://zjeep-arch.github.io/rhino-count-site/"
       }
     ],
     featured: [
       {
-        type: "Essay",
-        title: "Anthropic做芯片、xAI做语音Agent、Sonnet 5下放Agent能力：三件事指向同一个真相",
-        desc: "AI公司正在同时从两头挤压——让Agent更便宜、让Agent更独立。这不是产品迭代，这是战略转向。",
-        href: "notes/2026-07-04-anthropic-chip-xai-voice-sonnet5-agent.html"
-      },
-      {
-        type: "Essay",
-        title: "Agent 不是产品，是新一代操作系统",
-        desc: "从 App 思维迁移到 Agent 思维需要的 5 个转变。",
-        href: "notes/agent-is-operating-system.html"
-      },
-      {
         type: "Game",
         title: "鸭骗战争：真鸭假鹅",
-        desc: "把内容创作做成互动玩法，测试轻量游戏化表达。",
+        desc: "荒诞答题小游戏，扮演鹅腿阿姨用鸭腿冒充鹅腿。",
         href: "games/duck-scare-war.html"
+      },
+      {
+        type: "Site",
+        title: "AI 创作实验室",
+        desc: "Agent 驱动的个人创作系统，持续迭代中。",
+        href: "https://zjeep-arch.github.io/rhino-count-site/"
       }
     ],
     roadmap: [
       "每周复盘一个 AI workflow 实验",
-      "每周沉淀一篇 AI-native 写作 / 产品观察",
-      "每月整理一个可复用 playbook",
-      "把聊天、网页、文章和自动化流程串成个人创作系统"
+      "每月发布一个交互实验或小游戏",
+      "把聊天、网页、文章和自动化流程串成个人创作系统",
+      "探索 H5 内容产品化的新形态"
     ]
   },
 
@@ -184,35 +178,35 @@ window.SITE_DATA = {
     notes: [
       {
         cat: "AI 趋势", num: "N° 01",
-        title: "当大模型开始替你思考，先学会问对问题",
+        title: "先学会问对问题",
         excerpt: "为什么 prompt 是 2026 年最被低估的核心技能。",
         img: "assets/note-01.svg",
         href: "notes/prompt-is-the-skill.html"
       },
       {
         cat: "学习方法", num: "N° 02",
-        title: "高考数学满分的人，怎么学一门新技术？",
+        title: "怎么学一门新技术？",
         excerpt: "把陌生学科拆成三层：直觉、框架、推演。",
         img: "assets/note-02.svg",
         href: "notes/how-to-learn-new-tech.html"
       },
       {
         cat: "大厂手记", num: "N° 03",
-        title: "在 AI 大厂的第 365 天，我删掉了 47 个工具",
+        title: "我删掉了 47 个工具",
         excerpt: "工具越多，越要警惕被工具反向定义。",
         img: "assets/note-03.svg",
         href: "notes/deleted-47-tools.html"
       },
       {
         cat: "踩坑实录", num: "N° 04",
-        title: "用 Agent 写代码三个月，省下的时间都去哪儿了？",
-        excerpt: "答案：花在 review、改 prompt 和向同事解释上。",
+        title: "Agent 写代码三个月，省的时间去哪了？",
+        excerpt: "花在 review、改 prompt 和向同事解释上。",
         img: "assets/note-04.svg",
         href: "notes/agent-coding-three-months.html"
       },
       {
         cat: "AI 趋势", num: "N° 05",
-        title: "Agent 不是产品，是新一代操作系统",
+        title: "Agent 是新一代操作系统",
         excerpt: "从 App 思维迁移到 Agent 思维需要的 5 个转变。",
         img: "assets/note-05.svg",
         href: "notes/agent-is-operating-system.html"
@@ -226,17 +220,10 @@ window.SITE_DATA = {
       },
       {
         cat: "AI 趋势", num: "N° 07",
-        title: "Anthropic做芯片、xAI做语音Agent、Sonnet 5下放Agent能力：三件事指向同一个真相",
-        excerpt: "AI公司正在同时从两头挤压——让Agent更便宜、让Agent更独立。这不是产品迭代，这是战略转向。",
+        title: "Anthropic做芯片、xAI做语音、Sonnet 5下放Agent",
+        excerpt: "让Agent更便宜、更独立。不是产品迭代，是战略转向。",
         img: "assets/note-05.svg",
         href: "notes/2026-07-04-anthropic-chip-xai-voice-sonnet5-agent.html"
-      },
-      {
-        cat: "小游戏", num: "🎮",
-        title: "鸭骗战争：真鸭假鹅",
-        excerpt: "扮演鹅腿阿姨，用鸭腿冒充鹅腿！荒诞答题小游戏，你能骗过几个学生？",
-        img: null,
-        href: "games/duck-scare-war.html"
       }
     ]
   },

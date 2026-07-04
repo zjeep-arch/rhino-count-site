@@ -847,16 +847,26 @@
     .lab-card h3 {
       margin: 0;
       font-family: var(--serif);
-      font-size: clamp(24px, 2.9vw, 34px);
-      line-height: 1.04;
+      font-size: clamp(20px, 2.4vw, 28px);
+      line-height: 1.1;
       max-width: 9em;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     .lab-card p {
       margin: 0;
       color: var(--ink-soft);
-      font-size: 14px;
-      line-height: 1.72;
+      font-size: 13px;
+      line-height: 1.65;
       max-width: 32em;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     .lab-link {
       margin-top: auto;
@@ -1217,14 +1227,24 @@
     .note-meta .cat { color: var(--accent); font-weight: 600; }
     .note h3 {
       font-family: var(--serif); font-weight: 700;
-      font-size: clamp(19px, 2vw, 22px);
+      font-size: clamp(17px, 1.8vw, 20px);
       line-height: 1.35;
       margin: 0;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     .note p {
       margin: 0;
       color: var(--ink-soft);
-      font-size: 14px; line-height: 1.7;
+      font-size: 13px; line-height: 1.65;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     .note-cta {
       margin-top: auto;
