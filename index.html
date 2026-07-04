@@ -4063,6 +4063,321 @@
         flex: 0 0 auto;
       }
     }
+
+    /* =========================================================
+     * Hero Redesign — Cinematic Full-Bleed Video
+     * Apple / RunwayML inspired: video IS the hero, UI retreats
+     * ========================================================= */
+    .hero {
+      padding: 0 !important;
+      min-height: 100svh !important;
+      overflow: hidden;
+      background: #04060A !important;
+      display: flex;
+      align-items: stretch;
+    }
+    [data-theme="light"] .hero {
+      background: #EDEFF2 !important;
+    }
+    /* Kill all old hero decoration */
+    .hero::before,
+    .hero::after,
+    .hero-backdrop,
+    .hero-shell,
+    .hero-stage,
+    .hero-stage::before,
+    .hero-stage::after,
+    .depth-field,
+    .depth-line,
+    .motion-orbit,
+    .motion-orbit::before,
+    .motion-orbit::after,
+    .motion-shadow,
+    .shadow-a,
+    .shadow-b,
+    .portal-ring,
+    .ring-a,
+    .ring-b,
+    .video-fusion,
+    .video-fusion::before,
+    .video-fusion::after,
+    .hero-video,
+    .hero-atmosphere {
+      display: none !important;
+      content: none !important;
+      background: none !important;
+      border: 0 !important;
+      box-shadow: none !important;
+      animation: none !important;
+      transform: none !important;
+      opacity: 0 !important;
+    }
+    /* Full-bleed video background */
+    .hero-cine-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 30%;
+      z-index: 0;
+      filter: saturate(1.06) contrast(1.08) brightness(0.88);
+    }
+    [data-theme="light"] .hero-cine-video {
+      filter: saturate(0.92) contrast(0.96) brightness(1.08);
+      opacity: 0.85;
+    }
+    /* Gradient overlay for text readability */
+    .hero-cine-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background:
+        linear-gradient(180deg,
+          rgba(4,6,10,0.72) 0%,
+          rgba(4,6,10,0.28) 28%,
+          rgba(4,6,10,0.12) 50%,
+          rgba(4,6,10,0.42) 72%,
+          rgba(4,6,10,0.88) 100%
+        );
+    }
+    [data-theme="light"] .hero-cine-overlay {
+      background:
+        linear-gradient(180deg,
+          rgba(237,239,242,0.82) 0%,
+          rgba(237,239,242,0.34) 28%,
+          rgba(237,239,242,0.14) 50%,
+          rgba(237,239,242,0.50) 72%,
+          rgba(237,239,242,0.92) 100%
+        );
+    }
+    /* Subtle grain texture */
+    .hero-cine-grain {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      opacity: 0.04;
+      background-image:
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.8) 0 1px, transparent 1px 3px),
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.8) 0 1px, transparent 1px 3px);
+      mix-blend-mode: overlay;
+    }
+    /* Content layer */
+    .hero-cine-content {
+      position: relative;
+      z-index: 3;
+      width: 100%;
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: clamp(80px, 12vh, 140px) var(--pad) clamp(60px, 8vh, 100px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      flex: 1;
+      min-height: 100svh;
+    }
+    .hero-cine-kicker {
+      font-size: clamp(10px, 0.9vw, 12px);
+      font-weight: 700;
+      letter-spacing: 0.36em;
+      text-transform: uppercase;
+      color: rgba(207,255,250,0.68);
+      margin-bottom: clamp(18px, 3vh, 32px);
+      text-shadow: 0 0 20px rgba(47,247,232,0.22);
+      animation: cineFadeUp 800ms 200ms cubic-bezier(.16,.84,.28,1) both;
+    }
+    [data-theme="light"] .hero-cine-kicker {
+      color: rgba(0,143,154,0.80);
+      text-shadow: none;
+    }
+    .hero-cine-title {
+      margin: 0 0 clamp(20px, 3vh, 36px);
+      font-family: var(--serif);
+      font-weight: 700;
+      font-size: clamp(52px, 10vw, 128px);
+      line-height: 0.98;
+      letter-spacing: -0.022em;
+      text-shadow: 0 4px 40px rgba(0,0,0,0.50);
+      animation: cineFadeUp 900ms 350ms cubic-bezier(.16,.84,.28,1) both;
+    }
+    .hero-cine-title span {
+      display: block;
+      font-size: 0.38em;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      color: rgba(246,247,251,0.62);
+      margin-bottom: 0.1em;
+    }
+    [data-theme="light"] .hero-cine-title span {
+      color: rgba(8,17,31,0.52);
+    }
+    .hero-cine-title strong {
+      display: block;
+      font-weight: 700;
+      color: rgba(246,247,251,0.96);
+      background: none;
+      -webkit-text-stroke: 0;
+      -webkit-background-clip: initial;
+      background-clip: initial;
+    }
+    [data-theme="light"] .hero-cine-title strong {
+      color: #0A0E14;
+    }
+    .hero-cine-lede {
+      max-width: 520px;
+      margin: 0 0 clamp(28px, 4vh, 44px);
+      font-size: clamp(15px, 1.3vw, 18px);
+      line-height: 1.85;
+      color: rgba(246,247,251,0.78);
+      text-shadow: 0 2px 24px rgba(0,0,0,0.60);
+      animation: cineFadeUp 900ms 500ms cubic-bezier(.16,.84,.28,1) both;
+    }
+    [data-theme="light"] .hero-cine-lede {
+      color: rgba(8,17,31,0.68);
+      text-shadow: none;
+    }
+    .hero-cine-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: clamp(32px, 5vh, 56px);
+      animation: cineFadeUp 900ms 650ms cubic-bezier(.16,.84,.28,1) both;
+    }
+    .hero-cine-cta .btn {
+      min-height: 46px;
+      padding: 12px 28px;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 6px;
+      letter-spacing: 0.02em;
+    }
+    .hero-cine-cta .btn:not(.ghost) {
+      background: rgba(207,255,250,0.94);
+      color: #04181A;
+      border: 1px solid transparent;
+      box-shadow: 0 8px 32px -12px rgba(47,247,232,0.50);
+    }
+    .hero-cine-cta .btn.ghost {
+      background: rgba(255,255,255,0.06);
+      color: rgba(246,247,251,0.88);
+      border: 1px solid rgba(246,247,251,0.24);
+      backdrop-filter: blur(12px);
+    }
+    [data-theme="light"] .hero-cine-cta .btn:not(.ghost) {
+      background: #0A0E14;
+      color: #F8FBFF;
+      box-shadow: 0 8px 32px -12px rgba(0,0,0,0.30);
+    }
+    [data-theme="light"] .hero-cine-cta .btn.ghost {
+      background: rgba(255,255,255,0.70);
+      color: #0A0E14;
+      border: 1px solid rgba(8,17,31,0.14);
+    }
+    /* Keywords as subtle bottom strip */
+    .hero-cine-keywords {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0;
+      max-width: 720px;
+      animation: cineFadeUp 900ms 800ms cubic-bezier(.16,.84,.28,1) both;
+    }
+    .hero-cine-keywords span {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: rgba(207,255,250,0.42);
+      padding: 0 16px;
+      border-right: 1px solid rgba(207,255,250,0.14);
+      line-height: 1.4;
+    }
+    .hero-cine-keywords span:last-child {
+      border-right: 0;
+    }
+    .hero-cine-keywords span:first-child {
+      padding-left: 0;
+    }
+    [data-theme="light"] .hero-cine-keywords span {
+      color: rgba(8,17,31,0.38);
+      border-right-color: rgba(8,17,31,0.12);
+    }
+    /* Scroll hint */
+    .hero-cine-scroll {
+      position: absolute;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 4;
+      font-size: 11px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(246,247,251,0.36);
+      animation: cineFadeUp 900ms 1000ms cubic-bezier(.16,.84,.28,1) both, cineBounce 2.4s 1.8s ease-in-out infinite;
+    }
+    [data-theme="light"] .hero-cine-scroll {
+      color: rgba(8,17,31,0.32);
+    }
+    @keyframes cineFadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(24px);
+        filter: blur(6px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+      }
+    }
+    @keyframes cineBounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(6px); }
+    }
+    @media (max-width: 860px) {
+      .hero-cine-content {
+        justify-content: flex-end;
+        padding-top: 100px;
+        padding-bottom: 48px;
+        min-height: auto;
+      }
+      .hero-cine-title {
+        font-size: clamp(40px, 14vw, 72px);
+      }
+      .hero-cine-lede {
+        font-size: 14px;
+      }
+      .hero-cine-cta {
+        flex-direction: column;
+      }
+      .hero-cine-cta .btn {
+        width: 100%;
+        justify-content: center;
+      }
+      .hero-cine-keywords {
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+      }
+      .hero-cine-keywords::-webkit-scrollbar { display: none; }
+      .hero-cine-keywords span {
+        flex: 0 0 auto;
+        white-space: nowrap;
+      }
+      .hero-cine-scroll { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-cine-kicker,
+      .hero-cine-title,
+      .hero-cine-lede,
+      .hero-cine-cta,
+      .hero-cine-keywords,
+      .hero-cine-scroll {
+        animation: none !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -4316,75 +4631,31 @@
         }
       }
 
-      /* Hero */
+      /* Hero — Cinematic Full-Bleed Video */
       const h = D.hero;
       const heroVideoSrc = (h.motion && h.motion.src) || 'assets/hero-rhino-scene.mp4';
-      const heroBackdropSrc = (h.motion && h.motion.backdrop) || heroVideoSrc;
       document.getElementById('hero-section').innerHTML = `
-        <video class="hero-backdrop" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
-          <source src="${esc(versionAsset(heroBackdropSrc))}" type="${esc(videoType(heroBackdropSrc))}">
+        <video class="hero-cine-video" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+          <source src="${esc(versionAsset(heroVideoSrc))}" type="${esc(videoType(heroVideoSrc))}">
         </video>
-        <div class="container">
-          <div class="hero-shell fade-in">
-            <div class="hero-kicker fade-in fade-in-delay-1">${esc(h.eyebrow)}</div>
-            <div class="hero-stage" aria-label="首屏动态视觉">
-              <div class="depth-field" aria-hidden="true">
-                <span class="depth-line line-a"></span>
-                <span class="depth-line line-b"></span>
-                <span class="depth-line line-c"></span>
-              </div>
-              <h1 class="hero-title hero-title-sr">
-                <span>${esc(h.titleMain)}</span>
-                <strong>${esc(h.titleAccent)}</strong>
-              </h1>
-              <div class="motion-orbit fade-in fade-in-delay-1">
-                <span class="motion-shadow shadow-a" aria-hidden="true"></span>
-                <span class="motion-shadow shadow-b" aria-hidden="true"></span>
-                <span class="portal-ring ring-a" aria-hidden="true"></span>
-                <span class="portal-ring ring-b" aria-hidden="true"></span>
-                <div class="video-fusion">
-                  <video class="hero-video" autoplay muted loop playsinline preload="metadata" aria-label="首屏动态视频">
-                    <source src="${esc(versionAsset(heroVideoSrc))}" type="${esc(videoType(heroVideoSrc))}">
-                  </video>
-                </div>
-              </div>
-            </div>
-            <div class="hero-bottom fade-in fade-in-delay-3">
-              <p class="hero-lede">${esc(h.lede)}</p>
-              <div class="hero-actions">
-                <div class="cta-row">
-                  <a class="btn" href="${esc(h.ctaPrimary.href)}">${esc(h.ctaPrimary.label)}</a>
-                  <a class="btn ghost" href="${esc(h.ctaSecondary.href)}">${esc(h.ctaSecondary.label)}</a>
-                </div>
-                <div class="stats">
-                  ${h.stats.map(s => `
-                    <div class="stat">
-                      <span class="num">${esc(s.num)}</span>
-                      <span class="lbl">${esc(s.lbl)}</span>
-                    </div>
-                  `).join('')}
-                </div>
-              </div>
-            </div>
-            <div class="keyword-cloud fade-in fade-in-delay-3" aria-label="关键词">
-              ${(h.keywords || []).map((item, i) => `<span class="keyword keyword-${i % 4}">${esc(item)}</span>`).join('')}
-            </div>
-            <div class="signal-strip fade-in fade-in-delay-3" aria-label="站点信号">
-              <div class="signal">
-                <b>MODEL WATCH</b>
-                <span>追踪模型、产品与产业拐点</span>
-              </div>
-              <div class="signal">
-                <b>TREND RADAR</b>
-                <span>把宏观变化拆成可读线索</span>
-              </div>
-              <div class="signal">
-                <b>NIGHT NOTES</b>
-                <span>每晚一篇，不追热闹追脉络</span>
-              </div>
-            </div>
+        <div class="hero-cine-overlay" aria-hidden="true"></div>
+        <div class="hero-cine-grain" aria-hidden="true"></div>
+        <div class="hero-cine-content">
+          <div class="hero-cine-kicker">${esc(h.eyebrow)}</div>
+          <h1 class="hero-cine-title">
+            <span>${esc(h.titleMain)}</span>
+            <strong>${esc(h.titleAccent)}</strong>
+          </h1>
+          <p class="hero-cine-lede">${esc(h.lede)}</p>
+          <div class="hero-cine-cta">
+            <a class="btn" href="${esc(h.ctaPrimary.href)}">${esc(h.ctaPrimary.label)}</a>
+            <a class="btn ghost" href="${esc(h.ctaSecondary.href)}">${esc(h.ctaSecondary.label)}</a>
+          </div>
+          <div class="hero-cine-keywords">
+            ${(h.keywords || []).map(item => `<span>${esc(item)}</span>`).join('')}
           </div>
         </div>
+        <div class="hero-cine-scroll">SCROLL</div>
       `;
 
       /* Profile */
