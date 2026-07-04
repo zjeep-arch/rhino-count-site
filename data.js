@@ -57,7 +57,8 @@ window.SITE_DATA = {
     ctaPrimary:   { label: "进入创作矩阵 →", href: "#builds" },
     ctaSecondary: { label: "阅读最新笔记",     href: "#notes" },
     motion: {
-      src: "assets/hero-atmosphere.webm"
+      src: "assets/hero-rhino-scene.mp4",
+      backdrop: "assets/hero-rhino-scene.mp4"
     },
     keywords: [
       "AI NATIVE",
