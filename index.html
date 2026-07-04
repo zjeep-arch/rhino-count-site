@@ -29,10 +29,6 @@
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%231C1410'/%3E%3Ctext x='50%25' y='54%25' text-anchor='middle' font-size='38' font-family='Georgia,serif' fill='%23E8C77A'%3E犀%3C/text%3E%3C/svg%3E" />
   <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='32' fill='%231C1410'/%3E%3Ctext x='50%25' y='58%25' text-anchor='middle' font-size='110' font-family='Georgia,serif' fill='%23E8C77A'%3E犀%3C/text%3E%3C/svg%3E" />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet" />
-
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -79,8 +75,8 @@
       --shadow-2: 0 26px 70px -34px rgba(17,22,27,0.32);
       --shadow-glow: 0 26px 80px -42px rgba(0,167,167,0.55);
 
-      --serif: "Playfair Display", "Noto Serif SC", "Songti SC", Georgia, serif;
-      --sans: "Inter", -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      --serif: Georgia, "Songti SC", "Noto Serif SC", serif;
+      --sans: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
     }
     [data-theme="dark"] {
       --bg: #080B10;
@@ -2009,8 +2005,8 @@
       --shadow-1: inset 0 1px 0 rgba(255,255,255,0.07);
       --shadow-2: 0 24px 80px -44px rgba(0,0,0,0.95);
       --shadow-glow: 0 0 38px -22px rgba(47,247,232,0.86), 0 0 58px -42px rgba(255,46,166,0.95);
-      --serif: "Bebas Neue", "Noto Sans SC", Impact, sans-serif;
-      --sans: "Inter", "Noto Sans SC", -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+      --serif: Impact, "Arial Narrow", "PingFang SC", "Microsoft YaHei", sans-serif;
+      --sans: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
     }
     [data-theme="light"] {
       --bg: #F6F8FF;
@@ -3861,8 +3857,8 @@
         drop-shadow(0 0 30px rgba(207,255,250,0.26))
         drop-shadow(0 0 74px rgba(83,103,255,0.14));
       transform: translate3d(0, -2%, 320px) rotateX(-3deg) rotateY(5deg) scale(1.02);
-      -webkit-mask-image: radial-gradient(ellipse 38% 84% at 51% 53%, #000 0 58%, rgba(0,0,0,0.72) 68%, rgba(0,0,0,0.24) 82%, transparent 94%);
-      mask-image: radial-gradient(ellipse 38% 84% at 51% 53%, #000 0 58%, rgba(0,0,0,0.72) 68%, rgba(0,0,0,0.24) 82%, transparent 94%);
+      -webkit-mask-image: none;
+      mask-image: none;
     }
     .video-fusion::before {
       background:
@@ -4196,7 +4192,7 @@
     </div>
   </footer>
 
-  <script src="data.js?v=20260703-popout-stage"></script>
+  <script src="data.js?v=20260704-transparent-webm"></script>
   <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
   <script>
     (function () {
@@ -4204,6 +4200,12 @@
       const esc = s => String(s).replace(/[&<>"']/g, c => (
         { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]
       ));
+      const ASSET_VERSION = '20260704-transparent-webm';
+      const versionAsset = src => {
+        const value = String(src || '');
+        if (!value || /^(?:https?:|data:)/.test(value) || /[?&]v=/.test(value)) return value;
+        return `${value}?v=${ASSET_VERSION}`;
+      };
 
       /* ---------- Theme & mobile menu ---------- */
       const root = document.documentElement;
@@ -4314,16 +4316,12 @@
               <div class="motion-orbit fade-in fade-in-delay-1">
                 <span class="motion-shadow shadow-a" aria-hidden="true"></span>
                 <span class="motion-shadow shadow-b" aria-hidden="true"></span>
-                <video class="hero-atmosphere" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
-                    <source src="${esc((h.motion && h.motion.atmosphere) || 'assets/hero-atmosphere.webm')}" type="video/webm">
-                    <source src="assets/hero-atmosphere.mp4" type="video/mp4">
-                  </video>
                 <span class="portal-ring ring-a" aria-hidden="true"></span>
                 <span class="portal-ring ring-b" aria-hidden="true"></span>
                 <div class="video-fusion">
                   <video class="hero-video" autoplay muted loop playsinline preload="metadata" aria-label="首屏动态视频">
-                    <source src="${esc((h.motion && h.motion.src) || 'assets/hero-atmosphere.webm')}" type="video/webm">
-                    <source src="assets/hero-atmosphere.mp4" type="video/mp4">
+                    <source src="${esc(versionAsset((h.motion && h.motion.src) || 'assets/hero-atmosphere.webm'))}" type="video/webm">
+                    <source src="${esc(versionAsset('assets/hero-atmosphere.mp4'))}" type="video/mp4">
                   </video>
                 </div>
               </div>
