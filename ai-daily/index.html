@@ -259,6 +259,10 @@
       grid-column: span 12;
       min-height: 250px;
     }
+    .article-card.is-featured {
+      grid-column: span 12;
+      min-height: 250px;
+    }
     .article-card:hover {
       transform: translateY(-4px);
       border-color: color-mix(in oklab, var(--accent) 50%, var(--line));
@@ -306,7 +310,7 @@
       line-height: 1.24;
       letter-spacing: 0;
     }
-    .article-card:not(:first-child) h2 {
+    .article-card:not(:first-child):not(.is-featured) h2 {
       font-size: clamp(18px, 1.8vw, 24px);
     }
     .article-card p {
@@ -350,6 +354,43 @@
       40% { opacity: 1; }
     }
     .empty strong { color: var(--ink); display: block; margin-bottom: var(--s-2); }
+
+    /* ─── Load More Button ─── */
+    .load-more-wrap {
+      grid-column: 1 / -1;
+      display: flex; flex-direction: column; align-items: center;
+      gap: var(--s-2); padding: var(--s-6) 0 var(--s-4);
+    }
+    .load-more {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 32px;
+      border: 1px solid var(--line-2);
+      border-radius: 100px;
+      background: var(--surface);
+      color: var(--ink);
+      font-family: var(--sans); font-size: 14px; font-weight: 500;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      backdrop-filter: blur(18px);
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+    }
+    .load-more:hover {
+      transform: translateY(-2px);
+      border-color: var(--accent);
+      box-shadow: 0 12px 32px -16px rgba(0,167,167,0.30);
+      background: color-mix(in oklab, var(--accent) 8%, var(--surface));
+    }
+    .load-more:active { transform: translateY(0); }
+    .load-more .arrow { color: var(--accent); font-size: 16px; }
+    .load-more:disabled {
+      opacity: 0.45; cursor: default; transform: none;
+      border-color: var(--line); box-shadow: none;
+    }
+    .load-more:disabled:hover { background: var(--surface); border-color: var(--line); }
+    .load-more-hint {
+      color: var(--muted); font-size: 12px; letter-spacing: 0.08em;
+    }
+
     .page-footer {
       padding: var(--s-6) 0 var(--s-8);
       border-top: 1px solid var(--line);
@@ -440,6 +481,12 @@
           <span>读</span><span>取</span><span>中</span> ...
         </div>
       </div>
+      <div id="loadMoreWrap" class="load-more-wrap" style="display:none;">
+        <button id="loadMoreBtn" class="load-more" type="button">
+          加载更多 <span class="arrow">↓</span>
+        </button>
+        <span id="loadMoreHint" class="load-more-hint"></span>
+      </div>
     </section>
 
     <footer class="page-footer">
@@ -450,6 +497,13 @@
   <script>
     (function () {
       var list = document.getElementById('articleList');
+      var loadMoreWrap = document.getElementById('loadMoreWrap');
+      var loadMoreBtn = document.getElementById('loadMoreBtn');
+      var loadMoreHint = document.getElementById('loadMoreHint');
+
+      var PAGE_SIZE = 8;
+      var allItems = [];
+      var shownCount = 0;
 
       function esc(s) {
         return String(s).replace(/[&<>"']/g, function(c) {
@@ -457,31 +511,64 @@
         });
       }
 
-      function render(articles) {
-        if (!articles || articles.length === 0) {
+      function articleHref(href) {
+        href = String(href || '#');
+        if (href.indexOf('ai-daily/') === 0) return href.replace(/^ai-daily\//, '');
+        return href;
+      }
+
+      function cardHTML(a, isFirst) {
+        return '<a class="article-card' + (isFirst ? ' is-featured' : '') + '" href="' + esc(articleHref(a.href)) + '">' +
+          '<div class="art-meta">' +
+          '<span class="cat">' + esc(a.cat || 'AI早报') + '</span>' +
+          '<span class="date">' + esc(a.date || '') + '</span>' +
+          '</div>' +
+          '<h2>' + esc(a.title) + '</h2>' +
+          '<p>' + esc(a.excerpt) + '</p>' +
+          '<span class="art-arrow" aria-hidden="true">→</span>' +
+          '</a>';
+      }
+
+      function renderPage() {
+        if (allItems.length === 0) {
           list.innerHTML = '<div class="empty">' +
             '<div><strong>还没有AI早报文章</strong>' +
             '每天8点生成第一篇后就会显示在这里。<br/>' +
             '"AI早报，每天8点精选关键动态。"</div></div>';
+          loadMoreWrap.style.display = 'none';
           return;
         }
-        function articleHref(href) {
-          href = String(href || '#');
-          if (href.indexOf('ai-daily/') === 0) return href.replace(/^ai-daily\//, '');
-          return href;
-        }
-        list.innerHTML = articles.map(function(a) {
-          return '<a class="article-card" href="' + esc(articleHref(a.href)) + '">' +
-            '<div class="art-meta">' +
-            '<span class="cat">' + esc(a.cat || 'AI早报') + '</span>' +
-            '<span class="date">' + esc(a.date || '') + '</span>' +
-            '</div>' +
-            '<h2>' + esc(a.title) + '</h2>' +
-            '<p>' + esc(a.excerpt) + '</p>' +
-            '<span class="art-arrow" aria-hidden="true">→</span>' +
-            '</a>';
+        var slice = allItems.slice(shownCount, shownCount + PAGE_SIZE);
+        var html = slice.map(function(a, i) {
+          return cardHTML(a, shownCount === 0 && i === 0);
         }).join('');
+        if (shownCount === 0) {
+          list.innerHTML = html;
+        } else {
+          list.insertAdjacentHTML('beforeend', html);
+        }
+        shownCount += slice.length;
+        updateLoadMore();
       }
+
+      function updateLoadMore() {
+        var remaining = allItems.length - shownCount;
+        if (remaining > 0) {
+          loadMoreWrap.style.display = 'flex';
+          loadMoreBtn.disabled = false;
+          loadMoreBtn.innerHTML = '加载更多 <span class="arrow">↓</span>';
+          loadMoreHint.textContent = '已显示 ' + shownCount + ' / ' + allItems.length + ' 篇';
+        } else {
+          loadMoreWrap.style.display = 'flex';
+          loadMoreBtn.disabled = true;
+          loadMoreBtn.innerHTML = '已全部加载 <span class="arrow">✓</span>';
+          loadMoreHint.textContent = '共 ' + allItems.length + ' 篇早报';
+        }
+      }
+
+      loadMoreBtn.addEventListener('click', function() {
+        renderPage();
+      });
 
       var xhr = new XMLHttpRequest();
       xhr.open('GET', 'feed.json?t=' + Date.now(), true);
@@ -489,13 +576,14 @@
         if (xhr.status === 200) {
           try {
             var feed = JSON.parse(xhr.responseText);
-            var items = feed.articles || feed;
-            items.sort(function(a, b) { return (b.date || '').localeCompare(a.date || ''); });
-            render(items);
-          } catch(e) { render(null); }
-        } else { render(null); }
+            allItems = feed.articles || feed;
+            allItems.sort(function(a, b) { return (b.date || '').localeCompare(a.date || ''); });
+            shownCount = 0;
+            renderPage();
+          } catch(e) { allItems = []; renderPage(); }
+        } else { allItems = []; renderPage(); }
       };
-      xhr.onerror = function() { render(null); };
+      xhr.onerror = function() { allItems = []; renderPage(); };
       xhr.send();
     })();
   </script>
