@@ -9,7 +9,7 @@
   body {
     background: #02040a;
     overflow: hidden;
-    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "PingFong SC", sans-serif;
     color: #F2F7F6;
   }
   #canvas-container {
@@ -23,186 +23,109 @@
   }
   #canvas-container canvas:active { cursor: grabbing; }
 
-  /* HUD overlay */
   .hud-overlay {
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    pointer-events: none;
-    z-index: 10;
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none; z-index: 10;
   }
-
-  /* Top bar */
   .hud-top {
-    position: absolute;
-    top: 24px; left: 24px; right: 24px;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+    position: absolute; top: 24px; left: 24px; right: 24px;
+    display: flex; justify-content: space-between; align-items: flex-start;
     pointer-events: auto;
   }
   .hud-title {
     font-family: 'SF Mono', 'Monaco', monospace;
-    font-size: 18px;
-    color: #27D7C9;
+    font-size: 16px; color: #27D7C9;
     text-shadow: 0 0 16px rgba(39,215,201,0.6);
     letter-spacing: 0.08em;
   }
   .hud-title small {
-    display: block;
-    font-size: 9px;
-    letter-spacing: 0.35em;
-    text-transform: uppercase;
-    color: rgba(242,247,246,0.35);
-    margin-top: 5px;
+    display: block; font-size: 9px; letter-spacing: 0.35em;
+    text-transform: uppercase; color: rgba(242,247,246,0.35); margin-top: 5px;
   }
   .hud-stats {
-    text-align: right;
-    font-size: 10px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: rgba(242,247,246,0.4);
-    font-family: 'SF Mono', 'Monaco', monospace;
-    line-height: 1.8;
+    text-align: right; font-size: 10px; letter-spacing: 0.18em;
+    text-transform: uppercase; color: rgba(242,247,246,0.4);
+    font-family: 'SF Mono', 'Monaco', monospace; line-height: 1.8;
   }
   .hud-stats span { color: #27D7C9; }
-
-  /* Corner brackets */
   .corner {
-    position: absolute;
-    width: 48px; height: 48px;
-    border: 1px solid rgba(39,215,201,0.25);
+    position: absolute; width: 48px; height: 48px;
+    border: 1px solid rgba(39,215,201,0.2);
   }
   .corner-tl { top: 14px; left: 14px; border-right: 0; border-bottom: 0; }
   .corner-tr { top: 14px; right: 14px; border-left: 0; border-bottom: 0; }
   .corner-bl { bottom: 14px; left: 14px; border-right: 0; border-top: 0; }
   .corner-br { bottom: 14px; right: 14px; border-left: 0; border-top: 0; }
-
-  /* Reticle */
   .reticle {
-    position: absolute;
-    top: 50%; left: 50%;
-    width: 80px; height: 80px;
-    transform: translate(-50%, -50%);
-    border: 1px solid rgba(39,215,201,0.08);
-    border-radius: 50%;
+    position: absolute; top: 50%; left: 50%;
+    width: 80px; height: 80px; transform: translate(-50%, -50%);
+    border: 1px solid rgba(39,215,201,0.06); border-radius: 50%;
     animation: reticlePulse 4s ease-in-out infinite;
   }
   .reticle::before {
-    content: "";
-    position: absolute;
-    inset: 16px;
-    border: 1px solid rgba(39,215,201,0.05);
-    border-radius: 50%;
+    content: ""; position: absolute; inset: 16px;
+    border: 1px solid rgba(39,215,201,0.04); border-radius: 50%;
   }
   @keyframes reticlePulse {
-    0%, 100% { opacity: 0.2; transform: translate(-50%,-50%) scale(1); }
-    50% { opacity: 0.5; transform: translate(-50%,-50%) scale(1.08); }
+    0%, 100% { opacity: 0.15; transform: translate(-50%,-50%) scale(1); }
+    50% { opacity: 0.4; transform: translate(-50%,-50%) scale(1.08); }
   }
-
-  /* Bottom controls */
   .hud-bottom {
-    position: absolute;
-    bottom: 24px; left: 24px; right: 24px;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
+    position: absolute; bottom: 24px; left: 24px; right: 24px;
+    display: flex; justify-content: space-between; align-items: flex-end;
     pointer-events: auto;
   }
   .hud-hint {
-    font-size: 10px;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: rgba(242,247,246,0.3);
-    font-family: 'SF Mono', 'Monaco', monospace;
+    font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: rgba(242,247,246,0.28); font-family: 'SF Mono', 'Monaco', monospace;
   }
   .hud-hint kbd {
-    display: inline-block;
-    padding: 2px 7px;
-    border: 1px solid rgba(39,215,201,0.25);
-    border-radius: 3px;
-    color: #27D7C9;
-    font-size: 9px;
-    margin: 0 2px;
+    display: inline-block; padding: 2px 7px;
+    border: 1px solid rgba(39,215,201,0.2); border-radius: 3px;
+    color: #27D7C9; font-size: 9px; margin: 0 2px;
   }
   .hud-back {
-    padding: 7px 14px;
-    border: 1px solid rgba(39,215,201,0.25);
-    border-radius: 999px;
-    color: #27D7C9;
-    text-decoration: none;
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    background: rgba(2,4,10,0.6);
-    backdrop-filter: blur(12px);
+    padding: 7px 14px; border: 1px solid rgba(39,215,201,0.2);
+    border-radius: 999px; color: #27D7C9; text-decoration: none;
+    font-size: 11px; letter-spacing: 0.1em;
+    background: rgba(2,4,10,0.6); backdrop-filter: blur(12px);
     transition: all 0.25s ease;
   }
   .hud-back:hover {
-    border-color: #27D7C9;
-    background: rgba(39,215,201,0.08);
+    border-color: #27D7C9; background: rgba(39,215,201,0.08);
     box-shadow: 0 0 20px rgba(39,215,201,0.2);
   }
-
-  /* Info panel */
   .info-panel {
-    position: fixed;
-    bottom: 70px; right: 24px;
-    width: 300px;
-    padding: 22px;
-    background: rgba(2,4,10,0.88);
-    border: 1px solid rgba(39,215,201,0.18);
-    border-radius: 14px;
-    backdrop-filter: blur(24px);
-    z-index: 20;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.4s ease, transform 0.4s ease;
-    pointer-events: none;
-    box-shadow: 0 20px 60px -20px rgba(0,0,0,0.8), 0 0 40px -10px rgba(39,215,201,0.08);
+    position: fixed; bottom: 70px; right: 24px; width: 300px;
+    padding: 22px; background: rgba(2,4,10,0.88);
+    border: 1px solid rgba(39,215,201,0.15); border-radius: 14px;
+    backdrop-filter: blur(24px); z-index: 20;
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.4s ease, transform 0.4s ease; pointer-events: none;
+    box-shadow: 0 20px 60px -20px rgba(0,0,0,0.8), 0 0 40px -10px rgba(39,215,201,0.06);
   }
-  .info-panel.show {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-  }
+  .info-panel.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
   .info-panel h3 {
-    font-family: 'SF Mono', 'Monaco', monospace;
-    font-size: 14px;
-    color: #27D7C9;
-    margin-bottom: 10px;
-    letter-spacing: 0.05em;
+    font-family: 'SF Mono', 'Monaco', monospace; font-size: 14px;
+    color: #27D7C9; margin-bottom: 10px; letter-spacing: 0.05em;
   }
-  .info-panel p {
-    font-size: 12px;
-    line-height: 1.7;
-    color: rgba(242,247,246,0.65);
-  }
+  .info-panel p { font-size: 12px; line-height: 1.7; color: rgba(242,247,246,0.65); }
   .info-panel .close-btn {
-    position: absolute;
-    top: 10px; right: 14px;
-    color: rgba(242,247,246,0.3);
-    cursor: pointer;
-    font-size: 16px;
+    position: absolute; top: 10px; right: 14px;
+    color: rgba(242,247,246,0.3); cursor: pointer; font-size: 16px;
     transition: color 0.2s;
   }
   .info-panel .close-btn:hover { color: #27D7C9; }
-
-  /* Loading */
   #loading {
-    position: fixed;
-    inset: 0;
-    background: #02040a;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 100;
-    transition: opacity 0.8s ease;
+    position: fixed; inset: 0; background: #02040a;
+    display: flex; align-items: center; justify-content: center;
+    z-index: 100; transition: opacity 0.8s ease;
   }
   #loading.hide { opacity: 0; pointer-events: none; }
   .loader-ring {
     width: 50px; height: 50px;
-    border: 2px solid rgba(39,215,201,0.12);
-    border-top-color: #27D7C9;
-    border-radius: 50%;
+    border: 2px solid rgba(39,215,201,0.1);
+    border-top-color: #27D7C9; border-radius: 50%;
     animation: spin 0.9s linear infinite;
   }
   @keyframes spin { to { transform: rotate(360deg); } }
@@ -220,7 +143,6 @@
 <body>
 
 <div id="loading"><div class="loader-ring"></div></div>
-
 <div id="canvas-container"></div>
 
 <div class="hud-overlay">
@@ -229,7 +151,6 @@
   <div class="corner corner-bl"></div>
   <div class="corner corner-br"></div>
   <div class="reticle"></div>
-
   <div class="hud-top">
     <div class="hud-title">
       J.A.R.V.I.S Lab
@@ -241,7 +162,6 @@
       <span id="fps">60</span> FPS
     </div>
   </div>
-
   <div class="hud-bottom">
     <div class="hud-hint">
       <kbd>拖拽</kbd> 旋转 &nbsp;
@@ -266,18 +186,17 @@ import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
 import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
 import { FXAAShader } from 'three/addons/shaders/FXAAShader.js';
-import { RGBShiftShader } from 'three/addons/shaders/RGBShiftShader.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 
 // ═══════════════════════════════════════════════════════════
-// Scene Setup
+// 核心：场景 / 相机 / 渲染器
 // ═══════════════════════════════════════════════════════════
 const container = document.getElementById('canvas-container');
 const scene = new THREE.Scene();
-scene.fog = new THREE.FogExp2(0x02040a, 0.025);
+scene.fog = new THREE.FogExp2(0x02040a, 0.022);
 
-const camera = new THREE.PerspectiveCamera(42, window.innerWidth / window.innerHeight, 0.1, 200);
-camera.position.set(9, 7.5, 13);
+const camera = new THREE.PerspectiveCamera(28, window.innerWidth / window.innerHeight, 0.1, 200);
+camera.position.set(14, 10, 16);
 
 const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
 renderer.setSize(window.innerWidth, window.innerHeight);
@@ -285,487 +204,379 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure = 1.15;
+renderer.toneMappingExposure = 1.2;
 renderer.outputColorSpace = THREE.SRGBColorSpace;
 container.appendChild(renderer.domElement);
 
-// Environment for PBR reflections
-const pmremGenerator = new THREE.PMREMGenerator(renderer);
+// 环境反射
+const pmrem = new THREE.PMREMGenerator(renderer);
 const envScene = new RoomEnvironment();
-scene.environment = pmremGenerator.fromScene(envScene, 0.04).texture;
+scene.environment = pmrem.fromScene(envScene, 0.03).texture;
 
-// ═══════════════════════════════════════════════════════════
-// Post-processing
-// ═══════════════════════════════════════════════════════════
+// 后处理链
 const composer = new EffectComposer(renderer);
 composer.addPass(new RenderPass(scene, camera));
-const bloomPass = new UnrealBloomPass(
-  new THREE.Vector2(window.innerWidth, window.innerHeight),
-  0.85, 0.35, 0.82
-);
-composer.addPass(bloomPass);
+const bloom = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 0.7, 0.4, 0.85);
+composer.addPass(bloom);
+const fxaa = new ShaderPass(FXAAShader);
+fxaa.material.uniforms['resolution'].value.set(1/(window.innerWidth*renderer.getPixelRatio()), 1/(window.innerHeight*renderer.getPixelRatio()));
+composer.addPass(fxaa);
 
-const rgbShiftPass = new ShaderPass(RGBShiftShader);
-rgbShiftPass.uniforms['amount'].value = 0.0008;
-composer.addPass(rgbShiftPass);
-
-const fxaaPass = new ShaderPass(FXAAShader);
-fxaaPass.material.uniforms['resolution'].value.set(
-  1 / (window.innerWidth * renderer.getPixelRatio()),
-  1 / (window.innerHeight * renderer.getPixelRatio())
-);
-composer.addPass(fxaaPass);
-
-// ═══════════════════════════════════════════════════════════
-// Controls
-// ═══════════════════════════════════════════════════════════
+// 相机控制 — 借鉴 my-room-in-3d 的平滑球坐标导航
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
-controls.dampingFactor = 0.06;
-controls.minDistance = 6;
-controls.maxDistance = 22;
+controls.dampingFactor = 0.04;
+controls.minDistance = 8;
+controls.maxDistance = 30;
 controls.maxPolarAngle = Math.PI * 0.48;
-controls.minPolarAngle = Math.PI * 0.12;
+controls.minPolarAngle = Math.PI * 0.1;
 controls.target.set(0, 2.5, 0);
 controls.autoRotate = true;
-controls.autoRotateSpeed = 0.3;
+controls.autoRotateSpeed = 0.25;
 
-// ═══════════════════════════════════════════════════════════
-// Procedural Textures
-// ═══════════════════════════════════════════════════════════
-function makeFloorTexture() {
-  const size = 1024;
-  const c = document.createElement('canvas');
-  c.width = c.height = size;
-  const ctx = c.getContext('2d');
-
-  // Base dark metal
-  const grad = ctx.createLinearGradient(0, 0, size, size);
-  grad.addColorStop(0, '#080b12');
-  grad.addColorStop(0.5, '#0a0e16');
-  grad.addColorStop(1, '#070a10');
-  ctx.fillStyle = grad;
-  ctx.fillRect(0, 0, size, size);
-
-  // Brushed metal lines
-  for (let i = 0; i < 800; i++) {
-    ctx.strokeStyle = `rgba(${30 + Math.random() * 20}, ${35 + Math.random() * 20}, ${45 + Math.random() * 25}, ${0.15 + Math.random() * 0.25})`;
-    ctx.lineWidth = 0.5 + Math.random();
-    ctx.beginPath();
-    ctx.moveTo(Math.random() * size, 0);
-    ctx.lineTo(Math.random() * size, size);
-    ctx.stroke();
-  }
-
-  // Hex grid pattern
-  ctx.strokeStyle = 'rgba(39, 215, 201, 0.04)';
-  ctx.lineWidth = 1;
-  const hexSize = 64;
-  for (let row = 0; row < size / hexSize + 2; row++) {
-    for (let col = 0; col < size / hexSize + 2; col++) {
-      const x = col * hexSize * 1.5;
-      const y = row * hexSize * Math.sqrt(3) + (col % 2) * hexSize * Math.sqrt(3) / 2;
-      ctx.beginPath();
-      for (let i = 0; i < 6; i++) {
-        const a = (i / 6) * Math.PI * 2;
-        const px = x + Math.cos(a) * hexSize * 0.5;
-        const py = y + Math.sin(a) * hexSize * 0.5;
-        if (i === 0) ctx.moveTo(px, py);
-        else ctx.lineTo(px, py);
-      }
-      ctx.closePath();
-      ctx.stroke();
-    }
-  }
-
-  // Subtle noise
-  const img = ctx.getImageData(0, 0, size, size);
-  for (let i = 0; i < img.data.length; i += 4) {
-    const n = (Math.random() - 0.5) * 12;
-    img.data[i] = Math.max(0, img.data[i] + n);
-    img.data[i + 1] = Math.max(0, img.data[i + 1] + n);
-    img.data[i + 2] = Math.max(0, img.data[i + 2] + n);
-  }
-  ctx.putImageData(img, 0, 0);
-
-  const tex = new THREE.CanvasTexture(c);
-  tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
-  tex.repeat.set(3, 3);
-  tex.colorSpace = THREE.SRGBColorSpace;
-  return tex;
-}
-
-function makeFloorNormalTexture() {
-  const size = 512;
-  const c = document.createElement('canvas');
-  c.width = c.height = size;
-  const ctx = c.getContext('2d');
-  ctx.fillStyle = 'rgb(128, 128, 255)';
-  ctx.fillRect(0, 0, size, size);
-  // Add subtle bumps
-  for (let i = 0; i < 3000; i++) {
-    const x = Math.random() * size;
-    const y = Math.random() * size;
-    const r = 1 + Math.random() * 2;
-    const dx = (Math.random() - 0.5) * 20;
-    const dy = (Math.random() - 0.5) * 20;
-    const grad = ctx.createRadialGradient(x, y, 0, x, y, r);
-    grad.addColorStop(0, `rgb(${128 + dx}, ${128 + dy}, 255)`);
-    grad.addColorStop(1, 'rgb(128, 128, 255)');
-    ctx.fillStyle = grad;
-    ctx.fillRect(x - r, y - r, r * 2, r * 2);
-  }
-  const tex = new THREE.CanvasTexture(c);
-  tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
-  tex.repeat.set(4, 4);
-  return tex;
-}
-
-function makeWallTexture() {
-  const size = 1024;
-  const c = document.createElement('canvas');
-  c.width = c.height = size;
-  const ctx = c.getContext('2d');
-
-  // Dark base
-  ctx.fillStyle = '#06080d';
-  ctx.fillRect(0, 0, size, size);
-
-  // Carbon fiber pattern
-  const cellSize = 16;
-  for (let y = 0; y < size; y += cellSize) {
-    for (let x = 0; x < size; x += cellSize) {
-      const isLight = ((x / cellSize) + (y / cellSize)) % 2 === 0;
-      ctx.fillStyle = isLight ? 'rgba(18, 22, 30, 0.6)' : 'rgba(10, 14, 20, 0.6)';
-      ctx.fillRect(x, y, cellSize, cellSize);
-      // Highlight
-      ctx.strokeStyle = 'rgba(30, 35, 45, 0.3)';
-      ctx.lineWidth = 0.5;
-      ctx.strokeRect(x + 0.5, y + 0.5, cellSize - 1, cellSize - 1);
-    }
-  }
-
-  // Glow strips
-  ctx.fillStyle = 'rgba(39, 215, 201, 0.08)';
-  ctx.fillRect(0, size * 0.3, size, 2);
-  ctx.fillRect(0, size * 0.7, size, 2);
-
-  const tex = new THREE.CanvasTexture(c);
-  tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
-  tex.colorSpace = THREE.SRGBColorSpace;
-  return tex;
-}
-
-function makeScreenTexture() {
-  const c = document.createElement('canvas');
-  c.width = 1024; c.height = 640;
-  const ctx = c.getContext('2d');
-
-  // Dark screen
-  ctx.fillStyle = '#021018';
-  ctx.fillRect(0, 0, c.width, c.height);
-
-  // JARVIS UI elements
-  ctx.font = 'bold 28px monospace';
-  ctx.fillStyle = 'rgba(39, 215, 201, 0.9)';
-  ctx.fillText('J.A.R.V.I.S', 40, 50);
-  ctx.font = '14px monospace';
-  ctx.fillStyle = 'rgba(39, 215, 201, 0.4)';
-  ctx.fillText('SYSTEM ONLINE · v5.2.1', 40, 72);
-
-  // Data charts
-  ctx.strokeStyle = 'rgba(39, 215, 201, 0.3)';
-  ctx.lineWidth = 1.5;
-  ctx.beginPath();
-  for (let x = 40; x < 500; x += 4) {
-    const y = 120 + Math.sin(x * 0.03) * 25 + Math.random() * 8;
-    if (x === 40) ctx.moveTo(x, y);
-    else ctx.lineTo(x, y);
-  }
-  ctx.stroke();
-
-  // Bar chart
-  for (let i = 0; i < 12; i++) {
-    const x = 40 + i * 38;
-    const h = 30 + Math.random() * 80;
-    const grad = ctx.createLinearGradient(x, 300 - h, x, 300);
-    grad.addColorStop(0, 'rgba(39, 215, 201, 0.8)');
-    grad.addColorStop(1, 'rgba(39, 215, 201, 0.1)');
-    ctx.fillStyle = grad;
-    ctx.fillRect(x, 300 - h, 28, h);
-  }
-
-  // Right panel — circular HUD
-  const cx = 780, cy = 200;
-  for (let r = 40; r <= 120; r += 20) {
-    ctx.strokeStyle = `rgba(39, 215, 201, ${0.15 - r * 0.001})`;
-    ctx.lineWidth = 1;
-    ctx.beginPath();
-    ctx.arc(cx, cy, r, 0, Math.PI * 2);
-    ctx.stroke();
-  }
-  // Arc segments
-  ctx.lineWidth = 2;
-  for (let i = 0; i < 6; i++) {
-    const start = (i / 6) * Math.PI * 2 + 0.1;
-    const end = start + Math.PI * 0.25;
-    ctx.strokeStyle = `rgba(39, 215, 201, ${0.4 + Math.random() * 0.3})`;
-    ctx.beginPath();
-    ctx.arc(cx, cy, 60 + i * 10, start, end);
-    ctx.stroke();
-  }
-
-  // Status lines
-  ctx.font = '11px monospace';
-  const lines = [
-    'CPU LOAD     ████░░░░  47%',
-    'MEMORY       ██████░░  72%',
-    'AGENT QUEUE  ██░░░░░░  23%',
-    'MCP SERVERS  ████████  12/12',
-    'MODEL        FABLE-5   READY',
-  ];
-  lines.forEach((line, i) => {
-    ctx.fillStyle = 'rgba(39, 215, 201, 0.5)';
-    ctx.fillText(line, 40, 400 + i * 22);
-  });
-
-  // Bottom data stream
-  ctx.font = '9px monospace';
-  ctx.fillStyle = 'rgba(39, 215, 201, 0.15)';
-  for (let i = 0; i < 5; i++) {
-    let line = '';
-    for (let j = 0; j < 80; j++) {
-      line += Math.random() > 0.5 ? '0' : '1';
-    }
-    ctx.fillText(line, 40, 560 + i * 14);
-  }
-
-  // Scan line effect
-  for (let y = 0; y < c.height; y += 3) {
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.08)';
-    ctx.fillRect(0, y, c.width, 1);
-  }
-
-  const tex = new THREE.CanvasTexture(c);
-  tex.colorSpace = THREE.SRGBColorSpace;
-  return tex;
-}
-
-function makeSideScreenTexture(color) {
-  const c = document.createElement('canvas');
-  c.width = 512; c.height = 320;
-  const ctx = c.getContext('2d');
-  ctx.fillStyle = '#020a0e';
-  ctx.fillRect(0, 0, c.width, c.height);
-
-  // Grid
-  ctx.strokeStyle = color.replace('1)', '0.08)');
-  ctx.lineWidth = 0.5;
-  for (let x = 0; x < c.width; x += 20) {
-    ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, c.height); ctx.stroke();
-  }
-  for (let y = 0; y < c.height; y += 20) {
-    ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(c.width, y); ctx.stroke();
-  }
-
-  // Waveform
-  ctx.strokeStyle = color.replace('1)', '0.6)');
-  ctx.lineWidth = 1.5;
-  ctx.beginPath();
-  for (let x = 0; x < c.width; x += 2) {
-    const y = c.height / 2 + Math.sin(x * 0.02) * 40 + Math.sin(x * 0.05) * 20 + (Math.random() - 0.5) * 8;
-    if (x === 0) ctx.moveTo(x, y);
-    else ctx.lineTo(x, y);
-  }
-  ctx.stroke();
-
-  // Data blocks
-  ctx.font = '10px monospace';
-  ctx.fillStyle = color.replace('1)', '0.4)');
-  const labels = ['AGENT-01', 'AGENT-02', 'TASK QUEUE', 'THROUGHPUT'];
-  labels.forEach((l, i) => {
-    ctx.fillText(l, 20, 20 + i * 16);
-  });
-
-  const tex = new THREE.CanvasTexture(c);
-  tex.colorSpace = THREE.SRGBColorSpace;
-  return tex;
-}
-
-// ═══════════════════════════════════════════════════════════
-// Lighting
-// ═══════════════════════════════════════════════════════════
-const ambient = new THREE.AmbientLight(0x1a2535, 0.35);
-scene.add(ambient);
-
-const keyLight = new THREE.DirectionalLight(0x4a6580, 0.5);
-keyLight.position.set(6, 12, 8);
-keyLight.castShadow = true;
-keyLight.shadow.mapSize.set(2048, 2048);
-keyLight.shadow.camera.left = -15;
-keyLight.shadow.camera.right = 15;
-keyLight.shadow.camera.top = 15;
-keyLight.shadow.camera.bottom = -15;
-keyLight.shadow.camera.near = 0.5;
-keyLight.shadow.camera.far = 40;
-keyLight.shadow.bias = -0.0005;
-keyLight.shadow.radius = 4;
-scene.add(keyLight);
-
-// Accent fills
-const tealFill = new THREE.PointLight(0x27D7C9, 8, 12, 1.5);
-tealFill.position.set(-4, 4, 2);
-scene.add(tealFill);
-
-const purpleFill = new THREE.PointLight(0x8E7CFF, 6, 10, 1.5);
-purpleFill.position.set(4, 3, 3);
-scene.add(purpleFill);
-
-const warmFill = new THREE.PointLight(0xFF7A59, 3, 8, 2);
-warmFill.position.set(0, 1, 4);
-scene.add(warmFill);
-
-// Interactive objects
+// 交互对象
 const interactables = [];
 
 // ═══════════════════════════════════════════════════════════
-// Room
+// 程序化纹理工厂
+// ═══════════════════════════════════════════════════════════
+
+// 木纹桌面纹理
+function makeWoodTexture() {
+  const s = 1024;
+  const c = document.createElement('canvas'); c.width = c.height = s;
+  const ctx = c.getContext('2d');
+  // 底色
+  ctx.fillStyle = '#1a1208'; ctx.fillRect(0, 0, s, s);
+  // 木纹层
+  for (let i = 0; i < 60; i++) {
+    const y = (i / 60) * s;
+    const grad = ctx.createLinearGradient(0, y, 0, y + s/60);
+    const base = 20 + Math.random() * 15;
+    grad.addColorStop(0, `rgb(${base+8}, ${base+4}, ${base})`);
+    grad.addColorStop(0.5, `rgb(${base+15}, ${base+10}, ${base+5})`);
+    grad.addColorStop(1, `rgb(${base+5}, ${base+2}, ${base-2})`);
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, y, s, s/60 + 2);
+    // 木纹细节
+    ctx.strokeStyle = `rgba(${base+20}, ${base+12}, ${base+6}, ${0.15 + Math.random()*0.2})`;
+    ctx.lineWidth = 0.5 + Math.random();
+    ctx.beginPath();
+    for (let x = 0; x < s; x += 4) {
+      const ny = y + Math.sin(x * 0.01 + i) * 3 + Math.sin(x * 0.03) * 2 + (Math.random()-0.5)*1.5;
+      if (x === 0) ctx.moveTo(x, ny); else ctx.lineTo(x, ny);
+    }
+    ctx.stroke();
+  }
+  // 节点
+  for (let i = 0; i < 4; i++) {
+    const x = Math.random() * s, y = Math.random() * s;
+    const grad = ctx.createRadialGradient(x, y, 0, x, y, 40+Math.random()*30);
+    grad.addColorStop(0, 'rgba(8, 5, 2, 0.6)');
+    grad.addColorStop(1, 'rgba(8, 5, 2, 0)');
+    ctx.fillStyle = grad;
+    ctx.fillRect(x-80, y-80, 160, 160);
+  }
+  const tex = new THREE.CanvasTexture(c);
+  tex.colorSpace = THREE.SRGBColorSpace;
+  return tex;
+}
+
+// 金属地板纹理
+function makeFloorTexture() {
+  const s = 1024;
+  const c = document.createElement('canvas'); c.width = c.height = s;
+  const ctx = c.getContext('2d');
+  const grad = ctx.createLinearGradient(0, 0, s, s);
+  grad.addColorStop(0, '#070a10'); grad.addColorStop(0.5, '#090d14'); grad.addColorStop(1, '#060810');
+  ctx.fillStyle = grad; ctx.fillRect(0, 0, s, s);
+  // 拉丝金属
+  for (let i = 0; i < 1000; i++) {
+    ctx.strokeStyle = `rgba(${25+Math.random()*15}, ${30+Math.random()*15}, ${40+Math.random()*20}, ${0.1+Math.random()*0.2})`;
+    ctx.lineWidth = 0.4+Math.random()*0.8;
+    ctx.beginPath(); ctx.moveTo(Math.random()*s, 0); ctx.lineTo(Math.random()*s, s); ctx.stroke();
+  }
+  // 六角网格
+  ctx.strokeStyle = 'rgba(39,215,201,0.03)'; ctx.lineWidth = 1;
+  const hs = 56;
+  for (let row = 0; row < s/hs + 2; row++) {
+    for (let col = 0; col < s/hs + 2; col++) {
+      const x = col * hs * 1.5;
+      const y = row * hs * Math.sqrt(3) + (col%2) * hs * Math.sqrt(3)/2;
+      ctx.beginPath();
+      for (let i = 0; i < 6; i++) {
+        const a = (i/6)*Math.PI*2;
+        const px = x + Math.cos(a)*hs*0.5;
+        const py = y + Math.sin(a)*hs*0.5;
+        if (i===0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+      }
+      ctx.closePath(); ctx.stroke();
+    }
+  }
+  // 噪点
+  const img = ctx.getImageData(0, 0, s, s);
+  for (let i = 0; i < img.data.length; i += 4) {
+    const n = (Math.random()-0.5)*10;
+    img.data[i] = Math.max(0, img.data[i]+n);
+    img.data[i+1] = Math.max(0, img.data[i+1]+n);
+    img.data[i+2] = Math.max(0, img.data[i+2]+n);
+  }
+  ctx.putImageData(img, 0, 0);
+  const tex = new THREE.CanvasTexture(c);
+  tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
+  tex.repeat.set(2.5, 2.5);
+  tex.colorSpace = THREE.SRGBColorSpace;
+  return tex;
+}
+
+// 墙面碳纤维纹理
+function makeWallTexture() {
+  const s = 1024;
+  const c = document.createElement('canvas'); c.width = c.height = s;
+  const ctx = c.getContext('2d');
+  ctx.fillStyle = '#05070c'; ctx.fillRect(0, 0, s, s);
+  const cs = 14;
+  for (let y = 0; y < s; y += cs) {
+    for (let x = 0; x < s; x += cs) {
+      const light = ((x/cs)+(y/cs))%2 === 0;
+      ctx.fillStyle = light ? 'rgba(16,20,28,0.55)' : 'rgba(8,12,18,0.55)';
+      ctx.fillRect(x, y, cs, cs);
+      ctx.strokeStyle = 'rgba(28,33,43,0.2)'; ctx.lineWidth = 0.5;
+      ctx.strokeRect(x+0.5, y+0.5, cs-1, cs-1);
+    }
+  }
+  const tex = new THREE.CanvasTexture(c);
+  tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
+  tex.colorSpace = THREE.SRGBColorSpace;
+  return tex;
+}
+
+// JARVIS 主屏幕 UI 纹理
+function makeScreenTexture() {
+  const c = document.createElement('canvas'); c.width = 1024; c.height = 640;
+  const ctx = c.getContext('2d');
+  ctx.fillStyle = '#021018'; ctx.fillRect(0, 0, c.width, c.height);
+  // 标题
+  ctx.font = 'bold 26px monospace'; ctx.fillStyle = 'rgba(39,215,201,0.9)';
+  ctx.fillText('J.A.R.V.I.S', 40, 48);
+  ctx.font = '12px monospace'; ctx.fillStyle = 'rgba(39,215,201,0.35)';
+  ctx.fillText('SYSTEM ONLINE · v5.2.1', 40, 68);
+  // 波形图
+  ctx.strokeStyle = 'rgba(39,215,201,0.25)'; ctx.lineWidth = 1.5;
+  ctx.beginPath();
+  for (let x = 40; x < 500; x += 3) {
+    const y = 120 + Math.sin(x*0.03)*22 + Math.random()*6;
+    if (x===40) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+  }
+  ctx.stroke();
+  // 柱状图
+  for (let i = 0; i < 14; i++) {
+    const x = 40+i*32; const h = 25+Math.random()*70;
+    const g = ctx.createLinearGradient(x, 300-h, x, 300);
+    g.addColorStop(0, 'rgba(39,215,201,0.7)'); g.addColorStop(1, 'rgba(39,215,201,0.05)');
+    ctx.fillStyle = g; ctx.fillRect(x, 300-h, 24, h);
+  }
+  // 右侧圆形 HUD
+  const cx=780, cy=180;
+  for (let r=40; r<=120; r+=18) {
+    ctx.strokeStyle = `rgba(39,215,201,${0.12-r*0.001})`;
+    ctx.lineWidth = 1; ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI*2); ctx.stroke();
+  }
+  ctx.lineWidth = 2;
+  for (let i = 0; i < 6; i++) {
+    const start = (i/6)*Math.PI*2+0.1; const end = start+Math.PI*0.25;
+    ctx.strokeStyle = `rgba(39,215,201,${0.35+Math.random()*0.3})`;
+    ctx.beginPath(); ctx.arc(cx, cy, 55+i*10, start, end); ctx.stroke();
+  }
+  // 状态行
+  ctx.font = '10px monospace'; ctx.fillStyle = 'rgba(39,215,201,0.45)';
+  const lines = ['CPU  ████░░  47%','MEM  ██████░  72%','AGT  ██░░░░  23%','MCP  ████████ 12/12','MDL  FABLE-5  READY'];
+  lines.forEach((l, i) => ctx.fillText(l, 40, 380+i*20));
+  // 数据流
+  ctx.font = '8px monospace'; ctx.fillStyle = 'rgba(39,215,201,0.12)';
+  for (let i = 0; i < 4; i++) {
+    let line = ''; for (let j = 0; j < 90; j++) line += Math.random()>0.5?'0':'1';
+    ctx.fillText(line, 40, 540+i*12);
+  }
+  // 扫描线
+  for (let y = 0; y < c.height; y += 2) { ctx.fillStyle = 'rgba(0,0,0,0.06)'; ctx.fillRect(0, y, c.width, 1); }
+  const tex = new THREE.CanvasTexture(c); tex.colorSpace = THREE.SRGBColorSpace;
+  return tex;
+}
+
+// 侧屏波形纹理
+function makeSideScreenTexture(colorR, colorG, colorB) {
+  const c = document.createElement('canvas'); c.width = 512; c.height = 320;
+  const ctx = c.getContext('2d');
+  ctx.fillStyle = '#020a0e'; ctx.fillRect(0, 0, c.width, c.height);
+  ctx.strokeStyle = `rgba(${colorR},${colorG},${colorB},0.06)`; ctx.lineWidth = 0.5;
+  for (let x = 0; x < c.width; x += 20) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, c.height); ctx.stroke(); }
+  for (let y = 0; y < c.height; y += 20) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(c.width, y); ctx.stroke(); }
+  ctx.strokeStyle = `rgba(${colorR},${colorG},${colorB},0.5)`; ctx.lineWidth = 1.5;
+  ctx.beginPath();
+  for (let x = 0; x < c.width; x += 2) {
+    const y = c.height/2 + Math.sin(x*0.02)*35 + Math.sin(x*0.05)*18 + (Math.random()-0.5)*6;
+    if (x===0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+  }
+  ctx.stroke();
+  ctx.font = '9px monospace'; ctx.fillStyle = `rgba(${colorR},${colorG},${colorB},0.35)`;
+  ['AGENT-01','AGENT-02','TASK Q','THROUGHPUT'].forEach((l, i) => ctx.fillText(l, 20, 20+i*14));
+  const tex = new THREE.CanvasTexture(c); tex.colorSpace = THREE.SRGBColorSpace;
+  return tex;
+}
+
+// Perlin 噪声蒸汽纹理（借鉴 my-room-in-3d 的 coffeeSteam）
+function makeSteamTexture() {
+  const s = 256;
+  const c = document.createElement('canvas'); c.width = c.height = s;
+  const ctx = c.getContext('2d');
+  ctx.fillStyle = 'rgba(255,255,255,0)'; ctx.fillRect(0, 0, s, s);
+  // 简化的 Perlin 风格噪声
+  for (let i = 0; i < 50; i++) {
+    const x = Math.random()*s, y = Math.random()*s;
+    const r = 20+Math.random()*40;
+    const grad = ctx.createRadialGradient(x, y, 0, x, y, r);
+    grad.addColorStop(0, 'rgba(200,210,220,0.04)');
+    grad.addColorStop(1, 'rgba(200,210,220,0)');
+    ctx.fillStyle = grad; ctx.fillRect(x-r, y-r, r*2, r*2);
+  }
+  const tex = new THREE.CanvasTexture(c);
+  return tex;
+}
+
+// ═══════════════════════════════════════════════════════════
+// 灯光
+// ═══════════════════════════════════════════════════════════
+const ambient = new THREE.AmbientLight(0x162030, 0.3);
+scene.add(ambient);
+
+const keyLight = new THREE.DirectionalLight(0x3a5470, 0.4);
+keyLight.position.set(5, 14, 8);
+keyLight.castShadow = true;
+keyLight.shadow.mapSize.set(2048, 2048);
+keyLight.shadow.camera.left = -14; keyLight.shadow.camera.right = 14;
+keyLight.shadow.camera.top = 14; keyLight.shadow.camera.bottom = -14;
+keyLight.shadow.camera.near = 0.5; keyLight.shadow.camera.far = 35;
+keyLight.shadow.bias = -0.0004; keyLight.shadow.radius = 5;
+scene.add(keyLight);
+
+// 环境补光 — 多色光源营造氛围
+const tealLight = new THREE.PointLight(0x27D7C9, 6, 12, 1.8);
+tealLight.position.set(-3.5, 4, 1); scene.add(tealLight);
+
+const purpleLight = new THREE.PointLight(0x8E7CFF, 4, 10, 1.8);
+purpleLight.position.set(4, 3, 2); scene.add(purpleLight);
+
+const warmLight = new THREE.PointLight(0xFF7A59, 2.5, 8, 2);
+warmLight.position.set(0, 1.5, 4); scene.add(warmLight);
+
+// 天花板光
+const ceilingLight = new THREE.PointLight(0x4a6580, 2, 14, 1.5);
+ceilingLight.position.set(0, 11, 0); scene.add(ceilingLight);
+
+// ═══════════════════════════════════════════════════════════
+// 房间 — 借鉴 my-room-in-3d 的等距视角房间结构，但改为开放式 AI 实验室
 // ═══════════════════════════════════════════════════════════
 function createRoom() {
   const room = new THREE.Group();
 
-  // Floor with procedural texture
+  // 地板
   const floorTex = makeFloorTexture();
-  const floorNorm = makeFloorNormalTexture();
   const floor = new THREE.Mesh(
-    new THREE.PlaneGeometry(26, 26),
-    new THREE.MeshStandardMaterial({
-      map: floorTex,
-      normalMap: floorNorm,
-      metalness: 0.85,
-      roughness: 0.28,
-      envMapIntensity: 0.4,
-    })
+    new THREE.PlaneGeometry(24, 24),
+    new THREE.MeshStandardMaterial({ map: floorTex, metalness: 0.82, roughness: 0.28, envMapIntensity: 0.45 })
   );
-  floor.rotation.x = -Math.PI / 2;
-  floor.receiveShadow = true;
+  floor.rotation.x = -Math.PI/2; floor.receiveShadow = true;
   room.add(floor);
 
-  // Floor glow strips (LED lines)
-  const stripMat = new THREE.MeshBasicMaterial({ color: 0x27D7C9, transparent: true, opacity: 0.35 });
-  const strips = [
-    { pos: [0, 0.02, -6], size: [10, 0.02, 0.04] },
-    { pos: [-5, 0.02, 0], size: [0.04, 0.02, 10] },
-    { pos: [5, 0.02, 0], size: [0.04, 0.02, 10] },
-  ];
-  strips.forEach(s => {
-    const strip = new THREE.Mesh(new THREE.BoxGeometry(...s.size), stripMat);
-    strip.position.set(...s.pos);
-    room.add(strip);
+  // 地板 LED 线条
+  const stripMat = new THREE.MeshBasicMaterial({ color: 0x27D7C9, transparent: true, opacity: 0.3, blending: THREE.AdditiveBlending });
+  [[0,0.01,-6,10,0.015,0.03],[-5,0.01,0,0.03,0.015,10],[5,0.01,0,0.03,0.015,10]].forEach(s => {
+    const strip = new THREE.Mesh(new THREE.BoxGeometry(...s.slice(3)), stripMat);
+    strip.position.set(...s.slice(0,3)); room.add(strip);
   });
 
-  // Walls with carbon fiber texture
-  const wallTex = makeWallTexture();
-  wallTex.repeat.set(2, 1);
-  const wallMat = new THREE.MeshStandardMaterial({
-    map: wallTex,
-    metalness: 0.6,
-    roughness: 0.6,
-    envMapIntensity: 0.3,
-  });
+  // 后墙
+  const wallTex = makeWallTexture(); wallTex.repeat.set(2, 1);
+  const wallMat = new THREE.MeshStandardMaterial({ map: wallTex, metalness: 0.5, roughness: 0.55, envMapIntensity: 0.25 });
+  const backWall = new THREE.Mesh(new THREE.PlaneGeometry(24, 11), wallMat);
+  backWall.position.set(0, 5.5, -12); backWall.receiveShadow = true; room.add(backWall);
 
-  const backWall = new THREE.Mesh(new THREE.PlaneGeometry(26, 12), wallMat);
-  backWall.position.set(0, 6, -13);
-  backWall.receiveShadow = true;
-  room.add(backWall);
+  // 左墙
+  const leftWall = new THREE.Mesh(new THREE.PlaneGeometry(24, 11), wallMat.clone());
+  leftWall.position.set(-12, 5.5, 0); leftWall.rotation.y = Math.PI/2; leftWall.receiveShadow = true; room.add(leftWall);
 
-  const leftWall = new THREE.Mesh(new THREE.PlaneGeometry(26, 12), wallMat.clone());
-  leftWall.position.set(-13, 6, 0);
-  leftWall.rotation.y = Math.PI / 2;
-  leftWall.receiveShadow = true;
-  room.add(leftWall);
+  // 右墙（开放式——不建右墙，让视野开阔）
 
-  const rightWall = new THREE.Mesh(new THREE.PlaneGeometry(26, 12), wallMat.clone());
-  rightWall.position.set(13, 6, 0);
-  rightWall.rotation.y = -Math.PI / 2;
-  rightWall.receiveShadow = true;
-  room.add(rightWall);
-
-  // Ceiling (dark, subtle)
+  // 天花板
   const ceiling = new THREE.Mesh(
-    new THREE.PlaneGeometry(26, 26),
-    new THREE.MeshStandardMaterial({ color: 0x030508, metalness: 0.3, roughness: 0.9 })
+    new THREE.PlaneGeometry(24, 24),
+    new THREE.MeshStandardMaterial({ color: 0x030508, metalness: 0.2, roughness: 0.9 })
   );
-  ceiling.position.y = 12;
-  ceiling.rotation.x = Math.PI / 2;
-  room.add(ceiling);
+  ceiling.position.y = 11; ceiling.rotation.x = Math.PI/2; room.add(ceiling);
 
-  // Ceiling light panels
-  for (let i = 0; i < 4; i++) {
+  // 天花板灯面板
+  for (let i = 0; i < 3; i++) {
     const panel = new THREE.Mesh(
-      new THREE.PlaneGeometry(3, 8),
-      new THREE.MeshBasicMaterial({ color: 0x27D7C9, transparent: true, opacity: 0.06 })
+      new THREE.PlaneGeometry(2.5, 7),
+      new THREE.MeshBasicMaterial({ color: 0x27D7C9, transparent: true, opacity: 0.05 })
     );
-    panel.position.set((i - 1.5) * 4, 11.95, 0);
-    panel.rotation.x = Math.PI / 2;
-    room.add(panel);
+    panel.position.set((i-1)*3.5, 10.95, 0); panel.rotation.x = Math.PI/2; room.add(panel);
   }
+
+  // 后墙装饰面板
+  for (let i = 0; i < 3; i++) {
+    const panel = new THREE.Mesh(
+      new THREE.PlaneGeometry(2.2, 3.5),
+      new THREE.MeshStandardMaterial({ color: 0x060810, metalness: 0.4, roughness: 0.5, emissive: 0x27D7C9, emissiveIntensity: 0.025 })
+    );
+    panel.position.set((i-1)*3.5, 4.5, -11.9); room.add(panel);
+    // 面板边框
+    const border = new THREE.LineSegments(
+      new THREE.EdgesGeometry(new THREE.PlaneGeometry(2.2, 3.5)),
+      new THREE.LineBasicMaterial({ color: 0x27D7C9, transparent: true, opacity: 0.12 })
+    );
+    border.position.copy(panel.position); border.position.z += 0.01; room.add(border);
+  }
+
+  // 后墙发光线
+  const glowLine = new THREE.Mesh(
+    new THREE.PlaneGeometry(20, 0.06),
+    new THREE.MeshBasicMaterial({ color: 0x27D7C9, transparent: true, opacity: 0.2, blending: THREE.AdditiveBlending })
+  );
+  glowLine.position.set(0, 2.2, -11.8); room.add(glowLine);
 
   return room;
 }
 scene.add(createRoom());
 
 // ═══════════════════════════════════════════════════════════
-// Desk
+// 工作台 — 木质桌面 + 金属边框
 // ═══════════════════════════════════════════════════════════
 function createDesk() {
   const desk = new THREE.Group();
 
-  // Desk surface — carbon fiber + metal edge
-  const deskTex = makeWallTexture();
-  deskTex.repeat.set(2, 1);
-  const topMat = new THREE.MeshStandardMaterial({
-    map: deskTex,
-    metalness: 0.7,
-    roughness: 0.3,
-    envMapIntensity: 0.5,
-  });
-  const top = new THREE.Mesh(new THREE.BoxGeometry(9, 0.12, 4), topMat);
-  top.position.set(0, 2.2, -4.5);
-  top.castShadow = true;
-  top.receiveShadow = true;
+  // 桌面
+  const woodTex = makeWoodTexture();
+  const topMat = new THREE.MeshStandardMaterial({ map: woodTex, metalness: 0.3, roughness: 0.45, envMapIntensity: 0.4 });
+  const top = new THREE.Mesh(new THREE.BoxGeometry(8, 0.1, 3.8), topMat);
+  top.position.set(0, 2.2, -4.5); top.castShadow = true; top.receiveShadow = true;
   desk.add(top);
 
-  // Glowing edge
-  const edgeMat = new THREE.MeshBasicMaterial({ color: 0x27D7C9, transparent: true, opacity: 0.4 });
-  const edges = [
-    { pos: [0, 2.27, -6.48], size: [9, 0.015, 0.02] },
-    { pos: [0, 2.27, -2.52], size: [9, 0.015, 0.02] },
-    { pos: [-4.48, 2.27, -4.5], size: [0.02, 0.015, 4] },
-    { pos: [4.48, 2.27, -4.5], size: [0.02, 0.015, 4] },
-  ];
-  edges.forEach(e => {
-    const edge = new THREE.Mesh(new THREE.BoxGeometry(...e.size), edgeMat);
-    edge.position.set(...e.pos);
-    desk.add(edge);
-  });
+  // 桌面金属边框
+  const edgeMat = new THREE.MeshStandardMaterial({ color: 0x1a1e26, metalness: 0.9, roughness: 0.2, envMapIntensity: 0.8 });
+  // 前边缘发光
+  const frontEdge = new THREE.Mesh(new THREE.BoxGeometry(8.1, 0.02, 0.04), new THREE.MeshBasicMaterial({ color: 0x27D7C9, transparent: true, opacity: 0.35 }));
+  frontEdge.position.set(0, 2.26, -2.6); desk.add(frontEdge);
 
-  // Desk legs — brushed metal
-  const legMat = new THREE.MeshStandardMaterial({
-    color: 0x141a24,
-    metalness: 0.9,
-    roughness: 0.2,
-    envMapIntensity: 0.8,
-  });
-  const legPos = [
-    [-4.2, 1.1, -6.2], [4.2, 1.1, -6.2],
-    [-4.2, 1.1, -2.8], [4.2, 1.1, -2.8]
-  ];
-  legPos.forEach(p => {
-    const leg = new THREE.Mesh(new THREE.BoxGeometry(0.15, 2.2, 0.15), legMat);
-    leg.position.set(...p);
-    leg.castShadow = true;
-    desk.add(leg);
+  // 桌腿 — 金属
+  const legMat = new THREE.MeshStandardMaterial({ color: 0x10141c, metalness: 0.88, roughness: 0.22, envMapIntensity: 0.8 });
+  [[-3.8,1.1,-6.1],[3.8,1.1,-6.1],[-3.8,1.1,-2.9],[3.8,1.1,-2.9]].forEach(p => {
+    const leg = new THREE.Mesh(new THREE.BoxGeometry(0.14, 2.2, 0.14), legMat);
+    leg.position.set(...p); leg.castShadow = true; desk.add(leg);
+    // 腿底支撑
+    const foot = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.15, 0.03, 8), legMat);
+    foot.position.set(p[0], 0.015, p[2]); desk.add(foot);
   });
 
   return desk;
@@ -773,663 +584,477 @@ function createDesk() {
 scene.add(createDesk());
 
 // ═══════════════════════════════════════════════════════════
-// Holographic Monitors
+// 显示器组 — 借鉴 my-room-in-3d 的多屏布局
 // ═══════════════════════════════════════════════════════════
 function createMonitors() {
   const group = new THREE.Group();
 
-  // Main screen — with JARVIS UI texture
+  // 主屏 — JARVIS UI
   const screenTex = makeScreenTexture();
-  const screenMat = new THREE.MeshStandardMaterial({
-    map: screenTex,
-    emissive: 0x27D7C9,
-    emissiveMap: screenTex,
-    emissiveIntensity: 0.8,
-    transparent: true,
-    opacity: 0.95,
-    side: THREE.DoubleSide,
-    metalness: 0.1,
-    roughness: 0.4,
+  const mainMat = new THREE.MeshStandardMaterial({
+    map: screenTex, emissive: 0x27D7C9, emissiveMap: screenTex, emissiveIntensity: 0.85,
+    transparent: true, opacity: 0.95, side: THREE.DoubleSide, metalness: 0.1, roughness: 0.35,
   });
-  const mainScreen = new THREE.Mesh(new THREE.PlaneGeometry(4, 2.5), screenMat);
-  mainScreen.position.set(0, 4.8, -7);
-  group.add(mainScreen);
+  const main = new THREE.Mesh(new THREE.PlaneGeometry(4, 2.5), mainMat);
+  main.position.set(0, 4.8, -7); group.add(main);
 
-  // Monitor frame — sleek dark metal
-  const frameMat = new THREE.MeshStandardMaterial({
-    color: 0x0a0e14,
-    metalness: 0.9,
-    roughness: 0.2,
-    envMapIntensity: 1.0,
-  });
-  const frame = new THREE.Mesh(new THREE.BoxGeometry(4.3, 2.8, 0.08), frameMat);
-  frame.position.set(0, 4.8, -7.06);
-  frame.castShadow = true;
-  group.add(frame);
+  // 主屏边框
+  const frameMat = new THREE.MeshStandardMaterial({ color: 0x080a0e, metalness: 0.9, roughness: 0.18, envMapIntensity: 1.0 });
+  const frame = new THREE.Mesh(new THREE.BoxGeometry(4.3, 2.8, 0.06), frameMat);
+  frame.position.set(0, 4.8, -7.04); frame.castShadow = true; group.add(frame);
 
-  // Monitor stand
-  const standMat = new THREE.MeshStandardMaterial({
-    color: 0x0d1015,
-    metalness: 0.85,
-    roughness: 0.25,
-  });
-  const standPole = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.08, 2, 12), standMat);
-  standPole.position.set(0, 3.5, -7);
-  standPole.castShadow = true;
-  group.add(standPole);
+  // 显示器支架
+  const standMat = new THREE.MeshStandardMaterial({ color: 0x0a0d12, metalness: 0.85, roughness: 0.25 });
+  const pole = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.07, 2, 12), standMat);
+  pole.position.set(0, 3.5, -7); pole.castShadow = true; group.add(pole);
+  const base = new THREE.Mesh(new THREE.CylinderGeometry(0.28, 0.38, 0.03, 16), standMat);
+  base.position.set(0, 2.27, -7); base.castShadow = true; group.add(base);
 
-  const standBase = new THREE.Mesh(new THREE.CylinderGeometry(0.3, 0.4, 0.04, 16), standMat);
-  standBase.position.set(0, 2.27, -7);
-  standBase.castShadow = true;
-  group.add(standBase);
+  // 屏幕光溢
+  const screenLight = new THREE.PointLight(0x27D7C9, 2.5, 6, 2);
+  screenLight.position.set(0, 4.8, -6.5); group.add(screenLight);
 
-  // Screen light spill
-  const screenLight = new THREE.PointLight(0x27D7C9, 3, 6, 2);
-  screenLight.position.set(0, 4.8, -6.5);
-  group.add(screenLight);
+  // 左侧屏 — 橙色波形
+  const lt = makeSideScreenTexture(255,122,89);
+  const ls = new THREE.Mesh(new THREE.PlaneGeometry(2.2, 1.4),
+    new THREE.MeshStandardMaterial({ map: lt, emissive: 0xFF7A59, emissiveMap: lt, emissiveIntensity: 0.7, transparent: true, opacity: 0.9, side: THREE.DoubleSide }));
+  ls.position.set(-3.5, 4.2, -6.3); ls.rotation.y = 0.32; group.add(ls);
+  const ll = new THREE.PointLight(0xFF7A59, 1.2, 4, 2); ll.position.set(-3.5, 4.2, -5.8); group.add(ll);
 
-  // Side monitors
-  const leftTex = makeSideScreenTexture('rgba(255, 122, 89, 1)');
-  const leftScreen = new THREE.Mesh(
-    new THREE.PlaneGeometry(2.2, 1.4),
-    new THREE.MeshStandardMaterial({
-      map: leftTex,
-      emissive: 0xFF7A59,
-      emissiveMap: leftTex,
-      emissiveIntensity: 0.7,
-      transparent: true,
-      opacity: 0.9,
-      side: THREE.DoubleSide,
-    })
-  );
-  leftScreen.position.set(-3.5, 4.2, -6.3);
-  leftScreen.rotation.y = 0.35;
-  group.add(leftScreen);
+  // 右侧屏 — 紫色波形
+  const rt = makeSideScreenTexture(142,124,255);
+  const rs = new THREE.Mesh(new THREE.PlaneGeometry(2.2, 1.4),
+    new THREE.MeshStandardMaterial({ map: rt, emissive: 0x8E7CFF, emissiveMap: rt, emissiveIntensity: 0.7, transparent: true, opacity: 0.9, side: THREE.DoubleSide }));
+  rs.position.set(3.5, 4.2, -6.3); rs.rotation.y = -0.32; group.add(rs);
+  const rl = new THREE.PointLight(0x8E7CFF, 1.2, 4, 2); rl.position.set(3.5, 4.2, -5.8); group.add(rl);
 
-  const leftLight = new THREE.PointLight(0xFF7A59, 1.5, 4, 2);
-  leftLight.position.set(-3.5, 4.2, -5.8);
-  group.add(leftLight);
-
-  const rightTex = makeSideScreenTexture('rgba(142, 124, 255, 1)');
-  const rightScreen = new THREE.Mesh(
-    new THREE.PlaneGeometry(2.2, 1.4),
-    new THREE.MeshStandardMaterial({
-      map: rightTex,
-      emissive: 0x8E7CFF,
-      emissiveMap: rightTex,
-      emissiveIntensity: 0.7,
-      transparent: true,
-      opacity: 0.9,
-      side: THREE.DoubleSide,
-    })
-  );
-  rightScreen.position.set(3.5, 4.2, -6.3);
-  rightScreen.rotation.y = -0.35;
-  group.add(rightScreen);
-
-  const rightLight = new THREE.PointLight(0x8E7CFF, 1.5, 4, 2);
-  rightLight.position.set(3.5, 4.2, -5.8);
-  group.add(rightLight);
-
-  // Make center screen interactable
-  mainScreen.userData = {
-    name: '全息主控屏',
-    desc: 'JARVIS 全息主控系统 — 实时显示 AI Agent 工作流、日报数据和创作进度。集成 MCP 协议，可调用外部工具。当前状态：运行中。',
-    isInteractable: true,
-  };
-  interactables.push(mainScreen);
+  // 交互
+  main.userData = { name: '全息主控屏', desc: 'JARVIS 全息主控系统 — 实时显示 AI Agent 工作流、日报数据和创作进度。集成 MCP 协议，可调用外部工具。当前状态：运行中。', isInteractable: true };
+  interactables.push(main);
 
   return group;
 }
 scene.add(createMonitors());
 
 // ═══════════════════════════════════════════════════════════
-// Arc Reactor — Iron Man Mark VI
+// 方舟反应堆 — Iron Man Mark VI 风格
 // ═══════════════════════════════════════════════════════════
 function createArcReactor() {
-  const reactor = new THREE.Group();
+  const r = new THREE.Group();
 
-  // Housing ring
+  // 外壳环
   const housing = new THREE.Mesh(
-    new THREE.TorusGeometry(0.55, 0.06, 32, 64),
-    new THREE.MeshStandardMaterial({
-      color: 0x3a3f4a,
-      metalness: 0.95,
-      roughness: 0.15,
-      envMapIntensity: 1.2,
-    })
+    new THREE.TorusGeometry(0.5, 0.055, 32, 64),
+    new THREE.MeshStandardMaterial({ color: 0x3a3f4a, metalness: 0.95, roughness: 0.12, envMapIntensity: 1.2 })
   );
-  housing.castShadow = true;
-  reactor.add(housing);
+  housing.castShadow = true; r.add(housing);
 
-  // Inner ring
-  const innerRing = new THREE.Mesh(
-    new THREE.TorusGeometry(0.42, 0.03, 24, 48),
-    new THREE.MeshStandardMaterial({
-      color: 0x5a5f6a,
-      metalness: 0.9,
-      roughness: 0.12,
-      emissive: 0x27D7C9,
-      emissiveIntensity: 0.4,
-      envMapIntensity: 1.0,
-    })
+  // 内环
+  const inner = new THREE.Mesh(
+    new THREE.TorusGeometry(0.38, 0.025, 24, 48),
+    new THREE.MeshStandardMaterial({ color: 0x5a5f6a, metalness: 0.9, roughness: 0.1, emissive: 0x27D7C9, emissiveIntensity: 0.35, envMapIntensity: 1.0 })
   );
-  reactor.add(innerRing);
+  r.add(inner);
 
-  // Reactor core — glowing
-  const core = new THREE.Mesh(
-    new THREE.CircleGeometry(0.32, 64),
-    new THREE.MeshBasicMaterial({
-      color: 0x27D7C9,
-      transparent: true,
-      opacity: 0.85,
-    })
-  );
-  core.position.z = 0.01;
-  reactor.add(core);
+  // 核心发光
+  const core = new THREE.Mesh(new THREE.CircleGeometry(0.28, 64),
+    new THREE.MeshBasicMaterial({ color: 0x27D7C9, transparent: true, opacity: 0.85 }));
+  core.position.z = 0.01; r.add(core);
 
-  // Core glow halo
-  const halo = new THREE.Mesh(
-    new THREE.CircleGeometry(0.45, 64),
-    new THREE.MeshBasicMaterial({
-      color: 0x27D7C9,
-      transparent: true,
-      opacity: 0.15,
-      blending: THREE.AdditiveBlending,
-      depthWrite: false,
-    })
-  );
-  halo.position.z = 0.005;
-  reactor.add(halo);
+  // 核心光晕
+  const halo = new THREE.Mesh(new THREE.CircleGeometry(0.42, 64),
+    new THREE.MeshBasicMaterial({ color: 0x27D7C9, transparent: true, opacity: 0.12, blending: THREE.AdditiveBlending, depthWrite: false }));
+  halo.position.z = 0.005; r.add(halo);
 
-  // Coil segments
+  // 9 段线圈
   for (let i = 0; i < 9; i++) {
-    const angle = (i / 9) * Math.PI * 2;
-    const coil = new THREE.Mesh(
-      new THREE.BoxGeometry(0.12, 0.05, 0.03),
-      new THREE.MeshStandardMaterial({
-        color: 0x2a2f3a,
-        metalness: 0.9,
-        roughness: 0.2,
-        emissive: 0x27D7C9,
-        emissiveIntensity: 0.15,
-        envMapIntensity: 0.8,
-      })
-    );
-    coil.position.set(Math.cos(angle) * 0.48, 0, Math.sin(angle) * 0.48);
-    coil.rotation.y = angle;
-    coil.castShadow = true;
-    reactor.add(coil);
+    const a = (i/9)*Math.PI*2;
+    const coil = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.04, 0.025),
+      new THREE.MeshStandardMaterial({ color: 0x2a2f3a, metalness: 0.9, roughness: 0.18, emissive: 0x27D7C9, emissiveIntensity: 0.12, envMapIntensity: 0.8 }));
+    coil.position.set(Math.cos(a)*0.43, 0, Math.sin(a)*0.43);
+    coil.rotation.y = a; coil.castShadow = true; r.add(coil);
   }
 
-  // Triangle (Mark VI style)
+  // Mark VI 三角形
   const triShape = new THREE.Shape();
-  const r = 0.18;
+  const triR = 0.16;
   for (let i = 0; i < 3; i++) {
-    const a = (i / 3) * Math.PI * 2 - Math.PI / 2;
-    if (i === 0) triShape.moveTo(Math.cos(a) * r, Math.sin(a) * r);
-    else triShape.lineTo(Math.cos(a) * r, Math.sin(a) * r);
+    const a = (i/3)*Math.PI*2 - Math.PI/2;
+    if (i===0) triShape.moveTo(Math.cos(a)*triR, Math.sin(a)*triR);
+    else triShape.lineTo(Math.cos(a)*triR, Math.sin(a)*triR);
   }
   triShape.closePath();
-  const tri = new THREE.Mesh(
-    new THREE.ShapeGeometry(triShape),
-    new THREE.MeshBasicMaterial({
-      color: 0xffffff,
-      transparent: true,
-      opacity: 0.5,
-      blending: THREE.AdditiveBlending,
-      depthWrite: false,
-    })
-  );
-  tri.position.z = 0.02;
-  reactor.add(tri);
+  const tri = new THREE.Mesh(new THREE.ShapeGeometry(triShape),
+    new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.45, blending: THREE.AdditiveBlending, depthWrite: false }));
+  tri.position.z = 0.02; r.add(tri);
 
-  // Reactor light
-  const reactorLight = new THREE.PointLight(0x27D7C9, 5, 8, 1.5);
-  reactor.add(reactorLight);
+  // 反应堆光
+  const rLight = new THREE.PointLight(0x27D7C9, 4, 8, 1.5);
+  r.add(rLight);
 
-  reactor.position.set(0, 2.27, -4.5);
-  reactor.rotation.x = -Math.PI / 2;
-  reactor.userData = {
+  r.position.set(0, 2.27, -4.5);
+  r.rotation.x = -Math.PI/2;
+  r.userData = {
     name: '方舟反应堆',
     desc: 'Iron Man Mark VI 方舟反应堆 — 为整个 AI 工作室供能。功率 8 GJ/s，可持续运行 10^12 小时。"Sometimes you gotta run before you can walk." — Tony Stark',
-    isInteractable: true,
-    reactorLight,
-    core,
-    halo,
+    isInteractable: true, reactorLight: rLight, core, halo,
   };
-  interactables.push(reactor);
-  return reactor;
+  interactables.push(r);
+  return r;
 }
 const arcReactor = createArcReactor();
 scene.add(arcReactor);
 
 // ═══════════════════════════════════════════════════════════
-// Holographic Data Globe
+// 全息地球仪 — 带弧形数据连线
 // ═══════════════════════════════════════════════════════════
 function createDataGlobe() {
-  const group = new THREE.Group();
+  const g = new THREE.Group();
 
-  // Inner solid sphere
-  const inner = new THREE.Mesh(
-    new THREE.SphereGeometry(1.0, 48, 32),
-    new THREE.MeshStandardMaterial({
-      color: 0x020812,
-      metalness: 0.3,
-      roughness: 0.7,
-      emissive: 0x0a1a2a,
-      emissiveIntensity: 0.5,
-    })
-  );
-  group.add(inner);
+  const inner = new THREE.Mesh(new THREE.SphereGeometry(1.0, 48, 32),
+    new THREE.MeshStandardMaterial({ color: 0x020812, metalness: 0.3, roughness: 0.7, emissive: 0x0a1a2a, emissiveIntensity: 0.4 }));
+  g.add(inner);
 
-  // Wireframe outer
-  const wire = new THREE.Mesh(
-    new THREE.SphereGeometry(1.02, 32, 24),
-    new THREE.MeshBasicMaterial({
-      color: 0x27D7C9,
-      wireframe: true,
-      transparent: true,
-      opacity: 0.15,
-    })
-  );
-  group.add(wire);
+  const wire = new THREE.Mesh(new THREE.SphereGeometry(1.02, 32, 24),
+    new THREE.MeshBasicMaterial({ color: 0x27D7C9, wireframe: true, transparent: true, opacity: 0.12 }));
+  g.add(wire);
 
-  // Data points on surface
-  const dotMat = new THREE.MeshBasicMaterial({ color: 0x27D7C9 });
-  const dotMatOrange = new THREE.MeshBasicMaterial({ color: 0xFF7A59 });
-  const dotGeo = new THREE.SphereGeometry(0.025, 8, 8);
-
+  const dotGeo = new THREE.SphereGeometry(0.02, 8, 8);
+  const dotMats = [new THREE.MeshBasicMaterial({color:0x27D7C9}), new THREE.MeshBasicMaterial({color:0xFF7A59}), new THREE.MeshBasicMaterial({color:0xE9C46A})];
   for (let i = 0; i < 60; i++) {
-    const phi = Math.acos(2 * Math.random() - 1);
-    const theta = Math.random() * Math.PI * 2;
-    const r = 1.03;
-    const dot = new THREE.Mesh(dotGeo, i % 5 === 0 ? dotMatOrange : dotMat);
-    dot.position.set(
-      r * Math.sin(phi) * Math.cos(theta),
-      r * Math.cos(phi),
-      r * Math.sin(phi) * Math.sin(theta)
-    );
-    group.add(dot);
+    const phi = Math.acos(2*Math.random()-1), theta = Math.random()*Math.PI*2, r = 1.03;
+    const dot = new THREE.Mesh(dotGeo, dotMats[i%3]);
+    dot.position.set(r*Math.sin(phi)*Math.cos(theta), r*Math.cos(phi), r*Math.sin(phi)*Math.sin(theta));
+    g.add(dot);
   }
 
-  // Arc connections
-  const lineMat = new THREE.LineBasicMaterial({
-    color: 0x27D7C9,
-    transparent: true,
-    opacity: 0.2,
-  });
-  for (let i = 0; i < 12; i++) {
-    const p1 = new THREE.Vector3(
-      Math.random() * 2 - 1,
-      Math.random() * 2 - 1,
-      Math.random() * 2 - 1
-    ).normalize().multiplyScalar(1.03);
-    const p2 = new THREE.Vector3(
-      Math.random() * 2 - 1,
-      Math.random() * 2 - 1,
-      Math.random() * 2 - 1
-    ).normalize().multiplyScalar(1.03);
-
+  // 弧形数据连线 — 借鉴 my-room-in-3d 的弯曲风格
+  const lineMat = new THREE.LineBasicMaterial({ color: 0x27D7C9, transparent: true, opacity: 0.15 });
+  for (let i = 0; i < 15; i++) {
+    const p1 = new THREE.Vector3(Math.random()*2-1, Math.random()*2-1, Math.random()*2-1).normalize().multiplyScalar(1.03);
+    const p2 = new THREE.Vector3(Math.random()*2-1, Math.random()*2-1, Math.random()*2-1).normalize().multiplyScalar(1.03);
     const mid = p1.clone().add(p2).multiplyScalar(0.5);
-    const dist = p1.distanceTo(p2);
-    mid.normalize().multiplyScalar(1.03 + dist * 0.3);
-
+    mid.normalize().multiplyScalar(1.03 + p1.distanceTo(p2)*0.35);
     const curve = new THREE.QuadraticBezierCurve3(p1, mid, p2);
     const points = curve.getPoints(20);
-    const geo = new THREE.BufferGeometry().setFromPoints(points);
-    const line = new THREE.Line(geo, lineMat);
-    group.add(line);
+    const line = new THREE.Line(new THREE.BufferGeometry().setFromPoints(points), lineMat);
+    g.add(line);
   }
 
-  group.position.set(4.5, 4, -2.5);
-  group.userData = {
+  g.position.set(4.5, 4, -2.5);
+  g.userData = {
     name: '全球数据网络',
     desc: '实时全球 AI 数据流可视化 — 连接 GCP Vertex AI、Claude API、MCP 服务器网络。每天处理 2.3B 条推理请求。',
     isInteractable: true,
   };
-  interactables.push(group);
-  return group;
+  interactables.push(g);
+  return g;
 }
 const dataGlobe = createDataGlobe();
 scene.add(dataGlobe);
 
 // ═══════════════════════════════════════════════════════════
-// HUD Rings
+// HUD 环 — 钢铁侠头盔界面风格
 // ═══════════════════════════════════════════════════════════
 function createHUDRings() {
-  const group = new THREE.Group();
+  const g = new THREE.Group();
   const colors = [0x27D7C9, 0x8E7CFF, 0xFF7A59, 0xE9C46A];
-
   for (let i = 0; i < 4; i++) {
     const ring = new THREE.Mesh(
-      new THREE.TorusGeometry(2.2 + i * 0.25, 0.008, 8, 80, Math.PI * (0.35 + i * 0.12)),
-      new THREE.MeshBasicMaterial({
-        color: colors[i],
-        transparent: true,
-        opacity: 0.3 - i * 0.04,
-        blending: THREE.AdditiveBlending,
-        depthWrite: false,
-      })
+      new THREE.TorusGeometry(2.0+i*0.22, 0.006, 8, 80, Math.PI*(0.35+i*0.12)),
+      new THREE.MeshBasicMaterial({ color: colors[i], transparent: true, opacity: 0.25-i*0.03, blending: THREE.AdditiveBlending, depthWrite: false })
     );
-    ring.rotation.x = Math.PI / 2 + (i * 0.08);
-    ring.rotation.z = i * 0.25;
-    ring.userData = { rotSpeed: 0.15 + i * 0.08, axis: i };
-    group.add(ring);
+    ring.rotation.x = Math.PI/2+(i*0.08); ring.rotation.z = i*0.25;
+    ring.userData = { rotSpeed: 0.12+i*0.06, axis: i };
+    g.add(ring);
   }
-
-  group.position.set(-3.8, 4, -2.5);
-  return group;
+  g.position.set(-3.8, 4, -2.5);
+  return g;
 }
 const hudRings = createHUDRings();
 scene.add(hudRings);
 
 // ═══════════════════════════════════════════════════════════
-// Floating Particles
+// 咖啡杯 + 蒸汽 — 直接借鉴 my-room-in-3d 的 CoffeeSteam
+// ═══════════════════════════════════════════════════════════
+function createCoffeeCup() {
+  const g = new THREE.Group();
+
+  // 杯身
+  const cup = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.18, 0.15, 0.25, 24),
+    new THREE.MeshStandardMaterial({ color: 0xf0ede8, metalness: 0.1, roughness: 0.5, envMapIntensity: 0.6 })
+  );
+  cup.position.y = 0.12; cup.castShadow = true; g.add(cup);
+
+  // 杯内液体
+  const liquid = new THREE.Mesh(
+    new THREE.CircleGeometry(0.17, 24),
+    new THREE.MeshStandardMaterial({ color: 0x3a2010, metalness: 0.3, roughness: 0.3, emissive: 0x1a0a02, emissiveIntensity: 0.2 })
+  );
+  liquid.rotation.x = -Math.PI/2; liquid.position.y = 0.24; g.add(liquid);
+
+  // 杯把
+  const handle = new THREE.Mesh(
+    new THREE.TorusGeometry(0.08, 0.02, 8, 16, Math.PI),
+    new THREE.MeshStandardMaterial({ color: 0xf0ede8, metalness: 0.1, roughness: 0.5 })
+  );
+  handle.position.set(0.17, 0.13, 0); handle.rotation.y = Math.PI/2; g.add(handle);
+
+  // 蒸汽 — Perlin 噪声 shader（简化版）
+  const steamGeo = new THREE.PlaneGeometry(0.3, 1.2, 8, 24);
+  const steamMat = new THREE.ShaderMaterial({
+    transparent: true, depthWrite: false, side: THREE.DoubleSide,
+    uniforms: { uTime: { value: 0 }, uColor: { value: new THREE.Color(0xd2958a) } },
+    vertexShader: `
+      uniform float uTime;
+      varying vec2 vUv;
+      void main() {
+        vec3 pos = position;
+        float strength = pow(uv.y * 3.0, 2.0);
+        pos.x += sin(uTime * 0.001 + uv.y * 8.0) * 0.03 * strength;
+        pos.z += cos(uTime * 0.0012 + uv.y * 6.0) * 0.03 * strength;
+        vec4 mp = modelMatrix * vec4(pos, 1.0);
+        gl_Position = projectionMatrix * viewMatrix * mp;
+        vUv = uv;
+      }
+    `,
+    fragmentShader: `
+      uniform float uTime;
+      uniform vec3 uColor;
+      varying vec2 vUv;
+      void main() {
+        float border = min(vUv.x * 4.0, (1.0 - vUv.x) * 4.0);
+        border *= (1.0 - vUv.y);
+        float n = sin(vUv.x * 12.0 + uTime * 0.002) * 0.3 + 0.5;
+        n *= sin(vUv.y * 8.0 - uTime * 0.003) * 0.3 + 0.5;
+        float alpha = border * n * 0.35;
+        gl_FragColor = vec4(uColor, alpha);
+      }
+    `,
+  });
+  const steam = new THREE.Mesh(steamGeo, steamMat);
+  steam.position.y = 0.85; steam.userData.steamMat = steamMat;
+  g.add(steam);
+
+  g.position.set(2.2, 2.27, -4.2);
+  return g;
+}
+const coffeeCup = createCoffeeCup();
+scene.add(coffeeCup);
+
+// ═══════════════════════════════════════════════════════════
+// 桌面物品 — 键盘
+// ═══════════════════════════════════════════════════════════
+function createKeyboard() {
+  const g = new THREE.Group();
+  const mat = new THREE.MeshStandardMaterial({ color: 0x0a0d12, metalness: 0.7, roughness: 0.35, envMapIntensity: 0.6 });
+
+  const base = new THREE.Mesh(new THREE.BoxGeometry(2.2, 0.06, 0.7), mat);
+  base.position.y = 0.03; base.castShadow = true; g.add(base);
+
+  // 按键
+  const keyMat = new THREE.MeshStandardMaterial({ color: 0x14181e, metalness: 0.5, roughness: 0.4, envMapIntensity: 0.4 });
+  for (let row = 0; row < 4; row++) {
+    for (let col = 0; col < 14; col++) {
+      const key = new THREE.Mesh(new THREE.BoxGeometry(0.12, 0.04, 0.12), keyMat);
+      key.position.set(-0.98 + col * 0.145, 0.07, -0.25 + row * 0.16);
+      key.castShadow = true; g.add(key);
+    }
+  }
+
+  // RGB 底光
+  const rgb = new THREE.PointLight(0x27D7C9, 0.8, 2, 2);
+  rgb.position.set(0, 0.01, 0); g.add(rgb);
+
+  g.position.set(0, 2.27, -3.8);
+  return g;
+}
+scene.add(createKeyboard());
+
+// ═══════════════════════════════════════════════════════════
+// 椅子 — 借鉴 my-room-in-3d 的 TopChair 悬浮旋转
+// ═══════════════════════════════════════════════════════════
+function createChair() {
+  const g = new THREE.Group();
+  const mat = new THREE.MeshStandardMaterial({ color: 0x080a0e, metalness: 0.6, roughness: 0.35, envMapIntensity: 0.5 });
+
+  const seat = new THREE.Mesh(new THREE.BoxGeometry(1.1, 0.1, 1.1), mat);
+  seat.position.y = 1.5; seat.castShadow = true; g.add(seat);
+
+  const back = new THREE.Mesh(new THREE.BoxGeometry(1.1, 1.5, 0.1), mat);
+  back.position.set(0, 2.25, 0.5); back.castShadow = true; g.add(back);
+
+  const pole = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.04, 1.5, 8), mat);
+  pole.position.y = 0.75; g.add(pole);
+
+  const base = new THREE.Mesh(new THREE.CylinderGeometry(0.4, 0.4, 0.03, 5),
+    new THREE.MeshStandardMaterial({ color: 0x060810, metalness: 0.8, roughness: 0.3 }));
+  base.position.y = 0.015; g.add(base);
+
+  g.position.set(0, 0, -2);
+  g.userData.chairGroup = g;
+  return g;
+}
+const chair = createChair();
+scene.add(chair);
+
+// ═══════════════════════════════════════════════════════════
+// 全息投影器 — 桌面设备
+// ═══════════════════════════════════════════════════════════
+function createProjector() {
+  const g = new THREE.Group();
+  const mat = new THREE.MeshStandardMaterial({ color: 0x12161e, metalness: 0.85, roughness: 0.2, envMapIntensity: 0.9 });
+  const base = new THREE.Mesh(new THREE.CylinderGeometry(0.2, 0.26, 0.1, 24), mat);
+  base.castShadow = true; g.add(base);
+  const em = new THREE.Mesh(new THREE.CylinderGeometry(0.09, 0.14, 0.05, 24),
+    new THREE.MeshStandardMaterial({ color: 0x12161e, metalness: 0.85, roughness: 0.2, emissive: 0x27D7C9, emissiveIntensity: 0.4 }));
+  em.position.y = 0.08; g.add(em);
+  const beam = new THREE.Mesh(new THREE.ConeGeometry(0.6, 2.2, 24, 1, true),
+    new THREE.MeshBasicMaterial({ color: 0x27D7C9, transparent: true, opacity: 0.03, side: THREE.DoubleSide, depthWrite: false, blending: THREE.AdditiveBlending }));
+  beam.position.y = 1.15; g.add(beam);
+  g.position.set(-2.2, 2.27, -4);
+  return g;
+}
+scene.add(createProjector());
+
+// ═══════════════════════════════════════════════════════════
+// 浮动粒子 — 数据流
 // ═══════════════════════════════════════════════════════════
 function createParticles() {
   const count = 300;
   const geo = new THREE.BufferGeometry();
-  const positions = new Float32Array(count * 3);
-  const colors = new Float32Array(count * 3);
-  const velocities = new Float32Array(count * 3);
-  const sizes = new Float32Array(count);
-
-  const c1 = new THREE.Color(0x27D7C9);
-  const c2 = new THREE.Color(0x8E7CFF);
-
+  const positions = new Float32Array(count*3), colors = new Float32Array(count*3), vel = new Float32Array(count*3);
+  const c1 = new THREE.Color(0x27D7C9), c2 = new THREE.Color(0x8E7CFF);
   for (let i = 0; i < count; i++) {
-    positions[i * 3] = (Math.random() - 0.5) * 22;
-    positions[i * 3 + 1] = Math.random() * 11;
-    positions[i * 3 + 2] = (Math.random() - 0.5) * 22;
-    velocities[i * 3] = (Math.random() - 0.5) * 0.004;
-    velocities[i * 3 + 1] = 0.001 + Math.random() * 0.008;
-    velocities[i * 3 + 2] = (Math.random() - 0.5) * 0.004;
-    sizes[i] = 0.02 + Math.random() * 0.06;
-    const c = Math.random() > 0.5 ? c1 : c2;
-    colors[i * 3] = c.r;
-    colors[i * 3 + 1] = c.g;
-    colors[i * 3 + 2] = c.b;
+    positions[i*3] = (Math.random()-0.5)*22;
+    positions[i*3+1] = Math.random()*10;
+    positions[i*3+2] = (Math.random()-0.5)*22;
+    vel[i*3] = (Math.random()-0.5)*0.003;
+    vel[i*3+1] = 0.001+Math.random()*0.007;
+    vel[i*3+2] = (Math.random()-0.5)*0.003;
+    const c = Math.random()>0.5 ? c1 : c2;
+    colors[i*3]=c.r; colors[i*3+1]=c.g; colors[i*3+2]=c.b;
   }
-
   geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
   geo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-
-  const mat = new THREE.PointsMaterial({
-    size: 0.05,
-    vertexColors: true,
-    transparent: true,
-    opacity: 0.5,
-    blending: THREE.AdditiveBlending,
-    depthWrite: false,
-    sizeAttenuation: true,
-  });
-
-  const points = new THREE.Points(geo, mat);
-  points.userData = { velocities };
+  const points = new THREE.Points(geo, new THREE.PointsMaterial({
+    size: 0.04, vertexColors: true, transparent: true, opacity: 0.45,
+    blending: THREE.AdditiveBlending, depthWrite: false, sizeAttenuation: true,
+  }));
+  points.userData = { vel };
   return points;
 }
 const particles = createParticles();
 scene.add(particles);
 
 // ═══════════════════════════════════════════════════════════
-// Holo Projector
-// ═══════════════════════════════════════════════════════════
-function createHoloProjector() {
-  const group = new THREE.Group();
-  const mat = new THREE.MeshStandardMaterial({
-    color: 0x12161e,
-    metalness: 0.85,
-    roughness: 0.2,
-    envMapIntensity: 0.9,
-  });
-
-  const base = new THREE.Mesh(new THREE.CylinderGeometry(0.22, 0.28, 0.12, 24), mat);
-  base.castShadow = true;
-  group.add(base);
-
-  const emitter = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.1, 0.15, 0.06, 24),
-    new THREE.MeshStandardMaterial({
-      color: 0x12161e,
-      metalness: 0.85,
-      roughness: 0.2,
-      emissive: 0x27D7C9,
-      emissiveIntensity: 0.5,
-    })
-  );
-  emitter.position.y = 0.09;
-  group.add(emitter);
-
-  // Light beam
-  const beam = new THREE.Mesh(
-    new THREE.ConeGeometry(0.7, 2.5, 24, 1, true),
-    new THREE.MeshBasicMaterial({
-      color: 0x27D7C9,
-      transparent: true,
-      opacity: 0.04,
-      side: THREE.DoubleSide,
-      depthWrite: false,
-      blending: THREE.AdditiveBlending,
-    })
-  );
-  beam.position.y = 1.3;
-  group.add(beam);
-
-  group.position.set(2.5, 2.27, -4);
-  return group;
-}
-scene.add(createHoloProjector());
-
-// ═══════════════════════════════════════════════════════════
-// Chair
-// ═══════════════════════════════════════════════════════════
-function createChair() {
-  const group = new THREE.Group();
-  const mat = new THREE.MeshStandardMaterial({
-    color: 0x0a0d12,
-    metalness: 0.6,
-    roughness: 0.35,
-    envMapIntensity: 0.5,
-  });
-
-  const seat = new THREE.Mesh(new THREE.BoxGeometry(1.1, 0.12, 1.1), mat);
-  seat.position.y = 1.5;
-  seat.castShadow = true;
-  group.add(seat);
-
-  const back = new THREE.Mesh(new THREE.BoxGeometry(1.1, 1.6, 0.1), mat);
-  back.position.set(0, 2.3, 0.5);
-  back.castShadow = true;
-  group.add(back);
-
-  const pole = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.05, 1.5, 12), mat);
-  pole.position.y = 0.75;
-  group.add(pole);
-
-  const base = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.42, 0.42, 0.04, 5),
-    new THREE.MeshStandardMaterial({ color: 0x080a0e, metalness: 0.8, roughness: 0.3 })
-  );
-  base.position.y = 0.02;
-  group.add(base);
-
-  group.position.set(0, 0, -2);
-  return group;
-}
-scene.add(createChair());
-
-// ═══════════════════════════════════════════════════════════
-// Wall Panels (decorative)
-// ═══════════════════════════════════════════════════════════
-function createWallPanels() {
-  const group = new THREE.Group();
-
-  // Back wall accent panels
-  for (let i = 0; i < 3; i++) {
-    const panel = new THREE.Mesh(
-      new THREE.PlaneGeometry(2.5, 4),
-      new THREE.MeshStandardMaterial({
-        color: 0x060810,
-        metalness: 0.5,
-        roughness: 0.5,
-        emissive: 0x27D7C9,
-        emissiveIntensity: 0.03,
-      })
-    );
-    panel.position.set((i - 1) * 3.5, 5, -12.9);
-    group.add(panel);
-
-    // Panel border glow
-    const border = new THREE.Mesh(
-      new THREE.EdgesGeometry(new THREE.PlaneGeometry(2.5, 4)),
-      new THREE.LineBasicMaterial({ color: 0x27D7C9, transparent: true, opacity: 0.15 })
-    );
-    border.position.copy(panel.position);
-    border.position.z += 0.01;
-    group.add(border);
-  }
-
-  // Back wall glow strip
-  const glowStrip = new THREE.Mesh(
-    new THREE.PlaneGeometry(20, 0.08),
-    new THREE.MeshBasicMaterial({
-      color: 0x27D7C9,
-      transparent: true,
-      opacity: 0.25,
-      blending: THREE.AdditiveBlending,
-    })
-  );
-  glowStrip.position.set(0, 2.5, -12.8);
-  group.add(glowStrip);
-
-  return group;
-}
-scene.add(createWallPanels());
-
-// ═══════════════════════════════════════════════════════════
-// Interaction
+// 交互
 // ═══════════════════════════════════════════════════════════
 const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
 
-function onPointerMove(event) {
-  const x = event.clientX !== undefined ? event.clientX : (event.touches && event.touches[0].clientX);
-  const y = event.clientY !== undefined ? event.clientY : (event.touches && event.touches[0].clientY);
+function onPointerMove(e) {
+  const x = e.clientX !== undefined ? e.clientX : (e.touches && e.touches[0] && e.touches[0].clientX) || 0;
+  const y = e.clientY !== undefined ? e.clientY : (e.touches && e.touches[0] && e.touches[0].clientY) || 0;
   mouse.x = (x / window.innerWidth) * 2 - 1;
   mouse.y = -(y / window.innerHeight) * 2 + 1;
 }
 
-function onPointerDown(event) {
-  onPointerMove(event);
+function onPointerDown(e) {
+  onPointerMove(e);
   raycaster.setFromCamera(mouse, camera);
   const hits = raycaster.intersectObjects(interactables, true);
   if (hits.length > 0) {
-    let target = hits[0].object;
-    while (target && !target.userData.isInteractable) {
-      target = target.parent;
-    }
-    if (target && target.userData.name) {
-      showInfo(target.userData.name, target.userData.desc);
-    }
+    let t = hits[0].object;
+    while (t && !t.userData.isInteractable) t = t.parent;
+    if (t && t.userData.name) showInfo(t.userData.name, t.userData.desc);
   }
 }
 
 function showInfo(title, text) {
-  const panel = document.getElementById('infoPanel');
+  const p = document.getElementById('infoPanel');
   document.getElementById('infoTitle').textContent = title;
   document.getElementById('infoText').textContent = text;
-  panel.classList.add('show');
+  p.classList.add('show');
 }
 
 window.addEventListener('pointermove', onPointerMove, { passive: true });
 window.addEventListener('pointerdown', onPointerDown, { passive: true });
 
 // ═══════════════════════════════════════════════════════════
-// Resize
+// 窗口缩放
 // ═══════════════════════════════════════════════════════════
 window.addEventListener('resize', () => {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
   composer.setSize(window.innerWidth, window.innerHeight);
-  fxaaPass.material.uniforms['resolution'].value.set(
-    1 / (window.innerWidth * renderer.getPixelRatio()),
-    1 / (window.innerHeight * renderer.getPixelRatio())
+  fxaa.material.uniforms['resolution'].value.set(
+    1/(window.innerWidth*renderer.getPixelRatio()),
+    1/(window.innerHeight*renderer.getPixelRatio())
   );
 }, { passive: true });
 
 // ═══════════════════════════════════════════════════════════
-// Animation Loop
+// 动画循环
 // ═══════════════════════════════════════════════════════════
 const clock = new THREE.Clock();
-let frameCount = 0;
-let lastFpsTime = 0;
+let frameCount = 0, lastFpsTime = 0;
 
 function animate() {
   requestAnimationFrame(animate);
-  const elapsed = clock.getElapsedTime();
+  const t = clock.getElapsedTime();
   frameCount++;
 
   controls.update();
 
-  // Arc reactor animation
-  arcReactor.rotation.z += 0.008;
-  if (arcReactor.userData.reactorLight) {
-    arcReactor.userData.reactorLight.intensity = 4 + Math.sin(elapsed * 2.5) * 1.5;
-  }
-  if (arcReactor.userData.core) {
-    arcReactor.userData.core.material.opacity = 0.75 + Math.sin(elapsed * 2.5) * 0.15;
-  }
-  if (arcReactor.userData.halo) {
-    const s = 1 + Math.sin(elapsed * 2.5) * 0.08;
-    arcReactor.userData.halo.scale.set(s, s, 1);
-  }
+  // 反应堆
+  arcReactor.rotation.z += 0.007;
+  if (arcReactor.userData.reactorLight) arcReactor.userData.reactorLight.intensity = 3.5 + Math.sin(t*2.5)*1.2;
+  if (arcReactor.userData.core) arcReactor.userData.core.material.opacity = 0.75 + Math.sin(t*2.5)*0.12;
+  if (arcReactor.userData.halo) { const s = 1+Math.sin(t*2.5)*0.07; arcReactor.userData.halo.scale.set(s, s, 1); }
 
-  // Data globe rotation
-  dataGlobe.rotation.y += 0.004;
-  dataGlobe.rotation.x = Math.sin(elapsed * 0.15) * 0.08;
+  // 数据球
+  dataGlobe.rotation.y += 0.003;
+  dataGlobe.rotation.x = Math.sin(t*0.12)*0.06;
 
-  // HUD rings
+  // HUD 环
   hudRings.children.forEach((ring, i) => {
     if (ring.userData.axis === 0) ring.rotation.z += 0.002;
     else if (ring.userData.axis === 1) ring.rotation.x += 0.0015;
-    else ring.rotation.y += 0.003;
+    else ring.rotation.y += 0.0025;
   });
-  hudRings.position.y = 4 + Math.sin(elapsed * 0.4) * 0.25;
+  hudRings.position.y = 4 + Math.sin(t*0.35)*0.2;
 
-  // Particles drift
+  // 粒子
   const pos = particles.geometry.attributes.position.array;
-  const vel = particles.userData.velocities;
+  const v = particles.userData.vel;
   for (let i = 0; i < pos.length; i += 3) {
-    pos[i] += vel[i];
-    pos[i + 1] += vel[i + 1];
-    pos[i + 2] += vel[i + 2];
-    if (pos[i + 1] > 11) {
-      pos[i] = (Math.random() - 0.5) * 22;
-      pos[i + 1] = 0;
-      pos[i + 2] = (Math.random() - 0.5) * 22;
-    }
+    pos[i] += v[i]; pos[i+1] += v[i+1]; pos[i+2] += v[i+2];
+    if (pos[i+1] > 10) { pos[i] = (Math.random()-0.5)*22; pos[i+1] = 0; pos[i+2] = (Math.random()-0.5)*22; }
   }
   particles.geometry.attributes.position.needsUpdate = true;
 
-  // FPS counter
-  if (elapsed - lastFpsTime > 1) {
-    const fps = Math.round(frameCount / (elapsed - lastFpsTime));
-    const fpsEl = document.getElementById('fps');
-    if (fpsEl) fpsEl.textContent = fps;
-    frameCount = 0;
-    lastFpsTime = elapsed;
+  // 咖啡蒸汽
+  if (coffeeCup.userData) {
+    coffeeCup.traverse(c => { if (c.userData && c.userData.steamMat) c.userData.steamMat.uniforms.uTime.value = t * 1000; });
+  }
+
+  // 椅子轻微旋转 — 借鉴 my-room-in-3d 的 TopChair
+  if (chair.userData.chairGroup) chair.rotation.y = Math.sin(t * 0.3) * 0.3;
+
+  // FPS
+  if (t - lastFpsTime > 1) {
+    const fps = Math.round(frameCount / (t - lastFpsTime));
+    const el = document.getElementById('fps'); if (el) el.textContent = fps;
+    frameCount = 0; lastFpsTime = t;
   }
 
   composer.render();
 }
 
-// Hide loading
-setTimeout(() => {
-  document.getElementById('loading').classList.add('hide');
-}, 500);
-
+setTimeout(() => document.getElementById('loading').classList.add('hide'), 500);
 animate();
 </script>
 </body>
