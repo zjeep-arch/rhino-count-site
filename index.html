@@ -173,7 +173,7 @@
       position: fixed;
       left: 0;
       top: 0;
-      z-index: 80;
+      z-index: 95;
       width: 100%;
       height: 2px;
       pointer-events: none;
@@ -1725,10 +1725,17 @@
     .quote-section .quote-mark,
     .quote-section blockquote.pull,
     .quote-section .quote-attr {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0);
+      transition: opacity 1s cubic-bezier(0.2,0.8,0.3,1), transform 1s cubic-bezier(0.2,0.8,0.3,1), filter 1s ease;
+    }
+    .quote-section:not(.assembled) .quote-mark,
+    .quote-section:not(.assembled) blockquote.pull,
+    .quote-section:not(.assembled) .quote-attr {
       opacity: 0;
       transform: translateY(30px);
       filter: blur(8px);
-      transition: opacity 1s cubic-bezier(0.2,0.8,0.3,1), transform 1s cubic-bezier(0.2,0.8,0.3,1), filter 1s ease;
     }
     .quote-section.assembled .quote-mark {
       opacity: 0.35;
@@ -1789,14 +1796,14 @@
     }
 
     /* =========================================================
-     * D: Section Transition Veil + Cinematic Vignette
+     * D: Section Transition — Light Scan Line
      * ========================================================= */
     .section-veil {
       position: absolute;
       left: 0;
       right: 0;
       top: 0;
-      height: 160px;
+      height: 2px;
       width: 100%;
       pointer-events: none;
       z-index: 5;
@@ -1806,8 +1813,26 @@
     .section-veil.active { opacity: 1; }
     section { position: relative; }
 
-    /* Cinematic vignette on all sections */
-    main > section::after {
+    /* Section top glow line */
+    main > section {
+      position: relative;
+    }
+    main > section:not(.quote-section)::before {
+      content: "";
+      position: absolute;
+      left: 0; right: 0;
+      top: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent 10%, color-mix(in oklab, var(--accent) 40%, transparent) 50%, transparent 90%);
+      opacity: 0;
+      z-index: 4;
+      pointer-events: none;
+      transition: opacity 0.6s ease;
+    }
+    main > section.in-view:not(.quote-section)::before { opacity: 0.6; }
+
+    /* Cinematic vignette on all sections (except quote-section which has its own ::after) */
+    main > section:not(.quote-section)::after {
       content: "";
       position: absolute;
       inset: 0;
@@ -1817,7 +1842,7 @@
       opacity: 0;
       transition: opacity 0.5s ease;
     }
-    main > section.in-view::after {
+    main > section.in-view:not(.quote-section)::after {
       opacity: 0.6;
     }
 
@@ -5176,7 +5201,14 @@
       /* === B: Manifesto Cinematic Particle Assembly === */
       (function initManifestoParticles() {
         const section = document.getElementById('manifesto');
-        if (!section || !motionOK) return;
+        if (!section) return;
+
+        // If reduced motion, just show the text immediately
+        if (!motionOK) {
+          section.classList.add('assembled');
+          return;
+        }
+
         const canvas = document.createElement('canvas');
         canvas.className = 'manifesto-particle-canvas';
         section.insertBefore(canvas, section.firstChild);
@@ -5294,7 +5326,7 @@
         cards.forEach(card => obs.observe(card));
       })();
 
-      /* === D: Section Veil + Vignette + Parallax + Letterbox === */
+      /* === D: Section Glow Line + Vignette + Parallax + Letterbox === */
       (function initCinematicSystem() {
         const sections = document.querySelectorAll('main > section');
         if (!sections.length) return;
@@ -5307,66 +5339,10 @@
         document.body.appendChild(lbTop);
         document.body.appendChild(lbBot);
 
-        // Veil canvases
-        const veils = [];
-        sections.forEach(sec => {
-          const veil = document.createElement('canvas');
-          veil.className = 'section-veil';
-          sec.insertBefore(veil, sec.firstChild);
-          veils.push({ el: veil, section: sec, ctx: veil.getContext('2d'), particles: [] });
-        });
-
         const accent = getComputedStyle(root).getPropertyValue('--accent').trim() || '#27D7C9';
         const electric = getComputedStyle(root).getPropertyValue('--electric').trim() || '#8E7CFF';
 
-        function initVeil(v) {
-          const rect = v.section.getBoundingClientRect();
-          v.el.width = rect.width;
-          v.el.height = 160;
-          v.particles = Array.from({ length: 60 }, () => ({
-            x: Math.random() * rect.width,
-            y: Math.random() * 160,
-            vx: (Math.random() - 0.5) * 0.8,
-            vy: (Math.random() - 0.5) * 0.5,
-            r: 0.5 + Math.random() * 2,
-            alpha: 0.08 + Math.random() * 0.35,
-            color: Math.random() > 0.5 ? accent : electric
-          }));
-        }
-
-        function drawVeil(v) {
-          v.ctx.fillStyle = 'rgba(8, 11, 16, 0.06)';
-          v.ctx.fillRect(0, 0, v.el.width, v.el.height);
-          v.particles.forEach(p => {
-            p.x += p.vx;
-            p.y += p.vy;
-            if (p.x < 0) p.x = v.el.width;
-            if (p.x > v.el.width) p.x = 0;
-            if (p.y < 0) p.y = 160;
-            if (p.y > 160) p.y = 0;
-            v.ctx.beginPath();
-            v.ctx.fillStyle = p.color;
-            v.ctx.globalAlpha = p.alpha;
-            v.ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-            v.ctx.fill();
-          });
-          v.ctx.globalAlpha = 1;
-        }
-
-        function loop() {
-          veils.forEach(v => {
-            const rect = v.section.getBoundingClientRect();
-            if (rect.top < window.innerHeight && rect.bottom > 0) {
-              if (!v.el.width || v.el.width !== Math.round(rect.width)) initVeil(v);
-              drawVeil(v);
-            }
-          });
-          requestAnimationFrame(loop);
-        }
-        if (motionOK) loop();
-        window.addEventListener('resize', () => veils.forEach(initVeil), { passive: true });
-
-        // In-view detection for vignette
+        // In-view detection for glow line + vignette
         const viewObs = new IntersectionObserver(entries => {
           entries.forEach(entry => {
             entry.target.classList.toggle('in-view', entry.isIntersecting);
