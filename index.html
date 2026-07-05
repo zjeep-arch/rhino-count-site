@@ -1674,17 +1674,45 @@
     .profile-grid { perspective: 1000px; }
     .profile-cell {
       transform-style: preserve-3d;
-      transition: transform 0.15s ease-out, background 0.25s ease;
+      transition: transform 0.15s ease-out, background 0.25s ease, box-shadow 0.25s ease;
       will-change: transform;
+      position: relative;
     }
     .profile-cell .k, .profile-cell .v {
       transform: translateZ(20px);
     }
+    .profile-cell::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, transparent 40%, color-mix(in oklab, var(--accent) 20%, transparent) 80%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+      mix-blend-mode: screen;
+    }
+    .profile-cell:hover::after { opacity: 1; }
+    .profile-cell:hover {
+      box-shadow: 0 20px 60px -20px var(--glow), 0 0 0 1px color-mix(in oklab, var(--accent) 30%, transparent);
+    }
 
     /* =========================================================
-     * B: Manifesto Text Particles
+     * B: Manifesto Cinematic Reveal
      * ========================================================= */
-    .quote-section { position: relative; }
+    .quote-section {
+      position: relative;
+      overflow: hidden;
+    }
+    .quote-section::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 50% 50%, color-mix(in oklab, var(--accent) 8%, transparent), transparent 60%),
+        radial-gradient(ellipse at 20% 30%, color-mix(in oklab, var(--electric) 6%, transparent), transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
     .manifesto-particle-canvas {
       position: absolute;
       inset: 0;
@@ -1694,60 +1722,127 @@
       z-index: 0;
     }
     .quote-section .container { position: relative; z-index: 1; }
-    .quote-section.assembling .quote-mark,
-    .quote-section.assembling blockquote.pull,
-    .quote-section.assembling .quote-attr {
+    .quote-section .quote-mark,
+    .quote-section blockquote.pull,
+    .quote-section .quote-attr {
       opacity: 0;
-      transition: opacity 0.3s ease;
+      transform: translateY(30px);
+      filter: blur(8px);
+      transition: opacity 1s cubic-bezier(0.2,0.8,0.3,1), transform 1s cubic-bezier(0.2,0.8,0.3,1), filter 1s ease;
     }
-    .quote-section.assembled .quote-mark,
-    .quote-section.assembled blockquote.pull,
+    .quote-section.assembled .quote-mark {
+      opacity: 0.35;
+      transform: translateY(0);
+      filter: blur(0);
+      transition-delay: 0.2s;
+    }
+    .quote-section.assembled blockquote.pull {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0);
+      transition-delay: 0.5s;
+    }
     .quote-section.assembled .quote-attr {
       opacity: 1;
-      transition: opacity 0.6s ease 0.2s;
+      transform: translateY(0);
+      filter: blur(0);
+      transition-delay: 0.9s;
+    }
+    .quote-section .quote-mark {
+      animation: none;
+    }
+    .quote-section.assembled .quote-mark {
+      animation: quoteGlow 3s ease-in-out infinite 1.5s;
+    }
+    @keyframes quoteGlow {
+      0%, 100% { text-shadow: 0 0 0 transparent; }
+      50% { text-shadow: 0 0 40px var(--accent); }
     }
 
     /* =========================================================
      * C: Builds 3D Flip Cards
      * ========================================================= */
-    .lab-grid { perspective: 1200px; }
+    .lab-grid { perspective: 1400px; }
     .lab-card {
       opacity: 0;
-      transform: rotateY(90deg) translateZ(-40px);
+      transform: rotateY(80deg) translateZ(-60px) translateX(-40px);
       transform-origin: left center;
-      transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.3, 1),
-                  opacity 0.4s ease;
+      transition: transform 0.7s cubic-bezier(0.2, 0.8, 0.3, 1),
+                  opacity 0.5s ease,
+                  border-color 0.3s ease, box-shadow 0.3s ease;
     }
     .lab-card.flip-in {
       opacity: 1;
-      transform: rotateY(0) translateZ(0);
+      transform: rotateY(0) translateZ(0) translateX(0);
     }
     .lab-card.flip-in:nth-child(1) { transition-delay: 0s; }
-    .lab-card.flip-in:nth-child(2) { transition-delay: 0.12s; }
-    .lab-card.flip-in:nth-child(3) { transition-delay: 0.24s; }
-    .lab-card.flip-in:nth-child(4) { transition-delay: 0.36s; }
-    .lab-card.flip-in:nth-child(5) { transition-delay: 0.48s; }
-    .lab-card.flip-in:nth-child(6) { transition-delay: 0.6s; }
-    .lab-card.flip-in:nth-child(7) { transition-delay: 0.72s; }
-    .lab-card.flip-in:nth-child(8) { transition-delay: 0.84s; }
+    .lab-card.flip-in:nth-child(2) { transition-delay: 0.1s; }
+    .lab-card.flip-in:nth-child(3) { transition-delay: 0.2s; }
+    .lab-card.flip-in:nth-child(4) { transition-delay: 0.3s; }
+    .lab-card.flip-in:nth-child(5) { transition-delay: 0.4s; }
+    .lab-card.flip-in:nth-child(6) { transition-delay: 0.5s; }
+    .lab-card.flip-in:nth-child(7) { transition-delay: 0.6s; }
+    .lab-card.flip-in:nth-child(8) { transition-delay: 0.7s; }
+    .lab-card.flip-in:hover {
+      transform: rotateY(-8deg) translateZ(20px);
+      transition: transform 0.25s ease;
+    }
 
     /* =========================================================
-     * D: Section Transition Veil
+     * D: Section Transition Veil + Cinematic Vignette
      * ========================================================= */
     .section-veil {
       position: absolute;
       left: 0;
       right: 0;
       top: 0;
-      height: 120px;
+      height: 160px;
       width: 100%;
       pointer-events: none;
       z-index: 5;
       opacity: 0;
-      transition: opacity 0.4s ease;
+      transition: opacity 0.6s ease;
     }
     .section-veil.active { opacity: 1; }
     section { position: relative; }
+
+    /* Cinematic vignette on all sections */
+    main > section::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 3;
+      background: radial-gradient(ellipse 120% 80% at 50% 50%, transparent 50%, color-mix(in oklab, var(--bg) 60%, transparent) 100%);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    main > section.in-view::after {
+      opacity: 0.6;
+    }
+
+    /* Scroll-driven parallax depth for section headings */
+    .section-head {
+      transition: transform 0.1s linear;
+      will-change: transform;
+    }
+
+    /* Cinematic letterbox bars (subtle) */
+    .letterbox-top, .letterbox-bottom {
+      position: fixed;
+      left: 0; right: 0;
+      height: 0px;
+      background: #000;
+      z-index: 90;
+      pointer-events: none;
+      transition: height 0.4s ease;
+    }
+    .letterbox-top { top: 0; }
+    .letterbox-bottom { bottom: 0; }
+    body.cinematic-mode .letterbox-top,
+    body.cinematic-mode .letterbox-bottom {
+      height: 32px;
+    }
 
     /* =========================================================
      * Floating rhino pet
@@ -5070,7 +5165,7 @@
             const x = (e.clientX - rect.left) / rect.width - 0.5;
             const y = (e.clientY - rect.top) / rect.height - 0.5;
             cell.style.transform =
-              `perspective(800px) rotateY(${x * 12}deg) rotateX(${y * -10}deg) translateZ(8px)`;
+              `perspective(800px) rotateY(${x * 14}deg) rotateX(${y * -12}deg) translateZ(12px)`;
           }, { passive: true });
           cell.addEventListener('pointerleave', () => {
             cell.style.transform = '';
@@ -5078,7 +5173,7 @@
         });
       })();
 
-      /* === B: Manifesto Text Particle Assembly === */
+      /* === B: Manifesto Cinematic Particle Assembly === */
       (function initManifestoParticles() {
         const section = document.getElementById('manifesto');
         if (!section || !motionOK) return;
@@ -5089,38 +5184,78 @@
         let ctx, particles = [], assembled = false, animId = null;
         const accent = getComputedStyle(root).getPropertyValue('--accent').trim() || '#27D7C9';
         const electric = getComputedStyle(root).getPropertyValue('--electric').trim() || '#8E7CFF';
+        const gold = getComputedStyle(root).getPropertyValue('--gold').trim() || '#E9C46A';
 
         function init() {
           const rect = section.getBoundingClientRect();
           canvas.width = rect.width;
           canvas.height = rect.height;
           ctx = canvas.getContext('2d');
-          const count = 180;
-          particles = Array.from({ length: count }, () => ({
-            x: Math.random() * rect.width,
-            y: Math.random() * rect.height,
-            tx: Math.random() * rect.width,
-            ty: Math.random() * rect.height,
-            vx: (Math.random() - 0.5) * 1.5,
-            vy: (Math.random() - 0.5) * 1.5,
-            r: 1 + Math.random() * 2.5,
-            color: Math.random() > 0.6 ? electric : accent,
-            alpha: 0.2 + Math.random() * 0.5
-          }));
+          const count = 260;
+          particles = Array.from({ length: count }, (_, i) => {
+            const cx = rect.width / 2;
+            const cy = rect.height / 2;
+            const angle = (i / count) * Math.PI * 2;
+            const radius = 100 + Math.random() * 300;
+            return {
+              x: cx + Math.cos(angle) * radius,
+              y: cy + Math.sin(angle) * radius,
+              tx: cx + (Math.random() - 0.5) * rect.width * 0.8,
+              ty: cy + (Math.random() - 0.5) * rect.height * 0.8,
+              vx: (Math.random() - 0.5) * 2,
+              vy: (Math.random() - 0.5) * 2,
+              r: 0.5 + Math.random() * 3,
+              color: [accent, electric, gold][i % 3],
+              alpha: 0.15 + Math.random() * 0.6,
+              phase: Math.random() * Math.PI * 2
+            };
+          });
         }
 
+        let frame = 0;
         function animate() {
-          ctx.clearRect(0, 0, canvas.width, canvas.height);
-          particles.forEach(p => {
-            p.x += (p.tx - p.x) * 0.02 + p.vx;
-            p.y += (p.ty - p.y) * 0.02 + p.vy;
-            if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
-            if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+          frame++;
+          ctx.fillStyle = 'rgba(8, 11, 16, 0.08)';
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+          particles.forEach((p, i) => {
+            const converge = assembled ? 0.04 : 0.01;
+            p.x += (p.tx - p.x) * converge + p.vx;
+            p.y += (p.ty - p.y) * converge + p.vy;
+            p.vx *= 0.96;
+            p.vy *= 0.96;
+
+            // Spiral motion
+            const cx = canvas.width / 2;
+            const cy = canvas.height / 2;
+            const dx = p.x - cx;
+            const dy = p.y - cy;
+            p.x += -dy * 0.002;
+            p.y += dx * 0.002;
+
+            const pulse = 0.5 + Math.sin(frame * 0.03 + p.phase) * 0.5;
             ctx.beginPath();
             ctx.fillStyle = p.color;
-            ctx.globalAlpha = p.alpha;
-            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+            ctx.globalAlpha = p.alpha * (0.5 + pulse * 0.5);
+            ctx.arc(p.x, p.y, p.r * (0.8 + pulse * 0.4), 0, Math.PI * 2);
             ctx.fill();
+
+            // Connect nearby particles
+            if (i % 3 === 0) {
+              for (let j = i + 1; j < Math.min(i + 8, particles.length); j++) {
+                const q = particles[j];
+                const d = Math.hypot(p.x - q.x, p.y - q.y);
+                if (d < 80) {
+                  ctx.globalAlpha = (1 - d / 80) * 0.15;
+                  ctx.strokeStyle = p.color;
+                  ctx.lineWidth = 0.5;
+                  ctx.beginPath();
+                  ctx.moveTo(p.x, p.y);
+                  ctx.lineTo(q.x, q.y);
+                  ctx.stroke();
+                }
+              }
+            }
           });
           ctx.globalAlpha = 1;
           animId = requestAnimationFrame(animate);
@@ -5132,20 +5267,14 @@
               assembled = true;
               init();
               animate();
-              section.classList.add('assembling');
+              section.classList.add('assembled');
               setTimeout(() => {
-                section.classList.remove('assembling');
-                section.classList.add('assembled');
-                // Fade particles out after text assembles
-                setTimeout(() => {
-                  cancelAnimationFrame(animId);
-                  canvas.style.transition = 'opacity 1s ease';
-                  canvas.style.opacity = '0';
-                }, 2000);
-              }, 1500);
+                canvas.style.transition = 'opacity 2s ease';
+                canvas.style.opacity = '0.15';
+              }, 3500);
             }
           });
-        }, { threshold: 0.3 });
+        }, { threshold: 0.25 });
         obs.observe(section);
       })();
 
@@ -5165,10 +5294,20 @@
         cards.forEach(card => obs.observe(card));
       })();
 
-      /* === D: Section Transition Particle Veil === */
-      (function initSectionVeil() {
+      /* === D: Section Veil + Vignette + Parallax + Letterbox === */
+      (function initCinematicSystem() {
         const sections = document.querySelectorAll('main > section');
-        if (!sections.length || !motionOK) return;
+        if (!sections.length) return;
+
+        // Create letterbox bars
+        const lbTop = document.createElement('div');
+        lbTop.className = 'letterbox-top';
+        const lbBot = document.createElement('div');
+        lbBot.className = 'letterbox-bottom';
+        document.body.appendChild(lbTop);
+        document.body.appendChild(lbBot);
+
+        // Veil canvases
         const veils = [];
         sections.forEach(sec => {
           const veil = document.createElement('canvas');
@@ -5178,32 +5317,35 @@
         });
 
         const accent = getComputedStyle(root).getPropertyValue('--accent').trim() || '#27D7C9';
+        const electric = getComputedStyle(root).getPropertyValue('--electric').trim() || '#8E7CFF';
 
         function initVeil(v) {
           const rect = v.section.getBoundingClientRect();
           v.el.width = rect.width;
-          v.el.height = 120;
-          v.particles = Array.from({ length: 40 }, () => ({
+          v.el.height = 160;
+          v.particles = Array.from({ length: 60 }, () => ({
             x: Math.random() * rect.width,
-            y: Math.random() * 120,
-            vx: (Math.random() - 0.5) * 0.6,
-            vy: (Math.random() - 0.5) * 0.4,
-            r: 0.5 + Math.random() * 1.5,
-            alpha: 0.1 + Math.random() * 0.3
+            y: Math.random() * 160,
+            vx: (Math.random() - 0.5) * 0.8,
+            vy: (Math.random() - 0.5) * 0.5,
+            r: 0.5 + Math.random() * 2,
+            alpha: 0.08 + Math.random() * 0.35,
+            color: Math.random() > 0.5 ? accent : electric
           }));
         }
 
         function drawVeil(v) {
-          v.ctx.clearRect(0, 0, v.el.width, v.el.height);
+          v.ctx.fillStyle = 'rgba(8, 11, 16, 0.06)';
+          v.ctx.fillRect(0, 0, v.el.width, v.el.height);
           v.particles.forEach(p => {
             p.x += p.vx;
             p.y += p.vy;
             if (p.x < 0) p.x = v.el.width;
             if (p.x > v.el.width) p.x = 0;
-            if (p.y < 0) p.y = 120;
-            if (p.y > 120) p.y = 0;
+            if (p.y < 0) p.y = 160;
+            if (p.y > 160) p.y = 0;
             v.ctx.beginPath();
-            v.ctx.fillStyle = accent;
+            v.ctx.fillStyle = p.color;
             v.ctx.globalAlpha = p.alpha;
             v.ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
             v.ctx.fill();
@@ -5221,8 +5363,50 @@
           });
           requestAnimationFrame(loop);
         }
-        loop();
+        if (motionOK) loop();
         window.addEventListener('resize', () => veils.forEach(initVeil), { passive: true });
+
+        // In-view detection for vignette
+        const viewObs = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            entry.target.classList.toggle('in-view', entry.isIntersecting);
+          });
+        }, { threshold: 0.1, rootMargin: '-10% 0px -10% 0px' });
+        sections.forEach(s => viewObs.observe(s));
+
+        // Parallax for section headings
+        if (motionOK) {
+          const heads = document.querySelectorAll('.section-head');
+          let ticking = false;
+          function updateParallax() {
+            heads.forEach(h => {
+              const rect = h.getBoundingClientRect();
+              const center = rect.top + rect.height / 2;
+              const offset = (center - window.innerHeight / 2) / window.innerHeight;
+              h.style.transform = `translateY(${offset * -20}px)`;
+            });
+            ticking = false;
+          }
+          window.addEventListener('scroll', () => {
+            if (!ticking) {
+              requestAnimationFrame(updateParallax);
+              ticking = true;
+            }
+          }, { passive: true });
+          updateParallax();
+        }
+
+        // Letterbox mode — activate when scrolling past hero
+        if (motionOK) {
+          let letterboxActive = false;
+          window.addEventListener('scroll', () => {
+            const shouldActivate = window.scrollY > window.innerHeight * 0.5;
+            if (shouldActivate !== letterboxActive) {
+              letterboxActive = shouldActivate;
+              document.body.classList.toggle('cinematic-mode', letterboxActive);
+            }
+          }, { passive: true });
+        }
       })();
 
       /* Ambient motion and section state */
