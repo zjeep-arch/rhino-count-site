@@ -5174,6 +5174,7 @@
       observeFadeIns();
 
       /* === A: Profile 3D Tilt Cards === */
+      const motionOK = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       (function initProfileTilt() {
         const cells = document.querySelectorAll('.profile-cell');
         if (!cells.length) return;
@@ -5416,7 +5417,6 @@
       /* Ambient motion and section state */
       const heroSection = document.getElementById('hero-section');
       const progress = document.getElementById('scrollProgress');
-      const motionOK = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
       function updateScrollProgress() {
         const max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
