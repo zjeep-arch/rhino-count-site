@@ -81,13 +81,6 @@ window.SITE_DATA = {
     blurb: "这里不放想法，放做出来的东西——网站、游戏、H5、交互实验。",
     tracks: [
       {
-        tag: "SITE",
-        title: "AI 创作实验室",
-        desc: "本站本身就是一个实验：用 Agent 工作流驱动内容生产和个人品牌。",
-        linkLabel: "查看站点",
-        href: "https://zjeep-arch.github.io/rhino-count-site/"
-      },
-      {
         tag: "GAME",
         title: "鸭骗战争：真鸭假鹅",
         desc: "扮演鹅腿阿姨，用鸭腿冒充鹅腿。荒诞答题小游戏，测试轻量游戏化表达。",
