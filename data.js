@@ -96,10 +96,10 @@ window.SITE_DATA = {
       },
       {
         tag: "PLAY",
-        title: "更多交互实验",
-        desc: "用小游戏和交互页面测试内容的新形态，让表达变得可玩。后续持续更新。",
-        linkLabel: "敬请期待",
-        href: "#builds"
+        title: "3D AI 工作室",
+        desc: "Iron Man 风格的 3D AI 工作室——方舟反应堆、全息屏幕、贾维斯 HUD、全球数据流。可拖拽旋转、点击交互。",
+        linkLabel: "进入工作室",
+        href: "ai-studio-3d.html"
       },
       {
         tag: "WORKFLOW",

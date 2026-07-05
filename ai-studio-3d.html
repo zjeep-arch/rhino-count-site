@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>3D AI 工作室 · 犀牛伯爵</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #05050A;
+    overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+    color: #F2F7F6;
+  }
+  #canvas-container {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+  }
+  #canvas-container canvas {
+    display: block;
+    cursor: grab;
+  }
+  #canvas-container canvas:active { cursor: grabbing; }
+
+  /* HUD overlay */
+  .hud-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  /* Top bar */
+  .hud-top {
+    position: absolute;
+    top: 20px; left: 20px; right: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    pointer-events: auto;
+  }
+  .hud-title {
+    font-family: Georgia, serif;
+    font-size: 22px;
+    color: #27D7C9;
+    text-shadow: 0 0 12px rgba(39,215,201,0.5);
+    letter-spacing: 0.05em;
+  }
+  .hud-title small {
+    display: block;
+    font-family: sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(242,247,246,0.4);
+    margin-top: 4px;
+  }
+  .hud-stats {
+    text-align: right;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(242,247,246,0.5);
+    font-family: monospace;
+  }
+  .hud-stats span { color: #27D7C9; }
+
+  /* Corner brackets — Jarvis style */
+  .corner {
+    position: absolute;
+    width: 60px; height: 60px;
+    border: 1px solid rgba(39,215,201,0.3);
+  }
+  .corner-tl { top: 12px; left: 12px; border-right: 0; border-bottom: 0; }
+  .corner-tr { top: 12px; right: 12px; border-left: 0; border-bottom: 0; }
+  .corner-bl { bottom: 12px; left: 12px; border-right: 0; border-top: 0; }
+  .corner-br { bottom: 12px; right: 12px; border-left: 0; border-top: 0; }
+
+  /* Reticle in center */
+  .reticle {
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 120px; height: 120px;
+    transform: translate(-50%, -50%);
+    border: 1px solid rgba(39,215,201,0.12);
+    border-radius: 50%;
+    animation: reticlePulse 4s ease-in-out infinite;
+  }
+  .reticle::before {
+    content: "";
+    position: absolute;
+    inset: 20px;
+    border: 1px solid rgba(39,215,201,0.08);
+    border-radius: 50%;
+  }
+  @keyframes reticlePulse {
+    0%, 100% { opacity: 0.3; transform: translate(-50%,-50%) scale(1); }
+    50% { opacity: 0.6; transform: translate(-50%,-50%) scale(1.05); }
+  }
+
+  /* Bottom controls */
+  .hud-bottom {
+    position: absolute;
+    bottom: 20px; left: 20px; right: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    pointer-events: auto;
+  }
+  .hud-hint {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(242,247,246,0.35);
+    font-family: monospace;
+  }
+  .hud-hint kbd {
+    display: inline-block;
+    padding: 2px 8px;
+    border: 1px solid rgba(39,215,201,0.3);
+    border-radius: 4px;
+    color: #27D7C9;
+    font-size: 10px;
+    margin: 0 2px;
+  }
+  .hud-back {
+    padding: 8px 16px;
+    border: 1px solid rgba(39,215,201,0.3);
+    border-radius: 999px;
+    color: #27D7C9;
+    text-decoration: none;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    background: rgba(8,11,16,0.6);
+    backdrop-filter: blur(10px);
+    transition: all 0.25s ease;
+  }
+  .hud-back:hover {
+    border-color: #27D7C9;
+    background: rgba(39,215,201,0.1);
+  }
+
+  /* Info panel */
+  .info-panel {
+    position: fixed;
+    bottom: 60px; right: 20px;
+    width: 280px;
+    padding: 20px;
+    background: rgba(8,11,16,0.85);
+    border: 1px solid rgba(39,215,201,0.2);
+    border-radius: 12px;
+    backdrop-filter: blur(20px);
+    z-index: 20;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    pointer-events: none;
+  }
+  .info-panel.show {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+  .info-panel h3 {
+    font-family: Georgia, serif;
+    font-size: 16px;
+    color: #27D7C9;
+    margin-bottom: 8px;
+  }
+  .info-panel p {
+    font-size: 13px;
+    line-height: 1.6;
+    color: rgba(242,247,246,0.7);
+  }
+  .info-panel .close-btn {
+    position: absolute;
+    top: 10px; right: 12px;
+    color: rgba(242,247,246,0.4);
+    cursor: pointer;
+    font-size: 16px;
+  }
+  .info-panel .close-btn:hover { color: #27D7C9; }
+
+  /* Loading */
+  #loading {
+    position: fixed;
+    inset: 0;
+    background: #05050A;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    transition: opacity 0.6s ease;
+  }
+  #loading.hide { opacity: 0; pointer-events: none; }
+  .loader-ring {
+    width: 60px; height: 60px;
+    border: 2px solid rgba(39,215,201,0.15);
+    border-top-color: #27D7C9;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+</style>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+
+<div id="loading"><div class="loader-ring"></div></div>
+
+<div id="canvas-container"></div>
+
+<div class="hud-overlay">
+  <div class="corner corner-tl"></div>
+  <div class="corner corner-tr"></div>
+  <div class="corner corner-bl"></div>
+  <div class="corner corner-br"></div>
+  <div class="reticle"></div>
+
+  <div class="hud-top">
+    <div class="hud-title">
+      J.A.R.V.I.S Lab
+      <small>犀牛伯爵 · AI 工作室</small>
+    </div>
+    <div class="hud-stats">
+      SYS <span>ONLINE</span><br/>
+      PWR <span>98%</span><br/>
+      <span id="fps">60</span> FPS
+    </div>
+  </div>
+
+  <div class="hud-bottom">
+    <div class="hud-hint">
+      <kbd>拖拽</kbd> 旋转视角 &nbsp;
+      <kbd>滚轮</kbd> 缩放 &nbsp;
+      <kbd>点击</kbd> 交互
+    </div>
+    <a href="../index.html#builds" class="hud-back">← 返回</a>
+  </div>
+</div>
+
+<div class="info-panel" id="infoPanel">
+  <span class="close-btn" onclick="document.getElementById('infoPanel').classList.remove('show')">×</span>
+  <h3 id="infoTitle">Title</h3>
+  <p id="infoText">Description</p>
+</div>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+
+// === Scene Setup ===
+const container = document.getElementById('canvas-container');
+const scene = new THREE.Scene();
+scene.fog = new THREE.FogExp2(0x05050a, 0.035);
+
+const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 200);
+camera.position.set(8, 7, 12);
+
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.0;
+container.appendChild(renderer.domElement);
+
+// === Post-processing ===
+const composer = new EffectComposer(renderer);
+composer.addPass(new RenderPass(scene, camera));
+const bloomPass = new UnrealBloomPass(
+  new THREE.Vector2(window.innerWidth, window.innerHeight),
+  0.6, 0.4, 0.85
+);
+composer.addPass(bloomPass);
+
+// === Controls ===
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = 0.08;
+controls.minDistance = 5;
+controls.maxDistance = 25;
+controls.maxPolarAngle = Math.PI * 0.48;
+controls.minPolarAngle = Math.PI * 0.15;
+controls.target.set(0, 2, 0);
+controls.autoRotate = true;
+controls.autoRotateSpeed = 0.5;
+
+// === Lighting ===
+const ambient = new THREE.AmbientLight(0x1a2a3a, 0.4);
+scene.add(ambient);
+
+const keyLight = new THREE.DirectionalLight(0x27D7C9, 0.6);
+keyLight.position.set(6, 10, 6);
+keyLight.castShadow = true;
+keyLight.shadow.mapSize.set(1024, 1024);
+keyLight.shadow.camera.left = -12;
+keyLight.shadow.camera.right = 12;
+keyLight.shadow.camera.top = 12;
+keyLight.shadow.camera.bottom = -12;
+scene.add(keyLight);
+
+const fillLight = new THREE.DirectionalLight(0x8E7CFF, 0.3);
+fillLight.position.set(-6, 5, -4);
+scene.add(fillLight);
+
+// Interactive objects array
+const interactables = [];
+
+// === Room ===
+function createRoom() {
+  const roomGroup = new THREE.Group();
+
+  // Floor
+  const floorGeo = new THREE.PlaneGeometry(24, 24);
+  const floorMat = new THREE.MeshStandardMaterial({
+    color: 0x0a0e14,
+    metalness: 0.8,
+    roughness: 0.3,
+  });
+  const floor = new THREE.Mesh(floorGeo, floorMat);
+  floor.rotation.x = -Math.PI / 2;
+  floor.receiveShadow = true;
+  roomGroup.add(floor);
+
+  // Floor grid
+  const gridHelper = new THREE.GridHelper(24, 24, 0x27D7C9, 0x0a1a1a);
+  gridHelper.material.opacity = 0.15;
+  gridHelper.material.transparent = true;
+  roomGroup.add(gridHelper);
+
+  // Back wall
+  const wallGeo = new THREE.PlaneGeometry(24, 10);
+  const wallMat = new THREE.MeshStandardMaterial({
+    color: 0x081218,
+    metalness: 0.6,
+    roughness: 0.7,
+  });
+  const backWall = new THREE.Mesh(wallGeo, wallMat);
+  backWall.position.set(0, 5, -12);
+  backWall.receiveShadow = true;
+  roomGroup.add(backWall);
+
+  // Side walls (partial, for atmosphere)
+  const sideWallGeo = new THREE.PlaneGeometry(24, 10);
+  const leftWall = new THREE.Mesh(sideWallGeo, wallMat.clone());
+  leftWall.position.set(-12, 5, 0);
+  leftWall.rotation.y = Math.PI / 2;
+  leftWall.receiveShadow = true;
+  roomGroup.add(leftWall);
+
+  const rightWall = new THREE.Mesh(sideWallGeo, wallMat.clone());
+  rightWall.position.set(12, 5, 0);
+  rightWall.rotation.y = -Math.PI / 2;
+  rightWall.receiveShadow = true;
+  roomGroup.add(rightWall);
+
+  return roomGroup;
+}
+scene.add(createRoom());
+
+// === Desk ===
+function createDesk() {
+  const deskGroup = new THREE.Group();
+
+  // Desk top
+  const topGeo = new THREE.BoxGeometry(8, 0.15, 3.5);
+  const topMat = new THREE.MeshStandardMaterial({
+    color: 0x0d1520,
+    metalness: 0.7,
+    roughness: 0.25,
+  });
+  const top = new THREE.Mesh(topGeo, topMat);
+  top.position.set(0, 2, -4);
+  top.castShadow = true;
+  top.receiveShadow = true;
+  deskGroup.add(top);
+
+  // Desk legs
+  const legMat = new THREE.MeshStandardMaterial({ color: 0x1a2030, metalness: 0.8, roughness: 0.3 });
+  const legPositions = [
+    [-3.8, 1, -5.6], [3.8, 1, -5.6],
+    [-3.8, 1, -2.4], [3.8, 1, -2.4]
+  ];
+  legPositions.forEach(pos => {
+    const leg = new THREE.Mesh(new THREE.BoxGeometry(0.2, 2, 0.2), legMat);
+    leg.position.set(...pos);
+    leg.castShadow = true;
+    deskGroup.add(leg);
+  });
+
+  // Desk edge glow
+  const edgeGeo = new THREE.BoxGeometry(8.1, 0.02, 3.6);
+  const edgeMat = new THREE.MeshBasicMaterial({ color: 0x27D7C9, transparent: true, opacity: 0.3 });
+  const edge = new THREE.Mesh(edgeGeo, edgeMat);
+  edge.position.set(0, 2.08, -4);
+  deskGroup.add(edge);
+
+  return deskGroup;
+}
+scene.add(createDesk());
+
+// === Holographic Monitors (Jarvis HUD style) ===
+function createHoloMonitors() {
+  const monitorGroup = new THREE.Group();
+
+  // Main center monitor — holographic
+  const screenGeo = new THREE.PlaneGeometry(3.5, 2);
+  const screenMat = new THREE.MeshBasicMaterial({
+    color: 0x27D7C9,
+    transparent: true,
+    opacity: 0.15,
+    side: THREE.DoubleSide,
+  });
+  const mainScreen = new THREE.Mesh(screenGeo, screenMat);
+  mainScreen.position.set(0, 4, -7);
+  monitorGroup.add(mainScreen);
+
+  // Monitor frame — Jarvis style arcs
+  const frameMat = new THREE.MeshBasicMaterial({ color: 0x27D7C9, transparent: true, opacity: 0.5 });
+  // Top arc
+  const topArc = new THREE.Mesh(
+    new THREE.RingGeometry(2.1, 2.2, 32, 1, Math.PI * 0.3, Math.PI * 0.4),
+    frameMat
+  );
+  topArc.position.set(0, 4, -6.98);
+  monitorGroup.add(topArc);
+
+  // Monitor glow plane
+  const glowGeo = new THREE.PlaneGeometry(4, 2.5);
+  const glowMat = new THREE.MeshBasicMaterial({
+    color: 0x27D7C9,
+    transparent: true,
+    opacity: 0.05,
+    side: THREE.DoubleSide,
+  });
+  const glow = new THREE.Mesh(glowGeo, glowMat);
+  glow.position.set(0, 4, -7.01);
+  monitorGroup.add(glow);
+
+  // Side monitors
+  [-1, 1].forEach(side => {
+    const sideScreen = new THREE.Mesh(
+      new THREE.PlaneGeometry(2, 1.2),
+      new THREE.MeshBasicMaterial({
+        color: side > 0 ? 0x8E7CFF : 0xFF7A59,
+        transparent: true,
+        opacity: 0.12,
+        side: THREE.DoubleSide,
+      })
+    );
+    sideScreen.position.set(side * 3.2, 3.8, -6.5);
+    sideScreen.rotation.y = side * -0.3;
+    monitorGroup.add(sideScreen);
+
+    // Side monitor frame
+    const sideFrame = new THREE.Mesh(
+      new THREE.PlaneGeometry(2.1, 1.3),
+      new THREE.MeshBasicMaterial({
+        color: side > 0 ? 0x8E7CFF : 0xFF7A59,
+        transparent: true,
+        opacity: 0.2,
+        side: THREE.DoubleSide,
+        wireframe: true,
+      })
+    );
+    sideFrame.position.copy(sideScreen.position);
+    sideFrame.position.z -= 0.01;
+    sideFrame.rotation.y = side * -0.3;
+    monitorGroup.add(sideFrame);
+  });
+
+  // Floating data points on main screen
+  for (let i = 0; i < 20; i++) {
+    const dot = new THREE.Mesh(
+      new THREE.CircleGeometry(0.03, 8),
+      new THREE.MeshBasicMaterial({ color: 0x27D7C9, transparent: true, opacity: 0.8 })
+    );
+    dot.position.set(
+      (Math.random() - 0.5) * 3.2,
+      3 + Math.random() * 2,
+      -6.95
+    );
+    dot.userData = { floatSpeed: 0.5 + Math.random(), floatOffset: Math.random() * Math.PI * 2 };
+    monitorGroup.add(dot);
+  }
+
+  // Make center screen interactable
+  mainScreen.userData = {
+    name: '全息主控屏',
+    desc: 'JARVIS 全息主控系统 — 实时显示 AI Agent 工作流、日报数据和创作进度。' +
+          '集成 MCP 协议，可调用外部工具。当前状态：运行中。',
+    isInteractable: true,
+  };
+  interactables.push(mainScreen);
+
+  return monitorGroup;
+}
+scene.add(createHoloMonitors());
+
+// === Arc Reactor (Iron Man style center piece) ===
+function createArcReactor() {
+  const reactorGroup = new THREE.Group();
+
+  // Outer ring
+  const outerRing = new THREE.Mesh(
+    new THREE.TorusGeometry(0.5, 0.08, 16, 48),
+    new THREE.MeshStandardMaterial({
+      color: 0x888899,
+      metalness: 0.9,
+      roughness: 0.2,
+      emissive: 0x27D7C9,
+      emissiveIntensity: 0.3,
+    })
+  );
+  reactorGroup.add(outerRing);
+
+  // Inner ring
+  const innerRing = new THREE.Mesh(
+    new THREE.TorusGeometry(0.35, 0.04, 16, 32),
+    new THREE.MeshStandardMaterial({
+      color: 0xaaaabb,
+      metalness: 0.9,
+      roughness: 0.15,
+      emissive: 0x27D7C9,
+      emissiveIntensity: 0.5,
+    })
+  );
+  reactorGroup.add(innerRing);
+
+  // Core
+  const core = new THREE.Mesh(
+    new THREE.SphereGeometry(0.2, 24, 24),
+    new THREE.MeshBasicMaterial({ color: 0x27D7C9, transparent: true, opacity: 0.8 })
+  );
+  reactorGroup.add(core);
+
+  // Core light
+  const coreLight = new THREE.PointLight(0x27D7C9, 2, 8);
+  reactorGroup.add(coreLight);
+
+  // Coil lines (Iron Man arc reactor detail)
+  for (let i = 0; i < 8; i++) {
+    const angle = (i / 8) * Math.PI * 2;
+    const coil = new THREE.Mesh(
+      new THREE.BoxGeometry(0.15, 0.06, 0.02),
+      new THREE.MeshStandardMaterial({ color: 0x666677, metalness: 0.8, roughness: 0.3 })
+    );
+    coil.position.set(Math.cos(angle) * 0.42, 0, Math.sin(angle) * 0.42);
+    coil.rotation.y = angle;
+    reactorGroup.add(coil);
+  }
+
+  // Triangle (Iron Man mark 1-2 style)
+  const triGeo = new THREE.BufferGeometry();
+  const triVerts = new Float32Array([
+    0, 0.15, 0,
+    -0.13, -0.08, 0,
+    0.13, -0.08, 0,
+  ]);
+  triGeo.setAttribute('position', new THREE.BufferAttribute(triVerts, 3));
+  triGeo.setIndex([0, 1, 2]);
+  const triangle = new THREE.Mesh(
+    triGeo,
+    new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.6, side: THREE.DoubleSide })
+  );
+  reactorGroup.add(triangle);
+
+  reactorGroup.position.set(0, 2.08, -4);
+  reactorGroup.userData = {
+    name: '方舟反应堆',
+    desc: 'Iron Man Mark VI 方舟反应堆 — 为整个 AI 工作室供能。' +
+          '功率 8 GJ/s，可持续运行 10^12 小时。' +
+          '"有时你得先学会跑，才能学会走。" — Tony Stark',
+    isInteractable: true,
+  };
+  interactables.push(reactorGroup);
+
+  return reactorGroup;
+}
+const arcReactor = createArcReactor();
+scene.add(arcReactor);
+
+// === Holographic Data Globe ===
+function createDataGlobe() {
+  const globeGroup = new THREE.Group();
+
+  // Wireframe sphere
+  const globe = new THREE.Mesh(
+    new THREE.SphereGeometry(1.2, 24, 16),
+    new THREE.MeshBasicMaterial({
+      color: 0x27D7C9,
+      wireframe: true,
+      transparent: true,
+      opacity: 0.2,
+    })
+  );
+  globeGroup.add(globe);
+
+  // Inner sphere
+  const inner = new THREE.Mesh(
+    new THREE.SphereGeometry(1.15, 24, 16),
+    new THREE.MeshBasicMaterial({
+      color: 0x27D7C9,
+      transparent: true,
+      opacity: 0.04,
+    })
+  );
+  globeGroup.add(inner);
+
+  // Data points on globe surface
+  for (let i = 0; i < 40; i++) {
+    const phi = Math.acos(2 * Math.random() - 1);
+    const theta = Math.random() * Math.PI * 2;
+    const r = 1.2;
+    const dot = new THREE.Mesh(
+      new THREE.SphereGeometry(0.03, 8, 8),
+      new THREE.MeshBasicMaterial({ color: i % 3 === 0 ? 0xFF7A59 : 0x27D7C9 })
+    );
+    dot.position.set(
+      r * Math.sin(phi) * Math.cos(theta),
+      r * Math.cos(phi),
+      r * Math.sin(phi) * Math.sin(theta)
+    );
+    globeGroup.add(dot);
+  }
+
+  globeGroup.position.set(4, 3.5, -2);
+  globeGroup.userData = {
+    name: '全球数据网络',
+    desc: '实时全球 AI 数据流可视化 — 连接 GCP Vertex AI、Claude API、' +
+          'MCP 服务器网络。每天处理 2.3B 条推理请求。',
+    isInteractable: true,
+  };
+  interactables.push(globeGroup);
+
+  return globeGroup;
+}
+const dataGlobe = createDataGlobe();
+scene.add(dataGlobe);
+
+// === Floating HUD Rings (Iron Man helmet HUD) ===
+function createHUDRings() {
+  const ringGroup = new THREE.Group();
+
+  for (let i = 0; i < 4; i++) {
+    const ring = new THREE.Mesh(
+      new THREE.TorusGeometry(2.5 + i * 0.3, 0.015, 8, 64, Math.PI * (0.3 + i * 0.15)),
+      new THREE.MeshBasicMaterial({
+        color: [0x27D7C9, 0x8E7CFF, 0xFF7A59, 0xE9C46A][i],
+        transparent: true,
+        opacity: 0.25 - i * 0.03,
+      })
+    );
+    ring.rotation.x = Math.PI / 2 + (i * 0.1);
+    ring.rotation.z = i * 0.3;
+    ring.userData = { rotSpeed: 0.2 + i * 0.1, axis: i };
+    ringGroup.add(ring);
+  }
+
+  ringGroup.position.set(-3.5, 3.5, -2);
+  return ringGroup;
+}
+const hudRings = createHUDRings();
+scene.add(hudRings);
+
+// === Floating Particles (AI data streams) ===
+function createParticles() {
+  const count = 200;
+  const geo = new THREE.BufferGeometry();
+  const positions = new Float32Array(count * 3);
+  const colors = new Float32Array(count * 3);
+  const velocities = new Float32Array(count * 3);
+
+  const color1 = new THREE.Color(0x27D7C9);
+  const color2 = new THREE.Color(0x8E7CFF);
+
+  for (let i = 0; i < count; i++) {
+    positions[i * 3] = (Math.random() - 0.5) * 20;
+    positions[i * 3 + 1] = Math.random() * 10;
+    positions[i * 3 + 2] = (Math.random() - 0.5) * 20;
+
+    velocities[i * 3] = (Math.random() - 0.5) * 0.005;
+    velocities[i * 3 + 1] = Math.random() * 0.01 + 0.002;
+    velocities[i * 3 + 2] = (Math.random() - 0.5) * 0.005;
+
+    const c = Math.random() > 0.5 ? color1 : color2;
+    colors[i * 3] = c.r;
+    colors[i * 3 + 1] = c.g;
+    colors[i * 3 + 2] = c.b;
+  }
+
+  geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+  geo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+  const mat = new THREE.PointsMaterial({
+    size: 0.06,
+    vertexColors: true,
+    transparent: true,
+    opacity: 0.6,
+    blending: THREE.AdditiveBlending,
+    depthWrite: false,
+  });
+
+  const points = new THREE.Points(geo, mat);
+  points.userData = { velocities };
+  return points;
+}
+const particles = createParticles();
+scene.add(particles);
+
+// === Holoprojector (desk device) ===
+function createHoloProjector() {
+  const projGroup = new THREE.Group();
+
+  // Base
+  const base = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.25, 0.3, 0.15, 16),
+    new THREE.MeshStandardMaterial({ color: 0x1a2030, metalness: 0.8, roughness: 0.2 })
+  );
+  base.castShadow = true;
+  projGroup.add(base);
+
+  // Top emitter
+  const emitter = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.12, 0.18, 0.08, 16),
+    new THREE.MeshStandardMaterial({
+      color: 0x1a2030, metalness: 0.8, roughness: 0.2,
+      emissive: 0x27D7C9, emissiveIntensity: 0.3,
+    })
+  );
+  emitter.position.y = 0.12;
+  projGroup.add(emitter);
+
+  // Light beam
+  const beam = new THREE.Mesh(
+    new THREE.ConeGeometry(0.8, 3, 16, 1, true),
+    new THREE.MeshBasicMaterial({
+      color: 0x27D7C9, transparent: true, opacity: 0.06,
+      side: THREE.DoubleSide, depthWrite: false,
+    })
+  );
+  beam.position.y = 1.5;
+  projGroup.add(beam);
+
+  projGroup.position.set(2, 2.15, -4);
+  return projGroup;
+}
+scene.add(createHoloProjector());
+
+// === Chair ===
+function createChair() {
+  const chairGroup = new THREE.Group();
+  const mat = new THREE.MeshStandardMaterial({ color: 0x0d1520, metalness: 0.6, roughness: 0.4 });
+
+  // Seat
+  const seat = new THREE.Mesh(new THREE.BoxGeometry(1, 0.1, 1), mat);
+  seat.position.y = 1.4;
+  seat.castShadow = true;
+  chairGroup.add(seat);
+
+  // Back
+  const back = new THREE.Mesh(new THREE.BoxGeometry(1, 1.5, 0.1), mat);
+  back.position.set(0, 2.1, 0.45);
+  back.castShadow = true;
+  chairGroup.add(back);
+
+  // Pole
+  const pole = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.05, 1.4, 8), mat);
+  pole.position.y = 0.7;
+  chairGroup.add(pole);
+
+  // Base
+  const baseGeo = new THREE.CylinderGeometry(0.4, 0.4, 0.05, 5);
+  const base = new THREE.Mesh(baseGeo, mat);
+  base.position.y = 0.025;
+  chairGroup.add(base);
+
+  chairGroup.position.set(0, 0, -2);
+  return chairGroup;
+}
+scene.add(createChair());
+
+// === Raycaster for interaction ===
+const raycaster = new THREE.Raycaster();
+const mouse = new THREE.Vector2();
+let hoveredObject = null;
+
+function onMouseMove(event) {
+  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+}
+
+function onClick(event) {
+  raycaster.setFromCamera(mouse, camera);
+  const intersects = raycaster.intersectObjects(interactables, true);
+
+  if (intersects.length > 0) {
+    let target = intersects[0].object;
+    // Walk up to find interactable parent
+    while (target && !target.userData.isInteractable) {
+      target = target.parent;
+    }
+    if (target && target.userData.name) {
+      showInfo(target.userData.name, target.userData.desc);
+    }
+  }
+}
+
+function showInfo(title, text) {
+  const panel = document.getElementById('infoPanel');
+  document.getElementById('infoTitle').textContent = title;
+  document.getElementById('infoText').textContent = text;
+  panel.classList.add('show');
+}
+
+window.addEventListener('mousemove', onMouseMove, { passive: true });
+window.addEventListener('click', onClick);
+window.addEventListener('touchstart', (e) => {
+  if (e.touches.length > 0) {
+    mouse.x = (e.touches[0].clientX / window.innerWidth) * 2 - 1;
+    mouse.y = -(e.touches[0].clientY / window.innerHeight) * 2 + 1;
+    onClick();
+  }
+}, { passive: true });
+
+// === Resize ===
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  composer.setSize(window.innerWidth, window.innerHeight);
+}, { passive: true });
+
+// === Animation Loop ===
+const clock = new THREE.Clock();
+let frameCount = 0;
+let lastFpsTime = 0;
+
+function animate() {
+  requestAnimationFrame(animate);
+  const elapsed = clock.getElapsedTime();
+  const delta = clock.getDelta();
+
+  controls.update();
+
+  // Arc reactor rotation
+  arcReactor.rotation.y += 0.01;
+  arcReactor.children[2].scale.setScalar(1 + Math.sin(elapsed * 3) * 0.05);
+  arcReactor.children[3].intensity = 1.5 + Math.sin(elapsed * 3) * 0.5;
+
+  // Data globe rotation
+  dataGlobe.rotation.y += 0.005;
+  dataGlobe.rotation.x = Math.sin(elapsed * 0.2) * 0.1;
+
+  // HUD rings rotation
+  hudRings.children.forEach((ring, i) => {
+    if (ring.userData.axis === 0) ring.rotation.z += 0.003;
+    else if (ring.userData.axis === 1) ring.rotation.x += 0.002;
+    else ring.rotation.y += 0.004;
+  });
+  hudRings.position.y = 3.5 + Math.sin(elapsed * 0.5) * 0.3;
+
+  // Particles drift up
+  const positions = particles.geometry.attributes.position.array;
+  const velocities = particles.userData.velocities;
+  for (let i = 0; i < positions.length; i += 3) {
+    positions[i] += velocities[i];
+    positions[i + 1] += velocities[i + 1];
+    positions[i + 2] += velocities[i + 2];
+
+    if (positions[i + 1] > 10) {
+      positions[i] = (Math.random() - 0.5) * 20;
+      positions[i + 1] = 0;
+      positions[i + 2] = (Math.random() - 0.5) * 20;
+    }
+  }
+  particles.geometry.attributes.position.needsUpdate = true;
+
+  // Floating monitor data points
+  scene.traverse(obj => {
+    if (obj.userData.floatSpeed) {
+      obj.position.y += Math.sin(elapsed * obj.userData.floatSpeed + obj.userData.floatOffset) * 0.002;
+    }
+  });
+
+  // Hover detection
+  raycaster.setFromCamera(mouse, camera);
+  const intersects = raycaster.intersectObjects(interactables, true);
+  if (intersects.length > 0) {
+    renderer.domElement.style.cursor = 'pointer';
+  } else {
+    renderer.domElement.style.cursor = '';
+  }
+
+  // FPS counter
+  frameCount++;
+  if (elapsed - lastFpsTime > 1) {
+    document.getElementById('fps').textContent = frameCount;
+    frameCount = 0;
+    lastFpsTime = elapsed;
+  }
+
+  composer.render();
+}
+
+// === Start ===
+animate();
+
+// Hide loading
+setTimeout(() => {
+  document.getElementById('loading').classList.add('hide');
+}, 800);
+
+// Stop auto-rotate after user interaction
+controls.addEventListener('start', () => {
+  controls.autoRotate = false;
+});
+</script>
+</body>
+</html>
