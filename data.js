@@ -102,6 +102,13 @@ window.SITE_DATA = {
         href: "ai-studio-3d.html"
       },
       {
+        tag: "LAB",
+        title: "AI 创作实验室",
+        desc: "沉浸式 3D 交互页面——悬浮水晶体、滚动驱动的相机运动、作品矩阵、能力图谱、实时数据面板。",
+        linkLabel: "进入实验室",
+        href: "ai-lab-3d.html"
+      },
+      {
         tag: "WORKFLOW",
         title: "AI Workflow Lab",
         desc: "把日常创作、资料整理、网页生成和自动化流程拆成可复用工作流。",
