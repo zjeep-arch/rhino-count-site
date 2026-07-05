@@ -1669,6 +1669,87 @@
     }
 
     /* =========================================================
+     * A: Profile 3D Tilt Cards
+     * ========================================================= */
+    .profile-grid { perspective: 1000px; }
+    .profile-cell {
+      transform-style: preserve-3d;
+      transition: transform 0.15s ease-out, background 0.25s ease;
+      will-change: transform;
+    }
+    .profile-cell .k, .profile-cell .v {
+      transform: translateZ(20px);
+    }
+
+    /* =========================================================
+     * B: Manifesto Text Particles
+     * ========================================================= */
+    .quote-section { position: relative; }
+    .manifesto-particle-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .quote-section .container { position: relative; z-index: 1; }
+    .quote-section.assembling .quote-mark,
+    .quote-section.assembling blockquote.pull,
+    .quote-section.assembling .quote-attr {
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .quote-section.assembled .quote-mark,
+    .quote-section.assembled blockquote.pull,
+    .quote-section.assembled .quote-attr {
+      opacity: 1;
+      transition: opacity 0.6s ease 0.2s;
+    }
+
+    /* =========================================================
+     * C: Builds 3D Flip Cards
+     * ========================================================= */
+    .lab-grid { perspective: 1200px; }
+    .lab-card {
+      opacity: 0;
+      transform: rotateY(90deg) translateZ(-40px);
+      transform-origin: left center;
+      transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.3, 1),
+                  opacity 0.4s ease;
+    }
+    .lab-card.flip-in {
+      opacity: 1;
+      transform: rotateY(0) translateZ(0);
+    }
+    .lab-card.flip-in:nth-child(1) { transition-delay: 0s; }
+    .lab-card.flip-in:nth-child(2) { transition-delay: 0.12s; }
+    .lab-card.flip-in:nth-child(3) { transition-delay: 0.24s; }
+    .lab-card.flip-in:nth-child(4) { transition-delay: 0.36s; }
+    .lab-card.flip-in:nth-child(5) { transition-delay: 0.48s; }
+    .lab-card.flip-in:nth-child(6) { transition-delay: 0.6s; }
+    .lab-card.flip-in:nth-child(7) { transition-delay: 0.72s; }
+    .lab-card.flip-in:nth-child(8) { transition-delay: 0.84s; }
+
+    /* =========================================================
+     * D: Section Transition Veil
+     * ========================================================= */
+    .section-veil {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      height: 120px;
+      width: 100%;
+      pointer-events: none;
+      z-index: 5;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    .section-veil.active { opacity: 1; }
+    section { position: relative; }
+
+    /* =========================================================
      * Floating rhino pet
      * ========================================================= */
     .rhino-pet {
@@ -4978,6 +5059,171 @@
       /* Reveal + observe initial */
       document.querySelector('main').classList.add('ready');
       observeFadeIns();
+
+      /* === A: Profile 3D Tilt Cards === */
+      (function initProfileTilt() {
+        const cells = document.querySelectorAll('.profile-cell');
+        if (!cells.length) return;
+        cells.forEach(cell => {
+          cell.addEventListener('pointermove', e => {
+            const rect = cell.getBoundingClientRect();
+            const x = (e.clientX - rect.left) / rect.width - 0.5;
+            const y = (e.clientY - rect.top) / rect.height - 0.5;
+            cell.style.transform =
+              `perspective(800px) rotateY(${x * 12}deg) rotateX(${y * -10}deg) translateZ(8px)`;
+          }, { passive: true });
+          cell.addEventListener('pointerleave', () => {
+            cell.style.transform = '';
+          });
+        });
+      })();
+
+      /* === B: Manifesto Text Particle Assembly === */
+      (function initManifestoParticles() {
+        const section = document.getElementById('manifesto');
+        if (!section || !motionOK) return;
+        const canvas = document.createElement('canvas');
+        canvas.className = 'manifesto-particle-canvas';
+        section.insertBefore(canvas, section.firstChild);
+
+        let ctx, particles = [], assembled = false, animId = null;
+        const accent = getComputedStyle(root).getPropertyValue('--accent').trim() || '#27D7C9';
+        const electric = getComputedStyle(root).getPropertyValue('--electric').trim() || '#8E7CFF';
+
+        function init() {
+          const rect = section.getBoundingClientRect();
+          canvas.width = rect.width;
+          canvas.height = rect.height;
+          ctx = canvas.getContext('2d');
+          const count = 180;
+          particles = Array.from({ length: count }, () => ({
+            x: Math.random() * rect.width,
+            y: Math.random() * rect.height,
+            tx: Math.random() * rect.width,
+            ty: Math.random() * rect.height,
+            vx: (Math.random() - 0.5) * 1.5,
+            vy: (Math.random() - 0.5) * 1.5,
+            r: 1 + Math.random() * 2.5,
+            color: Math.random() > 0.6 ? electric : accent,
+            alpha: 0.2 + Math.random() * 0.5
+          }));
+        }
+
+        function animate() {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          particles.forEach(p => {
+            p.x += (p.tx - p.x) * 0.02 + p.vx;
+            p.y += (p.ty - p.y) * 0.02 + p.vy;
+            if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+            if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+            ctx.beginPath();
+            ctx.fillStyle = p.color;
+            ctx.globalAlpha = p.alpha;
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+            ctx.fill();
+          });
+          ctx.globalAlpha = 1;
+          animId = requestAnimationFrame(animate);
+        }
+
+        const obs = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting && !assembled) {
+              assembled = true;
+              init();
+              animate();
+              section.classList.add('assembling');
+              setTimeout(() => {
+                section.classList.remove('assembling');
+                section.classList.add('assembled');
+                // Fade particles out after text assembles
+                setTimeout(() => {
+                  cancelAnimationFrame(animId);
+                  canvas.style.transition = 'opacity 1s ease';
+                  canvas.style.opacity = '0';
+                }, 2000);
+              }, 1500);
+            }
+          });
+        }, { threshold: 0.3 });
+        obs.observe(section);
+      })();
+
+      /* === C: Builds 3D Flip Cards === */
+      (function initBuildsFlip() {
+        const grid = document.querySelector('.lab-grid');
+        if (!grid) return;
+        const cards = grid.querySelectorAll('.lab-card');
+        const obs = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('flip-in');
+              obs.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.15 });
+        cards.forEach(card => obs.observe(card));
+      })();
+
+      /* === D: Section Transition Particle Veil === */
+      (function initSectionVeil() {
+        const sections = document.querySelectorAll('main > section');
+        if (!sections.length || !motionOK) return;
+        const veils = [];
+        sections.forEach(sec => {
+          const veil = document.createElement('canvas');
+          veil.className = 'section-veil';
+          sec.insertBefore(veil, sec.firstChild);
+          veils.push({ el: veil, section: sec, ctx: veil.getContext('2d'), particles: [] });
+        });
+
+        const accent = getComputedStyle(root).getPropertyValue('--accent').trim() || '#27D7C9';
+
+        function initVeil(v) {
+          const rect = v.section.getBoundingClientRect();
+          v.el.width = rect.width;
+          v.el.height = 120;
+          v.particles = Array.from({ length: 40 }, () => ({
+            x: Math.random() * rect.width,
+            y: Math.random() * 120,
+            vx: (Math.random() - 0.5) * 0.6,
+            vy: (Math.random() - 0.5) * 0.4,
+            r: 0.5 + Math.random() * 1.5,
+            alpha: 0.1 + Math.random() * 0.3
+          }));
+        }
+
+        function drawVeil(v) {
+          v.ctx.clearRect(0, 0, v.el.width, v.el.height);
+          v.particles.forEach(p => {
+            p.x += p.vx;
+            p.y += p.vy;
+            if (p.x < 0) p.x = v.el.width;
+            if (p.x > v.el.width) p.x = 0;
+            if (p.y < 0) p.y = 120;
+            if (p.y > 120) p.y = 0;
+            v.ctx.beginPath();
+            v.ctx.fillStyle = accent;
+            v.ctx.globalAlpha = p.alpha;
+            v.ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+            v.ctx.fill();
+          });
+          v.ctx.globalAlpha = 1;
+        }
+
+        function loop() {
+          veils.forEach(v => {
+            const rect = v.section.getBoundingClientRect();
+            if (rect.top < window.innerHeight && rect.bottom > 0) {
+              if (!v.el.width || v.el.width !== Math.round(rect.width)) initVeil(v);
+              drawVeil(v);
+            }
+          });
+          requestAnimationFrame(loop);
+        }
+        loop();
+        window.addEventListener('resize', () => veils.forEach(initVeil), { passive: true });
+      })();
 
       /* Ambient motion and section state */
       const heroSection = document.getElementById('hero-section');
