@@ -387,6 +387,10 @@ body, html {
     opacity: 0; animation: floatIn 0.6s 0.1s ease forwards;
 }
 
+/* 底部按钮确保可点击 */
+.bottom-bar { position: relative; z-index: 50; }
+.btn { position: relative; z-index: 51; }
+
 /* 响应式 */
 @media (max-width: 768px) {
     .hud { padding: 16px; }
@@ -992,9 +996,14 @@ scene.add(stars);
 let isStorm = false;
 let bloomBoost = 0;
 
-document.getElementById('storm-btn').addEventListener('click', triggerStorm);
-renderer.domElement.addEventListener('click', (e) => {
-    if (e.target.closest('.interactive')) return;
+document.getElementById('storm-btn').addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    triggerStorm();
+});
+renderer.domElement.addEventListener('pointerdown', (e) => {
+    // 只在直接点击 canvas 时触发，不拦截 UI 按钮
+    if (e.target !== renderer.domElement) return;
     triggerStorm();
 });
 
@@ -1035,53 +1044,86 @@ let handState = {
 };
 
 const gestureBtn = document.getElementById('gesture-btn');
-gestureBtn.addEventListener('click', toggleGesture);
+if (gestureBtn) {
+    gestureBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log('[GESTURE] Button clicked, handsActive=' + handsActive);
+        toggleGesture();
+    });
+} else {
+    console.error('[GESTURE] Button not found!');
+}
 
 async function toggleGesture() {
     if (handsActive) {
+        console.log('[GESTURE] Turning off...');
         handsActive = false;
-        if (mpCamera) { mpCamera.stop(); mpCamera = null; }
-        if (mpHands) { mpHands.close(); mpHands = null; }
+        if (mpCamera) { try { mpCamera.stop(); } catch(e){} mpCamera = null; }
+        if (mpHands) { try { mpHands.close(); } catch(e){} mpHands = null; }
         document.getElementById('cam-box').classList.remove('on');
         document.getElementById('gesture-guide').classList.remove('on');
-        gestureBtn.classList.remove('active');
-        gestureBtn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 11V7a2 2 0 014 0v4M11 11V5a2 2 0 014 0v6M15 11V7a2 2 0 014 0v8a6 6 0 01-6 6h-3a8 8 0 01-8-8V9a2 2 0 014 0"/></svg> GESTURE';
+        if (gestureBtn) {
+            gestureBtn.classList.remove('active');
+            gestureBtn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 11V7a2 2 0 014 0v4M11 11V5a2 2 0 014 0v6M15 11V7a2 2 0 014 0v8a6 6 0 01-6 6h-3a8 8 0 01-8-8V9a2 2 0 014 0"/></svg> GESTURE';
+        }
         controls.autoRotate = true;
         showToast('🖐', '手势追踪已关闭');
-    } else {
-        try {
-            showToast('📷', '正在启动摄像头...');
-            document.getElementById('cam-box').classList.add('on');
-            document.getElementById('gesture-guide').classList.add('on');
+        return;
+    }
 
-            mpHands = new Hands({
-                locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`
-            });
-            mpHands.setOptions({
-                maxNumHands: 1, modelComplexity: 1,
-                minDetectionConfidence: 0.6, minTrackingConfidence: 0.5
-            });
-            mpHands.onResults(onHandResults);
+    console.log('[GESTURE] Turning on...');
+    try {
+        showToast('📷', '正在启动摄像头...');
+        document.getElementById('cam-box').classList.add('on');
+        document.getElementById('gesture-guide').classList.add('on');
 
-            mpCamera = new Camera(camVideo, {
-                onFrame: async () => {
-                    if (mpHands && handsActive) await mpHands.send({ image: camVideo });
-                },
-                width: 320, height: 240
-            });
-            await mpCamera.start();
-            handsActive = true;
+        // 检查 MediaPipe 是否加载
+        if (typeof Hands === 'undefined') {
+            throw new Error('MediaPipe Hands 库未加载，请检查网络');
+        }
+        if (typeof Camera === 'undefined') {
+            throw new Error('MediaPipe Camera Utils 未加载');
+        }
+
+        console.log('[GESTURE] Creating Hands instance...');
+        mpHands = new Hands({
+            locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`
+        });
+        mpHands.setOptions({
+            maxNumHands: 1, modelComplexity: 1,
+            minDetectionConfidence: 0.6, minTrackingConfidence: 0.5
+        });
+        mpHands.onResults(onHandResults);
+
+        console.log('[GESTURE] Creating Camera instance...');
+        mpCamera = new Camera(camVideo, {
+            onFrame: async () => {
+                if (mpHands && handsActive) {
+                    try { await mpHands.send({ image: camVideo }); } catch(e) { console.warn('[GESTURE] Frame error:', e); }
+                }
+            },
+            width: 320, height: 240
+        });
+
+        console.log('[GESTURE] Starting camera...');
+        await mpCamera.start();
+        handsActive = true;
+        console.log('[GESTURE] Camera started successfully!');
+
+        if (gestureBtn) {
             gestureBtn.classList.add('active');
             gestureBtn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 11V7a2 2 0 014 0v4M11 11V5a2 2 0 014 0v6M15 11V7a2 2 0 014 0v8a6 6 0 01-6 6h-3a8 8 0 01-8-8V9a2 2 0 014 0"/></svg> GESTURE: ON';
-            controls.autoRotate = false;
-            showToast('✋', '手势追踪已开启');
-        } catch (err) {
-            showToast('❌', '摄像头启动失败');
-            setTimeout(() => {
-                document.getElementById('cam-box').classList.remove('on');
-                document.getElementById('gesture-guide').classList.remove('on');
-            }, 2000);
         }
+        controls.autoRotate = false;
+        showToast('✋', '手势追踪已开启');
+    } catch (err) {
+        console.error('[GESTURE] Error:', err);
+        showToast('❌', '摄像头启动失败: ' + (err.message || '未知错误'));
+        handsActive = false;
+        document.getElementById('cam-box').classList.remove('on');
+        document.getElementById('gesture-guide').classList.remove('on');
+        if (gestureBtn) gestureBtn.classList.remove('active');
     }
 }
 
