@@ -1722,20 +1722,13 @@
       z-index: 0;
     }
     .quote-section .container { position: relative; z-index: 1; }
+    /* Manifesto text is visible by default; JS hides it only if motion is OK
+       and will reveal it via the cinematic animation. This ensures text is
+       never lost even if JS fails or observer doesn't fire. */
     .quote-section .quote-mark,
     .quote-section blockquote.pull,
     .quote-section .quote-attr {
-      opacity: 1;
-      transform: translateY(0);
-      filter: blur(0);
       transition: opacity 1s cubic-bezier(0.2,0.8,0.3,1), transform 1s cubic-bezier(0.2,0.8,0.3,1), filter 1s ease;
-    }
-    .quote-section:not(.assembled) .quote-mark,
-    .quote-section:not(.assembled) blockquote.pull,
-    .quote-section:not(.assembled) .quote-attr {
-      opacity: 0;
-      transform: translateY(30px);
-      filter: blur(8px);
     }
     .quote-section.assembled .quote-mark {
       opacity: 0.35;
@@ -5131,7 +5124,7 @@
       /* Quote */
       const q = D.quote;
       document.getElementById('manifesto').innerHTML = `
-        <div class="container fade-in">
+        <div class="container manifesto-container">
           <div class="quote-mark" aria-hidden="true">\u201C</div>
           <blockquote class="pull">${esc(q.text)}</blockquote>
           <div class="quote-attr">${esc(q.attr)}</div>
@@ -5208,6 +5201,31 @@
           section.classList.add('assembled');
           return;
         }
+
+        // Hide text elements for the cinematic reveal, then show via observer
+        const hideEls = section.querySelectorAll('.quote-mark, blockquote.pull, .quote-attr');
+        hideEls.forEach(el => {
+          el.style.opacity = '0';
+          el.style.transform = 'translateY(30px)';
+          el.style.filter = 'blur(8px)';
+        });
+
+        function revealText() {
+          hideEls.forEach(el => {
+            el.style.opacity = '';
+            el.style.transform = '';
+            el.style.filter = '';
+          });
+          section.classList.add('assembled');
+        }
+
+        // Fallback 1: if observer hasn't fired after 1.5s, show text immediately
+        let fallbackTimer = setTimeout(() => {
+          if (!assembled) {
+            assembled = true;
+            revealText();
+          }
+        }, 1500);
 
         const canvas = document.createElement('canvas');
         canvas.className = 'manifesto-particle-canvas';
@@ -5293,13 +5311,23 @@
           animId = requestAnimationFrame(animate);
         }
 
+        function revealText() {
+          hideEls.forEach(el => {
+            el.style.opacity = '';
+            el.style.transform = '';
+            el.style.filter = '';
+          });
+          section.classList.add('assembled');
+        }
+
         const obs = new IntersectionObserver(entries => {
           entries.forEach(entry => {
             if (entry.isIntersecting && !assembled) {
               assembled = true;
+              clearTimeout(fallbackTimer);
               init();
               animate();
-              section.classList.add('assembled');
+              revealText();
               setTimeout(() => {
                 canvas.style.transition = 'opacity 2s ease';
                 canvas.style.opacity = '0.15';
