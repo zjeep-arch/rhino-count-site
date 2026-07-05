@@ -4,826 +4,799 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>AI 创作实验室 · 犀牛伯爵</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=JetBrains+Mono:wght@300;400;600&display=swap" rel="stylesheet" />
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  :root {
-    --accent: #27D7C9;
-    --electric: #8E7CFF;
-    --warm: #FF7A59;
-    --gold: #E9C46A;
-    --bg: #02040a;
-    --fg: #F2F7F6;
-  }
   body {
-    background: var(--bg);
-    color: var(--fg);
-    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
-    overflow-x: hidden;
-    cursor: none;
+    background: #02040a;
+    overflow: hidden;
+    font-family: 'JetBrains Mono', 'SF Mono', monospace;
+    color: #F2F7F6;
   }
-  #three-canvas {
-    position: fixed;
-    top: 0; left: 0;
+  #canvas-container {
     width: 100vw; height: 100vh;
-    z-index: 0;
+    position: absolute; top: 0; left: 0; z-index: 1;
   }
-  /* Custom cursor */
-  .cursor {
-    position: fixed;
-    width: 20px; height: 20px;
-    border: 1px solid var(--accent);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9999;
-    transform: translate(-50%, -50%);
-    transition: width 0.2s, height 0.2s, background 0.2s;
-    mix-blend-mode: screen;
+
+  /* 加载动画 */
+  #loader {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: #02040a; z-index: 100;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    transition: opacity 0.8s ease-out;
   }
-  .cursor.hover {
+  .loader-text {
+    color: #27D7C9; font-size: 12px; letter-spacing: 4px;
+    margin-top: 20px; text-transform: uppercase; font-weight: 300;
+  }
+  .spinner {
     width: 40px; height: 40px;
-    background: rgba(39,215,201,0.1);
-    border-color: var(--accent);
-  }
-  /* Scroll content */
-  .scroll-content {
-    position: relative;
-    z-index: 1;
-    pointer-events: none;
-  }
-  .scroll-content a, .scroll-content button { pointer-events: auto; }
-
-  /* Sections */
-  section {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-  }
-
-  /* HUD elements */
-  .hud-bar {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 10;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 32px;
-    pointer-events: none;
-  }
-  .hud-bar > * { pointer-events: auto; }
-  .hud-logo {
-    font-family: 'SF Mono', monospace;
-    font-size: 14px;
-    color: var(--accent);
-    letter-spacing: 0.1em;
-    text-shadow: 0 0 12px rgba(39,215,201,0.4);
-  }
-  .hud-back {
-    padding: 8px 16px;
-    border: 1px solid rgba(39,215,201,0.25);
-    border-radius: 999px;
-    color: var(--accent);
-    text-decoration: none;
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    background: rgba(2,4,10,0.5);
-    backdrop-filter: blur(12px);
-    transition: all 0.25s;
-  }
-  .hud-back:hover {
-    border-color: var(--accent);
-    background: rgba(39,215,201,0.08);
-  }
-
-  /* Scroll progress */
-  .scroll-indicator {
-    position: fixed;
-    right: 24px;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 10;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    pointer-events: none;
-  }
-  .scroll-dot {
-    width: 6px; height: 6px;
+    border: 1px solid rgba(39,215,201,0.15);
+    border-top: 1px solid #27D7C9;
     border-radius: 50%;
-    background: rgba(39,215,201,0.2);
-    transition: all 0.3s;
-  }
-  .scroll-dot.active {
-    background: var(--accent);
-    box-shadow: 0 0 12px var(--accent);
-    transform: scale(1.5);
-  }
-
-  /* Hero */
-  .hero-content {
-    text-align: center;
-    max-width: 900px;
-    padding: 0 24px;
-  }
-  .hero-label {
-    font-family: 'SF Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.4em;
-    text-transform: uppercase;
-    color: rgba(39,215,201,0.5);
-    margin-bottom: 24px;
-  }
-  .hero-title {
-    font-size: clamp(48px, 8vw, 96px);
-    font-weight: 200;
-    line-height: 1.05;
-    letter-spacing: -0.02em;
-    background: linear-gradient(135deg, #F2F7F6 0%, #27D7C9 50%, #8E7CFF 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: 24px;
-  }
-  .hero-subtitle {
-    font-size: clamp(14px, 2vw, 18px);
-    color: rgba(242,247,246,0.5);
-    max-width: 600px;
-    margin: 0 auto 48px;
-    line-height: 1.6;
-  }
-  .hero-cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    padding: 14px 32px;
-    border: 1px solid rgba(39,215,201,0.3);
-    border-radius: 999px;
-    color: var(--accent);
-    text-decoration: none;
-    font-size: 14px;
-    letter-spacing: 0.08em;
-    background: rgba(39,215,201,0.05);
-    backdrop-filter: blur(10px);
-    transition: all 0.3s;
-  }
-  .hero-cta:hover {
-    border-color: var(--accent);
-    background: rgba(39,215,201,0.12);
-    box-shadow: 0 0 30px rgba(39,215,201,0.2);
-  }
-  .scroll-hint {
-    position: absolute;
-    bottom: 48px; left: 50%;
-    transform: translateX(-50%);
-    font-size: 10px;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: rgba(242,247,246,0.25);
-    font-family: 'SF Mono', monospace;
-    animation: bounce 2s infinite;
-  }
-  @keyframes bounce {
-    0%,100% { transform: translateX(-50%) translateY(0); }
-    50% { transform: translateX(-50%) translateY(8px); }
-  }
-
-  /* Works section */
-  .works-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 24px;
-    max-width: 1200px;
-    padding: 0 24px;
-  }
-  .work-card {
-    width: 320px;
-    padding: 28px;
-    background: rgba(8,12,20,0.6);
-    border: 1px solid rgba(39,215,201,0.1);
-    border-radius: 16px;
-    backdrop-filter: blur(16px);
-    transition: all 0.4s cubic-bezier(0.2,0.8,0.3,1);
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  .work-card.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  .work-card:hover {
-    border-color: rgba(39,215,201,0.3);
-    background: rgba(8,12,20,0.8);
-    box-shadow: 0 20px 60px -20px rgba(39,215,201,0.15);
-    transform: translateY(-4px);
-  }
-  .work-tag {
-    display: inline-block;
-    font-family: 'SF Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--accent);
-    padding: 4px 10px;
-    border: 1px solid rgba(39,215,201,0.2);
-    border-radius: 4px;
-    margin-bottom: 16px;
-  }
-  .work-title {
-    font-size: 20px;
-    font-weight: 600;
-    margin-bottom: 8px;
-    color: var(--fg);
-  }
-  .work-desc {
-    font-size: 13px;
-    line-height: 1.6;
-    color: rgba(242,247,246,0.5);
-    margin-bottom: 20px;
-  }
-  .work-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    color: var(--accent);
-    text-decoration: none;
-    font-size: 12px;
-    letter-spacing: 0.05em;
-    transition: gap 0.3s;
-  }
-  .work-link:hover { gap: 12px; }
-
-  /* Capabilities */
-  .caps-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-    max-width: 900px;
-    padding: 0 24px;
-  }
-  .cap-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 140px;
-    padding: 24px 12px;
-    background: rgba(8,12,20,0.5);
-    border: 1px solid rgba(39,215,201,0.08);
-    border-radius: 12px;
-    text-align: center;
-    transition: all 0.3s;
-    opacity: 0;
-    transform: scale(0.8);
-  }
-  .cap-item.visible {
-    opacity: 1;
-    transform: scale(1);
-  }
-  .cap-item:hover {
-    border-color: rgba(39,215,201,0.25);
-    background: rgba(8,12,20,0.7);
-  }
-  .cap-icon {
-    width: 40px; height: 40px;
-    margin-bottom: 12px;
-    color: var(--accent);
-  }
-  .cap-name {
-    font-size: 12px;
-    font-weight: 600;
-    margin-bottom: 4px;
-  }
-  .cap-desc {
-    font-size: 10px;
-    color: rgba(242,247,246,0.4);
-    line-height: 1.4;
-  }
-
-  /* Data panel */
-  .data-panel {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 48px;
-    max-width: 900px;
-    padding: 0 24px;
-  }
-  .data-item {
-    text-align: center;
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  .data-item.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  .data-value {
-    font-size: clamp(40px, 6vw, 64px);
-    font-weight: 200;
-    background: linear-gradient(135deg, var(--accent), var(--electric));
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    line-height: 1;
-  }
-  .data-label {
-    font-family: 'SF Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: rgba(242,247,246,0.4);
-    margin-top: 8px;
-  }
-
-  /* CTA */
-  .cta-content {
-    text-align: center;
-    max-width: 700px;
-    padding: 0 24px;
-  }
-  .cta-title {
-    font-size: clamp(32px, 5vw, 56px);
-    font-weight: 200;
-    line-height: 1.1;
-    margin-bottom: 24px;
-  }
-  .cta-desc {
-    font-size: 16px;
-    color: rgba(242,247,246,0.5);
-    margin-bottom: 40px;
-    line-height: 1.6;
-  }
-  .cta-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    padding: 16px 40px;
-    background: linear-gradient(135deg, var(--accent), var(--electric));
-    color: #02040a;
-    text-decoration: none;
-    font-size: 15px;
-    font-weight: 600;
-    border-radius: 999px;
-    transition: all 0.3s;
-  }
-  .cta-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 20px 50px -15px rgba(39,215,201,0.4);
-  }
-
-  /* Section labels */
-  .section-label {
-    font-family: 'SF Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.4em;
-    text-transform: uppercase;
-    color: rgba(39,215,201,0.4);
-    text-align: center;
-    margin-bottom: 16px;
-    width: 100%;
-  }
-  .section-heading {
-    font-size: clamp(28px, 4vw, 44px);
-    font-weight: 200;
-    text-align: center;
-    margin-bottom: 48px;
-    width: 100%;
-    padding: 0 24px;
-  }
-
-  /* Loading */
-  #loading {
-    position: fixed; inset: 0;
-    background: var(--bg);
-    display: flex; align-items: center; justify-content: center;
-    z-index: 100;
-    transition: opacity 0.8s;
-  }
-  #loading.hide { opacity: 0; pointer-events: none; }
-  .loader-ring {
-    width: 50px; height: 50px;
-    border: 2px solid rgba(39,215,201,0.1);
-    border-top-color: var(--accent);
-    border-radius: 50%;
-    animation: spin 0.9s linear infinite;
+    animation: spin 1s linear infinite;
   }
   @keyframes spin { to { transform: rotate(360deg); } }
 
-  /* Mobile */
-  @media (max-width: 768px) {
-    .work-card { width: 100%; }
-    .caps-grid { gap: 12px; }
-    .cap-item { width: 100px; }
-    .data-panel { gap: 32px; }
-    body { cursor: auto; }
-    .cursor { display: none; }
+  /* 欢迎弹窗 */
+  #welcome-modal {
+    display: none;
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(2,4,10,0.85); z-index: 200;
+    align-items: center; justify-content: center;
+    backdrop-filter: blur(12px);
+    animation: fadeIn 0.6s ease-out;
+  }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+  .modal-content {
+    background: rgba(6,10,18,0.92);
+    border: 1px solid rgba(39,215,201,0.2);
+    padding: 50px 40px;
+    max-width: 520px; width: 90%;
+    text-align: center;
+    box-shadow: 0 0 60px rgba(39,215,201,0.08), 0 20px 80px -20px rgba(0,0,0,0.8);
+    border-radius: 2px;
+    position: relative;
+  }
+  .modal-content::before, .modal-content::after {
+    content: ''; position: absolute;
+    width: 24px; height: 24px;
+    border: 1px solid rgba(39,215,201,0.3);
+  }
+  .modal-content::before { top: -1px; left: -1px; border-right: 0; border-bottom: 0; }
+  .modal-content::after { bottom: -1px; right: -1px; border-left: 0; border-top: 0; }
+
+  .modal-title {
+    font-size: 28px;
+    background: linear-gradient(135deg, #F2F7F6, #27D7C9, #8E7CFF);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 3px;
+    margin-bottom: 8px;
+    font-family: 'Cinzel', serif;
+    font-weight: 400;
+  }
+  .modal-subtitle {
+    color: rgba(242,247,246,0.4);
+    font-size: 11px; letter-spacing: 4px;
+    margin-bottom: 36px; text-transform: uppercase;
+  }
+
+  .modal-buttons {
+    display: flex; flex-direction: column; gap: 12px;
+  }
+  .modal-btn {
+    background: rgba(39,215,201,0.06);
+    border: 1px solid rgba(39,215,201,0.2);
+    color: #27D7C9; padding: 16px 28px;
+    text-decoration: none; text-transform: uppercase;
+    letter-spacing: 3px; font-size: 11px;
+    transition: all 0.4s; cursor: pointer;
+    display: block; border-radius: 2px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .modal-btn:hover {
+    background: rgba(39,215,201,0.15);
+    border-color: #27D7C9;
+    box-shadow: 0 0 30px rgba(39,215,201,0.15);
+    transform: translateY(-1px);
+  }
+  .modal-btn-primary {
+    background: rgba(39,215,201,0.12);
+    border-color: rgba(39,215,201,0.4);
+  }
+  .modal-desc {
+    font-size: 10px; color: rgba(242,247,246,0.35);
+    margin-top: 6px; letter-spacing: 1px; text-transform: none;
+  }
+  .modal-footer {
+    margin-top: 30px; font-size: 9px;
+    color: rgba(242,247,246,0.25); letter-spacing: 2px;
+  }
+  .modal-footer a {
+    color: #27D7C9; text-decoration: none;
+    border-bottom: 1px solid rgba(39,215,201,0.2);
+  }
+
+  /* HUD overlay */
+  .hud-top {
+    position: fixed; top: 24px; left: 24px; right: 24px;
+    z-index: 50; display: flex;
+    justify-content: space-between; align-items: flex-start;
+    pointer-events: none;
+  }
+  .hud-top > * { pointer-events: auto; }
+  .hud-logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; color: rgba(39,215,201,0.6);
+    letter-spacing: 3px; text-transform: uppercase;
+  }
+  .hud-logo strong { color: #27D7C9; }
+  .hud-back {
+    padding: 8px 16px;
+    border: 1px solid rgba(39,215,201,0.2);
+    border-radius: 2px;
+    color: rgba(39,215,201,0.8);
+    text-decoration: none;
+    font-size: 10px; letter-spacing: 2px;
+    text-transform: uppercase;
+    background: rgba(2,4,10,0.5);
+    backdrop-filter: blur(10px);
+    transition: all 0.25s;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .hud-back:hover {
+    border-color: #27D7C9;
+    background: rgba(39,215,201,0.08);
+    color: #27D7C9;
+  }
+
+  /* 底部信息 */
+  .hud-bottom {
+    position: fixed; bottom: 24px; left: 24px; right: 24px;
+    z-index: 50; display: flex;
+    justify-content: space-between; align-items: flex-end;
+    pointer-events: none;
+  }
+  .hud-bottom > * { pointer-events: auto; }
+  .hud-info {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px; letter-spacing: 2px;
+    color: rgba(242,247,246,0.25);
+    text-transform: uppercase;
+    line-height: 1.8;
+  }
+  .hud-info span { color: rgba(39,215,201,0.5); }
+  .hud-hint {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px; letter-spacing: 2px;
+    color: rgba(242,247,246,0.2);
+    text-transform: uppercase;
+  }
+
+  /* 侧边数据流 */
+  .data-stream {
+    position: fixed; right: 24px; top: 50%;
+    transform: translateY(-50%); z-index: 50;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8px; letter-spacing: 1px;
+    color: rgba(39,215,201,0.15);
+    text-align: right; line-height: 1.6;
+    pointer-events: none;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
   }
 </style>
 
 <script type="importmap">
 {
   "imports": {
-    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
-    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
   }
 }
 </script>
 </head>
 <body>
 
-<div id="loading"><div class="loader-ring"></div></div>
-<canvas id="three-canvas"></canvas>
-<div class="cursor" id="cursor"></div>
-
-<div class="hud-bar">
-  <div class="hud-logo">AI LAB · 犀牛伯爵</div>
-  <a href="../index.html#builds" class="hud-back">← 返回主页</a>
+<div id="loader">
+  <div class="spinner"></div>
+  <div class="loader-text">INITIALIZING AI LAB</div>
 </div>
 
-<div class="scroll-indicator" id="scrollIndicator"></div>
+<div id="canvas-container"></div>
 
-<div class="scroll-content">
+<!-- 欢迎弹窗 -->
+<div id="welcome-modal">
+  <div class="modal-content">
+    <div class="modal-title">AI CREATION LAB</div>
+    <div class="modal-subtitle">犀牛伯爵 · 创作实验室</div>
 
-  <!-- Hero -->
-  <section id="hero" data-section="0">
-    <div class="hero-content">
-      <div class="hero-label">AI CREATION LAB · 创作实验室</div>
-      <h1 class="hero-title">把想象力<br/>编译成现实</h1>
-      <p class="hero-subtitle">
-        用 AI Agent 驱动内容生产，用代码雕刻交互体验。<br/>
-        这是犀牛伯爵的数字工坊——每一个像素都在思考。
-      </p>
-      <a href="#works" class="hero-cta">
-        探索作品
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    <div class="modal-buttons">
+      <button class="modal-btn modal-btn-primary" onclick="enterLab()">
+        进入实验室
+        <div class="modal-desc">拖拽旋转 · 滚轮缩放 · 点击交互</div>
+      </button>
+      <a href="../index.html#builds" class="modal-btn">
+        返回主页
+        <div class="modal-desc">回到犀牛伯爵官网</div>
       </a>
     </div>
-    <div class="scroll-hint">SCROLL ↓</div>
-  </section>
 
-  <!-- Works -->
-  <section id="works" data-section="1">
-    <div style="width:100%;">
-      <div class="section-label">CREATION MATRIX</div>
-      <h2 class="section-heading">作品矩阵</h2>
-      <div class="works-grid" id="worksGrid"></div>
+    <div class="modal-footer">
+      CRAFTED BY <a href="https://zjeep-arch.github.io/rhino-count-site/">犀牛伯爵</a>
     </div>
-  </section>
-
-  <!-- Capabilities -->
-  <section id="capabilities" data-section="2">
-    <div style="width:100%;">
-      <div class="section-label">AI CAPABILITIES</div>
-      <h2 class="section-heading">能力图谱</h2>
-      <div class="caps-grid" id="capsGrid"></div>
-    </div>
-  </section>
-
-  <!-- Data -->
-  <section id="data" data-section="3">
-    <div style="width:100%;">
-      <div class="section-label">LIVE METRICS</div>
-      <h2 class="section-heading">实时数据</h2>
-      <div class="data-panel" id="dataPanel"></div>
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <section id="cta" data-section="4">
-    <div class="cta-content">
-      <h2 class="cta-title">准备好<br/>一起创作了吗？</h2>
-      <p class="cta-desc">
-        如果你也有一个想法正在寻找合适的执行者——<br/>
-        或者只是想聊聊 AI 能做什么。
-      </p>
-      <a href="https://www.xiaohongshu.com/user/profile/60572004000000000101ce41" target="_blank" rel="noopener" class="cta-btn">
-        来小红书聊聊
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </a>
-    </div>
-  </section>
-
+  </div>
 </div>
+
+<!-- HUD -->
+<div class="hud-top">
+  <div class="hud-logo"><strong>AI LAB</strong> · 犀牛伯爵</div>
+  <a href="../index.html#builds" class="hud-back">← BACK</a>
+</div>
+
+<div class="hud-bottom">
+  <div class="hud-info">
+    SYS <span>ONLINE</span><br/>
+    PWR <span>98%</span><br/>
+    <span id="fps">60</span> FPS
+  </div>
+  <div class="hud-hint">
+    DRAG TO ROTATE · SCROLL TO ZOOM
+  </div>
+</div>
+
+<div class="data-stream" id="dataStream"></div>
 
 <script type="module">
 import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
 import { FXAAShader } from 'three/addons/shaders/FXAAShader.js';
-import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 
 // ═══════════════════════════════════════════════════════════
-// 数据
+// 配置
 // ═══════════════════════════════════════════════════════════
-const WORKS = [
-  { tag: 'SITE', title: '犀牛伯爵官网', desc: '用 Agent 工作流驱动内容生产和个人品牌。纯静态站点，无框架依赖。', link: 'https://zjeep-arch.github.io/rhino-count-site/', linkLabel: '访问' },
-  { tag: 'GAME', title: '鸭骗战争', desc: '扮演鹅腿阿姨，用鸭腿冒充鹅腿。荒诞答题小游戏，测试轻量游戏化表达。', link: '../games/duck-scare-war.html', linkLabel: '玩' },
-  { tag: '3D', title: 'JARVIS 3D 工作室', desc: 'Iron Man 风格的 3D AI 工作室——方舟反应堆、全息屏幕、贾维斯 HUD。', link: '../ai-studio-3d.html', linkLabel: '进入' },
-  { tag: 'WORKFLOW', title: 'AI Workflow Lab', desc: '把日常创作、资料整理、网页生成和自动化流程拆成可复用工作流。', link: 'https://zjeep-arch.github.io/rhino-count-site/', linkLabel: '查看' },
-  { tag: 'VIDEO', title: '视频转字幕工具链', desc: 'yt-dlp + whisper.cpp + 自定义脚本，30 分钟视频 2 分钟转录为结构化笔记。', link: '#', linkLabel: '了解' },
-  { tag: 'KNOWLEDGE', title: 'Obsidian 知识图谱', desc: 'Karpathy LLM-Wiki 方法论实践——44 节点、0 断链、0 孤立的知识网络。', link: '#', linkLabel: '了解' },
-];
-
-const CAPS = [
-  { name: 'Agent', desc: '多步推理与工具调用', icon: 'agent' },
-  { name: 'MCP', desc: '标准化工具接入协议', icon: 'mcp' },
-  { name: 'RAG', desc: '检索增强生成', icon: 'rag' },
-  { name: 'Prompt', desc: '提示词工程', icon: 'prompt' },
-  { name: '3D Web', desc: 'Three.js 交互开发', icon: 'web' },
-  { name: 'Workflow', desc: '自动化工作流设计', icon: 'flow' },
-  { name: 'Vibe Coding', desc: '自然语言驱动编程', icon: 'vibe' },
-  { name: 'Content', desc: 'AI 内容生产管线', icon: 'content' },
-];
-
-const METRICS = [
-  { value: 47, suffix: '+', label: '知识节点' },
-  { value: 6, suffix: '', label: '发布作品' },
-  { value: 12, suffix: '/12', label: 'MCP 工具' },
-  { value: 99, suffix: '%', label: '正常运行' },
-];
-
-// SVG icons
-const ICONS = {
-  agent: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 1v6M12 17v6M4.22 4.22l4.24 4.24M15.54 15.54l4.24 4.24M1 12h6M17 12h6M4.22 19.78l4.24-4.24M15.54 8.46l4.24-4.24"/></svg>',
-  mcp: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>',
-  rag: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>',
-  prompt: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>',
-  web: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>',
-  flow: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="6" height="6"/><rect x="16" y="3" width="6" height="6"/><rect x="9" y="15" width="6" height="6"/><path d="M5 9v3a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V9M12 15v-3"/></svg>',
-  vibe: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>',
-  content: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>',
+const CFG = {
+  colors: {
+    bg: 0x02040a,
+    accent: 0x27D7C9,
+    electric: 0x8E7CFF,
+    warm: 0xFF7A59,
+    gold: 0xE9C46A,
+  },
+  particles: {
+    coreCount: 800,       // 核心区粒子
+    orbitCount: 120,      // 轨道粒子
+    dustCount: 2000,      // 远景尘埃
+    radius: 8,
+    height: 20,
+  },
+  camera: { z: 22, y: 2 },
 };
 
 // ═══════════════════════════════════════════════════════════
-// 渲染 HTML 内容
+// 初始化
 // ═══════════════════════════════════════════════════════════
-const worksGrid = document.getElementById('worksGrid');
-WORKS.forEach((w, i) => {
-  const card = document.createElement('div');
-  card.className = 'work-card';
-  card.style.transitionDelay = `${i * 80}ms`;
-  card.innerHTML = `
-    <span class="work-tag">${w.tag}</span>
-    <h3 class="work-title">${w.title}</h3>
-    <p class="work-desc">${w.desc}</p>
-    <a class="work-link" href="${w.link}" ${w.link.startsWith('http') ? 'target="_blank" rel="noopener"' : ''}>
-      ${w.linkLabel} <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-    </a>
-  `;
-  worksGrid.appendChild(card);
-});
+let scene, camera, renderer, composer, mainGroup, clock = new THREE.Clock();
+let controls;
+const interactables = [];
 
-const capsGrid = document.getElementById('capsGrid');
-CAPS.forEach((c, i) => {
-  const item = document.createElement('div');
-  item.className = 'cap-item';
-  item.style.transitionDelay = `${i * 60}ms`;
-  item.innerHTML = `
-    <div class="cap-icon">${ICONS[c.icon] || ''}</div>
-    <div class="cap-name">${c.name}</div>
-    <div class="cap-desc">${c.desc}</div>
-  `;
-  capsGrid.appendChild(item);
-});
+function init() {
+  initThree();
+  setupEnvironment();
+  setupLights();
+  createCoreStructure();
+  createOrbitParticles();
+  createDust();
+  createDataStreams();
+  setupPostProcessing();
+  setupInteraction();
 
-const dataPanel = document.getElementById('dataPanel');
-METRICS.forEach((m, i) => {
-  const item = document.createElement('div');
-  item.className = 'data-item';
-  item.style.transitionDelay = `${i * 100}ms`;
-  item.innerHTML = `
-    <div class="data-value" data-target="${m.value}">0${m.suffix}</div>
-    <div class="data-label">${m.label}</div>
-  `;
-  dataPanel.appendChild(item);
-});
+  // 隐藏加载动画
+  const loader = document.getElementById('loader');
+  loader.style.opacity = 0;
+  setTimeout(() => loader.remove(), 800);
 
-// Scroll indicator dots
-const scrollInd = document.getElementById('scrollIndicator');
-for (let i = 0; i < 5; i++) {
-  const dot = document.createElement('div');
-  dot.className = 'scroll-dot' + (i === 0 ? ' active' : '');
-  scrollInd.appendChild(dot);
+  // 显示欢迎弹窗
+  setTimeout(() => {
+    document.getElementById('welcome-modal').style.display = 'flex';
+  }, 800);
+
+  animate();
+}
+
+function initThree() {
+  const container = document.getElementById('canvas-container');
+  scene = new THREE.Scene();
+  scene.background = new THREE.Color(CFG.colors.bg);
+  scene.fog = new THREE.FogExp2(CFG.colors.bg, 0.012);
+
+  camera = new THREE.PerspectiveCamera(42, window.innerWidth / window.innerHeight, 0.1, 1000);
+  camera.position.set(0, CFG.camera.y, CFG.camera.z);
+
+  renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.0;
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
+  container.appendChild(renderer.domElement);
+
+  mainGroup = new THREE.Group();
+  scene.add(mainGroup);
+
+  // OrbitControls
+  controls = new OrbitControls(camera, renderer.domElement);
+  controls.enableDamping = true;
+  controls.dampingFactor = 0.05;
+  controls.minDistance = 10;
+  controls.maxDistance = 40;
+  controls.maxPolarAngle = Math.PI * 0.48;
+  controls.minPolarAngle = Math.PI * 0.1;
+  controls.target.set(0, 2, 0);
+  controls.autoRotate = true;
+  controls.autoRotateSpeed = 0.4;
+}
+
+function setupEnvironment() {
+  const pmrem = new THREE.PMREMGenerator(renderer);
+  scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.03).texture;
+}
+
+function setupLights() {
+  scene.add(new THREE.AmbientLight(0x162030, 0.4));
+
+  // 核心光源 — 青色
+  const coreLight = new THREE.PointLight(CFG.colors.accent, 6, 15, 1.5);
+  coreLight.position.set(0, 3, 0);
+  mainGroup.add(coreLight);
+
+  // 补光 — 紫色
+  const purpleLight = new THREE.PointLight(CFG.colors.electric, 3, 12, 1.5);
+  purpleLight.position.set(4, 2, 3);
+  mainGroup.add(purpleLight);
+
+  // 暖光
+  const warmLight = new THREE.PointLight(CFG.colors.warm, 2, 10, 2);
+  warmLight.position.set(-3, 1, 4);
+  mainGroup.add(warmLight);
+
+  // 方向光
+  const dir = new THREE.DirectionalLight(0x4a6580, 0.3);
+  dir.position.set(5, 10, 5);
+  scene.add(dir);
 }
 
 // ═══════════════════════════════════════════════════════════
-// Three.js 场景
+// 核心结构 — 螺旋 DNA 风格的知识树
 // ═══════════════════════════════════════════════════════════
-const canvas = document.getElementById('three-canvas');
-const scene = new THREE.Scene();
-scene.fog = new THREE.FogExp2(0x02040a, 0.015);
-
-const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 200);
-camera.position.set(0, 0, 12);
-
-const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-renderer.setSize(window.innerWidth, window.innerHeight);
-renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-renderer.toneMapping = THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure = 1.2;
-renderer.outputColorSpace = THREE.SRGBColorSpace;
-
-// Environment
-const pmrem = new THREE.PMREMGenerator(renderer);
-scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.03).texture;
-
-// Post-processing
-const composer = new EffectComposer(renderer);
-composer.addPass(new RenderPass(scene, camera));
-const bloom = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 0.6, 0.5, 0.85);
-composer.addPass(bloom);
-const fxaa = new ShaderPass(FXAAShader);
-fxaa.material.uniforms['resolution'].value.set(1/(window.innerWidth*renderer.getPixelRatio()), 1/(window.innerHeight*renderer.getPixelRatio()));
-composer.addPass(fxaa);
-
-// Lights
-scene.add(new THREE.AmbientLight(0x1a2535, 0.3));
-const key = new THREE.DirectionalLight(0x4a6580, 0.4);
-key.position.set(5, 8, 5); scene.add(key);
-const p1 = new THREE.PointLight(0x27D7C9, 4, 15, 1.5); p1.position.set(-4, 2, 4); scene.add(p1);
-const p2 = new THREE.PointLight(0x8E7CFF, 3, 12, 1.5); p2.position.set(4, 1, 3); scene.add(p2);
-
-// ═══════════════════════════════════════════════════════════
-// 3D 主体 — 悬浮水晶体（低多边形犀牛抽象体）
-// ═══════════════════════════════════════════════════════════
-
-// 核心多面体 — 代表"创造力核心"
-const crystalGroup = new THREE.Group();
-scene.add(crystalGroup);
-
-// 外壳 — 二十面体线框
-const shellGeo = new THREE.IcosahedronGeometry(2.5, 1);
-const shellMat = new THREE.MeshBasicMaterial({
-  color: 0x27D7C9,
-  wireframe: true,
-  transparent: true,
-  opacity: 0.15,
-});
-const shell = new THREE.Mesh(shellGeo, shellMat);
-crystalGroup.add(shell);
-
-// 内核 — 发光实体
-const coreGeo = new THREE.IcosahedronGeometry(1.2, 0);
-const coreMat = new THREE.MeshStandardMaterial({
-  color: 0x27D7C9,
-  metalness: 0.3,
-  roughness: 0.1,
-  emissive: 0x27D7C9,
-  emissiveIntensity: 0.5,
-  transparent: true,
-  opacity: 0.6,
-  flatShading: true,
-});
-const core = new THREE.Mesh(coreGeo, coreMat);
-crystalGroup.add(core);
-
-// 中层 — 旋转环
-for (let i = 0; i < 3; i++) {
-  const ring = new THREE.Mesh(
-    new THREE.TorusGeometry(1.8 + i * 0.3, 0.008, 8, 64),
-    new THREE.MeshBasicMaterial({
-      color: [0x27D7C9, 0x8E7CFF, 0xFF7A59][i],
+function createCoreStructure() {
+  // 核心发光球
+  const coreSphere = new THREE.Mesh(
+    new THREE.IcosahedronGeometry(0.8, 1),
+    new THREE.MeshStandardMaterial({
+      color: CFG.colors.accent,
+      emissive: CFG.colors.accent,
+      emissiveIntensity: 0.8,
+      metalness: 0.3,
+      roughness: 0.2,
       transparent: true,
-      opacity: 0.3,
+      opacity: 0.7,
+      flatShading: true,
+    })
+  );
+  coreSphere.position.set(0, 3, 0);
+  coreSphere.userData = {
+    name: 'AI 核心',
+    desc: '犀牛伯爵 AI 创作核心 — 驱动内容生产、知识管理和交互实验的中央引擎。',
+    isInteractable: true,
+  };
+  mainGroup.add(coreSphere);
+  interactables.push(coreSphere);
+
+  // 核心光晕
+  const halo = new THREE.Mesh(
+    new THREE.SphereGeometry(1.4, 32, 32),
+    new THREE.MeshBasicMaterial({
+      color: CFG.colors.accent,
+      transparent: true,
+      opacity: 0.05,
       blending: THREE.AdditiveBlending,
       depthWrite: false,
     })
   );
-  ring.rotation.x = Math.PI / 2 + (i * 0.3);
-  ring.rotation.z = i * 0.4;
-  ring.userData = { axis: i, speed: 0.1 + i * 0.05 };
-  crystalGroup.add(ring);
-}
+  halo.position.copy(coreSphere.position);
+  mainGroup.add(halo);
 
-// 轨道粒子 — 围绕核心
-const orbitCount = 80;
-const orbitGeo = new THREE.BufferGeometry();
-const orbitPos = new Float32Array(orbitCount * 3);
-const orbitCol = new Float32Array(orbitCount * 3);
-const orbitData = [];
-const cTeal = new THREE.Color(0x27D7C9);
-const cPurple = new THREE.Color(0x8E7CFF);
+  // 螺旋结构 — 双螺旋（DNA 风格），代表知识网络
+  const helixHeight = 16;
+  const helixRadius = 3;
+  const helixTurns = 4;
+  const nodeCount = 60;
 
-for (let i = 0; i < orbitCount; i++) {
-  const radius = 2.5 + Math.random() * 2;
-  const theta = Math.random() * Math.PI * 2;
-  const phi = Math.acos(2 * Math.random() - 1);
-  orbitData.push({ radius, theta, phi, speed: 0.0005 + Math.random() * 0.001 });
-  const c = Math.random() > 0.5 ? cTeal : cPurple;
-  orbitCol[i*3] = c.r; orbitCol[i*3+1] = c.g; orbitCol[i*3+2] = c.b;
-}
-orbitGeo.setAttribute('position', new THREE.BufferAttribute(orbitPos, 3));
-orbitGeo.setAttribute('color', new THREE.BufferAttribute(orbitCol, 3));
-const orbitPoints = new THREE.Points(orbitGeo, new THREE.PointsMaterial({
-  size: 0.05, vertexColors: true, transparent: true, opacity: 0.6,
-  blending: THREE.AdditiveBlending, depthWrite: false, sizeAttenuation: true,
-}));
-crystalGroup.add(orbitPoints);
+  const goldMat = new THREE.MeshStandardMaterial({
+    color: CFG.colors.gold, metalness: 0.9, roughness: 0.15,
+    emissive: 0x443300, emissiveIntensity: 0.3, envMapIntensity: 1.5,
+  });
+  const tealMat = new THREE.MeshStandardMaterial({
+    color: CFG.colors.accent, metalness: 0.7, roughness: 0.2,
+    emissive: CFG.colors.accent, emissiveIntensity: 0.2, envMapIntensity: 1.0,
+  });
+  const purpleMat = new THREE.MeshStandardMaterial({
+    color: CFG.colors.electric, metalness: 0.7, roughness: 0.2,
+    emissive: CFG.colors.electric, emissiveIntensity: 0.2, envMapIntensity: 1.0,
+  });
+  const warmMat = new THREE.MeshStandardMaterial({
+    color: CFG.colors.warm, metalness: 0.6, roughness: 0.25,
+    emissive: CFG.colors.warm, emissiveIntensity: 0.15, envMapIntensity: 0.8,
+  });
 
-// 背景粒子
-const bgCount = 200;
-const bgGeo = new THREE.BufferGeometry();
-const bgPos = new Float32Array(bgCount * 3);
-const bgCol = new Float32Array(bgCount * 3);
-for (let i = 0; i < bgCount; i++) {
-  bgPos[i*3] = (Math.random() - 0.5) * 40;
-  bgPos[i*3+1] = (Math.random() - 0.5) * 40;
-  bgPos[i*3+2] = (Math.random() - 0.5) * 30 - 10;
-  const c = Math.random() > 0.5 ? cTeal : cPurple;
-  bgCol[i*3] = c.r; bgCol[i*3+1] = c.g; bgCol[i*3+2] = c.b;
-}
-bgGeo.setAttribute('position', new THREE.BufferAttribute(bgPos, 3));
-bgGeo.setAttribute('color', new THREE.BufferAttribute(bgCol, 3));
-const bgPoints = new THREE.Points(bgGeo, new THREE.PointsMaterial({
-  size: 0.03, vertexColors: true, transparent: true, opacity: 0.3,
-  blending: THREE.AdditiveBlending, depthWrite: false,
-}));
-scene.add(bgPoints);
+  const nodeGeos = [
+    new THREE.OctahedronGeometry(0.25, 0),
+    new THREE.TetrahedronGeometry(0.25, 0),
+    new THREE.IcosahedronGeometry(0.22, 0),
+    new THREE.BoxGeometry(0.3, 0.3, 0.3),
+  ];
+  const nodeMats = [tealMat, goldMat, purpleMat, warmMat];
 
-// ═══════════════════════════════════════════════════════════
-// 交互 — 鼠标视差
-// ═══════════════════════════════════════════════════════════
-const mouse = { x: 0, y: 0, tx: 0, ty: 0 };
-window.addEventListener('pointermove', (e) => {
-  mouse.tx = (e.clientX / window.innerWidth - 0.5) * 2;
-  mouse.ty = (e.clientY / window.innerHeight - 0.5) * 2;
-  // Custom cursor
-  const cur = document.getElementById('cursor');
-  if (cur) {
-    cur.style.left = e.clientX + 'px';
-    cur.style.top = e.clientY + 'px';
+  // 存储节点位置用于连线
+  const helixNodes = [];
+
+  for (let strand = 0; strand < 2; strand++) {
+    const phase = strand * Math.PI;
+    for (let i = 0; i < nodeCount; i++) {
+      const t = i / nodeCount;
+      const angle = t * Math.PI * 2 * helixTurns + phase;
+      const y = (t - 0.5) * helixHeight + 3;
+
+      // 节点
+      const geoIdx = Math.floor(Math.random() * nodeGeos.length);
+      const matIdx = Math.floor(Math.random() * nodeMats.length);
+      const node = new THREE.Mesh(nodeGeos[geoIdx], nodeMats[matIdx]);
+      const r = helixRadius + (Math.random() - 0.5) * 0.8;
+      node.position.set(Math.cos(angle) * r, y, Math.sin(angle) * r);
+      node.rotation.set(Math.random() * 6, Math.random() * 6, Math.random() * 6);
+      const s = 0.5 + Math.random() * 0.5;
+      node.scale.set(s, s, s);
+      node.userData = { floatOffset: Math.random() * Math.PI * 2, baseY: y };
+      mainGroup.add(node);
+      helixNodes.push({ pos: node.position.clone(), strand, idx: i });
+    }
   }
-}, { passive: true });
 
-// Hover detection for cursor
-document.querySelectorAll('a, .work-card, .cap-item').forEach(el => {
-  el.addEventListener('pointerenter', () => document.getElementById('cursor')?.classList.add('hover'));
-  el.addEventListener('pointerleave', () => document.getElementById('cursor')?.classList.remove('hover'));
-});
+  // 螺旋间的横连接线（DNA 桥梁）
+  const lineMat = new THREE.LineBasicMaterial({
+    color: CFG.colors.accent,
+    transparent: true,
+    opacity: 0.15,
+    blending: THREE.AdditiveBlending,
+  });
+
+  for (let i = 0; i < nodeCount; i++) {
+    const n1 = helixNodes[i];
+    const n2 = helixNodes[i + nodeCount];
+    if (n1 && n2) {
+      // 只连接相近的对
+      const dist = n1.pos.distanceTo(n2.pos);
+      if (dist < 8) {
+        const geo = new THREE.BufferGeometry().setFromPoints([n1.pos, n2.pos]);
+        const line = new THREE.Line(geo, lineMat);
+        mainGroup.add(line);
+      }
+    }
+  }
+
+  // 底座平台
+  const baseGeo = new THREE.CylinderGeometry(4, 4.5, 0.15, 64);
+  const baseMat = new THREE.MeshStandardMaterial({
+    color: 0x060810,
+    metalness: 0.85,
+    roughness: 0.25,
+    envMapIntensity: 0.6,
+  });
+  const base = new THREE.Mesh(baseGeo, baseMat);
+  base.position.set(0, -5.5, 0);
+  base.receiveShadow = true;
+  mainGroup.add(base);
+
+  // 底座发光环
+  const baseRing = new THREE.Mesh(
+    new THREE.TorusGeometry(4.2, 0.02, 8, 64),
+    new THREE.MeshBasicMaterial({
+      color: CFG.colors.accent,
+      transparent: true,
+      opacity: 0.4,
+      blending: THREE.AdditiveBlending,
+    })
+  );
+  baseRing.position.set(0, -5.4, 0);
+  baseRing.rotation.x = Math.PI / 2;
+  mainGroup.add(baseRing);
+
+  // 底座内圈
+  const innerRing = new THREE.Mesh(
+    new THREE.TorusGeometry(3, 0.015, 8, 48),
+    new THREE.MeshBasicMaterial({
+      color: CFG.colors.electric,
+      transparent: true,
+      opacity: 0.25,
+      blending: THREE.AdditiveBlending,
+    })
+  );
+  innerRing.position.set(0, -5.4, 0);
+  innerRing.rotation.x = Math.PI / 2;
+  mainGroup.add(innerRing);
+
+  // 底座交互
+  base.userData = {
+    name: '知识基座',
+    desc: '44 个知识节点 · 0 断链 · 0 孤立 — 基于 Karpathy LLM-Wiki 方法论的 Obsidian 知识图谱。',
+    isInteractable: true,
+  };
+  interactables.push(base);
+}
 
 // ═══════════════════════════════════════════════════════════
-// 滚动 — 3D 场景随滚动变化
+// 轨道粒子
 // ═══════════════════════════════════════════════════════════
-let scrollProgress = 0;
-const sections = document.querySelectorAll('section[data-section]');
-const dots = document.querySelectorAll('.scroll-dot');
+let orbitData = [];
+function createOrbitParticles() {
+  const count = CFG.particles.orbitCount;
+  const geo = new THREE.BufferGeometry();
+  const positions = new Float32Array(count * 3);
+  const colors = new Float32Array(count * 3);
+  orbitData = [];
 
-function updateScroll() {
-  scrollProgress = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+  const cTeal = new THREE.Color(CFG.colors.accent);
+  const cPurple = new THREE.Color(CFG.colors.electric);
+  const cGold = new THREE.Color(CFG.colors.gold);
 
-  // 更新 3D 场景
-  // 相机随滚动推进
-  camera.position.z = 12 - scrollProgress * 6;
-  camera.position.y = scrollProgress * 3;
-  camera.lookAt(0, scrollProgress * 1.5, 0);
+  for (let i = 0; i < count; i++) {
+    const radius = 4 + Math.random() * 4;
+    const theta = Math.random() * Math.PI * 2;
+    const phi = Math.acos(2 * Math.random() - 1);
+    orbitData.push({ radius, theta, phi, speed: 0.0003 + Math.random() * 0.001 });
 
-  // 水晶随滚动缩小 + 旋转加速
-  const scale = 1 - scrollProgress * 0.4;
-  crystalGroup.scale.setScalar(Math.max(0.3, scale));
+    positions[i*3] = radius * Math.sin(phi) * Math.cos(theta);
+    positions[i*3+1] = radius * Math.cos(phi) + 2;
+    positions[i*3+2] = radius * Math.sin(phi) * Math.sin(theta);
 
-  // 粒子扩散
-  bgPoints.rotation.y = scrollProgress * Math.PI * 0.5;
+    const c = [cTeal, cPurple, cGold][Math.floor(Math.random() * 3)];
+    colors[i*3] = c.r; colors[i*3+1] = c.g; colors[i*3+2] = c.b;
+  }
 
-  // 更新指示器
-  const activeIdx = Math.min(4, Math.floor(scrollProgress * 5));
-  dots.forEach((d, i) => d.classList.toggle('active', i === activeIdx));
+  geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+  geo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
 
-  // 显示动画元素
-  const viewportMid = window.scrollY + window.innerHeight * 0.6;
-  document.querySelectorAll('.work-card').forEach(c => {
-    c.classList.toggle('visible', c.offsetTop + c.parentElement.offsetTop < viewportMid);
+  const points = new THREE.Points(geo, new THREE.PointsMaterial({
+    size: 0.06, vertexColors: true, transparent: true, opacity: 0.7,
+    blending: THREE.AdditiveBlending, depthWrite: false, sizeAttenuation: true,
+  }));
+  mainGroup.add(points);
+  points.userData.isOrbit = true;
+}
+
+// ═══════════════════════════════════════════════════════════
+// 远景尘埃
+// ═══════════════════════════════════════════════════════════
+function createDust() {
+  const count = CFG.particles.dustCount;
+  const geo = new THREE.BufferGeometry();
+  const positions = new Float32Array(count * 3);
+  const colors = new Float32Array(count * 3);
+
+  const cTeal = new THREE.Color(CFG.colors.accent);
+  const cPurple = new THREE.Color(CFG.colors.electric);
+
+  for (let i = 0; i < count; i++) {
+    const r = 15 + Math.random() * 25;
+    const theta = Math.random() * Math.PI * 2;
+    const phi = Math.acos(2 * Math.random() - 1);
+    positions[i*3] = r * Math.sin(phi) * Math.cos(theta);
+    positions[i*3+1] = r * Math.cos(phi);
+    positions[i*3+2] = r * Math.sin(phi) * Math.sin(theta);
+
+    const c = Math.random() > 0.5 ? cTeal : cPurple;
+    colors[i*3] = c.r; colors[i*3+1] = c.g; colors[i*3+2] = c.b;
+  }
+
+  geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+  geo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+  const dust = new THREE.Points(geo, new THREE.PointsMaterial({
+    size: 0.04, vertexColors: true, transparent: true, opacity: 0.3,
+    blending: THREE.AdditiveBlending, depthWrite: false,
+  }));
+  scene.add(dust);
+}
+
+// ═══════════════════════════════════════════════════════════
+// 数据流 — 垂直滚动的代码流（装饰性）
+// ═══════════════════════════════════════════════════════════
+function createDataStreams() {
+  const streamEl = document.getElementById('dataStream');
+  const terms = ['AGENT', 'MCP', 'RAG', 'PROMPT', 'VIBE', 'CODEX', 'FABLE-5', 'VERTEX', 'CLAUDE', 'WHISPER', 'OBSIDIAN', 'THREE.JS', 'BLOOM', 'SHADER', 'WEBGL'];
+  let text = '';
+  for (let i = 0; i < 60; i++) {
+    text += terms[Math.floor(Math.random() * terms.length)] + ' · ';
+  }
+  streamEl.textContent = text;
+}
+
+// ═══════════════════════════════════════════════════════════
+// 后处理
+// ═══════════════════════════════════════════════════════════
+function setupPostProcessing() {
+  const renderPass = new RenderPass(scene, camera);
+  const bloomPass = new UnrealBloomPass(
+    new THREE.Vector2(window.innerWidth, window.innerHeight),
+    1.0, 0.4, 0.85
+  );
+  bloomPass.threshold = 0.6;
+  bloomPass.strength = 0.5;
+  bloomPass.radius = 0.45;
+
+  composer = new EffectComposer(renderer);
+  composer.addPass(renderPass);
+  composer.addPass(bloomPass);
+
+  const fxaa = new ShaderPass(FXAAShader);
+  fxaa.material.uniforms['resolution'].value.set(
+    1 / (window.innerWidth * renderer.getPixelRatio()),
+    1 / (window.innerHeight * renderer.getPixelRatio())
+  );
+  composer.addPass(fxaa);
+}
+
+// ═══════════════════════════════════════════════════════════
+// 交互 — 射线检测
+// ═══════════════════════════════════════════════════════════
+const raycaster = new THREE.Raycaster();
+const pointer = new THREE.Vector2();
+let pointerDownPos = null;
+
+function setupInteraction() {
+  renderer.domElement.addEventListener('pointerdown', (e) => {
+    pointerDownPos = { x: e.clientX, y: e.clientY };
   });
-  document.querySelectorAll('.cap-item').forEach(c => {
-    c.classList.toggle('visible', c.offsetTop + c.parentElement.offsetTop < viewportMid);
-  });
-  document.querySelectorAll('.data-item').forEach(c => {
-    c.classList.toggle('visible', c.offsetTop + c.parentElement.offsetTop < viewportMid);
+
+  renderer.domElement.addEventListener('pointerup', (e) => {
+    if (!pointerDownPos) return;
+    const dx = e.clientX - pointerDownPos.x;
+    const dy = e.clientY - pointerDownPos.y;
+    // 只有点击（非拖拽）才触发
+    if (Math.abs(dx) < 5 && Math.abs(dy) < 5) {
+      pointer.x = (e.clientX / window.innerWidth) * 2 - 1;
+      pointer.y = -(e.clientY / window.innerHeight) * 2 + 1;
+      raycaster.setFromCamera(pointer, camera);
+      const hits = raycaster.intersectObjects(interactables, true);
+      if (hits.length > 0) {
+        let t = hits[0].object;
+        while (t && !t.userData.isInteractable) t = t.parent;
+        if (t && t.userData.name) {
+          showInfo(t.userData.name, t.userData.desc);
+        }
+      }
+    }
+    pointerDownPos = null;
   });
 
-  // 数字动画
-  document.querySelectorAll('.data-value').forEach(el => {
-    if (el.classList.contains('counted')) return;
-    const rect = el.getBoundingClientRect();
-    if (rect.top < window.innerHeight && rect.bottom > 0) {
-      el.classList.add('counted');
-      const target = parseInt(el.dataset.target);
-      const suffix = el.textContent.replace(/[\d.]/g, '');
-      let current = 0;
-      const step = Math.max(1, Math.ceil(target / 30));
-      const timer = setInterval(() => {
-        current += step;
-        if (current >= target) { current = target; clearInterval(timer); }
-        el.textContent = current + suffix;
-      }, 30);
+  // hover 光标
+  renderer.domElement.addEventListener('pointermove', (e) => {
+    pointer.x = (e.clientX / window.innerWidth) * 2 - 1;
+    pointer.y = -(e.clientY / window.innerHeight) * 2 + 1;
+    raycaster.setFromCamera(pointer, camera);
+    const hits = raycaster.intersectObjects(interactables, true);
+    renderer.domElement.style.cursor = hits.length > 0 ? 'pointer' : 'grab';
+  });
+}
+
+function showInfo(title, text) {
+  // 创建临时信息浮层
+  const existing = document.getElementById('info-toast');
+  if (existing) existing.remove();
+
+  const toast = document.createElement('div');
+  toast.id = 'info-toast';
+  toast.style.cssText = `
+    position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%);
+    padding: 20px 32px; background: rgba(2,4,10,0.9);
+    border: 1px solid rgba(39,215,201,0.2); border-radius: 4px;
+    backdrop-filter: blur(20px); z-index: 100;
+    max-width: 420px; text-align: center;
+    opacity: 0; transition: opacity 0.4s;
+    box-shadow: 0 0 40px rgba(39,215,201,0.08);
+  `;
+  toast.innerHTML = `
+    <div style="font-size: 13px; color: #27D7C9; margin-bottom: 6px; letter-spacing: 2px; font-family: 'JetBrains Mono', monospace;">${title}</div>
+    <div style="font-size: 12px; color: rgba(242,247,246,0.6); line-height: 1.6;">${text}</div>
+  `;
+  document.body.appendChild(toast);
+  requestAnimationFrame(() => toast.style.opacity = '1');
+  setTimeout(() => {
+    toast.style.opacity = '0';
+    setTimeout(() => toast.remove(), 400);
+  }, 4000);
+}
+
+// ═══════════════════════════════════════════════════════════
+// 全局函数 — 进入实验室
+// ═══════════════════════════════════════════════════════════
+window.enterLab = function() {
+  document.getElementById('welcome-modal').style.display = 'none';
+};
+
+// ═══════════════════════════════════════════════════════════
+// 动画循环
+// ═══════════════════════════════════════════════════════════
+let frameCount = 0, lastFpsTime = 0;
+
+function animate() {
+  requestAnimationFrame(animate);
+  const t = clock.getElapsedTime();
+  frameCount++;
+
+  controls.update();
+
+  // 主体缓慢自转
+  mainGroup.rotation.y += 0.0015;
+
+  // 核心球脉冲
+  if (interactables[0]) {
+    const pulse = 1 + Math.sin(t * 1.5) * 0.05;
+    interactables[0].scale.setScalar(pulse);
+    interactables[0].material.emissiveIntensity = 0.7 + Math.sin(t * 1.5) * 0.2;
+  }
+
+  // 螺旋节点浮动
+  mainGroup.children.forEach(child => {
+    if (child.userData.floatOffset !== undefined) {
+      child.position.y = child.userData.baseY + Math.sin(t * 0.5 + child.userData.floatOffset) * 0.1;
+      child.rotation.x += 0.002;
+      child.rotation.y += 0.003;
     }
   });
+
+  // 轨道粒子运动
+  mainGroup.children.forEach(child => {
+    if (child.userData.isOrbit && child.geometry) {
+      const pos = child.geometry.attributes.position.array;
+      const data = orbitData;
+      for (let i = 0; i < data.length; i++) {
+        data[i].theta += data[i].speed;
+        pos[i*3] = data[i].radius * Math.sin(data[i].phi) * Math.cos(data[i].theta);
+        pos[i*3+1] = data[i].radius * Math.cos(data[i].phi) + 2;
+        pos[i*3+2] = data[i].radius * Math.sin(data[i].phi) * Math.sin(data[i].theta);
+      }
+      child.geometry.attributes.position.needsUpdate = true;
+    }
+  });
+
+  // 底座环旋转
+  mainGroup.children.forEach(child => {
+    if (child.geometry && child.geometry.type === 'TorusGeometry') {
+      child.rotation.z += 0.003;
+    }
+  });
+
+  // FPS
+  if (t - lastFpsTime > 1) {
+    const fps = Math.round(frameCount / (t - lastFpsTime));
+    const el = document.getElementById('fps');
+    if (el) el.textContent = fps;
+    frameCount = 0; lastFpsTime = t;
+  }
+
+  composer.render();
 }
-window.addEventListener('scroll', updateScroll, { passive: true });
 
 // ═══════════════════════════════════════════════════════════
 // 窗口缩放
@@ -833,69 +806,10 @@ window.addEventListener('resize', () => {
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
   composer.setSize(window.innerWidth, window.innerHeight);
-  fxaa.material.uniforms['resolution'].value.set(
-    1/(window.innerWidth*renderer.getPixelRatio()),
-    1/(window.innerHeight*renderer.getPixelRatio())
-  );
 }, { passive: true });
 
-// ═══════════════════════════════════════════════════════════
-// 动画循环
-// ═══════════════════════════════════════════════════════════
-const clock = new THREE.Clock();
-
-function animate() {
-  requestAnimationFrame(animate);
-  const t = clock.getElapsedTime();
-
-  // 鼠标平滑
-  mouse.x += (mouse.tx - mouse.x) * 0.05;
-  mouse.y += (mouse.ty - mouse.y) * 0.05;
-
-  // 水晶旋转
-  crystalGroup.rotation.y = t * 0.15 + mouse.x * 0.3;
-  crystalGroup.rotation.x = mouse.y * 0.2;
-  crystalGroup.position.y = Math.sin(t * 0.5) * 0.15;
-
-  // 核心脉冲
-  const pulse = 1 + Math.sin(t * 1.5) * 0.05;
-  core.scale.setScalar(pulse);
-  coreMat.emissiveIntensity = 0.4 + Math.sin(t * 1.5) * 0.2;
-
-  // 外壳呼吸
-  shellMat.opacity = 0.1 + Math.sin(t * 0.8) * 0.05;
-
-  // 环旋转
-  crystalGroup.children.forEach(child => {
-    if (child.userData.axis !== undefined) {
-      if (child.userData.axis === 0) child.rotation.z += child.userData.speed * 0.02;
-      else if (child.userData.axis === 1) child.rotation.x += child.userData.speed * 0.015;
-      else child.rotation.y += child.userData.speed * 0.025;
-    }
-  });
-
-  // 轨道粒子
-  const pos = orbitPoints.geometry.attributes.position.array;
-  orbitData.forEach((d, i) => {
-    d.theta += d.speed;
-    pos[i*3] = d.radius * Math.sin(d.phi) * Math.cos(d.theta);
-    pos[i*3+1] = d.radius * Math.cos(d.phi);
-    pos[i*3+2] = d.radius * Math.sin(d.phi) * Math.sin(d.theta);
-  });
-  orbitPoints.geometry.attributes.position.needsUpdate = true;
-
-  // 背景粒子缓慢漂移
-  bgPoints.rotation.y += 0.0003;
-
-  // 相机微视差
-  camera.position.x += (mouse.x * 1.5 - camera.position.x) * 0.03;
-
-  composer.render();
-}
-
-setTimeout(() => document.getElementById('loading').classList.add('hide'), 600);
-updateScroll();
-animate();
+// 启动
+init();
 </script>
 </body>
 </html>
