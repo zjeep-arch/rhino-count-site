@@ -270,6 +270,123 @@ body, html {
 .corner-bl { bottom: 16px; left: 16px; transform: scaleY(-1); }
 .corner-br { bottom: 16px; right: 16px; transform: scale(-1, -1); }
 
+/* ==================== 底部流程管线 ==================== */
+.pipeline {
+    width: 100%; padding: 14px 20px;
+    display: flex; flex-direction: column; gap: 8px;
+}
+.pipeline-header {
+    display: flex; justify-content: space-between; align-items: center;
+}
+.pipeline-title {
+    font-size: 0.6rem; letter-spacing: 4px; color: rgba(255,255,255,0.3);
+    font-family: 'JetBrains Mono', monospace;
+}
+.pipeline-status {
+    font-size: 0.65rem; color: var(--c1); font-family: 'JetBrains Mono', monospace;
+}
+.pipeline-track {
+    display: flex; align-items: center; gap: 0; position: relative;
+}
+.pipe-node {
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
+    position: relative; z-index: 2; flex-shrink: 0;
+}
+.pipe-dot {
+    width: 12px; height: 12px; border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.03);
+    transition: all 0.4s;
+}
+.pipe-node.done .pipe-dot {
+    border-color: var(--c1); background: var(--c1);
+    box-shadow: 0 0 10px rgba(0,240,255,0.5);
+}
+.pipe-node.active .pipe-dot {
+    border-color: var(--c2); background: var(--c2);
+    box-shadow: 0 0 12px rgba(255,61,166,0.6);
+    animation: pipePulse 1s infinite;
+}
+@keyframes pipePulse { 50% { transform: scale(1.3); } }
+.pipe-label { font-size: 0.55rem; letter-spacing: 1px; color: rgba(255,255,255,0.4); font-family: 'JetBrains Mono', monospace; white-space: nowrap; }
+.pipe-node.done .pipe-label { color: rgba(0,240,255,0.7); }
+.pipe-node.active .pipe-label { color: #fff; }
+.pipe-line {
+    flex: 1; height: 2px; min-width: 20px;
+    background: rgba(255,255,255,0.06); border-radius: 1px;
+    position: relative; overflow: hidden;
+}
+.pipe-line.done { background: linear-gradient(90deg, var(--c1), rgba(0,240,255,0.4)); box-shadow: 0 0 6px rgba(0,240,255,0.3); }
+.pipe-line.active::after {
+    content: ''; position: absolute; top: 0; left: -30%; width: 30%; height: 100%;
+    background: linear-gradient(90deg, transparent, var(--c2), transparent);
+    animation: pipeFlow 1.5s linear infinite;
+}
+@keyframes pipeFlow { to { left: 100%; } }
+
+/* ==================== 浮动信息卡片 ==================== */
+.float-cards {
+    position: absolute; inset: 0; z-index: 8; pointer-events: none;
+}
+.float-card {
+    position: absolute;
+    padding: 12px 16px; min-width: 140px;
+    opacity: 0; animation: floatIn 0.6s ease forwards;
+    pointer-events: auto;
+}
+@keyframes floatIn { to { opacity: 1; } }
+.fc-title { font-size: 0.55rem; letter-spacing: 3px; color: rgba(255,255,255,0.35); font-family: 'JetBrains Mono', monospace; margin-bottom: 6px; }
+.fc-row { display: flex; justify-content: space-between; align-items: center; font-size: 0.7rem; margin-bottom: 3px; }
+.fc-row span:first-child { color: rgba(255,255,255,0.4); }
+.fc-row span:last-child { color: var(--c1); font-family: 'JetBrains Mono', monospace; font-weight: 600; }
+.fc-row.pink span:last-child { color: var(--c2); }
+.fc-row.purple span:last-child { color: var(--c3); }
+
+/* 日志面板 */
+.log-panel {
+    position: absolute; bottom: 140px; left: 50%; transform: translateX(-50%);
+    width: 420px; max-height: 120px; padding: 10px 14px;
+    overflow: hidden; z-index: 8; pointer-events: none;
+}
+.log-list { display: flex; flex-direction: column; gap: 2px; }
+.log-entry {
+    font-size: 0.6rem; font-family: 'JetBrains Mono', monospace;
+    color: rgba(255,255,255,0.35); letter-spacing: 0.5px;
+    opacity: 0; animation: logIn 0.3s ease forwards;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.log-entry .ts { color: rgba(0,240,255,0.5); margin-right: 8px; }
+.log-entry .tag { color: var(--c2); margin-right: 6px; }
+.log-entry.done { color: rgba(45, 216, 122, 0.5); }
+@keyframes logIn { to { opacity: 1; } }
+
+/* 生成预览缩略图 */
+.preview-card {
+    position: absolute; top: 50%; right: 320px; transform: translateY(-50%);
+    width: 120px; padding: 10px; z-index: 8; pointer-events: auto;
+    opacity: 0; animation: floatIn 0.6s 0.3s ease forwards;
+}
+.preview-thumb {
+    width: 100%; height: 70px; border-radius: 8px;
+    background: linear-gradient(135deg, rgba(0,240,255,0.1), rgba(177,74,255,0.1));
+    border: 1px solid rgba(255,255,255,0.08);
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden; position: relative;
+}
+.preview-thumb canvas { width: 100%; height: 100%; }
+.preview-thumb::after {
+    content: 'RENDERING'; position: absolute; bottom: 4px; left: 6px;
+    font-size: 0.5rem; color: var(--c2); letter-spacing: 2px;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+/* 参数面板（左上） */
+.params-card {
+    position: absolute; top: 100px; left: 290px;
+    width: 180px; padding: 12px 14px; z-index: 8; pointer-events: auto;
+    opacity: 0; animation: floatIn 0.6s 0.1s ease forwards;
+}
+
 /* 响应式 */
 @media (max-width: 768px) {
     .hud { padding: 16px; }
@@ -277,6 +394,9 @@ body, html {
     .top-title { font-size: 1rem; letter-spacing: 4px; }
     .nav-text small { display: none; }
     #cam-box, #gesture-guide { width: 150px; }
+    .float-card, .params-card, .preview-card, .log-panel { display: none; }
+    .pipe-label { display: none; }
+    .pipeline { padding: 8px; }
 }
 </style>
 </head>
@@ -297,6 +417,33 @@ body, html {
 <div class="corner-deco corner-tr"><svg viewBox="0 0 60 60"><path d="M2 20 L2 2 L20 2 M10 2 L10 10 L2 10" /></svg></div>
 <div class="corner-deco corner-bl"><svg viewBox="0 0 60 60"><path d="M2 20 L2 2 L20 2 M10 2 L10 10 L2 10" /></svg></div>
 <div class="corner-deco corner-br"><svg viewBox="0 0 60 60"><path d="M2 20 L2 2 L20 2 M10 2 L10 10 L2 10" /></svg></div>
+
+<!-- 浮动信息卡片层 -->
+<div class="float-cards">
+    <!-- 参数面板 -->
+    <div class="glass params-card">
+        <div class="fc-title">MODEL PARAMETERS</div>
+        <div class="fc-row"><span>Model</span><span>GPT-4o</span></div>
+        <div class="fc-row"><span>Resolution</span><span>2048×2048</span></div>
+        <div class="fc-row pink"><span>Seed</span><span id="fc-seed">847291</span></div>
+        <div class="fc-row purple"><span>Steps</span><span id="fc-steps">42/50</span></div>
+        <div class="fc-row"><span>Guidance</span><span>7.5</span></div>
+    </div>
+
+    <!-- 生成预览 -->
+    <div class="glass preview-card">
+        <div class="fc-title">PREVIEW</div>
+        <div class="preview-thumb">
+            <canvas id="preview-canvas" width="100" height="60"></canvas>
+        </div>
+    </div>
+</div>
+
+<!-- 日志面板 -->
+<div class="glass log-panel">
+    <div class="fc-title" style="margin-bottom:6px;">SYSTEM LOG</div>
+    <div class="log-list" id="log-list"></div>
+</div>
 
 <!-- HUD -->
 <div class="hud">
@@ -377,23 +524,47 @@ body, html {
         </div>
     </div>
 
-    <!-- 底部 -->
-    <div class="bottom-bar">
-        <div class="bottom-left">
-            <button class="btn interactive" onclick="window.history.back()">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
-                RETURN
-            </button>
-            <button class="btn interactive" id="storm-btn">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-                TEMPEST
+    <!-- 底部：管线流程 + 操作栏 -->
+    <div style="display:flex; flex-direction:column; gap:12px; width:100%;">
+        <!-- AI生成管线 -->
+        <div class="glass pipeline interactive">
+            <div class="pipeline-header">
+                <span class="pipeline-title">AI GENERATION PIPELINE</span>
+                <span class="pipeline-status" id="pipe-status">PROCESSING... 73%</span>
+            </div>
+            <div class="pipeline-track" id="pipeline-track">
+                <div class="pipe-node done"><div class="pipe-dot"></div><span class="pipe-label">INPUT</span></div>
+                <div class="pipe-line done"></div>
+                <div class="pipe-node done"><div class="pipe-dot"></div><span class="pipe-label">PARSE</span></div>
+                <div class="pipe-line done"></div>
+                <div class="pipe-node active"><div class="pipe-dot"></div><span class="pipe-label">3D MODEL</span></div>
+                <div class="pipe-line active"></div>
+                <div class="pipe-node"><div class="pipe-dot"></div><span class="pipe-label">SHADER</span></div>
+                <div class="pipe-line"></div>
+                <div class="pipe-node"><div class="pipe-dot"></div><span class="pipe-label">RENDER</span></div>
+                <div class="pipe-line"></div>
+                <div class="pipe-node"><div class="pipe-dot"></div><span class="pipe-label">EXPORT</span></div>
+            </div>
+        </div>
+
+        <!-- 操作按钮行 -->
+        <div class="bottom-bar">
+            <div class="bottom-left">
+                <button class="btn interactive" onclick="window.history.back()">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+                    RETURN
+                </button>
+                <button class="btn interactive" id="storm-btn">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                    TEMPEST
+                </button>
+            </div>
+            <div class="bottom-tip">DRAG TO ROTATE · SCROLL TO ZOOM · ENABLE GESTURE FOR HAND CONTROL</div>
+            <button class="btn gesture-btn interactive" id="gesture-btn">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 11V7a2 2 0 014 0v4M11 11V5a2 2 0 014 0v6M15 11V7a2 2 0 014 0v8a6 6 0 01-6 6h-3a8 8 0 01-8-8V9a2 2 0 014 0"/></svg>
+                GESTURE
             </button>
         </div>
-        <div class="bottom-tip">DRAG TO ROTATE · SCROLL TO ZOOM · ENABLE GESTURE FOR HAND CONTROL</div>
-        <button class="btn gesture-btn interactive" id="gesture-btn">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 11V7a2 2 0 014 0v4M11 11V5a2 2 0 014 0v6M15 11V7a2 2 0 014 0v8a6 6 0 01-6 6h-3a8 8 0 01-8-8V9a2 2 0 014 0"/></svg>
-            GESTURE
-        </button>
     </div>
 </div>
 
@@ -661,6 +832,141 @@ const innerRing = new THREE.Mesh(
 );
 innerRing.position.y = 0.15;
 globeGroup.add(innerRing);
+
+// ================================================================
+//  方案 B: 球内 3D 内容 — 浮空岛屿 + 光柱 + 数据流文字 + 卫星
+// ================================================================
+
+// --- 浮空岛屿（3座） ---
+const islands = [];
+const islandData = [
+    { y: 0.8, r: 0.6, color: '#1a2a4a' },
+    { y: -0.3, r: 0.45, color: '#2a1a3a' },
+    { y: 0.2, r: 0.35, color: '#0a2a3a' }
+];
+islandData.forEach((d, i) => {
+    const island = new THREE.Group();
+
+    // 岛屿底盘（六边形柱）
+    const base = new THREE.Mesh(
+        new THREE.CylinderGeometry(d.r, d.r * 0.7, 0.08, 6),
+        new THREE.MeshStandardMaterial({ color: d.color, roughness: 0.3, metalness: 0.8, flatShading: true })
+    );
+    base.castShadow = true;
+    island.add(base);
+
+    // 岛上发光塔
+    const tower = new THREE.Mesh(
+        new THREE.ConeGeometry(d.r * 0.3, d.r * 0.6, 6),
+        new THREE.MeshStandardMaterial({
+            color: '#00f0ff', emissive: '#00f0ff', emissiveIntensity: 1.5,
+            roughness: 0.2, metalness: 0.5, flatShading: true
+        })
+    );
+    tower.position.y = d.r * 0.35;
+    island.add(tower);
+
+    // 岛底发光点
+    const glow = new THREE.Mesh(
+        new THREE.SphereGeometry(0.05, 8, 8),
+        new THREE.MeshBasicMaterial({ color: '#ff3da6' })
+    );
+    glow.position.y = -d.r * 0.3;
+    island.add(glow);
+
+    island.position.set(
+        Math.cos(i * 2.1) * 1.2,
+        d.y,
+        Math.sin(i * 2.1) * 1.2
+    );
+    island.userData = { floatPhase: i * 2, baseY: d.y, rotSpeed: 0.3 + i * 0.2 };
+    islands.push(island);
+    globeGroup.add(island);
+});
+
+// --- 光柱（从底座射向上方） ---
+const beamGeo = new THREE.CylinderGeometry(0.02, 0.15, 3.5, 8, 1, true);
+const beamMat = new THREE.MeshBasicMaterial({
+    color: '#00f0ff', transparent: true, opacity: 0.08,
+    side: THREE.DoubleSide, blending: THREE.AdditiveBlending, depthWrite: false
+});
+const beam = new THREE.Mesh(beamGeo, beamMat);
+beam.position.y = 0;
+globeGroup.add(beam);
+
+// 第二条粉色光柱
+const beam2 = new THREE.Mesh(
+    beamGeo.clone(),
+    new THREE.MeshBasicMaterial({
+        color: '#ff3da6', transparent: true, opacity: 0.06,
+        side: THREE.DoubleSide, blending: THREE.AdditiveBlending, depthWrite: false
+    })
+);
+beam2.position.y = 0;
+beam2.rotation.z = 0.15;
+globeGroup.add(beam2);
+
+// --- 数据流文字（3D 环绕文字粒子） ---
+const dataWords = ['AI', 'GEN', '3D', 'NEURAL', 'MESH', 'PIXEL', 'VERTEX', 'SHADER'];
+const textGroup = new THREE.Group();
+dataWords.forEach((word, i) => {
+    const cv = document.createElement('canvas');
+    cv.width = 256; cv.height = 64;
+    const ctx = cv.getContext('2d');
+    ctx.font = 'bold 32px JetBrains Mono, monospace';
+    ctx.fillStyle = i % 3 === 0 ? '#00f0ff' : i % 3 === 1 ? '#ff3da6' : '#b14aff';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(word, 128, 32);
+
+    const tex = new THREE.CanvasTexture(cv);
+    const sprite = new THREE.Sprite(new THREE.SpriteMaterial({
+        map: tex, transparent: true, opacity: 0.5,
+        blending: THREE.AdditiveBlending, depthWrite: false
+    }));
+    const angle = (i / dataWords.length) * Math.PI * 2;
+    sprite.position.set(
+        Math.cos(angle) * 1.8,
+        0.3 + Math.sin(i) * 0.4,
+        Math.sin(angle) * 1.8
+    );
+    sprite.scale.set(0.4, 0.1, 1);
+    sprite.userData = { angle, baseY: sprite.position.y, phase: i * 0.5 };
+    textGroup.add(sprite);
+});
+globeGroup.add(textGroup);
+
+// --- 卫星球（3个轨道运动） ---
+const satellites = [];
+for (let i = 0; i < 3; i++) {
+    const sat = new THREE.Mesh(
+        new THREE.SphereGeometry(0.06, 16, 16),
+        new THREE.MeshBasicMaterial({
+            color: [0x00f0ff, 0xff3da6, 0xb14aff][i],
+            transparent: true, opacity: 0.9
+        })
+    );
+    sat.userData = {
+        orbitR: 1.5 + i * 0.3,
+        orbitSpeed: 0.5 + i * 0.2,
+        orbitPhase: i * 2.1,
+        tilt: i * 0.3
+    };
+    satellites.push(sat);
+    globeGroup.add(sat);
+
+    // 卫星拖尾（细环）
+    const trail = new THREE.Mesh(
+        new THREE.TorusGeometry(sat.userData.orbitR, 0.003, 4, 64),
+        new THREE.MeshBasicMaterial({
+            color: [0x00f0ff, 0xff3da6, 0xb14aff][i],
+            transparent: true, opacity: 0.1
+        })
+    );
+    trail.rotation.x = Math.PI / 2 + sat.userData.tilt;
+    trail.position.y = 0.15;
+    globeGroup.add(trail);
+}
 
 // 远景星空
 const starGeo = new THREE.BufferGeometry();
@@ -1032,6 +1338,36 @@ function animate() {
     corePoint.intensity = 2.5 + Math.sin(t * 1.2) * 0.6;
     innerRing.rotation.z = t * 0.5;
 
+    // 浮空岛屿 — 漂浮 + 自转
+    islands.forEach(island => {
+        const d = island.userData;
+        island.position.y = d.baseY + Math.sin(t * 0.8 + d.floatPhase) * 0.1;
+        island.rotation.y = t * d.rotSpeed;
+    });
+
+    // 光柱呼吸
+    beam.material.opacity = 0.06 + Math.sin(t * 0.8) * 0.03;
+    beam2.material.opacity = 0.04 + Math.sin(t * 0.8 + 1) * 0.02;
+
+    // 数据流文字 — 环绕 + 上下浮动
+    textGroup.children.forEach(sprite => {
+        const d = sprite.userData;
+        d.angle += 0.003;
+        sprite.position.x = Math.cos(d.angle) * 1.8;
+        sprite.position.z = Math.sin(d.angle) * 1.8;
+        sprite.position.y = d.baseY + Math.sin(t * 1.5 + d.phase) * 0.1;
+        sprite.material.opacity = 0.3 + Math.sin(t * 2 + d.phase) * 0.2;
+    });
+
+    // 卫星球 — 轨道运动
+    satellites.forEach(sat => {
+        const d = sat.userData;
+        const angle = t * d.orbitSpeed + d.orbitPhase;
+        sat.position.x = Math.cos(angle) * d.orbitR;
+        sat.position.z = Math.sin(angle) * d.orbitR;
+        sat.position.y = 0.15 + Math.sin(angle) * d.tilt;
+    });
+
     // 星空
     stars.rotation.y = t * 0.006;
 
@@ -1067,6 +1403,191 @@ setInterval(() => {
     document.getElementById('m-flux').innerText = f.toFixed(1) + '%';
     document.getElementById('bar-flux').style.width = f + '%';
 }, 3000);
+
+// ================================================================
+//  方案 A: 管线流程动画
+// ================================================================
+const pipeStages = [
+    { name: 'INPUT', label: '解析文本输入', logTag: 'INPUT' },
+    { name: 'PARSE', label: '语义解析完成', logTag: 'PARSE' },
+    { name: '3D MODEL', label: '生成3D网格', logTag: 'MODEL' },
+    { name: 'SHADER', label: '应用着色器', logTag: 'SHADER' },
+    { name: 'RENDER', label: '渲染帧缓冲', logTag: 'RENDER' },
+    { name: 'EXPORT', label: '导出资源', logTag: 'EXPORT' }
+];
+let pipeStageIdx = 2; // 从 3D MODEL 开始
+
+function advancePipeline() {
+    const nodes = document.querySelectorAll('#pipeline-track .pipe-node');
+    const lines = document.querySelectorAll('#pipeline-track .pipe-line');
+
+    if (pipeStageIdx < pipeStages.length) {
+        // 当前阶段完成
+        if (nodes[pipeStageIdx]) {
+            nodes[pipeStageIdx].classList.remove('active');
+            nodes[pipeStageIdx].classList.add('done');
+        }
+        if (lines[pipeStageIdx]) {
+            lines[pipeStageIdx].classList.remove('active');
+            lines[pipeStageIdx].classList.add('done');
+        }
+
+        addLog(pipeStages[pipeStageIdx].logTag, pipeStages[pipeStageIdx].label + ' ✓', true);
+
+        pipeStageIdx++;
+
+        // 下一阶段激活
+        if (pipeStageIdx < pipeStages.length && nodes[pipeStageIdx]) {
+            nodes[pipeStageIdx].classList.add('active');
+            if (lines[pipeStageIdx]) lines[pipeStageIdx].classList.add('active');
+            addLog(pipeStages[pipeStageIdx].logTag, '正在' + pipeStages[pipeStageIdx].label + '...');
+        }
+
+        // 更新进度
+        const pct = Math.round((pipeStageIdx / pipeStages.length) * 100);
+        document.getElementById('pipe-status').textContent = pipeStageIdx < pipeStages.length
+            ? 'PROCESSING... ' + pct + '%'
+            : 'COMPLETE 100%';
+
+        // 更新参数面板
+        document.getElementById('fc-steps').textContent = (30 + pipeStageIdx * 4) + '/50';
+    } else {
+        // 重置循环
+        pipeStageIdx = 0;
+        nodes.forEach(n => { n.classList.remove('done', 'active'); });
+        lines.forEach(l => { l.classList.remove('done', 'active'); });
+        nodes[0].classList.add('done');
+        lines[0].classList.add('done');
+        nodes[1].classList.add('done');
+        lines[1].classList.add('active');
+        nodes[2].classList.add('active');
+        pipeStageIdx = 2;
+        addLog('SYSTEM', '新一轮生成任务已启动');
+    }
+}
+
+// 管线自动推进
+setInterval(advancePipeline, 4500);
+
+// ================================================================
+//  方案 D: 日志系统
+// ================================================================
+const logList = document.getElementById('log-list');
+const logMessages = [
+    { tag: 'INIT', text: 'Loading neural network weights...' },
+    { tag: 'INIT', text: 'Model GPT-4o loaded successfully' },
+    { tag: 'PARSE', text: 'Tokenizing input prompt...' },
+    { tag: 'PARSE', text: 'Semantic graph built (42 nodes)' },
+    { tag: 'MODEL', text: 'Generating mesh topology...' },
+    { tag: 'MODEL', text: 'Vertex count: 24,576' },
+    { tag: 'SHADER', text: 'Compiling PBR shader...' },
+    { tag: 'SHADER', text: 'Bloom pass initialized' },
+    { tag: 'RENDER', text: 'Frame buffer allocated 2048×2048' },
+    { tag: 'RENDER', text: 'Ray tracing pass... 73%' },
+    { tag: 'EXPORT', text: 'Encoding GLTF binary...' },
+    { tag: 'EXPORT', text: 'Export complete: 2.4MB' }
+];
+let logIdx = 0;
+
+function addLog(tag, text, done = false) {
+    const entry = document.createElement('div');
+    entry.className = 'log-entry' + (done ? ' done' : '');
+    const now = new Date();
+    const ts = String(now.getHours()).padStart(2, '0') + ':' +
+               String(now.getMinutes()).padStart(2, '0') + ':' +
+               String(now.getSeconds()).padStart(2, '0');
+    entry.innerHTML = '<span class="ts">' + ts + '</span><span class="tag">[' + tag + ']</span>' + text;
+    logList.insertBefore(entry, logList.firstChild);
+
+    // 限制最多 5 条
+    while (logList.children.length > 5) {
+        logList.removeChild(logList.lastChild);
+    }
+}
+
+// 初始日志
+logMessages.slice(0, 3).forEach(m => addLog(m.tag, m.text));
+
+// 循环添加日志
+setInterval(() => {
+    const m = logMessages[logIdx % logMessages.length];
+    addLog(m.tag, m.text);
+    logIdx++;
+}, 3500);
+
+// ================================================================
+//  预览缩略图 Canvas — 模拟生成进度
+// ================================================================
+const pCanvas = document.getElementById('preview-canvas');
+const pCtx = pCanvas.getContext('2d');
+let previewProgress = 0;
+
+function drawPreview() {
+    const w = pCanvas.width, h = pCanvas.height;
+    pCtx.clearRect(0, 0, w, h);
+
+    // 背景
+    const bgGrad = pCtx.createLinearGradient(0, 0, w, h);
+    bgGrad.addColorStop(0, 'rgba(0, 240, 255, 0.05)');
+    bgGrad.addColorStop(1, 'rgba(177, 74, 255, 0.05)');
+    pCtx.fillStyle = bgGrad;
+    pCtx.fillRect(0, 0, w, h);
+
+    // 扫描线
+    const scanY = (previewProgress * h * 2) % (h + 20) - 10;
+    const scanGrad = pCtx.createLinearGradient(0, scanY - 8, 0, scanY + 8);
+    scanGrad.addColorStop(0, 'rgba(0, 240, 255, 0)');
+    scanGrad.addColorStop(0.5, 'rgba(0, 240, 255, 0.3)');
+    scanGrad.addColorStop(1, 'rgba(0, 240, 255, 0)');
+    pCtx.fillStyle = scanGrad;
+    pCtx.fillRect(0, scanY - 8, w, 16);
+
+    // 网格
+    pCtx.strokeStyle = 'rgba(0, 240, 255, 0.08)';
+    pCtx.lineWidth = 0.5;
+    for (let x = 0; x < w; x += 10) {
+        pCtx.beginPath();
+        pCtx.moveTo(x, 0); pCtx.lineTo(x, h);
+        pCtx.stroke();
+    }
+    for (let y = 0; y < h; y += 10) {
+        pCtx.beginPath();
+        pCtx.moveTo(0, y); pCtx.lineTo(w, y);
+        pCtx.stroke();
+    }
+
+    // 噪点（模拟生成中）
+    const noiseCount = Math.floor(previewProgress * 200);
+    for (let i = 0; i < noiseCount; i++) {
+        const x = Math.random() * w, y = Math.random() * h;
+        const c = Math.random();
+        pCtx.fillStyle = c < 0.4 ? 'rgba(0,240,255,0.4)' :
+                         c < 0.7 ? 'rgba(255,61,166,0.3)' :
+                                   'rgba(177,74,255,0.3)';
+        pCtx.fillRect(x, y, 1.5, 1.5);
+    }
+
+    // 中心发光点
+    const cx = w / 2, cy = h / 2;
+    const radial = pCtx.createRadialGradient(cx, cy, 0, cx, cy, 20);
+    radial.addColorStop(0, 'rgba(0, 240, 255, 0.4)');
+    radial.addColorStop(1, 'rgba(0, 240, 255, 0)');
+    pCtx.fillStyle = radial;
+    pCtx.beginPath();
+    pCtx.arc(cx, cy, 20, 0, Math.PI * 2);
+    pCtx.fill();
+
+    previewProgress += 0.01;
+    if (previewProgress > 1) previewProgress = 0;
+
+    requestAnimationFrame(drawPreview);
+}
+drawPreview();
+
+// 参数面板随机更新
+setInterval(() => {
+    document.getElementById('fc-seed').textContent = Math.floor(100000 + Math.random() * 900000);
+}, 7000);
 </script>
 </body>
 </html>
