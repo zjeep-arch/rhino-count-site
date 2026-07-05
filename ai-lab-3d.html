@@ -3,955 +3,537 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI 创作实验室 · 水晶球</title>
+    <title>AI Creative Lab - Synaptic Dreams</title>
     <style>
-        * { margin:0; padding:0; box-sizing:border-box; }
-        body { overflow:hidden; background:#05060f; font-family:'Helvetica Neue',Arial,sans-serif; }
-        #canvas-container { width:100vw; height:100vh; }
+        :root {
+            --neon-cyan: #00f3ff;
+            --neon-pink: #ff00bb;
+            --glass-bg: rgba(10, 25, 41, 0.45);
+            --glass-border: rgba(0, 243, 255, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+        }
+
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #020208;
+            font-family: 'Consolas', 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            color: #ffffff;
+        }
+
+        /* 3D 底层画布 */
+        #canvas-container {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        /* 全局科幻 UI 图层 */
+        .hud-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+            pointer-events: none; /* 穿透鼠标事件到3D */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 35px 50px;
+            box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.8);
+        }
+
+        .interactive {
+            pointer-events: auto; /* 激活UI交互 */
+        }
+
+        /* 统一的高级毛玻璃科幻面板样式 */
+        .sci-panel {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            box-shadow: 0 0 25px rgba(0, 243, 255, 0.05), inset 0 0 15px rgba(0, 243, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        /* ================= 1. 顶部标题区域 ================= */
+        .top-header {
+            text-align: center;
+            width: 100%;
+        }
+
+        .main-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            letter-spacing: 6px;
+            color: #fff;
+            text-shadow: 0 0 20px rgba(0, 243, 255, 0.6), 0 0 40px rgba(0, 243, 255, 0.2);
+            margin-bottom: 2px;
+        }
+
+        .sub-title {
+            font-size: 0.85rem;
+            letter-spacing: 8px;
+            color: rgba(255, 255, 255, 0.6);
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        .counter-badge {
+            display: inline-block;
+            padding: 6px 16px;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            color: var(--neon-cyan);
+            border: 1px solid rgba(0, 243, 255, 0.3);
+            border-radius: 20px;
+            background: rgba(0, 243, 255, 0.05);
+            font-weight: bold;
+        }
+
+        /* ================= 2. 中间两翼布局 ================= */
+        .mid-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            height: 60vh;
+        }
+
+        /* 左翼：功能按键组 */
+        .left-wing {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 180px;
+        }
+
+        .nav-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 85px;
+            cursor: pointer;
+            text-decoration: none;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .nav-card:hover {
+            color: #fff;
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.3), inset 0 0 10px rgba(0, 243, 255, 0.2);
+            transform: translateX(5px);
+        }
+
+        .nav-card svg {
+            width: 28px;
+            height: 28px;
+            margin-bottom: 8px;
+            fill: currentColor;
+            filter: drop-shadow(0 0 5px rgba(0,243,255,0.3));
+        }
+
+        .nav-card span {
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+
+        /* 右翼：数据监视器 */
+        .right-wing {
+            width: 280px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* 效果图圆盘心率感应器 */
+        .pulse-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 15px;
+        }
+
+        .pulse-circle {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 2px dashed rgba(0, 243, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            margin-bottom: 10px;
+            animation: spin 20s linear infinite;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .pulse-wave {
+            position: absolute;
+            width: 70px;
+            height: 35px;
+            border-top: 2px solid var(--neon-cyan);
+            border-radius: 50% 50% 0 0;
+            animation: pulseWave 1.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulseWave {
+            0% { transform: scale(0.8); opacity: 0.5; }
+            100% { transform: scale(1.1); opacity: 1; filter: drop-shadow(0 0 8px var(--neon-cyan)); }
+        }
+
+        .pulse-title {
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            color: rgba(255,255,255,0.5);
+            text-align: center;
+        }
+
+        /* 实时参数文本 */
+        .data-list {
+            font-size: 0.75rem;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .data-item {
+            display: flex;
+            justify-content: space-between;
+            letter-spacing: 1px;
+        }
+
+        .data-label { color: rgba(255,255,255,0.5); }
+        .data-val { color: var(--neon-cyan); font-weight: bold; }
+
+        /* ================= 3. 底部快捷操作 ================= */
+        .bottom-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .bottom-btn {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.6);
+            padding: 8px 18px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .bottom-btn:hover {
+            border-color: var(--neon-pink);
+            color: #fff;
+            box-shadow: 0 0 15px rgba(255, 0, 187, 0.4);
+        }
+
+        .center-tip {
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            color: rgba(255,255,255,0.4);
+            text-shadow: 0 0 5px rgba(255,255,255,0.2);
+        }
+
+        /* 加载黑幕 */
         #loading {
-            position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
-            color:rgba(255,255,255,.85); font-size:18px; letter-spacing:3px;
-            pointer-events:none; transition:opacity .8s; z-index:200;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #03030a; z-index: 100; display: flex; justify-content: center;
+            align-items: center; flex-direction: column; transition: opacity 0.8s ease;
         }
-        #loading .dot { animation: pulse 1.4s infinite; display:inline-block; }
-        @keyframes pulse { 0%,100%{opacity:.3} 50%{opacity:1} }
-        /* Welcome modal */
-        #welcome {
-            position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
-            background:rgba(5,6,15,.85); backdrop-filter:blur(12px); z-index:300;
-            transition:opacity .6s;
-        }
-        #welcome .card {
-            background:rgba(20,22,40,.9); border:1px solid rgba(39,215,201,.25);
-            border-radius:20px; padding:48px 56px; text-align:center; max-width:480px;
-            box-shadow:0 0 80px rgba(39,215,201,.15);
-        }
-        #welcome h1 {
-            font-size:28px; color:#27D7C9; letter-spacing:2px; margin-bottom:8px; font-weight:600;
-        }
-        #welcome p { color:rgba(255,255,255,.55); font-size:14px; line-height:1.7; margin-bottom:28px; }
-        #welcome .btn-row { display:flex; gap:16px; justify-content:center; }
-        #welcome button {
-            padding:12px 32px; border:none; border-radius:10px; font-size:14px; cursor:pointer;
-            letter-spacing:1px; transition:all .3s;
-        }
-        #welcome .btn-enter {
-            background:linear-gradient(135deg,#27D7C9,#8E7CFF); color:#fff;
-            box-shadow:0 4px 24px rgba(39,215,201,.35);
-        }
-        #welcome .btn-enter:hover { transform:translateY(-2px); box-shadow:0 8px 32px rgba(39,215,201,.5); }
-        #welcome .btn-back {
-            background:rgba(255,255,255,.06); color:rgba(255,255,255,.6); border:1px solid rgba(255,255,255,.1);
-        }
-        #welcome .btn-back:hover { background:rgba(255,255,255,.1); }
-        #welcome.hidden { opacity:0; pointer-events:none; }
-        /* HUD */
-        #hud { position:absolute; bottom:20px; left:20px; z-index:100; pointer-events:none; }
-        #hud .label { font-size:11px; color:rgba(39,215,201,.5); letter-spacing:2px; margin-bottom:4px; }
-        #hud .hint { font-size:12px; color:rgba(255,255,255,.3); }
-        #music-toggle {
-            position:absolute; bottom:20px; right:20px; z-index:100;
-            background:rgba(20,22,40,.7); border:1px solid rgba(39,215,201,.2); border-radius:10px;
-            color:rgba(255,255,255,.6); padding:8px 16px; font-size:12px; cursor:pointer;
-            backdrop-filter:blur(8px); transition:all .3s; display:none;
-        }
-        #music-toggle:hover { border-color:rgba(39,215,201,.5); color:#27D7C9; }
-        #music-toggle.on { display:block; }
-        #back-btn {
-            position:absolute; top:20px; left:20px; z-index:100;
-            background:rgba(20,22,40,.7); border:1px solid rgba(255,255,255,.1); border-radius:10px;
-            color:rgba(255,255,255,.5); padding:8px 20px; font-size:13px; cursor:pointer;
-            backdrop-filter:blur(8px); transition:all .3s; display:none;
-        }
-        #back-btn:hover { border-color:rgba(39,215,201,.4); color:#27D7C9; }
-        #back-btn.on { display:block; }
     </style>
-    <!-- Three.js r128 -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
-    <!-- Post-processing -->
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/EffectComposer.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/RenderPass.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/UnrealBloomPass.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/ShaderPass.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/CopyShader.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/LuminosityHighPassShader.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/FXAAShader.js"></script>
 </head>
 <body>
-    <div id="loading">正在构建水晶球世界<span class="dot">...</span></div>
+
+    <div id="loading">
+        <div style="width: 40px; height: 40px; border: 2px solid rgba(0,243,255,0.1); border-top-color: var(--neon-cyan); border-radius: 50%; animation: spin 1s infinite linear;"></div>
+        <p style="margin-top: 20px; font-size: 0.8rem; letter-spacing: 3px; color: var(--neon-cyan);">INITIALIZING CYBER SCENE...</p>
+    </div>
+
     <div id="canvas-container"></div>
 
-    <div id="welcome">
-        <div class="card">
-            <h1>AI 创作实验室</h1>
-            <p>进入梦幻水晶球世界<br>拖拽旋转视角 · 点击水晶球触发暴风雪<br>建议佩戴耳机以获得最佳体验</p>
-            <div class="btn-row">
-                <button class="btn-enter" onclick="enterScene()">进入实验室</button>
-                <button class="btn-back" onclick="goBack()">返回主页</button>
+    <div class="hud-overlay">
+        
+        <div class="top-header">
+            <h1 class="main-title">AI CREATIVE LAB</h1>
+            <div class="sub-title">Synaptic Dreams Collection</div>
+            <div class="counter-badge">REALTIME PARTICLE COUNT: <span id="p-count">14,352</span></div>
+        </div>
+
+        <div class="mid-container">
+            <div class="left-wing interactive">
+                <a href="#" class="sci-panel nav-card">
+                    <svg viewBox="0 0 24 24"><path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="12" cy="12" r="3"/><path d="M12 2V5M12 19V22M2 12H5M19 12H22" stroke="currentColor" stroke-width="2"/></svg>
+                    <span>AI Generator</span>
+                </a>
+                <div class="sci-panel nav-card">
+                    <svg viewBox="0 0 24 24"><path d="M7.5 10.5L4 14V17H7L10.5 13.5M17 4.5L19.5 7L10.5 16L7 17L8 13.5L17 4.5Z" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+                    <span>Art Style</span>
+                </div>
+                <div class="sci-panel nav-card">
+                    <svg viewBox="0 0 24 24"><path d="M4 16V20H20V16M12 3V15M12 15L8 11M12 15L16 11" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+                    <span>Export 3D</span>
+                </div>
             </div>
+
+            <div class="sci-panel right-wing interactive">
+                <div class="pulse-box">
+                    <div class="pulse-circle">
+                        <div class="pulse-wave"></div>
+                    </div>
+                    <div class="pulse-title">STORM INTENSITY</div>
+                </div>
+                <div class="data-list">
+                    <div class="data-item"><span class="data-label">DATA VORTEX STABILITY:</span><span class="data-val" id="val-stab">98.4%</span></div>
+                    <div class="data-item"><span class="data-label">ACTIVE AI MODELS:</span><span class="data-val">3</span></div>
+                    <div class="data-item"><span class="data-label">TEMPORAL FLUX:</span><span class="data-val">0.002s</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom-footer">
+            <button class="bottom-btn interactive" onclick="window.history.back()">← SYSTEM RETURN</button>
+            <div class="center-tip">DRAG TO ROTATE • SCROLL TO ZOOM • CLICK TO INJECT TEMPEST</div>
+            <button class="bottom-btn interactive" id="mute-btn">AUDIO: ON</button>
         </div>
     </div>
 
-    <button id="back-btn" onclick="goBack()">← 返回主页</button>
-    <button id="music-toggle" onclick="toggleMusic()">🔊 音乐</button>
-    <div id="hud">
-        <div class="label">AI CREATIVE LAB</div>
-        <div class="hint">拖拽旋转 · 滚轮缩放 · 点击水晶球</div>
-    </div>
-
-<script>
-// ============================================================
-//  AI 创作实验室 — 梦幻水晶球 3D 场景
-//  Three.js r128 + UnrealBloom + Web Audio 八音盒
-// ============================================================
-
-const container = document.getElementById('canvas-container');
-const scene = new THREE.Scene();
-scene.fog = new THREE.FogExp2(0x05060f, 0.018);
-
-const camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 0.1, 1000);
-camera.position.set(0, 4, 16);
-
-const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-renderer.setSize(window.innerWidth, window.innerHeight);
-renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-renderer.shadowMap.enabled = true;
-renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-renderer.toneMapping = THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure = 1.0;
-container.appendChild(renderer.domElement);
-
-// ---- OrbitControls ----
-const controls = new THREE.OrbitControls(camera, renderer.domElement);
-controls.enableDamping = true;
-controls.dampingFactor = 0.06;
-controls.maxPolarAngle = Math.PI / 2 + 0.15;
-controls.minDistance = 7;
-controls.maxDistance = 28;
-controls.autoRotate = true;
-controls.autoRotateSpeed = 0.4;
-controls.target.set(0, 3, 0);
-
-// ============================================================
-//  Post-processing — UnrealBloom
-// ============================================================
-const composer = new THREE.EffectComposer(renderer);
-composer.addPass(new THREE.RenderPass(scene, camera));
-
-const bloomPass = new THREE.UnrealBloomPass(
-    new THREE.Vector2(window.innerWidth, window.innerHeight),
-    0.85,  // strength
-    0.35,  // radius
-    0.15   // threshold
-);
-composer.addPass(bloomPass);
-
-const fxaaPass = new THREE.ShaderPass(THREE.FXAAShader);
-fxaaPass.material.uniforms['resolution'].value.set(
-    1 / window.innerWidth, 1 / window.innerHeight
-);
-composer.addPass(fxaaPass);
-
-// ============================================================
-//  Lights
-// ============================================================
-scene.add(new THREE.AmbientLight(0x1a1e3a, 0.6));
-
-const moonLight = new THREE.DirectionalLight(0xb0d0ff, 1.2);
-moonLight.position.set(8, 18, 8);
-moonLight.castShadow = true;
-moonLight.shadow.mapSize.set(2048, 2048);
-moonLight.shadow.camera.near = 1;
-moonLight.shadow.camera.far = 60;
-moonLight.shadow.camera.left = -15;
-moonLight.shadow.camera.right = 15;
-moonLight.shadow.camera.top = 15;
-moonLight.shadow.camera.bottom = -15;
-moonLight.shadow.bias = -0.0005;
-scene.add(moonLight);
-
-// 水晶球内暖色点光源
-const warmPoint = new THREE.PointLight(0xffaa55, 1.5, 12, 1.5);
-warmPoint.position.set(0, 3, 0);
-scene.add(warmPoint);
-
-// ============================================================
-//  水晶球主体
-// ============================================================
-const globeGroup = new THREE.Group();
-scene.add(globeGroup);
-
-// --- 底座（精致金属木纹） ---
-const baseGroup = new THREE.Group();
-globeGroup.add(baseGroup);
-
-// 底座下盘
-const baseBot = new THREE.Mesh(
-    new THREE.CylinderGeometry(4.6, 5.0, 0.4, 64),
-    new THREE.MeshStandardMaterial({ color: 0x2a1a12, roughness: 0.3, metalness: 0.7 })
-);
-baseBot.position.y = -2.4;
-baseBot.receiveShadow = true;
-baseBot.castShadow = true;
-baseGroup.add(baseBot);
-
-// 底座中段（金色装饰环）
-const baseRing = new THREE.Mesh(
-    new THREE.CylinderGeometry(4.5, 4.6, 0.15, 64),
-    new THREE.MeshStandardMaterial({ color: 0xD4AF37, roughness: 0.15, metalness: 0.95, emissive: 0x554422, emissiveIntensity: 0.2 })
-);
-baseRing.position.y = -2.15;
-baseRing.castShadow = true;
-baseGroup.add(baseRing);
-
-// 底座上盘（收口）
-const baseTop = new THREE.Mesh(
-    new THREE.CylinderGeometry(3.9, 4.4, 0.5, 64),
-    new THREE.MeshStandardMaterial({ color: 0x3a2418, roughness: 0.25, metalness: 0.6 })
-);
-baseTop.position.y = -1.8;
-baseTop.receiveShadow = true;
-baseTop.castShadow = true;
-baseGroup.add(baseTop);
-
-// 底座顶部金边
-const baseTopRing = new THREE.Mesh(
-    new THREE.TorusGeometry(3.9, 0.06, 16, 64),
-    new THREE.MeshStandardMaterial({ color: 0xD4AF37, roughness: 0.1, metalness: 1.0, emissive: 0x886622, emissiveIntensity: 0.3 })
-);
-baseTopRing.rotation.x = Math.PI / 2;
-baseTopRing.position.y = -1.55;
-baseGroup.add(baseTopRing);
-
-// --- 水晶球玻璃外壳 ---
-const glassGeo = new THREE.SphereGeometry(3.8, 64, 64);
-const glassMat = new THREE.MeshPhysicalMaterial({
-    color: 0xffffff,
-    transparent: true,
-    opacity: 0.08,
-    roughness: 0.02,
-    metalness: 0,
-    transmission: 0.95,
-    thickness: 0.3,
-    ior: 1.45,
-    side: THREE.DoubleSide,
-    clearcoat: 1.0,
-    clearcoatRoughness: 0.02
-});
-const glass = new THREE.Mesh(glassGeo, glassMat);
-glass.position.y = 1.2;
-globeGroup.add(glass);
-
-// 球内地面（积雪）
-const snowGround = new THREE.Mesh(
-    new THREE.CylinderGeometry(3.6, 3.6, 0.3, 64),
-    new THREE.MeshStandardMaterial({ color: 0xf0f4ff, roughness: 0.85, metalness: 0.05 })
-);
-snowGround.position.y = -0.9;
-snowGround.receiveShadow = true;
-globeGroup.add(snowGround);
-
-// 地面雪堆起伏（用几个小球营造）
-for (let i = 0; i < 12; i++) {
-    const angle = (i / 12) * Math.PI * 2;
-    const r = 2.5 + Math.random() * 0.8;
-    const mound = new THREE.Mesh(
-        new THREE.SphereGeometry(0.35 + Math.random() * 0.25, 16, 16),
-        new THREE.MeshStandardMaterial({ color: 0xeef2ff, roughness: 0.9 })
-    );
-    mound.position.set(Math.cos(angle) * r, -0.65, Math.sin(angle) * r);
-    mound.scale.y = 0.4;
-    mound.castShadow = true;
-    mound.receiveShadow = true;
-    globeGroup.add(mound);
-}
-
-// ============================================================
-//  精致小木屋（程序化建模）
-// ============================================================
-function buildHouse() {
-    const house = new THREE.Group();
-
-    // 墙体
-    const wallMat = new THREE.MeshStandardMaterial({ color: 0x8B5E3C, roughness: 0.8 });
-    const walls = new THREE.Mesh(new THREE.BoxGeometry(1.8, 1.4, 1.6), wallMat);
-    walls.position.y = 0.7;
-    walls.castShadow = true;
-    walls.receiveShadow = true;
-    house.add(walls);
-
-    // 石头基座
-    const stoneMat = new THREE.MeshStandardMaterial({ color: 0x6B6B6B, roughness: 0.9 });
-    const stone = new THREE.Mesh(new THREE.BoxGeometry(1.9, 0.25, 1.7), stoneMat);
-    stone.position.y = 0.125;
-    stone.castShadow = true;
-    stone.receiveShadow = true;
-    house.add(stone);
-
-    // 屋顶（圆锥）
-    const roofMat = new THREE.MeshStandardMaterial({ color: 0x8B0000, roughness: 0.6 });
-    const roof = new THREE.Mesh(new THREE.ConeGeometry(1.55, 1.1, 4), roofMat);
-    roof.position.y = 1.95;
-    roof.rotation.y = Math.PI / 4;
-    roof.castShadow = true;
-    house.add(roof);
-
-    // 屋顶积雪
-    const snowCap = new THREE.Mesh(
-        new THREE.ConeGeometry(1.45, 0.4, 4),
-        new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.9 })
-    );
-    snowCap.position.y = 2.2;
-    snowCap.rotation.y = Math.PI / 4;
-    house.add(snowCap);
-
-    // 门
-    const door = new THREE.Mesh(
-        new THREE.BoxGeometry(0.35, 0.7, 0.06),
-        new THREE.MeshStandardMaterial({ color: 0x4A2C1A, roughness: 0.7 })
-    );
-    door.position.set(0, 0.45, 0.81);
-    house.add(door);
-
-    // 门把手
-    const knob = new THREE.Mesh(
-        new THREE.SphereGeometry(0.03, 8, 8),
-        new THREE.MeshStandardMaterial({ color: 0xD4AF37, metalness: 1, roughness: 0.2 })
-    );
-    knob.position.set(0.1, 0.45, 0.85);
-    house.add(knob);
-
-    // 窗户（发光！）
-    const winMat = new THREE.MeshStandardMaterial({
-        color: 0xffcc44,
-        emissive: 0xffaa22,
-        emissiveIntensity: 2.5,
-        roughness: 0.3
-    });
-    const winFrameMat = new THREE.MeshStandardMaterial({ color: 0x3a2418, roughness: 0.6 });
-
-    // 前面两个窗
-    const w1 = new THREE.Mesh(new THREE.PlaneGeometry(0.32, 0.32), winMat);
-    w1.position.set(-0.55, 0.8, 0.81);
-    house.add(w1);
-    const w2 = w1.clone();
-    w2.position.x = 0.55;
-    house.add(w2);
-
-    // 窗框
-    [{x:-0.55},{x:0.55}].forEach(pos => {
-        const frame = new THREE.Mesh(new THREE.BoxGeometry(0.38, 0.38, 0.02), winFrameMat);
-        frame.position.set(pos.x, 0.8, 0.80);
-        house.add(frame);
-        // 十字窗格
-        const bar1 = new THREE.Mesh(new THREE.BoxGeometry(0.36, 0.03, 0.03), winFrameMat);
-        bar1.position.set(pos.x, 0.8, 0.82);
-        house.add(bar1);
-        const bar2 = new THREE.Mesh(new THREE.BoxGeometry(0.03, 0.36, 0.03), winFrameMat);
-        bar2.position.set(pos.x, 0.8, 0.82);
-        house.add(bar2);
-    });
-
-    // 侧面窗
-    const w3 = new THREE.Mesh(new THREE.PlaneGeometry(0.3, 0.3), winMat.clone());
-    w3.position.set(0.91, 0.8, 0);
-    w3.rotation.y = Math.PI / 2;
-    house.add(w3);
-
-    // 烟囱
-    const chimney = new THREE.Mesh(
-        new THREE.BoxGeometry(0.25, 0.6, 0.25),
-        new THREE.MeshStandardMaterial({ color: 0x5a4030, roughness: 0.8 })
-    );
-    chimney.position.set(0.45, 2.0, 0);
-    chimney.castShadow = true;
-    house.add(chimney);
-
-    // 烟囱顶砖
-    const chimneyTop = new THREE.Mesh(
-        new THREE.BoxGeometry(0.32, 0.08, 0.32),
-        new THREE.MeshStandardMaterial({ color: 0x6B3A2A, roughness: 0.7 })
-    );
-    chimneyTop.position.set(0.45, 2.32, 0);
-    house.add(chimneyTop);
-
-    return house;
-}
-
-const house = buildHouse();
-house.position.set(-1.2, -0.75, -0.3);
-house.scale.set(0.85, 0.85, 0.85);
-globeGroup.add(house);
-
-// ============================================================
-//  圣诞树（程序化 + 彩灯）
-// ============================================================
-function buildTree() {
-    const tree = new THREE.Group();
-
-    // 树干
-    const trunk = new THREE.Mesh(
-        new THREE.CylinderGeometry(0.12, 0.16, 0.5, 12),
-        new THREE.MeshStandardMaterial({ color: 0x4A2C1A, roughness: 0.8 })
-    );
-    trunk.position.y = 0.25;
-    trunk.castShadow = true;
-    tree.add(trunk);
-
-    // 三层圆锥树叶
-    const leafMat = new THREE.MeshStandardMaterial({ color: 0x1a5c2a, roughness: 0.7, flatShading: true });
-    const tiers = [
-        { r: 0.85, h: 1.0, y: 0.9 },
-        { r: 0.65, h: 0.85, y: 1.55 },
-        { r: 0.42, h: 0.7, y: 2.1 }
-    ];
-    tiers.forEach(t => {
-        const cone = new THREE.Mesh(new THREE.ConeGeometry(t.r, t.h, 12), leafMat);
-        cone.position.y = t.y;
-        cone.castShadow = true;
-        tree.add(cone);
-    });
-
-    // 树顶星星（强发光）
-    const star = new THREE.Mesh(
-        new THREE.OctahedronGeometry(0.12, 0),
-        new THREE.MeshStandardMaterial({ color: 0xffdd44, emissive: 0xffdd00, emissiveIntensity: 3.0, roughness: 0.2 })
-    );
-    star.position.y = 2.65;
-    star.scale.set(1, 1.3, 0.5);
-    tree.add(star);
-
-    // 彩灯球（发光）
-    const lightColors = [0xff2244, 0x22ff44, 0x4444ff, 0xffff22, 0xff44ff, 0x44ffff];
-    const lightMeshes = [];
-    for (let i = 0; i < 24; i++) {
-        const tier = Math.floor(i / 8);
-        const angleInTier = (i % 8) / 8 * Math.PI * 2;
-        const r = tiers[tier].r * 0.75;
-        const y = tiers[tier].y + 0.1;
-        const color = lightColors[i % lightColors.length];
-        const ball = new THREE.Mesh(
-            new THREE.SphereGeometry(0.05, 8, 8),
-            new THREE.MeshStandardMaterial({ color: color, emissive: color, emissiveIntensity: 2.5 })
-        );
-        ball.position.set(Math.cos(angleInTier) * r, y, Math.sin(angleInTier) * r);
-        ball.userData = { baseIntensity: 2.5, phase: i * 0.3, color: color };
-        tree.add(ball);
-        lightMeshes.push(ball);
-    }
-
-    tree.userData.lights = lightMeshes;
-    return tree;
-}
-
-const tree = buildTree();
-tree.position.set(1.1, -0.75, 0.4);
-tree.scale.set(0.9, 0.9, 0.9);
-globeGroup.add(tree);
-
-// ============================================================
-//  礼物盒
-// ============================================================
-function buildGift(x, z, scale, ribbonColor, boxColor) {
-    const gift = new THREE.Group();
-
-    const box = new THREE.Mesh(
-        new THREE.BoxGeometry(0.35, 0.35, 0.35),
-        new THREE.MeshStandardMaterial({ color: boxColor, roughness: 0.4, metalness: 0.1 })
-    );
-    box.position.y = 0.175;
-    box.castShadow = true;
-    box.receiveShadow = true;
-    gift.add(box);
-
-    // 丝带（十字）
-    const ribbonMat = new THREE.MeshStandardMaterial({ color: ribbonColor, roughness: 0.3, metalness: 0.2, emissive: ribbonColor, emissiveIntensity: 0.15 });
-    const r1 = new THREE.Mesh(new THREE.BoxGeometry(0.37, 0.36, 0.06), ribbonMat);
-    r1.position.y = 0.175;
-    gift.add(r1);
-    const r2 = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.36, 0.37), ribbonMat);
-    r2.position.y = 0.175;
-    gift.add(r2);
-
-    // 蝴蝶结
-    const bow = new THREE.Mesh(new THREE.TorusGeometry(0.06, 0.02, 8, 16), ribbonMat);
-    bow.position.y = 0.38;
-    bow.rotation.x = Math.PI / 2;
-    gift.add(bow);
-
-    gift.position.set(x, -0.75, z);
-    gift.scale.setScalar(scale);
-    return gift;
-}
-
-globeGroup.add(buildGift(-0.3, 0.8, 1.0, 0xD4AF37, 0x8B0000));
-globeGroup.add(buildGift(0.5, 0.9, 0.7, 0xffffff, 0x1a5c2a));
-globeGroup.add(buildGift(-0.8, 0.6, 0.5, 0x27D7C9, 0x8E7CFF));
-
-// ============================================================
-//  雪人
-// ============================================================
-function buildSnowman() {
-    const sm = new THREE.Group();
-    const snowMat = new THREE.MeshStandardMaterial({ color: 0xf5f8ff, roughness: 0.85 });
-
-    const body = new THREE.Mesh(new THREE.SphereGeometry(0.3, 20, 20), snowMat);
-    body.position.y = 0.3;
-    body.castShadow = true;
-    sm.add(body);
-
-    const head = new THREE.Mesh(new THREE.SphereGeometry(0.22, 20, 20), snowMat);
-    head.position.y = 0.7;
-    head.castShadow = true;
-    sm.add(head);
-
-    // 眼睛
-    const eyeMat = new THREE.MeshStandardMaterial({ color: 0x111111, roughness: 0.3 });
-    const e1 = new THREE.Mesh(new THREE.SphereGeometry(0.025, 8, 8), eyeMat);
-    e1.position.set(-0.08, 0.75, 0.18);
-    sm.add(e1);
-    const e2 = e1.clone();
-    e2.position.x = 0.08;
-    sm.add(e2);
-
-    // 鼻子（胡萝卜）
-    const nose = new THREE.Mesh(
-        new THREE.ConeGeometry(0.04, 0.15, 8),
-        new THREE.MeshStandardMaterial({ color: 0xFF6B35, roughness: 0.6 })
-    );
-    nose.position.set(0, 0.68, 0.22);
-    nose.rotation.x = Math.PI / 2;
-    sm.add(nose);
-
-    // 围巾
-    const scarf = new THREE.Mesh(
-        new THREE.TorusGeometry(0.18, 0.05, 8, 16),
-        new THREE.MeshStandardMaterial({ color: 0x8B0000, roughness: 0.5 })
-    );
-    scarf.position.y = 0.52;
-    scarf.rotation.x = Math.PI / 2;
-    sm.add(scarf);
-
-    // 纽扣
-    for (let i = 0; i < 3; i++) {
-        const btn = new THREE.Mesh(new THREE.SphereGeometry(0.025, 8, 8), eyeMat);
-        btn.position.set(0, 0.4 - i * 0.08, 0.28);
-        sm.add(btn);
-    }
-
-    return sm;
-}
-
-const snowman = buildSnowman();
-snowman.position.set(0.3, -0.75, -1.0);
-globeGroup.add(snowman);
-
-// ============================================================
-//  路灯（暖光发光）
-// ============================================================
-function buildLamp() {
-    const lamp = new THREE.Group();
-    const poleMat = new THREE.MeshStandardMaterial({ color: 0x2a2a2a, roughness: 0.4, metalness: 0.7 });
-
-    const pole = new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.04, 1.0, 8), poleMat);
-    pole.position.y = 0.5;
-    pole.castShadow = true;
-    lamp.add(pole);
-
-    // 弯臂
-    const arm = new THREE.Mesh(new THREE.TorusGeometry(0.12, 0.03, 8, 12, Math.PI / 2), poleMat);
-    arm.position.set(0.12, 1.0, 0);
-    arm.rotation.y = Math.PI / 2;
-    lamp.add(arm);
-
-    // 灯罩
-    const bulbMat = new THREE.MeshStandardMaterial({
-        color: 0xffaa33,
-        emissive: 0xff9911,
-        emissiveIntensity: 3.0,
-        roughness: 0.2
-    });
-    const bulb = new THREE.Mesh(new THREE.SphereGeometry(0.08, 12, 12), bulbMat);
-    bulb.position.set(0.24, 0.95, 0);
-    lamp.add(bulb);
-
-    // 灯罩顶
-    const cap = new THREE.Mesh(
-        new THREE.ConeGeometry(0.1, 0.08, 8),
-        new THREE.MeshStandardMaterial({ color: 0x1a1a1a, roughness: 0.5, metalness: 0.6 })
-    );
-    cap.position.set(0.24, 1.06, 0);
-    lamp.add(cap);
-
-    lamp.userData.bulb = bulb;
-    return lamp;
-}
-
-const lamp1 = buildLamp();
-lamp1.position.set(-1.6, -0.75, 0.8);
-globeGroup.add(lamp1);
-
-const lamp2 = buildLamp();
-lamp2.position.set(1.8, -0.75, -0.5);
-lamp2.rotation.y = Math.PI;
-globeGroup.add(lamp2);
-
-// ============================================================
-//  雪花粒子系统（球内飘落）
-// ============================================================
-const particleCount = 800;
-const pGeo = new THREE.BufferGeometry();
-const pPos = new Float32Array(particleCount * 3);
-const pVel = new Float32Array(particleCount);
-const pSway = new Float32Array(particleCount);
-
-for (let i = 0; i < particleCount; i++) {
-    const idx = i * 3;
-    const u = Math.random(), v = Math.random();
-    const theta = u * 2.0 * Math.PI;
-    const phi = Math.acos(2.0 * v - 1.0);
-    const r = Math.random() * 3.5;
-
-    pPos[idx]     = r * Math.sin(phi) * Math.cos(theta);
-    pPos[idx + 1] = Math.abs(r * Math.sin(phi) * Math.sin(theta)) + 0.5;
-    pPos[idx + 2] = r * Math.cos(phi);
-
-    pVel[i] = 0.008 + Math.random() * 0.012;
-    pSway[i] = Math.random() * Math.PI * 2;
-}
-pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
-
-// 雪花用圆形纹理（Canvas生成）
-function makeSnowTexture() {
-    const c = document.createElement('canvas');
-    c.width = 64; c.height = 64;
-    const ctx = c.getContext('2d');
-    const grad = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
-    grad.addColorStop(0, 'rgba(255,255,255,1)');
-    grad.addColorStop(0.3, 'rgba(255,255,255,0.6)');
-    grad.addColorStop(1, 'rgba(255,255,255,0)');
-    ctx.fillStyle = grad;
-    ctx.fillRect(0, 0, 64, 64);
-    return new THREE.CanvasTexture(c);
-}
-
-const snowTex = makeSnowTexture();
-const snowMat = new THREE.PointsMaterial({
-    map: snowTex,
-    size: 0.12,
-    transparent: true,
-    opacity: 0.85,
-    blending: THREE.AdditiveBlending,
-    depthWrite: false,
-    sizeAttenuation: true
-});
-const snow = new THREE.Points(pGeo, snowMat);
-globeGroup.add(snow);
-
-// ============================================================
-//  背景星空粒子（球外）
-// ============================================================
-const starCount = 2000;
-const sGeo = new THREE.BufferGeometry();
-const sPos = new Float32Array(starCount * 3);
-const sCol = new Float32Array(starCount * 3);
-
-for (let i = 0; i < starCount; i++) {
-    const idx = i * 3;
-    const r = 30 + Math.random() * 40;
-    const theta = Math.random() * Math.PI * 2;
-    const phi = Math.acos(2 * Math.random() - 1);
-    sPos[idx]     = r * Math.sin(phi) * Math.cos(theta);
-    sPos[idx + 1] = r * Math.sin(phi) * Math.sin(theta);
-    sPos[idx + 2] = r * Math.cos(phi);
-
-    const t = Math.random();
-    if (t < 0.6) { sCol[idx] = 1; sCol[idx+1] = 1; sCol[idx+2] = 1; }
-    else if (t < 0.8) { sCol[idx] = 0.6; sCol[idx+1] = 0.8; sCol[idx+2] = 1; }
-    else { sCol[idx] = 1; sCol[idx+1] = 0.8; sCol[idx+2] = 0.6; }
-}
-sGeo.setAttribute('position', new THREE.BufferAttribute(sPos, 3));
-sGeo.setAttribute('color', new THREE.BufferAttribute(sCol, 3));
-
-const starMat = new THREE.PointsMaterial({
-    size: 0.15,
-    vertexColors: true,
-    transparent: true,
-    opacity: 0.7,
-    blending: THREE.AdditiveBlending,
-    depthWrite: false,
-    map: snowTex
-});
-const stars = new THREE.Points(sGeo, starMat);
-scene.add(stars);
-
-// ============================================================
-//  鼠标视差
-// ============================================================
-let mouseX = 0, mouseY = 0;
-window.addEventListener('mousemove', (e) => {
-    mouseX = (e.clientX - window.innerWidth / 2) * 0.0003;
-    mouseY = (e.clientY - window.innerHeight / 2) * 0.0003;
-});
-
-// ============================================================
-//  点击交互 — 水晶球弹跳 + 暴风雪
-// ============================================================
-let isShaking = false;
-let snowStorm = false;
-let snowStormTimer = 0;
-
-renderer.domElement.addEventListener('click', (e) => {
-    if (isShaking) return;
-    isShaking = true;
-
-    // 水晶球整体旋转 + 弹跳
-    gsap.to(globeGroup.rotation, { y: globeGroup.rotation.y + Math.PI * 2, duration: 1.5, ease: "back.out(1.4)" });
-    gsap.to(globeGroup.position, { y: 0.6, duration: 0.18, yoyo: true, repeat: 5, onComplete: () => {
-        gsap.to(globeGroup.position, { y: 0, duration: 0.3, ease: "elastic.out(1,0.5)" });
-        isShaking = false;
-    }});
-
-    // 暴风雪模式
-    snowStorm = true;
-    snowStormTimer = 0;
-
-    // 彩灯闪烁加速
-    if (tree.userData.lights) {
-        tree.userData.lights.forEach(l => l.userData.flash = 1.0);
-    }
-});
-
-// ============================================================
-//  Web Audio — 八音盒《We Wish You a Merry Christmas》
-// ============================================================
-let audioCtx = null;
-let musicGain = null;
-let isMusicPlaying = false;
-let musicTimeoutId = null;
-
-const NOTE_FREQ = {
-    'C4': 261.63, 'D4': 293.66, 'E4': 329.63, 'F4': 349.23,
-    'G4': 392.00, 'A4': 440.00, 'B4': 493.88, 'C5': 523.25,
-    'D5': 587.33, 'E5': 659.25, 'F5': 698.46, 'G5': 783.99,
-    'rest': 0
-};
-
-// Melody: [note, duration_in_beats]
-const melody = [
-    ['D4',1],['D4',0.5],['G4',1.5],['G4',1],['A4',0.5],['B4',1],['A4',1],['G4',0.5],
-    ['E4',1],['E4',0.5],['E4',1],['A4',1.5],['A4',1],['B4',0.5],['C5',1],['B4',1],['A4',0.5],
-    ['G4',1],['E4',0.5],['D4',1],['D4',0.5],['G4',1.5],['B4',1],['A4',0.5],['G4',1],['F4',1.5],
-    ['E4',1],['C4',0.5],['D4',1],['E4',0.5],['G4',1],['E4',1],['D4',0.5],['C4',1],['D4',0.5],
-    ['G4',2],['rest',0.5],
-    // 第二段
-    ['D4',1],['D4',0.5],['G4',1.5],['G4',1],['A4',0.5],['B4',1],['A4',1],['G4',0.5],
-    ['E4',1],['E4',0.5],['E4',1],['A4',1.5],['A4',1],['B4',0.5],['C5',1],['B4',1],['A4',0.5],
-    ['G4',1],['E4',0.5],['D4',1],['D4',0.5],['G4',1.5],['B4',1],['A4',0.5],['G4',1],['F4',1.5],
-    ['E4',1],['C4',0.5],['D4',1],['E4',0.5],['G4',1],['E4',1],['D4',0.5],['C4',1],['D4',0.5],
-    ['G4',2],['rest',1]
-];
-
-function playNote(freq, time, duration) {
-    if (freq === 0) return;
-
-    // 八音盒音色：基频正弦 + 倍频谐波 + 快速衰减
-    const osc1 = audioCtx.createOscillator();
-    const osc2 = audioCtx.createOscillator();
-    const osc3 = audioCtx.createOscillator();
-    const gain = audioCtx.createGain();
-
-    osc1.type = 'sine';
-    osc2.type = 'sine';
-    osc3.type = 'triangle';
-
-    osc1.frequency.value = freq;
-    osc2.frequency.value = freq * 2;       // 倍频
-    osc3.frequency.value = freq * 3.01;    // 略偏的3倍频（金属共振感）
-
-    const gain1 = audioCtx.createGain();
-    const gain2 = audioCtx.createGain();
-    const gain3 = audioCtx.createGain();
-    gain1.gain.value = 0.5;
-    gain2.gain.value = 0.15;
-    gain3.gain.value = 0.05;
-
-    osc1.connect(gain1);
-    osc2.connect(gain2);
-    osc3.connect(gain3);
-    gain1.connect(gain);
-    gain2.connect(gain);
-    gain3.connect(gain);
-    gain.connect(musicGain);
-
-    // 八音盒包络：极快attack + 指数衰减
-    gain.gain.setValueAtTime(0, time);
-    gain.gain.linearRampToValueAtTime(0.8, time + 0.005);
-    gain.gain.exponentialRampToValueAtTime(0.001, time + duration * 0.9);
-
-    osc1.start(time);
-    osc2.start(time);
-    osc3.start(time);
-    osc1.stop(time + duration);
-    osc2.stop(time + duration);
-    osc3.stop(time + duration);
-}
-
-function playMelodyLoop() {
-    if (!audioCtx) return;
-
-    const bpm = 120;
-    const beatDuration = 60 / bpm;
-    let currentTime = audioCtx.currentTime + 0.1;
-
-    melody.forEach(([note, beats]) => {
-        const dur = beats * beatDuration;
-        const freq = NOTE_FREQ[note] || 0;
-        playNote(freq, currentTime, dur * 0.95);
-        currentTime += dur;
-    });
-
-    // 循环
-    const totalDuration = currentTime - audioCtx.currentTime;
-    musicTimeoutId = setTimeout(() => {
-        if (isMusicPlaying) playMelodyLoop();
-    }, totalDuration * 1000);
-}
-
-function startMusic() {
-    if (!audioCtx) {
-        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        musicGain = audioCtx.createGain();
-        musicGain.gain.value = 0;
-        musicGain.connect(audioCtx.destination);
-    }
-    if (audioCtx.state === 'suspended') audioCtx.resume();
-
-    // 渐入
-    isMusicPlaying = true;
-    musicGain.gain.cancelScheduledValues(audioCtx.currentTime);
-    musicGain.gain.setValueAtTime(musicGain.gain.value, audioCtx.currentTime);
-    musicGain.gain.linearRampToValueAtTime(0.35, audioCtx.currentTime + 2);
-    playMelodyLoop();
-}
-
-function stopMusic() {
-    isMusicPlaying = false;
-    if (musicTimeoutId) clearTimeout(musicTimeoutId);
-    if (musicGain && audioCtx) {
-        musicGain.gain.cancelScheduledValues(audioCtx.currentTime);
-        musicGain.gain.setValueAtTime(musicGain.gain.value, audioCtx.currentTime);
-        musicGain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 1);
-    }
-}
-
-function toggleMusic() {
-    if (isMusicPlaying) {
-        stopMusic();
-        document.getElementById('music-toggle').textContent = '🔇 音乐';
-    } else {
-        startMusic();
-        document.getElementById('music-toggle').textContent = '🔊 音乐';
-    }
-}
-
-// ============================================================
-//  入场 / 返回
-// ============================================================
-function enterScene() {
-    document.getElementById('welcome').classList.add('hidden');
-    document.getElementById('loading').style.opacity = '0';
-    document.getElementById('back-btn').classList.add('on');
-    document.getElementById('music-toggle').classList.add('on');
-    startMusic();
-}
-
-function goBack() {
-    stopMusic();
-    window.location.href = 'index.html';
-}
-
-// ============================================================
-//  渲染循环
-// ============================================================
-const clock = new THREE.Clock();
-function animate() {
-    requestAnimationFrame(animate);
-    const t = clock.getElapsedTime();
-
-    // 鼠标视差（平滑跟随）
-    scene.rotation.y += (mouseX - scene.rotation.y) * 0.04;
-    scene.rotation.x += (mouseY - scene.rotation.x) * 0.04;
-
-    // 雪花飘落
-    const coords = snow.geometry.attributes.position.array;
-    const stormMul = snowStorm ? 6 : 1;
-    for (let i = 0; i < particleCount; i++) {
-        const idx = i * 3;
-        coords[idx + 1] -= pVel[i] * stormMul;
-        coords[idx] += Math.sin(t * 2 + pSway[i]) * 0.003 * stormMul;
-        coords[idx + 2] += Math.cos(t * 1.5 + pSway[i]) * 0.002 * stormMul;
-
-        if (coords[idx + 1] < -0.5) {
-            coords[idx + 1] = 3.5;
-            coords[idx] = (Math.random() - 0.5) * 7;
-            coords[idx + 2] = (Math.random() - 0.5) * 7;
-        }
-    }
-    snow.geometry.attributes.position.needsUpdate = true;
-    snow.rotation.y = t * 0.02;
-
-    // 暴风雪计时
-    if (snowStorm) {
-        snowStormTimer += 1 / 60;
-        if (snowStormTimer > 4) snowStorm = false;
-    }
-
-    // 彩灯呼吸闪烁
-    if (tree.userData.lights) {
-        tree.userData.lights.forEach(l => {
-            const base = l.userData.baseIntensity;
-            const flash = l.userData.flash || 0;
-            l.material.emissiveIntensity = base + Math.sin(t * 3 + l.userData.phase) * 0.8 + flash;
-            if (flash > 0) l.userData.flash = flash * 0.95;
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/18.6.4/tween.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/EffectComposer.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/RenderPass.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/ShaderPass.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/CopyShader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/LuminosityHighPassShader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/UnrealBloomPass.js"></script>
+
+    <script>
+        // --- 1. 基础舞台与超分辨率渲染设置 ---
+        const container = document.getElementById('canvas-container');
+        const scene = new THREE.Scene();
+        scene.fog = new THREE.FogExp2('#010105', 0.02);
+
+        const camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.set(0, 3, 10);
+
+        const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: "high-performance" });
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.toneMapping = THREE.ACESFilmicToneMapping; // 终极色彩映射
+        renderer.toneMappingExposure = 1.3;
+        container.appendChild(renderer.domElement);
+
+        const controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.05;
+        controls.maxPolarAngle = Math.PI / 2 + 0.1;
+        controls.minDistance = 4;
+        controls.maxDistance = 15;
+
+        // --- 2. 完美还原：赛博辉光通道 (Bloom) ---
+        const renderScene = new THREE.RenderPass(scene, camera);
+        // 强度1.8，半径0.7，阈值0.1，完美还原图中的炫目高亮光晕
+        const bloomPass = new THREE.UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 1.8, 0.7, 0.1);
+        const composer = new THREE.EffectComposer(renderer);
+        composer.addPass(renderScene);
+        composer.addPass(bloomPass);
+
+        // --- 3. 舞台灯光（大厂冷暖双色侧光体系） ---
+        scene.add(new THREE.AmbientLight('#050515', 1.0));
+        
+        const cyanLight = new THREE.DirectionalLight('#00f3ff', 2.5);
+        cyanLight.position.set(6, 6, 4);
+        scene.add(cyanLight);
+
+        const pinkLight = new THREE.DirectionalLight('#ff00bb', 1.8);
+        pinkLight.position.set(-6, 4, -4);
+        scene.add(pinkLight);
+
+        // --- 4. 资产构建：星云水晶球 ---
+        const globeGroup = new THREE.Group();
+        globeGroup.position.y = -0.5; // 轻微向下偏移腾出上方视觉空间
+        scene.add(globeGroup);
+
+        // 哑光钛合金底座
+        const baseGeo = new THREE.CylinderGeometry(2.8, 3.2, 1.0, 64);
+        const baseMat = new THREE.MeshStandardMaterial({ color: '#05070f', roughness: 0.15, metalness: 0.9 });
+        const base = new THREE.Mesh(baseGeo, baseMat);
+        base.position.y = -2.1;
+        globeGroup.add(base);
+
+        // 底座科幻自发光环
+        const neonRingGeo = new THREE.TorusGeometry(2.82, 0.04, 16, 100);
+        const neonRingMat = new THREE.MeshBasicMaterial({ color: '#00f3ff' });
+        const neonRing = new THREE.Mesh(neonRingGeo, neonRingMat);
+        neonRing.rotation.x = Math.PI / 2;
+        neonRing.position.y = -1.6;
+        globeGroup.add(neonRing);
+
+        // 高级清漆玻璃外壳
+        const glassGeo = new THREE.SphereGeometry(3.0, 64, 64);
+        const glassMat = new THREE.MeshPhysicalMaterial({
+            color: '#ffffff', transparent: true, opacity: 0.08,
+            transmission: 0.96, ior: 1.52, roughness: 0.01,
+            clearcoat: 1.0, clearcoatRoughness: 0.01, side: THREE.DoubleSide
         });
-    }
+        const glass = new THREE.Mesh(glassGeo, glassMat);
+        globeGroup.add(glass);
 
-    // 路灯脉动
-    [lamp1, lamp2].forEach(lamp => {
-        if (lamp.userData.bulb) {
-            lamp.userData.bulb.material.emissiveIntensity = 2.5 + Math.sin(t * 1.5) * 0.4;
+        // --- 5. 核心震撼：还原图中漩涡星云效果 ---
+        const vortexCount = 2500;
+        const vortexGeo = new THREE.BufferGeometry();
+        const vortexPositions = new Float32Array(vortexCount * 3);
+        const vortexColors = new Float32Array(vortexCount * 3);
+        const vortexData = [];
+
+        const colorCyan = new THREE.Color('#00f3ff');
+        const colorPink = new THREE.Color('#ff00bb');
+
+        for(let i=0; i<vortexCount; i++) {
+            // 阿基米德螺线模拟漩涡
+            const r = Math.random() * 2.6;
+            const theta = r * 5 + Math.random() * 1.5; 
+            const y = (Math.random() - 0.5) * 0.4 * (2.8 - r); // 中心厚边缘薄
+
+            vortexPositions[i*3] = r * Math.cos(theta);
+            vortexPositions[i*3+1] = y;
+            vortexPositions[i*3+2] = r * Math.sin(theta);
+
+            // 混合冷暖双色通道
+            const mixedColor = colorCyan.clone().lerp(colorPink, r / 2.6);
+            vortexColors[i*3] = mixedColor.r;
+            vortexColors[i*3+1] = mixedColor.g;
+            vortexColors[i*3+2] = mixedColor.b;
+
+            vortexData.push({ r, theta, y, speed: 0.02 + (2.8 - r) * 0.01 });
         }
-    });
+        vortexGeo.setAttribute('position', new THREE.BufferAttribute(vortexPositions, 3));
+        vortexGeo.setAttribute('color', new THREE.BufferAttribute(vortexColors, 3));
 
-    // 星空缓慢旋转
-    stars.rotation.y = t * 0.01;
-    stars.rotation.x = t * 0.005;
+        const pTex = (() => {
+            const canvas = document.createElement('canvas'); canvas.width = 32; canvas.height = 32;
+            const ctx = canvas.getContext('2d');
+            const g = ctx.createRadialGradient(16,16,0, 16,16,16);
+            g.addColorStop(0, 'rgba(255,255,255,1)'); g.addColorStop(1, 'rgba(0,0,0,0)');
+            ctx.fillStyle = g; ctx.fillRect(0,0,32,32); return new THREE.CanvasTexture(canvas);
+        })();
 
-    // 暖色点光源脉动
-    warmPoint.intensity = 1.5 + Math.sin(t * 0.8) * 0.3;
+        const vortexMat = new THREE.PointsMaterial({
+            size: 0.06, vertexColors: true, map: pTex, transparent: true,
+            blending: THREE.AdditiveBlending, depthWrite: false
+        });
+        const vortexParticles = new THREE.Points(vortexGeo, vortexMat);
+        vortexParticles.position.y = 0.2;
+        globeGroup.add(vortexParticles);
 
-    controls.update();
-    composer.render();
-}
+        // 周围悬浮的外围粒子群 (散落雪花)
+        const envCount = 1000;
+        const envGeo = new THREE.BufferGeometry();
+        const envPos = new Float32Array(envCount * 3);
+        const envData = [];
+        for(let i=0; i<envCount; i++) {
+            const u = Math.random(); const v = Math.random();
+            const theta = u * 2 * Math.PI; const phi = Math.acos(2 * v - 1);
+            const r = Math.cbrt(Math.random()) * 2.8;
+            envPos[i*3] = r * Math.sin(phi) * Math.cos(theta);
+            envPos[i*3+1] = r * Math.sin(phi) * Math.sin(theta);
+            envPos[i*3+2] = r * Math.cos(phi);
+            envData.push({ xSpeed: (Math.random()-0.5)*0.004, ySpeed: -Math.random()*0.01 - 0.003, zSpeed: (Math.random()-0.5)*0.004 });
+        }
+        envGeo.setAttribute('position', new THREE.BufferAttribute(envPos, 3));
+        const envMat = new THREE.PointsMaterial({ size: 0.04, color: '#ffffff', map: pTex, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false });
+        const envParticles = new THREE.Points(envGeo, envMat);
+        globeGroup.add(envParticles);
 
-animate();
+        // --- 6. 暴风雪魔法波动交互 ---
+        let isStorm = false;
+        window.addEventListener('click', (e) => {
+            if(e.target.closest('.interactive')) return; // 排除点击UI
+            isStorm = true;
+            
+            // 粒子暴风雪散开动效
+            new TWEEN.Tween(bloomPass).to({ strength: 3.8 }, 250).yoyo(true).repeat(1).start();
+            
+            // UI数据随机跳动反馈
+            document.getElementById('val-stab').innerText = (90 + Math.random()*8).toFixed(1) + "%";
+            document.getElementById('p-count').innerText = Math.floor(14000 + Math.random()*2000).toLocaleString();
 
-// 隐藏 loading
-document.getElementById('loading').style.opacity = '0';
+            setTimeout(() => { isStorm = false; }, 1200);
+        });
 
-// 响应式
-window.addEventListener('resize', () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    composer.setSize(window.innerWidth, window.innerHeight);
-    fxaaPass.material.uniforms['resolution'].value.set(
-        1 / window.innerWidth, 1 / window.innerHeight
-    );
-});
-</script>
+        // 移除加载层
+        setTimeout(() => {
+            const loader = document.getElementById('loading');
+            if(loader) { loader.style.opacity = '0'; setTimeout(() => loader.remove(), 800); }
+        }, 500);
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight; camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight); composer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // --- 7. 动态渲染环 ---
+        const clock = new THREE.Clock();
+        const animate = () => {
+            requestAnimationFrame(animate);
+            TWEEN.update();
+            const time = clock.getElapsedTime();
+
+            // 整体自转
+            globeGroup.rotation.y = time * 0.02;
+
+            // 漩涡粒子内聚旋转更新
+            const vPos = vortexParticles.geometry.attributes.position;
+            for(let i=0; i<vortexCount; i++) {
+                const data = vortexData[i];
+                if(!isStorm) {
+                    data.theta += data.speed;
+                } else {
+                    data.theta += data.speed * 5; // 暴风雪爆发时急速旋转
+                }
+                vPos.setX(i, data.r * Math.cos(data.theta));
+                vPos.setZ(i, data.r * Math.sin(data.theta));
+            }
+            vPos.needsUpdate = true;
+
+            // 外围落雪粒子更新
+            const ePos = envParticles.geometry.attributes.position;
+            for(let i=0; i<envCount; i++) {
+                let ex = ePos.getX(i); let ey = ePos.getY(i); let ez = ePos.getZ(i);
+                const d = envData[i];
+
+                ex += d.xSpeed; ey += d.ySpeed; ez += d.zSpeed;
+                if(Math.sqrt(ex*ex + ey*ey + ez*ez) > 2.8 || ey < -1.4) {
+                    ey = 2.5; ex = (Math.random()-0.5)*2; ez = (Math.random()-0.5)*2;
+                }
+                ePos.setXYZ(i, ex, ey, ez);
+            }
+            ePos.needsUpdate = true;
+
+            controls.update();
+            composer.render(); // 渲染带有赛博辉光效果的画面
+        };
+        animate();
+    </script>
 </body>
 </html>
