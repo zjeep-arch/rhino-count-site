@@ -112,6 +112,12 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "谷歌掐了Meta的电闸，AI争夺战杀到了变压器",
+        desc: "Meta被限算力后被迫卖算力，半导体暴跌6.27%。AI的战争已从算法打到了电力。",
+        href: "notes/2026-07-06-ai-compute-crisis-google-meta-power.html"
+      },
+      {
+        type: "Essay",
         title: "Anthropic把最强模型送给了政府",
         desc: "Fable 5解禁背后，是一场22天的交易。Anthropic用Mythos 5的政府专属访问权，换回了Fable 5的商业自由。",
         href: "notes/2026-07-05-anthropic-mythos5-government-trade.html"
@@ -211,6 +217,13 @@ window.SITE_DATA = {
         excerpt: "毕业之后才明白，专业不是身份，是工具箱。",
         img: "assets/note-06.svg",
         href: "notes/what-pku-didnt-teach-me.html"
+      },
+      {
+        cat: "AI 趋势", num: "N° 09",
+        title: "谷歌掐了Meta的电闸，AI争夺战杀到了变压器",
+        excerpt: "Meta被限算力后被迫卖算力，半导体暴跌6.27%。AI的战争已从算法打到了电力。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-07-06-ai-compute-crisis-google-meta-power.html"
       },
       {
         cat: "AI 趋势", num: "N° 08",

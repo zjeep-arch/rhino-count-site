@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>谷歌掐了Meta的电闸，AI争夺战杀到了变压器</title>
+  <style>
+    :root {
+      --accent: #8b2635;
+      --ink: #333;
+      --ink-soft: #555;
+      --muted: #888;
+      --surface: #fafafa;
+      --border: rgba(0,0,0,0.06);
+      --radius: 12px;
+      --font-sans: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-serif: "Noto Serif SC", "Songti SC", Georgia, serif;
+    }
+    body { font-family: var(--font-sans); background: #f5f5f5; margin: 0; padding: 16px; font-size: 16px; line-height: 1.8; color: var(--ink); -webkit-font-smoothing: antialiased; }
+    .container { max-width: 680px; margin: 0 auto; background: var(--surface); padding: 32px; border-radius: var(--radius); }
+    .cover-img { width: 100%; border-radius: 8px; margin-bottom: 24px; }
+    h1 { font-family: var(--font-serif); font-size: 24px; font-weight: 700; color: var(--ink); line-height: 1.4; margin: 0 0 16px; }
+    .meta { color: var(--muted); font-size: 13px; margin-bottom: 16px; }
+    .byline { color: var(--ink-soft); font-size: 14px; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+    h2 { font-family: var(--font-serif); font-size: 20px; font-weight: 600; color: var(--ink); margin: 32px 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+    p { margin: 0 0 24px; }
+    .quote-box { border-left: 4px solid var(--accent); background: #f5f5f5; padding: 16px 20px; margin: 24px 0; border-radius: 0 var(--radius) var(--radius) 0; }
+    .quote-box p { margin: 0; color: var(--ink-soft); font-style: italic; font-size: 15px; }
+    .quote-box .attribution { margin-top: 8px; color: var(--muted); font-size: 13px; font-style: normal; }
+    .data-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14px; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .data-table th, .data-table td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); }
+    .data-table th { background: #f0f0f0; font-weight: 600; color: var(--ink); }
+    .data-table td { color: var(--ink-soft); }
+    .img-caption { text-align: center; color: var(--muted); font-size: 13px; margin-top: 8px; margin-bottom: 24px; }
+    .ending { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--ink-soft); font-size: 14px; }
+    strong { color: var(--ink); font-weight: 600; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img class="cover-img" src="note-09-cover.jpg" alt="AI数据中心与电力基础设施">
+    <h1>谷歌掐了Meta的电闸，AI争夺战杀到了变压器</h1>
+    <div class="meta">2026年7月6日 · 阅读时间约8分钟</div>
+    <div class="byline">文｜犀牛伯爵</div>
+
+    <p>7月1日美股开盘，一个名字引爆了整条产业链，<strong>Meta</strong>。</p>
+
+    <p>消息很简单，Meta正在筹建一项叫"Meta Compute"的云业务，准备把闲置的AI算力租给外部客户。当天Meta股价暴涨8.8%，市值一天多了1270亿美元。但另一边，半导体板块集体崩盘，费城半导体指数单日暴跌6.27%，存储芯片美光跌超10%，康宁光纤暴跌13%，三星和SK海力士接力下跌9%和14%。</p>
+
+    <p>同一天，市场同时相信了两个互相矛盾的故事，算力过剩了，算力也不够用。</p>
+
+    <p>真相藏在这两个故事的夹缝里。</p>
+
+    <h2>一条炸了锅的客户群消息</h2>
+
+    <p>故事要从更早说起。今年3月，谷歌云的一个大客户群里，有人贴出了一条内部通知，核心内容只有一句话：你们要的算力，我给不了那么多。</p>
+
+    <p>收到这条通知的不是什么小公司，是<strong>Meta</strong>。Facebook和Instagram的母公司，谷歌云6年100亿美元级别的大客户，全球前三的外部算力采购方。</p>
+
+    <p>英国《金融时报》6月28日率先披露了这件事。报道说，谷歌今年3月正式通知Meta，无法满足其对Gemini模型的算力采购需求。到5月17日，硬性配额落地，每周固定上限，每5小时刷新一次额度池。即便Meta愿意加价，也无法扩容。</p>
+
+    <p>Meta内部发生了什么？据多个信源交叉确认，大量依赖Gemini API的AI研发项目被迫放缓。内容审核系统、广告算法优化、内部代码助手，这些原本跑得好好的流程突然"变慢"了。技术团队一开始以为是模型出了bug，后来才发现是后台算力配额被拧小了。</p>
+
+    <p>有Meta内部人士透露，管理层给工程师的指令是四个字：<strong>省着点用token</strong>。</p>
+
+    <p>你没看错。全球最富有的科技公司之一，在2026年，要求员工节省AI调用额度。这听起来像2022年某些城市拉闸限电时，工厂被要求错峰用电。只不过这次，断的不是电，是算力。</p>
+
+    <div class="quote-box">
+      <p>Gemini API的请求量，从2025年3月的每月350亿次，半年内飙到了850亿次。</p>
+      <div class="attribution">数据来源：谷歌云内部统计，经多家媒体交叉引用</div>
+    </div>
+
+    <p>谷歌不是没准备。2026年资本支出预算高达1750亿到1850亿美元，全球几十个数据中心，体量已经是世界第三大云服务商。但API请求量翻倍的速度，远超它扩容的速度。</p>
+
+    <p>更扎心的是，谷歌云的待履行合同积压了<strong>4600亿美元</strong>，环比几乎翻倍。单子多到不敢接，有了订单但没法交付，客户的钱就在账上躺着，干着急。</p>
+
+    <img class="cover-img" src="note-09-gpu.jpg" alt="GPU芯片供应链紧张">
+    <div class="img-caption">图源：AI基础设施概念图 · 犀牛伯爵</div>
+
+    <h2>被逼出来的"Meta Compute"</h2>
+
+    <p>算力被限这件事，直接把Meta逼到了一个十字路口。</p>
+
+    <p>扎克伯格今年5月在股东大会上说过一句话，"进军云计算，肯定在考虑范围内"。他透露，几乎每周都有外部公司找上门，希望Meta提供模型API，或者以高于采购成本的价格购买算力。</p>
+
+    <p>7月1日，这个计划正式曝光。Meta内部已经成立了一个叫"Meta Compute"的部门，统筹算力基础设施，考虑两种变现形式：一是把GPU等底层算力直接出租，二是在自有基础设施上托管AI模型，通过API收费。</p>
+
+    <p>消息一出，资本市场的反应极为分裂。</p>
+
+    <p>Meta大涨，因为华尔街终于看到了它那1.25万亿到1.45万亿美元资本开支的变现路径。富国银行算了一笔账，Meta总算力规模将从2025年的7.5吉瓦增至2028年的21.2吉瓦，按每吉瓦算力转售对应200亿美元年化营收计算，到2028年这块业务年化营收有望达到<strong>2640亿美元</strong>。</p>
+
+    <p>但Neocloud（新型AI云服务商）集体暴跌。CoreWeave重挫13.92%，Nebius暴跌17.01%。D.A. Davidson分析师吉尔·卢里亚说得很直接，CoreWeave和Nebius的增长"在相当程度上依赖Meta"，Meta未来既可能不再那么需要它们，又会在外部市场与它们抢客户。</p>
+
+    <p>而半导体板块的大跌，则暴露了一个更深层的焦虑，如果连最能烧算力的Meta都有闲置产能要卖，那整个AI芯片产业链是不是已经建多了？</p>
+
+    <h2>算力到底是多还是少</h2>
+
+    <p>这个问题有一个看起来矛盾但逻辑自洽的答案：<strong>高端算力严重不足，但中低端算力出现结构性过剩。</strong></p>
+
+    <p>说不足，证据非常硬。</p>
+
+    <p>英伟达B200 GPU的每小时租赁价格，将在今年10月续约时从2.63美元涨到5.10美元，涨幅<strong>94%</strong>。采购1000块GPU的交付周期已经延长到12到15个月，新订单普遍排到2027年第二季度。</p>
+
+    <p>H100的一年期租赁价格，从2025年10月的每块每小时1.70美元，涨到2026年3月的2.35美元，五个月涨了38%。更高端的H200已经到了3.5美元/小时。</p>
+
+    <p>连亚马逊AWS都在涨价。从2026年7月起，AWS的EC2 Capacity Blocks for ML预订价格上涨约20%。这已经是今年第二次提价，1月份刚涨过15%。</p>
+
+    <p>说过剩，也有数据支撑。Meta内部基础设施利用率约为<strong>65%</strong>，剩余35%是闲置产能。D.A. Davidson分析师甚至直接说，Meta可能正在"放弃前沿AI"，转而出售计算资源。</p>
+
+    <p>这两种现象同时存在，怎么理解？</p>
+
+    <p>关键在于，Meta虽然花了上千亿美元买芯片建数据中心，但它自家的Muse Spark模型还没能在性能上追平Gemini和Claude。模型不够强，算力就消化不了。CoreWeave和Nebius这些Neocloud也面临类似问题，它们买了大量GPU，但客户需求的增长速度和GPU采购速度之间，存在时间差。</p>
+
+    <p>所以你看到了一个奇特的画面：一边是B200涨到5美元/小时还抢不到，一边是Meta有35%的算力在空转。这不是整体过剩，是严重的<strong>错配</strong>。</p>
+
+    <div class="data-table">
+      <tr><th>指标</th><th>数据</th><th>含义</th></tr>
+      <tr><td>谷歌2026年CapEx</td><td>1750-1850亿美元</td><td>还不够用</td></tr>
+      <tr><td>Meta 2026年CapEx</td><td>1150-1350亿美元</td><td>利用率仅65%</td></tr>
+      <tr><td>B200租赁价涨幅</td><td>+94%（10月续约）</td><td>高端严重不足</td></tr>
+      <tr><td>GPU交付周期</td><td>12-15个月</td><td>排到2027年</td></tr>
+      <tr><td>Meta总算力规划</td><td>7.5GW到21.2GW（2028）</td><td>三年翻两倍</td></tr>
+      <tr><td>SpaceX算力出租月收入</td><td>21.7亿美元</td><td>马斯克已跑通</td></tr>
+    </table>
+    <div class="img-caption">数据来源：SemiAnalysis、富国银行、每日经济新闻、金融时报</div>
+
+    <h2>真正的瓶颈不是芯片，是电力</h2>
+
+    <p>如果继续追问，为什么会错配？答案会从一个所有人都没想到的方向冒出来。</p>
+
+    <p><strong>不是芯片不够，是电不够。</strong></p>
+
+    <p>一个大型AI数据中心的年用电量，堪比一座小型城市。美国已经有17个州出现了电力供应紧张，直接原因就是数据中心太耗电了。台积电的先进封装产能排到了2027年，HBM内存、光通信模块、燃气轮机，每一个环节都在涨价或拉长交付。</p>
+
+    <p>回到谷歌限制Meta这件事。表面上看是"谷歌不愿意给"，背后是"谷歌真的给不了"。谷歌2026年TPU总供给约400到450万颗，其中60%到70%自留，只有100到150万颗能对外。Meta调用量近几个月增长数倍，缺口大到无法填补。</p>
+
+    <p>这不是商业制裁，不是竞品打压，是纯粹的物理供给不够。</p>
+
+    <p>这也解释了为什么硅谷巨头最近不约而同地把手伸向了核电。微软签了重启三里岛核电站部分机组的合同，购电835兆瓦，为期20年。谷歌投资了多家核电初创公司。马斯克的SpaceX已经在向Anthropic和谷歌出租算力，合计月收入21.7亿美元，其中Anthropic每月支付12.5亿。</p>
+
+    <p>他们终于意识到一件事：靠光伏和风电撑不起一个几百万瓦的数据中心24小时不间断运转。AI的燃料不是数据，是电力。</p>
+
+    <img class="cover-img" src="note-09-power.jpg" alt="电力基础设施与AI数据中心">
+    <div class="img-caption">图源：电力基础设施概念图 · 犀牛伯爵</div>
+
+    <h2>三个被忽略的信号</h2>
+
+    <p>把谷歌限Meta、Meta卖算力、GPU涨价、半导体暴跌这几件事拼在一起看，有三个信号正在从行业里挤出来，但大多数人还没注意到。</p>
+
+    <p><strong>第一，AI行业的胜负手已经不在模型上了。</strong></p>
+
+    <p>过去三年所有人都在比谁的Benchmark分数高、谁的多模态能力强。但到了2026年中，模型之间的差距正在快速缩小。真正拉开差距的，是谁掌握了更多的电力、更靠近数据中心的变电站、更稳定的GPU供应链。Anthropic找马斯克借超算，找Google砸2000亿，在澳大利亚买1.4吉瓦的数据中心容量，这些动作不是产品策略，是<strong>资源抢夺</strong>。</p>
+
+    <p><strong>第二，"算力民主化"正在走向反面。</strong></p>
+
+    <p>开源模型的初衷是让所有人都能用上大模型。但现实是，哪怕你拿到了开源权重，你没有足够的GPU去跑它，等于没有。B200涨到5美元/小时，1000块GPU要等15个月，这对中小团队来说已经是不可承受的成本。算力正在向少数巨头集中，而不是扩散。</p>
+
+    <p><strong>第三，AI公司正在变成重工业公司。</strong></p>
+
+    <p>Meta计划到2028年在美国投资6000亿美元建数据中心，这个数字超过了许多国家的GDP。它要操心的事已经不只是算法和产品，还有电力管网许可、变压器供应、冷却水源、环保审批。扎克伯格现在面对的竞争对手不仅是扎格，还有各州政府的公共事业委员会。</p>
+
+    <p>说真的，如果五年前有人告诉我，做AI最终要和变压器厂抢产能，我一定会觉得他在开玩笑。</p>
+
+    <h2>普通人的位置在哪里</h2>
+
+    <p>你可能觉得这些事离你很远。但有一条链条是直接连到你身上的。</p>
+
+    <p>当谷歌对Gemini实施限额，Meta项目被迫减速，最终延迟的是Facebook、Instagram、WhatsApp上所有依赖AI的功能。社区内容审核可能更慢，AI聊天机器人可能更笨，广告推荐可能更不准。你感受到的"AI体验变差"，背后可能是几千公里外某个数据中心的电闸被拧小了。</p>
+
+    <p>更长远地看，算力瓶颈会直接影响你日常用的每一个AI产品的定价。GPU租金涨94%，这个成本最终会传导到每个API调用、每次ChatGPT对话、每张Midjourney图片的价格上。</p>
+
+    <p>还有一个更隐性的影响。如果高端算力越来越贵、越来越集中在少数巨头手里，那么AI创新的速度可能会被物理资源硬生生拖慢。不是没人有好的想法，是跑不动。</p>
+
+    <p>回到最开始那个画面。7月1日，Meta大涨8.8%，半导体暴跌6.27%。市场在用真金白银投票，赌的是一个还没被主流叙事完全消化的事实：</p>
+
+    <p><strong>AI的战争，已经从软件打到了硬件，从算法打到了电力。</strong></p>
+
+    <p>模型再强，变压器不够，一切归零。</p>
+
+    <div class="ending">
+      谢谢你看我的文章。
+    </div>
+  </div>
+</body>
+</html>
