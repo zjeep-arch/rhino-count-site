@@ -538,6 +538,30 @@ h3 { font-size: 0.75rem; font-weight: 400; color: var(--gold); margin-bottom: 6p
 <div id="gesture-toast"><span class="icon">✋</span><span id="toast-text">Gesture Active</span></div>
 
 <script>
+// 全局错误兜底 — 任何 JS 报错都强制移除 loading
+window.addEventListener('error', function(e) {
+    console.error('[FATAL]', e.message);
+    removeLoading();
+});
+// 未捕获的 Promise 异常
+window.addEventListener('unhandledrejection', function(e) {
+    console.error('[PROMISE]', e.reason);
+    removeLoading();
+});
+
+// 移除 loading — 多重保险
+function removeLoading() {
+    var l = document.getElementById('loading');
+    if (l) {
+        l.style.opacity = '0';
+        setTimeout(function() { if (l && l.parentNode) l.parentNode.removeChild(l); }, 500);
+    }
+}
+setTimeout(removeLoading, 800);
+setTimeout(removeLoading, 2000);
+setTimeout(removeLoading, 4000); // 最后兜底
+window.addEventListener('load', removeLoading);
+
 // ================================================================
 //  Three.js Scene — 金色油画风格水晶球
 // ================================================================
@@ -1317,11 +1341,10 @@ function animate() {
 }
 animate();
 
-// 移除加载
-setTimeout(() => {
-    const l = document.getElementById('loading');
-    if (l) { l.style.opacity = '0'; setTimeout(() => l.remove(), 1000); }
-}, 800);
+// 移除加载 — 已在文件顶部定义 removeLoading，这里只调用
+setTimeout(removeLoading, 800);
+setTimeout(removeLoading, 3000);
+window.addEventListener('load', removeLoading);
 
 // 数据波动
 setInterval(() => {
