@@ -112,6 +112,12 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "微软裁了4800人，转头招了6000人干AI",
+        desc: "不是AI替代你，是会用AI的人在替代不会用AI的人。",
+        href: "notes/2026-07-07-microsoft-layoff-ai-hiring.html"
+      },
+      {
+        type: "Essay",
         title: "谷歌掐了Meta的电闸，AI争夺战杀到了变压器",
         desc: "Meta被限算力后被迫卖算力，半导体暴跌6.27%。AI的战争已从算法打到了电力。",
         href: "notes/2026-07-06-ai-compute-crisis-google-meta-power.html"
@@ -219,6 +225,14 @@ window.SITE_DATA = {
         href: "notes/what-pku-didnt-teach-me.html"
       },
       {
+      {
+        cat: "AI 趋势", num: "N° 10",
+        title: "微软裁了4800人，转头招了6000人干AI",
+        excerpt: "不是AI替代你，是会用AI的人在替代不会用AI的人。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-07-07-microsoft-layoff-ai-hiring.html"
+      },
+
         cat: "AI 趋势", num: "N° 09",
         title: "谷歌掐了Meta的电闸，AI争夺战杀到了变压器",
         excerpt: "Meta被限算力后被迫卖算力，半导体暴跌6.27%。AI的战争已从算法打到了电力。",
