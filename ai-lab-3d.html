@@ -3,655 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Creative Lab · Synaptic Dreams</title>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=JetBrains+Mono:wght@300;400;600&display=swap');
+<title>AI Creative Lab · Oil Painting Interactive Edition</title>
 
-:root {
-    --c1: #00f0ff;
-    --c2: #ff3da6;
-    --c3: #b14aff;
-    --glass: rgba(12, 14, 28, 0.5);
-    --glass-brd: rgba(255, 255, 255, 0.08);
-    --glass-hi: rgba(255, 255, 255, 0.04);
-}
-
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-body, html {
-    width: 100%; height: 100%; overflow: hidden;
-    background: #050510;
-    font-family: 'Space Grotesk', 'Microsoft YaHei', sans-serif;
-    color: #fff; cursor: default;
-}
-
-/* === 3D Canvas === */
-#canvas-container { position: absolute; inset: 0; z-index: 1; }
-
-/* === 背景渐变光晕 === */
-.bg-glow {
-    position: absolute; inset: 0; z-index: 0;
-    background:
-        radial-gradient(ellipse 60% 50% at 30% 40%, rgba(0, 240, 255, 0.08), transparent),
-        radial-gradient(ellipse 50% 60% at 70% 60%, rgba(177, 74, 255, 0.06), transparent),
-        radial-gradient(ellipse 40% 40% at 50% 100%, rgba(255, 61, 166, 0.04), transparent);
-    pointer-events: none;
-}
-
-/* === HUD 图层 === */
-.hud {
-    position: absolute; inset: 0; z-index: 10;
-    pointer-events: none;
-    display: flex; flex-direction: column; justify-content: space-between;
-    padding: 28px 40px;
-}
-
-/* 毛玻璃面板基类 */
-.glass {
-    background: var(--glass);
-    border: 1px solid var(--glass-brd);
-    border-radius: 16px;
-    backdrop-filter: blur(20px) saturate(1.5);
-    -webkit-backdrop-filter: blur(20px) saturate(1.5);
-    box-shadow:
-        0 4px 30px rgba(0, 0, 0, 0.3),
-        inset 0 1px 0 rgba(255, 255, 255, 0.06);
-}
-
-/* ==================== 顶部 ==================== */
-.top-bar {
-    display: flex; align-items: center; justify-content: space-between;
-    width: 100%;
-}
-.brand {
-    display: flex; align-items: center; gap: 12px;
-}
-.brand-icon {
-    width: 36px; height: 36px; border-radius: 10px;
-    background: linear-gradient(135deg, var(--c1), var(--c3));
-    display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
-    position: relative; overflow: hidden;
-}
-.brand-icon::after {
-    content: ''; position: absolute; inset: 1px; border-radius: 9px;
-    background: linear-gradient(135deg, rgba(0,240,255,0.15), rgba(177,74,255,0.15));
-}
-.brand-icon svg { position: relative; z-index: 1; width: 20px; height: 20px; fill: #fff; filter: drop-shadow(0 0 4px rgba(255,255,255,0.5)); }
-.brand-text { display: flex; flex-direction: column; }
-.brand-name { font-size: 1.1rem; font-weight: 700; letter-spacing: 1px; }
-.brand-sub { font-size: 0.65rem; color: rgba(255,255,255,0.4); letter-spacing: 3px; font-family: 'JetBrains Mono', monospace; }
-
-.top-center { text-align: center; }
-.top-title { font-size: 1.4rem; font-weight: 300; letter-spacing: 8px; color: rgba(255,255,255,0.9); }
-.top-title b { font-weight: 700; color: var(--c1); text-shadow: 0 0 12px rgba(0,240,255,0.4); }
-.top-sub { font-size: 0.6rem; letter-spacing: 6px; color: rgba(255,255,255,0.3); font-family: 'JetBrains Mono', monospace; margin-top: 2px; }
-
-.top-right { display: flex; gap: 10px; align-items: center; }
-.pill {
-    padding: 6px 14px; border-radius: 20px; font-size: 0.7rem;
-    font-family: 'JetBrains Mono', monospace; letter-spacing: 1px;
-    border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.03);
-    color: rgba(255,255,255,0.5); display: flex; align-items: center; gap: 6px;
-}
-.pill .dot { width: 6px; height: 6px; border-radius: 50%; background: #2dd87a; box-shadow: 0 0 6px #2dd87a; }
-.pill .dot.offline { background: #ff4444; box-shadow: none; }
-
-/* ==================== 中部左右面板 ==================== */
-.mid-row {
-    flex: 1; display: flex; justify-content: space-between; align-items: center;
-    padding: 0 0;
-}
-
-/* --- 左面板 --- */
-.left-panel {
-    width: 220px; padding: 20px; display: flex; flex-direction: column; gap: 16px;
-}
-.panel-label {
-    font-size: 0.6rem; letter-spacing: 4px; color: rgba(255,255,255,0.3);
-    font-family: 'JetBrains Mono', monospace; text-transform: uppercase;
-}
-.nav-item {
-    display: flex; align-items: center; gap: 12px; padding: 12px 14px;
-    border-radius: 10px; cursor: pointer; text-decoration: none;
-    color: rgba(255,255,255,0.6); transition: all 0.3s;
-    border: 1px solid transparent;
-}
-.nav-item:hover {
-    color: #fff;
-    background: rgba(255,255,255,0.04);
-    border-color: rgba(0,240,255,0.2);
-    transform: translateX(4px);
-}
-.nav-icon {
-    width: 32px; height: 32px; border-radius: 8px; flex-shrink: 0;
-    display: flex; align-items: center; justify-content: center;
-    background: rgba(255,255,255,0.04);
-    transition: all 0.3s;
-}
-.nav-item:hover .nav-icon {
-    background: rgba(0,240,255,0.1);
-    box-shadow: 0 0 12px rgba(0,240,255,0.2);
-}
-.nav-icon svg { width: 16px; height: 16px; fill: currentColor; }
-.nav-text { font-size: 0.8rem; letter-spacing: 0.5px; }
-.nav-text small { display: block; font-size: 0.6rem; color: rgba(255,255,255,0.3); margin-top: 1px; }
-
-/* --- 右面板 --- */
-.right-panel {
-    width: 260px; padding: 20px; display: flex; flex-direction: column; gap: 16px;
-}
-.metric { display: flex; flex-direction: column; gap: 4px; }
-.metric-head { display: flex; justify-content: space-between; align-items: baseline; }
-.metric-name { font-size: 0.65rem; letter-spacing: 2px; color: rgba(255,255,255,0.4); font-family: 'JetBrains Mono', monospace; }
-.metric-val { font-size: 1.1rem; font-weight: 600; font-family: 'JetBrains Mono', monospace; }
-.metric-val.cyan { color: var(--c1); }
-.metric-val.pink { color: var(--c2); }
-.metric-val.purple { color: var(--c3); }
-.bar { height: 3px; border-radius: 2px; background: rgba(255,255,255,0.06); overflow: hidden; }
-.bar-fill { height: 100%; border-radius: 2px; transition: width 0.6s ease; }
-.bar-fill.cyan { background: linear-gradient(90deg, var(--c1), rgba(0,240,255,0.3)); box-shadow: 0 0 8px rgba(0,240,255,0.4); }
-.bar-fill.pink { background: linear-gradient(90deg, var(--c2), rgba(255,61,166,0.3)); box-shadow: 0 0 8px rgba(255,61,166,0.4); }
-.bar-fill.purple { background: linear-gradient(90deg, var(--c3), rgba(177,74,255,0.3)); box-shadow: 0 0 8px rgba(177,74,255,0.4); }
-
-/* 波形动画 */
-.wave-box { display: flex; align-items: end; justify-content: center; gap: 3px; height: 40px; padding: 8px 0; }
-.wave-bar { width: 3px; border-radius: 2px; background: var(--c1); opacity: 0.7; animation: waveBar 1.2s ease-in-out infinite alternate; }
-@keyframes waveBar { 0% { height: 4px; } 100% { height: 32px; } }
-
-/* ==================== 底部 ==================== */
-.bottom-bar {
-    display: flex; justify-content: space-between; align-items: center;
-    width: 100%;
-}
-.bottom-left { display: flex; gap: 10px; }
-.btn {
-    padding: 10px 20px; border-radius: 10px; font-size: 0.75rem;
-    font-family: 'JetBrains Mono', monospace; letter-spacing: 1px;
-    border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.03);
-    color: rgba(255,255,255,0.6); cursor: pointer; transition: all 0.3s;
-    display: flex; align-items: center; gap: 8px;
-}
-.btn:hover {
-    border-color: rgba(255,255,255,0.2); color: #fff;
-    background: rgba(255,255,255,0.06);
-}
-.btn.active {
-    border-color: var(--c1); color: var(--c1);
-    background: rgba(0,240,255,0.08);
-    box-shadow: 0 0 16px rgba(0,240,255,0.15);
-}
-.btn.gesture-btn.active {
-    border-color: var(--c2); color: var(--c2);
-    background: rgba(255,61,166,0.08);
-    box-shadow: 0 0 16px rgba(255,61,166,0.15);
-}
-.bottom-tip {
-    font-size: 0.65rem; letter-spacing: 4px; color: rgba(255,255,255,0.25);
-    font-family: 'JetBrains Mono', monospace;
-    text-align: center;
-}
-
-/* ==================== 摄像头窗 ==================== */
-#cam-box {
-    position: absolute; bottom: 80px; right: 40px; z-index: 20;
-    width: 220px; height: 165px; border-radius: 16px; overflow: hidden;
-    border: 1px solid rgba(255,255,255,0.1);
-    box-shadow: 0 8px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba(0,240,255,0.08);
-    background: rgba(5,8,16,0.9); display: none;
-    transition: all 0.4s;
-}
-#cam-box.on { display: block; animation: camIn 0.4s ease; }
-@keyframes camIn { from { opacity: 0; transform: translateY(10px) scale(0.95); } to { opacity: 1; transform: none; } }
-#cam-video { width: 100%; height: 100%; object-fit: cover; transform: scaleX(-1); opacity: 0.5; }
-#cam-overlay { position: absolute; inset: 0; width: 100%; height: 100%; transform: scaleX(-1); }
-#cam-header {
-    position: absolute; top: 0; left: 0; right: 0; padding: 8px 12px;
-    display: flex; justify-content: space-between; align-items: center;
-    background: linear-gradient(180deg, rgba(0,0,0,0.7), transparent);
-}
-#cam-title { font-size: 0.6rem; letter-spacing: 2px; color: var(--c1); font-family: 'JetBrains Mono', monospace; }
-#cam-status {
-    position: absolute; bottom: 0; left: 0; right: 0; padding: 6px 12px;
-    font-size: 0.6rem; color: rgba(255,255,255,0.7); font-family: 'JetBrains Mono', monospace;
-    background: linear-gradient(0deg, rgba(0,0,0,0.8), transparent);
-    display: flex; justify-content: space-between; align-items: center;
-}
-#cam-status .dot-rec { width: 6px; height: 6px; border-radius: 50%; background: #ff4444; animation: blink 1s infinite; }
-@keyframes blink { 50% { opacity: 0.2; } }
-
-/* ==================== 手势提示 ==================== */
-#gesture-toast {
-    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.9);
-    z-index: 15; pointer-events: none;
-    padding: 14px 32px; border-radius: 12px;
-    background: rgba(12,14,28,0.8); border: 1px solid rgba(0,240,255,0.3);
-    color: #fff; font-size: 0.9rem; letter-spacing: 2px;
-    backdrop-filter: blur(20px); opacity: 0; transition: all 0.3s;
-    box-shadow: 0 0 30px rgba(0,240,255,0.1);
-}
-#gesture-toast.show { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-#gesture-toast .icon { font-size: 1.4rem; margin-right: 8px; vertical-align: middle; }
-
-/* ==================== 手势图例 ==================== */
-#gesture-guide {
-    position: absolute; bottom: 80px; left: 40px; z-index: 20;
-    width: 200px; padding: 16px; display: none;
-}
-#gesture-guide.on { display: block; animation: camIn 0.4s ease; }
-.guide-title { font-size: 0.6rem; letter-spacing: 3px; color: rgba(255,255,255,0.4); font-family: 'JetBrains Mono', monospace; margin-bottom: 12px; }
-.guide-item { display: flex; align-items: center; gap: 10px; padding: 6px 0; }
-.guide-emoji { font-size: 1.2rem; width: 28px; text-align: center; }
-.guide-desc { font-size: 0.7rem; color: rgba(255,255,255,0.6); }
-.guide-desc b { color: #fff; font-weight: 500; }
-
-/* ==================== 加载 ==================== */
-#loading {
-    position: fixed; inset: 0; background: #050510; z-index: 100;
-    display: flex; flex-direction: column; justify-content: center; align-items: center;
-    transition: opacity 0.8s;
-}
-.loader-ring {
-    width: 48px; height: 48px; border-radius: 50%;
-    border: 2px solid rgba(0,240,255,0.1); border-top-color: var(--c1);
-    animation: spin 0.8s linear infinite;
-}
-@keyframes spin { to { transform: rotate(360deg); } }
-.loader-text { margin-top: 20px; font-size: 0.7rem; letter-spacing: 4px; color: var(--c1); font-family: 'JetBrains Mono', monospace; }
-
-/* ==================== 装饰元素 ==================== */
-.corner-deco {
-    position: absolute; width: 60px; height: 60px; z-index: 5; pointer-events: none;
-    opacity: 0.3;
-}
-.corner-deco svg { width: 100%; height: 100%; fill: none; stroke: var(--c1); stroke-width: 1; }
-.corner-tl { top: 16px; left: 16px; }
-.corner-tr { top: 16px; right: 16px; transform: scaleX(-1); }
-.corner-bl { bottom: 16px; left: 16px; transform: scaleY(-1); }
-.corner-br { bottom: 16px; right: 16px; transform: scale(-1, -1); }
-
-/* ==================== 底部流程管线 ==================== */
-.pipeline {
-    width: 100%; padding: 14px 20px;
-    display: flex; flex-direction: column; gap: 8px;
-}
-.pipeline-header {
-    display: flex; justify-content: space-between; align-items: center;
-}
-.pipeline-title {
-    font-size: 0.6rem; letter-spacing: 4px; color: rgba(255,255,255,0.3);
-    font-family: 'JetBrains Mono', monospace;
-}
-.pipeline-status {
-    font-size: 0.65rem; color: var(--c1); font-family: 'JetBrains Mono', monospace;
-}
-.pipeline-track {
-    display: flex; align-items: center; gap: 0; position: relative;
-}
-.pipe-node {
-    display: flex; flex-direction: column; align-items: center; gap: 4px;
-    position: relative; z-index: 2; flex-shrink: 0;
-}
-.pipe-dot {
-    width: 12px; height: 12px; border-radius: 50%;
-    border: 2px solid rgba(255,255,255,0.15);
-    background: rgba(255,255,255,0.03);
-    transition: all 0.4s;
-}
-.pipe-node.done .pipe-dot {
-    border-color: var(--c1); background: var(--c1);
-    box-shadow: 0 0 10px rgba(0,240,255,0.5);
-}
-.pipe-node.active .pipe-dot {
-    border-color: var(--c2); background: var(--c2);
-    box-shadow: 0 0 12px rgba(255,61,166,0.6);
-    animation: pipePulse 1s infinite;
-}
-@keyframes pipePulse { 50% { transform: scale(1.3); } }
-.pipe-label { font-size: 0.55rem; letter-spacing: 1px; color: rgba(255,255,255,0.4); font-family: 'JetBrains Mono', monospace; white-space: nowrap; }
-.pipe-node.done .pipe-label { color: rgba(0,240,255,0.7); }
-.pipe-node.active .pipe-label { color: #fff; }
-.pipe-line {
-    flex: 1; height: 2px; min-width: 20px;
-    background: rgba(255,255,255,0.06); border-radius: 1px;
-    position: relative; overflow: hidden;
-}
-.pipe-line.done { background: linear-gradient(90deg, var(--c1), rgba(0,240,255,0.4)); box-shadow: 0 0 6px rgba(0,240,255,0.3); }
-.pipe-line.active::after {
-    content: ''; position: absolute; top: 0; left: -30%; width: 30%; height: 100%;
-    background: linear-gradient(90deg, transparent, var(--c2), transparent);
-    animation: pipeFlow 1.5s linear infinite;
-}
-@keyframes pipeFlow { to { left: 100%; } }
-
-/* ==================== 浮动信息卡片 ==================== */
-.float-cards {
-    position: absolute; inset: 0; z-index: 8; pointer-events: none;
-}
-.float-card {
-    position: absolute;
-    padding: 12px 16px; min-width: 140px;
-    opacity: 0; animation: floatIn 0.6s ease forwards;
-    pointer-events: auto;
-}
-@keyframes floatIn { to { opacity: 1; } }
-.fc-title { font-size: 0.55rem; letter-spacing: 3px; color: rgba(255,255,255,0.35); font-family: 'JetBrains Mono', monospace; margin-bottom: 6px; }
-.fc-row { display: flex; justify-content: space-between; align-items: center; font-size: 0.7rem; margin-bottom: 3px; }
-.fc-row span:first-child { color: rgba(255,255,255,0.4); }
-.fc-row span:last-child { color: var(--c1); font-family: 'JetBrains Mono', monospace; font-weight: 600; }
-.fc-row.pink span:last-child { color: var(--c2); }
-.fc-row.purple span:last-child { color: var(--c3); }
-
-/* 日志面板 */
-.log-panel {
-    position: absolute; bottom: 140px; left: 50%; transform: translateX(-50%);
-    width: 420px; max-height: 120px; padding: 10px 14px;
-    overflow: hidden; z-index: 8; pointer-events: none;
-}
-.log-list { display: flex; flex-direction: column; gap: 2px; }
-.log-entry {
-    font-size: 0.6rem; font-family: 'JetBrains Mono', monospace;
-    color: rgba(255,255,255,0.35); letter-spacing: 0.5px;
-    opacity: 0; animation: logIn 0.3s ease forwards;
-    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-}
-.log-entry .ts { color: rgba(0,240,255,0.5); margin-right: 8px; }
-.log-entry .tag { color: var(--c2); margin-right: 6px; }
-.log-entry.done { color: rgba(45, 216, 122, 0.5); }
-@keyframes logIn { to { opacity: 1; } }
-
-/* 生成预览缩略图 */
-.preview-card {
-    position: absolute; top: 50%; right: 320px; transform: translateY(-50%);
-    width: 120px; padding: 10px; z-index: 8; pointer-events: auto;
-    opacity: 0; animation: floatIn 0.6s 0.3s ease forwards;
-}
-.preview-thumb {
-    width: 100%; height: 70px; border-radius: 8px;
-    background: linear-gradient(135deg, rgba(0,240,255,0.1), rgba(177,74,255,0.1));
-    border: 1px solid rgba(255,255,255,0.08);
-    display: flex; align-items: center; justify-content: center;
-    overflow: hidden; position: relative;
-}
-.preview-thumb canvas { width: 100%; height: 100%; }
-.preview-thumb::after {
-    content: 'RENDERING'; position: absolute; bottom: 4px; left: 6px;
-    font-size: 0.5rem; color: var(--c2); letter-spacing: 2px;
-    font-family: 'JetBrains Mono', monospace;
-}
-
-/* 参数面板（左上） */
-.params-card {
-    position: absolute; top: 100px; left: 290px;
-    width: 180px; padding: 12px 14px; z-index: 8; pointer-events: auto;
-    opacity: 0; animation: floatIn 0.6s 0.1s ease forwards;
-}
-
-/* 底部按钮确保可点击 */
-.bottom-bar { position: relative; z-index: 50; }
-.btn { position: relative; z-index: 51; }
-
-/* ==================== 独立底部控制栏 ==================== */
-#bottom-controls {
-    position: fixed; bottom: 20px; left: 40px; right: 40px;
-    z-index: 200; display: flex; align-items: center; justify-content: space-between;
-    gap: 12px; pointer-events: none;
-}
-#bottom-controls > * { pointer-events: auto; }
-.btn-ctrl {
-    padding: 10px 20px; border-radius: 10px; font-size: 0.75rem;
-    font-family: 'JetBrains Mono', monospace; letter-spacing: 1px;
-    border: 1px solid rgba(255,255,255,0.15); background: rgba(12,14,28,0.7);
-    color: rgba(255,255,255,0.7); cursor: pointer; transition: all 0.3s;
-    display: flex; align-items: center; gap: 8px;
-    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-    position: relative; z-index: 201;
-}
-.btn-ctrl:hover {
-    border-color: rgba(255,255,255,0.3); color: #fff;
-    background: rgba(20,22,40,0.8);
-    transform: translateY(-1px);
-}
-.btn-ctrl.gesture-ctrl.active {
-    border-color: var(--c2); color: var(--c2);
-    background: rgba(255,61,166,0.1);
-    box-shadow: 0 0 16px rgba(255,61,166,0.2);
-}
-.bottom-tip-fixed {
-    font-size: 0.65rem; letter-spacing: 4px; color: rgba(255,255,255,0.25);
-    font-family: 'JetBrains Mono', monospace; text-align: center;
-    pointer-events: none;
-}
-
-/* 响应式 */
-@media (max-width: 768px) {
-    .hud { padding: 16px; }
-    .left-panel, .right-panel { width: 140px; padding: 12px; }
-    .top-title { font-size: 1rem; letter-spacing: 4px; }
-    .nav-text small { display: none; }
-    #cam-box, #gesture-guide { width: 150px; }
-    .float-card, .params-card, .preview-card, .log-panel { display: none; }
-    .pipe-label { display: none; }
-    .pipeline { padding: 8px; }
-}
-</style>
-</head>
-<body>
-
-<!-- Loading -->
-<div id="loading">
-    <div class="loader-ring"></div>
-    <p class="loader-text">INITIALIZING NEURAL SCENE</p>
-</div>
-
-<!-- 3D Canvas -->
-<div class="bg-glow"></div>
-<div id="canvas-container"></div>
-
-<!-- 角落装饰 -->
-<div class="corner-deco corner-tl"><svg viewBox="0 0 60 60"><path d="M2 20 L2 2 L20 2 M10 2 L10 10 L2 10" /></svg></div>
-<div class="corner-deco corner-tr"><svg viewBox="0 0 60 60"><path d="M2 20 L2 2 L20 2 M10 2 L10 10 L2 10" /></svg></div>
-<div class="corner-deco corner-bl"><svg viewBox="0 0 60 60"><path d="M2 20 L2 2 L20 2 M10 2 L10 10 L2 10" /></svg></div>
-<div class="corner-deco corner-br"><svg viewBox="0 0 60 60"><path d="M2 20 L2 2 L20 2 M10 2 L10 10 L2 10" /></svg></div>
-
-<!-- 浮动信息卡片层 -->
-<div class="float-cards">
-    <!-- 参数面板 -->
-    <div class="glass params-card">
-        <div class="fc-title">MODEL PARAMETERS</div>
-        <div class="fc-row"><span>Model</span><span>GPT-4o</span></div>
-        <div class="fc-row"><span>Resolution</span><span>2048×2048</span></div>
-        <div class="fc-row pink"><span>Seed</span><span id="fc-seed">847291</span></div>
-        <div class="fc-row purple"><span>Steps</span><span id="fc-steps">42/50</span></div>
-        <div class="fc-row"><span>Guidance</span><span>7.5</span></div>
-    </div>
-
-    <!-- 生成预览 -->
-    <div class="glass preview-card">
-        <div class="fc-title">PREVIEW</div>
-        <div class="preview-thumb">
-            <canvas id="preview-canvas" width="100" height="60"></canvas>
-        </div>
-    </div>
-</div>
-
-<!-- 日志面板 -->
-<div class="glass log-panel">
-    <div class="fc-title" style="margin-bottom:6px;">SYSTEM LOG</div>
-    <div class="log-list" id="log-list"></div>
-</div>
-
-<!-- HUD -->
-<div class="hud">
-    <!-- 顶部 -->
-    <div class="top-bar">
-        <div class="brand">
-            <div class="brand-icon">
-                <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-            </div>
-            <div class="brand-text">
-                <span class="brand-name">犀牛伯爵</span>
-                <span class="brand-sub">RHINO·COUNT</span>
-            </div>
-        </div>
-        <div class="top-center">
-            <div class="top-title">AI <b>CREATIVE</b> LAB</div>
-            <div class="top-sub">SYNAPTIC DREAMS COLLECTION</div>
-        </div>
-        <div class="top-right">
-            <div class="pill"><span class="dot"></span> ONLINE</div>
-            <div class="pill" id="fps-pill">60 FPS</div>
-        </div>
-    </div>
-
-    <!-- 中部 -->
-    <div class="mid-row">
-        <!-- 左面板 -->
-        <div class="glass left-panel interactive">
-            <div class="panel-label">NAVIGATION</div>
-            <a href="#" class="nav-item" onclick="event.preventDefault()">
-                <div class="nav-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" fill="none" stroke="currentColor" stroke-width="2"/></svg></div>
-                <div class="nav-text">AI Generator<small>Text to 3D</small></div>
-            </a>
-            <div class="nav-item">
-                <div class="nav-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/></svg></div>
-                <div class="nav-text">Art Style<small>Neural Transfer</small></div>
-            </div>
-            <div class="nav-item">
-                <div class="nav-icon"><svg viewBox="0 0 24 24"><path d="M21 3H3v18h18V3zm-2 16H5V5h14v14zM7 7h4v4H7V7zm6 0h4v4h-4V7zm-6 6h4v4H7v-4zm6 0h4v4h-4v-4z" fill="none" stroke="currentColor" stroke-width="2"/></svg></div>
-                <div class="nav-text">Export 3D<small>GLTF / GLB</small></div>
-            </div>
-            <div class="nav-item">
-                <div class="nav-icon"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z" fill="none" stroke="currentColor" stroke-width="2"/></svg></div>
-                <div class="nav-text">Workflow<small>Agent Pipeline</small></div>
-            </div>
-        </div>
-
-        <!-- 右面板 -->
-        <div class="glass right-panel interactive">
-            <div class="panel-label">SYSTEM METRICS</div>
-
-            <div class="metric">
-                <div class="metric-head">
-                    <span class="metric-name">VORTEX ENERGY</span>
-                    <span class="metric-val cyan" id="m-energy">87.3%</span>
-                </div>
-                <div class="bar"><div class="bar-fill cyan" id="bar-energy" style="width:87%"></div></div>
-            </div>
-            <div class="metric">
-                <div class="metric-head">
-                    <span class="metric-name">NEURAL SYNC</span>
-                    <span class="metric-val pink" id="m-sync">64.1%</span>
-                </div>
-                <div class="bar"><div class="bar-fill pink" id="bar-sync" style="width:64%"></div></div>
-            </div>
-            <div class="metric">
-                <div class="metric-head">
-                    <span class="metric-name">PARTICLE FLUX</span>
-                    <span class="metric-val purple" id="m-flux">92.0%</span>
-                </div>
-                <div class="bar"><div class="bar-fill purple" id="bar-flux" style="width:92%"></div></div>
-            </div>
-
-            <div style="border-top:1px solid rgba(255,255,255,0.06); padding-top:12px;">
-                <div class="panel-label" style="margin-bottom:8px;">SIGNAL WAVE</div>
-                <div class="wave-box" id="wave-box"></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 底部：管线流程 + 操作栏 -->
-    <div style="display:flex; flex-direction:column; gap:12px; width:100%;">
-        <!-- AI生成管线 -->
-        <div class="glass pipeline interactive">
-            <div class="pipeline-header">
-                <span class="pipeline-title">AI GENERATION PIPELINE</span>
-                <span class="pipeline-status" id="pipe-status">PROCESSING... 73%</span>
-            </div>
-            <div class="pipeline-track" id="pipeline-track">
-                <div class="pipe-node done"><div class="pipe-dot"></div><span class="pipe-label">INPUT</span></div>
-                <div class="pipe-line done"></div>
-                <div class="pipe-node done"><div class="pipe-dot"></div><span class="pipe-label">PARSE</span></div>
-                <div class="pipe-line done"></div>
-                <div class="pipe-node active"><div class="pipe-dot"></div><span class="pipe-label">3D MODEL</span></div>
-                <div class="pipe-line active"></div>
-                <div class="pipe-node"><div class="pipe-dot"></div><span class="pipe-label">SHADER</span></div>
-                <div class="pipe-line"></div>
-                <div class="pipe-node"><div class="pipe-dot"></div><span class="pipe-label">RENDER</span></div>
-                <div class="pipe-line"></div>
-                <div class="pipe-node"><div class="pipe-dot"></div><span class="pipe-label">EXPORT</span></div>
-            </div>
-        </div>
-
-        <!-- 操作按钮行 — 移到 hud 外面以确保可点击 -->
-    </div>
-</div>
-
-<!-- 独立底部按钮栏 — 不受 hud pointer-events:none 影响 -->
-<div id="bottom-controls">
-    <button class="btn-ctrl" id="btn-return">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
-        RETURN
-    </button>
-    <button class="btn-ctrl" id="btn-tempest">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-        TEMPEST
-    </button>
-    <div class="bottom-tip-fixed">DRAG TO ROTATE · SCROLL TO ZOOM · ENABLE GESTURE FOR HAND CONTROL</div>
-    <button class="btn-ctrl gesture-ctrl" id="gesture-btn">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 11V7a2 2 0 014 0v4M11 11V5a2 2 0 014 0v6M15 11V7a2 2 0 014 0v8a6 6 0 01-6 6h-3a8 8 0 01-8-8V9a2 2 0 014 0"/></svg>
-        GESTURE
-    </button>
-</div>
-
-<!-- 摄像头 -->
-<div id="cam-box">
-    <video id="cam-video" autoplay playsinline></video>
-    <canvas id="cam-overlay" width="320" height="240"></canvas>
-    <div id="cam-header">
-        <span id="cam-title">HAND TRACKING</span>
-    </div>
-    <div id="cam-status">
-        <span id="cam-gesture">—</span>
-        <span><span class="dot-rec"></span> LIVE</span>
-    </div>
-</div>
-
-<!-- 手势图例 -->
-<div id="gesture-guide" class="glass">
-    <div class="guide-title">GESTURE GUIDE</div>
-    <div class="guide-item">
-        <span class="guide-emoji">🖐</span>
-        <span class="guide-desc"><b>Open Palm</b><br>Rotate globe</span>
-    </div>
-    <div class="guide-item">
-        <span class="guide-emoji">✊</span>
-        <span class="guide-desc"><b>Fist</b><br>Trigger tempest</span>
-    </div>
-    <div class="guide-item">
-        <span class="guide-emoji">🤏</span>
-        <span class="guide-desc"><b>Pinch</b><br>Zoom in/out</span>
-    </div>
-    <div class="guide-item">
-        <span class="guide-emoji">👆</span>
-        <span class="guide-desc"><b>Point</b><br>Move camera</span>
-    </div>
-    <div class="guide-item">
-        <span class="guide-emoji">✌️</span>
-        <span class="guide-desc"><b>Peace</b><br>Reset view</span>
-    </div>
-    <div class="guide-item">
-        <span class="guide-emoji">🫶</span>
-        <span class="guide-desc"><b>Heart</b><br>Bloom boost</span>
-    </div>
-</div>
-
-<!-- 手势提示 -->
-<div id="gesture-toast"><span class="icon">✋</span><span id="toast-text">Gesture Active</span></div>
+<!-- 古典字体 -->
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;600;700&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
 
 <!-- MediaPipe -->
-<script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
 
 <!-- Three.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -664,109 +23,620 @@ body, html {
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/LuminosityHighPassShader.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/UnrealBloomPass.js"></script>
 
+<style>
+:root {
+    --gold: #d4af37;
+    --gold-light: #e5d5b3;
+    --gold-dark: #a07828;
+    --walnut: #2a1f15;
+    --walnut-dark: #1a1208;
+    --parchment: rgba(22, 18, 14, 0.82);
+    --parchment-brd: rgba(212, 175, 55, 0.25);
+    --ink: #c9b097;
+    --ink-dim: #8a7460;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body, html {
+    width: 100%; height: 100%; overflow: hidden;
+    background: radial-gradient(ellipse at 50% 50%, #1a1410, #0a0806);
+    font-family: 'Noto Serif SC', serif;
+    color: var(--ink);
+}
+
+/* 亚麻画布纹理叠加 */
+body::after {
+    content: ""; position: fixed; inset: 0; z-index: 9999; pointer-events: none;
+    opacity: 0.03;
+    background-image:
+        radial-gradient(rgba(255,255,255,0.3) 1px, transparent 0),
+        radial-gradient(rgba(0,0,0,0.5) 1px, transparent 0);
+    background-size: 3px 3px;
+}
+
+/* 暗角效果 */
+body::before {
+    content: ""; position: fixed; inset: 0; z-index: 9998; pointer-events: none;
+    box-shadow: inset 0 0 200px rgba(0,0,0,0.8);
+}
+
+/* ==================== 主布局 ==================== */
+.workspace {
+    display: grid;
+    grid-template-columns: 280px 1fr 320px;
+    grid-template-rows: 64px 1fr 130px;
+    width: 100vw; height: 100vh;
+    padding: 12px; gap: 12px;
+    z-index: 2; position: relative;
+}
+
+/* ==================== 古典面板 ==================== */
+.panel {
+    background: var(--parchment);
+    backdrop-filter: blur(15px) saturate(110%);
+    -webkit-backdrop-filter: blur(15px) saturate(110%);
+    border-radius: 4px;
+    border: 1px solid var(--parchment-brd);
+    box-shadow: inset 0 0 20px rgba(212,175,55,0.04), 0 8px 30px rgba(0,0,0,0.6);
+    padding: 16px 20px;
+    position: relative;
+    overflow: hidden;
+}
+/* 古典内框装饰线 */
+.panel::before {
+    content: ''; position: absolute; top: 3px; left: 3px; right: 3px; bottom: 3px;
+    border: 1px solid rgba(212,175,55,0.06);
+    border-radius: 2px; pointer-events: none;
+}
+/* 四角金箔装饰 */
+.panel::after {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background:
+        linear-gradient(135deg, var(--gold) 0%, transparent 8px) top left / 16px 16px no-repeat,
+        linear-gradient(225deg, var(--gold) 0%, transparent 8px) top right / 16px 16px no-repeat,
+        linear-gradient(45deg, var(--gold) 0%, transparent 8px) bottom left / 16px 16px no-repeat,
+        linear-gradient(315deg, var(--gold) 0%, transparent 8px) bottom right / 16px 16px no-repeat;
+    opacity: 0.15; pointer-events: none;
+}
+
+.header-panel { grid-column: 1 / span 3; display: flex; justify-content: space-between; align-items: center; padding: 12px 24px; }
+.footer-panel { grid-column: 1 / span 3; }
+
+/* ==================== 标题 ==================== */
+h1, h2, h3 {
+    font-family: 'Cinzel', serif;
+    color: var(--gold-light);
+    letter-spacing: 2px;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.5);
+}
+h1 { font-size: 1.4rem; font-weight: 600; }
+h2 { font-size: 0.85rem; font-weight: 500; margin-bottom: 12px; padding-bottom: 6px; border-bottom: 1px solid rgba(212,175,55,0.12); }
+h3 { font-size: 0.75rem; font-weight: 400; color: var(--gold); margin-bottom: 6px; }
+
+.brand-row { display: flex; align-items: center; gap: 14px; }
+.brand-crest {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: radial-gradient(circle, var(--gold-dark), var(--walnut));
+    border: 2px solid var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 0 12px rgba(212,175,55,0.2), inset 0 0 8px rgba(0,0,0,0.4);
+}
+.brand-crest svg { width: 20px; height: 20px; fill: var(--gold-light); }
+.brand-text { display: flex; flex-direction: column; }
+.brand-name { font-family: 'Cinzel', serif; font-size: 1rem; color: var(--gold-light); letter-spacing: 2px; }
+.brand-sub { font-size: 0.6rem; color: var(--ink-dim); letter-spacing: 3px; font-family: 'JetBrains Mono', monospace; }
+
+/* 状态徽章 */
+.gesture-badge {
+    background: rgba(160,120,40,0.15); border: 1px solid var(--gold);
+    padding: 5px 16px; border-radius: 20px; font-size: 0.7rem;
+    color: var(--gold-light); font-family: 'Noto Serif SC', serif;
+    display: flex; align-items: center; gap: 6px;
+    transition: all 0.3s;
+}
+.gesture-badge.active {
+    background: rgba(160,120,40,0.3);
+    box-shadow: 0 0 12px rgba(212,175,55,0.3);
+}
+.gesture-badge .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--ink-dim); }
+.gesture-badge.active .dot { background: #5dc85d; box-shadow: 0 0 4px #5dc85d; }
+
+/* ==================== 中央画框 ==================== */
+.canvas-frame {
+    position: relative;
+    background: #0d0a08;
+    border: 14px solid var(--walnut);
+    border-radius: 2px;
+    outline: 2px solid var(--gold);
+    outline-offset: -2px;
+    box-shadow:
+        inset 0 0 60px rgba(0,0,0,0.9),
+        inset 0 0 20px rgba(212,175,55,0.05),
+        0 12px 50px rgba(0,0,0,0.8);
+    overflow: hidden;
+}
+/* 画框外层金箔雕花效果 */
+.canvas-frame::before {
+    content: ''; position: absolute; inset: -16px; z-index: -1;
+    border: 2px solid var(--gold-dark);
+    box-shadow: 0 0 0 2px var(--walnut), 0 0 0 4px var(--gold);
+}
+/* 画框内角装饰 */
+.canvas-frame::after {
+    content: ''; position: absolute; top: 4px; left: 4px; right: 4px; bottom: 4px;
+    pointer-events: none; z-index: 10;
+    background:
+        linear-gradient(135deg, var(--gold) 0%, transparent 12px) top left / 24px 24px no-repeat,
+        linear-gradient(225deg, var(--gold) 0%, transparent 12px) top right / 24px 24px no-repeat,
+        linear-gradient(45deg, var(--gold) 0%, transparent 12px) bottom left / 24px 24px no-repeat,
+        linear-gradient(315deg, var(--gold) 0%, transparent 12px) bottom right / 24px 24px no-repeat;
+    opacity: 0.2;
+}
+
+#three-canvas { width: 100%; height: 100%; display: block; }
+
+/* 油彩粒子画布叠加 */
+#paint-canvas {
+    position: absolute; inset: 0; z-index: 5; pointer-events: none;
+}
+
+/* 隐藏摄像头 */
+#webcam { display: none; }
+
+/* 摄像头预览窗 */
+#cam-preview {
+    position: absolute; bottom: 16px; right: 16px; z-index: 20;
+    width: 180px; height: 135px; border-radius: 4px; overflow: hidden;
+    border: 2px solid var(--gold);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+    display: none;
+}
+#cam-preview.on { display: block; }
+#cam-preview video { width: 100%; height: 100%; object-fit: cover; transform: scaleX(-1); opacity: 0.5; }
+#cam-preview canvas { position: absolute; inset: 0; width: 100%; height: 100%; transform: scaleX(-1); }
+#cam-preview .cam-label {
+    position: absolute; top: 4px; left: 6px;
+    font-size: 0.55rem; color: var(--gold); letter-spacing: 1px;
+    font-family: 'JetBrains Mono', monospace;
+    text-shadow: 0 0 4px rgba(0,0,0,0.8);
+}
+#cam-preview .cam-gesture {
+    position: absolute; bottom: 4px; left: 6px;
+    font-size: 0.55rem; color: var(--gold-light); letter-spacing: 1px;
+    font-family: 'JetBrains Mono', monospace;
+    text-shadow: 0 0 4px rgba(0,0,0,0.8);
+}
+
+/* ==================== 左面板导航 ==================== */
+.nav-list { list-style: none; padding: 0; margin: 0; }
+.nav-item {
+    padding: 10px 12px; margin-bottom: 6px; border-radius: 3px;
+    cursor: pointer; transition: all 0.3s;
+    border: 1px solid transparent;
+    display: flex; align-items: center; gap: 10px;
+    font-size: 0.8rem; color: var(--ink-dim);
+}
+.nav-item:hover {
+    color: var(--gold-light); background: rgba(212,175,55,0.05);
+    border-color: rgba(212,175,55,0.15);
+}
+.nav-item.active {
+    color: var(--gold); background: rgba(212,175,55,0.08);
+    border-color: rgba(212,175,55,0.25);
+}
+.nav-icon {
+    width: 24px; height: 24px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+}
+.nav-icon svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.5; }
+.nav-text { font-family: 'Noto Serif SC', serif; }
+.nav-text small { display: block; font-size: 0.6rem; color: var(--ink-dim); margin-top: 1px; font-family: 'JetBrains Mono', monospace; }
+
+/* ==================== 右面板指标 ==================== */
+.metric-item { margin-bottom: 14px; }
+.metric-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px; }
+.metric-label { font-size: 0.7rem; color: var(--ink-dim); letter-spacing: 1px; }
+.metric-val { font-size: 0.85rem; color: var(--gold); font-family: 'JetBrains Mono', monospace; font-weight: 600; }
+.progress-bar {
+    width: 100%; height: 4px; background: rgba(0,0,0,0.4);
+    border-radius: 2px; overflow: hidden;
+    border: 1px solid rgba(212,175,55,0.08);
+}
+.progress-fill {
+    height: 100%; border-radius: 1px;
+    background: linear-gradient(90deg, var(--gold-dark), var(--gold));
+    box-shadow: 0 0 6px rgba(212,175,55,0.4);
+    transition: width 0.6s ease;
+}
+
+/* 调色板预览 */
+.palette-row { display: flex; gap: 4px; margin-top: 8px; }
+.palette-swatch {
+    flex: 1; height: 24px; border-radius: 2px;
+    border: 1px solid rgba(212,175,55,0.15);
+    cursor: pointer; transition: transform 0.2s;
+}
+.palette-swatch:hover { transform: translateY(-2px); }
+
+/* ==================== 底部日志 ==================== */
+.log-container {
+    max-height: 80px; overflow: hidden;
+    font-family: 'JetBrains Mono', monospace; font-size: 0.65rem;
+}
+.log-entry {
+    color: var(--ink-dim); margin-bottom: 2px; letter-spacing: 0.5px;
+    opacity: 0; animation: logFadeIn 0.4s ease forwards;
+}
+.log-entry .ts { color: var(--gold-dark); margin-right: 8px; }
+.log-entry .tag { color: var(--gold); margin-right: 6px; }
+.log-entry.done { color: #6a8c5d; }
+@keyframes logFadeIn { to { opacity: 1; } }
+
+/* ==================== 底部控制按钮 ==================== */
+#bottom-controls {
+    position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%);
+    z-index: 200; display: flex; gap: 10px; align-items: center;
+}
+.btn-ornate {
+    padding: 8px 20px; border-radius: 3px;
+    font-family: 'Cinzel', serif; font-size: 0.7rem; letter-spacing: 2px;
+    color: var(--gold-light);
+    background: linear-gradient(180deg, rgba(42,31,21,0.9), rgba(26,18,8,0.9));
+    border: 1px solid var(--gold-dark);
+    cursor: pointer; transition: all 0.3s;
+    display: flex; align-items: center; gap: 6px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.4), inset 0 1px 0 rgba(212,175,55,0.1);
+    position: relative;
+}
+.btn-ornate::before {
+    content: ''; position: absolute; top: 1px; left: 1px; right: 1px; bottom: 1px;
+    border: 1px solid rgba(212,175,55,0.08); border-radius: 2px;
+    pointer-events: none;
+}
+.btn-ornate:hover {
+    color: #fff; border-color: var(--gold);
+    background: linear-gradient(180deg, rgba(52,39,25,0.9), rgba(36,25,12,0.9));
+    box-shadow: 0 0 16px rgba(212,175,55,0.25), inset 0 1px 0 rgba(212,175,55,0.2);
+    transform: translateY(-1px);
+}
+.btn-ornate.active {
+    border-color: var(--gold); color: var(--gold);
+    box-shadow: 0 0 16px rgba(212,175,55,0.3);
+    background: linear-gradient(180deg, rgba(62,46,28,0.9), rgba(42,28,14,0.9));
+}
+.btn-ornate svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 2; }
+
+/* ==================== 手势提示 ==================== */
+#gesture-toast {
+    position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.9);
+    z-index: 300; pointer-events: none;
+    padding: 12px 28px; border-radius: 4px;
+    background: var(--parchment); border: 1px solid var(--gold);
+    color: var(--gold-light); font-size: 0.8rem; letter-spacing: 2px;
+    font-family: 'Cinzel', serif;
+    backdrop-filter: blur(20px); opacity: 0; transition: all 0.4s;
+    box-shadow: 0 0 30px rgba(212,175,55,0.15);
+}
+#gesture-toast.show { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+#gesture-toast .icon { font-size: 1.2rem; margin-right: 8px; }
+
+/* ==================== 手势图例 ==================== */
+#gesture-guide {
+    position: fixed; bottom: 160px; left: 16px; z-index: 200;
+    width: 180px; display: none;
+}
+#gesture-guide.on { display: block; }
+.guide-item { display: flex; align-items: center; gap: 8px; padding: 4px 0; }
+.guide-emoji { font-size: 1rem; width: 24px; text-align: center; }
+.guide-desc { font-size: 0.65rem; color: var(--ink-dim); }
+.guide-desc b { color: var(--gold-light); font-weight: 500; }
+
+/* ==================== 加载 ==================== */
+#loading {
+    position: fixed; inset: 0; background: #0a0806; z-index: 1000;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    transition: opacity 1s;
+}
+.loader-frame {
+    width: 56px; height: 56px; border-radius: 50%;
+    border: 2px solid rgba(212,175,55,0.1); border-top-color: var(--gold);
+    animation: spin 1s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.loader-text {
+    margin-top: 20px; font-size: 0.7rem; letter-spacing: 4px;
+    color: var(--gold); font-family: 'Cinzel', serif;
+}
+
+/* 响应式 */
+@media (max-width: 900px) {
+    .workspace { grid-template-columns: 180px 1fr 200px; }
+    .nav-text small { display: none; }
+}
+@media (max-width: 600px) {
+    .workspace { grid-template-columns: 1fr; grid-template-rows: 56px 1fr 100px; }
+    .header-panel { grid-column: 1; }
+    .footer-panel { grid-column: 1; }
+    .workspace > .panel:not(.header-panel):not(.footer-panel):not(.canvas-frame) { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- 加载 -->
+<div id="loading">
+    <div class="loader-frame"></div>
+    <p class="loader-text">PREPARING THE CANVAS</p>
+</div>
+
+<!-- 主工作区 -->
+<div class="workspace">
+    <!-- 顶部 -->
+    <div class="panel header-panel">
+        <div class="brand-row">
+            <div class="brand-crest">
+                <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+            </div>
+            <div class="brand-text">
+                <span class="brand-name">RHINO COUNT</span>
+                <span class="brand-sub">犀牛伯爵 · AI LAB</span>
+            </div>
+        </div>
+        <div style="text-align:center;">
+            <h1>AI CREATIVE LAB</h1>
+            <div style="font-size:0.55rem; letter-spacing:4px; color:var(--ink-dim); font-family:'JetBrains Mono',monospace; margin-top:2px;">OIL PAINTING INTERACTIVE EDITION</div>
+        </div>
+        <div class="gesture-badge" id="status">
+            <span class="dot"></span>
+            <span id="status-text">等待右手挥舞</span>
+        </div>
+    </div>
+
+    <!-- 左面板：导航 -->
+    <div class="panel">
+        <h2>NAVIGATION</h2>
+        <ul class="nav-list">
+            <li class="nav-item active">
+                <div class="nav-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+                <div class="nav-text">AI Generator<small>Text to 3D</small></div>
+            </li>
+            <li class="nav-item">
+                <div class="nav-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/></svg></div>
+                <div class="nav-text">Art Style<small>Neural Transfer</small></div>
+            </li>
+            <li class="nav-item">
+                <div class="nav-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M9 3v18"/></svg></div>
+                <div class="nav-text">Export 3D<small>GLTF / GLB</small></div>
+            </li>
+            <li class="nav-item">
+                <div class="nav-icon"><svg viewBox="0 0 24 24"><path d="M9 16l-5-5 5-5M15 8l5 5-5 5"/></svg></div>
+                <div class="nav-text">Workflow<small>Agent Pipeline</small></div>
+            </li>
+        </ul>
+
+        <h2 style="margin-top:20px;">PIPELINE</h2>
+        <div id="pipeline-mini" style="display:flex; flex-direction:column; gap:6px;">
+            <div style="display:flex; align-items:center; gap:8px; font-size:0.65rem; color:var(--ink-dim); font-family:'JetBrains Mono',monospace;">
+                <span style="width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 4px var(--gold);"></span>
+                INPUT ✓
+            </div>
+            <div style="display:flex; align-items:center; gap:8px; font-size:0.65rem; color:var(--ink-dim); font-family:'JetBrains Mono',monospace;">
+                <span style="width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 4px var(--gold);"></span>
+                PARSE ✓
+            </div>
+            <div style="display:flex; align-items:center; gap:8px; font-size:0.65rem; color:var(--gold-light); font-family:'JetBrains Mono',monospace;">
+                <span style="width:8px;height:8px;border-radius:50%;background:#c87a2a;box-shadow:0 0 6px #c87a2a;animation:spin 1s infinite;"></span>
+                3D MODEL ⏳
+            </div>
+            <div style="display:flex; align-items:center; gap:8px; font-size:0.65rem; color:var(--ink-dim); font-family:'JetBrains Mono',monospace;">
+                <span style="width:8px;height:8px;border-radius:50%;border:1px solid var(--ink-dim);"></span>
+                SHADER
+            </div>
+            <div style="display:flex; align-items:center; gap:8px; font-size:0.65rem; color:var(--ink-dim); font-family:'JetBrains Mono',monospace;">
+                <span style="width:8px;height:8px;border-radius:50%;border:1px solid var(--ink-dim);"></span>
+                RENDER
+            </div>
+            <div style="display:flex; align-items:center; gap:8px; font-size:0.65rem; color:var(--ink-dim); font-family:'JetBrains Mono',monospace;">
+                <span style="width:8px;height:8px;border-radius:50%;border:1px solid var(--ink-dim);"></span>
+                EXPORT
+            </div>
+        </div>
+    </div>
+
+    <!-- 中央画框 -->
+    <div class="canvas-frame">
+        <canvas id="three-canvas"></canvas>
+        <canvas id="paint-canvas"></canvas>
+        <video id="webcam" autoplay playsinline></video>
+        <div id="cam-preview">
+            <video id="cam-video" autoplay playsinline></video>
+            <canvas id="cam-overlay" width="320" height="240"></canvas>
+            <span class="cam-label">HAND TRACKING</span>
+            <span class="cam-gesture" id="cam-gesture">—</span>
+        </div>
+    </div>
+
+    <!-- 右面板：指标 -->
+    <div class="panel">
+        <h2>ARTISTIC METRICS</h2>
+        <div class="metric-item">
+            <div class="metric-head">
+                <span class="metric-label">Vortex Energy</span>
+                <span class="metric-val" id="m-energy">87.3%</span>
+            </div>
+            <div class="progress-bar"><div class="progress-fill" id="bar-energy" style="width:87%"></div></div>
+        </div>
+        <div class="metric-item">
+            <div class="metric-head">
+                <span class="metric-label">Brushstroke Sync</span>
+                <span class="metric-val" id="m-sync">64.1%</span>
+            </div>
+            <div class="progress-bar"><div class="progress-fill" id="bar-sync" style="width:64%"></div></div>
+        </div>
+        <div class="metric-item">
+            <div class="metric-head">
+                <span class="metric-label">Particle Flux</span>
+                <span class="metric-val" id="m-flux">92.0%</span>
+            </div>
+            <div class="progress-bar"><div class="progress-fill" id="bar-flux" style="width:92%"></div></div>
+        </div>
+
+        <h2 style="margin-top:16px;">PALETTE</h2>
+        <div class="palette-row">
+            <div class="palette-swatch" style="background:#d4af37;" title="Gold"></div>
+            <div class="palette-swatch" style="background:#8c2d19;" title="Vermilion"></div>
+            <div class="palette-swatch" style="background:#2a1f15;" title="Walnut"></div>
+            <div class="palette-swatch" style="background:#4a2c11;" title="Umber"></div>
+            <div class="palette-swatch" style="background:#e5d5b3;" title="Ivory"></div>
+        </div>
+
+        <h2 style="margin-top:16px;">PARAMETERS</h2>
+        <div style="font-size:0.65rem; color:var(--ink-dim); font-family:'JetBrains Mono',monospace; line-height:1.8;">
+            <div style="display:flex; justify-content:space-between;"><span>Model</span><span style="color:var(--gold);">GPT-4o</span></div>
+            <div style="display:flex; justify-content:space-between;"><span>Resolution</span><span style="color:var(--gold);">2048²</span></div>
+            <div style="display:flex; justify-content:space-between;"><span>Seed</span><span style="color:var(--gold);" id="fc-seed">847291</span></div>
+            <div style="display:flex; justify-content:space-between;"><span>Steps</span><span style="color:var(--gold);" id="fc-steps">42/50</span></div>
+        </div>
+    </div>
+
+    <!-- 底部日志 -->
+    <div class="panel footer-panel">
+        <h2>CANVAS REAL-TIME LOG</h2>
+        <div class="log-container" id="log-list"></div>
+    </div>
+</div>
+
+<!-- 底部控制按钮 -->
+<div id="bottom-controls">
+    <button class="btn-ornate" id="btn-return">
+        <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+        RETURN
+    </button>
+    <button class="btn-ornate" id="btn-tempest">
+        <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        TEMPEST
+    </button>
+    <button class="btn-ornate" id="gesture-btn">
+        <svg viewBox="0 0 24 24"><path d="M7 11V7a2 2 0 014 0v4M11 11V5a2 2 0 014 0v6M15 11V7a2 2 0 014 0v8a6 6 0 01-6 6h-3a8 8 0 01-8-8V9a2 2 0 014 0"/></svg>
+        GESTURE
+    </button>
+</div>
+
+<!-- 手势图例 -->
+<div id="gesture-guide" class="panel">
+    <h2 style="font-size:0.7rem;">GESTURE GUIDE</h2>
+    <div class="guide-item"><span class="guide-emoji">🖐</span><span class="guide-desc"><b>Open Palm</b><br>Rotate globe</span></div>
+    <div class="guide-item"><span class="guide-emoji">✊</span><span class="guide-desc"><b>Fist</b><br>Trigger tempest</span></div>
+    <div class="guide-item"><span class="guide-emoji">🤏</span><span class="guide-desc"><b>Pinch</b><br>Zoom in/out</span></div>
+    <div class="guide-item"><span class="guide-emoji">👆</span><span class="guide-desc"><b>Point</b><br>Move & paint</span></div>
+    <div class="guide-item"><span class="guide-emoji">✌️</span><span class="guide-desc"><b>Peace</b><br>Reset view</span></div>
+    <div class="guide-item"><span class="guide-emoji">🫶</span><span class="guide-desc"><b>Heart</b><br>Golden bloom</span></div>
+</div>
+
+<!-- 手势提示 -->
+<div id="gesture-toast"><span class="icon">✋</span><span id="toast-text">Gesture Active</span></div>
+
 <script>
 // ================================================================
-//  Scene Setup
+//  Three.js Scene — 金色油画风格水晶球
 // ================================================================
-const container = document.getElementById('canvas-container');
+const threeCanvas = document.getElementById('three-canvas');
+const paintCanvas = document.getElementById('paint-canvas');
+const paintCtx = paintCanvas.getContext('2d');
+
 const scene = new THREE.Scene();
-scene.fog = new THREE.FogExp2('#060614', 0.01);
+scene.fog = new THREE.FogExp2('#0a0806', 0.012);
 
-const camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 0.1, 1000);
-camera.position.set(0, 2.5, 11);
+const camera = new THREE.PerspectiveCamera(55, 1, 0.1, 1000);
+camera.position.set(0, 2, 10);
 
-const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: "high-performance" });
+const renderer = new THREE.WebGLRenderer({ canvas: threeCanvas, antialias: true, alpha: true });
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure = 1.5;
-container.appendChild(renderer.domElement);
+renderer.toneMappingExposure = 1.4;
 
-const controls = new THREE.OrbitControls(camera, renderer.domElement);
+const controls = new THREE.OrbitControls(camera, threeCanvas);
 controls.enableDamping = true;
 controls.dampingFactor = 0.06;
 controls.maxPolarAngle = Math.PI / 2 + 0.1;
 controls.minDistance = 4;
-controls.maxDistance = 18;
+controls.maxDistance = 16;
 controls.autoRotate = true;
-controls.autoRotateSpeed = 0.35;
+controls.autoRotateSpeed = 0.3;
 
-// Bloom
+// Bloom — 暖金色调
 const renderScene = new THREE.RenderPass(scene, camera);
 const bloomPass = new THREE.UnrealBloomPass(
-    new THREE.Vector2(window.innerWidth, window.innerHeight),
-    1.0, 0.6, 0.25
+    new THREE.Vector2(800, 600), 0.9, 0.5, 0.3
 );
 const composer = new THREE.EffectComposer(renderer);
 composer.addPass(renderScene);
 composer.addPass(bloomPass);
 
-// Lights
-scene.add(new THREE.AmbientLight('#0c0e22', 2.0));
-const cyanLight = new THREE.DirectionalLight('#00f0ff', 3.5);
-cyanLight.position.set(6, 7, 5);
-scene.add(cyanLight);
-const pinkLight = new THREE.DirectionalLight('#ff3da6', 2.5);
-pinkLight.position.set(-6, 4, -4);
-scene.add(pinkLight);
-const purpleLight = new THREE.DirectionalLight('#b14aff', 1.5);
-purpleLight.position.set(0, -5, 3);
-scene.add(purpleLight);
-const corePoint = new THREE.PointLight('#00f0ff', 2.5, 10, 1.5);
+// 灯光 — 暖色油画光
+scene.add(new THREE.AmbientLight('#1a1408', 2.0));
+const keyLight = new THREE.DirectionalLight('#d4af37', 2.5);
+keyLight.position.set(5, 8, 5);
+scene.add(keyLight);
+const fillLight = new THREE.DirectionalLight('#8c2d19', 1.2);
+fillLight.position.set(-5, 3, -3);
+scene.add(fillLight);
+const corePoint = new THREE.PointLight('#d4af37', 2.0, 10, 1.5);
 corePoint.position.set(0, 0, 0);
 scene.add(corePoint);
 
 // ================================================================
-//  Globe & Base
+//  水晶球 + 底座
 // ================================================================
 const globeGroup = new THREE.Group();
 globeGroup.position.y = -0.3;
 scene.add(globeGroup);
 
-// 底座 — 三层金属
+// 底座
 const base1 = new THREE.Mesh(
-    new THREE.CylinderGeometry(3.0, 3.4, 0.5, 64),
-    new THREE.MeshStandardMaterial({ color: '#080812', roughness: 0.12, metalness: 0.95 })
+    new THREE.CylinderGeometry(2.8, 3.2, 0.5, 64),
+    new THREE.MeshStandardMaterial({ color: '#2a1f15', roughness: 0.2, metalness: 0.8 })
 );
-base1.position.y = -2.35;
+base1.position.y = -2.3;
 globeGroup.add(base1);
 
 const base2 = new THREE.Mesh(
-    new THREE.CylinderGeometry(2.6, 3.0, 0.3, 64),
-    new THREE.MeshStandardMaterial({ color: '#0d0d1a', roughness: 0.08, metalness: 1.0 })
+    new THREE.CylinderGeometry(2.5, 2.8, 0.3, 64),
+    new THREE.MeshStandardMaterial({ color: '#1a1208', roughness: 0.1, metalness: 0.9 })
 );
-base2.position.y = -1.95;
+base2.position.y = -1.9;
 globeGroup.add(base2);
 
-// 发光环 x2
-const ring1 = new THREE.Mesh(
-    new THREE.TorusGeometry(2.62, 0.04, 16, 100),
-    new THREE.MeshBasicMaterial({ color: '#00f0ff' })
+// 金色发光环
+const goldRing = new THREE.Mesh(
+    new THREE.TorusGeometry(2.55, 0.04, 16, 100),
+    new THREE.MeshBasicMaterial({ color: '#d4af37' })
 );
-ring1.rotation.x = Math.PI / 2;
-ring1.position.y = -1.78;
-globeGroup.add(ring1);
+goldRing.rotation.x = Math.PI / 2;
+goldRing.position.y = -1.72;
+globeGroup.add(goldRing);
 
-const ring2 = new THREE.Mesh(
-    new THREE.TorusGeometry(2.2, 0.025, 16, 100),
-    new THREE.MeshBasicMaterial({ color: '#ff3da6' })
+const goldRing2 = new THREE.Mesh(
+    new THREE.TorusGeometry(2.15, 0.025, 16, 100),
+    new THREE.MeshBasicMaterial({ color: '#a07828' })
 );
-ring2.rotation.x = Math.PI / 2;
-ring2.position.y = -1.78;
-globeGroup.add(ring2);
+goldRing2.rotation.x = Math.PI / 2;
+goldRing2.position.y = -1.72;
+globeGroup.add(goldRing2);
 
-// 底座顶部反光面
+// 底座顶面
 const baseTop = new THREE.Mesh(
-    new THREE.CircleGeometry(2.5, 64),
-    new THREE.MeshStandardMaterial({ color: '#111122', roughness: 0.05, metalness: 1.0 })
+    new THREE.CircleGeometry(2.4, 64),
+    new THREE.MeshStandardMaterial({ color: '#1a1208', roughness: 0.05, metalness: 1.0 })
 );
 baseTop.rotation.x = -Math.PI / 2;
-baseTop.position.y = -1.76;
+baseTop.position.y = -1.7;
 globeGroup.add(baseTop);
 
 // 玻璃球
 const glass = new THREE.Mesh(
-    new THREE.SphereGeometry(2.8, 96, 96),
+    new THREE.SphereGeometry(2.7, 96, 96),
     new THREE.MeshPhysicalMaterial({
         color: '#ffffff', transparent: true, opacity: 0.08,
         transmission: 0.95, ior: 1.5, roughness: 0.01,
@@ -776,39 +646,38 @@ const glass = new THREE.Mesh(
 globeGroup.add(glass);
 
 // ================================================================
-//  Vortex Particles
+//  漩涡粒子 — 金色油画色调
 // ================================================================
-const vortexCount = 3000;
+const vortexCount = 2500;
 const vortexGeo = new THREE.BufferGeometry();
-const vortexPositions = new Float32Array(vortexCount * 3);
-const vortexColors = new Float32Array(vortexCount * 3);
+const vPos = new Float32Array(vortexCount * 3);
+const vCol = new Float32Array(vortexCount * 3);
 const vortexData = [];
-const cCyan = new THREE.Color('#00f0ff');
-const cPink = new THREE.Color('#ff3da6');
-const cPurple = new THREE.Color('#b14aff');
+const cGold = new THREE.Color('#d4af37');
+const cVermilion = new THREE.Color('#8c2d19');
+const cIvory = new THREE.Color('#e5d5b3');
 
 for (let i = 0; i < vortexCount; i++) {
-    const r = Math.random() * 2.4;
+    const r = Math.random() * 2.3;
     const theta = r * 5 + Math.random() * 1.5;
-    const y = (Math.random() - 0.5) * 0.5 * (2.6 - r);
-    vortexPositions[i*3]     = r * Math.cos(theta);
-    vortexPositions[i*3 + 1] = y;
-    vortexPositions[i*3 + 2] = r * Math.sin(theta);
+    const y = (Math.random() - 0.5) * 0.5 * (2.5 - r);
+    vPos[i*3]     = r * Math.cos(theta);
+    vPos[i*3 + 1] = y;
+    vPos[i*3 + 2] = r * Math.sin(theta);
 
-    // 三色渐变
     let mc;
-    if (r / 2.4 < 0.5) {
-        mc = cCyan.clone().lerp(cPurple, r / 1.2);
+    if (r / 2.3 < 0.5) {
+        mc = cGold.clone().lerp(cIvory, r / 1.15);
     } else {
-        mc = cPurple.clone().lerp(cPink, (r - 1.2) / 1.2);
+        mc = cIvory.clone().lerp(cVermilion, (r - 1.15) / 1.15);
     }
-    vortexColors[i*3]     = mc.r;
-    vortexColors[i*3 + 1] = mc.g;
-    vortexColors[i*3 + 2] = mc.b;
-    vortexData.push({ r, theta, y, speed: 0.015 + (2.4 - r) * 0.012 });
+    vCol[i*3]     = mc.r;
+    vCol[i*3 + 1] = mc.g;
+    vCol[i*3 + 2] = mc.b;
+    vortexData.push({ r, theta, y, speed: 0.015 + (2.3 - r) * 0.012 });
 }
-vortexGeo.setAttribute('position', new THREE.BufferAttribute(vortexPositions, 3));
-vortexGeo.setAttribute('color', new THREE.BufferAttribute(vortexColors, 3));
+vortexGeo.setAttribute('position', new THREE.BufferAttribute(vPos, 3));
+vortexGeo.setAttribute('color', new THREE.BufferAttribute(vCol, 3));
 
 const pTex = (() => {
     const c = document.createElement('canvas'); c.width = 32; c.height = 32;
@@ -829,14 +698,14 @@ vortexParticles.position.y = 0.15;
 globeGroup.add(vortexParticles);
 
 // 外围粒子
-const envCount = 1200;
+const envCount = 1000;
 const envGeo = new THREE.BufferGeometry();
 const envPos = new Float32Array(envCount * 3);
 const envData = [];
 for (let i = 0; i < envCount; i++) {
     const u = Math.random(), v = Math.random();
     const theta = u * 2 * Math.PI, phi = Math.acos(2 * v - 1);
-    const r = Math.cbrt(Math.random()) * 2.6;
+    const r = Math.cbrt(Math.random()) * 2.5;
     envPos[i*3]     = r * Math.sin(phi) * Math.cos(theta);
     envPos[i*3 + 1] = r * Math.sin(phi) * Math.sin(theta);
     envPos[i*3 + 2] = r * Math.cos(phi);
@@ -848,167 +717,83 @@ for (let i = 0; i < envCount; i++) {
 }
 envGeo.setAttribute('position', new THREE.BufferAttribute(envPos, 3));
 const envParticles = new THREE.Points(envGeo, new THREE.PointsMaterial({
-    size: 0.04, color: '#88aaff', map: pTex, transparent: true,
+    size: 0.04, color: '#c9b097', map: pTex, transparent: true,
     blending: THREE.AdditiveBlending, depthWrite: false
 }));
 globeGroup.add(envParticles);
 
-// 中心发光核
+// 核心发光球
 const coreGlow = new THREE.Mesh(
-    new THREE.SphereGeometry(0.2, 32, 32),
-    new THREE.MeshBasicMaterial({ color: '#00f0ff', transparent: true, opacity: 0.7 })
+    new THREE.SphereGeometry(0.18, 32, 32),
+    new THREE.MeshBasicMaterial({ color: '#d4af37', transparent: true, opacity: 0.7 })
 );
 coreGlow.position.y = 0.15;
 globeGroup.add(coreGlow);
 
-// 内圈光环
+// 内环
 const innerRing = new THREE.Mesh(
-    new THREE.TorusGeometry(0.5, 0.01, 8, 64),
-    new THREE.MeshBasicMaterial({ color: '#ff3da6', transparent: true, opacity: 0.6 })
+    new THREE.TorusGeometry(0.45, 0.01, 8, 64),
+    new THREE.MeshBasicMaterial({ color: '#8c2d19', transparent: true, opacity: 0.6 })
 );
 innerRing.position.y = 0.15;
 globeGroup.add(innerRing);
 
-// ================================================================
-//  方案 B: 球内 3D 内容 — 浮空岛屿 + 光柱 + 数据流文字 + 卫星
-// ================================================================
-
-// --- 浮空岛屿（3座） ---
+// 浮空岛屿
 const islands = [];
 const islandData = [
-    { y: 0.8, r: 0.6, color: '#1a2a4a' },
-    { y: -0.3, r: 0.45, color: '#2a1a3a' },
-    { y: 0.2, r: 0.35, color: '#0a2a3a' }
+    { y: 0.7, r: 0.5, color: '#2a1f15' },
+    { y: -0.2, r: 0.38, color: '#1a1208' },
+    { y: 0.1, r: 0.3, color: '#1a1408' }
 ];
 islandData.forEach((d, i) => {
     const island = new THREE.Group();
-
-    // 岛屿底盘（六边形柱）
     const base = new THREE.Mesh(
         new THREE.CylinderGeometry(d.r, d.r * 0.7, 0.08, 6),
-        new THREE.MeshStandardMaterial({ color: d.color, roughness: 0.3, metalness: 0.8, flatShading: true })
+        new THREE.MeshStandardMaterial({ color: d.color, roughness: 0.3, metalness: 0.7, flatShading: true })
     );
-    base.castShadow = true;
     island.add(base);
-
-    // 岛上发光塔
     const tower = new THREE.Mesh(
-        new THREE.ConeGeometry(d.r * 0.3, d.r * 0.6, 6),
+        new THREE.ConeGeometry(d.r * 0.3, d.r * 0.5, 6),
         new THREE.MeshStandardMaterial({
-            color: '#00f0ff', emissive: '#00f0ff', emissiveIntensity: 1.5,
+            color: '#d4af37', emissive: '#d4af37', emissiveIntensity: 1.2,
             roughness: 0.2, metalness: 0.5, flatShading: true
         })
     );
-    tower.position.y = d.r * 0.35;
+    tower.position.y = d.r * 0.3;
     island.add(tower);
-
-    // 岛底发光点
-    const glow = new THREE.Mesh(
-        new THREE.SphereGeometry(0.05, 8, 8),
-        new THREE.MeshBasicMaterial({ color: '#ff3da6' })
-    );
-    glow.position.y = -d.r * 0.3;
-    island.add(glow);
-
-    island.position.set(
-        Math.cos(i * 2.1) * 1.2,
-        d.y,
-        Math.sin(i * 2.1) * 1.2
-    );
+    island.position.set(Math.cos(i * 2.1) * 1.1, d.y, Math.sin(i * 2.1) * 1.1);
     island.userData = { floatPhase: i * 2, baseY: d.y, rotSpeed: 0.3 + i * 0.2 };
     islands.push(island);
     globeGroup.add(island);
 });
 
-// --- 光柱（从底座射向上方） ---
-const beamGeo = new THREE.CylinderGeometry(0.02, 0.15, 3.5, 8, 1, true);
-const beamMat = new THREE.MeshBasicMaterial({
-    color: '#00f0ff', transparent: true, opacity: 0.08,
-    side: THREE.DoubleSide, blending: THREE.AdditiveBlending, depthWrite: false
-});
-const beam = new THREE.Mesh(beamGeo, beamMat);
-beam.position.y = 0;
-globeGroup.add(beam);
-
-// 第二条粉色光柱
-const beam2 = new THREE.Mesh(
-    beamGeo.clone(),
+// 光柱
+const beam = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.02, 0.12, 3.2, 8, 1, true),
     new THREE.MeshBasicMaterial({
-        color: '#ff3da6', transparent: true, opacity: 0.06,
+        color: '#d4af37', transparent: true, opacity: 0.06,
         side: THREE.DoubleSide, blending: THREE.AdditiveBlending, depthWrite: false
     })
 );
-beam2.position.y = 0;
-beam2.rotation.z = 0.15;
-globeGroup.add(beam2);
+globeGroup.add(beam);
 
-// --- 数据流文字（3D 环绕文字粒子） ---
-const dataWords = ['AI', 'GEN', '3D', 'NEURAL', 'MESH', 'PIXEL', 'VERTEX', 'SHADER'];
-const textGroup = new THREE.Group();
-dataWords.forEach((word, i) => {
-    const cv = document.createElement('canvas');
-    cv.width = 256; cv.height = 64;
-    const ctx = cv.getContext('2d');
-    ctx.font = 'bold 32px JetBrains Mono, monospace';
-    ctx.fillStyle = i % 3 === 0 ? '#00f0ff' : i % 3 === 1 ? '#ff3da6' : '#b14aff';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.fillText(word, 128, 32);
-
-    const tex = new THREE.CanvasTexture(cv);
-    const sprite = new THREE.Sprite(new THREE.SpriteMaterial({
-        map: tex, transparent: true, opacity: 0.5,
-        blending: THREE.AdditiveBlending, depthWrite: false
-    }));
-    const angle = (i / dataWords.length) * Math.PI * 2;
-    sprite.position.set(
-        Math.cos(angle) * 1.8,
-        0.3 + Math.sin(i) * 0.4,
-        Math.sin(angle) * 1.8
-    );
-    sprite.scale.set(0.4, 0.1, 1);
-    sprite.userData = { angle, baseY: sprite.position.y, phase: i * 0.5 };
-    textGroup.add(sprite);
-});
-globeGroup.add(textGroup);
-
-// --- 卫星球（3个轨道运动） ---
+// 卫星
 const satellites = [];
 for (let i = 0; i < 3; i++) {
     const sat = new THREE.Mesh(
-        new THREE.SphereGeometry(0.06, 16, 16),
-        new THREE.MeshBasicMaterial({
-            color: [0x00f0ff, 0xff3da6, 0xb14aff][i],
-            transparent: true, opacity: 0.9
-        })
+        new THREE.SphereGeometry(0.05, 16, 16),
+        new THREE.MeshBasicMaterial({ color: [0xd4af37, 0x8c2d19, 0xe5d5b3][i], transparent: true, opacity: 0.9 })
     );
-    sat.userData = {
-        orbitR: 1.5 + i * 0.3,
-        orbitSpeed: 0.5 + i * 0.2,
-        orbitPhase: i * 2.1,
-        tilt: i * 0.3
-    };
+    sat.userData = { orbitR: 1.4 + i * 0.25, orbitSpeed: 0.5 + i * 0.2, orbitPhase: i * 2.1, tilt: i * 0.3 };
     satellites.push(sat);
     globeGroup.add(sat);
-
-    // 卫星拖尾（细环）
-    const trail = new THREE.Mesh(
-        new THREE.TorusGeometry(sat.userData.orbitR, 0.003, 4, 64),
-        new THREE.MeshBasicMaterial({
-            color: [0x00f0ff, 0xff3da6, 0xb14aff][i],
-            transparent: true, opacity: 0.1
-        })
-    );
-    trail.rotation.x = Math.PI / 2 + sat.userData.tilt;
-    trail.position.y = 0.15;
-    globeGroup.add(trail);
 }
 
 // 远景星空
 const starGeo = new THREE.BufferGeometry();
-const starPos = new Float32Array(4000 * 3);
-for (let i = 0; i < 4000; i++) {
-    const r = 25 + Math.random() * 60;
+const starPos = new Float32Array(3000 * 3);
+for (let i = 0; i < 3000; i++) {
+    const r = 25 + Math.random() * 50;
     const theta = Math.random() * Math.PI * 2;
     const phi = Math.acos(2 * Math.random() - 1);
     starPos[i*3]     = r * Math.sin(phi) * Math.cos(theta);
@@ -1017,53 +802,151 @@ for (let i = 0; i < 4000; i++) {
 }
 starGeo.setAttribute('position', new THREE.BufferAttribute(starPos, 3));
 const stars = new THREE.Points(starGeo, new THREE.PointsMaterial({
-    size: 0.06, color: '#6677aa', map: pTex, transparent: true,
-    opacity: 0.4, blending: THREE.AdditiveBlending, depthWrite: false
+    size: 0.05, color: '#c9b097', map: pTex, transparent: true,
+    opacity: 0.3, blending: THREE.AdditiveBlending, depthWrite: false
 }));
 scene.add(stars);
 
 // ================================================================
-//  Storm interaction
+//  尺寸适配
+// ================================================================
+function resizeAll() {
+    const w = threeCanvas.parentElement.clientWidth;
+    const h = threeCanvas.parentElement.clientHeight;
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+    renderer.setSize(w, h, false);
+    composer.setSize(w, h);
+    paintCanvas.width = w;
+    paintCanvas.height = h;
+}
+window.addEventListener('resize', resizeAll);
+setTimeout(resizeAll, 100);
+
+// ================================================================
+//  油彩粒子系统（Canvas 2D 叠加层）
+// ================================================================
+let paintParticles = [];
+let characterX = 0, characterTargetX = 0;
+let characterFrame = 0;
+
+function spawnPaintParticle(x, y) {
+    const colors = [
+        `hsla(${35 + Math.random() * 15}, 65%, ${40 + Math.random() * 20}%, 0.7)`,
+        `hsla(${10 + Math.random() * 15}, 55%, ${35 + Math.random() * 15}%, 0.6)`,
+        `hsla(${40 + Math.random() * 10}, 50%, ${60 + Math.random() * 15}%, 0.5)`
+    ];
+    paintParticles.push({
+        x: x + (Math.random() - 0.5) * 30,
+        y: y + (Math.random() - 0.5) * 30,
+        vx: (Math.random() - 0.5) * 3,
+        vy: -Math.random() * 2 - 0.5,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        size: Math.random() * 8 + 4,
+        life: 1
+    });
+}
+
+function drawPaintLayer() {
+    const w = paintCanvas.width, h = paintCanvas.height;
+    paintCtx.clearRect(0, 0, w, h);
+
+    // 角色缓动
+    characterX += (characterTargetX - characterX) * 0.05;
+    characterFrame += 0.08;
+
+    // 绘制画中角色（古典油画风格小人）
+    const cx = characterX || w / 2;
+    const cy = h * 0.7;
+    const breath = Math.abs(characterTargetX - characterX) > 2
+        ? Math.sin(characterFrame * 2) * 6
+        : Math.sin(characterFrame) * 2;
+
+    paintCtx.save();
+    paintCtx.translate(cx, cy + breath);
+
+    // 阴影
+    paintCtx.beginPath();
+    paintCtx.ellipse(0, 0, 35, 8, 0, 0, Math.PI * 2);
+    paintCtx.fillStyle = 'rgba(0,0,0,0.35)';
+    paintCtx.fill();
+
+    // 身躯（暗褐色）
+    paintCtx.fillStyle = '#4a2c11';
+    paintCtx.fillRect(-22, -85, 44, 70);
+    // 衣服（朱红）
+    paintCtx.fillStyle = '#8c2d19';
+    paintCtx.fillRect(-18, -78, 36, 55);
+    // 头部
+    paintCtx.fillStyle = '#e5d5b3';
+    paintCtx.fillRect(-10, -100, 20, 22);
+    // 帽子
+    paintCtx.fillStyle = '#2a1f15';
+    paintCtx.beginPath();
+    paintCtx.arc(0, -100, 16, Math.PI, 0);
+    paintCtx.fill();
+
+    // 手势激活时的金色光环
+    if (handState.detected) {
+        paintCtx.beginPath();
+        paintCtx.arc(0, -45, 50, 0, Math.PI * 2);
+        paintCtx.strokeStyle = `rgba(212, 175, 55, ${0.08 + Math.sin(characterFrame) * 0.04})`;
+        paintCtx.lineWidth = 1.5;
+        paintCtx.setLineDash([4, 12]);
+        paintCtx.stroke();
+        paintCtx.setLineDash([]);
+    }
+
+    paintCtx.restore();
+
+    // 油彩粒子
+    for (let i = paintParticles.length - 1; i >= 0; i--) {
+        const p = paintParticles[i];
+        p.x += p.vx; p.y += p.vy; p.life -= 0.02;
+        if (p.life <= 0) { paintParticles.splice(i, 1); continue; }
+        paintCtx.beginPath();
+        paintCtx.arc(p.x, p.y, p.size * p.life, 0, Math.PI * 2);
+        paintCtx.fillStyle = p.color;
+        paintCtx.shadowColor = 'rgba(0,0,0,0.3)';
+        paintCtx.shadowBlur = 4;
+        paintCtx.fill();
+        paintCtx.shadowBlur = 0;
+    }
+
+    requestAnimationFrame(drawPaintLayer);
+}
+drawPaintLayer();
+
+// ================================================================
+//  暴风雪交互
 // ================================================================
 let isStorm = false;
-let bloomBoost = 0;
-
-document.getElementById('btn-tempest').addEventListener('click', function(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    triggerStorm();
-});
-document.getElementById('btn-return').addEventListener('click', function(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    // 优先 history.back，失败则直接跳转主页
-    if (window.history.length > 1) {
-        window.history.back();
-    } else {
-        window.location.href = 'index.html';
-    }
-});
-renderer.domElement.addEventListener('pointerdown', (e) => {
-    if (e.target !== renderer.domElement) return;
-    triggerStorm();
-});
 
 function triggerStorm() {
     isStorm = true;
-    bloomBoost = 1;
-    new TWEEN.Tween(bloomPass).to({ strength: 3.0 }, 200).yoyo(true).repeat(1).start();
+    new TWEEN.Tween(bloomPass).to({ strength: 2.5 }, 200).yoyo(true).repeat(1).start();
     new TWEEN.Tween(coreGlow.material).to({ opacity: 1.0 }, 150).yoyo(true).repeat(1).start();
     new TWEEN.Tween(coreGlow.scale).to({ x: 3, y: 3, z: 3 }, 300).yoyo(true).repeat(1).start();
+
+    // 油彩粒子爆发
+    for (let i = 0; i < 40; i++) {
+        spawnPaintParticle(paintCanvas.width / 2, paintCanvas.height * 0.6);
+    }
+
     // UI 反馈
-    document.getElementById('m-energy').innerText = (85 + Math.random()*12).toFixed(1) + '%';
-    document.getElementById('bar-energy').style.width = (85 + Math.random()*12) + '%';
-    document.getElementById('m-sync').innerText = (55 + Math.random()*30).toFixed(1) + '%';
-    document.getElementById('bar-sync').style.width = (55 + Math.random()*30) + '%';
+    updateMetric('m-energy', 'bar-energy', 85 + Math.random() * 12);
+    updateMetric('m-sync', 'bar-sync', 55 + Math.random() * 30);
+    addLog('STORM', '油彩风暴已释放', true);
     setTimeout(() => { isStorm = false; }, 1500);
 }
 
+function updateMetric(valId, barId, val) {
+    document.getElementById(valId).innerText = val.toFixed(1) + '%';
+    document.getElementById(barId).style.width = val + '%';
+}
+
 // ================================================================
-//  MediaPipe Hands — 6 gestures
+//  MediaPipe Hands
 // ================================================================
 let handsActive = false;
 let mpHands = null;
@@ -1071,73 +954,54 @@ let mpCamera = null;
 const camVideo = document.getElementById('cam-video');
 const camOverlay = document.getElementById('cam-overlay');
 const camCtx = camOverlay.getContext('2d');
+const camPreview = document.getElementById('cam-preview');
+const statusBadge = document.getElementById('status');
+const statusText = document.getElementById('status-text');
 
 let handState = {
     detected: false,
     gesture: 'none',
     x: 0.5, y: 0.5,
     smoothX: 0.5, smoothY: 0.5,
-    pinchDist: 0.2,
-    velocity: { x: 0, y: 0 },
-    prevX: 0.5, prevY: 0.5,
-    gestureHistory: [],
-    heartDetected: false
+    pinchDist: 0.2
 };
 
 const gestureBtn = document.getElementById('gesture-btn');
-if (gestureBtn) {
-    gestureBtn.addEventListener('click', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        console.log('[GESTURE] Button clicked, handsActive=' + handsActive);
-        toggleGesture();
-    });
-} else {
-    console.error('[GESTURE] Button not found!');
-}
+gestureBtn.addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    console.log('[GESTURE] Button clicked, handsActive=' + handsActive);
+    toggleGesture();
+});
 
 async function toggleGesture() {
     if (handsActive) {
-        console.log('[GESTURE] Turning off...');
         handsActive = false;
         if (mpCamera) { try { mpCamera.stop(); } catch(e){} mpCamera = null; }
         if (mpHands) { try { mpHands.close(); } catch(e){} mpHands = null; }
-        document.getElementById('cam-box').classList.remove('on');
+        camPreview.classList.remove('on');
         document.getElementById('gesture-guide').classList.remove('on');
-        if (gestureBtn) {
-            gestureBtn.classList.remove('active');
-            gestureBtn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 11V7a2 2 0 014 0v4M11 11V5a2 2 0 014 0v6M15 11V7a2 2 0 014 0v8a6 6 0 01-6 6h-3a8 8 0 01-8-8V9a2 2 0 014 0"/></svg> GESTURE';
-        }
+        gestureBtn.classList.remove('active');
+        gestureBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M7 11V7a2 2 0 014 0v4M11 11V5a2 2 0 014 0v6M15 11V7a2 2 0 014 0v8a6 6 0 01-6 6h-3a8 8 0 01-8-8V9a2 2 0 014 0"/></svg> GESTURE';
+        statusBadge.classList.remove('active');
+        statusText.textContent = '等待右手挥舞';
         controls.autoRotate = true;
         showToast('🖐', '手势追踪已关闭');
         return;
     }
 
-    console.log('[GESTURE] Turning on...');
     try {
         showToast('📷', '正在启动摄像头...');
-        document.getElementById('cam-box').classList.add('on');
+        camPreview.classList.add('on');
         document.getElementById('gesture-guide').classList.add('on');
 
-        // 检查 MediaPipe 是否加载
-        if (typeof Hands === 'undefined') {
-            throw new Error('MediaPipe Hands 库未加载，请检查网络');
-        }
-        if (typeof Camera === 'undefined') {
-            throw new Error('MediaPipe Camera Utils 未加载');
-        }
+        if (typeof Hands === 'undefined') throw new Error('MediaPipe Hands 未加载');
+        if (typeof Camera === 'undefined') throw new Error('Camera Utils 未加载');
 
-        console.log('[GESTURE] Creating Hands instance...');
-        mpHands = new Hands({
-            locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`
-        });
-        mpHands.setOptions({
-            maxNumHands: 1, modelComplexity: 1,
-            minDetectionConfidence: 0.6, minTrackingConfidence: 0.5
-        });
+        mpHands = new Hands({ locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}` });
+        mpHands.setOptions({ maxNumHands: 1, modelComplexity: 1, minDetectionConfidence: 0.6, minTrackingConfidence: 0.5 });
         mpHands.onResults(onHandResults);
 
-        console.log('[GESTURE] Creating Camera instance...');
         mpCamera = new Camera(camVideo, {
             onFrame: async () => {
                 if (mpHands && handsActive) {
@@ -1146,25 +1010,22 @@ async function toggleGesture() {
             },
             width: 320, height: 240
         });
-
-        console.log('[GESTURE] Starting camera...');
         await mpCamera.start();
         handsActive = true;
-        console.log('[GESTURE] Camera started successfully!');
-
-        if (gestureBtn) {
-            gestureBtn.classList.add('active');
-            gestureBtn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 11V7a2 2 0 014 0v4M11 11V5a2 2 0 014 0v6M15 11V7a2 2 0 014 0v8a6 6 0 01-6 6h-3a8 8 0 01-8-8V9a2 2 0 014 0"/></svg> GESTURE: ON';
-        }
+        gestureBtn.classList.add('active');
+        gestureBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M7 11V7a2 2 0 014 0v4M11 11V5a2 2 0 014 0v6M15 11V7a2 2 0 014 0v8a6 6 0 01-6 6h-3a8 8 0 01-8-8V9a2 2 0 014 0"/></svg> GESTURE: ON';
+        statusBadge.classList.add('active');
+        statusText.textContent = '右手已锁定 · 绘色中';
         controls.autoRotate = false;
         showToast('✋', '手势追踪已开启');
+        addLog('GESTURE', '手势追踪系统已激活', true);
     } catch (err) {
         console.error('[GESTURE] Error:', err);
         showToast('❌', '摄像头启动失败: ' + (err.message || '未知错误'));
         handsActive = false;
-        document.getElementById('cam-box').classList.remove('on');
+        camPreview.classList.remove('on');
         document.getElementById('gesture-guide').classList.remove('on');
-        if (gestureBtn) gestureBtn.classList.remove('active');
+        gestureBtn.classList.remove('active');
     }
 }
 
@@ -1185,8 +1046,8 @@ function onHandResults(results) {
         const lm = results.multiHandLandmarks[0];
         handState.detected = true;
 
-        // 绘制骨架
-        camCtx.strokeStyle = 'rgba(0, 240, 255, 0.5)';
+        // 绘制手部骨架
+        camCtx.strokeStyle = 'rgba(212, 175, 55, 0.5)';
         camCtx.lineWidth = 2;
         HAND_CONNECTIONS.forEach(([a, b]) => {
             camCtx.beginPath();
@@ -1195,19 +1056,14 @@ function onHandResults(results) {
             camCtx.stroke();
         });
         lm.forEach((p, i) => {
-            camCtx.fillStyle = i === 0 ? '#ff3da6' : '#00f0ff';
+            camCtx.fillStyle = i === 0 ? '#8c2d19' : '#d4af37';
             camCtx.beginPath();
             camCtx.arc(p.x * w, p.y * h, i === 0 ? 5 : 3, 0, Math.PI * 2);
             camCtx.fill();
         });
 
-        // 速度
         const wrist = lm[0];
-        handState.velocity.x = wrist.x - handState.prevX;
-        handState.velocity.y = wrist.y - handState.prevY;
-        handState.prevX = wrist.x;
-        handState.prevY = wrist.y;
-        handState.x = wrist.x;
+        handState.x = 1 - wrist.x;
         handState.y = wrist.y;
         handState.smoothX += (handState.x - handState.smoothX) * 0.15;
         handState.smoothY += (handState.y - handState.smoothY) * 0.15;
@@ -1221,6 +1077,7 @@ function onHandResults(results) {
         handState.detected = false;
         handState.gesture = 'none';
         document.getElementById('cam-gesture').textContent = '—';
+        characterTargetX = paintCanvas.width / 2;
     }
 }
 
@@ -1229,27 +1086,21 @@ function recognizeGesture(lm) {
     const tips = [4, 8, 12, 16, 20];
     const mcps = [2, 5, 9, 13, 17];
     let ext = [false, false, false, false, false];
-
     for (let i = 0; i < 5; i++) {
         const tip = lm[tips[i]], mcp = lm[mcps[i]];
         if (i === 0) {
-            ext[0] = Math.hypot(tip.x - wrist.x, tip.y - wrist.y) >
-                     Math.hypot(mcp.x - wrist.x, mcp.y - wrist.y) * 1.3;
+            ext[0] = Math.hypot(tip.x - wrist.x, tip.y - wrist.y) > Math.hypot(mcp.x - wrist.x, mcp.y - wrist.y) * 1.3;
         } else {
             ext[i] = tip.y < mcp.y - 0.02;
         }
     }
     const count = ext.filter(e => e).length;
-
-    // pinch
     const pinchD = Math.hypot(lm[4].x - lm[8].x, lm[4].y - lm[8].y);
     handState.pinchDist = pinchD;
 
-    // heart: 拇指尖 + 食指尖靠近，中指无名指小指伸直
-    const heartThumb = Math.hypot(lm[4].x - lm[8].x, lm[4].y - lm[8].y) < 0.08;
+    const heartThumb = pinchD < 0.08;
     const heartFingers = ext[2] && ext[3] && ext[4];
     if (heartThumb && heartFingers) return 'heart';
-
     if (pinchD < 0.05) return 'pinch';
     if (count <= 1) return 'fist';
     if (count >= 4) return 'open';
@@ -1264,24 +1115,20 @@ let gestureStableCount = 0;
 function applyGesture(lm) {
     if (!handState.detected) return;
 
-    // 手势稳定性检测（防抖）
     if (handState.gesture === lastGesture) {
         gestureStableCount++;
     } else {
         gestureStableCount = 0;
         lastGesture = handState.gesture;
-        // 手势变化时显示提示
         const hints = {
             open: ['🖐', '旋转模式'],
             fist: ['✊', '暴风雪触发！'],
             pinch: ['🤏', '缩放模式'],
-            point: ['👆', '视角平移'],
+            point: ['👆', '绘色模式'],
             peace: ['✌️', '重置视角'],
-            heart: ['🫶', '辉光增强！']
+            heart: ['🫶', '金色辉光！']
         };
-        if (hints[handState.gesture]) {
-            showToast(hints[handState.gesture][0], hints[handState.gesture][1]);
-        }
+        if (hints[handState.gesture]) showToast(hints[handState.gesture][0], hints[handState.gesture][1]);
     }
 
     const sx = handState.smoothX;
@@ -1289,63 +1136,53 @@ function applyGesture(lm) {
 
     switch (handState.gesture) {
         case 'open':
-            // 张开手 → 旋转
             const tRotY = (sx - 0.5) * Math.PI * 2.5;
             const tRotX = (sy - 0.5) * Math.PI * 0.4;
             globeGroup.rotation.y += (tRotY - globeGroup.rotation.y) * 0.05;
             globeGroup.rotation.x += (tRotX - globeGroup.rotation.x) * 0.05;
             break;
-
         case 'fist':
-            // 握拳 → 暴风雪（稳定 3 帧后触发）
             if (gestureStableCount === 3 && !isStorm) triggerStorm();
             break;
-
         case 'pinch':
-            // 捏合 → 缩放
             const d = handState.pinchDist;
             const target = 4 + d * 25;
             const cur = camera.position.length();
             const nd = cur + (target - cur) * 0.06;
-            camera.position.normalize().multiplyScalar(
-                Math.max(controls.minDistance, Math.min(controls.maxDistance, nd))
-            );
+            camera.position.normalize().multiplyScalar(Math.max(controls.minDistance, Math.min(controls.maxDistance, nd)));
             break;
-
         case 'point':
-            // 食指 → 相机平移
-            const px = (sx - 0.5) * 5;
-            const py = -(sy - 0.5) * 3;
-            camera.position.x += (px - camera.position.x) * 0.04;
-            camera.position.y += (2.5 + py - camera.position.y) * 0.04;
+            // 食指 → 角色移动 + 油彩粒子
+            characterTargetX = sx * paintCanvas.width;
+            if (Math.random() > 0.3) {
+                spawnPaintParticle(characterTargetX, paintCanvas.height * 0.6);
+            }
+            // 相机微移
+            const px = (sx - 0.5) * 3;
+            camera.position.x += (px - camera.position.x) * 0.03;
             camera.lookAt(0, 0, 0);
             break;
-
         case 'peace':
-            // 二指 → 重置视角（稳定5帧后）
             if (gestureStableCount === 5) {
-                camera.position.set(0, 2.5, 11);
+                camera.position.set(0, 2, 10);
                 camera.lookAt(0, 0, 0);
                 globeGroup.rotation.x = 0;
                 showToast('✌️', '视角已重置');
             }
             break;
-
         case 'heart':
-            // 心形 → Bloom 增强
-            bloomPass.strength = 2.5;
-            corePoint.color.setHex(0xff3da6);
-            coreGlow.material.color.setHex(0xff3da6);
-            innerRing.material.color.setHex(0x00f0ff);
+            bloomPass.strength = 2.0;
+            corePoint.color.setHex(0xd4af37);
+            coreGlow.material.color.setHex(0xd4af37);
+            innerRing.material.color.setHex(0xd4af37);
             break;
     }
 
-    // 心形手势释放后恢复
     if (lastGesture === 'heart' && handState.gesture !== 'heart') {
-        bloomPass.strength = 1.0;
-        corePoint.color.setHex(0x00f0ff);
-        coreGlow.material.color.setHex(0x00f0ff);
-        innerRing.material.color.setHex(0xff3da6);
+        bloomPass.strength = 0.9;
+        corePoint.color.setHex(0xd4af37);
+        coreGlow.material.color.setHex(0xd4af37);
+        innerRing.material.color.setHex(0x8c2d19);
     }
 }
 
@@ -1361,31 +1198,63 @@ function showToast(icon, text) {
 }
 
 // ================================================================
-//  波形动画
+//  日志系统
 // ================================================================
-const waveBox = document.getElementById('wave-box');
-for (let i = 0; i < 24; i++) {
-    const bar = document.createElement('div');
-    bar.className = 'wave-bar';
-    bar.style.animationDelay = (i * 0.05) + 's';
-    bar.style.animationDuration = (0.8 + Math.random() * 0.8) + 's';
-    waveBox.appendChild(bar);
+const logList = document.getElementById('log-list');
+const logMessages = [
+    { tag: 'INIT', text: '正在加载神经网络权重...' },
+    { tag: 'INIT', text: '模型 GPT-4o 已就绪' },
+    { tag: 'PARSE', text: '正在解析文本输入...' },
+    { tag: 'PARSE', text: '语义图谱已构建 (42 节点)' },
+    { tag: 'MODEL', text: '正在生成3D网格...' },
+    { tag: 'MODEL', text: '顶点数: 24,576' },
+    { tag: 'SHADER', text: '正在编译古典着色器...' },
+    { tag: 'SHADER', text: '金箔光泽通道已初始化' },
+    { tag: 'RENDER', text: '帧缓冲已分配 2048²' },
+    { tag: 'RENDER', text: '光追渲染中... 73%' },
+    { tag: 'EXPORT', text: '正在编码 GLTF...' },
+    { tag: 'EXPORT', text: '导出完成: 2.4MB' }
+];
+let logIdx = 0;
+
+function addLog(tag, text, done = false) {
+    const entry = document.createElement('div');
+    entry.className = 'log-entry' + (done ? ' done' : '');
+    const now = new Date();
+    const ts = String(now.getHours()).padStart(2, '0') + ':' +
+               String(now.getMinutes()).padStart(2, '0') + ':' +
+               String(now.getSeconds()).padStart(2, '0');
+    entry.innerHTML = '<span class="ts">' + ts + '</span><span class="tag">[' + tag + ']</span>' + text;
+    logList.insertBefore(entry, logList.firstChild);
+    while (logList.children.length > 4) logList.removeChild(logList.lastChild);
 }
 
-// FPS 计数
-let fpsCount = 0, fpsTime = performance.now();
-function updateFPS() {
-    fpsCount++;
-    const now = performance.now();
-    if (now - fpsTime > 1000) {
-        document.getElementById('fps-pill').textContent = fpsCount + ' FPS';
-        fpsCount = 0;
-        fpsTime = now;
+logMessages.slice(0, 2).forEach(m => addLog(m.tag, m.text));
+setInterval(() => {
+    const m = logMessages[logIdx % logMessages.length];
+    addLog(m.tag, m.text);
+    logIdx++;
+}, 4000);
+
+// ================================================================
+//  按钮事件
+// ================================================================
+document.getElementById('btn-tempest').addEventListener('click', function(e) {
+    e.preventDefault(); e.stopPropagation();
+    triggerStorm();
+});
+
+document.getElementById('btn-return').addEventListener('click', function(e) {
+    e.preventDefault(); e.stopPropagation();
+    if (window.history.length > 1) {
+        window.history.back();
+    } else {
+        window.location.href = 'index.html';
     }
-}
+});
 
 // ================================================================
-//  Render Loop
+//  渲染循环
 // ================================================================
 const clock = new THREE.Clock();
 function animate() {
@@ -1394,55 +1263,44 @@ function animate() {
     const t = clock.getElapsedTime();
 
     // 漩涡
-    const vPos = vortexParticles.geometry.attributes.position;
+    const vp = vortexParticles.geometry.attributes.position;
     for (let i = 0; i < vortexCount; i++) {
         const d = vortexData[i];
         d.theta += d.speed * (isStorm ? 6 : 1);
-        vPos.setX(i, d.r * Math.cos(d.theta));
-        vPos.setZ(i, d.r * Math.sin(d.theta));
+        vp.setX(i, d.r * Math.cos(d.theta));
+        vp.setZ(i, d.r * Math.sin(d.theta));
     }
-    vPos.needsUpdate = true;
+    vp.needsUpdate = true;
 
     // 外围粒子
-    const ePos = envParticles.geometry.attributes.position;
+    const ep = envParticles.geometry.attributes.position;
     for (let i = 0; i < envCount; i++) {
-        let x = ePos.getX(i), y = ePos.getY(i), z = ePos.getZ(i);
+        let x = ep.getX(i), y = ep.getY(i), z = ep.getZ(i);
         const d = envData[i];
         x += d.xSpeed; y += d.ySpeed; z += d.zSpeed;
-        if (Math.sqrt(x*x + y*y + z*z) > 2.6 || y < -1.3) {
+        if (Math.sqrt(x*x + y*y + z*z) > 2.5 || y < -1.3) {
             y = 2.3; x = (Math.random()-0.5)*2; z = (Math.random()-0.5)*2;
         }
-        ePos.setXYZ(i, x, y, z);
+        ep.setXYZ(i, x, y, z);
     }
-    ePos.needsUpdate = true;
+    ep.needsUpdate = true;
 
     // 核心呼吸
     coreGlow.scale.setScalar(1 + Math.sin(t * 1.2) * 0.2);
-    corePoint.intensity = 2.5 + Math.sin(t * 1.2) * 0.6;
+    corePoint.intensity = 2.0 + Math.sin(t * 1.2) * 0.5;
     innerRing.rotation.z = t * 0.5;
 
-    // 浮空岛屿 — 漂浮 + 自转
+    // 岛屿
     islands.forEach(island => {
         const d = island.userData;
         island.position.y = d.baseY + Math.sin(t * 0.8 + d.floatPhase) * 0.1;
         island.rotation.y = t * d.rotSpeed;
     });
 
-    // 光柱呼吸
-    beam.material.opacity = 0.06 + Math.sin(t * 0.8) * 0.03;
-    beam2.material.opacity = 0.04 + Math.sin(t * 0.8 + 1) * 0.02;
+    // 光柱
+    beam.material.opacity = 0.05 + Math.sin(t * 0.8) * 0.02;
 
-    // 数据流文字 — 环绕 + 上下浮动
-    textGroup.children.forEach(sprite => {
-        const d = sprite.userData;
-        d.angle += 0.003;
-        sprite.position.x = Math.cos(d.angle) * 1.8;
-        sprite.position.z = Math.sin(d.angle) * 1.8;
-        sprite.position.y = d.baseY + Math.sin(t * 1.5 + d.phase) * 0.1;
-        sprite.material.opacity = 0.3 + Math.sin(t * 2 + d.phase) * 0.2;
-    });
-
-    // 卫星球 — 轨道运动
+    // 卫星
     satellites.forEach(sat => {
         const d = sat.userData;
         const angle = t * d.orbitSpeed + d.orbitPhase;
@@ -1456,218 +1314,23 @@ function animate() {
 
     controls.update();
     composer.render();
-    updateFPS();
 }
 animate();
 
-// Remove loading
+// 移除加载
 setTimeout(() => {
     const l = document.getElementById('loading');
-    if (l) { l.style.opacity = '0'; setTimeout(() => l.remove(), 800); }
-}, 600);
+    if (l) { l.style.opacity = '0'; setTimeout(() => l.remove(), 1000); }
+}, 800);
 
-// Resize
-window.addEventListener('resize', () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    composer.setSize(window.innerWidth, window.innerHeight);
-});
-
-// 实时数据波动
+// 数据波动
 setInterval(() => {
-    const e = 80 + Math.random() * 15;
-    const s = 55 + Math.random() * 30;
-    const f = 85 + Math.random() * 12;
-    document.getElementById('m-energy').innerText = e.toFixed(1) + '%';
-    document.getElementById('bar-energy').style.width = e + '%';
-    document.getElementById('m-sync').innerText = s.toFixed(1) + '%';
-    document.getElementById('bar-sync').style.width = s + '%';
-    document.getElementById('m-flux').innerText = f.toFixed(1) + '%';
-    document.getElementById('bar-flux').style.width = f + '%';
+    updateMetric('m-energy', 'bar-energy', 80 + Math.random() * 15);
+    updateMetric('m-sync', 'bar-sync', 55 + Math.random() * 30);
+    updateMetric('m-flux', 'bar-flux', 85 + Math.random() * 12);
 }, 3000);
 
-// ================================================================
-//  方案 A: 管线流程动画
-// ================================================================
-const pipeStages = [
-    { name: 'INPUT', label: '解析文本输入', logTag: 'INPUT' },
-    { name: 'PARSE', label: '语义解析完成', logTag: 'PARSE' },
-    { name: '3D MODEL', label: '生成3D网格', logTag: 'MODEL' },
-    { name: 'SHADER', label: '应用着色器', logTag: 'SHADER' },
-    { name: 'RENDER', label: '渲染帧缓冲', logTag: 'RENDER' },
-    { name: 'EXPORT', label: '导出资源', logTag: 'EXPORT' }
-];
-let pipeStageIdx = 2; // 从 3D MODEL 开始
-
-function advancePipeline() {
-    const nodes = document.querySelectorAll('#pipeline-track .pipe-node');
-    const lines = document.querySelectorAll('#pipeline-track .pipe-line');
-
-    if (pipeStageIdx < pipeStages.length) {
-        // 当前阶段完成
-        if (nodes[pipeStageIdx]) {
-            nodes[pipeStageIdx].classList.remove('active');
-            nodes[pipeStageIdx].classList.add('done');
-        }
-        if (lines[pipeStageIdx]) {
-            lines[pipeStageIdx].classList.remove('active');
-            lines[pipeStageIdx].classList.add('done');
-        }
-
-        addLog(pipeStages[pipeStageIdx].logTag, pipeStages[pipeStageIdx].label + ' ✓', true);
-
-        pipeStageIdx++;
-
-        // 下一阶段激活
-        if (pipeStageIdx < pipeStages.length && nodes[pipeStageIdx]) {
-            nodes[pipeStageIdx].classList.add('active');
-            if (lines[pipeStageIdx]) lines[pipeStageIdx].classList.add('active');
-            addLog(pipeStages[pipeStageIdx].logTag, '正在' + pipeStages[pipeStageIdx].label + '...');
-        }
-
-        // 更新进度
-        const pct = Math.round((pipeStageIdx / pipeStages.length) * 100);
-        document.getElementById('pipe-status').textContent = pipeStageIdx < pipeStages.length
-            ? 'PROCESSING... ' + pct + '%'
-            : 'COMPLETE 100%';
-
-        // 更新参数面板
-        document.getElementById('fc-steps').textContent = (30 + pipeStageIdx * 4) + '/50';
-    } else {
-        // 重置循环
-        pipeStageIdx = 0;
-        nodes.forEach(n => { n.classList.remove('done', 'active'); });
-        lines.forEach(l => { l.classList.remove('done', 'active'); });
-        nodes[0].classList.add('done');
-        lines[0].classList.add('done');
-        nodes[1].classList.add('done');
-        lines[1].classList.add('active');
-        nodes[2].classList.add('active');
-        pipeStageIdx = 2;
-        addLog('SYSTEM', '新一轮生成任务已启动');
-    }
-}
-
-// 管线自动推进
-setInterval(advancePipeline, 4500);
-
-// ================================================================
-//  方案 D: 日志系统
-// ================================================================
-const logList = document.getElementById('log-list');
-const logMessages = [
-    { tag: 'INIT', text: 'Loading neural network weights...' },
-    { tag: 'INIT', text: 'Model GPT-4o loaded successfully' },
-    { tag: 'PARSE', text: 'Tokenizing input prompt...' },
-    { tag: 'PARSE', text: 'Semantic graph built (42 nodes)' },
-    { tag: 'MODEL', text: 'Generating mesh topology...' },
-    { tag: 'MODEL', text: 'Vertex count: 24,576' },
-    { tag: 'SHADER', text: 'Compiling PBR shader...' },
-    { tag: 'SHADER', text: 'Bloom pass initialized' },
-    { tag: 'RENDER', text: 'Frame buffer allocated 2048×2048' },
-    { tag: 'RENDER', text: 'Ray tracing pass... 73%' },
-    { tag: 'EXPORT', text: 'Encoding GLTF binary...' },
-    { tag: 'EXPORT', text: 'Export complete: 2.4MB' }
-];
-let logIdx = 0;
-
-function addLog(tag, text, done = false) {
-    const entry = document.createElement('div');
-    entry.className = 'log-entry' + (done ? ' done' : '');
-    const now = new Date();
-    const ts = String(now.getHours()).padStart(2, '0') + ':' +
-               String(now.getMinutes()).padStart(2, '0') + ':' +
-               String(now.getSeconds()).padStart(2, '0');
-    entry.innerHTML = '<span class="ts">' + ts + '</span><span class="tag">[' + tag + ']</span>' + text;
-    logList.insertBefore(entry, logList.firstChild);
-
-    // 限制最多 5 条
-    while (logList.children.length > 5) {
-        logList.removeChild(logList.lastChild);
-    }
-}
-
-// 初始日志
-logMessages.slice(0, 3).forEach(m => addLog(m.tag, m.text));
-
-// 循环添加日志
-setInterval(() => {
-    const m = logMessages[logIdx % logMessages.length];
-    addLog(m.tag, m.text);
-    logIdx++;
-}, 3500);
-
-// ================================================================
-//  预览缩略图 Canvas — 模拟生成进度
-// ================================================================
-const pCanvas = document.getElementById('preview-canvas');
-const pCtx = pCanvas.getContext('2d');
-let previewProgress = 0;
-
-function drawPreview() {
-    const w = pCanvas.width, h = pCanvas.height;
-    pCtx.clearRect(0, 0, w, h);
-
-    // 背景
-    const bgGrad = pCtx.createLinearGradient(0, 0, w, h);
-    bgGrad.addColorStop(0, 'rgba(0, 240, 255, 0.05)');
-    bgGrad.addColorStop(1, 'rgba(177, 74, 255, 0.05)');
-    pCtx.fillStyle = bgGrad;
-    pCtx.fillRect(0, 0, w, h);
-
-    // 扫描线
-    const scanY = (previewProgress * h * 2) % (h + 20) - 10;
-    const scanGrad = pCtx.createLinearGradient(0, scanY - 8, 0, scanY + 8);
-    scanGrad.addColorStop(0, 'rgba(0, 240, 255, 0)');
-    scanGrad.addColorStop(0.5, 'rgba(0, 240, 255, 0.3)');
-    scanGrad.addColorStop(1, 'rgba(0, 240, 255, 0)');
-    pCtx.fillStyle = scanGrad;
-    pCtx.fillRect(0, scanY - 8, w, 16);
-
-    // 网格
-    pCtx.strokeStyle = 'rgba(0, 240, 255, 0.08)';
-    pCtx.lineWidth = 0.5;
-    for (let x = 0; x < w; x += 10) {
-        pCtx.beginPath();
-        pCtx.moveTo(x, 0); pCtx.lineTo(x, h);
-        pCtx.stroke();
-    }
-    for (let y = 0; y < h; y += 10) {
-        pCtx.beginPath();
-        pCtx.moveTo(0, y); pCtx.lineTo(w, y);
-        pCtx.stroke();
-    }
-
-    // 噪点（模拟生成中）
-    const noiseCount = Math.floor(previewProgress * 200);
-    for (let i = 0; i < noiseCount; i++) {
-        const x = Math.random() * w, y = Math.random() * h;
-        const c = Math.random();
-        pCtx.fillStyle = c < 0.4 ? 'rgba(0,240,255,0.4)' :
-                         c < 0.7 ? 'rgba(255,61,166,0.3)' :
-                                   'rgba(177,74,255,0.3)';
-        pCtx.fillRect(x, y, 1.5, 1.5);
-    }
-
-    // 中心发光点
-    const cx = w / 2, cy = h / 2;
-    const radial = pCtx.createRadialGradient(cx, cy, 0, cx, cy, 20);
-    radial.addColorStop(0, 'rgba(0, 240, 255, 0.4)');
-    radial.addColorStop(1, 'rgba(0, 240, 255, 0)');
-    pCtx.fillStyle = radial;
-    pCtx.beginPath();
-    pCtx.arc(cx, cy, 20, 0, Math.PI * 2);
-    pCtx.fill();
-
-    previewProgress += 0.01;
-    if (previewProgress > 1) previewProgress = 0;
-
-    requestAnimationFrame(drawPreview);
-}
-drawPreview();
-
-// 参数面板随机更新
+// 参数随机
 setInterval(() => {
     document.getElementById('fc-seed').textContent = Math.floor(100000 + Math.random() * 900000);
 }, 7000);
