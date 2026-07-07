@@ -8,21 +8,6 @@
 <!-- 古典字体 -->
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;600;700&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
 
-<!-- MediaPipe -->
-<script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
-
-<!-- Three.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/18.6.4/tween.umd.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/EffectComposer.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/RenderPass.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/ShaderPass.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/CopyShader.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/LuminosityHighPassShader.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/UnrealBloomPass.js"></script>
-
 <style>
 :root {
     --gold: #d4af37;
@@ -369,6 +354,16 @@ h3 { font-size: 0.75rem; font-weight: 400; color: var(--gold); margin-bottom: 6p
     <div class="loader-frame"></div>
     <p class="loader-text">PREPARING THE CANVAS</p>
 </div>
+<!-- 立即注册兜底 — 纯内联，不依赖任何外部库 -->
+<script>
+(function(){
+    function rl(){var l=document.getElementById('loading');if(l){l.style.opacity='0';setTimeout(function(){if(l&&l.parentNode)l.parentNode.removeChild(l);},500);}}
+    setTimeout(rl,1500);setTimeout(rl,3000);setTimeout(rl,5000);
+    window.__removeLoading=rl;
+    window.addEventListener('error',function(e){console.error('[FATAL]',e.message);rl();});
+    window.addEventListener('unhandledrejection',function(e){console.error('[PROMISE]',e.reason);rl();});
+})();
+</script>
 
 <!-- 主工作区 -->
 <div class="workspace">
@@ -537,31 +532,21 @@ h3 { font-size: 0.75rem; font-weight: 400; color: var(--gold); margin-bottom: 6p
 <!-- 手势提示 -->
 <div id="gesture-toast"><span class="icon">✋</span><span id="toast-text">Gesture Active</span></div>
 
+<!-- 所有外部库 — 放在 body 底部按顺序加载，不阻塞 HTML 渲染 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/18.6.4/tween.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/EffectComposer.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/RenderPass.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/ShaderPass.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/CopyShader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/LuminosityHighPassShader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/UnrealBloomPass.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
+
 <script>
-// 全局错误兜底 — 任何 JS 报错都强制移除 loading
-window.addEventListener('error', function(e) {
-    console.error('[FATAL]', e.message);
-    removeLoading();
-});
-// 未捕获的 Promise 异常
-window.addEventListener('unhandledrejection', function(e) {
-    console.error('[PROMISE]', e.reason);
-    removeLoading();
-});
-
-// 移除 loading — 多重保险
-function removeLoading() {
-    var l = document.getElementById('loading');
-    if (l) {
-        l.style.opacity = '0';
-        setTimeout(function() { if (l && l.parentNode) l.parentNode.removeChild(l); }, 500);
-    }
-}
-setTimeout(removeLoading, 800);
-setTimeout(removeLoading, 2000);
-setTimeout(removeLoading, 4000); // 最后兜底
-window.addEventListener('load', removeLoading);
-
+// 全局错误兜底已在内联 script 中注册
 // ================================================================
 //  Three.js Scene — 金色油画风格水晶球
 // ================================================================
@@ -1384,10 +1369,10 @@ function animate() {
 }
 animate();
 
-// 移除加载 — 已在文件顶部定义 removeLoading，这里只调用
-setTimeout(removeLoading, 800);
-setTimeout(removeLoading, 3000);
-window.addEventListener('load', removeLoading);
+// 移除加载 — 调用内联脚本注册的全局函数
+setTimeout(function(){ if(window.__removeLoading) window.__removeLoading(); }, 800);
+setTimeout(function(){ if(window.__removeLoading) window.__removeLoading(); }, 3000);
+window.addEventListener('load', function(){ if(window.__removeLoading) window.__removeLoading(); });
 
 // 数据波动
 setInterval(() => {
