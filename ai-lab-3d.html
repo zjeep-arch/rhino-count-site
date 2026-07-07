@@ -569,18 +569,31 @@ const threeCanvas = document.getElementById('three-canvas');
 const paintCanvas = document.getElementById('paint-canvas');
 const paintCtx = paintCanvas.getContext('2d');
 
-const scene = new THREE.Scene();
+// 全局变量声明 — 即使 3D 初始化失败也不会阻断后续代码
+let scene, camera, renderer, controls, composer, bloomPass, globeGroup;
+let vortexParticles, vortexData, vortexCount = 2500;
+let envParticles, envData, envCount = 1000;
+let coreGlow, corePoint, innerRing, beam;
+let islands = [], satellites = [], stars;
+let pTex;
+let isStorm = false;
+
+// 标记 3D 是否可用
+let threeReady = false;
+
+try {
+scene = new THREE.Scene();
 scene.fog = new THREE.FogExp2('#0a0806', 0.012);
 
-const camera = new THREE.PerspectiveCamera(55, 1, 0.1, 1000);
+camera = new THREE.PerspectiveCamera(55, 1, 0.1, 1000);
 camera.position.set(0, 2, 10);
 
-const renderer = new THREE.WebGLRenderer({ canvas: threeCanvas, antialias: true, alpha: true });
+renderer = new THREE.WebGLRenderer({ canvas: threeCanvas, antialias: true, alpha: true });
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.toneMappingExposure = 1.4;
 
-const controls = new THREE.OrbitControls(camera, threeCanvas);
+controls = new THREE.OrbitControls(camera, threeCanvas);
 controls.enableDamping = true;
 controls.dampingFactor = 0.06;
 controls.maxPolarAngle = Math.PI / 2 + 0.1;
@@ -589,14 +602,22 @@ controls.maxDistance = 16;
 controls.autoRotate = true;
 controls.autoRotateSpeed = 0.3;
 
-// Bloom — 暖金色调
-const renderScene = new THREE.RenderPass(scene, camera);
-const bloomPass = new THREE.UnrealBloomPass(
-    new THREE.Vector2(800, 600), 0.9, 0.5, 0.3
-);
-const composer = new THREE.EffectComposer(renderer);
-composer.addPass(renderScene);
-composer.addPass(bloomPass);
+// Bloom — 可选，加载失败则跳过
+let useBloom = false;
+try {
+    if (THREE.EffectComposer && THREE.RenderPass && THREE.UnrealBloomPass) {
+        const renderScenePass = new THREE.RenderPass(scene, camera);
+        bloomPass = new THREE.UnrealBloomPass(
+            new THREE.Vector2(800, 600), 0.9, 0.5, 0.3
+        );
+        composer = new THREE.EffectComposer(renderer);
+        composer.addPass(renderScenePass);
+        composer.addPass(bloomPass);
+        useBloom = true;
+    }
+} catch (bloomErr) {
+    console.warn('[BLOOM] 后处理不可用，使用普通渲染:', bloomErr.message);
+}
 
 // 灯光 — 暖色油画光
 scene.add(new THREE.AmbientLight('#1a1408', 2.0));
@@ -830,6 +851,13 @@ const stars = new THREE.Points(starGeo, new THREE.PointsMaterial({
     opacity: 0.3, blending: THREE.AdditiveBlending, depthWrite: false
 }));
 scene.add(stars);
+threeReady = true;
+console.log('[3D] Scene initialized successfully, bloom=' + useBloom);
+
+} catch (initErr) {
+    console.error('[3D] Scene init failed:', initErr);
+    threeReady = false;
+}
 
 // ================================================================
 //  尺寸适配
@@ -837,10 +865,11 @@ scene.add(stars);
 function resizeAll() {
     const w = threeCanvas.parentElement.clientWidth;
     const h = threeCanvas.parentElement.clientHeight;
+    if (!threeReady) return;
     camera.aspect = w / h;
     camera.updateProjectionMatrix();
     renderer.setSize(w, h, false);
-    composer.setSize(w, h);
+    if (composer) composer.setSize(w, h);
     paintCanvas.width = w;
     paintCanvas.height = h;
 }
@@ -948,9 +977,9 @@ let isStorm = false;
 
 function triggerStorm() {
     isStorm = true;
-    new TWEEN.Tween(bloomPass).to({ strength: 2.5 }, 200).yoyo(true).repeat(1).start();
-    new TWEEN.Tween(coreGlow.material).to({ opacity: 1.0 }, 150).yoyo(true).repeat(1).start();
-    new TWEEN.Tween(coreGlow.scale).to({ x: 3, y: 3, z: 3 }, 300).yoyo(true).repeat(1).start();
+    if (bloomPass) new TWEEN.Tween(bloomPass).to({ strength: 2.5 }, 200).yoyo(true).repeat(1).start();
+    if (coreGlow) new TWEEN.Tween(coreGlow.material).to({ opacity: 1.0 }, 150).yoyo(true).repeat(1).start();
+    if (coreGlow) new TWEEN.Tween(coreGlow.scale).to({ x: 3, y: 3, z: 3 }, 300).yoyo(true).repeat(1).start();
 
     // 油彩粒子爆发
     for (let i = 0; i < 40; i++) {
@@ -1138,6 +1167,7 @@ let gestureStableCount = 0;
 
 function applyGesture(lm) {
     if (!handState.detected) return;
+    if (!threeReady || !globeGroup) return;
 
     if (handState.gesture === lastGesture) {
         gestureStableCount++;
@@ -1195,7 +1225,7 @@ function applyGesture(lm) {
             }
             break;
         case 'heart':
-            bloomPass.strength = 2.0;
+            if (bloomPass) bloomPass.strength = 2.0;
             corePoint.color.setHex(0xd4af37);
             coreGlow.material.color.setHex(0xd4af37);
             innerRing.material.color.setHex(0xd4af37);
@@ -1203,7 +1233,7 @@ function applyGesture(lm) {
     }
 
     if (lastGesture === 'heart' && handState.gesture !== 'heart') {
-        bloomPass.strength = 0.9;
+        if (bloomPass) bloomPass.strength = 0.9;
         corePoint.color.setHex(0xd4af37);
         coreGlow.material.color.setHex(0xd4af37);
         innerRing.material.color.setHex(0x8c2d19);
@@ -1283,10 +1313,12 @@ document.getElementById('btn-return').addEventListener('click', function(e) {
 const clock = new THREE.Clock();
 function animate() {
     requestAnimationFrame(animate);
+    if (!threeReady) return;
     TWEEN.update();
     const t = clock.getElapsedTime();
 
     // 漩涡
+    if (vortexParticles && vortexData) {
     const vp = vortexParticles.geometry.attributes.position;
     for (let i = 0; i < vortexCount; i++) {
         const d = vortexData[i];
@@ -1295,8 +1327,10 @@ function animate() {
         vp.setZ(i, d.r * Math.sin(d.theta));
     }
     vp.needsUpdate = true;
+    } // end vortex guard
 
     // 外围粒子
+    if (envParticles && envData) {
     const ep = envParticles.geometry.attributes.position;
     for (let i = 0; i < envCount; i++) {
         let x = ep.getX(i), y = ep.getY(i), z = ep.getZ(i);
@@ -1308,23 +1342,27 @@ function animate() {
         ep.setXYZ(i, x, y, z);
     }
     ep.needsUpdate = true;
+    } // end env guard
 
     // 核心呼吸
-    coreGlow.scale.setScalar(1 + Math.sin(t * 1.2) * 0.2);
-    corePoint.intensity = 2.0 + Math.sin(t * 1.2) * 0.5;
-    innerRing.rotation.z = t * 0.5;
+    if (coreGlow) coreGlow.scale.setScalar(1 + Math.sin(t * 1.2) * 0.2);
+    if (corePoint) corePoint.intensity = 2.0 + Math.sin(t * 1.2) * 0.5;
+    if (innerRing) innerRing.rotation.z = t * 0.5;
 
     // 岛屿
+    if (islands && islands.length) {
     islands.forEach(island => {
         const d = island.userData;
         island.position.y = d.baseY + Math.sin(t * 0.8 + d.floatPhase) * 0.1;
         island.rotation.y = t * d.rotSpeed;
     });
+    }
 
     // 光柱
-    beam.material.opacity = 0.05 + Math.sin(t * 0.8) * 0.02;
+    if (beam) beam.material.opacity = 0.05 + Math.sin(t * 0.8) * 0.02;
 
     // 卫星
+    if (satellites && satellites.length) {
     satellites.forEach(sat => {
         const d = sat.userData;
         const angle = t * d.orbitSpeed + d.orbitPhase;
@@ -1332,12 +1370,17 @@ function animate() {
         sat.position.z = Math.sin(angle) * d.orbitR;
         sat.position.y = 0.15 + Math.sin(angle) * d.tilt;
     });
+    }
 
     // 星空
-    stars.rotation.y = t * 0.006;
+    if (stars) stars.rotation.y = t * 0.006;
 
     controls.update();
-    composer.render();
+    if (useBloom && composer) {
+        composer.render();
+    } else if (renderer) {
+        renderer.render(scene, camera);
+    }
 }
 animate();
 
