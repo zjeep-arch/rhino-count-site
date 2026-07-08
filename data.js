@@ -231,7 +231,7 @@ window.SITE_DATA = {
         img: "assets/note-05.svg",
         href: "notes/2026-07-07-microsoft-layoff-ai-hiring.html"
       },
-
+      {
         cat: "AI 趋势", num: "N° 09",
         title: "谷歌掐了Meta的电闸，AI争夺战杀到了变压器",
         excerpt: "Meta被限算力后被迫卖算力，半导体暴跌6.27%。AI的战争已从算法打到了电力。",
