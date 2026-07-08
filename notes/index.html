@@ -198,10 +198,7 @@
 
       if (countEl) countEl.textContent = '共 ' + notes.length + ' 篇';
 
-      /* 倒序排列：最新的（编号大的）排前面 */
-      var sorted = notes.slice().reverse();
-
-      list.innerHTML = sorted.map(function(n) {
+      list.innerHTML = notes.map(function(n) {
         return '<a class="note-item" href="' + n.href + '">' +
           '<span class="note-item-num">' + (n.num || '') + '</span>' +
           '<div class="note-item-main">' +
