@@ -112,6 +112,12 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "扎克伯格说搞砸了，Meta市值却涨了1500亿",
+        desc: "AI重组搞砸了，员工直播会上骂老板，半导体暴跌5.4%。市场听懂了：不是AI失败，是换挡。",
+        href: "notes/2026-07-08-meta-leaked-recording-zuckerberg.html"
+      },
+      {
+        type: "Essay",
         title: "Anthropic给Claude做了一次脑部CT，然后全世界都在喊它有意识",
         desc: "论文里没说意识两个字，但Anthropic让全宇宙都在讨论意识。科学上保持谨慎，传播上不断贴边。",
         href: "notes/2026-07-08-anthropic-j-space-consciousness-marketing.html"
@@ -188,6 +194,13 @@ window.SITE_DATA = {
     headingLine2: "慢慢记。",
     blurb: "每一篇笔记都是一次小型田野调查：关于模型、关于人、关于我们如何被这个时代重新塑形。",
     notes: [
+      {
+        cat: "AI 趋势", num: "N° 12",
+        title: "扎克伯格说搞砸了，Meta市值却涨了1500亿",
+        excerpt: "AI重组搞砸了，员工直播会上骂老板，半导体暴跌5.4%。市场听懂了：不是AI失败，是换挡。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-07-08-meta-leaked-recording-zuckerberg.html"
+      },
       {
         cat: "AI 趋势", num: "N° 11",
         title: "Anthropic给Claude做了一次脑部CT，然后全世界都在喊它有意识",
