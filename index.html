@@ -1266,6 +1266,38 @@
     }
     .note:hover .note-cta::after { transform: translateX(4px); }
 
+    /* Journal — 3列固定网格 + 查看全部按钮 */
+    .journal-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @media (max-width: 900px) {
+      .journal-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .journal-grid { grid-template-columns: 1fr; }
+    }
+    .notes-view-all {
+      margin-top: var(--s-8);
+      display: flex; justify-content: center;
+    }
+    .notes-archive-link {
+      display: inline-flex; align-items: center; gap: var(--s-3);
+      padding: var(--s-4) var(--s-7);
+      border: 1px solid var(--line-2);
+      border-radius: var(--radius);
+      font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--accent); font-weight: 600;
+      background: var(--surface);
+      transition: all 0.3s ease;
+    }
+    .notes-archive-link:hover {
+      border-color: var(--accent);
+      box-shadow: var(--shadow-glow);
+      transform: translateY(-2px);
+    }
+    .notes-archive-link span { transition: transform 0.3s ease; }
+    .notes-archive-link:hover span { transform: translateX(4px); }
+
     /* =========================================================
      * Commentary (Daily Xiaolei-style articles)
      * ========================================================= */
@@ -4921,8 +4953,9 @@
         </div>
       `;
 
-      /* Journal */
+      /* Journal — 首页只展示最新 3 篇 + 查看全部入口 */
       const j = D.journal;
+      const featuredNotes = j.notes.slice(0, 3);
       document.getElementById('notes').innerHTML = `
         <div class="container">
           <div class="section-head fade-in">
@@ -4933,7 +4966,7 @@
             <p class="blurb">${esc(j.blurb)}</p>
           </div>
           <div class="journal-grid">
-            ${j.notes.map((n, i) => `
+            ${featuredNotes.map((n, i) => `
               <article class="note fade-in fade-in-delay-${Math.min(i, 3)}">
                 ${n.img ? `<div class="note-cover"><img src="${esc(n.img)}" alt="" loading="lazy"/></div>` : ''}
                 <div class="note-body">
@@ -4947,6 +4980,9 @@
                 </div>
               </article>
             `).join('')}
+          </div>
+          <div class="notes-view-all fade-in fade-in-delay-3">
+            <a class="notes-archive-link" href="notes/">查看全部 ${j.notes.length} 篇笔记 <span aria-hidden="true">\u2192</span></a>
           </div>
         </div>
       `;
