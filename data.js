@@ -225,7 +225,6 @@ window.SITE_DATA = {
         href: "notes/what-pku-didnt-teach-me.html"
       },
       {
-      {
         cat: "AI 趋势", num: "N° 10",
         title: "微软裁了4800人，转头招了6000人干AI",
         excerpt: "不是AI替代你，是会用AI的人在替代不会用AI的人。",
