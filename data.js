@@ -112,6 +112,12 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "ChatGPT终于学会了一件事：别急着抢话",
+        desc: "GPT-Live用全双工架构和前后台解耦，把语音交互从对讲机变成了电话。BrowseComp从0.7%到75.2%。",
+        href: "notes/2026-07-09-gpt-live-voice-model.html"
+      },
+      {
+        type: "Essay",
         title: "扎克伯格说搞砸了，Meta市值却涨了1500亿",
         desc: "AI重组搞砸了，员工直播会上骂老板，半导体暴跌5.4%。市场听懂了：不是AI失败，是换挡。",
         href: "notes/2026-07-08-meta-leaked-recording-zuckerberg.html"
@@ -194,6 +200,13 @@ window.SITE_DATA = {
     headingLine2: "慢慢记。",
     blurb: "每一篇笔记都是一次小型田野调查：关于模型、关于人、关于我们如何被这个时代重新塑形。",
     notes: [
+      {
+        cat: "产品评测", num: "N° 13",
+        title: "ChatGPT终于学会了一件事：别急着抢话",
+        excerpt: "GPT-Live用全双工架构和前后台解耦，把语音交互从对讲机变成了电话。BrowseComp从0.7%到75.2%。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-07-09-gpt-live-voice-model.html"
+      },
       {
         cat: "AI 趋势", num: "N° 12",
         title: "扎克伯格说搞砸了，Meta市值却涨了1500亿",
