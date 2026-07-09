@@ -112,6 +112,12 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "马斯克600亿买了Cursor，但真正吓人的不是Grok 4.5",
+        desc: "36天内从IPO到收购Cursor到更名SpaceXAI到联合发布Grok 4.5。AI编程赛道的终局不是谁模型最强，而是谁最先完成闭环。",
+        href: "notes/2026-07-10-spacexai-cursor-grok45.html"
+      },
+      {
+        type: "Essay",
         title: "两周，三颗芯片，AI行业换了个赛道",
         desc: "OpenAI、Anthropic、DeepSeek两周内集体转向芯片。模型竞赛的高潮已过，下一场是芯片竞赛。",
         href: "notes/2026-07-09-deepseek-ai-chip.html"
@@ -206,6 +212,13 @@ window.SITE_DATA = {
     headingLine2: "慢慢记。",
     blurb: "每一篇笔记都是一次小型田野调查：关于模型、关于人、关于我们如何被这个时代重新塑形。",
     notes: [
+      {
+        cat: "行业观察", num: "N° 15",
+        title: "马斯克600亿买了Cursor，但真正吓人的不是Grok 4.5",
+        excerpt: "36天内从IPO到收购Cursor到更名SpaceXAI到联合发布Grok 4.5。马斯克拼出了一条AI编程赛道的垂直整合闭环。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-07-10-spacexai-cursor-grok45.html"
+      },
       {
         cat: "行业观察", num: "N° 14",
         title: "两周，三颗芯片，AI行业换了个赛道",
