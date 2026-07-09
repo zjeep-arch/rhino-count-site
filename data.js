@@ -112,6 +112,12 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "两周，三颗芯片，AI行业换了个赛道",
+        desc: "OpenAI、Anthropic、DeepSeek两周内集体转向芯片。模型竞赛的高潮已过，下一场是芯片竞赛。",
+        href: "notes/2026-07-09-deepseek-ai-chip.html"
+      },
+      {
+        type: "Essay",
         title: "ChatGPT终于学会了一件事：别急着抢话",
         desc: "GPT-Live用全双工架构和前后台解耦，把语音交互从对讲机变成了电话。BrowseComp从0.7%到75.2%。",
         href: "notes/2026-07-09-gpt-live-voice-model.html"
@@ -200,6 +206,13 @@ window.SITE_DATA = {
     headingLine2: "慢慢记。",
     blurb: "每一篇笔记都是一次小型田野调查：关于模型、关于人、关于我们如何被这个时代重新塑形。",
     notes: [
+      {
+        cat: "行业观察", num: "N° 14",
+        title: "两周，三颗芯片，AI行业换了个赛道",
+        excerpt: "OpenAI、Anthropic、DeepSeek两周内集体转向芯片。模型竞赛的高潮已过，下一场是芯片竞赛。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-07-09-deepseek-ai-chip.html"
+      },
       {
         cat: "产品评测", num: "N° 13",
         title: "ChatGPT终于学会了一件事：别急着抢话",

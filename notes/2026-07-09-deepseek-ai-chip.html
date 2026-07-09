@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>两周，三颗芯片，AI行业换了个赛道</title>
+  <style>
+    :root {
+      --accent: #8b2635;
+      --ink: #333;
+      --ink-soft: #555;
+      --muted: #888;
+      --surface: #fafafa;
+      --border: rgba(0,0,0,0.06);
+      --radius: 12px;
+      --font-sans: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-serif: "Noto Serif SC", "Songti SC", Georgia, serif;
+    }
+    body { font-family: var(--font-sans); background: #f5f5f5; margin: 0; padding: 16px; font-size: 16px; line-height: 1.8; color: var(--ink); -webkit-font-smoothing: antialiased; }
+    .container { max-width: 680px; margin: 0 auto; background: var(--surface); padding: 32px; border-radius: var(--radius); }
+    .cover-img { width: 100%; border-radius: 8px; margin-bottom: 24px; }
+    h1 { font-family: var(--font-serif); font-size: 24px; font-weight: 700; color: var(--ink); line-height: 1.4; margin: 0 0 16px; }
+    .meta { color: var(--muted); font-size: 13px; margin-bottom: 16px; }
+    .byline { color: var(--ink-soft); font-size: 14px; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+    h2 { font-family: var(--font-serif); font-size: 20px; font-weight: 600; color: var(--ink); margin: 32px 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+    h3 { font-family: var(--font-serif); font-size: 18px; font-weight: 600; color: var(--ink); margin: 24px 0 12px; }
+    p { margin: 0 0 24px; }
+    .quote-box { border-left: 4px solid var(--accent); background: #f5f5f5; padding: 16px 20px; margin: 24px 0; border-radius: 0 var(--radius) var(--radius) 0; }
+    .quote-box p { margin: 0; color: var(--ink-soft); font-style: italic; font-size: 15px; }
+    .quote-box .attribution { margin-top: 8px; color: var(--muted); font-size: 13px; font-style: normal; }
+    .data-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14px; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .data-table th, .data-table td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); }
+    .data-table th { background: #f0f0f0; font-weight: 600; color: var(--ink); }
+    .data-table td { color: var(--ink-soft); }
+    .timeline { position: relative; padding-left: 24px; margin: 24px 0; }
+    .timeline::before { content: ''; position: absolute; left: 6px; top: 0; bottom: 0; width: 2px; background: #e0e0e0; }
+    .timeline-item { position: relative; margin-bottom: 16px; }
+    .timeline-item::before { content: ''; position: absolute; left: -22px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); }
+    .timeline-item .date { font-size: 13px; color: var(--muted); margin-bottom: 4px; }
+    .timeline-item .content { font-size: 15px; color: var(--ink); }
+    .img-caption { text-align: center; color: var(--muted); font-size: 13px; margin-top: 8px; margin-bottom: 24px; }
+    .ending { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--ink-soft); font-size: 14px; }
+    .highlight { color: var(--accent); font-weight: 600; background: linear-gradient(to top, rgba(139,38,53,0.08) 40%, transparent 40%); padding: 0 2px; }
+    .data-callout { display: inline-block; background: var(--accent); color: #fff; padding: 2px 10px; border-radius: 4px; font-weight: 700; font-size: 15px; }
+    .contrast-card { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin: 24px 0; border-radius: var(--radius); overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .contrast-card .side { padding: 16px 20px; }
+    .contrast-card .side-left { background: #fef2f2; border-right: 1px solid var(--border); }
+    .contrast-card .side-right { background: #f0fdf4; }
+    .contrast-card .side h4 { margin: 0 0 8px; font-size: 14px; font-weight: 600; }
+    .contrast-card .side-left h4 { color: #991b1b; }
+    .contrast-card .side-right h4 { color: #166534; }
+    .contrast-card .side p { margin: 0; font-size: 14px; color: var(--ink-soft); line-height: 1.6; }
+    .punchline { font-family: var(--font-serif); font-size: 18px; font-weight: 700; color: var(--accent); text-align: center; margin: 32px 0; padding: 16px 0; border-top: 2px solid var(--accent); border-bottom: 2px solid var(--accent); }
+    strong { color: var(--ink); font-weight: 600; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img class="cover-img" src="../assets/deepseek-chip-cover.jpg" alt="三颗AI芯片的全球竞争">
+    <h1>两周，三颗芯片，AI行业换了个赛道</h1>
+    <div class="meta">2026-07-09 · 阅读时间约8分钟</div>
+    <div class="byline">文｜犀牛伯爵</div>
+
+    <p>6月的最后一周，OpenAI发布了自己的第一颗芯片。7月初，Anthropic被曝正在评估自研芯片。7月7日，路透社独家曝出DeepSeek也在造芯片，已经秘密推进了一年。</p>
+
+    <p>两周，三颗芯片。全球最值钱的三家AI模型公司，在同一时间做了同一件事。这个密度很难说是巧合。</p>
+
+    <p>坦率地讲，模型竞赛的高潮可能真的已经过去了。下一场竞赛，比的不是谁的参数更大，而是谁能把模型和芯片一起做。</p>
+
+    <h2>两周，三颗芯片</h2>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="date">6月底</div>
+        <div class="content"><strong>OpenAI</strong>发布首款自研推理芯片Jalapeño，与博通合作，从设计到流片仅用9个月</div>
+      </div>
+      <div class="timeline-item">
+        <div class="date">7月初</div>
+        <div class="content"><strong>Anthropic</strong>被曝进入定制AI芯片早期研发，正与三星洽谈制造合作</div>
+      </div>
+      <div class="timeline-item">
+        <div class="date">7月7日</div>
+        <div class="content"><strong>DeepSeek</strong>被曝正在自研AI推理芯片，已秘密推进约一年，正对接芯片设计、代工和存储厂商</div>
+      </div>
+    </div>
+
+    <p>这不是三家公司各自的决定，是整个行业在发生结构性的变化。</p>
+
+    <h2>为什么都在造芯</h2>
+
+    <p>我翻了所有报道，把原因归结为三个。</p>
+
+    <p><strong>第一，推理成本正在吞噬利润。</strong></p>
+
+    <p>Anthropic CEO Dario Amodei说过一句让人倒吸冷气的话，"如果我的收入无法达到1万亿美元，一旦我购买了那么多的算力，地球上没有任何力量能阻止我破产。"</p>
+
+    <p>这不是夸张。Anthropic 2026年仅推理成本预计就达141亿美元，全年亏损预计140亿。模型越强、用户越多、Token消耗越大，推理算力支出就越像一头吞金兽。自研芯片的核心目的，不是完全替代英伟达，而是针对自家模型架构做软硬协同优化——把推理成本从"不可承受"压到"可持续"。</p>
+
+    <p><strong>第二，出口管制让芯片采购变得不可控。</strong></p>
+
+    <p>DeepSeek的处境最典型。它最初用英伟达H800训练R1，2023年底H800被禁。转向华为昇腾，但华为芯片性能与英伟达仍有差距，且产能受限。梁文锋在2023年就说过，"我们真正的挑战从来不是资金，而是高端芯片的出口禁令。"</p>
+
+    <p>买别人的芯片，命运就不在自己手里。自研是终极解法。</p>
+
+    <p><strong>第三，推理需求正在超过训练，专用芯片的时代到了。</strong></p>
+
+    <p>IDC预测，到2027年推理将占智能算力需求的70%以上。聊天机器人、代码助手、Agent应用——这些场景对芯片的要求与训练截然不同。通用GPU为训练而设计，推理用专用芯片可以在成本和能效上实现数量级的优化。</p>
+
+    <p>DeepSeek的模型本身就以高效著称，V4-Flash输出仅2元/百万token。如果再配上自研推理芯片，成本还能再往下压一个台阶。</p>
+
+    <h2>但造芯没那么容易</h2>
+
+    <p>说完了为什么造，说说为什么难。</p>
+
+    <p><strong>研发周期。</strong>一款芯片从架构设计、验证、流片到量产通常需要数年时间。DeepSeek此前没有芯片研发积淀，技术团队磨合、工程落地经验都需要长期积累。</p>
+
+    <p><strong>制造限制。</strong>海外出口管制下，国内芯片设计企业难以获取海外顶尖晶圆厂的先进制程产能。高端工艺选择空间有限，推理芯片核心元器件高带宽内存（HBM）同样受海外管控。</p>
+
+    <p><strong>软件生态。</strong>英伟达长期垄断市场的核心优势不只是硬件性能，更是成熟完善的CUDA软件生态。国产芯片普遍存在适配难度高、生态配套不完善的痛点。</p>
+
+    <p><strong>量产规模。</strong>如果芯片仅供给内部业务使用，量产规模不足会拉高单片硬件成本，难以形成规模效应。</p>
+
+    <p>路透社报道说DeepSeek的芯片项目仍处于早期阶段，已经接触芯片设计、晶圆代工和存储厂商。项目大约一年前启动，近几个月悄悄加大了芯片设计工程师的招聘，但没有在公开招聘平台发布职位。</p>
+
+    <h2>DeepSeek的完整链路野心</h2>
+
+    <p>如果自研芯片落地，DeepSeek将掌握从模型架构、软件栈到计算硬件的完整链路。</p>
+
+    <p>它之前已经开源了DeepGEMM、DeepEP、FlashMLA和3FS等面向大模型训练、通信、推理及存储的基础设施组件。向芯片层延伸，意味着其希望进一步控制整条技术栈。</p>
+
+    <div class="data-table">
+      <tr><th>公司</th><th>芯片状态</th><th>聚焦场景</th><th>合作方</th></tr>
+      <tr><td>OpenAI</td><td>已发布（Jalapeño）</td><td>推理</td><td>博通、台积电</td></tr>
+      <tr><td>Anthropic</td><td>早期研发</td><td>定制AI芯片</td><td>三星（洽谈中）</td></tr>
+      <tr><td>DeepSeek</td><td>早期阶段，约1年</td><td>推理</td><td>设计/代工/存储厂商（接触中）</td></tr>
+      <tr><td>阿里巴巴</td><td>已推进</td><td>通用AI</td><td>自研</td></tr>
+      <tr><td>百度</td><td>已推进</td><td>通用AI</td><td>自研</td></tr>
+    </div>
+
+    <p class="img-caption">全球头部AI公司自研芯片进展</p>
+
+    <h2>竞争维度正在切换</h2>
+
+    <p>过去两年，AI公司只比一件事，模型能力。谁的Benchmark分数高、谁在SWE-bench上更靠前，谁就赢了。</p>
+
+    <p>但2026年下半年的信号越来越清晰。模型能力的天花板还没有到，但"纯软件"的竞争窗口正在关闭。</p>
+
+    <p>下一个阶段的竞争，将围绕三个维度展开：</p>
+
+    <p><strong>软硬件协同优化能力</strong>——谁能在自家芯片上跑自家模型，推理成本压到最低。</p>
+
+    <p><strong>供应链掌控能力</strong>——谁的算力供应不依赖单一供应商，不会被一纸禁令卡住。</p>
+
+    <p><strong>成本结构优势</strong>——谁能在Token单价上持续碾压对手，谁就能拿到开发者市场。</p>
+
+    <p>还有一个值得关注的变化。DeepSeek上个月刚被曝出计划完成首轮外部融资，目标募资70亿美元，投后估值520亿至590亿美元。这是它多年来第一次接受外部资本。从融资到造芯，一个月内做了两件以前不会做的事——这标志着它正在从"实验室"变成"公司"。</p>
+
+    <p>7月中旬，DeepSeek V4正式版大模型即将上线。叠加自研推理芯片项目稳步推进，这家公司的全链条布局越来越清晰。</p>
+
+    <h2>一个被忽略的细节</h2>
+
+    <p>很多人把三家造芯解读为"去英伟达化"，但这不完全准确。</p>
+
+    <p>OpenAI的Jalapeño聚焦推理，训练仍然依赖英伟达。Anthropic的芯片还在早期评估。DeepSeek的芯片也明确是推理专用，训练仍需外部芯片支持。</p>
+
+    <p>更准确的描述是，头部AI公司正在从"买算力"走向"造算力"，但不是在所有场景替代英伟达，而是在推理这个 fastest-growing 的细分市场建立差异化优势。</p>
+
+    <p>英伟达不会一夜之间失去地位。训练市场它仍然统治，推理市场它也会继续竞争。但专用推理芯片的崛起，意味着英伟达面临的竞争将从"没有竞争"变成"有具体对手"。</p>
+
+    <p class="punchline">模型竞赛的上半场看谁的参数大，下半场看谁能把模型和芯片一起做。</p>
+
+    <div class="ending">
+      谢谢你看我的文章。<br><br>
+      数据来源：路透社（2026.07.07）、OpenAI官方公告、AI前线、36氪
+    </div>
+  </div>
+</body>
+</html>
