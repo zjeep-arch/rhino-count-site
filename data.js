@@ -112,6 +112,12 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "马斯克向Anthropic认输，但最骚的操作不是认输",
+        desc: "Anthropic月付12.5亿租对手的GPU训练自己的模型，ARR 18个月从90亿飙到600亿。马斯克的认输是一门精明的生意。",
+        href: "notes/2026-07-11-anthropic-musk-surrender.html"
+      },
+      {
+        type: "Essay",
         title: "马斯克600亿买了Cursor，但真正吓人的不是Grok 4.5",
         desc: "36天内从IPO到收购Cursor到更名SpaceXAI到联合发布Grok 4.5。AI编程赛道的终局不是谁模型最强，而是谁最先完成闭环。",
         href: "notes/2026-07-10-spacexai-cursor-grok45.html"
@@ -212,6 +218,13 @@ window.SITE_DATA = {
     headingLine2: "慢慢记。",
     blurb: "每一篇笔记都是一次小型田野调查：关于模型、关于人、关于我们如何被这个时代重新塑形。",
     notes: [
+      {
+        cat: "行业观察", num: "N° 16",
+        title: "马斯克向Anthropic认输，但最骚的操作不是认输",
+        excerpt: "Anthropic月付12.5亿租对手GPU，ARR 18个月从90亿飙到600亿。马斯克的认输是一门精明的生意。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-07-11-anthropic-musk-surrender.html"
+      },
       {
         cat: "行业观察", num: "N° 15",
         title: "马斯克600亿买了Cursor，但真正吓人的不是Grok 4.5",
