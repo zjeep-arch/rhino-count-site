@@ -81,6 +81,13 @@ window.SITE_DATA = {
     blurb: "这里不放想法，放做出来的东西——网站、游戏、H5、交互实验。",
     tracks: [
       {
+        tag: "TOOL",
+        title: "犀牛白板 · 录屏创作器",
+        desc: "边画边讲的浏览器创作工具：白板、幻灯片、提词器、摄像头画中画与一键录屏，作品只保存在本地。",
+        linkLabel: "开始创作",
+        href: "whiteboard-recorder.html"
+      },
+      {
         tag: "GAME",
         title: "鸭骗战争：真鸭假鹅",
         desc: "扮演鹅腿阿姨，用鸭腿冒充鹅腿。荒诞答题小游戏，测试轻量游戏化表达。",
