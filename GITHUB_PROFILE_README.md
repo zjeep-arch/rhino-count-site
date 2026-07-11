@@ -18,22 +18,26 @@
 
 | Project | What It Is | Link |
 |--------|-----------|------|
-| 🧪 **AI 创作实验室** | 全栈个人创作站：时评 + 早报 + 笔记 + 互动实验 | [进入 →](https://zjeep-arch.github.io/rhino-count-site/) |
-| 🤖 **Agent Is Operating System** | 从 App 思维迁移到 Agent 思维的 5 个转变 | [阅读 →](https://zjeep-arch.github.io/rhino-count-site/notes/agent-is-operating-system.html) |
-| 📚 **DuMate 从 0 到 1 教程** | 把 AI 产品拆成可操作、可复用的教程资产 | [学习 →](https://zjeep-arch.github.io/rhino-count-site/dumate/) |
-| 📰 **每日时评** | 每晚 7 点，闲聊拆解宏观、科技和产业信号 | [阅读 →](https://zjeep-arch.github.io/rhino-count-site/articles/) |
-| ☀️ **AI 早报** | 每天 8 点，AI 大模型 / 产品 / 资本 / 产业速览 | [阅读 →](https://zjeep-arch.github.io/rhino-count-site/ai-daily/) |
+| 🧪 **AI 创作实验室** | 全栈个人创作站：时评 + 早报 + 笔记 + 3D 交互 + 游戏 | [进入 ->](https://zjeep-arch.github.io/rhino-count-site/) |
+| 🌐 **3D AI 工作室** | Iron Man 风格 3D 交互页面：方舟反应堆、全息屏幕、贾维斯 HUD | [体验 ->](https://zjeep-arch.github.io/rhino-count-site/ai-studio-3d.html) |
+| 🌐 **3D 创作实验室** | 沉浸式 3D 页面：悬浮水晶体、滚动驱动相机、作品矩阵 | [体验 ->](https://zjeep-arch.github.io/rhino-count-site/ai-lab-3d.html) |
+| 🤖 **Agent Is Operating System** | 从 App 思维迁移到 Agent 思维的 5 个转变 | [阅读 ->](https://zjeep-arch.github.io/rhino-count-site/notes/agent-is-operating-system.html) |
+| 📚 **DuMate 从 0 到 1 教程** | 把 AI 产品拆成可操作、可复用的教程资产 | [学习 ->](https://zjeep-arch.github.io/rhino-count-site/dumate/) |
+| 📰 **每日时评** | 每晚 7 点，闲聊拆解宏观、科技和产业信号 | [阅读 ->](https://zjeep-arch.github.io/rhino-count-site/articles/) |
+| ☀️ **AI 早报** | 每天 8 点，AI 大模型 / 产品 / 资本 / 产业速览 | [阅读 ->](https://zjeep-arch.github.io/rhino-count-site/ai-daily/) |
 
 ## 🛠 Tech Stack
 
-`AI Agent` · `Agent Workflow` · `Prompt Engineering` · `Content Automation` · `Static Site` · `JavaScript` · `HTML/CSS` · `Python` · `GitHub Pages`
+`AI Agent` · `Agent Workflow` · `Prompt Engineering` · `Content Automation` · `Three.js` · `Static Site` · `JavaScript` · `HTML/CSS` · `Python` · `GitHub Pages`
 
 ## 📊 By the Numbers
 
 - **50000+** 全平台粉丝
 - **10000+** 全平台点赞
-- **25+** 篇时评文章（持续增长）
-- **7** 篇深度 AI 笔记
+- **16** 篇深度 AI 笔记（N°01–N°16，持续更新）
+- **15** 篇时评文章（持续增长）
+- **5** 期 AI 早报（每日更新）
+- **2** 个 3D 交互页面
 - **每日** 自动化内容产出（时评 + 早报）
 
 ## 🧭 Currently Exploring
