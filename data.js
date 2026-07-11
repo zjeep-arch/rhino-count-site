@@ -115,54 +115,6 @@ window.SITE_DATA = {
         title: "马斯克向Anthropic认输，但最骚的操作不是认输",
         desc: "Anthropic月付12.5亿租对手的GPU训练自己的模型，ARR 18个月从90亿飙到600亿。马斯克的认输是一门精明的生意。",
         href: "notes/2026-07-11-anthropic-musk-surrender.html"
-      },
-      {
-        type: "Essay",
-        title: "马斯克600亿买了Cursor，但真正吓人的不是Grok 4.5",
-        desc: "36天内从IPO到收购Cursor到更名SpaceXAI到联合发布Grok 4.5。AI编程赛道的终局不是谁模型最强，而是谁最先完成闭环。",
-        href: "notes/2026-07-10-spacexai-cursor-grok45.html"
-      },
-      {
-        type: "Essay",
-        title: "两周，三颗芯片，AI行业换了个赛道",
-        desc: "OpenAI、Anthropic、DeepSeek两周内集体转向芯片。模型竞赛的高潮已过，下一场是芯片竞赛。",
-        href: "notes/2026-07-09-deepseek-ai-chip.html"
-      },
-      {
-        type: "Essay",
-        title: "ChatGPT终于学会了一件事：别急着抢话",
-        desc: "GPT-Live用全双工架构和前后台解耦，把语音交互从对讲机变成了电话。BrowseComp从0.7%到75.2%。",
-        href: "notes/2026-07-09-gpt-live-voice-model.html"
-      },
-      {
-        type: "Essay",
-        title: "扎克伯格说搞砸了，Meta市值却涨了1500亿",
-        desc: "AI重组搞砸了，员工直播会上骂老板，半导体暴跌5.4%。市场听懂了：不是AI失败，是换挡。",
-        href: "notes/2026-07-08-meta-leaked-recording-zuckerberg.html"
-      },
-      {
-        type: "Essay",
-        title: "Anthropic给Claude做了一次脑部CT，然后全世界都在喊它有意识",
-        desc: "论文里没说意识两个字，但Anthropic让全宇宙都在讨论意识。科学上保持谨慎，传播上不断贴边。",
-        href: "notes/2026-07-08-anthropic-j-space-consciousness-marketing.html"
-      },
-      {
-        type: "Essay",
-        title: "微软裁了4800人，转头招了6000人干AI",
-        desc: "不是AI替代你，是会用AI的人在替代不会用AI的人。",
-        href: "notes/2026-07-07-microsoft-layoff-ai-hiring.html"
-      },
-      {
-        type: "Essay",
-        title: "谷歌掐了Meta的电闸，AI争夺战杀到了变压器",
-        desc: "Meta被限算力后被迫卖算力，半导体暴跌6.27%。AI的战争已从算法打到了电力。",
-        href: "notes/2026-07-06-ai-compute-crisis-google-meta-power.html"
-      },
-      {
-        type: "Essay",
-        title: "Anthropic把最强模型送给了政府",
-        desc: "Fable 5解禁背后，是一场22天的交易。Anthropic用Mythos 5的政府专属访问权，换回了Fable 5的商业自由。",
-        href: "notes/2026-07-05-anthropic-mythos5-government-trade.html"
       }
     ],
     roadmap: [
