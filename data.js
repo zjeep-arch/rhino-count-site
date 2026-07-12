@@ -119,6 +119,12 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "6万亿估值的Anthropic，电费单却寄给马斯克",
+        desc: "Anthropic的ARR从90亿飙到600亿，但每月12.5亿算力租金交给马斯克。微软用自研MAI替换OpenAI模型。AI产业正分成算力层、模型层和分发层，利润分配正在倾斜。",
+        href: "notes/2026-07-12-anthropic-valuation-compute-layer.html"
+      },
+      {
+        type: "Essay",
         title: "马斯克向Anthropic认输，但最骚的操作不是认输",
         desc: "Anthropic月付12.5亿租对手的GPU训练自己的模型，ARR 18个月从90亿飙到600亿。马斯克的认输是一门精明的生意。",
         href: "notes/2026-07-11-anthropic-musk-surrender.html"
@@ -177,6 +183,13 @@ window.SITE_DATA = {
     headingLine2: "慢慢记。",
     blurb: "每一篇笔记都是一次小型田野调查：关于模型、关于人、关于我们如何被这个时代重新塑形。",
     notes: [
+      {
+        cat: "行业观察", num: "N° 18",
+        title: "6万亿估值的Anthropic，电费单却寄给马斯克",
+        excerpt: "Anthropic的ARR从90亿飙到600亿，但每月12.5亿算力租金交给马斯克。微软用自研MAI替换OpenAI模型。AI产业正分成算力层、模型层和分发层，利润分配正在倾斜。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-07-12-anthropic-valuation-compute-layer.html"
+      },
       {
         cat: "行业观察", num: "N° 17",
         title: "苹果一纸诉状，OpenAI的硬件从根部烂了",

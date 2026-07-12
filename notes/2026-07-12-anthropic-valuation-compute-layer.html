@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>6万亿估值的Anthropic，电费单却寄给马斯克</title>
+  <style>
+    :root {
+      --accent: #8b2635;
+      --ink: #333;
+      --ink-soft: #555;
+      --muted: #888;
+      --surface: #fafafa;
+      --border: rgba(0,0,0,0.06);
+      --radius: 12px;
+      --font-sans: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-serif: "Noto Serif SC", "Songti SC", Georgia, serif;
+    }
+    body { font-family: var(--font-sans); background: #f5f5f5; margin: 0; padding: 16px; font-size: 16px; line-height: 1.8; color: var(--ink); -webkit-font-smoothing: antialiased; }
+    .container { max-width: 680px; margin: 0 auto; background: var(--surface); padding: 32px; border-radius: var(--radius); }
+    .cover-img { width: 100%; border-radius: 8px; margin-bottom: 24px; }
+    .inline-img { width: 100%; border-radius: 8px; margin: 24px 0 0; }
+    h1 { font-family: var(--font-serif); font-size: 24px; font-weight: 700; color: var(--ink); line-height: 1.4; margin: 0 0 16px; }
+    .meta { color: var(--muted); font-size: 13px; margin-bottom: 16px; }
+    .byline { color: var(--ink-soft); font-size: 14px; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+    h2 { font-family: var(--font-serif); font-size: 20px; font-weight: 600; color: var(--ink); margin: 32px 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+    h3 { font-family: var(--font-serif); font-size: 18px; font-weight: 600; color: var(--ink); margin: 24px 0 12px; }
+    p { margin: 0 0 24px; }
+    .quote-box { border-left: 4px solid var(--accent); background: #f5f5f5; padding: 16px 20px; margin: 24px 0; border-radius: 0 var(--radius) var(--radius) 0; }
+    .quote-box p { margin: 0; color: var(--ink-soft); font-style: italic; font-size: 15px; }
+    .quote-box .attribution { margin-top: 8px; color: var(--muted); font-size: 13px; font-style: normal; }
+    .data-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14px; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .data-table th, .data-table td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); }
+    .data-table th { background: #f0f0f0; font-weight: 600; color: var(--ink); }
+    .data-table td { color: var(--ink-soft); }
+    .timeline { position: relative; padding-left: 24px; margin: 24px 0; }
+    .timeline::before { content: ''; position: absolute; left: 6px; top: 0; bottom: 0; width: 2px; background: #e0e0e0; }
+    .timeline-item { position: relative; margin-bottom: 16px; }
+    .timeline-item::before { content: ''; position: absolute; left: -22px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); }
+    .timeline-item .date { font-size: 13px; color: var(--muted); margin-bottom: 4px; }
+    .timeline-item .content { font-size: 15px; color: var(--ink); }
+    .img-caption { text-align: center; color: var(--muted); font-size: 13px; margin-top: 8px; margin-bottom: 24px; }
+    .ending { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--ink-soft); font-size: 14px; }
+    .highlight { color: var(--accent); font-weight: 600; background: linear-gradient(to top, rgba(139,38,53,0.08) 40%, transparent 40%); padding: 0 2px; }
+    .data-callout { display: inline-block; background: var(--accent); color: #fff; padding: 2px 10px; border-radius: 4px; font-weight: 700; font-size: 15px; }
+    .contrast-card { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin: 24px 0; border-radius: var(--radius); overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .contrast-card .side { padding: 16px 20px; }
+    .contrast-card .side-left { background: #fef2f2; border-right: 1px solid var(--border); }
+    .contrast-card .side-right { background: #f0fdf4; }
+    .contrast-card .side h4 { margin: 0 0 8px; font-size: 14px; font-weight: 600; }
+    .contrast-card .side-left h4 { color: #991b1b; }
+    .contrast-card .side-right h4 { color: #166534; }
+    .contrast-card .side p { margin: 0; font-size: 14px; color: var(--ink-soft); line-height: 1.6; }
+    .punchline { font-family: var(--font-serif); font-size: 18px; font-weight: 700; color: var(--accent); text-align: center; margin: 32px 0; padding: 16px 0; border-top: 2px solid var(--accent); border-bottom: 2px solid var(--accent); }
+    strong { color: var(--ink); font-weight: 600; }
+    .data-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin: 24px 0; }
+    .data-grid .cell { background: #fff; padding: 16px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); text-align: center; }
+    .data-grid .cell .num { font-size: 24px; font-weight: 700; color: var(--accent); display: block; }
+    .data-grid .cell .lbl { font-size: 13px; color: var(--muted); margin-top: 4px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img class="cover-img" src="http://n.sinaimg.cn/sinakd20260507s/540/w1080h1060/20260507/46f4-7df2f443b3ffe6534cdb04c84c9d4e0a.png" alt="xAI并入SpaceX，马斯克将GPU租给竞争对手">
+    <div class="img-caption">图源｜新浪科技：xAI并入SpaceX品牌整合示意图</div>
+
+    <h1>6万亿估值的Anthropic，电费单却寄给马斯克</h1>
+    <div class="meta">2026-07-12 · 阅读时间约10分钟</div>
+    <div class="byline">文｜犀牛伯爵</div>
+
+    <p>7月8日，研究机构SemiAnalysis发了一份报告。结论很吓人。Anthropic有可能成为全球第一家<span class="highlight">6万亿美元市值</span>的公司。</p>
+
+    <p>同一周，彭博社报道了另一件事。微软已经开始在Excel和Outlook里用自研的MAI模型替代OpenAI和Anthropic的模型。每周数万条AI提示词，不再经过GPT。</p>
+
+    <p>这两条新闻看似无关。但如果你把它们放到同一张棋盘上看，会发现一个正在发生的位移。</p>
+
+    <p>AI产业的利润中心，正在从模型层往下沉。</p>
+
+    <p>谁造模型，谁卖算力，谁来分发。这三个角色之间的分界线，比所有人预想的都来得更快。</p>
+
+    <h2>Anthropic的账本</h2>
+
+    <p>先说Anthropic。</p>
+
+    <p>SemiAnalysis的报告里有一组数字。Anthropic的ARR在18个月内从90亿美元飙到超过600亿美元。Q2首次实现季度盈利，营业利润<span class="data-callout">5.59亿美元</span>。API业务毛利率超过80%。净收入留存率500%。</p>
+
+    <p>500%的净收入留存率是什么概念。每花1美元获客的客户，一年后还在花5美元。在SaaS行业，120%就已经算优秀了。</p>
+
+    <div class="data-grid">
+      <div class="cell"><span class="num">600亿$</span><span class="lbl">ARR（年化收入）</span></div>
+      <div class="cell"><span class="num">80%+</span><span class="lbl">API毛利率</span></div>
+      <div class="cell"><span class="num">500%</span><span class="lbl">净收入留存率</span></div>
+      <div class="cell"><span class="num">65%</span><span class="lbl">编程场景占比</span></div>
+    </div>
+
+    <p>更值得留意的是收入结构。65%的ARR来自编程场景。Claude Code的爆发，让Anthropic在开发者工具这个赛道上跑出了一个从未有过的商业模型。不是卖订阅，不是卖广告，而是把AI变成程序员的"时薪"。</p>
+
+    <p>但这份漂亮的账本下面，藏着一张不太好看的电费单。</p>
+
+    <h2>电费单寄给了谁</h2>
+
+    <p>Anthropic训练和推理用的算力，很大一部分不在自己手里。</p>
+
+    <p>今年5月，Anthropic向SpaceX购买了300兆瓦算力，包下了xAI位于田纳西州孟菲斯的Colossus 1数据中心全部产能。代价是每月12.5亿美元，合同签到2029年5月。</p>
+
+    <p>你算算这笔账。12.5亿乘以48个月，约600亿美元。SpaceX的招股文件里还提到，Google每月也向SpaceX支付9.2亿美元租用约11万张GPU。两份合同跑满，一年超过250亿美元。</p>
+
+    <p>这个数字比SpaceX去年全公司的营收还高。</p>
+
+    <p>更有意思的是，这两份合同的正式名称就叫"云服务协议"。SpaceX做的，就是云厂商的批发生意。而它最大的两个客户Anthropic和Google，恰好都是Grok的直接竞争对手。</p>
+
+    <div class="quote-box">
+      <p>"Anthropic显然是当前AI领域的领导者。即便Anthropic是竞争对手，我也绝不会切断服务，让Anthropic遭受严重伤害。那不是我的风格。"</p>
+      <div class="attribution">马斯克 · 2026年7月10日 X帖子</div>
+    </div>
+
+    <p>十个月前，这同一个人说的是，"胜利从来不在Anthropic可能出现的结果集合中"。</p>
+
+    <p>从嘲讽到认输，180度大转弯。</p>
+
+    <p>但如果你只看到了认输，就错过了重点。马斯克没有输。他换了个位置。</p>
+
+    <p>Grok去年的收入加X的订阅才3.65亿美元。而光靠出租Colossus的算力，SpaceX一年就能收超过150亿。造模型赚3亿，租GPU赚150亿。</p>
+
+    <p>你选哪个？</p>
+
+    <h2>微软的平行操作</h2>
+
+    <p>Anthropic的电费单寄给了马斯克。微软看了这笔账，转头就开始自己的计划。</p>
+
+    <img class="inline-img" src="http://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2026%2F0708%2F04174446j00thtj3800o7d0012800lcp.jpg&thumbnail=660x2147483647&quality=80&type=jpg" alt="微软Copilot开始使用自研MAI模型替代OpenAI">
+    <div class="img-caption">图源｜网易科技：微软Copilot产品架构调整示意</div>
+
+    <p>彭博社7月7日的报道说，微软已经在Excel和Outlook中用自研的MAI模型替代OpenAI和Anthropic的模型。每周数万条AI提示词由MAI处理。微软发言人拒绝置评。</p>
+
+    <p>微软AI业务负责人Mustafa Suleyman今年6月公开说过一句话。</p>
+
+    <div class="quote-box">
+      <p>"我们支付给Anthropic大量资金，目标是减少并最终消除这一成本依赖。"</p>
+      <div class="attribution">Mustafa Suleyman · 微软AI业务负责人 · 2026年6月</div>
+    </div>
+
+    <p>Build 2026上微软发布了7款MAI模型。其中一款号称能以更低成本实现与Anthropic Opus 4.6相当的代码生成能力。成本效率较GPT-5.5提升十倍。</p>
+
+    <p>你想想这个信号。微软曾经是OpenAI最大的投资方，累计投了130多亿美元。现在它开始在自己的核心产品里替换掉OpenAI的模型。不是因为它和OpenAI闹翻了，而是因为算这笔账的结果很清楚。自己造模型，比租别人的便宜太多。</p>
+
+    <p>4月27日微软和OpenAI修订了合作协议，删除了独家绑定条款。OpenAI可以去找亚马逊，微软也可以去找别人。"首选模型"这个词，听着体面，翻译过来就是"优先考虑，但不保证唯一"。</p>
+
+    <p>微软股价今年累计下跌近20%，在科技七巨头中垫底。Copilot的市场表现持续承压，大股东陆续减持。在这个背景下，降本不是战略选择，是生存需要。</p>
+
+    <h2>三层分家</h2>
+
+    <p>把这三件事放一起看。</p>
+
+    <p>第一件：Anthropic的ARR从90亿飙到600亿，Q2首次盈利，估值可能到6万亿。</p>
+
+    <p>第二件：Anthropic每月向SpaceX交12.5亿美元算力租金，马斯克靠出租GPU赚的比造模型多几十倍。</p>
+
+    <p>第三件：微软开始用自研MAI模型替代OpenAI和Anthropic，因为外部模型的采购成本扛不住了。</p>
+
+    <p>三件事指向同一个结论。AI产业正在分成三层。</p>
+
+    <div class="contrast-card">
+      <div class="side side-left">
+        <h4>算力基础设施层</h4>
+        <p>谁拥有GPU集群、数据中心和能源供给，谁收过路费。马斯克选了这一层。Google自己也在这一层。英伟达卖芯片，也在这一层。</p>
+      </div>
+      <div class="side side-right">
+        <h4>模型能力层</h4>
+        <p>谁训练出最强的模型，谁拿到最高的ARR和估值。Anthropic在这一层跑得最快。OpenAI也在这一层。</p>
+      </div>
+    </div>
+
+    <p>第三层是应用分发。谁拥有用户触达渠道，谁决定用户实际用哪个模型。微软在这一层。Office有十几亿用户，它换什么模型，用户就用什么模型。苹果如果做AI硬件也在这一层。</p>
+
+    <p>关键问题在于，这三层之间的利润分配，正在发生倾斜。</p>
+
+    <p>模型层的收入增长惊人，但成本也惊人。Anthropic的ARR 600亿，但每月光算力租金就12.5亿，一年150亿。再加上人力、研发、数据成本，毛利率80%听着高，但净利率可能远没有想象中那么性感。</p>
+
+    <p>而算力层的生意，虽然重资产，但一旦建成就是护城河。SpaceX的Colossus数据中心，建起来要花上百亿，但建成之后每多一个客户，边际成本趋近于零。这和云厂商的逻辑一模一样。</p>
+
+    <p>微软的选择更微妙。它同时横跨三层。有Azure的算力基础设施，有MAI的模型能力，有Office的用户分发渠道。它正在做的事情是，把模型层的成本压到最低，用MAI替代外部模型，同时保住分发层的渠道优势。</p>
+
+    <p>微软不想当模型公司了。它想当渠道商。用最便宜的模型，赚最稳定的分发利润。</p>
+
+    <div class="punchline">造模型的人交租金，卖算力的人收租金，管渠道的人挑模型</div>
+
+    <h2>6万亿的隐忧</h2>
+
+    <p>回到开头那个6万亿美元的预测。</p>
+
+    <p>SemiAnalysis说Anthropic可能成为全球第一家6万亿美元公司。这个预测如果成真，Anthropic的市值将超过当前地球上任何一家上市公司。</p>
+
+    <p>但6万亿估值的前提是，Anthropic能持续保持模型层的领先，同时把算力成本压下来。而它的算力成本，相当一部分控制在马斯克手里。</p>
+
+    <p>马斯克承诺不会切断服务。"那不是我的风格。"他还举了特斯拉2014年开放专利和超级充电网络的例子。</p>
+
+    <p>但商业世界里，"承诺不切断"和"无法切断"是两码事。</p>
+
+    <p>Anthropic把核心训练算力托管给竞争对手，就像一家餐厅把自己唯一的厨房租给了隔壁连锁品牌的老板。房东人再好，你也不会把配方放在他桌上。</p>
+
+    <p>合同里确实写了提前90天可终止的条款。SpaceX的招股文件也没藏着，白纸黑字列在那里。90天，够你搬家吗？300兆瓦的算力集群，找场地、谈电力、搬设备、重新部署，半年都算快的。</p>
+
+    <p>SemiAnalysis预测Anthropic 2027年末ARR有望触及3000亿美元。按这个增速，6万亿的估值确实不算离谱。但前提是，马斯克不涨价，不续约，不找理由断供。或者Anthropic能在两年内建好自己的算力基础设施。</p>
+
+    <p>后者需要多少钱？按当前GPU价格和数据中心建设成本估算，300兆瓦的等效算力，至少需要200到300亿美元的资本开支。这还不算后续的电力采购、运维团队和土地租赁。</p>
+
+    <p>Anthropic刚实现季度盈利，手里现金有限。要拿出300亿建算力，要么融资，要么上市。而它已经在6月1日向SEC秘密提交了S-1 IPO申请。</p>
+
+    <p>IPO的钱拿来干什么？买独立。从马斯克的厨房里搬出来，建自己的。</p>
+
+    <p>6万亿估值的Anthropic，电费单寄给马斯克。</p>
+
+    <p>这笔账，怎么看都不像是一个稳的生意。</p>
+
+    <div class="ending">
+      <p>参考信源：SemiAnalysis 7月8日报告｜彭博社7月7日报道｜IT之家7月10日｜SpaceX招股文件｜The Information 7月2日</p>
+      <p>本文为犀牛伯爵原创观察，不构成投资建议。</p>
+    </div>
+  </div>
+</body>
+</html>
