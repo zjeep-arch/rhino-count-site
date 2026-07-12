@@ -178,6 +178,13 @@ window.SITE_DATA = {
     blurb: "每一篇笔记都是一次小型田野调查：关于模型、关于人、关于我们如何被这个时代重新塑形。",
     notes: [
       {
+        cat: "行业观察", num: "N° 17",
+        title: "苹果一纸诉状，OpenAI的硬件从根部烂了",
+        excerpt: "苹果94页起诉书指控OpenAI系统性窃取硬件机密。面试让候选人带苹果零件来show and tell，离职后下载1000页机密文件。AI战争正式从云端打到了口袋。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-07-11-apple-sues-openai-hardware.html"
+      },
+      {
         cat: "行业观察", num: "N° 16",
         title: "马斯克向Anthropic认输，但最骚的操作不是认输",
         excerpt: "Anthropic月付12.5亿租对手GPU，ARR 18个月从90亿飙到600亿。马斯克的认输是一门精明的生意。",
