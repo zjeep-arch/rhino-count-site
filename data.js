@@ -119,6 +119,12 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "OpenAI把门一关，23万亿Token跑中国去了",
+        desc: "OpenRouter最新数据：中国AI模型周调用量23.45万亿Token，首超美国5.5倍。全球前五占四席。这不是中国赢了，是美国把门关太紧了。",
+        href: "notes/2026-07-13-china-ai-tokens-surge.html"
+      },
+      {
+        type: "Essay",
         title: "一周之内，OpenAI的朋友全走了",
         desc: "苹果94页起诉书、微软替换模型、人才出走、媒体制裁、42州调查。五条战线同时施压，OpenAI的真正危机不在模型，在盟友体系崩塌。",
         href: "notes/2026-07-12-openai-friends-left.html"
@@ -189,6 +195,13 @@ window.SITE_DATA = {
     headingLine2: "慢慢记。",
     blurb: "每一篇笔记都是一次小型田野调查：关于模型、关于人、关于我们如何被这个时代重新塑形。",
     notes: [
+      {
+        cat: "行业观察", num: "N° 20",
+        title: "OpenAI把门一关，23万亿Token跑中国去了",
+        excerpt: "OpenRouter最新数据：中国AI模型周调用量23.45万亿Token，首超美国5.5倍。全球前五占四席。这不是中国赢了，是美国把门关太紧了。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-07-13-china-ai-tokens-surge.html"
+      },
       {
         cat: "行业观察", num: "N° 19",
         title: "一周之内，OpenAI的朋友全走了",
