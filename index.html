@@ -3,9 +3,6 @@
 <head>
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-  <meta http-equiv="Pragma" content="no-cache" />
-  <meta http-equiv="Expires" content="0" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="color-scheme" content="light dark" />
   <meta name="theme-color" content="#F4F8FF" media="(prefers-color-scheme: light)" />
@@ -4817,8 +4814,9 @@
   <script src="data.js?v=final-stable"></script>
   <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
   <script>
-    /* Fallback: force-show page after 5s if JS hasn't completed */
-    setTimeout(function(){var m=document.querySelector('main');if(m&&!m.classList.contains('ready'))m.classList.add('ready');},5000);
+    /* Fallback: force-show page after 3s if JS hasn't completed */
+    setTimeout(function(){var m=document.querySelector('main');if(m&&!m.classList.contains('ready'))m.classList.add('ready');},3000);
+    try {
     (function () {
       'use strict';
       const esc = s => String(s).replace(/[&<>"']/g, c => (
@@ -5799,6 +5797,7 @@
       }, 1200);
       resetIdle();
     })();
+    } catch(e) { console.error('Render error:', e); document.querySelector('main').classList.add('ready'); }
   </script>
 </body>
 </html>
