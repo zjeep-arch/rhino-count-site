@@ -119,6 +119,12 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "一周之内，OpenAI的朋友全走了",
+        desc: "苹果94页起诉书、微软替换模型、人才出走、媒体制裁、42州调查。五条战线同时施压，OpenAI的真正危机不在模型，在盟友体系崩塌。",
+        href: "notes/2026-07-12-openai-friends-left.html"
+      },
+      {
+        type: "Essay",
         title: "6万亿估值的Anthropic，电费单却寄给马斯克",
         desc: "Anthropic的ARR从90亿飙到600亿，但每月12.5亿算力租金交给马斯克。微软用自研MAI替换OpenAI模型。AI产业正分成算力层、模型层和分发层，利润分配正在倾斜。",
         href: "notes/2026-07-12-anthropic-valuation-compute-layer.html"
@@ -183,6 +189,13 @@ window.SITE_DATA = {
     headingLine2: "慢慢记。",
     blurb: "每一篇笔记都是一次小型田野调查：关于模型、关于人、关于我们如何被这个时代重新塑形。",
     notes: [
+      {
+        cat: "行业观察", num: "N° 19",
+        title: "一周之内，OpenAI的朋友全走了",
+        excerpt: "苹果94页起诉书、微软替换模型、人才出走、媒体制裁、42州调查。五条战线同时施压，OpenAI的真正危机不在模型，在盟友体系崩塌。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-07-12-openai-friends-left.html"
+      },
       {
         cat: "行业观察", num: "N° 18",
         title: "6万亿估值的Anthropic，电费单却寄给马斯克",

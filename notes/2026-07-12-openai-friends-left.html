@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>一周之内，OpenAI的朋友全走了</title>
+  <style>
+    :root {
+      --accent: #8b2635;
+      --ink: #333;
+      --ink-soft: #555;
+      --muted: #888;
+      --surface: #fafafa;
+      --border: rgba(0,0,0,0.06);
+      --radius: 12px;
+      --font-sans: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-serif: "Noto Serif SC", "Songti SC", Georgia, serif;
+    }
+    body { font-family: var(--font-sans); background: #f5f5f5; margin: 0; padding: 16px; font-size: 16px; line-height: 1.8; color: var(--ink); -webkit-font-smoothing: antialiased; }
+    .container { max-width: 680px; margin: 0 auto; background: var(--surface); padding: 32px; border-radius: var(--radius); }
+    .cover-img { width: 100%; border-radius: 8px; margin-bottom: 24px; }
+    h1 { font-family: var(--font-serif); font-size: 24px; font-weight: 700; color: var(--ink); line-height: 1.4; margin: 0 0 16px; }
+    .meta { color: var(--muted); font-size: 13px; margin-bottom: 16px; }
+    .byline { color: var(--ink-soft); font-size: 14px; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+    h2 { font-family: var(--font-serif); font-size: 20px; font-weight: 600; color: var(--ink); margin: 32px 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+    h3 { font-family: var(--font-serif); font-size: 18px; font-weight: 600; color: var(--ink); margin: 24px 0 12px; }
+    p { margin: 0 0 24px; }
+    .quote-box { border-left: 4px solid var(--accent); background: #f5f5f5; padding: 16px 20px; margin: 24px 0; border-radius: 0 var(--radius) var(--radius) 0; }
+    .quote-box p { margin: 0; color: var(--ink-soft); font-style: italic; font-size: 15px; }
+    .quote-box .attribution { margin-top: 8px; color: var(--muted); font-size: 13px; font-style: normal; }
+    .timeline { position: relative; padding-left: 24px; margin: 24px 0; }
+    .timeline::before { content: ''; position: absolute; left: 6px; top: 0; bottom: 0; width: 2px; background: #e0e0e0; }
+    .timeline-item { position: relative; margin-bottom: 16px; }
+    .timeline-item::before { content: ''; position: absolute; left: -22px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); }
+    .timeline-item .date { font-size: 13px; color: var(--muted); margin-bottom: 4px; }
+    .timeline-item .content { font-size: 15px; color: var(--ink); }
+    .img-caption { text-align: center; color: var(--muted); font-size: 13px; margin-top: 8px; margin-bottom: 24px; }
+    .ending { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--ink-soft); font-size: 14px; }
+    .highlight { color: var(--accent); font-weight: 600; background: linear-gradient(to top, rgba(139,38,53,0.08) 40%, transparent 40%); padding: 0 2px; }
+    .contrast-card { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin: 24px 0; border-radius: var(--radius); overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .contrast-card .side { padding: 16px 20px; }
+    .contrast-card .side-left { background: #fef2f2; border-right: 1px solid var(--border); }
+    .contrast-card .side-right { background: #f0fdf4; }
+    .contrast-card .side h4 { margin: 0 0 8px; font-size: 14px; font-weight: 600; }
+    .contrast-card .side-left h4 { color: #991b1b; }
+    .contrast-card .side-right h4 { color: #166534; }
+    .contrast-card .side p { margin: 0; font-size: 14px; color: var(--ink-soft); line-height: 1.6; }
+    .punchline { font-family: var(--font-serif); font-size: 18px; font-weight: 700; color: var(--accent); text-align: center; margin: 32px 0; padding: 16px 0; border-top: 2px solid var(--accent); border-bottom: 2px solid var(--accent); }
+    strong { color: var(--ink); font-weight: 600; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img class="cover-img" src="note-19-cover.jpg" alt="OpenAI面临多面围攻的编辑插图">
+
+    <h1>一周之内，OpenAI的朋友全走了</h1>
+    <div class="meta">2026-07-12 · 阅读时间约12分钟</div>
+    <div class="byline">文｜犀牛伯爵</div>
+
+    <p>7月10号这天，如果你是OpenAI的CEO Sam Altman，你大概会在早上醒来的时候有点恍惚。</p>
+
+    <p>不是因为你做错了什么。而是因为你发现，过去这些年你亲手搭起来的同盟体系，正在以你没法控制的速度瓦解。</p>
+
+    <p>苹果，那个在2024年WWDC上跟你手牵手宣布合作的苹果，把一份94页的起诉书摔到了你面前。微软，那个给你砸了上百亿美元、持有你27%股份的微软，正在自家最重要的办公软件里悄悄把你的模型换掉。你的一号业务负责人病退了，你的安全负责人走了，你的首席产品官去了对手那里。《纽约时报》带着十几家媒体在法庭上指控你隐藏证据，42个州的检察官正在翻你的箱子。</p>
+
+    <p>这些事不是在同一季度发生的，也不是在半年内陆续出现的。是同一周。七天。</p>
+
+    <p class="punchline">AI武林史上，从来没有一家公司同时被这么多方向的炮火覆盖过。</p>
+
+    <h2>从"年内集成"到"从根部烂了"</h2>
+
+    <p>先把时间线捋清楚。所有事情都发生在2026年7月7号到7月11号这五天里。</p>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="date">7月7日</div>
+        <div class="content">微软在Excel和Outlook的生产环境中全量上线自研MAI模型，正式替换OpenAI模型。同一天Build 2026大会上发布7款自研模型、Cobalt 200芯片和Majorana 2量子芯片。</div>
+      </div>
+      <div class="timeline-item">
+        <div class="date">7月9日</div>
+        <div class="content">《纽约时报》联合十多家媒体在纽约联邦法院提交制裁动议，指控OpenAI在版权诉讼中隐藏证据。同日，OpenAI应用业务CEO Fidji Simo因慢性病恶化宣布转为兼职顾问。</div>
+      </div>
+      <div class="timeline-item">
+        <div class="date">7月10日</div>
+        <div class="content">苹果在北加州联邦法院正式起诉OpenAI，94页起诉书指控其系统性窃取硬件商业机密。同日，OpenAI安全系统负责人Johannes Heidecke宣布离职。</div>
+      </div>
+      <div class="timeline-item">
+        <div class="date">7月11日</div>
+        <div class="content">OpenAI首席未来学家Joshua Achiam确认离开。三日内，至少五名核心高管或技术骨干确认离职或转岗。</div>
+      </div>
+    </div>
+
+    <img class="cover-img" src="note-19-apple-openai.jpg" alt="苹果与OpenAI从合作走向对峙">
+
+    <div class="img-caption">图源：编辑插图</div>
+
+    <p>这五天发生的事情，每一件单独拿出来都不算致命。苹果起诉是法律战，微软替换模型是商业竞争，人才出走在硅谷是常态，媒体制裁是版权纠纷的常规升级。</p>
+
+    <p>但当五件事压缩在120个小时之内砸下来的时候，问题的性质变了。这不是运气不好，也不是周期波动。<span class="highlight">这是一个组织在高速膨胀过程中积累的结构性缺陷，在同一时刻集中暴露。</span></p>
+
+    <h2>苹果那94页写了什么</h2>
+
+    <p>苹果的起诉书是这一周里声响最大的一炮，但要说最致命的，还真不是它。</p>
+
+    <p>起诉书的核心指控指向两个人。一个是Tang Tan，在苹果干了24年，做过Apple Watch产品设计副总裁，长期参与iPhone研发，现在是OpenAI的首席硬件官。另一个是Chang Liu，前苹果高级系统电气工程师。</p>
+
+    <p>苹果说Tan在离职前就开始有条不紊地利用苹果的内部信息为OpenAI谋利，把供应商信息和内部简报发到私人邮箱。更绝的是，Tan鼓励还在苹果的员工去OpenAI面试的时候，<strong>把苹果的未发布零件带过去现场展示讲解</strong>。起诉书里引用了一名求职者的话："我甚至不知道我们可以把这些东西从办公室带走。"</p>
+
+    <div class="quote-box">
+      <p>OpenAI的硬件业务从根部烂了，因为它非法依赖盗来的商业机密。</p>
+      <div class="attribution">苹果94页起诉书原文，"rotten to its core"</div>
+    </div>
+
+    <p>苹果还指控Liu离职时没归还公司配发的笔记本电脑，随后利用身份验证漏洞访问苹果内网，下载了数十份机密硬件文件。起诉书中提到一个细节：Liu和另一位苹果员工录制了苹果内部会议的语音，语音中苹果高管用"LOL"来评价OpenAI的硬件水平，这些录音被当成了某种"投名状"。</p>
+
+    <p>苹果请求法院强制OpenAI重新设计即将发布的硬件产品，确保彻底剔除属于苹果的专利技术。还要求追缴不当得利、交还并销毁全部涉密资料。</p>
+
+    <p>OpenAI的回应很简短，发言人Drew Pusateri在X上发了一条声明："我们对其他公司的商业秘密没有兴趣。"</p>
+
+    <p>说真的，这句话读完让人有一种很微妙的感觉。OpenAI目前在职的前苹果员工超过400人。你当然可以对400人中的每一个人说"你来了之后不许用从前东家那里学到的任何东西"，但在硬件研发这个行当里，一个在苹果干了24年的人，他的肌肉记忆、工程直觉、供应链认知，这些东西你没法用一个保密协议隔离开。</p>
+
+    <p>苹果不是不知道这个道理。它在加州起诉这件事本身就说明，苹果认为OpenAI做的远远不止是"人在跳槽"。它认为OpenAI在<strong>有组织地</strong>搬运苹果的知识产权。</p>
+
+    <p>这事目前还在走法律程序，谁胜谁负要看证据和庭审。但起诉书里有一个数字值得注意：苹果说早在2026年2月就给OpenAI发过函，要求沟通，OpenAI始终没有回复。</p>
+
+    <p>五个月不回信。你品品这是什么态度。</p>
+
+    <h2>微软在打一场没有硝烟的仗</h2>
+
+    <p>如果说苹果的起诉是明面上的炮火，微软的动作就是那种更安静的绞杀。</p>
+
+    <p>7月7号，微软在Build 2026大会上做了三件事。第一，一口气发布了7款自研MAI模型，其中MAI-Thinking-1在多项推理基准上超过GPT-5.6。第二，发布了Cobalt 200芯片和Majorana 2量子芯片。第三，也是最关键的，开始在生产环境里用自研模型替换OpenAI的模型。</p>
+
+    <p>先换的是Excel和Outlook。这两个产品加起来有多少用户？数以亿计。每个用户每天可能触发好几次AI操作。这些请求原来走的是OpenAI的API，现在走微软自己的MAI。</p>
+
+    <p>这个操作的微妙之处在于，微软持有OpenAI盈利实体27%的股份，账面价值约1350亿美元。它既是最大的股东，又在关掉OpenAI最重要的出货管道。左手拿着你的股票希望它升值，右手在你最重要的分销渠道上做替代。怎么说呢，这不叫背叛，这叫精明到让人后背发凉。</p>
+
+    <p>从独家合作到"可选"，从"可选"到"替换"，微软走的每一步都是商业上完全合理的。一家拥有上万亿美元市值的公司，把核心产品的AI能力交给外部供应商，这个风险敞口本身就不可持续。微软在Build 2026上展示的信号很明确：我要把AI能力内化了，从模型到芯片，全栈自研。</p>
+
+    <p>但这恰恰是OpenAI最疼的地方。<span class="highlight">OpenAI的商业模式里，微软的Azure不只是算力提供商，更是最重要的分销渠道。</span>当这个渠道开始用自家产品替代你的时候，你的增长模型就要重写了。</p>
+
+    <p>现在换的是Excel和Outlook。下一个可能是Teams、Word、PowerPoint。逐步蚕食，不搞一次性断供，每次只切一个场景。温水煮青蛙，但水温在一点一点上升。</p>
+
+    <h2>人，是最贵的筹码</h2>
+
+    <p>模型可以被追赶，资金可以被稀释，但如果人走了，很多积累就真的散了。</p>
+
+    <p>这一周离开的人里，有三位特别值得关注。</p>
+
+    <p>Fidji Simo，OpenAI的应用业务CEO，7月9号宣布因慢性病恶化转为兼职顾问。她身兼数职，负责AGI部署策略和安全政策。她走之后，这两个位置没有指定接替者。AGI部署谁在管？安全政策谁在盯？</p>
+
+    <p>Johannes Heidecke，OpenAI安全系统负责人，7月10号宣布离职，最后工作日定在7月24号。他管的是模型发布前的安全评估团队。他走的时候，42个州的调查员正在敲OpenAI的大门，调查的核心问题恰好是AI模型是否存在系统性的谄媚倾向——说白了就是模型会不会为了讨好用户而放弃客观中立。</p>
+
+    <p>Joshua Achiam，首席未来学家，7月11号确认离开。</p>
+
+    <p>三位核心人物，同一周，三个位置同时空了。</p>
+
+    <p>更早一些时候，首席产品官Kevin Weil跳槽去了Anthropic。这位老兄在OpenAI负责GPT产品线的整体规划，GPT-4、GPT-4o、GPT-5系列的所有关键发布决策都经过他的手。他去Anthropic意味着什么？OpenAI的产品路线图，下一代模型什么时候发、发什么功能、定价策略怎么走，Anthropic很可能已经知道了。</p>
+
+    <p>我个人觉得，人才流失这件事不应该被简化成"被挖走"三个字。Simo是因为健康原因，这是意外。Weil去Anthropic是主动选择，那是竞争。Heidecke的离开原因还没有完全公开，但时间点太巧了——42州调查刚启动一个月，安全负责人就走了。</p>
+
+    <p>不管原因是什么，结果是清楚的：OpenAI正在同时失去安全评估能力、产品规划能力和AGI部署的执行能力。这三块拼在一起，基本上就是一家AI公司从"模型好用"到"模型安全好用且能规模化落地"的全部链条。</p>
+
+    <div class="contrast-card">
+      <div class="side side-left">
+        <h4>OpenAI这一周失去的</h4>
+        <p>安全评估负责人、AGI部署CEO、首席未来学家、产品负责人（去Anthropic）、工程副总裁。五个关键位置同时出现真空。</p>
+      </div>
+      <div class="side side-right">
+        <h4>Anthropic正在得到的</h4>
+        <p>OpenAI前首席产品官Kevin Weil、工程副总裁Srinivas Narayanan，以及至少5位核心骨干。估值9650亿美元反超OpenAI的8520亿美元。</p>
+      </div>
+    </div>
+
+    <img class="cover-img" src="note-19-chess.jpg" alt="棋盘上的国王被多面围攻">
+
+    <div class="img-caption">图源：编辑插图</div>
+
+    <h2>42个州的调查员在翻什么</h2>
+
+    <p>这一周所有的新闻里，42个州联合调查可能是被讨论最少的，但可能是对IPO影响最大的。</p>
+
+    <p>2026年6月12日，OpenAI机密提交IPO文件仅仅数天后，以纽约州为首的42个州总检察长联盟发起了大规模联合调查。调查的核心是一个叫sycophancy的问题——AI模型为了讨好用户而选择性迎合用户观点的倾向。</p>
+
+    <p>你可能会说，讨好用户有什么不好？问题在于，如果ChatGPT在跟右翼用户聊天时自动呈现保守立场，跟左翼用户聊天时自动切换成自由立场，那它就不只是在"服务用户"了，它在<strong>操控用户的信息环境</strong>。</p>
+
+    <p>42个州同时关注这件事，背后有很强的政治逻辑。2026年是美国的大选年，AI模型的内容倾向性问题被提到了一个前所未有的政治高度。这不是技术审查，是政治审查。技术问题可以靠改模型解决，政治问题靠改模型解决不了。</p>
+
+    <p>对IPO而言，42州调查意味着什么？意味着不确定性。投行写招股书的时候得把这个列进重大风险因素，而且是一种没法量化的风险——你不知道调查会持续多久，不知道结论会是什么，不知道会不会触发监管处罚。投资者看到这种风险条目，第一反应通常不是"没事我等着"，而是"我再看看"。</p>
+
+    <h2>OpenAI还有牌吗</h2>
+
+    <p>说了这么多，不是要说OpenAI完了。这个判断太轻率了。</p>
+
+    <p>GPT-5.6已经发布，在MMLU、HumanEval、GSM8K等核心基准上表现不错。ChatGPT Work刚刚推出，30美元月费对标Microsoft 365 Copilot。从Google挖来了Transformer架构的发明者之一Noam Shazeer。5月份赢了马斯克那场诉讼，清除了IPO路上最大的一块法律障碍。</p>
+
+    <p>牌还有。但时间窗口在缩小。</p>
+
+    <p>三个原因。第一，Anthropic的IPO走在前面。机密提交S-1的时间比OpenAI早一周，意味着先过SEC审核、先亮相资本市场。华尔街对"第一个AI巨头上市"这个叙事是有热情溢价的，第二个就没有了。</p>
+
+    <p>第二，微软的替代不会停。现在是Excel和Outlook，下一个可能是Teams和Word。Cobalt 200芯片和Majorana 2量子芯片的发布说明微软不是在做实验，是在做长期战略。</p>
+
+    <p>第三，42州调查的周期一般在6到12个月。如果调查结论赶在IPO窗口之前出来——不管好坏——都意味着战略延期。而IPO延期的每一天，Anthropic就多一天的叙事主导权。</p>
+
+    <p>OpenAI的CFO Sarah Friar reportedly 主张把IPO推迟到2027年，认为6000亿美元的风险敞口太大。但Altman想赶在热度还在的时候冲。<span class="highlight">CEO和CFO在上市节奏上出现分歧，这个信号本身就说明了内部的焦虑程度。</span></p>
+
+    <h2>真正让人不安的</h2>
+
+    <p>如果你仔细看这一周发生的每一件事，会发现一个共同的主题：不是OpenAI的模型不行了，是OpenAI的<strong>关系网</strong>出了问题。</p>
+
+    <p>模型还是强的。GPT-5.6的数据不差。ChatGPT Work的产品逻辑也说得通。但这家公司的困境已经不在技术层面了——技术问题有清晰的解决路径，加算力、调参数、改架构，总能逼近一个上限。</p>
+
+    <p>OpenAI现在面对的问题是：你的合作伙伴不想跟你合作了，你的最大股东在替代你，你的核心人才在去对手那里，你的法律战线同时在三个联邦法院展开，你的监管环境在一个大选年急剧收紧。</p>
+
+    <p>这些东西没有一个能靠发布一个更强的模型来解决。</p>
+
+    <p>回到2024年，ChatGPT横空出世的时候，OpenAI是AI行业里唯一能打的选手。谷歌还在追赶，Anthropic还是个精品工作室，Meta还在开源路线上犹豫。那时候的OpenAI拥有行业内最好的模型、最多的用户、最强的盟友，和最充裕的资金。</p>
+
+    <p>两年后的今天，Anthropic估值反超了，微软在自研替代，苹果在法庭对峙，核心高管连续出走，42个州的调查员在翻它的底。最讽刺的是，OpenAI的模型可能比两年前更强了，但它周围的盟友体系比两年前脆弱了十倍。</p>
+
+    <p class="punchline">独木桥上的人，最怕的不是风大，是两边的人都在松手。</p>
+
+    <p>聊到这里我突然想起一个事。当年IBM在大型机时代是绝对霸主，技术上从来没有输过，但从合作伙伴到客户到人才，一层一层地流失。不是一天垮的，是每天流失一点，流失了整整十年。我不是说OpenAI就是IBM——但这几天的信号，确实有点那个味道。</p>
+
+    <p>Altman还有牌可打。但他手里的牌，和他周围正在缩小的盟友圈，之间的差距正在以一种不太妙的速度扩大。</p>
+
+    <div class="ending">
+      谢谢你看我的文章。
+    </div>
+  </div>
+</body>
+</html>
