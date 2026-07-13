@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>反重力文字 · 北京地标 — 犀牛伯爵</title>
-<meta name="description" content="反重力排版实验：零重力中漂浮的文字，讲述北京地标建筑的故事。">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%23F5F0E8'/%3E%3Ctext x='50%25' y='56%25' text-anchor='middle' font-size='30' font-family='Georgia,serif' fill='%231C1917'%3E反%3C/text%3E%3C/svg%3E">
+<title>祈年殿 · 反重力文字 — 犀牛伯爵</title>
+<meta name="description" content="祈年殿 · 天地之间 — 反重力排版实验。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%23F5F0E8'/%3E%3Ctext x='50%25' y='56%25' text-anchor='middle' font-size='30' font-family='Georgia,serif' fill='%231C1917'%3E祈%3C/text%3E%3C/svg%3E">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,15 +16,13 @@
 
   :root {
     --bg: #F5F0E8;
-    --bg-warm: #EDE8DE;
     --ink: #1C1917;
     --ink-light: #44403C;
     --ink-muted: #78716C;
     --ink-faint: #A8A29E;
     --border: #D6D3D1;
-    --border-light: #E7E5E4;
     --dot: #C4BFB5;
-    --accent-gold: #B45309;
+    --gold: #B45309;
   }
 
   html { scroll-behavior: smooth; }
@@ -36,6 +34,7 @@
     line-height: 1.8;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
   }
 
   /* ===== 点阵纹理背景 ===== */
@@ -45,9 +44,9 @@
     inset: 0;
     z-index: 0;
     pointer-events: none;
-    background-image: radial-gradient(circle, var(--dot) 0.6px, transparent 0.6px);
-    background-size: 18px 18px;
-    opacity: 0.5;
+    background-image: radial-gradient(circle, var(--dot) 0.5px, transparent 0.5px);
+    background-size: 16px 16px;
+    opacity: 0.45;
   }
 
   /* ===== 导航 ===== */
@@ -58,23 +57,22 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px 48px;
-    background: rgba(245,240,232,.88);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border-bottom: 1px solid var(--border-light);
+    padding: 24px 48px;
+    background: rgba(245,240,232,.9);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
   }
   .nav-brand {
     font-family: 'Playfair Display', Georgia, serif;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 600;
     color: var(--ink);
     text-decoration: none;
-    letter-spacing: -0.3px;
+    letter-spacing: 0.5px;
   }
   .nav-links {
     display: flex;
-    gap: 36px;
+    gap: 48px;
     list-style: none;
     position: absolute;
     left: 50%;
@@ -86,179 +84,141 @@
     font-weight: 400;
     color: var(--ink-muted);
     text-decoration: none;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
+    letter-spacing: 0.02em;
     transition: color .3s;
     position: relative;
   }
-  .nav-links a::after {
-    content: '';
-    position: absolute;
-    bottom: -4px; left: 0;
-    width: 0; height: 1px;
-    background: var(--ink);
-    transition: width .3s;
-  }
   .nav-links a:hover { color: var(--ink); }
-  .nav-links a:hover::after { width: 100%; }
   .nav-btn {
     font-family: 'Inter', sans-serif;
     font-size: 11px;
     font-weight: 500;
     color: #fff;
     background: var(--ink);
-    padding: 10px 22px;
-    border-radius: 3px;
+    padding: 10px 24px;
+    border-radius: 2px;
     text-decoration: none;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.02em;
     transition: all .3s;
   }
   .nav-btn:hover {
     background: var(--ink-light);
     transform: translateY(-1px);
-    box-shadow: 0 4px 16px rgba(28,25,23,.12);
   }
 
-  /* ===== Hero — 完全复刻参考图布局 ===== */
+  /* ===== Hero — 完全对标参考图 ===== */
   .hero {
     position: relative;
     min-height: 100vh;
     display: grid;
-    grid-template-columns: 1fr 1.4fr 1fr;
-    align-items: center;
-    padding: 100px 48px 80px;
-    gap: 32px;
-    max-width: 1400px;
+    grid-template-columns: 1fr 1.6fr 1fr;
+    align-items: end;
+    padding: 120px 48px 80px;
+    gap: 0;
+    max-width: 1440px;
     margin: 0 auto;
   }
+
+  /* 左侧 */
   .hero-left {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    height: 100%;
-    padding-bottom: 60px;
+    padding-bottom: 80px;
+    padding-right: 20px;
     position: relative;
   }
   .hero-eyebrow {
-    font-family: 'Noto Serif SC', serif;
-    font-size: 13px;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
     color: var(--ink-muted);
-    margin-bottom: 16px;
-    letter-spacing: 0.04em;
-  }
-  .hero-title-wrap {
-    position: relative;
     margin-bottom: 20px;
+    letter-spacing: 0.02em;
   }
   .hero-title {
     font-family: 'Playfair Display', Georgia, serif;
-    font-size: clamp(48px, 6vw, 80px);
+    font-size: clamp(56px, 7vw, 96px);
     font-weight: 700;
-    line-height: 1.05;
+    line-height: 0.95;
     color: var(--ink);
-    letter-spacing: -1.5px;
+    letter-spacing: -2px;
+    margin-bottom: 16px;
   }
   .hero-title .ag-char {
     display: inline-block;
     cursor: default;
     user-select: none;
-    position: relative;
   }
   .hero-accent-line {
-    width: 36px;
+    width: 40px;
     height: 1px;
     background: var(--ink);
     opacity: .25;
-    margin-bottom: 20px;
+    margin-top: 20px;
   }
-  .hero-circle-accent {
-    width: 6px;
-    height: 6px;
-    border: 1px solid var(--ink);
+  .hero-circle {
+    width: 8px;
+    height: 8px;
+    border: 1.5px solid var(--ink);
     border-radius: 50%;
-    opacity: .3;
+    opacity: .25;
     position: absolute;
-    right: 20%;
-    top: 42%;
-  }
-  .hero-subtitle-cn {
-    font-size: 13px;
-    color: var(--ink-muted);
-    letter-spacing: 0.08em;
-    line-height: 2;
+    right: 40px;
+    top: 52%;
   }
 
+  /* 中间 */
   .hero-center {
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%;
+    padding-bottom: 40px;
   }
   .hero-image-wrap {
     position: relative;
     width: 100%;
-    max-width: 480px;
+    max-width: 520px;
   }
   .hero-image {
     width: 100%;
-    aspect-ratio: 3/4;
-    object-fit: cover;
-    border-radius: 3px;
-    filter: saturate(0.88) contrast(1.06);
     display: block;
+    filter: saturate(0.92) contrast(1.05);
+    /* 拐图悬浮效果 */
+    filter: saturate(0.92) contrast(1.05) drop-shadow(0 20px 40px rgba(28,25,23,.12));
   }
-  /* 模拟拐图悬浮效果 */
-  .hero-image-wrap::after {
-    content: '';
+  /* 竖排中文叠加在图片上 */
+  .hero-vertical-text {
     position: absolute;
-    inset: 0;
-    border-radius: 3px;
-    box-shadow:
-      0 32px 80px rgba(28,25,23,.14),
-      0 8px 24px rgba(28,25,23,.08),
-      0 2px 6px rgba(28,25,23,.04);
-    pointer-events: none;
-  }
-  .hero-image-wrap::before {
-    content: '';
-    position: absolute;
-    inset: -14px;
-    border: 1px solid var(--border);
-    border-radius: 3px;
-    pointer-events: none;
-    opacity: .7;
-  }
-  /* 图片上的竖排中文叠加 */
-  .hero-vertical-overlay {
-    position: absolute;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
+    right: -10px;
+    bottom: 15%;
     writing-mode: vertical-rl;
-    font-size: 12px;
-    color: var(--ink);
-    letter-spacing: .35em;
-    line-height: 2.8;
-    opacity: .55;
-    text-shadow: 0 0 20px rgba(245,240,232,.8);
+    font-size: 11px;
+    color: var(--ink-light);
+    letter-spacing: .3em;
+    line-height: 2.6;
+    opacity: .45;
     pointer-events: none;
     font-weight: 400;
+    text-shadow: 0 0 12px rgba(245,240,232,.9);
+    max-height: 320px;
   }
 
+  /* 右侧 */
   .hero-right {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 100%;
-    padding-top: 40px;
     align-items: flex-end;
+    height: 100%;
+    padding-bottom: 80px;
+    padding-left: 20px;
   }
   .hero-nav-box {
-    width: 76px;
-    height: 76px;
+    width: 72px;
+    height: 72px;
     border: 1px solid var(--border);
-    border-radius: 3px;
+    border-radius: 2px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -267,250 +227,33 @@
     cursor: pointer;
     transition: all .3s;
     background: transparent;
+    margin-top: 20px;
   }
   .hero-nav-box:hover {
     border-color: var(--ink-muted);
-    background: rgba(28,25,23,.02);
   }
   .hero-nav-box .curve {
-    width: 18px;
-    height: 8px;
+    width: 16px;
+    height: 6px;
     border-top: 1px solid var(--ink-muted);
     border-radius: 50% 50% 0 0;
-    opacity: .6;
+    opacity: .5;
   }
   .hero-nav-box span {
     font-family: 'Inter', sans-serif;
     font-size: 10px;
     color: var(--ink-muted);
-    letter-spacing: .08em;
-    text-transform: uppercase;
+    letter-spacing: .06em;
   }
   .hero-quote {
     font-family: 'Playfair Display', Georgia, serif;
     font-size: 14px;
     font-style: italic;
     color: var(--ink-muted);
-    line-height: 1.9;
+    line-height: 1.8;
     max-width: 200px;
     text-align: right;
     margin-top: auto;
-    padding-bottom: 60px;
-  }
-
-  .scroll-hint {
-    position: absolute;
-    bottom: 32px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    cursor: pointer;
-    color: var(--ink-faint);
-    font-family: 'Inter', sans-serif;
-    font-size: 10px;
-    letter-spacing: .2em;
-    text-transform: uppercase;
-    transition: color .3s;
-  }
-  .scroll-hint:hover { color: var(--ink); }
-  .scroll-hint .arrow {
-    width: 1px;
-    height: 28px;
-    background: linear-gradient(to bottom, var(--ink-faint), transparent);
-    animation: scrollPulse 2.5s ease-in-out infinite;
-  }
-  @keyframes scrollPulse {
-    0%, 100% { opacity: .3; transform: scaleY(.6); }
-    50% { opacity: 1; transform: scaleY(1); }
-  }
-
-  /* ===== 地标章节 — 交错网格 ===== */
-  .landmark {
-    position: relative;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    min-height: 100vh;
-    opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 1s cubic-bezier(.22,1,.36,1), transform 1s cubic-bezier(.22,1,.36,1);
-  }
-  .landmark.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  .landmark:nth-child(even) { direction: rtl; }
-  .landmark:nth-child(even) > * { direction: ltr; }
-
-  .landmark-image-side {
-    position: relative;
-    overflow: hidden;
-    background: var(--bg-warm);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 60px;
-  }
-  .landmark-image-wrap {
-    position: relative;
-    width: 100%;
-    max-width: 420px;
-  }
-  .landmark-image-wrap img {
-    width: 100%;
-    aspect-ratio: 4/5;
-    object-fit: cover;
-    border-radius: 3px;
-    filter: saturate(0.9) contrast(1.04);
-    display: block;
-    transition: transform 8s ease;
-  }
-  .landmark.visible .landmark-image-wrap img {
-    transform: scale(1.04);
-  }
-  .landmark-image-wrap::before {
-    content: '';
-    position: absolute;
-    inset: -12px;
-    border: 1px solid var(--border);
-    border-radius: 3px;
-    pointer-events: none;
-    opacity: .6;
-  }
-  .landmark-image-wrap::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: 3px;
-    box-shadow: 0 24px 64px rgba(28,25,23,.1);
-    pointer-events: none;
-  }
-  .landmark-vertical-text {
-    position: absolute;
-    right: 24px;
-    top: 50%;
-    transform: translateY(-50%);
-    writing-mode: vertical-rl;
-    font-size: 12px;
-    color: var(--ink-faint);
-    letter-spacing: .4em;
-    line-height: 2.6;
-    opacity: .5;
-    pointer-events: none;
-  }
-
-  .landmark-text-side {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 80px 60px;
-    position: relative;
-  }
-  .landmark-num {
-    font-family: 'Inter', sans-serif;
-    font-size: 11px;
-    font-weight: 500;
-    color: var(--ink-faint);
-    letter-spacing: .15em;
-    margin-bottom: 12px;
-  }
-  .landmark-tag {
-    font-family: 'Inter', sans-serif;
-    font-size: 10px;
-    color: var(--ink-faint);
-    letter-spacing: .2em;
-    text-transform: uppercase;
-    margin-bottom: 28px;
-  }
-  .landmark-title {
-    font-family: 'Playfair Display', Georgia, serif;
-    font-size: clamp(36px, 4.5vw, 56px);
-    font-weight: 700;
-    line-height: 1.1;
-    color: var(--ink);
-    margin-bottom: 20px;
-    letter-spacing: -0.5px;
-  }
-  .landmark-title .ag-char {
-    display: inline-block;
-    cursor: default;
-    user-select: none;
-  }
-  .landmark-accent-line {
-    width: 28px;
-    height: 1px;
-    background: var(--ink);
-    opacity: .2;
-    margin-bottom: 28px;
-  }
-  .landmark-desc {
-    font-size: 14px;
-    color: var(--ink-muted);
-    line-height: 2.2;
-    max-width: 380px;
-    letter-spacing: .02em;
-  }
-  .landmark-quote {
-    font-family: 'Playfair Display', Georgia, serif;
-    font-size: 13px;
-    font-style: italic;
-    color: var(--ink-faint);
-    margin-top: 32px;
-    line-height: 1.9;
-    max-width: 280px;
-  }
-  .landmark-bg-number {
-    position: absolute;
-    font-family: 'Playfair Display', Georgia, serif;
-    font-size: clamp(180px, 18vw, 280px);
-    font-weight: 700;
-    color: var(--ink);
-    opacity: .02;
-    bottom: -20px;
-    right: 32px;
-    line-height: 1;
-    pointer-events: none;
-    user-select: none;
-  }
-
-  .section-divider {
-    height: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .section-divider::before {
-    content: '';
-    width: 1px;
-    height: 32px;
-    background: linear-gradient(to bottom, transparent, var(--border), transparent);
-  }
-
-  /* ===== Footer ===== */
-  .footer {
-    padding: 80px 48px 40px;
-    text-align: center;
-    border-top: 1px solid var(--border-light);
-    background: var(--bg);
-    position: relative;
-  }
-  .footer-text {
-    font-size: 12px;
-    color: var(--ink-faint);
-    line-height: 2;
-    font-family: 'Inter', sans-serif;
-  }
-  .footer-link {
-    color: var(--ink-muted);
-    text-decoration: none;
-    border-bottom: 1px solid transparent;
-    transition: .25s;
-  }
-  .footer-link:hover {
-    border-color: var(--ink-muted);
-    color: var(--ink);
   }
 
   /* ===== 响应式 ===== */
@@ -519,18 +262,14 @@
     .nav-links { display: none; }
     .hero {
       grid-template-columns: 1fr;
-      padding: 80px 24px 40px;
+      padding: 100px 24px 40px;
       gap: 32px;
     }
     .hero-left { padding-bottom: 0; order: 2; }
-    .hero-center { order: 1; }
+    .hero-center { order: 1; padding-bottom: 0; }
     .hero-right { display: none; }
     .hero-image-wrap { max-width: 320px; margin: 0 auto; }
-    .landmark { grid-template-columns: 1fr; min-height: auto; }
-    .landmark-image-side { padding: 40px 24px; }
-    .landmark-text-side { padding: 40px 24px; }
-    .landmark:nth-child(even) { direction: ltr; }
-    .landmark-bg-number { display: none; }
+    .hero-vertical-text { display: none; }
   }
 
   @media(prefers-reduced-motion: reduce) {
@@ -547,9 +286,9 @@
 <nav class="nav">
   <a class="nav-brand" href="index.html#builds">犀牛伯爵</a>
   <ul class="nav-links">
-    <li><a href="#hero">首页</a></li>
-    <li><a href="#landmarks">地标</a></li>
-    <li><a href="#footer">关于</a></li>
+    <li><a href="#">首页</a></li>
+    <li><a href="#">地标</a></li>
+    <li><a href="#">社区</a></li>
   </ul>
   <a class="nav-btn" href="index.html#builds">返回创作矩阵</a>
 </nav>
@@ -557,54 +296,38 @@
 <!-- Hero -->
 <section class="hero" id="hero">
   <div class="hero-left">
-    <div class="hero-eyebrow">北京（Beijing） / 天地之间</div>
-    <div class="hero-title-wrap">
-      <h1 class="hero-title" id="heroTitle">
-        <span class="ag-char">反</span><span class="ag-char">重</span><span class="ag-char">力</span><br>
-        <span class="ag-char">文</span><span class="ag-char">字</span>
-      </h1>
-      <div class="hero-circle-accent"></div>
-    </div>
+    <div class="hero-eyebrow">北京（Beijing）/ 天地之间</div>
+    <h1 class="hero-title" id="heroTitle">
+      <span class="ag-char">T</span><span class="ag-char">e</span><span class="ag-char">m</span><span class="ag-char">p</span><span class="ag-char">l</span><span class="ag-char">e</span><br>
+      <span class="ag-char">o</span><span class="ag-char">f</span><br>
+      <span class="ag-char">H</span><span class="ag-char">e</span><span class="ag-char">a</span><span class="ag-char">v</span><span class="ag-char">e</span><span class="ag-char">n</span>
+    </h1>
     <div class="hero-accent-line"></div>
-    <div class="hero-subtitle-cn">鼠标靠近时聆听字符的声音</div>
+    <div class="hero-circle"></div>
   </div>
 
   <div class="hero-center">
     <div class="hero-image-wrap">
-      <img class="hero-image" src="https://images.unsplash.com/photo-1508804185872-d7badad00f7d?w=800&q=80" alt="天坛祈年殿" loading="eager">
-      <div class="hero-vertical-overlay">零重力排版实验 · 字符漂浮 · 物理交互</div>
+      <img class="hero-image" src="https://images.unsplash.com/photo-1508804185872-d7badad00f7d?w=800&q=80" alt="祈年殿" loading="eager">
+      <div class="hero-vertical-text">
+        祈年殿建于明永乐十八年正月十九日，是天坛内最大的建筑。三层蓝瓦金顶，正八角形三重纹，高达三十八米，直径三十二米，为北京地标。殿内无柱无金，全靠二十八根大栉支撑。年底的冬至日，阳光穿过祈年殿的窗标，照在供桌上，呼之为“冬至光”。
+      </div>
     </div>
   </div>
 
   <div class="hero-right">
-    <div class="hero-nav-box" onclick="document.getElementById('landmarks').scrollIntoView({behavior:'smooth'})">
+    <div class="hero-nav-box" onclick="location.href='index.html#builds'">
       <div class="curve"></div>
-      <span>地标</span>
+      <span>返回</span>
     </div>
     <p class="hero-quote">
-      A celestial dialogue<br>
-      between characters<br>
-      floating free in<br>
-      zero gravity.
+      A celestial dialogue between<br>
+      round skies and square earth,<br>
+      where emperors once prayed for<br>
+      the year's harmony.
     </p>
   </div>
-
-  <div class="scroll-hint" onclick="document.getElementById('landmarks').scrollIntoView({behavior:'smooth'})">
-    <span>Scroll</span>
-    <div class="arrow"></div>
-  </div>
 </section>
-
-<!-- 地标章节 -->
-<div id="landmarks"></div>
-
-<!-- Footer -->
-<footer class="footer" id="footer">
-  <div class="footer-text">
-    反重力文字实验 · 灵感来自 <a class="footer-link" href="https://www.instagram.com/marina_uiux/" target="_blank" rel="noopener">Marina Budarina</a> 的零重力设计语言<br>
-    每个字符都是独立的物理实体 · 鼠标靠近时聆听它们的声音
-  </div>
-</footer>
 
 <script>
 // ===== Web Audio API 音频系统 =====
@@ -637,7 +360,6 @@ function playChime(freq, duration, volume) {
   osc.start(now);
   osc.stop(now + duration);
 
-  // 泛音
   [1.5, 2].forEach((ratio, i) => {
     const o = audioCtx.createOscillator();
     const g = audioCtx.createGain();
@@ -645,10 +367,10 @@ function playChime(freq, duration, volume) {
     g.connect(audioCtx.destination);
     o.frequency.value = freq * ratio;
     o.type = i === 0 ? 'sine' : 'triangle';
-    g.gain.setValueAtTime(volume * (i === 0 ? 0.3 : 0.12), now);
-    g.gain.exponentialRampToValueAtTime(0.001, now + duration * (i === 0 ? 0.7 : 0.5));
+    g.gain.setValueAtTime(volume * (i === 0 ? 0.25 : 0.1), now);
+    g.gain.exponentialRampToValueAtTime(0.001, now + duration * (i === 0 ? 0.6 : 0.4));
     o.start(now);
-    o.stop(now + duration * (i === 0 ? 0.7 : 0.5));
+    o.stop(now + duration * (i === 0 ? 0.6 : 0.4));
   });
 }
 
@@ -664,13 +386,13 @@ document.addEventListener('mousemove', initAudio, { once: true });
 // ===== 反重力文字物理引擎 =====
 function attachAntiGravity(el, options = {}) {
   const {
-    floatAmp = 6,
-    floatSpeed = 0.4,
-    rotAmp = 2,
-    pushRadius = 140,
-    pushForce = 22,
-    springK = 0.06,
-    damping = 0.88
+    floatAmp = 5,
+    floatSpeed = 0.35,
+    rotAmp = 1.5,
+    pushRadius = 130,
+    pushForce = 20,
+    springK = 0.055,
+    damping = 0.89
   } = options;
 
   let vx = 0, vy = 0, ox = 0, oy = 0;
@@ -683,8 +405,8 @@ function attachAntiGravity(el, options = {}) {
     if (isPushed) return;
     const time = Date.now() / 1000;
     const floatY = Math.sin(time * floatSpeed + phase) * floatAmp;
-    const floatX = Math.cos(time * floatSpeed * 0.7 + phase) * (floatAmp * 0.4);
-    const rotZ = Math.sin(time * floatSpeed * 0.5 + phase) * rotAmp;
+    const floatX = Math.cos(time * floatSpeed * 0.7 + phase) * (floatAmp * 0.35);
+    const rotZ = Math.sin(time * floatSpeed * 0.45 + phase) * rotAmp;
     el.style.transform = `translate(${floatX + ox}px, ${floatY + oy}px) rotate(${rotZ}deg)`;
   }
 
@@ -702,8 +424,8 @@ function attachAntiGravity(el, options = {}) {
 
     const time = Date.now() / 1000;
     const floatY = Math.sin(time * floatSpeed + phase) * floatAmp;
-    const floatX = Math.cos(time * floatSpeed * 0.7 + phase) * (floatAmp * 0.4);
-    const rotZ = Math.sin(time * floatSpeed * 0.5 + phase) * rotAmp;
+    const floatX = Math.cos(time * floatSpeed * 0.7 + phase) * (floatAmp * 0.35);
+    const rotZ = Math.sin(time * floatSpeed * 0.45 + phase) * rotAmp;
     el.style.transform = `translate(${floatX + ox}px, ${floatY + oy}px) rotate(${rotZ}deg)`;
 
     rafId = requestAnimationFrame(physicsTick);
@@ -719,14 +441,14 @@ function attachAntiGravity(el, options = {}) {
 
     if (dist < pushRadius && dist > 0) {
       const force = (pushRadius - dist) / pushRadius * pushForce;
-      vx += (dx / dist) * force * 0.15;
-      vy += (dy / dist) * force * 0.15;
+      vx += (dx / dist) * force * 0.12;
+      vy += (dy / dist) * force * 0.12;
       isPushed = true;
 
       const now = Date.now();
-      if (now - lastSoundTime > 80) {
+      if (now - lastSoundTime > 90) {
         const noteIdx = Math.abs(el.textContent.charCodeAt(0)) % pentatonic.length;
-        playChime(getNote(noteIdx), 0.12, 0.035);
+        playChime(getNote(noteIdx), 0.1, 0.03);
         lastSoundTime = now;
       }
       if (!rafId) rafId = requestAnimationFrame(physicsTick);
@@ -737,7 +459,7 @@ function attachAntiGravity(el, options = {}) {
     isPushed = false;
     if (!rafId) rafId = requestAnimationFrame(physicsTick);
     const noteIdx = Math.abs(el.textContent.charCodeAt(0)) % pentatonic.length;
-    playChime(getNote(noteIdx) * 0.5, 0.18, 0.02);
+    playChime(getNote(noteIdx) * 0.5, 0.15, 0.02);
   }
 
   el.addEventListener('mousemove', onPointerMove);
@@ -753,155 +475,17 @@ function attachAntiGravity(el, options = {}) {
 function initAntiGravity() {
   document.querySelectorAll('.ag-char').forEach((el) => {
     attachAntiGravity(el, {
-      floatAmp: 4 + Math.random() * 5,
-      floatSpeed: 0.25 + Math.random() * 0.35,
-      rotAmp: 0.8 + Math.random() * 1.8,
-      pushRadius: 120,
-      pushForce: 18 + Math.random() * 10
+      floatAmp: 3 + Math.random() * 4,
+      floatSpeed: 0.25 + Math.random() * 0.3,
+      rotAmp: 0.6 + Math.random() * 1.4,
+      pushRadius: 110,
+      pushForce: 16
     });
-  });
-}
-
-// ===== 地标数据 =====
-const landmarksData = [
-  {
-    num: '01',
-    tag: 'Forbidden City',
-    title: '紫禁城',
-    quote: '600 years of imperial order, carved in wood and stone.',
-    desc: '600 年的紫禁城，9999 间半房屋。中轴对称，黄瓦红墙，斗拱飞檐。从午门到神武门，每一块砖都刻着王朝的秩序。',
-    vertical: '紫禁城 · 午门 · 太和殿',
-    image: 'https://images.unsplash.com/photo-1599571234909-29ed5d1321d6?w=800&q=80'
-  },
-  {
-    num: '02',
-    tag: "Bird's Nest",
-    title: '鸟巢',
-    quote: '42,000 tons of steel, not a single straight column.',
-    desc: '赫尔佐格与德梅隆设计，2008 年奥运主场馆。钢铁编织如鸟巢，没有一根立柱是直的。4.2 万吨钢材交织成椭圆碗状。',
-    vertical: '鸟巢 · 水立方 · 奥林匹克',
-    image: 'https://images.unsplash.com/photo-1548919973-5cef591cdbc9?w=800&q=80'
-  },
-  {
-    num: '03',
-    tag: 'National Centre',
-    title: '国家大剧院',
-    quote: 'A silver egg floating on water, reflecting the sky.',
-    desc: '保罗·安德鲁设计，天安门广场西侧的银色穹顶。钛金属壳体倒映在人工湖面上，远看像一颗浮在水上的蛋。夜晚灯光亮起，它变成一颗发光的珍珠。',
-    vertical: '大剧院 · 蛋壳 · 人工湖',
-    image: 'https://images.unsplash.com/photo-1474181487882-5abf3f0ba6c2?w=800&q=80'
-  },
-  {
-    num: '04',
-    tag: 'CCTV Headquarters',
-    title: '央视大楼',
-    quote: 'Two towers leaning into each other, 75 meters in the air.',
-    desc: '雷姆·库哈斯 OMA 设计。两座塔楼倾斜相交，顶部悬挑 75 米相连，形成巨大的"空中之环"。没有正面、没有背面。',
-    vertical: '大裤衩 · 悬挑 · 空中之环',
-    image: 'https://images.unsplash.com/photo-1508804052814-cd3ba865a116?w=800&q=80'
-  },
-  {
-    num: '05',
-    tag: 'China Zun',
-    title: '中国尊',
-    quote: '528 meters, shaped like an ancient ritual vessel.',
-    desc: '528 米，北京最高建筑。外形取自古代礼器"尊"的意象，下宽上窄中收，如酒杯立于大地。',
-    vertical: '中国尊 · 中信大厦 · 金融街',
-    image: 'https://images.unsplash.com/photo-1533050487297-09b450131914?w=800&q=80'
-  },
-  {
-    num: '06',
-    tag: 'Great Wall',
-    title: '长城',
-    quote: '21,196 kilometers, built over 2,000 years.',
-    desc: '东起山海关，西至嘉峪关，蜿蜒 21196 公里。从战国到明朝，修了 2000 年。它不是一堵墙，是一套军事信息系统。',
-    vertical: '长城 · 山海关 · 嘉峪关',
-    image: 'https://images.unsplash.com/photo-1508804185872-d7badad00f7d?w=800&q=80'
-  },
-  {
-    num: '07',
-    tag: 'Summer Palace',
-    title: '颐和园',
-    quote: 'A 728-meter corridor, where nature becomes the stage.',
-    desc: '万寿山、昆明湖、长廊 728 米。乾隆为母亲祝寿而建，慈禧重建为行宫。十七孔桥的桥洞在冬至日落时被金光穿过。',
-    vertical: '颐和园 · 万寿山 · 昆明湖',
-    image: 'https://images.unsplash.com/photo-1584467541268-b040f83be3fd?w=800&q=80'
-  }
-];
-
-function renderLandmarks() {
-  const container = document.getElementById('landmarks');
-  landmarksData.forEach((lm, idx) => {
-    const section = document.createElement('section');
-    section.className = 'landmark';
-    section.innerHTML = `
-      <div class="landmark-image-side">
-        <div class="landmark-image-wrap">
-          <img src="${lm.image}" alt="${lm.title}" loading="lazy">
-          <div class="landmark-vertical-text">${lm.vertical}</div>
-        </div>
-      </div>
-      <div class="landmark-text-side">
-        <div class="landmark-num">${lm.num}</div>
-        <div class="landmark-tag">${lm.tag}</div>
-        <h2 class="landmark-title">
-          ${lm.title.split('').map(ch => `<span class="ag-char">${ch}</span>`).join('')}
-        </h2>
-        <div class="landmark-accent-line"></div>
-        <p class="landmark-desc">${lm.desc}</p>
-        <p class="landmark-quote">${lm.quote}</p>
-        <div class="landmark-bg-number">${lm.num}</div>
-      </div>
-    `;
-    container.appendChild(section);
-    if (idx < landmarksData.length - 1) {
-      const divider = document.createElement('div');
-      divider.className = 'section-divider';
-      container.appendChild(divider);
-    }
-  });
-
-  setTimeout(() => {
-    document.querySelectorAll('.landmark .ag-char').forEach((el) => {
-      attachAntiGravity(el, {
-        floatAmp: 3 + Math.random() * 3,
-        floatSpeed: 0.2 + Math.random() * 0.25,
-        rotAmp: 0.5 + Math.random() * 1,
-        pushRadius: 100,
-        pushForce: 14
-      });
-    });
-  }, 100);
-}
-
-function initScrollObserver() {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) entry.target.classList.add('visible');
-    });
-  }, { threshold: 0.12, rootMargin: '0px 0px -80px 0px' });
-  document.querySelectorAll('.landmark').forEach(el => observer.observe(el));
-}
-
-function initNavScroll() {
-  const nav = document.querySelector('.nav');
-  window.addEventListener('scroll', () => {
-    const y = window.scrollY;
-    if (y > 60) {
-      nav.style.background = 'rgba(245,240,232,.95)';
-      nav.style.boxShadow = '0 1px 20px rgba(28,25,23,.06)';
-    } else {
-      nav.style.background = 'rgba(245,240,232,.88)';
-      nav.style.boxShadow = 'none';
-    }
   });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   initAntiGravity();
-  renderLandmarks();
-  initScrollObserver();
-  initNavScroll();
 });
 </script>
 
