@@ -2228,8 +2228,8 @@
       .rhino-spark { animation: none !important; }
     }
 
-    .render-target { opacity: 0; transition: opacity 0.4s ease; }
-    .render-target.ready { opacity: 1; }
+    /* Content must remain visible even when a mobile browser blocks or delays JS. */
+    .render-target { opacity: 1; transition: opacity 0.4s ease; }
     noscript .nojs {
       padding: var(--s-6); border: 1px solid var(--line-2);
       border-radius: var(--radius); margin: var(--s-5) 0;
@@ -4722,8 +4722,32 @@
     </div>
   </header>
 
-  <main id="top" class="render-target">
-    <section class="hero" id="hero-section"></section>
+  <main id="top" class="render-target ready">
+    <section class="hero" id="hero-section">
+      <!-- Static first paint: JavaScript enhances/replaces this, but it is already usable. -->
+      <div class="hero-cine-overlay" aria-hidden="true"></div>
+      <div class="hero-cine-grain" aria-hidden="true"></div>
+      <div class="hero-cine-content">
+        <div class="hero-cine-kicker">RHINO COUNT · AI NATIVE STUDIO</div>
+        <h1 class="hero-cine-title">
+          <span>HI, I'M</span>
+          <strong>RHINO</strong>
+        </h1>
+        <p class="hero-cine-lede">把 AI 观察、Agent 工作流、产业判断和内容实验，压缩成一套持续生长的个人创作系统。</p>
+        <div class="hero-cine-cta">
+          <a class="btn" href="#builds">进入创作矩阵 →</a>
+          <a class="btn ghost" href="#notes">阅读最新笔记</a>
+        </div>
+        <div class="hero-cine-keywords">
+          <span>AI NATIVE</span>
+          <span>SIGNAL CURATION</span>
+          <span>AGENT WORKFLOW</span>
+          <span>MODEL WATCH</span>
+          <span>CONTENT SYSTEM</span>
+        </div>
+      </div>
+      <div class="hero-cine-scroll">SCROLL ↓</div>
+    </section>
     <section id="profile"></section>
     <section id="notes"></section>
     <section id="builds"></section>
@@ -4811,14 +4835,16 @@
     </div>
   </footer>
 
-  <script src="data.js?v=final-stable"></script>
-  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <script src="data.js?v=20260714-mobile-safe-1"></script>
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
   <script>
     /* Fallback: force-show page after 3s if JS hasn't completed */
     setTimeout(function(){var m=document.querySelector('main');if(m&&!m.classList.contains('ready'))m.classList.add('ready');},3000);
     try {
     (function () {
       'use strict';
+      /* The static first paint is usable before any enhancement runs. */
+      document.querySelector('main').classList.add('ready');
       const esc = s => String(s).replace(/[&<>"']/g, c => (
         { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]
       ));
@@ -4835,7 +4861,8 @@
       /* Force dark-only theme */
       root.setAttribute('data-theme', 'dark');
       const KEY = 'rhino-theme';
-      localStorage.removeItem(KEY);
+      /* Safari privacy modes and embedded browsers may deny storage access. */
+      try { window.localStorage.removeItem(KEY); } catch (storageError) {}
 
       const menuBtn = document.getElementById('menuBtn');
       const panel = document.getElementById('mobilePanel');
@@ -4915,7 +4942,7 @@
         : ((h.motion && h.motion.src) || 'assets/hero-rhino-scene.mp4');
       const _preload = _isMobile ? 'metadata' : 'auto';
       document.getElementById('hero-section').innerHTML = `
-        <video class="hero-cine-video" autoplay muted loop playsinline preload="${esc(_preload)}" aria-hidden="true">
+        <video class="hero-cine-video" autoplay muted loop playsinline webkit-playsinline preload="${esc(_preload)}" aria-hidden="true">
           <source src="${esc(versionAsset(heroVideoSrc))}" type="${esc(videoType(heroVideoSrc))}">
         </video>
         <div class="hero-cine-overlay" aria-hidden="true"></div>
