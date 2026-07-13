@@ -4,47 +4,53 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>反重力文字 · 北京地标 — 犀牛伯爵</title>
-<meta name="description" content="3D 反重力排版实验：零重力中漂浮的文字，鼠标反应透视，深度挤出，环境光晕。讲述北京地标建筑的故事。">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%2305050A'/%3E%3Ctext x='50%25' y='56%25' text-anchor='middle' font-size='30' font-family='Georgia,serif' fill='%23E8C77A'%3E反%3C/text%3E%3C/svg%3E">
+<meta name="description" content="反重力排版实验：在零重力中漂浮的文字，讲述北京地标建筑的故事。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%23F5F0E8'/%3E%3Ctext x='50%25' y='56%25' text-anchor='middle' font-size='30' font-family='Georgia,serif' fill='%231C1917'%3E反%3C/text%3E%3C/svg%3E">
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600;700;900&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
+
   :root {
-    --gold: #E8C77A;
-    --cyan: #7BE0E8;
-    --pink: #FF6B9D;
-    --purple: #B07BFF;
-    --bg: #05050A;
-    --text: #e8e8f0;
-    --text-dim: #555570;
+    --bg: #F5F0E8;
+    --bg-warm: #EDE8DE;
+    --ink: #1C1917;
+    --ink-light: #44403C;
+    --ink-muted: #78716C;
+    --ink-faint: #A8A29E;
+    --accent-gold: #B45309;
+    --accent-blue: #1E3A5F;
+    --accent-cyan: #0E7490;
+    --border: #D6D3D1;
+    --border-light: #E7E5E4;
   }
+
   html { scroll-behavior: smooth; }
+
   body {
     background: var(--bg);
-    color: var(--text);
-    font: 16px/1.6 -apple-system, BlinkMacSystemFont, "PingFang SC", "Inter", sans-serif;
+    color: var(--ink);
+    font-family: 'Noto Serif SC', Georgia, 'Songti SC', serif;
+    line-height: 1.8;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
   }
 
-  /* ===== Three.js Canvas 底层 ===== */
-  #canvas-container {
+  /* ===== 点阵纹理背景 ===== */
+  body::before {
+    content: '';
     position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
+    inset: 0;
     z-index: 0;
-    pointer-events: all;
-  }
-  #canvas-container canvas {
-    display: block;
-  }
-
-  /* ===== 内容层（在 Canvas 之上）===== */
-  .content-layer {
-    position: relative;
-    z-index: 1;
     pointer-events: none;
+    background-image: radial-gradient(circle, #C4BFB5 0.8px, transparent 0.8px);
+    background-size: 20px 20px;
+    opacity: 0.6;
   }
-  .content-layer > * { pointer-events: auto; }
 
   /* ===== 导航 ===== */
   .nav {
@@ -54,230 +60,443 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 16px 32px;
-    background: rgba(5,5,10,.5);
-    backdrop-filter: blur(20px) saturate(1.2);
-    -webkit-backdrop-filter: blur(20px) saturate(1.2);
-    border-bottom: 1px solid rgba(255,255,255,.06);
-    transition: background .3s;
-    pointer-events: auto;
+    padding: 20px 48px;
+    background: rgba(245,240,232,.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border-light);
   }
   .nav-brand {
-    font: 700 18px Georgia, serif;
-    color: var(--gold);
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--ink);
     text-decoration: none;
-    letter-spacing: 1px;
+    letter-spacing: -0.5px;
   }
-  .nav-back {
-    color: #aab;
-    padding: 8px 16px;
-    border: 1px solid rgba(255,255,255,.12);
-    border-radius: 8px;
+  .nav-links {
+    display: flex;
+    gap: 40px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--ink-muted);
     text-decoration: none;
-    font-size: 14px;
-    transition: .25s;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color .3s;
+    position: relative;
   }
-  .nav-back:hover {
-    border-color: var(--cyan);
-    color: var(--cyan);
-    box-shadow: 0 0 12px rgba(123,224,232,.15);
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0;
+    width: 0; height: 1px;
+    background: var(--ink);
+    transition: width .3s;
+  }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-btn {
+    font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    color: #fff;
+    background: var(--ink);
+    padding: 10px 24px;
+    border-radius: 4px;
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    transition: all .3s;
+  }
+  .nav-btn:hover {
+    background: var(--ink-light);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(28,25,23,.15);
   }
 
   /* ===== Hero ===== */
   .hero {
     position: relative;
     min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr 1fr;
+    align-items: center;
+    padding: 100px 48px 60px;
+    gap: 40px;
+  }
+  .hero-left {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: flex-end;
-    padding: 100px 24px 80px;
-    text-align: center;
-    pointer-events: none;
+    gap: 24px;
+    align-self: end;
+    padding-bottom: 80px;
   }
   .hero-eyebrow {
+    font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
     font-size: 11px;
-    letter-spacing: .4em;
-    color: var(--cyan);
+    letter-spacing: .3em;
+    color: var(--ink-faint);
     text-transform: uppercase;
-    margin-bottom: 20px;
-    opacity: 0;
-    animation: fadeUp .8s .3s forwards;
-    text-shadow: 0 0 20px rgba(123,224,232,.3);
-    pointer-events: auto;
   }
-  .hero-sub {
-    font-size: 16px;
-    color: #777790;
-    max-width: 540px;
-    line-height: 2;
-    margin-bottom: 40px;
-    opacity: 0;
-    animation: fadeUp .8s .8s forwards;
-    pointer-events: auto;
+  .hero-title-wrap {
+    position: relative;
   }
-  .hero-sub .highlight {
-    color: var(--cyan);
-    font-weight: 500;
-    text-shadow: 0 0 12px rgba(123,224,232,.2);
+  .hero-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(52px, 7vw, 90px);
+    font-weight: 700;
+    line-height: 1.05;
+    color: var(--ink);
+    letter-spacing: -1px;
   }
-  .scroll-hint {
-    font-size: 11px;
-    letter-spacing: .25em;
-    color: var(--text-dim);
+  .hero-title .ag-char {
+    display: inline-block;
+    cursor: default;
+    user-select: none;
+    position: relative;
+    transition: text-shadow .3s;
+  }
+  .hero-title .ag-char:hover {
+    text-shadow: 0 0 30px rgba(180,83,9,.15);
+  }
+  .hero-accent-line {
+    width: 40px;
+    height: 1px;
+    background: var(--ink);
+    margin-top: 24px;
+    opacity: .3;
+  }
+  .hero-subtitle-cn {
+    font-size: 14px;
+    color: var(--ink-muted);
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    height: 200px;
+    letter-spacing: .15em;
+  }
+  .hero-center {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .hero-image {
+    width: 100%;
+    max-width: 520px;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    border-radius: 4px;
+    box-shadow:
+      0 20px 60px rgba(28,25,23,.12),
+      0 2px 8px rgba(28,25,23,.06);
+    filter: saturate(0.9) contrast(1.05);
+  }
+  .hero-image-frame {
+    position: relative;
+  }
+  .hero-image-frame::before {
+    content: '';
+    position: absolute;
+    inset: -12px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    pointer-events: none;
+  }
+  .hero-vertical-text {
+    position: absolute;
+    right: -30px;
+    top: 50%;
+    transform: translateY(-50%);
+    writing-mode: vertical-rl;
+    font-size: 12px;
+    color: var(--ink-faint);
+    letter-spacing: .3em;
+    line-height: 2.5;
+    opacity: .7;
+  }
+  .hero-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    padding-top: 60px;
+  }
+  .hero-nav-box {
+    width: 80px;
+    height: 80px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
-    opacity: 0;
-    animation: fadeUp .8s 1.2s forwards;
+    justify-content: center;
+    gap: 8px;
     cursor: pointer;
-    transition: color .3s;
-    pointer-events: auto;
+    transition: all .3s;
+    align-self: flex-end;
   }
-  .scroll-hint:hover { color: var(--cyan); }
+  .hero-nav-box:hover {
+    border-color: var(--ink-muted);
+    background: rgba(28,25,23,.02);
+  }
+  .hero-nav-box .curve {
+    width: 20px;
+    height: 10px;
+    border-top: 1px solid var(--ink-muted);
+    border-radius: 50% 50% 0 0;
+  }
+  .hero-nav-box span {
+    font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--ink-muted);
+    letter-spacing: .1em;
+  }
+  .hero-quote {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 15px;
+    font-style: italic;
+    color: var(--ink-muted);
+    line-height: 1.9;
+    max-width: 220px;
+    align-self: flex-end;
+    text-align: right;
+  }
+  .scroll-hint {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    color: var(--ink-faint);
+    font-size: 11px;
+    letter-spacing: .2em;
+    transition: color .3s;
+  }
+  .scroll-hint:hover { color: var(--ink); }
   .scroll-hint .arrow {
     width: 1px;
-    height: 40px;
-    background: linear-gradient(to bottom, transparent, var(--cyan), transparent);
-    animation: scrollPulse 2.2s ease-in-out infinite;
-    position: relative;
-  }
-  .scroll-hint .arrow::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: -2px;
-    width: 5px; height: 5px;
-    border-right: 1px solid var(--cyan);
-    border-bottom: 1px solid var(--cyan);
-    transform: rotate(45deg);
-    opacity: .6;
+    height: 32px;
+    background: linear-gradient(to bottom, var(--ink-faint), transparent);
+    animation: scrollPulse 2.5s ease-in-out infinite;
   }
   @keyframes scrollPulse {
-    0%, 100% { opacity: .2; transform: scaleY(.6); }
+    0%, 100% { opacity: .3; transform: scaleY(.7); }
     50% { opacity: 1; transform: scaleY(1); }
-  }
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
   }
 
   /* ===== 地标章节 ===== */
-  .landmarks {
-    position: relative;
-    padding: 60px 24px 40px;
-    background: linear-gradient(to bottom, transparent 0%, rgba(5,5,10,.85) 10%, rgba(5,5,10,.95) 100%);
-    pointer-events: auto;
-  }
   .landmark {
-    margin-bottom: 140px;
-    text-align: center;
+    position: relative;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
     opacity: 0;
-    transform: translateY(50px);
-    transition: opacity .8s cubic-bezier(.22,1,.36,1), transform .8s cubic-bezier(.22,1,.36,1);
+    transform: translateY(40px);
+    transition: opacity 1s cubic-bezier(.22,1,.36,1), transform 1s cubic-bezier(.22,1,.36,1);
   }
   .landmark.visible {
     opacity: 1;
     transform: translateY(0);
   }
-  .landmark-head {
+  .landmark:nth-child(even) {
+    direction: rtl;
+  }
+  .landmark:nth-child(even) > * {
+    direction: ltr;
+  }
+  .landmark-image-side {
+    position: relative;
+    overflow: hidden;
+    background: var(--bg-warm);
     display: flex;
-    align-items: baseline;
-    gap: 16px;
-    margin-bottom: 16px;
-    max-width: 900px;
-    margin-left: auto;
-    margin-right: auto;
+    align-items: center;
     justify-content: center;
+    padding: 60px;
+  }
+  .landmark-image-side img {
+    width: 100%;
+    max-width: 480px;
+    aspect-ratio: 4/5;
+    object-fit: cover;
+    border-radius: 4px;
+    box-shadow: 0 24px 64px rgba(28,25,23,.1);
+    filter: saturate(0.92) contrast(1.03);
+    transition: transform 6s ease;
+  }
+  .landmark.visible .landmark-image-side img {
+    transform: scale(1.03);
+  }
+  .landmark-image-frame {
+    position: relative;
+  }
+  .landmark-image-frame::before {
+    content: '';
+    position: absolute;
+    inset: -16px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    pointer-events: none;
+    opacity: .7;
+  }
+  .landmark-vertical-text {
+    position: absolute;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    writing-mode: vertical-rl;
+    font-size: 13px;
+    color: var(--ink-faint);
+    letter-spacing: .4em;
+    line-height: 2.8;
+    opacity: .5;
+    pointer-events: none;
+  }
+  .landmark-text-side {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 60px;
+    position: relative;
   }
   .landmark-num {
-    font: 700 13px "SF Mono", monospace;
-    color: var(--gold);
-    opacity: .5;
-    letter-spacing: 2px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ink-faint);
+    letter-spacing: .2em;
+    margin-bottom: 16px;
   }
   .landmark-tag {
+    font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
     font-size: 11px;
+    color: var(--ink-faint);
     letter-spacing: .25em;
-    color: var(--cyan);
     text-transform: uppercase;
-    opacity: .8;
+    margin-bottom: 32px;
   }
   .landmark-title {
-    font: 700 clamp(42px, 8vw, 80px)/1.1 Georgia, "Songti SC", serif;
-    margin-bottom: 20px;
-    position: relative;
-    display: inline-block;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(42px, 5vw, 64px);
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 24px;
+    letter-spacing: -0.5px;
   }
   .landmark-title .ag-char {
     display: inline-block;
     cursor: default;
     user-select: none;
-    transition: transform .3s;
   }
   .landmark-title .ag-char:hover {
-    transform: translateY(-5px) scale(1.05);
+    color: var(--accent-gold);
+  }
+  .landmark-accent-line {
+    width: 32px;
+    height: 1px;
+    background: var(--ink);
+    opacity: .2;
+    margin-bottom: 32px;
   }
   .landmark-desc {
-    max-width: 560px;
-    margin: 28px auto 0;
     font-size: 15px;
-    line-height: 2;
-    color: #555570;
+    color: var(--ink-muted);
+    line-height: 2.2;
+    max-width: 420px;
     letter-spacing: .02em;
   }
-
-  /* ===== 分隔线 ===== */
-  .ag-divider {
-    max-width: 200px;
-    margin: 0 auto 140px;
-    height: 1px;
-    background: linear-gradient(to right, transparent, rgba(255,255,255,.1), transparent);
-    position: relative;
+  .landmark-quote {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 14px;
+    font-style: italic;
+    color: var(--ink-faint);
+    margin-top: 40px;
+    line-height: 1.9;
+    max-width: 320px;
   }
-  .ag-divider::after {
-    content: '';
+  .landmark-bg-number {
     position: absolute;
-    left: 50%; top: -2px;
-    width: 5px; height: 5px;
-    border-radius: 50%;
-    background: var(--cyan);
-    opacity: .4;
-    transform: translateX(-50%);
-    box-shadow: 0 0 10px var(--cyan);
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(200px, 20vw, 320px);
+    font-weight: 700;
+    color: var(--ink);
+    opacity: .025;
+    bottom: -40px;
+    right: 40px;
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
   }
 
-  /* ===== 底部 ===== */
-  .footer {
+  /* ===== 分隔 ===== */
+  .section-divider {
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: relative;
-    padding: 80px 24px 40px;
+  }
+  .section-divider::before {
+    content: '';
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, transparent, var(--border), transparent);
+  }
+
+  /* ===== Footer ===== */
+  .footer {
+    padding: 80px 48px 40px;
     text-align: center;
-    background: rgba(5,5,10,.95);
-    pointer-events: auto;
+    border-top: 1px solid var(--border-light);
   }
   .footer-text {
     font-size: 13px;
-    color: #3a3a50;
+    color: var(--ink-faint);
     line-height: 2;
+    font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
   }
   .footer-link {
-    color: var(--cyan);
+    color: var(--ink-muted);
     text-decoration: none;
     border-bottom: 1px solid transparent;
     transition: .25s;
   }
   .footer-link:hover {
-    border-color: var(--cyan);
-    text-shadow: 0 0 8px rgba(123,224,232,.3);
+    border-color: var(--ink-muted);
+    color: var(--ink);
   }
 
   /* ===== 响应式 ===== */
-  @media(max-width: 768px) {
-    .nav { padding: 12px 16px; }
-    .hero { padding: 80px 16px 60px; }
-    .landmarks { padding: 40px 16px 20px; }
-    .landmark { margin-bottom: 100px; }
+  @media(max-width: 900px) {
+    .nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    .hero {
+      grid-template-columns: 1fr;
+      padding: 80px 24px 40px;
+      gap: 40px;
+    }
+    .hero-left { align-self: center; padding-bottom: 0; }
+    .hero-right { display: none; }
+    .hero-center { order: -1; }
+    .landmark {
+      grid-template-columns: 1fr;
+      min-height: auto;
+    }
+    .landmark-image-side { padding: 40px 24px; }
+    .landmark-text-side { padding: 40px 24px; }
+    .landmark:nth-child(even) { direction: ltr; }
+    .landmark-bg-number { display: none; }
   }
+
   @media(prefers-reduced-motion: reduce) {
     *, *::before, *::after {
       animation-duration: .01ms !important;
@@ -286,514 +505,454 @@
     }
   }
 </style>
-
-<script type="importmap">
-{
-  "imports": {
-    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
-    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
-  }
-}
-</script>
 </head>
 <body>
 
-<!-- Three.js 全屏 Canvas -->
-<div id="canvas-container"></div>
+<nav class="nav">
+  <a class="nav-brand" href="index.html#builds">犀牛伯爵</a>
+  <ul class="nav-links">
+    <li><a href="#hero">首页</a></li>
+    <li><a href="#landmarks">地标</a></li>
+    <li><a href="#footer">关于</a></li>
+  </ul>
+  <a class="nav-btn" href="index.html#builds">返回创作矩阵</a>
+</nav>
 
-<!-- HTML 内容层 -->
-<div class="content-layer">
-  <nav class="nav">
-    <a class="nav-brand" href="index.html#builds">犀牛伯爵</a>
-    <a class="nav-back" href="index.html#builds">← 返回创作矩阵</a>
-  </nav>
-
-  <section class="hero">
-    <div class="hero-eyebrow">Anti-Gravity Typography · 反重力排版实验</div>
-    <div class="hero-sub">
-      每个字符在<span class="highlight">零重力</span>中漂浮、旋转、散落。<br>
-      鼠标移动改变<span class="highlight">透视角度</span>，靠近时文字被推开。<br>
-      用反重力文字，讲述北京地标建筑的故事。
+<!-- Hero -->
+<section class="hero" id="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Anti-Gravity Typography</div>
+    <div class="hero-title-wrap">
+      <h1 class="hero-title" id="heroTitle">
+        <span class="ag-char">反</span><span class="ag-char">重</span><span class="ag-char">力</span><br>
+        <span class="ag-char">文</span><span class="ag-char">字</span>
+      </h1>
     </div>
-    <div class="scroll-hint" onclick="document.getElementById('landmarks').scrollIntoView({behavior:'smooth'})">
-      <span>向下滚动</span>
-      <div class="arrow"></div>
+    <div class="hero-accent-line"></div>
+    <div class="hero-subtitle-cn">北京 · 天地之间</div>
+  </div>
+
+  <div class="hero-center">
+    <div class="hero-image-frame">
+      <img class="hero-image" src="https://images.unsplash.com/photo-1508804185872-d7badad00f7d?w=800&q=80" alt="天坛祈年殿" loading="eager">
+      <div class="hero-vertical-text">零重力排版实验</div>
     </div>
-  </section>
+  </div>
 
-  <section class="landmarks" id="landmarks"></section>
-
-  <footer class="footer">
-    <div class="footer-text">
-      反重力文字实验 · 灵感来自 <a class="footer-link" href="https://www.instagram.com/marina_uiux/" target="_blank" rel="noopener">Marina Budarina</a> 的零重力设计语言<br>
-      基于 Three.js + Bloom 后期处理 · 纯前端实现
+  <div class="hero-right">
+    <div class="hero-nav-box" onclick="document.getElementById('landmarks').scrollIntoView({behavior:'smooth'})">
+      <div class="curve"></div>
+      <span>地标</span>
     </div>
-  </footer>
-</div>
+    <p class="hero-quote">
+      A celestial dialogue between<br>
+      round skies and square earth,<br>
+      where characters float free<br>
+      in zero gravity.
+    </p>
+  </div>
 
-<script type="module">
-import * as THREE from 'three';
-import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
-import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
-import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+  <div class="scroll-hint" onclick="document.getElementById('landmarks').scrollIntoView({behavior:'smooth'})">
+    <span>向下滚动</span>
+    <div class="arrow"></div>
+  </div>
+</section>
 
-// ===== 场景初始化 =====
-const container = document.getElementById('canvas-container');
-const scene = new THREE.Scene();
-scene.fog = new THREE.FogExp2(0x05050a, 0.015);
+<!-- 地标章节 -->
+<div id="landmarks"></div>
 
-const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 1000);
-camera.position.set(0, 0, 35);
+<!-- Footer -->
+<footer class="footer" id="footer">
+  <div class="footer-text">
+    反重力文字实验 · 灵感来自 <a class="footer-link" href="https://www.instagram.com/marina_uiux/" target="_blank" rel="noopener">Marina Budarina</a> 的零重力设计语言<br>
+    每个字符都是独立的物理实体 · 鼠标靠近时聆听它们的声音
+  </div>
+</footer>
 
-const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
-renderer.setSize(window.innerWidth, window.innerHeight);
-renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-renderer.toneMapping = THREE.ReinhardToneMapping;
-container.appendChild(renderer.domElement);
+<script>
+// ===== Web Audio API 声音系统 =====
+let audioCtx = null;
+let audioEnabled = false;
 
-// ===== 后期处理 Bloom =====
-const composer = new EffectComposer(renderer);
-composer.addPass(new RenderPass(scene, camera));
+function initAudio() {
+  if (audioCtx) return;
+  try {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    audioEnabled = true;
+  } catch(e) {
+    console.log('Web Audio not supported');
+  }
+}
 
-const bloomPass = new UnrealBloomPass(
-  new THREE.Vector2(window.innerWidth, window.innerHeight),
-  1.5, 0.4, 0.85
-);
-bloomPass.threshold = 0.15;
-bloomPass.strength = 1.8;
-bloomPass.radius = 0.6;
-composer.addPass(bloomPass);
+// 播放风铃般的声音
+function playChime(freq, duration = 0.15, volume = 0.04) {
+  if (!audioEnabled || !audioCtx) return;
+  if (audioCtx.state === 'suspended') audioCtx.resume();
 
-// ===== 文字纹理生成 =====
-function createTextTexture(text, color, fontSize = 140) {
-  const canvas = document.createElement('canvas');
-  const ctx = canvas.getContext('2d');
-  const size = 512;
-  canvas.width = size;
-  canvas.height = size;
+  const now = audioCtx.currentTime;
 
-  // 清透明背景
-  ctx.clearRect(0, 0, size, size);
+  // 主音
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+  osc.connect(gain);
+  gain.connect(audioCtx.destination);
 
-  // 发光效果 - 多层阴影模拟
-  const glowColor = color.replace(')', ', 0.3)').replace('rgb', 'rgba');
-  for (let i = 5; i > 0; i--) {
-    ctx.shadowColor = color;
-    ctx.shadowBlur = i * 15;
-    ctx.font = `900 ${fontSize}px Georgia, "Songti SC", "Noto Serif SC", serif`;
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.fillStyle = i === 1 ? color : glowColor;
-    ctx.fillText(text, size/2, size/2);
+  osc.frequency.value = freq;
+  osc.type = 'sine';
+  gain.gain.setValueAtTime(volume, now);
+  gain.gain.exponentialRampToValueAtTime(0.001, now + duration);
+  osc.start(now);
+  osc.stop(now + duration);
+
+  // 泛音 - 营造风铃感
+  const osc2 = audioCtx.createOscillator();
+  const gain2 = audioCtx.createGain();
+  osc2.connect(gain2);
+  gain2.connect(audioCtx.destination);
+  osc2.frequency.value = freq * 1.5;
+  osc2.type = 'sine';
+  gain2.gain.setValueAtTime(volume * 0.3, now);
+  gain2.gain.exponentialRampToValueAtTime(0.001, now + duration * 0.7);
+  osc2.start(now);
+  osc2.stop(now + duration * 0.7);
+
+  // 高频泛音
+  const osc3 = audioCtx.createOscillator();
+  const gain3 = audioCtx.createGain();
+  osc3.connect(gain3);
+  gain3.connect(audioCtx.destination);
+  osc3.frequency.value = freq * 2;
+  osc3.type = 'triangle';
+  gain3.gain.setValueAtTime(volume * 0.15, now);
+  gain3.gain.exponentialRampToValueAtTime(0.001, now + duration * 0.5);
+  osc3.start(now);
+  osc3.stop(now + duration * 0.5);
+}
+
+// 播放推开时的"嗖"声
+function playWhoosh(intensity = 1) {
+  if (!audioEnabled || !audioCtx) return;
+  if (audioCtx.state === 'suspended') audioCtx.resume();
+
+  const now = audioCtx.currentTime;
+  const bufferSize = audioCtx.sampleRate * 0.1;
+  const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+  const data = buffer.getChannelData(0);
+
+  for (let i = 0; i < bufferSize; i++) {
+    data[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / bufferSize, 2);
   }
 
-  const texture = new THREE.CanvasTexture(canvas);
-  texture.needsUpdate = true;
-  return texture;
+  const source = audioCtx.createBufferSource();
+  const filter = audioCtx.createBiquadFilter();
+  const gain = audioCtx.createGain();
+
+  source.buffer = buffer;
+  filter.type = 'lowpass';
+  filter.frequency.value = 800 + intensity * 400;
+  filter.Q.value = 1;
+
+  source.connect(filter);
+  filter.connect(gain);
+  gain.connect(audioCtx.destination);
+
+  gain.gain.setValueAtTime(0.02 * intensity, now);
+  gain.gain.exponentialRampToValueAtTime(0.001, now + 0.1);
+
+  source.start(now);
+  source.stop(now + 0.1);
 }
 
-// ===== 创建 3D 文字组（带深度挤出层）=====
-function create3DText(text, color, size = 5, extrusion = true) {
-  const group = new THREE.Group();
-  const texture = createTextTexture(text, color);
+// 音阶映射（五声音阶）
+const pentatonic = [261.63, 293.66, 329.63, 392.00, 440.00, 523.25, 587.33, 659.25];
+function getNote(index) {
+  return pentatonic[index % pentatonic.length];
+}
 
-  // 主文字层
-  const geo = new THREE.PlaneGeometry(size, size);
-  const mat = new THREE.MeshBasicMaterial({
-    map: texture,
-    transparent: true,
-    side: THREE.DoubleSide,
-    blending: THREE.AdditiveBlending,
-    depthWrite: false,
-    opacity: 1
-  });
-  const mainMesh = new THREE.Mesh(geo, mat);
-  group.add(mainMesh);
+// 首次交互时初始化音频
+document.addEventListener('click', initAudio, { once: true });
+document.addEventListener('touchstart', initAudio, { once: true });
+document.addEventListener('mousemove', initAudio, { once: true });
 
-  // 深度挤出层
-  if (extrusion) {
-    for (let i = 1; i <= 6; i++) {
-      const layerGeo = new THREE.PlaneGeometry(size * (1 + i * 0.06), size * (1 + i * 0.06));
-      const layerMat = new THREE.MeshBasicMaterial({
-        map: texture,
-        transparent: true,
-        side: THREE.DoubleSide,
-        blending: THREE.AdditiveBlending,
-        depthWrite: false,
-        opacity: 0.12 / i,
-        color: new THREE.Color(color)
-      });
-      const layer = new THREE.Mesh(layerGeo, layerMat);
-      layer.position.z = -i * 0.4;
-      group.add(layer);
+// ===== 反重力文字物理引擎 =====
+function attachAntiGravity(el, options = {}) {
+  const {
+    floatAmp = 8,
+    floatSpeed = 0.4,
+    rotAmp = 2,
+    pushRadius = 150,
+    pushForce = 25,
+    springK = 0.06,
+    damping = 0.88
+  } = options;
+
+  let vx = 0, vy = 0, ox = 0, oy = 0;
+  let baseY = 0;
+  let phase = Math.random() * Math.PI * 2;
+  let lastSoundTime = 0;
+  let rafId = null;
+  let isPushed = false;
+
+  // 基础漂浮动画
+  function floatTick() {
+    if (isPushed) return;
+    const time = Date.now() / 1000;
+    const floatY = Math.sin(time * floatSpeed + phase) * floatAmp;
+    const floatX = Math.cos(time * floatSpeed * 0.7 + phase) * (floatAmp * 0.4);
+    const rotZ = Math.sin(time * floatSpeed * 0.5 + phase) * rotAmp;
+
+    el.style.transform = `translate(${floatX + ox}px, ${floatY + oy}px) rotate(${rotZ}deg)`;
+  }
+
+  // 物理回弹
+  function physicsTick() {
+    if (!isPushed && Math.abs(ox) < 0.1 && Math.abs(oy) < 0.1 && Math.abs(vx) < 0.01 && Math.abs(vy) < 0.01) {
+      ox = 0; oy = 0; vx = 0; vy = 0;
+      rafId = null;
+      return;
+    }
+
+    const ax = -ox * springK;
+    const ay = -oy * springK;
+    vx = (vx + ax) * damping;
+    vy = (vy + ay) * damping;
+    ox += vx;
+    oy += vy;
+
+    const time = Date.now() / 1000;
+    const floatY = Math.sin(time * floatSpeed + phase) * floatAmp;
+    const floatX = Math.cos(time * floatSpeed * 0.7 + phase) * (floatAmp * 0.4);
+    const rotZ = Math.sin(time * floatSpeed * 0.5 + phase) * rotAmp;
+
+    el.style.transform = `translate(${floatX + ox}px, ${floatY + oy}px) rotate(${rotZ}deg)`;
+
+    rafId = requestAnimationFrame(physicsTick);
+  }
+
+  // 鼠标交互
+  function onPointerMove(e) {
+    const rect = el.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+    const dx = cx - e.clientX;
+    const dy = cy - e.clientY;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+
+    if (dist < pushRadius && dist > 0) {
+      const force = (pushRadius - dist) / pushRadius * pushForce;
+      vx += (dx / dist) * force * 0.15;
+      vy += (dy / dist) * force * 0.15;
+      isPushed = true;
+
+      // 声音
+      const now = Date.now();
+      if (now - lastSoundTime > 80) {
+        const noteIdx = Math.floor(el.textContent.charCodeAt(0) % pentatonic.length);
+        playChime(getNote(noteIdx), 0.12, 0.035);
+        lastSoundTime = now;
+      }
+
+      if (!rafId) rafId = requestAnimationFrame(physicsTick);
     }
   }
 
-  return { group, mainMesh };
-}
+  function onPointerLeave() {
+    isPushed = false;
+    if (!rafId) rafId = requestAnimationFrame(physicsTick);
 
-// ===== Hero 标题文字 =====
-const heroChars = ['反', '重', '力', '文', '字'];
-const heroColors = ['#E8C77A', '#7BE0E8', '#FF6B9D', '#B07BFF', '#E8C77A'];
-const heroItems = [];
-
-heroChars.forEach((char, i) => {
-  const spacing = 5.5;
-  const x = (i - (heroChars.length - 1) / 2) * spacing;
-  const { group } = create3DText(char, heroColors[i], 5, true);
-
-  group.position.set(x, 2, 0);
-  scene.add(group);
-
-  heroItems.push({
-    group,
-    basePos: new THREE.Vector3(x, 2, 0),
-    velocity: new THREE.Vector3(0, 0, 0),
-    offset: new THREE.Vector3(0, 0, 0),
-    phase: Math.random() * Math.PI * 2,
-    charSize: 5
-  });
-});
-
-// ===== 英文副标题 =====
-const subTitle = "ANTI\u2011GRAVITY";
-const subItems = [];
-subTitle.split('').forEach((char, i) => {
-  if (char === '\u2011') return;
-  const spacing = 1.8;
-  const x = (i - subTitle.replace(/\u2011/g, '').length / 2) * spacing;
-  const { group } = create3DText(char, '#ffffff', 2.5, false);
-
-  group.position.set(x, -2.5, -2);
-  scene.add(group);
-
-  subItems.push({
-    group,
-    basePos: new THREE.Vector3(x, -2.5, -2),
-    phase: Math.random() * Math.PI * 2,
-    floatAmp: 0.15
-  });
-});
-
-// ===== 飘浮粒子系统 =====
-const particleCount = 300;
-const pGeo = new THREE.BufferGeometry();
-const pPositions = new Float32Array(particleCount * 3);
-const pSizes = new Float32Array(particleCount);
-const pVelocities = [];
-
-const particleColors = [
-  new THREE.Color('#E8C77A'),
-  new THREE.Color('#7BE0E8'),
-  new THREE.Color('#FF6B9D'),
-  new THREE.Color('#B07BFF'),
-  new THREE.Color('#ffffff')
-];
-const pColors = new Float32Array(particleCount * 3);
-
-for (let i = 0; i < particleCount; i++) {
-  pPositions[i*3] = (Math.random() - 0.5) * 80;
-  pPositions[i*3+1] = (Math.random() - 0.5) * 60;
-  pPositions[i*3+2] = (Math.random() - 0.5) * 40;
-  pSizes[i] = Math.random() * 2 + 0.5;
-  pVelocities.push({
-    x: (Math.random() - 0.5) * 0.008,
-    y: (Math.random() - 0.5) * 0.008,
-    z: (Math.random() - 0.5) * 0.004
-  });
-  const c = particleColors[Math.floor(Math.random() * particleColors.length)];
-  pColors[i*3] = c.r;
-  pColors[i*3+1] = c.g;
-  pColors[i*3+2] = c.b;
-}
-
-pGeo.setAttribute('position', new THREE.BufferAttribute(pPositions, 3));
-pGeo.setAttribute('color', new THREE.BufferAttribute(pColors, 3));
-pGeo.setAttribute('size', new THREE.BufferAttribute(pSizes, 1));
-
-const pMat = new THREE.PointsMaterial({
-  size: 0.15,
-  transparent: true,
-  opacity: 0.8,
-  blending: THREE.AdditiveBlending,
-  depthWrite: false,
-  vertexColors: true
-});
-
-const particles = new THREE.Points(pGeo, pMat);
-scene.add(particles);
-
-// ===== 环境光 =====
-const ambientLight = new THREE.AmbientLight(0x404040, 2);
-scene.add(ambientLight);
-
-// 多个彩色点光源
-const lights = [
-  { color: 0xE8C77A, pos: [20, 10, 10] },
-  { color: 0x7BE0E8, pos: [-20, 10, 10] },
-  { color: 0xFF6B9D, pos: [0, -10, 15] }
-];
-lights.forEach(l => {
-  const light = new THREE.PointLight(l.color, 3, 50);
-  light.position.set(...l.pos);
-  scene.add(light);
-});
-
-// ===== 鼠标交互 =====
-const mouse = new THREE.Vector2();
-const mouseWorld = new THREE.Vector3();
-const raycaster = new THREE.Raycaster();
-
-// 用于将鼠标屏幕坐标转换为世界坐标
-const planeZ = new THREE.Plane(new THREE.Vector3(0, 0, 1), 0);
-
-container.addEventListener('mousemove', (e) => {
-  mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
-  mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
-
-  // 计算鼠标在 z=0 平面的世界坐标
-  raycaster.setFromCamera(mouse, camera);
-  const target = new THREE.Vector3();
-  raycaster.ray.intersectPlane(planeZ, target);
-  if (target) mouseWorld.copy(target);
-
-  // 推开 Hero 文字
-  heroItems.forEach(item => {
-    const worldPos = item.basePos.clone().add(item.offset);
-    const dx = worldPos.x - mouseWorld.x;
-    const dy = worldPos.y - mouseWorld.y;
-    const dist = Math.sqrt(dx*dx + dy*dy);
-
-    if (dist < 6 && dist > 0) {
-      const force = (6 - dist) * 0.15;
-      item.velocity.x += (dx / dist) * force;
-      item.velocity.y += (dy / dist) * force;
-    }
-  });
-});
-
-// 触摸支持
-container.addEventListener('touchmove', (e) => {
-  const t = e.touches[0];
-  mouse.x = (t.clientX / window.innerWidth) * 2 - 1;
-  mouse.y = -(t.clientY / window.innerHeight) * 2 + 1;
-
-  raycaster.setFromCamera(mouse, camera);
-  const target = new THREE.Vector3();
-  raycaster.ray.intersectPlane(planeZ, target);
-  if (target) mouseWorld.copy(target);
-
-  heroItems.forEach(item => {
-    const worldPos = item.basePos.clone().add(item.offset);
-    const dx = worldPos.x - mouseWorld.x;
-    const dy = worldPos.y - mouseWorld.y;
-    const dist = Math.sqrt(dx*dx + dy*dy);
-    if (dist < 8 && dist > 0) {
-      const force = (8 - dist) * 0.2;
-      item.velocity.x += (dx / dist) * force;
-      item.velocity.y += (dy / dist) * force;
-    }
-  });
-}, { passive: true });
-
-// ===== 动画循环 =====
-const clock = new THREE.Clock();
-const cameraTarget = new THREE.Vector3(0, 0, 35);
-
-function animate() {
-  requestAnimationFrame(animate);
-  const time = clock.getElapsedTime();
-
-  // 鼠标反应透视 - 相机轻微偏移
-  cameraTarget.x = mouse.x * 3;
-  cameraTarget.y = mouse.y * 2;
-  camera.position.lerp(cameraTarget, 0.04);
-  camera.lookAt(0, 0, 0);
-
-  // Hero 文字动画
-  heroItems.forEach((item, i) => {
-    // 弹簧物理 - 回复到基础位置
-    const springK = 0.06;
-    const damping = 0.88;
-
-    item.velocity.x += (0 - item.offset.x) * springK;
-    item.velocity.y += (0 - item.offset.y) * springK;
-    item.velocity.z += (0 - item.offset.z) * springK;
-    item.velocity.multiplyScalar(damping);
-
-    item.offset.add(item.velocity);
-
-    // 基础漂浮
-    const floatY = Math.sin(time * 0.6 + item.phase) * 0.4;
-    const floatX = Math.cos(time * 0.4 + item.phase * 0.7) * 0.25;
-    const floatRotZ = Math.sin(time * 0.25 + item.phase) * 0.03;
-    const floatRotX = Math.cos(time * 0.3 + item.phase) * 0.02;
-
-    item.group.position.set(
-      item.basePos.x + item.offset.x + floatX,
-      item.basePos.y + item.offset.y + floatY,
-      item.basePos.z + item.offset.z
-    );
-    item.group.rotation.z = floatRotZ;
-    item.group.rotation.x = floatRotX;
-  });
-
-  // 副标题动画
-  subItems.forEach((item, i) => {
-    const floatY = Math.sin(time * 0.5 + item.phase) * item.floatAmp;
-    const floatX = Math.cos(time * 0.35 + item.phase) * 0.1;
-    item.group.position.set(
-      item.basePos.x + floatX,
-      item.basePos.y + floatY,
-      item.basePos.z
-    );
-    item.group.rotation.y = Math.sin(time * 0.2 + item.phase) * 0.05;
-  });
-
-  // 粒子动画
-  const positions = particles.geometry.attributes.position.array;
-  for (let i = 0; i < particleCount; i++) {
-    positions[i*3] += pVelocities[i].x;
-    positions[i*3+1] += pVelocities[i].y;
-    positions[i*3+2] += pVelocities[i].z;
-
-    // 边界循环
-    if (Math.abs(positions[i*3]) > 45) pVelocities[i].x *= -1;
-    if (Math.abs(positions[i*3+1]) > 35) pVelocities[i].y *= -1;
-    if (Math.abs(positions[i*3+2]) > 25) pVelocities[i].z *= -1;
+    // 归位音效
+    const noteIdx = Math.floor(el.textContent.charCodeAt(0) % pentatonic.length);
+    playChime(getNote(noteIdx) * 0.5, 0.2, 0.025);
   }
-  particles.geometry.attributes.position.needsUpdate = true;
-  particles.rotation.y = time * 0.015;
 
-  // 光源动画
-  lights.forEach((l, i) => {
-    const light = scene.children.find(c => c.isPointLight && c.color.getHex() === l.color);
-    if (light) {
-      light.position.x = l.pos[0] + Math.sin(time * 0.3 + i * 2) * 5;
-      light.position.y = l.pos[1] + Math.cos(time * 0.25 + i * 2) * 3;
-    }
-  });
+  el.addEventListener('mousemove', onPointerMove);
+  el.addEventListener('mouseleave', onPointerLeave);
 
-  composer.render();
+  // 触摸
+  el.addEventListener('touchmove', (e) => {
+    const t = e.touches[0];
+    onPointerMove({ clientX: t.clientX, clientY: t.clientY });
+  }, { passive: true });
+
+  // 启动漂浮
+  setInterval(floatTick, 33);
 }
 
-animate();
-
-// ===== 窗口调整 =====
-window.addEventListener('resize', () => {
-  camera.aspect = window.innerWidth / window.innerHeight;
-  camera.updateProjectionMatrix();
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  composer.setSize(window.innerWidth, window.innerHeight);
-});
-
-// ===== 滚动入场动画 =====
-(function() {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) entry.target.classList.add('visible');
+// 为所有 ag-char 附加反重力
+function initAntiGravity() {
+  document.querySelectorAll('.ag-char').forEach((el, i) => {
+    attachAntiGravity(el, {
+      floatAmp: 6 + Math.random() * 6,
+      floatSpeed: 0.3 + Math.random() * 0.3,
+      rotAmp: 1 + Math.random() * 2,
+      pushRadius: 120,
+      pushForce: 20 + Math.random() * 10
     });
-  }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+  });
+}
 
-  document.querySelectorAll('.landmark').forEach(el => observer.observe(el));
-})();
-
-// ===== 地标数据渲染 =====
+// ===== 地标数据 =====
 const landmarksData = [
   {
     num: '01',
-    tag: 'FORBIDDEN CITY · 紫禁城',
+    tag: 'Forbidden City',
     title: '紫禁城',
-    color: '#E8C77A',
-    desc: '600 年的紫禁城，9999 间半房屋。中轴对称，黄瓦红墙，斗拱飞檐。从午门到神武门，每一块砖都刻着王朝的秩序。它是世界上现存规模最大、保存最完整的木质结构古建筑群。'
+    color: '#B45309',
+    quote: '600 years of imperial order, carved in wood and stone.',
+    desc: '600 年的紫禁城，9999 间半房屋。中轴对称，黄瓦红墙，斗拱飞檐。从午门到神武门，每一块砖都刻着王朝的秩序。它是世界上现存规模最大、保存最完整的木质结构古建筑群。',
+    vertical: '紫禁城 · 午门 · 太和殿 · 神武门',
+    image: 'https://images.unsplash.com/photo-1599571234909-29ed5d1321d6?w=800&q=80'
   },
   {
     num: '02',
-    tag: 'BIRD\'S NEST · 国家体育场',
+    tag: "Bird's Nest",
     title: '鸟巢',
-    color: '#7BE0E8',
-    desc: '赫尔佐格与德梅隆设计，2008 年奥运主场馆。钢铁编织如鸟巢，没有一根立柱是直的。4.2 万吨钢材交织成椭圆碗状，巨大的空间里藏着中国体育最辉煌的夏天。'
+    color: '#0E7490',
+    quote: '42,000 tons of steel, not a single straight column.',
+    desc: '赫尔佐格与德梅隆设计，2008 年奥运主场馆。钢铁编织如鸟巢，没有一根立柱是直的。4.2 万吨钢材交织成椭圆碗状，巨大的空间里藏着中国体育最辉煌的夏天。',
+    vertical: '鸟巢 · 水立方 · 奥林匹克公园',
+    image: 'https://images.unsplash.com/photo-1548919973-5cef591cdbc9?w=800&q=80'
   },
   {
     num: '03',
-    tag: 'NATIONAL CENTRE · 国家大剧院',
+    tag: 'National Centre',
     title: '国家大剧院',
-    color: '#ffffff',
-    desc: '保罗·安德鲁设计，天安门广场西侧的银色穹顶。钛金属壳体倒映在人工湖面上，远看像一颗浮在水上的蛋。南北长 212 米，没有任何柱子支撑。夜晚灯光亮起，它变成一颗发光的珍珠。'
+    color: '#44403C',
+    quote: 'A silver egg floating on water, reflecting the sky.',
+    desc: '保罗·安德鲁设计，天安门广场西侧的银色穹顶。钛金属壳体倒映在人工湖面上，远看像一颗浮在水上的蛋。南北长 212 米，没有任何柱子支撑。夜晚灯光亮起，它变成一颗发光的珍珠。',
+    vertical: '大剧院 · 蛋壳 · 人工湖 · 珍珠',
+    image: 'https://images.unsplash.com/photo-1474181487882-5abf3f0ba6c2?w=800&q=80'
   },
   {
     num: '04',
-    tag: 'CCTV HEADQUARTERS · 央视大楼',
+    tag: 'CCTV Headquarters',
     title: '央视大楼',
-    color: '#FF6B9D',
-    desc: '雷姆·库哈斯 OMA 设计。两座塔楼倾斜相交，顶部悬挑 75 米相连，形成巨大的"空中之环"。没有正面、没有背面，从每个角度看都是不同的建筑。北京 CBD 最叛逆的天际线。'
+    color: '#BE185D',
+    quote: 'Two towers leaning into each other, 75 meters in the air.',
+    desc: '雷姆·库哈斯 OMA 设计。两座塔楼倾斜相交，顶部悬挑 75 米相连，形成巨大的"空中之环"。没有正面、没有背面，从每个角度看都是不同的建筑。北京 CBD 最叛逆的天际线。',
+    vertical: '大裤衩 · 悬挑 · 空中之环 · CBD',
+    image: 'https://images.unsplash.com/photo-1508804052814-cd3ba865a116?w=800&q=80'
   },
   {
     num: '05',
-    tag: 'CHINA ZUN · 中国尊',
+    tag: 'China Zun',
     title: '中国尊',
-    color: '#E8C77A',
-    desc: '528 米，北京最高建筑。外形取自古代礼器"尊"的意象，下宽上窄中收，如酒杯立于大地。中信大厦的 108 层里藏着金融街的野心。'
+    color: '#B45309',
+    quote: '528 meters, shaped like an ancient ritual vessel.',
+    desc: '528 米，北京最高建筑。外形取自古代礼器"尊"的意象，下宽上窄中收，如酒杯立于大地。中信大厦的 108 层里藏着金融街的野心。在雾霾天，它的塔尖消失在灰雾中，像一柄插入天空的利剑。',
+    vertical: '中国尊 · 中信大厦 · 金融街 · 利剑',
+    image: 'https://images.unsplash.com/photo-1533050487297-09b450131914?w=800&q=80'
   },
   {
     num: '06',
-    tag: 'GREAT WALL · 长城',
+    tag: 'Great Wall',
     title: '长城',
-    color: '#B07BFF',
-    desc: '东起山海关，西至嘉峪关，蜿蜒 21196 公里。从战国到明朝，修了 2000 年。它不是一堵墙，是一套由城墙、敌楼、关隘、烽火台组成的军事信息系统。'
+    color: '#78716C',
+    quote: '21,196 kilometers, built over 2,000 years.',
+    desc: '东起山海关，西至嘉峪关，蜿蜒 21196 公里。从战国到明朝，修了 2000 年。它不是一堵墙，是一套由城墙、敌楼、关隘、烽火台组成的军事信息系统。从太空看不见它，但它一直在那里。',
+    vertical: '长城 · 山海关 · 嘉峪关 · 烽火台',
+    image: 'https://images.unsplash.com/photo-1508804185872-d7badad00f7d?w=800&q=80'
   },
   {
     num: '07',
-    tag: 'SUMMER PALACE · 颐和园',
+    tag: 'Summer Palace',
     title: '颐和园',
-    color: '#7BE0E8',
-    desc: '万寿山、昆明湖、长廊 728 米。乾隆为母亲祝寿而建，慈禧重建为行宫。佛香阁 41 米，立在万寿山上俯瞰昆明湖。十七孔桥的桥洞在冬至日落时被金光穿过。'
+    color: '#0E7490',
+    quote: 'A 728-meter corridor, where nature becomes the stage.',
+    desc: '万寿山、昆明湖、长廊 728 米。乾隆为母亲祝寿而建，慈禧重建为行宫。佛香阁 41 米，立在万寿山上俯瞰昆明湖。十七孔桥的桥洞在冬至日落时被金光穿过。皇家园林的极致，是借自然做舞台。',
+    vertical: '颐和园 · 万寿山 · 昆明湖 · 佛香阁',
+    image: 'https://images.unsplash.com/photo-1584467541268-b040f83be3fd?w=800&q=80'
   }
 ];
 
-(function() {
-  const stage = document.getElementById('landmarks');
+// 渲染地标
+function renderLandmarks() {
+  const container = document.getElementById('landmarks');
+
   landmarksData.forEach((lm, idx) => {
-    const section = document.createElement('div');
+    const section = document.createElement('section');
     section.className = 'landmark';
+    section.dataset.idx = idx;
 
     section.innerHTML = `
-      <div class="landmark-head">
-        <span class="landmark-num">${lm.num}</span>
-        <span class="landmark-tag">${lm.tag}</span>
+      <div class="landmark-image-side">
+        <div class="landmark-image-frame">
+          <img src="${lm.image}" alt="${lm.title}" loading="lazy">
+          <div class="landmark-vertical-text">${lm.vertical}</div>
+        </div>
       </div>
-      <h2 class="landmark-title" style="color: ${lm.color}; text-shadow: 0 0 40px ${lm.color}50, 0 0 80px ${lm.color}20;">
-        ${lm.title.split('').map(ch => `<span class="ag-char">${ch}</span>`).join('')}
-      </h2>
-      <p class="landmark-desc">${lm.desc}</p>
-      ${idx < landmarksData.length - 1 ? '<div class="ag-divider"></div>' : ''}
+      <div class="landmark-text-side">
+        <div class="landmark-num">${lm.num}</div>
+        <div class="landmark-tag">${lm.tag}</div>
+        <h2 class="landmark-title" style="color: ${lm.color};">
+          ${lm.title.split('').map(ch => `<span class="ag-char">${ch}</span>`).join('')}
+        </h2>
+        <div class="landmark-accent-line"></div>
+        <p class="landmark-desc">${lm.desc}</p>
+        <p class="landmark-quote">${lm.quote}</p>
+        <div class="landmark-bg-number">${lm.num}</div>
+      </div>
     `;
-    stage.appendChild(section);
+
+    container.appendChild(section);
+
+    // 添加section之间的分隔
+    if (idx < landmarksData.length - 1) {
+      const divider = document.createElement('div');
+      divider.className = 'section-divider';
+      container.appendChild(divider);
+    }
   });
 
-  // 重新注册 observer
+  // 重新初始化反重力（新渲染的文字）
+  setTimeout(() => {
+    document.querySelectorAll('.landmark .ag-char').forEach((el, i) => {
+      attachAntiGravity(el, {
+        floatAmp: 3 + Math.random() * 4,
+        floatSpeed: 0.2 + Math.random() * 0.3,
+        rotAmp: 0.5 + Math.random() * 1.5,
+        pushRadius: 100,
+        pushForce: 15
+      });
+    });
+  }, 100);
+}
+
+// ===== 滚动入场动画 =====
+function initScrollObserver() {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) entry.target.classList.add('visible');
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
     });
-  }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+  }, { threshold: 0.12, rootMargin: '0px 0px -80px 0px' });
+
   document.querySelectorAll('.landmark').forEach(el => observer.observe(el));
-})();
+}
 
 // ===== 导航栏滚动效果 =====
-(function() {
+function initNavScroll() {
   const nav = document.querySelector('.nav');
   window.addEventListener('scroll', () => {
     const y = window.scrollY;
-    if (y > 80) {
-      nav.style.background = 'rgba(5,5,10,.85)';
-      nav.style.borderBottom = '1px solid rgba(255,255,255,.1)';
+    if (y > 60) {
+      nav.style.background = 'rgba(245,240,232,.95)';
+      nav.style.boxShadow = '0 1px 20px rgba(28,25,23,.06)';
     } else {
-      nav.style.background = 'rgba(5,5,10,.5)';
-      nav.style.borderBottom = '1px solid rgba(255,255,255,.06)';
+      nav.style.background = 'rgba(245,240,232,.85)';
+      nav.style.boxShadow = 'none';
     }
   });
-})();
+}
+
+// ===== 初始化 =====
+document.addEventListener('DOMContentLoaded', () => {
+  initAntiGravity();
+  renderLandmarks();
+  initScrollObserver();
+  initNavScroll();
+});
 </script>
 
 </body>
