@@ -4811,7 +4811,7 @@
     </div>
   </footer>
 
-  <script src="data.js?v=20260714-fix4"></script>
+  <script src="data.js?v=20260714-fix5"></script>
   <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
   <script>
     (function () {
@@ -4904,11 +4904,15 @@
         }
       }
 
-      /* Hero — Cinematic Full-Bleed Video */
+      /* Hero - Cinematic Full-Bleed Video */
       const h = D.hero;
-      const heroVideoSrc = (h.motion && h.motion.src) || 'assets/hero-rhino-scene.mp4';
+      const _isMobile = window.matchMedia('(max-width: 860px)').matches;
+      const heroVideoSrc = _isMobile
+        ? ((h.motion && h.motion.mobile) || 'assets/hero-atmosphere.mp4')
+        : ((h.motion && h.motion.src) || 'assets/hero-rhino-scene.mp4');
+      const _preload = _isMobile ? 'metadata' : 'auto';
       document.getElementById('hero-section').innerHTML = `
-        <video class="hero-cine-video" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+        <video class="hero-cine-video" autoplay muted loop playsinline preload="${esc(_preload)}" aria-hidden="true">
           <source src="${esc(versionAsset(heroVideoSrc))}" type="${esc(videoType(heroVideoSrc))}">
         </video>
         <div class="hero-cine-overlay" aria-hidden="true"></div>

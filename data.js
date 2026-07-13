@@ -115,13 +115,6 @@ window.SITE_DATA = {
         desc: "每个字符在零重力中漂浮上升--用反重力排版讲述故宫、鸟巢、国贸等北京地标的建筑故事。鼠标悬停时字母被推开，松手后弹回原位。",
         linkLabel: "进入实验",
         href: "anti-gravity-text.html"
-      },
-      {
-        tag: "WORKFLOW",
-        title: "AI Workflow Lab",
-        desc: "把日常创作、资料整理、网页生成和自动化流程拆成可复用工作流。",
-        linkLabel: "查看站点",
-        href: "https://zjeep-arch.github.io/rhino-count-site/"
       }
     ],
     featured: [
