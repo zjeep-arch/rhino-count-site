@@ -3,68 +3,103 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#fafafa">
+  <meta name="theme-color" content="#fbfbfd">
   <title>犀牛白板 · 录屏创作器</title>
   <meta name="description" content="白板、幻灯片、提词器、摄像头和录屏一体化创作工具。">
-  <link rel="stylesheet" href="whiteboard-studio.css?v=20260713-16">
+  <link rel="stylesheet" href="whiteboard-studio.css?v=20260714">
 </head>
 <body>
 <main class="studio" id="studio">
-  <button class="corner-btn" id="homeBtn" title="返回创作矩阵" aria-label="返回创作矩阵">☰</button>
+  <button class="corner-btn" id="homeBtn" title="返回创作矩阵" aria-label="返回创作矩阵">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+  </button>
 
   <nav class="toolbar floating" id="toolbar" aria-label="白板工具栏">
-    <button class="tool" id="lockBtn" title="绘制后保持工具（Q）" aria-label="锁定工具">♙</button><i></i>
-    <button class="tool" data-tool="hand" title="抓手（H）" aria-label="抓手">♨</button>
-    <button class="tool active" data-tool="select" title="选择（1）" aria-label="选择">➤<small>1</small></button>
-    <button class="tool" data-tool="rect" title="矩形（2）" aria-label="矩形">□<small>2</small></button>
-    <button class="tool" data-tool="diamond" title="菱形（3）" aria-label="菱形">◇<small>3</small></button>
-    <button class="tool" data-tool="circle" title="椭圆（4）" aria-label="椭圆">○<small>4</small></button>
-    <button class="tool" data-tool="arrow" title="箭头（5）" aria-label="箭头">→<small>5</small></button>
-    <button class="tool" data-tool="line" title="直线（6）" aria-label="直线">−<small>6</small></button>
-    <button class="tool" data-tool="pen" title="自由书写（7）" aria-label="自由书写">⌁<small>7</small></button>
-    <button class="tool" data-tool="text" title="文字（8）" aria-label="文字">A<small>8</small></button>
-    <button class="tool" id="imageTool" title="插入图片（9）" aria-label="插入图片">▧<small>9</small></button>
-    <button class="tool" data-tool="eraser" title="橡皮（0）" aria-label="橡皮">◇<small>0</small></button><i></i>
-    <button class="tool" id="moreBtn" title="更多工具" aria-label="更多工具">♙</button>
+    <button class="tool" id="lockBtn" title="绘制后保持工具（Q）" aria-label="锁定工具">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+    </button><i></i>
+    <button class="tool" data-tool="hand" title="抓手（H）" aria-label="抓手">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 11V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v0"/><path d="M14 10V4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg>
+    </button>
+    <button class="tool active" data-tool="select" title="选择（1）" aria-label="选择">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/></svg><small>1</small>
+    </button>
+    <button class="tool" data-tool="rect" title="矩形（2）" aria-label="矩形">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/></svg><small>2</small>
+    </button>
+    <button class="tool" data-tool="diamond" title="菱形（3）" aria-label="菱形">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L22 12L12 22L2 12L12 2z"/></svg><small>3</small>
+    </button>
+    <button class="tool" data-tool="circle" title="椭圆（4）" aria-label="椭圆">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="12" rx="9" ry="9"/></svg><small>4</small>
+    </button>
+    <button class="tool" data-tool="arrow" title="箭头（5）" aria-label="箭头">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg><small>5</small>
+    </button>
+    <button class="tool" data-tool="line" title="直线（6）" aria-label="直线">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="19" x2="19" y2="5"/></svg><small>6</small>
+    </button>
+    <button class="tool" data-tool="pen" title="自由书写（7）" aria-label="自由书写">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg><small>7</small>
+    </button>
+    <button class="tool" data-tool="text" title="文字（8）" aria-label="文字">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg><small>8</small>
+    </button>
+    <button class="tool" id="imageTool" title="插入图片（9）" aria-label="插入图片">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><small>9</small>
+    </button>
+    <button class="tool" data-tool="eraser" title="橡皮（0）" aria-label="橡皮">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 20H7L3 16C2.5 15.5 2.5 14.5 3 14L13 4L20 11L11 20"/><line x1="18" y1="13" x2="9" y2="22"/></svg><small>0</small>
+    </button><i></i>
+    <button class="tool" id="moreBtn" title="更多工具" aria-label="更多工具">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+    </button>
   </nav>
 
   <div class="record-controls floating">
-    <button class="control-icon" id="settingsBtn" title="录制设置" aria-label="录制设置">⚙</button>
-    <button class="control-icon" id="scriptBtn" title="提词器" aria-label="提词器">▤</button>
-    <button class="record-btn" id="recordBtn"><b></b>录制</button>
+    <button class="control-icon" id="settingsBtn" title="录制设置" aria-label="录制设置">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+    </button>
+    <button class="control-icon" id="scriptBtn" title="提词器" aria-label="提词器">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg>
+    </button>
+    <button class="control-icon" id="exportBtn" title="导出" aria-label="导出">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    </button>
+    <button class="record-btn" id="recordBtn"><span class="rec-dot"></span>录制</button>
   </div>
 
   <section class="workspace" id="workspace" aria-label="幻灯片工作区"><div class="slide-row" id="slideRow"></div></section>
   <video class="camera" id="camera" autoplay muted playsinline></video>
 
-  <aside class="slides floating" id="slidesPanel"><header>▢ 幻灯片</header><div id="slideThumbs"></div><hr><button class="add-slide" id="addSlide" title="添加幻灯片">＋</button></aside>
+  <aside class="slides floating" id="slidesPanel"><header>幻灯片</header><div id="slideThumbs"></div><hr><button class="add-slide" id="addSlide" title="添加幻灯片">＋</button></aside>
   <div class="zoom floating"><button id="zoomOut">−</button><span id="zoomValue">20%</span><button id="zoomIn">＋</button></div>
-  <div class="history floating"><button id="undo" title="撤销">↶</button><button id="redo" title="重做">↷</button></div>
+  <div class="history floating"><button id="undo" title="撤销 (⌘Z)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg></button><button id="redo" title="重做 (⌘⇧Z)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg></button></div>
   <button class="help-btn" id="helpBtn" title="帮助">?</button>
 
   <div class="popover floating" id="moreMenu">
-    <button data-insert="image"><span>▧</span><b>插入图片</b><small>PNG、JPG、WebP</small></button>
-    <button data-insert="video"><span>▶</span><b>插入视频</b><small>本地 MP4 / WebM</small></button>
-    <button data-insert="web"><span>◎</span><b>嵌入网页</b><small>输入公开网址</small></button>
-    <button data-insert="template"><span>✦</span><b>视觉模板</b><small>标题、课程、要点</small></button>
-    <button data-insert="sticky"><span>▰</span><b>灵感便签</b><small>插入可拖动便签卡</small></button>
-    <button data-insert="grid"><span>⌗</span><b>网格画布</b><small>点阵、方格、横线纸</small></button>
-    <button data-insert="focus"><span>◉</span><b>演示聚光灯</b><small>录制时突出鼠标区域</small></button>
+    <button data-insert="image"><span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></span><b>插入图片</b><small>PNG、JPG、WebP</small></button>
+    <button data-insert="video"><span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></span><b>插入视频</b><small>本地 MP4 / WebM</small></button>
+    <button data-insert="web"><span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span><b>嵌入网页</b><small>输入公开网址</small></button>
+    <button data-insert="template"><span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></span><b>视觉模板</b><small>标题、课程、要点</small></button>
+    <button data-insert="sticky"><span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span><b>灵感便签</b><small>插入可拖动便签卡</small></button>
+    <button data-insert="grid"><span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/></svg></span><b>网格画布</b><small>点阵、方格、横线纸</small></button>
+    <button data-insert="focus"><span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg></span><b>演示聚光灯</b><small>录制时突出鼠标区域</small></button>
   </div>
 
   <aside class="style-panel floating" id="stylePanel">
     <header><b id="styleTitle">元素样式</b><button id="closeStyle">×</button></header>
-    <section><label>描边</label><div class="choice-row colors"><button data-stroke="#202124" style="--c:#202124"></button><button data-stroke="#e03131" style="--c:#e03131"></button><button data-stroke="#2f9e44" style="--c:#2f9e44"></button><button data-stroke="#1971c2" style="--c:#1971c2"></button><button data-stroke="#f08c00" style="--c:#f08c00"></button><input id="customStroke" type="color" value="#202124"></div></section>
+    <section><label>描边</label><div class="choice-row colors"><button data-stroke="#1d1d1f" style="--c:#1d1d1f"></button><button data-stroke="#e03131" style="--c:#e03131"></button><button data-stroke="#2f9e44" style="--c:#2f9e44"></button><button data-stroke="#1971c2" style="--c:#1971c2"></button><button data-stroke="#f08c00" style="--c:#f08c00"></button><input id="customStroke" type="color" value="#1d1d1f"></div></section>
     <section id="fillSection"><label>背景</label><div class="choice-row colors"><button data-fill="transparent" class="checker"></button><button data-fill="#ffc9c9" style="--c:#ffc9c9"></button><button data-fill="#b2f2bb" style="--c:#b2f2bb"></button><button data-fill="#a5d8ff" style="--c:#a5d8ff"></button><button data-fill="#ffec99" style="--c:#ffec99"></button></div></section>
     <section><label>描边宽度</label><div class="segmented"><button data-width="2">细</button><button data-width="4" class="active">中</button><button data-width="7">粗</button></div></section>
-    <section><label>边框样式</label><div class="segmented"><button data-dash="solid" class="active">——</button><button data-dash="dashed">- - -</button><button data-dash="dotted">····</button></div></section>
+    <section><label>边框样式</label><div class="segmented"><button data-dash="solid" class="active">--</button><button data-dash="dashed">- - -</button><button data-dash="dotted">····</button></div></section>
     <section><label>线条风格</label><div class="segmented"><button data-rough="0">精准</button><button data-rough="1" class="active">自然</button><button data-rough="2">手绘</button></div></section>
     <section id="textOptions"><label>字体</label><div class="segmented"><button data-font="hand" class="active">手写</button><button data-font="sans">现代</button><button data-font="serif">衬线</button></div><label>字体大小</label><div class="segmented"><button data-font-size="20">S</button><button data-font-size="28" class="active">M</button><button data-font-size="38">L</button><button data-font-size="52">XL</button></div><label>文本对齐</label><div class="segmented"><button data-align="left" class="active">左</button><button data-align="center">中</button><button data-align="right">右</button></div></section>
     <section><label>透明度 <output id="opacityOut">100</output></label><input id="opacity" type="range" min="15" max="100" value="100"></section>
     <section><label>图层</label><div class="segmented"><button data-layer="back">置底</button><button data-layer="down">下移</button><button data-layer="up">上移</button><button data-layer="front">置顶</button></div></section>
   </aside>
 
-  <aside class="panel settings-panel" id="settingsPanel"><button class="close" data-close="settingsPanel">×</button><h2>录制设置</h2><div class="settings-layout"><div class="settings-preview"><label>实时预览</label><div id="recordPreview"><div class="preview-sheet"><i></i><i></i><i></i><em></em></div></div></div><div class="settings-fields"><h3>画面比例</h3><div class="ratio-grid"><button class="ratio active" data-ratio="16/9">16:9<small>YouTube</small></button><button class="ratio" data-ratio="4/3">4:3<small>经典</small></button><button class="ratio" data-ratio="3/4">3:4<small>小红书</small></button><button class="ratio" data-ratio="9/16">9:16<small>抖音</small></button><button class="ratio" data-ratio="1/1">1:1<small>正方形</small></button><button class="ratio" data-ratio="custom">Custom<small>自定义</small></button></div><h3>氛围壁纸</h3><div class="wallpaper-filters"><button class="active">全部</button><button>柔和</button><button>鲜艳</button><button>深色</button><button>自然</button></div><button class="random-wallpaper" id="randomWallpaper">✦ 随机选择壁纸</button><div class="wallpapers"><button data-wallpaper="linear-gradient(135deg,#ffd6e7,#d7ffd2,#d8d7ff)" style="--w:linear-gradient(135deg,#ffd6e7,#d7ffd2,#d8d7ff)"></button><button data-wallpaper="linear-gradient(135deg,#f2ddff,#d9f6ee,#fff3c8)" style="--w:linear-gradient(135deg,#f2ddff,#d9f6ee,#fff3c8)"></button><button data-wallpaper="radial-gradient(circle at 80% 10%,#57f2c6,#172244 58%,#090b15)" style="--w:radial-gradient(circle at 80% 10%,#57f2c6,#172244 58%,#090b15)"></button><button data-wallpaper="linear-gradient(135deg,#ff2e88,#ffb04a,#7357ff)" style="--w:linear-gradient(135deg,#ff2e88,#ffb04a,#7357ff)"></button><button data-wallpaper="linear-gradient(135deg,#163d2a,#8cbf8a,#e5d5ad)" style="--w:linear-gradient(135deg,#163d2a,#8cbf8a,#e5d5ad)"></button></div><div class="setting-range"><label>圆角半径 <output id="radiusOut">10px</output></label><input id="canvasRadius" type="range" min="0" max="36" value="10"></div><h3>摄像头</h3><div class="toggle-row"><button class="toggle active" id="cameraToggle"><i></i></button><span>录制时显示摄像头画面</span></div><div class="setting-range"><label>大小 <output id="cameraSizeOut">180px</output></label><input id="cameraSize" type="range" min="90" max="300" value="180"></div><div class="camera-shape"><button data-camera-shape="50%" class="active">○ 圆形</button><button data-camera-shape="18px">□ 方形</button></div><button class="dark-btn" id="cameraBtn">开启摄像头</button><div class="setting-range"><label>画布边距 <output id="paddingOut">80px</output></label><input id="canvasPadding" type="range" min="20" max="160" value="80"></div><h3>演示光标</h3><div class="toggle-row"><button class="toggle" id="cursorToggle"><i></i></button><span>录制时显示光标高亮</span></div><div class="cursor-colors"><button data-cursor="#ff4d4f" style="--c:#ff4d4f"></button><button data-cursor="#ff8c1a" style="--c:#ff8c1a"></button><button data-cursor="#f5bd00" style="--c:#f5bd00"></button><button data-cursor="#25c768" style="--c:#25c768"></button><button data-cursor="#4385f5" style="--c:#4385f5"></button><button data-cursor="#a54df4" style="--c:#a54df4"></button></div></div></div></aside>
+  <aside class="panel settings-panel" id="settingsPanel"><button class="close" data-close="settingsPanel">×</button><h2>录制设置</h2><div class="settings-layout"><div class="settings-preview"><label>实时预览</label><div id="recordPreview"><div class="preview-sheet"><i></i><i></i><i></i><em></em></div></div></div><div class="settings-fields"><h3>画面比例</h3><div class="ratio-grid"><button class="ratio active" data-ratio="16/9">16:9<small>YouTube</small></button><button class="ratio" data-ratio="4/3">4:3<small>经典</small></button><button class="ratio" data-ratio="3/4">3:4<small>小红书</small></button><button class="ratio" data-ratio="9/16">9:16<small>抖音</small></button><button class="ratio" data-ratio="1/1">1:1<small>正方形</small></button><button class="ratio" data-ratio="custom">Custom<small>自定义</small></button></div><h3>氛围壁纸</h3><div class="wallpaper-filters"><button class="active">全部</button><button>柔和</button><button>鲜艳</button><button>深色</button><button>自然</button></div><button class="random-wallpaper" id="randomWallpaper">✦ 随机选择壁纸</button><div class="wallpapers"><button data-wallpaper="linear-gradient(135deg,#ffd6e7,#d7ffd2,#d8d7ff)" style="--w:linear-gradient(135deg,#ffd6e7,#d7ffd2,#d8d7ff)"></button><button data-wallpaper="linear-gradient(135deg,#f2ddff,#d9f6ee,#fff3c8)" style="--w:linear-gradient(135deg,#f2ddff,#d9f6ee,#fff3c8)"></button><button data-wallpaper="radial-gradient(circle at 80% 10%,#57f2c6,#172244 58%,#090b15)" style="--w:radial-gradient(circle at 80% 10%,#57f2c6,#172244 58%,#090b15)"></button><button data-wallpaper="linear-gradient(135deg,#ff2e88,#ffb04a,#7357ff)" style="--w:linear-gradient(135deg,#ff2e88,#ffb04a,#7357ff)"></button><button data-wallpaper="linear-gradient(135deg,#163d2a,#8cbf8a,#e5d5ad)" style="--w:linear-gradient(135deg,#163d2a,#8cbf8a,#e5d5ad)"></button></div><div class="setting-range"><label>圆角半径 <output id="radiusOut">10px</output></label><input id="canvasRadius" type="range" min="0" max="36" value="10"></div><h3>摄像头</h3><div class="toggle-row"><button class="toggle active" id="cameraToggle"></button><span>显示摄像头画面</span></div><div class="setting-range"><label>摄像头大小 <output id="cameraSizeOut">180px</output></label><input id="cameraSize" type="range" min="80" max="320" value="180"></div><div class="choice-row"><button class="active" data-camera-shape="50%">圆形</button><button data-camera-shape="12px">圆角</button><button data-camera-shape="0">方形</button></div><button class="dark-btn" id="cameraBtn">开启摄像头</button><h3>录制模式</h3><div class="record-modes"><button data-record-mode="studio" class="active"><b>白板 + 摄像头</b><small>推荐选择当前标签页</small></button><button data-record-mode="screen"><b>屏幕 + 摄像头</b><small>共享屏幕或窗口</small></button><button data-record-mode="camera"><b>仅摄像头</b><small>直接录制相机与麦克风</small></button></div><div class="device-status" id="deviceStatus"><i></i><span>点击"开启摄像头"进行设备自检</span></div><div class="setting-range"><label>画面边距 <output id="paddingOut">80px</output></label><input id="canvasPadding" type="range" min="0" max="200" value="80"></div><h3>鼠标光标</h3><div class="toggle-row"><button class="toggle" id="cursorToggle"></button><span>录制时显示聚光灯</span></div><div class="choice-row"><button class="active" data-cursor="#6c5ce8">紫</button><button data-cursor="#ff3b30">红</button><button data-cursor="#34c759">绿</button><button data-cursor="#007aff">蓝</button></div></div></div></aside>
 
   <aside class="panel tele-panel" id="scriptPanel"><button class="close" data-close="scriptPanel">×</button><h2>提词器</h2><p>讲稿仅保存在当前浏览器中。播放后会在屏幕底部平滑滚动。</p><textarea id="script" placeholder="在这里输入讲稿……"></textarea><div class="range-row"><label>字号 <output id="fontOut">24</output></label><input id="fontSize" type="range" min="16" max="42" value="24"></div><div class="range-row"><label>速度 <output id="speedOut">3</output></label><input id="teleSpeed" type="range" min="1" max="8" value="3"></div><div class="panel-actions"><button class="dark-btn" id="startTele">▶ 开始提词</button><button class="soft-btn" id="hideTele">隐藏</button></div></aside>
 
@@ -74,8 +109,9 @@
   <div class="cursor-spot" id="cursorSpot"></div>
   <input type="file" id="imageInput" accept="image/*" hidden><input type="file" id="videoInput" accept="video/*" hidden>
 
-  <div class="welcome" id="welcome"><div class="welcome-card"><div class="welcome-logo">▤<em>●</em></div><h1>欢迎使用犀牛白板</h1><p>录制精美的白板视频，你的面部画面会出现在角落。非常适合教程、讲解和异步沟通。</p><ul><li>🎨 在无限工作区自由绘画</li><li>📹 插入图片、视频与网页</li><li>📜 内置可滚动提词器</li><li>⏺ 准备好就点击录制</li></ul><button id="welcomeGo">了解了，开始吧</button><small>按 Esc 或点击背景关闭</small></div></div>
+  <div class="welcome hide" id="welcome"><div class="welcome-card"><div class="welcome-logo"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/></svg></div><h1>犀牛白板</h1><p>录制精美的白板视频，你的面部画面会出现在角落。非常适合教程、讲解和异步沟通。</p><ul><li>在无限工作区自由绘画</li><li>插入图片、视频与网页</li><li>内置可滚动提词器</li><li>准备好就点击录制</li></ul><button id="welcomeGo">开始创作</button><small>按 Esc 或点击背景关闭</small></div></div>
 </main>
-<script src="whiteboard-studio.js?v=20260713-16"></script>
+<script src="https://cdn.jsdelivr.net/npm/roughjs@4.6.6/bundled/rough.js"></script>
+<script src="whiteboard-studio.js?v=20260714"></script>
 </body>
 </html>
