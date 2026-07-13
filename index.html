@@ -4367,6 +4367,17 @@
       opacity: 0 !important;
     }
     /* Full-bleed video background */
+    .hero-cine-fallback {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background:
+        radial-gradient(ellipse at 52% 38%, rgba(47, 247, 232, 0.15), transparent 42%),
+        radial-gradient(ellipse at 70% 62%, rgba(83, 103, 255, 0.12), transparent 40%),
+        linear-gradient(180deg, #05080B 0%, #0A1218 48%, #040608 100%);
+      opacity: 0;
+      transition: opacity 0.6s ease;
+    }
     .hero-cine-video {
       position: absolute;
       inset: 0;
@@ -4374,7 +4385,7 @@
       height: 100%;
       object-fit: cover;
       object-position: center 35%;
-      z-index: 0;
+      z-index: 1;
       filter: saturate(1.06) contrast(1.08) brightness(0.82);
     }
     [data-theme="light"] .hero-cine-video {
@@ -4385,7 +4396,7 @@
     .hero-cine-overlay {
       position: absolute;
       inset: 0;
-      z-index: 1;
+      z-index: 2;
       pointer-events: none;
       background:
         linear-gradient(180deg,
@@ -4416,7 +4427,7 @@
     .hero-cine-grain {
       position: absolute;
       inset: 0;
-      z-index: 2;
+      z-index: 3;
       pointer-events: none;
       opacity: 0.035;
       background-image:
@@ -4427,7 +4438,7 @@
     /* Content layer — left-aligned, vertically centered lower third */
     .hero-cine-content {
       position: relative;
-      z-index: 3;
+      z-index: 4;
       width: 100%;
       max-width: var(--maxw);
       margin: 0 auto;
@@ -4811,15 +4822,22 @@
     </div>
   </footer>
 
-  <script src="data.js?v=20260713-ag"></script>
+  <script src="data.js?v=20260713-fix2"></script>
   <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
   <script>
+    /* Fallback: if render hasn't completed in 4s, force-show the page */
+    setTimeout(function() {
+      var main = document.querySelector('main');
+      if (main && !main.classList.contains('ready')) {
+        main.classList.add('ready');
+      }
+    }, 4000);
     (function () {
       'use strict';
       const esc = s => String(s).replace(/[&<>"']/g, c => (
         { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]
       ));
-      const ASSET_VERSION = '20260704-rhino-scene-v4';
+      const ASSET_VERSION = '20260713-fix2';
       const versionAsset = src => {
         const value = String(src || '');
         if (!value || /^(?:https?:|data:)/.test(value) || /[?&]v=/.test(value)) return value;
@@ -4904,12 +4922,22 @@
         }
       }
 
-      /* Hero — Cinematic Full-Bleed Video */
+      /* Hero - Cinematic Full-Bleed Video */
       const h = D.hero;
+      const isMobile = window.matchMedia('(max-width: 860px)').matches;
+      const isSlowConn = (navigator.connection && navigator.connection.effectiveType)
+        ? /slow-2g|2g|3g/.test(navigator.connection.effectiveType)
+        : false;
       const heroVideoSrc = (h.motion && h.motion.src) || 'assets/hero-rhino-scene.mp4';
+      /* Mobile/slow-connection: use lighter atmosphere video (1.1MB vs 9.9MB) */
+      const mobileVideoSrc = (h.motion && h.motion.mobile) || 'assets/hero-atmosphere.mp4';
+      const finalVideoSrc = (isMobile || isSlowConn) ? mobileVideoSrc : heroVideoSrc;
+      const videoPreload = (isMobile || isSlowConn) ? 'metadata' : 'auto';
       document.getElementById('hero-section').innerHTML = `
-        <video class="hero-cine-video" autoplay muted loop playsinline preload="auto" aria-hidden="true">
-          <source src="${esc(versionAsset(heroVideoSrc))}" type="${esc(videoType(heroVideoSrc))}">
+        <div class="hero-cine-fallback" aria-hidden="true"></div>
+        <video class="hero-cine-video" autoplay muted loop playsinline preload="${esc(videoPreload)}" aria-hidden="true"
+               onerror="this.style.display='none';document.querySelector('.hero-cine-fallback').style.opacity='1'">
+          <source src="${esc(versionAsset(finalVideoSrc))}" type="${esc(videoType(finalVideoSrc))}">
         </video>
         <div class="hero-cine-overlay" aria-hidden="true"></div>
         <div class="hero-cine-grain" aria-hidden="true"></div>

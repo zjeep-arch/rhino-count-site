@@ -58,6 +58,7 @@ window.SITE_DATA = {
     ctaSecondary: { label: "阅读最新笔记",     href: "#notes" },
     motion: {
       src: "assets/hero-rhino-scene.mp4",
+      mobile: "assets/hero-atmosphere.mp4",
       backdrop: "assets/hero-rhino-scene.mp4"
     },
     keywords: [
