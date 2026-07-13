@@ -4811,9 +4811,11 @@
     </div>
   </footer>
 
-  <script src="data.js?v=20260714-fix5"></script>
+  <script src="data.js?v=20260714-fix6"></script>
   <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
   <script>
+    /* Fallback: force-show page after 5s if JS hasn't completed */
+    setTimeout(function(){var m=document.querySelector('main');if(m&&!m.classList.contains('ready'))m.classList.add('ready');},5000);
     (function () {
       'use strict';
       const esc = s => String(s).replace(/[&<>"']/g, c => (
