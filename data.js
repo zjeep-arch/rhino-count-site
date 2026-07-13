@@ -125,6 +125,18 @@ window.SITE_DATA = {
     ],
     featured: [
       {
+      {
+        type: "Essay",
+        title: "Codex的负责人说，我们自己的App是用凑合的模型造的",
+        desc: "OpenAI Codex负责人Tibo公开自曝前端能力okayish，83.9万人围观。诚实比吹牛更有杀伤力。",
+        href: "notes/2026-07-13-tibo-codex-okayish.html"
+      },
+      {
+        type: "Essay",
+        title: "Codex是工厂，Claude Code是工作室，你该选哪个",
+        desc: "2026年AI编程三巨头实测对比。核心差异不是功能多少，是协作哲学。",
+        href: "notes/2026-07-13-codex-factory-claude-studio.html"
+      },
         type: "Essay",
         title: "OpenAI把门一关，23万亿Token跑中国去了",
         desc: "OpenRouter最新数据：中国AI模型周调用量23.45万亿Token，首超美国5.5倍。全球前五占四席。这不是中国赢了，是美国把门关太紧了。",
@@ -203,6 +215,20 @@ window.SITE_DATA = {
     blurb: "每一篇笔记都是一次小型田野调查：关于模型、关于人、关于我们如何被这个时代重新塑形。",
     notes: [
       {
+      {
+        cat: "产品观察", num: "N° 21",
+        title: "Codex的负责人说，我们自己的App是用凑合的模型造的",
+        excerpt: "OpenAI Codex负责人Tibo公开自曝：我们是用前端能力okayish的模型硬攒出Codex桌面App的。83.9万人围观了这句大实话。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-07-13-tibo-codex-okayish.html"
+      },
+      {
+        cat: "产品观察", num: "N° 22",
+        title: "Codex是工厂，Claude Code是工作室，你该选哪个",
+        excerpt: "2026年AI编程三巨头实测：终端党选Claude Code，要速度选Codex，爱IDE选Cursor。核心差异不是功能多少，是协作哲学。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-07-13-codex-factory-claude-studio.html"
+      },
         cat: "行业观察", num: "N° 20",
         title: "OpenAI把门一关，23万亿Token跑中国去了",
         excerpt: "OpenRouter最新数据：中国AI模型周调用量23.45万亿Token，首超美国5.5倍。全球前五占四席。这不是中国赢了，是美国把门关太紧了。",
