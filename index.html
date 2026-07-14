@@ -4673,37 +4673,8 @@
         animation: none !important;
       }
     }
-    .hero-cine-video.mobile-delayed-video {
-      opacity: 0;
-      transition: opacity 0.7s ease;
-    }
-    .hero-cine-video.mobile-delayed-video.is-ready { opacity: 1; }
-    [data-theme="light"] .hero-cine-video.mobile-delayed-video.is-ready { opacity: 0.85; }
-    @media (max-width: 860px) {
-      .hero-cine-video.mobile-delayed-video {
-        object-position: center 38%;
-        filter: saturate(0.9) contrast(1.1) brightness(0.76);
-        -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 68%, rgba(0,0,0,0.92) 78%, rgba(0,0,0,0.48) 90%, transparent 100%);
-        mask-image: linear-gradient(to bottom, #000 0%, #000 68%, rgba(0,0,0,0.92) 78%, rgba(0,0,0,0.48) 90%, transparent 100%);
-      }
-      .hero-cine-overlay {
-        background:
-          radial-gradient(ellipse at center 38%, transparent 35%, rgba(4,6,10,0.22) 72%, rgba(4,6,10,0.58) 100%),
-          linear-gradient(180deg, rgba(4,6,10,0.68) 0%, rgba(4,6,10,0.10) 28%, rgba(4,6,10,0.08) 58%, rgba(4,6,10,0.72) 84%, #04060A 100%);
-      }
-    }
     .hero-video-play {
-      position: absolute;
-      z-index: 5;
-      top: 92px;
-      right: var(--pad);
-      padding: 9px 14px;
-      border: 1px solid rgba(255,255,255,0.28);
-      border-radius: 999px;
-      color: rgba(255,255,255,0.9);
-      background: rgba(4,6,10,0.58);
-      backdrop-filter: blur(12px);
-      font-size: 12px;
+      display: none;
     }
   </style>
 </head>
@@ -4867,7 +4838,7 @@
     </div>
   </footer>
 
-  <script src="data.js?v=20260714-mobile-safe-1"></script>
+  <script src="data.js?v=20260714-restore"></script>
   <script>
     /* Fallback: force-show page after 3s if JS hasn't completed */
     setTimeout(function(){var m=document.querySelector('main');if(m&&!m.classList.contains('ready'))m.classList.add('ready');},3000);
@@ -4879,7 +4850,7 @@
       const esc = s => String(s).replace(/[&<>"']/g, c => (
         { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]
       ));
-      const ASSET_VERSION = '20260704-rhino-scene-v4';
+      const ASSET_VERSION = '20260714-restore';
       const versionAsset = src => {
         const value = String(src || '');
         if (!value || /^(?:https?:|data:)/.test(value) || /[?&]v=/.test(value)) return value;
@@ -4967,15 +4938,11 @@
 
       /* Hero - Cinematic Full-Bleed Video */
       const h = D.hero;
-      const _isMobile = window.matchMedia('(max-width: 860px)').matches;
       const heroVideoSrc = (h.motion && h.motion.src) || 'assets/hero-rhino-scene.mp4';
-      /* Mobile Safari gets a zero-media first load to avoid flaky parallel range requests. */
-      const heroMedia = _isMobile ? '' : `
+      document.getElementById('hero-section').innerHTML = `
         <video class="hero-cine-video" autoplay muted loop playsinline preload="auto" aria-hidden="true">
           <source src="${esc(versionAsset(heroVideoSrc))}" type="${esc(videoType(heroVideoSrc))}">
-        </video>`;
-      document.getElementById('hero-section').innerHTML = `
-        ${heroMedia}
+        </video>
         <div class="hero-cine-overlay" aria-hidden="true"></div>
         <div class="hero-cine-grain" aria-hidden="true"></div>
         <div class="hero-cine-content">
@@ -4995,54 +4962,6 @@
         </div>
         <div class="hero-cine-scroll">SCROLL</div>
       `;
-
-      /* Load the smaller mobile video only after the page itself is complete. */
-      if (_isMobile) {
-        const mobileVideoSrc = (h.motion && h.motion.mobile) || 'assets/hero-atmosphere.mp4';
-        const mountMobileHeroVideo = () => {
-          const hero = document.getElementById('hero-section');
-          if (!hero || hero.querySelector('.hero-cine-video')) return;
-
-          const video = document.createElement('video');
-          video.className = 'hero-cine-video mobile-delayed-video';
-          video.autoplay = true;
-          video.muted = true;
-          video.defaultMuted = true;
-          video.loop = true;
-          video.playsInline = true;
-          video.preload = 'metadata';
-          video.setAttribute('muted', '');
-          video.setAttribute('playsinline', '');
-          video.setAttribute('webkit-playsinline', '');
-          video.setAttribute('aria-hidden', 'true');
-
-          const source = document.createElement('source');
-          source.src = versionAsset(mobileVideoSrc);
-          source.type = videoType(mobileVideoSrc);
-          video.appendChild(source);
-          hero.insertBefore(video, hero.firstChild);
-
-          video.addEventListener('loadeddata', () => video.classList.add('is-ready'), { once: true });
-          video.addEventListener('error', () => video.remove(), { once: true });
-
-          const playResult = video.play();
-          if (playResult && typeof playResult.catch === 'function') {
-            playResult.catch(() => {
-              const playButton = document.createElement('button');
-              playButton.className = 'hero-video-play';
-              playButton.type = 'button';
-              playButton.textContent = '播放首屏视频';
-              playButton.addEventListener('click', () => {
-                video.play().then(() => playButton.remove()).catch(() => {});
-              }, { once: true });
-              hero.appendChild(playButton);
-            });
-          }
-        };
-        const startMobileVideo = () => window.setTimeout(mountMobileHeroVideo, 700);
-        if (document.readyState === 'complete') startMobileVideo();
-        else window.addEventListener('load', startMobileVideo, { once: true });
-      }
 
       /* Profile */
       const p = D.profile;
