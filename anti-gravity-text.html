@@ -22,7 +22,6 @@
     --ink-faint: #A8A29E;
     --border: #D6D3D1;
     --dot: #C4BFB5;
-    --gold: #B45309;
   }
 
   html { scroll-behavior: smooth; }
@@ -37,7 +36,6 @@
     min-height: 100vh;
   }
 
-  /* ===== 点阵纹理背景 ===== */
   body::before {
     content: '';
     position: fixed;
@@ -86,7 +84,6 @@
     text-decoration: none;
     letter-spacing: 0.02em;
     transition: color .3s;
-    position: relative;
   }
   .nav-links a:hover { color: var(--ink); }
   .nav-btn {
@@ -106,7 +103,7 @@
     transform: translateY(-1px);
   }
 
-  /* ===== Hero — 完全对标参考图 ===== */
+  /* ===== Hero ===== */
   .hero {
     position: relative;
     min-height: 100vh;
@@ -119,7 +116,6 @@
     margin: 0 auto;
   }
 
-  /* 左侧 */
   .hero-left {
     display: flex;
     flex-direction: column;
@@ -167,30 +163,31 @@
     top: 52%;
   }
 
-  /* 中间 */
   .hero-center {
     position: relative;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
     padding-bottom: 40px;
   }
   .hero-image-wrap {
     position: relative;
     width: 100%;
-    max-width: 520px;
+    max-width: 480px;
+    overflow: hidden;
+    border-radius: 2px;
   }
   .hero-image {
     width: 100%;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    object-position: 50% 20%;
     display: block;
     filter: saturate(0.92) contrast(1.05);
-    /* 拐图悬浮效果 */
-    filter: saturate(0.92) contrast(1.05) drop-shadow(0 20px 40px rgba(28,25,23,.12));
   }
-  /* 竖排中文叠加在图片上 */
-  .hero-vertical-text {
+  .hero-vertical-overlay {
     position: absolute;
-    right: -10px;
+    right: 8px;
     bottom: 15%;
     writing-mode: vertical-rl;
     font-size: 11px;
@@ -202,9 +199,43 @@
     font-weight: 400;
     text-shadow: 0 0 12px rgba(245,240,232,.9);
     max-height: 320px;
+    overflow: hidden;
   }
 
-  /* 右侧 */
+  /* 图片下方竖排文字 - 可点击风吹拂感 */
+  .wind-text-container {
+    display: flex;
+    gap: 5px;
+    margin-top: 20px;
+    cursor: pointer;
+    padding: 8px;
+    position: relative;
+  }
+  .wind-char {
+    writing-mode: vertical-rl;
+    font-size: 12px;
+    color: var(--ink-muted);
+    letter-spacing: 0.1em;
+    line-height: 1;
+    transition: color .3s;
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+  }
+  .wind-char:hover {
+    color: var(--ink);
+  }
+  .wind-char.wind-blown {
+    animation: windSway 0.7s ease-in-out;
+  }
+  @keyframes windSway {
+    0% { transform: rotate(0deg) translateX(0); }
+    20% { transform: rotate(10deg) translateX(4px); }
+    45% { transform: rotate(-6deg) translateX(-3px); }
+    70% { transform: rotate(4deg) translateX(2px); }
+    100% { transform: rotate(0deg) translateX(0); }
+  }
+
   .hero-right {
     display: flex;
     flex-direction: column;
@@ -256,7 +287,7 @@
     margin-top: auto;
   }
 
-  /* ===== 响应式 ===== */
+  /* 响应式 */
   @media(max-width: 900px) {
     .nav { padding: 16px 24px; }
     .nav-links { display: none; }
@@ -269,7 +300,7 @@
     .hero-center { order: 1; padding-bottom: 0; }
     .hero-right { display: none; }
     .hero-image-wrap { max-width: 320px; margin: 0 auto; }
-    .hero-vertical-text { display: none; }
+    .hero-vertical-overlay { display: none; }
   }
 
   @media(prefers-reduced-motion: reduce) {
@@ -293,7 +324,6 @@
   <a class="nav-btn" href="index.html#builds">返回创作矩阵</a>
 </nav>
 
-<!-- Hero -->
 <section class="hero" id="hero">
   <div class="hero-left">
     <div class="hero-eyebrow">北京（Beijing）/ 天地之间</div>
@@ -308,10 +338,103 @@
 
   <div class="hero-center">
     <div class="hero-image-wrap">
-      <img class="hero-image" src="https://images.unsplash.com/photo-1508804185872-d7badad00f7d?w=800&q=80" alt="祈年殿" loading="eager">
-      <div class="hero-vertical-text">
-        祈年殿建于明永乐十八年正月十九日，是天坛内最大的建筑。三层蓝瓦金顶，正八角形三重纹，高达三十八米，直径三十二米，为北京地标。殿内无柱无金，全靠二十八根大栉支撑。年底的冬至日，阳光穿过祈年殿的窗标，照在供桌上，呼之为“冬至光”。
-      </div>
+      <img class="hero-image" src="temple-of-heaven.png" alt="祈年殿" loading="eager">
+      <div class="hero-vertical-overlay">祈年殿 · 天坛 · 北京</div>
+    </div>
+    <div class="wind-text-container" id="windText">
+      <span class="wind-char">祈</span>
+      <span class="wind-char">年</span>
+      <span class="wind-char">殿</span>
+      <span class="wind-char">建</span>
+      <span class="wind-char">于</span>
+      <span class="wind-char">明</span>
+      <span class="wind-char">永</span>
+      <span class="wind-char">乐</span>
+      <span class="wind-char">十</span>
+      <span class="wind-char">八</span>
+      <span class="wind-char">年</span>
+      <span class="wind-char">正</span>
+      <span class="wind-char">月</span>
+      <span class="wind-char">十</span>
+      <span class="wind-char">九</span>
+      <span class="wind-char">日</span>
+      <span class="wind-char">是</span>
+      <span class="wind-char">天</span>
+      <span class="wind-char">坛</span>
+      <span class="wind-char">内</span>
+      <span class="wind-char">最</span>
+      <span class="wind-char">大</span>
+      <span class="wind-char">建</span>
+      <span class="wind-char">筑</span>
+      <span class="wind-char">三</span>
+      <span class="wind-char">层</span>
+      <span class="wind-char">蓝</span>
+      <span class="wind-char">瓦</span>
+      <span class="wind-char">金</span>
+      <span class="wind-char">顶</span>
+      <span class="wind-char">正</span>
+      <span class="wind-char">八</span>
+      <span class="wind-char">角</span>
+      <span class="wind-char">形</span>
+      <span class="wind-char">三</span>
+      <span class="wind-char">重</span>
+      <span class="wind-char">檐</span>
+      <span class="wind-char">高</span>
+      <span class="wind-char">达</span>
+      <span class="wind-char">三</span>
+      <span class="wind-char">十</span>
+      <span class="wind-char">八</span>
+      <span class="wind-char">米</span>
+      <span class="wind-char">直</span>
+      <span class="wind-char">径</span>
+      <span class="wind-char">三</span>
+      <span class="wind-char">十</span>
+      <span class="wind-char">二</span>
+      <span class="wind-char">米</span>
+      <span class="wind-char">为</span>
+      <span class="wind-char">北</span>
+      <span class="wind-char">京</span>
+      <span class="wind-char">地</span>
+      <span class="wind-char">标</span>
+      <span class="wind-char">殿</span>
+      <span class="wind-char">内</span>
+      <span class="wind-char">无</span>
+      <span class="wind-char">柱</span>
+      <span class="wind-char">无</span>
+      <span class="wind-char">金</span>
+      <span class="wind-char">全</span>
+      <span class="wind-char">靠</span>
+      <span class="wind-char">二</span>
+      <span class="wind-char">十</span>
+      <span class="wind-char">八</span>
+      <span class="wind-char">根</span>
+      <span class="wind-char">大</span>
+      <span class="wind-char">枋</span>
+      <span class="wind-char">支</span>
+      <span class="wind-char">撑</span>
+      <span class="wind-char">年</span>
+      <span class="wind-char">底</span>
+      <span class="wind-char">的</span>
+      <span class="wind-char">冬</span>
+      <span class="wind-char">至</span>
+      <span class="wind-char">日</span>
+      <span class="wind-char">阳</span>
+      <span class="wind-char">光</span>
+      <span class="wind-char">穿</span>
+      <span class="wind-char">过</span>
+      <span class="wind-char">窗</span>
+      <span class="wind-char">棂</span>
+      <span class="wind-char">照</span>
+      <span class="wind-char">在</span>
+      <span class="wind-char">供</span>
+      <span class="wind-char">桌</span>
+      <span class="wind-char">上</span>
+      <span class="wind-char">呼</span>
+      <span class="wind-char">之</span>
+      <span class="wind-char">为</span>
+      <span class="wind-char">冬</span>
+      <span class="wind-char">至</span>
+      <span class="wind-char">光</span>
     </div>
   </div>
 
@@ -330,7 +453,7 @@
 </section>
 
 <script>
-// ===== Web Audio API 音频系统 =====
+// ===== Web Audio =====
 let audioCtx = null;
 let audioEnabled = false;
 
@@ -339,9 +462,7 @@ function initAudio() {
   try {
     audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     audioEnabled = true;
-  } catch(e) {
-    console.log('Web Audio not supported');
-  }
+  } catch(e) {}
 }
 
 function playChime(freq, duration, volume) {
@@ -374,6 +495,41 @@ function playChime(freq, duration, volume) {
   });
 }
 
+function playWind(duration, volume) {
+  if (!audioEnabled || !audioCtx) return;
+  if (audioCtx.state === 'suspended') audioCtx.resume();
+  const now = audioCtx.currentTime;
+
+  const bufferSize = audioCtx.sampleRate * duration;
+  const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+  const data = buffer.getChannelData(0);
+
+  for (let i = 0; i < bufferSize; i++) {
+    data[i] = (Math.random() * 2 - 1) * 0.5;
+  }
+
+  const source = audioCtx.createBufferSource();
+  const filter = audioCtx.createBiquadFilter();
+  const gain = audioCtx.createGain();
+
+  source.buffer = buffer;
+  filter.type = 'bandpass';
+  filter.frequency.value = 400 + Math.random() * 300;
+  filter.Q.value = 0.5;
+
+  source.connect(filter);
+  filter.connect(gain);
+  gain.connect(audioCtx.destination);
+
+  gain.gain.setValueAtTime(0, now);
+  gain.gain.linearRampToValueAtTime(volume, now + 0.1);
+  gain.gain.linearRampToValueAtTime(volume * 0.6, now + duration * 0.5);
+  gain.gain.linearRampToValueAtTime(0, now + duration);
+
+  source.start(now);
+  source.stop(now + duration);
+}
+
 const pentatonic = [261.63, 293.66, 329.63, 392.00, 440.00, 523.25, 587.33, 659.25];
 function getNote(index) {
   return pentatonic[index % pentatonic.length];
@@ -383,16 +539,12 @@ document.addEventListener('click', initAudio, { once: true });
 document.addEventListener('touchstart', initAudio, { once: true });
 document.addEventListener('mousemove', initAudio, { once: true });
 
-// ===== 反重力文字物理引擎 =====
+// ===== 反重力文字 =====
 function attachAntiGravity(el, options = {}) {
   const {
-    floatAmp = 5,
-    floatSpeed = 0.35,
-    rotAmp = 1.5,
-    pushRadius = 130,
-    pushForce = 20,
-    springK = 0.055,
-    damping = 0.89
+    floatAmp = 5, floatSpeed = 0.35, rotAmp = 1.5,
+    pushRadius = 130, pushForce = 20,
+    springK = 0.055, damping = 0.89
   } = options;
 
   let vx = 0, vy = 0, ox = 0, oy = 0;
@@ -416,8 +568,7 @@ function attachAntiGravity(el, options = {}) {
       rafId = null;
       return;
     }
-    const ax = -ox * springK;
-    const ay = -oy * springK;
+    const ax = -ox * springK, ay = -oy * springK;
     vx = (vx + ax) * damping;
     vy = (vy + ay) * damping;
     ox += vx; oy += vy;
@@ -472,21 +623,46 @@ function attachAntiGravity(el, options = {}) {
   setInterval(floatTick, 33);
 }
 
-function initAntiGravity() {
+// ===== 风吹拂文字 =====
+function attachWind(el) {
+  el.addEventListener('click', () => {
+    if (!audioEnabled) initAudio();
+
+    playWind(0.5, 0.035);
+    const noteIdx = Math.abs(el.textContent.charCodeAt(0)) % pentatonic.length;
+    playChime(getNote(noteIdx), 0.25, 0.02);
+
+    el.classList.add('wind-blown');
+    setTimeout(() => el.classList.remove('wind-blown'), 700);
+
+    const siblings = Array.from(el.parentElement.children);
+    const idx = siblings.indexOf(el);
+    siblings.forEach((sib, i) => {
+      if (sib === el) return;
+      const dist = Math.abs(i - idx);
+      if (dist <= 4) {
+        setTimeout(() => {
+          sib.classList.add('wind-blown');
+          setTimeout(() => sib.classList.remove('wind-blown'), 700);
+        }, dist * 60);
+      }
+    });
+  });
+}
+
+function init() {
   document.querySelectorAll('.ag-char').forEach((el) => {
     attachAntiGravity(el, {
       floatAmp: 3 + Math.random() * 4,
       floatSpeed: 0.25 + Math.random() * 0.3,
       rotAmp: 0.6 + Math.random() * 1.4,
-      pushRadius: 110,
-      pushForce: 16
+      pushRadius: 110, pushForce: 16
     });
   });
+  document.querySelectorAll('.wind-char').forEach((el) => attachWind(el));
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  initAntiGravity();
-});
+document.addEventListener('DOMContentLoaded', init);
 </script>
 
 </body>
