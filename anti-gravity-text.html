@@ -256,19 +256,6 @@
     opacity: .3;
   }
 
-  /* ===== Caption ===== */
-  .caption {
-    position: absolute;
-    z-index: 6;
-    right: clamp(28px, 8vw, 152px);
-    bottom: clamp(52px, 11vh, 126px);
-    width: min(220px, 20vw);
-    margin: 0;
-    color: var(--muted);
-    font: italic 14px/1.6 'Playfair Display', Georgia, serif;
-    pointer-events: none;
-  }
-
   /* ===== Progress bar ===== */
   .progress {
     position: absolute;
@@ -379,7 +366,6 @@
     .destination.right { right: 16px; }
     .headline { left: 24px; bottom: 38px; width: min(285px, 72vw); }
     h1 { font-size: clamp(42px, 14vw, 66px); }
-    .caption { display: none; }
     .progress { display: none; }
     .counter { display: none; }
   }
@@ -430,7 +416,6 @@
     </h1>
   </section>
 
-  <p class="caption" id="story">A celestial dialogue between round skies and square earth, where emperors once prayed for the year's harmony.</p>
   <div class="progress" aria-hidden="true"></div>
   <div class="counter" id="counter" aria-hidden="true">珠帘触碰 · 0</div>
   <div class="cursor" id="cursor" aria-hidden="true"></div>
