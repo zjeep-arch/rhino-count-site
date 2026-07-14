@@ -126,29 +126,24 @@
     align-items: center;
     gap: 18px;
   }
-  .github-link {
-    padding: 7px 0 6px;
-    border-bottom: 1px solid transparent;
-    color: inherit;
-    text-decoration: none;
-    font: 12px/1 'Inter', sans-serif;
-    transition: all .3s;
-  }
-  .github-link:hover { color: var(--ink); border-bottom-color: currentColor; }
   .configure {
-    border: 0;
-    padding: 10px 24px;
-    color: var(--paper);
-    background: var(--ink);
+    border: 1px solid var(--ink);
+    padding: 9px 22px;
+    color: var(--ink);
+    background: transparent;
     font-family: 'Inter', sans-serif;
     font-size: 11px;
     font-weight: 500;
     cursor: pointer;
-    clip-path: polygon(4% 6%, 96% 0, 100% 91%, 2% 100%);
-    letter-spacing: 0.02em;
+    letter-spacing: 0.04em;
     transition: all .3s;
+    border-radius: 999px;
+    line-height: 1;
   }
-  .configure:hover { opacity: .85; transform: translateY(-1px); }
+  .configure:hover {
+    background: var(--ink);
+    color: var(--paper);
+  }
 
   /* theme & sound toggles */
   .toggle-btn {
@@ -364,7 +359,6 @@
     <div class="masthead-actions">
       <button class="toggle-btn" id="themeToggle" type="button" title="切换昼夜主题" aria-label="切换昼夜主题">☀</button>
       <button class="toggle-btn" id="soundToggle" type="button" title="开关声音" aria-label="开关声音">♪</button>
-      <a class="github-link" href="https://github.com/CodeMaryy/temple-of-heaven-curtain" target="_blank" rel="noopener noreferrer">参考</a>
       <button class="configure" id="configure" type="button" aria-expanded="false" aria-controls="settings">配置</button>
     </div>
   </header>
