@@ -15,19 +15,18 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   :root {
-    --bg: #F5F0E8;
-    --ink: #1C1917;
-    --ink-light: #44403C;
-    --ink-muted: #78716C;
-    --ink-faint: #A8A29E;
-    --border: #D6D3D1;
-    --dot: #C4BFB5;
+    --paper: #e8dfca;
+    --ink: #2e251f;
+    --muted: #70665b;
+    --hairline: rgba(46, 37, 31, .36);
+    --panel: rgba(232, 223, 202, .93);
+    --dot: #c4bfb5;
   }
 
   html { scroll-behavior: smooth; }
 
   body {
-    background: var(--bg);
+    background: var(--paper);
     color: var(--ink);
     font-family: 'Noto Serif SC', Georgia, 'Songti SC', serif;
     line-height: 1.8;
@@ -36,15 +35,31 @@
     min-height: 100vh;
   }
 
-  body::before {
-    content: '';
-    position: fixed;
+  /* ===== 纸质纹理背景 ===== */
+  .artboard {
+    position: relative;
+    min-height: 100svh;
+    overflow: hidden;
+    isolation: isolate;
+    background:
+      repeating-linear-gradient(91deg, rgba(46, 37, 31, .022) 0 1px, transparent 1px 11px),
+      repeating-linear-gradient(2deg, rgba(46, 37, 31, .017) 0 1px, transparent 1px 14px),
+      radial-gradient(circle at 53% 16%, rgba(255,255,255,.26), transparent 34%),
+      var(--paper);
+  }
+
+  .artboard::after {
+    content: "";
+    position: absolute;
     inset: 0;
-    z-index: 0;
+    z-index: 10;
     pointer-events: none;
-    background-image: radial-gradient(circle, var(--dot) 0.5px, transparent 0.5px);
-    background-size: 16px 16px;
-    opacity: 0.45;
+    opacity: .14;
+    background-image:
+      radial-gradient(circle at 24% 31%, currentColor 0 .5px, transparent .65px),
+      radial-gradient(circle at 71% 56%, currentColor 0 .45px, transparent .6px);
+    background-size: 9px 11px, 13px 15px;
+    mix-blend-mode: multiply;
   }
 
   /* ===== 导航 ===== */
@@ -56,7 +71,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 24px 48px;
-    background: rgba(245,240,232,.9);
+    background: rgba(232, 223, 202, .88);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
   }
@@ -80,7 +95,7 @@
     font-family: 'Inter', -apple-system, sans-serif;
     font-size: 12px;
     font-weight: 400;
-    color: var(--ink-muted);
+    color: var(--muted);
     text-decoration: none;
     letter-spacing: 0.02em;
     transition: color .3s;
@@ -90,16 +105,19 @@
     font-family: 'Inter', sans-serif;
     font-size: 11px;
     font-weight: 500;
-    color: #fff;
+    color: var(--paper);
     background: var(--ink);
     padding: 10px 24px;
+    border: 0;
     border-radius: 2px;
     text-decoration: none;
     letter-spacing: 0.02em;
+    cursor: pointer;
     transition: all .3s;
+    clip-path: polygon(4% 6%, 96% 0, 100% 91%, 2% 100%);
   }
   .nav-btn:hover {
-    background: var(--ink-light);
+    background: #3a3028;
     transform: translateY(-1px);
   }
 
@@ -123,11 +141,12 @@
     padding-bottom: 80px;
     padding-right: 20px;
     position: relative;
+    z-index: 12;
   }
   .hero-eyebrow {
     font-family: 'Inter', sans-serif;
     font-size: 12px;
-    color: var(--ink-muted);
+    color: var(--muted);
     margin-bottom: 20px;
     letter-spacing: 0.02em;
   }
@@ -169,40 +188,22 @@
     flex-direction: column;
     align-items: center;
     padding-bottom: 40px;
+    z-index: 5;
   }
   .hero-image-wrap {
     position: relative;
     width: 100%;
-    max-width: 480px;
-    overflow: hidden;
-    border-radius: 2px;
+    max-width: 520px;
+    z-index: 4;
   }
   .hero-image {
     width: 100%;
-    aspect-ratio: 3/4;
-    object-fit: cover;
-    object-position: 50% 20%;
     display: block;
+    mix-blend-mode: multiply;
     filter: saturate(0.92) contrast(1.05);
   }
-  .hero-vertical-overlay {
-    position: absolute;
-    right: 8px;
-    bottom: 15%;
-    writing-mode: vertical-rl;
-    font-size: 11px;
-    color: var(--ink-light);
-    letter-spacing: .3em;
-    line-height: 2.6;
-    opacity: .45;
-    pointer-events: none;
-    font-weight: 400;
-    text-shadow: 0 0 12px rgba(245,240,232,.9);
-    max-height: 320px;
-    overflow: hidden;
-  }
 
-  /* 图片下方竖排文字 - 可点击风吹拂感 */
+  /* 图片下方竖排可点击文字 */
   .wind-text-container {
     display: flex;
     gap: 5px;
@@ -210,11 +211,12 @@
     cursor: pointer;
     padding: 8px;
     position: relative;
+    z-index: 12;
   }
   .wind-char {
     writing-mode: vertical-rl;
     font-size: 12px;
-    color: var(--ink-muted);
+    color: var(--muted);
     letter-spacing: 0.1em;
     line-height: 1;
     transition: color .3s;
@@ -222,9 +224,7 @@
     user-select: none;
     position: relative;
   }
-  .wind-char:hover {
-    color: var(--ink);
-  }
+  .wind-char:hover { color: var(--ink); }
   .wind-char.wind-blown {
     animation: windSway 0.7s ease-in-out;
   }
@@ -244,11 +244,13 @@
     height: 100%;
     padding-bottom: 80px;
     padding-left: 20px;
+    position: relative;
+    z-index: 12;
   }
   .hero-nav-box {
     width: 72px;
     height: 72px;
-    border: 1px solid var(--border);
+    border: 1px solid var(--hairline);
     border-radius: 2px;
     display: flex;
     flex-direction: column;
@@ -261,33 +263,76 @@
     margin-top: 20px;
   }
   .hero-nav-box:hover {
-    border-color: var(--ink-muted);
+    border-color: var(--muted);
   }
   .hero-nav-box .curve {
     width: 16px;
     height: 6px;
-    border-top: 1px solid var(--ink-muted);
+    border-top: 1px solid var(--muted);
     border-radius: 50% 50% 0 0;
     opacity: .5;
   }
   .hero-nav-box span {
     font-family: 'Inter', sans-serif;
     font-size: 10px;
-    color: var(--ink-muted);
+    color: var(--muted);
     letter-spacing: .06em;
   }
   .hero-quote {
     font-family: 'Playfair Display', Georgia, serif;
     font-size: 14px;
     font-style: italic;
-    color: var(--ink-muted);
+    color: var(--muted);
     line-height: 1.8;
     max-width: 200px;
     text-align: right;
     margin-top: auto;
   }
 
-  /* 响应式 */
+  /* ===== 配置面板 ===== */
+  .settings {
+    position: fixed;
+    z-index: 110;
+    top: 72px;
+    right: clamp(24px, 5vw, 94px);
+    width: 238px;
+    padding: 16px;
+    border: 1px solid var(--hairline);
+    background: var(--panel);
+    box-shadow: 16px 18px 32px rgba(46, 37, 31, .12);
+    backdrop-filter: blur(8px);
+  }
+  .settings[hidden] { display: none; }
+  .setting { display: grid; gap: 6px; margin-bottom: 13px; }
+  .setting label { display: flex; justify-content: space-between; color: var(--muted); font: 11px/1 'Inter', ui-monospace, monospace; }
+  .setting input { width: 100%; accent-color: var(--ink); }
+  .reset-btn { width: 100%; border: 1px solid var(--hairline); padding: 7px 10px; color: var(--ink); background: transparent; cursor: pointer; font: 11px/1 'Inter', ui-monospace, monospace; }
+
+  /* ===== Canvas 珠帘 ===== */
+  #curtain {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    cursor: none;
+    touch-action: none;
+  }
+
+  .cursor {
+    position: absolute;
+    z-index: 12;
+    width: 12px;
+    height: 12px;
+    border: 1px solid rgba(46, 37, 31, .72);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    pointer-events: none;
+  }
+  .artboard.is-active .cursor { opacity: 1; }
+
+  /* ===== 响应式 ===== */
   @media(max-width: 900px) {
     .nav { padding: 16px 24px; }
     .nav-links { display: none; }
@@ -300,7 +345,7 @@
     .hero-center { order: 1; padding-bottom: 0; }
     .hero-right { display: none; }
     .hero-image-wrap { max-width: 320px; margin: 0 auto; }
-    .hero-vertical-overlay { display: none; }
+    .settings { right: 16px; width: 200px; }
   }
 
   @media(prefers-reduced-motion: reduce) {
@@ -314,244 +359,87 @@
 </head>
 <body>
 
-<nav class="nav">
-  <a class="nav-brand" href="index.html#builds">犀牛伯爵</a>
-  <ul class="nav-links">
-    <li><a href="#">首页</a></li>
-    <li><a href="#">地标</a></li>
-    <li><a href="#">社区</a></li>
-  </ul>
-  <a class="nav-btn" href="index.html#builds">返回创作矩阵</a>
-</nav>
+<div class="artboard" id="artboard">
+  <canvas id="curtain" aria-label="天坛屋檐下可交互的中文珠帘"></canvas>
 
-<section class="hero" id="hero">
-  <div class="hero-left">
-    <div class="hero-eyebrow">北京（Beijing）/ 天地之间</div>
-    <h1 class="hero-title" id="heroTitle">
-      <span class="ag-char">T</span><span class="ag-char">e</span><span class="ag-char">m</span><span class="ag-char">p</span><span class="ag-char">l</span><span class="ag-char">e</span><br>
-      <span class="ag-char">o</span><span class="ag-char">f</span><br>
-      <span class="ag-char">H</span><span class="ag-char">e</span><span class="ag-char">a</span><span class="ag-char">v</span><span class="ag-char">e</span><span class="ag-char">n</span>
-    </h1>
-    <div class="hero-accent-line"></div>
-    <div class="hero-circle"></div>
-  </div>
+  <nav class="nav">
+    <a class="nav-brand" href="index.html#builds">犀牛伯爵</a>
+    <ul class="nav-links">
+      <li><a href="#">首页</a></li>
+      <li><a href="#">地标</a></li>
+      <li><a href="#">社区</a></li>
+    </ul>
+    <div style="display:flex;gap:18px;align-items:center;">
+      <a class="github-link" href="https://github.com/CodeMaryy/temple-of-heaven-curtain" target="_blank" rel="noopener" style="font:12px/1 'Inter',sans-serif;color:var(--muted);text-decoration:none;border-bottom:1px solid transparent;padding:7px 0 6px;">参考</a>
+      <button class="nav-btn" id="configure" type="button" aria-expanded="false" aria-controls="settings">配置</button>
+      <a class="nav-btn" href="index.html#builds" style="display:inline-block;padding:10px 24px;">返回创作矩阵</a>
+    </div>
+  </nav>
 
-  <div class="hero-center">
-    <div class="hero-image-wrap">
-      <img class="hero-image" src="temple-of-heaven.png" alt="祈年殿" loading="eager">
-      <div class="hero-vertical-overlay">祈年殿 · 天坛 · 北京</div>
+  <section class="hero" id="hero">
+    <div class="hero-left">
+      <div class="hero-eyebrow">北京（Beijing）/ 天地之间</div>
+      <h1 class="hero-title" id="heroTitle">
+        <span class="ag-char">T</span><span class="ag-char">e</span><span class="ag-char">m</span><span class="ag-char">p</span><span class="ag-char">l</span><span class="ag-char">e</span><br>
+        <span class="ag-char">o</span><span class="ag-char">f</span><br>
+        <span class="ag-char">H</span><span class="ag-char">e</span><span class="ag-char">a</span><span class="ag-char">v</span><span class="ag-char">e</span><span class="ag-char">n</span>
+      </h1>
+      <div class="hero-accent-line"></div>
+      <div class="hero-circle"></div>
     </div>
-    <div class="wind-text-container" id="windText">
-      <span class="wind-char">祈</span>
-      <span class="wind-char">年</span>
-      <span class="wind-char">殿</span>
-      <span class="wind-char">建</span>
-      <span class="wind-char">于</span>
-      <span class="wind-char">明</span>
-      <span class="wind-char">永</span>
-      <span class="wind-char">乐</span>
-      <span class="wind-char">十</span>
-      <span class="wind-char">八</span>
-      <span class="wind-char">年</span>
-      <span class="wind-char">正</span>
-      <span class="wind-char">月</span>
-      <span class="wind-char">十</span>
-      <span class="wind-char">九</span>
-      <span class="wind-char">日</span>
-      <span class="wind-char">是</span>
-      <span class="wind-char">天</span>
-      <span class="wind-char">坛</span>
-      <span class="wind-char">内</span>
-      <span class="wind-char">最</span>
-      <span class="wind-char">大</span>
-      <span class="wind-char">建</span>
-      <span class="wind-char">筑</span>
-      <span class="wind-char">三</span>
-      <span class="wind-char">层</span>
-      <span class="wind-char">蓝</span>
-      <span class="wind-char">瓦</span>
-      <span class="wind-char">金</span>
-      <span class="wind-char">顶</span>
-      <span class="wind-char">正</span>
-      <span class="wind-char">八</span>
-      <span class="wind-char">角</span>
-      <span class="wind-char">形</span>
-      <span class="wind-char">三</span>
-      <span class="wind-char">重</span>
-      <span class="wind-char">檐</span>
-      <span class="wind-char">高</span>
-      <span class="wind-char">达</span>
-      <span class="wind-char">三</span>
-      <span class="wind-char">十</span>
-      <span class="wind-char">八</span>
-      <span class="wind-char">米</span>
-      <span class="wind-char">直</span>
-      <span class="wind-char">径</span>
-      <span class="wind-char">三</span>
-      <span class="wind-char">十</span>
-      <span class="wind-char">二</span>
-      <span class="wind-char">米</span>
-      <span class="wind-char">为</span>
-      <span class="wind-char">北</span>
-      <span class="wind-char">京</span>
-      <span class="wind-char">地</span>
-      <span class="wind-char">标</span>
-      <span class="wind-char">殿</span>
-      <span class="wind-char">内</span>
-      <span class="wind-char">无</span>
-      <span class="wind-char">柱</span>
-      <span class="wind-char">无</span>
-      <span class="wind-char">金</span>
-      <span class="wind-char">全</span>
-      <span class="wind-char">靠</span>
-      <span class="wind-char">二</span>
-      <span class="wind-char">十</span>
-      <span class="wind-char">八</span>
-      <span class="wind-char">根</span>
-      <span class="wind-char">大</span>
-      <span class="wind-char">枋</span>
-      <span class="wind-char">支</span>
-      <span class="wind-char">撑</span>
-      <span class="wind-char">年</span>
-      <span class="wind-char">底</span>
-      <span class="wind-char">的</span>
-      <span class="wind-char">冬</span>
-      <span class="wind-char">至</span>
-      <span class="wind-char">日</span>
-      <span class="wind-char">阳</span>
-      <span class="wind-char">光</span>
-      <span class="wind-char">穿</span>
-      <span class="wind-char">过</span>
-      <span class="wind-char">窗</span>
-      <span class="wind-char">棂</span>
-      <span class="wind-char">照</span>
-      <span class="wind-char">在</span>
-      <span class="wind-char">供</span>
-      <span class="wind-char">桌</span>
-      <span class="wind-char">上</span>
-      <span class="wind-char">呼</span>
-      <span class="wind-char">之</span>
-      <span class="wind-char">为</span>
-      <span class="wind-char">冬</span>
-      <span class="wind-char">至</span>
-      <span class="wind-char">光</span>
-    </div>
-  </div>
 
-  <div class="hero-right">
-    <div class="hero-nav-box" onclick="location.href='index.html#builds'">
-      <div class="curve"></div>
-      <span>返回</span>
+    <div class="hero-center">
+      <div class="hero-image-wrap" id="temple">
+        <img class="hero-image" src="temple-of-heaven.png" alt="祈年殿" loading="eager">
+      </div>
+      <div class="wind-text-container" id="windText">
+        <span class="wind-char">祈</span><span class="wind-char">年</span><span class="wind-char">殿</span><span class="wind-char">建</span><span class="wind-char">于</span><span class="wind-char">明</span><span class="wind-char">永</span><span class="wind-char">乐</span><span class="wind-char">十</span><span class="wind-char">八</span><span class="wind-char">年</span><span class="wind-char">正</span><span class="wind-char">月</span><span class="wind-char">十</span><span class="wind-char">九</span><span class="wind-char">日</span><span class="wind-char">是</span><span class="wind-char">天</span><span class="wind-char">坛</span><span class="wind-char">内</span><span class="wind-char">最</span><span class="wind-char">大</span><span class="wind-char">建</span><span class="wind-char">筑</span><span class="wind-char">三</span><span class="wind-char">层</span><span class="wind-char">蓝</span><span class="wind-char">瓦</span><span class="wind-char">金</span><span class="wind-char">顶</span><span class="wind-char">正</span><span class="wind-char">八</span><span class="wind-char">角</span><span class="wind-char">形</span><span class="wind-char">三</span><span class="wind-char">重</span><span class="wind-char">檐</span><span class="wind-char">高</span><span class="wind-char">达</span><span class="wind-char">三</span><span class="wind-char">十</span><span class="wind-char">八</span><span class="wind-char">米</span><span class="wind-char">直</span><span class="wind-char">径</span><span class="wind-char">三</span><span class="wind-char">十</span><span class="wind-char">二</span><span class="wind-char">米</span><span class="wind-char">为</span><span class="wind-char">北</span><span class="wind-char">京</span><span class="wind-char">地</span><span class="wind-char">标</span><span class="wind-char">殿</span><span class="wind-char">内</span><span class="wind-char">无</span><span class="wind-char">柱</span><span class="wind-char">无</span><span class="wind-char">金</span><span class="wind-char">全</span><span class="wind-char">靠</span><span class="wind-char">二</span><span class="wind-char">十</span><span class="wind-char">八</span><span class="wind-char">根</span><span class="wind-char">大</span><span class="wind-char">枋</span><span class="wind-char">支</span><span class="wind-char">撑</span><span class="wind-char">年</span><span class="wind-char">底</span><span class="wind-char">的</span><span class="wind-char">冬</span><span class="wind-char">至</span><span class="wind-char">日</span><span class="wind-char">阳</span><span class="wind-char">光</span><span class="wind-char">穿</span><span class="wind-char">过</span><span class="wind-char">窗</span><span class="wind-char">棂</span><span class="wind-char">照</span><span class="wind-char">在</span><span class="wind-char">供</span><span class="wind-char">桌</span><span class="wind-char">上</span><span class="wind-char">呼</span><span class="wind-char">之</span><span class="wind-char">为</span><span class="wind-char">冬</span><span class="wind-char">至</span><span class="wind-char">光</span>
+      </div>
     </div>
-    <p class="hero-quote">
-      A celestial dialogue between<br>
-      round skies and square earth,<br>
-      where emperors once prayed for<br>
-      the year's harmony.
-    </p>
-  </div>
-</section>
+
+    <div class="hero-right">
+      <div class="hero-nav-box" onclick="location.href='index.html#builds'">
+        <div class="curve"></div>
+        <span>返回</span>
+      </div>
+      <p class="hero-quote">
+        A celestial dialogue between<br>
+        round skies and square earth,<br>
+        where emperors once prayed for<br>
+        the year's harmony.
+      </p>
+    </div>
+  </section>
+
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+
+  <aside class="settings" id="settings" hidden>
+    <div class="setting"><label for="strength">Strength <output id="strengthValue">72</output></label><input id="strength" type="range" min="20" max="110" value="72"></div>
+    <div class="setting"><label for="reach">Reach <output id="reachValue">34</output></label><input id="reach" type="range" min="18" max="56" value="34"></div>
+    <div class="setting"><label for="inertia">Inertia <output id="inertiaValue">97</output></label><input id="inertia" type="range" min="86" max="99" value="97"></div>
+    <button class="reset-btn" id="resetCurtain" type="button">Reset curtain</button>
+  </aside>
+</div>
 
 <script>
-// ===== Web Audio =====
-let audioCtx = null;
-let audioEnabled = false;
-
-function initAudio() {
-  if (audioCtx) return;
-  try {
-    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    audioEnabled = true;
-  } catch(e) {}
-}
-
-function playChime(freq, duration, volume) {
-  if (!audioEnabled || !audioCtx) return;
-  if (audioCtx.state === 'suspended') audioCtx.resume();
-  const now = audioCtx.currentTime;
-
-  const osc = audioCtx.createOscillator();
-  const gain = audioCtx.createGain();
-  osc.connect(gain);
-  gain.connect(audioCtx.destination);
-  osc.frequency.value = freq;
-  osc.type = 'sine';
-  gain.gain.setValueAtTime(volume, now);
-  gain.gain.exponentialRampToValueAtTime(0.001, now + duration);
-  osc.start(now);
-  osc.stop(now + duration);
-
-  [1.5, 2].forEach((ratio, i) => {
-    const o = audioCtx.createOscillator();
-    const g = audioCtx.createGain();
-    o.connect(g);
-    g.connect(audioCtx.destination);
-    o.frequency.value = freq * ratio;
-    o.type = i === 0 ? 'sine' : 'triangle';
-    g.gain.setValueAtTime(volume * (i === 0 ? 0.25 : 0.1), now);
-    g.gain.exponentialRampToValueAtTime(0.001, now + duration * (i === 0 ? 0.6 : 0.4));
-    o.start(now);
-    o.stop(now + duration * (i === 0 ? 0.6 : 0.4));
-  });
-}
-
-function playWind(duration, volume) {
-  if (!audioEnabled || !audioCtx) return;
-  if (audioCtx.state === 'suspended') audioCtx.resume();
-  const now = audioCtx.currentTime;
-
-  const bufferSize = audioCtx.sampleRate * duration;
-  const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
-  const data = buffer.getChannelData(0);
-
-  for (let i = 0; i < bufferSize; i++) {
-    data[i] = (Math.random() * 2 - 1) * 0.5;
-  }
-
-  const source = audioCtx.createBufferSource();
-  const filter = audioCtx.createBiquadFilter();
-  const gain = audioCtx.createGain();
-
-  source.buffer = buffer;
-  filter.type = 'bandpass';
-  filter.frequency.value = 400 + Math.random() * 300;
-  filter.Q.value = 0.5;
-
-  source.connect(filter);
-  filter.connect(gain);
-  gain.connect(audioCtx.destination);
-
-  gain.gain.setValueAtTime(0, now);
-  gain.gain.linearRampToValueAtTime(volume, now + 0.1);
-  gain.gain.linearRampToValueAtTime(volume * 0.6, now + duration * 0.5);
-  gain.gain.linearRampToValueAtTime(0, now + duration);
-
-  source.start(now);
-  source.stop(now + duration);
-}
-
-const pentatonic = [261.63, 293.66, 329.63, 392.00, 440.00, 523.25, 587.33, 659.25];
-function getNote(index) {
-  return pentatonic[index % pentatonic.length];
-}
-
-document.addEventListener('click', initAudio, { once: true });
-document.addEventListener('touchstart', initAudio, { once: true });
-document.addEventListener('mousemove', initAudio, { once: true });
-
-// ===== 反重力文字 =====
+// ===== 反重力标题 =====
 function attachAntiGravity(el, options = {}) {
-  const {
-    floatAmp = 5, floatSpeed = 0.35, rotAmp = 1.5,
-    pushRadius = 130, pushForce = 20,
-    springK = 0.055, damping = 0.89
-  } = options;
+  const { floatAmp = 5, floatSpeed = 0.35, rotAmp = 1.5, pushRadius = 130, pushForce = 20, springK = 0.055, damping = 0.89 } = options;
+  let vx = 0, vy = 0, ox = 0, oy = 0, phase = Math.random() * Math.PI * 2;
+  let lastSoundTime = 0, rafId = null, isPushed = false;
 
-  let vx = 0, vy = 0, ox = 0, oy = 0;
-  let phase = Math.random() * Math.PI * 2;
-  let lastSoundTime = 0;
-  let rafId = null;
-  let isPushed = false;
+  const pentatonic = [261.63, 293.66, 329.63, 392.00, 440.00, 523.25, 587.33, 659.25];
+  function playChime(freq, duration, volume) {
+    if (!audioCtx || audioCtx.state === 'suspended') return;
+    const now = audioCtx.currentTime;
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.connect(gain); gain.connect(audioCtx.destination);
+    osc.frequency.value = freq; osc.type = 'sine';
+    gain.gain.setValueAtTime(volume, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + duration);
+    osc.start(now); osc.stop(now + duration);
+  }
 
   function floatTick() {
     if (isPushed) return;
@@ -564,77 +452,83 @@ function attachAntiGravity(el, options = {}) {
 
   function physicsTick() {
     if (!isPushed && Math.abs(ox) < 0.1 && Math.abs(oy) < 0.1 && Math.abs(vx) < 0.01 && Math.abs(vy) < 0.01) {
-      ox = 0; oy = 0; vx = 0; vy = 0;
-      rafId = null;
-      return;
+      ox = 0; oy = 0; vx = 0; vy = 0; rafId = null; return;
     }
     const ax = -ox * springK, ay = -oy * springK;
-    vx = (vx + ax) * damping;
-    vy = (vy + ay) * damping;
+    vx = (vx + ax) * damping; vy = (vy + ay) * damping;
     ox += vx; oy += vy;
-
     const time = Date.now() / 1000;
     const floatY = Math.sin(time * floatSpeed + phase) * floatAmp;
     const floatX = Math.cos(time * floatSpeed * 0.7 + phase) * (floatAmp * 0.35);
     const rotZ = Math.sin(time * floatSpeed * 0.45 + phase) * rotAmp;
     el.style.transform = `translate(${floatX + ox}px, ${floatY + oy}px) rotate(${rotZ}deg)`;
-
     rafId = requestAnimationFrame(physicsTick);
   }
 
-  function onPointerMove(e) {
+  el.addEventListener('mousemove', (e) => {
     const rect = el.getBoundingClientRect();
-    const cx = rect.left + rect.width / 2;
-    const cy = rect.top + rect.height / 2;
-    const dx = cx - e.clientX;
-    const dy = cy - e.clientY;
+    const cx = rect.left + rect.width / 2, cy = rect.top + rect.height / 2;
+    const dx = cx - e.clientX, dy = cy - e.clientY;
     const dist = Math.sqrt(dx * dx + dy * dy);
-
     if (dist < pushRadius && dist > 0) {
       const force = (pushRadius - dist) / pushRadius * pushForce;
-      vx += (dx / dist) * force * 0.12;
-      vy += (dy / dist) * force * 0.12;
+      vx += (dx / dist) * force * 0.12; vy += (dy / dist) * force * 0.12;
       isPushed = true;
-
       const now = Date.now();
       if (now - lastSoundTime > 90) {
-        const noteIdx = Math.abs(el.textContent.charCodeAt(0)) % pentatonic.length;
-        playChime(getNote(noteIdx), 0.1, 0.03);
+        playChime(pentatonic[Math.abs(el.textContent.charCodeAt(0)) % pentatonic.length], 0.1, 0.03);
         lastSoundTime = now;
       }
       if (!rafId) rafId = requestAnimationFrame(physicsTick);
     }
-  }
-
-  function onPointerLeave() {
+  });
+  el.addEventListener('mouseleave', () => {
     isPushed = false;
     if (!rafId) rafId = requestAnimationFrame(physicsTick);
-    const noteIdx = Math.abs(el.textContent.charCodeAt(0)) % pentatonic.length;
-    playChime(getNote(noteIdx) * 0.5, 0.15, 0.02);
-  }
-
-  el.addEventListener('mousemove', onPointerMove);
-  el.addEventListener('mouseleave', onPointerLeave);
-  el.addEventListener('touchmove', (e) => {
-    const t = e.touches[0];
-    onPointerMove({ clientX: t.clientX, clientY: t.clientY });
-  }, { passive: true });
-
+    playChime(pentatonic[Math.abs(el.textContent.charCodeAt(0)) % pentatonic.length] * 0.5, 0.15, 0.02);
+  });
   setInterval(floatTick, 33);
 }
 
 // ===== 风吹拂文字 =====
 function attachWind(el) {
+  function playChime(freq, duration, volume) {
+    if (!audioCtx || audioCtx.state === 'suspended') return;
+    const now = audioCtx.currentTime;
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.connect(gain); gain.connect(audioCtx.destination);
+    osc.frequency.value = freq; osc.type = 'sine';
+    gain.gain.setValueAtTime(volume, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + duration);
+    osc.start(now); osc.stop(now + duration);
+  }
+  function playWindSound(duration, volume) {
+    if (!audioCtx || audioCtx.state === 'suspended') return;
+    const now = audioCtx.currentTime;
+    const bufferSize = audioCtx.sampleRate * duration;
+    const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+    const data = buffer.getChannelData(0);
+    for (let i = 0; i < bufferSize; i++) data[i] = (Math.random() * 2 - 1) * 0.5;
+    const source = audioCtx.createBufferSource();
+    const filter = audioCtx.createBiquadFilter();
+    const gain = audioCtx.createGain();
+    source.buffer = buffer;
+    filter.type = 'bandpass'; filter.frequency.value = 400 + Math.random() * 300; filter.Q.value = 0.5;
+    source.connect(filter); filter.connect(gain); gain.connect(audioCtx.destination);
+    gain.gain.setValueAtTime(0, now);
+    gain.gain.linearRampToValueAtTime(volume, now + 0.1);
+    gain.gain.linearRampToValueAtTime(volume * 0.6, now + duration * 0.5);
+    gain.gain.linearRampToValueAtTime(0, now + duration);
+    source.start(now); source.stop(now + duration);
+  }
+  const pentatonic = [261.63, 293.66, 329.63, 392.00, 440.00, 523.25, 587.33, 659.25];
+
   el.addEventListener('click', () => {
-    if (!audioEnabled) initAudio();
-
-    playWind(0.5, 0.035);
-    const noteIdx = Math.abs(el.textContent.charCodeAt(0)) % pentatonic.length;
-    playChime(getNote(noteIdx), 0.25, 0.02);
-
+    playWindSound(0.5, 0.035);
+    playChime(pentatonic[Math.abs(el.textContent.charCodeAt(0)) % pentatonic.length], 0.25, 0.02);
     el.classList.add('wind-blown');
     setTimeout(() => el.classList.remove('wind-blown'), 700);
-
     const siblings = Array.from(el.parentElement.children);
     const idx = siblings.indexOf(el);
     siblings.forEach((sib, i) => {
@@ -650,16 +544,262 @@ function attachWind(el) {
   });
 }
 
-function init() {
-  document.querySelectorAll('.ag-char').forEach((el) => {
-    attachAntiGravity(el, {
-      floatAmp: 3 + Math.random() * 4,
-      floatSpeed: 0.25 + Math.random() * 0.3,
-      rotAmp: 0.6 + Math.random() * 1.4,
-      pushRadius: 110, pushForce: 16
-    });
+// ===== Canvas 珠帘 Verlet 物理 =====
+let audioCtx = null;
+const artboard = document.getElementById('artboard');
+const canvas = document.getElementById('curtain');
+const ctx = canvas.getContext('2d');
+const cursor = document.getElementById('cursor');
+const temple = document.getElementById('temple');
+const configure = document.getElementById('configure');
+const settings = document.getElementById('settings');
+const resetBtn = document.getElementById('resetCurtain');
+const chains = [];
+let glyphs = '天坛祈年风调雨顺天地玄黄日月星辰礼乐文明北京春秋山川云海故宫长城颐和圆明天坛地坛先农坛帝王祭祀五谷丰登皇天后土圜丘皇穹宇回音壁祈谷坛祈年殿皇乾殿丹陛桥七星石三音石七十二长廊五百二十八米三重檐攒尖顶鎏金宝顶蓝瓦红柱和玺彩画金龙藻井二十四节气七十二候孟春祈谷岁事典礼钟鼓齐鸣乐舞升平九五之尊天子亲耕藉田之礼先蚕坛日月坛社稷坛太庙文庙武庙孔庙雍和宫白塔寺大钟寺五塔寺万寿寺碧云寺卧佛寺戒台寺潭柘寺灵光寺法源寺广济寺广化寺智化寺大慧寺大觉寺真觉寺觉生寺西黄寺东黄寺柏林寺贤良寺普度寺昭显庙凝和庙宣仁庙夕月坛太岁坛天神坛地祇坛先农坛观耕台一亩三分地藉田礼亲耕耤田祈雨雩祭日坛朝日坛月坛夕月坛星辰坛社稷坛太庙文庙历代帝王庙先农坛天神坛地祇坛太岁坛祈年殿皇穹宇圜丘坛祈谷坛孟春正月上辛日皇帝亲祭昊天上帝皇天上帝百神从祀三献礼九奏乐八佾舞钦若昊天敬授人时祈谷于天为民祈福五谷丰登国泰民安风调雨顺天下太平万邦协和怀柔远人威震四方天下一统九州同庆万国来朝天朝上国礼仪之邦衣冠上国礼乐之邦';
+const mouse = { x: -999, y: -999, oldX: -999, oldY: -999, active: false };
+const physics = { strength: .72, radius: 34, friction: .965, gravity: .18 };
+const sound = {
+  context: null, output: null, lastStrike: [], lastGlobal: 0, voices: 0,
+  scale: [523.25, 587.33, 659.25, 783.99, 880, 1046.5, 1174.66, 1318.51, 1567.98, 1760]
+};
+let width = 0, height = 0, dpr = 1;
+
+function unlockSound() {
+  const AudioContext = window.AudioContext || window.webkitAudioContext;
+  if (!AudioContext) return;
+  if (!sound.context) {
+    const context = new AudioContext();
+    const output = context.createGain();
+    const compressor = context.createDynamicsCompressor();
+    const delay = context.createDelay(.3);
+    const feedback = context.createGain();
+    const wet = context.createGain();
+    output.gain.value = .62;
+    compressor.threshold.value = -18; compressor.ratio.value = 3;
+    delay.delayTime.value = .11; feedback.gain.value = .14; wet.gain.value = .13;
+    output.connect(compressor); output.connect(delay);
+    delay.connect(feedback); feedback.connect(delay); delay.connect(wet); wet.connect(compressor);
+    compressor.connect(context.destination);
+    sound.context = context; sound.output = output;
+  }
+  if (sound.context.state === 'suspended') sound.context.resume().catch(() => {});
+  if (!audioCtx) audioCtx = sound.context;
+}
+
+function strikeChain(columnIndex, impact, x) {
+  const context = sound.context;
+  if (!context || context.state !== 'running' || impact < 1.1) return;
+  const timestamp = performance.now();
+  if (timestamp - (sound.lastStrike[columnIndex] || 0) < 95) return;
+  if (timestamp - sound.lastGlobal < 28 || sound.voices >= 8) return;
+  sound.lastStrike[columnIndex] = timestamp;
+  sound.lastGlobal = timestamp;
+  sound.voices += 1;
+
+  const now = context.currentTime;
+  const frequency = sound.scale[columnIndex % sound.scale.length];
+  const level = .028 + Math.min(impact, 18) / 18 * .075;
+  const duration = .72 + Math.random() * .32;
+  const spatial = context.createStereoPanner ? context.createStereoPanner() : context.createGain();
+  const pan = Math.max(-.9, Math.min(.9, x / width * 2 - 1));
+  if (spatial.pan) spatial.pan.setValueAtTime(pan, now);
+  spatial.connect(sound.output);
+
+  [{ratio:1,amount:1,decay:1},{ratio:2.01,amount:.24,decay:.62},{ratio:3.96,amount:.1,decay:.38}].forEach(partial => {
+    const oscillator = context.createOscillator();
+    const envelope = context.createGain();
+    oscillator.type = 'sine';
+    oscillator.frequency.setValueAtTime(frequency * partial.ratio, now);
+    oscillator.detune.setValueAtTime((Math.random()-.5)*8, now);
+    envelope.gain.setValueAtTime(level * partial.amount, now);
+    envelope.gain.exponentialRampToValueAtTime(.0001, now + duration * partial.decay);
+    oscillator.connect(envelope); envelope.connect(spatial);
+    oscillator.start(now); oscillator.stop(now + duration + .05);
   });
-  document.querySelectorAll('.wind-char').forEach((el) => attachWind(el));
+
+  window.setTimeout(() => {
+    sound.voices = Math.max(0, sound.voices - 1);
+    spatial.disconnect();
+  }, (duration + .15) * 1000);
+}
+
+function build() {
+  chains.length = 0;
+  const narrow = width < 720;
+  const columns = narrow ? 16 : 26;
+  const templeRect = temple.getBoundingClientRect();
+  const artboardRect = artboard.getBoundingClientRect();
+  const buildingCenter = templeRect.left - artboardRect.left + templeRect.width * .5;
+  const curtainWidth = templeRect.width * .84;
+  const left = buildingCenter - curtainWidth / 2;
+  const templeTop = templeRect.top - artboardRect.top;
+  const roofScale = templeRect.width / 520;
+  const centerEdge = templeTop + 380 * roofScale;
+  const sideEdge = templeTop + 420 * roofScale;
+  const curtainBottom = height - (narrow ? 42 : 48);
+  const availableHeight = Math.max(120, curtainBottom - sideEdge);
+  const rows = Math.max(18, Math.min(narrow ? 35 : 39, Math.floor(availableHeight / 9.4) + 1));
+
+  for (let column = 0; column < columns; column++) {
+    const x = left + column * curtainWidth / (columns - 1);
+    const normalizedX = Math.abs(column / (columns - 1) * 2 - 1);
+    const top = centerEdge + (sideEdge - centerEdge) * Math.pow(normalizedX, 1.7) - 4;
+    const segmentLength = Math.max(6.4, (curtainBottom - top) / (rows - 1));
+    const readingColumn = columns - 1 - column;
+    const chain = [];
+    for (let row = 0; row < rows; row++) {
+      const y = top + row * segmentLength;
+      chain.push({
+        x, y, oldX: x, oldY: y, anchorX: x, anchorY: y,
+        pinned: row === 0, restLength: segmentLength,
+        char: glyphs[(readingColumn * rows + row) % glyphs.length],
+        alpha: .36 + ((column + row * 2) % 6) * .055
+      });
+    }
+    chains.push(chain);
+  }
+}
+
+function resize() {
+  const rect = artboard.getBoundingClientRect();
+  width = rect.width; height = rect.height;
+  dpr = Math.min(2, window.devicePixelRatio || 1);
+  canvas.width = Math.round(width * dpr);
+  canvas.height = Math.round(height * dpr);
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  build();
+}
+
+function injectMouseDelta() {
+  if (!mouse.active) return;
+  const moveX = mouse.x - mouse.oldX;
+  const moveY = mouse.y - mouse.oldY;
+  const speed = Math.hypot(moveX, moveY);
+  if (speed < .01 || speed > 80) return;
+  for (let chainIndex = 0; chainIndex < chains.length; chainIndex++) {
+    const chain = chains[chainIndex];
+    let strongestImpact = 0;
+    for (let index = 1; index < chain.length; index++) {
+      const point = chain[index];
+      const distance = Math.hypot(point.x - mouse.oldX, point.y - mouse.oldY);
+      if (distance >= physics.radius) continue;
+      const falloff = 1 - distance / physics.radius;
+      strongestImpact = Math.max(strongestImpact, speed * falloff);
+      point.x += moveX * physics.strength * falloff;
+      point.y += moveY * physics.strength * falloff;
+    }
+    if (strongestImpact > 0) strikeChain(chainIndex, strongestImpact, chain[0].x);
+  }
+}
+
+function integrate() {
+  for (const chain of chains) {
+    for (const point of chain) {
+      if (point.pinned) continue;
+      const velocityX = (point.x - point.oldX) * physics.friction;
+      const velocityY = (point.y - point.oldY) * physics.friction;
+      point.oldX = point.x; point.oldY = point.y;
+      point.x += velocityX; point.y += velocityY + physics.gravity;
+    }
+  }
+}
+
+function constrain() {
+  for (let pass = 0; pass < 8; pass++) {
+    for (const chain of chains) {
+      const anchor = chain[0];
+      anchor.x = anchor.anchorX; anchor.y = anchor.anchorY;
+      for (let index = 1; index < chain.length; index++) {
+        const a = chain[index - 1], b = chain[index];
+        const dx = b.x - a.x, dy = b.y - a.y;
+        const distance = Math.max(.0001, Math.hypot(dx, dy));
+        const difference = (distance - b.restLength) / distance;
+        if (a.pinned) {
+          b.x -= dx * difference; b.y -= dy * difference;
+        } else {
+          const cx = dx * difference * .5, cy = dy * difference * .5;
+          a.x += cx; a.y += cy; b.x -= cx; b.y -= cy;
+        }
+      }
+    }
+  }
+}
+
+function draw() {
+  ctx.clearRect(0, 0, width, height);
+  ctx.fillStyle = '#2e251f';
+  ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  ctx.font = '500 10px ui-monospace, SFMono-Regular, Menlo, monospace';
+  for (const chain of chains) {
+    for (const point of chain) {
+      ctx.globalAlpha = point.alpha;
+      ctx.fillText(point.char, point.x, point.y);
+    }
+  }
+  ctx.globalAlpha = 1;
+}
+
+function frame() {
+  integrate(); constrain(); draw();
+  requestAnimationFrame(frame);
+}
+
+function enter(event) {
+  const rect = canvas.getBoundingClientRect();
+  mouse.x = mouse.oldX = event.clientX - rect.left;
+  mouse.y = mouse.oldY = event.clientY - rect.top;
+  mouse.active = true;
+  cursor.style.left = mouse.x + 'px'; cursor.style.top = mouse.y + 'px';
+  artboard.classList.add('is-active');
+}
+
+function move(event) {
+  if (!mouse.active) enter(event);
+  mouse.oldX = mouse.x; mouse.oldY = mouse.y;
+  const rect = canvas.getBoundingClientRect();
+  mouse.x = event.clientX - rect.left; mouse.y = event.clientY - rect.top;
+  injectMouseDelta();
+  cursor.style.left = mouse.x + 'px'; cursor.style.top = mouse.y + 'px';
+}
+
+function leave() {
+  mouse.active = false;
+  artboard.classList.remove('is-active');
+}
+
+function bindRange(id, outputId, update) {
+  const input = document.getElementById(id);
+  const output = document.getElementById(outputId);
+  input.addEventListener('input', () => {
+    const value = Number(input.value);
+    output.value = String(value);
+    update(value);
+  });
+}
+
+configure.addEventListener('click', () => {
+  const open = settings.hidden;
+  settings.hidden = !open;
+  configure.setAttribute('aria-expanded', String(open));
+});
+resetBtn.addEventListener('click', build);
+bindRange('strength', 'strengthValue', v => { physics.strength = v / 100; });
+bindRange('reach', 'reachValue', v => { physics.radius = v; });
+bindRange('inertia', 'inertiaValue', v => { physics.friction = v / 100; });
+canvas.addEventListener('pointerenter', enter);
+canvas.addEventListener('pointermove', move);
+canvas.addEventListener('pointerleave', leave);
+window.addEventListener('pointerdown', unlockSound, { passive: true });
+window.addEventListener('resize', resize);
+
+// ===== 初始化 =====
+function init() {
+  document.querySelectorAll('.ag-char').forEach(el => {
+    attachAntiGravity(el, { floatAmp: 3 + Math.random() * 4, floatSpeed: 0.25 + Math.random() * 0.3, rotAmp: 0.6 + Math.random() * 1.4, pushRadius: 110, pushForce: 16 });
+  });
+  document.querySelectorAll('.wind-char').forEach(el => attachWind(el));
+  resize();
+  frame();
 }
 
 document.addEventListener('DOMContentLoaded', init);
