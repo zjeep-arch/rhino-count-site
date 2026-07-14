@@ -4679,6 +4679,19 @@
     }
     .hero-cine-video.mobile-delayed-video.is-ready { opacity: 1; }
     [data-theme="light"] .hero-cine-video.mobile-delayed-video.is-ready { opacity: 0.85; }
+    @media (max-width: 860px) {
+      .hero-cine-video.mobile-delayed-video {
+        object-position: center 38%;
+        filter: saturate(0.9) contrast(1.1) brightness(0.76);
+        -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 68%, rgba(0,0,0,0.92) 78%, rgba(0,0,0,0.48) 90%, transparent 100%);
+        mask-image: linear-gradient(to bottom, #000 0%, #000 68%, rgba(0,0,0,0.92) 78%, rgba(0,0,0,0.48) 90%, transparent 100%);
+      }
+      .hero-cine-overlay {
+        background:
+          radial-gradient(ellipse at center 38%, transparent 35%, rgba(4,6,10,0.22) 72%, rgba(4,6,10,0.58) 100%),
+          linear-gradient(180deg, rgba(4,6,10,0.68) 0%, rgba(4,6,10,0.10) 28%, rgba(4,6,10,0.08) 58%, rgba(4,6,10,0.72) 84%, #04060A 100%);
+      }
+    }
     .hero-video-play {
       position: absolute;
       z-index: 5;
