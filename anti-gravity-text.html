@@ -195,33 +195,6 @@
       brightness(.85) saturate(1.1);
   }
 
-  /* ===== Destination labels ===== */
-  .destination {
-    position: absolute;
-    z-index: 6;
-    top: 29%;
-    width: 60px;
-    min-height: 68px;
-    display: grid;
-    place-content: center;
-    gap: 5px;
-    border: 1px solid var(--hairline);
-    background: transparent;
-    color: var(--ink);
-    font: 12px/1 'Playfair Display', Georgia, "Times New Roman", serif;
-    pointer-events: none;
-  }
-  .destination::before {
-    content: "";
-    width: 26px;
-    height: 7px;
-    margin: auto;
-    border-top: 2px solid currentColor;
-    border-radius: 50% 50% 0 0;
-  }
-  .destination.left { left: clamp(24px, 6vw, 108px); }
-  .destination.right { right: clamp(24px, 6vw, 108px); }
-
   /* ===== Headline ===== */
   .headline {
     position: absolute;
@@ -361,9 +334,6 @@
     .masthead { grid-template-columns: 1fr auto; }
     .nav-links { display: none; }
     .temple { top: 66px; width: min(520px, 96vw); }
-    .destination { top: 24%; transform: scale(.86); }
-    .destination.left { left: 16px; }
-    .destination.right { right: 16px; }
     .headline { left: 24px; bottom: 38px; width: min(285px, 72vw); }
     h1 { font-size: clamp(42px, 14vw, 66px); }
     .progress { display: none; }
@@ -403,9 +373,6 @@
     <img src="assets/temple-roof-cutout-web.webp" alt="天坛祈年殿屋顶" width="901" height="730" fetchpriority="high" decoding="async"
          onerror="this.onerror=null;this.src='temple-of-heaven.png';this.removeAttribute('width');this.removeAttribute('height')">
   </div>
-
-  <div class="destination left"><span>Vietnam</span></div>
-  <div class="destination right"><span>Japan</span></div>
 
   <section class="headline" id="home">
     <p class="eyebrow">北京 (Beijing) / 天地之间</p>
