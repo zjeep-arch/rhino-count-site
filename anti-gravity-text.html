@@ -306,41 +306,6 @@
   }
   .counter.visible { opacity: 1; }
 
-  /* ===== Wind text (vertical reading) ===== */
-  .wind-text-container {
-    position: absolute;
-    z-index: 7;
-    bottom: clamp(80px, 14vh, 160px);
-    left: clamp(28px, 6vw, 112px);
-    display: flex;
-    gap: 5px;
-    cursor: pointer;
-    padding: 8px;
-  }
-  .wind-char {
-    writing-mode: vertical-rl;
-    font-size: 12px;
-    color: var(--muted);
-    letter-spacing: 0.1em;
-    line-height: 1;
-    transition: color .3s;
-    cursor: pointer;
-    user-select: none;
-    position: relative;
-    font-family: 'Noto Serif SC', serif;
-  }
-  .wind-char:hover { color: var(--ink); }
-  .wind-char.wind-blown {
-    animation: windSway 0.7s ease-in-out;
-  }
-  @keyframes windSway {
-    0% { transform: rotate(0deg) translateX(0); }
-    20% { transform: rotate(10deg) translateX(4px); }
-    45% { transform: rotate(-6deg) translateX(-3px); }
-    70% { transform: rotate(4deg) translateX(2px); }
-    100% { transform: rotate(0deg) translateX(0); }
-  }
-
   /* ===== Canvas 珠帘 ===== */
   #curtain {
     position: absolute;
@@ -417,7 +382,6 @@
     .caption { display: none; }
     .progress { display: none; }
     .counter { display: none; }
-    .wind-text-container { display: none; }
   }
 
   @media(prefers-reduced-motion: reduce) {
@@ -465,10 +429,6 @@
       <span class="ag-char">H</span><span class="ag-char">e</span><span class="ag-char">a</span><span class="ag-char">v</span><span class="ag-char">e</span><span class="ag-char">n</span><span class="rule"></span>
     </h1>
   </section>
-
-  <div class="wind-text-container" id="windText">
-    <span class="wind-char">祈</span><span class="wind-char">年</span><span class="wind-char">殿</span><span class="wind-char">建</span><span class="wind-char">于</span><span class="wind-char">明</span><span class="wind-char">永</span><span class="wind-char">乐</span><span class="wind-char">十</span><span class="wind-char">八</span><span class="wind-char">年</span><span class="wind-char">正</span><span class="wind-char">月</span><span class="wind-char">十</span><span class="wind-char">九</span><span class="wind-char">日</span><span class="wind-char">是</span><span class="wind-char">天</span><span class="wind-char">坛</span><span class="wind-char">内</span><span class="wind-char">最</span><span class="wind-char">大</span><span class="wind-char">建</span><span class="wind-char">筑</span><span class="wind-char">三</span><span class="wind-char">层</span><span class="wind-char">蓝</span><span class="wind-char">瓦</span><span class="wind-char">金</span><span class="wind-char">顶</span><span class="wind-char">正</span><span class="wind-char">八</span><span class="wind-char">角</span><span class="wind-char">形</span><span class="wind-char">三</span><span class="wind-char">重</span><span class="wind-char">檐</span><span class="wind-char">高</span><span class="wind-char">达</span><span class="wind-char">三</span><span class="wind-char">十</span><span class="wind-char">八</span><span class="wind-char">米</span><span class="wind-char">直</span><span class="wind-char">径</span><span class="wind-char">三</span><span class="wind-char">十</span><span class="wind-char">二</span><span class="wind-char">米</span><span class="wind-char">为</span><span class="wind-char">北</span><span class="wind-char">京</span><span class="wind-char">地</span><span class="wind-char">标</span><span class="wind-char">殿</span><span class="wind-char">内</span><span class="wind-char">无</span><span class="wind-char">柱</span><span class="wind-char">无</span><span class="wind-char">金</span><span class="wind-char">全</span><span class="wind-char">靠</span><span class="wind-char">二</span><span class="wind-char">十</span><span class="wind-char">八</span><span class="wind-char">根</span><span class="wind-char">楠</span><span class="wind-char">木</span><span class="wind-char">柱</span><span class="wind-char">支</span><span class="wind-char">撑</span><span class="wind-char">象</span><span class="wind-char">征</span><span class="wind-char">四</span><span class="wind-char">季</span><span class="wind-char">二</span><span class="wind-char">十</span><span class="wind-char">四</span><span class="wind-char">节</span><span class="wind-char">气</span><span class="wind-char">十</span><span class="wind-char">二</span><span class="wind-char">月</span><span class="wind-char">时</span><span class="wind-char">辰</span><span class="wind-char">天</span><span class="wind-char">圆</span><span class="wind-char">地</span><span class="wind-char">方</span><span class="wind-char">阴</span><span class="wind-char">阳</span><span class="wind-char">和</span><span class="wind-char">谐</span><span class="wind-char">万</span><span class="wind-char">物</span><span class="wind-char">共</span><span class="wind-char">生</span><span class="wind-char">礼</span><span class="wind-char">乐</span><span class="wind-char">文</span><span class="wind-char">明</span><span class="wind-char">天</span><span class="wind-char">人</span><span class="wind-char">合</span><span class="wind-char">一</span>
-  </div>
 
   <p class="caption" id="story">A celestial dialogue between round skies and square earth, where emperors once prayed for the year's harmony.</p>
   <div class="progress" aria-hidden="true"></div>
@@ -555,60 +515,6 @@
       playChime(pentatonic[Math.abs(el.textContent.charCodeAt(0)) % pentatonic.length] * 0.5, 0.15, 0.02);
     });
     setInterval(floatTick, 33);
-  }
-
-  // ===== 风吹拂文字 =====
-  function attachWind(el) {
-    function playChime(freq, duration, volume) {
-      if (!audioCtx || audioCtx.state === 'suspended' || !soundEnabled) return;
-      const now = audioCtx.currentTime;
-      const osc = audioCtx.createOscillator();
-      const gain = audioCtx.createGain();
-      osc.connect(gain); gain.connect(audioCtx.destination);
-      osc.frequency.value = freq; osc.type = 'sine';
-      gain.gain.setValueAtTime(volume, now);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + duration);
-      osc.start(now); osc.stop(now + duration);
-    }
-    function playWindSound(duration, volume) {
-      if (!audioCtx || audioCtx.state === 'suspended' || !soundEnabled) return;
-      const now = audioCtx.currentTime;
-      const bufferSize = audioCtx.sampleRate * duration;
-      const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
-      const data = buffer.getChannelData(0);
-      for (let i = 0; i < bufferSize; i++) data[i] = (Math.random() * 2 - 1) * 0.5;
-      const source = audioCtx.createBufferSource();
-      const filter = audioCtx.createBiquadFilter();
-      const gain = audioCtx.createGain();
-      source.buffer = buffer;
-      filter.type = 'bandpass'; filter.frequency.value = 400 + Math.random() * 300; filter.Q.value = 0.5;
-      source.connect(filter); filter.connect(gain); gain.connect(audioCtx.destination);
-      gain.gain.setValueAtTime(0, now);
-      gain.gain.linearRampToValueAtTime(volume, now + 0.1);
-      gain.gain.linearRampToValueAtTime(volume * 0.6, now + duration * 0.5);
-      gain.gain.linearRampToValueAtTime(0, now + duration);
-      source.start(now); source.stop(now + duration);
-    }
-    const pentatonic = [261.63, 293.66, 329.63, 392.00, 440.00, 523.25, 587.33, 659.25];
-
-    el.addEventListener('click', () => {
-      playWindSound(0.5, 0.035);
-      playChime(pentatonic[Math.abs(el.textContent.charCodeAt(0)) % pentatonic.length], 0.25, 0.02);
-      el.classList.add('wind-blown');
-      setTimeout(() => el.classList.remove('wind-blown'), 700);
-      const siblings = Array.from(el.parentElement.children);
-      const idx = siblings.indexOf(el);
-      siblings.forEach((sib, i) => {
-        if (sib === el) return;
-        const dist = Math.abs(i - idx);
-        if (dist <= 4) {
-          setTimeout(() => {
-            sib.classList.add('wind-blown');
-            setTimeout(() => sib.classList.remove('wind-blown'), 700);
-          }, dist * 60);
-        }
-      });
-    });
   }
 
   // ===== Canvas 珠帘 Verlet 物理 =====
@@ -958,7 +864,6 @@
     document.querySelectorAll('.ag-char').forEach(el => {
       attachAntiGravity(el, { floatAmp: 3 + Math.random() * 4, floatSpeed: 0.25 + Math.random() * 0.3, rotAmp: 0.6 + Math.random() * 1.4, pushRadius: 110, pushForce: 16 });
     });
-    document.querySelectorAll('.wind-char').forEach(el => attachWind(el));
     resize();
     loadBodyText();
     frame();
