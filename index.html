@@ -1589,6 +1589,9 @@
     .fade-in-delay-1 { transition-delay: 0.1s; }
     .fade-in-delay-2 { transition-delay: 0.2s; }
     .fade-in-delay-3 { transition-delay: 0.3s; }
+    /* Safety net: if JS fails, fade-in elements become visible after 5s */
+    @keyframes fadeInSafety { from { opacity: 0; } to { opacity: 1; transform: translateY(0); } }
+    .fade-in:not(.visible) { animation: fadeInSafety 0s 5s forwards; }
 
     /* =========================================================
      * Back to top
@@ -5831,7 +5834,12 @@
       }, 1200);
       resetIdle();
     })();
-    } catch(e) { console.error('Render error:', e); document.querySelector('main').classList.add('ready'); }
+    } catch(e) {
+      console.error('Render error:', e);
+      document.querySelector('main').classList.add('ready');
+      /* Force-show all fade-in elements if JS failed mid-render */
+      document.querySelectorAll('.fade-in').forEach(function(el){ el.classList.add('visible'); });
+    }
   </script>
 </body>
 </html>
