@@ -120,6 +120,12 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "卷了两年画质，这家清华团队把视频做成了游戏",
+        desc: "Xmax AI发布全球首个实时交互视频模型X2.0。不是又一个视频生成工具，而是把视频从'内容'变成'界面'的范式跃迁。",
+        href: "notes/2026-07-15-xmax-x2-0.html"
+      },
+      {
+        type: "Essay",
         title: "Codex的负责人说，我们自己的App是用凑合的模型造的",
         desc: "OpenAI Codex负责人Tibo公开自曝前端能力okayish，83.9万人围观。诚实比吹牛更有杀伤力。",
         href: "notes/2026-07-13-tibo-codex-okayish.html"
@@ -208,6 +214,13 @@ window.SITE_DATA = {
     headingLine2: "慢慢记。",
     blurb: "每一篇笔记都是一次小型田野调查：关于模型、关于人、关于我们如何被这个时代重新塑形。",
     notes: [
+      {
+        cat: "产品观察", num: "N° 23",
+        title: "卷了两年画质，这家清华团队把视频做成了游戏",
+        excerpt: "Xmax AI发布全球首个实时交互视频模型X2.0。毫秒级响应、iPhone端侧运行、API成本仅为海外十二分之一。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-07-15-xmax-x2-0.html"
+      },
       {
         cat: "产品观察", num: "N° 21",
         title: "Codex的负责人说，我们自己的App是用凑合的模型造的",
