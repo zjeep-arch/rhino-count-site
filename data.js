@@ -58,6 +58,7 @@ window.SITE_DATA = {
     ctaSecondary: { label: "阅读最新笔记",     href: "#notes" },
     motion: {
       src: "assets/hero-rhino-scene.mp4",
+      mobile: "assets/hero-atmosphere.mp4",
       backdrop: "assets/hero-rhino-scene.mp4"
     },
     keywords: [
@@ -81,6 +82,13 @@ window.SITE_DATA = {
     blurb: "这里不放想法，放做出来的东西——网站、游戏、H5、交互实验。",
     tracks: [
       {
+        tag: "TOOL",
+        title: "犀牛白板 · 录屏创作器",
+        desc: "边画边讲的浏览器创作工具：白板、幻灯片、提词器、摄像头画中画与一键录屏，作品只保存在本地。",
+        linkLabel: "开始创作",
+        href: "whiteboard-recorder.html"
+      },
+      {
         tag: "GAME",
         title: "鸭骗战争：真鸭假鹅",
         desc: "扮演鹅腿阿姨，用鸭腿冒充鹅腿。荒诞答题小游戏，测试轻量游戏化表达。",
@@ -102,31 +110,61 @@ window.SITE_DATA = {
         href: "ai-lab-3d.html"
       },
       {
-        tag: "WORKFLOW",
-        title: "AI Workflow Lab",
-        desc: "把日常创作、资料整理、网页生成和自动化流程拆成可复用工作流。",
-        linkLabel: "查看站点",
-        href: "https://zjeep-arch.github.io/rhino-count-site/"
+        tag: "EXPERIMENT",
+        title: "反重力文字 · 北京地标",
+        desc: "每个字符在零重力中漂浮上升--用反重力排版讲述故宫、鸟巢、国贸等北京地标的建筑故事。鼠标悬停时字母被推开，松手后弹回原位。",
+        linkLabel: "进入实验",
+        href: "anti-gravity-text.html"
       }
     ],
     featured: [
       {
         type: "Essay",
-        title: "微软裁了4800人，转头招了6000人干AI",
-        desc: "不是AI替代你，是会用AI的人在替代不会用AI的人。",
-        href: "notes/2026-07-07-microsoft-layoff-ai-hiring.html"
+        title: "资本六周追着给DeepSeek送钱，因为闻到了一个味道",
+        desc: "DeepSeek B轮估值710亿美元，六周涨37%。梁文锋360亿美元登顶AI创始人首富。资本闻到了什么？",
+        href: "notes/2026-07-16-deepseek-funding-710b.html"
       },
       {
         type: "Essay",
-        title: "谷歌掐了Meta的电闸，AI争夺战杀到了变压器",
-        desc: "Meta被限算力后被迫卖算力，半导体暴跌6.27%。AI的战争已从算法打到了电力。",
-        href: "notes/2026-07-06-ai-compute-crisis-google-meta-power.html"
+        title: "卷了两年画质，这家清华团队把视频做成了游戏",
+        desc: "Xmax AI发布全球首个实时交互视频模型X2.0。不是又一个视频生成工具，而是把视频从'内容'变成'界面'的范式跃迁。",
+        href: "notes/2026-07-15-xmax-x2-0.html"
       },
       {
         type: "Essay",
-        title: "Anthropic把最强模型送给了政府",
-        desc: "Fable 5解禁背后，是一场22天的交易。Anthropic用Mythos 5的政府专属访问权，换回了Fable 5的商业自由。",
-        href: "notes/2026-07-05-anthropic-mythos5-government-trade.html"
+        title: "Codex的负责人说，我们自己的App是用凑合的模型造的",
+        desc: "OpenAI Codex负责人Tibo公开自曝前端能力okayish，83.9万人围观。诚实比吹牛更有杀伤力。",
+        href: "notes/2026-07-13-tibo-codex-okayish.html"
+      },
+      {
+        type: "Essay",
+        title: "Codex是工厂，Claude Code是工作室，你该选哪个",
+        desc: "2026年AI编程三巨头实测对比。核心差异不是功能多少，是协作哲学。",
+        href: "notes/2026-07-13-codex-factory-claude-studio.html"
+      },
+      {
+        type: "Essay",
+        title: "OpenAI把门一关，23万亿Token跑中国去了",
+        desc: "OpenRouter最新数据：中国AI模型周调用量23.45万亿Token，首超美国5.5倍。全球前五占四席。这不是中国赢了，是美国把门关太紧了。",
+        href: "notes/2026-07-13-china-ai-tokens-surge.html"
+      },
+      {
+        type: "Essay",
+        title: "一周之内，OpenAI的朋友全走了",
+        desc: "苹果94页起诉书、微软替换模型、人才出走、媒体制裁、42州调查。五条战线同时施压，OpenAI的真正危机不在模型，在盟友体系崩塌。",
+        href: "notes/2026-07-12-openai-friends-left.html"
+      },
+      {
+        type: "Essay",
+        title: "6万亿估值的Anthropic，电费单却寄给马斯克",
+        desc: "Anthropic的ARR从90亿飙到600亿，但每月12.5亿算力租金交给马斯克。微软用自研MAI替换OpenAI模型。AI产业正分成算力层、模型层和分发层，利润分配正在倾斜。",
+        href: "notes/2026-07-12-anthropic-valuation-compute-layer.html"
+      },
+      {
+        type: "Essay",
+        title: "马斯克向Anthropic认输，但最骚的操作不是认输",
+        desc: "Anthropic月付12.5亿租对手的GPU训练自己的模型，ARR 18个月从90亿飙到600亿。马斯克的认输是一门精明的生意。",
+        href: "notes/2026-07-11-anthropic-musk-surrender.html"
       }
     ],
     roadmap: [
@@ -182,6 +220,104 @@ window.SITE_DATA = {
     headingLine2: "慢慢记。",
     blurb: "每一篇笔记都是一次小型田野调查：关于模型、关于人、关于我们如何被这个时代重新塑形。",
     notes: [
+      {
+        cat: "行业观察", num: "N° 24",
+        title: "资本六周追着给DeepSeek送钱，因为闻到了一个味道",
+        excerpt: "DeepSeek B轮估值710亿美元，六周涨37%。梁文锋360亿美元登顶AI创始人首富。资本闻到了什么？",
+        img: "assets/note-05.svg",
+        href: "notes/2026-07-16-deepseek-funding-710b.html"
+      },
+      {
+        cat: "产品观察", num: "N° 23",
+        title: "卷了两年画质，这家清华团队把视频做成了游戏",
+        excerpt: "Xmax AI发布全球首个实时交互视频模型X2.0。毫秒级响应、iPhone端侧运行、API成本仅为海外十二分之一。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-07-15-xmax-x2-0.html"
+      },
+      {
+        cat: "产品观察", num: "N° 21",
+        title: "Codex的负责人说，我们自己的App是用凑合的模型造的",
+        excerpt: "OpenAI Codex负责人Tibo公开自曝：我们是用前端能力okayish的模型硬攒出Codex桌面App的。83.9万人围观了这句大实话。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-07-13-tibo-codex-okayish.html"
+      },
+      {
+        cat: "产品观察", num: "N° 22",
+        title: "Codex是工厂，Claude Code是工作室，你该选哪个",
+        excerpt: "2026年AI编程三巨头实测：终端党选Claude Code，要速度选Codex，爱IDE选Cursor。核心差异不是功能多少，是协作哲学。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-07-13-codex-factory-claude-studio.html"
+      },
+      {
+        cat: "行业观察", num: "N° 20",
+        title: "OpenAI把门一关，23万亿Token跑中国去了",
+        excerpt: "OpenRouter最新数据：中国AI模型周调用量23.45万亿Token，首超美国5.5倍。全球前五占四席。这不是中国赢了，是美国把门关太紧了。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-07-13-china-ai-tokens-surge.html"
+      },
+      {
+        cat: "行业观察", num: "N° 19",
+        title: "一周之内，OpenAI的朋友全走了",
+        excerpt: "苹果94页起诉书、微软替换模型、人才出走、媒体制裁、42州调查。五条战线同时施压，OpenAI的真正危机不在模型，在盟友体系崩塌。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-07-12-openai-friends-left.html"
+      },
+      {
+        cat: "行业观察", num: "N° 18",
+        title: "6万亿估值的Anthropic，电费单却寄给马斯克",
+        excerpt: "Anthropic的ARR从90亿飙到600亿，但每月12.5亿算力租金交给马斯克。微软用自研MAI替换OpenAI模型。AI产业正分成算力层、模型层和分发层，利润分配正在倾斜。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-07-12-anthropic-valuation-compute-layer.html"
+      },
+      {
+        cat: "行业观察", num: "N° 17",
+        title: "苹果一纸诉状，OpenAI的硬件从根部烂了",
+        excerpt: "苹果94页起诉书指控OpenAI系统性窃取硬件机密。面试让候选人带苹果零件来show and tell，离职后下载1000页机密文件。AI战争正式从云端打到了口袋。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-07-11-apple-sues-openai-hardware.html"
+      },
+      {
+        cat: "行业观察", num: "N° 16",
+        title: "马斯克向Anthropic认输，但最骚的操作不是认输",
+        excerpt: "Anthropic月付12.5亿租对手GPU，ARR 18个月从90亿飙到600亿。马斯克的认输是一门精明的生意。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-07-11-anthropic-musk-surrender.html"
+      },
+      {
+        cat: "行业观察", num: "N° 15",
+        title: "马斯克600亿买了Cursor，但真正吓人的不是Grok 4.5",
+        excerpt: "36天内从IPO到收购Cursor到更名SpaceXAI到联合发布Grok 4.5。马斯克拼出了一条AI编程赛道的垂直整合闭环。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-07-10-spacexai-cursor-grok45.html"
+      },
+      {
+        cat: "行业观察", num: "N° 14",
+        title: "两周，三颗芯片，AI行业换了个赛道",
+        excerpt: "OpenAI、Anthropic、DeepSeek两周内集体转向芯片。模型竞赛的高潮已过，下一场是芯片竞赛。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-07-09-deepseek-ai-chip.html"
+      },
+      {
+        cat: "产品评测", num: "N° 13",
+        title: "ChatGPT终于学会了一件事：别急着抢话",
+        excerpt: "GPT-Live用全双工架构和前后台解耦，把语音交互从对讲机变成了电话。BrowseComp从0.7%到75.2%。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-07-09-gpt-live-voice-model.html"
+      },
+      {
+        cat: "AI 趋势", num: "N° 12",
+        title: "扎克伯格说搞砸了，Meta市值却涨了1500亿",
+        excerpt: "AI重组搞砸了，员工直播会上骂老板，半导体暴跌5.4%。市场听懂了：不是AI失败，是换挡。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-07-08-meta-leaked-recording-zuckerberg.html"
+      },
+      {
+        cat: "AI 趋势", num: "N° 11",
+        title: "Anthropic给Claude做了一次脑部CT，然后全世界都在喊它有意识",
+        excerpt: "论文里没说意识两个字，但Anthropic让全宇宙都在讨论意识。科学上保持谨慎，传播上不断贴边。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-07-08-anthropic-j-space-consciousness-marketing.html"
+      },
       {
         cat: "AI 趋势", num: "N° 01",
         title: "先学会问对问题",

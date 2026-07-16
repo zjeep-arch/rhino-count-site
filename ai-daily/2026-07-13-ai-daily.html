@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="color-scheme" content="light dark" />
+  <title>AI大模型动态日报 | 2026年07月13日（星期一） · AI日报 · 犀牛伯爵</title>
+  <meta name="description" content="中国AI大模型周调用量连续十一周全球居首，阶跃星辰发布STEPX Neo大模型原生AI手机，DeepSeek V4即将上线并秘密自研芯片，OpenAI与Anthropic年收入或达2000亿美元，MiniMax拟融资160亿港元。" />
+  <meta name="author" content="犀牛伯爵" />
+  <meta name="robots" content="index,follow" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="AI大模型动态日报 | 2026年07月13日（星期一） · AI日报" />
+  <meta property="og:description" content="中国AI大模型周调用量连续十一周全球居首，阶跃星辰发布STEPX Neo大模型原生AI手机，DeepSeek V4即将上线并秘密自研芯片，OpenAI与Anthropic年收入或达2000亿美元，MiniMax拟融资160亿港元。" />
+  <meta property="article:published_time" content="2026-07-13" />
+  <meta property="article:author" content="犀牛伯爵" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,400;1,500&family=Inter:wght@400;500;600&family=Noto+Serif+SC:wght@500;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #F5EFE6; --bg-soft: #ECE3D2; --surface: #FBF7EE;
+      --ink: #1C1410; --ink-soft: #3B2E24; --muted: #7A6B5B;
+      --line: rgba(28,20,16,0.10); --line-2: rgba(28,20,16,0.22);
+      --accent: #8B3A2E; --gold: #B8862F;
+      --cat-accent: #2563eb;
+      --serif: "Playfair Display","Noto Serif SC","Songti SC",Georgia,serif;
+      --sans: "Inter",-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+      --maxw: 740px; --pad: clamp(20px,4vw,32px);
+      --radius: 14px; --radius-sm: 10px;
+      --s-1:4px;--s-2:8px;--s-3:12px;--s-4:16px;--s-5:24px;--s-6:32px;--s-7:48px;--s-8:64px;
+    }
+    [data-theme="dark"] {
+      --bg: #14100C; --bg-soft: #1A1510; --surface: #1F1813;
+      --ink: #F1E8DA; --ink-soft: #DCCEB8; --muted: #9B8B77;
+      --line: rgba(241,232,218,0.10); --line-2: rgba(241,232,218,0.22);
+      --accent: #D4825F; --gold: #E8C77A;
+      --cat-accent: #60a5fa;
+    }
+    *,*::before,*::after { box-sizing: border-box; }
+    body {
+      margin: 0; background: var(--bg); color: var(--ink);
+      font-family: var(--sans); font-size: 17px; line-height: 1.8;
+      -webkit-font-smoothing: antialiased;
+    }
+    body::before {
+      content:"";position:fixed;inset:0;
+      background-image:radial-gradient(700px 400px at 10% 0%,rgba(184,134,47,0.06),transparent 60%);
+      pointer-events:none;z-index:0;
+    }
+    .container { max-width: var(--maxw); margin-inline: auto; padding-inline: var(--pad); position: relative; z-index: 1; }
+
+    .article-header {
+      padding: var(--s-8) 0 var(--s-6);
+      border-bottom: 1px solid var(--line);
+      margin-bottom: var(--s-7);
+    }
+    .article-header .back {
+      display: inline-flex; align-items: center; gap: var(--s-2);
+      font-size: 13px; color: var(--cat-accent); font-weight: 500;
+      margin-bottom: var(--s-5);
+      transition: gap 0.2s ease;
+    }
+    .article-header .back:hover { gap: var(--s-3); }
+    .article-header .meta {
+      display: flex; align-items: center; gap: var(--s-3);
+      font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: var(--s-4);
+    }
+    .article-header .meta .cat {
+      color: var(--cat-accent); font-weight: 600;
+      background: color-mix(in srgb, var(--cat-accent) 10%, transparent);
+      padding: 2px 10px; border-radius: 20px;
+      letter-spacing: 0.04em;
+    }
+    .article-header .meta .date::before { content: "\00B7"; margin-right: var(--s-3); }
+    .article-header h1 {
+      font-family: var(--serif); font-weight: 700;
+      font-size: clamp(26px,4vw,40px); line-height: 1.2;
+      margin: 0; letter-spacing: 0.01em;
+    }
+
+    .article-body {
+      padding-bottom: var(--s-8);
+    }
+    .article-body p {
+      margin: 0 0 1.4em;
+    }
+
+    /* ===== Section h2 with category pill ===== */
+    .article-body h2 {
+      font-family: var(--serif); font-weight: 700;
+      font-size: clamp(20px,2.5vw,26px);
+      margin: 2.8em 0 1.2em; line-height: 1.3;
+      padding-top: var(--s-6);
+      border-top: 1px solid var(--line);
+      display: flex; align-items: center; gap: var(--s-3);
+    }
+    .article-body h2::before {
+      content: attr(data-section);
+      display: inline-block;
+      font-family: var(--sans); font-weight: 600;
+      font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--cat-accent);
+      background: color-mix(in srgb, var(--cat-accent) 10%, transparent);
+      padding: 2px 10px; border-radius: 20px;
+      white-space: nowrap; flex-shrink: 0;
+      line-height: 1.5;
+    }
+    .article-body h2:first-child { border-top: none; padding-top: 0; margin-top: 0; }
+
+    /* ===== Data Highlights: Grid cards under "今日数据亮点" h2 ===== */
+    .article-body .data-highlights {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--s-3);
+      margin-bottom: var(--s-6);
+    }
+    .article-body .data-highlights p {
+      margin: 0;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      padding: var(--s-4);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .article-body .data-highlights p:hover {
+      border-color: var(--line-2);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+    .article-body .data-highlights strong {
+      display: block;
+      font-size: clamp(20px,2.5vw,28px);
+      font-weight: 800;
+      color: var(--accent);
+      margin-bottom: var(--s-1);
+      letter-spacing: -0.01em;
+    }
+    @media (max-width: 520px) {
+      .article-body .data-highlights { grid-template-columns: 1fr; }
+    }
+
+    /* ===== Insight cards: h3 + p + blockquote under "今日洞察" h2 ===== */
+    .article-body .insight-card {
+      background: var(--surface);
+      border-left: 3px solid var(--cat-accent);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      padding: var(--s-5);
+      margin-bottom: var(--s-4);
+      transition: box-shadow 0.2s ease;
+    }
+    .article-body .insight-card:hover {
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    }
+    .article-body .insight-card h3 {
+      font-family: var(--serif); font-weight: 600;
+      font-size: clamp(16px,1.8vw,19px);
+      margin: 0 0 var(--s-3); line-height: 1.4;
+      color: var(--ink);
+    }
+    .article-body .insight-card p {
+      margin: 0 0 var(--s-3);
+      font-size: 15px; color: var(--ink-soft); line-height: 1.7;
+    }
+    .article-body .insight-card blockquote {
+      margin: 0;
+      padding: var(--s-3) var(--s-4);
+      background: color-mix(in srgb, var(--cat-accent) 6%, transparent);
+      border-left: none;
+      border-radius: var(--radius-sm);
+      font-style: normal;
+      font-size: 14px;
+      color: var(--ink-soft);
+    }
+
+    /* ===== News items: h3 entries with separator ===== */
+    .article-body .news-item {
+      padding: var(--s-4) 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .article-body .news-item:last-child { border-bottom: none; }
+    .article-body .news-item h3 a {
+      color: var(--ink);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    .article-body .news-item h3 a:hover {
+      color: var(--cat-accent);
+    }
+    .article-body .news-item h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin: 0 0 var(--s-2) 0;
+      line-height: 1.45;
+    }
+    .article-body .news-item p {
+      margin: 0;
+      font-size: 15px; color: var(--ink-soft); line-height: 1.7;
+    }
+
+    /* ===== Competitor pill badges in "友商雷达" ===== */
+    .article-body .competitor-badge {
+      display: inline-block;
+      font-family: var(--sans); font-weight: 600;
+      font-size: 12px;
+      color: var(--cat-accent);
+      background: color-mix(in srgb, var(--cat-accent) 10%, transparent);
+      padding: 2px 10px; border-radius: 20px;
+      margin-right: var(--s-1);
+      vertical-align: middle;
+      line-height: 1.5;
+    }
+
+    /* ===== Default h3 / blockquote (fallback) ===== */
+    .article-body h3 {
+      font-family: var(--serif); font-weight: 600;
+      font-size: clamp(17px,1.8vw,20px);
+      margin: 1.6em 0 0.6em;
+    }
+    .article-body blockquote {
+      margin: 1.5em 0; padding: var(--s-4) var(--s-5);
+      border-left: 3px solid var(--accent);
+      background: var(--surface);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      color: var(--ink-soft);
+      font-style: italic;
+    }
+    .article-body strong { color: var(--ink); font-weight: 600; }
+    .article-body a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+
+    .article-footer {
+      border-top: 1px solid var(--line);
+      padding: var(--s-6) 0 var(--s-8);
+      text-align: center;
+    }
+    .article-footer .disclaimer {
+      font-size: 13px; color: var(--muted);
+      line-height: 1.8; font-style: italic;
+    }
+    .article-footer .back-link {
+      display: inline-flex; align-items: center; gap: var(--s-2);
+      margin-top: var(--s-5);
+      font-size: 13px; color: var(--cat-accent); font-weight: 500;
+    }
+
+    .giscus-wrapper {
+      max-width: var(--maxw);
+      margin-inline: auto;
+      padding-inline: var(--pad);
+      padding-bottom: var(--s-7);
+    }
+
+    .site-footer {
+      border-top: 1px solid var(--line);
+      padding: var(--s-5) 0;
+      text-align: center;
+      font-size: 12px; color: var(--muted);
+    }
+
+    @media (max-width: 520px) {
+      body { font-size: 16px; }
+      .article-body .insight-card { padding: var(--s-4); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,*::before,*::after { animation:none!important; transition:none!important; }
+    }
+  </style>
+</head>
+<body>
+  <article class="container">
+    <header class="article-header">
+      <a class="back" href="./">&larr; AI日报</a>
+      <div class="meta">
+        <span class="cat">数据 · 洞察 · 市场</span>
+        <span class="date">2026-07-13</span>
+      </div>
+      <h1>AI大模型动态日报 | 2026年07月13日（星期一）</h1>
+    </header>
+
+    <div class="article-body">
+<h2 data-section="数据">今日数据亮点</h2>
+<div class="data-highlights">
+<p><strong>27.58万亿</strong>中国AI模型周调用量Token，环比+17.61%，连续十一周全球居首</p>
+<p><strong>2000亿美元</strong>OpenAI+Anthropic 2026年底年收入运行率预估，月增收入已超Meta/Google</p>
+<p><strong>160亿港元</strong>MiniMax拟融资金额（约138亿人民币），2026年国内AI领域最大融资之一</p>
+<p><strong>265亿美元</strong>SK海力士美国IPO募资额，创美国历史上最大外资IPO纪录</p>
+</div>
+
+<h2 data-section="观点">权威观点 / 报告</h2>
+<div class="news-item">
+<h3><a href="https://news.fx678.com/202607131148162461.shtml" target="_blank">中国AI大模型周调用量连续十一周全球居首，前六名均为中国模型</a></h3>
+<p>据OpenRouter数据测算，上周（7月6日至12日）全球AI大模型总调用量为54.6万亿Token，环比增长12.6%。中国AI大模型周调用量达27.58万亿Token，环比增长17.61%，连续十一周全球居首。上榜模型前六名均为中国模型，DeepSeek稳居榜首。<em style="color:var(--muted)">— OpenRouter / 汇通网</em></p>
+</div>
+<div class="news-item">
+<h3><a href="http://m.toutiao.com/group/7661158269053911595/" target="_blank">高盛50页重磅研报：中国AI大模型谁能笑到最后？</a></h3>
+<p>高盛发布50页深度研报，系统分析中国AI大模型竞争格局。研报指出，中国大模型正从"参数竞赛"转向"应用落地"，成本优势和场景丰富度成为核心竞争力。<em style="color:var(--muted)">— 高盛 / 今日头条</em></p>
+</div>
+<div class="news-item">
+<h3><a href="http://m.toutiao.com/group/7661858630509298203/" target="_blank">AI"下半场"突然换赛道，大模型不再只比谁更大、更强</a></h3>
+<p>企业不再迷信"最强模型"，大模型开始从舞台中央退到系统内部，成为可以被组合、替换和调度的"发动机"。行业共识转向多模型编排与场景适配。<em style="color:var(--muted)">— 今日头条</em></p>
+</div>
+
+<h2 data-section="产品">产品 / 技术动态</h2>
+<div class="news-item">
+<h3><a href="http://m.toutiao.com/group/7661982229194670643/" target="_blank">阶跃星辰发布STEPX Neo：全球首个大模型原生AI终端品牌</a></h3>
+<p>7月13日，阶跃星辰在上海发布全球首个大模型原生AI终端品牌"STEPX"，并推出首款智能体手机STEPX Neo。这是该公司从基础大模型研发向终端硬件产品全面转型的标志性动作。<em style="color:var(--muted)">— 硬AI / 今日头条</em></p>
+</div>
+<div class="news-item">
+<h3><a href="https://m.ebrun.com/685348.html" target="_blank">DeepSeek V4即将上线，首推API峰谷分时定价</a></h3>
+<p>DeepSeek将于2026年7月中旬上线大模型V4正式版，并同步推出行业首个API峰谷分时定价规则。V4在预览版基础上做了全面优化，长上下文和推理能力显著提升。<em style="color:var(--muted)">— 亿邦动力</em></p>
+</div>
+<div class="news-item">
+<h3><a href="http://m.toutiao.com/group/7661837671295205903/" target="_blank">DeepSeek秘密开发自有AI芯片，项目已低调启动一年</a></h3>
+<p>路透社7月7日独家爆料，DeepSeek已在秘密开发自有AI芯片，项目早在约一年前就低调启动。近几个月来通过猎头、内推等非公开渠道密集招募芯片人才。<em style="color:var(--muted)">— 路透社 / 今日头条</em></p>
+</div>
+<div class="news-item">
+<h3><a href="https://techcrunch.com/2026/07/09/meta-enters-the-crowded-ai-coding-battle-with-muse-spark-1-1/" target="_blank">Meta发布Muse Spark 1.1进入AI编程战场</a></h3>
+<p>Meta正式推出Muse Spark 1.1，加入AI编程工具竞争。该产品主打大型代理工作负载处理、Bug修复和大型代码迁移，直接对标Anthropic的Claude Code和OpenAI的Codex。<em style="color:var(--muted)">— TechCrunch</em></p>
+</div>
+<div class="news-item">
+<h3><a href="https://openai.com/index/openai-broadcom-jalapeno-inference-chip" target="_blank">OpenAI与博通推出Jalapeño推理芯片</a></h3>
+<p>OpenAI与Broadcom联合推出专为LLM推理优化的定制AI芯片Jalapeño，旨在提升AI系统的性能、效率和规模。这是OpenAI在自研芯片领域的重要布局。<em style="color:var(--muted)">— OpenAI</em></p>
+</div>
+<div class="news-item">
+<h3><a href="http://m.toutiao.com/group/7660799166334911022/" target="_blank">腾讯混元模型免费开源，大模型成本或再降50%</a></h3>
+<p>腾讯混元干脆把模型免费开源，与DeepSeek的峰谷电价策略形成呼应。2026年7月，全球AI产业正经历一场"价格起义"，模型使用成本有望再降50%。<em style="color:var(--muted)">— 今日头条</em></p>
+</div>
+
+<h2 data-section="友商">友商雷达</h2>
+<div class="news-item">
+<span class="competitor-badge">字节跳动</span>
+<h3><a href="http://m.toutiao.com/group/7659686899904463387/" target="_blank">字节Seedance 2.0：字节首款效果绝对领先的模型</a></h3>
+<p>Seedance 2.0几乎是字节第一款、也是目前唯一一款在效果上能形成绝对领先的模型，标志着字节在大模型领域实现关键突破。</p>
+</div>
+<div class="news-item">
+<span class="competitor-badge">MiniMax</span>
+<h3><a href="http://m.toutiao.com/group/7661927833341542927/" target="_blank">MiniMax拟融资160亿港元（约138亿人民币）</a></h3>
+<p>上海AI大模型企业MiniMax发布公告，拟通过配售新股及发行可转换债券募集资金约160亿港元。这是2026年国内AI领域最大规模融资之一。</p>
+</div>
+<div class="news-item">
+<span class="competitor-badge">Meta</span>
+<h3><a href="https://techcrunch.com/2026/07/10/meta-removes-controversial-ai-feature-on-instagram-after-backlash/" target="_blank">Meta紧急下线Instagram AI生图功能，默认引用公开内容引众怒</a></h3>
+<p>Meta于7月11日宣布全面下线本周刚推出的AI图像生成新功能。该功能允许用户通过@提及公开Instagram账号引用他人内容生成AI图像，上线时默认开启，引发用户强烈不满。</p>
+</div>
+<div class="news-item">
+<span class="competitor-badge">Meta</span>
+<h3><a href="http://m.toutiao.com/group/7660882832536994310/" target="_blank">Meta AI有望半年内超越谷歌，MSL确立盈利能力</a></h3>
+<p>SemiAnalysis报告指出，Meta旗下的Meta Superintelligence(MSL)有望在未来六个月内在前沿AI能力排名上超越谷歌。</p>
+</div>
+<div class="news-item">
+<span class="competitor-badge">OpenAI</span>
+<h3><a href="https://techcrunch.com/2026/07/09/fidji-simo-steps-down-from-openais-no-2-role/" target="_blank">OpenAI二号高管Fidji Simo离职，GPT-5.6成为Microsoft Copilot首选模型</a></h3>
+<p>OpenAI二号高管Fidji Simo因医疗休假延长宣布离职。与此同时，OpenAI确认GPT-5.6是Microsoft Copilot 365的首选模型，打破双方关系破裂的传闻。</p>
+</div>
+<div class="news-item">
+<span class="competitor-badge">Anthropic</span>
+<h3><a href="http://m.toutiao.com/group/7655186863581348402/" target="_blank">Anthropic年收470亿美元ARR，B端市场反超OpenAI</a></h3>
+<p>中信证券最新研报数据显示，Anthropic在2026年5月的年度经常性收入(ARR)达到了470亿美元。凭借Claude Code在企业市场的爆发式增长，Anthropic已确立起盈利能力。</p>
+</div>
+
+<h2 data-section="资本">资本市场动态</h2>
+<div class="news-item">
+<h3><a href="http://m.toutiao.com/group/7661635239944569353/" target="_blank">OpenAI与Anthropic 2026年收入或达2000亿美元，月增收入超Meta谷歌</a></h3>
+<p>两位投资人测算数据显示，OpenAI与Anthropic两家模型公司月度新增收入已超过Meta、Google或Microsoft中的任意一家，按此增速，2026年底二者年收入运行率或达2000亿美元。<em style="color:var(--muted)">— 投资人测算 / 今日头条</em></p>
+</div>
+<div class="news-item">
+<h3><a href="https://techcrunch.com/2026/07/10/sk-hynix-raises-26-5b-in-the-biggest-foreign-ipo-in-us-history-is-urged-to-build-new-us-fabs/" target="_blank">SK海力士募资265亿美元，创美国历史上最大外资IPO</a></h3>
+<p>AI芯片热潮催生了华尔街最大时刻。SK海力士在美国募资265亿美元，成为美国历史上最大规模外资IPO。美国政府正敦促SK海力士和三星在美国建设新工厂。<em style="color:var(--muted)">— TechCrunch</em></p>
+</div>
+<div class="news-item">
+<h3><a href="https://techcrunch.com/2026/07/09/an-ai-agent-startup-just-let-its-agent-run-its-100-million-fundraise/" target="_blank">AI初创公司Lyzr用自家AI Agent完成1亿美元融资</a></h3>
+<p>AI Agent初创公司Lyzr使用自己的AI Agent完成了1亿美元融资，成为"AI自己给自己融资"的标志性案例，证明企业级AI Agent已具备实际商业价值。<em style="color:var(--muted)">— TechCrunch</em></p>
+</div>
+
+<h2 data-section="市场">品牌与市场动作</h2>
+<div class="news-item">
+<h3><a href="https://techcrunch.com/2026/07/10/apple-sues-openai-over-alleged-trade-secret-theft/" target="_blank">苹果起诉OpenAI涉嫌商业秘密盗窃</a></h3>
+<p>苹果公司起诉OpenAI，指控其存在商业秘密盗窃行为。苹果称不当行为由OpenAI高级领导层指导，包括一名长期前员工。<em style="color:var(--muted)">— TechCrunch</em></p>
+</div>
+<div class="news-item">
+<h3><a href="http://m.toutiao.com/group/7661942065786143275/" target="_blank">四部门发文推动智能体互联互通</a></h3>
+<p>中国四部门联合发文推动智能体互联互通，旨在打破不同厂商AI Agent之间的壁垒，构建统一的智能体协作标准。<em style="color:var(--muted)">— 今日头条</em></p>
+</div>
+<div class="news-item">
+<h3><a href="http://m.toutiao.com/group/7661893559548674601/" target="_blank">博主靠AI气象大模型发台风预测涉嫌违法</a></h3>
+<p>网络博主借助AI气象大模型发布台风预测，涉嫌违反气象法。该事件引发关于AI生成内容在公共服务领域合规性的广泛讨论。<em style="color:var(--muted)">— 今日头条</em></p>
+</div>
+<div class="news-item">
+<h3><a href="http://m.toutiao.com/group/7661893559548674601/" target="_blank">工信部NVDB提醒Claude Code安全后门隐患</a></h3>
+<p>工信部国家漏洞数据库(NVDB)发布提醒，指出Claude Code存在安全后门隐患，建议企业用户谨慎使用并加强代码审计。<em style="color:var(--muted)">— 工信部 / 今日头条</em></p>
+</div>
+<div class="news-item">
+<h3><a href="https://techcrunch.com/2026/07/09/openai-is-shutting-down-atlas-but-its-ai-browser-ambitions-are-still-growing/" target="_blank">OpenAI关闭Atlas浏览器，AI浏览器野心仍在</a></h3>
+<p>OpenAI宣布关闭上线不到一年的AI浏览器Atlas，但将部分代理浏览功能迁移至桌面应用和Chrome扩展，显示其AI浏览器战略仍在调整中。<em style="color:var(--muted)">— TechCrunch</em></p>
+</div>
+
+<h2 data-section="洞察">今日洞察</h2>
+<div class="insight-card">
+<h3>洞察 1: 中国AI模型全球调用量反超美国，标志从技术追赶转向生态输出</h3>
+<p><strong>核心发现:</strong> OpenRouter数据显示，中国AI模型周调用量连续十一周全球居首，美国企业在OpenRouter上使用中国模型的Token占比从2025年上半年的4.5%飙升至30%-46%。</p>
+<blockquote><strong>Action建议:</strong> 关注中国模型出海合规与本地化运营机会，尤其是东南亚、中东等新兴市场。</blockquote>
+</div>
+<div class="insight-card">
+<h3>洞察 2: DeepSeek同时推进V4上线和自研芯片，"模型+芯片"垂直整合趋势明显</h3>
+<p><strong>核心发现:</strong> DeepSeek不仅即将发布V4正式版并首推峰谷定价，还秘密启动自研AI芯片项目已一年。腾讯混元也加入免费开源阵营。</p>
+<blockquote><strong>Action建议:</strong> 跟踪国产AI芯片产业链投资机会，关注海光、寒武纪等替代标的。</blockquote>
+</div>
+<div class="insight-card">
+<h3>洞察 3: OpenAI与Anthropic年收入冲向2000亿，AI商业化进入超级回报期</h3>
+<p><strong>核心发现:</strong> 两家模型公司月度新增收入已超过Meta、Google或Microsoft中的任意一家。Anthropic凭借Claude Code在企业市场实现反超。</p>
+<blockquote><strong>Action建议:</strong> 关注AI应用层SaaS公司的估值重构，尤其是企业级编码、客服、营销等垂直场景。</blockquote>
+</div>
+<div class="insight-card">
+<h3>洞察 4: 全球AI算力格局从"英伟达独大"走向多元化定制</h3>
+<p><strong>核心发现:</strong> OpenAI联合博通推Jalapeño、Meta自研芯片9月投产、DeepSeek秘密造芯，前沿AI竞争已从芯片竞赛转向系统和电力竞赛。</p>
+<blockquote><strong>Action建议:</strong> 关注博通、Marvell等定制芯片厂商，以及数据中心电力基础设施投资。</blockquote>
+</div>
+<div class="insight-card">
+<h3>洞察 5: AI终端从"应用层"走向"系统层"，端侧AI迎来拐点</h3>
+<p><strong>核心发现:</strong> 阶跃星辰发布大模型原生AI手机STEPX Neo，标志着AI从App级应用向操作系统级深度融合。Meta、苹果也在加速端侧AI布局。</p>
+<blockquote><strong>Action建议:</strong> 关注端侧AI与硬件结合的创新赛道，尤其是AI手机、AI眼镜、AI耳机等消费级产品。</blockquote>
+</div>
+
+    </div>
+
+    <div class="giscus-wrapper">
+      <div class="giscus"></div>
+    </div>
+
+    <footer class="article-footer">
+      <p class="disclaimer">
+        免责声明: 本日报仅供信息参考，不构成投资建议。内容来源于公开渠道，如有出入请以官方信息为准。犀牛伯爵 · 2026年07月13日（星期一）
+      </p>
+      <a class="back-link" href="../">&larr; 回到犀牛伯爵首页</a>
+    </footer>
+  </article>
+
+  <footer class="site-footer">
+    <div class="container">&copy; 2026 犀牛伯爵</div>
+  </footer>
+
+  <script>
+    // Theme sync with main site
+    (function() {
+      var root = document.documentElement;
+      var saved = localStorage.getItem('rhino-theme');
+      var sysDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (saved) { root.setAttribute('data-theme', saved); }
+      else if (sysDark) { root.setAttribute('data-theme', 'dark'); }
+    })();
+  </script>
+  <script src="https://giscus.app/client.js"
+    data-repo="zjeep-arch/rhino-count-site"
+    data-repo-id="R_kgDOOZx3aA"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOOZx3aM4CqRVM"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="preferred_color_scheme"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async>
+  </script>
+</body>
+</html>
