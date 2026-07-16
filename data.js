@@ -120,6 +120,12 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "资本六周追着给DeepSeek送钱，因为闻到了一个味道",
+        desc: "DeepSeek B轮估值710亿美元，六周涨37%。梁文锋360亿美元登顶AI创始人首富。资本闻到了什么？",
+        href: "notes/2026-07-16-deepseek-funding-710b.html"
+      },
+      {
+        type: "Essay",
         title: "卷了两年画质，这家清华团队把视频做成了游戏",
         desc: "Xmax AI发布全球首个实时交互视频模型X2.0。不是又一个视频生成工具，而是把视频从'内容'变成'界面'的范式跃迁。",
         href: "notes/2026-07-15-xmax-x2-0.html"
@@ -214,6 +220,13 @@ window.SITE_DATA = {
     headingLine2: "慢慢记。",
     blurb: "每一篇笔记都是一次小型田野调查：关于模型、关于人、关于我们如何被这个时代重新塑形。",
     notes: [
+      {
+        cat: "行业观察", num: "N° 24",
+        title: "资本六周追着给DeepSeek送钱，因为闻到了一个味道",
+        excerpt: "DeepSeek B轮估值710亿美元，六周涨37%。梁文锋360亿美元登顶AI创始人首富。资本闻到了什么？",
+        img: "assets/note-05.svg",
+        href: "notes/2026-07-16-deepseek-funding-710b.html"
+      },
       {
         cat: "产品观察", num: "N° 23",
         title: "卷了两年画质，这家清华团队把视频做成了游戏",
