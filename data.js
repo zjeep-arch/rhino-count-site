@@ -120,6 +120,12 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "苹果AI拿到中国身份证，里面住的是阿里千问",
+        desc: "苹果AI拿到中国通行证，但云端大脑全盘外包给阿里千问。全球AI正在分岔成两条轨道，而苹果是第一个被迫选边站的超级巨头。",
+        href: "notes/2026-07-16-apple-ai-china-alibaba.html"
+      },
+      {
+        type: "Essay",
         title: "资本六周追着给DeepSeek送钱，因为闻到了一个味道",
         desc: "DeepSeek B轮估值710亿美元，六周涨37%。梁文锋360亿美元登顶AI创始人首富。资本闻到了什么？",
         href: "notes/2026-07-16-deepseek-funding-710b.html"
@@ -220,6 +226,13 @@ window.SITE_DATA = {
     headingLine2: "慢慢记。",
     blurb: "每一篇笔记都是一次小型田野调查：关于模型、关于人、关于我们如何被这个时代重新塑形。",
     notes: [
+      {
+        cat: "行业观察", num: "N° 25",
+        title: "苹果AI拿到中国身份证，里面住的是阿里千问",
+        excerpt: "苹果AI拿到中国通行证，但云端大脑全盘外包给阿里千问。全球AI正在分岔成两条轨道，而苹果是第一个被迫选边站的超级巨头。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-07-16-apple-ai-china-alibaba.html"
+      },
       {
         cat: "行业观察", num: "N° 24",
         title: "资本六周追着给DeepSeek送钱，因为闻到了一个味道",

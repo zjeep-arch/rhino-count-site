@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>苹果AI拿到中国身份证，里面住的是阿里千问</title>
+  <style>
+    /* === 8px基线网格 === */
+    :root {
+      --accent: #8b2635;
+      --ink: #333;
+      --ink-soft: #555;
+      --muted: #888;
+      --surface: #fafafa;
+      --border: rgba(0,0,0,0.06);
+      --radius: 12px;
+      --font-sans: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-serif: "Noto Serif SC", "Songti SC", Georgia, serif;
+    }
+    body { font-family: var(--font-sans); background: #f5f5f5; margin: 0; padding: 16px; font-size: 16px; line-height: 1.8; color: var(--ink); -webkit-font-smoothing: antialiased; }
+    .container { max-width: 680px; margin: 0 auto; background: var(--surface); padding: 32px; border-radius: var(--radius); }
+    .cover-img { width: 100%; border-radius: 8px; margin-bottom: 24px; }
+    h1 { font-family: var(--font-serif); font-size: 24px; font-weight: 700; color: var(--ink); line-height: 1.4; margin: 0 0 16px; }
+    .meta { color: var(--muted); font-size: 13px; margin-bottom: 16px; }
+    .byline { color: var(--ink-soft); font-size: 14px; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+    h2 { font-family: var(--font-serif); font-size: 20px; font-weight: 600; color: var(--ink); margin: 32px 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+    h3 { font-family: var(--font-serif); font-size: 18px; font-weight: 600; color: var(--ink); margin: 24px 0 12px; }
+    p { margin: 0 0 24px; }
+    .quote-box { border-left: 4px solid var(--accent); background: #f5f5f5; padding: 16px 20px; margin: 24px 0; border-radius: 0 var(--radius) var(--radius) 0; }
+    .quote-box p { margin: 0; color: var(--ink-soft); font-style: italic; font-size: 15px; }
+    .quote-box .attribution { margin-top: 8px; color: var(--muted); font-size: 13px; font-style: normal; }
+    .insight-box { background: #fff8f0; border: 1px solid #ffe4c4; border-radius: var(--radius); padding: 20px; margin: 24px 0; }
+    .insight-box h4 { margin: 0 0 8px; font-size: 16px; color: var(--ink); }
+    .insight-box p { margin: 0; font-size: 15px; color: var(--ink-soft); }
+    .data-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14px; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .data-table th, .data-table td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); }
+    .data-table th { background: #f0f0f0; font-weight: 600; color: var(--ink); }
+    .data-table td { color: var(--ink-soft); }
+    .timeline { position: relative; padding-left: 24px; margin: 24px 0; }
+    .timeline::before { content: ''; position: absolute; left: 6px; top: 0; bottom: 0; width: 2px; background: #e0e0e0; }
+    .timeline-item { position: relative; margin-bottom: 16px; }
+    .timeline-item::before { content: ''; position: absolute; left: -22px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); }
+    .timeline-item .date { font-size: 13px; color: var(--muted); margin-bottom: 4px; }
+    .timeline-item .content { font-size: 15px; color: var(--ink); }
+    .img-caption { text-align: center; color: var(--muted); font-size: 13px; margin-top: 8px; margin-bottom: 24px; }
+    .ending { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--ink-soft); font-size: 14px; }
+    .highlight { color: var(--accent); font-weight: 600; background: linear-gradient(to top, rgba(139,38,53,0.08) 40%, transparent 40%); padding: 0 2px; }
+    .data-callout { display: inline-block; background: var(--accent); color: #fff; padding: 2px 10px; border-radius: 4px; font-weight: 700; font-size: 15px; }
+    .contrast-card { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin: 24px 0; border-radius: var(--radius); overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .contrast-card .side { padding: 16px 20px; }
+    .contrast-card .side-left { background: #fef2f2; border-right: 1px solid var(--border); }
+    .contrast-card .side-right { background: #f0fdf4; }
+    .contrast-card .side h4 { margin: 0 0 8px; font-size: 14px; font-weight: 600; }
+    .contrast-card .side-left h4 { color: #991b1b; }
+    .contrast-card .side-right h4 { color: #166534; }
+    .contrast-card .side p { margin: 0; font-size: 14px; color: var(--ink-soft); line-height: 1.6; }
+    .punchline { font-family: var(--font-serif); font-size: 18px; font-weight: 700; color: var(--accent); text-align: center; margin: 32px 0; padding: 16px 0; border-top: 2px solid var(--accent); border-bottom: 2px solid var(--accent); }
+    strong { color: var(--ink); font-weight: 600; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img class="cover-img" src="apple_ai_china_cover.jpg" alt="苹果AI入华，海外版与国行版采用不同底层模型的视觉隐喻">
+    <div class="img-caption">AI生成封面图 · 全球AI分岔的视觉隐喻</div>
+
+    <h1>苹果AI拿到中国身份证，里面住的是阿里千问</h1>
+    <div class="meta">2026年7月16日 · 阅读时间约8分钟</div>
+    <div class="byline">文｜犀牛伯爵</div>
+
+    <p>7月15日，网信中国公示了一则不太起眼的公告。苹果技术开发（上海）有限公司申报的"Apple智能"，拿到了生成式AI服务备案。</p>
+
+    <p>看上去只是一张牌照。但这张牌照的背后，是全球市值最高的科技公司，把自己产品的<span class="highlight">"大脑"外包给了另一家中国公司</span>。</p>
+
+    <p>海外版iPhone的AI，底层是苹果自研模型加OpenAI的ChatGPT。国行版iPhone的AI，底层是苹果自研模型加阿里的通义千问。同一个苹果，两套完全不同的神经系统。</p>
+
+    <p>这不是简单的"入乡随俗"。全球AI正在分岔成两条轨道，而苹果是第一个被迫选边站的超级巨头。</p>
+
+    <h2>一张牌照，两年等待</h2>
+
+    <p>把时间线往回拉一点。</p>
+
+    <p>2024年6月，苹果在WWDC上发布了Apple Intelligence，承诺给iPhone带来系统级的AI能力。海外市场从去年开始陆续推送，但国行用户始终没等到。</p>
+
+    <p>卡在哪？三个门槛。数据合规、生成式AI备案、境外模型限制。缺一不可。</p>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="date">2024年6月</div>
+        <div class="content">苹果在WWDC发布Apple Intelligence，海外陆续上线</div>
+      </div>
+      <div class="timeline-item">
+        <div class="date">2026年3月</div>
+        <div class="content">苹果短暂灰度推送国行AI，因未完成备案紧急撤回</div>
+      </div>
+      <div class="timeline-item">
+        <div class="date">2026年7月8日</div>
+        <div class="content">备案正式办结</div>
+      </div>
+      <div class="timeline-item">
+        <div class="date">2026年7月15日</div>
+        <div class="content">网信中国统一公示，苹果与华为、小米等6家同批获批</div>
+      </div>
+    </div>
+
+    <p>7月8日，备案正式办结。7月15日，网信中国统一公示。和苹果一起过审的还有华为小艺、小米澎湃AI、OPPO、vivo、三星、努比亚，一共7家。</p>
+
+    <p>但苹果的方案和其他6家都不一样。华为、小米、OPPO、vivo，用的全是自研大模型。三星虽然也是外企，但它在中国市场的份额已经掉到了Others，关注度有限。</p>
+
+    <p>只有苹果，选择了"外来和尚念本地经"的路径。端侧模型自己跑，云端大脑全盘外包。</p>
+
+    <h2>核心判断，全球AI正在分岔</h2>
+
+    <p>我的判断是，苹果这次备案通过，最大的意义不是国行iPhone终于有AI了。而是<span class="highlight">全球科技巨头第一次公开承认，中国的AI市场需要一套完全独立的底层架构</span>。</p>
+
+    <p>海外版Apple Intelligence的云端搭档是OpenAI。国行版的云端搭档是阿里千问。这不是换了一个供应商那么简单，这是两套不同的技术哲学。</p>
+
+    <div class="contrast-card">
+      <div class="side side-left">
+        <h4>海外版 iPhone AI</h4>
+        <p>云端搭档：OpenAI ChatGPT + Google Gemini</p>
+        <p>训练数据：英文互联网为主</p>
+        <p>知识库：西方文化语境</p>
+        <p>搜索引擎：Google</p>
+      </div>
+      <div class="side side-right">
+        <h4>国行版 iPhone AI</h4>
+        <p>云端搭档：阿里通义千问 + 百度视觉/搜索</p>
+        <p>训练数据：中文互联网为主</p>
+        <p>知识库：中国文化语境</p>
+        <p>搜索引擎：百度</p>
+      </div>
+    </div>
+
+    <p>OpenAI的模型训练数据以英文互联网为主，思维方式、知识库、文化语境，全是西方的。阿里千问的训练数据以中文互联网为主，懂淘宝、懂钉钉、懂中国人的表达习惯。</p>
+
+    <p>同一个用户，拿着同一款iPhone，在纽约和北京问Siri同样的问题，得到的可能是两个完全不同的答案。</p>
+
+    <p>这才是这件事的真正分量。苹果不是第一家进入中国市场的外国科技公司，但它是<span class="highlight">第一家在核心AI能力上完全依赖本土合作伙伴的全球巨头</span>。</p>
+
+    <h2>苹果为什么选阿里</h2>
+
+    <p>这个问题很有意思。百度也在名单里，而且苹果和百度传绯闻的时间比阿里早得多。</p>
+
+    <p>去年年初，外界普遍预期苹果会选择百度文心一言作为国行AI的核心合作方。彭博社、The Information都报道过，说双方已经在谈判了。</p>
+
+    <p>但最终的方案是，阿里千问吃下了云端大模型这块最大的蛋糕，百度只拿到了视觉搜索和Siri语音的配套能力。</p>
+
+    <p>为什么？</p>
+
+    <p>坦率地讲，百度的模型能力并不差，但阿里有两个百度没有的优势。</p>
+
+    <p>第一个是云。国行iPhone的AI请求需要在中国境内处理，这意味着苹果需要一个能承接海量并发请求的本土云底座。<span class="highlight">阿里云是中国最大的公有云厂商</span>，千问从诞生第一天起就是长在阿里云上的。这个基建优势，百度追不上。</p>
+
+    <p>第二个是场景。千问在电商、办公、生活服务等中文场景的适配度更高。苹果需要的是一个"懂中国用户"的AI，而不是一个"中文说得流利"的AI。阿里有淘宝、钉钉、夸克，这些场景数据是百度没有的。</p>
+
+    <p>百度也不是完全出局。iOS 27 Beta 2的代码里已经发现了"Baidu Visual Search"的组件，百度会继续承担视觉识别和搜索能力的开发。但逻辑层、推理层、生成层，全是千问的。</p>
+
+    <p class="punchline">阿里吃肉，百度喝汤。这个分工，基本定了。</p>
+
+    <h2>阿里得到了什么</h2>
+
+    <p>这可能是中国互联网过去五年最划算的一笔买卖之一。</p>
+
+    <p>机构算过一笔账。国行iPhone存量用户超过<span class="data-callout">3亿</span>。如果AI功能带来千问月均新增1000亿tokens的调用量，阿里云推理业务单月就能新增<span class="data-callout">2-3亿元</span>收入。</p>
+
+    <p>但这还不是最关键的。</p>
+
+    <p>最关键的是，千问拿到了一个全球顶级的消费电子入口。不是App里的一级入口，是<span class="highlight">系统底层的入口</span>。用户不需要下载任何应用，不需要注册任何账号，直接在系统层面调用千问的能力。</p>
+
+    <p>这种级别的合作，在中国AI历史上从来没有过。就连百度，也只是曾经把搜索框预装到手机里。现在阿里直接把大模型装进了iOS的底层。</p>
+
+    <p>对千问来说，这不仅是收入。这是一个标杆效应。微软、三星、其他想进入中国市场的外国科技公司，都会看着苹果和阿里怎么合作。如果这条路跑通了，"外企硬件加本土大模型"就会成为一种可复制的标准模板。</p>
+
+    <p>阿里赌的，是成为中国AI的"默认选项"。</p>
+
+    <h2>监管释放的三条红线</h2>
+
+    <p>很多人把这次备案理解成"苹果终于搞定了关系"。这个说法太浅了。</p>
+
+    <p>监管释放的信号其实很清晰。三条红线，没有商量余地。</p>
+
+    <table class="data-table">
+      <tr>
+        <th>红线</th>
+        <th>具体要求</th>
+        <th>影响</th>
+      </tr>
+      <tr>
+        <td>境外模型禁入</td>
+        <td>境外AI算力和模型不得处理国内用户数据</td>
+        <td>OpenAI、Gemini、Anthropic无法直接服务中国用户</td>
+      </tr>
+      <tr>
+        <td>数据境内留存</td>
+        <td>用户隐私数据必须在中国境内服务器运算和存储</td>
+        <td>数据不出境，隐私风险降低</td>
+      </tr>
+      <tr>
+        <td>强制备案</td>
+        <td>所有手机端生成式AI必须完成网信备案</td>
+        <td>无备案不得上线生成类功能</td>
+      </tr>
+    </table>
+
+    <p>这不是针对苹果。华为、小米、OPPO、vivo、三星，全部要过这道坎。但苹果的敏感性更高，因为它是美国公司，而且它的AI方案在海外深度绑定了OpenAI。</p>
+
+    <p>监管层要的是一个明确的答案。苹果交出了一份标准答卷，端侧自研加本土云端，数据全留境内。</p>
+
+    <p>这个模板一旦确立，未来所有想进入中国AI市场的外国科技公司，都会面临同样的选择题。要么自建本土团队自研大模型，要么绑定一个已经通过备案的本土合作伙伴。</p>
+
+    <p>前者的成本和时间周期，足以让大多数公司望而却步。后者，几乎成了唯一选择。</p>
+
+    <h2>别急着欢呼</h2>
+
+    <p>现在主流的声音是，"苹果AI终于来了，国行iPhone要翻身"。</p>
+
+    <p>这个说法，有点过于乐观了。</p>
+
+    <p>首先，备案通过不等于功能立即上线。苹果还需要完成系统适配、功能调优、安全复测。行业预判是9月iOS 27正式版推送，但如果适配出问题，延迟到年底也不是不可能。</p>
+
+    <p>其次，备案的是iOS 26版本的Apple Intelligence。真正重量级的Siri AI功能，还需要单独的备案流程。也就是说，今年年内国行用户能体验到的AI能力，大概率是"基础版"而非"完整版"。</p>
+
+    <p>再次，国行AI和海外版存在本质差异。海外版可以调用OpenAI的GPT能力，国行版调用的是千问。两者的知识库、推理风格、创意能力，都有差别。这不是好坏之分，是"不同"。</p>
+
+    <p>最后，也是最容易被忽略的一点。苹果把云端大脑外包给阿里，意味着国行iPhone的AI体验，很大程度上取决于千问的迭代速度。如果千问跟不上，苹果无能为力。这种依赖关系，在海外版里是不存在的。</p>
+
+    <p>所以别急着欢呼。一张备案证，解决的是合规问题，不是体验问题。</p>
+
+    <h2>接下来会发生什么</h2>
+
+    <p>接下来几个月，有几件事值得盯着。</p>
+
+    <p>第一，iOS 27正式版的推送节奏。如果9月准时上线，说明苹果和阿里、百度的技术对接已经跑通了。如果延迟，说明Outsourcing AI的复杂度被低估了。</p>
+
+    <p>第二，Siri AI的单独备案。那才是真正的重头戏。Siri AI需要的备案级别和审查深度，可能远超这次的Apple Intelligence基础功能。</p>
+
+    <p>第三，用户真实体验。千问和ChatGPT的差异，在日常使用场景里到底有多大？这决定了国行用户会不会为了"完整AI体验"去买外版iPhone。</p>
+
+    <p>第四，其他外企的跟进。微软的Copilot、三星的Galaxy AI、Google的Gemini，会不会也走"本土大模型合作"这条路？如果会，阿里和百度，谁会成为更多外企的选择？</p>
+
+    <p>我目前的看法是，苹果这条路如果跑通了，会有一波外企跟风。但跟风的程度和速度，取决于国行iPhone的AI体验到底好不好。体验好，是模板。体验差，是警钟。</p>
+
+    <p>也可能我错了。毕竟Outsourcing核心AI能力这件事，之前没有人做过。</p>
+
+    <div class="insight-box">
+      <h4>对普通用户的启示</h4>
+      <p>你的下一台国行iPhone，AI能力不再完全由苹果决定。苹果负责硬件和端侧体验，但当你问Siri一个复杂问题的时候，回答你的那个"大脑"，其实是阿里千问。</p>
+    </div>
+
+    <p>这不是坏事。千问的中文能力确实强，而且数据留在境内，隐私风险更低。但这意味着，<span class="highlight">国行iPhone和海外版iPhone，正在变成两个不同的产品</span>。</p>
+
+    <p>同一个Logo，同一个外壳，不同的灵魂。</p>
+
+    <p class="punchline">全球AI的分岔，从一部手机开始。</p>
+
+    <div class="ending">
+      <p>谢谢你看我的文章。</p>
+      <p style="margin-top: 8px; font-size: 12px; color: var(--muted);">本文部分信息援引自 Reuters、彭博社、The Information、环球网、第一财经等公开报道。</p>
+    </div>
+  </div>
+</body>
+</html>
