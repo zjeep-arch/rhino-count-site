@@ -120,6 +120,12 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "OpenAI帮用户在Claude Code里跑GPT-5.6，这招太脏了",
+        desc: "OpenAI产品负责人亲自下场，教开发者把GPT-5.6 Sol接进Claude Code。这不是大方，是模型层对工具层的降维打击。",
+        href: "notes/2026-07-18-openai-claude-code-gpt56.html"
+      },
+      {
+        type: "Essay",
         title: "2.8万亿参数的Kimi K3，月之暗面的背水一战",
         desc: "Kimi K3发布，2.8万亿参数、百万token上下文、即将开源。但这不是一张成绩单，更像一张赌桌前的最后一把all in。",
         href: "notes/2026-07-17-kimi-k3-moonshot-gamble.html"
@@ -232,6 +238,13 @@ window.SITE_DATA = {
     headingLine2: "慢慢记。",
     blurb: "每一篇笔记都是一次小型田野调查：关于模型、关于人、关于我们如何被这个时代重新塑形。",
     notes: [
+      {
+        cat: "行业观察", num: "N° 27",
+        title: "OpenAI帮用户在Claude Code里跑GPT-5.6，这招太脏了",
+        excerpt: "OpenAI产品负责人亲自下场，教开发者把GPT-5.6 Sol接进Claude Code。这不是大方，是模型层对工具层的降维打击。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-07-18-openai-claude-code-gpt56.html"
+      },
       {
         cat: "产品观察", num: "N° 26",
         title: "2.8万亿参数的Kimi K3，月之暗面的背水一战",
