@@ -120,6 +120,12 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "2.8万亿参数的Kimi K3，月之暗面的背水一战",
+        desc: "Kimi K3发布，2.8万亿参数、百万token上下文、即将开源。但这不是一张成绩单，更像一张赌桌前的最后一把all in。",
+        href: "notes/2026-07-17-kimi-k3-moonshot-gamble.html"
+      },
+      {
+        type: "Essay",
         title: "苹果AI拿到中国身份证，里面住的是阿里千问",
         desc: "苹果AI拿到中国通行证，但云端大脑全盘外包给阿里千问。全球AI正在分岔成两条轨道，而苹果是第一个被迫选边站的超级巨头。",
         href: "notes/2026-07-16-apple-ai-china-alibaba.html"
@@ -226,6 +232,13 @@ window.SITE_DATA = {
     headingLine2: "慢慢记。",
     blurb: "每一篇笔记都是一次小型田野调查：关于模型、关于人、关于我们如何被这个时代重新塑形。",
     notes: [
+      {
+        cat: "产品观察", num: "N° 26",
+        title: "2.8万亿参数的Kimi K3，月之暗面的背水一战",
+        excerpt: "Kimi K3发布，2.8万亿参数、百万token上下文、即将开源。但这不是一张成绩单，更像一张赌桌前的最后一把all in。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-07-17-kimi-k3-moonshot-gamble.html"
+      },
       {
         cat: "行业观察", num: "N° 25",
         title: "苹果AI拿到中国身份证，里面住的是阿里千问",
