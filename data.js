@@ -127,6 +127,12 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "Kimi送出2.8万亿参数，DeepSeek白天涨价一倍",
+        desc: "月之暗面开源Kimi K3，DeepSeek V4引入峰谷定价。一个送最贵的东西，一个在最便宜的价格上分时段收钱。中国AI定价，不再只有一种答案。",
+        href: "notes/2026-07-19-kimi-k3-deepseek.html"
+      },
+      {
+        type: "Essay",
         title: "OpenAI帮用户在Claude Code里跑GPT-5.6，这招太脏了",
         desc: "OpenAI产品负责人亲自下场，教开发者把GPT-5.6 Sol接进Claude Code。这不是大方，是模型层对工具层的降维打击。",
         href: "notes/2026-07-18-openai-claude-code-gpt56.html"
@@ -203,6 +209,13 @@ window.SITE_DATA = {
         excerpt: "OpenAI产品负责人亲自下场，教开发者把GPT-5.6 Sol接进Claude Code。这不是大方，是模型层对工具层的降维打击。",
         img: "assets/note-05.svg",
         href: "notes/2026-07-18-openai-claude-code-gpt56.html"
+      },
+      {
+        cat: "行业观察", num: "N° 28",
+        title: "Kimi送出2.8万亿参数，DeepSeek白天涨价一倍",
+        excerpt: "月之暗面开源Kimi K3，DeepSeek V4引入峰谷定价。一个送最贵的东西，一个在最便宜的价格上分时段收钱。中国AI定价，不再只有一种答案。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-07-19-kimi-k3-deepseek.html"
       },
       {
         cat: "产品观察", num: "N° 26",
