@@ -1068,78 +1068,75 @@ function exitSeatView() {
 }
 
 /* ============================================================
-   MATCH SIM — ball only moves when kicked, role-based AI
+   MATCH SIM — chase ball, tackle, collision, kick physics
    ============================================================ */
 let lastTime = performance.now();
 let goalCooldown = 0;
-let ballOwner = null;        // player who has the ball
-let ballVel = new THREE.Vector3(0, 0, 0);  // ball velocity
-const BALL_FRICTION = 0.96;   // ball slows down each frame
-const KICK_POWER = 8.0;
-const PASS_POWER = 5.0;
-const BALL_MAX_SPEED = 15;
+let ballOwner = null;
+let ballVel = new THREE.Vector3(0, 0, 0);
+const BALL_FRICTION = 0.965;
+const KICK_POWER = 10.0;
+const PASS_POWER = 6.0;
+const TACKLE_RANGE = 1.8;
+const PLAYER_RADIUS = 0.5;
 
 function updateMatch(dt) {
   matchState.minute += dt * 0.6;
 
-  // ---- Ball physics: ball only moves if it has velocity (was kicked) ----
+  // ---- Ball physics ----
   if (ballVel.length() > 0.05) {
-    // Ball is rolling — apply friction
     ball.position.x += ballVel.x * dt;
     ball.position.z += ballVel.z * dt;
-    ballVel.multiplyScalar(BALL_FRICTION);
-    // Clamp ball to field bounds (walls on sidelines)
+    ballVel.multiplyScalar(Math.pow(BALL_FRICTION, dt * 60));
+    // Sideline walls
     if (Math.abs(ball.position.z) > FIELD.W / 2) {
       ball.position.z = Math.sign(ball.position.z) * FIELD.W / 2;
       ballVel.z *= -0.4;
     }
+    // Goal line
     if (Math.abs(ball.position.x) > FIELD.L / 2) {
-      // Check if it's a goal (within goal width)
       if (Math.abs(ball.position.z) < 3.66) {
         // GOAL!
         if (ball.position.x > 0 && ballVel.x > 0) {
-          matchState.home++;
-          triggerGoal();
+          matchState.home++; triggerGoal();
         } else if (ball.position.x < 0 && ballVel.x < 0) {
-          matchState.away++;
-          triggerGoal();
+          matchState.away++; triggerGoal();
         }
       } else {
-        // Bounce off back wall
         ball.position.x = Math.sign(ball.position.x) * FIELD.L / 2;
         ballVel.x *= -0.4;
       }
     }
   }
 
-  // ---- Find ball owner: nearest player within 1.2 units, ball must be slow ----
-  if (ballVel.length() < 2.0) {
+  // ---- Find ball owner: nearest player within 1.5 units ----
+  if (ballVel.length() < 3.0) {
     let nearest = null, nearestDist = 1.5;
     players.forEach(p => {
       if (p.isRef) return;
       const d = p.pos.distanceTo(ball.position);
       if (d < nearestDist) { nearestDist = d; nearest = p; }
     });
-    if (nearest) {
-      if (ballOwner !== nearest) {
-        ballOwner = nearest;
-        ballVel.set(0, 0, 0);
+    if (nearest && ballOwner !== nearest) {
+      // Tackle: if the new owner is from opposite team, it's a tackle
+      if (ballOwner && ballOwner.team !== nearest.team) {
+        ballOwner.kickCooldown = 0;
       }
+      ballOwner = nearest;
+      ballVel.set(0, 0, 0);
+      ballOwner.kickCooldown = 1.5 + Math.random() * 2.5;
     }
   }
 
   // ---- Ball follows owner ----
   if (ballOwner) {
-    // Validate ballOwner still exists
-    const validOwner = ballOwner.g && players.indexOf(ballOwner) >= 0;
-    if (!validOwner) {
+    if (!ballOwner.g || players.indexOf(ballOwner) < 0) {
       ballOwner = null;
     } else {
-      const aheadX = ballOwner.pos.x + Math.sin(ballOwner.facing) * 0.4;
-      const aheadZ = ballOwner.pos.z + Math.cos(ballOwner.facing) * 0.4;
-      ball.position.lerp(new THREE.Vector3(aheadX, 0.22, aheadZ), 0.3);
+      const aheadX = ballOwner.pos.x + Math.sin(ballOwner.facing) * 0.5;
+      const aheadZ = ballOwner.pos.z + Math.cos(ballOwner.facing) * 0.5;
+      ball.position.lerp(new THREE.Vector3(aheadX, 0.22, aheadZ), 0.25);
 
-      // Owner kicks the ball after a short delay
       ballOwner.kickCooldown -= dt;
       if (ballOwner.kickCooldown <= 0) {
         kickBall(ballOwner);
@@ -1148,87 +1145,138 @@ function updateMatch(dt) {
     }
   }
 
-  // ---- Player movement: role-based targets ----
+  // ---- Player movement + AI ----
+  // Find nearest 3 players to ball (per team) for chasing
+  const chasers = { home: [], away: [] };
+  players.forEach(p => {
+    if (p.isRef || p.isGK) return;
+    const d = p.pos.distanceTo(ball.position);
+    chasers[p.team].push({ player: p, dist: d });
+  });
+  chasers.home.sort((a, b) => a.dist - b.dist);
+  chasers.away.sort((a, b) => a.dist - b.dist);
+
   players.forEach((p, i) => {
-    // Skip movement logic if referee (handled separately)
     if (p.isRef) {
-      // Referees jog along the sideline, following play
+      // Referees follow play
       const playX = ball.position.x;
       if (p.role === 4) {
-        // Main ref — follow behind play
         p.target.set(playX * 0.7, 0, ball.position.z > 0 ? -FIELD.W / 2 - 3 : FIELD.W / 2 + 3);
       } else {
-        // Linesmen — stay on their sideline
         p.target.set(playX * 0.8, 0, FIELD.W / 2 + 2);
       }
       p.target.x = Math.max(-FIELD.L / 2, Math.min(FIELD.L / 2, p.target.x));
     } else {
-      // Field players — decide target based on role
-      if (Math.random() < 0.01 || p.target.distanceTo(p.pos) < 3) {
+      // Decide target based on role
+      if (Math.random() < 0.012 || p.target.distanceTo(p.pos) < 3) {
         const attackDir = p.team === 'home' ? 1 : -1;
         const ownGoalX = -attackDir * FIELD.L / 2;
         const oppGoalX = attackDir * FIELD.L / 2;
 
         if (p.isGK) {
-          // Goalkeeper — stay near own goal, shadow the ball's z
           const ballApproaching = (attackDir === 1 && ballVel.x < -1) || (attackDir === -1 && ballVel.x > 1);
           if (ballApproaching && Math.abs(ball.position.x - ownGoalX) < 25) {
-            // Ball coming toward goal — GK comes out slightly
-            p.target.set(ownGoalX + attackDir * 2, 0, ball.position.z * 0.5);
+            p.target.set(ownGoalX + attackDir * 2, 0, ball.position.z * 0.6);
           } else {
-            // Stay on line
             p.target.set(ownGoalX + attackDir * 1, 0, ball.position.z * 0.3);
           }
         } else if (ballOwner === p) {
-          // Has the ball — dribble toward opponent goal
-          p.target.set(oppGoalX - attackDir * 5 + (Math.random() - 0.5) * 8, 0, (Math.random() - 0.5) * 20);
-        } else if (p.role === 1) {
-          // Defender — stay on own half
-          p.target.set(ownGoalX * 0.7 + ball.position.x * 0.15, 0, ball.position.z + (Math.random() - 0.5) * 15);
-        } else if (p.role === 2) {
-          // Midfielder — support around ball
-          p.target.set(ball.position.x * 0.6 + attackDir * 5, 0, ball.position.z + (Math.random() - 0.5) * 18);
+          // Has ball — dribble toward goal
+          p.target.set(oppGoalX - attackDir * 5 + (Math.random() - 0.5) * 6, 0, (Math.random() - 0.5) * 15);
         } else {
-          // Forward — push toward goal
-          p.target.set(oppGoalX - attackDir * (10 + Math.random() * 15), 0, ball.position.z + (Math.random() - 0.5) * 20);
+          // Check if this player should chase the ball
+          const teamChasers = chasers[p.team];
+          const isChaser = teamChasers.slice(0, 3).some(c => c.player === p);
+          const ballIsLoose = !ballOwner || ballVel.length() > 3;
+
+          if (isChaser && (ballIsLoose || (ballOwner && ballOwner.team !== p.team))) {
+            // Chase the ball directly
+            p.target.set(ball.position.x, 0, ball.position.z);
+          } else if (ballOwner && ballOwner.team === p.team) {
+            // Teammate has ball — support/move to space
+            if (p.role === 1) {
+              p.target.set(ownGoalX * 0.6 + ballOwner.pos.x * 0.3, 0, ballOwner.pos.z + (Math.random() - 0.5) * 10);
+            } else if (p.role === 2) {
+              p.target.set(ballOwner.pos.x + attackDir * 8, 0, ballOwner.pos.z + (Math.random() - 0.5) * 15);
+            } else {
+              p.target.set(oppGoalX - attackDir * (8 + Math.random() * 12), 0, (Math.random() - 0.5) * 25);
+            }
+          } else if (ballOwner && ballOwner.team !== p.team) {
+            // Opponent has ball — mark/defend
+            if (p.role === 1) {
+              p.target.set(ownGoalX * 0.5 + ballOwner.pos.x * 0.3, 0, ballOwner.pos.z + (Math.random() - 0.5) * 8);
+            } else if (p.role === 2) {
+              p.target.set(ballOwner.pos.x * 0.7, 0, ballOwner.pos.z + (Math.random() - 0.5) * 10);
+            } else {
+              p.target.set(oppGoalX - attackDir * 15, 0, ballOwner.pos.z * 0.5);
+            }
+          } else {
+            // Default positional
+            if (p.role === 1) {
+              p.target.set(ownGoalX * 0.7 + ball.position.x * 0.15, 0, ball.position.z + (Math.random() - 0.5) * 12);
+            } else if (p.role === 2) {
+              p.target.set(ball.position.x * 0.5 + attackDir * 3, 0, ball.position.z + (Math.random() - 0.5) * 15);
+            } else {
+              p.target.set(oppGoalX - attackDir * (12 + Math.random() * 10), 0, ball.position.z + (Math.random() - 0.5) * 18);
+            }
+          }
         }
-        // Clamp to field
         p.target.x = Math.max(-FIELD.L / 2 - 3, Math.min(FIELD.L / 2 + 3, p.target.x));
         p.target.z = Math.max(-FIELD.W / 2 - 3, Math.min(FIELD.W / 2 + 3, p.target.z));
       }
     }
 
-    // Smooth movement toward target
+    // Move toward target
     const dir = p.target.clone().sub(p.pos);
     dir.y = 0;
     const dist = dir.length();
     if (dist > 0.5) {
-      const moveDist = Math.min(p.speed * dt, dist);
+      // Speed boost when chasing ball
+      let speed = p.speed;
+      const distToBall = p.pos.distanceTo(ball.position);
+      if (!p.isGK && !p.isRef && (!ballOwner || ballOwner.team !== p.team) && distToBall < 15) {
+        speed *= 1.3; // Sprint when chasing
+      }
+      const moveDist = Math.min(speed * dt, dist);
       dir.normalize().multiplyScalar(moveDist);
       p.pos.add(dir);
-      p.g.position.copy(p.pos);
 
-      // Smooth facing
+      // Player-vs-player collision (from fuseball)
+      players.forEach(other => {
+        if (other === p || other.isRef) return;
+        const dx = p.pos.x - other.pos.x;
+        const dz = p.pos.z - other.pos.z;
+        const d = Math.sqrt(dx * dx + dz * dz);
+        const minDist = PLAYER_RADIUS * 2;
+        if (d < minDist && d > 0.01) {
+          const push = (minDist - d) / 2;
+          p.pos.x += (dx / d) * push;
+          p.pos.z += (dz / d) * push;
+          other.pos.x -= (dx / d) * push;
+          other.pos.z -= (dz / d) * push;
+        }
+      });
+
+      p.g.position.copy(p.pos);
       const targetAngle = Math.atan2(dir.x, dir.z);
       let diff = targetAngle - p.facing;
       while (diff > Math.PI) diff -= TAU;
       while (diff < -Math.PI) diff += TAU;
       p.facing += diff * 0.15;
       p.g.rotation.y = p.facing;
-
       p.moving = true;
-      p.walkPhase += dt * 8 * Math.min(p.speed / 4, 2);
+      p.walkPhase += dt * 9 * Math.min(speed / 4, 2);
     } else {
       p.moving = false;
     }
 
     // Walk animation
     if (p.moving) {
-      const amp = 0.35;
+      const amp = 0.4;
       p.legL.rotation.x = Math.sin(p.walkPhase) * amp;
       p.legR.rotation.x = -Math.sin(p.walkPhase) * amp;
-      p.armL.rotation.x = -Math.sin(p.walkPhase) * 0.25;
-      p.armR.rotation.x = Math.sin(p.walkPhase) * 0.25;
+      p.armL.rotation.x = -Math.sin(p.walkPhase) * 0.3;
+      p.armR.rotation.x = Math.sin(p.walkPhase) * 0.3;
     } else {
       p.legL.rotation.x *= 0.8;
       p.legR.rotation.x *= 0.8;
@@ -1253,26 +1301,29 @@ function kickBall(player) {
   const oppGoalX = attackDir * FIELD.L / 2;
   const r = Math.random();
 
-  if (r < 0.15) {
-    // Shoot at goal
+  // Check if near goal → shoot
+  const distToGoal = Math.abs(ball.position.x - oppGoalX);
+  if (distToGoal < 25 && r < 0.4) {
+    // Shoot
     const targetZ = (Math.random() - 0.5) * 6;
     const dx = oppGoalX - ball.position.x;
     const dz = targetZ - ball.position.z;
     const len = Math.sqrt(dx * dx + dz * dz);
     ballVel.set(dx / len * KICK_POWER, 0, dz / len * KICK_POWER);
-  } else if (r < 0.6) {
-    // Pass forward to a teammate
+  } else if (r < 0.5) {
+    // Pass to teammate ahead
     const teammates = players.filter(p => p.team === player.team && p !== player && !p.isGK && !p.isRef);
-    if (teammates.length > 0) {
-      const mate = teammates[Math.floor(Math.random() * teammates.length)];
-      const dx = mate.pos.x - ball.position.x;
-      const dz = mate.pos.z - ball.position.z;
+    const ahead = teammates.filter(t => (attackDir === 1 ? t.pos.x > player.pos.x : t.pos.x < player.pos.x));
+    const target = ahead.length > 0 ? ahead[Math.floor(Math.random() * ahead.length)] : teammates[Math.floor(Math.random() * teammates.length)];
+    if (target) {
+      const dx = target.pos.x - ball.position.x;
+      const dz = target.pos.z - ball.position.z;
       const len = Math.sqrt(dx * dx + dz * dz);
       ballVel.set(dx / len * PASS_POWER, 0, dz / len * PASS_POWER);
     }
   } else {
-    // Dribble forward (small kick)
-    ballVel.set(attackDir * 3.0, 0, (Math.random() - 0.5) * 2.0);
+    // Dribble forward
+    ballVel.set(attackDir * 4.0, 0, (Math.random() - 0.5) * 3.0);
   }
   ballOwner = null;
 }
@@ -1282,18 +1333,14 @@ function triggerGoal() {
   scoreboard.draw();
   document.getElementById('score-home').textContent = matchState.home;
   document.getElementById('score-away').textContent = matchState.away;
-  // Reset
   ball.position.set(0, 0.22, 0);
   ballVel.set(0, 0, 0);
   ballOwner = null;
-  // Reset player positions to formation
-  const homeIdx = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   const awayStart = 11;
   FORMATION_433.forEach((f, i) => {
     if (players[i]) { players[i].pos.set(f.x, 0, f.z); players[i].target.copy(players[i].pos); }
     if (players[awayStart + i]) { players[awayStart + i].pos.set(-f.x, 0, f.z); players[awayStart + i].target.copy(players[awayStart + i].pos); }
   });
-  // Danmaku burst
   for (let i = 0; i < 6; i++) setTimeout(spawnDanmaku, i * 150);
 }
 
