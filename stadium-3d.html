@@ -1,0 +1,1257 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>犀牛伯爵 · AI 竞技场 3D</title>
+<meta name="description" content="3D AI 竞技场 - 多球场切换、日夜模式、天气系统、球迷应援、实时弹幕。" />
+<style>
+  :root {
+    --paper: #f4eee0;
+    --paper-2: #ffffff;
+    --ink: #141414;
+    --dim: #5c564c;
+    --yellow: #ffd23f;
+    --blue: #3d6dff;
+    --green: #2fd573;
+    --pink: #ff5d8f;
+    --cyan: #39c4ff;
+    --shadow-lg: 7px 7px 0 var(--ink);
+    --shadow-md: 4px 4px 0 var(--ink);
+    --shadow-sm: 2.5px 2.5px 0 var(--ink);
+    --radius: 12px;
+    --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, "Helvetica Neue", sans-serif;
+    --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html, body { height:100%; overflow:hidden; background:#05070d; font-family:var(--font); color:var(--ink); -webkit-font-smoothing:antialiased; }
+  #c { position:fixed; inset:0; display:block; cursor:grab; }
+  #c.dragging { cursor:grabbing; }
+
+  /* ---------- nav ---------- */
+  nav {
+    position:fixed; top:0; left:0; right:0; height:68px; z-index:20;
+    display:flex; align-items:center; justify-content:space-between; padding:0 20px;
+    pointer-events:none;
+  }
+  nav > * { pointer-events:auto; }
+  .brand {
+    display:flex; align-items:center; gap:8px; font-size:16px; font-weight:900;
+    letter-spacing:-0.02em; text-transform:uppercase;
+    background:var(--paper); border:3px solid var(--ink); border-radius:10px;
+    padding:7px 14px 7px 10px; box-shadow:var(--shadow-sm);
+  }
+  .brand .dot { width:14px; height:14px; background:var(--green); border:2px solid var(--ink); border-radius:50%; }
+
+  /* ---------- control panel ---------- */
+  #panel {
+    position:fixed; top:78px; right:18px; z-index:18;
+    background:var(--paper); border:3px solid var(--ink); border-radius:14px;
+    box-shadow:var(--shadow-md); padding:14px 16px; width:280px;
+    max-height:calc(100vh - 100px); overflow-y:auto;
+  }
+  #panel h3 {
+    font-size:11px; font-weight:900; text-transform:uppercase; letter-spacing:0.08em;
+    color:var(--dim); margin-bottom:8px; margin-top:14px;
+  }
+  #panel h3:first-child { margin-top:0; }
+  #panel .row { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:8px; }
+  .pbtn {
+    font-family:var(--font); cursor:pointer; border:2.5px solid var(--ink);
+    background:var(--paper-2); border-radius:8px; padding:7px 12px;
+    font-size:12px; font-weight:800; box-shadow:var(--shadow-sm);
+    transition:transform 0.1s, box-shadow 0.1s, background 0.15s; color:var(--ink);
+  }
+  .pbtn:hover { transform:translate(-1.5px,-1.5px); box-shadow:4px 4px 0 var(--ink); }
+  .pbtn:active { transform:translate(1px,1px); box-shadow:0.5px 0.5px 0 var(--ink); }
+  .pbtn.active { background:var(--yellow); }
+
+  /* stadium picker */
+  .stadium-btn { width:100%; text-align:left; display:flex; align-items:center; gap:8px; margin-bottom:6px; }
+  .stadium-btn .flag { width:20px; height:14px; border:2px solid var(--ink); border-radius:2px; flex:none; }
+
+  /* toggle */
+  .toggle-row { display:flex; align-items:center; justify-content:space-between; margin-bottom:6px; }
+  .toggle-row label { font-size:12px; font-weight:700; }
+  .toggle {
+    width:42px; height:22px; background:#ccc; border:2.5px solid var(--ink); border-radius:12px;
+    position:relative; cursor:pointer; transition:background 0.2s;
+  }
+  .toggle::after {
+    content:''; position:absolute; top:1px; left:1px; width:14px; height:14px;
+    background:var(--paper-2); border:2px solid var(--ink); border-radius:50%; transition:transform 0.2s;
+  }
+  .toggle.on { background:var(--green); }
+  .toggle.on::after { transform:translateX(20px); }
+
+  /* ---------- match info card ---------- */
+  #match-card {
+    position:fixed; bottom:18px; left:18px; z-index:16;
+    background:var(--paper); border:3px solid var(--ink); border-radius:14px;
+    box-shadow:var(--shadow-md); padding:14px 18px; max-width:320px;
+  }
+  #match-card .eyebrow {
+    font-size:10px; font-weight:900; letter-spacing:0.1em; text-transform:uppercase;
+    color:var(--dim); margin-bottom:6px;
+  }
+  #match-card .teams { display:flex; align-items:center; gap:12px; margin-bottom:8px; }
+  #match-card .team { display:flex; align-items:center; gap:6px; }
+  #match-card .team .name { font-size:15px; font-weight:900; }
+  #match-card .vs { font-size:13px; font-weight:900; color:var(--dim); }
+  #match-card .score { font-size:22px; font-weight:900; font-variant-numeric:tabular-nums; }
+  #match-card .meta { font-size:11px; color:var(--dim); font-weight:600; }
+
+  /* ---------- seat card ---------- */
+  #seat-card {
+    position:fixed; bottom:18px; right:18px; z-index:16;
+    background:var(--paper); border:3px solid var(--ink); border-radius:14px;
+    box-shadow:var(--shadow-md); padding:14px 18px; width:280px;
+    opacity:0; transform:translateY(10px); transition:opacity 0.2s, transform 0.2s;
+    pointer-events:none;
+  }
+  #seat-card.show { opacity:1; transform:translateY(0); pointer-events:auto; }
+  #seat-card .seat-head { display:flex; align-items:center; justify-content:space-between; margin-bottom:8px; }
+  #seat-card .seat-label { font-size:13px; font-weight:900; }
+  #seat-card .seat-tier {
+    font-size:10px; font-weight:900; text-transform:uppercase; letter-spacing:0.06em;
+    background:var(--cyan); border:2px solid var(--ink); border-radius:5px; padding:2px 6px; box-shadow:var(--shadow-sm);
+  }
+  #seat-card .seat-grid { display:grid; grid-template-columns:1fr 1fr; gap:6px; }
+  #seat-card .cell { background:var(--paper-2); border:2px solid var(--ink); border-radius:6px; padding:6px 8px; }
+  #seat-card .cell .k { font-size:9px; font-weight:800; color:var(--dim); text-transform:uppercase; }
+  #seat-card .cell .v { font-size:15px; font-weight:900; }
+  #seat-card .view-btn {
+    width:100%; margin-top:8px; padding:8px; font-size:12px; font-weight:900;
+    background:var(--blue); color:#fff; border:2.5px solid var(--ink); border-radius:8px;
+    box-shadow:var(--shadow-sm); cursor:pointer; text-transform:uppercase; letter-spacing:0.03em;
+  }
+  #seat-card .view-btn:hover { transform:translate(-1px,-1px); box-shadow:4px 4px 0 var(--ink); }
+
+  /* ---------- danmaku ---------- */
+  #danmaku-layer {
+    position:fixed; inset:0; z-index:15; pointer-events:none; overflow:hidden;
+  }
+  .danmaku {
+    position:absolute; white-space:nowrap; font-size:14px; font-weight:800;
+    padding:3px 10px; border:2px solid var(--ink); border-radius:14px;
+    background:var(--paper); box-shadow:var(--shadow-sm); opacity:0.92;
+    will-change:transform; animation:dmFloat linear forwards;
+  }
+  .danmaku.type-home { background:var(--blue); color:#fff; }
+  .danmaku.type-away { background:var(--pink); color:var(--ink); }
+  .danmaku.type-neut { background:var(--yellow); }
+  @keyframes dmFloat {
+    from { transform:translateX(100vw); }
+    to { transform:translateX(-120%); }
+  }
+
+  /* ---------- minimap ---------- */
+  #minimap {
+    position:fixed; bottom:18px; left:50%; transform:translateX(-50%); z-index:14;
+    width:140px; height:100px; background:rgba(244,238,224,0.92); border:3px solid var(--ink);
+    border-radius:10px; box-shadow:var(--shadow-sm);
+  }
+  #minimap canvas { width:100%; height:100%; border-radius:7px; }
+
+  /* ---------- loader ---------- */
+  #loader {
+    position:fixed; inset:0; z-index:100; display:grid; place-items:center;
+    background:#05070d; transition:opacity 0.5s; color:#fff;
+  }
+  #loader.hide { opacity:0; pointer-events:none; }
+  #loader .lt { font-size:14px; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; color:var(--cyan); }
+
+  /* ---------- back button (seat view) ---------- */
+  #back-btn {
+    position:fixed; top:78px; left:18px; z-index:18; display:none;
+    background:var(--pink); border:3px solid var(--ink); border-radius:10px;
+    box-shadow:var(--shadow-sm); padding:8px 14px; font-size:12px; font-weight:900;
+    cursor:pointer; text-transform:uppercase; letter-spacing:0.03em;
+  }
+  #back-btn:hover { transform:translate(-1px,-1px); box-shadow:4px 4px 0 var(--ink); }
+
+  /* responsive */
+  @media (max-width: 768px) {
+    #panel { width:calc(100vw - 36px); right:18px; max-height:38vh; }
+    #match-card { max-width:calc(100vw - 36px); }
+    #seat-card { width:calc(100vw - 36px); }
+    #minimap { display:none; }
+  }
+</style>
+</head>
+<body>
+
+<div id="loader"><div class="lt" id="loader-text">Building AI Arena…</div></div>
+
+<canvas id="c" aria-label="3D AI Arena. Click seats to preview."></canvas>
+
+<nav>
+  <div class="brand"><span class="dot"></span> AI ARENA 3D</div>
+  <div style="display:flex;gap:8px;">
+    <button class="pbtn" id="nav-day">☀ Day</button>
+    <button class="pbtn active" id="nav-night">🌙 Night</button>
+  </div>
+</nav>
+
+<div id="back-btn">← Back to Arena</div>
+
+<div id="panel">
+  <h3>Stadium</h3>
+  <div id="stadium-list"></div>
+  <h3>Weather</h3>
+  <div class="row">
+    <button class="pbtn active" data-weather="clear">☀ Clear</button>
+    <button class="pbtn" data-weather="rain">🌧 Rain</button>
+  </div>
+  <h3>Time</h3>
+  <div class="toggle-row">
+    <label>Night Mode</label>
+    <div class="toggle on" id="toggle-night"></div>
+  </div>
+  <h3>Fans</h3>
+  <div class="toggle-row">
+    <label>Wave Animation</label>
+    <div class="toggle on" id="toggle-wave"></div>
+  </div>
+  <div class="toggle-row">
+    <label>Danmaku 弹幕</label>
+    <div class="toggle on" id="toggle-danmaku"></div>
+  </div>
+  <h3>Camera</h3>
+  <div class="row">
+    <button class="pbtn" id="cam-reset">⟲ Reset</button>
+    <button class="pbtn" id="cam-zin">+</button>
+    <button class="pbtn" id="cam-zout">−</button>
+  </div>
+</div>
+
+<div id="match-card">
+  <div class="eyebrow">AI ARENA · MATCH SIMULATION</div>
+  <div class="teams">
+    <div class="team"><div class="name" style="color:var(--blue)">MODEL-A</div></div>
+    <div class="vs">VS</div>
+    <div class="team"><div class="name" style="color:var(--pink)">MODEL-B</div></div>
+  </div>
+  <div class="score"><span id="score-home">0</span> : <span id="score-away">0</span></div>
+  <div class="meta"><span id="match-minute">00:00</span> · Round <span id="match-round">1</span></div>
+</div>
+
+<div id="seat-card">
+  <div class="seat-head">
+    <div class="seat-label">Seat <span id="sc-id">—</span></div>
+    <div class="seat-tier" id="sc-tier">—</div>
+  </div>
+  <div class="seat-grid">
+    <div class="cell"><div class="k">Row</div><div class="v" id="sc-row">—</div></div>
+    <div class="cell"><div class="k">Seat</div><div class="v" id="sc-seat">—</div></div>
+    <div class="cell"><div class="k">View Score</div><div class="v" id="sc-score">—</div></div>
+    <div class="cell"><div class="k">Section</div><div class="v" id="sc-section">—</div></div>
+  </div>
+  <button class="view-btn" id="sc-view">Enter Seat View</button>
+</div>
+
+<div id="minimap"><canvas id="mm-canvas"></canvas></div>
+
+<div id="danmaku-layer"></div>
+
+<script type="importmap">
+{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js" } }
+</script>
+
+<script type="module">
+import * as THREE from 'three';
+
+/* ============================================================
+   AI ARENA 3D — Procedural stadium + seats + match sim
+   ============================================================ */
+
+const TAU = Math.PI * 2;
+const canvas = document.getElementById('c');
+const renderer = new THREE.WebGLRenderer({ canvas, antialias:true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.setSize(innerWidth, innerHeight);
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.1;
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x05070d);
+scene.fog = new THREE.Fog(0x05070d, 80, 220);
+
+const camera = new THREE.PerspectiveCamera(50, innerWidth/innerHeight, 0.1, 600);
+camera.position.set(0, 38, 70);
+
+/* ---------- lights ---------- */
+const ambient = new THREE.AmbientLight(0x404060, 0.5);
+scene.add(ambient);
+
+const sunLight = new THREE.DirectionalLight(0xfff5e0, 0.6);
+sunLight.position.set(40, 60, 30);
+sunLight.castShadow = true;
+sunLight.shadow.mapSize.set(1024, 1024);
+sunLight.shadow.camera.near = 1;
+sunLight.shadow.camera.far = 200;
+sunLight.shadow.camera.left = -60;
+sunLight.shadow.camera.right = 60;
+sunLight.shadow.camera.top = 60;
+sunLight.shadow.camera.bottom = -60;
+scene.add(sunLight);
+
+const moonLight = new THREE.DirectionalLight(0x6080ff, 0.3);
+moonLight.position.set(-30, 50, -20);
+scene.add(moonLight);
+
+// Stadium floodlights (towers)
+const floodLights = [];
+const floodTowers = [];
+function createFloodLights() {
+  const positions = [[-45,22,-45],[45,22,-45],[-45,22,45],[45,22,45]];
+  positions.forEach(pos => {
+    // Tower pole
+    const pole = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.3, 0.4, 22, 6),
+      new THREE.MeshLambertMaterial({ color: 0x333333 })
+    );
+    pole.position.set(pos[0], 11, pos[2]);
+    pole.castShadow = true;
+    scene.add(pole);
+
+    // Light panel
+    const panel = new THREE.Mesh(
+      new THREE.BoxGeometry(4, 2.5, 0.5),
+      new THREE.MeshBasicMaterial({ color: 0xffffee })
+    );
+    panel.position.set(pos[0], 22, pos[2]);
+    scene.add(panel);
+
+    const spot = new THREE.SpotLight(0xfff5e0, 0, 120, Math.PI/4, 0.4, 1.5);
+    spot.position.set(pos[0], 22, pos[2]);
+    spot.target.position.set(0, 0, 0);
+    scene.add(spot);
+    scene.add(spot.target);
+    floodLights.push(spot);
+    floodTowers.push({ pole, panel });
+  });
+}
+createFloodLights();
+
+/* ---------- field ---------- */
+const FIELD = { L: 105, W: 68 };
+const fieldGroup = new THREE.Group();
+scene.add(fieldGroup);
+
+function buildField() {
+  // Pitch
+  const pitchGeo = new THREE.PlaneGeometry(FIELD.L, FIELD.W);
+  const pitchCanvas = document.createElement('canvas');
+  pitchCanvas.width = 2048; pitchCanvas.height = 1360;
+  const pctx = pitchCanvas.getContext('2d');
+  pctx.fillStyle = '#1a4d1a';
+  pctx.fillRect(0, 0, 2048, 1360);
+  // Stripes
+  for (let i = 0; i < 18; i++) {
+    pctx.fillStyle = i % 2 ? '#1a5a1a' : '#155015';
+    pctx.fillRect(i * (2048/18), 0, 2048/18, 1360);
+  }
+  // Lines
+  pctx.strokeStyle = '#ffffff';
+  pctx.lineWidth = 4;
+  pctx.strokeRect(40, 40, 1968, 1280);
+  // Center line
+  pctx.beginPath(); pctx.moveTo(1024, 40); pctx.lineTo(1024, 1280); pctx.stroke();
+  // Center circle
+  pctx.beginPath(); pctx.arc(1024, 680, 120, 0, TAU); pctx.stroke();
+  // Center spot
+  pctx.beginPath(); pctx.arc(1024, 680, 6, 0, TAU); pctx.fillStyle = '#fff'; pctx.fill();
+  // Penalty boxes
+  pctx.strokeRect(40, 380, 200, 600);
+  pctx.strokeRect(1808, 380, 200, 600);
+  // Goal boxes
+  pctx.strokeRect(40, 530, 80, 300);
+  pctx.strokeRect(1928, 530, 80, 300);
+  // Penalty spots
+  pctx.beginPath(); pctx.arc(150, 680, 5, 0, TAU); pctx.fill();
+  pctx.beginPath(); pctx.arc(1898, 680, 5, 0, TAU); pctx.fill();
+  // Penalty arcs
+  pctx.beginPath(); pctx.arc(150, 680, 120, -0.9, 0.9); pctx.stroke();
+  pctx.beginPath(); pctx.arc(1898, 680, 120, Math.PI-0.9, Math.PI+0.9); pctx.stroke();
+
+  const pitchTex = new THREE.CanvasTexture(pitchCanvas);
+  pitchTex.colorSpace = THREE.SRGBColorSpace;
+  const pitchMat = new THREE.MeshLambertMaterial({ map: pitchTex });
+  const pitch = new THREE.Mesh(pitchGeo, pitchMat);
+  pitch.rotation.x = -Math.PI / 2;
+  pitch.receiveShadow = true;
+  fieldGroup.add(pitch);
+
+  // Track around pitch
+  const trackGeo = new THREE.RingGeometry(FIELD.W * 0.6, FIELD.W * 0.85, 64, 1, 0, TAU);
+  // Not used; instead a simple border
+  const border = new THREE.Mesh(
+    new THREE.RingGeometry(
+      Math.max(FIELD.L, FIELD.W) * 0.55,
+      Math.max(FIELD.L, FIELD.W) * 0.62,
+      64
+    ),
+    new THREE.MeshLambertMaterial({ color: 0x8a3030 })
+  );
+  border.rotation.x = -Math.PI / 2;
+  border.position.y = 0.01;
+  fieldGroup.add(border);
+
+  // Goals
+  const goalMat = new THREE.MeshLambertMaterial({ color: 0xffffff, transparent:true, opacity:0.4 });
+  [-1, 1].forEach(side => {
+    const postGeo = new THREE.CylinderGeometry(0.08, 0.08, 2.44, 6);
+    const postL = new THREE.Mesh(postGeo, goalMat);
+    postL.position.set(side * FIELD.L/2, 1.22, -3.66);
+    fieldGroup.add(postL);
+    const postR = new THREE.Mesh(postGeo, goalMat);
+    postR.position.set(side * FIELD.L/2, 1.22, 3.66);
+    fieldGroup.add(postR);
+    const bar = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.08, 7.32, 6), goalMat);
+    bar.rotation.x = Math.PI / 2;
+    bar.position.set(side * FIELD.L/2, 2.44, 0);
+    fieldGroup.add(bar);
+  });
+}
+buildField();
+
+/* ---------- stadium stands (oval bowl) ---------- */
+// We build tiers of seats using InstancedMesh
+const standsGroup = new THREE.Group();
+scene.add(standsGroup);
+
+const STADIUM_PRESETS = {
+  bernabeu: {
+    name: 'Santiago Bernabéu',
+    flag: 'linear-gradient(90deg,#c60b1e 50%,#ffc400 50%)',
+    radiusX: 72, radiusZ: 56,
+    tiers: 3, tierHeight: 6, tierDepth: 8,
+    seatRows: 28, seatCols: 80,
+    color: 0xffffff,
+    label: 'Bernabéu'
+  },
+  gongti: {
+    name: '工人体育场',
+    flag: 'linear-gradient(90deg,#de2910 0 100%)',
+    radiusX: 68, radiusZ: 54,
+    tiers: 2, tierHeight: 5.5, tierDepth: 7,
+    seatRows: 22, seatCols: 70,
+    color: 0xff4444,
+    label: '工体'
+  },
+  maracana: {
+    name: 'Maracanã',
+    flag: 'linear-gradient(90deg,#009c3b 50%,#ffdf00 50%)',
+    radiusX: 75, radiusZ: 60,
+    tiers: 3, tierHeight: 6.5, tierDepth: 9,
+    seatRows: 30, seatCols: 85,
+    color: 0x2fd573,
+    label: 'Maracanã'
+  }
+};
+
+let currentStadium = 'bernabeu';
+let seatMesh = null;
+let seatPositions = [];
+let seatColors = [];
+let seatOriginalColors = [];
+let totalSeats = 0;
+let seatData = []; // {row, col, section, tier, score, price, pos:Vector3}
+
+function clearStands() {
+  while (standsGroup.children.length) {
+    const c = standsGroup.children[0];
+    standsGroup.remove(c);
+    if (c.geometry) c.geometry.dispose();
+    if (c.material) c.material.dispose();
+  }
+  seatMesh = null;
+  seatPositions = [];
+  seatColors = [];
+  seatOriginalColors = [];
+  seatData = [];
+}
+
+function buildStands(presetKey) {
+  clearStands();
+  const p = STADIUM_PRESETS[presetKey];
+  currentStadium = presetKey;
+
+  const rxB = p.radiusX, rzB = p.radiusZ;
+  const tierH = p.tierHeight, tierD = p.tierDepth;
+
+  // Build tier shells (the concrete bowl)
+  for (let t = 0; t < p.tiers; t++) {
+    const rx = rxB + t * tierD * 0.8;
+    const rz = rzB + t * tierD * 0.8;
+    const baseY = t * tierH;
+
+    // Stand ring
+    const ringShape = new THREE.Shape();
+    const segs = 64;
+    for (let i = 0; i <= segs; i++) {
+      const a = (i/segs) * TAU;
+      const x = Math.cos(a) * (rx + tierD);
+      const z = Math.sin(a) * (rz + tierD);
+      if (i===0) ringShape.moveTo(x, z); else ringShape.lineTo(x, z);
+    }
+    for (let i = segs; i >= 0; i--) {
+      const a = (i/segs) * TAU;
+      const x = Math.cos(a) * rx;
+      const z = Math.sin(a) * rz;
+      ringShape.lineTo(x, z);
+    }
+    const ringGeo = new THREE.ExtrudeGeometry(ringShape, { depth: tierH, bevelEnabled:false });
+    ringGeo.rotateX(-Math.PI/2);
+    const ringMat = new THREE.MeshLambertMaterial({ color: t === 0 ? 0x3a3a42 : 0x2a2a30 });
+    const ring = new THREE.Mesh(ringGeo, ringMat);
+    ring.position.y = baseY;
+    ring.receiveShadow = true;
+    standsGroup.add(ring);
+  }
+
+  // Build seats — InstancedMesh
+  const seatGeo = new THREE.BoxGeometry(0.5, 0.35, 0.5);
+  const rows = p.seatRows;
+  const cols = p.seatCols;
+
+  // Calculate seat positions
+  const positions = [];
+  const datas = [];
+  const colors = [];
+  const origColors = [];
+
+  for (let t = 0; t < p.tiers; t++) {
+    const rx = rxB + t * tierD * 0.8 + 1;
+    const rz = rzB + t * tierD * 0.8 + 1;
+    const baseY = t * tierH + 1.2;
+    const rowsInTier = Math.max(4, Math.floor(rows / p.tiers) - t);
+
+    for (let r = 0; r < rowsInTier; r++) {
+      const ry = baseY + r * 0.5;
+      const rxF = rx + r * 0.3;
+      const rzF = rz + r * 0.3;
+      const ringScale = Math.max(0.01, rxF / Math.max(rxF, rzF));
+
+      for (let c = 0; c < cols; c++) {
+        const angle = (c / cols) * TAU;
+        const x = Math.cos(angle) * rxF;
+        const z = Math.sin(angle) * rzF;
+
+        // Seat faces center
+        const lookAngle = Math.atan2(-x, -z);
+
+        // Section assignment (4 main sections)
+        const sectionIdx = Math.floor(((angle + TAU) % TAU) / (TAU/8));
+        const sectionNames = ['North','NE','East','SE','South','SW','West','NW'];
+
+        // Color by section (fan colors)
+        let color;
+        if (t === 0) {
+          // Lower tier — team colors by half
+          color = (c < cols/2) ? p.color : 0x333333;
+        } else {
+          const secColors = [0x3d6dff, 0xff5d8f, 0x2fd573, 0xffd23f, 0x3d6dff, 0xff5d8f, 0x2fd573, 0xffd23f];
+          color = secColors[sectionIdx % secColors.length];
+        }
+
+        // View score: better view = higher tier + center
+        const distToCenter = Math.sqrt(x*x + z*z);
+        const centerAlignment = Math.abs(Math.sin(angle)); // 1 = facing long side
+        let viewScore = Math.round(100 - distToCenter * 0.4 + t * 8 + centerAlignment * 5);
+        viewScore = Math.max(30, Math.min(99, viewScore));
+
+        positions.push(new THREE.Vector3(x, ry, z));
+        colors.push(color);
+        origColors.push(color);
+        datas.push({
+          row: r + 1 + t * 10,
+          col: c + 1,
+          section: sectionNames[sectionIdx],
+          tier: t + 1,
+          score: viewScore,
+          price: 80 + t * 60 + Math.round(centerAlignment * 30),
+          angle: lookAngle,
+          pos: new THREE.Vector3(x, ry, z)
+        });
+      }
+    }
+  }
+
+  totalSeats = positions.length;
+  const instMat = new THREE.MeshLambertMaterial({ vertexColors:false });
+  seatMesh = new THREE.InstancedMesh(seatGeo, instMat, totalSeats);
+  seatMesh.instanceColor = new THREE.InstancedBufferAttribute(new Float32Array(totalSeats * 3), 3);
+  seatMesh.castShadow = true;
+
+  const dummy = new THREE.Object3D();
+  const colorObj = new THREE.Color();
+  for (let i = 0; i < totalSeats; i++) {
+    dummy.position.copy(positions[i]);
+    dummy.rotation.y = datas[i].angle;
+    dummy.updateMatrix();
+    seatMesh.setMatrixAt(i, dummy.matrix);
+    colorObj.setHex(colors[i]);
+    seatMesh.setColorAt(i, colorObj);
+  }
+  seatMesh.instanceMatrix.needsUpdate = true;
+  if (seatMesh.instanceColor) seatMesh.instanceColor.needsUpdate = true;
+  seatMesh.userData.datas = datas;
+
+  standsGroup.add(seatMesh);
+  seatPositions = positions;
+  seatColors = colors;
+  seatOriginalColors = origColors;
+  seatData = datas;
+}
+
+buildStands('bernabeu');
+
+/* ---------- players (AI agents) ---------- */
+const players = [];
+let ball;
+const matchState = { home: 0, away: 0, minute: 0, round: 1, possession: 0 };
+
+function createPlayer(color, x, z) {
+  const g = new THREE.Group();
+  const mat = new THREE.MeshLambertMaterial({ color });
+  const skinMat = new THREE.MeshLambertMaterial({ color: 0xc98d63 });
+
+  const torso = new THREE.Mesh(new THREE.CylinderGeometry(0.22, 0.18, 0.6, 6), mat);
+  torso.position.y = 1.3;
+  torso.castShadow = true;
+  g.add(torso);
+
+  const head = new THREE.Mesh(new THREE.SphereGeometry(0.16, 8, 6), skinMat);
+  head.position.y = 1.75;
+  head.castShadow = true;
+  g.add(head);
+
+  const legGeo = new THREE.CylinderGeometry(0.07, 0.05, 0.8, 5);
+  legGeo.translate(0, -0.4, 0);
+  const legL = new THREE.Group(); legL.position.set(-0.1, 0.9, 0);
+  const legR = new THREE.Group(); legR.position.set(0.1, 0.9, 0);
+  legL.add(new THREE.Mesh(legGeo, skinMat));
+  legR.add(new THREE.Mesh(legGeo, skinMat));
+  g.add(legL, legR);
+
+  const armGeo = new THREE.CylinderGeometry(0.05, 0.04, 0.5, 4);
+  armGeo.translate(0, -0.25, 0);
+  const armL = new THREE.Group(); armL.position.set(-0.26, 1.55, 0);
+  const armR = new THREE.Group(); armR.position.set(0.26, 1.55, 0);
+  armL.add(new THREE.Mesh(armGeo, mat));
+  armR.add(new THREE.Mesh(armGeo, mat));
+  g.add(armL, armR);
+
+  g.position.set(x, 0, z);
+  scene.add(g);
+  return { g, legL, legR, armL, armR, target: new THREE.Vector3(x, 0, z), speed: 0.5 + Math.random() * 0.3 };
+}
+
+function buildPlayers() {
+  // Team A (blue)
+  for (let i = 0; i < 6; i++) {
+    const x = -15 + (i % 3) * 10;
+    const z = -10 + Math.floor(i/3) * 20;
+    players.push({ ...createPlayer(0x3d6dff, x, z), team: 'home' });
+  }
+  // Team B (pink)
+  for (let i = 0; i < 6; i++) {
+    const x = 15 - (i % 3) * 10;
+    const z = -10 + Math.floor(i/3) * 20;
+    players.push({ ...createPlayer(0xff5d8f, x, z), team: 'away' });
+  }
+
+  // Ball
+  ball = new THREE.Mesh(
+    new THREE.SphereGeometry(0.3, 12, 8),
+    new THREE.MeshLambertMaterial({ color: 0xffffff, emissive: 0x222222 })
+  );
+  ball.position.set(0, 0.3, 0);
+  ball.castShadow = true;
+  scene.add(ball);
+  matchState.ballTarget = new THREE.Vector3(0, 0.3, 0);
+}
+buildPlayers();
+
+/* ---------- LED ad boards ---------- */
+const adGroup = new THREE.Group();
+scene.add(adGroup);
+
+function buildAdBoards() {
+  const adCanvas = document.createElement('canvas');
+  adCanvas.width = 2048; adCanvas.height = 64;
+  const actx = adCanvas.getContext('2d');
+  actx.fillStyle = '#04101f';
+  actx.fillRect(0, 0, 2048, 64);
+  actx.font = '700 36px sans-serif';
+  actx.textBaseline = 'middle';
+  const words = ['AI ARENA', 'MODEL-A VS MODEL-B', 'MATCHDAY LIVE', '犀牛伯爵'];
+  let cx = 20;
+  for (let i = 0; i < 12; i++) {
+    const t = words[i % words.length];
+    actx.fillStyle = i % 2 ? '#2f9bff' : '#9fd3ff';
+    actx.fillText(t, cx, 32);
+    cx += actx.measureText(t).width + 100;
+  }
+  const adTex = new THREE.CanvasTexture(adCanvas);
+  adTex.colorSpace = THREE.SRGBColorSpace;
+  const adMat = new THREE.MeshBasicMaterial({ map: adTex, toneMapped: false });
+
+  const mk = (w, x, z, ry) => {
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(w, 1), adMat);
+    m.position.set(x, 0.5, z);
+    m.rotation.y = ry;
+    adGroup.add(m);
+  };
+  mk(FIELD.L + 6, 0, FIELD.W/2 + 7, Math.PI);
+  mk(FIELD.L + 6, 0, -FIELD.W/2 - 7, 0);
+  mk(FIELD.W + 6, FIELD.L/2 + 7, 0, -Math.PI/2);
+  mk(FIELD.W + 6, -FIELD.L/2 - 7, 0, Math.PI/2);
+}
+buildAdBoards();
+
+/* ---------- scoreboard ---------- */
+const scoreboard = (() => {
+  const cvs = document.createElement('canvas');
+  cvs.width = 1024; cvs.height = 256;
+  const ctx = cvs.getContext('2d');
+  const tex = new THREE.CanvasTexture(cvs);
+  tex.colorSpace = THREE.SRGBColorSpace;
+  const mesh = new THREE.Mesh(
+    new THREE.PlaneGeometry(20, 5),
+    new THREE.MeshBasicMaterial({ map: tex, toneMapped: false })
+  );
+  mesh.position.set(0, 18, -FIELD.W/2 - 12);
+  scene.add(mesh);
+
+  function draw() {
+    ctx.fillStyle = '#05070d';
+    ctx.fillRect(0, 0, 1024, 256);
+    ctx.fillStyle = '#3d6dff';
+    ctx.fillRect(0, 0, 512, 256);
+    ctx.fillStyle = '#ff5d8f';
+    ctx.fillRect(512, 0, 512, 256);
+    ctx.fillStyle = '#fff';
+    ctx.font = '900 120px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(matchState.home, 256, 128);
+    ctx.fillText(matchState.away, 768, 128);
+    ctx.fillStyle = '#ffd23f';
+    ctx.font = '900 40px monospace';
+    const m = String(Math.floor(matchState.minute/60)).padStart(2,'0');
+    const s = String(Math.floor(matchState.minute%60)).padStart(2,'0');
+    ctx.fillText(`${m}:${s}`, 512, 30);
+    ctx.font = '800 28px sans-serif';
+    ctx.fillStyle = '#fff';
+    ctx.fillText('AI ARENA', 512, 230);
+    tex.needsUpdate = true;
+  }
+  draw();
+  return { mesh, draw };
+})();
+
+/* ---------- weather: rain ---------- */
+let rainSystem = null;
+let weatherType = 'clear';
+
+function createRain() {
+  if (rainSystem) {
+    scene.remove(rainSystem);
+    rainSystem.geometry.dispose();
+    rainSystem.material.dispose();
+  }
+  const count = 3000;
+  const geo = new THREE.BufferGeometry();
+  const positions = new Float32Array(count * 3);
+  const velocities = new Float32Array(count);
+  for (let i = 0; i < count; i++) {
+    positions[i*3] = (Math.random() - 0.5) * 200;
+    positions[i*3+1] = Math.random() * 80;
+    positions[i*3+2] = (Math.random() - 0.5) * 200;
+    velocities[i] = 0.8 + Math.random() * 0.6;
+  }
+  geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+  geo.userData.velocities = velocities;
+
+  const mat = new THREE.LineBasicMaterial({ color: 0x88aaff, transparent: true, opacity: 0.4 });
+  // Use Points for simplicity
+  const pMat = new THREE.PointsMaterial({ color: 0x88aaff, size: 0.3, transparent: true, opacity: 0.5 });
+  rainSystem = new THREE.Points(geo, pMat);
+  scene.add(rainSystem);
+}
+function removeRain() {
+  if (rainSystem) {
+    scene.remove(rainSystem);
+    rainSystem.geometry.dispose();
+    rainSystem.material.dispose();
+    rainSystem = null;
+  }
+}
+
+/* ---------- day/night ---------- */
+let isNight = true;
+
+function setDayNight(night) {
+  isNight = night;
+  if (night) {
+    scene.background = new THREE.Color(0x05070d);
+    scene.fog = new THREE.Fog(0x05070d, 80, 220);
+    ambient.intensity = 0.3;
+    ambient.color.setHex(0x404060);
+    sunLight.intensity = 0.2;
+    sunLight.color.setHex(0x6080ff);
+    moonLight.intensity = 0.3;
+    floodLights.forEach(f => f.intensity = 2);
+    floodTowers.forEach(t => t.panel.material.color.setHex(0xfff5e0));
+    renderer.toneMappingExposure = 1.1;
+  } else {
+    scene.background = new THREE.Color(0x87ceeb);
+    scene.fog = new THREE.Fog(0x87ceeb, 100, 300);
+    ambient.intensity = 0.7;
+    ambient.color.setHex(0x9090a0);
+    sunLight.intensity = 1.2;
+    sunLight.color.setHex(0xfff5e0);
+    moonLight.intensity = 0;
+    floodLights.forEach(f => f.intensity = 0);
+    floodTowers.forEach(t => t.panel.material.color.setHex(0x888888));
+    renderer.toneMappingExposure = 1.0;
+  }
+}
+setDayNight(true);
+
+/* ---------- fan wave animation ---------- */
+let waveEnabled = true;
+const waveTime = { value: 0 };
+
+function updateFanWave(dt) {
+  if (!waveEnabled || !seatMesh) return;
+  waveTime.value += dt;
+  const dummy = new THREE.Object3D();
+  const colorObj = new THREE.Color();
+  const t = waveTime.value;
+
+  for (let i = 0; i < totalSeats; i++) {
+    const d = seatData[i];
+    const phase = (d.col / seatData.length) * 80 + d.tier * 2;
+    const wave = Math.sin(t * 2 + phase) * 0.3;
+    dummy.position.copy(seatPositions[i]);
+    dummy.position.y += Math.max(0, wave) * 0.6;
+    dummy.rotation.y = d.angle;
+    dummy.updateMatrix();
+    seatMesh.setMatrixAt(i, dummy.matrix);
+
+    // Color pulse on wave crest
+    if (wave > 0.5) {
+      colorObj.setHex(0xffd23f);
+    } else {
+      colorObj.setHex(seatOriginalColors[i]);
+    }
+    seatMesh.setColorAt(i, colorObj);
+  }
+  seatMesh.instanceMatrix.needsUpdate = true;
+  if (seatMesh.instanceColor) seatMesh.instanceColor.needsUpdate = true;
+}
+
+/* ---------- danmaku ---------- */
+let danmakuEnabled = true;
+const dmLayer = document.getElementById('danmaku-layer');
+const dmMessages = [
+  { text: 'Go Model-A! 🔥', type: 'home' },
+  { text: 'Model-B 太强了', type: 'away' },
+  { text: '这波操作666', type: 'neut' },
+  { text: 'AI 永远滴神！', type: 'neut' },
+  { text: '进球了！！！', type: 'home' },
+  { text: '防守！防守！', type: 'away' },
+  { text: '犀牛伯爵出品', type: 'neut' },
+  { text: '这座位视野绝了', type: 'neut' },
+  { text: '666666', type: 'neut' },
+  { text: 'Bernabéu yyds', type: 'neut' },
+  { text: '下雨了也要看球', type: 'neut' },
+  { text: '夜场氛围感拉满', type: 'neut' },
+  { text: '人浪来了！🌊', type: 'neut' },
+  { text: 'Model-B 防守漏了', type: 'home' },
+  { text: 'Model-A 加油！', type: 'home' },
+  { text: '这角度太刁钻了', type: 'neut' },
+  { text: '球进了！！！⚽', type: 'away' },
+  { text: '好球好球', type: 'neut' },
+  { text: 'AI Arena 牛逼', type: 'neut' },
+  { text: '工体气氛太燃了', type: 'neut' },
+];
+let dmIndex = 0;
+
+function spawnDanmaku() {
+  if (!danmakuEnabled) return;
+  const msg = dmMessages[dmIndex % dmMessages.length];
+  dmIndex++;
+  const el = document.createElement('div');
+  el.className = `danmaku type-${msg.type}`;
+  el.textContent = msg.text;
+  el.style.top = (10 + Math.random() * 60) + '%';
+  el.style.animationDuration = (8 + Math.random() * 5) + 's';
+  dmLayer.appendChild(el);
+  el.addEventListener('animationend', () => el.remove());
+}
+setInterval(spawnDanmaku, 1800);
+
+/* ---------- orbit controls (manual) ---------- */
+let isDragging = false, prevMX = 0, prevMY = 0;
+let camTheta = 0, camPhi = 0.45, camDist = 90;
+let camTarget = new THREE.Vector3(0, 0, 0);
+
+function updateCameraPos() {
+  camera.position.x = camTarget.x + camDist * Math.sin(camTheta) * Math.cos(camPhi);
+  camera.position.z = camTarget.z + camDist * Math.cos(camTheta) * Math.cos(camPhi);
+  camera.position.y = camTarget.y + camDist * Math.sin(camPhi);
+  camera.lookAt(camTarget);
+}
+updateCameraPos();
+
+canvas.addEventListener('pointerdown', e => {
+  isDragging = true; prevMX = e.clientX; prevMY = e.clientY;
+  canvas.classList.add('dragging');
+});
+window.addEventListener('pointermove', e => {
+  if (!isDragging) return;
+  camTheta -= (e.clientX - prevMX) * 0.006;
+  camPhi = Math.max(0.08, Math.min(1.4, camPhi + (e.clientY - prevMY) * 0.004));
+  prevMX = e.clientX; prevMY = e.clientY;
+  updateCameraPos();
+});
+window.addEventListener('pointerup', () => { isDragging = false; canvas.classList.remove('dragging'); });
+canvas.addEventListener('wheel', e => {
+  e.preventDefault();
+  camDist = Math.max(15, Math.min(200, camDist + e.deltaY * 0.08));
+  updateCameraPos();
+}, { passive: false });
+
+// Touch pinch
+let pinchDist = 0;
+canvas.addEventListener('touchstart', e => {
+  if (e.touches.length === 2) {
+    const dx = e.touches[0].clientX - e.touches[1].clientX;
+    const dy = e.touches[0].clientY - e.touches[1].clientY;
+    pinchDist = Math.sqrt(dx*dx + dy*dy);
+  }
+}, { passive: true });
+canvas.addEventListener('touchmove', e => {
+  if (e.touches.length === 2) {
+    const dx = e.touches[0].clientX - e.touches[1].clientX;
+    const dy = e.touches[0].clientY - e.touches[1].clientY;
+    const d = Math.sqrt(dx*dx + dy*dy);
+    camDist = Math.max(15, Math.min(200, camDist + (pinchDist - d) * 0.2));
+    pinchDist = d;
+    updateCameraPos();
+  }
+}, { passive: true });
+
+/* ---------- seat picking ---------- */
+const raycaster = new THREE.Raycaster();
+const mouse = new THREE.Vector2();
+let hoveredSeat = -1;
+let selectedSeat = -1;
+let seatMode = false;
+let pdx = 0, pdy = 0;
+
+canvas.addEventListener('pointerdown', e => {
+  pdx = e.clientX; pdy = e.clientY;
+});
+canvas.addEventListener('click', e => {
+  // Only treat as click if pointer didn't move much (not a drag)
+  if (Math.abs(e.clientX - pdx) > 5 || Math.abs(e.clientY - pdy) > 5) return;
+  mouse.x = (e.clientX / innerWidth) * 2 - 1;
+  mouse.y = -(e.clientY / innerHeight) * 2 + 1;
+  raycaster.setFromCamera(mouse, camera);
+  if (!seatMesh) return;
+  const hits = raycaster.intersectObject(seatMesh);
+  if (hits.length > 0) {
+    const idx = hits[0].instanceId;
+    selectedSeat = idx;
+    showSeatCard(idx);
+  }
+});
+
+function showSeatCard(idx) {
+  const d = seatData[idx];
+  document.getElementById('sc-id').textContent = `R${d.row}-C${d.col}`;
+  document.getElementById('sc-row').textContent = d.row;
+  document.getElementById('sc-seat').textContent = d.col;
+  document.getElementById('sc-score').textContent = d.score;
+  document.getElementById('sc-section').textContent = d.section;
+  const tierLabel = d.tier === 1 ? 'Lower' : d.tier === 2 ? 'Club' : 'Upper';
+  const tierEl = document.getElementById('sc-tier');
+  tierEl.textContent = `${tierLabel} · Tier ${d.tier}`;
+  tierEl.style.background = d.tier === 1 ? 'var(--cyan)' : d.tier === 2 ? 'var(--green)' : 'var(--yellow)';
+  document.getElementById('seat-card').classList.add('show');
+}
+
+document.getElementById('sc-view').addEventListener('click', () => {
+  if (selectedSeat < 0) return;
+  enterSeatView(selectedSeat);
+});
+
+document.getElementById('back-btn').addEventListener('click', () => exitSeatView());
+
+function enterSeatView(idx) {
+  const d = seatData[idx];
+  const pos = seatPositions[idx];
+  // Position camera at seat, looking at field center
+  const lookDir = new THREE.Vector3(0, 2, 0).sub(pos).normalize();
+  const camPos = pos.clone().add(new THREE.Vector3(0, 1, 0));
+  camera.position.copy(camPos);
+  camera.lookAt(0, 2, 0);
+  seatMode = true;
+  document.getElementById('back-btn').style.display = 'block';
+  canvas.classList.add('seatmode');
+}
+
+function exitSeatView() {
+  seatMode = false;
+  document.getElementById('back-btn').style.display = 'none';
+  canvas.classList.remove('seatmode');
+  updateCameraPos();
+}
+
+/* ---------- match simulation ---------- */
+let lastTime = performance.now();
+let matchTimer = 0;
+let goalCooldown = 0;
+
+function updateMatch(dt) {
+  matchTimer += dt;
+  matchState.minute += dt * 0.5; // 2x speed
+
+  // Update ball — random walk toward target
+  if (Math.random() < 0.005) {
+    matchState.ballTarget.set(
+      (Math.random() - 0.5) * FIELD.L,
+      0.3,
+      (Math.random() - 0.5) * FIELD.W
+    );
+  }
+  ball.position.lerp(matchState.ballTarget, 0.02);
+
+  // Update players — chase ball or random target
+  players.forEach((p, i) => {
+    if (Math.random() < 0.01) {
+      p.target.set(
+        ball.position.x + (Math.random() - 0.5) * 20,
+        0,
+        ball.position.z + (Math.random() - 0.5) * 20
+      );
+    }
+    const dir = p.target.clone().sub(p.g.position);
+    dir.y = 0;
+    const dist = dir.length();
+    if (dist > 1) {
+      dir.normalize().multiplyScalar(p.speed * dt * 10);
+      p.g.position.add(dir);
+      p.g.lookAt(p.target.x, 0, p.target.z);
+    }
+
+    // Leg animation
+    const walkPhase = performance.now() * 0.01 + i;
+    p.legL.rotation.x = Math.sin(walkPhase) * 0.4;
+    p.legR.rotation.x = -Math.sin(walkPhase) * 0.4;
+    p.armL.rotation.x = -Math.sin(walkPhase) * 0.3;
+    p.armR.rotation.x = Math.sin(walkPhase) * 0.3;
+  });
+
+  // Score
+  goalCooldown -= dt;
+  if (goalCooldown <= 0 && Math.random() < 0.003) {
+    if (Math.random() < 0.5) matchState.home++;
+    else matchState.away++;
+    goalCooldown = 15;
+    scoreboard.draw();
+    document.getElementById('score-home').textContent = matchState.home;
+    document.getElementById('score-away').textContent = matchState.away;
+    // Extra danmaku burst on goal
+    for (let i = 0; i < 5; i++) setTimeout(spawnDanmaku, i * 200);
+  }
+
+  // Update match display
+  const m = Math.floor(matchState.minute / 60);
+  const s = Math.floor(matchState.minute % 60);
+  document.getElementById('match-minute').textContent =
+    String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+  if (matchState.minute > 90) {
+    matchState.minute = 0;
+    matchState.round++;
+    document.getElementById('match-round').textContent = matchState.round;
+  }
+}
+
+/* ---------- minimap ---------- */
+const mmCanvas = document.getElementById('mm-canvas');
+const mmCtx = mmCanvas.getContext('2d');
+mmCanvas.width = 280; mmCanvas.height = 200;
+
+function drawMiniMap() {
+  const w = mmCanvas.width, h = mmCanvas.height;
+  mmCtx.fillStyle = '#1a4d1a';
+  mmCtx.fillRect(0, 0, w, h);
+  mmCtx.strokeStyle = '#fff';
+  mmCtx.lineWidth = 2;
+  mmCtx.strokeRect(2, 2, w-4, h-4);
+  mmCtx.beginPath();
+  mmCtx.moveTo(w/2, 2); mmCtx.lineTo(w/2, h-2); mmCtx.stroke();
+  mmCtx.beginPath();
+  mmCtx.arc(w/2, h/2, 25, 0, TAU); mmCtx.stroke();
+
+  // Players
+  const sx = w / (FIELD.L + 40);
+  const sz = h / (FIELD.W + 40);
+  players.forEach(p => {
+    mmCtx.fillStyle = p.team === 'home' ? '#3d6dff' : '#ff5d8f';
+    const x = w/2 + p.g.position.x * sx;
+    const y = h/2 + p.g.position.z * sz;
+    mmCtx.beginPath();
+    mmCtx.arc(x, y, 4, 0, TAU);
+    mmCtx.fill();
+  });
+
+  // Ball
+  mmCtx.fillStyle = '#fff';
+  mmCtx.beginPath();
+  mmCtx.arc(w/2 + ball.position.x * sx, h/2 + ball.position.z * sz, 3, 0, TAU);
+  mmCtx.fill();
+
+  // Camera indicator
+  mmCtx.strokeStyle = '#ffd23f';
+  mmCtx.lineWidth = 1.5;
+  mmCtx.strokeRect(
+    w/2 + (camera.position.x - 10) * sx,
+    h/2 + (camera.position.z - 8) * sz,
+    20 * sx, 16 * sz
+  );
+}
+
+/* ---------- UI controls ---------- */
+// Stadium picker
+const stadiumList = document.getElementById('stadium-list');
+Object.entries(STADIUM_PRESETS).forEach(([key, p]) => {
+  const btn = document.createElement('button');
+  btn.className = 'pbtn stadium-btn' + (key === 'bernabeu' ? ' active' : '');
+  btn.dataset.stadium = key;
+  btn.innerHTML = `<span class="flag" style="background:${p.flag}"></span> ${p.name}`;
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.stadium-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    buildStands(key);
+    if (selectedSeat >= 0) {
+      document.getElementById('seat-card').classList.remove('show');
+      selectedSeat = -1;
+    }
+  });
+  stadiumList.appendChild(btn);
+});
+
+// Weather
+document.querySelectorAll('[data-weather]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('[data-weather]').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    weatherType = btn.dataset.weather;
+    if (weatherType === 'rain') createRain();
+    else removeRain();
+  });
+});
+
+// Day/night toggle
+function toggleNight() {
+  const t = document.getElementById('toggle-night');
+  const night = !t.classList.contains('on');
+  t.classList.toggle('on');
+  setDayNight(night);
+  document.getElementById('nav-day').classList.toggle('active', !night);
+  document.getElementById('nav-night').classList.toggle('active', night);
+}
+document.getElementById('toggle-night').addEventListener('click', toggleNight);
+document.getElementById('nav-day').addEventListener('click', () => { if (isNight) toggleNight(); });
+document.getElementById('nav-night').addEventListener('click', () => { if (!isNight) toggleNight(); });
+
+// Wave toggle
+document.getElementById('toggle-wave').addEventListener('click', () => {
+  waveEnabled = !waveEnabled;
+  document.getElementById('toggle-wave').classList.toggle('on', waveEnabled);
+});
+
+// Danmaku toggle
+document.getElementById('toggle-danmaku').addEventListener('click', () => {
+  danmakuEnabled = !danmakuEnabled;
+  document.getElementById('toggle-danmaku').classList.toggle('on', danmakuEnabled);
+  if (!danmakuEnabled) {
+    dmLayer.querySelectorAll('.danmaku').forEach(el => el.remove());
+  }
+});
+
+// Camera controls
+document.getElementById('cam-reset').addEventListener('click', () => {
+  exitSeatView();
+  camTheta = 0; camPhi = 0.45; camDist = 90;
+  camTarget.set(0, 0, 0);
+  updateCameraPos();
+});
+document.getElementById('cam-zin').addEventListener('click', () => {
+  camDist = Math.max(15, camDist - 8);
+  updateCameraPos();
+});
+document.getElementById('cam-zout').addEventListener('click', () => {
+  camDist = Math.min(200, camDist + 8);
+  updateCameraPos();
+});
+
+// Keyboard
+window.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && seatMode) exitSeatView();
+});
+
+// Resize
+window.addEventListener('resize', () => {
+  camera.aspect = innerWidth / innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth, innerHeight);
+});
+
+/* ---------- animation loop ---------- */
+function animate() {
+  requestAnimationFrame(animate);
+  const now = performance.now();
+  const dt = Math.min(0.05, (now - lastTime) / 1000);
+  lastTime = now;
+
+  updateMatch(dt);
+  updateFanWave(dt);
+
+  // Rain
+  if (rainSystem) {
+    const positions = rainSystem.geometry.attributes.position.array;
+    const velocities = rainSystem.geometry.userData.velocities;
+    for (let i = 0; i < velocities.length; i++) {
+      positions[i*3+1] -= velocities[i];
+      if (positions[i*3+1] < 0) {
+        positions[i*3] = (Math.random() - 0.5) * 200;
+        positions[i*3+1] = 80;
+        positions[i*3+2] = (Math.random() - 0.5) * 200;
+      }
+    }
+    rainSystem.geometry.attributes.position.needsUpdate = true;
+  }
+
+  drawMiniMap();
+  renderer.render(scene, camera);
+}
+
+// Hide loader
+document.getElementById('loader').classList.add('hide');
+animate();
+
+</script>
+</body>
+</html>
