@@ -661,17 +661,43 @@ const players = [];
 let ball;
 const matchState = { home: 0, away: 0, minute: 0, round: 1 };
 
-function createPlayer(color, x, z, team) {
+function createPlayer(color, x, z, team, role, number, isGK, isRef) {
   const g = new THREE.Group();
-  const mat = new THREE.MeshStandardMaterial({ color, roughness: 0.6 });
+  let mat;
+  if (isRef) {
+    mat = new THREE.MeshStandardMaterial({ color: 0x1a1a1a, roughness: 0.6 });
+  } else if (isGK) {
+    mat = new THREE.MeshStandardMaterial({ color: team === 'home' ? 0x2fd573 : 0xffd23f, roughness: 0.6 });
+  } else {
+    mat = new THREE.MeshStandardMaterial({ color, roughness: 0.6 });
+  }
   const skinMat = new THREE.MeshStandardMaterial({ color: 0xc98d63, roughness: 0.7 });
-  const shortMat = new THREE.MeshStandardMaterial({ color: 0x222222, roughness: 0.6 });
+  const shortMat = new THREE.MeshStandardMaterial({ color: isRef ? 0x1a1a1a : 0x222222, roughness: 0.6 });
   const bootMat = new THREE.MeshStandardMaterial({ color: 0x111114, roughness: 0.5 });
 
   // Torso
   const torso = new THREE.Mesh(new THREE.CapsuleGeometry(0.18, 0.35, 4, 8), mat);
   torso.position.y = 1.3; torso.castShadow = true;
   g.add(torso);
+
+  // Jersey number on back — canvas texture
+  if (number !== undefined) {
+    const numCanvas = document.createElement('canvas');
+    numCanvas.width = 128; numCanvas.height = 128;
+    const nctx = numCanvas.getContext('2d');
+    nctx.fillStyle = 'rgba(255,255,255,0.9)';
+    nctx.font = '900 80px Arial';
+    nctx.textAlign = 'center';
+    nctx.textBaseline = 'middle';
+    nctx.fillText(number, 64, 64);
+    const numTex = new THREE.CanvasTexture(numCanvas);
+    numTex.colorSpace = THREE.SRGBColorSpace;
+    const numMat = new THREE.MeshBasicMaterial({ map: numTex, transparent: true });
+    const numPlane = new THREE.Mesh(new THREE.PlaneGeometry(0.3, 0.3), numMat);
+    numPlane.position.set(0, 1.35, -0.19);
+    numPlane.rotation.y = Math.PI;
+    g.add(numPlane);
+  }
 
   // Head
   const head = new THREE.Mesh(new THREE.SphereGeometry(0.14, 10, 8), skinMat);
@@ -714,31 +740,48 @@ function createPlayer(color, x, z, team) {
   scene.add(g);
 
   return {
-    g, legL, legR, armL, armR, team,
+    g, legL, legR, armL, armR, team, role, number, isGK: !!isGK, isRef: !!isRef,
     pos: new THREE.Vector3(x, 0, z),
     target: new THREE.Vector3(x, 0, z),
-    speed: 3.5 + Math.random() * 1.5,
-    facing: 0,
+    speed: isGK ? 2.0 : (isRef ? 3.0 : 3.5 + Math.random() * 1.5),
+    facing: team === 'away' ? Math.PI : 0,
     walkPhase: Math.random() * TAU,
     moving: false,
-    role: Math.floor(Math.random() * 3) // 0=defender, 1=midfield, 2=forward
+    kickCooldown: 0
   };
 }
 
+// 4-3-3 formation positions (relative to own goal at x=-L/2)
+// Roles: 0=GK, 1=DEF, 2=MID, 3=FWD
+const FORMATION_433 = [
+  { x: -48, z: 0, role: 0, num: 1 },        // GK
+  { x: -35, z: -22, role: 1, num: 2 },      // LB
+  { x: -38, z: -8, role: 1, num: 3 },       // CB
+  { x: -38, z: 8, role: 1, num: 4 },        // CB
+  { x: -35, z: 22, role: 1, num: 5 },        // RB
+  { x: -20, z: -15, role: 2, num: 6 },      // LM
+  { x: -22, z: 0, role: 2, num: 7 },        // CM
+  { x: -20, z: 15, role: 2, num: 8 },       // RM
+  { x: -5, z: -12, role: 3, num: 9 },       // LW
+  { x: -3, z: 0, role: 3, num: 10 },        // ST
+  { x: -5, z: 12, role: 3, num: 11 },       // RW
+];
+
 function buildPlayers() {
-  // Team A (blue) — left side
-  const homePositions = [
-    [-40, 0], [-35, -15], [-35, 15], [-25, -25], [-25, 0], [-25, 25], [-15, -10], [-15, 10], [-5, 0], [-10, -20], [-10, 20]
-  ];
-  for (let i = 0; i < 7; i++) {
-    const [x, z] = homePositions[i] || [-20 + i * 5, 0];
-    players.push(createPlayer(0x3d6dff, x, z, 'home'));
-  }
-  // Team B (pink) — right side
-  for (let i = 0; i < 7; i++) {
-    const [x, z] = homePositions[i] || [-20 + i * 5, 0];
-    players.push(createPlayer(0xff5d8f, -x, z, 'away'));
-  }
+  // Team A (blue) — home, attacks right (+x)
+  FORMATION_433.forEach(f => {
+    players.push(createPlayer(0x3d6dff, f.x, f.z, 'home', f.role, f.num, f.role === 0));
+  });
+
+  // Team B (pink) — away, attacks left (-x), mirror positions
+  FORMATION_433.forEach(f => {
+    players.push(createPlayer(0xff5d8f, -f.x, f.z, 'away', f.role, f.num, f.role === 0));
+  });
+
+  // Referees
+  players.push(createPlayer(0x1a1a1a, 0, -FIELD.W / 2 - 3, 'ref', 4, undefined, false, true)); // Main ref
+  players.push(createPlayer(0x1a1a1a, -FIELD.L / 4, -FIELD.W / 2 - 2, 'ref', 5, undefined, false, true)); // Linesman 1
+  players.push(createPlayer(0x1a1a1a, FIELD.L / 4, FIELD.W / 2 + 2, 'ref', 5, undefined, false, true)); // Linesman 2
 
   // Ball
   ball = new THREE.Mesh(
@@ -1025,72 +1068,137 @@ function exitSeatView() {
 }
 
 /* ============================================================
-   MATCH SIM — smooth player movement + ball physics
+   MATCH SIM — ball only moves when kicked, role-based AI
    ============================================================ */
 let lastTime = performance.now();
 let goalCooldown = 0;
-let ballTarget = new THREE.Vector3(0, 0.22, 0);
-let ballOwner = null;
+let ballOwner = null;        // player who has the ball
+let ballVel = new THREE.Vector3(0, 0, 0);  // ball velocity
+const BALL_FRICTION = 0.96;   // ball slows down each frame
+const KICK_POWER = 8.0;
+const PASS_POWER = 5.0;
+const BALL_MAX_SPEED = 15;
 
 function updateMatch(dt) {
   matchState.minute += dt * 0.6;
 
-  // Ball logic — follow owner or drift to new target
-  if (ballOwner) {
-    // Ball follows the owner
-    const ownerPos = ballOwner.pos;
-    ballTarget.set(ownerPos.x + Math.cos(ballOwner.facing) * 0.3, 0.22, ownerPos.z + Math.sin(ballOwner.facing) * 0.3);
-  } else if (Math.random() < 0.008) {
-    // Pick a new ball target
-    ballTarget.set((Math.random() - 0.5) * FIELD.L * 0.8, 0.22, (Math.random() - 0.5) * FIELD.W * 0.8);
-  }
-  ball.position.lerp(ballTarget, 0.04);
-
-  // Check if someone is near the ball → becomes owner
-  let nearestPlayer = null, nearestDist = 999;
-  players.forEach(p => {
-    const d = p.pos.distanceTo(ball.position);
-    if (d < nearestDist) { nearestDist = d; nearestPlayer = p; }
-  });
-  if (nearestDist < 2 && Math.random() < 0.05) {
-    ballOwner = nearestPlayer;
-    // Owner kicks the ball forward after a short time
-    if (Math.random() < 0.02) {
-      ballTarget.set(
-        ballOwner.team === 'home' ? FIELD.L / 2 : -FIELD.L / 2,
-        0.22,
-        (Math.random() - 0.5) * FIELD.W * 0.6
-      );
-      ballOwner = null;
+  // ---- Ball physics: ball only moves if it has velocity (was kicked) ----
+  if (ballVel.length() > 0.05) {
+    // Ball is rolling — apply friction
+    ball.position.x += ballVel.x * dt;
+    ball.position.z += ballVel.z * dt;
+    ballVel.multiplyScalar(BALL_FRICTION);
+    // Clamp ball to field bounds (walls on sidelines)
+    if (Math.abs(ball.position.z) > FIELD.W / 2) {
+      ball.position.z = Math.sign(ball.position.z) * FIELD.W / 2;
+      ballVel.z *= -0.4;
     }
-  }
-
-  // Player movement — smooth pursuit with role-based behavior
-  players.forEach((p, i) => {
-    // Decide target: chase ball, defend, or attack based on role and team
-    if (Math.random() < 0.008 || p.target.distanceTo(p.pos) < 3) {
-      if (ballOwner === p) {
-        // Run toward opponent goal
-        const goalX = p.team === 'home' ? FIELD.L / 2 - 5 : -FIELD.L / 2 + 5;
-        p.target.set(goalX + (Math.random() - 0.5) * 10, 0, (Math.random() - 0.5) * FIELD.W * 0.6);
-      } else if (p.role === 0) {
-        // Defender — stay on own half, shadow the ball
-        const side = p.team === 'home' ? -1 : 1;
-        p.target.set(side * (15 + Math.random() * 15), 0, ball.position.z + (Math.random() - 0.5) * 20);
-      } else if (p.role === 1) {
-        // Midfielder — follow ball
-        p.target.set(ball.position.x * 0.6 + (Math.random() - 0.5) * 10, 0, ball.position.z + (Math.random() - 0.5) * 15);
+    if (Math.abs(ball.position.x) > FIELD.L / 2) {
+      // Check if it's a goal (within goal width)
+      if (Math.abs(ball.position.z) < 3.66) {
+        // GOAL!
+        if (ball.position.x > 0 && ballVel.x > 0) {
+          matchState.home++;
+          triggerGoal();
+        } else if (ball.position.x < 0 && ballVel.x < 0) {
+          matchState.away++;
+          triggerGoal();
+        }
       } else {
-        // Forward — push toward goal
-        const dir = p.team === 'home' ? 1 : -1;
-        p.target.set(dir * (10 + Math.random() * 20), 0, ball.position.z + (Math.random() - 0.5) * 25);
+        // Bounce off back wall
+        ball.position.x = Math.sign(ball.position.x) * FIELD.L / 2;
+        ballVel.x *= -0.4;
       }
-      // Clamp to field
-      p.target.x = Math.max(-FIELD.L / 2 - 5, Math.min(FIELD.L / 2 + 5, p.target.x));
-      p.target.z = Math.max(-FIELD.W / 2 - 5, Math.min(FIELD.W / 2 + 5, p.target.z));
+    }
+  }
+
+  // ---- Find ball owner: nearest player within 1.2 units, ball must be slow ----
+  if (ballVel.length() < 2.0) {
+    let nearest = null, nearestDist = 1.5;
+    players.forEach(p => {
+      if (p.isRef) return;
+      const d = p.pos.distanceTo(ball.position);
+      if (d < nearestDist) { nearestDist = d; nearest = p; }
+    });
+    if (nearest) {
+      if (ballOwner !== nearest) {
+        ballOwner = nearest;
+        ballVel.set(0, 0, 0);
+      }
+    }
+  }
+
+  // ---- Ball follows owner ----
+  if (ballOwner) {
+    // Validate ballOwner still exists
+    const validOwner = ballOwner.g && players.indexOf(ballOwner) >= 0;
+    if (!validOwner) {
+      ballOwner = null;
+    } else {
+      const aheadX = ballOwner.pos.x + Math.sin(ballOwner.facing) * 0.4;
+      const aheadZ = ballOwner.pos.z + Math.cos(ballOwner.facing) * 0.4;
+      ball.position.lerp(new THREE.Vector3(aheadX, 0.22, aheadZ), 0.3);
+
+      // Owner kicks the ball after a short delay
+      ballOwner.kickCooldown -= dt;
+      if (ballOwner.kickCooldown <= 0) {
+        kickBall(ballOwner);
+        ballOwner = null;
+      }
+    }
+  }
+
+  // ---- Player movement: role-based targets ----
+  players.forEach((p, i) => {
+    // Skip movement logic if referee (handled separately)
+    if (p.isRef) {
+      // Referees jog along the sideline, following play
+      const playX = ball.position.x;
+      if (p.role === 4) {
+        // Main ref — follow behind play
+        p.target.set(playX * 0.7, 0, ball.position.z > 0 ? -FIELD.W / 2 - 3 : FIELD.W / 2 + 3);
+      } else {
+        // Linesmen — stay on their sideline
+        p.target.set(playX * 0.8, 0, FIELD.W / 2 + 2);
+      }
+      p.target.x = Math.max(-FIELD.L / 2, Math.min(FIELD.L / 2, p.target.x));
+    } else {
+      // Field players — decide target based on role
+      if (Math.random() < 0.01 || p.target.distanceTo(p.pos) < 3) {
+        const attackDir = p.team === 'home' ? 1 : -1;
+        const ownGoalX = -attackDir * FIELD.L / 2;
+        const oppGoalX = attackDir * FIELD.L / 2;
+
+        if (p.isGK) {
+          // Goalkeeper — stay near own goal, shadow the ball's z
+          const ballApproaching = (attackDir === 1 && ballVel.x < -1) || (attackDir === -1 && ballVel.x > 1);
+          if (ballApproaching && Math.abs(ball.position.x - ownGoalX) < 25) {
+            // Ball coming toward goal — GK comes out slightly
+            p.target.set(ownGoalX + attackDir * 2, 0, ball.position.z * 0.5);
+          } else {
+            // Stay on line
+            p.target.set(ownGoalX + attackDir * 1, 0, ball.position.z * 0.3);
+          }
+        } else if (ballOwner === p) {
+          // Has the ball — dribble toward opponent goal
+          p.target.set(oppGoalX - attackDir * 5 + (Math.random() - 0.5) * 8, 0, (Math.random() - 0.5) * 20);
+        } else if (p.role === 1) {
+          // Defender — stay on own half
+          p.target.set(ownGoalX * 0.7 + ball.position.x * 0.15, 0, ball.position.z + (Math.random() - 0.5) * 15);
+        } else if (p.role === 2) {
+          // Midfielder — support around ball
+          p.target.set(ball.position.x * 0.6 + attackDir * 5, 0, ball.position.z + (Math.random() - 0.5) * 18);
+        } else {
+          // Forward — push toward goal
+          p.target.set(oppGoalX - attackDir * (10 + Math.random() * 15), 0, ball.position.z + (Math.random() - 0.5) * 20);
+        }
+        // Clamp to field
+        p.target.x = Math.max(-FIELD.L / 2 - 3, Math.min(FIELD.L / 2 + 3, p.target.x));
+        p.target.z = Math.max(-FIELD.W / 2 - 3, Math.min(FIELD.W / 2 + 3, p.target.z));
+      }
     }
 
-    // Smooth movement — lerp toward target
+    // Smooth movement toward target
     const dir = p.target.clone().sub(p.pos);
     dir.y = 0;
     const dist = dir.length();
@@ -1100,7 +1208,7 @@ function updateMatch(dt) {
       p.pos.add(dir);
       p.g.position.copy(p.pos);
 
-      // Smooth facing — lerp angle
+      // Smooth facing
       const targetAngle = Math.atan2(dir.x, dir.z);
       let diff = targetAngle - p.facing;
       while (diff > Math.PI) diff -= TAU;
@@ -1109,7 +1217,7 @@ function updateMatch(dt) {
       p.g.rotation.y = p.facing;
 
       p.moving = true;
-      p.walkPhase += dt * 8 * (p.speed / 4);
+      p.walkPhase += dt * 8 * Math.min(p.speed / 4, 2);
     } else {
       p.moving = false;
     }
@@ -1122,7 +1230,6 @@ function updateMatch(dt) {
       p.armL.rotation.x = -Math.sin(p.walkPhase) * 0.25;
       p.armR.rotation.x = Math.sin(p.walkPhase) * 0.25;
     } else {
-      // Idle — settle legs
       p.legL.rotation.x *= 0.8;
       p.legR.rotation.x *= 0.8;
       p.armL.rotation.x *= 0.8;
@@ -1130,42 +1237,7 @@ function updateMatch(dt) {
     }
   });
 
-  // Score
-  goalCooldown -= dt;
-  if (goalCooldown <= 0) {
-    // Check if ball is in goal area
-    if (Math.abs(ball.position.x) > FIELD.L / 2 - 1 && Math.abs(ball.position.z) < 3.66) {
-      if (ball.position.x > 0) matchState.home++;
-      else matchState.away++;
-      goalCooldown = 20;
-      scoreboard.draw();
-      document.getElementById('score-home').textContent = matchState.home;
-      document.getElementById('score-away').textContent = matchState.away;
-      // Reset positions
-      ball.position.set(0, 0.22, 0);
-      ballTarget.set(0, 0.22, 0);
-      ballOwner = null;
-      players.forEach((p, i) => {
-        const side = p.team === 'home' ? -1 : 1;
-        p.pos.set(side * (10 + i * 3), 0, (Math.random() - 0.5) * 30);
-        p.target.copy(p.pos);
-      });
-      // Danmaku burst
-      for (let i = 0; i < 6; i++) setTimeout(spawnDanmaku, i * 150);
-    }
-    // Random goal chance
-    if (goalCooldown <= 0 && Math.random() < 0.002) {
-      if (Math.random() < 0.5) matchState.home++;
-      else matchState.away++;
-      goalCooldown = 20;
-      scoreboard.draw();
-      document.getElementById('score-home').textContent = matchState.home;
-      document.getElementById('score-away').textContent = matchState.away;
-      for (let i = 0; i < 6; i++) setTimeout(spawnDanmaku, i * 150);
-    }
-  }
-
-  // Update timer display
+  // Update timer
   const m = Math.floor(matchState.minute / 60);
   const s = Math.floor(matchState.minute % 60);
   document.getElementById('match-minute').textContent = String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
@@ -1174,6 +1246,55 @@ function updateMatch(dt) {
     matchState.round++;
     document.getElementById('match-round').textContent = matchState.round;
   }
+}
+
+function kickBall(player) {
+  const attackDir = player.team === 'home' ? 1 : -1;
+  const oppGoalX = attackDir * FIELD.L / 2;
+  const r = Math.random();
+
+  if (r < 0.15) {
+    // Shoot at goal
+    const targetZ = (Math.random() - 0.5) * 6;
+    const dx = oppGoalX - ball.position.x;
+    const dz = targetZ - ball.position.z;
+    const len = Math.sqrt(dx * dx + dz * dz);
+    ballVel.set(dx / len * KICK_POWER, 0, dz / len * KICK_POWER);
+  } else if (r < 0.6) {
+    // Pass forward to a teammate
+    const teammates = players.filter(p => p.team === player.team && p !== player && !p.isGK && !p.isRef);
+    if (teammates.length > 0) {
+      const mate = teammates[Math.floor(Math.random() * teammates.length)];
+      const dx = mate.pos.x - ball.position.x;
+      const dz = mate.pos.z - ball.position.z;
+      const len = Math.sqrt(dx * dx + dz * dz);
+      ballVel.set(dx / len * PASS_POWER, 0, dz / len * PASS_POWER);
+    }
+  } else {
+    // Dribble forward (small kick)
+    ballVel.set(attackDir * 3.0, 0, (Math.random() - 0.5) * 2.0);
+  }
+  ballOwner = null;
+}
+
+function triggerGoal() {
+  goalCooldown = 15;
+  scoreboard.draw();
+  document.getElementById('score-home').textContent = matchState.home;
+  document.getElementById('score-away').textContent = matchState.away;
+  // Reset
+  ball.position.set(0, 0.22, 0);
+  ballVel.set(0, 0, 0);
+  ballOwner = null;
+  // Reset player positions to formation
+  const homeIdx = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  const awayStart = 11;
+  FORMATION_433.forEach((f, i) => {
+    if (players[i]) { players[i].pos.set(f.x, 0, f.z); players[i].target.copy(players[i].pos); }
+    if (players[awayStart + i]) { players[awayStart + i].pos.set(-f.x, 0, f.z); players[awayStart + i].target.copy(players[awayStart + i].pos); }
+  });
+  // Danmaku burst
+  for (let i = 0; i < 6; i++) setTimeout(spawnDanmaku, i * 150);
 }
 
 /* ============================================================
@@ -1192,7 +1313,7 @@ function drawMiniMap() {
   mmCtx.beginPath(); mmCtx.arc(w / 2, h / 2, 22, 0, TAU); mmCtx.stroke();
   const sx = w / (FIELD.L + 30), sz = h / (FIELD.W + 30);
   players.forEach(p => {
-    mmCtx.fillStyle = p.team === 'home' ? '#3d6dff' : '#ff5d8f';
+    mmCtx.fillStyle = p.isRef ? '#000' : (p.team === 'home' ? '#3d6dff' : '#ff5d8f');
     mmCtx.beginPath(); mmCtx.arc(w / 2 + p.pos.x * sx, h / 2 + p.pos.z * sz, 3, 0, TAU); mmCtx.fill();
   });
   mmCtx.fillStyle = '#fff';
