@@ -142,54 +142,6 @@ window.SITE_DATA = {
         title: "苹果AI拿到中国身份证，里面住的是阿里千问",
         desc: "苹果AI拿到中国通行证，但云端大脑全盘外包给阿里千问。全球AI正在分岔成两条轨道，而苹果是第一个被迫选边站的超级巨头。",
         href: "notes/2026-07-16-apple-ai-china-alibaba.html"
-      },
-      {
-        type: "Essay",
-        title: "资本六周追着给DeepSeek送钱，因为闻到了一个味道",
-        desc: "DeepSeek B轮估值710亿美元，六周涨37%。梁文锋360亿美元登顶AI创始人首富。资本闻到了什么？",
-        href: "notes/2026-07-16-deepseek-funding-710b.html"
-      },
-      {
-        type: "Essay",
-        title: "卷了两年画质，这家清华团队把视频做成了游戏",
-        desc: "Xmax AI发布全球首个实时交互视频模型X2.0。不是又一个视频生成工具，而是把视频从'内容'变成'界面'的范式跃迁。",
-        href: "notes/2026-07-15-xmax-x2-0.html"
-      },
-      {
-        type: "Essay",
-        title: "Codex的负责人说，我们自己的App是用凑合的模型造的",
-        desc: "OpenAI Codex负责人Tibo公开自曝前端能力okayish，83.9万人围观。诚实比吹牛更有杀伤力。",
-        href: "notes/2026-07-13-tibo-codex-okayish.html"
-      },
-      {
-        type: "Essay",
-        title: "Codex是工厂，Claude Code是工作室，你该选哪个",
-        desc: "2026年AI编程三巨头实测对比。核心差异不是功能多少，是协作哲学。",
-        href: "notes/2026-07-13-codex-factory-claude-studio.html"
-      },
-      {
-        type: "Essay",
-        title: "OpenAI把门一关，23万亿Token跑中国去了",
-        desc: "OpenRouter最新数据：中国AI模型周调用量23.45万亿Token，首超美国5.5倍。全球前五占四席。这不是中国赢了，是美国把门关太紧了。",
-        href: "notes/2026-07-13-china-ai-tokens-surge.html"
-      },
-      {
-        type: "Essay",
-        title: "一周之内，OpenAI的朋友全走了",
-        desc: "苹果94页起诉书、微软替换模型、人才出走、媒体制裁、42州调查。五条战线同时施压，OpenAI的真正危机不在模型，在盟友体系崩塌。",
-        href: "notes/2026-07-12-openai-friends-left.html"
-      },
-      {
-        type: "Essay",
-        title: "6万亿估值的Anthropic，电费单却寄给马斯克",
-        desc: "Anthropic的ARR从90亿飙到600亿，但每月12.5亿算力租金交给马斯克。微软用自研MAI替换OpenAI模型。AI产业正分成算力层、模型层和分发层，利润分配正在倾斜。",
-        href: "notes/2026-07-12-anthropic-valuation-compute-layer.html"
-      },
-      {
-        type: "Essay",
-        title: "马斯克向Anthropic认输，但最骚的操作不是认输",
-        desc: "Anthropic月付12.5亿租对手的GPU训练自己的模型，ARR 18个月从90亿飙到600亿。马斯克的认输是一门精明的生意。",
-        href: "notes/2026-07-11-anthropic-musk-surrender.html"
       }
     ],
     roadmap: [
