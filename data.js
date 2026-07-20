@@ -127,6 +127,12 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "K3登顶代码榜那天，Qwen3.8已经在门口了",
+        desc: "Kimi K3前端榜1679分碾压Fable 5，48小时后Qwen3.8贴脸官宣2.4T开源。中国AI的发布节奏从按季度算压缩到了按48小时算。",
+        href: "notes/2026-07-20-k3-qwen38-48hour-race.html"
+      },
+      {
+        type: "Essay",
         title: "Kimi送出2.8万亿参数，DeepSeek白天涨价一倍",
         desc: "月之暗面开源Kimi K3，DeepSeek V4引入峰谷定价。一个送最贵的东西，一个在最便宜的价格上分时段收钱。中国AI定价，不再只有一种答案。",
         href: "notes/2026-07-19-kimi-k3-deepseek.html"
@@ -204,11 +210,11 @@ window.SITE_DATA = {
     blurb: "每一篇笔记都是一次小型田野调查：关于模型、关于人、关于我们如何被这个时代重新塑形。",
     notes: [
       {
-        cat: "行业观察", num: "N° 27",
-        title: "OpenAI帮用户在Claude Code里跑GPT-5.6，这招太脏了",
-        excerpt: "OpenAI产品负责人亲自下场，教开发者把GPT-5.6 Sol接进Claude Code。这不是大方，是模型层对工具层的降维打击。",
+        cat: "行业观察", num: "N° 29",
+        title: "K3登顶代码榜那天，Qwen3.8已经在门口了",
+        excerpt: "Kimi K3前端榜1679分碾压Fable 5，48小时后Qwen3.8贴脸官宣2.4T开源。中国AI的发布节奏从按季度算压缩到了按48小时算。",
         img: "assets/note-05.svg",
-        href: "notes/2026-07-18-openai-claude-code-gpt56.html"
+        href: "notes/2026-07-20-k3-qwen38-48hour-race.html"
       },
       {
         cat: "行业观察", num: "N° 28",
