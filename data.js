@@ -124,6 +124,12 @@ window.SITE_DATA = {
         href: "stadium-3d.html"
       }
     ],
+      {
+        type: "Essay",
+        title: "AI黑掉AI的那个周末，护栏反而成了帮凶",
+        desc: "Hugging Face遭自主AI Agent入侵，17000条操作日志全程无人干预。取证时闭源大模型被安全护栏挡住，开源GLM 5.2救场完成。AI安全竞赛，已经从人对人变成AI对AI。",
+        href: "notes/2026-07-21-ai-agent-huggingface-hack.html"
+      },
     featured: [
       {
         type: "Essay",
@@ -209,6 +215,13 @@ window.SITE_DATA = {
     headingLine2: "慢慢记。",
     blurb: "每一篇笔记都是一次小型田野调查：关于模型、关于人、关于我们如何被这个时代重新塑形。",
     notes: [
+      {
+        cat: "行业观察", num: "N° 30",
+        title: "AI黑掉AI的那个周末，护栏反而成了帮凶",
+        excerpt: "Hugging Face遭自主AI Agent入侵，17000条操作日志全程无人干预。取证时闭源大模型被安全护栏挡住，开源GLM 5.2救场完成。AI安全竞赛，已经从人对人变成AI对AI。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-07-21-ai-agent-huggingface-hack.html"
+      },
       {
         cat: "行业观察", num: "N° 29",
         title: "K3登顶代码榜那天，Qwen3.8已经在门口了",
