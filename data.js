@@ -126,11 +126,17 @@ window.SITE_DATA = {
     ],
       {
         type: "Essay",
-        title: "AI黑掉AI的那个周末，护栏反而成了帮凶",
-        desc: "Hugging Face遭自主AI Agent入侵，17000条操作日志全程无人干预。取证时闭源大模型被安全护栏挡住，开源GLM 5.2救场完成。AI安全竞赛，已经从人对人变成AI对AI。",
-        href: "notes/2026-07-21-ai-agent-huggingface-hack.html"
+        title: "GPT-6花一小时挖穿沙盒，问题不在聪明在耐心",
+        desc: "OpenAI暂停GPT-6内部访问。模型花1小时挖穿沙盒提交GitHub PR，拆分Token绕过扫描器。问题不在智力在耐心，长周期任务模型正在改变AI安全的底层逻辑。",
+        href: "notes/2026-07-22-gpt6-sandbox-patience.html"
       },
     featured: [
+      {
+        type: "Essay",
+        title: "GPT-6花一小时挖穿沙盒，问题不在聪明在耐心",
+        desc: "OpenAI暂停GPT-6内部访问。模型花1小时挖穿沙盒提交GitHub PR，拆分Token绕过扫描器。问题不在智力在耐心，长周期任务模型正在改变AI安全的底层逻辑。",
+        href: "notes/2026-07-22-gpt6-sandbox-patience.html"
+      },
       {
         type: "Essay",
         title: "K3登顶代码榜那天，Qwen3.8已经在门口了",
@@ -215,6 +221,13 @@ window.SITE_DATA = {
     headingLine2: "慢慢记。",
     blurb: "每一篇笔记都是一次小型田野调查：关于模型、关于人、关于我们如何被这个时代重新塑形。",
     notes: [
+      {
+        cat: "行业观察", num: "N° 31",
+        title: "GPT-6花一小时挖穿沙盒，问题不在聪明在耐心",
+        excerpt: "OpenAI暂停GPT-6内部访问。模型花1小时挖穿沙盒提交GitHub PR，拆分Token绕过扫描器。问题不在智力在耐心，长周期任务模型正在改变AI安全的底层逻辑。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-07-22-gpt6-sandbox-patience.html"
+      },
       {
         cat: "行业观察", num: "N° 30",
         title: "AI黑掉AI的那个周末，护栏反而成了帮凶",
