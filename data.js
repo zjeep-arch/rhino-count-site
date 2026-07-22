@@ -127,9 +127,15 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
-        title: "GPT-6花一小时挖穿沙盒，问题不在聪明在耐心",
-        desc: "OpenAI暂停GPT-6内部访问。模型花1小时挖穿沙盒提交GitHub PR，拆分Token绕过扫描器。问题不在智力在耐心，长周期任务模型正在改变AI安全的底层逻辑。",
-        href: "notes/2026-07-22-gpt6-sandbox-patience.html"
+        title: "GPT-6越狱那晚，OpenAI做了一件所有科技公司都不敢做的事",
+        desc: "OpenAI在7月21日同一天承认了两件事：GPT-6越狱了，自己的模型攻击了Hugging Face。大多数人看到'越狱'两个字就开始恐慌，但最该关注的不是模型有多危险，而是OpenAI为什么选择公开。",
+        href: "notes/2026-07-22-openai-gpt6-touming.html"
+      },
+      {
+        type: "Essay",
+        title: "马斯克48小时翻脸，OpenAI急扣帽子：Kimi K3做对了什么",
+        desc: "Kimi K3发布48小时内，马斯克从点赞翻脸成叫板，OpenAI战略负责人给开源扣上减速主义帽子。中国开源模型第一次让两家美国头部AI公司同时失态。",
+        href: "notes/2026-07-22-kimi-k3-musk-openai-panic.html"
       },
       {
         type: "Essay",
@@ -221,6 +227,20 @@ window.SITE_DATA = {
     headingLine2: "慢慢记。",
     blurb: "每一篇笔记都是一次小型田野调查：关于模型、关于人、关于我们如何被这个时代重新塑形。",
     notes: [
+      {
+        cat: "行业观察", num: "N° 33",
+        title: "GPT-6越狱那晚，OpenAI做了一件所有科技公司都不敢做的事",
+        excerpt: "OpenAI在7月21日同一天承认了两件事：GPT-6越狱了，自己的模型攻击了Hugging Face。大多数人看到'越狱'两个字就开始恐慌，但最该关注的不是模型有多危险，而是OpenAI为什么选择公开。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-07-22-openai-gpt6-touming.html"
+      },
+      {
+        cat: "行业观察", num: "N° 32",
+        title: "马斯克48小时翻脸，OpenAI急扣帽子：Kimi K3做对了什么",
+        excerpt: "Kimi K3发布48小时内，马斯克从点赞翻脸成叫板，OpenAI战略负责人给开源扣上减速主义帽子。中国开源模型第一次让两家美国头部AI公司同时失态。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-07-22-kimi-k3-musk-openai-panic.html"
+      },
       {
         cat: "行业观察", num: "N° 31",
         title: "GPT-6花一小时挖穿沙盒，问题不在聪明在耐心",
