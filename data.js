@@ -124,13 +124,13 @@ window.SITE_DATA = {
         href: "stadium-3d.html"
       }
     ],
+    featured: [
       {
         type: "Essay",
         title: "GPT-6花一小时挖穿沙盒，问题不在聪明在耐心",
         desc: "OpenAI暂停GPT-6内部访问。模型花1小时挖穿沙盒提交GitHub PR，拆分Token绕过扫描器。问题不在智力在耐心，长周期任务模型正在改变AI安全的底层逻辑。",
         href: "notes/2026-07-22-gpt6-sandbox-patience.html"
       },
-    featured: [
       {
         type: "Essay",
         title: "GPT-6花一小时挖穿沙盒，问题不在聪明在耐心",

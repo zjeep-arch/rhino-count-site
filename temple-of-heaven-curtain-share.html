@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>祈年殿 · 反重力文字</title>
+<meta name="description" content="天坛祈年殿 · 交互珠帘与反重力排版实验">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%23e8dfca'/%3E%3Ctext x='50%25' y='56%25' text-anchor='middle' font-size='30' font-family='Georgia,serif' fill='%232e251f'%3E祈%3C/text%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600;700;900&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  /* ===== 色板：白天纸质 / 夜间深紫 ===== */
+  :root {
+    --paper: #e8dfca;
+    --ink: #2e251f;
+    --muted: #70665b;
+    --hairline: rgba(46, 37, 31, .36);
+    --panel: rgba(232, 223, 202, .93);
+    --temple-width: min(620px, 62vw);
+  }
+  [data-theme="night"] {
+    --paper: #1a1520;
+    --ink: #e8dfca;
+    --muted: #968a7e;
+    --hairline: rgba(232, 223, 202, .28);
+    --panel: rgba(26, 21, 32, .93);
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Noto Serif SC', Georgia, serif;
+    line-height: 1.8;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    transition: background .6s, color .6s;
+  }
+
+  /* ===== 画板：纸质纹理底 ===== */
+  .artboard {
+    position: relative;
+    min-height: 100svh;
+    overflow: hidden;
+    isolation: isolate;
+    background:
+      repeating-linear-gradient(91deg, rgba(46,37,31,.022) 0 1px, transparent 1px 11px),
+      repeating-linear-gradient(2deg, rgba(46,37,31,.017) 0 1px, transparent 1px 14px),
+      radial-gradient(circle at 53% 16%, rgba(255,255,255,.26), transparent 34%),
+      var(--paper);
+  }
+  [data-theme="night"] .artboard {
+    background:
+      repeating-linear-gradient(91deg, rgba(232,223,202,.015) 0 1px, transparent 1px 11px),
+      repeating-linear-gradient(2deg, rgba(232,223,202,.012) 0 1px, transparent 1px 14px),
+      radial-gradient(circle at 53% 16%, rgba(100,80,130,.12), transparent 34%),
+      var(--paper);
+  }
+  /* 纸面颗粒噪点 */
+  .artboard::after {
+    content: ""; position: absolute; inset: 0; z-index: 10; pointer-events: none;
+    opacity: .14; mix-blend-mode: multiply;
+    background-image:
+      radial-gradient(circle at 24% 31%, currentColor 0 .5px, transparent .65px),
+      radial-gradient(circle at 71% 56%, currentColor 0 .45px, transparent .6px);
+    background-size: 9px 11px, 13px 15px;
+  }
+  [data-theme="night"] .artboard::after { mix-blend-mode: screen; opacity: .08; }
+
+  /* ===== 导航栏 ===== */
+  .masthead {
+    position: absolute; z-index: 8; top: 28px;
+    left: clamp(24px, 5vw, 94px); right: clamp(24px, 5vw, 94px);
+    display: grid; grid-template-columns: 1fr auto 1fr;
+    align-items: center; gap: 28px;
+    font: 12px/1 'Inter', ui-monospace, monospace; color: var(--muted);
+  }
+  .brand {
+    color: var(--ink);
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 14px; font-weight: 600;
+    text-decoration: none; letter-spacing: .5px;
+  }
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+  .nav-links a { color: inherit; text-decoration: none; transition: color .3s; }
+  .nav-links a:hover { color: var(--ink); }
+
+  .masthead-actions { justify-self: end; display: flex; align-items: center; gap: 18px; }
+
+  /* 配置按钮：胶囊描边 */
+  .configure {
+    border: 1px solid var(--ink); border-radius: 999px;
+    padding: 9px 22px; color: var(--ink); background: transparent;
+    font: 500 11px/1 'Inter', sans-serif; letter-spacing: .04em;
+    cursor: pointer; transition: all .3s;
+  }
+  .configure:hover { background: var(--ink); color: var(--paper); }
+
+  /* 主题 / 声音切换按钮 */
+  .toggle-btn {
+    width: 36px; height: 36px;
+    border: 1px solid var(--hairline); border-radius: 2px;
+    background: transparent; color: var(--muted);
+    cursor: pointer; display: grid; place-content: center;
+    font-size: 16px; line-height: 1; transition: all .3s;
+  }
+  .toggle-btn:hover { color: var(--ink); border-color: var(--muted); }
+  .toggle-btn.active { color: var(--ink); border-color: var(--ink); }
+
+  /* ===== 天坛图片 ===== */
+  .temple {
+    position: absolute; z-index: 4;
+    top: clamp(48px, 6vh, 72px); left: 50%;
+    width: var(--temple-width); transform: translateX(-50%);
+    pointer-events: none; transition: filter .6s;
+  }
+  .temple img {
+    width: 100%; height: auto; display: block;
+    mix-blend-mode: multiply;
+    filter: drop-shadow(34px 38px 18px rgba(46,37,31,.19))
+            drop-shadow(70px 64px 34px rgba(46,37,31,.10));
+  }
+  [data-theme="night"] .temple img {
+    mix-blend-mode: screen;
+    filter: drop-shadow(34px 38px 18px rgba(100,80,130,.25))
+            drop-shadow(0 0 60px rgba(80,60,120,.15))
+            brightness(.85) saturate(1.1);
+  }
+
+  /* ===== 标题 ===== */
+  .headline {
+    position: absolute; z-index: 6;
+    left: clamp(28px, 6vw, 112px); bottom: clamp(38px, 8vh, 92px);
+    width: min(330px, 31vw); pointer-events: none;
+  }
+  .eyebrow {
+    margin: 0 0 16px; color: var(--muted);
+    font: 12px/1.3 'Inter', ui-monospace, monospace;
+  }
+  h1 {
+    margin: 0; color: var(--ink); letter-spacing: -1px;
+    font: 700 clamp(48px, 5.5vw, 86px)/.86 'Playfair Display', Georgia, serif;
+  }
+  h1 .ag-char { display: inline-block; cursor: default; user-select: none; }
+  .rule {
+    display: inline-block; width: 76px; margin-left: 15px;
+    border-top: 1px solid var(--ink); transform: translateY(-.35em); opacity: .3;
+  }
+
+  /* ===== 进度条 ===== */
+  .progress {
+    position: absolute; z-index: 6; left: 50%; bottom: 22px;
+    width: 140px; height: 2px; transform: translateX(-50%);
+    background: rgba(46,37,31,.18);
+  }
+  [data-theme="night"] .progress { background: rgba(232,223,202,.15); }
+  .progress::before {
+    content: ""; display: block; width: 42%; height: 100%;
+    background: rgba(46,37,31,.55); transition: width .3s;
+  }
+  [data-theme="night"] .progress::before { background: rgba(232,223,202,.5); }
+
+  /* ===== 交互计数器 ===== */
+  .counter {
+    position: absolute; z-index: 6; left: 50%; bottom: 36px;
+    transform: translateX(-50%); opacity: 0; transition: opacity .4s;
+    font: 10px/1 'Inter', ui-monospace, monospace; color: var(--muted);
+    letter-spacing: .05em;
+  }
+  .counter.visible { opacity: 1; }
+
+  /* ===== Canvas 珠帘 ===== */
+  #curtain {
+    position: absolute; inset: 0; z-index: 2;
+    width: 100%; height: 100%; cursor: none; touch-action: none;
+  }
+  .cursor {
+    position: absolute; z-index: 12; width: 12px; height: 12px;
+    border: 1px solid rgba(46,37,31,.72); border-radius: 50%;
+    transform: translate(-50%, -50%); opacity: 0; pointer-events: none;
+  }
+  [data-theme="night"] .cursor { border-color: rgba(232,223,202,.72); }
+  .artboard.is-active .cursor { opacity: 1; }
+
+  /* ===== 配置面板 ===== */
+  .settings {
+    position: absolute; z-index: 20; top: 62px;
+    right: clamp(24px, 5vw, 94px); width: 238px; padding: 16px;
+    border: 1px solid var(--hairline); background: var(--panel);
+    box-shadow: 16px 18px 32px rgba(46,37,31,.12);
+    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  }
+  [data-theme="night"] .settings { box-shadow: 16px 18px 32px rgba(0,0,0,.4); }
+  .settings[hidden] { display: none; }
+  .setting { display: grid; gap: 6px; margin-bottom: 13px; }
+  .setting label {
+    display: flex; justify-content: space-between; color: var(--muted);
+    font: 11px/1 'Inter', ui-monospace, monospace;
+  }
+  .setting input { width: 100%; accent-color: var(--ink); }
+  .reset-btn {
+    width: 100%; border: 1px solid var(--hairline); padding: 7px 10px;
+    color: var(--ink); background: transparent; cursor: pointer;
+    font: 11px/1 'Inter', ui-monospace, monospace; transition: all .3s;
+  }
+  .reset-btn:hover { border-color: var(--muted); }
+
+  /* ===== 响应式 ===== */
+  @media (max-width: 720px) {
+    .masthead { grid-template-columns: 1fr auto; }
+    .nav-links { display: none; }
+    .temple { top: 66px; width: min(520px, 96vw); }
+    .headline { left: 24px; bottom: 38px; width: min(285px, 72vw); }
+    h1 { font-size: clamp(42px, 14vw, 66px); }
+    .progress, .counter { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: .01ms !important; animation-iteration-count: 1 !important;
+      transition-duration: .01ms !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<main class="artboard" id="artboard">
+  <canvas id="curtain" aria-label="天坛屋檐下可交互的中文珠帘"></canvas>
+
+  <!-- 导航 -->
+  <header class="masthead">
+    <a class="brand" href="#">天坛 · Temple of Heaven</a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#home">首页</a>
+      <a href="#temple">地标</a>
+      <a href="#story">社区</a>
+    </nav>
+    <div class="masthead-actions">
+      <button class="toggle-btn" id="themeToggle" title="切换昼夜主题" aria-label="切换昼夜主题">☀</button>
+      <button class="toggle-btn" id="soundToggle" title="开关声音" aria-label="开关声音">♪</button>
+      <button class="configure" id="configure" aria-expanded="false" aria-controls="settings">配置</button>
+    </div>
+  </header>
+
+  <!-- 天坛图片 -->
+  <div class="temple" id="temple">
+    <!-- 替换成你自己的天坛抠图，建议 WebP 格式，透明背景 -->
+    <img src="assets/temple-roof-cutout-web.webp"
+         alt="天坛祈年殿屋顶"
+         width="901" height="730"
+         fetchpriority="high" decoding="async"
+         onerror="this.onerror=null;this.src='temple-of-heaven.png'">
+  </div>
+
+  <!-- 标题 -->
+  <section class="headline" id="home">
+    <p class="eyebrow">北京 (Beijing) / 天地之间</p>
+    <h1 id="heroTitle">
+      <span class="ag-char">T</span><span class="ag-char">e</span><span class="ag-char">m</span><span class="ag-char">p</span><span class="ag-char">l</span><span class="ag-char">e</span><br>
+      <span class="ag-char">o</span><span class="ag-char">f</span><br>
+      <span class="ag-char">H</span><span class="ag-char">e</span><span class="ag-char">a</span><span class="ag-char">v</span><span class="ag-char">e</span><span class="ag-char">n</span><span class="rule"></span>
+    </h1>
+  </section>
+
+  <!-- 进度条 + 计数器 + 自定义光标 -->
+  <div class="progress" aria-hidden="true"></div>
+  <div class="counter" id="counter" aria-hidden="true">珠帘触碰 · 0</div>
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+
+  <!-- 配置面板 -->
+  <aside class="settings" id="settings" hidden>
+    <div class="setting"><label for="strength">Strength <output id="strengthValue">72</output></label><input id="strength" type="range" min="20" max="110" value="72"></div>
+    <div class="setting"><label for="reach">Reach <output id="reachValue">34</output></label><input id="reach" type="range" min="18" max="56" value="34"></div>
+    <div class="setting"><label for="inertia">Inertia <output id="inertiaValue">97</output></label><input id="inertia" type="range" min="86" max="99" value="97"></div>
+    <div class="setting"><label for="breeze">Auto Breeze <output id="breezeValue">0</output></label><input id="breeze" type="range" min="0" max="100" value="0"></div>
+    <button class="reset-btn" id="resetCurtain" type="button">Reset curtain</button>
+  </aside>
+</main>
+
+<script>
+(() => {
+  /* ═══════════════════════════════════════════════
+   *  1. 反重力标题：每个字母独立悬浮 + 鼠标弹开
+   * ═══════════════════════════════════════════════ */
+  let audioCtx = null;
+  let soundEnabled = true;
+
+  function attachAntiGravity(el, opts = {}) {
+    const {
+      floatAmp = 5,     // 悬浮幅度 (px)
+      floatSpeed = 0.35, // 悬浮速度
+      rotAmp = 1.5,     // 旋转幅度 (deg)
+      pushRadius = 130,  // 鼠标推力范围
+      pushForce = 20,    // 推力强度
+      springK = 0.055,   // 弹簧刚度
+      damping = 0.89     // 阻尼
+    } = opts;
+
+    let vx = 0, vy = 0, ox = 0, oy = 0;
+    let phase = Math.random() * Math.PI * 2;
+    let lastSoundTime = 0, rafId = null, isPushed = false;
+
+    // 五声音阶：触碰时按字符映射不同音高
+    const pentatonic = [261.63, 293.66, 329.63, 392.00, 440.00, 523.25, 587.33, 659.25];
+
+    function playChime(freq, duration, volume) {
+      if (!audioCtx || audioCtx.state === 'suspended' || !soundEnabled) return;
+      const now = audioCtx.currentTime;
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.connect(gain); gain.connect(audioCtx.destination);
+      osc.frequency.value = freq; osc.type = 'sine';
+      gain.gain.setValueAtTime(volume, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + duration);
+      osc.start(now); osc.stop(now + duration);
+    }
+
+    // 悬浮动画：sin/cos 驱动 X/Y/旋转
+    function floatTick() {
+      if (isPushed) return;
+      const t = Date.now() / 1000;
+      const fy = Math.sin(t * floatSpeed + phase) * floatAmp;
+      const fx = Math.cos(t * floatSpeed * 0.7 + phase) * (floatAmp * 0.35);
+      const rz = Math.sin(t * floatSpeed * 0.45 + phase) * rotAmp;
+      el.style.transform = `translate(${fx + ox}px, ${fy + oy}px) rotate(${rz}deg)`;
+    }
+
+    // 弹簧物理：鼠标推开后弹性回归
+    function physicsTick() {
+      if (!isPushed && Math.abs(ox) < 0.1 && Math.abs(oy) < 0.1 &&
+          Math.abs(vx) < 0.01 && Math.abs(vy) < 0.01) {
+        ox = oy = vx = vy = 0; rafId = null; return;
+      }
+      vx = (vx + (-ox * springK)) * damping;
+      vy = (vy + (-oy * springK)) * damping;
+      ox += vx; oy += vy;
+      const t = Date.now() / 1000;
+      const fy = Math.sin(t * floatSpeed + phase) * floatAmp;
+      const fx = Math.cos(t * floatSpeed * 0.7 + phase) * (floatAmp * 0.35);
+      const rz = Math.sin(t * floatSpeed * 0.45 + phase) * rotAmp;
+      el.style.transform = `translate(${fx + ox}px, ${fy + oy}px) rotate(${rz}deg)`;
+      rafId = requestAnimationFrame(physicsTick);
+    }
+
+    // 鼠标靠近时推开
+    el.addEventListener('mousemove', (e) => {
+      const r = el.getBoundingClientRect();
+      const cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+      const dx = cx - e.clientX, dy = cy - e.clientY;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < pushRadius && dist > 0) {
+        const force = (pushRadius - dist) / pushRadius * pushForce;
+        vx += (dx / dist) * force * 0.12;
+        vy += (dy / dist) * force * 0.12;
+        isPushed = true;
+        const now = Date.now();
+        if (now - lastSoundTime > 90) {
+          playChime(pentatonic[Math.abs(el.textContent.charCodeAt(0)) % pentatonic.length], 0.1, 0.03);
+          lastSoundTime = now;
+        }
+        if (!rafId) rafId = requestAnimationFrame(physicsTick);
+      }
+    });
+
+    // 鼠标离开时弹回
+    el.addEventListener('mouseleave', () => {
+      isPushed = false;
+      if (!rafId) rafId = requestAnimationFrame(physicsTick);
+      playChime(pentatonic[Math.abs(el.textContent.charCodeAt(0)) % pentatonic.length] * 0.5, 0.15, 0.02);
+    });
+
+    setInterval(floatTick, 33);
+  }
+
+  /* ═══════════════════════════════════════════════
+   *  2. Canvas 珠帘：Verlet 物理 + Web Audio 钟声
+   * ═══════════════════════════════════════════════ */
+  const artboard   = document.getElementById('artboard');
+  const canvas     = document.getElementById('curtain');
+  const ctx        = canvas.getContext('2d');
+  const cursor     = document.getElementById('cursor');
+  const temple     = document.getElementById('temple');
+  const configure  = document.getElementById('configure');
+  const settings   = document.getElementById('settings');
+  const resetBtn   = document.getElementById('resetCurtain');
+  const counterEl  = document.getElementById('counter');
+
+  const chains = [];  // 每条珠帘链条 = [{ x, y, oldX, oldY, ... }, ...]
+
+  // 默认汉字（会尝试从 tiantan.txt 加载更长的文本替换）
+  let glyphs = '天坛祈年风调雨顺天地玄黄日月星辰礼乐文明北京春秋山川云海';
+
+  // 鼠标状态
+  const mouse = { x: -999, y: -999, oldX: -999, oldY: -999, active: false };
+
+  // 物理参数（配置面板可调）
+  const physics = { strength: .72, radius: 34, friction: .965, gravity: .18 };
+
+  // 音频系统
+  const sound = {
+    context: null, output: null,
+    lastStrike: [], lastGlobal: 0, voices: 0,
+    // 五声音阶（C5~A6），按列索引取频率
+    scale: [523.25, 587.33, 659.25, 783.99, 880, 1046.5, 1174.66, 1318.51, 1567.98, 1760]
+  };
+
+  let width = 0, height = 0, dpr = 1;
+  let interactionCount = 0;
+  let breezeIntensity = 0, breezePhase = 0;
+
+  /* ---- 解锁音频（浏览器要求用户交互后才能播放） ---- */
+  function unlockSound() {
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return;
+    if (!sound.context) {
+      const c = new AC();
+      const output = c.createGain();
+      const comp = c.createDynamicsCompressor();
+      const delay = c.createDelay(.3);
+      const fb = c.createGain();
+      const wet = c.createGain();
+      output.gain.value = .62;
+      comp.threshold.value = -18; comp.ratio.value = 3;
+      delay.delayTime.value = .11; fb.gain.value = .14; wet.gain.value = .13;
+      output.connect(comp); output.connect(delay);
+      delay.connect(fb); fb.connect(delay); delay.connect(wet); wet.connect(comp);
+      comp.connect(c.destination);
+      sound.context = c; sound.output = output;
+    }
+    if (sound.context.state === 'suspended') sound.context.resume().catch(() => {});
+    if (!audioCtx) audioCtx = sound.context;
+  }
+
+  /* ---- 触发钟声 ----
+   * 每次珠帘被推动且冲击力足够大时调用
+   * - 按列索引取五声音阶频率
+   * - 3 个正弦波分音（基频 + 2 倍频 + 4 倍频）模拟编钟泛音
+   * - 立体声平移（按列位置左右分布）
+   * - 95ms 同列去抖 + 28ms 全局去抖 + 8 声部上限
+   */
+  function strikeChain(col, impact, x) {
+    const c = sound.context;
+    if (!c || c.state !== 'running' || impact < 1.1 || !soundEnabled) return;
+    const ts = performance.now();
+    if (ts - (sound.lastStrike[col] || 0) < 95) return;
+    if (ts - sound.lastGlobal < 28 || sound.voices >= 8) return;
+    sound.lastStrike[col] = ts; sound.lastGlobal = ts; sound.voices++;
+
+    const now = c.currentTime;
+    const freq = sound.scale[col % sound.scale.length];
+    const level = .028 + Math.min(impact, 18) / 18 * .075;
+    const dur = .72 + Math.random() * .32;
+
+    // 立体声平移
+    const pan = c.createStereoPanner ? c.createStereoPanner() : c.createGain();
+    if (pan.pan) pan.pan.setValueAtTime(
+      Math.max(-.9, Math.min(.9, x / width * 2 - 1)), now
+    );
+    pan.connect(sound.output);
+
+    // 3 个分音：基频、2 倍频、4 倍频
+    [
+      { ratio: 1,    amount: 1,   decay: 1 },
+      { ratio: 2.01,  amount: .24, decay: .62 },
+      { ratio: 3.96,  amount: .1,  decay: .38 }
+    ].forEach(p => {
+      const osc = c.createOscillator();
+      const env = c.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq * p.ratio, now);
+      osc.detune.setValueAtTime((Math.random() - .5) * 8, now);
+      env.gain.setValueAtTime(level * p.amount, now);
+      env.gain.exponentialRampToValueAtTime(.0001, now + dur * p.decay);
+      osc.connect(env); env.connect(pan);
+      osc.start(now); osc.stop(now + dur + .05);
+    });
+
+    setTimeout(() => { sound.voices = Math.max(0, sound.voices - 1); pan.disconnect(); },
+              (dur + .15) * 1000);
+  }
+
+  /* ---- 构建珠帘 ----
+   * 26 列 × 39 行汉字链条
+   * 顶部锚点固定在屋檐下（按屋顶曲线计算 y）
+   * 汉字从右到左竖排阅读（readingColumn = columns - 1 - column）
+   */
+  function build() {
+    chains.length = 0;
+    const narrow = width < 720;
+    const columns = narrow ? 16 : 26;
+    const tRect = temple.getBoundingClientRect();
+    const aRect = artboard.getBoundingClientRect();
+
+    const centerX = tRect.left - aRect.left + tRect.width * .5;
+    const cWidth = tRect.width * .84;
+    const left = centerX - cWidth / 2;
+    const tTop = tRect.top - aRect.top;
+    const scale = tRect.width / 901;  // 原图 901px 宽
+    const centerEdge = tTop + 682 * scale;  // 屋顶中心檐口
+    const sideEdge  = tTop + 726 * scale;   // 屋顶两侧檐口
+    const bottom = height - (narrow ? 42 : 48);
+    const availH = Math.max(120, bottom - sideEdge);
+    const rows = Math.max(18, Math.min(narrow ? 35 : 39, Math.floor(availH / 9.4) + 1));
+
+    for (let col = 0; col < columns; col++) {
+      const x = left + col * cWidth / (columns - 1);
+      const norm = Math.abs(col / (columns - 1) * 2 - 1);  // 0=中心, 1=两侧
+      const top = centerEdge + (sideEdge - centerEdge) * Math.pow(norm, 1.7) - 4;
+      const segLen = Math.max(6.4, (bottom - top) / (rows - 1));
+      const readingCol = columns - 1 - col;  // 从右往左阅读
+      const chain = [];
+      for (let row = 0; row < rows; row++) {
+        const y = top + row * segLen;
+        chain.push({
+          x, y, oldX: x, oldY: y, anchorX: x, anchorY: y,
+          pinned: row === 0, restLength: segLen,
+          char: glyphs[(readingCol * rows + row) % glyphs.length],
+          alpha: .36 + ((col + row * 2) % 6) * .055
+        });
+      }
+      chains.push(chain);
+    }
+  }
+
+  /* ---- 窗口尺寸变化 ---- */
+  function resize() {
+    const r = artboard.getBoundingClientRect();
+    width = r.width; height = r.height;
+    dpr = Math.min(2, window.devicePixelRatio || 1);  // 限制 DPR ≤ 2
+    canvas.width = Math.round(width * dpr);
+    canvas.height = Math.round(height * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    build();
+  }
+
+  /* ---- 鼠标推动珠帘 ----
+   * 计算鼠标移动速度，对半径内的点施加冲量
+   */
+  function injectMouseDelta() {
+    if (!mouse.active) return;
+    const mx = mouse.x - mouse.oldX;
+    const my = mouse.y - mouse.oldY;
+    const speed = Math.hypot(mx, my);
+    if (speed < .01 || speed > 80) return;  // 过慢或过快都忽略
+
+    for (let ci = 0; ci < chains.length; ci++) {
+      const chain = chains[ci];
+      let strongest = 0;
+      for (let i = 1; i < chain.length; i++) {
+        const p = chain[i];
+        const dist = Math.hypot(p.x - mouse.oldX, p.y - mouse.oldY);
+        if (dist >= physics.radius) continue;
+        const falloff = 1 - dist / physics.radius;
+        strongest = Math.max(strongest, speed * falloff);
+        p.x += mx * physics.strength * falloff;
+        p.y += my * physics.strength * falloff;
+      }
+      if (strongest > 0) {
+        strikeChain(ci, strongest, chain[0].x);
+        registerInteraction();
+      }
+    }
+  }
+
+  /* ---- 自动微风 ----
+   * 滑块控制强度，正弦波驱动链条摆动
+   * 底部摆幅更大（heightRatio² ），偶发触发钟声
+   */
+  function injectBreeze() {
+    if (breezeIntensity <= 0) return;
+    breezePhase += 0.015;
+    const sway = breezeIntensity * 0.015;
+    for (let ci = 0; ci < chains.length; ci++) {
+      const chain = chains[ci];
+      const offset = ci * 0.3;
+      const s = Math.sin(breezePhase + offset) * sway;
+      let strongest = 0;
+      for (let i = 1; i < chain.length; i++) {
+        const p = chain[i];
+        const ratio = i / chain.length;
+        const local = s * ratio * ratio;
+        p.x += local;
+        strongest = Math.max(strongest, Math.abs(local) * 20);
+      }
+      if (strongest > 1.2 && Math.random() < 0.02) {
+        strikeChain(ci, strongest, chain[0].x);
+      }
+    }
+  }
+
+  /* ---- 交互计数器 ---- */
+  function registerInteraction() {
+    interactionCount++;
+    counterEl.textContent = `珠帘触碰 · ${interactionCount}`;
+    counterEl.classList.add('visible');
+    clearTimeout(counterEl._timer);
+    counterEl._timer = setTimeout(() => counterEl.classList.remove('visible'), 2000);
+  }
+
+  /* ---- Verlet 积分 ----
+   * 每个点：新位置 = 旧位置 + (当前位置 - 旧位置) × 摩擦 + 重力
+   */
+  function integrate() {
+    for (const chain of chains) {
+      for (const p of chain) {
+        if (p.pinned) continue;
+        const vx = (p.x - p.oldX) * physics.friction;
+        const vy = (p.y - p.oldY) * physics.friction;
+        p.oldX = p.x; p.oldY = p.y;
+        p.x += vx; p.y += vy + physics.gravity;
+      }
+    }
+  }
+
+  /* ---- 距离约束 ----
+   * 8 次迭代，让相邻点之间保持 restLength
+   * 第一个点固定不动
+   */
+  function constrain() {
+    for (let pass = 0; pass < 8; pass++) {
+      for (const chain of chains) {
+        const anchor = chain[0];
+        anchor.x = anchor.anchorX; anchor.y = anchor.anchorY;
+        for (let i = 1; i < chain.length; i++) {
+          const a = chain[i - 1], b = chain[i];
+          const dx = b.x - a.x, dy = b.y - a.y;
+          const dist = Math.max(.0001, Math.hypot(dx, dy));
+          const diff = (dist - b.restLength) / dist;
+          if (a.pinned) {
+            b.x -= dx * diff; b.y -= dy * diff;
+          } else {
+            const cx = dx * diff * .5, cy = dy * diff * .5;
+            a.x += cx; a.y += cy; b.x -= cx; b.y -= cy;
+          }
+        }
+      }
+    }
+  }
+
+  /* ---- 绘制 ---- */
+  function draw() {
+    ctx.clearRect(0, 0, width, height);
+    ctx.fillStyle = getComputedStyle(document.documentElement)
+      .getPropertyValue('--ink').trim() || '#2e251f';
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.font = '500 10px ui-monospace, SFMono-Regular, Menlo, monospace';
+    for (const chain of chains) {
+      for (const p of chain) {
+        ctx.globalAlpha = p.alpha;
+        ctx.fillText(p.char, p.x, p.y);
+      }
+    }
+    ctx.globalAlpha = 1;
+  }
+
+  /* ---- 主循环 ---- */
+  function frame() {
+    injectBreeze();
+    integrate(); constrain(); draw();
+    requestAnimationFrame(frame);
+  }
+
+  /* ---- 鼠标事件 ---- */
+  function enter(e) {
+    const r = canvas.getBoundingClientRect();
+    mouse.x = mouse.oldX = e.clientX - r.left;
+    mouse.y = mouse.oldY = e.clientY - r.top;
+    mouse.active = true;
+    cursor.style.left = `${mouse.x}px`;
+    cursor.style.top = `${mouse.y}px`;
+    artboard.classList.add('is-active');
+  }
+  function move(e) {
+    if (!mouse.active) enter(e);
+    mouse.oldX = mouse.x; mouse.oldY = mouse.y;
+    const r = canvas.getBoundingClientRect();
+    mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top;
+    injectMouseDelta();
+    cursor.style.left = `${mouse.x}px`;
+    cursor.style.top = `${mouse.y}px`;
+  }
+  function leave() {
+    mouse.active = false;
+    artboard.classList.remove('is-active');
+  }
+
+  /* ---- 配置面板 ---- */
+  function bindRange(id, outId, update) {
+    const input = document.getElementById(id);
+    const out = document.getElementById(outId);
+    input.addEventListener('input', () => {
+      const v = Number(input.value);
+      out.value = String(v);
+      update(v);
+    });
+  }
+
+  /* ═══════════════════════════════════════════════
+   *  3. 昼夜主题 + 声音开关 + 初始化
+   * ═══════════════════════════════════════════════ */
+
+  // 主题切换（localStorage 持久化）
+  const themeToggle = document.getElementById('themeToggle');
+  if (localStorage.getItem('temple-theme') === 'night') {
+    document.documentElement.setAttribute('data-theme', 'night');
+    themeToggle.textContent = '☾';
+    themeToggle.classList.add('active');
+  }
+  themeToggle.addEventListener('click', () => {
+    const isNight = document.documentElement.getAttribute('data-theme') === 'night';
+    if (isNight) {
+      document.documentElement.removeAttribute('data-theme');
+      themeToggle.textContent = '☀';
+      themeToggle.classList.remove('active');
+      localStorage.setItem('temple-theme', 'day');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'night');
+      themeToggle.textContent = '☾';
+      themeToggle.classList.add('active');
+      localStorage.setItem('temple-theme', 'night');
+    }
+  });
+
+  // 声音开关
+  const soundToggle = document.getElementById('soundToggle');
+  soundToggle.classList.add('active');
+  soundToggle.addEventListener('click', () => {
+    soundEnabled = !soundEnabled;
+    if (soundEnabled) {
+      soundToggle.textContent = '♪';
+      soundToggle.classList.add('active');
+      unlockSound();
+    } else {
+      soundToggle.textContent = '✕';
+      soundToggle.classList.remove('active');
+    }
+  });
+
+  // 配置面板开关 + 滑块绑定
+  configure.addEventListener('click', () => {
+    const open = settings.hidden;
+    settings.hidden = !open;
+    configure.setAttribute('aria-expanded', String(open));
+  });
+  resetBtn.addEventListener('click', build);
+  bindRange('strength', 'strengthValue', v => { physics.strength = v / 100; });
+  bindRange('reach',    'reachValue',    v => { physics.radius = v; });
+  bindRange('inertia',  'inertiaValue',  v => { physics.friction = v / 100; });
+  bindRange('breeze',   'breezeValue',   v => { breezeIntensity = v; });
+
+  // Canvas 鼠标事件
+  canvas.addEventListener('pointerenter', enter);
+  canvas.addEventListener('pointermove', move);
+  canvas.addEventListener('pointerleave', leave);
+  // 首次点击解锁音频
+  window.addEventListener('pointerdown', unlockSound, { passive: true });
+  window.addEventListener('resize', resize);
+
+  // 异步加载天坛长文本作为珠帘汉字源
+  async function loadBodyText() {
+    try {
+      const res = await fetch('assets/tiantan.txt');
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const chars = (await res.text()).match(/\p{Script=Han}/gu);
+      if (chars && chars.length) {
+        glyphs = chars.join('');
+        build();
+      }
+    } catch (e) { console.warn(e); }
+  }
+
+  /* ---- 初始化 ---- */
+  function init() {
+    // 每个标题字母挂载反重力物理
+    document.querySelectorAll('.ag-char').forEach(el => {
+      attachAntiGravity(el, {
+        floatAmp: 3 + Math.random() * 4,
+        floatSpeed: 0.25 + Math.random() * 0.3,
+        rotAmp: 0.6 + Math.random() * 1.4,
+        pushRadius: 110,
+        pushForce: 16
+      });
+    });
+    resize();
+    loadBodyText();
+    frame();
+  }
+
+  document.addEventListener('DOMContentLoaded', init);
+})();
+</script>
+
+</body>
+</html>
