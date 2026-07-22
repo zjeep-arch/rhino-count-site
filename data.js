@@ -58,6 +58,7 @@ window.SITE_DATA = {
     ctaSecondary: { label: "阅读最新笔记",     href: "#notes" },
     motion: {
       src: "assets/hero-rhino-scene.mp4",
+      mobile: "assets/hero-atmosphere.mp4",
       backdrop: "assets/hero-rhino-scene.mp4"
     },
     keywords: [
@@ -116,37 +117,49 @@ window.SITE_DATA = {
         href: "anti-gravity-text.html"
       },
       {
-        tag: "WORKFLOW",
-        title: "AI Workflow Lab",
-        desc: "把日常创作、资料整理、网页生成和自动化流程拆成可复用工作流。",
-        linkLabel: "查看站点",
-        href: "https://zjeep-arch.github.io/rhino-count-site/"
+        tag: "3D",
+        title: "AI 竞技场 3D · 多球场体验",
+        desc: "程序化 3D 体育场--Three.js 构建的沉浸式球场，支持伯纳乌/工体/马拉卡纳三座经典球场切换、日夜模式、雨天天气系统、球迷人浪应援和实时弹幕。点击座位查看视野评分，进入第一人称观赛视角。",
+        linkLabel: "进入竞技场",
+        href: "stadium-3d.html"
       }
     ],
+      {
+        type: "Essay",
+        title: "AI黑掉AI的那个周末，护栏反而成了帮凶",
+        desc: "Hugging Face遭自主AI Agent入侵，17000条操作日志全程无人干预。取证时闭源大模型被安全护栏挡住，开源GLM 5.2救场完成。AI安全竞赛，已经从人对人变成AI对AI。",
+        href: "notes/2026-07-21-ai-agent-huggingface-hack.html"
+      },
     featured: [
       {
         type: "Essay",
-        title: "OpenAI把门一关，23万亿Token跑中国去了",
-        desc: "OpenRouter最新数据：中国AI模型周调用量23.45万亿Token，首超美国5.5倍。全球前五占四席。这不是中国赢了，是美国把门关太紧了。",
-        href: "notes/2026-07-13-china-ai-tokens-surge.html"
+        title: "K3登顶代码榜那天，Qwen3.8已经在门口了",
+        desc: "Kimi K3前端榜1679分碾压Fable 5，48小时后Qwen3.8贴脸官宣2.4T开源。中国AI的发布节奏从按季度算压缩到了按48小时算。",
+        href: "notes/2026-07-20-k3-qwen38-48hour-race.html"
       },
       {
         type: "Essay",
-        title: "一周之内，OpenAI的朋友全走了",
-        desc: "苹果94页起诉书、微软替换模型、人才出走、媒体制裁、42州调查。五条战线同时施压，OpenAI的真正危机不在模型，在盟友体系崩塌。",
-        href: "notes/2026-07-12-openai-friends-left.html"
+        title: "Kimi送出2.8万亿参数，DeepSeek白天涨价一倍",
+        desc: "月之暗面开源Kimi K3，DeepSeek V4引入峰谷定价。一个送最贵的东西，一个在最便宜的价格上分时段收钱。中国AI定价，不再只有一种答案。",
+        href: "notes/2026-07-19-kimi-k3-deepseek.html"
       },
       {
         type: "Essay",
-        title: "6万亿估值的Anthropic，电费单却寄给马斯克",
-        desc: "Anthropic的ARR从90亿飙到600亿，但每月12.5亿算力租金交给马斯克。微软用自研MAI替换OpenAI模型。AI产业正分成算力层、模型层和分发层，利润分配正在倾斜。",
-        href: "notes/2026-07-12-anthropic-valuation-compute-layer.html"
+        title: "OpenAI帮用户在Claude Code里跑GPT-5.6，这招太脏了",
+        desc: "OpenAI产品负责人亲自下场，教开发者把GPT-5.6 Sol接进Claude Code。这不是大方，是模型层对工具层的降维打击。",
+        href: "notes/2026-07-18-openai-claude-code-gpt56.html"
       },
       {
         type: "Essay",
-        title: "马斯克向Anthropic认输，但最骚的操作不是认输",
-        desc: "Anthropic月付12.5亿租对手的GPU训练自己的模型，ARR 18个月从90亿飙到600亿。马斯克的认输是一门精明的生意。",
-        href: "notes/2026-07-11-anthropic-musk-surrender.html"
+        title: "2.8万亿参数的Kimi K3，月之暗面的背水一战",
+        desc: "Kimi K3发布，2.8万亿参数、百万token上下文、即将开源。但这不是一张成绩单，更像一张赌桌前的最后一把all in。",
+        href: "notes/2026-07-17-kimi-k3-moonshot-gamble.html"
+      },
+      {
+        type: "Essay",
+        title: "苹果AI拿到中国身份证，里面住的是阿里千问",
+        desc: "苹果AI拿到中国通行证，但云端大脑全盘外包给阿里千问。全球AI正在分岔成两条轨道，而苹果是第一个被迫选边站的超级巨头。",
+        href: "notes/2026-07-16-apple-ai-china-alibaba.html"
       }
     ],
     roadmap: [
@@ -202,6 +215,69 @@ window.SITE_DATA = {
     headingLine2: "慢慢记。",
     blurb: "每一篇笔记都是一次小型田野调查：关于模型、关于人、关于我们如何被这个时代重新塑形。",
     notes: [
+      {
+        cat: "行业观察", num: "N° 30",
+        title: "AI黑掉AI的那个周末，护栏反而成了帮凶",
+        excerpt: "Hugging Face遭自主AI Agent入侵，17000条操作日志全程无人干预。取证时闭源大模型被安全护栏挡住，开源GLM 5.2救场完成。AI安全竞赛，已经从人对人变成AI对AI。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-07-21-ai-agent-huggingface-hack.html"
+      },
+      {
+        cat: "行业观察", num: "N° 29",
+        title: "K3登顶代码榜那天，Qwen3.8已经在门口了",
+        excerpt: "Kimi K3前端榜1679分碾压Fable 5，48小时后Qwen3.8贴脸官宣2.4T开源。中国AI的发布节奏从按季度算压缩到了按48小时算。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-07-20-k3-qwen38-48hour-race.html"
+      },
+      {
+        cat: "行业观察", num: "N° 28",
+        title: "Kimi送出2.8万亿参数，DeepSeek白天涨价一倍",
+        excerpt: "月之暗面开源Kimi K3，DeepSeek V4引入峰谷定价。一个送最贵的东西，一个在最便宜的价格上分时段收钱。中国AI定价，不再只有一种答案。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-07-19-kimi-k3-deepseek.html"
+      },
+      {
+        cat: "产品观察", num: "N° 26",
+        title: "2.8万亿参数的Kimi K3，月之暗面的背水一战",
+        excerpt: "Kimi K3发布，2.8万亿参数、百万token上下文、即将开源。但这不是一张成绩单，更像一张赌桌前的最后一把all in。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-07-17-kimi-k3-moonshot-gamble.html"
+      },
+      {
+        cat: "行业观察", num: "N° 25",
+        title: "苹果AI拿到中国身份证，里面住的是阿里千问",
+        excerpt: "苹果AI拿到中国通行证，但云端大脑全盘外包给阿里千问。全球AI正在分岔成两条轨道，而苹果是第一个被迫选边站的超级巨头。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-07-16-apple-ai-china-alibaba.html"
+      },
+      {
+        cat: "行业观察", num: "N° 24",
+        title: "资本六周追着给DeepSeek送钱，因为闻到了一个味道",
+        excerpt: "DeepSeek B轮估值710亿美元，六周涨37%。梁文锋360亿美元登顶AI创始人首富。资本闻到了什么？",
+        img: "assets/note-05.svg",
+        href: "notes/2026-07-16-deepseek-funding-710b.html"
+      },
+      {
+        cat: "产品观察", num: "N° 23",
+        title: "卷了两年画质，这家清华团队把视频做成了游戏",
+        excerpt: "Xmax AI发布全球首个实时交互视频模型X2.0。毫秒级响应、iPhone端侧运行、API成本仅为海外十二分之一。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-07-15-xmax-x2-0.html"
+      },
+      {
+        cat: "产品观察", num: "N° 21",
+        title: "Codex的负责人说，我们自己的App是用凑合的模型造的",
+        excerpt: "OpenAI Codex负责人Tibo公开自曝：我们是用前端能力okayish的模型硬攒出Codex桌面App的。83.9万人围观了这句大实话。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-07-13-tibo-codex-okayish.html"
+      },
+      {
+        cat: "产品观察", num: "N° 22",
+        title: "Codex是工厂，Claude Code是工作室，你该选哪个",
+        excerpt: "2026年AI编程三巨头实测：终端党选Claude Code，要速度选Codex，爱IDE选Cursor。核心差异不是功能多少，是协作哲学。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-07-13-codex-factory-claude-studio.html"
+      },
       {
         cat: "行业观察", num: "N° 20",
         title: "OpenAI把门一关，23万亿Token跑中国去了",

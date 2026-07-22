@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Codex是工厂，Claude Code是工作室，你该选哪个</title>
+  <style>
+    :root {
+      --accent: #92400e;
+      --ink: #333;
+      --ink-soft: #555;
+      --muted: #888;
+      --surface: #fafafa;
+      --border: rgba(0,0,0,0.06);
+      --radius: 12px;
+      --font-sans: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-serif: "Noto Serif SC", "Songti SC", Georgia, serif;
+    }
+    body { font-family: var(--font-sans); background: #f5f5f5; margin: 0; padding: 16px; font-size: 16px; line-height: 1.8; color: var(--ink); -webkit-font-smoothing: antialiased; }
+    .container { max-width: 680px; margin: 0 auto; background: var(--surface); padding: 32px; border-radius: var(--radius); }
+    .cover-img { width: 100%; border-radius: 8px; margin-bottom: 24px; }
+    h1 { font-family: var(--font-serif); font-size: 24px; font-weight: 700; color: var(--ink); line-height: 1.4; margin: 0 0 16px; }
+    .meta { color: var(--muted); font-size: 13px; margin-bottom: 16px; }
+    .byline { color: var(--ink-soft); font-size: 14px; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+    h2 { font-family: var(--font-serif); font-size: 20px; font-weight: 600; color: var(--ink); margin: 32px 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+    h3 { font-family: var(--font-serif); font-size: 18px; font-weight: 600; color: var(--ink); margin: 24px 0 12px; }
+    p { margin: 0 0 24px; }
+    .quote-box { border-left: 4px solid var(--accent); background: #f5f5f5; padding: 16px 20px; margin: 24px 0; border-radius: 0 var(--radius) var(--radius) 0; }
+    .quote-box p { margin: 0; color: var(--ink-soft); font-style: italic; font-size: 15px; }
+    .quote-box .attribution { margin-top: 8px; color: var(--muted); font-size: 13px; font-style: normal; }
+    .data-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14px; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .data-table th, .data-table td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); }
+    .data-table th { background: #f0f0f0; font-weight: 600; color: var(--ink); }
+    .data-table td { color: var(--ink-soft); }
+    .data-table tr:last-child td { border-bottom: none; }
+    .img-caption { text-align: center; color: var(--muted); font-size: 13px; margin-top: 8px; margin-bottom: 24px; }
+    .ending { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--ink-soft); font-size: 14px; }
+    .highlight { color: var(--accent); font-weight: 600; background: linear-gradient(to top, rgba(146,64,14,0.08) 40%, transparent 40%); padding: 0 2px; }
+    .contrast-card { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin: 24px 0; border-radius: var(--radius); overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .contrast-card .side { padding: 16px 20px; }
+    .contrast-card .side-left { background: #fffbeb; border-right: 1px solid var(--border); }
+    .contrast-card .side-right { background: #f0fdf4; }
+    .contrast-card .side h4 { margin: 0 0 8px; font-size: 14px; font-weight: 600; }
+    .contrast-card .side-left h4 { color: #92400e; }
+    .contrast-card .side-right h4 { color: #166534; }
+    .contrast-card .side p { margin: 0; font-size: 14px; color: var(--ink-soft); line-height: 1.6; }
+    .contrast-card .side ul { margin: 8px 0 0; padding-left: 16px; font-size: 14px; color: var(--ink-soft); line-height: 1.8; }
+    .punchline { font-family: var(--font-serif); font-size: 18px; font-weight: 700; color: var(--accent); text-align: center; margin: 32px 0; padding: 16px 0; border-top: 2px solid var(--accent); border-bottom: 2px solid var(--accent); }
+    .insight-box { background: #fffbeb; border: 1px solid #fde68a; border-radius: var(--radius); padding: 20px; margin: 24px 0; }
+    .insight-box h4 { margin: 0 0 8px; font-size: 16px; color: var(--ink); }
+    .insight-box p { margin: 0; font-size: 15px; color: var(--ink-soft); line-height: 1.6; }
+    .data-callout { display: inline-block; background: var(--accent); color: #fff; padding: 2px 10px; border-radius: 4px; font-weight: 700; font-size: 15px; }
+    strong { color: var(--ink); font-weight: 600; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img class="cover-img" src="note-22-cover.jpg" alt="工厂流水线与手工工作室的对比意象，代表Codex和Claude Code两种AI编程哲学">
+
+    <h1>Codex是工厂，Claude Code是工作室，你该选哪个</h1>
+    <div class="meta">2026-07-13 · 阅读时间约10分钟</div>
+    <div class="byline">文｜犀牛伯爵</div>
+
+    <p>上周有个朋友跟我吐槽，说他同时开了两个AI编程工具改同一个bug。</p>
+
+    <p>一个工具三分钟就给出了方案，另一个花了十五分钟，中间还停下来问他了两句话。他点开第一个工具的结果看了一眼，改了改，提了PR。然后回到第二个工具，发现它不光修了那个bug，还顺手把旁边三个相关函数一起优化了。</p>
+
+    <p>他说了一句话让我印象特别深。"第一个像工厂流水线，第二个像请了个老师傅到家里干活。"</p>
+
+    <p>他说的这两个工具，一个是OpenAI的Codex，一个是Anthropic的Claude Code。再加一个Cursor，基本就是2026年AI编程工具的三大主力。</p>
+
+    <p>但说实话，市面上大部分对比文章都在罗列参数。上下文多少K，速度多少tokens每秒，支持哪些语言。这些东西有用吗？有用。但看完你依然不知道自己该选哪个。</p>
+
+    <p>因为这三款工具，根本就不是同一种东西。</p>
+
+    <h2>三款工具，三种活法</h2>
+
+    <p>怎么讲呢，你得先理解一个前提。</p>
+
+    <p>2026年的AI编程工具已经彻底进入Agent时代了。不再是你在旁边敲一行，它补一行。是你给它一个任务，它自己拆解、自己写代码、自己跑测试、自己改bug、自己提PR。</p>
+
+    <p>但同样是"Agent"，三家走的路完全不一样。</p>
+
+    <p>Codex走的是"云端工厂"路线。你把任务丢上去，它在云端的独立沙箱里自己跑。你不需要守在电脑前，甚至不需要打开编辑器。</p>
+
+    <p>Claude Code走的是"终端工作室"路线。Agent直接在你的终端里运行，读写你的本地文件。你随时能看到它在干什么，随时能插嘴。</p>
+
+    <p>Cursor走的是"IDE增强"路线。你还是在编辑器里写代码，AI嵌在你的开发环境里，实时辅助。</p>
+
+    <p>听起来区别不大？那是因为你还没真正用起来。</p>
+
+    <img class="cover-img" src="note-22-codex-claude.jpg" alt="云端工厂 vs 本地工作室的概念对比"><div class="img-caption">图源：编辑插图 · 云端工厂模式 vs 本地协作模式</div>
+    <p class="img-caption">[图] 云端工厂 vs 终端工作室，两种完全不同的协作哲学</p>
+
+    <h2>Codex，你不需要在场</h2>
+
+    <p>我第一次认真用Codex的时候，体验有点魔幻。</p>
+
+    <p>我提交了一个任务，修一个数据导入模块的bug。然后我关掉电脑，去开了个会，回来之后发现，那个Agent不光修了bug，跑完了全部测试，还自动提交了PR。</p>
+
+    <p>整个过程我完全没在场。十五分钟。bug修好了，测试过了，PR在那儿等着我点Merge。</p>
+
+    <p>这玩意儿的核心设计理念就四个字，"独立容器"。你提交的每个任务都在云端隔离的沙箱里跑，不会碰到你本地环境。</p>
+
+    <p>你同时开五个任务也行。每个Agent在各自的工作树里干各自的活，互不干扰。到2026年6月，超过10%的活跃用户每周会同时管理3个或更多Agent并行跑。有的人是真的把它当车间在用。</p>
+
+    <p>Codex还有一套很有意思的体系。项目根目录放一个AGENTS.md文件，相当于给Agent写了一份"工作手册"，告诉它代码风格、测试要求、部署流程。然后你还能把常用的操作封装成Skills，就是可复用的指令包。还有Automation定时任务，让它每天凌晨自动跑一次测试。</p>
+
+    <p>怎么讲呢，AGENTS.md就是你的工厂管理制度，Skills就是标准操作流程，Automation就是排班表。</p>
+
+    <div class="quote-box">
+      <p>"我用Codex改了一个跨三个微服务的bug，从提交到PR合入，全程没打开过IDE。就中间手机上收到一条通知，说测试跑了40个case全过，我回了个'ok，merge'。"</p>
+      <div class="attribution">某后端工程师，掘金社区，2026年6月</div>
+    </div>
+
+    <p>速度确实是Codex的强项。上下文128K，推理速度快，但深度一般。适合那种目标明确的任务。你告诉它做什么，它就做什么，不跟你废话。</p>
+
+    <p>Codex的活跃用户2026年上半年增长了五倍。到了7月10号，OpenAI做了一个让人有点意外的事，把独立运行近一年的Codex App正式下线，并入ChatGPT桌面端，同时推出了ChatGPT Work智能体。</p>
+
+    <p>不是Codex不行了。是OpenAI觉得，编程能力不应该是一个单独的App，而是ChatGPT能力的一部分。对用户来说，底层的Codex能力还在，只是入口变了。</p>
+
+    <p>这个决定在社区里争议挺大的。有人觉得合并之后更方便了，有人觉得独立App的专注感没了。但不管怎么说，Codex"工厂"的核心定位没有变。</p>
+
+    <h2>Claude Code，你始终在场</h2>
+
+    <p>Claude Code给我的第一感觉，跟Codex完全相反。</p>
+
+    <p>它不是在云端自己跑。它是直接在你本地的终端里工作的。你能看到它读文件、写代码、跑命令，一行一行在你眼前滚动。</p>
+
+    <p>然后它会停下来问你。</p>
+
+    <p>"这个函数要不要保留向后兼容？" "这个字段名用snake_case还是camelCase？" "我发现这个模块有个潜在的并发问题，要一起修吗？"</p>
+
+    <p>这种体验怎么说呢，有点像请了一个水平很高的同事坐在你旁边，一起改代码。你不是甲方，你是搭档。</p>
+
+    <p>Claude Code今年2月份推出的Agent Teams功能，把这个"搭档"体验又往上拉了一个台阶。</p>
+
+    <p>你创建一个Lead Agent，再创建几个Teammate Agent。它们共享一个任务列表，自主认领工作。关键是Teammates之间可以互相发消息、互相挑战。一个Agent写了代码，另一个Agent会review，发现问题直接提出来。</p>
+
+    <p>有人用这个架构花了2万美元、跑了2000个会话，从零写出了一个能编译Linux内核的项目。</p>
+
+    <p>这个数字有点离谱。但你细想，16个AI Agent同时工作，有人写Makefile，有人调驱动，有人跑测试，互相检查。这已经不是一个人在编程了，这是一个团队。</p>
+
+    <div class="quote-box">
+      <p>"Claude Code最大的优势是设计质量。同样的需求，它给出的代码结构比其他工具更合理，命名更一致，架构更有长远考虑。100个小时用下来，差距是肉眼可见的。"</p>
+      <div class="attribution">MindStudio团队，100小时实测报告，2026年Q2</div>
+    </div>
+
+    <p>Claude Code的上下文窗口是目前三款工具里最大的，200K。推理深度也是最强的。Anthropic 2026年的年化收入据报已经到了25亿美元，Claude Code是企业AI支出增长最快的工具。</p>
+
+    <p>钱不会撒谎。</p>
+
+    <img class="cover-img" src="note-22-three-tools.jpg" alt="三款AI编程工具的对比示意图"><div class="img-caption">图源：编辑插图 · Claude Code、Codex、Cursor三款工具定位对比</div>
+    <p class="img-caption">[图] Claude Code Agent Teams终端界面，多个Agent在共享任务看板上协作</p>
+
+    <h2>Cursor，用起来最爽的那个</h2>
+
+    <p>说Cursor之前，我想先承认一件事。</p>
+
+    <p>我有很长一段时间觉得Cursor是被高估的。不就是VS Code套了个AI壳吗？</p>
+
+    <p>后来我真的用了三天，态度变了。</p>
+
+    <p>Cursor的体验确实好。不是那种"功能多"的好，是那种"顺手"的好。你在编辑器里写代码，AI在旁边实时补全，Tab一按就接上了。你选中一段代码，右键让它重构，它直接在你当前文件里改，改完你能立刻看到效果。</p>
+
+    <p>Agent模式下，它可以跨文件搜索、重构、新建文件。整体能力很强。</p>
+
+    <p>但问题也有。Cursor吃资源，内存占用不小。复杂任务的时候编辑器会锁住，你只能等它跑完。大规模的重构，稳定性不如Claude Code。上下文128K，速度中等偏快。</p>
+
+    <p>Claude Code和Codex的用户有时候会互相争论谁更强。但两边通常都不怎么踩Cursor。因为大家心里都清楚，Cursor赢在了体验上。</p>
+
+    <p>有些东西不是参数能说清楚的。就是舒服。你在那个界面里，肌肉记忆都还在，快捷键都没变，只是多了个超级聪明的助手在旁边。</p>
+
+    <p>说真的，如果你是刚从传统编码过渡到AI辅助编程，Cursor是最好的入口。没有学习成本，打开就能用。</p>
+
+    <h2>核心差异不是功能，是哲学</h2>
+
+    <p>聊到这里，我想把几个关键参数摆出来，大家心里有个数。</p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>维度</th>
+          <th>Codex</th>
+          <th>Claude Code</th>
+          <th>Cursor</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>运行方式</td>
+          <td>云端沙箱</td>
+          <td>本地终端</td>
+          <td>IDE内嵌</td>
+        </tr>
+        <tr>
+          <td>上下文窗口</td>
+          <td>128K</td>
+          <td>200K</td>
+          <td>128K</td>
+        </tr>
+        <tr>
+          <td>推理深度</td>
+          <td>一般</td>
+          <td>最强</td>
+          <td>中等</td>
+        </tr>
+        <tr>
+          <td>速度</td>
+          <td>最快</td>
+          <td>中等</td>
+          <td>中等偏快</td>
+        </tr>
+        <tr>
+          <td>并行能力</td>
+          <td>多Agent并行</td>
+          <td>Agent Teams协同</td>
+          <td>单Agent</td>
+        </tr>
+        <tr>
+          <td>协作模式</td>
+          <td>异步离线</td>
+          <td>实时在线</td>
+          <td>实时辅助</td>
+        </tr>
+        <tr>
+          <td>设计质量</td>
+          <td>中上</td>
+          <td>优秀</td>
+          <td>中等</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>但你发现没有，这些参数真的不足以帮你做决定。因为核心差异根本不在功能上。</p>
+
+    <p>核心差异是协作哲学。</p>
+
+    <div class="contrast-card">
+      <div class="side side-left">
+        <h4>Codex的哲学</h4>
+        <p>最好的协作是你不需要在场。</p>
+        <ul>
+          <li>你定好规范，它去执行</li>
+          <li>中间不需要讨论，不需要确认</li>
+          <li>结果交付到你面前，你审核就好</li>
+        </ul>
+      </div>
+      <div class="side side-right">
+        <h4>Claude Code的哲学</h4>
+        <p>最好的协作是你始终在场。</p>
+        <ul>
+          <li>你跟它一起干活，随时交流</li>
+          <li>方向随时调整，细节实时确认</li>
+          <li>过程和结果你全程参与</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="punchline">两种都对。取决于你是想当甲方，还是想当搭档。</p>
+
+    <p>这不是优劣的问题，是场景的问题。</p>
+
+    <p>你想一下，如果你是一个Team Lead，手底下有十个微服务要升级依赖版本。每个服务的升级流程你都很清楚，AGENTS.md里都写好了。你不需要跟AI讨论要不要升级，你只需要它去做。</p>
+
+    <p>这种时候Codex就是完美的。十个任务并行扔上去，你去喝杯咖啡，回来十份PR等着你审。</p>
+
+    <p>但如果你遇到的是另一种情况。你接了一个新需求，模模糊糊的，产品经理自己都没想清楚。你需要边写代码边摸索方向，每走一步都可能要调整。</p>
+
+    <p>这种时候Claude Code就更好。Agent在旁边改代码，改到关键节点停下来问你，你觉得不对就拉回来。整个过程像一个真实的编程session，只不过你的搭档特别快。</p>
+
+    <p>我自己也踩过坑。有一次用Codex跑一个需求不明确的任务，它一通操作猛如虎，我一看结果，方向完全跑偏了。反过来用Claude Code跑一个流程化的批量迁移任务，它中间问了八百个问题，效率低到让我怀疑人生。</p>
+
+    <p>不是工具不行，是我用错了场景。</p>
+
+    <h2>怎么选，四种开发者画像</h2>
+
+    <p>聊了这么多，直接给结论吧。</p>
+
+    <div class="insight-box">
+      <h4>画像一，流水线管理者</h4>
+      <p>你的日常是维护大量服务，任务重复度高、流程标准化。你的痛点是时间不够，不是方向不清。选Codex。把AGENTS.md和Skills搭好，让它批量干活。你只负责审核结果。</p>
+    </div>
+
+    <div class="insight-box">
+      <h4>画像二，探索型开发者</h4>
+      <p>你经常接到模糊需求，需要边写代码边想清楚。你不喜欢AI自作主张，你希望它在关键节点听你的。选Claude Code。它会在需要决策的时候停下来，等你一句话。</p>
+    </div>
+
+    <div class="insight-box">
+      <h4>画像三，体验优先派</h4>
+      <p>你不想切换工具，你想在IDE里完成所有事情。你重视流畅度，喜欢Tab补全带来的那种丝滑感。选Cursor。打开就能用，学习成本几乎为零。</p>
+    </div>
+
+    <div class="insight-box">
+      <h4>画像四，全栈大佬</h4>
+      <p>三个都用。日常写业务逻辑开Cursor，遇到复杂重构切Claude Code，批量迁移和流程化任务扔Codex。工具是你的手，不是你的脑子。该用哪只手就用哪只手。</p>
+    </div>
+
+    <p>可能有些朋友会觉得，三个都用是不是太折腾了。</p>
+
+    <p>说真的，我一开始也这么想。但2026年走到现在，这三个工具的切换成本已经很低了。它们之间的差异不在技术栈，而在协作模式。你选的不是工具，是你想怎么工作。</p>
+
+    <p>聊到这里我突然想起一个事。当年Martin Fowler写《重构》的时候说过一句话，大意是工具选择反映的是你对软件的理解方式。2026年，这句话可以升级一下了。工具选择反映的是你对协作的理解方式。</p>
+
+    <h2>全栈大佬的桌面</h2>
+
+    <p>最后说个我身边真实的事。</p>
+
+    <p>一个做了八年全栈的朋友，现在每天早上打开三个终端窗口。左边的Cursor写当天的新功能，中间的Claude Code跑着一个持续优化的重构任务，右边的Codex同时在给三个服务跑安全补丁升级。</p>
+
+    <p>他说了一句话我觉得很准。"Cursor是我的键盘，Claude Code是我的同事，Codex是我的外包团队。它们不是竞品，是我工具箱里不同的工具。"</p>
+
+    <p>这话听着有点凡尔赛。但确实是2026年AI编程工具的真实使用状态。</p>
+
+    <p>所以别再问"Claude Code和Codex哪个更好"了。问你自己，你现在要干的是什么活。</p>
+
+    <p>需要不在场，选工厂。需要始终在场，选工作室。需要手感，选IDE。</p>
+
+    <p>就这么简单。</p>
+
+    <div class="ending">以上。如果对你有帮助，欢迎转发。</div>
+  </div>
+</body>
+</html>

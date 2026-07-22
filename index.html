@@ -1589,6 +1589,9 @@
     .fade-in-delay-1 { transition-delay: 0.1s; }
     .fade-in-delay-2 { transition-delay: 0.2s; }
     .fade-in-delay-3 { transition-delay: 0.3s; }
+    /* Safety net: if JS fails, fade-in elements become visible after 5s */
+    @keyframes fadeInSafety { from { opacity: 0; } to { opacity: 1; transform: translateY(0); } }
+    .fade-in:not(.visible) { animation: fadeInSafety 0s 5s forwards; }
 
     /* =========================================================
      * Back to top
@@ -2228,8 +2231,8 @@
       .rhino-spark { animation: none !important; }
     }
 
-    .render-target { opacity: 0; transition: opacity 0.4s ease; }
-    .render-target.ready { opacity: 1; }
+    /* Content must remain visible even when a mobile browser blocks or delays JS. */
+    .render-target { opacity: 1; transition: opacity 0.4s ease; }
     noscript .nojs {
       padding: var(--s-6); border: 1px solid var(--line-2);
       border-radius: var(--radius); margin: var(--s-5) 0;
@@ -4673,6 +4676,9 @@
         animation: none !important;
       }
     }
+    .hero-video-play {
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -4722,8 +4728,32 @@
     </div>
   </header>
 
-  <main id="top" class="render-target">
-    <section class="hero" id="hero-section"></section>
+  <main id="top" class="render-target ready">
+    <section class="hero" id="hero-section">
+      <!-- Static first paint: JavaScript enhances/replaces this, but it is already usable. -->
+      <div class="hero-cine-overlay" aria-hidden="true"></div>
+      <div class="hero-cine-grain" aria-hidden="true"></div>
+      <div class="hero-cine-content">
+        <div class="hero-cine-kicker">RHINO COUNT · AI NATIVE STUDIO</div>
+        <h1 class="hero-cine-title">
+          <span>HI, I'M</span>
+          <strong>RHINO</strong>
+        </h1>
+        <p class="hero-cine-lede">把 AI 观察、Agent 工作流、产业判断和内容实验，压缩成一套持续生长的个人创作系统。</p>
+        <div class="hero-cine-cta">
+          <a class="btn" href="#builds">进入创作矩阵 →</a>
+          <a class="btn ghost" href="#notes">阅读最新笔记</a>
+        </div>
+        <div class="hero-cine-keywords">
+          <span>AI NATIVE</span>
+          <span>SIGNAL CURATION</span>
+          <span>AGENT WORKFLOW</span>
+          <span>MODEL WATCH</span>
+          <span>CONTENT SYSTEM</span>
+        </div>
+      </div>
+      <div class="hero-cine-scroll">SCROLL ↓</div>
+    </section>
     <section id="profile"></section>
     <section id="notes"></section>
     <section id="builds"></section>
@@ -4811,15 +4841,19 @@
     </div>
   </footer>
 
-  <script src="data.js?v=20260713-ag"></script>
-  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <script src="data.js?v=20260714-restore"></script>
   <script>
+    /* Fallback: force-show page after 3s if JS hasn't completed */
+    setTimeout(function(){var m=document.querySelector('main');if(m&&!m.classList.contains('ready'))m.classList.add('ready');},3000);
+    try {
     (function () {
       'use strict';
+      /* The static first paint is usable before any enhancement runs. */
+      document.querySelector('main').classList.add('ready');
       const esc = s => String(s).replace(/[&<>"']/g, c => (
         { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]
       ));
-      const ASSET_VERSION = '20260704-rhino-scene-v4';
+      const ASSET_VERSION = '20260714-restore';
       const versionAsset = src => {
         const value = String(src || '');
         if (!value || /^(?:https?:|data:)/.test(value) || /[?&]v=/.test(value)) return value;
@@ -4832,7 +4866,8 @@
       /* Force dark-only theme */
       root.setAttribute('data-theme', 'dark');
       const KEY = 'rhino-theme';
-      localStorage.removeItem(KEY);
+      /* Safari privacy modes and embedded browsers may deny storage access. */
+      try { window.localStorage.removeItem(KEY); } catch (storageError) {}
 
       const menuBtn = document.getElementById('menuBtn');
       const panel = document.getElementById('mobilePanel');
@@ -4904,7 +4939,7 @@
         }
       }
 
-      /* Hero — Cinematic Full-Bleed Video */
+      /* Hero - Cinematic Full-Bleed Video */
       const h = D.hero;
       const heroVideoSrc = (h.motion && h.motion.src) || 'assets/hero-rhino-scene.mp4';
       document.getElementById('hero-section').innerHTML = `
@@ -4930,6 +4965,8 @@
         </div>
         <div class="hero-cine-scroll">SCROLL</div>
       `;
+
+      const _isMobile = window.matchMedia('(max-width: 860px)').matches;
 
       /* Profile */
       const p = D.profile;
@@ -4968,7 +5005,7 @@
           <div class="journal-grid">
             ${featuredNotes.map((n, i) => `
               <article class="note fade-in fade-in-delay-${Math.min(i, 3)}">
-                ${n.img ? `<div class="note-cover"><img src="${esc(n.img)}" alt="" loading="lazy"/></div>` : ''}
+                ${(!_isMobile && n.img) ? `<div class="note-cover"><img src="${esc(n.img)}" alt="" loading="lazy"/></div>` : ''}
                 <div class="note-body">
                   <div class="note-meta">
                     <span class="cat">${esc(n.cat)}</span>
@@ -5127,11 +5164,17 @@
         </div>
       `;
 
-      // Fetch article feed
-      var feedUrl = D.siteConfig ? D.siteConfig.articlesFeed : 'articles/feed.json';
-      var xhr = new XMLHttpRequest();
-      xhr.open('GET', feedUrl, true);
-      xhr.onload = function () {
+      // Mobile uses embedded defaults and avoids another startup connection.
+      var list = document.getElementById('articleList');
+      if (_isMobile) {
+        list.innerHTML = renderArticles(cm.defaultFeatured);
+        observeFadeIns();
+        attachSpotlight('.article-card');
+      } else {
+        var feedUrl = D.siteConfig ? D.siteConfig.articlesFeed : 'articles/feed.json';
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', feedUrl, true);
+        xhr.onload = function () {
         var list = document.getElementById('articleList');
         if (xhr.status === 200) {
           try {
@@ -5148,14 +5191,15 @@
         }
         observeFadeIns();
         attachSpotlight('.article-card');
-      };
-      xhr.onerror = function () {
-        var list = document.getElementById('articleList');
-        list.innerHTML = renderArticles(cm.defaultFeatured);
-        observeFadeIns();
-        attachSpotlight('.article-card');
-      };
-      xhr.send();
+        };
+        xhr.onerror = function () {
+          var list = document.getElementById('articleList');
+          list.innerHTML = renderArticles(cm.defaultFeatured);
+          observeFadeIns();
+          attachSpotlight('.article-card');
+        };
+        xhr.send();
+      }
 
       /* Quote */
       const q = D.quote;
@@ -5790,6 +5834,12 @@
       }, 1200);
       resetIdle();
     })();
+    } catch(e) {
+      console.error('Render error:', e);
+      document.querySelector('main').classList.add('ready');
+      /* Force-show all fade-in elements if JS failed mid-render */
+      document.querySelectorAll('.fade-in').forEach(function(el){ el.classList.add('visible'); });
+    }
   </script>
 </body>
 </html>

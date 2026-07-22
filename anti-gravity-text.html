@@ -2,434 +2,822 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
-<title>反重力文字 · 北京地标 — 犀牛伯爵</title>
-<meta name="description" content="反重力排版实验：用零重力中漂浮的文字讲述北京地标建筑的故事。">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%2305050A'/%3E%3Ctext x='50%25' y='56%25' text-anchor='middle' font-size='30' font-family='Georgia,serif' fill='%23E8C77A'%3E反%3C/text%3E%3C/svg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>祈年殿 · 反重力文字 - 犀牛伯爵</title>
+<meta name="description" content="祈年殿 · 天地之间 - 反重力排版实验与交互珠帘。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%23F5F0E8'/%3E%3Ctext x='50%25' y='56%25' text-anchor='middle' font-size='30' font-family='Georgia,serif' fill='%231C1917'%3E祈%3C/text%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600;700;900&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-:root{--gold:#E8C77A;--cyan:#7BE0E8;--pink:#FF6B9D;--bg:#05050A;--surface:#0E0E18}
-html{scroll-behavior:smooth}
-body{background:var(--bg);color:#e8e8f0;font:16px/1.6 -apple-system,BlinkMacSystemFont,"PingFang SC","Inter",sans-serif;overflow-x:hidden}
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-/* ===== 星空背景 ===== */
-.starfield{position:fixed;inset:0;z-index:0;pointer-events:none}
-.star{position:absolute;background:#fff;border-radius:50%;animation:twinkle 3s ease-in-out infinite}
-@keyframes twinkle{0%,100%{opacity:.2}50%{opacity:.8}}
+  :root {
+    --paper: #e8dfca;
+    --ink: #2e251f;
+    --muted: #70665b;
+    --hairline: rgba(46, 37, 31, .36);
+    --panel: rgba(232, 223, 202, .93);
+    --dot: #c4bfb5;
+    --temple-width: min(620px, 62vw);
+  }
 
-/* ===== 导航 ===== */
-.nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:16px 32px;background:rgba(5,5,10,.7);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.06)}
-.nav-brand{font:700 18px Georgia,serif;color:var(--gold);text-decoration:none}
-.nav-back{color:#aab;padding:8px 16px;border:1px solid rgba(255,255,255,.12);border-radius:8px;text-decoration:none;font-size:14px;transition:.2s}
-.nav-back:hover{border-color:var(--cyan);color:var(--cyan)}
+  [data-theme="night"] {
+    --paper: #1a1520;
+    --ink: #e8dfca;
+    --muted: #968a7e;
+    --hairline: rgba(232, 223, 202, .28);
+    --panel: rgba(26, 21, 32, .93);
+    --dot: #4a4252;
+  }
 
-/* ===== Hero ===== */
-.hero{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:100px 24px 60px;text-align:center}
-.hero-eyebrow{font-size:12px;letter-spacing:.3em;color:var(--cyan);text-transform:uppercase;margin-bottom:24px;opacity:0;animation:fadeUp .8s .2s forwards}
-.hero-title-wrap{font:700 clamp(48px,10vw,120px)/1 Georgia,"Songti SC",serif;color:#fff;margin-bottom:20px}
-.hero-sub{font-size:18px;color:#8888a0;max-width:600px;margin-bottom:40px;opacity:0;animation:fadeUp .8s .6s forwards}
-.scroll-hint{font-size:13px;color:#565670;display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fadeUp .8s 1s forwards}
-.scroll-hint .arrow{width:1px;height:40px;background:linear-gradient(to bottom,transparent,var(--cyan));animation:scrollPulse 2s ease-in-out infinite}
-@keyframes scrollPulse{0%,100%{opacity:.3;transform:scaleY(.7)}50%{opacity:1;transform:scaleY(1)}}
-@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+  html { scroll-behavior: smooth; }
 
-/* ===== 反重力文字核心 ===== */
-.ag-stage{position:relative;z-index:1;padding:60px 24px;overflow:hidden}
-.ag-landmark{margin-bottom:120px}
-.ag-landmark-head{display:flex;align-items:baseline;gap:12px;margin-bottom:8px;max-width:900px;margin-left:auto;margin-right:auto}
-.ag-number{font:700 14px Georgia,serif;color:var(--gold);opacity:.6}
-.ag-tag{font-size:11px;letter-spacing:.2em;color:var(--cyan);text-transform:uppercase}
-.ag-body{max-width:800px;margin:0 auto;position:relative}
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Noto Serif SC', Georgia, 'Songti SC', serif;
+    line-height: 1.8;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    transition: background .6s ease, color .6s ease;
+  }
 
-/* 每个字符的容器 */
-.char-spray{display:inline;position:relative}
-.ag-char{display:inline-block;position:relative;transition:none;will-change:transform,opacity;cursor:default}
-.ag-char.gold{color:var(--gold)}
-.ag-char.cyan{color:var(--cyan)}
-.ag-char.pink{color:var(--pink)}
-.ag-char.white{color:#fff}
-.ag-char.dim{color:#444458}
-.ag-char.bold{font-weight:800}
-.ag-char.serif{font-family:Georgia,"Songti SC",serif}
+  /* ===== 纸质纹理背景 ===== */
+  .artboard {
+    position: relative;
+    min-height: 100svh;
+    overflow: hidden;
+    isolation: isolate;
+    background:
+      repeating-linear-gradient(91deg, rgba(46, 37, 31, .022) 0 1px, transparent 1px 11px),
+      repeating-linear-gradient(2deg, rgba(46, 37, 31, .017) 0 1px, transparent 1px 14px),
+      radial-gradient(circle at 53% 16%, rgba(255,255,255,.26), transparent 34%),
+      var(--paper);
+  }
 
-/* 漂浮动画 - 每个字独立 */
-@keyframes floatUp{
-  0%{transform:translateY(0) rotate(0deg)}
-  50%{transform:translateY(-12px) rotate(var(--rot,2deg))}
-  100%{transform:translateY(0) rotate(0deg)}
-}
+  [data-theme="night"] .artboard {
+    background:
+      repeating-linear-gradient(91deg, rgba(232, 223, 202, .015) 0 1px, transparent 1px 11px),
+      repeating-linear-gradient(2deg, rgba(232, 223, 202, .012) 0 1px, transparent 1px 14px),
+      radial-gradient(circle at 53% 16%, rgba(100, 80, 130, .12), transparent 34%),
+      var(--paper);
+  }
 
-/* 地标建筑 SVG 装饰 */
-.ag-building{max-width:600px;margin:24px auto 0;opacity:.5;filter:drop-shadow(0 0 20px rgba(123,224,232,.15))}
-.ag-building svg{width:100%;height:auto}
+  .artboard::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    pointer-events: none;
+    opacity: .14;
+    background-image:
+      radial-gradient(circle at 24% 31%, currentColor 0 .5px, transparent .65px),
+      radial-gradient(circle at 71% 56%, currentColor 0 .45px, transparent .6px);
+    background-size: 9px 11px, 13px 15px;
+    mix-blend-mode: multiply;
+  }
 
-/* 地标描述文本 */
-.ag-desc{max-width:600px;margin:28px auto 0;font-size:15px;line-height:1.9;color:#777790}
+  [data-theme="night"] .artboard::after {
+    mix-blend-mode: screen;
+    opacity: .08;
+  }
 
-/* ===== 章节分隔 ===== */
-.ag-divider{max-width:200px;margin:40px auto;height:1px;background:linear-gradient(to right,transparent,rgba(255,255,255,.1),transparent)}
+  /* ===== 导航 masthead ===== */
+  .masthead {
+    position: absolute;
+    z-index: 8;
+    top: 28px;
+    left: clamp(24px, 5vw, 94px);
+    right: clamp(24px, 5vw, 94px);
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 28px;
+    font: 12px/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+    color: var(--muted);
+  }
+  .brand {
+    color: var(--ink);
+    font-family: 'Playfair Display', Georgia, "Times New Roman", serif;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+  }
+  .nav-links {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+  }
+  .nav-links a {
+    color: inherit;
+    text-decoration: none;
+    transition: color .3s;
+  }
+  .nav-links a:hover { color: var(--ink); }
 
-/* ===== 底部 ===== */
-.footer{position:relative;z-index:1;padding:80px 24px 40px;text-align:center}
-.footer-text{font-size:13px;color:#454558}
-.footer-link{color:var(--cyan);text-decoration:none;border-bottom:1px solid transparent;transition:.2s}
-.footer-link:hover{border-color:var(--cyan)}
+  .masthead-actions {
+    justify-self: end;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+  .configure {
+    border: 1px solid var(--ink);
+    padding: 9px 22px;
+    color: var(--ink);
+    background: transparent;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    cursor: pointer;
+    letter-spacing: 0.04em;
+    transition: all .3s;
+    border-radius: 999px;
+    line-height: 1;
+  }
+  .configure:hover {
+    background: var(--ink);
+    color: var(--paper);
+  }
 
-/* ===== 响应式 ===== */
-@media(max-width:768px){
-  .nav{padding:12px 16px}
-  .hero{padding:80px 16px 40px}
-  .ag-stage{padding:40px 16px}
-  .ag-body{font-size:24px}
-}
+  /* theme & sound toggles */
+  .toggle-btn {
+    width: 36px; height: 36px;
+    border: 1px solid var(--hairline);
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    display: grid;
+    place-content: center;
+    border-radius: 2px;
+    transition: all .3s;
+    font-size: 16px;
+    line-height: 1;
+  }
+  .toggle-btn:hover { color: var(--ink); border-color: var(--muted); }
+  .toggle-btn.active { color: var(--ink); border-color: var(--ink); }
+
+  /* ===== Temple Image ===== */
+  .temple {
+    position: absolute;
+    z-index: 4;
+    top: clamp(48px, 6vh, 72px);
+    left: 50%;
+    width: var(--temple-width);
+    transform: translateX(-50%);
+    pointer-events: none;
+    transition: filter .6s ease;
+  }
+  .temple img {
+    width: 100%;
+    height: auto;
+    display: block;
+    mix-blend-mode: multiply;
+    filter:
+      drop-shadow(34px 38px 18px rgba(46, 37, 31, .19))
+      drop-shadow(70px 64px 34px rgba(46, 37, 31, .10));
+  }
+  [data-theme="night"] .temple img {
+    mix-blend-mode: screen;
+    filter:
+      drop-shadow(34px 38px 18px rgba(100, 80, 130, .25))
+      drop-shadow(0 0 60px rgba(80, 60, 120, .15))
+      brightness(.85) saturate(1.1);
+  }
+
+  /* ===== Headline ===== */
+  .headline {
+    position: absolute;
+    z-index: 6;
+    left: clamp(28px, 6vw, 112px);
+    bottom: clamp(38px, 8vh, 92px);
+    width: min(330px, 31vw);
+    pointer-events: none;
+  }
+  .eyebrow {
+    margin: 0 0 16px;
+    font: 12px/1.3 'Inter', ui-monospace, SFMono-Regular, Menlo, monospace;
+    color: var(--muted);
+  }
+  h1 {
+    margin: 0;
+    font: 700 clamp(48px, 5.5vw, 86px)/.86 'Playfair Display', Georgia, "Times New Roman", serif;
+    letter-spacing: -1px;
+    color: var(--ink);
+  }
+  h1 .ag-char {
+    display: inline-block;
+    cursor: default;
+    user-select: none;
+  }
+  .rule {
+    display: inline-block;
+    width: 76px;
+    margin-left: 15px;
+    border-top: 1px solid var(--ink);
+    transform: translateY(-.35em);
+    opacity: .3;
+  }
+
+  /* ===== Progress bar ===== */
+  .progress {
+    position: absolute;
+    z-index: 6;
+    left: 50%;
+    bottom: 22px;
+    width: 140px;
+    height: 2px;
+    transform: translateX(-50%);
+    background: rgba(46,37,31,.18);
+  }
+  [data-theme="night"] .progress { background: rgba(232,223,202,.15); }
+  .progress::before {
+    content: "";
+    display: block;
+    width: 42%;
+    height: 100%;
+    background: rgba(46,37,31,.55);
+    transition: width .3s ease;
+  }
+  [data-theme="night"] .progress::before { background: rgba(232,223,202,.5); }
+
+  /* ===== Interaction counter ===== */
+  .counter {
+    position: absolute;
+    z-index: 6;
+    left: 50%;
+    bottom: 36px;
+    transform: translateX(-50%);
+    font: 10px/1 'Inter', ui-monospace, monospace;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    opacity: 0;
+    transition: opacity .4s;
+  }
+  .counter.visible { opacity: 1; }
+
+  /* ===== Canvas 珠帘 ===== */
+  #curtain {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    cursor: none;
+    touch-action: none;
+  }
+
+  .cursor {
+    position: absolute;
+    z-index: 12;
+    width: 12px;
+    height: 12px;
+    border: 1px solid rgba(46, 37, 31, .72);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    pointer-events: none;
+  }
+  [data-theme="night"] .cursor { border-color: rgba(232, 223, 202, .72); }
+  .artboard.is-active .cursor { opacity: 1; }
+
+  /* ===== 配置面板 ===== */
+  .settings {
+    position: absolute;
+    z-index: 20;
+    top: 62px;
+    right: clamp(24px, 5vw, 94px);
+    width: 238px;
+    padding: 16px;
+    border: 1px solid var(--hairline);
+    background: var(--panel);
+    box-shadow: 16px 18px 32px rgba(46, 37, 31, .12);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  [data-theme="night"] .settings {
+    box-shadow: 16px 18px 32px rgba(0, 0, 0, .4);
+  }
+  .settings[hidden] { display: none; }
+  .setting { display: grid; gap: 6px; margin-bottom: 13px; }
+  .setting label {
+    display: flex;
+    justify-content: space-between;
+    color: var(--muted);
+    font: 11px/1 'Inter', ui-monospace, monospace;
+  }
+  .setting input { width: 100%; accent-color: var(--ink); }
+  .reset-btn {
+    width: 100%;
+    border: 1px solid var(--hairline);
+    padding: 7px 10px;
+    color: var(--ink);
+    background: transparent;
+    cursor: pointer;
+    font: 11px/1 'Inter', ui-monospace, monospace;
+    transition: all .3s;
+  }
+  .reset-btn:hover { border-color: var(--muted); }
+
+  /* ===== 响应式 ===== */
+  @media(max-width: 720px) {
+    .masthead { grid-template-columns: 1fr auto; }
+    .nav-links { display: none; }
+    .temple { top: 66px; width: min(520px, 96vw); }
+    .headline { left: 24px; bottom: 38px; width: min(285px, 72vw); }
+    h1 { font-size: clamp(42px, 14vw, 66px); }
+    .progress { display: none; }
+    .counter { display: none; }
+  }
+
+  @media(prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: .01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: .01ms !important;
+    }
+  }
 </style>
 </head>
 <body>
 
-<!-- 星空背景 -->
-<div class="starfield" id="starfield"></div>
+<main class="artboard" id="artboard">
+  <canvas id="curtain" aria-label="天坛屋檐下可交互的中文珠帘"></canvas>
 
-<!-- 导航 -->
-<nav class="nav">
-  <a class="nav-brand" href="index.html#builds">犀牛伯爵</a>
-  <a class="nav-back" href="index.html#builds">← 返回创作矩阵</a>
-</nav>
+  <header class="masthead">
+    <a class="brand" href="index.html#builds">犀牛伯爵</a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#home">首页</a>
+      <a href="#temple">地标</a>
+      <a href="#story">社区</a>
+    </nav>
+    <div class="masthead-actions">
+      <button class="toggle-btn" id="themeToggle" type="button" title="切换昼夜主题" aria-label="切换昼夜主题">☀</button>
+      <button class="toggle-btn" id="soundToggle" type="button" title="开关声音" aria-label="开关声音">♪</button>
+      <button class="configure" id="configure" type="button" aria-expanded="false" aria-controls="settings">配置</button>
+    </div>
+  </header>
 
-<!-- Hero -->
-<section class="hero">
-  <div class="hero-eyebrow">Anti-Gravity Typography · 反重力排版实验</div>
-  <div class="hero-title-wrap" id="heroTitle"></div>
-  <div class="hero-sub">每个字符在零重力中漂浮、旋转、散落。鼠标悬停时字母被推开，松手后弹回原位。<br/>用反重力文字，讲述北京地标建筑的故事。</div>
-  <div class="scroll-hint">
-    <span>向下滚动</span>
-    <div class="arrow"></div>
+  <div class="temple" id="temple">
+    <img src="assets/temple-roof-cutout-web.webp" alt="天坛祈年殿屋顶" width="901" height="730" fetchpriority="high" decoding="async"
+         onerror="this.onerror=null;this.src='temple-of-heaven.png';this.removeAttribute('width');this.removeAttribute('height')">
   </div>
-</section>
 
-<!-- 地标章节 -->
-<section class="ag-stage" id="agStage"></section>
+  <section class="headline" id="home">
+    <p class="eyebrow">北京 (Beijing) / 天地之间</p>
+    <h1 id="heroTitle">
+      <span class="ag-char">T</span><span class="ag-char">e</span><span class="ag-char">m</span><span class="ag-char">p</span><span class="ag-char">l</span><span class="ag-char">e</span><br>
+      <span class="ag-char">o</span><span class="ag-char">f</span><br>
+      <span class="ag-char">H</span><span class="ag-char">e</span><span class="ag-char">a</span><span class="ag-char">v</span><span class="ag-char">e</span><span class="ag-char">n</span><span class="rule"></span>
+    </h1>
+  </section>
 
-<!-- 底部 -->
-<footer class="footer">
-  <div class="footer-text">
-    反重力文字实验 · 灵感来自 <a class="footer-link" href="https://www.instagram.com/marina_uiux/" target="_blank" rel="noopener">Marina Budarina</a> 的零重力设计语言<br>
-    字母物理交互基于 requestAnimationFrame 弹簧模拟 · 纯前端实现
-  </div>
-  <br>
-  <a class="footer-link" href="index.html#builds">← 返回创作矩阵</a>
-</footer>
+  <div class="progress" aria-hidden="true"></div>
+  <div class="counter" id="counter" aria-hidden="true">珠帘触碰 · 0</div>
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+
+  <aside class="settings" id="settings" hidden>
+    <div class="setting"><label for="strength">Strength <output id="strengthValue">72</output></label><input id="strength" type="range" min="20" max="110" value="72"></div>
+    <div class="setting"><label for="reach">Reach <output id="reachValue">34</output></label><input id="reach" type="range" min="18" max="56" value="34"></div>
+    <div class="setting"><label for="inertia">Inertia <output id="inertiaValue">97</output></label><input id="inertia" type="range" min="86" max="99" value="97"></div>
+    <div class="setting"><label for="breeze">Auto Breeze <output id="breezeValue">0</output></label><input id="breeze" type="range" min="0" max="100" value="0"></div>
+    <button class="reset-btn" id="resetCurtain" type="button">Reset curtain</button>
+  </aside>
+</main>
 
 <script>
-// ===== 星空 =====
-(function(){
-  const sf=document.getElementById('starfield');
-  for(let i=0;i<120;i++){
-    const s=document.createElement('div');
-    s.className='star';
-    const sz=Math.random()*2+0.5;
-    s.style.width=sz+'px';s.style.height=sz+'px';
-    s.style.left=Math.random()*100+'%';
-    s.style.top=Math.random()*100+'%';
-    s.style.animationDelay=Math.random()*3+'s';
-    s.style.animationDuration=(Math.random()*3+2)+'s';
-    sf.appendChild(s);
-  }
-})();
+(() => {
+  // ===== 反重力标题 =====
+  let audioCtx = null;
+  let soundEnabled = true;
 
-// ===== 反重力文字渲染引擎 =====
-function createCharSpray(text,opts={}){
-  const{colors=['white'],fontClass='',size=28,spacing=1}=opts;
-  const wrapper=document.createElement('span');
-  wrapper.className='char-spray';
-  const chars=Array.from(text);
-  chars.forEach((ch,i)=>{
-    if(ch===' '){wrapper.appendChild(document.createTextNode(' '));return}
-    const span=document.createElement('span');
-    span.className='ag-char '+fontClass;
-    const colorIdx=colors[i%colors.length];
-    if(colorIdx)span.classList.add(colorIdx);
-    span.textContent=ch;
-    span.style.fontSize=size+'px';
-    span.style.letterSpacing=spacing+'px';
-    // 随机漂浮参数
-    const duration=3+Math.random()*4;
-    const delay=Math.random()*2;
-    const rot=(Math.random()*8-4).toFixed(1);
-    span.style.setProperty('--rot',rot+'deg');
-    span.style.animation=`floatUp ${duration}s ease-in-out ${delay}s infinite`;
-    // 鼠标交互
-    attachMousePhysics(span);
-    wrapper.appendChild(span);
-  });
-  return wrapper;
-}
+  function attachAntiGravity(el, options = {}) {
+    const { floatAmp = 5, floatSpeed = 0.35, rotAmp = 1.5, pushRadius = 130, pushForce = 20, springK = 0.055, damping = 0.89 } = options;
+    let vx = 0, vy = 0, ox = 0, oy = 0, phase = Math.random() * Math.PI * 2;
+    let lastSoundTime = 0, rafId = null, isPushed = false;
 
-// ===== 鼠标物理交互 =====
-function attachMousePhysics(el){
-  let vx=0,vy=0,ox=0,oy=0,dragging=false;
-  const spring=0.12,damping=0.82;
-  const baseAnim=el.style.animation;
-
-  function tick(){
-    if(dragging)return;
-    const ax=-ox*spring,ay=-oy*spring;
-    vx=(vx+ax)*damping;
-    vy=(vy+ay)*damping;
-    ox+=vx;oy+=vy;
-    if(Math.abs(ox)>.1||Math.abs(oy)>.1){
-      el.style.transform=`translate(${ox.toFixed(1)}px,${oy.toFixed(1)}px)`;
-      el.style.animation='none';
-      requestAnimationFrame(tick);
-    }else{
-      ox=0;oy=0;vx=0;vy=0;
-      el.style.transform='';
-      el.style.animation=baseAnim;
-    }
-  }
-
-  el.addEventListener('pointerenter',()=>{
-    const rect=el.getBoundingClientRect();
-    const cx=rect.left+rect.width/2,cy=rect.top+rect.height/2;
-    // 鼠标进入时给一个推力
-    const dx=cx-lastMouseX,dy=cy-lastMouseY;
-    const dist=Math.sqrt(dx*dx+dy*dy);
-    if(dist>0){
-      const force=Math.min(40,800/dist);
-      vx+=(dx/dist)*force*0.3;
-      vy+=(dy/dist)*force*0.3;
-    }
-    if(!dragging){dragging=true;el.style.animation='none';requestAnimationFrame(tick)}
-  });
-
-  el.addEventListener('pointerleave',()=>{
-    dragging=false;
-    requestAnimationFrame(tick);
-  });
-}
-
-let lastMouseX=0,lastMouseY=0;
-document.addEventListener('pointermove',e=>{lastMouseX=e.clientX;lastMouseY=e.clientY});
-
-// ===== Hero 标题 =====
-(function(){
-  const title=document.getElementById('heroTitle');
-  title.appendChild(createCharSpray('反重力文字',{
-    colors:['gold','cyan','pink','white'],
-    fontClass:'serif',
-    size:NaN, // 用 CSS clamp
-    spacing:2
-  }));
-  // 覆盖字体大小用CSS
-  title.querySelectorAll('.ag-char').forEach(el=>{
-    el.style.fontSize='';
-  });
-})();
-
-// ===== 北京地标数据 =====
-const landmarks=[
-  {
-    num:'01',
-    tag:'FORBIDDEN CITY · 紫禁城',
-    title:'故宫',
-    titleColors:['gold','gold','white'],
-    building:`<svg viewBox="0 0 400 160" fill="none" stroke="currentColor" stroke-width="1.5" style="color:#E8C77A">
-      <path d="M50 140 L50 80 L80 60 L80 40 L120 40 L120 60 L150 80 L150 140 Z" fill="rgba(232,199,122,0.03)"/>
-      <path d="M60 140 L60 85 L140 85 L140 140 Z" fill="rgba(232,199,122,0.05)"/>
-      <rect x="75" y="95" width="15" height="30" fill="rgba(232,199,122,0.08)"/>
-      <rect x="110" y="95" width="15" height="30" fill="rgba(232,199,122,0.08)"/>
-      <path d="M70 60 L100 35 L130 60" stroke="#E8C77A" fill="none"/>
-      <circle cx="100" cy="45" r="4" fill="#E8C77A" opacity="0.5"/>
-      <path d="M200 140 L200 70 L230 50 L230 30 L270 30 L270 50 L300 70 L300 140 Z" fill="rgba(232,199,122,0.03)"/>
-      <path d="M210 140 L210 75 L290 75 L290 140 Z" fill="rgba(232,199,122,0.05)"/>
-      <path d="M220 60 L250 25 L280 60" fill="none"/>
-      <rect x="225" y="85" width="15" height="30" fill="rgba(232,199,122,0.08)"/>
-      <rect x="255" y="85" width="15" height="30" fill="rgba(232,199,122,0.08)"/>
-      <line x1="0" y1="140" x2="400" y2="140" stroke="rgba(255,255,255,0.1)"/>
-    </svg>`,
-    desc:'600 年的紫禁城，9999 间半房屋。中轴对称，黄瓦红墙，斗拱飞檐。从午门到神武门，每一块砖都刻着王朝的秩序。它是世界上现存规模最大、保存最完整的木质结构古建筑群。'
-  },
-  {
-    num:'02',
-    tag:'BIRD'S NEST · 国家体育场',
-    title:'鸟巢',
-    titleColors:['cyan','pink','white'],
-    building:`<svg viewBox="0 0 400 160" fill="none" stroke="currentColor" stroke-width="1.2" style="color:#7BE0E8">
-      <ellipse cx="200" cy="100" rx="140" ry="50" fill="rgba(123,224,232,0.03)"/>
-      <path d="M80 100 Q120 60 200 55 Q280 60 320 100" stroke="#7BE0E8" fill="none"/>
-      <path d="M85 110 Q130 75 200 70 Q270 75 315 110" stroke="#7BE0E8" fill="none" opacity="0.7"/>
-      <path d="M75 120 Q125 85 200 80 Q275 85 325 120" stroke="#7BE0E8" fill="none" opacity="0.5"/>
-      <path d="M70 105 Q120 140 200 145 Q280 140 330 105" stroke="#7BE0E8" fill="none" opacity="0.4"/>
-      <path d="M100 70 L120 135 M140 58 L145 142 M180 55 L180 145 M220 55 L220 145 M260 58 L255 142 M300 70 L280 135" stroke="#7BE0E8" opacity="0.3"/>
-      <line x1="0" y1="150" x2="400" y2="150" stroke="rgba(255,255,255,0.1)"/>
-    </svg>`,
-    desc:'赫尔佐格与德梅隆设计，2008 年奥运主场馆。钢铁编织如鸟巢，没有一根立柱是直的。4.2 万吨钢材交织成椭圆碗状，巨大的空间里藏着中国体育最辉煌的夏天。它是用结构本身做装饰的极致。'
-  },
-  {
-    num:'03',
-    tag:'NATIONAL CENTRE · 国家大剧院',
-    title:'国家大剧院',
-    titleColors:['white','cyan','gold'],
-    building:`<svg viewBox="0 0 400 160" fill="none" stroke="currentColor" stroke-width="1.2" style="color:#fff">
-      <ellipse cx="200" cy="115" rx="120" ry="35" fill="rgba(255,255,255,0.04)"/>
-      <ellipse cx="200" cy="110" rx="110" ry="32" fill="rgba(123,224,232,0.06)"/>
-      <path d="M90 110 Q200 30 310 110" stroke="#7BE0E8" fill="rgba(123,224,232,0.03)" stroke-width="1.5"/>
-      <line x1="90" y1="110" x2="310" y2="110" stroke="rgba(255,255,255,0.2)"/>
-      <ellipse cx="170" cy="100" rx="8" ry="5" fill="rgba(255,255,255,0.06)"/>
-      <ellipse cx="230" cy="95" rx="6" ry="4" fill="rgba(255,255,255,0.06)"/>
-      <path d="M40 115 Q60 108 80 115 M320 115 Q340 108 360 115" stroke="rgba(255,255,255,0.15)" fill="none"/>
-      <line x1="0" y1="115" x2="400" y2="115" stroke="rgba(255,255,255,0.08)"/>
-    </svg>`,
-    desc:'保罗·安德鲁设计，天安门广场西侧的银色穹顶。钛金属壳体倒映在人工湖面上，远看像一颗浮在水上的蛋。南北长 212 米，没有任何柱子支撑。夜晚灯光亮起，它变成一颗发光的珍珠。'
-  },
-  {
-    num:'04',
-    tag:'CCTV HEADQUARTERS · 央视大楼',
-    title:'央视大楼',
-    titleColors:['pink','white','cyan'],
-    building:`<svg viewBox="0 0 400 180" fill="none" stroke="currentColor" stroke-width="1.5" style="color:#FF6B9D">
-      <path d="M120 160 L120 50 L130 40 L260 40 L270 50 L270 160" stroke="#FF6B9D" fill="rgba(255,107,157,0.03)"/>
-      <path d="M120 55 Q200 95 270 55" stroke="#FF6B9D" fill="rgba(255,107,157,0.05)" stroke-width="1.5"/>
-      <path d="M120 70 Q200 100 270 70" stroke="#FF6B9D" fill="none" opacity="0.5"/>
-      <path d="M120 85 Q200 105 270 85" stroke="#FF6B9D" fill="none" opacity="0.3"/>
-      <rect x="130" y="55" width="12" height="8" fill="rgba(255,255,255,0.08)"/>
-      <rect x="150" y="52" width="12" height="8" fill="rgba(255,255,255,0.08)"/>
-      <rect x="170" y="58" width="12" height="8" fill="rgba(255,255,255,0.08)"/>
-      <rect x="210" y="58" width="12" height="8" fill="rgba(255,255,255,0.08)"/>
-      <rect x="230" y="52" width="12" height="8" fill="rgba(255,255,255,0.08)"/>
-      <rect x="250" y="55" width="12" height="8" fill="rgba(255,255,255,0.08)"/>
-      <line x1="0" y1="160" x2="400" y2="160" stroke="rgba(255,255,255,0.1)"/>
-    </svg>`,
-    desc:'雷姆·库哈斯 OMA 设计。两座塔楼倾斜相交，顶部悬挑 75 米相连，形成巨大的"空中之环"。没有正面、没有背面，从每个角度看都是不同的建筑。北京 CBD 最叛逆的天际线。'
-  },
-  {
-    num:'05',
-    tag:'CHINA ZUN · 中国尊',
-    title:'中国尊',
-    titleColors:['gold','white','cyan','pink'],
-    building:`<svg viewBox="0 0 400 200" fill="none" stroke="currentColor" stroke-width="1.2" style="color:#E8C77A">
-      <path d="M160 180 L170 40 L175 30 L225 30 L230 40 L240 180 Z" stroke="#E8C77A" fill="rgba(232,199,122,0.03)"/>
-      <path d="M165 170 L172 50 L228 50 L235 170 Z" fill="rgba(232,199,122,0.05)"/>
-      <line x1="175" y1="60" x2="225" y2="60" stroke="rgba(232,199,122,0.15)"/>
-      <line x1="173" y1="75" x2="227" y2="75" stroke="rgba(232,199,122,0.12)"/>
-      <line x1="172" y1="90" x2="228" y2="90" stroke="rgba(232,199,122,0.1)"/>
-      <line x1="171" y1="110" x2="229" y2="110" stroke="rgba(232,199,122,0.1)"/>
-      <line x1="170" y1="130" x2="230" y2="130" stroke="rgba(232,199,122,0.12)"/>
-      <line x1="168" y1="150" x2="232" y2="150" stroke="rgba(232,199,122,0.15)"/>
-      <path d="M175 30 Q200 20 225 30" stroke="#E8C77A" fill="rgba(232,199,122,0.1)"/>
-      <line x1="0" y1="180" x2="400" y2="180" stroke="rgba(255,255,255,0.1)"/>
-    </svg>`,
-    desc:'528 米，北京最高建筑。外形取自古代礼器"尊"的意象，下宽上窄中收，如酒杯立于大地。中信大厦的 108 层里藏着金融街的野心。在雾霾天，它的塔尖消失在灰雾中，像一柄插入天空的利剑。'
-  },
-  {
-    num:'06',
-    tag:'GREAT WALL · 长城',
-    title:'长城',
-    titleColors:['white','gold','cyan','pink'],
-    building:`<svg viewBox="0 0 400 160" fill="none" stroke="currentColor" stroke-width="1.2" style="color:#E8C77A">
-      <path d="M0 130 Q50 100 100 110 Q150 80 200 90 Q250 60 300 70 Q350 50 400 60" stroke="#E8C77A" fill="none" stroke-width="2"/>
-      <path d="M0 140 Q50 115 100 120 Q150 95 200 105 Q250 80 300 85 Q350 65 400 75" stroke="#E8C77A" fill="rgba(232,199,122,0.03)" opacity="0.6"/>
-      <rect x="45" y="95" width="10" height="15" fill="rgba(232,199,122,0.15)"/>
-      <rect x="95" y="105" width="10" height="15" fill="rgba(232,199,122,0.15)"/>
-      <rect x="195" y="85" width="10" height="15" fill="rgba(232,199,122,0.15)"/>
-      <rect x="295" y="65" width="10" height="15" fill="rgba(232,199,122,0.15)"/>
-      <path d="M40 95 L40 88 L60 88 L60 95 M90 105 L90 98 L110 98 L110 105 M190 85 L190 78 L210 78 L210 85 M290 65 L290 58 L310 58 L310 65" stroke="#E8C77A" fill="none" opacity="0.4"/>
-      <line x1="0" y1="140" x2="400" y2="140" stroke="rgba(255,255,255,0.1)"/>
-    </svg>`,
-    desc:'东起山海关，西至嘉峪关，蜿蜒 21196 公里。从战国到明朝，修了 2000 年。它不是一堵墙，是一套由城墙、敌楼、关隘、烽火台组成的军事信息系统。从太空看不见它，但它一直在那里。'
-  },
-  {
-    num:'07',
-    tag:'SUMMER PALACE · 颐和园',
-    title:'颐和园',
-    titleColors:['cyan','gold','pink','white'],
-    building:`<svg viewBox="0 0 400 180" fill="none" stroke="currentColor" stroke-width="1.2" style="color:#7BE0E8">
-      <path d="M150 150 L150 100 L170 80 L170 60 L190 40 L210 40 L230 60 L230 80 L250 100 L250 150 Z" stroke="#7BE0E8" fill="rgba(123,224,232,0.04)"/>
-      <path d="M160 150 L160 105 L240 105 L240 150 Z" fill="rgba(123,224,232,0.06)"/>
-      <path d="M165 80 L200 50 L235 80" fill="none" stroke="#7BE0E8"/>
-      <path d="M175 60 L200 45 L225 60" fill="none" stroke="#7BE0E8" opacity="0.6"/>
-      <rect x="185" y="110" width="10" height="20" fill="rgba(123,224,232,0.1)"/>
-      <rect x="205" y="110" width="10" height="20" fill="rgba(123,224,232,0.1)"/>
-      <ellipse cx="200" cy="155" rx="100" ry="8" fill="rgba(123,224,232,0.06)"/>
-      <path d="M80 152 Q120 148 200 152 Q280 156 320 152" stroke="#7BE0E8" fill="none" opacity="0.2"/>
-      <line x1="0" y1="155" x2="400" y2="155" stroke="rgba(255,255,255,0.08)"/>
-    </svg>`,
-    desc:'万寿山、昆明湖、长廊 728 米。乾隆为母亲祝寿而建，慈禧重建为行宫。佛香阁 41 米，立在万寿山上俯瞰昆明湖。十七孔桥的桥洞在冬至日落时被金光穿过。皇家园林的极致，是借自然做舞台。'
-  }
-];
-
-// ===== 渲染地标章节 =====
-(function(){
-  const stage=document.getElementById('agStage');
-  landmarks.forEach((lm,idx)=>{
-    const section=document.createElement('div');
-    section.className='ag-landmark';
-
-    // 章节头
-    const head=document.createElement('div');
-    head.className='ag-landmark-head';
-    head.innerHTML=`<span class="ag-number">${lm.num}</span><span class="ag-tag">${lm.tag}</span>`;
-    section.appendChild(head);
-
-    // 标题 - 反重力文字
-    const titleWrap=document.createElement('div');
-    titleWrap.className='ag-body';
-    titleWrap.style.textAlign='center';
-    titleWrap.style.marginBottom='0';
-    const titleSize=lm.title.length>4?48:64;
-    titleWrap.appendChild(createCharSpray(lm.title,{
-      colors:lm.titleColors,
-      fontClass:'serif bold',
-      size:titleSize,
-      spacing:3
-    }));
-    section.appendChild(titleWrap);
-
-    // 建筑插画
-    const building=document.createElement('div');
-    building.className='ag-building';
-    building.innerHTML=lm.building;
-    section.appendChild(building);
-
-    // 描述文字 - 也用反重力处理
-    const descWrap=document.createElement('div');
-    descWrap.className='ag-desc';
-    descWrap.style.textAlign='center';
-    // 描述用普通文字+轻微反重力
-    const descSpray=createCharSpray(lm.desc,{
-      colors:['dim'],
-      size:15,
-      spacing:0
-    });
-    descSpray.style.lineHeight='1.9';
-    descWrap.appendChild(descSpray);
-    section.appendChild(descWrap);
-
-    // 分隔线
-    if(idx<landmarks.length-1){
-      const div=document.createElement('div');
-      div.className='ag-divider';
-      section.appendChild(div);
+    const pentatonic = [261.63, 293.66, 329.63, 392.00, 440.00, 523.25, 587.33, 659.25];
+    function playChime(freq, duration, volume) {
+      if (!audioCtx || audioCtx.state === 'suspended' || !soundEnabled) return;
+      const now = audioCtx.currentTime;
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.connect(gain); gain.connect(audioCtx.destination);
+      osc.frequency.value = freq; osc.type = 'sine';
+      gain.gain.setValueAtTime(volume, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + duration);
+      osc.start(now); osc.stop(now + duration);
     }
 
-    stage.appendChild(section);
-  });
-})();
+    function floatTick() {
+      if (isPushed) return;
+      const time = Date.now() / 1000;
+      const floatY = Math.sin(time * floatSpeed + phase) * floatAmp;
+      const floatX = Math.cos(time * floatSpeed * 0.7 + phase) * (floatAmp * 0.35);
+      const rotZ = Math.sin(time * floatSpeed * 0.45 + phase) * rotAmp;
+      el.style.transform = `translate(${floatX + ox}px, ${floatY + oy}px) rotate(${rotZ}deg)`;
+    }
 
-// ===== 全局鼠标推开效果（第二个交互层） =====
-let mouseRAF=null;
-document.addEventListener('pointermove',e=>{
-  if(mouseRAF)return;
-  mouseRAF=requestAnimationFrame(()=>{
-    mouseRAF=null;
-    // 轻量级：只检查视口内的字符
-    const els=document.elementsFromPoint(e.clientX,e.clientY);
-    els.forEach(el=>{
-      if(el.classList&&el.classList.contains('ag-char')){
-        // 已被 attachMousePhysics 处理
+    function physicsTick() {
+      if (!isPushed && Math.abs(ox) < 0.1 && Math.abs(oy) < 0.1 && Math.abs(vx) < 0.01 && Math.abs(vy) < 0.01) {
+        ox = 0; oy = 0; vx = 0; vy = 0; rafId = null; return;
+      }
+      const ax = -ox * springK, ay = -oy * springK;
+      vx = (vx + ax) * damping; vy = (vy + ay) * damping;
+      ox += vx; oy += vy;
+      const time = Date.now() / 1000;
+      const floatY = Math.sin(time * floatSpeed + phase) * floatAmp;
+      const floatX = Math.cos(time * floatSpeed * 0.7 + phase) * (floatAmp * 0.35);
+      const rotZ = Math.sin(time * floatSpeed * 0.45 + phase) * rotAmp;
+      el.style.transform = `translate(${floatX + ox}px, ${floatY + oy}px) rotate(${rotZ}deg)`;
+      rafId = requestAnimationFrame(physicsTick);
+    }
+
+    el.addEventListener('mousemove', (e) => {
+      const rect = el.getBoundingClientRect();
+      const cx = rect.left + rect.width / 2, cy = rect.top + rect.height / 2;
+      const dx = cx - e.clientX, dy = cy - e.clientY;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < pushRadius && dist > 0) {
+        const force = (pushRadius - dist) / pushRadius * pushForce;
+        vx += (dx / dist) * force * 0.12; vy += (dy / dist) * force * 0.12;
+        isPushed = true;
+        const now = Date.now();
+        if (now - lastSoundTime > 90) {
+          playChime(pentatonic[Math.abs(el.textContent.charCodeAt(0)) % pentatonic.length], 0.1, 0.03);
+          lastSoundTime = now;
+        }
+        if (!rafId) rafId = requestAnimationFrame(physicsTick);
       }
     });
+    el.addEventListener('mouseleave', () => {
+      isPushed = false;
+      if (!rafId) rafId = requestAnimationFrame(physicsTick);
+      playChime(pentatonic[Math.abs(el.textContent.charCodeAt(0)) % pentatonic.length] * 0.5, 0.15, 0.02);
+    });
+    setInterval(floatTick, 33);
+  }
+
+  // ===== Canvas 珠帘 Verlet 物理 =====
+  const artboard = document.getElementById('artboard');
+  const canvas = document.getElementById('curtain');
+  const ctx = canvas.getContext('2d');
+  const cursor = document.getElementById('cursor');
+  const temple = document.getElementById('temple');
+  const configure = document.getElementById('configure');
+  const settings = document.getElementById('settings');
+  const resetBtn = document.getElementById('resetCurtain');
+  const counterEl = document.getElementById('counter');
+  const chains = [];
+  let glyphs = '天坛祈年风调雨顺天地玄黄日月星辰礼乐文明北京春秋山川云海';
+  const mouse = { x: -999, y: -999, oldX: -999, oldY: -999, active: false };
+  const physics = { strength: .72, radius: 34, friction: .965, gravity: .18 };
+  const sound = {
+    context: null, output: null, lastStrike: [], lastGlobal: 0, voices: 0,
+    scale: [523.25, 587.33, 659.25, 783.99, 880, 1046.5, 1174.66, 1318.51, 1567.98, 1760]
+  };
+  let width = 0, height = 0, dpr = 1;
+  let interactionCount = 0;
+  let breezeIntensity = 0;
+  let breezePhase = 0;
+
+  function unlockSound() {
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContext) return;
+    if (!sound.context) {
+      const context = new AudioContext();
+      const output = context.createGain();
+      const compressor = context.createDynamicsCompressor();
+      const delay = context.createDelay(.3);
+      const feedback = context.createGain();
+      const wet = context.createGain();
+      output.gain.value = .62;
+      compressor.threshold.value = -18; compressor.ratio.value = 3;
+      delay.delayTime.value = .11; feedback.gain.value = .14; wet.gain.value = .13;
+      output.connect(compressor); output.connect(delay);
+      delay.connect(feedback); feedback.connect(delay); delay.connect(wet); wet.connect(compressor);
+      compressor.connect(context.destination);
+      sound.context = context; sound.output = output;
+    }
+    if (sound.context.state === 'suspended') sound.context.resume().catch(() => {});
+    if (!audioCtx) audioCtx = sound.context;
+  }
+
+  function strikeChain(columnIndex, impact, x) {
+    const context = sound.context;
+    if (!context || context.state !== 'running' || impact < 1.1 || !soundEnabled) return;
+    const timestamp = performance.now();
+    if (timestamp - (sound.lastStrike[columnIndex] || 0) < 95) return;
+    if (timestamp - sound.lastGlobal < 28 || sound.voices >= 8) return;
+    sound.lastStrike[columnIndex] = timestamp;
+    sound.lastGlobal = timestamp;
+    sound.voices += 1;
+
+    const now = context.currentTime;
+    const frequency = sound.scale[columnIndex % sound.scale.length];
+    const level = .028 + Math.min(impact, 18) / 18 * .075;
+    const duration = .72 + Math.random() * .32;
+    const spatial = context.createStereoPanner ? context.createStereoPanner() : context.createGain();
+    const pan = Math.max(-.9, Math.min(.9, x / width * 2 - 1));
+    if (spatial.pan) spatial.pan.setValueAtTime(pan, now);
+    spatial.connect(sound.output);
+
+    [{ratio:1,amount:1,decay:1},{ratio:2.01,amount:.24,decay:.62},{ratio:3.96,amount:.1,decay:.38}].forEach(partial => {
+      const oscillator = context.createOscillator();
+      const envelope = context.createGain();
+      oscillator.type = 'sine';
+      oscillator.frequency.setValueAtTime(frequency * partial.ratio, now);
+      oscillator.detune.setValueAtTime((Math.random()-.5)*8, now);
+      envelope.gain.setValueAtTime(level * partial.amount, now);
+      envelope.gain.exponentialRampToValueAtTime(.0001, now + duration * partial.decay);
+      oscillator.connect(envelope); envelope.connect(spatial);
+      oscillator.start(now); oscillator.stop(now + duration + .05);
+    });
+
+    window.setTimeout(() => {
+      sound.voices = Math.max(0, sound.voices - 1);
+      spatial.disconnect();
+    }, (duration + .15) * 1000);
+  }
+
+  function build() {
+    chains.length = 0;
+    const narrow = width < 720;
+    const columns = narrow ? 16 : 26;
+    const templeRect = temple.getBoundingClientRect();
+    const artboardRect = artboard.getBoundingClientRect();
+    const buildingCenter = templeRect.left - artboardRect.left + templeRect.width * .5;
+    const curtainWidth = templeRect.width * .84;
+    const left = buildingCenter - curtainWidth / 2;
+    const templeTop = templeRect.top - artboardRect.top;
+    const roofScale = templeRect.width / 901;
+    const centerEdge = templeTop + 682 * roofScale;
+    const sideEdge = templeTop + 726 * roofScale;
+    const curtainBottom = height - (narrow ? 42 : 48);
+    const availableHeight = Math.max(120, curtainBottom - sideEdge);
+    const rows = Math.max(18, Math.min(narrow ? 35 : 39, Math.floor(availableHeight / 9.4) + 1));
+
+    for (let column = 0; column < columns; column += 1) {
+      const x = left + column * curtainWidth / (columns - 1);
+      const normalizedX = Math.abs(column / (columns - 1) * 2 - 1);
+      const top = centerEdge + (sideEdge - centerEdge) * Math.pow(normalizedX, 1.7) - 4;
+      const segmentLength = Math.max(6.4, (curtainBottom - top) / (rows - 1));
+      const readingColumn = columns - 1 - column;
+      const chain = [];
+      for (let row = 0; row < rows; row += 1) {
+        const y = top + row * segmentLength;
+        chain.push({
+          x, y, oldX: x, oldY: y, anchorX: x, anchorY: y,
+          pinned: row === 0, restLength: segmentLength,
+          char: glyphs[(readingColumn * rows + row) % glyphs.length],
+          alpha: .36 + ((column + row * 2) % 6) * .055
+        });
+      }
+      chains.push(chain);
+    }
+  }
+
+  function resize() {
+    const rect = artboard.getBoundingClientRect();
+    width = rect.width; height = rect.height;
+    dpr = Math.min(2, window.devicePixelRatio || 1);
+    canvas.width = Math.round(width * dpr);
+    canvas.height = Math.round(height * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    build();
+  }
+
+  function injectMouseDelta() {
+    if (!mouse.active) return;
+    const moveX = mouse.x - mouse.oldX;
+    const moveY = mouse.y - mouse.oldY;
+    const speed = Math.hypot(moveX, moveY);
+    if (speed < .01 || speed > 80) return;
+    for (let chainIndex = 0; chainIndex < chains.length; chainIndex += 1) {
+      const chain = chains[chainIndex];
+      let strongestImpact = 0;
+      for (let index = 1; index < chain.length; index += 1) {
+        const point = chain[index];
+        const distance = Math.hypot(point.x - mouse.oldX, point.y - mouse.oldY);
+        if (distance >= physics.radius) continue;
+        const falloff = 1 - distance / physics.radius;
+        strongestImpact = Math.max(strongestImpact, speed * falloff);
+        point.x += moveX * physics.strength * falloff;
+        point.y += moveY * physics.strength * falloff;
+      }
+      if (strongestImpact > 0) {
+        strikeChain(chainIndex, strongestImpact, chain[0].x);
+        registerInteraction();
+      }
+    }
+  }
+
+  function injectBreeze() {
+    if (breezeIntensity <= 0) return;
+    breezePhase += 0.015;
+    const swayAmount = breezeIntensity * 0.015;
+    for (let chainIndex = 0; chainIndex < chains.length; chainIndex += 1) {
+      const chain = chains[chainIndex];
+      const phaseOffset = chainIndex * 0.3;
+      const sway = Math.sin(breezePhase + phaseOffset) * swayAmount;
+      const heightFactor = 0;
+      let strongestImpact = 0;
+      for (let index = 1; index < chain.length; index += 1) {
+        const point = chain[index];
+        const heightRatio = index / chain.length;
+        const localSway = sway * heightRatio * heightRatio;
+        point.x += localSway;
+        strongestImpact = Math.max(strongestImpact, Math.abs(localSway) * 20);
+      }
+      if (strongestImpact > 1.2 && Math.random() < 0.02) {
+        strikeChain(chainIndex, strongestImpact, chain[0].x);
+      }
+    }
+  }
+
+  function registerInteraction() {
+    interactionCount++;
+    counterEl.textContent = `珠帘触碰 · ${interactionCount}`;
+    counterEl.classList.add('visible');
+    clearTimeout(counterEl._timer);
+    counterEl._timer = setTimeout(() => counterEl.classList.remove('visible'), 2000);
+  }
+
+  function integrate() {
+    for (const chain of chains) {
+      for (const point of chain) {
+        if (point.pinned) continue;
+        const velocityX = (point.x - point.oldX) * physics.friction;
+        const velocityY = (point.y - point.oldY) * physics.friction;
+        point.oldX = point.x; point.oldY = point.y;
+        point.x += velocityX; point.y += velocityY + physics.gravity;
+      }
+    }
+  }
+
+  function constrain() {
+    for (let pass = 0; pass < 8; pass += 1) {
+      for (const chain of chains) {
+        const anchor = chain[0];
+        anchor.x = anchor.anchorX; anchor.y = anchor.anchorY;
+        for (let index = 1; index < chain.length; index += 1) {
+          const a = chain[index - 1], b = chain[index];
+          const dx = b.x - a.x, dy = b.y - a.y;
+          const distance = Math.max(.0001, Math.hypot(dx, dy));
+          const difference = (distance - b.restLength) / distance;
+          if (a.pinned) {
+            b.x -= dx * difference; b.y -= dy * difference;
+          } else {
+            const cx = dx * difference * .5, cy = dy * difference * .5;
+            a.x += cx; a.y += cy; b.x -= cx; b.y -= cy;
+          }
+        }
+      }
+    }
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, width, height);
+    const inkColor = getComputedStyle(document.documentElement).getPropertyValue('--ink').trim();
+    ctx.fillStyle = inkColor || '#2e251f';
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.font = '500 10px ui-monospace, SFMono-Regular, Menlo, monospace';
+    for (const chain of chains) {
+      for (const point of chain) {
+        ctx.globalAlpha = point.alpha;
+        ctx.fillText(point.char, point.x, point.y);
+      }
+    }
+    ctx.globalAlpha = 1;
+  }
+
+  function frame() {
+    injectBreeze();
+    integrate(); constrain(); draw();
+    requestAnimationFrame(frame);
+  }
+
+  function enter(event) {
+    const rect = canvas.getBoundingClientRect();
+    mouse.x = mouse.oldX = event.clientX - rect.left;
+    mouse.y = mouse.oldY = event.clientY - rect.top;
+    mouse.active = true;
+    cursor.style.left = `${mouse.x}px`; cursor.style.top = `${mouse.y}px`;
+    artboard.classList.add('is-active');
+  }
+
+  function move(event) {
+    if (!mouse.active) enter(event);
+    mouse.oldX = mouse.x; mouse.oldY = mouse.y;
+    const rect = canvas.getBoundingClientRect();
+    mouse.x = event.clientX - rect.left; mouse.y = event.clientY - rect.top;
+    injectMouseDelta();
+    cursor.style.left = `${mouse.x}px`; cursor.style.top = `${mouse.y}px`;
+  }
+
+  function leave() {
+    mouse.active = false;
+    artboard.classList.remove('is-active');
+  }
+
+  function bindRange(id, outputId, update) {
+    const input = document.getElementById(id);
+    const output = document.getElementById(outputId);
+    input.addEventListener('input', () => {
+      const value = Number(input.value);
+      output.value = String(value);
+      update(value);
+    });
+  }
+
+  // Theme toggle
+  const themeToggle = document.getElementById('themeToggle');
+  const savedTheme = localStorage.getItem('temple-theme');
+  if (savedTheme === 'night') {
+    document.documentElement.setAttribute('data-theme', 'night');
+    themeToggle.textContent = '☾';
+    themeToggle.classList.add('active');
+  }
+  themeToggle.addEventListener('click', () => {
+    const isNight = document.documentElement.getAttribute('data-theme') === 'night';
+    if (isNight) {
+      document.documentElement.removeAttribute('data-theme');
+      themeToggle.textContent = '☀';
+      themeToggle.classList.remove('active');
+      localStorage.setItem('temple-theme', 'day');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'night');
+      themeToggle.textContent = '☾';
+      themeToggle.classList.add('active');
+      localStorage.setItem('temple-theme', 'night');
+    }
   });
-});
+
+  // Sound toggle
+  const soundToggle = document.getElementById('soundToggle');
+  soundToggle.classList.add('active');
+  soundToggle.addEventListener('click', () => {
+    soundEnabled = !soundEnabled;
+    if (soundEnabled) {
+      soundToggle.textContent = '♪';
+      soundToggle.classList.add('active');
+      unlockSound();
+    } else {
+      soundToggle.textContent = '✕';
+      soundToggle.classList.remove('active');
+    }
+  });
+
+  configure.addEventListener('click', () => {
+    const open = settings.hidden;
+    settings.hidden = !open;
+    configure.setAttribute('aria-expanded', String(open));
+  });
+  resetBtn.addEventListener('click', build);
+  bindRange('strength', 'strengthValue', v => { physics.strength = v / 100; });
+  bindRange('reach', 'reachValue', v => { physics.radius = v; });
+  bindRange('inertia', 'inertiaValue', v => { physics.friction = v / 100; });
+  bindRange('breeze', 'breezeValue', v => { breezeIntensity = v; });
+
+  canvas.addEventListener('pointerenter', enter);
+  canvas.addEventListener('pointermove', move);
+  canvas.addEventListener('pointerleave', leave);
+  window.addEventListener('pointerdown', unlockSound, { passive: true });
+  window.addEventListener('resize', resize);
+
+  // Load body text
+  async function loadBodyText() {
+    try {
+      const response = await fetch('assets/tiantan.txt');
+      if (!response.ok) throw new Error(`Unable to load body text: ${response.status}`);
+      const characters = (await response.text()).match(/\p{Script=Han}/gu);
+      if (characters && characters.length) {
+        glyphs = characters.join('');
+        build();
+      }
+    } catch (error) {
+      console.warn(error);
+    }
+  }
+
+  // ===== 初始化 =====
+  function init() {
+    document.querySelectorAll('.ag-char').forEach(el => {
+      attachAntiGravity(el, { floatAmp: 3 + Math.random() * 4, floatSpeed: 0.25 + Math.random() * 0.3, rotAmp: 0.6 + Math.random() * 1.4, pushRadius: 110, pushForce: 16 });
+    });
+    resize();
+    loadBodyText();
+    frame();
+  }
+
+  document.addEventListener('DOMContentLoaded', init);
+})();
 </script>
+
 </body>
 </html>

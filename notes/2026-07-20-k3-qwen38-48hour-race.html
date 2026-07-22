@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>K3登顶代码榜那天，Qwen3.8已经在门口了</title>
+  <style>
+    :root {
+      --accent: #8b2635;
+      --ink: #333;
+      --ink-soft: #555;
+      --muted: #888;
+      --surface: #fafafa;
+      --border: rgba(0,0,0,0.06);
+      --radius: 12px;
+      --font-sans: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-serif: "Noto Serif SC", "Songti SC", Georgia, serif;
+    }
+    body { font-family: var(--font-sans); background: #f5f5f5; margin: 0; padding: 16px; font-size: 16px; line-height: 32px; color: var(--ink); -webkit-font-smoothing: antialiased; }
+    .container { max-width: 680px; margin: 0 auto; background: var(--surface); padding: 32px; border-radius: var(--radius); }
+    .cover-img { width: 100%; border-radius: 8px; margin-bottom: 24px; object-fit: cover; }
+    h1 { font-family: var(--font-serif); font-size: 24px; font-weight: 700; color: var(--ink); line-height: 40px; margin: 0 0 16px; }
+    .meta { color: var(--muted); font-size: 13px; margin-bottom: 16px; }
+    .byline { color: var(--ink-soft); font-size: 14px; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+    h2 { font-family: var(--font-serif); font-size: 20px; font-weight: 600; color: var(--ink); margin: 32px 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+    h3 { font-family: var(--font-serif); font-size: 18px; font-weight: 600; color: var(--ink); margin: 24px 0 12px; }
+    p { margin: 0 0 24px; }
+    .quote-box { border-left: 4px solid var(--accent); background: #f5f5f5; padding: 16px 20px; margin: 24px 0; border-radius: 0 var(--radius) var(--radius) 0; }
+    .quote-box p { margin: 0; color: var(--ink-soft); font-style: italic; font-size: 15px; }
+    .quote-box .attribution { margin-top: 8px; color: var(--muted); font-size: 13px; font-style: normal; }
+    .data-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14px; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .data-table th, .data-table td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); }
+    .data-table th { background: #f0f0f0; font-weight: 600; color: var(--ink); }
+    .data-table td { color: var(--ink-soft); }
+    .timeline { position: relative; padding-left: 24px; margin: 24px 0; }
+    .timeline::before { content: ''; position: absolute; left: 6px; top: 0; bottom: 0; width: 2px; background: #e0e0e0; }
+    .timeline-item { position: relative; margin-bottom: 16px; }
+    .timeline-item::before { content: ''; position: absolute; left: -22px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); }
+    .timeline-item .date { font-size: 13px; color: var(--muted); margin-bottom: 4px; }
+    .timeline-item .content { font-size: 15px; color: var(--ink); line-height: 24px; }
+    .img-caption { text-align: center; color: var(--muted); font-size: 13px; margin-top: 8px; margin-bottom: 24px; }
+    .ending { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--ink-soft); font-size: 14px; }
+    .highlight { color: var(--accent); font-weight: 600; background: linear-gradient(to top, rgba(139,38,53,0.08) 40%, transparent 40%); padding: 0 2px; }
+    .data-callout { display: inline-block; background: var(--accent); color: #fff; padding: 2px 10px; border-radius: 4px; font-weight: 700; font-size: 15px; }
+    .contrast-card { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin: 24px 0; border-radius: var(--radius); overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .contrast-card .side { padding: 16px 20px; }
+    .contrast-card .side-left { background: #fef2f2; border-right: 1px solid var(--border); }
+    .contrast-card .side-right { background: #f0fdf4; }
+    .contrast-card .side h4 { margin: 0 0 8px; font-size: 14px; font-weight: 600; }
+    .contrast-card .side-left h4 { color: #991b1b; }
+    .contrast-card .side-right h4 { color: #166534; }
+    .contrast-card .side p { margin: 0; font-size: 14px; color: var(--ink-soft); line-height: 24px; }
+    .punchline { font-family: var(--font-serif); font-size: 18px; font-weight: 700; color: var(--accent); text-align: center; margin: 32px 0; padding: 16px 0; border-top: 2px solid var(--accent); border-bottom: 2px solid var(--accent); }
+    strong { color: var(--ink); font-weight: 600; }
+    .arena-img { width: 100%; border-radius: 8px; margin-bottom: 8px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img class="cover-img" src="notes/cover-k3-qwen38-race.jpg" alt="Kimi K3与Qwen3.8在48小时内先后冲击全球AI模型排行榜的竞争场景">
+    <h1>K3登顶代码榜那天，Qwen3.8已经在门口了</h1>
+    <div class="meta">2026-07-20 · 阅读时间约12分钟</div>
+    <div class="byline">文｜犀牛伯爵</div>
+
+    <p>7月16日，Arena.ai的前端代码竞技场刷新了排名，Kimi K3以<span class="data-callout">1679分</span>坐上了头把交椅。Claude Fable 5的1631分被压在下面，GPT-5.6 Sol的1618分更远。48分，在Elo体系里不是小差，是梯队级别的碾压。</p>
+
+    <p>谁都没来得及消化这个消息。7月19日深夜，阿里通义千问在X上甩了一句：<span class="highlight">"这可能是除了Fable 5外最强大的模型。"</span>Qwen3.8-Max，2.4万亿参数，预览版已经丢到线上，开源权重"很快"放出。</p>
+
+    <p>从K3登顶到Qwen3.8贴脸，中间隔了一个周末。中国AI的发布节奏，从"按季度算"压缩到了"按48小时算"。</p>
+
+    <img class="arena-img" src="https://aka.doubaocdn.com/s/eIFx1woKBE" alt="Arena.ai前端代码竞技场排行榜，Kimi K3以1679分排名第一，Claude Fable 5以1631分排名第二">
+    <div class="img-caption">Arena.ai前端代码竞技场排行榜（2026-07-16），Kimi K3首次登顶 · 图源：Arena.ai via IT之家</div>
+
+    <h2>一张榜单和一个更安静的数字</h2>
+
+    <p>前端代码竞技场这个榜，跟那些拿固定题库跑分的基准测试不一样。它是真人盲投，全球开发者拿真实任务给两个模型打，投完才知道自己投的是谁。刷不了，买不了，每一分都是实打实的人投出来的。</p>
+
+    <p>K3拿了1679分，领先第二名48分，在七个子领域里拿下六个第一。这个成绩在Arena的体系里属于"梯队级领先"，不是靠一两个题目的运气，是系统性碾压。</p>
+
+    <p>但今天Arena放出了完整周榜（2026-29期，7月13日至19日），一个更值得注意的数字藏在综合榜里：K3以1486分排在第9名，首次杀进Top 10，跟Gemini 3 Pro和GPT-5.6 Sol-xhigh分数完全一样。没拉开差距，甚至还没甩开身后的Qwen3.7。</p>
+
+    <div class="data-table">
+      <table>
+        <tr><th>排名</th><th>模型</th><th>厂商</th><th>ELO</th><th>价格（$/百万token）</th></tr>
+        <tr><td>1</td><td>Claude Fable 5</td><td>Anthropic</td><td>1507</td><td>$10/$50</td></tr>
+        <tr><td>2</td><td>Claude Opus 4-6-thinking</td><td>Anthropic</td><td>1504</td><td>$5/$25</td></tr>
+        <tr><td>8</td><td>Gemini 3 Pro</td><td>Google</td><td>1486</td><td>$2/$12</td></tr>
+        <tr><td><strong>9</strong></td><td><strong>Kimi K3</strong></td><td><strong>月之暗面</strong></td><td><strong>1486</strong></td><td><strong>$3/$15</strong></td></tr>
+        <tr><td>10</td><td>GPT-5.6 Sol-xhigh</td><td>OpenAI</td><td>1486</td><td>N/A</td></tr>
+        <tr><td>18</td><td>Qwen3.7-Max-Preview</td><td>阿里</td><td>1475</td><td>$1.48/$4.43</td></tr>
+        <tr><td>27</td><td>GLM-5.1</td><td>智谱</td><td>1471</td><td>$1.4/$4.4</td></tr>
+      </table>
+    </div>
+    <div class="img-caption">Arena.ai综合榜Top 10及国产模型排名（2026年第29期） · 数据源：arena.ai</div>
+
+    <p>我的判断是，综合榜第9比前端榜第1更真实。前端榜登顶说明K3在某个细分场景做到了世界顶级，但综合榜告诉我们，离全面追平Anthropic的旗舰梯队，还差一个身位。官方自己也写了，"与Claude Fable 5和GPT 5.6 Sol相比在用户体验上仍有可感知的差距"，很坦诚。</p>
+
+    <h2>30天，五张牌</h2>
+
+    <p>但真正让我觉得不对劲的，不是K3的分数，是这个节奏。</p>
+
+    <div class="timeline">
+      <div class="timeline-item"><div class="date">7月8日</div><div class="content">DeepSeek曝出自研AI推理芯片消息</div></div>
+      <div class="timeline-item"><div class="date">7月15日</div><div class="content">DeepSeek V4上线，首创峰谷定价，比GPT-5便宜80%</div></div>
+      <div class="timeline-item"><div class="date">7月16日</div><div class="content">Kimi K3发布，2.8万亿参数，登顶Arena前端榜</div></div>
+      <div class="timeline-item"><div class="date">7月17日</div><div class="content">WAIC 2026上海开幕，1100+企业参展</div></div>
+      <div class="timeline-item"><div class="date">7月19日</div><div class="content">Qwen3.8-Max预览上线，2.4万亿参数，官宣开源</div></div>
+      <div class="timeline-item"><div class="date">7月19日晚</div><div class="content">Kimi K3因GPU挤爆，暂停新用户订阅</div></div>
+      <div class="timeline-item"><div class="date">7月20日</div><div class="content">WAIC闭幕，面壁智能开源MiniCPM-Robo</div></div>
+    </div>
+
+    <p>四家头部厂商，两周内五次炸场。硅谷那边一年发一次旗舰，中国这边一个月能发五次。</p>
+
+    <p>这背后有一件大部分人没注意到的事：K3发布不到48小时，月之暗面的GPU就快被挤爆了，7月19日晚间发了公开信，暂停C端新用户订阅。2.8万亿参数的模型，推理成本极高，每次只激活16个专家但总量摆在那里，算力开销是实打实的。</p>
+
+    <p>然后同一天晚上，阿里就把Qwen3.8的预览版丢了出来。</p>
+
+    <p>这个时间差太微妙了。你很难不把这两件事连在一起看：K3证明了中国模型能在全球代码榜上拿第一，但它的算力撑不住爆发式的需求，这时候Qwen3.8就到了。一个打标杆，一个打规模，像排练好了一样。</p>
+
+    <p>说真的，我怀疑没有人在排练。但WAIC的闭幕日确实成了一个天然的发布窗口，谁都不想在上海大会结束的时候手上没牌。</p>
+
+    <h2>开源的代价，没人在算</h2>
+
+    <p>这两款模型的参数量很吓人，K3是2.8万亿，Qwen3.8是2.4万亿。但更值得聊的是"开源"这两个字。</p>
+
+    <p>K3承诺7月27日前放出全部权重，Qwen3.8也说了"很快开源"。两个加在一起超过5万亿参数的模型要开源，等于把百亿级的训练成本、几千张H系列显卡的算力开销，一次性送给全球开发者。</p>
+
+    <p>Simon Willison跑了他那个经典的鹈鹕骑车SVG测试，95个输入token，K3吐了16658个输出token，其中13241个是推理链，一张图花了25美分。Hacker News上有人算了笔账，同样一个任务GPT-5.6 Sol用1万推理token搞定，K3要烧5万。单价看着跟Anthropic Sonnet档对齐了，但推理链长到这个程度，总价一点不便宜。</p>
+
+    <div class="contrast-card">
+      <div class="side side-left">
+        <h4>参数与能力的幻觉</h4>
+        <p>K3综合榜第9，前端榜第1。Qwen3.8预览版还没上Arena。参数量全球前三，不代表综合能力全球前三。官方自己都承认跟Fable 5有可感知差距。</p>
+      </div>
+      <div class="side side-right">
+        <h4>开源与落地的鸿沟</h4>
+        <p>2.4T参数要跑起来，至少8张H100级别的卡。能吃到开源红利的，是有算力储备的大厂和头部AI公司。中小开发者依然只能靠API调用。</p>
+      </div>
+    </div>
+
+    <p>价格战也在打。阿里Qoder的Token Plan个人版Lite档39元/月，K3的API输出定价100元/百万token，国产模型里的历史最高价。GLM-5.2呢？1.4加4.4美元，白菜价，在Arena前端榜拿第4名，K3四分之一的价格交出八成水准。</p>
+
+    <p>当国产开源模型每周都在刷新参数纪录，价格已经打到39元/月，头部厂商的商业化空间正在被自己压缩。烧钱换用户的老剧本，AI这一轮能撑多久，没人给得出答案。</p>
+
+    <h2>被忽略的第三张牌</h2>
+
+    <p>K3和Qwen3.8抢了所有头版，但今天Arena周报里藏着一个很容易被忽略的数据：智谱GLM-5.2（Max）在前端榜拿了第4名，1587分，超过了Claude Opus 4-8-thinking和Grok 4.5。在智能体榜里，它也是唯一杀进Top 10的国产模型，净提升度6.24%。</p>
+
+    <p>GLM-5.2的价格是1.4加4.4美元，K3的四分之一不到。</p>
+
+    <p>我自己的感受是，这三家代表的是三条完全不同的路。K3走的是"拿最贵的东西证明我能行"，Qwen3.8走的是"我把全链路锁在阿里云生态里"，GLM走的是"便宜够用，我打性价比"。</p>
+
+    <p>三条路都有人买单。但三条路同时加速，这个画面是以前没出现过的。</p>
+
+    <h2>闭源的护城河，还剩什么</h2>
+
+    <p>一年前，讨论的话题还是"国产模型什么时候能追上"。现在讨论的已经是"闭源旗舰还能领先几个月"。</p>
+
+    <p>K3前端榜登顶，GLM-5.2第四，Qwen3.7第17名，字节seed-2.1第14名。国产模型在前端开发这个细分场景已经占了一半以上的席位。代码榜整体上，Anthropic的思考模型依然包揽前7名的绝大多数，这个统治力还在。</p>
+
+    <p>但Fable 5是Anthropic最后的王牌。K3对准了它，Qwen3.8也对准了它，每家发布都要拿Fable 5当标尺。这本身就说明了一件事：Fable 5是目前AI行业唯一的"绝对参照物"，所有人都在追它。</p>
+
+    <p>一旦这个参照物被追上，或者被追到差距可以忽略的程度，闭源模型的定价权就没了。</p>
+
+    <p>Anthropic把Fable 5的API定价拉到了$10/$50每百万token，K3直接对齐到了$3/$15，GLM-5.2更是到了$1.4/$4.4。如果能力差距缩小到"可感知但不大"的程度，价格差5倍到10倍，开发者会怎么选？</p>
+
+    <p>我有时候觉得，这场竞赛真正可怕的地方不是谁赢，是节奏。每48小时刷新一次，每家都在用比上一家更大的参数、更低的价格、更快的速度回应。这不是百米冲刺，这是把马拉松跑成了接力赛，而且每一棒都在加速。</p>
+
+    <p class="punchline">所有护城河，都有保质期。</p>
+
+    <h2>最后说两句</h2>
+
+    <p>K3登顶前端榜是一件值得记住的事。不是因为它证明了中国模型"赢了"，而是因为这是中国模型第一次在真人盲投的全球代码竞技场里，不是靠挑题、不是靠刷分，是实打实地坐在了第一名的位置上。</p>
+
+    <p>但Qwen3.8深夜官宣的画面同样值得记住。K3的香槟还没开完，阿里已经在门口站着了。不是来抢风头的，是来告诉你这只是一个开始，后面还有更多。</p>
+
+    <p>聊到这里我突然想起一个事。2000年代初的时候，中国互联网也是这个节奏，每几个月就有一个新网站、新产品冒出来，所有人都在追赶，没人知道最后谁能赢。后来我们知道了一些名字，也忘了很多名字。但这不妨碍那段时期成为中国互联网最密集、最疯狂的几年。</p>
+
+    <p>AI现在就在那个节点上。</p>
+
+    <div class="ending">谢谢你看我的文章。
+RC-20260720-29</div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>卷了两年画质，这家清华团队把视频做成了游戏</title>
+  <style>
+    :root {
+      --accent: #8b2635;
+      --ink: #333;
+      --ink-soft: #555;
+      --muted: #888;
+      --surface: #fafafa;
+      --border: rgba(0,0,0,0.06);
+      --radius: 12px;
+      --font-sans: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-serif: "Noto Serif SC", "Songti SC", Georgia, serif;
+    }
+    body { font-family: var(--font-sans); background: #f5f5f5; margin: 0; padding: 16px; font-size: 16px; line-height: 1.8; color: var(--ink); -webkit-font-smoothing: antialiased; }
+    .container { max-width: 680px; margin: 0 auto; background: var(--surface); padding: 32px; border-radius: var(--radius); }
+    .cover-img { width: 100%; border-radius: 8px; margin-bottom: 24px; }
+    h1 { font-family: var(--font-serif); font-size: 24px; font-weight: 700; color: var(--ink); line-height: 1.4; margin: 0 0 16px; }
+    .meta { color: var(--muted); font-size: 13px; margin-bottom: 16px; }
+    .byline { color: var(--ink-soft); font-size: 14px; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+    h2 { font-family: var(--font-serif); font-size: 20px; font-weight: 600; color: var(--ink); margin: 32px 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+    p { margin: 0 0 24px; }
+    .quote-box { border-left: 4px solid var(--accent); background: #f5f5f5; padding: 16px 20px; margin: 24px 0; border-radius: 0 var(--radius) var(--radius) 0; }
+    .quote-box p { margin: 0; color: var(--ink-soft); font-style: italic; font-size: 15px; }
+    .quote-box .attribution { margin-top: 8px; color: var(--muted); font-size: 13px; font-style: normal; }
+    .insight-box { background: #fff8f0; border: 1px solid #ffe4c4; border-radius: var(--radius); padding: 20px; margin: 24px 0; }
+    .insight-box h4 { margin: 0 0 8px; font-size: 16px; color: var(--ink); }
+    .insight-box p { margin: 0; font-size: 15px; color: var(--ink-soft); }
+    .data-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14px; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .data-table th, .data-table td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); }
+    .data-table th { background: #f0f0f0; font-weight: 600; color: var(--ink); }
+    .data-table td { color: var(--ink-soft); }
+    .img-caption { text-align: center; color: var(--muted); font-size: 13px; margin-top: 8px; margin-bottom: 24px; }
+    .ending { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--ink-soft); font-size: 14px; }
+    .highlight { color: var(--accent); font-weight: 600; background: linear-gradient(to top, rgba(139,38,53,0.08) 40%, transparent 40%); padding: 0 2px; }
+    .punchline { font-family: var(--font-serif); font-size: 18px; font-weight: 700; color: var(--accent); text-align: center; margin: 32px 0; padding: 16px 0; border-top: 2px solid var(--accent); border-bottom: 2px solid var(--accent); }
+    strong { color: var(--ink); font-weight: 600; }
+    img.in-article { width: 100%; border-radius: 8px; margin-top: 8px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img class="cover-img" src="https://aka.doubaocdn.com/s/2lq01wmVhg" alt="Xmax X2.0实时交互视频模型演示画面，虚拟角色通过摄像头与现实场景实时融合">
+    <div class="img-caption">图源：量子位实测</div>
+
+    <h1>卷了两年画质，这家清华团队把视频做成了游戏</h1>
+    <div class="meta">2026年7月15日 · 阅读时间约8分钟</div>
+    <div class="byline">文｜犀牛伯爵</div>
+
+    <p>对着摄像头比个手势，桌上凭空多了一只企鹅。在屏幕上拖拽一张照片，小猫跟着你的手指跑了起来。打开自由模式，输入一句"我手上有个火球"，掌心真的燃起了火焰。</p>
+
+    <p>这些画面不是后期特效，也不是预渲染的动画。<strong>每一帧都是AI根据摄像头捕捉的实时画面和你的操作即时算出来的。</strong></p>
+
+    <p>7月15日凌晨，清华团队Xmax AI发布了X2.0。这不是又一个视频生成模型。这是全球第一个把视频变成"游戏"的实时交互系统。</p>
+
+    <h2>过去两年，AI视频只干了一件事</h2>
+
+    <p>卷画质。</p>
+
+    <p>2024年2月OpenAI发布Sora，一段"咖啡杯里的海盗船"让全行业失眠。随后快手可灵、字节Seedance、Runway Gen-4、Pika 2.0、Google Veo集体跟进。参数量越堆越大，渲染时间越来越长，生成的画面越来越精致。</p>
+
+    <p>但到了2026年年中，一个尴尬的事实摆在眼前。头部模型在基础画质上的差距，已经很难用肉眼分辨。而商业化的答案，似乎并没有随着画质的提升自动浮现。</p>
+
+    <p>OpenAI在4月底关掉了Sora的网页端。Runway和Pika在专业创作者中小众，普通用户一年打开不了几次。整个赛道陷入了某种"越好越没人用"的怪圈。</p>
+
+    <p>大家都在做更好的电影，但没人问一句，用户真的只想看电影吗？</p>
+
+    <h2>Xmax的答案是，不</h2>
+
+    <p>用户不想只是看，用户想玩。</p>
+
+    <p>X2.0做的事情，用一句话概括，就是把视频从"内容"变成了"界面"。过去你打开一个视频，你是观众，你只能看。现在你打开摄像头，你是玩家，你在操控一个实时生成的世界。</p>
+
+    <img class="in-article" src="https://aka.doubaocdn.com/s/Eksn1wmVhf" alt="Xmax X2.0 CharX实时换人功能演示，用户通过摄像头实时替换角色形象">
+    <div class="img-caption">CharX实时换人，毫秒级响应 · 图源：Xmax AI官方</div>
+
+    <p>这个转变让我想起网页的历史。1993年的网页只是电子版的印刷品，只能读，不能动。当网页变成可以被操作的界面之后，长出了电商、社交网络、SaaS，几乎整个互联网经济都建立在这个转变之上。</p>
+
+    <p>视频正在经历同样的跃迁。从单向观看，到双向操作。从"我欣赏你创作的内容"，到"我介入你生成的世界"。</p>
+
+    <div class="punchline">这不是优化，是换赛道。</div>
+
+    <h2>为什么大家都在卷画质</h2>
+
+    <p>Sora发布的时候，整个行业被震撼的核心原因，是AI第一次证明了自己能"理解"物理世界。咖啡杯里的液体有正确的折射，海盗船在浪里摇晃的方式符合力学规律。这让所有人相信，通用世界模型是可能的。</p>
+
+    <p>于是接下来两年，所有团队都在朝同一个方向狂奔。谁的视频更长？谁的分辨率更高？谁的人物更逼真？从4秒到16秒到60秒，从480p到1080p到4K，从简单场景到复杂多角色。</p>
+
+    <p>但这个逻辑有一个隐含假设：视频的价值在于"像不像真的"。如果这个假设成立，那确实应该无限卷画质。但如果用户想要的不是"更真的电影"，而是"能参与的世界"呢？</p>
+
+    <p>画质竞赛的终点，可能不是更好的好莱坞，而是更好的游戏引擎。</p>
+
+    <h2>Xmax选择了后者</h2>
+
+    <p>创始人史佳欣是清华计算机本博，博士就读于清华KEG实验室。团队核心成员大多出自清华KEG和HCI实验室，还有前华为"天才少年"。智谱就诞生于KEG实验室，是国内顶级的AI Lab。HCI则是人机交互研究的重镇。</p>
+
+    <p>今年2月，他们发布了世界首个虚实融合的实时交互视频模型X1。5个月后，X2.0把画质从480p提到了960p，延迟控制到了毫秒级，并且在iPhone上跑通了本地实时推理。</p>
+
+    <img class="in-article" src="https://aka.doubaocdn.com/s/dUa31wmVhg" alt="Xmax X2.0 ClothX实时换装功能，用户通过摄像头实时试穿不同服装">
+    <div class="img-caption">ClothX实时换装，所见即所得 · 图源：Xmax AI官方</div>
+
+    <p>技术路线完全不同。传统视频模型用双向注意力机制对整段视频联合建模，必须全部算完才能输出，如同视频要完整下载才能看。Xmax转向了流式生成路线，逐帧自回归架构，每一帧的输出不依赖前面整段视频渲完。</p>
+
+    <p>这看起来只是一个工程选择，但它带来了一个根本性的变化。用户从"等待AI渲染结果"，变成了"实时参与、实时操控画面"。</p>
+
+    <p>X2.0开放了五大核心能力。CharX实时换人，ClothX实时换装，VibeX实时换风格，MoX触屏交互，DimX次元互动，外加一个支持自定义prompt的Free模式。</p>
+
+    <img class="in-article" src="https://aka.doubaocdn.com/s/AegU1wmVhg" alt="Xmax X2.0 DimX次元互动功能，虚拟角色在现实桌面上与用户实时互动">
+    <div class="img-caption">DimX次元互动，打破次元壁 · 图源：量子位实测</div>
+
+    <p>这些能力组合在一起，直播间变成了观众可以实时操控的画布。电商详情页可以嵌入实时试穿。对着空桌面做一个手势，虚拟角色凭空出现。摄像头对准桌上的立牌，角色活了过来。</p>
+
+    <p>而且成本被压到了一个不可思议的程度。</p>
+
+    <p>海外同类模型Decart的API定价是每秒0.02美元，换算下来每小时72美元。X2.0的海外定价是6美元每小时，国内是20元人民币每小时。大概是Decart的十二分之一。</p>
+
+    <p>用一个具体场景来算账。按Decart的价格，一个电商用户花3分钟在线试穿，成本是3.6美元。对绝大多数零售商来说无法承受。如果降到十分之一，就进入了可以规模化部署的范围。</p>
+
+    <h2>视频正在从内容变成界面</h2>
+
+    <p>我真正想说的是，这件事的价值可能远超"又一个AI功能"。</p>
+
+    <p>一百多年来，视频这个媒介有一个属性始终没变。观众和画面的关系是单向的。你可以选择看什么，但你不能改变正在发生的事。</p>
+
+    <p>实时交互视频正在打破这个属性。它让视频从只能被观看的内容，变成可以被操作的界面。</p>
+
+    <img class="in-article" src="https://aka.doubaocdn.com/s/QvJL1wmVhg" alt="Xmax X2.0 MoX触屏交互功能，用户在屏幕上拖拽让静态图片动起来">
+    <div class="img-caption">MoX触屏交互，拖拽即可让画面"活"过来 · 图源：Xmax AI官方</div>
+
+    <p>这个判断不是我瞎说的，有商业逻辑在支撑。</p>
+
+    <p>中国直播行业的日活用户已经突破3亿，但互动方式从诞生至今没有发生过结构性变化。弹幕、礼物、连麦，这些都属于叠加在画面表层的独立图层，和主播的实景画面相互割裂。</p>
+
+    <p>实时交互能力接入之后，互动可以直接发生在画面层。观众在弹幕里喊"变成早川秋"，主播的形象实时变成角色。这不是评论区互动，这是内容本身的改变。</p>
+
+    <p>女装电商的退货率长期在40%以上，部分品类超过60%。退货带来的逆向物流成本是每年千亿级别的行业损耗。行业共识是，让消费者在下单前看到"这件衣服穿在我身上"的效果，是降低退货率最有效的手段。</p>
+
+    <p>X2.0的ClothX做的就是这件事。打开手机摄像头对着自己，衣服实时替换，你自己的体型、动态、光线环境全部保留。不是静态合成图，是"这件衣服穿在我身上、在当下这个环境"的真实效果。</p>
+
+    <p>如果实时试穿能把退货率压低哪怕几个百分点，省下来的逆向物流成本就足以覆盖API调用费用。这笔账，算得过来。</p>
+
+    <h2>被忽略的细节</h2>
+
+    <p>但这里有一个被忽略的细节。</p>
+
+    <p>虚实融合交互效果，高度依赖真人与虚拟元素自然联动的实景素材。这类高质量合成数据在公开互联网中极度稀缺，无法通过通用数据集完成训练。</p>
+
+    <p>Xmax团队为此自建了一条半自动化的数据合成管线。这也解释了为什么全球做虚实融合实时交互的团队这么少。模型架构的难度是一方面，训练数据的稀缺是另一个同样关键的瓶颈。</p>
+
+    <p>海外进度最快的是以色列公司Decart，今年5月刚完成3亿美元融资，估值40亿美元，总融资额超过4.5亿美元。它的Lucy系列模型已经在直播和虚拟试穿等场景中开始测试。</p>
+
+    <p>对比之下，Xmax的能力在这个垂直赛道中处于领先地位，价格却低了一个数量级。而且他们是国内唯一可商用规模化部署实时编辑和交互模型的公司。</p>
+
+    <h2>实时交互视频的GPT-3时刻</h2>
+
+    <p>端侧能跑，云端用得起，API开放可调用。这三个条件同时满足，意味着实时交互视频这条路线第一次有了可供中小团队和垂类企业低成本复用的标准化基础设施。</p>
+
+    <p>接下来会看到什么？</p>
+
+    <p>直播平台和MCN会第一个动起来。电商详情页和线下试衣镜会跟上。虚拟陪伴和IP潮玩团队会拿DimX做差异化。AR眼镜厂商会把它当成核心卖点。景区入口放一块互动屏，游客对着镜头一秒换上古装。</p>
+
+    <img class="in-article" src="https://aka.doubaocdn.com/s/TPh51wmVhg" alt="Xmax X2.0在iPhone端侧本地运行的技术演示，展示移动端实时推理能力">
+    <div class="img-caption">全球首个iPhone端侧实时交互视频模型 · 图源：Xmax AI官方</div>
+
+    <p>所有需要"人机实时交互"的视频场景，底层逻辑全部同理。同一个模型、同一套交互逻辑，适配的终端越多，长出来的产品形态就越多。</p>
+
+    <div class="punchline">视频的下一次跃迁，不是更清晰的画面，而是可以被触碰的世界。</div>
+
+    <div class="ending">
+      <p>对普通用户来说，你的下一部手机可能自带这个功能。对开发者来说，一个新的交互范式正在打开。对行业来说，中国团队在这个细分赛道，第一次走到了前面。</p>
+      <p style="margin-top: 16px; color: var(--muted);">谢谢你看我的文章。</p>
+    </div>
+  </div>
+</body>
+</html>
