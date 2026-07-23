@@ -127,9 +127,9 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
-        title: "梁文锃4小时只聊一件事，越克制的人越可能赢",
-        desc: "梁文锃4小时投资人会议实录曝光，52条语录说了无数个不。不做字节、不做腾讯、不闭源、不追求用户量。每个不背后都是同一个判断，越克制越可能做成AGI。这不是佛系，是精算后的最优解。",
-        href: "notes/2026-07-23-liangwenfeng-restraint.html"
+        title: "谷歌这份财报最吓人的不是涨了298%，是那个负号",
+        desc: "谷歌Q2净利润暴涨298%至1121亿美元，但990亿是股权浮盈。自由现金流史上首次转负，资本开支翻倍。一家利润暴涨的公司在借钱花，谷歌从印钶机变成了碎钶机。",
+        href: "notes/2026-07-23-google-cashflow-negative.html"
       }
     ],
     roadmap: [
@@ -185,6 +185,13 @@ window.SITE_DATA = {
     headingLine2: "慢慢记。",
     blurb: "每一篇笔记都是一次小型田野调查：关于模型、关于人、关于我们如何被这个时代重新塑形。",
     notes: [
+      {
+        cat: "财报分析", num: "N° 36",
+        title: "谷歌这份财报最吓人的不是涨了298%，是那个负号",
+        excerpt: "谷歌Q2净利润暴涨298%至1121亿美元，但990亿是股权浮盈。自由现金流史上首次转负，资本开支翻倍。一家利润暴涨的公司在借钱花，谷歌从印钶机变成了碎钶机。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-07-23-google-cashflow-negative.html"
+      },
       {
         cat: "行业观察", num: "N° 35",
         title: "AMD不是在卖芯片，是在花50亿买英伟达的对手",
