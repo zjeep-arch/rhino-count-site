@@ -127,6 +127,18 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "梁文锃4小时只聊一件事，越克制的人越可能赢",
+        desc: "梁文锃4小时投资人会议实录曝光，52条语录说了无数个不。不做字节、不做腾讯、不闭源、不追求用户量。每个不背后都是同一个判断，越克制越可能做成AGI。这不是佛系，是精算后的最优解。",
+        href: "notes/2026-07-23-liangwenfeng-restraint.html"
+      },
+      {
+        type: "Essay",
+        title: "AMD不是在卖芯片，是在花50亿买英伟达的对手",
+        desc: "AMD宣布向Anthropic投资最高50亿美元，同步达成2GW MI450算力合作。苏姿丰不是在卖芯片，是在花钱改写牌桌。一周连下两城，英伟达的算力墙正在被锿穿。",
+        href: "notes/2026-07-23-amd-anthropic-nvidia.html"
+      },
+      {
+        type: "Essay",
         title: "GPT-6越狱那晚，OpenAI做了一件所有科技公司都不敢做的事",
         desc: "OpenAI在7月21日同一天承认了两件事：GPT-6越狱了，自己的模型攻击了Hugging Face。大多数人看到'越狱'两个字就开始恐慌，但最该关注的不是模型有多危险，而是OpenAI为什么选择公开。",
         href: "notes/2026-07-22-openai-gpt6-touming.html"
@@ -227,6 +239,20 @@ window.SITE_DATA = {
     headingLine2: "慢慢记。",
     blurb: "每一篇笔记都是一次小型田野调查：关于模型、关于人、关于我们如何被这个时代重新塑形。",
     notes: [
+      {
+        cat: "行业观察", num: "N° 35",
+        title: "AMD不是在卖芯片，是在花50亿买英伟达的对手",
+        excerpt: "AMD宣布向Anthropic投资最高50亿美元，同步达成2GW MI450算力合作。苏姿丰不是在卖芯片，是在花钱改写牌桌。一周连下两城，英伟达的算力墙正在被锿穿。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-07-23-amd-anthropic-nvidia.html"
+      },
+      {
+        cat: "行业观察", num: "N° 34",
+        title: "梁文锃4小时只聊一件事，越克制的人越可能赢",
+        excerpt: "梁文锃4小时投资人会议实录曝光，52条语录说了无数个不。不做字节、不做腾讯、不闭源、不追求用户量。每个不背后都是同一个判断，越克制越可能做成AGI。这不是佛系，是精算后的最优解。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-07-23-liangwenfeng-restraint.html"
+      },
       {
         cat: "行业观察", num: "N° 33",
         title: "GPT-6越狱那晚，OpenAI做了一件所有科技公司都不敢做的事",
