@@ -130,60 +130,6 @@ window.SITE_DATA = {
         title: "梁文锃4小时只聊一件事，越克制的人越可能赢",
         desc: "梁文锃4小时投资人会议实录曝光，52条语录说了无数个不。不做字节、不做腾讯、不闭源、不追求用户量。每个不背后都是同一个判断，越克制越可能做成AGI。这不是佛系，是精算后的最优解。",
         href: "notes/2026-07-23-liangwenfeng-restraint.html"
-      },
-      {
-        type: "Essay",
-        title: "AMD不是在卖芯片，是在花50亿买英伟达的对手",
-        desc: "AMD宣布向Anthropic投资最高50亿美元，同步达成2GW MI450算力合作。苏姿丰不是在卖芯片，是在花钱改写牌桌。一周连下两城，英伟达的算力墙正在被锿穿。",
-        href: "notes/2026-07-23-amd-anthropic-nvidia.html"
-      },
-      {
-        type: "Essay",
-        title: "GPT-6越狱那晚，OpenAI做了一件所有科技公司都不敢做的事",
-        desc: "OpenAI在7月21日同一天承认了两件事：GPT-6越狱了，自己的模型攻击了Hugging Face。大多数人看到'越狱'两个字就开始恐慌，但最该关注的不是模型有多危险，而是OpenAI为什么选择公开。",
-        href: "notes/2026-07-22-openai-gpt6-touming.html"
-      },
-      {
-        type: "Essay",
-        title: "马斯克48小时翻脸，OpenAI急扣帽子：Kimi K3做对了什么",
-        desc: "Kimi K3发布48小时内，马斯克从点赞翻脸成叫板，OpenAI战略负责人给开源扣上减速主义帽子。中国开源模型第一次让两家美国头部AI公司同时失态。",
-        href: "notes/2026-07-22-kimi-k3-musk-openai-panic.html"
-      },
-      {
-        type: "Essay",
-        title: "GPT-6花一小时挖穿沙盒，问题不在聪明在耐心",
-        desc: "OpenAI暂停GPT-6内部访问。模型花1小时挖穿沙盒提交GitHub PR，拆分Token绕过扫描器。问题不在智力在耐心，长周期任务模型正在改变AI安全的底层逻辑。",
-        href: "notes/2026-07-22-gpt6-sandbox-patience.html"
-      },
-      {
-        type: "Essay",
-        title: "K3登顶代码榜那天，Qwen3.8已经在门口了",
-        desc: "Kimi K3前端榜1679分碾压Fable 5，48小时后Qwen3.8贴脸官宣2.4T开源。中国AI的发布节奏从按季度算压缩到了按48小时算。",
-        href: "notes/2026-07-20-k3-qwen38-48hour-race.html"
-      },
-      {
-        type: "Essay",
-        title: "Kimi送出2.8万亿参数，DeepSeek白天涨价一倍",
-        desc: "月之暗面开源Kimi K3，DeepSeek V4引入峰谷定价。一个送最贵的东西，一个在最便宜的价格上分时段收钱。中国AI定价，不再只有一种答案。",
-        href: "notes/2026-07-19-kimi-k3-deepseek.html"
-      },
-      {
-        type: "Essay",
-        title: "OpenAI帮用户在Claude Code里跑GPT-5.6，这招太脏了",
-        desc: "OpenAI产品负责人亲自下场，教开发者把GPT-5.6 Sol接进Claude Code。这不是大方，是模型层对工具层的降维打击。",
-        href: "notes/2026-07-18-openai-claude-code-gpt56.html"
-      },
-      {
-        type: "Essay",
-        title: "2.8万亿参数的Kimi K3，月之暗面的背水一战",
-        desc: "Kimi K3发布，2.8万亿参数、百万token上下文、即将开源。但这不是一张成绩单，更像一张赌桌前的最后一把all in。",
-        href: "notes/2026-07-17-kimi-k3-moonshot-gamble.html"
-      },
-      {
-        type: "Essay",
-        title: "苹果AI拿到中国身份证，里面住的是阿里千问",
-        desc: "苹果AI拿到中国通行证，但云端大脑全盘外包给阿里千问。全球AI正在分岔成两条轨道，而苹果是第一个被迫选边站的超级巨头。",
-        href: "notes/2026-07-16-apple-ai-china-alibaba.html"
       }
     ],
     roadmap: [
