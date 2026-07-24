@@ -127,8 +127,8 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
-        title: "同一天，ChatGPT指挥电脑，Claude接管邮箱",
-        desc: "7月23日，OpenAI和Anthropic同一天发布语音功能。ChatGPT用GPT-Live全双工语音指挥多个Agent干活，Claude用语音连上Gmail和Slack。两条路线，一个要当你的嘴，一个要当你的手。",
+        title: "48小时内，ChatGPT指挥电脑，Claude接管邮箱",
+        desc: "7月23日和24日，OpenAI和Anthropic在48小时内相继发布语音功能。ChatGPT用GPT-Live全双工语音指挥多个Agent干活，Claude用语音连上Gmail和Slack。两条路线，一个要当你的嘴，一个要当你的手。",
         href: "notes/2026-07-24-voice-war-chatgpt-claude.html"
       }
     ],
@@ -187,8 +187,8 @@ window.SITE_DATA = {
     notes: [
       {
         cat: "产品观察", num: "N° 38",
-        title: "同一天，ChatGPT指挥电脑，Claude接管邮箱",
-        excerpt: "7月23日，OpenAI和Anthropic同一天发布语音功能。ChatGPT用GPT-Live全双工语音指挥多个Agent干活，Claude用语音连上Gmail和Slack。两条路线，一个要当你的嘴，一个要当你的手。",
+        title: "48小时内，ChatGPT指挥电脑，Claude接管邮箱",
+        excerpt: "7月23日和24日，OpenAI和Anthropic在48小时内相继发布语音功能。ChatGPT用GPT-Live全双工语音指挥多个Agent干活，Claude用语音连上Gmail和Slack。两条路线，一个要当你的嘴，一个要当你的手。",
         img: "assets/note-05.svg",
         href: "notes/2026-07-24-voice-war-chatgpt-claude.html"
       },
