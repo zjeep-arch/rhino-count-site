@@ -127,8 +127,8 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
-        title: "亏损110亿还涨了13%，Intel赌的不是芯片",
-        desc: "Intel Q2 2026营收暴涨25%创15年最快增速，但GAAP净亏损110亿。股价盘后涨13%。这份财报真正的赌注不是芯片，是AI推理时代的CPU定价权。",
+        title: "三个月前砍预算，三个月后砸200亿，Intel新帅到底在赌什么",
+        desc: "Intel Q2 2026营收161亿涨25%创15年最快增速，GAAP净亏损110亿，股价盘后涨13%。CEO陈立武从Q1砍预算到Q2加码200亿，180度掉头背后是AI推理时代的CPU定价权之争。",
         href: "notes/2026-07-24-intel-q2-earnings.html"
       }
     ],
@@ -187,8 +187,8 @@ window.SITE_DATA = {
     notes: [
       {
         cat: "财报分析", num: "N° 39",
-        title: "亏损110亿还涨了13%，Intel赌的不是芯片",
-        excerpt: "Intel Q2 2026营收161亿美元同比涨25%创15年最快增速，但GAAP净亏损110亿。盘后股价涨13%。真正的赌注不是芯片，是AI推理时代的CPU定价权。DCAI利润率从16%跳到40%，陈立武从砍预算到加码200亿。",
+        title: "三个月前砍预算，三个月后砸200亿，Intel新帅到底在赌什么",
+        excerpt: "Intel Q2 2026营收161亿涨25%创15年最快增速，GAAP净亏损110亿，股价盘后涨13%。CEO陈立武从Q1砍预算到Q2加码200亿，180度掉头背后是AI推理时代的CPU定价权之争。DCAI利润率从16%跳到40%。",
         img: "assets/note-05.svg",
         href: "notes/2026-07-24-intel-q2-earnings.html"
       },
