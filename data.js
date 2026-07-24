@@ -127,9 +127,9 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
-        title: "48小时内，ChatGPT指挥电脑，Claude接管邮箱",
-        desc: "7月23日和24日，OpenAI和Anthropic在48小时内相继发布语音功能。ChatGPT用GPT-Live全双工语音指挥多个Agent干活，Claude用语音连上Gmail和Slack。两条路线，一个要当你的嘴，一个要当你的手。",
-        href: "notes/2026-07-24-voice-war-chatgpt-claude.html"
+        title: "亏损110亿还涨了13%，Intel赌的不是芯片",
+        desc: "Intel Q2 2026营收暴涨25%创15年最快增速，但GAAP净亏损110亿。股价盘后涨13%。这份财报真正的赌注不是芯片，是AI推理时代的CPU定价权。",
+        href: "notes/2026-07-24-intel-q2-earnings.html"
       }
     ],
     roadmap: [
@@ -185,6 +185,13 @@ window.SITE_DATA = {
     headingLine2: "慢慢记。",
     blurb: "每一篇笔记都是一次小型田野调查：关于模型、关于人、关于我们如何被这个时代重新塑形。",
     notes: [
+      {
+        cat: "财报分析", num: "N° 39",
+        title: "亏损110亿还涨了13%，Intel赌的不是芯片",
+        excerpt: "Intel Q2 2026营收161亿美元同比涨25%创15年最快增速，但GAAP净亏损110亿。盘后股价涨13%。真正的赌注不是芯片，是AI推理时代的CPU定价权。DCAI利润率从16%跳到40%，陈立武从砍预算到加码200亿。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-07-24-intel-q2-earnings.html"
+      },
       {
         cat: "产品观察", num: "N° 38",
         title: "48小时内，ChatGPT指挥电脑，Claude接管邮箱",
