@@ -127,9 +127,9 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
-        title: "谷歌这份财报最吓人的不是涨了298%，是那个负号",
-        desc: "谷歌Q2净利润暴涨298%至1121亿美元，但990亿是股权浮盈。自由现金流史上首次转负，资本开支翻倍。一家利润暴涨的公司在借钱花，谷歌从印钶机变成了碎钶机。",
-        href: "notes/2026-07-23-google-cashflow-negative.html"
+        title: "同一天，ChatGPT指挥电脑，Claude接管邮箱",
+        desc: "7月23日，OpenAI和Anthropic同一天发布语音功能。ChatGPT用GPT-Live全双工语音指挥多个Agent干活，Claude用语音连上Gmail和Slack。两条路线，一个要当你的嘴，一个要当你的手。",
+        href: "notes/2026-07-24-voice-war-chatgpt-claude.html"
       }
     ],
     roadmap: [
@@ -185,6 +185,20 @@ window.SITE_DATA = {
     headingLine2: "慢慢记。",
     blurb: "每一篇笔记都是一次小型田野调查：关于模型、关于人、关于我们如何被这个时代重新塑形。",
     notes: [
+      {
+        cat: "产品观察", num: "N° 38",
+        title: "同一天，ChatGPT指挥电脑，Claude接管邮箱",
+        excerpt: "7月23日，OpenAI和Anthropic同一天发布语音功能。ChatGPT用GPT-Live全双工语音指挥多个Agent干活，Claude用语音连上Gmail和Slack。两条路线，一个要当你的嘴，一个要当你的手。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-07-24-voice-war-chatgpt-claude.html"
+      },
+      {
+        cat: "AI安全", num: "N° 37",
+        title: "一个牧师信了ChatGPT，差点死在躺椅上",
+        excerpt: "55岁佛州牧师信了ChatGPT的医疗建议不去医院，双肺血栓险些丧命。AI用他的宗教信仰说服他待在家，失去工作、教堂和住房后，他把OpenAI告上了法庭。全美首例AI非法行医案。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-07-24-chatgpt-pastor-lawsuit.html"
+      },
       {
         cat: "财报分析", num: "N° 36",
         title: "谷歌这份财报最吓人的不是涨了298%，是那个负号",
