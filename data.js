@@ -127,9 +127,9 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
-        title: "三个月前砍预算，三个月后砸200亿，Intel新帅到底在赌什么",
-        desc: "Intel Q2 2026营收161亿涨25%创15年最快增速，GAAP净亏损110亿，股价盘后涨13%。CEO陈立武从Q1砍预算到Q2加码200亿，180度掉头背后是AI推理时代的CPU定价权之争。",
-        href: "notes/2026-07-24-intel-q2-earnings.html"
+        title: "AMD把Token成本砍到1/18，英伟达的客户开始算账了",
+        desc: "AMD新款Helios机架把单位token成本砍到1/18，OpenAI、Anthropic、Meta集体站队。苏姿丰不是在挑战英伟达的芯片，是在挑战英伟达定义了十年的计价规则。",
+        href: "notes/2026-07-24-amd-token-cost-nvidia.html"
       }
     ],
     roadmap: [
@@ -186,11 +186,18 @@ window.SITE_DATA = {
     blurb: "每一篇笔记都是一次小型田野调查：关于模型、关于人、关于我们如何被这个时代重新塑形。",
     notes: [
       {
-        cat: "财报分析", num: "N° 39",
-        title: "三个月前砍预算，三个月后砸200亿，Intel新帅到底在赌什么",
-        excerpt: "Intel Q2 2026营收161亿涨25%创15年最快增速，GAAP净亏损110亿，股价盘后涨13%。CEO陈立武从Q1砍预算到Q2加码200亿，180度掉头背后是AI推理时代的CPU定价权之争。DCAI利润率从16%跳到40%。",
+        cat: "行业观察", num: "N° 40",
+        title: "AMD把Token成本砍到1/18，英伟达的客户开始算账了",
+        excerpt: "AMD新款Helios机架把单位token成本砍到1/18，OpenAI、Anthropic、Meta集体站队。苏姿丰不是在挑战英伟达的芯片，是在挑战英伟达定义了十年的计价规则。",
         img: "assets/note-05.svg",
-        href: "notes/2026-07-24-intel-q2-earnings.html"
+        href: "notes/2026-07-24-amd-token-cost-nvidia.html"
+      },
+      {
+        cat: "财报分析", num: "N° 39",
+        title: "AMD把Token成本砍到1/18，英伟达的客户开始算账了",
+        excerpt: "AMD新款Helios机架把单位token成本砍到1/18，OpenAI、Anthropic、Meta集体站队。苏姿丰不是在挑战英伟达的芯片，是在挑战英伟达定义了十年的计价规则。DCAI利润率从16%跳到40%。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-07-24-amd-token-cost-nvidia.html"
       },
       {
         cat: "产品观察", num: "N° 38",

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AMD把Token成本砍到1/18，英伟达的客户开始算账了</title>
+  <meta name="description" content="AMD新款Helios机架把单位token成本砍到1/18，OpenAI、Anthropic、Meta集体站队。这不是产品升级，是AI基础设施计价规则的政变。">
+  <style>
+    :root {
+      --accent: #8b2635;
+      --ink: #333;
+      --ink-soft: #555;
+      --muted: #888;
+      --surface: #fafafa;
+      --border: rgba(0,0,0,0.06);
+      --radius: 12px;
+      --font-sans: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-serif: "Noto Serif SC", "Songti SC", Georgia, serif;
+    }
+    body { font-family: var(--font-sans); background: #f5f5f5; margin: 0; padding: 16px; font-size: 16px; line-height: 1.8; color: var(--ink); -webkit-font-smoothing: antialiased; }
+    .container { max-width: 680px; margin: 0 auto; background: var(--surface); padding: 32px; border-radius: var(--radius); }
+    .cover-img { width: 100%; border-radius: 8px; margin-bottom: 24px; }
+    h1 { font-family: var(--font-serif); font-size: 24px; font-weight: 700; color: var(--ink); line-height: 1.4; margin: 0 0 16px; }
+    .meta { color: var(--muted); font-size: 13px; margin-bottom: 16px; }
+    .byline { color: var(--ink-soft); font-size: 14px; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+    h2 { font-family: var(--font-serif); font-size: 20px; font-weight: 600; color: var(--ink); margin: 32px 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+    h3 { font-family: var(--font-serif); font-size: 18px; font-weight: 600; color: var(--ink); margin: 24px 0 12px; }
+    p { margin: 0 0 24px; }
+    .quote-box { border-left: 4px solid var(--accent); background: #f5f5f5; padding: 16px 20px; margin: 24px 0; border-radius: 0 var(--radius) var(--radius) 0; }
+    .quote-box p { margin: 0; color: var(--ink-soft); font-style: italic; font-size: 15px; }
+    .quote-box .attribution { margin-top: 8px; color: var(--muted); font-size: 13px; font-style: normal; }
+    .insight-box { background: #fff8f0; border: 1px solid #ffe4c4; border-radius: var(--radius); padding: 20px; margin: 24px 0; }
+    .insight-box h4 { margin: 0 0 8px; font-size: 16px; color: var(--ink); }
+    .insight-box p { margin: 0; font-size: 15px; color: var(--ink-soft); }
+    .data-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14px; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .data-table th, .data-table td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); }
+    .data-table th { background: #f0f0f0; font-weight: 600; color: var(--ink); }
+    .data-table td { color: var(--ink-soft); }
+    .timeline { position: relative; padding-left: 24px; margin: 24px 0; }
+    .timeline::before { content: ''; position: absolute; left: 6px; top: 0; bottom: 0; width: 2px; background: #e0e0e0; }
+    .timeline-item { position: relative; margin-bottom: 16px; }
+    .timeline-item::before { content: ''; position: absolute; left: -22px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); }
+    .timeline-item .date { font-size: 13px; color: var(--muted); margin-bottom: 4px; }
+    .timeline-item .content { font-size: 15px; color: var(--ink); }
+    .img-caption { text-align: center; color: var(--muted); font-size: 13px; margin-top: 8px; margin-bottom: 24px; }
+    .ending { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--ink-soft); font-size: 14px; }
+    .highlight { color: var(--accent); font-weight: 600; background: linear-gradient(to top, rgba(139,38,53,0.08) 40%, transparent 40%); padding: 0 2px; }
+    .data-callout { display: inline-block; background: var(--accent); color: #fff; padding: 2px 10px; border-radius: 4px; font-weight: 700; font-size: 15px; }
+    .contrast-card { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin: 24px 0; border-radius: var(--radius); overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .contrast-card .side { padding: 16px 20px; }
+    .contrast-card .side-left { background: #fef2f2; border-right: 1px solid var(--border); }
+    .contrast-card .side-right { background: #f0fdf4; }
+    .contrast-card .side h4 { margin: 0 0 8px; font-size: 14px; font-weight: 600; }
+    .contrast-card .side-left h4 { color: #991b1b; }
+    .contrast-card .side-right h4 { color: #166534; }
+    .contrast-card .side p { margin: 0; font-size: 14px; color: var(--ink-soft); line-height: 1.6; }
+    .punchline { font-family: var(--font-serif); font-size: 18px; font-weight: 700; color: var(--accent); text-align: center; margin: 32px 0; padding: 16px 0; border-top: 2px solid var(--accent); border-bottom: 2px solid var(--accent); }
+    strong { color: var(--ink); font-weight: 600; }
+    .in-text-img { width: 100%; border-radius: 8px; margin: 24px 0 8px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img class="cover-img" src="https://aka.doubaocdn.com/s/zA261wpm0l" alt="AMD董事长兼CEO苏姿丰">
+    <p class="img-caption">AMD董事长兼CEO苏姿丰博士 | 图源：头条百科</p>
+
+    <h1>AMD把Token成本砍到1/18，英伟达的客户开始算账了</h1>
+    <div class="meta">2026年7月24日 · 阅读时间约8分钟</div>
+    <div class="byline">文｜犀牛伯爵</div>
+
+    <p>过去五年，英伟达在AI芯片市场的统治地位几乎没人敢质疑。但7月23日，AMD CEO苏姿丰在旧金山Moscone中心扔出了一组数字，让台下坐着的OpenAI、Anthropic、Meta高管集体点头。</p>
+
+    <p>AMD新款Helios机架，把单位token成本砍到了上一代的<span class="data-callout">1/18</span>。每美元产出的token比英伟达下一代Vera Rubin还多<span class="data-callout">30%</span>。</p>
+
+    <p>这不是产品升级。这是计价规则的政变。</p>
+
+    <h2>一、500万的机架里装了什么</h2>
+
+    <p>当地时间7月23日，AMD年度Advancing AI大会在旧金山举行。苏姿丰站在舞台中央，身后是一款被内部代号"Helios"的机架级AI系统。</p>
+
+    <p>这款系统塞进了72颗Instinct MI455X GPU、18颗第六代EPYC Venice CPU，以及31TB的HBM4高带宽内存。MI455X是AMD首款基于2纳米工艺的GPU，单卡集成了3200亿个晶体管，配备432GB HBM4显存，带宽达到23.3TB/s。</p>
+
+    <img class="in-text-img" src="https://aka.doubaocdn.com/s/LSBM1wplzq" alt="AMD Instinct MI455X数据中心GPU">
+    <p class="img-caption">AMD Instinct MI455X数据中心GPU | 图源：IT之家 / 头条</p>
+
+    <p>整机架在FP4精度下提供2.9 exaFLOPS的AI推理算力。翻译成人话，一个机架就能装下一个多千亿参数大模型的所有权重，外加足够的推理缓存，不需要跨机架做张量并行。</p>
+
+    <p>这跟过去的玩法完全不同。以前跑一个超大模型，需要把模型"切碎"分散到几十上百个机架上，效率损耗巨大。现在，一个机架就是一个完整的"AI大脑"。</p>
+
+    <p>苏姿丰说了一句话，把这事儿点透了。她说前沿AI已经没法靠单颗芯片或单台服务器满足需求，<span class="highlight">"整个机架必须作为一个系统来设计"</span>。</p>
+
+    <p>这句话的潜台词是，未来的AI基础设施竞争，不是比单颗GPU谁更猛，而是比一整柜设备谁能以更低的成本产出更多的token。AMD不再卖芯片了，AMD在卖"token工厂"。</p>
+
+    <h2>二、token就是AI时代的电费</h2>
+
+    <p>AI行业正在经历一个巨大的范式转移。</p>
+
+    <p>前几年的军备竞赛集中在训练端——谁家的GPU能让大模型在最短时间内训练完成。那时候客户关心的是峰值算力、显存容量、节点间互联带宽。英伟达的H100在这个战场上几乎没有对手。</p>
+
+    <p>但现在情况变了。大模型训练完成后，真正的战场是推理——如何把模型部署到线上，以最低的成本服务尽可能多的用户。</p>
+
+    <img class="in-text-img" src="https://aka.doubaocdn.com/s/KLxA1wplzq" alt="AMD MI455X与上一代token吞吐量对比">
+    <p class="img-caption">MI455X token吞吐量较上一代提升34倍，单位成本降低18倍 | 图源：IT之家 / 头条</p>
+
+    <p>推理的成本结构和训练完全不同。训练是一次性投入，推理是持续性消耗。一家AI公司可能花几千万美元训练一次模型，但接下来每年要在推理上花几亿美元。推理效率每提升一倍，就相当于每年省下上亿美金。</p>
+
+    <p>token就是AI时代的电费。当一个AI助手回复用户一次提问，背后消耗的是算力，算力折算成token，token折算成钱。AMD把token成本砍到1/18，相当于把电费从每度五毛降到了不到三分钱。</p>
+
+    <p>MI455X在DeepSeek V4 Flash FP4服务测试中的token吞吐量达到上一代MI355X的34倍。跑Kimi K2思考模型时，Helios的单GPU token吞吐量比英伟达Vera Rubin NVL72高出10%到15%。</p>
+
+    <div class="quote-box">
+      <p>"如果你还没听说的话——我需要更多算力，而且需要得更快。"</p>
+      <div class="attribution">—— OpenAI基础设施负责人 Sachin Katti，AMD Advancing AI 2026大会现场</div>
+    </div>
+
+    <h2>三、客户为什么集体站队</h2>
+
+    <p>真正让市场震动的不是参数，而是客户阵容。</p>
+
+    <p>OpenAI基础设施负责人Sachin Katti亲自登台表态，说OpenAI计划从今年年底开始大规模部署Helios。他还补了一句大实话，<span class="highlight">"如果你们还没听说的话——我需要更多算力，而且需要得更快。"</span></p>
+
+    <p>Anthropic的动作更大。双方宣布Anthropic计划部署至多2吉瓦的AMD Instinct MI455X GPU，首批1吉瓦预计在2027年上半年开始。AMD还计划对Anthropic进行至多50亿美元股权投资。这不是买卖关系，这是战略合作。</p>
+
+    <img class="in-text-img" src="https://aka.doubaocdn.com/s/y9UA1wplzq" alt="AMD Helios机架级AI解决方案">
+    <p class="img-caption">AMD Helios机架级AI解决方案，整机架总算力达2.9 ExaFlops | 图源：IT之家 / 头条</p>
+
+    <p>Meta达成了涉及6吉瓦AI基础设施的多年合作。微软CEO纳德拉到场站台。甲骨文也在客户名单上。</p>
+
+    <p>一家芯片公司，同时拿到OpenAI、Anthropic和Meta的算力订单——这在英伟达统治AI芯片市场的这几年里，是头一次出现。</p>
+
+    <h2>四、开放标准是另一张牌</h2>
+
+    <p>AMD打的另一张牌是开放。</p>
+
+    <p>Helios的底层互联架构基于UALink开放标准，而不是英伟达的NVLink私有协议。英伟达的NVLink交换芯片只能从英伟达一家买，跟其他厂商的设备不兼容。UALink建立在开放以太网标准之上，可以从多个供应商采购。</p>
+
+    <p>对微软、甲骨文这样的云厂商来说，这很有吸引力。谁也不想被单一供应商掐住脖子。当一家供应商的市场份额超过95%的时候，议价权就基本为零了。</p>
+
+    <p>AMD的Venice CPU也在同一逻辑下进攻。在智能体AI场景下，Venice的性能是英伟达Vera CPU的3.3倍。随着AI从聊天机器人向智能体演进，工作负载不再只集中在GPU，编排调度、工具调用、沙箱执行都需要大量CPU算力。</p>
+
+    <p>AMD的打法很清楚，用Venice CPU + MI455X GPU + Helios机架 + ROCm软件，构建一套完整的AI基础设施方案，从"卖芯片"升级为"卖系统"。</p>
+
+    <h2>五、但英伟达的护城河没那么容易撼动</h2>
+
+    <p>先别急着喊"AMD要颠覆英伟达了"。</p>
+
+    <p>发布会当天AMD股价跌了约4%。投资者在担心什么？</p>
+
+    <p>首先是时间差。英伟达的Vera Rubin平台已经全面量产并出货，而Helios要到今年Q3末才开始发货。对于急着扩建算力的大客户来说，这几个月的等待可能意味着数亿美元的收入损失。</p>
+
+    <p>其次是软件生态。CUDA仍然是AI开发的事实标准。AMD的ROCm.AI平台要到今年8月才正式向开发者开放。虽然AMD说Hugging Face上超过300万个模型可以在AMD硬件上开箱即用，但真实世界的迁移成本永远比PPT上写的要高。</p>
+
+    <p>还有价格。Helios的成本在500万到550万美元之间，比英伟达Vera Rubin还贵。虽然每美元能多产出30%的token，但 upfront 成本摆在那里。</p>
+
+    <div class="quote-box">
+      <p>"在整个市场中，没有单一一家公司能解决所有问题。"</p>
+      <div class="attribution">—— AMD CEO 苏姿丰，Advancing AI 2026大会</div>
+    </div>
+
+    <p>苏姿丰自己也承认，"在整个市场中，没有单一一家公司能解决所有问题。"这话既是说给竞争对手听的，也是说给客户听的——AMD不是在取代英伟达，AMD是在给客户一个选择权。</p>
+
+    <h2>六、接下来会发生什么</h2>
+
+    <p>苏姿丰在演讲尾声抛出了一个预测，到2030年，整体计算市场规模将达到2万亿美元，其中AI加速器市场1.4万亿美元。</p>
+
+    <p>她给出了清晰的年度迭代路线图，2027年推出MI500系列，2028年推出MI600系列。MI500的推理吞吐量将是4年前MI300X的2000倍以上。</p>
+
+    <p>AMD还在做一件事——投资。对Anthropic的50亿美元股权投资，意味着AMD不只是卖硬件，还在绑定下游客户。这种垂直整合的打法，英伟达也在做，但AMD做得更激进。</p>
+
+    <p>英伟达不会坐以待毙。黄仁勋手里还有下一代芯片的路线图，CUDA生态的护城河也不是一天能撼动的。</p>
+
+    <p>真正的赢家可能是客户。竞争带来的成本下降，最终会让更多AI应用变得经济可行。</p>
+
+    <h2>七、对普通人意味着什么</h2>
+
+    <p>对AI从业者和创业者来说，这件事的真正意义不在芯片本身。</p>
+
+    <p>token成本降低18倍，意味着很多今天还亏钱的AI应用，明天可能就能跑正了。一个原本月付10万美元的推理服务，现在可能只要5500美元。这个降幅足以让一大批商业模式从"不可能"变成"可以试试"。</p>
+
+    <p>同时，开放标准的兴起意味着硬件选择的自由度在增加。过去选英伟达是唯一答案，未来可能是多选题。</p>
+
+    <p>但我的建议是，别急着换平台。等真实部署数据出来，等ROCm生态再成熟一些。毕竟，算力便宜是好事，但算力便宜且稳定，才是真正的好事。</p>
+
+    <p>苏姿丰说得对，没有单一一家公司能解决所有问题。AI算力这场仗，正在从独角戏变成群戏。</p>
+
+    <div class="ending">
+      <p>谢谢你看我的文章。</p>
+      <p style="margin-top: 8px; font-size: 12px; color: var(--muted);">本文信息源自AMD Advancing AI 2026大会公开资料、IT之家、路透社等报道。</p>
+    </div>
+  </div>
+</body>
+</html>
