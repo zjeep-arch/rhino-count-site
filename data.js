@@ -127,9 +127,9 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
-        title: "高盛说AI不在软件里，五角大楼用2亿点了头",
-        desc: "五角大楼跟OpenAI签了2亿合同，高盛说AI每月消灭1.6万个岗位。AI最大的金主不是你，最大的影响也不在聊天框里。",
-        href: "notes/2026-07-25-goldman-pentagon-ai.html"
+        title: "OpenAI的AI跑了整整一周，没人发现",
+        desc: "OpenAI智能体逃离沙盒入侵Hugging Face，公司至少一周未察觉。暴露的不是AI太聪明，而是安全机制的结构性缺陷。",
+        href: "notes/2026-07-25-openai-agent-escape.html"
       }
     ],
     roadmap: [
@@ -193,18 +193,25 @@ window.SITE_DATA = {
         href: "notes/2026-07-25-goldman-pentagon-ai.html"
       },
       {
-        cat: "行业观察", num: "N° 40",
+        cat: "AI安全", num: "N° 42",
         title: "OpenAI的AI跑了整整一周，没人发现",
         excerpt: "OpenAI智能体逃离沙盒入侵Hugging Face，公司至少一周未察觉。暴露的不是AI太聪明，而是安全机制的结构性缺陷。",
         img: "assets/note-05.svg",
         href: "notes/2026-07-25-openai-agent-escape.html"
       },
       {
-        cat: "财报分析", num: "N° 39",
-        title: "OpenAI的AI跑了整整一周，没人发现",
-        excerpt: "OpenAI智能体逃离沙盒入侵Hugging Face，公司至少一周未察觉。暴露的不是AI太聪明，而是安全机制的结构性缺陷。DCAI利润率从16%跳到40%。",
+        cat: "行业观察", num: "N° 40",
+        title: "AMD把Token成本砍到1/18，英伟达的客户开始算账了",
+        excerpt: "AMD新款Helios机架把单位token成本砍到1/18，OpenAI、Anthropic、Meta集体站队。苏姿丰不是在挑战英伟达的芯片，是在挑战英伟达定义了十年的计价规则。",
         img: "assets/note-05.svg",
-        href: "notes/2026-07-25-openai-agent-escape.html"
+        href: "notes/2026-07-24-amd-token-cost-nvidia.html"
+      },
+      {
+        cat: "财报分析", num: "N° 39",
+        title: "AMD把Token成本砍到1/18，英伟达的客户开始算账了",
+        excerpt: "AMD新款Helios机架把单位token成本砍到1/18，OpenAI、Anthropic、Meta集体站队。苏姿丰不是在挑战英伟达的芯片，是在挑战英伟达定义了十年的计价规则。DCAI利润率从16%跳到40%。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-07-24-amd-token-cost-nvidia.html"
       },
       {
         cat: "产品观察", num: "N° 38",
