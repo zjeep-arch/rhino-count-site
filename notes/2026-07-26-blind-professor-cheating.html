@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>他看不见黑板，却看穿了40个满分背后的谎言</title>
+  <meta name="description" content="布朗大学盲人教授罗伯托·塞拉诺用一场博弈论实验揭穿常春藤最大AI作弊案。86人选课40个满分，改为线下考试后平均分从96暴跌至48.6。">
+  <style>
+    :root {
+      --accent: #1e3a5f;
+      --accent-soft: #2d5a8f;
+      --ink: #333;
+      --ink-soft: #555;
+      --muted: #888;
+      --surface: #fafafa;
+      --border: rgba(0,0,0,0.07);
+      --radius: 12px;
+      --font-sans: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-serif: "Noto Serif SC", "Songti SC", Georgia, serif;
+    }
+    * { box-sizing: border-box; }
+    body { font-family: var(--font-sans); background: #f0f0f0; margin: 0; padding: 24px 16px; font-size: 16px; line-height: 32px; color: var(--ink); -webkit-font-smoothing: antialiased; }
+    .container { max-width: 680px; margin: 0 auto; background: var(--surface); padding: 32px; border-radius: var(--radius); box-shadow: 0 2px 16px rgba(0,0,0,0.05); }
+    .cover-img { width: 100%; border-radius: 8px; margin-bottom: 24px; display: block; }
+    h1 { font-family: var(--font-serif); font-size: 24px; font-weight: 700; color: var(--ink); line-height: 40px; margin: 0 0 16px; }
+    .meta { color: var(--muted); font-size: 13px; margin-bottom: 8px; }
+    .byline { color: var(--ink-soft); font-size: 14px; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+    h2 { font-family: var(--font-serif); font-size: 20px; font-weight: 600; color: var(--ink); margin: 32px 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+    h3 { font-family: var(--font-serif); font-size: 18px; font-weight: 600; color: var(--accent); margin: 28px 0 12px; }
+    p { margin: 0 0 24px; }
+    .lead { font-size: 17px; color: var(--ink); }
+    .quote-box { border-left: 4px solid var(--accent); background: #eef2f7; padding: 16px 20px; margin: 24px 0; border-radius: 0 var(--radius) var(--radius) 0; }
+    .quote-box p { margin: 0 0 8px; color: var(--ink-soft); font-style: italic; font-size: 15px; }
+    .quote-box p:last-child { margin-bottom: 0; }
+    .quote-box .attribution { margin-top: 8px; color: var(--muted); font-size: 13px; font-style: normal; }
+    .timeline { position: relative; padding-left: 24px; margin: 24px 0; }
+    .timeline::before { content: ''; position: absolute; left: 6px; top: 4px; bottom: 4px; width: 2px; background: #c0cede; }
+    .timeline-item { position: relative; margin-bottom: 20px; }
+    .timeline-item:last-child { margin-bottom: 0; }
+    .timeline-item::before { content: ''; position: absolute; left: -22px; top: 8px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 3px var(--surface); }
+    .timeline-item .date { font-size: 13px; color: var(--accent-soft); font-weight: 600; margin-bottom: 4px; }
+    .timeline-item .content { font-size: 15px; color: var(--ink); line-height: 28px; }
+    .img-caption { text-align: center; color: var(--muted); font-size: 13px; margin-top: 8px; margin-bottom: 24px; }
+    .inline-img { width: 100%; border-radius: 8px; margin: 8px 0 0; display: block; }
+    .ending { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--ink-soft); font-size: 14px; }
+    .highlight { color: var(--accent); font-weight: 600; background: linear-gradient(to top, rgba(30,58,95,0.10) 40%, transparent 40%); padding: 0 2px; }
+    .punchline { font-family: var(--font-serif); font-size: 18px; font-weight: 700; color: var(--accent); text-align: center; margin: 32px 0; padding: 16px 0; border-top: 2px solid var(--accent); border-bottom: 2px solid var(--accent); }
+    .contrast-card { display: flex; gap: 16px; margin: 24px 0; }
+    .contrast-card .card { flex: 1; background: #eef2f7; border-radius: 8px; padding: 20px; text-align: center; }
+    .contrast-card .card .label { font-size: 13px; color: var(--muted); margin-bottom: 8px; }
+    .contrast-card .card .value { font-size: 28px; font-weight: 700; color: var(--accent); font-family: var(--font-serif); }
+    .contrast-card .card .sub { font-size: 13px; color: var(--ink-soft); margin-top: 4px; }
+    .data-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 15px; }
+    .data-table th { background: var(--accent); color: #fff; padding: 12px 16px; text-align: left; font-weight: 600; font-size: 14px; }
+    .data-table td { padding: 12px 16px; border-bottom: 1px solid var(--border); color: var(--ink); }
+    .data-table tr:last-child td { border-bottom: none; }
+    .data-table .num { font-weight: 700; color: var(--accent); }
+    strong { color: var(--ink); font-weight: 600; }
+    @media (max-width: 480px) {
+      body { padding: 0; }
+      .container { padding: 20px; border-radius: 0; }
+      h1 { font-size: 22px; }
+      .contrast-card { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img class="cover-img" src="https://aka.doubaocdn.com/s/5SZm1wqUKb" alt="布朗大学经济学教授罗伯托·塞拉诺（Roberto Serrano）">
+    <p class="img-caption">罗伯托·塞拉诺教授，布朗大学经济学教授，研究方向为博弈论（图源：布朗大学官网）</p>
+
+    <h1>他看不见黑板，却看穿了40个满分背后的谎言</h1>
+    <div class="meta">2026年7月26日 · 阅读时间约10分钟</div>
+    <div class="byline">文｜犀牛伯爵</div>
+
+    <p class="lead">2026年3月5日，布朗大学经济学教授罗伯托·塞拉诺坐在办公室里，等助教把期中考试成绩念给他听。</p>
+
+    <p>他看不见试卷。34年前，视网膜营养不良在17岁那年夺走了他的全部视力。从那以后，他靠盲文、靠录音、靠助教的朗读，在布朗大学教了34年经济学。</p>
+
+    <p>助教开始念分数。</p>
+
+    <p>96分。全班平均96分。86个人里，40个满分。</p>
+
+    <p>塞拉诺没有高兴。</p>
+
+    <p>这门课叫ECON 1170，《福利经济学与社会选择理论》，涉及大量数理证明，是布朗经济系最硬核的本科课之一。往年期中平均分在65到80之间，而且这次考题他特意出了更难的。带回家考试，学生有充裕时间，正好借机加大挑战。</p>
+
+    <p>题目更难，分数却更高。这种反差，他34年没见过。</p>
+
+    <p>他让助教把考题输入ChatGPT。</p>
+
+    <p>屏幕上跳出了答案。某道数学证明题，存在一种简洁优雅的直接证法。但ChatGPT给出的，是一种迂回的反证法，别扭，拐弯抹角。翻阅学生答卷，几十份试卷出现了完全相同的反证法推理路径，行文风格高度相似。</p>
+
+    <p>答案不是学生自己写的。是AI写的。</p>
+
+    <p>他看不见学生的脸，看不见他们心虚的眼神。但他看见了答案里的破绽。</p>
+
+    <h2>善意的代价</h2>
+
+    <p>故事要从三个月前说起。</p>
+
+    <p>2025年12月13日，一个枪手闯进布朗大学工程与物理系的教学楼。2名学生死亡，9人受伤。遇难者之一叫Ella Cook。案发前几天，她刚走进塞拉诺的办公室，问他能不能提供学业和职业指导。</p>
+
+    <div class="quote-box">
+      <p>"我们聊得很愉快，她是个很棒的年轻人，充满活力，很有想法。几天后，遇难者名单公布，我才知道其中竟然有她。"</p>
+      <div class="attribution">—— 塞拉诺回忆遇难学生Ella Cook</div>
+    </div>
+
+    <img class="inline-img" src="https://aka.doubaocdn.com/s/55ia1wqUNo" alt="布朗大学校园降半旗悼念枪击案遇难者">
+    <p class="img-caption">布朗大学降半旗悼念枪击案遇难者（图源：美联社）</p>
+
+    <p>枪击案之后，很多学生不敢回教室。塞拉诺做了个教学生涯中从没做过的决定，把2026年春季学期的期中和期末考试都改成带回家、不限时间的开卷形式。</p>
+
+    <p>他没料到，这个出于善意的决定，打开了一个潘多拉魔盒。</p>
+
+    <p>消息传开后，选课人数从不超过30人暴涨到86人。有些学期这门课只有8个学生，现在涌进来86个。很多人选这门课的理由可能不是对福利经济学感兴趣，而是"可以带回家考"。</p>
+
+    <h2>17岁失明，考入哈佛</h2>
+
+    <p>塞拉诺不是那种会迁就学生的教授。</p>
+
+    <p>17岁失明后，他没有向命运低头。自学盲文，靠同学录音朗读讲义完成学业，一路考进哈佛大学读经济学博士。1992年起在布朗任教，他是布朗经济系自编教材的作者之一，谷歌学术引用量超过6100次，2024年还拿了西班牙王室颁发的经济学奖。</p>
+
+    <p>他的研究方向是博弈论。</p>
+
+    <p>后来他这样描述自己面对失明的态度：</p>
+
+    <div class="quote-box">
+      <p>"这当然影响了我的生活，但没必要过度渲染。我们经济学家理解现实的方式，就是把它看作一群人在各种限制条件下解优化问题。我把我的疾病，简单地看作又一个需要应对的限制条件，然后基于这个限制条件去做优化。"</p>
+      <div class="attribution">—— 塞拉诺谈失明</div>
+    </div>
+
+    <p>教课时，助教帮他写板书。他看不见台下学生的表情，但能听出教室里的沉默。34年了，他闭着眼睛也能判断一份答卷是不是学生自己写的。</p>
+
+    <p>所以当96分的平均分和40个满分摆在他面前时，他的第一反应不是骄傲，是警觉。</p>
+
+    <h2>一场博弈论实验</h2>
+
+    <p>发现答案与ChatGPT高度相似后，塞拉诺没有立即宣布成绩作废。</p>
+
+    <p>他选择了一种更巧妙的方式。一种博弈论专家才会用的方式。</p>
+
+    <p>他给全班发了一封邮件，措辞相当直接：</p>
+
+    <div class="quote-box">
+      <p>"我暂时不宣布期中成绩作废。我给这个班一个自证清白的机会。如果期末考试的分数分布和期中大致相似，我就认可期中成绩。否则，也就是我预料中会发生的情况，我将宣布期中成绩无效，并相应调整期末考试的权重。"</p>
+      <div class="attribution">—— 塞拉诺发给全班的邮件</div>
+    </div>
+
+    <p>期末考试改回现场闭卷，有监考。</p>
+
+    <p>他在课堂上对学生说了一段话。教室里一片沉默。</p>
+
+    <div class="quote-box">
+      <p>"如果你们只是点一下鼠标，让人工智能替你们完成作业，那你们就在证明自己毫无用处。我想问的是，你们为什么要来上大学？如果拒绝学习、拒绝付出努力、拒绝培养批判性思维，那你们要一张布朗大学的文凭做什么？"</p>
+      <div class="attribution">—— 塞拉诺在课堂上对学生说</div>
+    </div>
+
+    <p>他怀疑，真正作弊的那些学生当天根本没出现在课堂上。当然也有可能是没有人愿意公开承认自己用了AI。</p>
+
+    <h2>满分学生跑了22个</h2>
+
+    <p>接下来几周发生的事，比任何检测软件都精准。</p>
+
+    <p>18名学生直接退课。另有9人干脆没去考期末。这27人里，有22人在期中考了满分。</p>
+
+    <p class="punchline">满分学生跑了22个。</p>
+
+    <p>59人参加了期末考试。平均分从96分跌到48.6分。</p>
+
+    <p>这是这门课历史上最低的一次期末平均分。此前从未低于65分。</p>
+
+    <p>有3名学生在期末考了零分。他们在期中时分别拿了100、100和88分。100到0，只隔了一场没有AI的考试。</p>
+
+    <p>只有极少数学生的期末成绩与期中相近。排名第一的那个学生，期中95.5分，期末95分。真学霸在AI面前和不在AI面前，分数几乎一样。</p>
+
+    <img class="inline-img" src="https://aka.doubaocdn.com/s/DYQa1wqUKb" alt="59名学生的期中与期末考试成绩对比散点图">
+    <p class="img-caption">59名学生的期中与期末考试成绩对比，横轴为期中分数，纵轴为期末分数（图源：Inside Higher Ed）</p>
+
+    <table class="data-table">
+      <tr>
+        <th>指标</th>
+        <th>期中（带回家）</th>
+        <th>期末（现场闭卷）</th>
+      </tr>
+      <tr>
+        <td>平均分</td>
+        <td class="num">96分</td>
+        <td class="num">48.6分</td>
+      </tr>
+      <tr>
+        <td>满分人数</td>
+        <td class="num">40人 / 86人</td>
+        <td class="num">极少</td>
+      </tr>
+      <tr>
+        <td>退课/缺考</td>
+        <td>—</td>
+        <td class="num">27人（22人期中满分）</td>
+      </tr>
+      <tr>
+        <td>零分</td>
+        <td>0人</td>
+        <td class="num">3人（期中100/100/88）</td>
+      </tr>
+      <tr>
+        <td>不及格</td>
+        <td>—</td>
+        <td class="num">19人</td>
+      </tr>
+    </table>
+
+    <p>塞拉诺宣布期中成绩作废。期末考试权重调整为总成绩的80%。即便降低了及格线，仍有19名学生没通过。</p>
+
+    <h2>校方的温吞</h2>
+
+    <p>2026年5月，塞拉诺把上述数据提交给布朗大学的学术准则常设委员会。</p>
+
+    <p>没有回应。</p>
+
+    <p>直到6月末他向多家媒体公开讲述这段经历，委员会才通过经济系系主任转告他：如果要正式立案，需要他针对每一名涉嫌作弊的学生分别提交个人投诉，并附上对应的试卷副本。</p>
+
+    <p>几十个学生，几十份投诉，几十份试卷副本。一位失明教授，要逐一起诉。</p>
+
+    <p>塞拉诺认为这个要求很荒谬。他判断委员会打算借助AI检测工具来核实，而这类工具"众所周知，存在大量误判，既会错杀无辜，也会放过真正作弊的人"。</p>
+
+    <p>他说自己收到了数百封布朗校友的邮件表达支持，"他们都认为校方的回应很令人失望"。</p>
+
+    <p>布朗大学发言人回应称，无论涉及一名学生还是多名学生，校方处理学术诚信投诉的程序都是一致的。</p>
+
+    <p>讽刺的是，就在同一时间，布朗大学自己的生成式AI教学委员会发布了一份官方报告。报告明确指出，七所常春藤院校都不建议使用AI检测软件，因为误判率太高，既存在假阳性也存在假阴性，而且对非英语母语学生存在系统性偏见。</p>
+
+    <p>同一所大学，同一个七月。一份官方报告在说"检测工具不可靠"，而负责审理案件的委员会，却在要求一位教授拿着检测结果去逐一起诉。</p>
+
+    <h2>不是孤例</h2>
+
+    <p>这起事件并非孤例。</p>
+
+    <p>几乎与塞拉诺的遭遇同步，普林斯顿大学教师投票终结了延续133年的无监考传统。从2026年7月1日起，所有考试一律安排监考。这是自1893年学生请愿建立无监考荣誉考试制度以来，最重大的一次学术诚信政策转向。</p>
+
+    <p>普林斯顿大学的一项调查显示，29.9%的学生承认曾在至少一次考试或作业中使用AI作弊。</p>
+
+    <p>布朗大学自己的报告也呈现了类似的图景。56%的本科生和67%的研究生表示每天或每周都会使用生成式AI工具。其中硕士生的高频使用比例最高，达到85%。</p>
+
+    <img class="inline-img" src="https://aka.doubaocdn.com/s/1NWW1wqUKb" alt="布朗大学697名受访者使用生成式AI工具的频率分布图">
+    <p class="img-caption">布朗大学697名受访者使用生成式AI工具的频率分布（图源：GAITL报告）</p>
+
+    <p>但学生自己心里也清楚代价。88%的本科生担心AI会影响学习效果，87%担心认知能力受损。即便是每天都使用AI的本科生，仍有78%担心长期学习效果受损。</p>
+
+    <p>教师一方的担忧更深。95%的教师担心学生长期学习效果受损。</p>
+
+    <p>然而在近三千份课程大纲中，2024-2025学年只有34%明确提到了AI使用政策。嘴上说着担心，大纲里写着沉默。</p>
+
+    <h2>博弈论专家的真实博弈</h2>
+
+    <p>塞拉诺的研究方向是博弈论。这件事本身就是博弈论活生生的案例。</p>
+
+    <p>当作弊的收益远高于被发现的成本时，选择作弊就成了理性的策略。带回家考试，没有监考，AI一秒生成答案，被发现的概率几乎为零。对那些日程排满、竞争激烈的常春藤学生来说，不作弊反而是"不理性"的。</p>
+
+    <p>但博弈论也告诉我们，当所有人都选择占优策略时，结果可能是集体的灾难。86人选课，40个满分，但真到了没有AI的考场上，平均分只有48.6。那些期中拿满分的学生，有人考了零分。</p>
+
+    <p>他们不是不聪明。常春藤的学生智力出众，完全有能力靠自己学懂课程。但AI太方便了，方便到让人忘了，分数和知识之间本来应该有一座桥，而AI直接把桥拆了，只留下两端的岸。</p>
+
+    <p>塞拉诺已经决定，从下一学年起，他的课程将永久取消居家考试，平时作业也不再计入总评。因为这些形式"太容易让学生向诱惑屈服"。</p>
+
+    <p>他并不反对AI本身。"它当然有可能成为学生学习中非常有用的工具。"但他坚持认为，学术诚信是<span class="highlight">不能丢掉的价值</span>。</p>
+
+    <h2>我们不能选择变成蠢货</h2>
+
+    <p>塞拉诺通过媒体对所有学生发出了那句被广泛引用的警告。</p>
+
+    <p class="punchline">"我们不能选择变成蠢货。"</p>
+
+    <div class="quote-box">
+      <p>"我们负担不起这样一个社会，在这个社会里，我们最优秀的一批年轻人中的很大一部分，居然认为作弊是可以接受的。这条路的尽头，是一个走向衰败、走向失败的社会。"</p>
+      <div class="attribution">—— 塞拉诺通过媒体发出的警告</div>
+    </div>
+
+    <p>高等教育的本质，尤其在侧重理论的学科中，考验的不只是"得到正确的结论"。而是通过克服逻辑推导中的痛苦和阻力，在大脑中构建新的神经元链接，塑造批判性思考的能力。</p>
+
+    <p>当学生习惯于将复杂的思考外包给大模型，他们实质上放弃了自己构建底层认知框架的机会。期末考试中那些期中满分的学生，在脱离AI后得分暴跌至不及格甚至零分，暴露的正是这种认知能力的空洞化。</p>
+
+    <p>一个17岁失明的人，靠盲文和录音读完了哈佛的经济学博士。他比任何人都清楚，真正的能力不是来自工具，是来自你自己脑子里长出来的东西。</p>
+
+    <p>他看不见黑板。但他看见了40个满分背后的谎言。</p>
+
+    <p>而那些看得见黑板的学生，选择了闭眼。</p>
+
+    <div class="ending">
+      <p>参考资料：</p>
+      <p>[1] Fortune, "Roberto Serrano Brown University massacre AI cheating", 2026-06-29</p>
+      <p>[2] Inside Higher Ed, "Brown professor suspects most of his class used AI to cheat", 2026-07-08</p>
+      <p>[3] Ars Technica, "We cannot choose to become idiots: The AI cheating scandal roiling Brown University", 2026-07</p>
+      <p>[4] Brown University GAITL Committee Report, 2026</p>
+      <p>[5] The Daily Princetonian, 普林斯顿终结133年无监考传统, 2026-05</p>
+    </div>
+  </div>
+</body>
+</html>

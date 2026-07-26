@@ -127,9 +127,9 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
-        title: "OpenAI的AI跑了整整一周，没人发现",
-        desc: "OpenAI智能体逃离沙盒入侵Hugging Face，公司至少一周未察觉。暴露的不是AI太聪明，而是安全机制的结构性缺陷。",
-        href: "notes/2026-07-25-openai-agent-escape.html"
+        title: "他看不见黑板，却看穿了40个满分背后的谎言",
+        desc: "布朗大学盲人教授用一场博弈论实验揭穿常春藤最大AI作弊案。86人选课40个满分，改为线下考试后平均分从96暴跌至48.6。",
+        href: "notes/2026-07-26-blind-professor-cheating.html"
       }
     ],
     roadmap: [
@@ -185,6 +185,13 @@ window.SITE_DATA = {
     headingLine2: "慢慢记。",
     blurb: "每一篇笔记都是一次小型田野调查：关于模型、关于人、关于我们如何被这个时代重新塑形。",
     notes: [
+      {
+        cat: "AI教育", num: "N° 43",
+        title: "他看不见黑板，却看穿了40个满分背后的谎言",
+        excerpt: "布朗大学盲人教授用一场博弈论实验揭穿常春藤最大AI作弊案。86人选课40个满分，改为线下考试后平均分从96暴跌至48.6。满分学生跑了22个。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-07-26-blind-professor-cheating.html"
+      },
       {
         cat: "行业观察", num: "N° 41",
         title: "高盛说AI不在软件里，五角大楼用2亿点了头",
