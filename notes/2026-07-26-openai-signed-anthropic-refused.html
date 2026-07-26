@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="OpenAI签了开源公开信，Anthropic和亚马逊却拒绝。50家科技巨头的站队背后，是AI开源与闭源的深层博弈。">
+  <title>OpenAI签了，Anthropic把笔放下了</title>
+  <style>
+    /* === 8px基线网格 === */
+    :root {
+      --accent: #8b2635; /* 模式C暗红 —— 观点感 */
+      --ink: #333;
+      --ink-soft: #555;
+      --muted: #888;
+      --surface: #fafafa;
+      --border: rgba(0,0,0,0.06);
+      --radius: 12px;
+      --font-sans: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-serif: "Noto Serif SC", "Songti SC", Georgia, serif;
+    }
+    body { font-family: var(--font-sans); background: #f5f5f5; margin: 0; padding: 16px; font-size: 16px; line-height: 1.8; color: var(--ink); -webkit-font-smoothing: antialiased; }
+    .container { max-width: 680px; margin: 0 auto; background: var(--surface); padding: 32px; border-radius: var(--radius); }
+    .cover-img { width: 100%; border-radius: 8px; margin-bottom: 24px; }
+    h1 { font-family: var(--font-serif); font-size: 24px; font-weight: 700; color: var(--ink); line-height: 1.4; margin: 0 0 16px; }
+    .meta { color: var(--muted); font-size: 13px; margin-bottom: 16px; }
+    .byline { color: var(--ink-soft); font-size: 14px; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+    h2 { font-family: var(--font-serif); font-size: 20px; font-weight: 600; color: var(--ink); margin: 32px 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+    h3 { font-family: var(--font-serif); font-size: 18px; font-weight: 600; color: var(--ink); margin: 24px 0 12px; }
+    p { margin: 0 0 24px; }
+    .quote-box { border-left: 4px solid var(--accent); background: #f5f5f5; padding: 16px 20px; margin: 24px 0; border-radius: 0 var(--radius) var(--radius) 0; }
+    .quote-box p { margin: 0; color: var(--ink-soft); font-style: italic; font-size: 15px; }
+    .quote-box .attribution { margin-top: 8px; color: var(--muted); font-size: 13px; font-style: normal; }
+    .insight-box { background: #fff8f0; border: 1px solid #ffe4c4; border-radius: var(--radius); padding: 20px; margin: 24px 0; }
+    .insight-box h4 { margin: 0 0 8px; font-size: 16px; color: var(--ink); }
+    .insight-box p { margin: 0; font-size: 15px; color: var(--ink-soft); }
+    .data-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14px; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .data-table th, .data-table td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); }
+    .data-table th { background: #f0f0f0; font-weight: 600; color: var(--ink); }
+    .data-table td { color: var(--ink-soft); }
+    .timeline { position: relative; padding-left: 24px; margin: 24px 0; }
+    .timeline::before { content: ''; position: absolute; left: 6px; top: 0; bottom: 0; width: 2px; background: #e0e0e0; }
+    .timeline-item { position: relative; margin-bottom: 16px; }
+    .timeline-item::before { content: ''; position: absolute; left: -22px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); }
+    .timeline-item .date { font-size: 13px; color: var(--muted); margin-bottom: 4px; }
+    .timeline-item .content { font-size: 15px; color: var(--ink); }
+    .img-caption { text-align: center; color: var(--muted); font-size: 13px; margin-top: 8px; margin-bottom: 24px; }
+    .ending { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--ink-soft); font-size: 14px; }
+    .highlight { color: var(--accent); font-weight: 600; background: linear-gradient(to top, rgba(139,38,53,0.08) 40%, transparent 40%); padding: 0 2px; }
+    .data-callout { display: inline-block; background: var(--accent); color: #fff; padding: 2px 10px; border-radius: 4px; font-weight: 700; font-size: 15px; }
+    .contrast-card { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin: 24px 0; border-radius: var(--radius); overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .contrast-card .side { padding: 16px 20px; }
+    .contrast-card .side-left { background: #fef2f2; border-right: 1px solid var(--border); }
+    .contrast-card .side-right { background: #f0fdf4; }
+    .contrast-card .side h4 { margin: 0 0 8px; font-size: 14px; font-weight: 600; }
+    .contrast-card .side-left h4 { color: #991b1b; }
+    .contrast-card .side-right h4 { color: #166534; }
+    .contrast-card .side p { margin: 0; font-size: 14px; color: var(--ink-soft); line-height: 1.6; }
+    .punchline { font-family: var(--font-serif); font-size: 18px; font-weight: 700; color: var(--accent); text-align: center; margin: 32px 0; padding: 16px 0; border-top: 2px solid var(--accent); border-bottom: 2px solid var(--accent); }
+    strong { color: var(--ink); font-weight: 600; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img class="cover-img" src="cover-open-weights-battle.jpg" alt="AI开源与闭源博弈，科技巨头站队示意">
+    <div class="img-caption">图源，AI生成，开放权重与封闭模型的阵营分野</div>
+
+    <h1>OpenAI签了，Anthropic把笔放下了</h1>
+    <div class="meta">2026年7月26日 · 阅读时间约12分钟</div>
+    <div class="byline">文｜犀牛伯爵</div>
+
+    <p>你仔细看那份名单，会看到一个诡异的画面。OpenAI，这家靠闭源模型做到千亿美元估值的公司，在一封呼吁保护开放权重AI的公开信上签了字。而Anthropic，那个一直以"AI安全"和"负责任创新"自居的团队，却把笔放下了。</p>
+
+    <p>两天之内，签名企业从25家涨到50家。谷歌、AMD、Cloudflare、Block、Ollama纷纷加入。黄仁勋甚至把自己在X上的第一条推文献给了这件事。但亚马逊和Anthropic的名字，始终没出现。</p>
+
+    <p>这不是简单的"支持"或"反对"开源。这是一场关于利益、恐惧和权力重新分配的暗战。</p>
+
+    <h2>事情是怎么发生的</h2>
+
+    <p>7月24日，微软官网挂出一封三页纸的公开信，标题很直接，《Open Weights and American AI Leadership》（开放权重与美国在AI领域的领导力）。首批签名者25家，英伟达、微软、Meta、IBM、Palantir、Hugging Face、Mozilla、Linux Foundation都在上面。</p>
+
+    <p>信的核心诉求只有一个，呼吁美国政策制定者不要一刀切限制开放权重AI模型。</p>
+
+    <p>公开信拿20世纪80年代的开源软件运动做类比。当年主流观点认为只有严格控制代码，软件才能进步，结果开源运动证明，允许全球开发者研究、修改和改进代码，反而形成了更强大的公共技术基础。今天，大量互联网基础设施、科技公司系统、科研与网络安全任务都建立在开源软件之上。</p>
+
+    <div class="quote-box">
+      <p>"AI将变革每个行业，赋能每家公司，并被每个国家构建。开源模型能强化安全性与网络安全，加速创新与普及，并实现技术主权。"</p>
+      <div class="attribution">—— 黄仁勋，X首条推文，2026年7月24日</div>
+    </div>
+
+    <p>黄仁勋今年6月注册了X账号，整整一个月没发声。第一条推文，不是新品预告，不是皮衣段子，而是这封公开信。微软CEO纳德拉随后呼应。到7月26日，签名名单已经扩到50家，谷歌、AMD、OpenAI、Y Combinator、GitHub、思科都加入了。</p>
+
+    <p>但亚马逊和Anthropic，缺席。</p>
+
+    <h2>OpenAI签了，这才是最讽刺的</h2>
+
+    <p>说实话，我看到OpenAI在签名名单里的时候，愣了一下。这家公司的商业模式，本质上就是把最先进的模型锁在API后面，按调用量收费。GPT-5、Codex、o系列推理模型，没有一个开放过权重。Sam Altman曾经半开玩笑地说，如果开源，他们就得改名ClosedAI了。</p>
+
+    <p>那OpenAI为什么签？</p>
+
+    <p>一个原因是政治姿态。当前美国政策风向对AI监管趋严，如果政府真的出台严厉限制，OpenAI自己也跑不掉。与其被动挨打，不如主动站到一个"保护美国AI领导力"的叙事里。公开信把开放权重框定为国家安全议题，这正中OpenAI下怀，他们最擅长的就是把商业利益包装成公共利益。</p>
+
+    <p>另一个原因更实际。OpenAI也在做"部分开放"，比如允许企业客户在私有环境部署模型，只是不公开权重。如果政策一刀切禁止任何形式的开放部署，OpenAI的企业业务也会受损。签这封信，等于给自己留一条后路。</p>
+
+    <p>说白了，OpenAI签的不是"开源宣言"，而是"别管太宽倡议书"。</p>
+
+    <h2>亚马逊不签，因为签了就是打自己的脸</h2>
+
+    <p>亚马逊的逻辑更直白。它是全球最大的云服务商，AWS的Bedrock平台靠托管各种闭源模型收服务费。Claude、Llama、Stable Diffusion，都在上面跑。如果开放权重AI被全面鼓励，企业完全可以自己下载模型、自己部署，何必通过AWS多花一层钱？</p>
+
+    <p>更关键的是，亚马逊是Anthropic的最大投资者。2023年开始，亚马逊先后砸了40亿美元进去，最新消息说还在讨论追加数十亿美元。Anthropic的Claude是AWS Bedrock的招牌产品之一，这笔投资是亚马逊AI战略的核心支柱。</p>
+
+    <div class="insight-box">
+      <h4>一个值得品味的细节</h4>
+      <p>亚马逊和Anthropic的关系，不只是投资人和被投公司。AWS是Claude的主要训练基础设施提供商，双方签了多年算力合同。Anthropic的成功直接等于AWS的收入。在这种利益绑定下，亚马逊怎么可能公开支持削弱Anthropic商业壁垒的政策？</p>
+    </div>
+
+    <p>《福布斯》的分析很直接，亚马逊不签的背后是商业利益。如果开放权重成为主流，模型层的差异化会被稀释，云厂商的竞争将转向算力和基础设施，这恰恰是亚马逊的强项。但问题是，Anthropic的估值建立在"拥有顶级闭源模型"的叙事上，如果这条叙事被开源运动冲垮，亚马逊那40亿美元投资的账面回报会大打折扣。</p>
+
+    <p>所以亚马逊不签，不是反对开源，是反对"以损害自己最大投资为代价"的开源。</p>
+
+    <h2>Anthropic不签，是真的怕</h2>
+
+    <p>Anthropic的缺席，跟亚马逊不一样。他们是真的怕。</p>
+
+    <p>这家公司从成立第一天起，就把AI安全放在比商业成功更优先的位置。创始人Dario Amodei和Daniela Amodei兄妹从OpenAI出走，就是因为担心OpenAI对安全不够重视。Anthropic的宪法AI（Constitutional AI）对齐方法、ASL安全等级体系、以及那句"我们希望成为那个因为太慢而被嘲笑的公司"，都说明了他们的底色。</p>
+
+    <p>对Anthropic来说，开放权重意味着不可控的风险。模型权重一旦发布，原开发者很难追回，修改版本也不易追踪。坏人可以拿去移除安全限制、生成有害内容、甚至开发网络攻击工具。 Anthropic的逻辑是，越强大的模型，越应该被谨慎管控。</p>
+
+    <p>但这里有一个更微妙的因素。就在公开信发布前后，美国白宫科技政策负责人迈克尔·克拉齐奥斯公开指控，月之暗面的Kimi K3利用了Anthropic的Fable模型进行大规模蒸馏。美国财长贝森特甚至放话，如果蒸馏涉及商业机密窃取，不排除使用制裁或实体清单。</p>
+
+    <p>Anthropic自己也在7月初发布了一篇技术报告，《检测和防止蒸馏攻击》，详细讲了他们怎么发现竞争对手在偷偷用他们的模型输出训练自己的模型。</p>
+
+    <p>你想想Anthropic此刻的心情。他们花了数十亿美元、用了最顶尖的安全团队训练出来的模型，被别人用开放权重的名义蒸馏走了。现在有人告诉他们，开放权重是"实现AI安全的重要路径"。</p>
+
+    <p>换你，你信吗？</p>
+
+    <div class="punchline"> Anthropic不是反对开源，是反对"用我的名字签你的宣言" </div>
+
+    <h2>谁在说谎</h2>
+
+    <p>主流媒体给这件事贴的标签是"开源vs闭源"，但这四个字掩盖了太多东西。</p>
+
+    <p>公开信的支持者们说，开放权重能降低门槛、促进竞争、防止收益集中在少数平台。这没错。但他们没说的是，训练大模型依然需要昂贵的芯片、能源、数据中心和工程团队。模型层开源了，底层算力资源却更集中了。英伟达为什么带头签？因为他们卖的从来不是某个模型，而是运行所有模型的计算平台。模型越便宜，用的人越多，总算力需求反而可能越大。</p>
+
+    <p>反对者们说，开放权重会带来不可控的安全风险。这也对。但他们没说的是，闭源模型同样可能被攻击、滥用，而且外界无法审计其安全机制。Anthropic自己的Claude被封禁过145万个账号，安全误判率高达96.7%（仅3.3%申诉成功），这说明闭源不等于安全。</p>
+
+    <div class="contrast-card">
+      <div class="side side-left">
+        <h4>支持者的潜台词</h4>
+        <p>模型层越开放，应用层越繁荣，基础设施层（芯片、云）的利润越丰厚。英伟达、AMD、云厂商是最大受益者。</p>
+      </div>
+      <div class="side side-right">
+        <h4>反对者的潜台词</h4>
+        <p>模型层一旦开放，模型公司的护城河就被稀释。Anthropic、以及押注闭源模型的亚马逊，是最大受损者。</p>
+      </div>
+    </div>
+
+    <p>两种说法都有道理，也都只说了一半。真正驱动这场博弈的，不是理念，是位置。你坐在产业链的哪一环，决定了你希望权重开不开放。</p>
+
+    <h2>接下来会发生什么</h2>
+
+    <p>我的判断是，这封公开信不会改变美国政策的基本走向，但会改变政策辩论的措辞。</p>
+
+    <p>美国白宫在2025年的《美国AI行动计划》中已经明确支持开源权重。现在的争议不是"美国支持封闭、中国支持开源"，而是"美国希望由本国企业主导开源生态，同时防止前沿能力被非法提取"。黄仁勋和公开信想划出的边界是，具体违法行为可以查处，但不能因为存在违规提取，就把蒸馏、开源权重整体视为风险源。</p>
+
+    <p>短期内，我预计会看到两个动向。第一，美国国会或商务部会推出更精细的监管框架，区分"合法开放权重"和"违规蒸馏"，而不是一刀切。第二，Anthropic会加大对模型水印、输出追踪等反蒸馏技术的投入，把安全战从"呼吁不开放"转向"技术上防提取"。</p>
+
+    <p>至于Kimi K3，它计划7月27日前释放模型权重。如果如期开源，将是这封公开信之后第一个重大测试，美国政策界和业界会如何反应，会直接决定开放权重运动的下一步节奏。</p>
+
+    <h2>对普通人的意义</h2>
+
+    <p>聊到这里，你可能会问，这跟我有什么关系？</p>
+
+    <p>关系在于，AI行业的权力结构正在被重新定义。如果开放权重成为主流，模型的门槛会急剧下降，应用层的创新会爆发，但算力和基础设施会被进一步集中。如果闭源路线胜出，模型公司会保持高利润，但普通开发者和中小企业会被挡在高价API之外。</p>
+
+    <p>你我用什么模型、付多少钱、数据安不安全，都取决于这场博弈的结果。</p>
+
+    <p>而 Anthropic 把笔放下的那一刻，不只是一个商业选择。它是一个信号，提醒我们，当所有人都站队的时候，缺席者的理由，往往比到场者的表态更值得听。</p>
+
+    <div class="ending">
+      <p>谢谢你看我的文章。</p>
+      <p style="margin-top: 12px; color: var(--muted); font-size: 12px;">本文事实基于公开报道整理，观点为作者独立判断。</p>
+    </div>
+  </div>
+</body>
+</html>

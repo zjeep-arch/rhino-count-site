@@ -127,9 +127,9 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
-        title: "他看不见黑板，却看穿了40个满分背后的谎言",
-        desc: "布朗大学盲人教授用一场博弈论实验揭穿常春藤最大AI作弊案。86人选课40个满分，改为线下考试后平均分从96暴跌至48.6。",
-        href: "notes/2026-07-26-blind-professor-cheating.html"
+        title: "OpenAI签了，Anthropic把笔放下了",
+        desc: "50家科技巨头联名支持开放权重AI，OpenAI签了，Anthropic和亚马逊却拒绝。这不是简单的开源之争，而是一场关于利益、恐惧和权力重新分配的暗战。",
+        href: "notes/2026-07-26-openai-signed-anthropic-refused.html"
       }
     ],
     roadmap: [
@@ -186,11 +186,18 @@ window.SITE_DATA = {
     blurb: "每一篇笔记都是一次小型田野调查：关于模型、关于人、关于我们如何被这个时代重新塑形。",
     notes: [
       {
-        cat: "AI教育", num: "N° 43",
-        title: "他看不见黑板，却看穿了40个满分背后的谎言",
-        excerpt: "布朗大学盲人教授用一场博弈论实验揭穿常春藤最大AI作弊案。86人选课40个满分，改为线下考试后平均分从96暴跌至48.6。满分学生跑了22个。",
+      {
+        cat: "行业观察", num: "N° 44",
+        title: "OpenAI签了，Anthropic把笔放下了",
+        excerpt: "50家科技巨头联名支持开放权重AI，OpenAI签了，Anthropic和亚马逊却拒绝。这不是简单的开源之争，而是一场关于利益、恐惧和权力重新分配的暗战。",
         img: "assets/note-05.svg",
-        href: "notes/2026-07-26-blind-professor-cheating.html"
+        href: "notes/2026-07-26-openai-signed-anthropic-refused.html"
+      },
+        cat: "AI教育", num: "N° 43",
+        title: "OpenAI签了，Anthropic把笔放下了",
+        excerpt: "50家科技巨头联名支持开放权重AI，OpenAI签了，Anthropic和亚马逊却拒绝。这不是简单的开源之争，而是一场关于利益、恐惧和权力重新分配的暗战。满分学生跑了22个。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-07-26-openai-signed-anthropic-refused.html"
       },
       {
         cat: "行业观察", num: "N° 41",
