@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="长鑫科技7月27日登陆科创板，开盘涨471%。从AI行业和投资专家视角，拆解这只2026年A股最大IPO背后的DRAM权力版图重写。">
+  <title>长鑫科技打新，AI存储的权力版图正在重写</title>
+  <style>
+    /* === 8px基线网格 === */
+    :root {
+      --accent: #8b2635; /* 模式C暗红 —— 观点感 */
+      --ink: #333;
+      --ink-soft: #555;
+      --muted: #888;
+      --surface: #fafafa;
+      --border: rgba(0,0,0,0.06);
+      --radius: 12px;
+      --font-sans: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-serif: "Noto Serif SC", "Songti SC", Georgia, serif;
+    }
+    body { font-family: var(--font-sans); background: #f5f5f5; margin: 0; padding: 16px; font-size: 16px; line-height: 1.8; color: var(--ink); -webkit-font-smoothing: antialiased; }
+    .container { max-width: 680px; margin: 0 auto; background: var(--surface); padding: 32px; border-radius: var(--radius); }
+    .cover-img { width: 100%; border-radius: 8px; margin-bottom: 24px; }
+    h1 { font-family: var(--font-serif); font-size: 24px; font-weight: 700; color: var(--ink); line-height: 1.4; margin: 0 0 16px; }
+    .meta { color: var(--muted); font-size: 13px; margin-bottom: 16px; }
+    .byline { color: var(--ink-soft); font-size: 14px; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+    h2 { font-family: var(--font-serif); font-size: 20px; font-weight: 600; color: var(--ink); margin: 32px 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+    h3 { font-family: var(--font-serif); font-size: 18px; font-weight: 600; color: var(--ink); margin: 24px 0 12px; }
+    p { margin: 0 0 24px; }
+    .quote-box { border-left: 4px solid var(--accent); background: #f5f5f5; padding: 16px 20px; margin: 24px 0; border-radius: 0 var(--radius) var(--radius) 0; }
+    .quote-box p { margin: 0; color: var(--ink-soft); font-style: italic; font-size: 15px; }
+    .quote-box .attribution { margin-top: 8px; color: var(--muted); font-size: 13px; font-style: normal; }
+    .insight-box { background: #fff8f0; border: 1px solid #ffe4c4; border-radius: var(--radius); padding: 20px; margin: 24px 0; }
+    .insight-box h4 { margin: 0 0 8px; font-size: 16px; color: var(--ink); }
+    .insight-box p { margin: 0; font-size: 15px; color: var(--ink-soft); }
+    .data-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14px; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .data-table th, .data-table td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); }
+    .data-table th { background: #f0f0f0; font-weight: 600; color: var(--ink); }
+    .data-table td { color: var(--ink-soft); }
+    .data-table tr:last-child td { border-bottom: none; }
+    .timeline { position: relative; padding-left: 24px; margin: 24px 0; }
+    .timeline::before { content: ''; position: absolute; left: 6px; top: 0; bottom: 0; width: 2px; background: #e0e0e0; }
+    .timeline-item { position: relative; margin-bottom: 16px; }
+    .timeline-item::before { content: ''; position: absolute; left: -22px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); }
+    .timeline-item .date { font-size: 13px; color: var(--muted); margin-bottom: 4px; }
+    .timeline-item .content { font-size: 15px; color: var(--ink); }
+    .img-caption { text-align: center; color: var(--muted); font-size: 13px; margin-top: 8px; margin-bottom: 24px; }
+    .ending { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--ink-soft); font-size: 14px; }
+    .highlight { color: var(--accent); font-weight: 600; background: linear-gradient(to top, rgba(139,38,53,0.08) 40%, transparent 40%); padding: 0 2px; }
+    .data-callout { display: inline-block; background: var(--accent); color: #fff; padding: 2px 10px; border-radius: 4px; font-weight: 700; font-size: 15px; }
+    .contrast-card { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin: 24px 0; border-radius: var(--radius); overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .contrast-card .side { padding: 16px 20px; }
+    .contrast-card .side-left { background: #fef2f2; border-right: 1px solid var(--border); }
+    .contrast-card .side-right { background: #f0fdf4; }
+    .contrast-card .side h4 { margin: 0 0 8px; font-size: 14px; font-weight: 600; }
+    .contrast-card .side-left h4 { color: #991b1b; }
+    .contrast-card .side-right h4 { color: #166534; }
+    .contrast-card .side p { margin: 0; font-size: 14px; color: var(--ink-soft); line-height: 1.6; }
+    .punchline { font-family: var(--font-serif); font-size: 18px; font-weight: 700; color: var(--accent); text-align: center; margin: 32px 0; padding: 16px 0; border-top: 2px solid var(--accent); border-bottom: 2px solid var(--accent); }
+    strong { color: var(--ink); font-weight: 600; }
+    .stat-row { display: flex; gap: 16px; margin: 24px 0; }
+    .stat-card { flex: 1; background: #fff; border-radius: 8px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); text-align: center; }
+    .stat-card .num { font-size: 24px; font-weight: 700; color: var(--accent); font-family: Inter, sans-serif; }
+    .stat-card .label { font-size: 12px; color: var(--muted); margin-top: 4px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img class="cover-img" src="https://aka.doubaocdn.com/s/6V1G1wqiXK" alt="长鑫科技上市首日开盘涨471%，科创板行情数据">
+    <div class="img-caption">图源，雪球/中证金牛会，长鑫科技打新收益测算</div>
+
+    <h1>长鑫科技打新，AI存储的权力版图正在重写</h1>
+    <div class="meta">2026年7月27日 · 阅读时间约14分钟</div>
+    <div class="byline">文｜犀牛伯爵</div>
+
+    <p>7月27日早上9点25分，长鑫科技（688825）登陆科创板，开盘涨471%。发行价8.66元，开盘直接冲到49.5元附近，市值破3.3万亿。</p>
+
+    <p>朋友圈刷屏了。中签的人在算能赚多少，没中的人在想要不要追。</p>
+
+    <p>但首日涨多少这件事，不是今天最该聊的。长鑫这个IPO，真正值得关注的是它背后那盘更大的棋，AI正在改写全球存储芯片的权力版图，而长鑫恰好站在了裂缝上。</p>
+
+    <h2>长鑫是谁，为什么这么炸</h2>
+
+    <p>先交代一下背景。长鑫科技，2016年成立于合肥，是中国大陆唯一一家实现DRAM全流程规模化量产的IDM企业。简单讲，就是造内存芯片的。</p>
+
+    <p>你电脑里的内存条、手机里的运存、AI服务器里的服务器内存，核心都是DRAM。全球能规模化量产这个东西的就四家，三星、SK海力士、美光，加上长鑫。前三家合计占了全球91%的份额，长鑫占8%，全球第四，中国第一。</p>
+
+    <p>这个IPO的体量也够大。募资295亿元，2026年A股最大IPO，科创板历史第二大，仅次于中芯国际。发行市值约5792亿元。</p>
+
+    <p>但真正炸的不是发行价，是业绩。</p>
+
+    <div class="stat-row">
+      <div class="stat-card">
+        <div class="num">508亿</div>
+        <div class="label">2026 Q1营收（同比+719%）</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">247亿</div>
+        <div class="label">Q1归母净利（同比+1688%）</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">1.5亿</div>
+        <div class="label">日均盈利</div>
+      </div>
+    </div>
+
+    <p>连续亏了十年的公司，一个季度就把过去亏的钱赚回来一大半。预计上半年营收1100到1200亿，净利润500到570亿。</p>
+
+    <p>这不是增长，是爆发。</p>
+
+    <h2>AI改写了DRAM的权力版图</h2>
+
+    <p>说真的，长鑫能在一个季度里从亏损翻身到日赚1.5亿，靠的不是自己的技术突然变牛了，是整个行业的游戏规则被AI改写了。</p>
+
+    <p>我自己的判断是这样的，AI正在重塑全球存储芯片的权力版图，而这个重塑的过程，恰好给长鑫打开了一个3到5年的战略窗口。</p>
+
+    <p>怎么理解这个事呢。</p>
+
+    <p>你得先看三星、SK海力士、美光这三家在干什么。表面上看，它们牢牢控制着九成市场，地位稳如泰山。但它们的行动暴露了真实意图，主动把资源向HBM（高带宽内存）倾斜。</p>
+
+    <p>HBM是什么？就是AI训练和推理专用的超高性能内存。一颗HBM消耗的晶圆面积是普通DDR5的3到4倍，但利润远超普通DRAM。英伟达的GPU必须搭配HBM才能跑，SK海力士CEO郭鲁正甚至警告，2027年将出现存储史上最严重的供应短缺，核心缺口就在HBM。</p>
+
+    <div class="quote-box">
+      <p>"2027年将出现存储史上最严重的供应短缺，核心缺口就在HBM。"</p>
+      <div class="attribution">—— 郭鲁正，SK海力士CEO</div>
+    </div>
+
+    <p>2026年全球DRAM资本支出613亿美元，三家合计535亿，占87%。这些钱绝大部分砸向了HBM。</p>
+
+    <p>结果是什么？三家巨头主动收缩了通用DRAM的产能。2026年Q2，DDR5合约价环比暴涨58%到63%，单季涨幅创近十年最高。</p>
+
+    <p>三家不是不能扩产通用DRAM，是不想。HBM的利润太香了，它们宁愿把通用市场让出来。</p>
+
+    <p>而长鑫，恰好站在了这个裂缝上。</p>
+
+    <h2>三层逻辑拆解</h2>
+
+    <h3>巨头为什么舍得让</h3>
+
+    <p>一台AI服务器的DRAM需求是普通服务器的8到10倍。2026年，AI服务器预计消耗掉全球53%的DRAM月产能。</p>
+
+    <p>这个数字很关键。它说明存储芯片的需求驱动主体，从"人人"变成了"算力"。以前卖内存条是卖给电脑厂、手机厂，现在最赚钱的生意是卖给AI算力中心。</p>
+
+    <p>三家巨头看到了这个趋势，做了一个精明的选择，把70%到80%的先进晶圆产能直接倾斜给AI存储，通用DRAM产能主动收缩。</p>
+
+    <p>这不是它们打不过长鑫，是它们主动选择了利润更高的战场。SK海力士和三星在赌HBM的超额利润能覆盖通用市场的份额损失。</p>
+
+    <p>但这个赌注有个副作用，通用DRAM出现了供给缺口。而长鑫，是全球唯一一家还在持续扩产通用DRAM的原厂。</p>
+
+    <h3>长鑫拿到了什么</h3>
+
+    <p>长鑫拿到的不是一个公平竞争的机会，是一个几乎不需要打价格战的窗口期。</p>
+
+    <p>三家巨头在2028年前新增产能接近一半被HBM吃掉，通用DRAM供给增量极为有限。这就给了长鑫在DDR5、服务器DRAM中低端赛道基本不需要跟三星正面硬刚的空间，产能消化和客户导入都顺畅得多。</p>
+
+    <div class="contrast-card">
+      <div class="side side-left">
+        <h4>三家巨头的算盘</h4>
+        <p>把资源向HBM倾斜，赌AI算力带来的超额利润能覆盖通用市场份额损失。2028年前新增产能近一半被HBM吃掉。</p>
+      </div>
+      <div class="side side-right">
+        <h4>长鑫的窗口</h4>
+        <p>全球唯一持续扩产通用DRAM的原厂。2028年前中国新增DRAM晶圆产能占全球增量30%，精准承接供给缺口。</p>
+      </div>
+    </div>
+
+    <p>苹果已经开始测试长鑫产品。谷歌启动了长鑫DRAM评估，计划用于自研TPU和Pixel终端。阿里云、字节跳动、腾讯、联想、小米、OPPO、vivo、荣耀，全在采购清单上。</p>
+
+    <p>下游客户为什么这么积极？不是因为长鑫的技术比三星好，是因为它们需要一个"第二供应商"来降低单一依赖风险。谁都不想把命脉攥在一两家供应商手里。</p>
+
+    <p>长鑫现在的产能是月产30万片12英寸晶圆，年底目标35万片，2028年冲击50万片。更关键的是，HBM3已经向华为昇腾交付了样品，2026年底正式量产。如果HBM能跑通，长鑫就不只是"通用DRAM的替代者"，而是切入了AI算力最核心的赛道。</p>
+
+    <h3>估值的真相</h3>
+
+    <p>长鑫的静态市盈率是308倍。看着吓人。</p>
+
+    <p>但这是"过去"的假象。用2026年预测利润算，动态市盈率只有5到6倍。</p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>公司</th>
+          <th>2026年预测PE</th>
+          <th>市场定位</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>三星电子</td>
+          <td>5.02倍</td>
+          <td>全球第一，HBM主力</td>
+        </tr>
+        <tr>
+          <td>SK海力士</td>
+          <td>5.64倍</td>
+          <td>全球第二，HBM垄断者</td>
+        </tr>
+        <tr>
+          <td>美光</td>
+          <td>8.2倍</td>
+          <td>全球第三，HBM追赶</td>
+        </tr>
+        <tr>
+          <td><strong>长鑫科技</strong></td>
+          <td><strong>5-6倍</strong></td>
+          <td>全球第四，国产替代</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>长鑫的动态估值跟国际巨头基本持平，甚至比美光还低。以"国产替代加超级景气周期"的溢价来看，这个估值不算贵。</p>
+
+    <p>但这里有个前提，2026年的利润能持续。DRAM是强周期行业，如果AI需求放缓、三巨头重启通用DRAM扩产，价格会快速回落。5到6倍的PE只在景气周期顶部成立。</p>
+
+    <p class="punchline">静态看贵得离谱，动态看便宜合理，这就是周期股定价的魔幻之处。</p>
+
+    <h2>摩根士丹利的冷水有没有道理</h2>
+
+    <p>上市前夜，摩根士丹利突然泼了一盆冷水。</p>
+
+    <p>它的逻辑是，长鑫当前量产工艺还是17nm，三星和SK海力士已经量产10nm级以下工艺，存在代际差距。HBM产品还在客户验证阶段。如果美国商务部把长鑫纳入实体清单、切断高端半导体设备供应，产能扩张和技术迭代节奏会直接受影响。</p>
+
+    <p>美光更直接，已经在欧洲发起针对国产存储模组厂商的专利诉讼，核心是在构筑海外市场准入壁垒。</p>
+
+    <p>这些冷水有没有道理？有。</p>
+
+    <p>技术代差是真实存在的。17nm跟10nm以下差了一代半，虽然17nm DDR5在通用场景下的性能与国际差距已经缩小到5%以内，但高端HBM领域，长鑫还在追赶。</p>
+
+    <p>地缘风险也是真实的。作为国产存储龙头，长鑫被纳入实体清单只是时间问题。一旦设备供应被切断，扩产节奏会打折。</p>
+
+    <p>但我想说的是，这些风险市场已经定价了。动态5到6倍PE，比美光还低，本身就反映了市场对这些风险的折价。如果这些风险不存在，长鑫的估值不应该跟三星持平，应该更高。</p>
+
+    <p>而且，长鑫的产线国产设备渗透率已经达到40%到50%。它不是从零开始建国产供应链，是在已有的国产化基础上继续爬坡。</p>
+
+    <h2>"3+1"格局怎么走</h2>
+
+    <p>我目前的看法是，未来3到5年全球DRAM市场会演变成"3+1"的分层竞争格局。</p>
+
+    <p>高端HBM赛道，三家垄断，短期内不会被撼动。SK海力士和三星在HBM上的技术积累和产能优势，不是两三年能追上的。</p>
+
+    <p>中低端通用DRAM赛道，长鑫逐步渗透。三家巨头主动让出来的市场，长鑫精准承接。到2028年，长鑫的全球产能份额可能达到13%到15%，超越美光不是没可能。</p>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="date">2026年7月</div>
+        <div class="content">月产能30万片，全球第四，份额8%</div>
+      </div>
+      <div class="timeline-item">
+        <div class="date">2026年底</div>
+        <div class="content">月产能35万片，HBM3正式量产，有望超越美光</div>
+      </div>
+      <div class="timeline-item">
+        <div class="date">2028年</div>
+        <div class="content">月产能冲击50万片，全球份额13%-15%，HBM4落地</div>
+      </div>
+    </div>
+
+    <p>这个格局的核心变量有两个。一是长鑫HBM能不能量产并拿到订单，二是地缘政策会不会加码。</p>
+
+    <p>如果HBM跑通了，长鑫就不只是"通用DRAM的替代者"，而是AI算力供应链里不可或缺的一环。如果地缘政策加码，扩产节奏会受影响，但国产替代的逻辑反而会更强化。</p>
+
+    <p>也可能我错了。如果AI需求在2027年放缓，三巨头可能回头抢通用DRAM市场，长鑫的窗口期会比预期更短。这个风险是存在的。</p>
+
+    <h2>投资者该看什么</h2>
+
+    <p>如果你关注长鑫，有三个信号比首日涨跌幅重要得多。</p>
+
+    <p>第一，HBM3的量产进度和客户认证情况。这是长鑫从"替代者"升级为"核心供应商"的关键。年底量产能不能如期兑现，华为昇腾的订单能不能落地，比股价涨跌重要十倍。</p>
+
+    <p>第二，月产能从30万片爬到35万片的速度。产能爬坡的节奏直接决定营收释放的节奏。如果年底能稳产35万片，超越美光就不是一句口号。</p>
+
+    <p>第三，地缘政策的变化。实体清单的靴子一天不落地，这个风险就一直在。但反过来看，如果真的被列入清单，国产替代的逻辑反而会更硬。</p>
+
+    <p>长鑫这个IPO，赌的不是打新收益，是国产AI基础设施的自主化进程。从合肥长岗的一片农田到3.3万亿市值，用了十年。但从全球第四到全球第三，可能只需要一两年。</p>
+
+    <p>大时代啊，朋友们。</p>
+
+    <div class="insight-box">
+      <h4>核心判断</h4>
+      <p>AI正在重塑全球存储芯片的权力版图。三巨头主动让出通用DRAM市场去追逐HBM的超额利润，给长鑫留下了一个3到5年的战略窗口。这个窗口期里，长鑫不需要打赢三星，只需要接住三星让出来的市场。真正的风险不在对手，在自身HBM的研发节奏和地缘政策的变化。</p>
+    </div>
+
+    <div class="ending">
+      <p>本文仅代表作者个人观点，不构成任何投资建议。市场有风险，投资需谨慎。文章数据来源于长鑫科技招股书、Omdia、摩根士丹利研报及公开报道。</p>
+    </div>
+  </div>
+</body>
+</html>

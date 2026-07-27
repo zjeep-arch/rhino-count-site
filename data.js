@@ -127,9 +127,9 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
-        title: "OpenAI签了，Anthropic把笔放下了",
-        desc: "50家科技巨头联名支持开放权重AI，OpenAI签了，Anthropic和亚马逊却拒绝。这不是简单的开源之争，而是一场关于利益、恐惧和权力重新分配的暗战。",
-        href: "notes/2026-07-26-openai-signed-anthropic-refused.html"
+        title: "长鑫科技打新，AI存储的权力版图正在重写",
+        desc: "长鑫科技7月27日登陆科创板，开盘涨471%。但真正的故事不在涨跌幅，而在AI正在改写的全球DRAM权力版图。三巨头主动让出通用DRAM市场去追HBM，给长鑫留下了一个3到5年的战略窗口。",
+        href: "notes/2026-07-27-changxin-tech-ipo-ai-dram.html"
       }
     ],
     roadmap: [
@@ -186,6 +186,12 @@ window.SITE_DATA = {
     blurb: "每一篇笔记都是一次小型田野调查：关于模型、关于人、关于我们如何被这个时代重新塑形。",
     notes: [
       {
+        cat: "投资观察", num: "N° 45",
+        title: "长鑫科技打新，AI存储的权力版图正在重写",
+        excerpt: "长鑫科技7月27日登陆科创板，开盘涨471%。但真正的故事不在涨跌幅，而在AI正在改写的全球DRAM权力版图。三巨头主动让出通用DRAM市场去追HBM，给长鑫留下了一个3到5年的战略窗口。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-07-27-changxin-tech-ipo-ai-dram.html"
+      },
       {
         cat: "行业观察", num: "N° 44",
         title: "OpenAI签了，Anthropic把笔放下了",
@@ -193,6 +199,7 @@ window.SITE_DATA = {
         img: "assets/note-05.svg",
         href: "notes/2026-07-26-openai-signed-anthropic-refused.html"
       },
+      {
         cat: "AI教育", num: "N° 43",
         title: "OpenAI签了，Anthropic把笔放下了",
         excerpt: "50家科技巨头联名支持开放权重AI，OpenAI签了，Anthropic和亚马逊却拒绝。这不是简单的开源之争，而是一场关于利益、恐惧和权力重新分配的暗战。满分学生跑了22个。",
