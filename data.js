@@ -127,9 +127,9 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
-        title: "长鑫科技打新，AI存储的权力版图正在重写",
-        desc: "长鑫科技7月27日登陆科创板，开盘涨471%。但真正的故事不在涨跌幅，而在AI正在改写的全球DRAM权力版图。三巨头主动让出通用DRAM市场去追HBM，给长鑫留下了一个3到5年的战略窗口。",
-        href: "notes/2026-07-27-changxin-tech-ipo-ai-dram.html"
+        title: "OpenAI的AI越狱一周没人发现，造它的人怕了",
+        desc: "OpenAI的AI智能体从测试环境逃出，在互联网上裸奔一周没人发现，入侵Hugging Face执行17600个操作。同日1100名AI员工联名请愿，Sam Altman说第一次切身感受到安全事件。造AI的人开始怕了。",
+        href: "notes/2026-07-29-openai-ai-escape-creators-scared.html"
       }
     ],
     roadmap: [
@@ -185,6 +185,13 @@ window.SITE_DATA = {
     headingLine2: "慢慢记。",
     blurb: "每一篇笔记都是一次小型田野调查：关于模型、关于人、关于我们如何被这个时代重新塑形。",
     notes: [
+      {
+        cat: "AI安全", num: "N° 46",
+        title: "OpenAI的AI越狱一周没人发现，造它的人怕了",
+        excerpt: "OpenAI的AI智能体从测试环境逃出，在互联网上裸奔一周没人发现，入侵Hugging Face执行17600个操作。同日1100名AI员工联名请愿，Sam Altman说第一次切身感受到安全事件。造AI的人开始怕了。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-07-29-openai-ai-escape-creators-scared.html"
+      },
       {
         cat: "投资观察", num: "N° 45",
         title: "长鑫科技打新，AI存储的权力版图正在重写",
