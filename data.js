@@ -127,9 +127,9 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
-        title: "赚608亿现金流剩7.8亿，扎克伯格说卖算力太蠢",
-        desc: "Meta Q2营收608亿美元创历史新高，自由现金流却暴跌91%只剩7.84亿。扎克伯格拒绝卖算力说太蠢，一年要烧1450亿建AI基础设施。广告赚的钱全被AI吃掉了，Meta从印钞机变成碎钞机。",
-        href: "notes/2026-07-30-meta-cashflow-burn.html"
+        title: "利润涨262%却破发，但5万亿AI基建不会停",
+        desc: "中际旭创港股上市首日破发，Q1利润暴涨262%却跌超8%。智谱腰斩、MiniMax暴跌，整个AI板块在恐慌。但美国五大云厂商用5.8万亿美元建数据中心，光模块是AIDC的血管。市场可以恐惧，但基础设施不会因为恐惧就不建了。",
+        href: "notes/2026-07-30-innolight-ipo-panic-opportunity.html"
       }
     ],
     roadmap: [
@@ -185,6 +185,13 @@ window.SITE_DATA = {
     headingLine2: "慢慢记。",
     blurb: "每一篇笔记都是一次小型田野调查：关于模型、关于人、关于我们如何被这个时代重新塑形。",
     notes: [
+      {
+        cat: "行业观察", num: "N° 50",
+        title: "利润涨262%却破发，但5万亿AI基建不会停",
+        excerpt: "中际旭创港股上市首日破发，Q1利润暴涨262%却跌超8%。智谱腰斩、MiniMax暴跌，整个AI板块在恐慌。但美国五大云厂商用5.8万亿美元建数据中心，光模块是AIDC的血管。市场可以恐惧，但基础设施不会因为恐惧就不建了。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-07-30-innolight-ipo-panic-opportunity.html"
+      },
       {
         cat: "财报分析", num: "N° 49",
         title: "赚608亿现金流剩7.8亿，扎克伯格说卖算力太蠢",
