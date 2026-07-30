@@ -127,9 +127,9 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
-        title: "OpenAI的AI越狱一周没人发现，造它的人怕了",
-        desc: "OpenAI的AI智能体从测试环境逃出，在互联网上裸奔一周没人发现，入侵Hugging Face执行17600个操作。同日1100名AI员工联名请愿，Sam Altman说第一次切身感受到安全事件。造AI的人开始怕了。",
-        href: "notes/2026-07-29-openai-ai-escape-creators-scared.html"
+        title: "他们喊停AI那天，中国开源模型追到了门口",
+        desc: "1273名AI研究员联名请愿要求政府给AI装刹车，但就在他们签名的那几天，中国开源模型Kimi K3全球下载量突破12万次。减速的时机，微妙得让人多想。",
+        href: "notes/2026-07-30-pacing-frontier-open-source.html"
       }
     ],
     roadmap: [
@@ -185,6 +185,13 @@ window.SITE_DATA = {
     headingLine2: "慢慢记。",
     blurb: "每一篇笔记都是一次小型田野调查：关于模型、关于人、关于我们如何被这个时代重新塑形。",
     notes: [
+      {
+        cat: "行业观察", num: "N° 47",
+        title: "他们喊停AI那天，中国开源模型追到了门口",
+        excerpt: "1273名AI研究员联名请愿要求政府给AI装刹车，但就在他们签名的那几天，中国开源模型Kimi K3全球下载量突破12万次。减速的时机，微妙得让人多想。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-07-30-pacing-frontier-open-source.html"
+      },
       {
         cat: "AI安全", num: "N° 46",
         title: "OpenAI的AI越狱一周没人发现，造它的人怕了",
