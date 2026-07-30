@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>40亿美元ARR，字节把中国AI的桌子掀了</title>
+  <meta name="description" content="字节大模型ARR达40亿美元，超过国内其他模型公司ARR总和。同日飞书并入豆包，火山引擎接管销售。中国AI的胜负手不在模型参数，在分发。">
+  <style>
+    :root {
+      --accent: #92400e;
+      --accent-soft: #b45309;
+      --ink: #333;
+      --ink-soft: #555;
+      --muted: #888;
+      --surface: #fafafa;
+      --border: rgba(0,0,0,0.07);
+      --radius: 12px;
+      --font-sans: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-serif: "Noto Serif SC", "Songti SC", Georgia, serif;
+    }
+    * { box-sizing: border-box; }
+    body { font-family: var(--font-sans); background: #f0f0f0; margin: 0; padding: 24px 16px; font-size: 16px; line-height: 32px; color: var(--ink); -webkit-font-smoothing: antialiased; }
+    .container { max-width: 680px; margin: 0 auto; background: var(--surface); padding: 32px; border-radius: var(--radius); box-shadow: 0 2px 16px rgba(0,0,0,0.05); }
+    .cover-img { width: 100%; border-radius: 8px; margin-bottom: 24px; display: block; }
+    h1 { font-family: var(--font-serif); font-size: 24px; font-weight: 700; color: var(--ink); line-height: 40px; margin: 0 0 16px; }
+    .meta { color: var(--muted); font-size: 13px; margin-bottom: 8px; }
+    .byline { color: var(--ink-soft); font-size: 14px; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+    h2 { font-family: var(--font-serif); font-size: 20px; font-weight: 600; color: var(--ink); margin: 32px 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+    h3 { font-family: var(--font-serif); font-size: 18px; font-weight: 600; color: var(--accent); margin: 28px 0 12px; }
+    p { margin: 0 0 24px; }
+    .lead { font-size: 17px; color: var(--ink); }
+    .quote-box { border-left: 4px solid var(--accent); background: #faf6f0; padding: 16px 20px; margin: 24px 0; border-radius: 0 var(--radius) var(--radius) 0; }
+    .quote-box p { margin: 0 0 8px; color: var(--ink-soft); font-style: italic; font-size: 15px; }
+    .quote-box p:last-child { margin-bottom: 0; }
+    .quote-box .attribution { margin-top: 8px; color: var(--muted); font-size: 13px; font-style: normal; }
+    .timeline { position: relative; padding-left: 24px; margin: 24px 0; }
+    .timeline::before { content: ''; position: absolute; left: 6px; top: 4px; bottom: 4px; width: 2px; background: #d6cfc4; }
+    .timeline-item { position: relative; margin-bottom: 20px; }
+    .timeline-item:last-child { margin-bottom: 0; }
+    .timeline-item::before { content: ''; position: absolute; left: -22px; top: 8px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 3px var(--surface); }
+    .timeline-item .date { font-size: 13px; color: var(--accent-soft); font-weight: 600; margin-bottom: 4px; }
+    .timeline-item .content { font-size: 15px; color: var(--ink); line-height: 28px; }
+    .img-caption { text-align: center; color: var(--muted); font-size: 13px; margin-top: 8px; margin-bottom: 24px; }
+    .inline-img { width: 100%; border-radius: 8px; margin: 8px 0 0; display: block; }
+    .ending { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--ink-soft); font-size: 14px; }
+    .highlight { color: var(--accent); font-weight: 600; background: linear-gradient(to top, rgba(146,64,14,0.10) 40%, transparent 40%); padding: 0 2px; }
+    .punchline { font-family: var(--font-serif); font-size: 18px; font-weight: 700; color: var(--accent); text-align: center; margin: 32px 0; padding: 16px 0; border-top: 2px solid var(--accent); border-bottom: 2px solid var(--accent); }
+    .data-callout { display: inline-block; background: var(--accent); color: #fff; padding: 2px 10px; border-radius: 4px; font-weight: 700; font-size: 15px; }
+    .contrast-card { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin: 24px 0; border-radius: var(--radius); overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .contrast-card .side { padding: 16px 20px; }
+    .contrast-card .side-left { background: #fef7f0; border-right: 1px solid var(--border); }
+    .contrast-card .side-right { background: #f0f7fe; }
+    .contrast-card .side h4 { margin: 0 0 8px; font-size: 14px; font-weight: 600; }
+    .contrast-card .side-left h4 { color: #92400e; }
+    .contrast-card .side-right h4 { color: #1e40af; }
+    .contrast-card .side p { margin: 0; font-size: 14px; color: var(--ink-soft); line-height: 24px; }
+    .data-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14px; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .data-table th, .data-table td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); }
+    .data-table th { background: #f5f0e8; font-weight: 600; color: var(--ink); }
+    .data-table td { color: var(--ink-soft); }
+    .data-table tr:last-child td { border-bottom: none; }
+    strong { color: var(--ink); font-weight: 600; }
+    @media (max-width: 480px) {
+      body { padding: 0; }
+      .container { padding: 20px 16px; border-radius: 0; }
+      .contrast-card { grid-template-columns: 1fr; }
+      .contrast-card .side-left { border-right: none; border-bottom: 1px solid var(--border); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img class="cover-img" src="https://aka.doubaocdn.com/s/HVgmBbYUO1" alt="字节跳动启动飞书豆包火山引擎组织大调整">
+    <div class="img-caption">7月30日，字节跳动内部邮件宣布飞书与豆包团队整合｜图源：今日头条</div>
+
+    <h1>40亿美元ARR，字节把中国AI的桌子掀了</h1>
+    <div class="meta">2026年7月30日 · 阅读时间约10分钟</div>
+    <div class="byline">文｜犀牛伯爵</div>
+
+    <p class="lead">中国AI最赚钱的公司，不是技术最强的那家。</p>
+
+    <p>7月30日，字节跳动一封内部邮件，把飞书产品团队并进了豆包。同一天，消息人士透露了一个数字，字节大模型业务的年化收入达到了<span class="data-callout">40亿美元</span>，超过国内其他所有模型公司ARR的总和。</p>
+
+    <p>40亿美元。折合人民币将近290亿。</p>
+
+    <p>这个数字是什么概念？月之暗面Kimi K3刚登顶全球前端开发榜，但它的ARR撑死在3亿美元量级。DeepSeek估值710亿美元，收入数据从未公开。智谱在冲上市。这些公司加起来，还不如字节一家。</p>
+
+    <p>大家都在卷参数、卷跑分、卷开源，字节在卷企业客户的Token消耗量。</p>
+
+    <h2>一封邮件改了什么</h2>
+
+    <p>先说清楚这封邮件干了什么。</p>
+
+    <p>两件事。第一，飞书产品团队并入豆包产品团队，成立新的豆包产品团队，由豆包负责人赵祺统一负责。飞书负责人谢欣，向赵祺汇报。</p>
+
+    <p>第二，飞书的销售、市场和客户服务团队，并入火山引擎，成立一个新的To B组织，叫"创造力服务平台"。火山引擎负责人谭待统管，飞书销售负责人林婵和战略市场负责人史志隽，都向谭待汇报。</p>
+
+    <img class="inline-img" src="https://aka.doubaocdn.com/s/biA0efrYVp" alt="字节跳动组织架构调整示意，飞书产品并入豆包，飞书GTM并入火山引擎">
+    <div class="img-caption">飞书和火山引擎，十年平行线第一次拧到同一个方向盘上｜图源：今日头条</div>
+
+    <p>翻译成人话就是，字节的To B业务，从两条平行线变成了一个拳头。产品端，豆包是大脑，飞书是手脚。销售端，火山引擎统一出口，飞书不再单卖。</p>
+
+    <p>飞书从2021年独立成业务板块以来，这是它第一次失去独立地位。</p>
+
+    <h2>40亿美元是怎么来的</h2>
+
+    <p>这个数字不是凭空冒出来的。</p>
+
+    <p>按照7月平均消耗口径折算，字节大模型业务的年化收入达到40亿美元。日均Token调用量突破180万亿。2026年二季度，飞书新增客户中超过九成同步采购了飞书AI产品。</p>
+
+    <p>注意那个"九成"。飞书不再是先卖协同工具再卖AI，而是AI成了飞书签单的默认配置。</p>
+
+    <p>这个路径跟你想的不一样。大多数人以为大模型赚钱靠卖API，按Token计费，薄利多销。字节不是这么干的。字节的做法是把豆包嵌进飞书的工作流里，让企业用了飞书就自然用上豆包，不需要单独采购、不需要技术对接、不需要额外部署。</p>
+
+    <p>豆包企业版已经在部分飞书客户中内测了。它原生接入飞书文档、表格、会议和群聊，支持基于企业自有知识库的问答和创作。还有企业级数据隔离和权限管控。</p>
+
+    <img class="inline-img" src="https://aka.doubaocdn.com/s/uL6pi1UsIg" alt="豆包企业版内测界面，原生接入飞书生态">
+    <div class="img-caption">豆包企业版内测中，原生接入飞书文档、表格、会议和群聊｜图源：今日头条</div>
+
+    <p>这跟卖API完全是两门生意。卖API是技术采购，CIO拍板，比的是价格和性能。嵌入飞书是业务采购，业务部门先用起来，CIO跟着买单。前者是走招标流程，后者是先上车后补票。</p>
+
+    <p>中国数据研究中心7月发布的《2026中国AI大模型竞争力TOP20》里，豆包排第一，96.2分。但说实话，这个排名对字节来说已经不重要了。它的竞争维度已经不在模型榜单上了。</p>
+
+    <h2>别人在卷模型，字节在卷分发</h2>
+
+    <p>把视角拉远一点。</p>
+
+    <div class="contrast-card">
+      <div class="side side-left">
+        <h4>多数公司的路径</h4>
+        <p>训模型→刷榜单→发论文→卖API→等企业来采购。技术驱动，线性增长，每一个客户都要单独谈。</p>
+      </div>
+      <div class="side side-right">
+        <h4>字节的路径</h4>
+        <p>做飞书→嵌入豆包→企业先用起来→Token自然消耗→收入跟着涨。分发驱动，指数增长，AI是工作流的一部分而不是额外采购。</p>
+      </div>
+    </div>
+
+    <p>这两条路径的核心区别在于获客成本。</p>
+
+    <p>卖API的公司，每一个新客户都需要销售跟进、技术对接、POC测试，周期长，成本高。字节通过飞书已经握住了企业客户的工作流入口，豆包的AI能力是"附赠"的，不需要额外说服客户为什么需要AI。</p>
+
+    <p>梁汝波今年6月在火山引擎FORCE原动力大会上说了一句话，"攀登AI高峰是字节当下最重要的事情。"他还说，字节正"把精力重点聚焦到AI，在AI里聚焦到提升模型能力"。</p>
+
+    <p>但如果你看字节的动作而不是听它的话，你会发现一个更有意思的优先级排序。字节不是先提升模型能力再找商业化路径，而是先搭好分发渠道再倒逼模型能力提升。飞书是渠道，豆包是产品，火山引擎是基础设施。三者拧在一起，形成了一个从基础设施到产品到渠道的完整闭环。</p>
+
+    <p class="punchline">中国AI的胜负手不在模型参数，在分发。</p>
+
+    <h2>飞书"降级"背后的逻辑</h2>
+
+    <p>很多人看到飞书并入豆包，第一反应是飞书被降级了。</p>
+
+    <p>表面上看确实如此。谢欣向赵祺汇报，等于飞书的掌门人向豆包的掌门人低头。飞书从独立业务板块变成了豆包的一个组成部分。</p>
+
+    <p>但我自己的判断恰好相反。</p>
+
+    <p>飞书不是被降级，是被重新定位了。在字节的AI战略里，飞书的角色从"独立To B业务"变成了"AI在企业端的落地抓手"。这个定位听起来低了，但实际价值高了。</p>
+
+    <p>想想看。飞书如果继续独立运作，它的天花板是一个企业协同工具，对标钉钉和Microsoft Teams。但如果飞书变成豆包的分发渠道，它的天花板是一个AI企业服务平台的入口。前者是百亿人民币的生意，后者是百亿美元的生意。</p>
+
+    <p>2023年，梁汝波在内部说过，飞书和火山引擎的研发投入"不低于抖音与TikTok"。这个投入级别，如果只是做一个协同工具，是讲不通的。但如果飞书的使命是承载字节的AI商业化，这个投入就合理了。</p>
+
+    <p>飞书不是被降级了。飞书是被装进了一个更大的故事里。</p>
+
+    <h2>这张牌桌上的其他人</h2>
+
+    <p>40亿美元ARR这个数字，对国内其他AI公司来说是一个残酷的参照系。</p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>公司</th>
+          <th>核心优势</th>
+          <th>商业化路径</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>字节跳动</td>
+          <td>飞书+火山引擎分发闭环</td>
+          <td>ARR 40亿美元</td>
+        </tr>
+        <tr>
+          <td>月之暗面</td>
+          <td>Kimi K3技术登顶</td>
+          <td>ARR约3亿美元</td>
+        </tr>
+        <tr>
+          <td>DeepSeek</td>
+          <td>估值710亿美元</td>
+          <td>收入未公开</td>
+        </tr>
+        <tr>
+          <td>智谱AI</td>
+          <td>GLM-5.2智能体能力</td>
+          <td>冲刺上市中</td>
+        </tr>
+        <tr>
+          <td>阿里千问</td>
+          <td>Qwen3.8开源+云</td>
+          <td>依托阿里云</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>这张表里最有意思的不是字节多强，而是其他公司的商业化路径各不相同，但都没有找到第二个像字节这样的分发闭环。</p>
+
+    <p>月之暗面技术很强，Kimi K3前端开发榜全球第一，但它的收入主要靠API和订阅，没有企业工作流的抓手。DeepSeek估值很高，但收入数据是个黑箱。智谱在冲上市，商业模式还是项目制为主。阿里千问有阿里云做后盾，路径跟字节最像，但飞书的渗透率比钉钉高，而且阿里的组织协同一直不如字节顺畅。</p>
+
+    <p>腾讯呢？腾讯有企业微信，有混元大模型，但企业微信的定位更偏沟通，不是生产力工具。腾讯在AI To B这件事上，一直缺一个飞书级别的产品。</p>
+
+    <p>所以这张牌桌上，字节是唯一一个同时握住了模型、分发渠道和企业入口的公司。</p>
+
+    <h2>大洋彼岸也在走同一条路</h2>
+
+    <p>有意思的是，大洋彼岸的微软刚刚交出了一份验证这条路是对的的财报。</p>
+
+    <p>7月29日，微软发布FY2026第四季度业绩。季度收入900亿美元，同比增长18%。Azure和其他云服务收入增长43%。Azure全年收入首次突破1000亿美元。OpenAI投资对微软全年净利润带来49.63亿美元正面影响。</p>
+
+    <p>更重要的是，微软主动将2027财年资本支出预期从1900亿美元下调至1750亿美元，盘后股价大涨超8%。</p>
+
+    <p>微软的故事跟字节是同一个逻辑。微软不是靠卖模型赚钱，是靠把OpenAI的能力嵌入Azure、Microsoft 365、Copilot这些已有的产品和工作流里赚钱。模型是引擎，分发是车，企业已经在车上了。</p>
+
+    <div class="quote-box">
+      <p>"攀登AI高峰是字节当下最重要的事情。字节正把精力重点聚焦到AI，在AI里聚焦到提升模型能力。"</p>
+      <p class="attribution">梁汝波，字节跳动CEO，2026年6月火山引擎FORCE大会</p>
+    </div>
+
+    <p>梁汝波说聚焦模型能力。但组织调整的动作告诉我们，字节同时在聚焦一件更重要的事，把模型变成可以规模化收钱的产品。飞书就是那个收钱的管道。</p>
+
+    <h2>接下来会怎样</h2>
+
+    <p>我自己的判断是，这次组织调整之后，字节会在三个方向加速。</p>
+
+    <p>第一，豆包企业版会快速从内测走向正式发布。飞书已经握住了企业客户，现在需要把AI能力从"附赠"变成"必选"。一旦豆包企业版正式上线，飞书的ARPU（单客户平均收入）会显著提升。</p>
+
+    <p>第二，火山引擎的MaaS业务会从"卖API"转向"卖解决方案"。新成立的"创造力服务平台"不只是在卖模型调用，而是在卖一整套从协同办公到AI应用到云计算的企业服务包。这对阿里云和腾讯云的To B业务会形成直接压力。</p>
+
+    <p>第三，字节的ARR会在未来6到12个月内继续加速。因为飞书Q2新增客户超九成采购AI产品，这意味着AI已经不是附加价值，而是签单的核心驱动力。当AI成为企业采购飞书的理由而不是赠品，收入的天花板会高很多。</p>
+
+    <p>对其他AI公司来说，字节40亿美元ARR的信号很残酷。技术强不等于能赚钱。模型好不等于能规模化。如果你没有自己的分发渠道，你的天花板就是API定价。</p>
+
+    <p>聊到这里我想起一件事。2016年字节做飞书的时候，所有人都在问，一个做短视频的公司为什么要做办公软件。十年后，那个办公软件变成了字节AI战略的最关键棋子。</p>
+
+    <p>有时候，你十年前种下的那棵树，长成了你没想到的样子。</p>
+
+    <h2>这件事跟你有关</h2>
+
+    <p>如果你是AI从业者，你需要想一个问题。你的公司是在卖模型，还是在卖嵌入工作流的解决方案？如果是前者，你的竞争对手不是其他模型公司，是字节。</p>
+
+    <p>如果你是企业决策者，你需要关注的不只是哪个模型跑分最高。你需要关注的是，哪家供应商能给你一整套从基础设施到AI应用到日常办公的闭环，而不是让你自己拼拼图。</p>
+
+    <p>中国AI大模型的竞争，已经从"谁的模型最强"变成了"谁的分发最广"。模型能力是入场券，分发能力才是护城河。</p>
+
+    <p class="punchline">技术决定你能不能上牌桌，分发决定你能不能赢。</p>
+
+    <p>40亿美元ARR。超过所有对手的总和。同一天，飞书向豆包低了头。</p>
+
+    <p>这两件事放在一起，就是中国AI商业化最清晰的一张牌。</p>
+
+    <div class="ending">谢谢你看我的文章。</div>
+  </div>
+</body>
+</html>

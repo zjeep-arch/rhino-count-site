@@ -127,9 +127,9 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
-        title: "他们喊停AI那天，中国开源模型追到了门口",
-        desc: "1273名AI研究员联名请愿要求政府给AI装刹车，但就在他们签名的那几天，中国开源模型Kimi K3全球下载量突破12万次。减速的时机，微妙得让人多想。",
-        href: "notes/2026-07-30-pacing-frontier-open-source.html"
+        title: "40亿美元ARR，字节把中国AI的桌子掀了",
+        desc: "字节大模型ARR达40亿美元，超过国内其他模型公司ARR总和。同日飞书并入豆包，火山引擎接管销售。中国AI的胜负手不在模型参数，在分发。",
+        href: "notes/2026-07-30-bytedance-arr-40b.html"
       }
     ],
     roadmap: [
@@ -185,6 +185,13 @@ window.SITE_DATA = {
     headingLine2: "慢慢记。",
     blurb: "每一篇笔记都是一次小型田野调查：关于模型、关于人、关于我们如何被这个时代重新塑形。",
     notes: [
+      {
+        cat: "行业观察", num: "N° 48",
+        title: "40亿美元ARR，字节把中国AI的桌子掀了",
+        excerpt: "字节大模型ARR达40亿美元，超过国内其他模型公司ARR总和。同日飞书并入豆包，火山引擎接管销售。中国AI的胜负手不在模型参数，在分发。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-07-30-bytedance-arr-40b.html"
+      },
       {
         cat: "行业观察", num: "N° 47",
         title: "他们喊停AI那天，中国开源模型追到了门口",
