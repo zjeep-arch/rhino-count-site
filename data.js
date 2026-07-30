@@ -127,9 +127,9 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
-        title: "40亿美元ARR，字节把中国AI的桌子掀了",
-        desc: "字节大模型ARR达40亿美元，超过国内其他模型公司ARR总和。同日飞书并入豆包，火山引擎接管销售。中国AI的胜负手不在模型参数，在分发。",
-        href: "notes/2026-07-30-bytedance-arr-40b.html"
+        title: "赚608亿现金流剩7.8亿，扎克伯格说卖算力太蠢",
+        desc: "Meta Q2营收608亿美元创历史新高，自由现金流却暴跌91%只剩7.84亿。扎克伯格拒绝卖算力说太蠢，一年要烧1450亿建AI基础设施。广告赚的钱全被AI吃掉了，Meta从印钞机变成碎钞机。",
+        href: "notes/2026-07-30-meta-cashflow-burn.html"
       }
     ],
     roadmap: [
@@ -185,6 +185,13 @@ window.SITE_DATA = {
     headingLine2: "慢慢记。",
     blurb: "每一篇笔记都是一次小型田野调查：关于模型、关于人、关于我们如何被这个时代重新塑形。",
     notes: [
+      {
+        cat: "财报分析", num: "N° 49",
+        title: "赚608亿现金流剩7.8亿，扎克伯格说卖算力太蠢",
+        excerpt: "Meta Q2营收608亿美元创历史新高，自由现金流却暴跌91%只剩7.84亿。扎克伯格拒绝卖算力说太蠢，一年要烧1450亿建AI基础设施。广告赚的钱全被AI吃掉了，Meta从印钞机变成碎钞机。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-07-30-meta-cashflow-burn.html"
+      },
       {
         cat: "行业观察", num: "N° 48",
         title: "40亿美元ARR，字节把中国AI的桌子掀了",

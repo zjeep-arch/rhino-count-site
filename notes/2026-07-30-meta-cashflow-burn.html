@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>赚608亿现金流剩7.8亿，扎克伯格说卖算力太蠢</title>
+  <meta name="description" content="Meta Q2营收608亿美元创历史新高，自由现金流却暴跌91%只剩7.84亿。扎克伯格拒绝卖算力说太蠢，一年要烧1450亿建AI基础设施。广告赚的钱全被AI吃掉了，Meta从印钞机变成碎钞机。">
+  <style>
+    :root {
+      --accent: #8b2635;
+      --accent-soft: #a53a4a;
+      --ink: #333;
+      --ink-soft: #555;
+      --muted: #888;
+      --surface: #fafafa;
+      --border: rgba(0,0,0,0.07);
+      --radius: 12px;
+      --font-sans: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-serif: "Noto Serif SC", "Songti SC", Georgia, serif;
+    }
+    * { box-sizing: border-box; }
+    body { font-family: var(--font-sans); background: #f0f0f0; margin: 0; padding: 24px 16px; font-size: 16px; line-height: 32px; color: var(--ink); -webkit-font-smoothing: antialiased; }
+    .container { max-width: 680px; margin: 0 auto; background: var(--surface); padding: 32px; border-radius: var(--radius); box-shadow: 0 2px 16px rgba(0,0,0,0.05); }
+    .cover-img { width: 100%; border-radius: 8px; margin-bottom: 24px; display: block; }
+    h1 { font-family: var(--font-serif); font-size: 24px; font-weight: 700; color: var(--ink); line-height: 40px; margin: 0 0 16px; }
+    .meta { color: var(--muted); font-size: 13px; margin-bottom: 8px; }
+    .byline { color: var(--ink-soft); font-size: 14px; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+    h2 { font-family: var(--font-serif); font-size: 20px; font-weight: 600; color: var(--ink); margin: 32px 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+    h3 { font-family: var(--font-serif); font-size: 18px; font-weight: 600; color: var(--accent); margin: 28px 0 12px; }
+    p { margin: 0 0 24px; }
+    .lead { font-size: 17px; color: var(--ink); }
+    .quote-box { border-left: 4px solid var(--accent); background: #f5f0f0; padding: 16px 20px; margin: 24px 0; border-radius: 0 var(--radius) var(--radius) 0; }
+    .quote-box p { margin: 0 0 8px; color: var(--ink-soft); font-style: italic; font-size: 15px; }
+    .quote-box p:last-child { margin-bottom: 0; }
+    .quote-box .attribution { margin-top: 8px; color: var(--muted); font-size: 13px; font-style: normal; }
+    .img-caption { text-align: center; color: var(--muted); font-size: 13px; margin-top: 8px; margin-bottom: 24px; }
+    .inline-img { width: 100%; border-radius: 8px; margin: 8px 0 0; display: block; }
+    .ending { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--ink-soft); font-size: 14px; }
+    .highlight { color: var(--accent); font-weight: 600; background: linear-gradient(to top, rgba(139,38,53,0.10) 40%, transparent 40%); padding: 0 2px; }
+    .punchline { font-family: var(--font-serif); font-size: 18px; font-weight: 700; color: var(--accent); text-align: center; margin: 32px 0; padding: 16px 0; border-top: 2px solid var(--accent); border-bottom: 2px solid var(--accent); }
+    .data-callout { display: inline-block; background: var(--accent); color: #fff; padding: 2px 10px; border-radius: 4px; font-weight: 700; font-size: 15px; }
+    .contrast-card { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin: 24px 0; border-radius: var(--radius); overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .contrast-card .side { padding: 16px 20px; }
+    .contrast-card .side-left { background: #fef2f2; border-right: 1px solid var(--border); }
+    .contrast-card .side-right { background: #f0fdf4; }
+    .contrast-card .side h4 { margin: 0 0 8px; font-size: 14px; font-weight: 600; }
+    .contrast-card .side-left h4 { color: #991b1b; }
+    .contrast-card .side-right h4 { color: #166534; }
+    .contrast-card .side p { margin: 0; font-size: 14px; color: var(--ink-soft); line-height: 24px; }
+    .data-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14px; }
+    .data-table th { background: var(--accent); color: #fff; padding: 10px 12px; text-align: left; font-weight: 600; }
+    .data-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    .data-table tr:last-child td { border-bottom: none; }
+    .data-table .label { color: var(--muted); font-size: 13px; }
+    .data-table .num { font-weight: 700; color: var(--ink); }
+    .data-table .change-down { color: #991b1b; font-weight: 600; }
+    .data-table .change-up { color: #166534; font-weight: 600; }
+    strong { color: var(--ink); font-weight: 600; }
+    @media (max-width: 480px) {
+      body { padding: 0; }
+      .container { padding: 20px 16px; border-radius: 0; }
+      .contrast-card { grid-template-columns: 1fr; }
+      .contrast-card .side-left { border-right: none; border-bottom: 1px solid var(--border); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img class="cover-img" src="https://aka.doubaocdn.com/s/z2OKjyS46x" alt="扎克伯格在Meta财报电话会议上阐述AI战略，背景为Meta正在建设的超大规模数据中心">
+    <div class="img-caption">扎克伯格在财报电话会上定调AI战略，但自由现金流的数字不太配合｜图源：第一财经</div>
+
+    <h1>赚608亿现金流剩7.8亿，扎克伯格说卖算力太蠢</h1>
+    <div class="meta">2026年7月30日 · 阅读时间约11分钟</div>
+    <div class="byline">文｜犀牛伯爵</div>
+
+    <p class="lead">7月29日盘后，Meta发了一份让人分裂的财报。</p>
+
+    <p>一面是营收<span class="data-callout">608亿</span>美元，同比增长28%，创历史新高。广告展示量涨14%，单价涨12%，日活用户36亿。怎么看都是一份漂亮的成绩单。</p>
+
+    <p>另一面是自由现金流只剩<span class="data-callout">7.84亿</span>美元，同比暴跌91%，四年最低。净利润158亿，同比下降14%。盘后股价一度跌超10%。</p>
+
+    <p>一个季度赚608亿的公司，口袋里只剩不到8亿的现金。</p>
+
+    <p>更绝的是，扎克伯格在电话会上说了一句话。有人问他，你GPU那么多，租给别人赚点钱呗。他说，卖算力太蠢了。</p>
+
+    <p class="punchline">赚着硅谷最多的钱，也烧着硅谷最多的钱。</p>
+
+    <h2>先看数字</h2>
+
+    <p>快速过一下这份财报的核心数据，不解释，就看数字。</p>
+
+    <table class="data-table">
+      <tr>
+        <th>指标</th>
+        <th>Q2 2026</th>
+        <th>同比变化</th>
+      </tr>
+      <tr>
+        <td class="label">营收</td>
+        <td class="num">608亿美元</td>
+        <td class="change-up">+28%</td>
+      </tr>
+      <tr>
+        <td class="label">每股收益</td>
+        <td class="num">6.18美元</td>
+        <td class="change-down">-13%</td>
+      </tr>
+      <tr>
+        <td class="label">净利润</td>
+        <td class="num">158.5亿美元</td>
+        <td class="change-down">-14%</td>
+      </tr>
+      <tr>
+        <td class="label">营业利润</td>
+        <td class="num">187.8亿美元</td>
+        <td class="change-down">-8%</td>
+      </tr>
+      <tr>
+        <td class="label">自由现金流</td>
+        <td class="num">7.84亿美元</td>
+        <td class="change-down">-91%</td>
+      </tr>
+      <tr>
+        <td class="label">资本支出</td>
+        <td class="num">310.8亿美元</td>
+        <td class="change-up">+83%</td>
+      </tr>
+      <tr>
+        <td class="label">总成本与费用</td>
+        <td class="num">420.3亿美元</td>
+        <td class="change-up">+55%</td>
+      </tr>
+    </table>
+
+    <p>营收涨28%，成本涨55%，资本支出涨83%。自由现金流跌91%。</p>
+
+    <p>所有增长的成本都在往一个方向涌，AI基础设施。</p>
+
+    <img class="inline-img" src="https://aka.doubaocdn.com/s/NYVaMSnqf2" alt="Meta Q2 2026营收608亿美元同比增长28%的财务数据图表">
+    <div class="img-caption">Meta Q2营收创新高，但利润端全面塌方｜图源：格隆汇</div>
+
+    <p>Q3营收指引610到640亿，中位数625亿，低于分析师预期的632亿。这意味着三季度增速会从28%放缓到19%到25%。</p>
+
+    <p>盘后股价一度跌超10%。财报发布前，Meta已经连跌10天，从7月15日到现在累计蒸发约13%的市值。</p>
+
+    <h2>广告是印钞机，AI是碎钞机</h2>
+
+    <p>这份财报最值得聊的不是某个单独的数字，是一个结构性的矛盾。</p>
+
+    <p>Meta现在做的事情，用大白话说就是，拿广告赚的钱去养AI。</p>
+
+    <p>广告业务是Meta的印钞机。一个季度608亿营收里，593亿是广告。36亿日活用户，广告展示量涨14%，单价涨12%。这台机器还在加速运转。扎克伯格说"AI正在加速我们今天的核心业务"，这话没毛病，AI确实在提升广告效率。</p>
+
+    <p>但AI同时也是Meta的碎钞机。一个季度310.8亿资本支出，主要是数据中心和GPU。全年要花1300到1450亿美元。路易斯安那州的Hyperion数据中心，一个项目投了500亿。得州埃尔帕索跟贝莱德合作，又是一个140亿。加拿大阿尔伯塔省还有90亿。</p>
+
+    <img class="inline-img" src="https://aka.doubaocdn.com/s/MImBgYFjU8" alt="Meta超大规模数据中心建设现场，占地巨大，远景可见成排的GPU机房">
+    <div class="img-caption">Meta在路易斯安那州的Hyperion数据中心，总投资超500亿美元，5GW算力容量｜图源：第一财经</div>
+
+    <p>广告赚进来的钱，几乎全部被AI吃掉了。</p>
+
+    <p>你算一笔账就知道了。Q2经营现金流318.6亿，扣掉310.8亿资本支出，自由现金流只剩7.84亿。也就是说，Meta一个季度赚到的现金，在付完AI基础设施之后，基本见底了。</p>
+
+    <p>按这个趋势，有分析指出，Meta的自由现金流下一季度大概率转负。上周谷歌的自由现金流已经史上首次转负了。Meta在走同一条路。</p>
+
+    <div class="contrast-card">
+      <div class="side side-left">
+        <h4>经营现金流</h4>
+        <p>318.6亿美元<br>看似健康</p>
+      </div>
+      <div class="side side-right">
+        <h4>资本支出</h4>
+        <p>310.8亿美元<br>吃掉了97.5%</p>
+      </div>
+    </div>
+
+    <p>但Meta和谷歌有一个关键区别。谷歌有Google Cloud可以卖算力，亚马逊有AWS，微软有Azure。Meta没有。</p>
+
+    <p>Meta是一家广告公司。它没有成熟的云计算业务可以直接变现AI投入。它的AI投入全部要靠广告收入来反哺。这是Meta在这场AI军备竞赛里最大的结构性劣势。</p>
+
+    <h2>"卖算力太蠢了"背后的账本</h2>
+
+    <p>电话会上有分析师问了一个很自然的问题。你有那么多GPU，有人出高价租，为什么不租？</p>
+
+    <p>扎克伯格的回答很直接。他承认收到了大量远高于成本价的GPU租赁报价，但认为仅仅出售计算能力获取短期利润是愚蠢的。</p>
+
+    <div class="quote-box">
+      <p>"销售智能的利润率，将持续显著高于直接销售计算小时。"</p>
+      <div class="attribution">马克·扎克伯格，Meta Q2财报电话会议，2026年7月29日</div>
+    </div>
+
+    <p>他的算盘是这样的。把GPU租给外部客户，今天能多赚几十亿。但如果Meta自己的AI产品需要这些算力来构建竞争壁垒，那区区几十亿的卖算力收入就是捡了芝麻丢了西瓜。</p>
+
+    <p>这个判断长期来看可能是对的。如果Meta的AI产品能跑通，模型API、企业代理服务、个性化推荐这些东西的利润率确实比卖GPU时间高。</p>
+
+    <p>问题是，这些产品现在还没跑通。</p>
+
+    <p>扎克伯格自己说，已有超过100万家企业在WhatsApp和Messenger上使用Meta商业代理。但这个数字在608亿的季度营收面前，几乎可以忽略不计。Reality Labs一个季度营收4.31亿，运营亏损46亿。AI业务的独立营收数据，Meta还没有单独披露。</p>
+
+    <p>也就是说，扎克伯格在拒绝一个确定能赚钱的路径，赌一个还没赚钱的路径。</p>
+
+    <p>这不是蠢，是赌。赌的是"卖智能"比"卖算力"更值钱。赌的是Meta能在这个周期里建出别人建不出的东西。但赌就有输的可能。</p>
+
+    <h2>扎克伯格自己说，开源不如前沿模型</h2>
+
+    <p>财报前后，扎克伯格还有几段关于开源的表态，值得细品。</p>
+
+    <p>他一方面高调支持开源，反对封禁中国AI模型，说这样只会让OpenAI和Anthropic获利。英伟达的黄仁勋也跟着站队，说中国模型很优秀应该被使用，华尔街低估了DeepSeek和Kimi的影响。</p>
+
+    <p>另一方面，扎克伯格自己在电话会上说了一句很关键的话。</p>
+
+    <div class="quote-box">
+      <p>"开源模型仍然不如前沿模型强大，所以Meta不会单一依赖开源模型。"</p>
+      <div class="attribution">马克·扎克伯格，Meta Q2财报电话会议</div>
+    </div>
+
+    <p>这句话翻译一下就是，Llama是生态武器，不是核心竞争力。</p>
+
+    <p>Meta推Llama，降低全行业的推理成本，让更多开发者在开源生态上构建应用。这对Meta有利，因为Meta需要低成本的AI生态来支撑自己的广告和智能体系统。但Meta自己真正押注的，是闭源的前沿模型。扎克伯格说不会在开源和闭源之间"采取教条主义态度"，会全栈投入把两者结合。</p>
+
+    <p>这个策略是理性的。但它也意味着，Meta在开源上投入的资源不会直接产生回报。Llama是基础设施投资，不是利润中心。而Meta现在最缺的就是利润中心。</p>
+
+    <h2>华尔街说买，但有一个问题没人回答</h2>
+
+    <img class="inline-img" src="https://aka.doubaocdn.com/s/ybBAUvrSVq" alt="Meta股价盘后大跌超过10%的走势图，显示连续10个交易日的下跌趋势">
+    <div class="img-caption">Meta盘后一度跌超10%，财报前已连跌10天｜图源：格隆汇</div>
+
+    <p>财报出来之后，美银给了买入评级，目标价835美元。高盛也给了买入，目标价815美元。德银小幅下调到800，但维持买入。</p>
+
+    <p>华尔街的逻辑是，AI投入是长期赌注，短期利润波动不影响长期价值。扎克伯格在构建下一代计算平台，值得等待。</p>
+
+    <p>这个逻辑有一个前提没被验证，广告业务能持续产生足够的现金来覆盖AI投入。</p>
+
+    <p>但Q2的数据已经在动摇这个前提了。自由现金流暴跌91%，Q3指引低于预期。如果下一季度自由现金流转负，Meta就需要动用现金储备或者借钱来维持AI投入。</p>
+
+    <p>Meta手上有902.6亿现金和有价证券，长期债务836.6亿。现金和债务几乎持平。如果自由现金流持续为负，这个缓冲并不厚。</p>
+
+    <p>更关键的是，Meta刚刚裁了8000人，付了11.8亿遣散费。一边裁员一边花310亿买GPU，这个画面的冲击力比任何财报数字都强。扎克伯格在用人的成本换机器的成本。</p>
+
+    <p>CFO苏珊·李拒绝给出2027年的资本支出指引，只说"最大化2026到2027年的产能"。对2028年及以后的策略是"先圈地、圈电、圈网络"，推迟服务器采购以保持灵活性。</p>
+
+    <p>怎么说呢，翻译过来就是，我们也不知道什么时候能停下来。</p>
+
+    <img class="inline-img" src="https://aka.doubaocdn.com/s/JtlJseO2xn" alt="Meta自由现金流从85.5亿美元暴跌至7.84亿美元的对比图，跌幅91%">
+    <div class="img-caption">自由现金流暴跌91%，这是2022年三季度以来近四年最低｜图源：智通财经</div>
+
+    <h2>接下来盯三件事</h2>
+
+    <p>短期内有三个指标比股价更值得看。</p>
+
+    <p><strong>第一，自由现金流会不会转负。</strong>Q2是7.84亿，Q1是123.9亿。如果Q3转负，市场反应会比这次更剧烈。谷歌上周自由现金流首次转负，股价也跌了。但谷歌有云业务回血，Meta没有。</p>
+
+    <p><strong>第二，AI变现的进展。</strong>扎克伯格说要发展面向大型企业客户的规模化业务。Meta发布了Muse Spark 1.1模型，定价低于OpenAI和Anthropic。如果这个产品能跑量，至少能证明"卖智能"不是空话。但目前连独立营收数据都没有披露。</p>
+
+    <p><strong>第三，资本支出的拐点。</strong>全年指引1300到1450亿，如果Q3或Q4上调上限，说明烧钱还没到头。如果维持或下调，可能意味着投入周期接近峰值。CFO不给2027年指引这件事本身，就说明管理层自己也不确定。</p>
+
+    <p>我自己目前的看法是，Meta的AI赌注方向可能是对的，但节奏可能太激进了。一个季度310亿的资本支出，全年1300到1450亿，这个数字放在全球任何科技公司身上都是史无前例的。也可能我错了，也许扎克伯格看到的未来比财报数字能反映的更清晰。但至少在自由现金流转正之前，这个赌注的风险是被市场低估的。</p>
+
+    <h2>对普通人意味着什么</h2>
+
+    <p>如果你在科技行业或者投资科技股，Meta这份财报值得认真看。不是因为它告诉你AI有多火，是因为它告诉你AI有多贵。</p>
+
+    <p>一个季度赚608亿的公司，自由现金流只剩7.8亿。这不是亏损公司的故事，这是盈利公司在被AI投入吞噬的故事。和谷歌一样，Meta正在经历从"印钞机"到"碎钞机"的转变。</p>
+
+    <p>如果你不在科技行业，记住一个数字。1300到1450亿美元。这是Meta一年要花在AI基础设施上的钱。这个数字比很多国家的GDP还大。</p>
+
+    <p>扎克伯格在赌，赌AI的回报会覆盖这笔投入。他可能赌赢，也可能赌输。但无论结果如何，这个赌注本身已经说明，AI的军备竞赛到了一个什么样的量级。</p>
+
+    <p class="punchline">这不是某家公司的财报故事，是整个AI行业烧钱速度的缩影。</p>
+
+    <p>聊到这里我突然想起一个事。当年亚马逊连续亏损了十几年，贝佐斯咬着牙往基础设施里砸钱，华尔街天天喊他止血，他不动。后来亚马逊成了全球最大的云计算公司。扎克伯格现在做的事，和贝佐斯当年有点像。</p>
+
+    <p>但有一个区别。贝佐斯砸钱的时候，AWS还没人做，他是在建一个全新的市场。扎克伯格砸钱的时候，OpenAI、谷歌、微软都已经跑在前面了。他不是在建新市场，是在追赶。</p>
+
+    <p>追赶的赌注，比拓荒的赌注，风险大得多。</p>
+
+    <div class="ending">
+      <p>谢谢你看我的文章。</p>
+      <p style="font-size: 13px; color: var(--muted); margin-top: 8px;">参考信源：第一财经、格隆汇、智通财经、IT之家、凤凰科技、华尔街见闻</p>
+    </div>
+  </div>
+</body>
+</html>
