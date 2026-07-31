@@ -127,9 +127,9 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
-        title: "Luna砍到两折，OpenAI真正的刀藏在Sol身上",
-        desc: "OpenAI把GPT-5.6 Luna砍到两折，所有人喊价格战。但Sol没降价反而加了个Fast模式收两倍钱。这不是让利，是分层收割，底层绞杀开源、中层安抚企业、顶层加价提速。",
-        href: "notes/2026-07-31-openai-tiered-pricing-sol-fast.html"
+        title: "同一夜微软涨8%Meta崩11%，AI的钱到底谁在赚",
+        desc: "7月29日盘后微软和Meta同时亮财报，市场给出截然相反的判决。微软Azure破1000亿涨8%，Meta自由现金流-91%崩11%。AI投资逻辑一夜变天，从烧钱叙事转向回报验证。",
+        href: "notes/2026-07-31-msft-meta-earnings-divergence.html"
       }
     ],
     roadmap: [
@@ -185,6 +185,13 @@ window.SITE_DATA = {
     headingLine2: "慢慢记。",
     blurb: "每一篇笔记都是一次小型田野调查：关于模型、关于人、关于我们如何被这个时代重新塑形。",
     notes: [
+      {
+        cat: "财报分析", num: "N° 52",
+        title: "同一夜微软涨8%Meta崩11%，AI的钱到底谁在赚",
+        excerpt: "7月29日盘后，微软Azure收入+43%全年破1000亿涨8%，Meta自由现金流暴跌91%只剩7.84亿崩11%。同一天同行业相反命运，AI投资逻辑从烧钱叙事转向回报验证。微软跑通了花钱到回本的闭环，Meta还卡在花钱没回本的阶段。这不是泡沫破裂，是估值重校准。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-07-31-msft-meta-earnings-divergence.html"
+      },
       {
         cat: "行业观察", num: "N° 51",
         title: "Luna砍到两折，OpenAI真正的刀藏在Sol身上",
