@@ -127,9 +127,9 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
-        title: "利润涨262%却破发，但5万亿AI基建不会停",
-        desc: "中际旭创港股上市首日破发，Q1利润暴涨262%却跌超8%。智谱腰斩、MiniMax暴跌，整个AI板块在恐慌。但美国五大云厂商用5.8万亿美元建数据中心，光模块是AIDC的血管。市场可以恐惧，但基础设施不会因为恐惧就不建了。",
-        href: "notes/2026-07-30-innolight-ipo-panic-opportunity.html"
+        title: "Luna砍到两折，OpenAI真正的刀藏在Sol身上",
+        desc: "OpenAI把GPT-5.6 Luna砍到两折，所有人喊价格战。但Sol没降价反而加了个Fast模式收两倍钱。这不是让利，是分层收割，底层绞杀开源、中层安抚企业、顶层加价提速。",
+        href: "notes/2026-07-31-openai-tiered-pricing-sol-fast.html"
       }
     ],
     roadmap: [
@@ -185,6 +185,13 @@ window.SITE_DATA = {
     headingLine2: "慢慢记。",
     blurb: "每一篇笔记都是一次小型田野调查：关于模型、关于人、关于我们如何被这个时代重新塑形。",
     notes: [
+      {
+        cat: "行业观察", num: "N° 51",
+        title: "Luna砍到两折，OpenAI真正的刀藏在Sol身上",
+        excerpt: "OpenAI把GPT-5.6 Luna砍到两折，所有人喊价格战。但Sol没降价反而加了个Fast模式收两倍钱。这不是让利，是分层收割，底层绞杀开源、中层安抚企业、顶层加价提速。Sol的Fast模式才是真正的杀招，它在把定价权从按token重构为按性能维度分层。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-07-31-openai-tiered-pricing-sol-fast.html"
+      },
       {
         cat: "行业观察", num: "N° 50",
         title: "利润涨262%却破发，但5万亿AI基建不会停",
