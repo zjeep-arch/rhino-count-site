@@ -127,9 +127,9 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
-        title: "同一夜微软涨8%Meta崩11%，AI的钱到底谁在赚",
-        desc: "7月29日盘后微软和Meta同时亮财报，市场给出截然相反的判决。微软Azure破1000亿涨8%，Meta自由现金流-91%崩11%。AI投资逻辑一夜变天，从烧钱叙事转向回报验证。",
-        href: "notes/2026-07-31-msft-meta-earnings-divergence.html"
+        title: "开源模型白送还融了35亿，月之暗面收的是什么税",
+        desc: "月之暗面把2.8万亿参数Kimi K3开源白送，转头融了35亿估值500亿。开源不是慈善，是更聪明的收税方式，免费送地基，收API过路费。DeepSeek已跑通这条路，年入4-5亿美元。",
+        href: "notes/2026-07-31-kimi-open-source-funding-tax.html"
       }
     ],
     roadmap: [
@@ -185,6 +185,13 @@ window.SITE_DATA = {
     headingLine2: "慢慢记。",
     blurb: "每一篇笔记都是一次小型田野调查：关于模型、关于人、关于我们如何被这个时代重新塑形。",
     notes: [
+      {
+        cat: "行业观察", num: "N° 53",
+        title: "开源模型白送还融了35亿，月之暗面收的是什么税",
+        excerpt: "月之暗面把Kimi K3完全开源还融了35亿美元估值500亿。开源不是慈善，是更聪明的收税方式，免费送地基收API过路费。DeepSeek已跑通这条路年入4-5亿。开源省的是许可费不是使用费，终局不是免费而是换一种方式把所有人绑在你的地基上。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-07-31-kimi-open-source-funding-tax.html"
+      },
       {
         cat: "财报分析", num: "N° 52",
         title: "同一夜微软涨8%Meta崩11%，AI的钱到底谁在赚",
