@@ -127,6 +127,12 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "被挤出前五的Anthropic，满世界喊被偷了",
+        desc: "OpenRouter周榜前五全是国产，Anthropic掉出榜单。蒸馏指控是败者的供词，当一家公司用律师函而非产品竞争，游戏已经结束。中国模型63.5%份额碾压美国35.5%。",
+        href: "notes/2026-08-02-anthropic-accusation.html"
+      },
+      {
+        type: "Essay",
         title: "开源模型白送还融了35亿，月之暗面收的是什么税",
         desc: "月之暗面把2.8万亿参数Kimi K3开源白送，转头融了35亿估值500亿。开源不是慈善，是更聪明的收税方式，免费送地基，收API过路费。DeepSeek已跑通这条路，年入4-5亿美元。",
         href: "notes/2026-07-31-kimi-open-source-funding-tax.html"
@@ -185,6 +191,13 @@ window.SITE_DATA = {
     headingLine2: "慢慢记。",
     blurb: "每一篇笔记都是一次小型田野调查：关于模型、关于人、关于我们如何被这个时代重新塑形。",
     notes: [
+      {
+        cat: "行业观察", num: "N° 54",
+        title: "被挤出前五的Anthropic，满世界喊被偷了",
+        excerpt: "OpenRouter最新周榜前五全是国产模型，Anthropic掉出榜单。一边指控中国模型蒸馏Claude，一边被全球开发者用脚投票挤出去。蒸馏指控是败者的供词。当一家公司开始用律师函而不是产品来竞争，游戏已经结束了。中国模型63.5%份额碾压美国35.5%，80%美国AI初创公司在用中国开源模型。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-08-02-anthropic-accusation.html"
+      },
       {
         cat: "行业观察", num: "N° 53",
         title: "开源模型白送还融了35亿，月之暗面收的是什么税",
