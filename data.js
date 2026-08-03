@@ -127,8 +127,8 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
-        title: "8万亿Token不是喜报，是AI模型变成水电煤",
-        desc: "DeepSeek单日8万亿Token，5万亿白送。OpenAI降80%还追不上，前五全是中国模型。但份额不等于利润，价格坍缩的终点是commodity化。AI模型正在变成新时代的光纤，赢家不是做模型的人，是用模型的人。",
+        title: "模型白送的时代，用模型的人才是新地主",
+        desc: "DeepSeek单日8万亿Token，模型价格坍缩到接近零。当AI模型变成水电煤，做模型的人利润归零，用模型解决问题的人迎来黄金时代。四波人的命运正在分岔，你的位置在哪？",
         href: "notes/2026-08-03-deepseek-8t-token-commodity.html"
       },
       {
@@ -199,8 +199,8 @@ window.SITE_DATA = {
     notes: [
       {
         cat: "行业观察", num: "N° 55",
-        title: "8万亿Token不是喜报，是AI模型变成水电煤",
-        excerpt: "DeepSeek V4-Flash单日8万亿Token，5万亿免费3万亿付费。OpenAI降80%还追不上，前五全是中国模型。但份额不等于利润，8万亿不是喜报是AI模型变成水电煤的信号弹。98%缓存折扣把推理成本逼近零，模型正在从产品变成基础设施，利润会从模型层迁移到应用层。",
+        title: "模型白送的时代，用模型的人才是新地主",
+        excerpt: "DeepSeek单日8万亿Token，模型价格坍缩到接近零。当AI模型变成水电煤，价值链重新分配。模型层利润归零，中间层新巨头冒头，应用层成最大金矿。四波人命运分岔：懂行业用模型的人黄金时代来了，只会调prompt的人技能贬值。五件现在就该做的事。",
         img: "assets/note-05.svg",
         href: "notes/2026-08-03-deepseek-8t-token-commodity.html"
       },
