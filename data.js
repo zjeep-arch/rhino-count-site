@@ -127,6 +127,12 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "8万亿Token不是喜报，是AI模型变成水电煤",
+        desc: "DeepSeek单日8万亿Token，5万亿白送。OpenAI降80%还追不上，前五全是中国模型。但份额不等于利润，价格坍缩的终点是commodity化。AI模型正在变成新时代的光纤，赢家不是做模型的人，是用模型的人。",
+        href: "notes/2026-08-03-deepseek-8t-token-commodity.html"
+      },
+      {
+        type: "Essay",
         title: "被挤出前五的Anthropic，满世界喊被偷了",
         desc: "OpenRouter周榜前五全是国产，Anthropic掉出榜单。蒸馏指控是败者的供词，当一家公司用律师函而非产品竞争，游戏已经结束。中国模型63.5%份额碾压美国35.5%。",
         href: "notes/2026-08-02-anthropic-accusation.html"
@@ -191,6 +197,13 @@ window.SITE_DATA = {
     headingLine2: "慢慢记。",
     blurb: "每一篇笔记都是一次小型田野调查：关于模型、关于人、关于我们如何被这个时代重新塑形。",
     notes: [
+      {
+        cat: "行业观察", num: "N° 55",
+        title: "8万亿Token不是喜报，是AI模型变成水电煤",
+        excerpt: "DeepSeek V4-Flash单日8万亿Token，5万亿免费3万亿付费。OpenAI降80%还追不上，前五全是中国模型。但份额不等于利润，8万亿不是喜报是AI模型变成水电煤的信号弹。98%缓存折扣把推理成本逼近零，模型正在从产品变成基础设施，利润会从模型层迁移到应用层。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-08-03-deepseek-8t-token-commodity.html"
+      },
       {
         cat: "行业观察", num: "N° 54",
         title: "被挤出前五的Anthropic，满世界喊被偷了",

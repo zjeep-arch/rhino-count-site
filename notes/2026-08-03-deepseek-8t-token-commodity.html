@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>8万亿Token不是喜报，是AI模型变成水电煤 | 犀牛伯爵</title>
+  <meta name="description" content="DeepSeek V4-Flash单日8万亿Token，OpenRouter前五全是中国模型。但8万亿Token不是胜利，是AI模型变成基础设施的信号弹。当模型价格坍缩到接近零，真正的赢家不在模型层。">
+  <style>
+    :root {
+      --accent: #8b2635;
+      --ink: #333;
+      --ink-soft: #555;
+      --muted: #888;
+      --surface: #fafafa;
+      --border: rgba(0,0,0,0.06);
+      --radius: 12px;
+      --font-sans: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-serif: "Noto Serif SC", "Songti SC", Georgia, serif;
+    }
+    body { font-family: var(--font-sans); background: #f5f5f5; margin: 0; padding: 16px; font-size: 16px; line-height: 1.8; color: var(--ink); -webkit-font-smoothing: antialiased; }
+    .container { max-width: 680px; margin: 0 auto; background: var(--surface); padding: 32px; border-radius: var(--radius); }
+    .cover-img { width: 100%; border-radius: 8px; margin-bottom: 24px; }
+    h1 { font-family: var(--font-serif); font-size: 24px; font-weight: 700; color: var(--ink); line-height: 1.4; margin: 0 0 16px; }
+    .meta { color: var(--muted); font-size: 13px; margin-bottom: 16px; }
+    .byline { color: var(--ink-soft); font-size: 14px; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+    h2 { font-family: var(--font-serif); font-size: 20px; font-weight: 600; color: var(--ink); margin: 32px 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+    h3 { font-family: var(--font-serif); font-size: 18px; font-weight: 600; color: var(--ink); margin: 24px 0 12px; }
+    p { margin: 0 0 24px; }
+    .quote-box { border-left: 4px solid var(--accent); background: #f5f5f5; padding: 16px 20px; margin: 24px 0; border-radius: 0 var(--radius) var(--radius) 0; }
+    .quote-box p { margin: 0; color: var(--ink-soft); font-style: italic; font-size: 15px; }
+    .quote-box .attribution { margin-top: 8px; color: var(--muted); font-size: 13px; font-style: normal; }
+    .insight-box { background: #fff8f0; border: 1px solid #ffe4c4; border-radius: var(--radius); padding: 20px; margin: 24px 0; }
+    .insight-box h4 { margin: 0 0 8px; font-size: 16px; color: var(--ink); }
+    .insight-box p { margin: 0; font-size: 15px; color: var(--ink-soft); }
+    .data-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14px; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .data-table th, .data-table td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); }
+    .data-table th { background: #f0f0f0; font-weight: 600; color: var(--ink); }
+    .data-table td { color: var(--ink-soft); }
+    .timeline { position: relative; padding-left: 24px; margin: 24px 0; }
+    .timeline::before { content: ''; position: absolute; left: 6px; top: 0; bottom: 0; width: 2px; background: #e0e0e0; }
+    .timeline-item { position: relative; margin-bottom: 16px; }
+    .timeline-item::before { content: ''; position: absolute; left: -22px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); }
+    .timeline-item .date { font-size: 13px; color: var(--muted); margin-bottom: 4px; }
+    .timeline-item .content { font-size: 15px; color: var(--ink); }
+    .img-caption { text-align: center; color: var(--muted); font-size: 13px; margin-top: 8px; margin-bottom: 24px; }
+    .ending { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--ink-soft); font-size: 14px; }
+    .highlight { color: var(--accent); font-weight: 600; background: linear-gradient(to top, rgba(139,38,53,0.08) 40%, transparent 40%); padding: 0 2px; }
+    .data-callout { display: inline-block; background: var(--accent); color: #fff; padding: 2px 10px; border-radius: 4px; font-weight: 700; font-size: 15px; }
+    .contrast-card { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin: 24px 0; border-radius: var(--radius); overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .contrast-card .side { padding: 16px 20px; }
+    .contrast-card .side-left { background: #fef2f2; border-right: 1px solid var(--border); }
+    .contrast-card .side-right { background: #f0fdf4; }
+    .contrast-card .side h4 { margin: 0 0 8px; font-size: 14px; font-weight: 600; }
+    .contrast-card .side-left h4 { color: #991b1b; }
+    .contrast-card .side-right h4 { color: #166534; }
+    .contrast-card .side p { margin: 0; font-size: 14px; color: var(--ink-soft); line-height: 1.6; }
+    .punchline { font-family: var(--font-serif); font-size: 18px; font-weight: 700; color: var(--accent); text-align: center; margin: 32px 0; padding: 16px 0; border-top: 2px solid var(--accent); border-bottom: 2px solid var(--accent); }
+    strong { color: var(--ink); font-weight: 600; }
+    .article-img { width: 100%; border-radius: 8px; margin: 24px 0 8px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img class="cover-img" src="2026-08-03-deepseek-commodity-cover.jpg" alt="AI模型通过工业管道和电网传输，从尖端科技变成基础设施的意象插图">
+    <h1>8万亿Token不是喜报，是AI模型变成水电煤</h1>
+    <div class="meta">2026年8月3日 · 阅读时间约12分钟</div>
+    <div class="byline">文｜犀牛伯爵</div>
+
+    <p>8万亿Token。</p>
+
+    <p>这是2026年8月1日，DeepSeek V4-Flash正式版上线后的单日处理量。5600万本《三体》的文字量，24小时内被一个模型吞下去又吐出来。</p>
+
+    <p>所有自媒体都在喊"DeepSeek赢了""Token战争胜负已分""中国AI碾压"。</p>
+
+    <p>说真的，我看完这些标题，第一个反应不是兴奋，是心里咯噔了一下。</p>
+
+    <p>因为8万亿这个数字，不是喜报。它更像一份诊断书，上面写着，AI模型正在变成水电煤。</p>
+
+    <h2>先看看发生了什么</h2>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="date">7月31日</div>
+        <div class="content">DeepSeek V4-Flash正式版API上线公测。MoE架构，总参数2840亿，激活130亿，支持100万Token上下文。Artificial Analysis智能指数50分，GPT-5.6 Luna是51分，差1分。</div>
+      </div>
+      <div class="timeline-item">
+        <div class="date">同一天</div>
+        <div class="content">OpenAI把GPT-5.6 Luna价格砍80%。输出从每百万Token 6美元降到1.2美元，输入从1美元降到0.2美元。这两款模型正式发布才三周。</div>
+      </div>
+      <div class="timeline-item">
+        <div class="date">8月3日</div>
+        <div class="content">海外开发者平台OpenCode发文，DeepSeek V4-Flash单日处理8万亿Token，其中5万亿免费试用，3万亿付费。OpenRouter周报显示DeepSeek以7.22万亿Token周调用量登顶全球第一。</div>
+      </div>
+    </div>
+
+    <p>更刺眼的是榜单。OpenRouter全球调用量前五，清一色中国模型。DeepSeek V4-Flash、小米MiMo-V2.5、腾讯混元3、DeepSeek V4 Pro、智谱GLM-5.2。中国模型总份额63.5%，美国35.5%，差距连续十四周拉大。</p>
+
+    <img class="article-img" src="https://aka.doubaocdn.com/s/XJCpU1GVrV" alt="OpenRouter全球调用量排行榜，前五名全部是中国模型">
+    <div class="img-caption">OpenRouter全球调用量榜，前五全是中国模型（图源：腾讯新闻）</div>
+
+    <p>OpenAI核心产品负责人Tibo跑到OpenCode评论区给Luna打广告，被开发者一句话怼回去，"我们希望得到DeepSeek的价格。"</p>
+
+    <p>场面一度非常尴尬。</p>
+
+    <h2>8万亿Token里藏着什么</h2>
+
+    <p>说说我的判断。</p>
+
+    <p>8万亿Token看起来是DeepSeek的高光时刻，但你把数字掰开看，会发现一件让人不安的事。8万亿里5万亿是白送的。剩下3万亿付费的，DeepSeek的定价是什么水平？缓存命中时输入0.2元/百万Token，输出2元/百万Token。缓存命中率98%，也就是说绝大部分调用只按标价的2%计费。</p>
+
+    <p>这个价格低到什么程度？第三方实测，DeepSeek V4-Flash单次任务平均成本<span class="data-callout">3美分</span>。海外同类高端模型3.5美元。差了一百倍。</p>
+
+    <p>一百倍。</p>
+
+    <p>当你把价格打到对手的百分之一，你不是在竞争，你是在把行业拖进一个新阶段。这个阶段叫commodity化，中文叫大宗商品化。</p>
+
+    <p>大宗商品有个特点，谁家的都差不多，买谁主要看价格。石油、钢铁、水泥、电力。你不会在乎你家插座里的电是哪个电厂发的，因为它都一样。</p>
+
+    <p>AI模型正在变成这个样子。</p>
+
+    <div class="contrast-card">
+      <div class="side side-left">
+        <h4>DeepSeek V4-Flash</h4>
+        <p>智能指数50分<br>单次任务3美分<br>缓存折扣98%<br>284B总参/13B激活</p>
+      </div>
+      <div class="side side-right">
+        <h4>GPT-5.6 Luna</h4>
+        <p>智能指数51分<br>降价后仍贵60%<br>缓存折扣90%（行业均值）<br>OpenAI闭源架构</p>
+      </div>
+    </div>
+
+    <p>DeepSeek V4-Flash拿50分，GPT-5.6 Luna拿51分。差1分。但DeepSeek便宜了60%。如果你是一个要做批量文档处理、代码辅助、智能体自动化的开发者，你会选谁？答案写在OpenRouter的榜单上了。</p>
+
+    <p>当模型之间的性能差距缩小到可以忽略，价格就成了唯一变量。而当价格成了唯一变量，模型本身就从"产品"变成了"基础设施"。</p>
+
+    <p class="punchline">这就是为什么我说8万亿Token不是喜报。</p>
+
+    <h2>价格坍缩的数学题</h2>
+
+    <p>我把这个判断拆成三个层面讲。</p>
+
+    <p>第一个层面，价格到底怎么坍的。</p>
+
+    <p>DeepSeek的98%缓存命中折扣是个很恐怖的数字。业内普遍的缓存折扣是90%，也就是命中缓存按标价10%计费。DeepSeek直接干到2%。如果一个开发者的调用模式高度重复，比如批量处理相似格式的文档，他的实际成本可以低到几乎免费。</p>
+
+    <p>OpenAI怎么追？Luna降了80%，看起来力度很大。但降价后的Luna，单任务成本仍比DeepSeek高约60%。因为DeepSeek不只是单价低，它的缓存机制把实际支出又压下去一个数量级。</p>
+
+    <img class="article-img" src="https://aka.doubaocdn.com/s/fOsTTnnS83" alt="DeepSeek V4-Flash上线后单日调用量飙升至8万亿Token的数据图">
+    <div class="img-caption">DeepSeek V4-Flash上线不到一周，单日调用量飙升至8万亿Token（图源：腾讯新闻）</div>
+
+    <p>这不是价格战，这是价格屠杀。OpenAI降80%还追不上，不是OpenAI不够努力，是DeepSeek选了一条完全不同的成本曲线。MoE架构2840亿参数只激活130亿，等于你有2840个专家但每次只请130个出来干活，其他都在休息。推理成本天然就低。</p>
+
+    <p>再加上98%的缓存折扣，DeepSeek实际上在告诉整个行业一件事，模型推理的边际成本可以逼近零。</p>
+
+    <h2>前五全是中国模型，不是中国赢了</h2>
+
+    <p>第二个层面，前五全是中国模型的含义。</p>
+
+    <p>很多人看到OpenRouter前五全是中国模型，第一反应是民族自豪感。我理解这种情绪，但这不是正确的读法。</p>
+
+    <p>前五全是中国的，不等于中国模型性能最强。它意味着中国模型在"性价比"这个维度上碾压了所有对手。而性价比碾压的底层逻辑，是价格足够低，低到开发者不需要犹豫。</p>
+
+    <p>想想看，如果DeepSeek V4-Flash和GPT-5.6 Luna性能差1分，但价格差60%，任何一个理性的开发者都会选便宜的。不是因为便宜的好，而是那1分的差距不值得多花60%的钱。</p>
+
+    <p>所以前五全是中国模型，翻译成人话就是，中国模型把价格打到了让性能差异变得不重要的程度。这不是技术胜利，是成本结构胜利。而成本结构胜利的终点，就是commodity化。</p>
+
+    <p>中国模型份额63.5%，美国35.5%。但你再想想，63.5%的份额背后，利润率是多少？DeepSeek V4-Flash单次任务3美分，扣掉算力成本、带宽、运营，利润能有多少？当你的价格是对手的百分之一，你的利润也大概率是对手的百分之一。</p>
+
+    <p>份额大不等于赚钱多。水电煤的份额都很大，但电厂和自来水公司的利润率，你心里有数。</p>
+
+    <h2>5万亿白送意味着什么</h2>
+
+    <p>第三个层面，也是最关键的数字。</p>
+
+    <p>8万亿Token里5万亿是免费的。这个数字很多人一笔带过，但我觉得这才是全文最重要的一个数。</p>
+
+    <p>5万亿免费意味着，DeepSeek的8万亿里，超过60%是没有收入的。这些免费调用是在培养用户习惯，抢占开发者心智。跟互联网早期的免费策略一模一样，先用免费把人圈进来，等他们离不开你了再变现。</p>
+
+    <p>但问题是，当你已经把付费价格打到3美分，你未来的变现空间在哪？一个已经习惯了3美分单次任务的开发者，你涨价他会立刻跑路，因为旁边的智谱GLM-5.2也便宜，小米MiMo-V2.5也在等着。</p>
+
+    <p>这就像共享单车大战。满大街免费骑车的时候，谁都觉得是好事。等需要赚钱的时候，发现用户已经被9.9包月惯坏了，涨价是不可能的。</p>
+
+    <p>我不是说DeepSeek做错了。低成本策略在当下是对的。但8万亿Token里有5万亿白送，这个数字提醒我们，Token经济的繁荣，很大一部分是补贴出来的。</p>
+
+    <h2>主流观点哪里不对</h2>
+
+    <p>现在说说几种主流说法的问题。</p>
+
+    <p>第一种，"中国AI赢了"。前面已经讲过了，份额不等于利润，价格优势不等于技术优势。DeepSeek V4-Flash在Agent任务上确实强，但在深度逻辑推理、复杂多模态理解上，跟全球顶尖旗舰模型仍有差距。赢了一场价格战不等于赢了整场AI竞赛。</p>
+
+    <p>第二种，"Token战争胜负已分"。太早了。7月31日才上线的模型，8月3日就说胜负已分？OpenAI上周Luna降价后首次上榜就暴涨456%，说明降价是有效的。这场战争离结束还远，现在只是第一轮大规模交锋。</p>
+
+    <img class="article-img" src="https://aka.doubaocdn.com/s/NcqfMaT4T1" alt="OpenAI宣布Luna降价80%应对DeepSeek竞争">
+    <div class="img-caption">OpenAI宣布Luna降价80%应对竞争，但开发者依然用脚投票（图源：腾讯新闻）</div>
+
+    <p>第三种最值得聊聊，就是OpenAI高管评论区翻车这件事。很多人把它当笑话看，Tibo亲自下场推销Luna，被怼"我们要DeepSeek的价格"，社死现场。</p>
+
+    <p>但你换一个角度想。OpenAI的高管跑到一个开源开发者平台的评论区去打广告，这件事本身就说明了什么？OpenAI慌了。不是慌DeepSeek的技术，是慌DeepSeek的价格正在重塑开发者的预期。</p>
+
+    <p>当一个OpenAI高管不得不亲自下场解释"我们也很便宜"的时候，定价权已经不在OpenAI手里了。定价权在DeepSeek手里，在OpenRouter的榜单上，在全球开发者用脚投票的行为里。</p>
+
+    <p>Tibo不是在卖Luna，他是在试图夺回定价权。但他失败了，因为开发者回的不是"你的模型不够好"，而是"你的价格不够低"。这句话翻译成商业语言就是，你的产品已经变成了大宗商品，而大宗商品的战场上，便宜就是一切。</p>
+
+    <h2>接下来会发生什么</h2>
+
+    <p>聊聊我的预判，也可能我错了。</p>
+
+    <p>第一，模型层的利润会继续坍缩。DeepSeek已经把天花板捅穿了，其他模型要么跟进降价，要么被挤出市场。就在今天，Qwen3.8-Max发布了，2.4万亿参数，95B激活，而且要开源Max级权重。一个2.4T参数的顶级模型白送，连最强模型都在走向commodity化。当最强的模型免费，中端模型的价格只会更低。</p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>事件</th>
+          <th>时间</th>
+          <th>信号</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>DeepSeek V4-Flash正式版</td>
+          <td>7月31日</td>
+          <td>98%缓存折扣，推理成本逼近零</td>
+        </tr>
+        <tr>
+          <td>OpenAI Luna降价80%</td>
+          <td>7月31日</td>
+          <td>降价后仍贵60%，定价权丢失</td>
+        </tr>
+        <tr>
+          <td>DeepSeek单日8万亿Token</td>
+          <td>8月3日</td>
+          <td>5万亿免费，3万亿付费</td>
+        </tr>
+        <tr>
+          <td>Qwen3.8-Max开源Max权重</td>
+          <td>8月3日</td>
+          <td>2.4T参数顶级模型走向免费</td>
+        </tr>
+        <tr>
+          <td>OpenRouter前五全是中国模型</td>
+          <td>8月3日</td>
+          <td>中国份额63.5%，美国35.5%</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>第二，钱会往应用层跑。这个逻辑不复杂。当模型本身不再值钱，值钱的是用模型做事的人。微软Copilot付费席位突破3000万，北美四大云厂二季度资本开支合计7325亿美元。这笔钱不是在买模型，是在买模型之上的应用和工作流。</p>
+
+    <p>第三，会有一批模型公司死掉。不是现在，但当VC发现模型层不再有超额利润的时候，资金会迅速收缩。那些既没有DeepSeek的成本优势，又没有应用层收入的模型公司，会非常难受。</p>
+
+    <p>我有时候觉得，AI行业正在经历通信行业2001年经历的事。光纤产能过剩，带宽价格崩塌，铺设光缆的公司大量破产。但正是廉价带宽催生了Google、Amazon、Netflix。光纤铺设者的尸骨上，长出了整个互联网应用层。</p>
+
+    <p>AI模型可能就是新时代的光纤。</p>
+
+    <h2>对你来说意味着什么</h2>
+
+    <p>如果你是开发者，这件事对你有利。模型越来越便宜，你能做的事越来越多。享受低价格的同时，别忘了想一个问题，当模型免费了，你的核心竞争力是什么？是调模型的能力，还是在模型之上解决具体问题的能力？</p>
+
+    <p>如果你是AI从业者，8万亿Token是一面镜子。它照出来的不是"我们赢了"，而是"我们的利润正在消失"。赢家不是做模型的人，是用模型的人。</p>
+
+    <p>8万亿Token。5万亿白送。3万亿付费，每次调用3美分。</p>
+
+    <p>这不是胜利的号角。这是AI模型变成水电煤的第一声汽笛。</p>
+
+    <div class="ending">
+      <p>谢谢你看我的文章。</p>
+      <p style="margin-top: 8px; font-size: 13px; color: var(--muted);">数据来源：OpenCode官方发文（8月3日）/ OpenRouter周报 / 第一财经 / 新浪财经 / 腾讯新闻 / Qwen官方博客（8月3日）/ Artificial Analysis</p>
+    </div>
+  </div>
+</body>
+</html>
