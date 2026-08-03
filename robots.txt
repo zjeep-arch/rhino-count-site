@@ -1,5 +1,79 @@
+# robots.txt for rhino-count-site
+# Updated: 2026-08-03
+
+# === All crawlers ===
 User-agent: *
 Allow: /
 
+# === Google ===
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+# === Bing ===
+User-agent: bingbot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# === Baidu ===
+User-agent: Baiduspider
+Allow: /
+
+User-agent: Baiduspider-image
+Allow: /
+
+# === Sogou ===
+User-agent: Sogou web spider
+Allow: /
+
+User-agent: Sogou inst spider
+Allow: /
+
+# === 360 ===
+User-agent: 360Spider
+Allow: /
+
+# === AI Search Crawlers ===
+# OpenAI / ChatGPT
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+
+# Claude / Anthropic
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+# Google AI
+User-agent: Google-Extended
+Allow: /
+
+# Meta AI
+User-agent: meta-externalagent
+Allow: /
+
+# ByteDance / Doubao
+User-agent: Bytespider
+Allow: /
+
+# Common Crawl
+User-agent: CCBot
+Allow: /
+
+# Sitemap
 Sitemap: https://zjeep-arch.github.io/rhino-count-site/sitemap.xml
-# deploy-refresh: 2026-06-30 creation-lab
