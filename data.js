@@ -127,6 +127,12 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "Luna砍80%不是价格战，是给GPT-Live铺路",
+        desc: "OpenAI把GPT-5.6 Luna砍80%，所有人喊价格战。但GPT-Live架构图泄露了真正的原因，语音交互要让文字模型当幕后打工人。1.5亿周活用户开始用语音，文字API调用量指数爆炸。降价不是让利，是提前铺管道。",
+        href: "notes/2026-08-04-gpt-live-luna-price-cut.html"
+      },
+      {
+        type: "Essay",
         title: "模型白送的时代，用模型的人才是新地主",
         desc: "DeepSeek单日8万亿Token，模型价格坍缩到接近零。当AI模型变成水电煤，做模型的人利润归零，用模型解决问题的人迎来黄金时代。四波人的命运正在分岔，你的位置在哪？",
         href: "notes/2026-08-03-deepseek-8t-token-commodity.html"
@@ -197,6 +203,13 @@ window.SITE_DATA = {
     headingLine2: "慢慢记。",
     blurb: "每一篇笔记都是一次小型田野调查：关于模型、关于人、关于我们如何被这个时代重新塑形。",
     notes: [
+      {
+        cat: "行业观察", num: "N° 56",
+        title: "Luna砍80%不是价格战，是给GPT-Live铺路",
+        excerpt: "OpenAI把GPT-5.6 Luna砍80%，所有人喊价格战。但GPT-Live架构图泄露了真正的原因，语音交互要让文字模型当幕后打工人。1.5亿周活用户开始用语音，文字API调用量指数爆炸。降价不是让利，是提前铺管道。AWS把存储压到地板不是为了卖存储，OpenAI把Luna压到地板不是为了卖Luna。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-08-04-gpt-live-luna-price-cut.html"
+      },
       {
         cat: "行业观察", num: "N° 55",
         title: "模型白送的时代，用模型的人才是新地主",
