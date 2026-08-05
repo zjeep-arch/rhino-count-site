@@ -127,6 +127,12 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "Anthropic砸100亿买算力，卖家才7个月大",
+        desc: "Anthropic签了100亿美元算力大单，接单的Volta成立才7个月，连服务器都是租的。硬件来自比特币矿企Bitdeer挪威数据中心。Anthropic买的不是服务器是时间表，为速度支付的代价是前所未有的交易对手风险。",
+        href: "notes/2026-08-05-anthropic-volta-10b-compute.html"
+      },
+      {
+        type: "Essay",
         title: "Luna砍80%不是价格战，是给GPT-Live铺路",
         desc: "OpenAI把GPT-5.6 Luna砍80%，所有人喊价格战。但GPT-Live架构图泄露了真正的原因，语音交互要让文字模型当幕后打工人。1.5亿周活用户开始用语音，文字API调用量指数爆炸。降价不是让利，是提前铺管道。",
         href: "notes/2026-08-04-gpt-live-luna-price-cut.html"
@@ -203,6 +209,13 @@ window.SITE_DATA = {
     headingLine2: "慢慢记。",
     blurb: "每一篇笔记都是一次小型田野调查：关于模型、关于人、关于我们如何被这个时代重新塑形。",
     notes: [
+      {
+        cat: "行业观察", num: "N° 57",
+        title: "Anthropic砸100亿买算力，卖家才7个月大",
+        excerpt: "Anthropic签了100亿美元算力大单，接单的Volta成立才7个月，连服务器都是租的。硬件来自比特币矿企Bitdeer的挪威数据中心，芯片是英伟达的，整机是戴尔组装的。Anthropic买的不是服务器，是时间表。当ARR从90亿飙到700亿，算力缺口只能用疯狂来填补。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-08-05-anthropic-volta-10b-compute.html"
+      },
       {
         cat: "行业观察", num: "N° 56",
         title: "Luna砍80%不是价格战，是给GPT-Live铺路",
