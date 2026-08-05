@@ -1,388 +1,919 @@
 <!DOCTYPE html>
-<html lang="zh-CN" data-theme="light">
+<html lang="zh-CN">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="color-scheme" content="light dark" />
-  <title>AI大模型动态日报 · 2026-08-05 · 犀牛伯爵时评</title>
-  <meta name="description" content="Qwen3.8-Max 2.4T参数登顶AI HOT热度榜首，NVIDIA一周拉起120+成员安全联盟，Anthropic百亿押注初创云厂商——8月5日AI圈五大板块全景速递。" />
-  <meta name="author" content="犀牛伯爵" />
-  <meta name="robots" content="index,follow" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI大模型动态日报 | 2026年08月05日</title>
+<meta name="description" content="8月3-5日AI圈五大板块全景速递：欧盟AI法案透明度规则生效、NVIDIA Alpamayo 2 Super登顶AI HOT热度、Anthropic百亿押注Volta、GPT-5.6 Luna永久降价80%。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Noto+Serif+SC:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* 暖色调主题 */
+  --bg-primary: #F5EFE6;
+  --bg-secondary: #EFE6D8;
+  --bg-card: #FBF8F2;
+  --bg-elevated: #FFFFFF;
+  --accent: #8B3A2E;
+  --accent-light: #C2604F;
+  --accent-bg: rgba(139, 58, 46, 0.06);
+  --insight-bg: rgba(194, 96, 79, 0.08);
+  --insight-border: #C2604F;
+  --text-primary: #2B2118;
+  --text-secondary: #6B5D4F;
+  --text-muted: #9A8B7A;
+  --border: #E0D4C0;
+  --border-strong: #C9B89E;
+  --divider: #E8DDC9;
+  --code-bg: #EDE3D2;
+  --tag-bg: rgba(139, 58, 46, 0.1);
+  --shadow: 0 2px 12px rgba(139, 58, 46, 0.08);
+  --shadow-lg: 0 8px 32px rgba(139, 58, 46, 0.12);
+}
 
-  <meta property="og:type" content="article" />
-  <meta property="og:title" content="AI大模型动态日报 | 2026年08月05日" />
-  <meta property="og:description" content="Qwen3.8-Max 2.4T参数登顶AI HOT热度榜首，NVIDIA一周拉起120+成员安全联盟，Anthropic百亿押注初创云厂商。" />
-  <meta property="article:published_time" content="2026-08-05" />
-  <meta property="article:author" content="犀牛伯爵" />
+[data-theme="dark"] {
+  --bg-primary: #1A1510;
+  --bg-secondary: #221C16;
+  --bg-card: #2A2218;
+  --bg-elevated: #30271C;
+  --accent: #D17B5E;
+  --accent-light: #E0A088;
+  --accent-bg: rgba(209, 123, 94, 0.1);
+  --insight-bg: rgba(209, 123, 94, 0.12);
+  --insight-border: #D17B5E;
+  --text-primary: #EDE3D2;
+  --text-secondary: #B8A892;
+  --text-muted: #8A7A66;
+  --border: #3D3326;
+  --border-strong: #4A3E2E;
+  --divider: #332A1F;
+  --code-bg: #2A2218;
+  --tag-bg: rgba(209, 123, 94, 0.15);
+  --shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,400;1,500&family=Inter:wght@400;500;600&family=Noto+Serif+SC:wght@500;700&display=swap" rel="stylesheet" />
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-  <style>
-    :root {
-      --bg: #F5EFE6; --bg-soft: #ECE3D2; --surface: #FBF7EE;
-      --ink: #1C1410; --ink-soft: #3B2E24; --muted: #7A6B5B;
-      --line: rgba(28,20,16,0.10); --line-2: rgba(28,20,16,0.22);
-      --accent: #8B3A2E; --gold: #B8862F;
-      --serif: "Playfair Display","Noto Serif SC","Songti SC",Georgia,serif;
-      --sans: "Inter",-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
-      --maxw: 740px; --pad: clamp(20px,4vw,32px);
-      --radius: 14px;
-      --s-1:4px;--s-2:8px;--s-3:12px;--s-4:16px;--s-5:24px;--s-6:32px;--s-7:48px;--s-8:64px;
-    }
-    [data-theme="dark"] {
-      --bg: #14100C; --bg-soft: #1A1510; --surface: #1F1813;
-      --ink: #F1E8DA; --ink-soft: #DCCEB8; --muted: #9B8B77;
-      --line: rgba(241,232,218,0.10); --line-2: rgba(241,232,218,0.22);
-      --accent: #D4825F; --gold: #E8C77A;
-    }
-    *,*::before,*::after { box-sizing: border-box; }
-    body {
-      margin: 0; background: var(--bg); color: var(--ink);
-      font-family: var(--sans); font-size: 17px; line-height: 1.8;
-      -webkit-font-smoothing: antialiased;
-    }
-    body::before {
-      content:"";position:fixed;inset:0;
-      background-image:radial-gradient(700px 400px at 10% 0%,rgba(184,134,47,0.06),transparent 60%);
-      pointer-events:none;z-index:0;
-    }
-    .container { max-width: var(--maxw); margin-inline: auto; padding-inline: var(--pad); position: relative; z-index: 1; }
+html {
+  scroll-behavior: smooth;
+}
 
-    .article-header {
-      padding: var(--s-8) 0 var(--s-6);
-      border-bottom: 1px solid var(--line);
-      margin-bottom: var(--s-7);
-    }
-    .article-header .back {
-      display: inline-flex; align-items: center; gap: var(--s-2);
-      font-size: 13px; color: var(--accent); font-weight: 500;
-      margin-bottom: var(--s-5);
-      transition: gap 0.2s ease;
-    }
-    .article-header .back:hover { gap: var(--s-3); }
-    .article-header .meta {
-      display: flex; align-items: center; gap: var(--s-3);
-      font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
-      color: var(--muted); margin-bottom: var(--s-4);
-    }
-    .article-header .meta .cat { color: var(--accent); font-weight: 600; }
-    .article-header .meta .date::before { content: "\00B7"; margin-right: var(--s-3); }
-    .article-header h1 {
-      font-family: var(--serif); font-weight: 700;
-      font-size: clamp(26px,4vw,40px); line-height: 1.2;
-      margin: 0; letter-spacing: 0.01em;
-    }
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Noto Serif SC', 'Playfair Display', Georgia, serif;
+  line-height: 1.85;
+  font-size: 17px;
+  transition: background 0.3s ease, color 0.3s ease;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
-    .article-body { padding-bottom: var(--s-8); }
-    .article-body p { margin: 0 0 1.4em; }
-    .article-body h2 {
-      font-family: var(--serif); font-weight: 700;
-      font-size: clamp(20px,2.5vw,26px);
-      margin: 2em 0 0.8em; line-height: 1.3;
-    }
-    .article-body h3 {
-      font-family: var(--sans); font-weight: 600;
-      font-size: clamp(16px,1.6vw,18px);
-      margin: 1.4em 0 0.5em;
-      color: var(--ink);
-    }
-    .article-body blockquote {
-      margin: 1.5em 0; padding: var(--s-4) var(--s-5);
-      border-left: 3px solid var(--accent);
-      background: var(--surface);
-      border-radius: 0 8px 8px 0;
-      color: var(--ink-soft);
-    }
-    .article-body strong { color: var(--ink); font-weight: 600; }
-    .article-body a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
 
-    .stat-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-3);
-      margin: var(--s-5) 0;
-    }
-    .stat-card {
-      background: var(--surface); border: 1px solid var(--line);
-      border-radius: 10px; padding: var(--s-4); text-align: center;
-    }
-    .stat-card .num { font-size: 28px; font-weight: 800; color: var(--accent); font-family: var(--serif); }
-    .stat-card .label { font-size: 12px; color: var(--muted); margin-top: 4px; }
+/* ===== 顶部导航 ===== */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-primary);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background: color-mix(in srgb, var(--bg-primary) 88%, transparent);
+}
 
-    .news-item {
-      padding: var(--s-4) 0; border-bottom: 1px solid var(--line);
-    }
-    .news-item:last-child { border-bottom: none; }
-    .news-item h3 { margin: 0 0 6px; }
-    .news-item .source { font-size: 12px; color: var(--muted); margin: 4px 0 0; }
-    .badge {
-      display: inline-block; font-size: 11px; font-weight: 600;
-      padding: 2px 8px; border-radius: 10px; margin-right: 6px;
-    }
-    .badge-nvidia { background: rgba(47,135,90,0.12); color: #2f855a; }
-    .badge-shumei { background: rgba(15,52,96,0.08); color: #0f3460; }
-    .badge-competitor { background: rgba(139,58,46,0.08); color: #8B3A2E; }
+.topbar-inner {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 14px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-    .insight-card {
-      border-left: 4px solid var(--accent);
-      background: var(--surface); border-radius: 0 10px 10px 0;
-      padding: var(--s-4) var(--s-5); margin-bottom: var(--s-3);
-    }
-    .insight-card h3 { margin: 0 0 8px; font-family: var(--serif); font-weight: 600; font-size: 17px; }
-    .insight-card .action { font-size: 13px; color: var(--accent); font-weight: 600; margin: 0; }
+.brand {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--accent);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+}
 
-    .article-footer {
-      border-top: 1px solid var(--line);
-      padding: var(--s-6) 0 var(--s-8);
-      text-align: center;
-    }
-    .article-footer .disclaimer {
-      font-size: 13px; color: var(--muted);
-      line-height: 1.8; font-style: italic;
-    }
-    .article-footer .back-link {
-      display: inline-flex; align-items: center; gap: var(--s-2);
-      margin-top: var(--s-5);
-      font-size: 13px; color: var(--accent); font-weight: 500;
-    }
+.brand .brand-cn {
+  font-family: 'Noto Serif SC', serif;
+  font-weight: 700;
+  margin-left: 6px;
+}
 
-    .giscus-wrapper {
-      max-width: var(--maxw);
-      margin-inline: auto;
-      padding-inline: var(--pad);
-      padding-bottom: var(--s-7);
-    }
+.theme-toggle {
+  background: var(--bg-card);
+  border: 1px solid var(--border-strong);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  transition: all 0.25s ease;
+  line-height: 1;
+}
 
-    .site-footer {
-      border-top: 1px solid var(--line);
-      padding: var(--s-5) 0;
-      text-align: center;
-      font-size: 12px; color: var(--muted);
-    }
+.theme-toggle:hover {
+  background: var(--accent-bg);
+  transform: scale(1.08);
+}
 
-    @media (max-width: 520px) {
-      body { font-size: 16px; }
-      .stat-grid { grid-template-columns: 1fr; }
-    }
+[data-theme="dark"] .theme-toggle .icon-sun { display: inline; }
+[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+.theme-toggle .icon-sun { display: none; }
+.theme-toggle .icon-moon { display: inline; }
 
-    @media (prefers-reduced-motion: reduce) {
-      *,*::before,*::after { animation:none!important; transition:none!important; }
-    }
-  </style>
+/* ===== 文章头部 ===== */
+article {
+  padding: 48px 0 32px;
+}
+
+.meta-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.category-tag {
+  display: inline-block;
+  background: var(--tag-bg);
+  color: var(--accent);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 4px 14px;
+  border-radius: 4px;
+  font-family: 'Noto Serif SC', serif;
+  letter-spacing: 0.05em;
+}
+
+.date-tag {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+h1.article-title {
+  font-family: 'Playfair Display', 'Noto Serif SC', serif;
+  font-size: clamp(1.9rem, 4.5vw, 2.8rem);
+  font-weight: 900;
+  line-height: 1.25;
+  color: var(--text-primary);
+  margin-bottom: 18px;
+  letter-spacing: -0.01em;
+}
+
+.article-desc {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 36px;
+  padding-bottom: 28px;
+  border-bottom: 2px solid var(--border-strong);
+  font-style: italic;
+}
+
+/* ===== 导语 ===== */
+.lead {
+  background: var(--bg-card);
+  border-left: 4px solid var(--accent);
+  padding: 24px 28px;
+  border-radius: 0 8px 8px 0;
+  margin-bottom: 44px;
+  font-size: 1.08rem;
+  line-height: 1.9;
+  color: var(--text-secondary);
+  box-shadow: var(--shadow);
+}
+
+.lead strong {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* ===== 统计卡片 ===== */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 18px;
+  margin-bottom: 52px;
+}
+
+.stat-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 24px 20px;
+  text-align: center;
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-light));
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--accent-light);
+}
+
+.stat-value {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: var(--accent);
+  line-height: 1.1;
+  margin-bottom: 8px;
+}
+
+.stat-label {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+.stat-date {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* ===== 板块标题 ===== */
+section {
+  margin-bottom: 52px;
+}
+
+.section-title {
+  font-family: 'Playfair Display', 'Noto Serif SC', serif;
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--accent);
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.section-title .section-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* ===== 新闻条目 ===== */
+.news-item {
+  padding: 26px 0;
+  border-bottom: 1px solid var(--divider);
+}
+
+.news-item:last-child {
+  border-bottom: none;
+}
+
+.news-item:first-child {
+  padding-top: 0;
+}
+
+.news-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.news-number {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--bg-primary);
+  font-family: 'Playfair Display', serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 4px;
+}
+
+.news-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 1.18rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.5;
+  flex: 1;
+}
+
+.news-body {
+  margin-left: 40px;
+  color: var(--text-secondary);
+  font-size: 0.98rem;
+  line-height: 1.85;
+}
+
+.news-source {
+  margin-top: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.news-source .source-label {
+  color: var(--accent);
+  font-weight: 500;
+}
+
+/* ===== 洞察卡片 ===== */
+.insights-grid {
+  display: grid;
+  gap: 18px;
+}
+
+.insight-card {
+  background: var(--insight-bg);
+  border-left: 4px solid var(--insight-border);
+  border-radius: 0 8px 8px 0;
+  padding: 22px 26px;
+  transition: all 0.25s ease;
+}
+
+.insight-card:hover {
+  box-shadow: var(--shadow);
+  transform: translateX(2px);
+}
+
+.insight-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 1.08rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+
+.insight-desc {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.8;
+  margin-bottom: 10px;
+}
+
+.insight-action {
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  background: var(--bg-card);
+  border-radius: 6px;
+  padding: 8px 14px;
+  display: inline-block;
+  border: 1px solid var(--border);
+}
+
+.insight-action strong {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* ===== 页脚 ===== */
+.footer {
+  margin-top: 60px;
+  padding: 40px 0 32px;
+  border-top: 2px solid var(--border-strong);
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  line-height: 1.8;
+}
+
+.footer-section {
+  margin-bottom: 16px;
+}
+
+.footer-section strong {
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.footer-back {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid var(--divider);
+  text-align: center;
+}
+
+.footer-back a {
+  display: inline-block;
+  background: var(--accent);
+  color: var(--bg-primary);
+  text-decoration: none;
+  padding: 12px 32px;
+  border-radius: 6px;
+  font-family: 'Noto Serif SC', serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.25s ease;
+}
+
+.footer-back a:hover {
+  background: var(--accent-light);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* ===== 评论区 ===== */
+.comments {
+  margin-top: 48px;
+  padding-top: 32px;
+  border-top: 2px solid var(--border-strong);
+}
+
+.comments-title {
+  font-family: 'Playfair Display', 'Noto Serif SC', serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 24px;
+}
+
+/* ===== 响应式 ===== */
+@media (max-width: 640px) {
+  body { font-size: 16px; }
+  .container { padding: 0 18px; }
+  article { padding: 32px 0 24px; }
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  .stat-value { font-size: 1.7rem; }
+  .stat-card { padding: 18px 12px; }
+  .news-body { margin-left: 0; }
+  .news-head { gap: 10px; }
+  .lead { padding: 20px; font-size: 1rem; }
+  .insight-card { padding: 18px 20px; }
+  .topbar-inner { padding: 12px 18px; }
+}
+
+@media (max-width: 380px) {
+  .stats-grid { grid-template-columns: 1fr; }
+}
+
+/* 滚动条 */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--bg-secondary); }
+::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 5px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent-light); }
+</style>
 </head>
 <body>
-  <article class="container">
-    <header class="article-header">
-      <a class="back" href="../articles/">&larr; 全部时评</a>
-      <div class="meta">
-        <span class="cat">AI 日报</span>
-        <span class="date">2026-08-05</span>
+
+<!-- 顶部导航 -->
+<nav class="topbar">
+  <div class="topbar-inner">
+    <a href="#" class="brand">RHINO EARL<span class="brand-cn">犀牛伯爵</span></a>
+    <button class="theme-toggle" id="themeToggle" aria-label="切换主题">
+      <span class="icon-moon">🌙</span>
+      <span class="icon-sun">☀️</span>
+    </button>
+  </div>
+</nav>
+
+<!-- 文章主体 -->
+<div class="container">
+<article>
+
+  <!-- 头部信息 -->
+  <div class="meta-row">
+    <span class="category-tag">AI 日报</span>
+    <span class="date-tag">2026-08-05</span>
+  </div>
+
+  <h1 class="article-title">AI大模型动态日报 | 2026年08月05日</h1>
+  <p class="article-desc">8月3-5日AI圈五大板块全景速递：欧盟AI法案透明度规则生效、NVIDIA Alpamayo 2 Super登顶AI HOT热度、Anthropic百亿押注Volta、GPT-5.6 Luna永久降价80%。</p>
+
+  <!-- 导语 -->
+  <div class="lead">
+    开源模型进入<strong>2T参数时代</strong>，AI安全从企业合规上升至<strong>国家安全</strong>，Anthropic为抢速度押注百亿于初创云厂商。今天的AI圈，三股力量同时涌动。
+  </div>
+
+  <!-- 数据亮点 -->
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-value">$100亿</div>
+      <div class="stat-label">Anthropic与Volta算力协议</div>
+      <div class="stat-date">8月5日</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">80%↓</div>
+      <div class="stat-label">GPT-5.6 Luna永久降价幅度</div>
+      <div class="stat-date">8月4日</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">1500万€</div>
+      <div class="stat-label">欧盟AI法案违规最高罚款</div>
+      <div class="stat-date">8月3日</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">8B</div>
+      <div class="stat-label">商汤U1.5-Lite参数量，达商业闭源质量</div>
+      <div class="stat-date">—</div>
+    </div>
+  </div>
+
+  <!-- 行业政策 / 监管 -->
+  <section>
+    <h2 class="section-title"><span class="section-num">I.</span>行业政策 / 监管</h2>
+
+    <div class="news-item">
+      <div class="news-head">
+        <span class="news-number">1</span>
+        <h3 class="news-title">欧盟《人工智能法案》透明度规则8月2日生效，AI生成内容必须标注</h3>
       </div>
-      <h1>AI大模型动态日报 | 2026年08月05日</h1>
-    </header>
-
-    <div class="article-body">
-
-      <p>开源模型进入2T参数时代，AI安全从企业合规上升至国家安全，Anthropic为抢速度押注百亿于初创云厂商。今天的AI圈，三股力量同时涌动。</p>
-
-      <div class="stat-grid">
-        <div class="stat-card"><div class="num">2.4T</div><div class="label">Qwen3.8-Max参数量，开源最强编码模型</div></div>
-        <div class="stat-card"><div class="num">$100亿</div><div class="label">Anthropic与Volta云服务协议</div></div>
-        <div class="stat-card"><div class="num">10x</div><div class="label">Deepfake攻击量同比增长</div></div>
-        <div class="stat-card"><div class="num">120+</div><div class="label">NVIDIA AI安全联盟成员数</div></div>
+      <div class="news-body">
+        欧盟《人工智能法案》新透明度义务于8月2日正式生效，要求公司披露用户何时与AI模型互动，为合成音视频和文本添加机器可读标记。违规公司面临最高1500万欧元或全球年营业额3%的罚款。8月2日前推出的模型有4个月宽限期。3个独立信源报道。
+        <div class="news-source"><span class="source-label">来源：</span>AI HOT / The Verge · 8月3日</div>
       </div>
+    </div>
 
-      <h2>权威观点 / 报告</h2>
-
-      <div class="news-item">
-        <h3>SaferAI报告：Z.ai开源GLM-5.2接近前沿能力，安全鸿沟依然存在</h3>
-        <p>SaferAI最新报告发现，Z.ai的开源权重模型GLM-5.2在能力上已接近前沿AI水平，但缺乏关键安全缓解措施，引发对强大开源模型可能超越治理和防护的担忧。报告呼吁开源模型在追求性能突破的同时需同步加强安全评估框架建设。</p>
-        <p class="source">来源：TechCrunch</p>
+    <div class="news-item">
+      <div class="news-head">
+        <span class="news-number">2</span>
+        <h3 class="news-title">工信部发布首部L3/L4自动驾驶系统安全要求强制性国标，2027年7月实施</h3>
       </div>
-
-      <div class="news-item">
-        <h3>Anthropic发布Threat Intelligence报告，首次披露AI编排网络间谍行动</h3>
-        <p>Anthropic发布威胁情报报告，详细披露Claude模型被滥用的多个案例，包括大规模影响力操纵操作和AI编排的网络间谍活动。这是首次有前沿实验室公开报告AI驱动的网络间谍行动，标志着AI安全威胁从理论走向现实。</p>
-        <p class="source">来源：Anthropic 官方博客</p>
+      <div class="news-body">
+        工信部发布首部L3/L4自动驾驶系统安全要求强制性国家标准，将于2027年7月正式实施。该标准填补了高级别自动驾驶安全规范的空白。5个信号源关注。
+        <div class="news-source"><span class="source-label">来源：</span>AI HOT / IT之家 · 8月4日</div>
       </div>
+    </div>
 
-      <div class="news-item">
-        <h3>AIGC黑灰产治理研讨会召开，行业协同共治成共识</h3>
-        <p>由首都互联网协会指导、阿里巴巴主办的"AIGC生成合成淫秽色情内容黑灰产治理"研讨会在北京举行，聚焦AIGC内容安全治理的协同共治机制，多家安全厂商参与讨论。</p>
-        <p class="source">来源：量子位</p>
+    <div class="news-item">
+      <div class="news-head">
+        <span class="news-number">3</span>
+        <h3 class="news-title">Palantir季度营收19亿美元同比增93%，CEO称AI行业"马克思主义"</h3>
       </div>
-
-      <h2>产品 / 技术动态</h2>
-
-      <div class="news-item">
-        <h3>Qwen3.8-Max发布：2.4T参数开源最强编码与协作模型（AI HOT热度第1）</h3>
-        <p>通义千问发布Qwen3.8-Max，2.4T参数量，定位开源最强编码与协作模型，9个独立信源报道。该模型在代码生成、多轮协作和复杂推理任务上达到开源模型新高度，标志着中国开源大模型在编码赛道实现突破。</p>
-        <p class="source">来源：AI HOT / Qwen官方</p>
+      <div class="news-body">
+        Palantir CEO Alex Karp在季度股东信中警告前沿AI实验室对企业过于不可信，称其意图"占有所谓合作伙伴的生产资料"，带有"马克思主义色彩"。Q2营收19亿美元，利润11亿美元。
+        <div class="news-source"><span class="source-label">来源：</span>AI HOT / TechCrunch · 8月3日</div>
       </div>
+    </div>
+  </section>
 
-      <div class="news-item">
-        <h3>NVIDIA Alpamayo 2 Super开放商用，面向Robotaxi与自动驾驶的前沿开源模型</h3>
-        <p>NVIDIA发布Alpamayo 2 Super开源模型并开放商用，基于Cosmos 3 Super Reasoner构建，采用强化学习后训练，支持轨迹预测、因果链推理、元动作、自动标注及视觉问答等多任务输出，专为Robotaxi和自动驾驶场景设计。</p>
-        <p class="source">来源：AI HOT / NVIDIA Blog</p>
+  <!-- 产品 / 技术动态 -->
+  <section>
+    <h2 class="section-title"><span class="section-num">II.</span>产品 / 技术动态</h2>
+
+    <div class="news-item">
+      <div class="news-head">
+        <span class="news-number">1</span>
+        <h3 class="news-title">NVIDIA Alpamayo 2 Super开放商用，面向Robotaxi与自动驾驶（AI HOT热度第1）</h3>
       </div>
-
-      <div class="news-item">
-        <h3>蚂蚁百灵Ling-3.0-flash开源权重发布，BF16与FP8双版本</h3>
-        <p>蚂蚁百灵发布Ling-3.0-flash开源权重，提供官方BF16和FP8量化版本，开发者可根据硬件、性能要求和部署需求选择最适合的版本，进一步降低大模型部署门槛。</p>
-        <p class="source">来源：AI HOT / 蚂蚁百灵</p>
+      <div class="news-body">
+        NVIDIA发布Alpamayo 2 Super开源模型并开放商用，基于Cosmos 3 Super Reasoner构建，采用强化学习后训练，支持轨迹预测、因果链推理、元动作、自动标注及视觉问答等多任务输出。3个独立信源报道。
+        <div class="news-source"><span class="source-label">来源：</span>AI HOT / NVIDIA Blog · 8月5日</div>
       </div>
+    </div>
 
-      <div class="news-item">
-        <h3>Google Cloud API Gateway推出统一模型路由，支持Gemini/Claude/OpenAI</h3>
-        <p>Google Cloud API Gateway新增模型路由功能（Public Preview），开发者可在OpenAPI 3.x规范中配置虚拟模型名到后端目标的映射，无需硬编码端点，网关自动将OpenAI兼容请求转码为目标模型的原生格式并动态路由流量。</p>
-        <p class="source">来源：AI HOT / Google Developers Blog</p>
+    <div class="news-item">
+      <div class="news-head">
+        <span class="news-number">2</span>
+        <h3 class="news-title">字节Seed发布SeedRealtime音视频全双工大模型</h3>
       </div>
-
-      <div class="news-item">
-        <h3>面壁智能开源ForgeStencil：一周自动优化100+工业与科学软件，全程零人工</h3>
-        <p>面壁智能开源ForgeStencil系统，一周内自动优化100+工业与科学软件，全程零人工介入。该系统展示了端侧小模型在软件工程领域的Agent化应用潜力。</p>
-        <p class="source">来源：AI HOT / 面壁智能</p>
+      <div class="news-body">
+        字节跳动Seed团队发布SeedRealtime音视频全双工大模型，支持实时音视频同步交互。
+        <div class="news-source"><span class="source-label">来源：</span>AI HOT / 字节Seed · 8月5日</div>
       </div>
+    </div>
 
-      <h2>AI 安全动态</h2>
-
-      <div class="news-item">
-        <h3><span class="badge badge-nvidia">NVIDIA</span>牵头成立Open Secure AI Alliance，一周内120+公司加入</h3>
-        <p>NVIDIA牵头成立Open Secure AI Alliance，成立仅一周已有120+公司加入，已提交针对AI Agent攻击的防御提案。联盟旨在建立AI安全的共享标准，推动安全能力从"附加项"变为"必选项"。</p>
-        <p class="source">来源：TechCrunch</p>
+    <div class="news-item">
+      <div class="news-head">
+        <span class="news-number">3</span>
+        <h3 class="news-title">腾讯混元发布Hy ASR 3.0 preview：真正懂上下文的语音识别</h3>
       </div>
-
-      <div class="news-item">
-        <h3>国安部发文警惕Deepfake，AI安全上升至国家安全层面</h3>
-        <p>国家安全部公众号发文《警惕！AI助手的"阴暗面"！》，指出境外势力利用AI生成假视频制造恐慌，Deepfake技术被滥用于间谍活动。攻击量同比增长10倍，AI安全已从企业合规上升至国家安全战略层面。</p>
-        <p class="source">来源：国家安全部 / 今日头条</p>
+      <div class="news-body">
+        基于大语言模型Hy3与MoE架构，中文普通话WER 3.34%、英语WER 2.62%、粤语WER 3.12%。3个独立信源报道。
+        <div class="news-source"><span class="source-label">来源：</span>AI HOT / 腾讯混元 · 8月4日</div>
       </div>
+    </div>
 
-      <div class="news-item">
-        <h3><span class="badge badge-shumei">数美科技</span>发布大模型审核Agent产品矩阵，升级AIGC全生命周期风控</h3>
-        <p>数美科技发布以"大模型审核Agent"为核心的AI风控产品矩阵，将风控体系升级为"AI机器审核+大模型审核Agent+专家决策"三链路架构，同步推出DeepSeek一体机内容安全组件。</p>
-        <p class="source">来源：数美科技 / CSDN</p>
+    <div class="news-item">
+      <div class="news-head">
+        <span class="news-number">4</span>
+        <h3 class="news-title">GPT-5.6 Luna降价80%永久生效，AI定价分层加速</h3>
       </div>
-
-      <div class="news-item">
-        <h3><span class="badge badge-competitor">易盾+同盾</span>竞品加速DeepSeek接入，AIGC风控赛道竞争白热化</h3>
-        <p>网易易盾完成核心内容安全产品线对DeepSeek全面接入，发布《AIGC内容安全合规指引》；同盾科技推出金融行业首个落地风控大模型诸葛®，引入DeepSeek后感知和决策能力大幅提升。两大竞品均在加速将大模型能力嵌入垂直行业风控场景。</p>
-        <p class="source">来源：网易易盾 / 同盾科技</p>
+      <div class="news-body">
+        OpenAI确认GPT-5.6 Luna降价80%为永久生效。Anthropic Fable 5定价翻倍。AI模型定价分层趋势加速。
+        <div class="news-source"><span class="source-label">来源：</span>AI HOT / X(Tibo) · 8月4日</div>
       </div>
+    </div>
 
-      <h2>资本市场动态</h2>
-
-      <div class="news-item">
-        <h3>Anthropic与成立仅数月的Volta签署100亿美元算力协议</h3>
-        <p>Anthropic与成立仅数月的云初创公司Volta签署100亿美元算力协议，约合每年17亿美元。Volta估值24亿美元，硬件几乎全为租用：算力来自比特币矿商Bitdeer挪威121MW站点，芯片由Nvidia供应、Dell组装。Anthropic买的是交付速度，代价是承担超大规模云厂商合同从未有过的交易对手风险。</p>
-        <p class="source">来源：AI HOT / TechCrunch</p>
+    <div class="news-item">
+      <div class="news-head">
+        <span class="news-number">5</span>
+        <h3 class="news-title">Qwen-Image-3.0-Pro上线Qwen Cloud</h3>
       </div>
-
-      <div class="news-item">
-        <h3>Design Arena创作者融资790万美元，为AI模型注入"品味"</h3>
-        <p>Design Arena（被530万全球用户使用的人类评估平台）的创作者获得790万美元融资，旨在为AI模型引入"品味"维度的人类偏好评估，为前沿实验室提供关键的人类评估数据。</p>
-        <p class="source">来源：TechCrunch</p>
+      <div class="news-body">
+        通义千问发布Qwen-Image-3.0-Pro，图像生成与理解能力同步升级。
+        <div class="news-source"><span class="source-label">来源：</span>AI HOT / Qwen官方 · 8月5日</div>
       </div>
+    </div>
 
-      <div class="news-item">
-        <h3>前海母基金数亿元押注端侧物理AI，Om AI联汇加速商业化</h3>
-        <p>前海母基金数亿元投资端侧物理AI公司Om AI联汇，加速端侧AI商业化落地。资本重仓端侧AI，预示着AI从云端向边缘侧的加速迁移趋势。</p>
-        <p class="source">来源：量子位</p>
+    <div class="news-item">
+      <div class="news-head">
+        <span class="news-number">6</span>
+        <h3 class="news-title">面壁智能开源ForgeStencil：一周自动优化100+工业与科学软件</h3>
       </div>
-
-      <h2>品牌与市场动作</h2>
-
-      <div class="news-item">
-        <h3>OpenAI天价网红公关活动翻车，品牌传播遭反噬</h3>
-        <p>OpenAI首次举办网红奢华品牌之旅活动，因"OpenAI+田园牧歌"的画风严重违和而引发网络强烈反弹，AI公司的品牌传播策略面临公众审视。</p>
-        <p class="source">来源：量子位 / TechCrunch</p>
+      <div class="news-body">
+        联合OpenBMB开源全球首个支持Stencil自动研究与部署的AI优化系统。2个独立信源报道。
+        <div class="news-source"><span class="source-label">来源：</span>AI HOT / 面壁智能 · 8月4日</div>
       </div>
+    </div>
+  </section>
 
-      <div class="news-item">
-        <h3>Cloudflare用AI软件工厂将Astro的GitHub issue降至零</h3>
-        <p>Cloudflare在Astro仓库上运行自动化triage流水线，通过隔离的AI子代理复现、诊断并修复bug，将开放issue从200多个降至约30个，预计下月归零。底层引擎已发展为开源框架Flue，用于构建持久化智能体与工作流。</p>
-        <p class="source">来源：AI HOT / Cloudflare Blog</p>
+  <!-- AI 安全动态 -->
+  <section>
+    <h2 class="section-title"><span class="section-num">III.</span>AI 安全动态</h2>
+
+    <div class="news-item">
+      <div class="news-head">
+        <span class="news-number">1</span>
+        <h3 class="news-title">欧盟AI法案透明度规则生效：Deepfake内容必须机器可读标注</h3>
       </div>
-
-      <div class="news-item">
-        <h3>德州叫停新建数据中心，州长要求审计</h3>
-        <p>德州州长叫停新建数据中心并要求审计，科技公司在全美搜寻数据中心建设地点时曾被德州宽松的监管和看似充足的电力供应所吸引，但即使德州也已被推向极限。</p>
-        <p class="source">来源：TechCrunch</p>
+      <div class="news-body">
+        8月2日起，欧盟要求所有Deepfake内容及涉及公共利益的AI生成文本必须明确标注。3个独立信源报道。
+        <div class="news-source"><span class="source-label">来源：</span>AI HOT / The Verge · 8月3日</div>
       </div>
+    </div>
 
-      <h2>今日洞察</h2>
+    <div class="news-item">
+      <div class="news-head">
+        <span class="news-number">2</span>
+        <h3 class="news-title">Cloudflare推出@cloudflare/computer，为智能体提供虚拟文件系统与安全运行时</h3>
+      </div>
+      <div class="news-body">
+        开源智能体运行时，支持在isolate、容器沙箱或浏览器中执行代码。2个独立信源报道。
+        <div class="news-source"><span class="source-label">来源：</span>AI HOT / Cloudflare Blog · 8月3日</div>
+      </div>
+    </div>
+
+    <div class="news-item">
+      <div class="news-head">
+        <span class="news-number">3</span>
+        <h3 class="news-title">NVIDIA SkillSpector：用LangGraph评估AI技能安全态势</h3>
+      </div>
+      <div class="news-body">
+        构建包含干净、风险、恶意及MCP示例的合成技能市场，通过LangGraph检查流水线扫描。
+        <div class="news-source"><span class="source-label">来源：</span>AI HOT / MarkTechPost · 8月4日</div>
+      </div>
+    </div>
+
+    <div class="news-item">
+      <div class="news-head">
+        <span class="news-number">4</span>
+        <h3 class="news-title">微软开源Orchard智能体训练框架，小模型也能实现强劲性能</h3>
+      </div>
+      <div class="news-body">
+        跨任务类型训练和评估AI智能体，降低复杂性。
+        <div class="news-source"><span class="source-label">来源：</span>AI HOT / Microsoft Research · 8月3日</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 资本市场动态 -->
+  <section>
+    <h2 class="section-title"><span class="section-num">IV.</span>资本市场动态</h2>
+
+    <div class="news-item">
+      <div class="news-head">
+        <span class="news-number">1</span>
+        <h3 class="news-title">Anthropic与成立仅数月的Volta签署100亿美元算力协议</h3>
+      </div>
+      <div class="news-body">
+        约合每年17亿美元。Volta估值24亿美元，硬件几乎全为租用。4个独立信源报道。
+        <div class="news-source"><span class="source-label">来源：</span>AI HOT / TechCrunch / SemiAnalysis · 8月5日</div>
+      </div>
+    </div>
+
+    <div class="news-item">
+      <div class="news-head">
+        <span class="news-number">2</span>
+        <h3 class="news-title">GPT-5.6 Luna永久降价80%，AI定价分层支撑算力需求增长</h3>
+      </div>
+      <div class="news-body">
+        杰文斯悖论是否可持续成为VC关注焦点。
+        <div class="news-source"><span class="source-label">来源：</span>AI HOT / Tomer Tunguz博客 · 8月4日</div>
+      </div>
+    </div>
+
+    <div class="news-item">
+      <div class="news-head">
+        <span class="news-number">3</span>
+        <h3 class="news-title">Palantir Q2营收19亿美元同比增93%，利润11亿美元</h3>
+      </div>
+      <div class="news-body">
+        AI概念股中业绩兑现最明确的公司之一。
+        <div class="news-source"><span class="source-label">来源：</span>AI HOT / TechCrunch · 8月3日</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 品牌与市场动作 -->
+  <section>
+    <h2 class="section-title"><span class="section-num">V.</span>品牌与市场动作</h2>
+
+    <div class="news-item">
+      <div class="news-head">
+        <span class="news-number">1</span>
+        <h3 class="news-title">Cloudflare Agents Week三连发</h3>
+      </div>
+      <div class="news-body">
+        @cloudflare/computer + Workers TCP/gRPC + Billable Usage API。Agent基础设施栈快速成型。
+        <div class="news-source"><span class="source-label">来源：</span>AI HOT / Cloudflare Blog · 8月3日</div>
+      </div>
+    </div>
+
+    <div class="news-item">
+      <div class="news-head">
+        <span class="news-number">2</span>
+        <h3 class="news-title">OpenRouter推出ori CLI</h3>
+      </div>
+      <div class="news-body">
+        为Claude Code、Codex等Harness提供开箱即用优化配置。2个独立信源报道。
+        <div class="news-source"><span class="source-label">来源：</span>AI HOT / OpenRouter · 8月4日</div>
+      </div>
+    </div>
+
+    <div class="news-item">
+      <div class="news-head">
+        <span class="news-number">3</span>
+        <h3 class="news-title">Swiftlet：在Mac上运行80B版Qwen（内存4.3GB），iPhone上运行35B版</h3>
+      </div>
+      <div class="news-body">
+        Swift + Metal运行时，按需从存储流式加载路由专家权重。登上Hacker News热门。
+        <div class="news-source"><span class="source-label">来源：</span>AI HOT / Hacker News · 8月4日</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 今日洞察 -->
+  <section>
+    <h2 class="section-title"><span class="section-num">VI.</span>今日洞察</h2>
+    <div class="insights-grid">
 
       <div class="insight-card">
-        <h3>开源模型进入2T参数时代，编码赛道成为中美竞争新焦点</h3>
-        <p>Qwen3.8-Max以2.4T参数登顶AI HOT热度榜首（9个独立信源），蚂蚁百灵Ling-3.0-flash同步开源。中国厂商正在编码和协作场景上集中发力，试图在开源生态中建立技术壁垒。</p>
-        <p class="action">Action: 关注Qwen3.8-Max在编码评测中的实际表现，评估其替代闭源编码模型的可行性。</p>
+        <h3 class="insight-title">1. AI监管从立法走向执行：全球首部综合性AI法律进入实操阶段</h3>
+        <p class="insight-desc">欧盟AI法案透明度规则8月2日生效，工信部同周发布L3/L4自动驾驶国标。</p>
+        <div class="insight-action"><strong>Action:</strong> 立即评估AI生成内容的标注合规能力，面向欧盟用户的产品仅有4个月宽限期。</div>
       </div>
 
       <div class="insight-card">
-        <h3>AI安全从企业合规走向国家安全，Deepfake成战略级威胁</h3>
-        <p>国安部发文警惕Deepfake、Anthropic披露AI编排网络间谍、NVIDIA一周拉起120+成员安全联盟——三件事指向同一趋势：AI安全已突破企业合规范畴，上升为国家安全议题。</p>
-        <p class="action">Action: 将AI安全能力建设提升至战略优先级，重点关注多模态Deepfake检测和Agent攻击防御。</p>
+        <h3 class="insight-title">2. 模型定价分层加速：GPT-5.6 Luna永久降80% vs Anthropic Fable 5翻倍</h3>
+        <p class="insight-desc">AI模型市场正在分化为高端能力层和平价开发层。</p>
+        <div class="insight-action"><strong>Action:</strong> 建立双轨模型策略，预计可降低40-60%推理成本。</div>
       </div>
 
       <div class="insight-card">
-        <h3>模型路由成新基建，Google Cloud统一网关预示多模型时代到来</h3>
-        <p>Google Cloud API Gateway推出统一模型路由功能，支持Gemini/Claude/OpenAI跨厂商调用。模型路由层正在成为新的基础设施，企业不再绑定单一模型供应商。</p>
-        <p class="action">Action: 评估模型路由策略，建立多模型A/B测试能力，根据任务类型动态选择最优模型。</p>
+        <h3 class="insight-title">3. 语音AI进入全双工时代：字节SeedRealtime + 腾讯Hy ASR 3.0 + GPT-Live三巨头同周发布</h3>
+        <p class="insight-desc">实时多模态交互成为下一阶段竞争焦点。</p>
+        <div class="insight-action"><strong>Action:</strong> 评估语音AI在客服、会议、车载场景的落地可行性。</div>
       </div>
 
       <div class="insight-card">
-        <h3>Anthropic百亿协议押注初创云厂商，算力获取风险结构正在变化</h3>
-        <p>Anthropic与成立仅数月的Volta签100亿美元协议，硬件全租用、算力来自矿商。AI巨头为抢速度愿意承担前所未有的交易对手风险，算力供应链的脆弱性正在被放大。</p>
-        <p class="action">Action: 评估自身算力供应链韧性，考虑多云策略和边缘推理能力建设，降低对单一供应商的依赖。</p>
+        <h3 class="insight-title">4. Agent基础设施成熟：Cloudflare + OpenRouter + 微软三路并进</h3>
+        <p class="insight-desc">Agent基础设施从碎片化走向体系化。</p>
+        <div class="insight-action"><strong>Action:</strong> 研究Cloudflare @cloudflare/computer的Agent隔离执行方案。</div>
       </div>
 
       <div class="insight-card">
-        <h3>AI Agent进入软件工程实战，Cloudflare零issue案例值得借鉴</h3>
-        <p>Cloudflare用AI子代理将200+开放issue降至30个并预计归零，底层引擎已开源为Flue框架。AI Agent在软件工程领域已从概念验证进入规模化生产应用阶段。</p>
-        <p class="action">Action: 研究Cloudflare Flue框架的Agent隔离与工作流设计，评估在自身工程团队中引入AI triage流水线。</p>
+        <h3 class="insight-title">5. Anthropic百亿协议押注初创云厂商，算力获取风险结构变化</h3>
+        <p class="insight-desc">4个独立信源报道。算力供应链的脆弱性正在被放大。</p>
+        <div class="insight-action"><strong>Action:</strong> 评估自身算力供应链韧性，考虑多云策略。</div>
       </div>
 
     </div>
+  </section>
 
-    <div class="giscus-wrapper">
-      <div class="giscus"></div>
+  <!-- 页脚 -->
+  <footer class="footer">
+    <div class="footer-section">
+      <strong>免责声明：</strong>本日报由犀牛伯爵AI日报系统自动生成。数据来源：AI HOT (aihot.virxact.com) / TechCrunch / The Verge / Cloudflare Blog / NVIDIA / 字节Seed / 腾讯混元 / 面壁智能 / OpenRouter / 微软研究院等。内容仅供参考，不构成投资建议。
     </div>
-
-    <footer class="article-footer">
-      <p class="disclaimer">
-        本日报由犀牛伯爵AI日报系统自动生成。数据来源：AI HOT / TechCrunch / 量子位 / Hugging Face / Anthropic / 数美科技 / 网易易盾 / 同盾科技等。内容仅供参考，不构成投资建议。
-      </p>
-      <a class="back-link" href="../">&larr; 回到犀牛伯爵首页</a>
-    </footer>
-  </article>
-
-  <footer class="site-footer">
-    <div class="container">&copy; 2026 犀牛伯爵</div>
+    <div class="footer-section">
+      <strong>覆盖时间窗：</strong>2026年8月3日-8月5日
+    </div>
+    <div class="footer-back">
+      <a href="#">← 回到犀牛伯爵首页</a>
+    </div>
   </footer>
 
-  <script>
-    (function() {
-      var root = document.documentElement;
-      var saved = localStorage.getItem('rhino-theme');
-      var sysDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      if (saved) { root.setAttribute('data-theme', saved); }
-      else if (sysDark) { root.setAttribute('data-theme', 'dark'); }
-    })();
-  </script>
-  <script src="https://giscus.app/client.js"
-    data-repo="zjeep-arch/rhino-count-site"
-    data-repo-id="R_kgDOOZx3aA"
-    data-category="Announcements"
-    data-category-id="DIC_kwDOOZx3aM4CqRVM"
-    data-mapping="pathname"
-    data-strict="0"
-    data-reactions-enabled="1"
-    data-emit-metadata="0"
-    data-input-position="bottom"
-    data-theme="preferred_color_scheme"
-    data-lang="zh-CN"
-    crossorigin="anonymous"
-    async>
-  </script>
+</article>
+
+<!-- 评论区 -->
+<div class="comments" id="comments">
+  <h2 class="comments-title">读者评论</h2>
+  <div class="giscus"></div>
+</div>
+
+</div>
+
+<!-- Giscus 评论系统 -->
+<script src="https://giscus.app/client.js"
+  data-repo="zjeep-arch/rhino-count-site"
+  data-repo-id="R_kgDOOZx3aA"
+  data-category="Announcements"
+  data-category-id="DIC_kwDOOZx3aM4CqRVM"
+  data-mapping="pathname"
+  data-strict="0"
+  data-reactions-enabled="1"
+  data-emit-metadata="0"
+  data-input-position="top"
+  data-theme="preferred_color_scheme"
+  data-lang="zh-CN"
+  data-loading="lazy"
+  crossorigin="anonymous"
+  async>
+</script>
+
+<!-- 主题切换脚本 -->
+<script>
+(function() {
+  const themeToggle = document.getElementById('themeToggle');
+  const giscusThemeSetter = (theme) => {
+    const giscusFrame = document.querySelector('iframe.giscus-frame');
+    if (giscusFrame) {
+      giscusFrame.contentWindow.postMessage(
+        { giscus: { setConfig: { theme: theme === 'dark' ? 'dark' : 'light' } } },
+        'https://giscus.app'
+      );
+    }
+  };
+
+  // 初始化主题
+  function applyTheme(theme) {
+    if (theme === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.removeAttribute('data-theme');
+    }
+    giscusThemeSetter(theme);
+  }
+
+  // 读取本地存储或系统偏好
+  const savedTheme = localStorage.getItem('rhino-theme');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const initialTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+  applyTheme(initialTheme);
+
+  // 切换事件
+  themeToggle.addEventListener('click', function() {
+    const current = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+    const newTheme = current === 'dark' ? 'light' : 'dark';
+    localStorage.setItem('rhino-theme', newTheme);
+    applyTheme(newTheme);
+  });
+
+  // Giscus 加载后同步主题
+  window.addEventListener('message', function(event) {
+    if (event.origin === 'https://giscus.app') {
+      const current = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+      giscusThemeSetter(current);
+    }
+  });
+})();
+</script>
+
 </body>
 </html>
