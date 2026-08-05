@@ -1,11 +1,11 @@
 {
-  "updated": "2026-08-05T09:30:00+08:00",
+  "updated": "2026-08-05T11:00:00+08:00",
   "articles": [
     {
       "cat": "AI 日报",
       "date": "2026-08-05",
-      "title": "AI大模型动态日报 | Qwen3.8-Max 2.4T登顶、NVIDIA安全联盟120+、Anthropic百亿押注Volta",
-      "excerpt": "8月5日AI圈五大板块全景速递：Qwen3.8-Max 2.4T参数登顶AI HOT热度榜首，NVIDIA一周拉起120+成员安全联盟，Anthropic百亿押注初创云厂商Volta，Cloudflare用AI Agent将GitHub issue降至零。数据来源：AI HOT / TechCrunch / 量子位等。",
+      "title": "AI大模型动态日报 | 欧盟AI法案生效、GPT-5.6 Luna永久降价80%、Anthropic百亿押注Volta",
+      "excerpt": "8月3-5日AI圈五大板块全景速递：欧盟AI法案透明度规则8月2日生效，GPT-5.6 Luna永久降价80%，Anthropic与Volta签100亿算力协议，字节发布SeedRealtime全双工大模型，Cloudflare Agents Week三连发。数据来源：AI HOT / TechCrunch / The Verge等。",
       "href": "articles/2026-08-05-ai-daily.html"
     },
     {
