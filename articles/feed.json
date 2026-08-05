@@ -1,13 +1,6 @@
 {
-  "updated": "2026-08-05T11:00:00+08:00",
+  "updated": "2026-07-01T08:00:00+08:00",
   "articles": [
-    {
-      "cat": "AI 日报",
-      "date": "2026-08-05",
-      "title": "AI大模型动态日报 | 欧盟AI法案生效、GPT-5.6 Luna永久降价80%、Anthropic百亿押注Volta",
-      "excerpt": "8月3-5日AI圈五大板块全景速递：欧盟AI法案透明度规则8月2日生效，GPT-5.6 Luna永久降价80%，Anthropic与Volta签100亿算力协议，字节发布SeedRealtime全双工大模型，Cloudflare Agents Week三连发。数据来源：AI HOT / TechCrunch / The Verge等。",
-      "href": "articles/2026-08-05-ai-daily.html"
-    },
     {
       "cat": "科技 · 宏观",
       "date": "2026-07-01",
