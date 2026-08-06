@@ -127,6 +127,12 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "27年谷歌传奇出走创业，AI最聪明的人开始逃离大厂",
+        desc: "Jeff Dean离职创业，Hassabis卸任DeepMind CEO。同日双震不是谷歌完蛋的信号，而是AI4Science窗口已开。当AI界最有成就的人主动放弃大厂安全网，真正的竞争从谁的模型更强变成了AI能解决什么真正的问题。Khosla将此比作2018年投OpenAI。",
+        href: "notes/2026-08-06-jeff-dean-google-ai-exodus.html"
+      },
+      {
+        type: "Essay",
         title: "Anthropic砸100亿买算力，卖家才7个月大",
         desc: "Anthropic签了100亿美元算力大单，接单的Volta成立才7个月，连服务器都是租的。硬件来自比特币矿企Bitdeer挪威数据中心。Anthropic买的不是服务器是时间表，为速度支付的代价是前所未有的交易对手风险。",
         href: "notes/2026-08-05-anthropic-volta-10b-compute.html"
@@ -209,6 +215,13 @@ window.SITE_DATA = {
     headingLine2: "慢慢记。",
     blurb: "每一篇笔记都是一次小型田野调查：关于模型、关于人、关于我们如何被这个时代重新塑形。",
     notes: [
+      {
+        cat: "行业观察", num: "N° 58",
+        title: "27年谷歌传奇出走创业，AI最聪明的人开始逃离大厂",
+        excerpt: "Jeff Dean离开谷歌创业，Hassabis卸任DeepMind CEO。同日双震不是谷歌完蛋的信号，而是AI4Science窗口已开。当AI界最有成就的人主动放弃大厂安全网，真正的竞争从谁的模型更强变成了AI能解决什么真正的问题。Khosla将此比作2018年投OpenAI。国产模型Qwen-Image-3.0同步冲到全球第五，中国AI公司的机会窗口正在打开。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-08-06-jeff-dean-google-ai-exodus.html"
+      },
       {
         cat: "行业观察", num: "N° 57",
         title: "Anthropic砸100亿买算力，卖家才7个月大",
