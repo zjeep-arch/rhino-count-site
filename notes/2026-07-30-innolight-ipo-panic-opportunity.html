@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>利润涨262%却破发，但5万亿AI基建不会停</title>
+  <meta name="description" content="中际旭创港股上市首日破发，Q1利润暴涨262%却跌超8%。智谱腰斩、MiniMax暴跌，整个AI板块在恐慌。但美国五大云厂商用5.8万亿美元建数据中心，光模块是AIDC的血管。市场可以恐惧，但基础设施不会因为恐惧就不建了。">
+  <style>
+    :root {
+      --accent: #8b2635;
+      --accent-soft: #a53a4a;
+      --ink: #333;
+      --ink-soft: #555;
+      --muted: #888;
+      --surface: #fafafa;
+      --border: rgba(0,0,0,0.07);
+      --radius: 12px;
+      --font-sans: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-serif: "Noto Serif SC", "Songti SC", Georgia, serif;
+    }
+    * { box-sizing: border-box; }
+    body { font-family: var(--font-sans); background: #f0f0f0; margin: 0; padding: 24px 16px; font-size: 16px; line-height: 32px; color: var(--ink); -webkit-font-smoothing: antialiased; }
+    .container { max-width: 680px; margin: 0 auto; background: var(--surface); padding: 32px; border-radius: var(--radius); box-shadow: 0 2px 16px rgba(0,0,0,0.05); }
+    .cover-img { width: 100%; border-radius: 8px; margin-bottom: 24px; display: block; }
+    h1 { font-family: var(--font-serif); font-size: 24px; font-weight: 700; color: var(--ink); line-height: 40px; margin: 0 0 16px; }
+    .meta { color: var(--muted); font-size: 13px; margin-bottom: 8px; }
+    .byline { color: var(--ink-soft); font-size: 14px; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+    h2 { font-family: var(--font-serif); font-size: 20px; font-weight: 600; color: var(--ink); margin: 32px 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+    h3 { font-family: var(--font-serif); font-size: 18px; font-weight: 600; color: var(--accent); margin: 28px 0 12px; }
+    p { margin: 0 0 24px; }
+    .lead { font-size: 17px; color: var(--ink); }
+    .quote-box { border-left: 4px solid var(--accent); background: #f5f0f0; padding: 16px 20px; margin: 24px 0; border-radius: 0 var(--radius) var(--radius) 0; }
+    .quote-box p { margin: 0 0 8px; color: var(--ink-soft); font-style: italic; font-size: 15px; }
+    .quote-box p:last-child { margin-bottom: 0; }
+    .quote-box .attribution { margin-top: 8px; color: var(--muted); font-size: 13px; font-style: normal; }
+    .img-caption { text-align: center; color: var(--muted); font-size: 13px; margin-top: 8px; margin-bottom: 24px; }
+    .inline-img { width: 100%; border-radius: 8px; margin: 8px 0 0; display: block; }
+    .ending { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--ink-soft); font-size: 14px; }
+    .highlight { color: var(--accent); font-weight: 600; background: linear-gradient(to top, rgba(139,38,53,0.10) 40%, transparent 40%); padding: 0 2px; }
+    .punchline { font-family: var(--font-serif); font-size: 18px; font-weight: 700; color: var(--accent); text-align: center; margin: 32px 0; padding: 16px 0; border-top: 2px solid var(--accent); border-bottom: 2px solid var(--accent); }
+    .data-callout { display: inline-block; background: var(--accent); color: #fff; padding: 2px 10px; border-radius: 4px; font-weight: 700; font-size: 15px; }
+    .contrast-card { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin: 24px 0; border-radius: var(--radius); overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .contrast-card .side { padding: 16px 20px; }
+    .contrast-card .side-left { background: #fef2f2; border-right: 1px solid var(--border); }
+    .contrast-card .side-right { background: #f0fdf4; }
+    .contrast-card .side h4 { margin: 0 0 8px; font-size: 14px; font-weight: 600; }
+    .contrast-card .side-left h4 { color: #991b1b; }
+    .contrast-card .side-right h4 { color: #166534; }
+    .contrast-card .side p { margin: 0; font-size: 14px; color: var(--ink-soft); line-height: 24px; }
+    .data-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14px; }
+    .data-table th { background: var(--accent); color: #fff; padding: 10px 12px; text-align: left; font-weight: 600; }
+    .data-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    .data-table tr:last-child td { border-bottom: none; }
+    .data-table .label { color: var(--muted); font-size: 13px; }
+    .data-table .num { font-weight: 700; color: var(--ink); }
+    .data-table .change-down { color: #991b1b; font-weight: 600; }
+    .data-table .change-up { color: #166534; font-weight: 600; }
+    strong { color: var(--ink); font-weight: 600; }
+    @media (max-width: 480px) {
+      body { padding: 0; }
+      .container { padding: 20px 16px; border-radius: 0; }
+      .contrast-card { grid-template-columns: 1fr; }
+      .contrast-card .side-left { border-right: none; border-bottom: 1px solid var(--border); }
+    }
+  </style>
+
+  <!-- SEO Optimization -->
+  <link rel="canonical" href="https://zjeep-arch.github.io/rhino-count-site/notes/2026-07-30-innolight-ipo-panic-opportunity.html" />
+  <meta property="og:url" content="https://zjeep-arch.github.io/rhino-count-site/notes/2026-07-30-innolight-ipo-panic-opportunity.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="利润涨262%却破发，但5万亿AI基建不会停" />
+  <meta property="og:description" content="中际旭创港股上市首日破发，Q1利润暴涨262%却跌超8%。智谱腰斩、MiniMax暴跌，整个AI板块在恐慌。但美国五大云厂商用5.8万亿美元建数据中心，光模块是AIDC的血管。市场可以恐惧，但基础设施不会因为恐惧就不建了。" />
+  <meta property="og:image" content="https://aka.doubaocdn.com/s/dZLSsALln5" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content="zh_CN" />
+  <meta property="og:site_name" content="犀牛伯爵 · AI 创作实验室" />
+  <meta property="article:published_time" content="2026-07-30" />
+  <meta property="article:author" content="犀牛伯爵" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="利润涨262%却破发，但5万亿AI基建不会停" />
+  <meta name="twitter:description" content="中际旭创港股上市首日破发，Q1利润暴涨262%却跌超8%。智谱腰斩、MiniMax暴跌，整个AI板块在恐慌。但美国五大云厂商用5.8万亿美元建数据中心，光模块是AIDC的血管。市场可以恐惧，但基础设施不会因为恐惧就不建了。" />
+  <meta name="twitter:image" content="https://aka.doubaocdn.com/s/dZLSsALln5" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "利润涨262%却破发，但5万亿AI基建不会停",
+  "description": "中际旭创港股上市首日破发，Q1利润暴涨262%却跌超8%。智谱腰斩、MiniMax暴跌，整个AI板块在恐慌。但美国五大云厂商用5.8万亿美元建数据中心，光模块是AIDC的血管。市场可以恐惧，但基础设施不会因为恐惧就不建了。",
+  "image": [
+    "https://aka.doubaocdn.com/s/dZLSsALln5"
+  ],
+  "datePublished": "2026-07-30",
+  "dateModified": "2026-07-30",
+  "author": {
+    "@type": "Person",
+    "name": "犀牛伯爵",
+    "url": "https://zjeep-arch.github.io/rhino-count-site/"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "犀牛伯爵",
+    "url": "https://zjeep-arch.github.io/rhino-count-site/"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://zjeep-arch.github.io/rhino-count-site/notes/2026-07-30-innolight-ipo-panic-opportunity.html"
+  }
+}
+  </script>
+</head>
+<body>
+  <div class="container">
+    <img class="cover-img" src="https://aka.doubaocdn.com/s/dZLSsALln5" alt="中际旭创港股上市首日股价走势图，显示开盘即跌破980港元发行价">
+    <div class="img-caption">中际旭创港股首日开盘即破发，盘中跌幅一度扩大至8%｜图源：贝壳财经</div>
+
+    <h1>利润涨262%却破发，但5万亿AI基建不会停</h1>
+    <div class="meta">2026年7月30日 · 阅读时间约12分钟</div>
+    <div class="byline">文｜犀牛伯爵</div>
+
+    <p class="lead">7月30日，中际旭创登陆港交所，上市首日破发。</p>
+
+    <p>这家公司今年一季度营收<span class="data-callout">195亿</span>，同比增长192%。净利润<span class="data-callout">57亿</span>，同比增长262%。单季利润超过2025年全年一半。全球市场份额连续五年第一，英伟达1.6T光模块采购占比约八成。</p>
+
+    <p>然后开盘就跌了。</p>
+
+    <p>港股开盘971港元，低于980港元发行价。盘中跌幅一度扩大到8%。A股同步跳水，跌超15%。一天之内，一家万亿市值公司又蒸发了上千亿。</p>
+
+    <p>利润涨262%的公司上市就破发，这不是公司出了问题。</p>
+
+    <p class="punchline">是整个市场在恐惧。</p>
+
+    <h2>不是中际旭创在跌，是整个AI板块在塌</h2>
+
+    <p>把视野拉远一点，中际旭创的破发一点都不意外。</p>
+
+    <p>7月以来，A股和港股的AI产业链全线杀跌。科创50、恒生科技指数持续走弱，存储、光模块、算力芯片、港股AI科创股无一幸免。</p>
+
+    <img class="inline-img" src="https://aka.doubaocdn.com/s/inoHwjkWzL" alt="2026年7月AI板块深度回调的走势图，显示恒生科技指数和科创50的持续下跌">
+    <div class="img-caption">7月AI板块集体回调，存储、光模块、算力芯片全线杀跌｜图源：格隆汇</div>
+
+    <p>智谱AI，"国产大模型第一股"，港股上市后一度突破万亿市值。然后十个交易日蒸发数千亿港元，从高点回撤超50%。7月21日股价定格在890.5港元，较配售价跌去44%。</p>
+
+    <p>MiniMax更惨，三日暴跌40%，高点回撤超80%。</p>
+
+    <p>A股这边也没好到哪去。存储产业链集体跌停，香农芯创、德明利、佰维存储、江波龙批量大跌超10%。天孚通信、新易盛等光模块标的单日跌超10%。</p>
+
+    <p>中际旭创的破发，只是这场集体恐慌里的一个截面。</p>
+
+    <p>这轮回调的根源是什么？不是AI产业逻辑崩了。是上半年涨太猛后的集中泡沫清洗。流动性收紧、交易拥挤、获利盘集中兑现，加上长鑫存储295亿打新抽血，公募和社保为参与配售集中抛售AI高位股回笼资金。典型的"多杀多"踩踏。</p>
+
+    <p>坦率地讲，这不是基本面的问题，是钱的问题。大家不是不看好AI了，是需要先把钱拿出来。等钱拿出来之后，该回来的还会回来。</p>
+
+    <h2>AI不会停，美国正在用5万亿建数据中心</h2>
+
+    <p>判断一家公司该不该恐惧，不能只看它自己的股价。要看它的客户在干什么。</p>
+
+    <p>中际旭创的客户是谁？英伟达、谷歌、微软、亚马逊、Meta。这五家公司在干什么？在建数据中心。建多少？</p>
+
+    <table class="data-table">
+      <tr>
+        <th>公司</th>
+        <th>2026年AI资本开支</th>
+        <th>同比增长</th>
+      </tr>
+      <tr>
+        <td class="label">亚马逊</td>
+        <td class="num">2000亿美元</td>
+        <td class="change-up">大幅增长</td>
+      </tr>
+      <tr>
+        <td class="label">微软</td>
+        <td class="num">1900亿美元</td>
+        <td class="change-up">+61%</td>
+      </tr>
+      <tr>
+        <td class="label">谷歌</td>
+        <td class="num">1750-1850亿美元</td>
+        <td class="change-up">重点扩数据中心</td>
+      </tr>
+      <tr>
+        <td class="label">Meta</td>
+        <td class="num">1250-1450亿美元</td>
+        <td class="change-up">几乎翻倍</td>
+      </tr>
+      <tr>
+        <td class="label">五家合计(2025-2030)</td>
+        <td class="num">5.8万亿美元</td>
+        <td class="change-up">前五年的6.5倍</td>
+      </tr>
+    </table>
+
+    <p>2026年一年，四大巨头就要花7250亿美元，同比暴涨77%。从2025到2030年，五家合计5.8万亿美元。2021到2025年这个数字是0.9万亿。后面五年是前面五年的6.5倍。</p>
+
+    <img class="inline-img" src="https://aka.doubaocdn.com/s/Uv8d7Tc6z2" alt="全球五大云厂商AI资本开支对比图，显示2025至2030年合计达5.8万亿美元">
+    <div class="img-caption">五大云厂商AI资本开支合计5.8万亿美元，2026年单年7250亿｜图源：高盛研究</div>
+
+    <p>这些钱不是在买模型。模型是软件，花钱有限。这些钱在建物理的东西，数据中心、电力系统、冷却系统、GPU集群、光互联网络。实打实的基础设施。</p>
+
+    <p>谷歌CEO皮查伊说了一句话，我觉得可以贴在每一个AI投资者的桌子上。</p>
+
+    <div class="quote-box">
+      <p>"投资不足的风险，远大于过度投资的风险。"</p>
+      <div class="attribution">桑达尔·皮查伊，Alphabet CEO，2026年Q2财报电话会议</div>
+    </div>
+
+    <p>Meta一个季度自由现金流暴跌91%，扎克伯格还是拒绝对外出租GPU，说卖算力太蠢。为什么？因为他要留着算力建自己的AI基础设施。</p>
+
+    <p>这些全球最聪明的科技公司，在用真金白银投票。投的不是概念，是AIDC。</p>
+
+    <h2>AIDC是AI的底座，光模块是底座的血管</h2>
+
+    <p>AIDC，AI数据中心，是承载所有AI能力的物理底座。大模型训练需要它，推理需要它，未来每一个AI应用跑起来都需要它。没有AIDC，GPT-5.6也好Claude也好Gemini也好，全是一堆跑不起来的代码。</p>
+
+    <p>而光模块，是AIDC里连接GPU集群的血管。</p>
+
+    <p>你可以把GPU想象成心脏，把数据想象成血液。心脏再强，血管不够粗，血就泵不出去。AI万卡集群里，GPU之间的数据传输带宽直接决定算力效率。GPU算得再快，光模块传不出去，就是一堆发热的硅片。</p>
+
+    <img class="inline-img" src="https://aka.doubaocdn.com/s/wt4JiNQlf7" alt="中际旭创光互连解决方案示意图，展示光模块在AI数据中心中连接服务器和交换机的作用">
+    <div class="img-caption">光模块在AI数据中心中负责服务器、交换机之间的高速光信号传输｜图源：中际旭创招股书</div>
+
+    <p>从400G到800G到1.6T，每一代升级都在把单卡算力榨干。2027年1.6T光模块需求量预计冲到7500万只，但行业预计只能出货5500万只，硬缺口30%。</p>
+
+    <p>这个缺口不是因为需求萎缩，是因为造不出来。</p>
+
+    <p>光模块不是大宗商品，不是谁都能做的。传输速率从800G跳到1.6T的时候，信号完整性、散热、功耗的问题指数级放大。你得一掌掌握高频高速电路设计、精密光学耦合、复杂的温控算法。美云厂商的认证周期长达6到18个月，要过上万项测试。这不是花钱就能解决的问题，是时间和技术换出来的壁垒。</p>
+
+    <p>全球光互连市场2025年248亿美元，2030年预计1110亿美元，年复合增速31.6%。AI资本开支里光模块的占比，有望从5%提升到10%。需求的天花板还在往上抬。</p>
+
+    <h2>中际旭创的位置，不是参与者，是规则制定者</h2>
+
+    <p>说回中际旭创本身。</p>
+
+    <p>这家公司的位置，用一句话概括就是，英伟达每次平台升级，光模块都要跟着迭代，而中际旭创是和英伟达一起定义下一代产品节奏的那个人。</p>
+
+    <p>全球市场份额21.2%，连续五年第一。高速数通光互连市场份额28.1%。英伟达1.6T光模块采购中际旭创占比约八成。</p>
+
+    <p>更关键的是技术节奏。400G、800G、1.6T三款全球首款硅光模块，都是中际旭创率先量产。量产节奏领先同行半年。硅光产品占高速收入比重已达70%，2026年Q1毛利率因此升到45.5%。3.2T已经在适配英伟达Rubin平台，预计2028年量产。</p>
+
+    <img class="inline-img" src="https://aka.doubaocdn.com/s/SzBV8zUljY" alt="中际旭创港股IPO基石投资者阵容，包括淡马锡、贝莱德、摩根资管、高瓴、腾讯、阿里等29家机构">
+    <div class="img-caption">29家基石投资者认购34.5亿美元，包括淡马锡、贝莱德、摩根资管、腾讯、阿里｜图源：贝壳财经</div>
+
+    <p>这次港股IPO募资534亿港元，计划到2029年把年产能从4000万只扩到9000万只，80%以上是1.6T及以上高速产品。29家基石投资者认购34.5亿美元，淡马锡、贝莱德、摩根资管、高瓴、腾讯、阿里全在里面。</p>
+
+    <p>这些机构不是来炒一把的。他们是来锁定下一代AI基础设施供应链的入场券的。</p>
+
+    <div class="contrast-card">
+      <div class="side side-left">
+        <h4>市场看到的</h4>
+        <p>上市破发，A股跌15%，一个1.6T降价传闻蒸发1800亿市值。恐惧。</p>
+      </div>
+      <div class="side side-right">
+        <h4>数据告诉你的</h4>
+        <p>Q1利润涨262%，订单排到2027年，1.6T缺口30%，硅光占比70%，毛利率45.5%。</p>
+      </div>
+    </div>
+
+    <h2>市场在怕什么，数据怎么说</h2>
+
+    <p>市场现在恐惧三件事。</p>
+
+    <p>第一，AI资本开支增速放缓。但事实是，2026年四大巨头AI资本开支7250亿美元，同比暴涨77%。2025到2030年合计5.8万亿美元。增速没有放缓，是在加速。</p>
+
+    <p>第二，光模块价格战。一个"1.6T降到600美元"的传闻，让万亿市值公司一天蒸发1800亿。中际旭创管理层紧急辟谣，说实际ASP远高于传言，600美元"非常离谱"。但市场选择不信。有意思的是，硅光占比提升实际上在降低成本而不是降低毛利，Q1毛利率反而升到了45.5%。价格下降和毛利下降，不是一回事。</p>
+
+    <p>第三，客户集中度太高。前五大客户占81.9%，最大客户25.1%，美国市场收入占比61.7%。这个担忧是真实的。但你反过来想，客户集中度高恰恰说明头部客户对中际旭创的依赖在加深。英伟达1.6T采购八成给了中际旭创，不是因为它便宜，是因为只有它能稳定交付。这个依赖关系，短期内很难被替代。</p>
+
+    <p>地缘政治风险是另一个真实担忧。如果美国出口管制延伸到光模块领域，中际旭创首当其冲。但中际旭创已经在海外建厂分散风险，而且光模块不像GPU那样有明确的出口管制清单。退一步说，即使地缘风险真的落地，全球光模块需求不会消失，只是流向会变。中际旭创的技术和产能是跟着需求走的，不是跟着某一块地缘版图走的。</p>
+
+    <h2>恐慌是机会的伪装</h2>
+
+    <p>我自己目前的看法是，中际旭创这次破发，和2023年ChatGPT出来之前市场对光模块的冷淡，有结构性的相似。</p>
+
+    <p>那时候大家觉得光模块就是个传统制造配件，没什么想象力。后来AI爆发，万卡集群要互联，光模块从"配件"变成"血管"，中际旭创市值从几百亿冲到1.5万亿。</p>
+
+    <p>现在市场又在恐慌了。但这次恐慌的背景完全不同。2023年AI基建还没开始，现在是5.8万亿美元的资本开支正在路上。2023年1.6T还是实验室里的概念，现在已经量产交付，订单排到2027年。2023年中际旭创的硅光占比还很低，现在已经70%。</p>
+
+    <p>基本面更强了，股价却在跌。这中间的落差，就是机会。</p>
+
+    <img class="inline-img" src="https://aka.doubaocdn.com/s/NfkDUOEexu" alt="云计算和AI基础设施的终局格局示意图，展示算力从训练到推理到应用的完整链路">
+    <div class="img-caption">AI基础设施的终局格局，算力从训练到推理到应用全链路都需要光互联｜图源：高盛研究</div>
+
+    <p>AIDC的建设周期至少还有5年。在这5年里，每一座新建的数据中心都需要光模块，每一代GPU升级都需要新一代光模块匹配。英伟达Blackwell平台需要1.6T，Rubin平台需要3.2T。中际旭创已经在这两个节点上布局了。</p>
+
+    <p>市场可以恐惧，但数据中心不会因为恐惧就不建了。</p>
+
+    <p class="punchline">恐惧是暂时的，基础设施是永久的。</p>
+
+    <p>聊到这里我想起一个事。2000年互联网泡沫破裂的时候，大量.com公司倒闭，市场一片哀嚎。但那几年建起来的光纤网络、数据中心、宽带基础设施，一个都没浪费。它们成了后来谷歌、亚马逊、Facebook崛起的地基。</p>
+
+    <p>泡沫破的是估值，不是基础设施。真正在修路的人，不需要担心路上有没有人走。路修好了，人自然会来。</p>
+
+    <p>中际旭创在修的路，叫AIDC。这条路至少还要修5年。5.8万亿美元的资本开支就是施工预算。市场的恐惧只是施工期间的噪音。</p>
+
+    <p>噪音会过去。路还在修。</p>
+
+    <div class="ending">
+      <p>谢谢你看我的文章。</p>
+      <p style="font-size: 13px; color: var(--muted); margin-top: 8px;">参考信源：投中网、格隆汇、贝壳财经、第一财经、高盛研究、灼识咨询、中际旭创招股书</p>
+    </div>
+  </div>
+</body>
+</html>

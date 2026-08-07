@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>高盛说AI不在软件里，五角大楼用2亿点了头</title>
+  <meta name="description" content="五角大楼跟OpenAI签了2亿合同，高盛说AI每月消灭1.6万个岗位。AI最大的金主不是你，最大的影响也不在聊天框里。">
+  <style>
+    :root {
+      --accent: #8b2635;
+      --ink: #333;
+      --ink-soft: #555;
+      --muted: #888;
+      --surface: #fafafa;
+      --border: rgba(0,0,0,0.06);
+      --radius: 12px;
+      --font-sans: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-serif: "Noto Serif SC", "Songti SC", Georgia, serif;
+    }
+    body { font-family: var(--font-sans); background: #f5f5f5; margin: 0; padding: 16px; font-size: 16px; line-height: 1.8; color: var(--ink); -webkit-font-smoothing: antialiased; }
+    .container { max-width: 680px; margin: 0 auto; background: var(--surface); padding: 32px; border-radius: var(--radius); }
+    .cover-img { width: 100%; border-radius: 8px; margin-bottom: 24px; }
+    h1 { font-family: var(--font-serif); font-size: 24px; font-weight: 700; color: var(--ink); line-height: 1.4; margin: 0 0 16px; }
+    .meta { color: var(--muted); font-size: 13px; margin-bottom: 16px; }
+    .byline { color: var(--ink-soft); font-size: 14px; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+    h2 { font-family: var(--font-serif); font-size: 20px; font-weight: 600; color: var(--ink); margin: 32px 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+    h3 { font-family: var(--font-serif); font-size: 18px; font-weight: 600; color: var(--ink); margin: 24px 0 12px; }
+    p { margin: 0 0 24px; }
+    .quote-box { border-left: 4px solid var(--accent); background: #f5f5f5; padding: 16px 20px; margin: 24px 0; border-radius: 0 var(--radius) var(--radius) 0; }
+    .quote-box p { margin: 0; color: var(--ink-soft); font-style: italic; font-size: 15px; }
+    .quote-box .attribution { margin-top: 8px; color: var(--muted); font-size: 13px; font-style: normal; }
+    .insight-box { background: #fff8f0; border: 1px solid #ffe4c4; border-radius: var(--radius); padding: 20px; margin: 24px 0; }
+    .insight-box h4 { margin: 0 0 8px; font-size: 16px; color: var(--ink); }
+    .insight-box p { margin: 0; font-size: 15px; color: var(--ink-soft); }
+    .data-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14px; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .data-table th, .data-table td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); }
+    .data-table th { background: #f0f0f0; font-weight: 600; color: var(--ink); }
+    .data-table td { color: var(--ink-soft); }
+    .timeline { position: relative; padding-left: 24px; margin: 24px 0; }
+    .timeline::before { content: ''; position: absolute; left: 6px; top: 0; bottom: 0; width: 2px; background: #e0e0e0; }
+    .timeline-item { position: relative; margin-bottom: 16px; }
+    .timeline-item::before { content: ''; position: absolute; left: -22px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); }
+    .timeline-item .date { font-size: 13px; color: var(--muted); margin-bottom: 4px; }
+    .timeline-item .content { font-size: 15px; color: var(--ink); }
+    .img-caption { text-align: center; color: var(--muted); font-size: 13px; margin-top: 8px; margin-bottom: 24px; }
+    .ending { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--ink-soft); font-size: 14px; }
+    .highlight { color: var(--accent); font-weight: 600; background: linear-gradient(to top, rgba(139,38,53,0.08) 40%, transparent 40%); padding: 0 2px; }
+    .data-callout { display: inline-block; background: var(--accent); color: #fff; padding: 2px 10px; border-radius: 4px; font-weight: 700; font-size: 15px; }
+    .contrast-card { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin: 24px 0; border-radius: var(--radius); overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .contrast-card .side { padding: 16px 20px; }
+    .contrast-card .side-left { background: #fef2f2; border-right: 1px solid var(--border); }
+    .contrast-card .side-right { background: #f0fdf4; }
+    .contrast-card .side h4 { margin: 0 0 8px; font-size: 14px; font-weight: 600; }
+    .contrast-card .side-left h4 { color: #991b1b; }
+    .contrast-card .side-right h4 { color: #166534; }
+    .contrast-card .side p { margin: 0; font-size: 14px; color: var(--ink-soft); line-height: 1.6; }
+    .punchline { font-family: var(--font-serif); font-size: 18px; font-weight: 700; color: var(--accent); text-align: center; margin: 32px 0; padding: 16px 0; border-top: 2px solid var(--accent); border-bottom: 2px solid var(--accent); }
+    strong { color: var(--ink); font-weight: 600; }
+    .in-text-img { width: 100%; border-radius: 8px; margin: 24px 0 8px; }
+    .action-box { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; margin: 24px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+    .action-box .action-item { margin-bottom: 16px; }
+    .action-box .action-item:last-child { margin-bottom: 0; }
+    .action-box .action-num { display: inline-block; background: var(--accent); color: #fff; width: 24px; height: 24px; border-radius: 50%; text-align: center; line-height: 24px; font-size: 13px; font-weight: 700; margin-right: 8px; }
+    .action-box .action-text { font-size: 15px; color: var(--ink); line-height: 1.7; }
+  </style>
+
+  <!-- SEO Optimization -->
+  <link rel="canonical" href="https://zjeep-arch.github.io/rhino-count-site/notes/2026-07-25-goldman-pentagon-ai.html" />
+  <meta property="og:url" content="https://zjeep-arch.github.io/rhino-count-site/notes/2026-07-25-goldman-pentagon-ai.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="高盛说AI不在软件里，五角大楼用2亿点了头" />
+  <meta property="og:description" content="五角大楼跟OpenAI签了2亿合同，高盛说AI每月消灭1.6万个岗位。AI最大的金主不是你，最大的影响也不在聊天框里。" />
+  <meta property="og:image" content="https://aka.doubaocdn.com/s/ZA3r1wq8Op" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content="zh_CN" />
+  <meta property="og:site_name" content="犀牛伯爵 · AI 创作实验室" />
+  <meta property="article:published_time" content="2026-07-25" />
+  <meta property="article:author" content="犀牛伯爵" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="高盛说AI不在软件里，五角大楼用2亿点了头" />
+  <meta name="twitter:description" content="五角大楼跟OpenAI签了2亿合同，高盛说AI每月消灭1.6万个岗位。AI最大的金主不是你，最大的影响也不在聊天框里。" />
+  <meta name="twitter:image" content="https://aka.doubaocdn.com/s/ZA3r1wq8Op" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "高盛说AI不在软件里，五角大楼用2亿点了头",
+  "description": "五角大楼跟OpenAI签了2亿合同，高盛说AI每月消灭1.6万个岗位。AI最大的金主不是你，最大的影响也不在聊天框里。",
+  "image": [
+    "https://aka.doubaocdn.com/s/ZA3r1wq8Op"
+  ],
+  "datePublished": "2026-07-25",
+  "dateModified": "2026-07-25",
+  "author": {
+    "@type": "Person",
+    "name": "犀牛伯爵",
+    "url": "https://zjeep-arch.github.io/rhino-count-site/"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "犀牛伯爵",
+    "url": "https://zjeep-arch.github.io/rhino-count-site/"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://zjeep-arch.github.io/rhino-count-site/notes/2026-07-25-goldman-pentagon-ai.html"
+  }
+}
+  </script>
+</head>
+<body>
+  <div class="container">
+    <img class="cover-img" src="https://aka.doubaocdn.com/s/ZA3r1wq8Op" alt="五角大楼与AI">
+    <p class="img-caption">五角大楼与OpenAI签下2亿美元合同，AI军事化进入新阶段 | 图源：TMTPost / Unsplash</p>
+
+    <h1>高盛说AI不在软件里，五角大楼用2亿点了头</h1>
+    <div class="meta">2026年7月25日 · 阅读时间约8分钟</div>
+    <div class="byline">文｜犀牛伯爵</div>
+
+    <p>大多数人对AI的理解，还停在"跟ChatGPT聊天"这个层面。但2026年过去七个月，两件事几乎同时发生，指向同一个信号。</p>
+
+    <p>五角大楼跟OpenAI签了<span class="data-callout">2亿美元</span>的合同，用AI搞军事决策。高盛发了份报告，说AI每个月在美国消灭<span class="data-callout">1.6万</span>个岗位。</p>
+
+    <p>一个在买，一个在卖。买家不是你，卖家也不是App Store。</p>
+
+    <h2>一、2亿和1.6万，两件事同时发生</h2>
+
+    <p>先说时间线。</p>
+
+    <p>2024年1月，OpenAI悄悄改了使用条款，删掉了"禁止军事用途"那行字。同年跟国防科技公司Anduril达成合作，搞反无人机系统。2025年6月，通过专门成立的"OpenAI Public Sector"实体，跟五角大楼首席数字与人工智能办公室签下2亿美元的"上限合同"，为期一年，预计2026年7月完成。</p>
+
+    <p>合同核心就一句话，开发"原型尖端AI能力"，用于"作战和企业领域"的国家安全挑战。这不是买几台服务器，是让AI直接进入作战决策链路。</p>
+
+    <img class="in-text-img" src="https://aka.doubaocdn.com/s/wLoV1wq8OM" alt="OpenAI与五角大楼的合作">
+    <p class="img-caption">OpenAI与五角大楼的合作标志着硅谷与军方关系的逆转 | 图源：MIT Technology Review</p>
+
+    <p>另一条线。</p>
+
+    <p>2026年4月，高盛研究部出了一份报告。里面有个数字值得停下来看一眼。AI正在以每个月净减少1.6万个岗位的速度，在美国就业市场产生影响。一年下来将近20万个。不是裁员，是岗位直接蒸发。原来五个人的活，现在一个人加AI就干了，连解雇通知都不用发。</p>
+
+    <p>到了6月，高盛又录了一期播客，请了自家经济学家Joseph Briggs和MIT的两位学者，其中一位是2024年诺贝尔经济学奖得主Daron Acemoglu。结论是，未来十年约9%的美国工人，1500万人，要换工作。</p>
+
+    <p>两条线，一个买AI买到了五角大楼，一个发现AI已经在吃岗位了。</p>
+
+    <h2>二、AI最大的金主不是你</h2>
+
+    <p>我的判断是，AI最大的价值从来不在你手机里那个聊天框。</p>
+
+    <p>大多数人讨论AI，翻来覆去就是"ChatGPT好不好用""Claude比不比得上""某某模型又刷榜了"。但你往钱的方向看，真正在砸钱的不是普通用户，是政府。</p>
+
+    <img class="in-text-img" src="https://aka.doubaocdn.com/s/osmI1wq8OM" alt="高盛AI就业影响预测">
+    <p class="img-caption">高盛预测约9%的美国工人将在AI转型期被重新配置到新岗位 | 图源：Goldman Sachs Research</p>
+
+    <p>五角大楼2024年拨了18亿美元做审计和自动化，其中2亿专门给了AI部署。特朗普政府在推2026年1万亿美元的国防预算，史上最高。OpenAI不是唯一一家拿到军方订单的，Anthropic跟Amazon和Palantir合作给情报机构提供Claude，马斯克的xAI通过微软联邦云平台分发Grok，Scale AI从2020年起就跟五角大楼签了多个合同。</p>
+
+    <p>高盛自己的预测是，生成式AI未来十年能给全球GDP增加7万亿美元。但MIT的Acemoglu泼了盆冷水，说美国经济里只有20%的任务能被AI高效自动化或增强。大部分行业，教育、医疗、熟练工种，AI的落地成本可能比收益还高。</p>
+
+    <div class="quote-box">
+      <p>"政府客户正在迅速成为AI公司最可靠的收入来源。这不是机会，是战略必需。"</p>
+      <div class="attribution">—— 华盛顿一位国防科技投资人，TMTPost报道</div>
+    </div>
+
+    <p>这就有意思了。一边是政府拼命砸钱买AI，一边是投行说AI的商业回报可能没那么快。中间夹着什么？夹着1500万要换工作的人。</p>
+
+    <h2>三、政府为什么成了AI的救命钱</h2>
+
+    <p>说真的，这事儿跟你想的不一样。</p>
+
+    <p>你以为AI公司靠的是订阅费？ChatGPT Plus每月20刀，Claude Pro每月20刀。但当商业收入增长放缓，大模型训练成本飙升，科技公司正在把政府合同当成"稳定性和生存"的来源。</p>
+
+    <p>2018年，4000名谷歌员工联名抗议公司参与五角大楼的Project Maven项目，谷歌被迫退出，还立了"禁止武器开发"的AI原则。七年过去了，这些原则正在被一条条撤掉。OpenAI在2024年1月删了军事禁令，2025年3月改了核心价值观，把"impact-driven"换成了追求AGI。谷歌2025年2月也跟上了，解除了国防AI项目的限制，说"只有竞争对手也遵守，我们才遵守军用AI标准"。</p>
+
+    <p>伦理底线在退，政府订单在涨。这不是巧合。</p>
+
+    <p>更有意思的是Anthropic的故事。Anthropic试图在合同里写死禁止其模型Claude被用于自主武器或国内大规模监控。五角大楼不干。国防部长赫格塞斯在X上发飙，说Anthropic上演了"一堂傲慢与背叛的大师课"，宣布把Anthropic列为供应链风险，禁止任何与军方有商业往来的承包商跟Anthropic合作。</p>
+
+    <p>OpenAI走的是另一条路。不设具体禁止条款，而是援引现行法律法规，"政府不会违法"这个假设作为底线。乔治华盛顿大学法学院的Jessica Tillipman一针见血地指出，OpenAI的合同"并未赋予它像Anthropic那样独立禁止合法政府行为的权利"。</p>
+
+    <p>翻译成人话就是，Anthropic画了红线，五角大楼把它踢出去了。OpenAI没画红线，五角大楼给了它2亿。</p>
+
+    <h2>四、岗位不是被裁的，是蒸发的</h2>
+
+    <p>高盛那份18个行业的渗透报告，比任何预测都直观。</p>
+
+    <table class="data-table">
+      <tr><th>行业</th><th>理论替代率</th><th>实际替代率</th></tr>
+      <tr><td>编程</td><td>89%</td><td>74.5%</td></tr>
+      <tr><td>客服</td><td>85%</td><td>70%</td></tr>
+      <tr><td>数据录入</td><td>95%</td><td>67%</td></tr>
+      <tr><td>法律文书</td><td>89%</td><td>~15%</td></tr>
+      <tr><td>金融分析</td><td>82%</td><td>28%</td></tr>
+    </table>
+
+    <img class="in-text-img" src="https://aka.doubaocdn.com/s/xQbm1wq8ON" alt="AI在18个行业的渗透率">
+    <p class="img-caption">2026年AI在18个行业的理论替代率与实际替代率对比 | 图源：Goldman Sachs Research</p>
+
+    <p>编程行业，理论替代率89%，实际替代率74.5%。这意味着十个程序员里有七个半的活已经被AI接管了。客服行业，85%对70%。数据录入更狠，95%对67%。</p>
+
+    <p>但真正吓人的不是数字本身，是数字背后的逻辑。</p>
+
+    <p>法律行业，理论上89%的工作可以被AI覆盖，实际只替代了15%。不是AI做不到，合同审查的准确率已经超过初级律师了。挡住的是行业壁垒和决策责任归属。这些保护层还在，但在变薄。</p>
+
+    <p>还有个数据。22到25岁的年轻人，在AI高暴露行业里的就业率，比ChatGPT诞生前下降了14%。高盛的经济学家Joe Briggs的原话是，<span class="highlight">"这不是大规模裁员，而是招聘通道正在悄悄关闭。"</span></p>
+
+    <p>95%的开发者每周至少用一次AI工具，73%的团队每天都在用。编程这个赛道已经跑通了。接下来轮到谁？</p>
+
+    <h2>五、"还有两年"已经过期了</h2>
+
+    <p>很多人还在用"还有两年"这个说法安慰自己。</p>
+
+    <p>这话说说可以，但数据不支持。2023年，AI是玩具。2024年，AI是工具。2025年，AI是实习生。2026年，AI正在变成你的同事。从"挺好玩的"到"正在取代你"，用了不到四年。</p>
+
+    <img class="in-text-img" src="https://aka.doubaocdn.com/s/8aw61wq8OM" alt="AI就业影响射程图">
+    <p class="img-caption">MIT学者Acemoglu的AI就业影响"射程图"，每解锁一层波及量级跳升一次 | 图源：Goldman Sachs Exchanges</p>
+
+    <p>更关键的是，这个曲线不是匀速上升的，在加速。三年前引入AI需要半年论证，现在一个SaaS工具点几下就能接入。老板在手机上花十分钟就能看到效果。</p>
+
+    <p>你还在纠结"要不要学AI"的时候，招聘JD里已经悄悄加上了"熟悉AI工具"和"有AI协作经验"。表面是个加分项，实际正在变成基础门槛。</p>
+
+    <p>但这里有个被忽略的细节。MIT的Thompson提出一个框架，大多数工作不会被整体自动化，是被"部分自动化"。而部分自动化之后你的命运，取决于被拿走的是"专家任务"还是"非专家任务"。</p>
+
+    <div class="contrast-card">
+      <div class="side side-left">
+        <h4>如果AI干掉你的"杂活"</h4>
+        <p>你变得更值钱。比如校对员，拼写检查被Word拿走了，剩下的论证和证据组织才是真正值钱的。能做的人变少，工资涨。</p>
+      </div>
+      <div class="side side-right">
+        <h4>如果AI干掉你的"手艺"</h4>
+        <p>你的门槛消失了。比如GPS把出租车司机记路线这个核心技能自动化了。门槛降低，涌入的人变多，工资跌。</p>
+      </div>
+    </div>
+
+    <p>所以"AI会不会取代我"这个问题本身就问错了。该问的是，你工作的哪部分会被AI拿走？是帮你省力气的杂活，还是让你值钱的手艺？</p>
+
+    <h2>六、普通用户该做什么</h2>
+
+    <p>说了这么多，落到你身上。</p>
+
+    <div class="action-box">
+      <div class="action-item">
+        <span class="action-num">1</span>
+        <span class="action-text"><strong>搞清楚你工作的哪部分是"专家任务"。</strong>如果AI干掉的是你的杂活，恭喜，你变得更值钱了。如果AI干掉的是你最核心的手艺，你得赶紧找新的护城河。别等被替代了才反应过来。</span>
+      </div>
+      <div class="action-item">
+        <span class="action-num">2</span>
+        <span class="action-text"><strong>现在就开始用。</strong>不是"有空了学学"，是今天。把AI嵌入到每天的工作流里。到年底回头看，你会发现自己做的事情跟年初已经不是一回事了。主动用AI的人和不用的人，差距只会越来越大。</span>
+      </div>
+      <div class="action-item">
+        <span class="action-num">3</span>
+        <span class="action-text"><strong>关注你所在行业的实际替代率，不是理论替代率。</strong>法律行业理论上89%可替代，实际只有15%。中间那个差距，就是你的缓冲期。但这个差距在缩小。缓冲期不是用来放松的，是用来转型的。</span>
+      </div>
+      <div class="action-item">
+        <span class="action-num">4</span>
+        <span class="action-text"><strong>别只盯着AI聊天工具。</strong>真正的AI战场在你看不到的地方，在五角大楼的服务器里，在工厂的机器人手臂上，在高盛的就业模型里。你的对手不是ChatGPT，是那个已经把AI用进工作流的同事。</span>
+      </div>
+    </div>
+
+    <p>还有一层判断。高盛的Briggs说，过去80年里约85%的就业增长来自技术创造的新岗位。美国劳动力市场每年创造约3000万个岗位，同时销毁约2900万个。AI带来的置换是叠加在这个巨大流转之上的。历史站在乐观一边。</p>
+
+    <p>但Acemoglu提醒了一件事。不存在一条经济学定律，保证岗位创造永远匹配岗位毁灭。1980年以后，为无大学学历工人创造的岗位持续不足，这个群体的就业率和工资长期下滑。如果这次重演一遍，只是被毁灭的换成认知型办公岗位，那就是他说的"有限但真实"的损失。</p>
+
+    <p>高盛的播客结尾有句话，"我不确定这些对话让我更担心了，还是更安心了。"可能这才是对当前AI最准确的注脚。</p>
+
+    <p class="punchline">但确定的是，窗口已经开了。不是两年后，是现在。</p>
+
+    <div class="ending">
+      <p>数据来源：Goldman Sachs Research (April 2026), Goldman Sachs Exchanges Podcast (June 2026), MIT Technology Review (March 2026), TMTPost, 高端装备产业研究中心, Pragmatic Engineer Survey (February 2026)</p>
+      <p>犀牛伯爵 · AI创作实验室 · 2026</p>
+    </div>
+  </div>
+</body>
+</html>

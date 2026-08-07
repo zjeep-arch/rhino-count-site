@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>模型白送的时代，用模型的人才是新地主 | 犀牛伯爵</title>
+  <meta name="description" content="DeepSeek单日8万亿Token，模型价格坍缩到接近零。当AI模型变成水电煤，做模型的人利润归零，用模型解决问题的人迎来黄金时代。四波人的命运正在分岔，你的位置在哪？">
+  <style>
+    :root {
+      --accent: #8b2635;
+      --ink: #333;
+      --ink-soft: #555;
+      --muted: #888;
+      --surface: #fafafa;
+      --border: rgba(0,0,0,0.06);
+      --radius: 12px;
+      --font-sans: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-serif: "Noto Serif SC", "Songti SC", Georgia, serif;
+    }
+    body { font-family: var(--font-sans); background: #f5f5f5; margin: 0; padding: 16px; font-size: 16px; line-height: 1.8; color: var(--ink); -webkit-font-smoothing: antialiased; }
+    .container { max-width: 680px; margin: 0 auto; background: var(--surface); padding: 32px; border-radius: var(--radius); }
+    .cover-img { width: 100%; border-radius: 8px; margin-bottom: 24px; }
+    h1 { font-family: var(--font-serif); font-size: 24px; font-weight: 700; color: var(--ink); line-height: 1.4; margin: 0 0 16px; }
+    .meta { color: var(--muted); font-size: 13px; margin-bottom: 16px; }
+    .byline { color: var(--ink-soft); font-size: 14px; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+    h2 { font-family: var(--font-serif); font-size: 20px; font-weight: 600; color: var(--ink); margin: 32px 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+    h3 { font-family: var(--font-serif); font-size: 18px; font-weight: 600; color: var(--ink); margin: 24px 0 12px; }
+    p { margin: 0 0 24px; }
+    .quote-box { border-left: 4px solid var(--accent); background: #f5f5f5; padding: 16px 20px; margin: 24px 0; border-radius: 0 var(--radius) var(--radius) 0; }
+    .quote-box p { margin: 0; color: var(--ink-soft); font-style: italic; font-size: 15px; }
+    .quote-box .attribution { margin-top: 8px; color: var(--muted); font-size: 13px; font-style: normal; }
+    .insight-box { background: #fff8f0; border: 1px solid #ffe4c4; border-radius: var(--radius); padding: 20px; margin: 24px 0; }
+    .insight-box h4 { margin: 0 0 8px; font-size: 16px; color: var(--ink); }
+    .insight-box p { margin: 0; font-size: 15px; color: var(--ink-soft); }
+    .data-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14px; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .data-table th, .data-table td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); }
+    .data-table th { background: #f0f0f0; font-weight: 600; color: var(--ink); }
+    .data-table td { color: var(--ink-soft); }
+    .timeline { position: relative; padding-left: 24px; margin: 24px 0; }
+    .timeline::before { content: ''; position: absolute; left: 6px; top: 0; bottom: 0; width: 2px; background: #e0e0e0; }
+    .timeline-item { position: relative; margin-bottom: 16px; }
+    .timeline-item::before { content: ''; position: absolute; left: -22px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); }
+    .timeline-item .date { font-size: 13px; color: var(--muted); margin-bottom: 4px; }
+    .timeline-item .content { font-size: 15px; color: var(--ink); }
+    .img-caption { text-align: center; color: var(--muted); font-size: 13px; margin-top: 8px; margin-bottom: 24px; }
+    .ending { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--ink-soft); font-size: 14px; }
+    .highlight { color: var(--accent); font-weight: 600; background: linear-gradient(to top, rgba(139,38,53,0.08) 40%, transparent 40%); padding: 0 2px; }
+    .data-callout { display: inline-block; background: var(--accent); color: #fff; padding: 2px 10px; border-radius: 4px; font-weight: 700; font-size: 15px; }
+    .contrast-card { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin: 24px 0; border-radius: var(--radius); overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .contrast-card .side { padding: 16px 20px; }
+    .contrast-card .side-left { background: #fef2f2; border-right: 1px solid var(--border); }
+    .contrast-card .side-right { background: #f0fdf4; }
+    .contrast-card .side h4 { margin: 0 0 8px; font-size: 14px; font-weight: 600; }
+    .contrast-card .side-left h4 { color: #991b1b; }
+    .contrast-card .side-right h4 { color: #166534; }
+    .contrast-card .side p { margin: 0; font-size: 14px; color: var(--ink-soft); line-height: 1.6; }
+    .punchline { font-family: var(--font-serif); font-size: 18px; font-weight: 700; color: var(--accent); text-align: center; margin: 32px 0; padding: 16px 0; border-top: 2px solid var(--accent); border-bottom: 2px solid var(--accent); }
+    strong { color: var(--ink); font-weight: 600; }
+    .article-img { width: 100%; border-radius: 8px; margin: 24px 0 8px; }
+    .opportunity-card { background: #f8f5ff; border-left: 4px solid #6b21a8; border-radius: 0 var(--radius) var(--radius) 0; padding: 16px 20px; margin: 20px 0; }
+    .opportunity-card .tag { display: inline-block; background: #6b21a8; color: #fff; font-size: 12px; padding: 2px 8px; border-radius: 4px; margin-bottom: 8px; }
+    .opportunity-card h4 { margin: 0 0 6px; font-size: 16px; color: var(--ink); }
+    .opportunity-card p { margin: 0; font-size: 15px; color: var(--ink-soft); line-height: 1.7; }
+    .risk-card { background: #fff4f4; border-left: 4px solid #991b1b; border-radius: 0 var(--radius) var(--radius) 0; padding: 16px 20px; margin: 20px 0; }
+    .risk-card .tag { display: inline-block; background: #991b1b; color: #fff; font-size: 12px; padding: 2px 8px; border-radius: 4px; margin-bottom: 8px; }
+    .risk-card h4 { margin: 0 0 6px; font-size: 16px; color: var(--ink); }
+    .risk-card p { margin: 0; font-size: 15px; color: var(--ink-soft); line-height: 1.7; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img class="cover-img" src="2026-08-03-deepseek-commodity-cover-v2.jpg" alt="AI模型从商店货架上的高端产品变成墙壁里的水电管道的概念插图">
+    <h1>模型白送的时代，用模型的人才是新地主</h1>
+    <div class="meta">2026年8月3日 · 阅读时间约15分钟</div>
+    <div class="byline">文｜犀牛伯爵</div>
+
+    <p>8万亿Token。</p>
+
+    <p>8月3日，DeepSeek V4-Flash单日处理8万亿Token的消息炸了整个AI圈。5600万本《三体》的文字量，24小时吞下去又吐出来。OpenRouter全球调用量前五，清一色中国模型。OpenAI高管跑到评论区打广告，被开发者一句话怼回去，"我们要DeepSeek的价格。"</p>
+
+    <p>所有自媒体都在喊"DeepSeek赢了""中国AI碾压"。</p>
+
+    <p>说真的，我看完这些标题心里咯噔了一下。不是为OpenAI紧张，是为看这篇文章的你紧张。</p>
+
+    <p>因为8万亿这个数字，不是某家公司的喜报。它是整个AI行业游戏规则改写的信号弹。模型正在变成水电煤，而水电煤时代，赚钱的逻辑跟今天完全不一样。</p>
+
+    <h2>72小时里发生了什么</h2>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="date">7月31日</div>
+        <div class="content">DeepSeek V4-Flash正式版API上线公测。MoE架构，2840亿总参数只激活130亿，100万Token上下文。Artificial Analysis智能指数50分，GPT-5.6 Luna 51分，差1分。</div>
+      </div>
+      <div class="timeline-item">
+        <div class="date">同一天</div>
+        <div class="content">OpenAI把GPT-5.6 Luna价格砍80%。输出从每百万Token 6美元降到1.2美元。这两款模型发布才三周。</div>
+      </div>
+      <div class="timeline-item">
+        <div class="date">8月3日</div>
+        <div class="content">OpenCode披露DeepSeek V4-Flash单日8万亿Token，5万亿免费3万亿付费。OpenRouter周报显示DeepSeek以7.22万亿登顶全球第一，前五全是中国模型，中国总份额63.5%。</div>
+      </div>
+    </div>
+
+    <p>同一天，Qwen3.8-Max发布，2.4万亿参数，95B激活，宣布下周开源Max级权重。一个2.4T参数的顶级模型白送。</p>
+
+    <p>一周之内，从DeepSeek到OpenAI到通义千问，所有人都在把价格往地板上砸。</p>
+
+    <h2>模型正在变成水电煤</h2>
+
+    <p>先说清楚一件事。</p>
+
+    <p>8万亿Token里5万亿是白送的。剩下3万亿付费的，DeepSeek缓存命中率98%，命中时只按标价2%计费。第三方实测，DeepSeek V4-Flash单次任务平均成本<span class="data-callout">3美分</span>。海外同类高端模型3.5美元。差了一百倍。</p>
+
+    <img class="article-img" src="2026-08-03-deepseek-price-collapse.jpg" alt="AI模型价格从高峰急剧坍缩到接近零的悬崖式下降曲线">
+    <div class="img-caption">模型价格坍缩曲线，从3.5美元到3美分，差了一百倍</div>
+
+    <p>一百倍是什么概念？当价格打到对手的百分之一，你不再是竞争对手，你是在重新定义这个商品的性质。</p>
+
+    <p>石油、钢铁、水泥、电力。这些大宗商品有个共同特点，谁家的都差不多，买谁主要看价格。你不会在乎你家插座里的电是哪个电厂发的。</p>
+
+    <p>AI模型正在变成这个样子。DeepSeek V4-Flash拿50分，GPT-5.6 Luna拿51分，差1分。但DeepSeek便宜了60%。任何一个理性的开发者都会选便宜的。因为那1分的差距，不值得多花60%的钱。</p>
+
+    <div class="contrast-card">
+      <div class="side side-left">
+        <h4>DeepSeek V4-Flash</h4>
+        <p>智能指数50分<br>单次任务3美分<br>缓存折扣98%<br>284B总参/13B激活</p>
+      </div>
+      <div class="side side-right">
+        <h4>GPT-5.6 Luna</h4>
+        <p>智能指数51分<br>降价后仍贵60%<br>缓存折扣90%（行业均值）<br>OpenAI闭源架构</p>
+      </div>
+    </div>
+
+    <p>当性能差距缩小到可以忽略，价格就成了唯一变量。当价格成了唯一变量，模型就从"产品"变成了"基础设施"。</p>
+
+    <p class="punchline">模型变成水电煤，做模型的就是发电厂，用模型的才是开工厂的人。</p>
+
+    <h2>水电煤时代，钱往哪跑</h2>
+
+    <p>这是整篇文章最关键的部分。如果你只读一段，读这段。</p>
+
+    <p>模型变成基础设施之后，价值链会重新分配。我把它分成三层。</p>
+
+    <p>第一层，模型层。利润归零。DeepSeek把推理成本打到3美分，Qwen3.8-Max把2.4T参数模型白送。当最强的模型免费，中端模型的价格只会更低。做模型的公司，要么像DeepSeek一样靠极致工程压成本走量，要么像OpenAI一样往高端走做差异化。中间地带是最危险的，既没有成本优势又没有技术壁垒的模型公司，接下来会非常难受。VC的钱已经开始从模型层撤退了。</p>
+
+    <p>第二层，中间层。这是新冒出来的机会。模型便宜了，调用多了，谁来做路由、缓存、监控、计费？OpenRouter就是这个层的代表，它不自己做模型，它做模型的"水管"。水管生意的特点是，水流越大你越值钱，不管谁家的水。API网关、模型路由、推理优化、Agent编排框架，这些中间件会变成新的基础设施。今天这个层还很分散，但两三年内会跑出几个巨头。</p>
+
+    <p>第三层，应用层。这是最大的金矿。当模型免费了，值钱的不是模型本身，是用模型解决具体问题的能力。微软Copilot付费席位突破3000万，北美四大云厂二季度资本开支7325亿美元。这笔钱不是在买模型，是在买模型之上的应用和工作流。</p>
+
+    <img class="article-img" src="2026-08-03-deepseek-value-chain.jpg" alt="价值从模型层流向应用层的河流示意图，上层干涸下层丰沛">
+    <div class="img-caption">价值链迁移，模型层利润干涸，应用层金矿涌现</div>
+
+    <p>我有时候觉得，AI行业正在重演通信行业2001年的事。光纤产能过剩，带宽价格崩塌，铺设光缆的公司大量破产。但正是廉价带宽催生了Google、Amazon、Netflix。光纤铺设者的尸骨上，长出了整个互联网应用层。</p>
+
+    <p>AI模型就是新时代的光纤。光纤不值钱，跑在光纤上的东西才值钱。</p>
+
+    <h2>四波人的命运正在分岔</h2>
+
+    <p>说了这么多宏观的，聊聊跟你有关的。</p>
+
+    <p>模型变成水电煤，对不同的人意味着完全不同的命运。我分成四波人来讲。</p>
+
+    <div class="opportunity-card">
+      <span class="tag">机会</span>
+      <h4>第一波：懂行业又用模型的人，这是你的黄金时代</h4>
+      <p>你可能是做了八年供应链的运营，可能是干了十年的律师助理，可能是三甲医院的影像科医生。你不需要懂Transformer的注意力机制，你需要懂的是你那个行业里哪些环节可以被AI优化。模型免费了，以前做不起来的AI方案现在成本几乎为零。你攒了十年的行业Know-how，突然变成了最稀缺的东西。因为模型人人都能用，但知道用它解决什么问题的人很少。这个窗口期大概两到三年。</p>
+    </div>
+
+    <div class="opportunity-card">
+      <span class="tag">机会</span>
+      <h4>第二波：会做Agent和工具链的开发者，你站在风口上</h4>
+      <p>模型层利润归零，但Agent编排、工作流自动化、多模型协作这些中间层正在爆发。会搭Agent pipeline的人，会做RAG系统的人，会调MoE推理优化的人，接下来两年的行情只会涨。微软、字节、阿里都在疯狂招这个方向的人。关键是你的技能不能只停留在"调API"，得往架构和系统层走。</p>
+    </div>
+
+    <div class="risk-card">
+      <span class="tag">危险</span>
+      <h4>第三波：只会调prompt的人，你的技能正在贬值</h4>
+      <p>这是最难听但最该说的话。如果你现在的核心竞争力是"我会写很好的prompt"，你需要警醒了。模型变聪明了，prompt门槛在降低。DeepSeek V4-Flash在Agent任务上的表现已经超过了很多需要复杂prompt工程的场景。当模型自己就能理解意图、自己就能规划步骤，prompt工程师的价值会快速缩水。不是说没用，而是不再是稀缺技能。你得往上游走，懂业务、懂系统、懂架构。</p>
+    </div>
+
+    <div class="risk-card">
+      <span class="tag">危险</span>
+      <h4>第四波：做纯模型的公司，利润正在从你手上流走</h4>
+      <p>如果你在一家中小型模型公司工作，既没有DeepSeek的成本优势，又没有OpenAI的品牌溢价，你得认真想想这家公司三年后还在不在。模型层的终局是两三家巨头加一群开源模型，中间地带会被挤干。这不是危言耸听，这是每个commodity化行业的必然路径。钢铁行业曾经有上千家钢厂，最后活下来的不到二十家。</p>
+    </div>
+
+    <img class="article-img" src="2026-08-03-deepseek-fork-road.jpg" alt="一条分岔路，一边通向废弃的工具和空桌，另一边通向充满生机的创造之地">
+    <div class="img-caption">模型免费之后，每个人面前都有一条分岔路</div>
+
+    <h2>现在能做的五件事</h2>
+
+    <p>判断完了，说说行动。不管你在哪一波，以下五件事现在就该开始做。</p>
+
+    <p>第一，停止追逐模型参数，开始积累行业场景。模型会越来越便宜越来越好，你追不上也没必要追。你应该追的是，你所在行业里有哪些具体问题，可以用现在的模型解决。列一张清单，从最痛的问题开始，一个一个试。模型3美分一次调用，试错成本几乎为零。</p>
+
+    <p>第二，学Agent架构，不只学prompt。prompt是入门技能，Agent架构才是下一个阶段的核心能力。怎么让多个模型协作，怎么管理工作流状态，怎么做工具调用和错误恢复。这些东西今天还不成熟，但两三年后会是标配。提前学的人就是第一批受益者。</p>
+
+    <p>第三，找一个垂直领域扎进去。通用AI工具人人都能做，但垂直领域的AI方案有壁垒。法律AI、医疗AI、金融AI、教育AI，每个领域都需要既懂AI又懂行业的人。你不需要两个都精通，但你需要能在两个世界之间翻译。这种翻译能力，就是未来五年最值钱的技能。</p>
+
+    <p>第四，关注中间层创业机会。如果你有技术背景，别去卷模型层了。模型路由、推理优化、Agent平台、AI可观测性，这些中间件赛道还在早期，天花板很高。OpenRouter证明了不自己做模型也能成为基础设施。这个方向的机会窗口大概三到五年。</p>
+
+    <p>第五，建立个人AI工作流。不是用ChatGPT聊天，是把AI嵌入你每天的工作流程。用DeepSeek V4-Flash做代码审查，用Claude做文档分析，用Agent自动化重复任务。你自己先变成"用模型的人"，才能真正理解这个时代的玩法。最好的学习不是读文章，是用起来。</p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>事件</th>
+          <th>时间</th>
+          <th>对你的信号</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>DeepSeek V4-Flash正式版</td>
+          <td>7月31日</td>
+          <td>推理成本逼近零，试错门槛消失</td>
+        </tr>
+        <tr>
+          <td>OpenAI Luna降价80%</td>
+          <td>7月31日</td>
+          <td>定价权丢失，模型不再是溢价产品</td>
+        </tr>
+        <tr>
+          <td>DeepSeek单日8万亿Token</td>
+          <td>8月3日</td>
+          <td>5万亿免费，用户习惯正在被培养</td>
+        </tr>
+        <tr>
+          <td>Qwen3.8-Max开源Max权重</td>
+          <td>8月3日</td>
+          <td>顶级模型走向免费，护城河不在模型</td>
+        </tr>
+        <tr>
+          <td>微软Copilot突破3000万席位</td>
+          <td>Q2</td>
+          <td>应用层已经开始变现，钱在往这跑</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>接下来会怎么变</h2>
+
+    <p>聊聊预判，也可能我错了。</p>
+
+    <p>模型层会继续杀价。DeepSeek的98%缓存折扣已经把地板捅穿了，其他模型要么跟，要么出局。Qwen3.8-Max开源2.4T参数权重，等于告诉所有人，连最强模型都在走向免费。这场价格战没有底部，因为边际成本在逼近零。</p>
+
+    <p>中间层会跑出新巨头。今天你听过的API网关、Agent框架都还是小公司。但两三年后，这个层会出现估值百亿级的公司。因为模型越多越便宜，路由和编排的需求就越大。水管生意不怕水多。</p>
+
+    <p>应用层会爆发。当模型成本从3.5美元降到3美分，以前做不起来的AI方案全部可行了。批量法律文书审查、千人千面教育辅导、全自动化财务分析，这些以前因为调用成本太高只能做Demo的东西，现在都能跑了。未来两年会冒出一批"AI原生"的应用公司，它们不自己做模型，但它们最懂怎么用模型解决问题。</p>
+
+    <p>OpenAI高管Tibo在评论区被怼的那句话，"我们要DeepSeek的价格"，我觉得会被写进AI商业史。不是因为这句话多好笑，而是因为它标志着一个转折点。从那天起，模型的定价权不再属于做模型的人，而属于用模型的人。</p>
+
+    <p>用模型的人，才是水电煤时代的新地主。</p>
+
+    <h2>最后说两句</h2>
+
+    <p>8万亿Token。5万亿白送。3万亿付费，每次调用3美分。</p>
+
+    <p>这个数字不是DeepSeek的喜报，也不是中国AI的胜利宣言。它是一张通知书，通知你AI行业的游戏规则变了。</p>
+
+    <p>做模型的人利润在消失。调模型的人技能在贬值。但用模型解决具体问题的人，你们的时代刚刚开始。</p>
+
+    <p>问题是，你是哪一波人？</p>
+
+    <div class="ending">
+      <p>谢谢你看我的文章。</p>
+      <p style="margin-top: 8px; font-size: 13px; color: var(--muted);">数据来源：OpenCode官方发文（8月3日）/ OpenRouter周报 / 第一财经 / 新浪财经 / 腾讯新闻 / Qwen官方博客（8月3日）/ Artificial Analysis / 微软FY2026 Q4财报</p>
+    </div>
+  </div>
+</body>
+</html>

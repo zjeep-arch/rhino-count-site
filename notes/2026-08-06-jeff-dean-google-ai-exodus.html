@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>27年谷歌传奇出走创业，AI最聪明的人开始逃离大厂</title>
+  <meta name="description" content="Jeff Dean离开谷歌创业，Hassabis卸任DeepMind CEO。当AI界最有成就的人主动离开最有钱的公司，真正的信号不是谷歌完蛋了，而是AI的下一站不在大厂。">
+  <meta name="keywords" content="Jeff Dean, Google, DeepMind, Discovery Loop, AI创业, AI4Science, Hassabis, 谷歌AI">
+  <style>
+    :root {
+      --accent: #8b2635;
+      --ink: #333;
+      --ink-soft: #555;
+      --muted: #888;
+      --surface: #fafafa;
+      --border: rgba(0,0,0,0.06);
+      --radius: 12px;
+      --font-sans: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-serif: "Noto Serif SC", "Songti SC", Georgia, serif;
+    }
+    body { font-family: var(--font-sans); background: #f5f5f5; margin: 0; padding: 16px; font-size: 16px; line-height: 1.8; color: var(--ink); -webkit-font-smoothing: antialiased; }
+    .container { max-width: 680px; margin: 0 auto; background: var(--surface); padding: 32px; border-radius: var(--radius); box-shadow: 0 2px 12px rgba(0,0,0,0.04); }
+    .cover-img { width: 100%; border-radius: 8px; margin-bottom: 24px; display: block; }
+    h1 { font-family: var(--font-serif); font-size: 24px; font-weight: 700; color: var(--ink); line-height: 1.4; margin: 0 0 16px; }
+    .meta { color: var(--muted); font-size: 13px; margin-bottom: 16px; }
+    .byline { color: var(--ink-soft); font-size: 14px; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+    h2 { font-family: var(--font-serif); font-size: 20px; font-weight: 600; color: var(--ink); margin: 32px 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+    h3 { font-family: var(--font-serif); font-size: 18px; font-weight: 600; color: var(--ink); margin: 24px 0 12px; }
+    p { margin: 0 0 24px; }
+    .quote-box { border-left: 4px solid var(--accent); background: #f5f5f5; padding: 16px 20px; margin: 24px 0; border-radius: 0 var(--radius) var(--radius) 0; }
+    .quote-box p { margin: 0; color: var(--ink-soft); font-style: italic; font-size: 15px; }
+    .quote-box .attribution { margin-top: 8px; color: var(--muted); font-size: 13px; font-style: normal; }
+    .insight-box { background: #fff8f0; border: 1px solid #ffe4c4; border-radius: var(--radius); padding: 20px; margin: 24px 0; }
+    .insight-box h4 { margin: 0 0 8px; font-size: 16px; color: var(--ink); }
+    .insight-box p { margin: 0; font-size: 15px; color: var(--ink-soft); }
+    .data-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14px; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .data-table th, .data-table td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); }
+    .data-table th { background: #f0f0f0; font-weight: 600; color: var(--ink); }
+    .data-table td { color: var(--ink-soft); }
+    .timeline { position: relative; padding-left: 24px; margin: 24px 0; }
+    .timeline::before { content: ''; position: absolute; left: 6px; top: 0; bottom: 0; width: 2px; background: #e0e0e0; }
+    .timeline-item { position: relative; margin-bottom: 16px; }
+    .timeline-item::before { content: ''; position: absolute; left: -22px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); }
+    .timeline-item .date { font-size: 13px; color: var(--muted); margin-bottom: 4px; }
+    .timeline-item .content { font-size: 15px; color: var(--ink); }
+    .img-caption { text-align: center; color: var(--muted); font-size: 13px; margin-top: 8px; margin-bottom: 24px; }
+    .ending { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--ink-soft); font-size: 14px; }
+    .highlight { color: var(--accent); font-weight: 600; background: linear-gradient(to top, rgba(139,38,53,0.08) 40%, transparent 40%); padding: 0 2px; }
+    .data-callout { display: inline-block; background: var(--accent); color: #fff; padding: 2px 10px; border-radius: 4px; font-weight: 700; font-size: 15px; }
+    .contrast-card { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin: 24px 0; border-radius: var(--radius); overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .contrast-card .side { padding: 16px 20px; }
+    .contrast-card .side-left { background: #fef2f2; border-right: 1px solid var(--border); }
+    .contrast-card .side-right { background: #f0fdf4; }
+    .contrast-card .side h4 { margin: 0 0 8px; font-size: 14px; font-weight: 600; }
+    .contrast-card .side-left h4 { color: #991b1b; }
+    .contrast-card .side-right h4 { color: #166534; }
+    .contrast-card .side p { margin: 0; font-size: 14px; color: var(--ink-soft); line-height: 1.6; }
+    .punchline { font-family: var(--font-serif); font-size: 18px; font-weight: 700; color: var(--accent); text-align: center; margin: 32px 0; padding: 16px 0; border-top: 2px solid var(--accent); border-bottom: 2px solid var(--accent); }
+    strong { color: var(--ink); font-weight: 600; }
+    .inline-img { width: 100%; border-radius: 8px; margin: 16px 0; display: block; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img class="cover-img" src="cover-jeff-dean-exodus.jpg" alt="AI人才从大厂出走的概念图，一位工程师走向新的创业方向">
+    <h1>27年谷歌传奇出走创业，AI最聪明的人开始逃离大厂</h1>
+    <div class="meta">2026年8月6日 · 阅读时间约8分钟</div>
+    <div class="byline">文｜犀牛伯爵</div>
+
+    <p>2026年8月5日，谷歌AI在同一天失去了两位灵魂人物。</p>
+
+    <p>Jeff Dean，在谷歌待了27年的首席科学家，亲手打造了TensorFlow和Google Brain的那位传奇，宣布明天就是最后一天。他要带着三个老搭档出去创业。同一天，诺奖得主Demis Hassabis卸任Google DeepMind CEO，交出了日常运营大权。</p>
+
+    <p>Alphabet股价应声跳水5%。朋友圈刷屏"谷歌完蛋了"。</p>
+
+    <p>但我一直在想一件事。这两个人，一个是AI基础设施的奠基者，一个是AlphaGo和AlphaFold的缔造者。他们不是被裁的，不是被架空的，是主动走的。而且走的方向出奇地一致，都指向科学发现。</p>
+
+    <p>当AI界最有成就的人选择离开最有钱的公司，这件事本身，比谷歌股价跌多少重要得多。</p>
+
+    <h2>同一天，两封告别信</h2>
+
+    <p>先把时间线捋清楚。</p>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="date">8月5日 美东上午</div>
+        <div class="content">Google CEO Sundar Pichai在公司博客发文《The next chapter of our AI momentum》，确认Hassabis卸任CEO，转任主席兼Alphabet首席科学家</div>
+      </div>
+      <div class="timeline-item">
+        <div class="date">同日</div>
+        <div class="content">原CTO Koray Kavukcuoglu晋升SVP，直接向Pichai汇报，全面接管Gemini模型研发、前沿研究和产品团队</div>
+      </div>
+      <div class="timeline-item">
+        <div class="date">同日</div>
+        <div class="content">Jeff Dean在X上发帖，宣布明天是谷歌最后一天，将与三位老同事创办Discovery Loop</div>
+      </div>
+      <div class="timeline-item">
+        <div class="date">同日</div>
+        <div class="content">Pichai补发感谢帖，确认Google是Discovery Loop创始投资方和云服务合作伙伴</div>
+      </div>
+      <div class="timeline-item">
+        <div class="date">盘中</div>
+        <div class="content">Alphabet股价跳水5.4%，AMD逆势上涨，市场押注"分散"而非"集中"</div>
+      </div>
+    </div>
+
+    <img class="inline-img" src="img-talent-flow.jpg" alt="AI人才从大公司流向创业公司的概念图">
+    <div class="img-caption">大厂实验室与新一代AI创业公司的人才流向正在逆转</div>
+
+    <p>四个人跟着Jeff Dean一起走。Sanjay Ghemawat，MapReduce的共同发明人，Jeff Dean长达30年的"代码灵魂伴侣"。Oriol Vinyals，Gemini核心负责人，星际争霸AI AlphaStar的缔造者。Quoc Le，AutoML之父，Seq2Seq突破的关键人物。</p>
+
+    <p>这四个人凑在一起，就是一张"谷歌AI黄埔军校"的毕业合影。</p>
+
+    <p>Discovery Loop的定位是一家公益公司（Public Benefit Corporation），使命是"用机器学习自动化科学和工程发现"。Hassabis那边，转任主席后专注两件事，一是AGI的长远战略，二是Isomorphic Labs的疾病治愈研究，目标是攻克癌症。</p>
+
+    <p>消息出来后，Alphabet盘中跌了5.4%。同一时间AMD涨了，英伟达震荡。华尔街在用脚投票，押的是"分散"而不是"集中"。</p>
+
+    <h2>真正的信号，没人写</h2>
+
+    <p>很多人把这件事解读成"谷歌留不住人了"。坦率地讲，这个判断太浅了。</p>
+
+    <p>Jeff Dean在离职前6天做了一期YC访谈，亲口承认自己低估了AI的进展速度。他说一年前判断AI接近初级工程师水平，现在回头看，复杂任务能力的增长比他想象的快得多。</p>
+
+    <p>一个低估了AI速度的人，选择在这个时候离开一家19万人的公司。你觉得他是因为失望走的，还是因为看到了什么东西？</p>
+
+    <p>我自己的感受是，Jeff Dean看到了一个窗口。</p>
+
+    <p>Discovery Loop要做的，是用AI自动化"提出假设、设计实验、评估结果、迭代改进"这个科学发现的完整闭环。Hassabis要做的，是用AI做药物发现，治愈癌症。两个人的路径不同，但指向同一个判断，AI的下一个阶段不是谁的参数更大，而是AI能解决什么真正的问题。</p>
+
+    <p>这不是空谈。Jeff Dean接受《纽约时报》采访时说了一句话，我觉得这才是整件事最核心的信号。他说，"We might make decisions that are not necessarily in the company's purist financial interests"，我们可能会做出不符合公司纯财务利益的决策。</p>
+
+    <div class="quote-box">
+      <p>"We might make decisions that are not necessarily in the company's purist financial interests."</p>
+      <div class="attribution">Jeff Dean，接受《纽约时报》采访，2026年8月5日</div>
+    </div>
+
+    <p>上市公司首席科学家说出这句话，信息量太大了。</p>
+
+    <p>在大公司里做AI4Science，你得跟CFO解释为什么要把算力花在蛋白质折叠上而不是广告推荐系统上。你得跟投行分析师解释为什么季度财报里没有AI药物管线的收入。你得跟法务团队解释为什么要把研究成果开源。</p>
+
+    <p>Jeff Dean不想再解释了。</p>
+
+    <h2>三个维度的拆解</h2>
+
+    <h3>维度一，人才流向在逆转</h3>
+
+    <img class="inline-img" src="img-ai4science-concept.jpg" alt="AI自动化科学发现的概念图，AI正在分析分子结构">
+    <div class="img-caption">AI4Science，用AI自动化科学发现的完整闭环</div>
+
+    <p>过去十年，AI人才的大方向是从创业公司流向大厂。DeepMind被Google收购，OpenAI拿了微软的钱，Anthropic拿了Google和亚马逊的钱。大厂有算力、有数据、有薪酬，是AI人才的终极归宿。</p>
+
+    <p>但现在风向变了。Noam Shazeer离开Google去Character.AI又回来又走了，Mira Murati离开OpenAI创业，现在Jeff Dean也走了。这些人不是找不到工作，是找到了比工作更重要的东西。</p>
+
+    <p>Khosla Ventures的创始人Vinod Khosla投了Discovery Loop的种子轮，他说了一句话，"这个团队能重新定义工程和科学研究的运作方式，其影响力可能与我们2018年投资OpenAI时一样巨大。"</p>
+
+    <p>2018年投OpenAI。你品品这个对比。</p>
+
+    <div class="contrast-card">
+      <div class="side side-left">
+        <h4>大公司实验室</h4>
+        <p>算力充足但要排期，数据独占但合规漫长，决策走委员会制，薪酬是现金加RSU，文化流程优先</p>
+      </div>
+      <div class="side side-right">
+        <h4>新一代AI创业公司</h4>
+        <p>算力精打细算但灵活，公开数据加自有pipeline，一句话拍板，现金加股权潜在倍数高，文化实验优先</p>
+      </div>
+    </div>
+
+    <h3>维度二，技术方向在转向</h3>
+
+    <p>Discovery Loop要做什么？用AI自动化科学发现的闭环。Hassabis要做什么？专注Isomorphic Labs做药物发现，目标是治愈癌症。</p>
+
+    <p>两个人都不约而同地把目光从consumer AI转向了AI4Science。这不是巧合。</p>
+
+    <p>当ChatGPT的月活到了10亿，当Gemini app的用户到了9.5亿，消费者AI的增量空间在收窄。但科学发现的自动化，几乎是未被触碰的蓝海。一个能自主提出假设、设计实验、验证结果的AI系统，对人类知识生产的加速效应，可能是过去500年最大的。</p>
+
+    <p>Jeff Dean在YC访谈里说过，AI创业要找"模型只有1%成功率的问题"。科学发现自动化，恰恰是这类问题。难，但一旦突破，回报是不可想象的。</p>
+
+    <h3>维度三，权力结构在松动</h3>
+
+    <img class="inline-img" src="img-hassabis-vision.jpg" alt="AI在生物医学和药物发现领域的应用概念图">
+    <div class="img-caption">Hassabis的愿景，用AI攻克癌症等疾病</div>
+
+    <p>Pichai做了一个很有意思的选择。他没有试图阻止Jeff Dean离开，反而成了Discovery Loop的创始投资方和云服务合作伙伴。</p>
+
+    <p>这意味着什么？Google的角色在变。过去大厂的逻辑是"拥有AI人才"，把最聪明的人圈在自己的园区里。现在变成了"投资AI人才"，你走可以，但我投你，用我的云，用我的算力。</p>
+
+    <p>这不是Google大度，是不得已。当一个27年的首席科学家铁了心要走，你能做的就是体面地送他出门，顺便把投资关系绑住。</p>
+
+    <p>但这个模式一旦跑通，更多的人会走。大厂会越来越像一个AI人才的"孵化器"，孵大了就飞走。这对大厂的护城河不是好消息。</p>
+
+    <h2>主流观点错在哪</h2>
+
+    <p>主流观点有两种，我觉得都不对。</p>
+
+    <p>第一种，"谷歌完蛋了"。Alphabet有完整的AI全栈，从TPU到云到模型到应用，Gemini app月活9.5亿。一家公司同一天换两个高管就完蛋了？这也太小看Google了。Koray接管后Gemini 4的研发在继续，基础设施没有动。</p>
+
+    <p>第二种，"Hassabis被架空了"。有人说他从CEO变成主席是明升暗降。但Hassabis自己说得很清楚，他要专注AGI的长期战略和Isomorphic Labs的疾病研究。一个想按"十年"甚至"人类历史"来思考问题的人，不应该被日常运营拖住。</p>
+
+    <p>但这两种观点都漏掉了一个更深的信号。</p>
+
+    <p>真正的问题不是Google怎么了，而是为什么最成功的人要走。Jeff Dean在谷歌拥有几乎无限的资源。他要算力有TPU集群，要数据有13个十亿用户产品，要钱有世界上最高的薪酬包。他什么都不缺。</p>
+
+    <p class="punchline">他缺的，是自由。</p>
+
+    <p>在大公司里做一个偏离主营业务的方向，你需要说服CFO、说服投行分析师、说服法务、说服合规团队。Jeff Dean对NYT说那句"可能会做出不符合公司纯财务利益的决策"，背后的潜台词就是，在上市公司里做AI4Science，束手束脚。</p>
+
+    <p>Hassabis也一样。他在达沃斯说过，AI的头号应用应该是改善人类健康。但CEO的日常是管模型发布节奏、管团队士气、管跟OpenAI的竞争。他想做的事和CEO的日常之间存在巨大的裂缝。</p>
+
+    <p>所以这次"双震"的真正信号是，AI4Science的窗口已经大到足以让最顶尖的人放弃大厂的安全网。</p>
+
+    <h2>接下来会发生什么</h2>
+
+    <p>我有几个判断。</p>
+
+    <p>第一，会有更多大厂AI顶级人才出走。Jeff Dean开了个头，而且是个体面的头。Google投了钱，Pichai发了感谢帖，华尔街虽然跌了但也不至于崩。这个示范效应会加速。</p>
+
+    <p>第二，AI4Science会成为下一个爆发点。Discovery Loop的种子轮已经关闭，Radical Ventures和Khosla Ventures领投，Lightspeed、Kleiner Perkins等硅谷顶级资本悉数入局。当钱开始往这个方向涌，人才会跟上。</p>
+
+    <p>第三，对中国AI公司来说，这是个机会窗口。当全球最顶尖的AI人才开始往AI4Science方向走，consumer AI的竞争压力会短暂缓解。阿里Qwen-Image-3.0昨天刚上线就冲到全球第五，国产模型在应用层的突破速度在加快。深势科技、百图生科这些国内AI4Science公司也值得关注。在全球AI人才重新洗牌的节点上，中国AI公司有机会吸引到更多原本流向硅谷的人才。</p>
+
+    <div class="data-table">
+      <thead>
+        <tr>
+          <th>事件</th>
+          <th>时间</th>
+          <th>信号</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Jeff Dean离职创业</td>
+          <td>8月5日</td>
+          <td>AI4Science窗口已开</td>
+        </tr>
+        <tr>
+          <td>Hassabis卸任CEO</td>
+          <td>8月5日</td>
+          <td>从产品竞争转向科学竞争</td>
+        </tr>
+        <tr>
+          <td>Alphabet跌5.4%</td>
+          <td>8月5日盘中</td>
+          <td>市场重新定价"人才流失"</td>
+        </tr>
+        <tr>
+          <td>Khosla对比OpenAI投资</td>
+          <td>8月5日</td>
+          <td>顶级资本押注AI4Science</td>
+        </tr>
+        <tr>
+          <td>Qwen-Image-3.0全球第五</td>
+          <td>8月5日</td>
+          <td>国产模型应用层加速</td>
+        </tr>
+      </tbody>
+    </div>
+
+    <p>但窗口不会永远开着。等Discovery Loop跑通了闭环，等Isomorphic Labs的药物管线进入临床，先发优势就建立起来了。</p>
+
+    <h2>最后说两句</h2>
+
+    <p>Jeff Dean在谷歌的最后一天，公司从25人变成了19万人，他参与打造了13个十亿用户级产品。这个履历已经足够传奇。</p>
+
+    <p>但他选择在55岁的年纪清零重来。不是因为他失去了什么，是因为他看到了更大的东西。</p>
+
+    <p>1999年他加入谷歌时，谷歌还是一家搜索公司。27年后他离开时，谷歌是AI时代最重要的玩家之一。现在他要去造的东西，如果成了，可能比谷歌这27年加起来还大。</p>
+
+    <p>你如果关注AI，别只盯着模型排名和参数大小了。真正值得看的是，最聪明的人在往哪里走。</p>
+
+    <p class="punchline">他们的脚，比他们的嘴诚实。</p>
+
+    <div class="ending">
+      <p>谢谢你看我的文章。</p>
+      <p style="font-size: 13px; color: var(--muted); margin-top: 8px;">信息来源：Google官方博客、X/Jeff Dean、X/Demis Hassabis、Axios、纽约时报、头条新闻</p>
+    </div>
+  </div>
+</body>
+</html>

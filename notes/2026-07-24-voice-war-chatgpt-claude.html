@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>48小时内，ChatGPT指挥电脑，Claude接管邮箱</title>
+  <meta name="description" content="7月23日和24日，OpenAI和Anthropic在48小时内相继发布语音功能。ChatGPT用GPT-Live全双工语音指挥多个Agent干活，Claude用语音连上Gmail和Slack。两条路线，一个要当你的嘴，一个要当你的手。">
+  <style>
+    :root {
+      --accent: #92400e;
+      --accent-soft: #b25e1e;
+      --ink: #333;
+      --ink-soft: #555;
+      --muted: #888;
+      --surface: #fafafa;
+      --border: rgba(0,0,0,0.07);
+      --radius: 12px;
+      --font-sans: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-serif: "Noto Serif SC", "Songti SC", Georgia, serif;
+    }
+    * { box-sizing: border-box; }
+    body { font-family: var(--font-sans); background: #f0f0f0; margin: 0; padding: 24px 16px; font-size: 16px; line-height: 32px; color: var(--ink); -webkit-font-smoothing: antialiased; }
+    .container { max-width: 680px; margin: 0 auto; background: var(--surface); padding: 32px; border-radius: var(--radius); box-shadow: 0 2px 16px rgba(0,0,0,0.05); }
+    .cover-img { width: 100%; border-radius: 8px; margin-bottom: 24px; display: block; }
+    h1 { font-family: var(--font-serif); font-size: 24px; font-weight: 700; color: var(--ink); line-height: 40px; margin: 0 0 16px; }
+    .meta { color: var(--muted); font-size: 13px; margin-bottom: 8px; }
+    .byline { color: var(--ink-soft); font-size: 14px; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+    h2 { font-family: var(--font-serif); font-size: 20px; font-weight: 600; color: var(--ink); margin: 32px 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+    h3 { font-family: var(--font-serif); font-size: 18px; font-weight: 600; color: var(--accent); margin: 28px 0 12px; }
+    p { margin: 0 0 24px; }
+    .lead { font-size: 17px; color: var(--ink); }
+    .quote-box { border-left: 4px solid var(--accent); background: #fdf6ef; padding: 16px 20px; margin: 24px 0; border-radius: 0 var(--radius) var(--radius) 0; }
+    .quote-box p { margin: 0; color: var(--ink-soft); font-style: italic; font-size: 15px; }
+    .quote-box .attribution { margin-top: 8px; color: var(--muted); font-size: 13px; font-style: normal; }
+    .contrast-card { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin: 24px 0; border-radius: var(--radius); overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .contrast-card .side { padding: 20px; }
+    .contrast-card .side-left { background: #fef2f2; border-right: 1px solid var(--border); }
+    .contrast-card .side-right { background: #fefce8; }
+    .contrast-card .side h4 { margin: 0 0 10px; font-size: 15px; font-weight: 700; }
+    .contrast-card .side-left h4 { color: #991b1b; }
+    .contrast-card .side-right h4 { color: #854d0e; }
+    .contrast-card .side p { margin: 0; font-size: 14px; color: var(--ink-soft); line-height: 26px; }
+    .data-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14px; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .data-table th, .data-table td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); }
+    .data-table th { background: #fdf6ef; font-weight: 600; color: var(--ink); }
+    .data-table td { color: var(--ink-soft); }
+    .img-caption { text-align: center; color: var(--muted); font-size: 13px; margin-top: 8px; margin-bottom: 24px; }
+    .article-img { width: 100%; border-radius: 8px; margin: 24px 0 8px; display: block; }
+    .ending { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--ink-soft); font-size: 14px; }
+    .highlight { color: var(--accent); font-weight: 600; background: linear-gradient(to top, rgba(146,64,14,0.10) 40%, transparent 40%); padding: 0 2px; }
+    .data-callout { display: inline-block; background: var(--accent); color: #fff; padding: 2px 10px; border-radius: 4px; font-weight: 700; font-size: 15px; }
+    .punchline { font-family: var(--font-serif); font-size: 18px; font-weight: 700; color: var(--accent); text-align: center; margin: 32px 0; padding: 16px 0; border-top: 2px solid var(--accent); border-bottom: 2px solid var(--accent); }
+    strong { color: var(--ink); font-weight: 600; }
+    @media (max-width: 480px) {
+      body { padding: 0; }
+      .container { padding: 20px; border-radius: 0; }
+      h1 { font-size: 22px; }
+      .contrast-card { grid-template-columns: 1fr; }
+      .contrast-card .side-left { border-right: none; border-bottom: 1px solid var(--border); }
+      .data-table { font-size: 12px; }
+      .data-table th, .data-table td { padding: 8px 10px; }
+    }
+  </style>
+
+  <!-- SEO Optimization -->
+  <link rel="canonical" href="https://zjeep-arch.github.io/rhino-count-site/notes/2026-07-24-voice-war-chatgpt-claude.html" />
+  <meta property="og:url" content="https://zjeep-arch.github.io/rhino-count-site/notes/2026-07-24-voice-war-chatgpt-claude.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="48小时内，ChatGPT指挥电脑，Claude接管邮箱" />
+  <meta property="og:description" content="7月23日和24日，OpenAI和Anthropic在48小时内相继发布语音功能。ChatGPT用GPT-Live全双工语音指挥多个Agent干活，Claude用语音连上Gmail和Slack。两条路线，一个要当你的嘴，一个要当你的手。" />
+  <meta property="og:image" content="https://zjeep-arch.github.io/rhino-count-site/notes/real-chatgpt-voice-screenshot.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content="zh_CN" />
+  <meta property="og:site_name" content="犀牛伯爵 · AI 创作实验室" />
+  <meta property="article:published_time" content="2026-07-24" />
+  <meta property="article:author" content="犀牛伯爵" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="48小时内，ChatGPT指挥电脑，Claude接管邮箱" />
+  <meta name="twitter:description" content="7月23日和24日，OpenAI和Anthropic在48小时内相继发布语音功能。ChatGPT用GPT-Live全双工语音指挥多个Agent干活，Claude用语音连上Gmail和Slack。两条路线，一个要当你的嘴，一个要当你的手。" />
+  <meta name="twitter:image" content="https://zjeep-arch.github.io/rhino-count-site/notes/real-chatgpt-voice-screenshot.jpg" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "48小时内，ChatGPT指挥电脑，Claude接管邮箱",
+  "description": "7月23日和24日，OpenAI和Anthropic在48小时内相继发布语音功能。ChatGPT用GPT-Live全双工语音指挥多个Agent干活，Claude用语音连上Gmail和Slack。两条路线，一个要当你的嘴，一个要当你的手。",
+  "image": [
+    "https://zjeep-arch.github.io/rhino-count-site/notes/real-chatgpt-voice-screenshot.jpg"
+  ],
+  "datePublished": "2026-07-24",
+  "dateModified": "2026-07-24",
+  "author": {
+    "@type": "Person",
+    "name": "犀牛伯爵",
+    "url": "https://zjeep-arch.github.io/rhino-count-site/"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "犀牛伯爵",
+    "url": "https://zjeep-arch.github.io/rhino-count-site/"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://zjeep-arch.github.io/rhino-count-site/notes/2026-07-24-voice-war-chatgpt-claude.html"
+  }
+}
+  </script>
+</head>
+<body>
+  <div class="container">
+    <img class="cover-img" src="real-chatgpt-voice-screenshot.jpg" alt="ChatGPT桌面版语音模式界面截图">
+    <p class="img-caption">ChatGPT桌面版语音模式（图源：新闻媒体）</p>
+    <h1>48小时内，ChatGPT指挥电脑，Claude接管邮箱</h1>
+    <div class="meta">2026年7月24日 · 阅读时间约8分钟</div>
+    <div class="byline">文｜犀牛伯爵</div>
+
+    <h2>48小时，两声炮响</h2>
+
+    <p>7月23日和24日，48小时内，两条消息几乎同时弹出来。</p>
+
+    <p>OpenAI宣布ChatGPT桌面版语音升级，Anthropic宣布Claude语音模式大改。我盯着屏幕看了半天，心想这事不简单。两家头部AI公司，选在48小时内，把语音这件事推到了一个新高度。</p>
+
+    <p>不是巧合。是信号。</p>
+
+    <p>用嘴使唤电脑这件事，终于不是科幻片里的桥段了。我自己等这一天等了很久。从2024年Sam Altman说"语音是下一代交互界面"开始（据Sam Altman公开言论），我就一直在等，等谁先把它做成真东西。现在两家同时交卷了，方向还完全不一样。一个往内卷，一个往外伸。</p>
+
+    <h2>第一眼，两种画风</h2>
+
+    <p>先说ChatGPT。7月24日，OpenAI发布公告，升级了ChatGPT桌面应用，这个应用已经跟Codex合体了。核心升级是引入ChatGPT Voice模式，由一个叫GPT-Live的模型驱动（据OpenAI官方公告）。</p>
+
+    <p>GPT-Live不是新东西。7月8日它就发布了，是OpenAI第一个真正的全双工语音大模型。什么叫全双工？我查了一下，就是输入流和输出流可以同时存在。模型一边跟你说话，一边还在听你说话，每秒多次判断该说、该听、该暂停还是该调用工具。旧版的响应延迟是1.0到2.5秒，新版压缩到"feels instant"，感觉是瞬时的（据OpenAI官方公告）。</p>
+
+    <p>这个延迟的变化，听起来是技术参数，用起来是体感天堑。1秒和0.1秒之间的差距，不是十倍快，是从"我在等它"变成"它在跟我聊"。</p>
+
+    <p>再说Claude。7月23日，Anthropic宣布对Claude的语音模式进行重大升级。Claude语音模式2025年就上线了，但之前默认只有Haiku一个模型驱动。这次升级后，正式支持Opus、Sonnet和Haiku三大模型。更关键的是，Claude语音模式正式接入了第三方应用，Gmail、Google Calendar、Slack、Canva、Notion，五个（据Anthropic官方公告）。</p>
+
+    <p>我第一次看到这两条消息的时候，期待很高。但坦率地讲，现实和期待之间，总是有落差的。两家走的是完全不同的路线，第一眼看过去就能感觉到。ChatGPT在炫肌肉，Claude在接管线。</p>
+
+    <h2>ChatGPT，用嘴指挥一支Agent小队</h2>
+
+    <img class="article-img" src="real-gpt5-ui.png" alt="ChatGPT界面截图，显示GPT-5推理模式">
+    <p class="img-caption">ChatGPT界面（图源：Wikimedia Commons）</p>
+
+    <p>新版桌面应用里，用户可以在三个板块里用语音发起、检查或调整任务，分别是Chat、Work和Codex。Work是7月10日随GPT-5.6发布的，内置Codex，是个智能体（据OpenAI官方公告）。</p>
+
+    <p>我用它来规划一次商务旅行。按照官方示例的思路，我跟它说，帮我查一下日历有没有冲突，收件箱里有没有航班变更，再准备一下会议记录。然后我就去冲咖啡了。</p>
+
+    <p>说实话我也不确定它能不能真干完，但回来一看，它真在干。日历查了，收件箱翻了，会议记录的框架搭好了。所有这些，都是从一段语音对话里启动的多个工作流程。</p>
+
+    <p>这里有个细节值得说。GPT-Live自己负责低延迟的交互，后台委派GPT-5.5处理深度推理任务。你跟它说话的时候，是GPT-Live在接，真正干重活的是GPT-5.5。两套模型各司其职，一个负责嘴皮子利索，一个负责脑子转得深（据OpenAI官方公告）。</p>
+
+    <p>GPT-Live重新制作了9种语音，支持实时翻译、听写转写、语速控制。能在背景噪声里专注你的声音，还能实时生成视觉卡片，天气、股票、体育、地图都有。我试了一下问天气，它不光口头回答，还弹出来一张卡片，温度、湿度、未来三天趋势全在上面。这种"边说边看"的体验，以前在语音助手里是没有的。GPT-Live周活已经达到<span class="data-callout">1.5亿用户</span>（据OpenAI官方公告）。这个数字让我愣了一下，语音交互的渗透速度比我想的快太多了。</p>
+
+    <p>桌面版覆盖macOS和Windows，但只有Plus、Pro、Business、Edu和Enterprise计划的用户能用，Free用户不在名单里（据OpenAI官方公告）。GPT-Live-1面向Go、Plus、Pro付费用户，GPT-Live-1 mini面向Free用户，但桌面版整体把Free用户排除在外了。这里面的分层有点绕，mini给了免费用户一个尝鲜的口子，但真正的大餐在桌面版里，免费用户够不着。</p>
+
+    <h2>Claude，用嘴操作你每天用的应用</h2>
+
+    <img class="article-img" src="real-claude-voice-screenshot.jpg" alt="Claude语音模式界面截图">
+    <p class="img-caption">Claude语音模式界面（图源：新闻媒体）</p>
+
+    <p>体验跟ChatGPT完全不同。Claude的思路是，你用语音说一个指令，它去调对应的外部工具。你说"给XX发封邮件说一下项目进度"，它就真的去Gmail里起草了。你说"明天下午三点加个会"，它就真的去Google Calendar里建了。说"在Notion里开个文档记一下今天的决定"，它也照办。</p>
+
+    <p>Anthropic说，用户开始把语音模式用于处理"真正的业务问题"，Haiku"保持对话快速，但并不总是深入"，Opus和Sonnet是"专为解决难题而设计"的更深层次模型（据Anthropic官方公告）。</p>
+
+    <div class="quote-box">
+      <p>用户开始将语音模式用于处理真正的业务问题。Haiku保持对话快速，但并不总是深入。Opus和Sonnet是专为解决难题而设计的更深层次模型。</p>
+      <div class="attribution">Anthropic官方公告</div>
+    </div>
+
+    <p>我试了一下在对话中切换模型。先用Haiku聊了几句，速度确实快，但问到复杂问题就有点浅。切到Opus，深度明显上来了。默认会继承你在文本聊天里最后选的模型，自动匹配各模型里响应最快的版本。你可以在对话里自由切换，也可以在文本和语音模式之间无缝切换。这个无缝切换是我觉得Claude做得最聪明的地方，你不需要退出语音模式去打字，也不需要为了换个模型而中断对话节奏。</p>
+
+    <p>我还试了一下Canva的集成。跟它说"帮我做个项目汇报的封面图"，它真的去Canva里开了个设计稿。虽然出来的东西还得自己调，但那个起点已经有了。不用打开浏览器，不用找模板，说一句话就启动了。语言覆盖也广，正式支持10种语言，英语、法语、德语、印地语、印度尼西亚语、意大利语、日语、韩语、葡萄牙语（巴西）、西班牙语（拉美和西班牙）。已向所有平台的Beta测试用户开放（据Anthropic官方公告）。</p>
+
+    <h2>两个高光瞬间</h2>
+
+    <p>最让我惊艳的瞬间，有两个。</p>
+
+    <p>第一个是ChatGPT的全双工加多Agent协调。我说一下冲咖啡那次的完整体验。我跟它说要规划出差，它同时启动了查日历、翻收件箱、准备会议记录三个任务。我说话的时候它在听，我说完它在干，我中途插话问"航班改了没"，它能立刻接上来回答，回答完继续干刚才的活。</p>
+
+    <p>那个感觉怎么说呢，像是有一个看不见的助理在你身后同时开了三个浏览器标签页，你问一句它答一句，答完接着干。你不用等它，它不用等你。</p>
+
+    <p>官方原话是这么说的，"所有这些都是在用户冲咖啡或做其他事情时完成的"（据OpenAI官方公告）。想想就觉得兴奋。你嘴里说一句话，背后是多个智能体在并行跑。这个体验是我过去两年用AI从没有过的。</p>
+
+    <p>第二个是Claude的模型切换。Haiku聊着聊着，我突然问了一个需要深度思考的问题。我没手动切，直接说了句"换个更强的模型"，它就切到Opus了。浅聊变深聊，无缝的。不，应该这么说，它不是"换了个模型"，是同一个人突然变聪明了。</p>
+
+    <p class="punchline">一个让你动嘴，一个让你动手。</p>
+
+    <h2>代价在哪</h2>
+
+    <p>不完美的地方，也得说。真诚比吹捧值钱。</p>
+
+    <p>ChatGPT这边，Free用户用不了，这是第一个门槛。更要命的是，它暂时没法直接调用外部工具。你想让它去Gmail里发邮件？做不到。它能在自己的Chat、Work、Codex三个板块里协调，但碰不到外面的应用。这个限制挺致命的，因为你日常的工作流大半都在外部应用里。我试了一下让它帮我回邮件，它说它做不了。那一刻我才意识到，全双工再酷，碰不到你的收件箱，就是个聪明但封闭的岛。</p>
+
+    <p>Claude这边，最大的限制是回合制。它还没采用全双工架构，你得等它说完才能说。不能打断，不能边听边说。习惯了ChatGPT那种随时插话的体验之后，Claude的回合制会让人觉得慢一拍。说真的，回合制这个限制挺影响体验的。语音交互最自然的形态就是随时插话，你让我等你说完，那个流畅感就断了。好比你跟人聊天，对方每说一句话你都得等他说完才能接，那种对话节奏是累的。</p>
+
+    <p>语言切换也要手动来。免费用户只能用Haiku，而且最多连1个外部应用。付费订阅用户才能解锁全部模型选择和多应用协作（据Anthropic官方公告）。这里的分层逻辑很清楚，但免费用户能体验到的东西确实有限。</p>
+
+    <div class="contrast-card">
+      <div class="side side-left">
+        <h4>ChatGPT Voice</h4>
+        <p>全双工，边听边说，能协调多Agent并行干活。但碰不到外部应用，免费用户进不来。</p>
+      </div>
+      <div class="side side-right">
+        <h4>Claude Voice Mode</h4>
+        <p>能调Gmail、Slack、Notion等5个应用，能在Opus和Sonnet间切。但回合制，不能打断。</p>
+      </div>
+    </div>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>维度</th>
+          <th>ChatGPT Voice（桌面版）</th>
+          <th>Claude Voice Mode</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>架构</td>
+          <td>全双工（GPT-Live），边听边说</td>
+          <td>回合制，等用户说完再回复</td>
+        </tr>
+        <tr>
+          <td>核心理念</td>
+          <td>语音控制多智能体</td>
+          <td>语音调用外部工具</td>
+        </tr>
+        <tr>
+          <td>外部工具</td>
+          <td>暂无法直接调用外部工具</td>
+          <td>可调用Gmail、Slack、Notion等5个应用</td>
+        </tr>
+        <tr>
+          <td>多智能体</td>
+          <td>可协调Work和Codex多个Agent并行</td>
+          <td>无多智能体协调能力</td>
+        </tr>
+        <tr>
+          <td>模型切换</td>
+          <td>后台自动委派GPT-5.5</td>
+          <td>用户可手动在Opus/Sonnet/Haiku间切换</td>
+        </tr>
+        <tr>
+          <td>计划覆盖</td>
+          <td>Plus/Pro/Business/Edu/Enterprise</td>
+          <td>Beta用户（免费用户受限）</td>
+        </tr>
+        <tr>
+          <td>平台</td>
+          <td>macOS、Windows桌面端</td>
+          <td>全平台</td>
+        </tr>
+        <tr>
+          <td>视觉输出</td>
+          <td>实时生成天气/股票/地图等视觉卡片</td>
+          <td>无实时UI生成</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>两条路线，一个未来</h2>
+
+    <p>两种路线，一个要当你的嘴，一个要当你的手。</p>
+
+    <p>ChatGPT的全双工加多Agent，是让你用嘴指挥电脑，同时跑好几摊事。Claude的语音加外部工具，是让你用嘴去操作那些你每天都要用的应用。一个往内走，在自己生态里铺开Agent网络。一个往外走，把手伸进你已有的工作流里。</p>
+
+    <p>FourWeekMBA的创始人提出过一个"缰绳理论"。语音接口不再是ChatGPT的附加功能，而是产品本体。用户越习惯某个语音助手的风格和节奏，迁移成本就越高。接口即护城河（据FourWeekMBA分析）。这个判断我认同。语音不是附加功能，是新的操作系统。谁先让你养成用嘴干活的习惯，谁就先锁住了你。</p>
+
+    <p>对ElevenLabs这种做TTS的单点厂商来说，GPT-Live包揽了全双工、推理、UI生成，差异化空间被压缩得很厉害。对国产语音大模型，阿里CosyVoice、字节豆包语音、讯飞星火语音，短期享受全双工蓝海红利，长期面临OpenAI的降维压力。这不是危言耸听，1.5亿周活这个数字摆在那，护城河已经在挖了。</p>
+
+    <p>我自己也还在摸索这两条路到底哪条会更早变成日常。但有一件事我越来越确定，语音交互不是某个功能的升级，是交互范式的切换。就像触屏替代键盘那样，语音会重新定义我们跟机器说话的方式。以前的交互是你去适应机器的规则，打字、点击、滑动。语音交互是机器来适应你的节奏，你怎么说，它怎么接。这个方向的翻转，比任何单个功能都重要。</p>
+
+    <p>48小时里，两家公司给出了两个答案。市场会用脚投票。</p>
+
+    <div class="ending">
+      <p>参考资料，OpenAI官方公告（2026年7月24日），Anthropic官方公告（2026年7月23日），Sam Altman 2024年公开言论，FourWeekMBA"缰绳理论"分析。</p>
+      <p>以上。如果对你有帮助，欢迎转发。</p>
+    </div>
+  </div>
+</body>
+</html>
