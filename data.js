@@ -127,6 +127,12 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "中美AI差距2.7%，苹果用脚投了票",
+        desc: "苹果官网上线千问支持文档24小时后删除，但信号已经传开。斯坦福报告确认中美AI差距仅2.7%，中国模型全球调用份额63.5%反超美国。苹果花两年评估选了千问，硅谷八成初创在用中国开源模型。国产AI从追赶者变成了被选择者，这是拐点时刻。",
+        href: "notes/2026-08-09-apple-qwen-27percent.html"
+      },
+      {
+        type: "Essay",
         title: "27年谷歌传奇出走创业，AI最聪明的人开始逃离大厂",
         desc: "Jeff Dean离职创业，Hassabis卸任DeepMind CEO。同日双震不是谷歌完蛋的信号，而是AI4Science窗口已开。当AI界最有成就的人主动放弃大厂安全网，真正的竞争从谁的模型更强变成了AI能解决什么真正的问题。Khosla将此比作2018年投OpenAI。",
         href: "notes/2026-08-06-jeff-dean-google-ai-exodus.html"
@@ -215,6 +221,13 @@ window.SITE_DATA = {
     headingLine2: "慢慢记。",
     blurb: "每一篇笔记都是一次小型田野调查：关于模型、关于人、关于我们如何被这个时代重新塑形。",
     notes: [
+      {
+        cat: "行业观察", num: "N° 59",
+        title: "中美AI差距2.7%，苹果用脚投了票",
+        excerpt: "苹果官网上线千问支持文档24小时后删除，但信号已经传开。斯坦福2026 AI指数报告确认中美模型差距仅2.7%，中国模型全球调用份额63.5%反超美国。苹果花两年评估选了千问，硅谷八成初创在用中国开源模型。国产AI从追赶者变成了被选择者。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-08-09-apple-qwen-27percent.html"
+      },
       {
         cat: "行业观察", num: "N° 58",
         title: "27年谷歌传奇出走创业，AI最聪明的人开始逃离大厂",

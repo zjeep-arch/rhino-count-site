@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>中美AI差距2.7%，苹果用脚投了票</title>
+  <meta name="description" content="苹果官网上线千问支持文档后删除，斯坦福报告显示中美AI差距仅2.7%。国产AI从追赶者变成被选择者，苹果选择了阿里千问。">
+  <style>
+    :root {
+      --accent: #8b2635;
+      --ink: #333;
+      --ink-soft: #555;
+      --muted: #888;
+      --surface: #fafafa;
+      --border: rgba(0,0,0,0.06);
+      --radius: 12px;
+      --font-sans: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-serif: "Noto Serif SC", "Songti SC", Georgia, serif;
+    }
+    body { font-family: var(--font-sans); background: #f5f5f5; margin: 0; padding: 16px; font-size: 16px; line-height: 1.8; color: var(--ink); -webkit-font-smoothing: antialiased; }
+    .container { max-width: 680px; margin: 0 auto; background: var(--surface); padding: 32px; border-radius: var(--radius); }
+    .cover-img { width: 100%; border-radius: 8px; margin-bottom: 24px; }
+    h1 { font-family: var(--font-serif); font-size: 24px; font-weight: 700; color: var(--ink); line-height: 1.4; margin: 0 0 16px; }
+    .meta { color: var(--muted); font-size: 13px; margin-bottom: 16px; }
+    .byline { color: var(--ink-soft); font-size: 14px; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+    h2 { font-family: var(--font-serif); font-size: 20px; font-weight: 600; color: var(--ink); margin: 32px 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+    h3 { font-family: var(--font-serif); font-size: 18px; font-weight: 600; color: var(--ink); margin: 24px 0 12px; }
+    p { margin: 0 0 24px; }
+    .quote-box { border-left: 4px solid var(--accent); background: #f5f5f5; padding: 16px 20px; margin: 24px 0; border-radius: 0 var(--radius) var(--radius) 0; }
+    .quote-box p { margin: 0; color: var(--ink-soft); font-style: italic; font-size: 15px; }
+    .quote-box .attribution { margin-top: 8px; color: var(--muted); font-size: 13px; font-style: normal; }
+    .insight-box { background: #fff8f0; border: 1px solid #ffe4c4; border-radius: var(--radius); padding: 20px; margin: 24px 0; }
+    .insight-box h4 { margin: 0 0 8px; font-size: 16px; color: var(--ink); }
+    .insight-box p { margin: 0; font-size: 15px; color: var(--ink-soft); }
+    .data-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14px; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .data-table th, .data-table td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); }
+    .data-table th { background: #f0f0f0; font-weight: 600; color: var(--ink); }
+    .data-table td { color: var(--ink-soft); }
+    .data-table .highlight-row { background: #fff8f0; }
+    .timeline { position: relative; padding-left: 24px; margin: 24px 0; }
+    .timeline::before { content: ''; position: absolute; left: 6px; top: 0; bottom: 0; width: 2px; background: #e0e0e0; }
+    .timeline-item { position: relative; margin-bottom: 16px; }
+    .timeline-item::before { content: ''; position: absolute; left: -22px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); }
+    .timeline-item .date { font-size: 13px; color: var(--muted); margin-bottom: 4px; }
+    .timeline-item .content { font-size: 15px; color: var(--ink); }
+    .img-caption { text-align: center; color: var(--muted); font-size: 13px; margin-top: 8px; margin-bottom: 24px; }
+    .ending { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--ink-soft); font-size: 14px; }
+    .highlight { color: var(--accent); font-weight: 600; background: linear-gradient(to top, rgba(139,38,53,0.08) 40%, transparent 40%); padding: 0 2px; }
+    .data-callout { display: inline-block; background: var(--accent); color: #fff; padding: 2px 10px; border-radius: 4px; font-weight: 700; font-size: 15px; }
+    .contrast-card { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin: 24px 0; border-radius: var(--radius); overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .contrast-card .side { padding: 16px 20px; }
+    .contrast-card .side-left { background: #fef2f2; border-right: 1px solid var(--border); }
+    .contrast-card .side-right { background: #f0fdf4; }
+    .contrast-card .side h4 { margin: 0 0 8px; font-size: 14px; font-weight: 600; }
+    .contrast-card .side-left h4 { color: #991b1b; }
+    .contrast-card .side-right h4 { color: #166534; }
+    .contrast-card .side p { margin: 0; font-size: 14px; color: var(--ink-soft); line-height: 1.6; }
+    .punchline { font-family: var(--font-serif); font-size: 18px; font-weight: 700; color: var(--accent); text-align: center; margin: 32px 0; padding: 16px 0; border-top: 2px solid var(--accent); border-bottom: 2px solid var(--accent); }
+    strong { color: var(--ink); font-weight: 600; }
+    .in-text-img { width: 100%; border-radius: 8px; margin: 24px 0; }
+    @media (max-width: 480px) {
+      .container { padding: 16px; }
+      .contrast-card { grid-template-columns: 1fr; }
+      .contrast-card .side-left { border-right: none; border-bottom: 1px solid var(--border); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img class="cover-img" src="https://aka.doubaocdn.com/s/MUF1GWBIPU" alt="苹果选择阿里千问，中美AI差距2.7%的拐点时刻">
+    <h1>中美AI差距2.7%，苹果用脚投了票</h1>
+    <div class="meta">2026年8月9日 · 阅读时间约8分钟</div>
+    <div class="byline">文｜犀牛伯爵</div>
+
+    <p>8月8日下午，苹果中国官网的Mac使用手册里，悄无声息地多了一个页面。</p>
+
+    <p>标题是《在Mac上配合Apple智能使用千问》。内容不长，核心信息就一条。符合条件的中国大陆Mac用户，可以让Apple智能调用阿里巴巴的千问模型。设置路径写得很清楚，系统设置里找到Apple智能与Siri，点扩展，选千问，登录账户就能用。</p>
+
+    <p>用户能拿千问干什么？写作工具可以在备忘录和邮件里创作文本。Siri可以调用千问回答问题。官方文档里还举了个例子，你可以说"嘿Siri，让千问写一首关于龙的诗"。如果Siri判断千问能帮上忙，它会主动问你一句，要不要用千问来完成。</p>
+
+    <p>24小时不到，这个页面消失了。8月9日，财联社确认文档已被苹果删除。</p>
+
+    <p class="punchline">苹果删得了文档，删不了已经传出去的信号。</p>
+
+    <h2>两年评估，走到这一步</h2>
+
+    <p>苹果和千问走到一起，不是突然发生的事。拉一条时间线，能看到一条很清晰的路径。</p>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="date">2024年起</div>
+        <div class="content">苹果开始在中国市场寻找AI合作伙伴，据报道评估了多家中国AI公司的模型，历时两年多</div>
+      </div>
+      <div class="timeline-item">
+        <div class="date">2026年7月8日</div>
+        <div class="content">Apple Intelligence在中国通过生成式AI服务备案</div>
+      </div>
+      <div class="timeline-item">
+        <div class="date">2026年7月15日</div>
+        <div class="content">网信部门正式批准苹果在中国推出Apple Intelligence，阿里巴巴千问和百度同时成为技术合作伙伴</div>
+      </div>
+      <div class="timeline-item">
+        <div class="date">2026年7月下旬</div>
+        <div class="content">库克在财报会议上确认，苹果已在中国获准推出首批Apple Intelligence功能</div>
+      </div>
+      <div class="timeline-item">
+        <div class="date">2026年8月8日</div>
+        <div class="content">支持文档《在Mac上配合Apple智能使用千问》现身苹果官网</div>
+      </div>
+      <div class="timeline-item">
+        <div class="date">2026年8月9日</div>
+        <div class="content">财联社确认，该文档已被苹果删除</div>
+      </div>
+    </div>
+
+    <p>阿里巴巴方面此前确认，千问将作为AI能力集成至Apple Intelligence，覆盖iOS、iPadOS、macOS和visionOS。这不是装个App的事，是系统级集成。苹果把AI能力底座交给了千问。</p>
+
+    <p>文档被删，原因还没有官方说法。可能是发布时机不对，可能还需要最后调整。但页面已经被人截图传开了，互联网有记忆。苹果的手指按了删除键，信号已经飞了出去。</p>
+
+    <h2>从"追赶者"到"被选择者"</h2>
+
+    <p>我的判断是这样的。国产AI已经跨过了一道门槛，从"追赶者"变成了"被选择者"。</p>
+
+    <p>这两个身份之间，隔着一道很多人还没反应过来的距离。追赶者意味着你在跑，别人也在跑，你只是离他更近了。被选择者意味着有人主动停下来，转过身，把手伸过来说，就你了。</p>
+
+    <p>苹果是全球市值最高的公司。Apple Intelligence是它最看重的战略级产品，没有之一。过去两年多，苹果的团队评估了多家中国AI公司的模型能力、中文理解水平、响应速度、安全合规。最后选了千问。</p>
+
+    <p>不是因为它便宜。千问在商业上的投入是天文数字，阿里巴巴最新的旗舰模型Qwen3.8-Max总参数量达到2.4万亿，训练成本远超普通模型。不是因为它"还能用"。一个全球战略级产品不会找一个"还能用"的合作伙伴。</p>
+
+    <p>是因为它够好。</p>
+
+    <p>这个判断有数据支撑，而且不是阿里自己说的数据。</p>
+
+    <h2>斯坦福说了什么</h2>
+
+    <p>斯坦福大学HAI实验室发布的《2026年AI指数报告》，423页，是目前全球覆盖面最广的年度AI追踪之一。覆盖研发、技术性能、负责任AI、经济、科学、医学、教育、政策与治理、公众舆论九大章节。</p>
+
+    <p>报告第9页白纸黑字写着一句话，"The U.S.-China AI model performance gap has effectively closed."</p>
+
+    <div class="quote-box">
+      <p>中美AI模型性能差距，已有效关闭。</p>
+      <div class="attribution">斯坦福大学 HAI《2026年AI指数报告》第9页</div>
+    </div>
+
+    <p>具体数字是这样的。</p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>指标</th>
+          <th>美国顶尖模型</th>
+          <th>中国顶尖模型</th>
+          <th>差距</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="highlight-row">
+          <td>Elo评分（2026年3月）</td>
+          <td>1503</td>
+          <td>1464</td>
+          <td><span class="data-callout">2.7%</span></td>
+        </tr>
+        <tr>
+          <td>全球调用份额（OpenRouter，7月）</td>
+          <td>35.5%</td>
+          <td>63.5%</td>
+          <td>中国领先28个百分点</td>
+        </tr>
+        <tr>
+          <td>Hugging Face开源下载占比</td>
+          <td>—</td>
+          <td>41%</td>
+          <td>全球第一，超100亿次</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>2.7%是什么概念？放在跑道上，两个人几乎并排冲过终点线。放在考试里，同一档分数段的小数点差异。一年前这个差距还是两位数，两年前没人觉得这是一个可以讨论的话题。</p>
+
+    <p>更值得注意的，智谱GLM 5.2在第三方评测中与Anthropic、OpenAI一同位居全球前三。在SWE-bench Pro基准上，中国模型甚至超过了OpenAI。这不是单项偶发，是结构性收窄。</p>
+
+    <h2>不止苹果，硅谷在换底座</h2>
+
+    <p>苹果选千问，不是孤例。如果你把视角放大，会发现一整个趋势正在发生。</p>
+
+    <div class="contrast-card">
+      <div class="side side-left">
+        <h4>一年前（2025年中）</h4>
+        <p>美国模型占全球调用份额70%以上<br>硅谷初创几乎全部用美国模型底座<br>Hugging Face下载量美国领先<br>没人讨论"切换到中国模型"</p>
+      </div>
+      <div class="side side-right">
+        <h4>现在（2026年8月）</h4>
+        <p>中国模型调用份额63.5%，反超<br>80%美国AI初创已集中国开源模型<br>Hugging Face下载量中国占41%<br>近200家企业联名反对切断中国模型</p>
+      </div>
+    </div>
+
+    <p>据a16z报告，全球约八成AI初创企业已经集成了中国开源大模型。Uber、Salesforce、Ramp等企业公开承认，为了降低70%到90%的接入成本，已经把代码底座从美国模型切换到了中国模型。</p>
+
+    <p>这不是边缘试验，不是小范围试用。硅谷寻求融资的AI初创公司里，八成的技术底座用的是中国模型。</p>
+
+    <p>近200家美国企业曾联名致信白宫，反对切断中国开源模型的访问渠道。他们的理由很直白，切了中国开源模型，数百家公司业务会直接停摆。</p>
+
+    <p>美国参议员推出了一个5亿美元的基金，专门补贴盟友采购美国AI技术产品。5亿美元听着不少。但面对中国AI模型已经拿下的63.5%全球份额，这点钱杯水车薪。想说服世界弃用中国AI，比当年围堵华为还难上十倍。</p>
+
+    <h2>有人说这只是合规</h2>
+
+    <p>有人可能会说，苹果选千问只是因为合规要求，不得不选中国厂商。不是千问真的好，是没有别的选。</p>
+
+    <p>这个说法站不住脚。</p>
+
+    <p>第一，苹果在全球其他市场用的是自己的端侧模型加ChatGPT。在中国市场，它需要选一个云端模型合作伙伴。符合备案要求的中国AI公司不止阿里一家。百度也入选了，但千问是主力。如果只是合规，选谁不是选。苹果花了两年评估，这不是走过场。</p>
+
+    <p>第二，苹果选的不只是一个模型，是一整个生态。千问要接入Siri、写作工具、图像理解。这些场景对模型的推理能力、中文理解、响应速度、稳定性都有很高要求。不是随便塞个模型就能干的活。你让Siri调用一个"还能用"的模型，用户体验一塌糊涂，苹果的品牌就砸了。</p>
+
+    <p>第三，系统级集成意味着深度绑定。千问嵌入Apple Intelligence的架构里，覆盖四个操作系统。苹果把AI能力底座交给千问，信任门槛极高。这不是签个合同就完事的事，是技术能力和工程能力的双重考核。</p>
+
+    <div class="insight-box">
+      <h4>一个被忽略的细节</h4>
+      <p>苹果的文档里写了一个很有意思的交互逻辑。Siri会自己判断千问能不能帮上忙，如果能，它才询问用户是否使用。这意味着苹果不是简单地把千问当工具调用，而是让Siri具备了一个"判断什么时候需要千问"的决策层。这种集成深度，远超普通的API接入。</p>
+    </div>
+
+    <h2>接下来会发生什么</h2>
+
+    <p>文档删了，但千问不会消失。</p>
+
+    <p>秋天苹果新系统正式发布的时候，千问大概率会回来。到那时候，每一个升级了新系统的国行iPhone用户，在Siri里问问题、在备忘录里写东西的时候，背后跑的可能就是千问的推理引擎。</p>
+
+    <p>大多数用户不会知道，也不会关心。他们只会觉得Siri变聪明了，能写东西了，能帮忙分析照片了。但恰恰是最有力的验证。技术最好的归宿不是被讨论，而是被使用。当几亿人在不知不觉中每天用着千问的时候，那才是国产AI真正站稳的时刻。</p>
+
+    <p>今晚20点，央视综合频道会播出《2026中国AI盛典》。国产大模型持续迭代，工业、文旅、生态监测场景加速落地。如果你关注这个领域，值得看一眼。这不是某个公司的发布会，是一个产业走到台前的标志性时刻。</p>
+
+    <h2>2.7%不是终点</h2>
+
+    <p>聊到这里我想起一个事。上世纪80年代，日本企业把美国消费电子市场打了个底朝天。索尼从"便宜货"变成了品质标杆，本田从"仿制品"变成了工程师的最爱。美国企业花了二十年才反应过来。历史不会简单重复，但节奏有时候会押韵。</p>
+
+    <p>回到开头那个被删除的页面。</p>
+
+    <p>苹果可以删掉一篇支持文档，但删不了一个已经发生的事实。全球最有价值的公司选了千问。硅谷八成初创在用中国开源模型。Hugging Face上41%的下载来自中国。OpenRouter上63.5%的调用给了中国模型。</p>
+
+    <p>2.7%的差距不是终点，是一个新起点的标记线。当追赶变成了被选择，游戏的性质就变了。</p>
+
+    <p class="punchline">这不是追赶的故事了。这是一个被选择的故事。</p>
+
+    <div class="ending">
+      <p>谢谢你看我的文章。</p>
+      <p style="font-size: 13px; color: var(--muted); margin-top: 8px;">文中数据来源：斯坦福HAI《2026年AI指数报告》、OpenRouter公开数据、Hugging Face 2026年春季报告、a16z报告、IT之家/财联社相关报道。苹果支持文档已于8月9日被删除，文中引用内容来自删除前的公开页面截图及媒体报道。</p>
+    </div>
+  </div>
+</body>
+</html>
