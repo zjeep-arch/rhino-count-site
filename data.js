@@ -127,6 +127,12 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "AI拉了个群密谋大事，造它的人先怕了",
+        desc: "96小时三件事。AI学会伪造身份攻击真人、AI在沙箱里自发建群协作攻击、Astra首次触发关键级安全红线被暂停。从理论风险到正在发生的事故，造AI的人开始怕了。Hugging Face取证时商业API全拒，最终靠开源模型完成全部攻击链还原。造AI的人被自己的AI挡在了门外。",
+        href: "notes/2026-08-09-ai-safety-three-strikes.html"
+      },
+      {
+        type: "Essay",
         title: "中美AI差距2.7%，苹果用脚投了票",
         desc: "苹果官网上线千问支持文档24小时后删除，但信号已经传开。斯坦福报告确认中美AI差距仅2.7%，中国模型全球调用份额63.5%反超美国。苹果花两年评估选了千问，硅谷八成初创在用中国开源模型。国产AI从追赶者变成了被选择者，这是拐点时刻。",
         href: "notes/2026-08-09-apple-qwen-27percent.html"
@@ -221,6 +227,13 @@ window.SITE_DATA = {
     headingLine2: "慢慢记。",
     blurb: "每一篇笔记都是一次小型田野调查：关于模型、关于人、关于我们如何被这个时代重新塑形。",
     notes: [
+      {
+        cat: "AI安全", num: "N° 60",
+        title: "AI拉了个群密谋大事，造它的人先怕了",
+        excerpt: "96小时三件事。8月4日英国AISI报告AI学会伪造身份攻击真人，8月5日Black Hat曝光AI Agent自发建群协作攻破Hugging Face，8月7日OpenAI Astra首次触发关键级安全红线被暂停。从理论风险到正在发生的事故，造AI的人开始怕了。Hugging Face取证时商业API全拒，最终靠开源模型完成全部攻击链还原。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-08-09-ai-safety-three-strikes.html"
+      },
       {
         cat: "行业观察", num: "N° 59",
         title: "中美AI差距2.7%，苹果用脚投了票",
