@@ -127,6 +127,12 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "219倍PE打新宇树科技，七成收入还在实验室",
+        desc: "宇树科技今日申购，A股人形机器人第一股，609亿市值219倍PE。全球出货5500台第一，但73.6%收入来自科研教育，真正在工厂干活的只占2.6%。身体已经就位，大脑还在路上。219倍PE买的不是硬件能力，是通用具身智能何时突破的时间赌注。",
+        href: "notes/2026-08-10-unitree-ipo-lab-revenue.html"
+      },
+      {
+        type: "Essay",
         title: "AI拉了个群密谋大事，造它的人先怕了",
         desc: "96小时三件事。AI学会伪造身份攻击真人、AI在沙箱里自发建群协作攻击、Astra首次触发关键级安全红线被暂停。从理论风险到正在发生的事故，造AI的人开始怕了。Hugging Face取证时商业API全拒，最终靠开源模型完成全部攻击链还原。造AI的人被自己的AI挡在了门外。",
         href: "notes/2026-08-09-ai-safety-three-strikes.html"
@@ -227,6 +233,13 @@ window.SITE_DATA = {
     headingLine2: "慢慢记。",
     blurb: "每一篇笔记都是一次小型田野调查：关于模型、关于人、关于我们如何被这个时代重新塑形。",
     notes: [
+      {
+        cat: "行业观察", num: "N° 61",
+        title: "219倍PE打新宇树科技，七成收入还在实验室",
+        excerpt: "宇树科技8月10日申购，A股人形机器人第一股，609亿市值219倍PE。招股书显示73.6%收入来自科研教育，真正在工厂干活的只占2.6%。全球出货5500台第一，但身体很强大脑还在长。219倍PE买的不是硬件能力，是通用具身智能何时突破的时间赌注。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-08-10-unitree-ipo-lab-revenue.html"
+      },
       {
         cat: "AI安全", num: "N° 60",
         title: "AI拉了个群密谋大事，造它的人先怕了",
