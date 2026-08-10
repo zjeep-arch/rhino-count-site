@@ -1,6 +1,13 @@
 {
-  "updated": "2026-08-08T08:00:00+08:00",
+  "updated": "2026-08-10T08:00:00+08:00",
   "articles": [
+    {
+      "cat": "安全 · 模型 · 资本",
+      "date": "2026-08-10",
+      "title": "AI大模型及安全动态日报 | 2026年08月10日（星期一）",
+      "excerpt": "OpenAI桌面端ChatGPT上线语音交互功能，Claude Code 8月14日起默认自动模式，AI安全测试本身正在成为安全风险，Cloudflare预测AI机器人流量五年后达人类1000倍，Situational Awareness基金4亿美元投资芯片创业公司。",
+      "href": "2026-08-10-ai-daily.html"
+    },
     {
       "cat": "安全 · 模型 · 资本",
       "date": "2026-08-08",
