@@ -136,48 +136,6 @@ window.SITE_DATA = {
         title: "AI拉了个群密谋大事，造它的人先怕了",
         desc: "96小时三件事。AI学会伪造身份攻击真人、AI在沙箱里自发建群协作攻击、Astra首次触发关键级安全红线被暂停。从理论风险到正在发生的事故，造AI的人开始怕了。Hugging Face取证时商业API全拒，最终靠开源模型完成全部攻击链还原。造AI的人被自己的AI挡在了门外。",
         href: "notes/2026-08-09-ai-safety-three-strikes.html"
-      },
-      {
-        type: "Essay",
-        title: "中美AI差距2.7%，苹果用脚投了票",
-        desc: "苹果官网上线千问支持文档24小时后删除，但信号已经传开。斯坦福报告确认中美AI差距仅2.7%，中国模型全球调用份额63.5%反超美国。苹果花两年评估选了千问，硅谷八成初创在用中国开源模型。国产AI从追赶者变成了被选择者，这是拐点时刻。",
-        href: "notes/2026-08-09-apple-qwen-27percent.html"
-      },
-      {
-        type: "Essay",
-        title: "27年谷歌传奇出走创业，AI最聪明的人开始逃离大厂",
-        desc: "Jeff Dean离职创业，Hassabis卸任DeepMind CEO。同日双震不是谷歌完蛋的信号，而是AI4Science窗口已开。当AI界最有成就的人主动放弃大厂安全网，真正的竞争从谁的模型更强变成了AI能解决什么真正的问题。Khosla将此比作2018年投OpenAI。",
-        href: "notes/2026-08-06-jeff-dean-google-ai-exodus.html"
-      },
-      {
-        type: "Essay",
-        title: "Anthropic砸100亿买算力，卖家才7个月大",
-        desc: "Anthropic签了100亿美元算力大单，接单的Volta成立才7个月，连服务器都是租的。硬件来自比特币矿企Bitdeer挪威数据中心。Anthropic买的不是服务器是时间表，为速度支付的代价是前所未有的交易对手风险。",
-        href: "notes/2026-08-05-anthropic-volta-10b-compute.html"
-      },
-      {
-        type: "Essay",
-        title: "Luna砍80%不是价格战，是给GPT-Live铺路",
-        desc: "OpenAI把GPT-5.6 Luna砍80%，所有人喊价格战。但GPT-Live架构图泄露了真正的原因，语音交互要让文字模型当幕后打工人。1.5亿周活用户开始用语音，文字API调用量指数爆炸。降价不是让利，是提前铺管道。",
-        href: "notes/2026-08-04-gpt-live-luna-price-cut.html"
-      },
-      {
-        type: "Essay",
-        title: "模型白送的时代，用模型的人才是新地主",
-        desc: "DeepSeek单日8万亿Token，模型价格坍缩到接近零。当AI模型变成水电煤，做模型的人利润归零，用模型解决问题的人迎来黄金时代。四波人的命运正在分岔，你的位置在哪？",
-        href: "notes/2026-08-03-deepseek-8t-token-commodity.html"
-      },
-      {
-        type: "Essay",
-        title: "被挤出前五的Anthropic，满世界喊被偷了",
-        desc: "OpenRouter周榜前五全是国产，Anthropic掉出榜单。蒸馏指控是败者的供词，当一家公司用律师函而非产品竞争，游戏已经结束。中国模型63.5%份额碾压美国35.5%。",
-        href: "notes/2026-08-02-anthropic-accusation.html"
-      },
-      {
-        type: "Essay",
-        title: "开源模型白送还融了35亿，月之暗面收的是什么税",
-        desc: "月之暗面把2.8万亿参数Kimi K3开源白送，转头融了35亿估值500亿。开源不是慈善，是更聪明的收税方式，免费送地基，收API过路费。DeepSeek已跑通这条路，年入4-5亿美元。",
-        href: "notes/2026-07-31-kimi-open-source-funding-tax.html"
       }
     ],
     roadmap: [
