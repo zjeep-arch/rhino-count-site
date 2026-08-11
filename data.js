@@ -127,6 +127,12 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "一句话寄快递租房，千问把App拆了重建",
+        desc: "千问开放平台上线，顺丰自如哈啰被装进同一个对话框。AI从帮你查信息到替你办事，一整套基础设施重构。这不是小程序2.0，是App的解构。但3800亿投入能不能换来可持续回报，谁也说不准。",
+        href: "notes/2026-08-11-qianwen-open-platform-app-rebuild.html"
+      },
+      {
+        type: "Essay",
         title: "219倍PE打新宇树科技，七成收入还在实验室",
         desc: "宇树科技今日申购，A股人形机器人第一股，609亿市值219倍PE。全球出货5500台第一，但73.6%收入来自科研教育，真正在工厂干活的只占2.6%。身体已经就位，大脑还在路上。219倍PE买的不是硬件能力，是通用具身智能何时突破的时间赌注。",
         href: "notes/2026-08-10-unitree-ipo-lab-revenue.html"
@@ -191,6 +197,13 @@ window.SITE_DATA = {
     headingLine2: "慢慢记。",
     blurb: "每一篇笔记都是一次小型田野调查：关于模型、关于人、关于我们如何被这个时代重新塑形。",
     notes: [
+      {
+        cat: "行业观察", num: "N° 62",
+        title: "一句话寄快递租房，千问把App拆了重建",
+        excerpt: "千问开放平台8月10日上线，顺丰自如哈啰等十余家企业首批接入。AI从帮你查信息到替你办事，一整套基础设施重构。这不是小程序2.0，是App的解构。但3800亿投入能不能换来可持续回报，谁也说不准。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-08-11-qianwen-open-platform-app-rebuild.html"
+      },
       {
         cat: "行业观察", num: "N° 61",
         title: "219倍PE打新宇树科技，七成收入还在实验室",

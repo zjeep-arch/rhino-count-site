@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>一句话寄快递租房，千问把App拆了重建 | 犀牛伯爵</title>
+  <meta name="description" content="千问开放平台上线，顺丰自如哈啰被装进同一个对话框。AI从帮你查信息到替你办事，App时代可能真的要翻篇了。">
+  <meta name="keywords" content="千问开放平台, AI办事, 智能体, 阿里AI, App替代, AI助手, 千问App, 顺丰, 自如">
+  <style>
+    :root {
+      --accent: #8b2635;
+      --ink: #333;
+      --ink-soft: #555;
+      --muted: #888;
+      --surface: #fafafa;
+      --border: rgba(0,0,0,0.06);
+      --radius: 12px;
+      --font-sans: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-serif: "Noto Serif SC", "Songti SC", Georgia, serif;
+    }
+    body { font-family: var(--font-sans); background: #f5f5f5; margin: 0; padding: 16px; font-size: 16px; line-height: 1.8; color: var(--ink); -webkit-font-smoothing: antialiased; }
+    .container { max-width: 680px; margin: 0 auto; background: var(--surface); padding: 32px; border-radius: var(--radius); box-shadow: 0 2px 12px rgba(0,0,0,0.04); }
+    .cover-img { width: 100%; border-radius: 8px; margin-bottom: 24px; display: block; }
+    h1 { font-family: var(--font-serif); font-size: 24px; font-weight: 700; color: var(--ink); line-height: 1.4; margin: 0 0 16px; }
+    .meta { color: var(--muted); font-size: 13px; margin-bottom: 16px; }
+    .byline { color: var(--ink-soft); font-size: 14px; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+    h2 { font-family: var(--font-serif); font-size: 20px; font-weight: 600; color: var(--ink); margin: 32px 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+    h3 { font-family: var(--font-serif); font-size: 18px; font-weight: 600; color: var(--ink); margin: 24px 0 12px; }
+    p { margin: 0 0 24px; }
+    .quote-box { border-left: 4px solid var(--accent); background: #f5f5f5; padding: 16px 20px; margin: 24px 0; border-radius: 0 var(--radius) var(--radius) 0; }
+    .quote-box p { margin: 0; color: var(--ink-soft); font-style: italic; font-size: 15px; }
+    .quote-box .attribution { margin-top: 8px; color: var(--muted); font-size: 13px; font-style: normal; }
+    .insight-box { background: #fff8f0; border: 1px solid #ffe4c4; border-radius: var(--radius); padding: 20px; margin: 24px 0; }
+    .insight-box h4 { margin: 0 0 8px; font-size: 16px; color: var(--ink); }
+    .insight-box p { margin: 0; font-size: 15px; color: var(--ink-soft); }
+    .data-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14px; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .data-table th, .data-table td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); }
+    .data-table th { background: #f0f0f0; font-weight: 600; color: var(--ink); }
+    .data-table td { color: var(--ink-soft); }
+    .data-table tr:last-child td { border-bottom: none; }
+    .timeline { position: relative; padding-left: 24px; margin: 24px 0; }
+    .timeline::before { content: ''; position: absolute; left: 6px; top: 0; bottom: 0; width: 2px; background: #e0e0e0; }
+    .timeline-item { position: relative; margin-bottom: 16px; }
+    .timeline-item::before { content: ''; position: absolute; left: -22px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); }
+    .timeline-item .date { font-size: 13px; color: var(--muted); margin-bottom: 4px; }
+    .timeline-item .content { font-size: 15px; color: var(--ink); }
+    .img-caption { text-align: center; color: var(--muted); font-size: 13px; margin-top: 8px; margin-bottom: 24px; }
+    .ending { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--ink-soft); font-size: 14px; }
+    .highlight { color: var(--accent); font-weight: 600; background: linear-gradient(to top, rgba(139,38,53,0.08) 40%, transparent 40%); padding: 0 2px; }
+    .data-callout { display: inline-block; background: var(--accent); color: #fff; padding: 2px 10px; border-radius: 4px; font-weight: 700; font-size: 15px; }
+    .contrast-card { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin: 24px 0; border-radius: var(--radius); overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .contrast-card .side { padding: 16px 20px; }
+    .contrast-card .side-left { background: #fef2f2; border-right: 1px solid var(--border); }
+    .contrast-card .side-right { background: #f0fdf4; }
+    .contrast-card .side h4 { margin: 0 0 8px; font-size: 14px; font-weight: 600; }
+    .contrast-card .side-left h4 { color: #991b1b; }
+    .contrast-card .side-right h4 { color: #166534; }
+    .contrast-card .side p { margin: 0; font-size: 14px; color: var(--ink-soft); line-height: 1.6; }
+    .punchline { font-family: var(--font-serif); font-size: 18px; font-weight: 700; color: var(--accent); text-align: center; margin: 32px 0; padding: 16px 0; border-top: 2px solid var(--accent); border-bottom: 2px solid var(--accent); }
+    strong { color: var(--ink); font-weight: 600; }
+    .inline-img { width: 100%; border-radius: 8px; margin: 16px 0 8px; display: block; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img class="cover-img" src="https://aka.doubaocdn.com/s/sVsyQ5j0US" alt="千问App内顺丰速运智能体对话界面，用户输入寄送需求后AI直接生成快递订单">
+    <h1>一句话寄快递租房，千问把App拆了重建</h1>
+    <div class="meta">2026年8月11日 · 阅读时间约8分钟</div>
+    <div class="byline">文｜犀牛伯爵</div>
+
+    <p>8月10日，千问开放平台上线。顺丰、自如、哈啰、闪送，十多家你手机里独立存在的生活服务App，被装进了同一个对话框。</p>
+
+    <p>这不是又一个AI助手。这是第一次，有人试图把App Store的模式拆掉重建。不是给你一个应用商店让你找App，而是给你一个对话框，让AI直接替你把事办了。</p>
+
+    <h2>十几个App，压缩成一句话</h2>
+
+    <p>千问开放平台8月10日正式上线，面向开发者和生态伙伴开放手机、PC和AI眼镜三类终端的接入能力。首批接入的伙伴覆盖物流运输、房产居住、本地生活、理财、汽车等十多个领域，包括顺丰速运、自如租房、盈米基金、哈啰租车、闪送、飞常准、美的美居、天鹅到家等十余家企业。菜鸟、夸克网盘、夸克扫描王等阿里生态产品也同步接入。</p>
+
+    <p>新京报记者实测发现，用户在千问App内只需@相关服务，或点击页面右上角的"圆点角标"进入对应智能体，即可直接调用第三方服务，全程无需跳转至独立应用。以顺丰速运为例，输入"帮我给上海客户寄个文件"，顺丰智能体便可记住用户此前的寄送地址等物流信息，直接生成快递订单并完成下单。</p>
+
+    <p>千问App现已上线超<span class="data-callout">400项</span>AI办事功能。这个数字本身就值得停下来想一想。</p>
+
+    <img class="inline-img" src="https://aka.doubaocdn.com/s/AumLMRiFoS" alt="千问App内贝壳找房智能体对话界面，用户输入租房需求后AI直接匹配房源">
+    <div class="img-caption">千问开放平台内贝壳找房智能体，用户说出租房需求后AI直接匹配房源（图源：千问开放平台官网）</div>
+
+    <h2>从"帮你查"到"替你办"</h2>
+
+    <p>说真的，我第一次看到这个消息的时候，反应是"嗯，又一个AI平台"。毕竟这半年，大模型公司搞生态平台的消息隔三差五就来一波。但仔细看了实测之后我改主意了。</p>
+
+    <p>千问开放平台做的事，和之前那些"AI助手"有一个根本区别。</p>
+
+    <p>之前的AI助手，不管多聪明，干的都是"帮你查信息"的活。你问它附近有什么好吃的，它给你列一串餐厅。然后呢？然后你还是得打开大众点评，自己筛选，自己下单，自己预约。AI帮你缩短了搜索时间，但最后那一步，真正"把事办了"的那一步，还是你自己动手。</p>
+
+    <p>千问这次不一样的地方在于，它把最后那一步也接管了。</p>
+
+    <p>你@顺丰速运，说"帮我给上海客户寄个文件"，它不是给你推荐顺丰的官网链接，也不是帮你查运费。它直接在对话框里生成订单，填好地址，完成下单。你@自如租房，说"国贸附近两居室、预算6000"，它直接推房源列表，点卡片看图片视频VR，一键约管家看房。</p>
+
+    <div class="contrast-card">
+      <div class="side side-left">
+        <h4>以前的AI助手</h4>
+        <p>你问"怎么寄快递"<br>AI告诉你步骤<br>你打开顺丰App<br>手动填地址、选网点<br>自己下单</p>
+      </div>
+      <div class="side side-right">
+        <h4>千问开放平台</h4>
+        <p>你说"帮我寄个文件"<br>AI记住你的地址<br>自动生成订单<br>对话内完成支付<br>全程不用离开</p>
+      </div>
+    </div>
+
+    <p>这个区别看着小，其实是一个范式分水岭。</p>
+
+    <p>从"帮你查"到"替你办"，中间隔着的不是一个功能迭代，是一整套基础设施的重构。千问提供了账号、AI支付、订单接入等基础设施，第三方不必从零搭建支付与订单系统。这意味着，任何一家生活服务公司，只要有API，就能在千问里开一个"对话门店"，用户来了说一句话，服务就启动了。</p>
+
+    <p>你想想这意味着什么。你手机里那些一年打开不了几次的App，寄快递的、查航班的、找保洁的、租车的，每一个都可以被压缩成一句对话。你不需要下载它们，不需要注册登录，不需要在五层菜单里找到那个"下单"按钮。你只需要在千问里@它，说一句话。</p>
+
+    <p class="punchline">这不是小程序2.0，是App的解构。</p>
+
+    <h2>四大平台，四条路</h2>
+
+    <p>不过千问不是唯一在干这件事的。国内AI智能体开放平台已经形成了一个竞争格局，但四家的路线差异极大。</p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>平台</th>
+          <th>核心路线</th>
+          <th>差异化</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>阿里千问</strong></td>
+          <td>交易履约闭环</td>
+          <td>接顺丰、自如等真实服务机构，从咨询到支付到履约一站完成</td>
+        </tr>
+        <tr>
+          <td><strong>字节扣子</strong></td>
+          <td>内容协同创作</td>
+          <td>700+功能插件，联动飞书+抖音，多人多Agent协同</td>
+        </tr>
+        <tr>
+          <td><strong>百度千帆</strong></td>
+          <td>B端知识密集</td>
+          <td>130万+企业智能体，聚焦政务、法律、医疗</td>
+        </tr>
+        <tr>
+          <td><strong>腾讯元器</strong></td>
+          <td>社交支付生态</td>
+          <td>内置微信支付MCP，打通企业微信+公众号</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>前三家侧重信息检索、内容生成与内部办公自动化，千问选择以交易履约闭环为核心。它接的不是工具插件，是顺丰、自如、哈啰这些真实的生活服务机构。它做的不是"帮你用工具"，是"替你办事"。</p>
+
+    <p>这个差异很关键。因为最终决定AI入口价值的，不是它能连接多少个工具，而是它能帮你完成多少笔真实交易。</p>
+
+    <img class="inline-img" src="https://aka.doubaocdn.com/s/RIHvUfDu1b" alt="千问App内闪送智能体对话界面，用户输入送花需求后AI直接完成下单流程">
+    <div class="img-caption">千问开放平台内闪送智能体，说清送什么从哪送到哪，下单支付全流程在对话内完成（图源：千问开放平台官网）</div>
+
+    <h2>"会做"的门槛比你想的高</h2>
+
+    <p>"AI替你办事"这件事的门槛比大多数人想象的高。不是模型够聪明就行。</p>
+
+    <p>你想在对话框里寄个快递，AI需要做到的不只是理解你的意图。它还得记住你的地址，调起顺丰的下单接口，处理支付，跟踪物流状态，遇到问题还能帮你改单。这中间任何一环断了，体验就崩了。</p>
+
+    <p>千问做的其实是把这些环节全部串起来。账号系统用千问你自己的账号。支付系统用千问内置的AI支付。订单系统用千问提供的订单接入。第三方只需要把自己的服务接口对接过来，剩下的千问全包了。</p>
+
+    <p>新京报实测里有个细节很值得注意。顺丰智能体可以"记住用户此前的寄送地址等物流信息"。这个"记住"不是简单的cookie或者缓存，是AI在对话中主动维护用户画像。知道你是谁，你常寄去哪，你习惯用什么样的快递服务。这种上下文记忆能力，是传统App做不到的。传统App让你每次都重新填写表单，AI让你说一句话就搞定。</p>
+
+    <h2>"小程序2.0"的质疑，对了一半</h2>
+
+    <p>唱衰的声音当然也有。最主流的质疑是，"这不就是小程序2.0吗？当年微信小程序也说要做超级入口，最后还不是各自为政。"</p>
+
+    <p>这个类比看着有道理，但其实漏了一个关键区别。</p>
+
+    <p>小程序的本质还是"App的轻量版"。你用小程序，流程和用App一模一样。找到入口，打开界面，操作功能，完成交易。小程序解决的是"下载安装"的门槛，没有解决"操作交互"的门槛。你打开顺丰小程序寄快递，还是得逐项填写收件人、地址、物品信息。</p>
+
+    <p>千问解决的是"操作交互"这个门槛。你说一句话，AI理解你的意图，自动调取你需要的服务，帮你填好表单，完成下单。用户从"操作员"变成了"指挥官"。</p>
+
+    <p>但另一种质疑是有道理的。行业整体尚未跑通可持续的商业化路径，庞大的用户体量背后对应着持续高企的算力成本。阿里CEO吴泳铭说过，原定未来三年投入<span class="data-callout">3800亿</span>进行AI基础建设。这笔钱能不能赚回来，"智能体即服务"的模式能不能跑通，目前谁也说不准。</p>
+
+    <div class="insight-box">
+      <h4>算一笔账</h4>
+      <p>千问App C端月活已破1亿。每多一项办事功能，背后都是一次API调用、一次模型推理、一次上下文维护。400项功能同时服务1亿用户，算力成本的量级，不是小数目。阿里3800亿的AI基建投入，光千问这一个入口就要吃掉很大一块。</p>
+    </div>
+
+    <h2>AI眼镜，比手机更大的棋盘</h2>
+
+    <p>有一个细节值得特别关注。</p>
+
+    <p>千问开放平台不只有手机端。它同时开放了PC和AI眼镜两类终端的接入。在AI眼镜端，开发者甚至可以用自然语言定制Skill。比如调用眼镜的拍照能力，为视障人士打造一个"身边有什么"的技能，主动提醒门槛和台阶。</p>
+
+    <p>这个方向的想象空间比手机大得多。</p>
+
+    <p>手机上的AI对话，说到底还是在替代App。但AI眼镜上的AI服务，是在创造一种全新的交互范式。你戴着眼镜走在街上，看到什么不懂的就问，需要什么服务就说，AI直接调取对应的服务帮你办。不需要掏手机，不需要解锁，不需要找App。</p>
+
+    <p>千问C端事业群总裁吴嘉说过一句话，"AI办事时代才刚刚开始"。今年1月千问发布会的时候，他现场演示了对着手机说"帮我订40杯奶茶送到现场"，屏幕上跳出选品、支付全流程。七个月后，千问把这个能力从阿里生态内部开放给了所有第三方。</p>
+
+    <p>从"帮自己人办事"到"帮所有人办事"，这一步迈得比大多数人以为的要大。</p>
+
+    <img class="inline-img" src="https://aka.doubaocdn.com/s/Q58H760uZU" alt="千问开放平台首批接入的生态合作伙伴全景展示">
+    <div class="img-caption">千问开放平台首批生态合作伙伴，覆盖物流、房产、理财、出行等十余个领域（图源：千问开放平台官网）</div>
+
+    <h2>每一次范式变迁，都在做同一件事</h2>
+
+    <p>聊到这里我突然想起一个事。从命令行到图形界面，从门户网站的目录导航到搜索引擎的关键词检索，从App Store的应用分发到今天AI对话的意图驱动，每一次计算范式的变迁，其实都在做同一件事。缩短你从"想要"到"得到"之间的距离。</p>
+
+    <p>千问做的事，不过是这个方向上的又一步。只不过这一步迈得有点大，大到可能改变你对"App"这个概念的基本认知。</p>
+
+    <p>你问我千问开放平台能不能成？说真的我也不确定。AI商业化的坑太多了，3800亿的投入能不能换来可持续的回报，这是所有人的疑问。</p>
+
+    <p>但有一件事我比较确定。你手机里那些一年用不了三次的App，它们的生存空间会越来越小。不是因为它们不好用，而是因为有了更好的方式。当你在对话框里说一句话就能寄快递、租房子、查基金的时候，你真的还会去打开那个需要注册、登录、填表的App吗？</p>
+
+    <p>App不会一夜消失。但App时代翻篇的方式，可能就是从一句话开始的。</p>
+
+    <div class="ending">谢谢你看我的文章。</div>
+  </div>
+</body>
+</html>
