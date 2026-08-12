@@ -1,6 +1,13 @@
 {
-  "updated": "2026-08-11T08:00:00+08:00",
+  "updated": "2026-08-12T08:00:00+08:00",
   "articles": [
+    {
+      "cat": "安全 · 模型 · 资本",
+      "date": "2026-08-12",
+      "title": "AI大模型及安全动态日报 | 2026年08月12日（星期三）",
+      "excerpt": "Meta Muse Glimmer开源模型登AI HOT热度榜首，Google Gemini月活破10亿，NVIDIA组建5000亿美元AI基础设施融资联盟，OpenAI发布GPT-5.6-Cyber发现Chrome零日漏洞，推理轨迹泄露暴露大模型安全新风险。",
+      "href": "2026-08-12-ai-daily.html"
+    },
     {
       "cat": "安全 · 模型 · 资本",
       "date": "2026-08-11",
