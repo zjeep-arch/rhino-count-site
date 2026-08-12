@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ChatGPT撞线10亿用户，AI悄悄变成了水电煤 | 犀牛伯爵</title>
+  <meta name="description" content="ChatGPT和Gemini双双突破10亿用户。但10亿用户不是AI的胜利宣言，而是AI从令人惊叹的新技术变成令人无聊的必需品的转折点。当AI变成水电煤，竞争逻辑彻底变了。">
+  <style>
+    :root {
+      --accent: #8b2635;
+      --ink: #333;
+      --ink-soft: #555;
+      --muted: #888;
+      --surface: #fafafa;
+      --border: rgba(0,0,0,0.06);
+      --radius: 12px;
+      --font-sans: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-serif: "Noto Serif SC", "Songti SC", Georgia, serif;
+    }
+    body { font-family: var(--font-sans); background: #f5f5f5; margin: 0; padding: 16px; font-size: 16px; line-height: 1.8; color: var(--ink); -webkit-font-smoothing: antialiased; }
+    .container { max-width: 680px; margin: 0 auto; background: var(--surface); padding: 32px; border-radius: var(--radius); }
+    .cover-img { width: 100%; border-radius: 8px; margin-bottom: 24px; }
+    h1 { font-family: var(--font-serif); font-size: 24px; font-weight: 700; color: var(--ink); line-height: 1.4; margin: 0 0 16px; }
+    .meta { color: var(--muted); font-size: 13px; margin-bottom: 16px; }
+    .byline { color: var(--ink-soft); font-size: 14px; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+    h2 { font-family: var(--font-serif); font-size: 20px; font-weight: 600; color: var(--ink); margin: 32px 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+    h3 { font-family: var(--font-serif); font-size: 18px; font-weight: 600; color: var(--ink); margin: 24px 0 12px; }
+    p { margin: 0 0 24px; }
+    .quote-box { border-left: 4px solid var(--accent); background: #f5f5f5; padding: 16px 20px; margin: 24px 0; border-radius: 0 var(--radius) var(--radius) 0; }
+    .quote-box p { margin: 0; color: var(--ink-soft); font-style: italic; font-size: 15px; }
+    .quote-box .attribution { margin-top: 8px; color: var(--muted); font-size: 13px; font-style: normal; }
+    .insight-box { background: #fff8f0; border: 1px solid #ffe4c4; border-radius: var(--radius); padding: 20px; margin: 24px 0; }
+    .insight-box h4 { margin: 0 0 8px; font-size: 16px; color: var(--ink); }
+    .insight-box p { margin: 0; font-size: 15px; color: var(--ink-soft); }
+    .data-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14px; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .data-table th, .data-table td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); }
+    .data-table th { background: #f0f0f0; font-weight: 600; color: var(--ink); }
+    .data-table td { color: var(--ink-soft); }
+    .timeline { position: relative; padding-left: 24px; margin: 24px 0; }
+    .timeline::before { content: ''; position: absolute; left: 6px; top: 0; bottom: 0; width: 2px; background: #e0e0e0; }
+    .timeline-item { position: relative; margin-bottom: 16px; }
+    .timeline-item::before { content: ''; position: absolute; left: -22px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); }
+    .timeline-item .date { font-size: 13px; color: var(--muted); margin-bottom: 4px; }
+    .timeline-item .content { font-size: 15px; color: var(--ink); }
+    .img-caption { text-align: center; color: var(--muted); font-size: 13px; margin-top: 8px; margin-bottom: 24px; }
+    .ending { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--ink-soft); font-size: 14px; }
+    .highlight { color: var(--accent); font-weight: 600; background: linear-gradient(to top, rgba(139,38,53,0.08) 40%, transparent 40%); padding: 0 2px; }
+    .data-callout { display: inline-block; background: var(--accent); color: #fff; padding: 2px 10px; border-radius: 4px; font-weight: 700; font-size: 15px; }
+    .contrast-card { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin: 24px 0; border-radius: var(--radius); overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .contrast-card .side { padding: 16px 20px; }
+    .contrast-card .side-left { background: #fef2f2; border-right: 1px solid var(--border); }
+    .contrast-card .side-right { background: #f0fdf4; }
+    .contrast-card .side h4 { margin: 0 0 8px; font-size: 14px; font-weight: 600; }
+    .contrast-card .side-left h4 { color: #991b1b; }
+    .contrast-card .side-right h4 { color: #166534; }
+    .contrast-card .side p { margin: 0; font-size: 14px; color: var(--ink-soft); line-height: 1.6; }
+    .punchline { font-family: var(--font-serif); font-size: 18px; font-weight: 700; color: var(--accent); text-align: center; margin: 32px 0; padding: 16px 0; border-top: 2px solid var(--accent); border-bottom: 2px solid var(--accent); }
+    strong { color: var(--ink); font-weight: 600; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img class="cover-img" src="2026-08-12-ai-billion-users-cover.jpg" alt="AI从炫酷新技术变为日常基础设施的视觉隐喻，左侧是发光的AI界面，右侧是融入城市管网的水电煤意象">
+    <h1>ChatGPT撞线10亿用户，AI悄悄变成了水电煤</h1>
+    <div class="meta">2026年8月12日 · 阅读时间约12分钟</div>
+    <div class="byline">文｜犀牛伯爵</div>
+
+    <p>8月11日晚上，Sundar Pichai在X上发了一条帖子。没有发布会，没有长文，就几句话，"每月有超过10亿人在使用Gemini"。配图都没有。</p>
+
+    <p>几个小时前，OpenAI那边也悄悄更新了一篇博客。说是博客，其实是一份全球使用数据报告，10亿用户这个数字只是其中一句话的从句，"帮助人们理解超过10亿人是如何使用ChatGPT的"。要不是媒体翻出来，你可能根本注意不到。</p>
+
+    <p>两个AI，同时撞线10亿用户。一个高调宣布，一个低调确认。</p>
+
+    <p>说实话，这个数字放在三年前，能把整个科技圈炸翻。2022年底ChatGPT刚出来那会儿，100万用户就是大新闻。两年后，1亿。现在，10亿。</p>
+
+    <p>但你有没有发现，这次你的朋友圈里没几个人在转。</p>
+
+    <p>不是大家不关心AI了。恰恰相反，是因为AI已经不够"新"了。</p>
+
+    <h2>两种姿态，同一个信号</h2>
+
+    <p>先把时间线理一下。</p>
+
+    <p>ChatGPT这边，OpenAI在8月6日发了一篇题为"从问到做，全世界如何让ChatGPT干活"的博客。10亿用户只是文中的一个定语。OpenAI发言人后来跟媒体确认，月活突破10亿"已经有一段时间了"，7月甚至达到了周活10亿的更高峰值。</p>
+
+    <p>但有意思的是，OpenAI今年2月就公布过9亿周活用户。从9亿到10亿，花了整整五个月。对于曾经被称为"史上增长最快软件"的ChatGPT来说，这个曲线明显在变平。</p>
+
+    <p>Gemini走的是完全相反的路线。2月公布7.5亿月活，7月底财报会上说9.5亿，不到一个月就冲到了10亿。半年涨了2.5亿用户，后半段还在加速。Pichai称它是"Google史上增长最快的产品"，也是Google第14个达到10亿用户的产品。</p>
+
+    <div class="data-table">
+      <table>
+        <tr><th>指标</th><th>ChatGPT</th><th>Gemini</th></tr>
+        <tr><td>10亿用户确认时间</td><td>8月6日（博客从句）</td><td>8月11日（CEO发X）</td></tr>
+        <tr><td>2月基数</td><td>9亿周活</td><td>7.5亿月活</td></tr>
+        <tr><td>到达10亿用时</td><td>约5个月（增速放缓）</td><td>约6个月（后段加速）</td></tr>
+        <tr><td>增长驱动力</td><td>产品口碑+企业客户</td><td>Google全家桶渠道</td></tr>
+        <tr><td>企业客户</td><td>200万+</td><td>未单独披露</td></tr>
+        <tr><td>付费用户</td><td>5000万+订阅者</td><td>未披露</td></tr>
+      </table>
+    </div>
+
+    <p>两种姿态背后，是两种完全不同的增长逻辑。OpenAI靠的是产品本身的口碑，用户主动来找你。Google靠的是渠道优势，把Gemini塞进Android、塞进Gmail、塞进Search，你想不用都难。</p>
+
+    <p>但不管是哪种路径，结果是一样的。10亿人，一个月，在用一个AI。</p>
+
+    <h2>10亿用户恰恰说明，AI不酷了</h2>
+
+    <p>我自己的感受是，这个10亿的数字，与其说是AI的胜利宣言，不如说是AI变得"无聊"的标志。</p>
+
+    <p>想想看，你会转发一条"全球10亿人在用电"的新闻吗？不会。因为电已经是基础设施了，没人觉得用电这件事本身有什么值得讨论的。</p>
+
+    <p>AI正在经历同样的过程。从"哇塞你能跟机器聊天"到"哦对，我今天又问了ChatGPT二十个问题"，这个转变不是在某个瞬间发生的，但10亿用户这个数字，像是给它盖了个戳。</p>
+
+    <div class="punchline">当一件事有10亿人在做，它就不再是新闻了。它变成了背景音。</div>
+
+    <p>Google发的那组Gemini使用数据，特别能说明问题。63%的用户现在直接用语音跟Gemini说话，不是打字，是说话。每天有1.5亿张图片在Gemini里生成。五分之一的Gemini Live交互用了摄像头或屏幕共享，对准一道数学题拍一下就能解题。38%的学生请求带着附件。Gemini还能跨40多个APP自动操作，叫车、订餐、查日历。</p>
+
+    <p>你仔细看这些数据，没有一条是关于"AI有多聪明"的。全是关于"AI有多日常"的。</p>
+
+    <p>OpenAI那边的数据也类似。工作中，人们用ChatGPT"做"事情的概率是"问"事情的两倍多。写代码、做分析、编辑文档，这些不是"探索AI"，是"用AI干活"。多媒体使用增长最快，占消息量的7.8%。35岁以上用户的占比在几乎所有国家都在涨。</p>
+
+    <p>这些不是早期 adopter 在尝鲜。这是普通人在过日子。</p>
+
+    <p>当AI从"值得讨论的话题"变成"默认使用的工具"，它的神奇感就消失了。这没什么不好的。电灯刚出来的时候，人们也觉得能发光是奇迹。现在你不会因为灯泡亮了就发朋友圈。</p>
+
+    <p>AI正在变成灯泡。</p>
+
+    <h2>10亿用户的另一面，是增长见顶</h2>
+
+    <p>但故事远没有那么简单。</p>
+
+    <p>10亿用户听着很厉害，但你得往下看几层。</p>
+
+    <p>第一层，增长在放缓。ChatGPT从9亿周活到10亿周活，花了五个月。Gemini虽然后段加速，但那主要是靠Google全家桶的渠道推送，不是用户主动选择。把Gemini塞进Android系统里，用户数当然涨得快，但这里面有多少是"被动用户"?</p>
+
+    <p>第二层，免费为主。OpenAI有5000万付费订阅者，听起来不少，但放到10亿用户里，付费率大概5%。Google更干脆，压根没公布Gemini的付费用户数。10亿用户里绝大多数是免费用户，而免费用户对AI公司来说，是成本中心，不是利润中心。</p>
+
+    <p>第三层，也是最关键的，用户数不等于商业价值。</p>
+
+    <p>同一周里，另一条消息也在刷屏。Anthropic正在跟投资者密集会面，最快9月上市，估值9650亿美元。这家公司的年化收入已经达到470亿美元。但Claude的用户数，外界估计只有数千万级别。</p>
+
+    <div class="contrast-card">
+      <div class="side side-left">
+        <h4>ChatGPT / Gemini</h4>
+        <p>10亿+月活用户<br>5000万付费（ChatGPT）<br>增长靠渠道+免费用户<br>商业化路径仍在探索</p>
+      </div>
+      <div class="side side-right">
+        <h4>Anthropic / Claude</h4>
+        <p>数千万级用户<br>ARR 470亿美元<br>增长靠企业客户深度付费<br>估值9650亿即将IPO</p>
+      </div>
+    </div>
+
+    <p>几千万用户的公司估值9650亿，10亿用户的公司还在想怎么赚钱。这不是矛盾，这恰恰是AI进入"基础设施阶段"的典型特征。基础设施的价值不在于有多少人用，而在于有多少人离不开它，愿意为它付钱。</p>
+
+    <p>OpenAI显然也意识到了这一点。8月11日，ChatGPT广告业务扩展到了五个新国家。10亿用户终于开始变现了，方式是卖广告。这个逻辑跟Google Search一模一样，免费聚拢用户，广告变现流量。AI正在变成下一个搜索引擎。</p>
+
+    <h2>中国厂商走了一条不同的路</h2>
+
+    <p>就在硅谷两家巨头为10亿用户撞线的同时，中国AI圈发生了一件容易被忽略的事。</p>
+
+    <p>8月11日，一个名为"DeepSeek Harness团队"的微信公众号完成了注册认证。认证主体是北京深度求索人工智能基础技术研究有限公司。账号头像是一只黑色鲸鱼。</p>
+
+    <p>没有发布会，没有预热。就这么安安静静地注册了。但圈子里的人已经炸了。</p>
+
+    <p>因为所有人都知道这意味着什么。DeepSeek终于不再只做模型了，它要开始做工具了。</p>
+
+    <p>在DeepSeek内部，有一套产品逻辑，"Model + Harness = Agent"。模型是大脑，负责思考和推理。Harness是身体，负责调度工具、管理任务、执行代码、跑测试。把模型的能力落到真实环境中，完成从"理解"到"交付"的闭环。</p>
+
+    <p>这个思路对标的是Anthropic的Claude Code和OpenAI的Codex。但DeepSeek的路线跟硅谷完全不同。硅谷走的是"先10亿用户再想怎么赚钱"，DeepSeek走的是"先把工具做深，让开发者和企业离不开它"。</p>
+
+    <p>负责人叫崔添翼，浙大计算机系毕业，在全球知名量化机构Jane Street干了九年，今年3月才加入DeepSeek。一个量化交易出身的工程师来做AI工具框架，这个组合本身就很有意思。量化交易最讲究的就是，系统要稳定、要快、要在极端情况下不出错。这些品质恰恰是AI Agent最需要的。</p>
+
+    <p>DeepSeek Harness目前还在内测阶段。但从36氪的报道来看，核心思路已经清晰了。不是做一个更聪明的模型，而是做一个更可靠的执行系统。模型再聪明，如果不能稳定地调用工具、管理任务状态、处理反馈，就只是个聊天玩具。</p>
+
+    <p>同一天，智谱的ZCode也传来了消息，用户数突破百万。ZCode针对GLM模型深度优化，上线了Goal、Subagents、Remote Control四大功能。在Z.ai Code Bench测试中，GLM-5.2搭配ZCode比搭配Claude Code的任务通过率还高了2.39个百分点。</p>
+
+    <p>蚂蚁百灵也开源了Ling-3.0-tiny，总参数7.9B，推理时只激活1.3B参数。不是追参数规模，是追在端侧跑得快、跑得省。</p>
+
+    <p>你发现没有，中国AI公司这波操作里，没有一个在追"10亿用户"。全在做工具、做生态、做深度嵌入。</p>
+
+    <p>这不是因为它们不想有10亿用户，是因为它们想明白了一件事。在AI变成水电煤的阶段，用户数不是护城河，使用深度才是。</p>
+
+    <h2>10亿用户不等于赢了</h2>
+
+    <p>现在主流的声音在说，ChatGPT和Gemini双双破10亿，"AI竞赛进入新阶段"。</p>
+
+    <p>这话对了一半。确实是新阶段，但不是"谁用户更多"的新阶段。</p>
+
+    <p>你想想，微信有10亿用户不是因为微信"聪明"，是因为微信变成了水电煤，你离不开它。淘宝有10亿用户不是因为淘宝"先进"，是因为你要买东西的时候第一个想到它。</p>
+
+    <p>10亿用户不是终点，是起跑线。真正的竞赛，是从"有10亿人在用"到"这10亿人离不开你"。</p>
+
+    <p>这个转变里，有几个关键变量。</p>
+
+    <p>第一个是工作流嵌入深度。ChatGPT现在能"做"事情，但它还没嵌入到你的日常工作流里。你打开ChatGPT，问一个问题，关掉。下次需要再打开。这跟"离不开"还有距离。什么时候AI变成了你的工作流默认起点，像打开电脑先开微信一样先开AI，那才是真正的嵌入。</p>
+
+    <p>第二个是生态绑定。Google为什么能把Gemini推到10亿?因为它有Android、有Gmail、有Search、有Workspace。AI不是一个独立产品，是整个生态的一个功能。OpenAI没有这样的生态，所以它在疯狂建，Codex、Work、ChatGPT Desktop、广告业务，全是在补生态的课。</p>
+
+    <p>第三个是付费意愿。10亿免费用户不如1000万付费用户值钱。Anthropic的470亿美元ARR，不是靠10亿免费用户堆出来的，是靠企业客户为Claude的深度使用付费。当AI从"免费聊聊天"变成"付费干活"，商业模型才真正跑通。</p>
+
+    <h2>AI的下一站，不是更多用户，是更深嵌入</h2>
+
+    <p>聊到这里我突然想起一个事。</p>
+
+    <p>1999年，Google刚上线的时候，有一个专门的按钮叫"I'm Feeling Lucky"。你点了它，Google直接跳转到搜索结果第一条，不给你看结果列表。这个按钮在当时是Google的标志，代表"我们足够聪明，能猜到你要什么"。</p>
+
+    <p>后来这个按钮还在，但几乎没人点了。不是因为它不好用，是因为搜索已经变成了基础设施。你不会跟水电煤较劲，你只会用它。</p>
+
+    <p>AI正在走一模一样的路。从"你觉得它很神奇"到"你甚至不觉得它的存在"。10亿用户这个数字，就是这条路上的一个里程碑。过了这个里程碑，没人会再讨论"AI有多少用户"了，就像没人讨论"Google有多少用户"一样。</p>
+
+    <p>下一阶段的竞争，不是在应用商店抢下载量，是在你的工作流里抢默认位置。不是让你"选择用AI"，是让你"想都不想就用AI"。</p>
+
+    <p>中国厂商似乎比硅谷更早想通了这件事。DeepSeek在做Harness，智谱在做ZCode，蚂蚁在把模型做小做轻放到端侧。没有人在追10亿用户这个数字，全在追"不可替代性"这个目标。</p>
+
+    <p>这可能是中国AI跟硅谷AI最有趣的一个分歧。硅谷在拼规模，中国在拼深度。硅谷在抢用户，中国在抢工作流。谁对谁错，现在还说不准，但这个分歧本身，就值得持续关注。</p>
+
+    <h2>对你来说意味着什么</h2>
+
+    <p>你不需要关心哪个AI有10亿用户。这个数字对你来说没有实际意义。</p>
+
+    <p>你需要关心的是，哪个AI正在变成你离不开的那一个。</p>
+
+    <p>不是哪个最聪明，不是哪个最便宜，是哪个已经嵌入了你的日常工作，让你回到没有它的状态会觉得别扭。</p>
+
+    <p>当你某天发现，你做一件事情的时候，第一反应不是"要不要用AI"，而是直接就开始用了，连"用AI"这个念头都没有闪过。那一天，AI对你来说就真的变成了水电煤。</p>
+
+    <p>10亿人已经开始这么做了。你呢?</p>
+
+    <div class="ending">谢谢你看我的文章。</div>
+  </div>
+</body>
+</html>

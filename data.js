@@ -127,6 +127,13 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        type: "Essay",
+        title: "ChatGPT撞线10亿用户，AI悄悄变成了水电煤",
+        desc: "ChatGPT和Gemini双双突破10亿用户，但朋友圈没人转了。10亿用户不是AI的胜利宣言，是AI变成水电煤的转折点。增长放缓、免费为主、付费率5%，10亿用户不如470亿ARR。中国厂商走不同路线，DeepSeek Harness从模型到工具框架，智谱ZCode破百万。当AI变成基础设施，比的不是谁用户多，是谁渗透深。",
+        href: "notes/2026-08-12-ai-billion-users-infrastructure.html"
+      },
+      {
+        type: "Essay",
         title: "一句话寄快递租房，千问把App拆了重建",
         desc: "千问开放平台上线，顺丰自如哈啰被装进同一个对话框。AI从帮你查信息到替你办事，一整套基础设施重构。这不是小程序2.0，是App的解构。但3800亿投入能不能换来可持续回报，谁也说不准。",
         href: "notes/2026-08-11-qianwen-open-platform-app-rebuild.html"
@@ -197,6 +204,14 @@ window.SITE_DATA = {
     headingLine2: "慢慢记。",
     blurb: "每一篇笔记都是一次小型田野调查：关于模型、关于人、关于我们如何被这个时代重新塑形。",
     notes: [
+      {
+        cat: "行业观察", num: "N° 62",
+        cat: "行业观察", num: "N° 63",
+        title: "ChatGPT撞线10亿用户，AI悄悄变成了水电煤",
+        excerpt: "ChatGPT和Gemini同时突破10亿月活，但朋友圈没人转了。10亿用户不是胜利宣言，是AI变得无聊的标志。ChatGPT增速放缓，Gemini靠渠道推送，付费率仅5%。Anthropic几千万用户估值9650亿，DeepSeek Harness从模型转向工具框架。当AI变成水电煤，竞争从用户数变成渗透深度。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-08-12-ai-billion-users-infrastructure.html"
+      },
       {
         cat: "行业观察", num: "N° 62",
         title: "一句话寄快递租房，千问把App拆了重建",
