@@ -127,6 +127,12 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "GLM-5.3挖出40年老bug，顺便把开源编程第一拿了",
+        desc: "智谱发布GLM-5.3，基座模型完全没变，所有能力提升来自后训练Scaling。编程能力暴涨50%，网络安全能力涌现，两周挖出2436个漏洞，最老的可追溯到1981年。在CyberGym上超越所有闭源模型，还启动了\"开源的盾\"计划。",
+        href: "notes/2026-08-14-GLM-5.3.html"
+      },
+      {
+        type: "Essay",
         type: "Essay",
         title: "ChatGPT撞线10亿用户，AI悄悄变成了水电煤",
         desc: "ChatGPT和Gemini双双突破10亿用户，但朋友圈没人转了。10亿用户不是AI的胜利宣言，是AI变成水电煤的转折点。增长放缓、免费为主、付费率5%，10亿用户不如470亿ARR。中国厂商走不同路线，DeepSeek Harness从模型到工具框架，智谱ZCode破百万。当AI变成基础设施，比的不是谁用户多，是谁渗透深。",
@@ -205,7 +211,13 @@ window.SITE_DATA = {
     blurb: "每一篇笔记都是一次小型田野调查：关于模型、关于人、关于我们如何被这个时代重新塑形。",
     notes: [
       {
-        cat: "行业观察", num: "N° 62",
+        cat: "行业观察", num: "N° 64",
+        title: "GLM-5.3挖出40年老bug，顺便把开源编程第一拿了",
+        excerpt: "智谱发布GLM-5.3，基座模型完全没变，所有能力提升来自后训练Scaling。编程能力暴涨50%，网络安全能力涌现，两周挖出2436个漏洞，最老的可追溯到1981年。在CyberGym上超越所有闭源模型，还启动了\"开源的盾\"计划。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-08-14-GLM-5.3.html"
+      },
+      {
         cat: "行业观察", num: "N° 63",
         title: "ChatGPT撞线10亿用户，AI悄悄变成了水电煤",
         excerpt: "ChatGPT和Gemini同时突破10亿月活，但朋友圈没人转了。10亿用户不是胜利宣言，是AI变得无聊的标志。ChatGPT增速放缓，Gemini靠渠道推送，付费率仅5%。Anthropic几千万用户估值9650亿，DeepSeek Harness从模型转向工具框架。当AI变成水电煤，竞争从用户数变成渗透深度。",
