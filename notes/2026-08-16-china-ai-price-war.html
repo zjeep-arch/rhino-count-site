@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="OpenAI把GPT-5.6 Luna砍了80%，不是让利，是被中国AI这一周的集体爆发逼的。小红书、智谱、通义千问、DeepSeek四家在同一周密集发布重磅模型，从技术性能到开源生态全面施压。">
+  <title>中国AI这周连出四招，OpenAI被迫降价80% — 犀牛伯爵</title>
+  <style>
+    :root {
+      --accent: #8b2635;
+      --ink: #333;
+      --ink-soft: #555;
+      --muted: #888;
+      --surface: #fafafa;
+      --border: rgba(0,0,0,0.06);
+      --radius: 12px;
+      --font-sans: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-serif: "Noto Serif SC", "Songti SC", Georgia, serif;
+    }
+    body { font-family: var(--font-sans); background: #f5f5f5; margin: 0; padding: 16px; font-size: 16px; line-height: 1.8; color: var(--ink); -webkit-font-smoothing: antialiased; }
+    .container { max-width: 680px; margin: 0 auto; background: var(--surface); padding: 32px; border-radius: var(--radius); }
+    .cover-img { width: 100%; border-radius: 8px; margin-bottom: 24px; }
+    h1 { font-family: var(--font-serif); font-size: 24px; font-weight: 700; color: var(--ink); line-height: 1.4; margin: 0 0 16px; }
+    .meta { color: var(--muted); font-size: 13px; margin-bottom: 16px; }
+    .byline { color: var(--ink-soft); font-size: 14px; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+    h2 { font-family: var(--font-serif); font-size: 20px; font-weight: 600; color: var(--ink); margin: 32px 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+    h3 { font-family: var(--font-serif); font-size: 18px; font-weight: 600; color: var(--ink); margin: 24px 0 12px; }
+    p { margin: 0 0 24px; }
+    .quote-box { border-left: 4px solid var(--accent); background: #f5f5f5; padding: 16px 20px; margin: 24px 0; border-radius: 0 var(--radius) var(--radius) 0; }
+    .quote-box p { margin: 0; color: var(--ink-soft); font-style: italic; font-size: 15px; }
+    .quote-box .attribution { margin-top: 8px; color: var(--muted); font-size: 13px; font-style: normal; }
+    .insight-box { background: #fff8f0; border: 1px solid #ffe4c4; border-radius: var(--radius); padding: 20px; margin: 24px 0; }
+    .insight-box h4 { margin: 0 0 8px; font-size: 16px; color: var(--ink); }
+    .insight-box p { margin: 0; font-size: 15px; color: var(--ink-soft); }
+    .data-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14px; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .data-table th, .data-table td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); }
+    .data-table th { background: #f0f0f0; font-weight: 600; color: var(--ink); }
+    .data-table td { color: var(--ink-soft); }
+    .timeline { position: relative; padding-left: 24px; margin: 24px 0; }
+    .timeline::before { content: ''; position: absolute; left: 6px; top: 0; bottom: 0; width: 2px; background: #e0e0e0; }
+    .timeline-item { position: relative; margin-bottom: 16px; }
+    .timeline-item::before { content: ''; position: absolute; left: -22px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); }
+    .timeline-item .date { font-size: 13px; color: var(--muted); margin-bottom: 4px; }
+    .timeline-item .content { font-size: 15px; color: var(--ink); }
+    .img-caption { text-align: center; color: var(--muted); font-size: 13px; margin-top: 8px; margin-bottom: 24px; }
+    .ending { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--ink-soft); font-size: 14px; }
+    .highlight { color: var(--accent); font-weight: 600; background: linear-gradient(to top, rgba(139,38,53,0.08) 40%, transparent 40%); padding: 0 2px; }
+    .data-callout { display: inline-block; background: var(--accent); color: #fff; padding: 2px 10px; border-radius: 4px; font-weight: 700; font-size: 15px; }
+    .contrast-card { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin: 24px 0; border-radius: var(--radius); overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .contrast-card .side { padding: 16px 20px; }
+    .contrast-card .side-left { background: #fef2f2; border-right: 1px solid var(--border); }
+    .contrast-card .side-right { background: #f0fdf4; }
+    .contrast-card .side h4 { margin: 0 0 8px; font-size: 14px; font-weight: 600; }
+    .contrast-card .side-left h4 { color: #991b1b; }
+    .contrast-card .side-right h4 { color: #166534; }
+    .contrast-card .side p { margin: 0; font-size: 14px; color: var(--ink-soft); line-height: 1.6; }
+    .punchline { font-family: var(--font-serif); font-size: 18px; font-weight: 700; color: var(--accent); text-align: center; margin: 32px 0; padding: 16px 0; border-top: 2px solid var(--accent); border-bottom: 2px solid var(--accent); }
+    strong { color: var(--ink); font-weight: 600; }
+    sup a { color: var(--accent); text-decoration: none; font-size: 0.75em; font-weight: 600; }
+    sup a:hover { text-decoration: underline; }
+    footer { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border); }
+    footer .sources { font-size: 14px; }
+    footer .sources h2 { font-size: 16px; border: none; margin: 0 0 12px; padding: 0; }
+    footer .sources ol { padding-left: 1.2rem; font-size: 0.85rem; color: var(--muted); }
+    footer .sources li { margin-bottom: 0.5rem; overflow-wrap: break-word; word-break: break-all; }
+    footer .sources .src-title { color: var(--ink); word-break: normal; }
+    footer .sources .src-url { display: block; margin-top: 0.15rem; font-size: 0.82rem; color: var(--accent); word-break: break-all; }
+    footer .sources a { word-break: break-all; }
+    @media (max-width: 600px) {
+      .container { padding: 20px; }
+      .contrast-card { grid-template-columns: 1fr; }
+      .contrast-card .side-left { border-right: none; border-bottom: 1px solid var(--border); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img class="cover-img" src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Editorial%20illustration%20showing%20Chinese%20AI%20companies%20DeepSeek%20Qwen%20GLM%20Xiaohongshu%20putting%20price%20pressure%20on%20OpenAI%20causing%2080%20percent%20price%20cut%2C%20four%20red%20pillars%20rising%20on%20left%20side%20vs%20OpenAI%20logo%20with%20downward%20arrow%20on%20right%2C%20dark%20crimson%20and%20amber%20color%20scheme%2C%20tension%20and%20strategic%20reversal%20mood%2C%20modern%20minimalist%20editorial%20style&image_size=landscape_16_9" alt="中国AI四家公司对OpenAI形成价格压力的编辑插画">
+    <h1>中国AI这周连出四招，OpenAI被迫降价80%</h1>
+    <div class="meta">2026年8月16日 · 阅读时间约8分钟</div>
+    <div class="byline">文｜犀牛伯爵</div>
+
+    <p>OpenAI把GPT-5.6 Luna砍了80%。</p>
+
+    <p>每百万token的输入价格从1美元降到0.2美元，输出从6美元降到1.2美元<sup><a href="#src1">[1]</a></sup>。同一天，Anthropic推出半价的Claude Opus 5，还顺手取消了原定9月的Sonnet 5涨价计划<sup><a href="#src2">[2]</a></sup>。</p>
+
+    <p>你可能觉得，这是美国巨头在让利用户。</p>
+
+    <p>不是。他们是被逼的。</p>
+
+    <h2>72小时，四记重拳</h2>
+
+    <p>这一周，中国AI公司干了什么？我用一条时间线给你捋一下。</p>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="date">8月12日深夜</div>
+        <div class="content">DeepSeek V4 Pro正式版静默上线API文档，版本号0813。1M上下文，Agent能力暴涨近5倍（DeepSWE从12.8飙到62.7），MIT开源许可<sup><a href="#src3">[3]</a></sup></div>
+      </div>
+      <div class="timeline-item">
+        <div class="date">8月14日</div>
+        <div class="content">智谱发布GLM-5.3，基座模型完全没换，纯靠后训练把编程能力拉升50%，还涌现出网络安全能力，两周挖出2436个漏洞<sup><a href="#src4">[4]</a></sup></div>
+      </div>
+      <div class="timeline-item">
+        <div class="date">8月14日晚</div>
+        <div class="content">通义千问开源Qwen3.8-27B，原生多模态稠密模型，超越Qwen3.7-Plus，Apache 2.0许可，量化后家用显卡就能跑<sup><a href="#src5">[5]</a></sup></div>
+      </div>
+      <div class="timeline-item">
+        <div class="date">8月14-15日</div>
+        <div class="content">小红书开源dots3-note Preview，280B MoE架构/16B激活参数，512K上下文，同系列模型上个月刚在IMO国际数学奥林匹克竞赛拿了满分42分<sup><a href="#src6">[6]</a></sup></div>
+      </div>
+    </div>
+
+    <p>四家公司，三天时间，四个重磅模型。然后OpenAI降价了。</p>
+
+    <p>巧合吗？我觉得不是。</p>
+
+    <h2>从"追赶者"到"定价者"</h2>
+
+    <p>FT在8月14日的报道里提到一个细节，我觉得很关键。DoorDash和Airbnb这些美国企业，已经开始用中国模型来压低AI账单了<sup><a href="#src2">[2]</a></sup>。</p>
+
+    <p>这不是个别现象。根据Silicon Data的token价格指数，美国顶级实验室的token价格自7月中旬以来下降了近25%<sup><a href="#src2">[2]</a></sup>。</p>
+
+    <p>更关键的信号来自Artificial Analysis的基准测试。他们发现，OpenAI的GPT-5.6 Luna在最高推理强度下，性能跟DeepSeek V4 Flash差不多，但成本高了将近两倍。Anthropic的Claude Opus 5在中等推理强度下，性能和成本跟月之暗面的Kimi K3在最高强度下类似<sup><a href="#src2">[2]</a></sup>。</p>
+
+    <p>说真的，我看到这组数据的时候愣了一下。</p>
+
+    <p>中国模型已经不需要靠"更便宜但更差"来竞争了。它们做到了<span class="highlight">一样好但更便宜</span>。这才是OpenAI和Anthropic真正害怕的。</p>
+
+    <div class="quote-box">
+      <p>"美国实验室砍了中端，在守高端。"</p>
+      <div class="attribution">Mantas Lukauskas，Hostinger AI技术负责人<sup><a href="#src2">[2]</a></sup></div>
+    </div>
+
+    <p class="punchline">这不是主动进攻。这是战略性撤退。</p>
+
+    <h2>技术不再有代差</h2>
+
+    <p>先把四家公司的技术参数摆出来看看。</p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>模型</th>
+          <th>公司</th>
+          <th>参数规模</th>
+          <th>上下文</th>
+          <th>许可证</th>
+          <th>核心亮点</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>dots3-note Preview</td>
+          <td>小红书</td>
+          <td>280B MoE / 16B激活</td>
+          <td>512K</td>
+          <td>开源</td>
+          <td>IMO满分同系列，Terminal-Bench 2.1得分75.1<sup><a href="#src6">[6]</a></sup></td>
+        </tr>
+        <tr>
+          <td>GLM-5.3</td>
+          <td>智谱</td>
+          <td>743B MoE</td>
+          <td>—</td>
+          <td>两周后开源</td>
+          <td>编程+50%，CyberGym 84.5%，检出2436个漏洞<sup><a href="#src4">[4]</a></sup></td>
+        </tr>
+        <tr>
+          <td>Qwen3.8-27B</td>
+          <td>通义千问</td>
+          <td>27B Dense</td>
+          <td>262K（可扩展至1M）</td>
+          <td>Apache 2.0</td>
+          <td>超越Qwen3.7-Plus，家用显卡可跑<sup><a href="#src5">[5]</a></sup></td>
+        </tr>
+        <tr>
+          <td>DeepSeek V4 Pro</td>
+          <td>DeepSeek</td>
+          <td>1.6T MoE / 49B激活</td>
+          <td>1M</td>
+          <td>MIT</td>
+          <td>Agent能力暴涨近5倍，价格为GPT-5.5的1/8<sup><a href="#src3">[3]</a></sup></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>几个细节值得展开。</p>
+
+    <p>小红书的dots3-note，280B总参数但只激活16B。这个效率很恐怖。更关键的是，它的同系列模型dots-note-3.0上个月刚在国际数学奥林匹克竞赛IMO拿了满分42分，全球只有7个人类选手做到<sup><a href="#src7">[7]</a></sup>。一个做内容社区的公司，做出了全球数学竞赛满分的AI模型。这个反差本身就值得专门写一篇文章。</p>
+
+    <img class="cover-img" src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Four%20Chinese%20AI%20companies%20DeepSeek%20Qwen%20GLM%20Xiaohongshu%20dots%20model%20logos%20and%20names%20arranged%20in%20a%20modern%20grid%20layout%2C%20red%20and%20gold%20color%20scheme%2C%20clean%20tech%20infographic%20style%2C%20representing%20Chinese%20AI%20collective%20breakthrough&image_size=landscape_16_9" alt="DeepSeek、通义千问、智谱GLM、小红书dots四家中国AI公司的模型发布概览">
+    <div class="img-caption">图｜本周密集发布重磅模型的四家中国AI公司</div>
+
+    <p>智谱的GLM-5.3更有意思。基座模型完全没换，和上一代GLM-5.2一模一样的743B参数。所有提升都来自后训练阶段的极致Scaling<sup><a href="#src4">[4]</a></sup>。编程能力涨了50%，还涌现出了网络安全能力，半个月挖出2436个漏洞，最老的一个藏了40年。这给了一个信号，中国AI公司已经在"怎么训练"这个环节上找到了新路径，不再单纯依赖堆参数。</p>
+
+    <p>通义千问的Qwen3.8-27B，270亿参数的稠密模型，量化后家用显卡就能跑。千问系列全球下载已经超过30亿次<sup><a href="#src5">[5]</a></sup>。30亿次。这个数字本身就说明了开源生态的规模。</p>
+
+    <p>DeepSeek V4 Pro，1.6T总参数，1M上下文，MIT许可。最亮眼的是Agent能力，软件工程基准DeepSWE从12.8飙到62.7，接近5倍提升<sup><a href="#src3">[3]</a></sup>。价格只有GPT-5.5的八分之一。</p>
+
+    <p>这四家公司，走的路完全不同。小红书做轻量高效，智谱做后训练Scaling，通义千问做开源生态，DeepSeek做Agent和长上下文。但它们指向同一个结果，<span class="highlight">中国AI不再是在某一个点上追赶，而是在多个方向上同时施压</span>。</p>
+
+    <h2>开源形成的生态压强</h2>
+
+    <div class="contrast-card">
+      <div class="side side-left">
+        <h4>美国闭源模型</h4>
+        <p>OpenAI GPT-5.6、Anthropic Claude<br>按token收费，价格可随时调整<br>依赖厂商API，数据需出境<br>企业被usage-based billing裹挟</p>
+      </div>
+      <div class="side side-right">
+        <h4>中国开源模型</h4>
+        <p>DeepSeek V4 Pro (MIT)、Qwen3.8 (Apache 2.0)<br>可免费下载部署，成本可控<br>本地部署，数据自主<br>企业可自行定制和微调</p>
+      </div>
+    </div>
+
+    <p>这周发布的四家中国模型，全部开源或即将开源。许可证不是限制性的，是Apache 2.0和MIT这种最宽松的。</p>
+
+    <p>开源的意义不只是免费。是控制权。</p>
+
+    <p>DoorDash和Airbnb为什么开始用中国模型？不只是因为便宜。是因为usage-based billing让他们受够了<sup><a href="#src2">[2]</a></sup>。Anthropic和OpenAI把一些企业客户从固定订阅转向按量计费，账单不可预测。企业最怕的不是贵，是不可控。</p>
+
+    <p>中国开源模型给了一个替代方案，你可以下载，可以部署在自己服务器上，可以微调，成本你自己说了算。</p>
+
+    <p>这才是真正的压强。不是某个模型比某个模型强多少，是整个开源生态在侵蚀闭源模型的定价权。</p>
+
+    <h2>价格战的底层逻辑</h2>
+
+    <p>FT报道里有一个细节很有意思。Artificial Analysis的测试显示，OpenAI的GPT-5.6 Luna在最高推理强度下，跟DeepSeek V4 Flash性能相当，但每个任务的成本高了将近两倍<sup><a href="#src2">[2]</a></sup>。</p>
+
+    <p>翻译一下，同样的事情，中国模型做得一样好，但只要一半价钱。</p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>模型</th>
+          <th>输入 ($/M tokens)</th>
+          <th>输出 ($/M tokens)</th>
+          <th>来源</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>GPT-5.6 Luna（降价后）</td>
+          <td>$0.20</td>
+          <td>$1.20</td>
+          <td>OpenAI官方<sup><a href="#src1">[1]</a></sup></td>
+        </tr>
+        <tr>
+          <td>GPT-5.6 Luna（降价前）</td>
+          <td>$1.00</td>
+          <td>$6.00</td>
+          <td>OpenAI官方<sup><a href="#src1">[1]</a></sup></td>
+        </tr>
+        <tr>
+          <td>Claude Opus 5</td>
+          <td>$5.00</td>
+          <td>$25.00</td>
+          <td>Anthropic官方<sup><a href="#src2">[2]</a></sup></td>
+        </tr>
+        <tr>
+          <td>DeepSeek V4 Pro</td>
+          <td>$1.32</td>
+          <td>$3.96</td>
+          <td>硅基流动<sup><a href="#src3">[3]</a></sup></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>OpenAI把Luna砍了80%之后，价格终于跟DeepSeek在一个量级了。但即便如此，Artificial Analysis的数据显示，Luna的成本仍然比同类中国模型高近一倍<sup><a href="#src2">[2]</a></sup>。</p>
+
+    <p>所以降价80%不是终点。如果中国模型的迭代速度保持现在的节奏，美国巨头还有继续降价的空间。或者说，还有继续被迫降价的空间。</p>
+
+    <img class="cover-img" src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=AI%20token%20price%20war%20concept%20visualization%2C%20falling%20price%20curve%20chart%20with%20red%20downward%20arrow%2C%20Chinese%20and%20American%20flags%20as%20labels%20on%20opposite%20sides%2C%20dark%20crimson%20and%20navy%20blue%20color%20scheme%2C%20clean%20data%20visualization%20editorial%20style&image_size=landscape_16_9" alt="AI模型token价格战概念图，价格曲线下降趋势">
+    <div class="img-caption">图｜美国实验室token价格自7月中旬以来下降近25%（Silicon Data指数）</div>
+
+    <h2>主流观点错在哪</h2>
+
+    <p>大部分媒体在报道这次降价的时候，用的框架是"OpenAI通过技术进步降低成本，把红利让给用户"。</p>
+
+    <p>这个说法不是全错。OpenAI的博客确实提到GPT-5.6在运行效率上有提升<sup><a href="#src1">[1]</a></sup>。但有几个细节被忽略了。</p>
+
+    <p>第一，Anthropic同周取消了原定9月的Sonnet 5涨价<sup><a href="#src2">[2]</a></sup>。如果是主动让利，为什么要取消一个已经计划好的涨价？</p>
+
+    <p>第二，OpenAI和Anthropic都在准备万亿估值IPO<sup><a href="#src2">[2]</a></sup>。如果token价格持续下降，"万亿估值"的故事怎么讲？降价对IPO估值是利空，不是利好。如果不是被迫的，没人在IPO前夜主动降价。</p>
+
+    <p>第三，Hostinger的AI技术负责人Mantas Lukauskas说得很直白，"美国实验室砍了中端，在守高端"<sup><a href="#src2">[2]</a></sup>。这不是主动进攻，是战略性防守。他们在用中端模型的降价来阻止客户流失到中国模型，同时在顶级模型上维持溢价。</p>
+
+    <p>我自己的判断是，这次降价是一个拐点信号。它标志着<span class="highlight">中国AI从"追赶者"变成了"定价者"</span>。OpenAI的价格不再只由OpenAI自己决定，而是由中国模型的性价比决定。</p>
+
+    <h2>接下来会怎么发展</h2>
+
+    <p>价格战会继续。这是大概率事件。</p>
+
+    <p>原因很简单。中国开源模型的迭代速度远快于美国闭源模型。这周四家公司同时发布，不是偶然事件，是中国AI行业已经形成了密集迭代的能力。下一次密集发布可能就在几个月后。</p>
+
+    <p>美国巨头会走差异化路线。在顶级模型上保持溢价，在中端市场跟中国打价格战。GPT-5.6 Sol的价格没降，就是证据。他们在守高端。</p>
+
+    <p>但这里有一个我不确定的地方。如果中国模型在顶级性能上也追平了怎么办？GLM-5.3在编程基准上已经接近Claude Fable 5<sup><a href="#src4">[4]</a></sup>，dots3-note在IMO上拿了满分<sup><a href="#src7">[7]</a></sup>。差距在缩小，而且在加速缩小。</p>
+
+    <p>也可能我错了。也许美国巨头在闭源模型上还有我们不知道的技术储备。也许下一次发布会重新拉开差距。但在目前这个时间点上，趋势是对中国有利的。</p>
+
+    <p>聊到这里我突然想起一个事。上世纪70年代石油危机的时候，日本汽车凭借省油和性价比冲进美国市场，逼得底特律的三大车企疯狂降价。当时也没人觉得日本车能超越美国车。但二十年后，丰田成了全球第一。</p>
+
+    <p>中国AI正在走类似的路。不一样的是，这次从追赶到施压，只用了不到两年。</p>
+
+    <div class="insight-box">
+      <h4>核心判断</h4>
+      <p>OpenAI降价80%不是让利，是被中国AI集体爆发逼的。四家公司同一周发布重磅模型，从技术性能到开源生态全面施压。美国巨头第一次在AI定价权上处于守势。这不是某一家公司的胜利，是中国AI行业系统性崛起的结果。</p>
+    </div>
+
+    <h2>这对你意味着什么</h2>
+
+    <p>如果你在选AI模型，现在是买方市场。同样的预算，你可以选的比半年前多得多。</p>
+
+    <p>如果你在AI行业工作，开源生态的崛起意味着闭源模型的高溢价时代在结束。你的技能值不值钱，越来越不取决于你会用哪个闭源API，而取决于你能不能用开源模型解决实际问题。</p>
+
+    <p>如果你关注投资，token价格的下降趋势会影响整个AI产业链的利润分配。模型层的利润在压缩，应用层和中间层的机会在变大。</p>
+
+    <p>这周发生的事，表面上是四个模型发布加一次降价。但如果你把视角拉远一点，看到的是全球AI权力格局正在重写。</p>
+
+    <p>而这一次，写规则的不只是硅谷。</p>
+
+    <div class="ending">— 犀牛伯爵 · 2026年8月16日 · 北京</div>
+
+    <footer>
+      <div class="sources">
+        <h2>信源</h2>
+        <ol>
+          <li id="src1">
+            <span class="src-title">OpenAI官方博客, Advancing the price-performance frontier with GPT-5.6</span>
+            <a class="src-url" href="https://openai.com/index/advancing-the-price-performance-frontier-with-gpt-5-6/">openai.com/index/advancing-the-price-performance-frontier-with-gpt-5-6/</a>
+          </li>
+          <li id="src2">
+            <span class="src-title">Ars Technica / Financial Times, OpenAI and Anthropic in price war as Chinese AI rivals gain ground (2026-08-14)</span>
+            <a class="src-url" href="https://arstechnica.com/ai/2026/08/openai-and-anthropic-in-price-war-as-chinese-ai-rivals-gain-ground/">arstechnica.com/ai/2026/08/openai-and-anthropic-in-price-war-as-chinese-ai-rivals-gain-ground/</a>
+          </li>
+          <li id="src3">
+            <span class="src-title">36氪 / CGTN, DeepSeek V4 Pro正式版上线 (2026-08-13)</span>
+            <a class="src-url" href="https://news.cgtn.com/news/2026-08-14/DeepSeek-launches-V4-Pro-model-with-enhanced-AI-agent-capabilities-1PAXZBW64P6/index.html">news.cgtn.com/news/2026-08-14/DeepSeek-launches-V4-Pro-model-with-enhanced-AI-agent-capabilities</a>
+          </li>
+          <li id="src4">
+            <span class="src-title">智谱官方 / IT之家, GLM-5.3发布, 编程能力最强开源模型 (2026-08-14)</span>
+            <a class="src-url" href="https://m.toutiao.com/group/7673757159703855650/">m.toutiao.com/group/7673757159703855650/</a>
+          </li>
+          <li id="src5">
+            <span class="src-title">36氪 / 量子位, 阿里开源Qwen3.8, 千问大模型全球下载超30亿次 (2026-08-14)</span>
+            <a class="src-url" href="https://36kr.com/newsflashes/3940098364669314">36kr.com/newsflashes/3940098364669314</a>
+          </li>
+          <li id="src6">
+            <span class="src-title">36氪 / 机器之心, 小红书开源dots3-note, IMO 42分满分同系列模型来了 (2026-08-15)</span>
+            <a class="src-url" href="https://36kr.com/p/3938759517896072">36kr.com/p/3938759517896072</a>
+          </li>
+          <li id="src7">
+            <span class="src-title">小红书 dots studio, dots模型取得IMO 2026官方认证满分金牌成绩</span>
+            <a class="src-url" href="https://studio-dots-ai.github.io/dots_imo_2026/index.html">studio-dots-ai.github.io/dots_imo_2026/index.html</a>
+          </li>
+        </ol>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

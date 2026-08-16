@@ -127,6 +127,12 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "中国AI这周连出四招，OpenAI被迫降价80%",
+        desc: "OpenAI把GPT-5.6 Luna砍了80%，不是让利，是被中国AI这一周的集体爆发逼的。小红书、智谱、通义千问、DeepSeek四家在同一周密集发布重磅模型，从技术性能到开源生态全面施压。Artificial Analysis数据显示中国模型已做到一样好但更便宜，美国巨头第一次在AI定价权上处于守势。",
+        href: "notes/2026-08-16-china-ai-price-war.html"
+      },
+      {
+        type: "Essay",
         title: "GLM-5.3挖出40年老bug，顺便把开源编程第一拿了",
         desc: "智谱发布GLM-5.3，基座模型完全没变，所有能力提升来自后训练Scaling。编程能力暴涨50%，网络安全能力涌现，两周挖出2436个漏洞，最老的可追溯到1981年。在CyberGym上超越所有闭源模型，还启动了\"开源的盾\"计划。",
         href: "notes/2026-08-14-GLM-5.3.html"
@@ -210,6 +216,13 @@ window.SITE_DATA = {
     headingLine2: "慢慢记。",
     blurb: "每一篇笔记都是一次小型田野调查：关于模型、关于人、关于我们如何被这个时代重新塑形。",
     notes: [
+      {
+        cat: "行业观察", num: "N° 65",
+        title: "中国AI这周连出四招，OpenAI被迫降价80%",
+        excerpt: "OpenAI把GPT-5.6 Luna砍了80%，不是让利，是被逼的。同一周小红书、智谱、通义千问、DeepSeek四家密集发布重磅模型，从技术性能到开源生态全面施压。Artificial Analysis数据显示中国模型已做到一样好但更便宜，美国巨头第一次在AI定价权上处于守势。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-08-16-china-ai-price-war.html"
+      },
       {
         cat: "行业观察", num: "N° 64",
         title: "GLM-5.3挖出40年老bug，顺便把开源编程第一拿了",
