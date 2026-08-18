@@ -1,6 +1,13 @@
 {
-  "updated": "2026-08-17T19:00:00+08:00",
+  "updated": "2026-08-18T19:00:00+08:00",
   "articles": [
+    {
+      "cat": "安全 · 模型 · 资本",
+      "date": "2026-08-18",
+      "title": "AI大模型及安全动态日报 | 2026年08月18日（星期二）",
+      "excerpt": "Anthropic年化收入破650亿美元xAI获200亿融资，NVIDIA为OpenAI锁定4.25GW算力，通义千问Qwen3.8开源27B多模态模型，DeepSeek V4涨价350%，信通院AI安全标准11月实施，Stripe 70亿美元收购OpenRouter。",
+      "href": "2026-08-18-ai-daily.html"
+    },
     {
       "cat": "安全 · 模型 · 资本",
       "date": "2026-08-17",
