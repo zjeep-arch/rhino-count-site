@@ -127,6 +127,12 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "高考英语28分，他把人形机器人第一股做上市了",
+        desc: "宇树科技8月19日科创板上市，A股人形机器人第一股。创始人王兴兴从200元手搓机器人到183亿身家，三年营收涨10倍，扣非净利率34.77%。全球同行特斯拉Optimus、Figure AI、波士顿动力全部亏损，宇树是唯一规模化盈利的人形机器人公司。219倍PE买的是稀缺性，不是现在的利润。",
+        href: "notes/2026-08-18-unitree-ipo-listing-day.html"
+      },
+      {
+        type: "Essay",
         title: "中国AI这周连出四招，OpenAI被迫降价80%",
         desc: "OpenAI把GPT-5.6 Luna砍了80%，不是让利，是被中国AI这一周的集体爆发逼的。小红书、智谱、通义千问、DeepSeek四家在同一周密集发布重磅模型，从技术性能到开源生态全面施压。Artificial Analysis数据显示中国模型已做到一样好但更便宜，美国巨头第一次在AI定价权上处于守势。",
         href: "notes/2026-08-16-china-ai-price-war.html"
@@ -216,6 +222,13 @@ window.SITE_DATA = {
     headingLine2: "慢慢记。",
     blurb: "每一篇笔记都是一次小型田野调查：关于模型、关于人、关于我们如何被这个时代重新塑形。",
     notes: [
+      {
+        cat: "行业观察", num: "N° 66",
+        title: "高考英语28分，他把人形机器人第一股做上市了",
+        excerpt: "宇树科技8月19日科创板上市，A股人形机器人第一股。创始人王兴兴从200元手搓机器人到183亿身家。三年营收涨10倍，扣非净利率34.77%，全球唯一规模化盈利的人形机器人公司。219倍PE看着离谱，但全球同行全部亏损，稀缺性有溢价。身体已经就位，大脑还在路上。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-08-18-unitree-ipo-listing-day.html"
+      },
       {
         cat: "行业观察", num: "N° 65",
         title: "中国AI这周连出四招，OpenAI被迫降价80%",
