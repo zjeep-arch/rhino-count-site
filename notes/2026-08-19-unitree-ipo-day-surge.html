@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>宇树暴涨460%那天，整个机器人板块却在跳水</title>
+  <meta name="description" content="宇树科技科创板上市首日暴涨460%，收盘市值3418亿。但同一时刻科创50跌6.89%，机器人板块全线回调。用五层验账框架拆解219倍PE背后的真实账本。">
+  <style>
+    :root {
+      --accent: #1b4332;
+      --ink: #333;
+      --ink-soft: #555;
+      --muted: #888;
+      --surface: #fafafa;
+      --border: rgba(0,0,0,0.06);
+      --radius: 12px;
+      --font-sans: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-serif: "Noto Serif SC", "Songti SC", Georgia, serif;
+    }
+    body { font-family: var(--font-sans); background: #f5f5f5; margin: 0; padding: 16px; font-size: 16px; line-height: 1.8; color: var(--ink); -webkit-font-smoothing: antialiased; }
+    .container { max-width: 680px; margin: 0 auto; background: var(--surface); padding: 32px; border-radius: var(--radius); }
+    .cover-img { width: 100%; border-radius: 8px; margin-bottom: 24px; }
+    h1 { font-family: var(--font-serif); font-size: 24px; font-weight: 700; color: var(--ink); line-height: 1.4; margin: 0 0 16px; }
+    .meta { color: var(--muted); font-size: 13px; margin-bottom: 16px; }
+    .byline { color: var(--ink-soft); font-size: 14px; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+    h2 { font-family: var(--font-serif); font-size: 20px; font-weight: 600; color: var(--ink); margin: 32px 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+    h3 { font-family: var(--font-serif); font-size: 18px; font-weight: 600; color: var(--ink); margin: 24px 0 12px; }
+    p { margin: 0 0 24px; }
+    .quote-box { border-left: 4px solid var(--accent); background: #f5f5f5; padding: 16px 20px; margin: 24px 0; border-radius: 0 var(--radius) var(--radius) 0; }
+    .quote-box p { margin: 0; color: var(--ink-soft); font-style: italic; font-size: 15px; }
+    .quote-box .attribution { margin-top: 8px; color: var(--muted); font-size: 13px; font-style: normal; }
+    .insight-box { background: #f0f7f4; border: 1px solid #d1e7dd; border-radius: var(--radius); padding: 20px; margin: 24px 0; }
+    .insight-box h4 { margin: 0 0 8px; font-size: 16px; color: var(--ink); }
+    .insight-box p { margin: 0; font-size: 15px; color: var(--ink-soft); }
+    .data-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14px; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .data-table th, .data-table td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); }
+    .data-table th { background: #f0f0f0; font-weight: 600; color: var(--ink); }
+    .data-table td { color: var(--ink-soft); }
+    .timeline { position: relative; padding-left: 24px; margin: 24px 0; }
+    .timeline::before { content: ''; position: absolute; left: 6px; top: 0; bottom: 0; width: 2px; background: #e0e0e0; }
+    .timeline-item { position: relative; margin-bottom: 16px; }
+    .timeline-item::before { content: ''; position: absolute; left: -22px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); }
+    .timeline-item .date { font-size: 13px; color: var(--muted); margin-bottom: 4px; }
+    .timeline-item .content { font-size: 15px; color: var(--ink); }
+    .img-caption { text-align: center; color: var(--muted); font-size: 13px; margin-top: 8px; margin-bottom: 24px; }
+    .ending { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--ink-soft); font-size: 14px; }
+    .highlight { color: var(--accent); font-weight: 600; background: linear-gradient(to top, rgba(27,67,50,0.08) 40%, transparent 40%); padding: 0 2px; }
+    .data-callout { display: inline-block; background: var(--accent); color: #fff; padding: 2px 10px; border-radius: 4px; font-weight: 700; font-size: 15px; }
+    .contrast-card { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin: 24px 0; border-radius: var(--radius); overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .contrast-card .side { padding: 16px 20px; }
+    .contrast-card .side-left { background: #fef2f2; border-right: 1px solid var(--border); }
+    .contrast-card .side-right { background: #f0fdf4; }
+    .contrast-card .side h4 { margin: 0 0 8px; font-size: 14px; font-weight: 600; }
+    .contrast-card .side-left h4 { color: #991b1b; }
+    .contrast-card .side-right h4 { color: #166534; }
+    .contrast-card .side p { margin: 0; font-size: 14px; color: var(--ink-soft); line-height: 1.6; }
+    .punchline { font-family: var(--font-serif); font-size: 18px; font-weight: 700; color: var(--accent); text-align: center; margin: 32px 0; padding: 16px 0; border-top: 2px solid var(--accent); border-bottom: 2px solid var(--accent); }
+    strong { color: var(--ink); font-weight: 600; }
+    .article-img { width: 100%; border-radius: 8px; margin: 24px 0 8px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img class="cover-img" src="https://aka.doubaocdn.com/s/o75bqBYsGq" alt="宇树科技科创板上市首日交易大厅">
+    <h1>宇树暴涨460%那天，整个机器人板块却在跳水</h1>
+    <div class="meta">2026年8月19日 · 阅读时间约8分钟</div>
+    <div class="byline">文｜犀牛伯爵</div>
+
+    <p>8月19日下午3点收盘的那一刻，宇树科技（688836.SH）报845元，较发行价涨了460%。一天成交231.60亿，换手率85.28%。中一签500股，账面浮盈47.46万。</p>
+
+    <p>打新申购户数978.46万，刷新科创板史上最挤纪录。中签率0.018%，比中彩票还难。弃购率0.09%，几乎没人舍得扔。</p>
+
+    <p>但你可能没注意到，同一时刻，科创50指数跌了6.89%。科创板600只股票下跌，仅15只收涨。人形机器人概念板块全线震荡下挫，超百家概念股下跌。</p>
+
+    <p>一个公司暴涨，一个板块跳水。</p>
+
+    <p class="punchline">资本在为一个未来投票，同时在对整个行业的现在用脚投票。</p>
+
+    <p>这种撕裂感，恰恰是今天这篇文章要拆的东西。不是追涨杀跌的鼓噪，是拿招股书和上市首日数据做一次五层验账，看看3400亿市值到底买的是什么。</p>
+
+    <h2>一、公司画像，一个工科生的十年</h2>
+
+    <img class="article-img" src="https://aka.doubaocdn.com/s/UkdFanPz3U" alt="宇树科技人形机器人产品展示">
+    <p class="img-caption">宇树科技人形机器人产品线，从H1到G1到R1覆盖3.99万到49.98万价格带</p>
+
+    <p>王兴兴1990年出生，浙江理工大学本科，上海大学机械工程硕士。没有海归光环，没有大厂高管履历。2015年还在读研的时候，花了200块钱做出了第一台四足机器人XDog。</p>
+
+    <p>2016年8月创立宇树科技。此后十年，他把"以价换量"在四足机器人上跑了一遍，又把同样的逻辑搬到了人形机器人上。</p>
+
+    <p>产品线很清晰。2020年A1把四足机器人价格压进消费级，2021年Go1以1.6万元定价进入大众市场并登上央视春晚，2023年Go2降到9,997元首次破万。人形方面，2023年8月H1发布，均价59.34万元，当年只卖了5台。2024年5月G1推出，起售价9.9万元。2025年7月R1以3.99万元起售，被《时代》周刊评为2025年度最佳发明。</p>
+
+    <p>四款人形机型覆盖了3.99万到49.98万的完整价格带。2025年蛇年春晚，16台H1表演《秧BOT》完成国民级曝光。2026年春晚，20多台G1和H2在《武BOT》中表演奔跑、翻桌、连续后空翻，最快跑位速度每秒4米。</p>
+
+    <p>到了2025年，宇树人形机器人销量从412台暴涨到5215台，增长1166%。加上四足机器人23037台，全年出货5511台，两项均居全球第一。三年营收复合增速226.8%，从行业第四跃升至第二，仅次于优必选的20亿。</p>
+
+    <h2>二、五层验账，拆3400亿的真金白银</h2>
+
+    <p>招股书披露，2025年宇树营收16.99亿，同比增长332.3%。毛利润10.27亿，毛利率60.4%。归母净利润2.78亿，净利率16.4%。</p>
+
+    <p>数字漂亮，但不能只看表面。按模式D的五层验账框架，逐层拆。</p>
+
+    <h3>第一层，需求真实性</h3>
+
+    <p>分业务看，2025年人形机器人收入8.68亿，同比增长711.2%。四足机器人收入6.98亿，同比增长202.2%。人形首次超过四足，占比51.09%。</p>
+
+    <p>这是增长的核心引擎。但拆客户结构会发现一个刺眼的事实。</p>
+
+    <div class="insight-box">
+      <h4>需求结构</h4>
+      <p>人形机器人收入73.6%来自科研教育客户，真正在工厂干活的工业客户只占2.6%。最真实的买家，还是大学和实验室。</p>
+    </div>
+
+    <p>境内收入占比从2024年的44.26%跳到2025年的56.35%，春晚效应确实拉动了国内需求。但一台会翻跟头的机器人和一台能在工厂干活的机器人，中间还隔着很远的路。</p>
+
+    <h3>第二层，供给交付力</h3>
+
+    <p>宇树是一家轻资产到近乎吝啬的公司。2023到2025年，购建长期资产支付的现金分别是511万、970万、5036万，三年合计不到6600万。2025年资本开支只有0.50亿。</p>
+
+    <p>核心部件全自研自产。2025年原材料采购7.94亿，其中机械零部件4.03亿占比50.8%，但机加件、压铸件这些非核心定制件占了采购的另一半，核心件全部自己造。</p>
+
+    <p>直接人工从2023年的13.97%摊薄到2025年的8.08%，规模效应开始显现。但产能扩张能力是否跟得上订单，是后面要观察的。</p>
+
+    <h3>第三层，商业化生态壁垒</h3>
+
+    <p>宇树的毛利率60.4%，远高于业内平均约40%的水平，差距在逐年拉大。2023年这个数字还在44.8%，和同行差不多。</p>
+
+    <p>成本优势来自三道账。第一道是路线选择，从XDog时代就押注电机驱动加行星减速器方案，绕开了液压系统和行星滚柱丝杠这两座成本大山。丝杠是特斯拉Optimus降本路上最贵的部件之一，长期依赖进口。宇树的一体化关节把电机、减速器、驱动器、传感器封进同一个壳体。</p>
+
+    <p>第二道是自研自产。别人付给供应商的差价留在了自己表内。第三道是复用和规模，人形和四足共用关节驱动、机械结构、电池管理和软件算法。</p>
+
+    <p>三道账合起来的结果，可以用倒算验证。按均价乘以（1减毛利率）估算，人形机器人单位成本从2024年的约8万元降到2025年的约6.13万元，一年下降23.46%。</p>
+
+    <p>但这条成本曲线能不能维持，是最大的变量。人形机器人毛利率已经从2023年的87.67%降到2025年的63.18%，说明宇树正在主动把成本优势兑换成价格和份额。四足机器人已经验证了这套打法，价格降6.27%，成本降16.03%，毛利率反而从43.71%升到56.72%。</p>
+
+    <h3>第四层，财务质量</h3>
+
+    <p>这是验账的核心。2025年归母净利润2.78亿，扣非归母净利润5.91亿，差出一倍还多。差额主体是一笔3.49亿的股份支付，全额计进管理费用，不流出一分钱现金。</p>
+
+    <p>剔除之后，扣非净利率是34.77%。放在行业里看这个数字才有感觉。</p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>公司</th>
+          <th>2025年扣非净利率</th>
+          <th>状态</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>宇树科技</td>
+          <td><strong>+34.77%</strong></td>
+          <td>唯一盈利</td>
+        </tr>
+        <tr>
+          <td>优必选</td>
+          <td>-35.71%</td>
+          <td>亏损</td>
+        </tr>
+        <tr>
+          <td>越疆</td>
+          <td>-25.05%</td>
+          <td>亏损</td>
+        </tr>
+        <tr>
+          <td>乐聚智能</td>
+          <td>-30.07%</td>
+          <td>亏损</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="img-caption">数据来源，各公司招股书及年度财报</p>
+
+    <p>全球同行全在亏，宇树是唯一规模化盈利的。观察这家公司的盈利质量，须优先看扣非指标。报表净利润被一次性股权激励拉低，容易得出盈利能力平庸的错觉。</p>
+
+    <h3>第五层，估值与风险校正</h3>
+
+    <p>发行摊薄市盈率219.23倍，行业均值38.56倍。按2025年扣非净利5.91亿算，发行时PE约103倍。按收盘845元、市值3418亿算，PE约578倍。</p>
+
+    <p>贵不贵？静态看当然贵。但全球同行全部亏损，宇树是唯一盈利的。稀缺性有溢价。</p>
+
+    <p>上一轮融资估值127亿（2025年6月），发行定价609.93亿（4.8倍），收盘3418亿（27倍）。14个月估值翻了27倍。募资净额59.17亿，超出原募投计划17.15亿，是历史资本开支总和的90倍。</p>
+
+    <h2>三、3400亿买的是大脑</h2>
+
+    <img class="article-img" src="https://aka.doubaocdn.com/s/t4HHXuV9pe" alt="宇树科技上市仪式现场">
+    <p class="img-caption">8月19日宇树科技科创板上市仪式现场，王兴兴披红围巾出席</p>
+
+    <p>拆完五层账，核心结论逐渐清晰。</p>
+
+    <p>宇树过去三年把研发资源压在本体和"小脑"上，也就是运动控制和硬件。"大脑"的投入是2024年才开始的。招股书风险章节自己写得很坦白，前期研发投入侧重本体结构与运动控制即本体与小脑方面，自2024年起开始逐步加强对具身大模型即大脑方面的研发投入，报告期内尚未大规模开展真实数据采集与工厂部署训练。</p>
+
+    <p>已开源WMA和VLA两项模型，尚未规模化应用于在售产品。工业级模型UnifoLM-X1-0到2026年初才在自有工厂完成试点，能自主完成关节电机装配。</p>
+
+    <p>费用表里有一个科目提前泄露了转向。云算力租赁及云服务费，2024年122.78万，2025年1515.43万，一年放大12.3倍。训练大模型要先租算力，这个科目是"大脑"投入的先行指标。</p>
+
+    <p>再看募投。四个募投项目合计42.02亿，智能机器人模型研发一个项目拿走20.22亿，占48.13%。加上本体研发和新产品开发，研发类项目合计占85.15%。真正投给制造基地的只有6.24亿。研发实施费用8.99亿的大头是算力租赁，设备购置4.02亿，买的是大模型训练与推理平台。</p>
+
+    <p class="punchline">IPO募的不是生产线，是大脑。</p>
+
+    <p>这份预算单的每一项都指向同一个方向。609.93亿发行市值里的每一分溢价，都是市场替宇树的"大脑"预付的学费。</p>
+
+    <h2>四、两个隐忧和一个拐点</h2>
+
+    <p>说完了好的，说说让我不安的地方。</p>
+
+    <p>第一个隐忧是利润拐点已经显现。2026年第一季度，归母净利润0.5亿，同比-47.69%。扣非归母净利润0.4亿，同比-52.55%。扣非净利率从上年同期的33.80%一口气收缩到9.52%。</p>
+
+    <p>钱花去了两处。一处是研发，2026Q1研发费用同比多投3832.80万。另一处是品牌，登上2026年央视春晚，2026Q1销售费用达1.4亿，绝对金额同比增长133.3%。按招股书数据粗算，一季度销售、管理、研发三项费用合计多增约1.41亿。</p>
+
+    <p>2025年宇树的销售费用率只有8.31%，同业均值是23.88%。2026年起，这家公司开始为注意力付钱了。</p>
+
+    <p>第二个隐忧是商业化场景。人形机器人最真实的买家依然是大学与科研实验室。走进千家万户所需要的成本和可靠性，宇树尚不具备，全行业都不具备。一台会跳舞的机器人和一台会在工厂干活的机器人，中间隔着的就是募投要补的东西。</p>
+
+    <p>但话说回来，福特的T型车1908年就生产了，1913年才建成完整生产线。英特尔1971年生产了第一颗微处理器，信息革命的开启也向后推迟了数年。技术从实验室到工厂再到千家万户，从来不是一条直线。</p>
+
+    <p>回到板块跳水这件事。宇树上市首日，整个机器人板块"利好出尽"获利回吐，说明市场已经在用脚投票。短期博弈的资金，赌的是稀缺性和打新溢价，不是产业基本面。但拉长看，宇树具备成本优势，也清楚自己的劣势在哪里，这是最难得的。</p>
+
+    <div class="contrast-card">
+      <div class="side side-left">
+        <h4>市场在赌什么</h4>
+        <p>3400亿市值买的不是现在16.99亿营收和5.91亿扣非利润。买的是具身大模型何时突破的时间期权，买的是成本护城河能不能守住，买的是宇树作为行业定价锚的先发位置。</p>
+      </div>
+      <div class="side side-right">
+        <h4>市场在怕什么</h4>
+        <p>73.6%收入来自科教，工厂落地只占2.6%。2026Q1扣非净利率从33.8%跌到9.52%。人形毛利率从87.67%主动降到63.18%。大脑补课才刚开始，云算力费12.3倍增长但模型尚未规模应用。</p>
+      </div>
+    </div>
+
+    <p class="img-caption">宇树科技多空对比，数据来源招股书及上市首日行情</p>
+
+    <h2>五、三个该盯的指标</h2>
+
+    <p>最后给一个实操层面的东西。如果你关注宇树或者人形机器人赛道，与其盯每天涨跌，不如盯三个指标。</p>
+
+    <p>第一个，云算力租赁及云服务费。这个科目是"大脑"投入的先行指标，2024年122.78万、2025年1515.43万，看2026年能不能继续指数级增长。增长说明公司在真金白银训练具身大模型。</p>
+
+    <p>第二个，人形机器人毛利率。守住60%意味着成本护城河还在兑现。一旦跌破50%，说明行业从"宇树的成本游戏"变成了"所有人的价格游戏"，护城河被填平了。</p>
+
+    <p>第三个，非科教客户占比。73.6%来自科教是现在的天花板。看这个比例能不能下降，意味着人形机器人是不是真的走进了工厂和商业场景，而不只是实验室里的展品。</p>
+
+    <p>王兴兴上市那天披着红围巾出席，表情极为平静，有媒体形容他像来上班的"打工人"。公司内部也没举行庆祝活动，员工正常在岗。4个90后身家直接上亿，44名员工身家过千万，但一切如常。</p>
+
+    <p>这种安静可能比3400亿市值本身更值得玩味。一家公司最危险的时刻不是亏钱的时候，是所有人都在为你欢呼而你开始飘的时候。王兴兴没飘，宇树内部没飘，这反而是最好的信号。</p>
+
+    <p>聊到这里我突然想起一个事。彼得·德鲁克说过，企业只有两件事要做，一件事创新，另一件是营销。从宇树的财报里能看出来，王兴兴就是德鲁克最忠实的信徒。过去十年压在创新上，2026年开始为营销付钱。节奏对了。</p>
+
+    <p>至于3400亿贵不贵，坦率地讲，我也没完全想明白。但我知道一件事，技术革命到经济范式的改革从来不是点状的。纠结于当下商业化的结果，没有太多实际意义。该看的是，金融资本繁荣转向生产资料开花结果的时刻，宇树还在不在牌桌上。</p>
+
+    <p>至少现在，它还在C位。</p>
+
+    <p class="ending">本文基于公开资料撰写，不构成任何投资建议。数据来源包括宇树科技招股书、观海新闻、证券时报、36氪、动点科技等公开报道。<br><br>模式D｜财报分析+投资判断。以上。如果觉得有启发，欢迎转发。</p>
+  </div>
+</body>
+</html>
