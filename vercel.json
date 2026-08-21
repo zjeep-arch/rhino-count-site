@@ -2,5 +2,13 @@
   "version": 2,
   "buildCommand": null,
   "outputDirectory": ".",
-  "framework": null
+  "framework": null,
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.rhinocount.cn" }],
+      "destination": "https://rhinocount.cn/:path*",
+      "statusCode": 301
+    }
+  ]
 }
