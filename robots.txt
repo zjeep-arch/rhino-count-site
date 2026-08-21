@@ -1,5 +1,5 @@
 # robots.txt for rhino-count-site
-# Updated: 2026-08-03
+# Updated: 2026-08-21
 
 # === All crawlers ===
 User-agent: *
