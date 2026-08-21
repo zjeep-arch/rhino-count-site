@@ -76,4 +76,4 @@ User-agent: CCBot
 Allow: /
 
 # Sitemap
-Sitemap: https://zjeep-arch.github.io/rhino-count-site/sitemap.xml
+Sitemap: https://rhinocount.cn/sitemap.xml

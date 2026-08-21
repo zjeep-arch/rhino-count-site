@@ -14,7 +14,7 @@ window.SITE_DATA = {
 
   /* ---------- 站点配置 ---------- */
   siteConfig: {
-    domain: "zjeep-arch.github.io",           // ← 上线时改成你的真实域名
+    domain: "rhinocount.cn",           // 自定义域名
     repo: "rhino-count-site",           // GitHub 仓库名
     articlesFeed: "articles/feed.json",  // 文章列表数据源
   },
@@ -25,7 +25,7 @@ window.SITE_DATA = {
     description: "犀牛伯爵 — AI-native builder。记录 Agent 工作流、AI 写作、宏观科技观察与内容产品化实验。",
     keywords: "犀牛伯爵, AI, Agent, AI-native, 大模型, 学习方法, 北大, 小红书, AI 大厂, Prompt, 时评, 宏观分析, 创作实验室",
     author: "犀牛伯爵",
-    siteUrl: "https://zjeep-arch.github.io/rhino-count-site/",
+    siteUrl: "https://rhinocount.cn/",
     ogImage: "assets/og-card.svg"
   },
 
