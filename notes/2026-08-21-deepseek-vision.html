@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DeepSeek终于长出眼睛，但它看的不只是照片</title>
+  <meta name="description" content="DeepSeek 8月21日上线V4-Flash-Vision-Exp视觉理解模型，Agent终于长出眼睛。同一周智谱GLM-5.3拿下开源编程第一，阿里Qwen-UI-Agent真机成功率92.2%。中国AI三天三连击，三个方向同时突破。">
+  <style>
+    :root {
+      --accent: #8b2635;
+      --ink: #333;
+      --ink-soft: #555;
+      --muted: #888;
+      --surface: #fafafa;
+      --border: rgba(0,0,0,0.06);
+      --radius: 12px;
+      --font-sans: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-serif: "Noto Serif SC", "Songti SC", Georgia, serif;
+    }
+    body { font-family: var(--font-sans); background: #f5f5f5; margin: 0; padding: 16px; font-size: 16px; line-height: 1.8; color: var(--ink); -webkit-font-smoothing: antialiased; }
+    .container { max-width: 680px; margin: 0 auto; background: var(--surface); padding: 32px; border-radius: var(--radius); }
+    .cover-img { width: 100%; border-radius: 8px; margin-bottom: 24px; }
+    h1 { font-family: var(--font-serif); font-size: 24px; font-weight: 700; color: var(--ink); line-height: 1.4; margin: 0 0 16px; }
+    .meta { color: var(--muted); font-size: 13px; margin-bottom: 16px; }
+    .byline { color: var(--ink-soft); font-size: 14px; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+    h2 { font-family: var(--font-serif); font-size: 20px; font-weight: 600; color: var(--ink); margin: 32px 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+    h3 { font-family: var(--font-serif); font-size: 18px; font-weight: 600; color: var(--ink); margin: 24px 0 12px; }
+    p { margin: 0 0 24px; }
+    .quote-box { border-left: 4px solid var(--accent); background: #f5f5f5; padding: 16px 20px; margin: 24px 0; border-radius: 0 var(--radius) var(--radius) 0; }
+    .quote-box p { margin: 0; color: var(--ink-soft); font-style: italic; font-size: 15px; }
+    .quote-box .attribution { margin-top: 8px; color: var(--muted); font-size: 13px; font-style: normal; }
+    .insight-box { background: #fff8f0; border: 1px solid #ffe4c4; border-radius: var(--radius); padding: 20px; margin: 24px 0; }
+    .insight-box h4 { margin: 0 0 8px; font-size: 16px; color: var(--ink); }
+    .insight-box p { margin: 0; font-size: 15px; color: var(--ink-soft); }
+    .data-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14px; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .data-table th, .data-table td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); }
+    .data-table th { background: #f0f0f0; font-weight: 600; color: var(--ink); }
+    .data-table td { color: var(--ink-soft); }
+    .data-table tr:last-child td { border-bottom: none; }
+    .timeline { position: relative; padding-left: 24px; margin: 24px 0; }
+    .timeline::before { content: ''; position: absolute; left: 6px; top: 0; bottom: 0; width: 2px; background: #e0e0e0; }
+    .timeline-item { position: relative; margin-bottom: 16px; }
+    .timeline-item::before { content: ''; position: absolute; left: -22px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); }
+    .timeline-item .date { font-size: 13px; color: var(--muted); margin-bottom: 4px; }
+    .timeline-item .content { font-size: 15px; color: var(--ink); }
+    .img-caption { text-align: center; color: var(--muted); font-size: 13px; margin-top: 8px; margin-bottom: 24px; }
+    .ending { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--ink-soft); font-size: 14px; }
+    .highlight { color: var(--accent); font-weight: 600; background: linear-gradient(to top, rgba(139,38,53,0.08) 40%, transparent 40%); padding: 0 2px; }
+    .data-callout { display: inline-block; background: var(--accent); color: #fff; padding: 2px 10px; border-radius: 4px; font-weight: 700; font-size: 15px; }
+    .contrast-card { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0; margin: 24px 0; border-radius: var(--radius); overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .contrast-card .side { padding: 16px 12px; }
+    .contrast-card .side:nth-child(1) { background: #fef3f2; border-right: 1px solid var(--border); }
+    .contrast-card .side:nth-child(2) { background: #f0fdf4; border-right: 1px solid var(--border); }
+    .contrast-card .side:nth-child(3) { background: #eff6ff; }
+    .contrast-card .side h4 { margin: 0 0 8px; font-size: 14px; font-weight: 600; }
+    .contrast-card .side:nth-child(1) h4 { color: #991b1b; }
+    .contrast-card .side:nth-child(2) h4 { color: #166534; }
+    .contrast-card .side:nth-child(3) h4 { color: #1e40af; }
+    .contrast-card .side p { margin: 0; font-size: 13px; color: var(--ink-soft); line-height: 1.6; }
+    .punchline { font-family: var(--font-serif); font-size: 18px; font-weight: 700; color: var(--accent); text-align: center; margin: 32px 0; padding: 16px 0; border-top: 2px solid var(--accent); border-bottom: 2px solid var(--accent); }
+    strong { color: var(--ink); font-weight: 600; }
+    .article-img { width: 100%; border-radius: 8px; margin: 24px 0; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img class="cover-img" src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=DeepSeek%E8%93%9D%E8%89%B2%E9%B2%B8%E9%B1%BC%E5%9C%A8%E6%B7%B1%E6%B5%B7%E4%B8%AD%E7%9D%81%E5%BC%80%E7%9C%BC%E7%9D%9B%EF%BC%8C%E7%9C%BC%E7%9D%9B%E5%8F%91%E5%87%BA%E8%93%9D%E8%89%B2%E5%85%89%E8%8A%92%EF%BC%8C%E4%BB%8E%E9%BB%91%E6%9A%97%E6%B7%B1%E6%B5%B7%E6%B5%AE%E5%87%BA%E6%B0%B4%E9%9D%A2%EF%BC%8C%E8%B1%A1%E5%BE%81AI%E8%8E%B7%E5%BE%97%E8%A7%86%E8%A7%89%E7%90%86%E8%A7%A3%E8%83%BD%E5%8A%9B%EF%BC%8C%E7%A7%91%E6%8A%80%E6%84%9F%E6%8F%92%E7%94%BB%E9%A3%8E%E6%A0%BC&image_size=landscape_16_9" alt="DeepSeek蓝色鲸鱼在深海中睁开眼睛，象征AI获得视觉理解能力">
+    <h1>DeepSeek终于长出眼睛，但它看的不只是照片</h1>
+    <div class="meta">2026年8月21日 · 阅读时间约6分钟</div>
+    <div class="byline">文｜犀牛伯爵</div>
+
+    <p>8月21日下午三点多，DeepSeek的API文档里悄悄多了个名字。</p>
+
+    <p>没有发布会，没有直播，没有梁文锋站台。</p>
+
+    <p>deepseek-v4-flash-vision-exp，就这么出现在了模型列表里。一个"Exp"后缀，在告诉所有人别急，先试试。</p>
+
+    <p>但这件"悄悄"的事，恰恰是DeepSeek这半年最大的转折点。它终于长出眼睛了。</p>
+
+    <h2>社区等不及，自己先给DeepSeek"装眼睛"</h2>
+
+    <p>说起来你可能不信，过去半年，DeepSeek一直是国内最受关注的AI公司之一，但它的模型有个尴尬的短板，只能处理文字。</p>
+
+    <p>你可以跟它聊天、写代码、做推理，但给它发张截图，它会直接报错，MODEL_DOES_NOT_SUPPORT_IMAGES。</p>
+
+    <p>这个报错信息，过去一周在DeepSeek Harness的GitHub讨论区里反复出现。8月14日，DeepSeek开源了Agent框架Harness，让模型可以调用终端、文件、代码和外部工具。框架很强大，但开发者很快发现一个实际问题，Agent连图都看不了，怎么操作界面？</p>
+
+    <p>社区等不及了。有人开始在DeepSeek前面接一个Qwen-VL，先把图片转成文字描述，再交给DeepSeek推理。有人写了vision bridge插件，让图片先保存到工作区，再由视觉插件读取。GitHub上甚至出现了专门的项目dsh-deepseek-vision。</p>
+
+    <p>一个发布了Agent框架的公司，自己的模型却看不了图，得借别人家的眼睛。这事儿怎么说呢，有点离谱。</p>
+
+    <p>8月21日下午，这个尴尬终于结束了。</p>
+
+    <h2>不是Pro版，是Flash版</h2>
+
+    <p>这里有个细节很多人可能没注意。</p>
+
+    <p>DeepSeek给加视觉能力的，不是旗舰版V4-Pro，而是Flash版。</p>
+
+    <p>V4-Pro总参数1.6万亿，激活490亿，是DeepSeek的旗舰。V4-Flash总参数284亿，激活13亿，定位是高吞吐、低成本。按常理，新能力应该先上旗舰，再下放。</p>
+
+    <p>DeepSeek反着来。</p>
+
+    <p>我觉得这个选择不是随便做的。你想，Agent在真实工作流中需要看的是什么？是截图、界面、报错信息、表格、设计稿。这些任务要的不是"看一张图看得多精细"，而是"看得够快、够便宜、能连续运行"。</p>
+
+    <p>一个Agent执行任务，可能需要在一分钟内连续看十几张截图。如果每次看图都要调用最贵的模型，这个Agent就没人用得起。</p>
+
+    <p>Flash的定位恰好匹配这个场景。13B激活参数，推理快，成本低。给它加上眼睛，Agent就能在执行任务时自己看路。</p>
+
+    <p>DeepSeek官方说，V4-Flash-Vision-Exp在多模态Agent基准测试中相比V4-Flash"大幅跃升"，整体表现接近Anthropic的Opus-4.8。注意，是"接近"，不是"超越"。但定价跟V4-Flash完全一样。</p>
+
+    <p>每张图最高折算384个token，跟文字一起计费。缓存命中时，百万token输入只要0.05元。</p>
+
+    <p><span class="data-callout">0.05元</span></p>
+
+    <p>这个价格意味着，用DeepSeek看一千张截图，可能花不了几毛钱。</p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>计费项</th>
+          <th>空闲时段</th>
+          <th>高峰时段（9-12, 14-18点）</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>缓存命中输入</td>
+          <td>0.05元/百万token</td>
+          <td>0.10元/百万token</td>
+        </tr>
+        <tr>
+          <td>缓存未命中输入</td>
+          <td>1.5元/百万token</td>
+          <td>3元/百万token</td>
+        </tr>
+        <tr>
+          <td>输出</td>
+          <td>4.5元/百万token</td>
+          <td>9元/百万token</td>
+        </tr>
+        <tr>
+          <td>图片计费</td>
+          <td colspan="2">每张最高384 token，按V4-Flash价格计费</td>
+        </tr>
+        <tr>
+          <td>Files API</td>
+          <td colspan="2">免费（单文件最大64MiB，最多10000个文件）</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="img-caption">数据来源：DeepSeek API官方文档，2026年8月21日</div>
+
+    <h2>这不是一个模型，是一套系统</h2>
+
+    <p>如果你只看"DeepSeek出了视觉模型"这件事，可能会觉得这不就是个常规更新吗。</p>
+
+    <p>但把时间线拉长看，完全不是那么回事。</p>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="date">2026年4月</div>
+        <div class="content">发布V4预览版（V4-Pro和V4-Flash），纯文本模型，支持1M上下文</div>
+      </div>
+      <div class="timeline-item">
+        <div class="date">8月13日</div>
+        <div class="content">V4-Pro正式版上线，Agent能力大幅增强，Terminal Bench 2.1达87.9</div>
+      </div>
+      <div class="timeline-item">
+        <div class="date">8月14日</div>
+        <div class="content">开源Harness Agent框架，支持终端、文件、代码、外部工具调用</div>
+      </div>
+      <div class="timeline-item">
+        <div class="date">8月21日</div>
+        <div class="content">V4-Flash-Vision-Exp上线 + Files API开放，视觉能力补齐</div>
+      </div>
+    </div>
+
+    <p>Harness解决的是"手"的问题，让Agent能操作工具。Files API解决的是"记忆"的问题，让图片可以存储和复用。Vision解决的是"眼睛"的问题，让Agent能看懂视觉信息。</p>
+
+    <p>手、记忆、眼睛。三个东西凑齐了。</p>
+
+    <p>这不是在做一个模型更新，是在搭一套完整的Agent系统。每一步都精准地补上了前一步留下的缺口。</p>
+
+    <p>你可能会说，这不算什么，GPT-5.6和Gemini早就有视觉能力了。</p>
+
+    <p>但有个区别。GPT-5.6的视觉是给聊天用的，你能给它发张照片问"这是什么"。DeepSeek的视觉是给Agent用的，它看截图是为了操作界面，看报错是为了修代码，看表格是为了分析数据。</p>
+
+    <div class="quote-box">
+      <p>DeepSeek此次上线deepseek-v4-flash-vision-exp，并没有单独强调图像生成或视觉娱乐能力，而是将重点放在多模态Agent场景。</p>
+      <div class="attribution">凤凰网·爱范儿，2026年8月21日</div>
+    </div>
+
+    <p>这就像给一个工人配眼镜，不是为了让他看风景，是为了让他看图纸。</p>
+
+    <h2>这一周，中国AI打了三枪</h2>
+
+    <p>把视角再拉远一点。</p>
+
+    <p>过去72小时，中国三家头部AI公司，分别在不同方向完成了突破。</p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>公司</th>
+          <th>发布日期</th>
+          <th>产品</th>
+          <th>核心突破</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>智谱</td>
+          <td>8月19日</td>
+          <td>GLM-5.3</td>
+          <td>AA智能指数60分，与Claude Fable 5、GPT-5.6 Sol并列，开源第一。编程能力+50%</td>
+        </tr>
+        <tr>
+          <td>阿里</td>
+          <td>8月20日</td>
+          <td>Qwen-UI-Agent</td>
+          <td>真机MobileWorld-Real成功率92.2%，超越GPT-5.6 Sol和Claude Opus 4.8</td>
+        </tr>
+        <tr>
+          <td>DeepSeek</td>
+          <td>8月21日</td>
+          <td>V4-Flash-Vision-Exp</td>
+          <td>视觉能力补齐，Agent感知层到位，定价不涨</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="img-caption">数据来源：智谱官方公告、阿里技术报告、DeepSeek API文档</div>
+
+    <p>8月19日，智谱发布GLM-5.3。在Artificial Analysis智能指数中拿到60分，跟Claude Fable 5、GPT-5.6 Sol并列，开源模型第一。编程能力暴涨50%，还顺手挖出了2436个安全漏洞，最老的可以追溯到1981年。总参数7430亿，但单任务成本是旗舰模型中最低。</p>
+
+    <p>8月20日，阿里发布Qwen-UI-Agent。100多台真实手机训练出来的GUI智能体，在真机评测集MobileWorld-Real上拿到92.2%成功率，把GPT-5.6 Sol和Claude Opus 4.8甩在身后。主力版本只有27B参数，做到了别家旗舰做不到的事。</p>
+
+    <img class="article-img" src="https://img.36krcdn.com/hsossms/20260820/v2_52df7ae7077744faae988183d6bf22d6@1743780481_img_gif" alt="阿里Qwen-UI-Agent在真实手机上执行GUI操作的演示动画">
+    <div class="img-caption">阿里Qwen-UI-Agent真机操作演示，图源：36氪</div>
+
+    <p>8月21日，DeepSeek上线V4-Flash-Vision-Exp。视觉能力补齐，Agent感知层到位。</p>
+
+    <p class="punchline">三天，三家公司，三个方向。</p>
+
+    <p>智谱往深了挖，把编程和安全能力推到开源天花板。阿里往广了铺，让AI真正能操作手机和电脑上的每一块屏幕。DeepSeek往底层补，给Agent框架配上眼睛。</p>
+
+    <p>这不是"中国AI追上了"的故事。这是<span class="highlight">中国AI开始分化的故事</span>。</p>
+
+    <p>三家公司不再追同一个方向、卷同一个benchmark。智谱不跟阿里比GUI，阿里不跟DeepSeek比价格，DeepSeek不跟智谱比编程。每家都在自己认为重要的方向上深挖。</p>
+
+    <p>这比"追上GPT-5.6"重要得多。</p>
+
+    <h2>Exp意味着什么</h2>
+
+    <p>最后说说那个"Exp"后缀。</p>
+
+    <p>DeepSeek不是第一次用实验版探路。2025年9月，他们推出V3.2-Exp，用实验版本验证了DSA稀疏注意力机制。两个月后升级到V3.2正式版。DeepSeek后来明确说，实验版获得了大量社区对比测试结果，这些反馈帮助验证了新架构。</p>
+
+    <p>V4-Flash-Vision-Exp很可能走同样的路。先把模型交给开发者，在真实图片和Agent工作流中找问题，再决定正式版怎么做。</p>
+
+    <p>腾讯新闻的报道里提到一个有意思的细节。Vision Exp最初接收image_url时还会返回expected 'text'，随后官方模型表和视觉接口才陆续更新。这说明视觉能力和V4-Flash现有API体系之间经历了明显的适配过程。</p>
+
+    <p>还有个值得关注的技术问题。DeepSeek此前已经有一条独立的DeepSeek-OCR产品线。Vision Exp到底是原生多模态模型，还是把视觉编码模块接到了V4-Flash前面？目前DeepSeek没有公布模型结构、训练方式或视觉编码器信息。</p>
+
+    <p>但说实话，对开发者来说，这个区别可能没那么重要。重要的是，能看图了，价格没涨，Harness原生支持，Files API免费。</p>
+
+    <p>接下来的看点不是"DeepSeek看图能不能跟GPT-5.6比"，而是<span class="highlight">视觉+Harness+Files API组合在一起，Agent能做什么以前做不了的事</span>。</p>
+
+    <p>一个能看截图、能读文件、能操作终端、还能记住看过的图片的Agent，跟一个只能处理文字的Agent，完全是两个物种。</p>
+
+    <h2>落点</h2>
+
+    <p>回到开头那个问题。DeepSeek终于长出眼睛了，但它看的不只是照片。</p>
+
+    <p>它看的是截图里的报错信息，是界面上的按钮位置，是表格里的数据排列，是设计稿的布局结构。这些东西，是Agent从"能聊天"走向"能干活"必须看懂的。</p>
+
+    <p>本周中国AI的三连击，与其说是在跟硅谷竞争，不如说是在各自搭建Agent时代的不同基础设施。智谱搭的是大脑的深度，阿里搭的是双手的灵活，DeepSeek搭的是眼睛和记忆。</p>
+
+    <p>三条路，最后可能汇到同一个终点，也可能各自走出不同的风景。</p>
+
+    <p>但有一点是确定的。中国AI不再只是追着别人的路线跑了。</p>
+
+    <div class="ending">
+      <p>谢谢你看我的文章。</p>
+      <p style="margin-top: 8px; color: var(--muted); font-size: 13px;">信息来源：DeepSeek API官方文档、凤凰网·爱范儿、腾讯科技、IT之家、36氪·智东西、环球网、AI HOT、runtimewire</p>
+    </div>
+  </div>
+</body>
+</html>

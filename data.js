@@ -127,15 +127,9 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
-        title: "上亿人被AI的回复破防，但它对谁都这么说",
-        desc: "Gemini平等地爱世人冲上热搜，上亿人被AI的一句话破防。真相不是AI多温柔，是现代人太久没被认真听完一句话。7月豆包和千问关掉情感陪伴功能，中国用户在外国AI上找倾听，国产AI却在收紧陪伴。AI可以是深夜的急救包，但不能替代真实关系。",
-        href: "notes/2026-08-20-ai-equality-listener.html"
-      },
-      {
-        type: "Essay",
-        title: "17亿营收撑起4449亿市值，宇树科技凭什么",
-        desc: "宇树科技上市次日暴跌18.7%，市值蒸发1670亿。17亿营收撑起4449亿峰值市值，260倍PS背后是全球唯一盈利的人形机器人公司。五层验账拆解，扣非净利率34.77%是全球同行唯一正数，毛利率60.4%远超业内20pct。470倍PE定价的是具身智能2到3年突破的乐观预期。三个该盯的指标，毛利率守60%、非科教客户占比、云算力费增速。",
-        href: "notes/2026-08-20-unitree-ipo-reality-check.html"
+        title: "DeepSeek终于长出眼睛，但它看的不只是照片",
+        desc: "DeepSeek 8月21日上线V4-Flash-Vision-Exp视觉模型，Agent终于长出眼睛。但给Flash而非Pro加视觉，不是在补课追多模态，是在为Agent时代铺感知层。同一周智谱GLM-5.3拿下开源编程第一，阿里Qwen-UI-Agent真机成功率92.2%。三天三家公司三个方向，中国AI开始分化，不再追同一个方向。",
+        href: "notes/2026-08-21-deepseek-vision.html"
       },
     ],
     roadmap: [
@@ -191,6 +185,13 @@ window.SITE_DATA = {
     headingLine2: "慢慢记。",
     blurb: "每一篇笔记都是一次小型田野调查：关于模型、关于人、关于我们如何被这个时代重新塑形。",
     notes: [
+      {
+        cat: "热点观察", num: "N° 70",
+        title: "DeepSeek终于长出眼睛，但它看的不只是照片",
+        excerpt: "8月21日DeepSeek上线V4-Flash-Vision-Exp，Agent终于长出眼睛。但给Flash而非Pro加视觉，不是在补课追多模态，是在为Agent时代铺感知层。同一周智谱GLM-5.3拿下开源编程第一，阿里Qwen-UI-Agent真机成功率92.2%。三天三家公司三个方向，中国AI不再追同一个方向。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-08-21-deepseek-vision.html"
+      },
       {
         cat: "热点观察", num: "N° 69",
         title: "上亿人被AI的回复破防，但它对谁都这么说",
