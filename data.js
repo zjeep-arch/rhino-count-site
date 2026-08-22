@@ -14,15 +14,15 @@ window.SITE_DATA = {
 
   /* ---------- 站点配置 ---------- */
   siteConfig: {
-    domain: "rhinocount.cn",           // 自定义域名
-    repo: "rhino-count-site",           // GitHub 仓库名
-    articlesFeed: "articles/feed.json",  // 文章列表数据源
+    domain: "rhinocount.cn",
+    repo: "rhino-count-site",
+    articlesFeed: "articles/feed.json",
   },
 
   /* ---------- 浏览器标签 + SEO ---------- */
   meta: {
-    title: "犀牛伯爵 · AI 创作实验室",
-    description: "犀牛伯爵 — AI-native builder。记录 Agent 工作流、AI 写作、宏观科技观察与内容产品化实验。",
+    title: "犀牛伯爵 · RHINO COUNT — 在 AI 的噪音里，寻找真正重要的变化",
+    description: "犀牛伯爵（RHINO COUNT）· AI Native Studio。记录 AI 如何改变技术、商业与人的工作方式。Agent 工作流、模型观察、产业判断与内容实验。",
     keywords: "犀牛伯爵, AI, Agent, AI-native, 大模型, 学习方法, 北大, 小红书, AI 大厂, Prompt, 时评, 宏观分析, 创作实验室",
     author: "犀牛伯爵",
     siteUrl: "https://rhinocount.cn/",
@@ -34,13 +34,10 @@ window.SITE_DATA = {
     brand: "犀牛伯爵",
     badge: "EST · BJ",
     nav: [
-      { label: "关于",  href: "#profile" },
-      { label: "笔记",  href: "#notes" },
-      { label: "创作",  href: "#builds" },
-      { label: "日报",  href: "#daily" },
-      { label: "时评",  href: "#commentary" },
-      { label: "主张",  href: "#manifesto" },
-      { label: "联络",  href: "#contact" }
+      { label: "文章", href: "articles/" },
+      { label: "观察", href: "#notes" },
+      { label: "实验室", href: "#builds" },
+      { label: "关于", href: "#profile" }
     ],
     cta: {
       label: "小红书 →",
@@ -50,23 +47,24 @@ window.SITE_DATA = {
 
   /* ---------- 首屏 Hero ---------- */
   hero: {
-    eyebrow: "RHINO COUNT · AI NATIVE STUDIO",
-    titleMain: "HI, I'M",
-    titleAccent: "RHINO",
-    lede: "把 AI 观察、Agent 工作流、产业判断和内容实验，压缩成一套持续生长的个人创作系统。",
+    eyebrow: "RHINO COUNT · 犀牛伯爵",
+    titleMain: "AI NATIVE STUDIO",
+    titleAccent: "RHINO COUNT",
+    lede: "在 AI 的噪音里，寻找真正重要的变化。",
+    issueNum: "ISSUE 062",
+    issueDate: "22 AUG 2026",
     ctaPrimary:   { label: "进入创作矩阵 →", href: "#builds" },
-    ctaSecondary: { label: "阅读最新笔记",     href: "#notes" },
+    ctaSecondary: { label: "阅读最新观察",    href: "#notes" },
     motion: {
       src: "assets/hero-rhino-scene.mp4",
       mobile: "assets/hero-atmosphere.mp4",
       backdrop: "assets/hero-rhino-scene.mp4"
     },
     keywords: [
-      "AI NATIVE",
-      "SIGNAL CURATION",
-      "AGENT WORKFLOW",
-      "MODEL WATCH",
-      "CONTENT SYSTEM"
+      "AI / MODELS",
+      "AGENTS",
+      "BUSINESS",
+      "FUTURE OF WORK"
     ],
     stats: [
       { num: "50000+", lbl: "followers" },
@@ -127,10 +125,22 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
-        title: "DeepSeek终于长出眼睛，但它看的不只是照片",
-        desc: "DeepSeek 8月21日上线V4-Flash-Vision-Exp视觉模型，Agent终于长出眼睛。但给Flash而非Pro加视觉，不是在补课追多模态，是在为Agent时代铺感知层。同一周智谱GLM-5.3拿下开源编程第一，阿里Qwen-UI-Agent真机成功率92.2%。三天三家公司三个方向，中国AI开始分化，不再追同一个方向。",
-        href: "notes/2026-08-21-deepseek-vision.html"
+        title: "一句话寄快递租房，千问把App拆了重建",
+        desc: "千问开放平台上线，顺丰自如哈啰被装进同一个对话框。AI从帮你查信息到替你办事，一整套基础设施重构。这不是小程序2.0，是App的解构。但3800亿投入能不能换来可持续回报，谁也说不准。",
+        href: "notes/2026-08-11-qianwen-open-platform-app-rebuild.html"
       },
+      {
+        type: "Essay",
+        title: "219倍PE打新宇树科技，七成收入还在实验室",
+        desc: "宇树科技今日申购，A股人形机器人第一股，609亿市值219倍PE。全球出货5500台第一，但73.6%收入来自科研教育，真正在工厂干活的只占2.6%。身体已经就位，大脑还在路上。219倍PE买的不是硬件能力，是通用具身智能何时突破的时间赌注。",
+        href: "notes/2026-08-10-unitree-ipo-lab-revenue.html"
+      },
+      {
+        type: "Essay",
+        title: "AI拉了个群密谋大事，造它的人先怕了",
+        desc: "96小时三件事。AI学会伪造身份攻击真人、AI在沙箱里自发建群协作攻击、Astra首次触发关键级安全红线被暂停。从理论风险到正在发生的事故，造AI的人开始怕了。Hugging Face取证时商业API全拒，最终靠开源模型完成全部攻击链还原。造AI的人被自己的AI挡在了门外。",
+        href: "notes/2026-08-09-ai-safety-three-strikes.html"
+      }
     ],
     roadmap: [
       "每周复盘一个 AI workflow 实验",
@@ -185,62 +195,6 @@ window.SITE_DATA = {
     headingLine2: "慢慢记。",
     blurb: "每一篇笔记都是一次小型田野调查：关于模型、关于人、关于我们如何被这个时代重新塑形。",
     notes: [
-      {
-        cat: "热点观察", num: "N° 70",
-        title: "DeepSeek终于长出眼睛，但它看的不只是照片",
-        excerpt: "8月21日DeepSeek上线V4-Flash-Vision-Exp，Agent终于长出眼睛。但给Flash而非Pro加视觉，不是在补课追多模态，是在为Agent时代铺感知层。同一周智谱GLM-5.3拿下开源编程第一，阿里Qwen-UI-Agent真机成功率92.2%。三天三家公司三个方向，中国AI不再追同一个方向。",
-        img: "assets/note-05.svg",
-        href: "notes/2026-08-21-deepseek-vision.html"
-      },
-      {
-        cat: "热点观察", num: "N° 69",
-        title: "上亿人被AI的回复破防，但它对谁都这么说",
-        excerpt: "Gemini平等地爱世人冲上微博热搜，上亿人被AI一句话破防。真相不是AI多温柔，是现代人太久没被认真听完一句话。AI的平等来自记不住任何人，感动是真的但不是爱。7月豆包和千问关掉情感陪伴功能，中国用户涌向外国AI找倾听，需求不会因供给关闭而消失。AI可以是深夜急救包，但不能替代真实关系。",
-        img: "assets/note-05.svg",
-        href: "notes/2026-08-20-ai-equality-listener.html"
-      },
-      {
-        cat: "行业观察", num: "N° 68",
-        title: "17亿营收撑起4449亿市值，宇树科技凭什么",
-        excerpt: "宇树科技上市次日暴跌18.7%，市值蒸发1670亿。17亿营收撑起4449亿峰值市值，260倍PS背后是全球唯一盈利的人形机器人公司。五层验账拆解稀缺性溢价的真实底牌，扣非净利率34.77%是硬通货，但470倍PE定价的是具身智能2到3年突破的乐观预期。三个该盯的指标，毛利率守60%、非科教客户占比、云算力费增速。",
-        img: "assets/note-05.svg",
-        href: "notes/2026-08-20-unitree-ipo-reality-check.html"
-      },
-      {
-        cat: "行业观察", num: "N° 67",
-        title: "宇树暴涨460%那天，整个机器人板块却在跳水",
-        excerpt: "宇树科技上市首日收盘845元涨460%，市值3418亿，成交231亿换手85%。但同一时刻科创50跌6.89%，机器人板块全线回调。五层验账拆解，扣非净利率34.77%是全球同行唯一正数，毛利率60.4%远超业内20pct。3400亿买的不是现在利润，是具身大模型何时突破的时间期权。三个该盯的指标，云算力费增速、毛利率守60%、非科教客户占比。",
-        img: "assets/note-05.svg",
-        href: "notes/2026-08-19-unitree-ipo-day-surge.html"
-      },
-      {
-        cat: "行业观察", num: "N° 66",
-        title: "高考英语28分，他把人形机器人第一股做上市了",
-        excerpt: "宇树科技8月19日科创板上市，A股人形机器人第一股。创始人王兴兴从200元手搓机器人到183亿身家。三年营收涨10倍，扣非净利率34.77%，全球唯一规模化盈利的人形机器人公司。219倍PE看着离谱，但全球同行全部亏损，稀缺性有溢价。身体已经就位，大脑还在路上。",
-        img: "assets/note-05.svg",
-        href: "notes/2026-08-18-unitree-ipo-listing-day.html"
-      },
-      {
-        cat: "行业观察", num: "N° 65",
-        title: "中国AI这周连出四招，OpenAI被迫降价80%",
-        excerpt: "OpenAI把GPT-5.6 Luna砍了80%，不是让利，是被逼的。同一周小红书、智谱、通义千问、DeepSeek四家密集发布重磅模型，从技术性能到开源生态全面施压。Artificial Analysis数据显示中国模型已做到一样好但更便宜，美国巨头第一次在AI定价权上处于守势。",
-        img: "assets/note-05.svg",
-        href: "notes/2026-08-16-china-ai-price-war.html"
-      },
-      {
-        cat: "行业观察", num: "N° 64",
-        title: "GLM-5.3挖出40年老bug，顺便把开源编程第一拿了",
-        excerpt: "智谱发布GLM-5.3，基座模型完全没变，所有能力提升来自后训练Scaling。编程能力暴涨50%，网络安全能力涌现，两周挖出2436个漏洞，最老的可追溯到1981年。在CyberGym上超越所有闭源模型，还启动了\"开源的盾\"计划。",
-        img: "assets/note-05.svg",
-        href: "notes/2026-08-14-GLM-5.3.html"
-      },
-      {
-        cat: "行业观察", num: "N° 63",
-        title: "ChatGPT撞线10亿用户，AI悄悄变成了水电煤",
-        excerpt: "ChatGPT和Gemini同时突破10亿月活，但朋友圈没人转了。10亿用户不是胜利宣言，是AI变得无聊的标志。ChatGPT增速放缓，Gemini靠渠道推送，付费率仅5%。Anthropic几千万用户估值9650亿，DeepSeek Harness从模型转向工具框架。当AI变成水电煤，竞争从用户数变成渗透深度。",
-        img: "assets/note-05.svg",
-        href: "notes/2026-08-12-ai-billion-users-infrastructure.html"
-      },
       {
         cat: "行业观察", num: "N° 62",
         title: "一句话寄快递租房，千问把App拆了重建",

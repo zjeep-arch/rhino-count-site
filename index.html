@@ -8,24 +8,23 @@
   <meta name="theme-color" content="#F4F8FF" media="(prefers-color-scheme: light)" />
   <meta name="theme-color" content="#05050A" media="(prefers-color-scheme: dark)" />
 
-  <title>犀牛伯爵 · AI 创作实验室</title>
-  <meta name="description" content="犀牛伯爵 — AI-native builder。记录 Agent 工作流、AI 写作、宏观科技观察与内容产品化实验。" />
+  <title>犀牛伯爵 · RHINO COUNT — 在 AI 的噪音里，寻找真正重要的变化</title>
+  <meta name="description" content="犀牛伯爵（RHINO COUNT）· AI Native Studio。记录 AI 如何改变技术、商业与人的工作方式。Agent 工作流、模型观察、产业判断与内容实验。" />
   <meta name="keywords" content="犀牛伯爵, AI, Agent, AI-native, 大模型, 学习方法, 北大, 小红书, AI 大厂, Prompt, 时评, 宏观分析, 创作实验室" />
   <meta name="author" content="犀牛伯爵" />
   <meta name="robots" content="index,follow,max-image-preview:large" />
-  <meta name="baidu-site-verification" content="codeva-BwbC9G551S" />
   <link rel="canonical" href="https://rhinocount.cn/" />
 
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="犀牛伯爵 · AI 创作实验室" />
-  <meta property="og:description" content="AI-native builder。记录 Agent 工作流、AI 写作、宏观科技观察与内容产品化实验。" />
+  <meta property="og:title" content="犀牛伯爵 · RHINO COUNT — 在 AI 的噪音里，寻找真正重要的变化" />
+  <meta property="og:description" content="犀牛伯爵（RHINO COUNT）· AI Native Studio。记录 AI 如何改变技术、商业与人的工作方式。" />
   <meta property="og:url" content="https://rhinocount.cn/" />
   <meta property="og:image" content="https://rhinocount.cn/temple-of-heaven.png" />
   <meta property="og:locale" content="zh_CN" />
 
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="犀牛伯爵 · AI 创作实验室" />
-  <meta name="twitter:description" content="AI-native builder。记录 Agent 工作流、AI 写作、宏观科技观察与内容产品化实验。" />
+  <meta name="twitter:title" content="犀牛伯爵 · RHINO COUNT — 在 AI 的噪音里，寻找真正重要的变化" />
+  <meta name="twitter:description" content="犀牛伯爵（RHINO COUNT）· AI Native Studio。记录 AI 如何改变技术、商业与人的工作方式。" />
 
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%231C1410'/%3E%3Ctext x='50%25' y='54%25' text-anchor='middle' font-size='38' font-family='Georgia,serif' fill='%23E8C77A'%3E犀%3C/text%3E%3C/svg%3E" />
   <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='32' fill='%231C1410'/%3E%3Ctext x='50%25' y='58%25' text-anchor='middle' font-size='110' font-family='Georgia,serif' fill='%23E8C77A'%3E犀%3C/text%3E%3C/svg%3E" />
@@ -174,9 +173,9 @@
       position: fixed;
       left: 0;
       top: 0;
-      z-index: 200;
+      z-index: 95;
       width: 100%;
-      height: 3px;
+      height: 2px;
       pointer-events: none;
       background: linear-gradient(90deg, var(--accent), var(--electric), var(--accent-2));
       box-shadow: 0 0 24px var(--glow);
@@ -382,6 +381,13 @@
       font-size: 11px; letter-spacing: 0.32em;
       text-transform: uppercase; color: var(--muted);
       margin-bottom: var(--s-3);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .section-head .label::before {
+      content: "";
+      width: 24px; height: 1px;
+      background: var(--accent); flex-shrink: 0;
+      opacity: 0.6;
     }
     .section-head h2 {
       font-family: var(--serif); font-weight: 700;
@@ -1172,8 +1178,6 @@
       border-radius: var(--radius);
       padding: 0;
       display: flex; flex-direction: column;
-      text-decoration: none;
-      color: inherit;
       gap: 0;
       position: relative;
       overflow: hidden;
@@ -4444,7 +4448,7 @@
       flex: 1;
       min-height: 100svh;
     }
-    /* Kicker — refined label with accent line */
+    /* Kicker - refined label with accent line */
     .hero-cine-kicker {
       display: flex;
       align-items: center;
@@ -4468,6 +4472,53 @@
     [data-theme="light"] .hero-cine-kicker {
       color: rgba(0,143,154,0.80);
       text-shadow: none;
+    }
+
+    /* Magazine masthead - ISSUE number + date */
+    .hero-masthead {
+      position: absolute;
+      top: clamp(60px, 8vh, 90px);
+      right: var(--pad);
+      z-index: 4;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: rgba(207,255,250,0.42);
+      animation: cineFadeUp 800ms 100ms cubic-bezier(.16,.84,.28,1) both;
+    }
+    .hero-masthead .issue-num {
+      font-family: var(--serif);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: rgba(207,255,250,0.62);
+      border-left: 1px solid rgba(207,255,250,0.16);
+      padding-left: 16px;
+    }
+    .hero-masthead .issue-date {
+      padding-top: 2px;
+    }
+    [data-theme="light"] .hero-masthead {
+      color: rgba(8,17,31,0.36);
+    }
+    [data-theme="light"] .hero-masthead .issue-num {
+      color: rgba(8,17,31,0.56);
+      border-left-color: rgba(8,17,31,0.14);
+    }
+    @media (max-width: 860px) {
+      .hero-masthead {
+        top: 56px;
+        right: 16px;
+        gap: 10px;
+      }
+      .hero-masthead .issue-num {
+        font-size: 12px;
+        padding-left: 10px;
+      }
     }
     /* Title — tighter, more dramatic */
     .hero-cine-title {
@@ -4726,31 +4777,23 @@
         <span class="badge" data-bind="badge">EST · BJ</span>
       </a>
       <nav class="nav-links" id="navLinks" aria-label="主导航">
+        <a href="articles/">文章</a>
+        <a href="#notes">观察</a>
+        <a href="#builds">实验室</a>
         <a href="#profile">关于</a>
-        <a href="#notes">笔记</a>
-        <a href="#builds">创作</a>
-        <a href="#daily">日报</a>
-        <a href="#commentary">时评</a>
-        <a href="#manifesto">主张</a>
-        <a href="#contact">联络</a>
-        <a href="games/duck-scare-war.html">游戏</a>
       </nav>
       <div class="nav-actions">
-        <a class="btn ghost" id="headerCta" href="https://www.xiaohongshu.com/user/profile/60572004000000000101ce41" target="_blank" rel="noopener">小红书 \2192</a>
+        <a class="btn ghost" id="headerCta" href="https://www.xiaohongshu.com/user/profile/60572004000000000101ce41" target="_blank" rel="noopener">小红书 →</a>
         <button id="menuBtn" class="icon-btn menu-btn" aria-label="菜单" aria-expanded="false">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
         </button>
       </div>
     </div>
     <div id="mobilePanel" class="mobile-panel" aria-hidden="true">
+      <a href="articles/">文章</a>
+      <a href="#notes">观察</a>
+      <a href="#builds">实验室</a>
       <a href="#profile">关于</a>
-      <a href="#notes">笔记</a>
-      <a href="#builds">创作</a>
-      <a href="#daily">日报</a>
-      <a href="#commentary">时评</a>
-      <a href="#manifesto">主张</a>
-      <a href="#contact">联络</a>
-      <a href="games/duck-scare-war.html">游戏</a>
       <a href="https://www.xiaohongshu.com/user/profile/60572004000000000101ce41" target="_blank" rel="noopener">小红书 →</a>
     </div>
   </header>
@@ -4760,16 +4803,20 @@
       <!-- Static first paint: JavaScript enhances/replaces this, but it is already usable. -->
       <div class="hero-cine-overlay" aria-hidden="true"></div>
       <div class="hero-cine-grain" aria-hidden="true"></div>
+      <div class="hero-masthead">
+        <span class="issue-date">22 AUG 2026</span>
+        <span class="issue-num">ISSUE 062</span>
+      </div>
       <div class="hero-cine-content">
-        <div class="hero-cine-kicker">RHINO COUNT · AI NATIVE STUDIO</div>
-        <p class="hero-cine-title" aria-hidden="true">
-          <span>HI, I'M</span>
-          <strong>RHINO</strong>
-        </p>
-        <p class="hero-cine-lede">把 AI 观察、Agent 工作流、产业判断和内容实验，压缩成一套持续生长的个人创作系统。</p>
+        <div class="hero-cine-kicker">RHINO COUNT · 犀牛伯爵</div>
+        <h1 class="hero-cine-title">
+          <span>AI NATIVE STUDIO</span>
+          <strong>RHINO COUNT</strong>
+        </h1>
+        <p class="hero-cine-lede">在 AI 的噪音里，寻找真正重要的变化。</p>
         <div class="hero-cine-cta">
           <a class="btn" href="#builds">进入创作矩阵 →</a>
-          <a class="btn ghost" href="#notes">阅读最新笔记</a>
+          <a class="btn ghost" href="#notes">阅读最新观察</a>
         </div>
         <div class="hero-cine-keywords">
           <span>AI NATIVE</span>
@@ -4868,7 +4915,7 @@
     </div>
   </footer>
 
-  <script src="data.js?v=20260821-fix"></script>
+  <script src="data.js?v=20260714-restore"></script>
   <script>
     /* Fallback: force-show page after 3s if JS hasn't completed */
     setTimeout(function(){var m=document.querySelector('main');if(m&&!m.classList.contains('ready'))m.classList.add('ready');},3000);
@@ -4975,6 +5022,10 @@
         </video>
         <div class="hero-cine-overlay" aria-hidden="true"></div>
         <div class="hero-cine-grain" aria-hidden="true"></div>
+        <div class="hero-masthead">
+          <span class="issue-date">${esc(h.issueDate || '22 AUG 2026')}</span>
+          <span class="issue-num">${esc(h.issueNum || 'ISSUE 062')}</span>
+        </div>
         <div class="hero-cine-content">
           <div class="hero-cine-kicker">${esc(h.eyebrow)}</div>
           <h1 class="hero-cine-title">
@@ -5031,7 +5082,7 @@
           </div>
           <div class="journal-grid">
             ${featuredNotes.map((n, i) => `
-              <a class="note fade-in fade-in-delay-${Math.min(i, 3)}" href="${esc(n.href)}">
+              <article class="note fade-in fade-in-delay-${Math.min(i, 3)}">
                 ${(!_isMobile && n.img) ? `<div class="note-cover"><img src="${esc(n.img)}" alt="" loading="lazy"/></div>` : ''}
                 <div class="note-body">
                   <div class="note-meta">
@@ -5040,9 +5091,9 @@
                   </div>
                   <h3>${esc(n.title)}</h3>
                   <p>${esc(n.excerpt)}</p>
-                  <span class="note-cta">READ</span>
+                  <a class="note-cta" href="${esc(n.href)}">READ</a>
                 </div>
-              </a>
+              </article>
             `).join('')}
           </div>
           <div class="notes-view-all fade-in fade-in-delay-3">
