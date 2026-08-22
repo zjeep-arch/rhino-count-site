@@ -34,10 +34,10 @@ window.SITE_DATA = {
     brand: "犀牛伯爵",
     badge: "EST · BJ",
     nav: [
-      { label: "文章", href: "articles/" },
+      { label: "关于", href: "#profile" },
       { label: "观察", href: "#notes" },
-      { label: "实验室", href: "#builds" },
-      { label: "关于", href: "#profile" }
+      { label: "文章", href: "articles/" },
+      { label: "作品", href: "#builds" }
     ],
     cta: {
       label: "小红书 →",
@@ -54,7 +54,7 @@ window.SITE_DATA = {
     issueNum: "ISSUE 062",
     issueDate: "22 AUG 2026",
     ctaPrimary:   { label: "进入创作矩阵 →", href: "#builds" },
-    ctaSecondary: { label: "阅读最新观察",    href: "#notes" },
+    ctaSecondary: { label: "了解犀牛伯爵",    href: "#profile" },
     motion: {
       src: "assets/hero-rhino-scene.mp4",
       mobile: "assets/hero-atmosphere.mp4",
@@ -175,22 +175,22 @@ window.SITE_DATA = {
 
   /* ---------- 侧像 Profile ---------- */
   profile: {
-    label: "PROFILE · 侧像",
-    heading: "侧像 · Profile",
-    blurb: "把一张名片摊开，给路过的人一个安静的坐标。",
+    label: "PROFILE · ABOUT",
+    heading: "About · 关于",
+    blurb: "我长期关注 AI、大模型、Agent、AI Infra 与科技商业，也持续用 AI 做内容、工具和交互实验。",
     cells: [
-      { k: "本名",  v: "犀牛伯爵" },
-      { k: "学历",  v: "北京大学 · 本科" },
-      { k: "履历",  v: "AI 大厂 · 互联网从业者" },
-      { k: "坐标",  v: "IP 属地 · 北京" },
-      { k: "勋章",  v: "高考数学 · 满分" },
-      { k: "频道",  v: "小红书号 1147661654" }
+      { k: "教育",   v: "北京大学" },
+      { k: "从业",   v: "互联网 / AI" },
+      { k: "关注",   v: "AI / Models / Agents / Business" },
+      { k: "能力",   v: "Content × Product × Marketing" },
+      { k: "坐标",   v: "Beijing" },
+      { k: "频道",   v: "小红书 / RHINO COUNT" }
     ]
   },
 
   /* ---------- 笔记 Journal ---------- */
   journal: {
-    label: "JOURNAL · 笔记",
+    label: "SIGNALS · 观察",
     headingLine1: "在喧嚣里，",
     headingLine2: "慢慢记。",
     blurb: "每一篇笔记都是一次小型田野调查：关于模型、关于人、关于我们如何被这个时代重新塑形。",
