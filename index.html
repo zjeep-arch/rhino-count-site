@@ -4804,8 +4804,8 @@
       <div class="hero-cine-overlay" aria-hidden="true"></div>
       <div class="hero-cine-grain" aria-hidden="true"></div>
       <div class="hero-masthead">
-        <span class="issue-date">22 AUG 2026</span>
-        <span class="issue-num">ISSUE 062</span>
+        <span class="issue-date" id="staticIssueDate">22 AUG 2026</span>
+        <span class="issue-num" id="staticIssueNum">ISSUE 082</span>
       </div>
       <div class="hero-cine-content">
         <div class="hero-cine-kicker">RHINO COUNT · 犀牛伯爵</div>
@@ -4914,6 +4914,21 @@
     </div>
   </footer>
 
+  <script>
+    /* Dynamic masthead - runs before data.js, updates static HTML */
+    (function() {
+      var d = new Date();
+      var months = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+      var dd = String(d.getDate()).padStart(2, '0');
+      var dateStr = dd + ' ' + months[d.getMonth()] + ' ' + d.getFullYear();
+      var start = new Date('2026-06-01');
+      var issueNum = String(Math.floor((d - start) / 86400000)).padStart(3, '0');
+      var dateEl = document.getElementById('staticIssueDate');
+      var numEl = document.getElementById('staticIssueNum');
+      if (dateEl) dateEl.textContent = dateStr;
+      if (numEl) numEl.textContent = 'ISSUE ' + issueNum;
+    })();
+  </script>
   <script src="data.js?v=20260714-restore"></script>
   <script>
     /* Fallback: force-show page after 3s if JS hasn't completed */
@@ -5022,8 +5037,17 @@
         <div class="hero-cine-overlay" aria-hidden="true"></div>
         <div class="hero-cine-grain" aria-hidden="true"></div>
         <div class="hero-masthead">
-          <span class="issue-date">${esc(h.issueDate || '22 AUG 2026')}</span>
-          <span class="issue-num">${esc(h.issueNum || 'ISSUE 062')}</span>
+          <span class="issue-date">${esc((function(){
+            var d = new Date();
+            var months = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+            var dd = String(d.getDate()).padStart(2,'0');
+            return dd + ' ' + months[d.getMonth()] + ' ' + d.getFullYear();
+          })())}</span>
+          <span class="issue-num">ISSUE ${esc((function(){
+            var start = new Date('2026-06-01');
+            var now = new Date();
+            return String(Math.floor((now - start) / 86400000)).padStart(3,'0');
+          })())}</span>
         </div>
         <div class="hero-cine-content">
           <div class="hero-cine-kicker">${esc(h.eyebrow)}</div>

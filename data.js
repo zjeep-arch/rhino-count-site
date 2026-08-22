@@ -51,8 +51,6 @@ window.SITE_DATA = {
     titleMain: "AI NATIVE STUDIO",
     titleAccent: "RHINO COUNT",
     lede: "在 AI 的噪音里，寻找真正重要的变化。",
-    issueNum: "ISSUE 062",
-    issueDate: "22 AUG 2026",
     ctaPrimary:   { label: "进入创作矩阵 →", href: "#builds" },
     ctaSecondary: { label: "了解犀牛伯爵",    href: "#profile" },
     motion: {
@@ -175,16 +173,18 @@ window.SITE_DATA = {
 
   /* ---------- 侧像 Profile ---------- */
   profile: {
-    label: "PROFILE · ABOUT",
-    heading: "About · 关于",
-    blurb: "我长期关注 AI、大模型、Agent、AI Infra 与科技商业，也持续用 AI 做内容、工具和交互实验。",
+    label: "PROFILE · 侧像",
+    heading: "侧像 · Profile",
+    blurb: "把一张名片摊开，给路过的人一个安静的坐标。",
     cells: [
-      { k: "教育",   v: "北京大学" },
-      { k: "从业",   v: "互联网 / AI" },
-      { k: "关注",   v: "AI / Models / Agents / Business" },
-      { k: "能力",   v: "Content × Product × Marketing" },
-      { k: "坐标",   v: "Beijing" },
-      { k: "频道",   v: "小红书 / RHINO COUNT" }
+      { k: "本名",  v: "犀牛伯爵" },
+      { k: "学历",  v: "北京大学 · 本科" },
+      { k: "履历",  v: "AI 大厂 · 互联网从业者" },
+      { k: "关注",  v: "AI / Models / Agents / Business" },
+      { k: "能力",  v: "Content × Product × Marketing" },
+      { k: "坐标",  v: "IP 属地 · 北京" },
+      { k: "勋章",  v: "高考数学 · 满分" },
+      { k: "频道",  v: "小红书号 1147661654" }
     ]
   },
 
