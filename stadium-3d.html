@@ -1529,5 +1529,33 @@ function animate() {
 document.getElementById('loader').classList.add('hide');
 animate();
 </script>
+
+<style>
+  .doi-badge {
+    position: fixed;
+    z-index: 999;
+    right: 14px;
+    bottom: 12px;
+    font-size: 11px;
+    letter-spacing: .04em;
+  }
+  .doi-badge a {
+    display: inline-block;
+    padding: 4px 8px;
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    border-radius: 6px;
+    box-shadow: var(--shadow-sm);
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .doi-badge a:hover { transform: translate(-1px,-1px); box-shadow: var(--shadow-md); }
+</style>
+
+<div class="doi-badge">
+  <a href="https://doi.org/10.5281/zenodo.22070200" target="_blank" rel="noopener"
+     title="Zenodo record: https://zenodo.org/records/22070200">DOI 10.5281/zenodo.22070200</a>
+</div>
+
 </body>
 </html>

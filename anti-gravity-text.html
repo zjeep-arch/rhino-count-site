@@ -835,7 +835,31 @@
 
   document.addEventListener('DOMContentLoaded', init);
 })();
+
 </script>
+
+<style>
+  .doi-badge {
+    position: fixed;
+    z-index: 30;
+    right: 18px;
+    bottom: 16px;
+    font-size: 11px;
+    letter-spacing: .04em;
+  }
+  .doi-badge a {
+    color: var(--muted);
+    text-decoration: none;
+    border-bottom: 1px solid var(--hairline);
+    transition: color .3s;
+  }
+  .doi-badge a:hover { color: var(--ink); }
+</style>
+
+<div class="doi-badge">
+  <a href="https://doi.org/10.5281/zenodo.22065955" target="_blank" rel="noopener"
+     title="Zenodo record: https://zenodo.org/records/22065955">DOI 10.5281/zenodo.22065955</a>
+</div>
 
 </body>
 </html>

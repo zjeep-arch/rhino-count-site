@@ -897,6 +897,16 @@
       content: "\2192";
       transition: transform 0.25s ease;
     }
+    .lab-doi {
+      display: inline-block;
+      margin-top: 10px;
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 3px 10px;
+    }
     .lab-card:hover .lab-link::after,
     .featured-work:hover .lab-link::after {
       transform: translateX(4px);
@@ -5108,7 +5118,7 @@
       if (numEl) numEl.textContent = 'ISSUE ' + issueNum;
     })();
   </script>
-  <script src="data.js?v=20260823-picks4"></script>
+  <script src="data.js?v=20260824-doi"></script>
   <script>
     /* Fallback: force-show page after 3s if JS hasn't completed */
     setTimeout(function(){var m=document.querySelector('main');if(m&&!m.classList.contains('ready'))m.classList.add('ready');},3000);
@@ -5442,6 +5452,7 @@
                     <h3>${esc(item.title)}</h3>
                     <p>${esc(item.desc)}</p>
                     <span class="lab-link">${esc(item.linkLabel)}</span>
+                    ${item.doi ? `<span class="lab-doi" title="Zenodo DOI">DOI ${esc(item.doi)}</span>` : ''}
                   </a>
                 `).join('')}
               </div>

@@ -110,14 +110,18 @@ window.SITE_DATA = {
         title: "反重力文字 · 北京地标",
         desc: "每个字符在零重力中漂浮上升--用反重力排版讲述故宫、鸟巢、国贸等北京地标的建筑故事。鼠标悬停时字母被推开，松手后弹回原位。",
         linkLabel: "进入实验",
-        href: "anti-gravity-text.html"
+        href: "anti-gravity-text.html",
+        doi: "10.5281/zenodo.22065955",
+        doiUrl: "https://doi.org/10.5281/zenodo.22065955"
       },
       {
         tag: "3D",
         title: "AI 竞技场 3D · 多球场体验",
         desc: "程序化 3D 体育场--Three.js 构建的沉浸式球场，支持伯纳乌/工体/马拉卡纳三座经典球场切换、日夜模式、雨天天气系统、球迷人浪应援和实时弹幕。点击座位查看视野评分，进入第一人称观赛视角。",
         linkLabel: "进入竞技场",
-        href: "stadium-3d.html"
+        href: "stadium-3d.html",
+        doi: "10.5281/zenodo.22070200",
+        doiUrl: "https://doi.org/10.5281/zenodo.22070200"
       }
     ],
     featured: [
