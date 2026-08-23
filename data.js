@@ -256,10 +256,10 @@ window.SITE_DATA = {
     followsLabel: "PEOPLE I FOLLOW · 我的信息源",
     follows: [
       { name: "Andrej Karpathy", desc: "Understanding Models", href: "https://x.com/karpathy" },
-      { name: "Dwarkesh Patel", desc: "Deep Interviews", href: "https://www.dwarkesh.com" },
-      { name: "Simon Willison", desc: "AI Engineering", href: "https://simonwillison.net" },
-      { name: "Benedict Evans", desc: "Technology Strategy", href: "https://www.ben-evans.com" },
-      { name: "Paul Graham", desc: "Startup Thinking", href: "https://www.paulgraham.com" }
+      { name: "Dwarkesh Patel", desc: "Deep Interviews", href: "https://x.com/dwarkesh_sp" },
+      { name: "Simon Willison", desc: "AI Engineering", href: "https://x.com/simonw" },
+      { name: "Benedict Evans", desc: "Technology Strategy", href: "https://x.com/benedictevans" },
+      { name: "Paul Graham", desc: "Startup Thinking", href: "https://x.com/paulg" }
     ]
   },
 
