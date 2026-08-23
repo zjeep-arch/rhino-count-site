@@ -1,6 +1,13 @@
 {
-  "updated": "2026-08-20T10:26:32+08:00",
+  "updated": "2026-08-23T11:04:41+08:00",
   "articles": [
+    {
+      "cat": "安全 · 模型 · 资本",
+      "date": "2026-08-21",
+      "title": "AI大模型及安全动态日报 | 2026年08月21日（星期五）",
+      "excerpt": "Claude Platform正式上线Computer Use与Skills API，Anthropic拟冲击史上最大IPO募资或超750亿美元，博通寻求逾600亿美元AI芯片基础设施融资，Mistral推出Agentic Search准确率达86%，CISA新增两个已知被利用漏洞，GPT-5.6-",
+      "href": "2026-08-21-ai-daily.html"
+    },
     {
       "cat": "安全 · 模型 · 资本",
       "date": "2026-08-20",

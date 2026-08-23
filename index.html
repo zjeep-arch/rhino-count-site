@@ -5479,6 +5479,7 @@
                     <span>${esc(item.v)}</span>
                   </div>
                 `).join('')}
+                <div id="dailyLatestBox">
                 ${(daily.latest || []).map(item => `
                   <a class="daily-latest" href="${esc(item.href)}">
                     <b>${esc(item.tag)}</b>
@@ -5486,11 +5487,35 @@
                     <span>${esc(item.desc)}</span>
                   </a>
                 `).join('')}
+                </div>
               </aside>
             </div>
           </div>
         `;
       }
+
+      /* Daily latest — auto-refresh from ai-daily/feed.json so LATEST is always the newest issue */
+      (function () {
+        var box = document.getElementById('dailyLatestBox');
+        if (!box) return;
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', (D.siteConfig && D.siteConfig.articlesFeed ? '' : '') + 'ai-daily/feed.json?t=' + Date.now(), true);
+        xhr.onload = function () {
+          if (xhr.status !== 200) return;
+          try {
+            var feed = JSON.parse(xhr.responseText);
+            var arts = feed.articles || [];
+            if (!arts.length) return;
+            arts.sort(function (a, b) { return (b.date || '').localeCompare(a.date || ''); });
+            var top = arts[0];
+            box.innerHTML = '<a class="daily-latest" href="ai-daily/' + esc(top.href || '') + '">' +
+              '<b>LATEST · ' + esc((top.date || '').slice(5)) + '</b>' +
+              '<strong>' + esc(top.title || '') + '</strong>' +
+              '<span>' + esc(top.excerpt || '') + '</span></a>';
+          } catch (e) { /* keep static fallback */ }
+        };
+        xhr.send();
+      })();
 
       /* Quote */
       const q = D.quote;
