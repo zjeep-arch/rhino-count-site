@@ -1186,27 +1186,86 @@
       border: 1px solid var(--line-2); border-radius: 999px; color: var(--muted);
     }
 
-    /* NOW — 此刻判断 */
+    /* NOW — 此刻判断（杂志卷首语风） */
     .now-wrap {
-      display: grid; grid-template-columns: 1fr 1.4fr; gap: clamp(24px, 5vw, 64px);
-      padding: clamp(40px, 7vw, 72px) 0;
+      position: relative;
+      padding: clamp(48px, 8vw, 88px) 0;
       border-bottom: 1px solid var(--line);
-      align-items: start;
     }
-    .now-head .label { font-size: 12px; letter-spacing: 0.14em; color: var(--muted); }
-    .now-head h2 { font-size: clamp(24px, 3vw, 34px); line-height: 1.25; margin: 12px 0 0; }
-    .now-list { list-style: none; margin: 0; padding: 0; }
+    .now-wrap::before {
+      content: "NOW";
+      position: absolute; top: 8px; right: 0;
+      font-family: var(--serif); font-style: italic;
+      font-size: clamp(80px, 14vw, 180px); line-height: 1;
+      color: transparent;
+      -webkit-text-stroke: 1px var(--line-2);
+      opacity: 0.5; pointer-events: none;
+    }
+    .now-head { position: relative; margin-bottom: clamp(24px, 4vw, 40px); }
+    .now-head .label {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 12px; letter-spacing: 0.18em; color: var(--accent); font-weight: 600;
+    }
+    .now-head .label::before {
+      content: ""; width: 24px; height: 1px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+    }
+    .now-head h2 {
+      font-family: var(--serif);
+      font-size: clamp(26px, 3.4vw, 40px); line-height: 1.22;
+      margin: 14px 0 0;
+    }
+    .now-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
     .now-item {
-      display: flex; gap: 20px; align-items: baseline;
-      padding: 18px 0; border-bottom: 1px solid var(--line);
+      position: relative; overflow: hidden;
+      display: flex; gap: 24px; align-items: baseline;
+      padding: 20px 24px;
+      background: var(--surface);
+      border: 1px solid var(--line); border-radius: var(--radius);
+      backdrop-filter: blur(16px);
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+      --spot-x: 50%; --spot-y: 0%;
     }
-    .now-item:last-child { border-bottom: none; }
+    .now-item::before {
+      content: "";
+      position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+      background: linear-gradient(var(--accent), var(--electric), var(--accent-2));
+      transform: scaleY(0); transform-origin: top;
+      transition: transform 0.4s ease;
+    }
+    .now-item::after {
+      content: "";
+      position: absolute; inset: 0;
+      background: radial-gradient(circle at var(--spot-x) var(--spot-y), color-mix(in oklab, var(--accent) 16%, transparent), transparent 32%);
+      opacity: 0; transition: opacity 0.25s ease; pointer-events: none;
+    }
+    .now-item:hover {
+      transform: translateY(-3px);
+      border-color: var(--line-2);
+      box-shadow: var(--shadow-2), var(--shadow-glow);
+    }
+    .now-item:hover::before { transform: scaleY(1); }
+    .now-item:hover::after { opacity: 1; }
     .now-num {
-      font-size: 13px; letter-spacing: 0.1em; color: var(--accent);
-      font-variant-numeric: tabular-nums; flex-shrink: 0;
+      font-family: var(--serif); font-style: italic;
+      font-size: clamp(20px, 2.4vw, 28px); line-height: 1;
+      background: linear-gradient(135deg, var(--accent), var(--electric));
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent; color: transparent;
+      font-variant-numeric: tabular-nums; flex-shrink: 0; min-width: 2.2em;
     }
-    .now-item p { margin: 0; font-size: clamp(15px, 1.6vw, 18px); line-height: 1.6; color: var(--ink-soft); }
-    @media (max-width: 800px) { .now-wrap { grid-template-columns: 1fr; gap: 16px; } }
+    .now-item p {
+      margin: 0; position: relative; z-index: 1;
+      font-size: clamp(15px, 1.7vw, 18.5px); line-height: 1.65; color: var(--ink);
+      font-family: var(--serif);
+    }
+    .now-foot {
+      margin-top: 18px; font-size: 12px; letter-spacing: 0.08em; color: var(--muted);
+    }
+    @media (max-width: 800px) {
+      .now-item { gap: 16px; padding: 16px 18px; flex-direction: column; }
+      .now-num { min-width: 0; }
+    }
 
     /* Rhino Picks */
     .picks-filters { display: flex; gap: 8px; margin: 24px 0 20px; flex-wrap: wrap; }
@@ -4911,7 +4970,6 @@
     <section id="picks"></section>
     <section id="builds"></section>
     <section id="daily"></section>
-    <section id="commentary"></section>
     <section id="manifesto" class="quote-section"></section>
     <section id="contact"></section>
   </main>
@@ -5009,7 +5067,7 @@
       if (numEl) numEl.textContent = 'ISSUE ' + issueNum;
     })();
   </script>
-  <script src="data.js?v=20260714-restore"></script>
+  <script src="data.js?v=20260823-merge"></script>
   <script>
     /* Fallback: force-show page after 3s if JS hasn't completed */
     setTimeout(function(){var m=document.querySelector('main');if(m&&!m.classList.contains('ready'))m.classList.add('ready');},3000);
@@ -5232,7 +5290,7 @@
             `).join('')}
           </div>
           <div class="notes-view-all fade-in fade-in-delay-3">
-            <a class="notes-archive-link" href="notes/">查看全部 ${j.notes.length} 篇笔记 <span aria-hidden="true">\u2192</span></a>
+            <a class="notes-archive-link" href="notes/">查看全部 ${j.notes.length} 篇观察 <span aria-hidden="true">\u2192</span></a>
           </div>
         </div>
       `;
@@ -5371,94 +5429,6 @@
             </div>
           </div>
         `;
-      }
-
-      /* Commentary — load from feed.json + fallback */
-      const commentarySection = document.getElementById('commentary');
-      const cm = D.commentary;
-
-      function renderArticles(articles) {
-        if (!articles || articles.length === 0) {
-          return `<div class="article-empty fade-in">
-            \u8fd8\u6ca1\u6709\u65f6\u8bc4\u6587\u7ae0\u3002\u6bcf\u665a 7 \u70b9\u751f\u6210\u7b2c\u4e00\u7bc7\u540e\u81ea\u52a8\u663e\u793a\u3002<br/>
-            \u201c\u7eaf\u5c5e\u4e2a\u4eba\u778e\u626f\u95f2\u804a\uff0c\u4f9b\u5927\u5bb6\u6253\u53d1\u7a7a\u95f2\u65f6\u95f4\u3002\u201d
-          </div>`;
-        }
-        return articles.map((a, i) => `
-          <a class="article-card fade-in fade-in-delay-${Math.min(i, 3)}" href="${esc(a.href)}">
-            <span class="art-glow" aria-hidden="true"></span>
-            <div>
-              <div class="art-meta">
-                <span class="art-cat">${esc(a.cat || '时评')}</span>
-                <span class="art-date">${esc(a.date || '')}</span>
-              </div>
-              <h3>${esc(a.title)}</h3>
-              <p class="art-excerpt">${esc(a.excerpt)}</p>
-            </div>
-            <div class="art-arrow" aria-hidden="true">\u2192</div>
-          </a>
-        `).join('');
-      }
-
-      // Initial render with loading state
-      commentarySection.innerHTML = `
-        <div class="container">
-          <div class="section-head fade-in">
-            <div>
-              <div class="label">${esc(cm.label)}</div>
-              <h2>${esc(cm.headingLine1)}<br/>${esc(cm.headingLine2)}</h2>
-            </div>
-            <p class="blurb">${esc(cm.blurb)}</p>
-          </div>
-          <div class="article-list" id="articleList">
-            <div class="article-loading fade-in">
-              <span class="loader-dot">\u8bfb</span>
-              <span class="loader-dot">\u53d6</span>
-              <span class="loader-dot">\u4e2d</span>
-              ...
-            </div>
-          </div>
-          <div class="commentary-footer">
-            <a href="articles/">\u67e5\u770b\u5168\u90e8\u65f6\u8bc4 \u2192</a>
-          </div>
-        </div>
-      `;
-
-      // Mobile uses embedded defaults and avoids another startup connection.
-      var list = document.getElementById('articleList');
-      if (_isMobile) {
-        list.innerHTML = renderArticles(cm.defaultFeatured);
-        observeFadeIns();
-        attachSpotlight('.article-card');
-      } else {
-        var feedUrl = D.siteConfig ? D.siteConfig.articlesFeed : 'articles/feed.json';
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', feedUrl, true);
-        xhr.onload = function () {
-        var list = document.getElementById('articleList');
-        if (xhr.status === 200) {
-          try {
-            var feed = JSON.parse(xhr.responseText);
-            var articles = feed.articles || feed;
-            // Show latest 5, in reverse chronological order
-            if (articles.length > 5) articles = articles.slice(0, 5);
-            list.innerHTML = renderArticles(articles);
-          } catch (e) {
-            list.innerHTML = renderArticles(cm.defaultFeatured);
-          }
-        } else {
-          list.innerHTML = renderArticles(cm.defaultFeatured);
-        }
-        observeFadeIns();
-        attachSpotlight('.article-card');
-        };
-        xhr.onerror = function () {
-          var list = document.getElementById('articleList');
-          list.innerHTML = renderArticles(cm.defaultFeatured);
-          observeFadeIns();
-          attachSpotlight('.article-card');
-        };
-        xhr.send();
       }
 
       /* Quote */
@@ -5767,7 +5737,7 @@
       window.addEventListener('scroll', updateScrollProgress, { passive: true });
 
       function updateActiveNav() {
-        const sectionIds = ['profile', 'notes', 'builds', 'daily', 'commentary', 'manifesto', 'contact'];
+        const sectionIds = ['now', 'profile', 'notes', 'picks', 'builds', 'daily', 'manifesto', 'contact'];
         const anchors = document.querySelectorAll('#navLinks a[href^="#"]');
         const activeId = sectionIds.reduce((current, id) => {
           const el = document.getElementById(id);
@@ -5800,6 +5770,7 @@
         });
       }
       attachSpotlight('.note');
+      attachSpotlight('.now-item');
       attachSpotlight('.article-card');
 
       const canvas = document.getElementById('ambientCanvas');

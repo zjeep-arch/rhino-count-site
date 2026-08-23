@@ -209,7 +209,7 @@
       var list = document.getElementById('note-list');
       var countEl = document.getElementById('note-count');
 
-      if (countEl) countEl.textContent = '共 ' + notes.length + ' 篇';
+      if (countEl) countEl.textContent = '共 ' + notes.length + ' 篇观察';
 
       list.innerHTML = notes.map(function(n) {
         return '<a class="note-item" href="' + n.href + '">' +
