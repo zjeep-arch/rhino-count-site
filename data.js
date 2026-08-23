@@ -217,6 +217,15 @@ window.SITE_DATA = {
     items: [
       {
         type: "YOUTUBE",
+        author: "Stanford Online",
+        title: "Stanford CME295 Transformers & LLMs | Lecture 1 - Transformer",
+        tag: "LLM Course",
+        reason: "斯坦福官方的 Transformers 与 LLM 课程第一讲，从注意力机制讲起，体系比零散视频完整得多，适合想系统补课的人。",
+        meta: "1h 42min · YouTube",
+        href: "https://www.youtube.com/watch?v=Ub3GoFaUcds"
+      },
+      {
+        type: "YOUTUBE",
         author: "Andrej Karpathy",
         title: "Deep Dive into LLMs like ChatGPT",
         tag: "LLM Fundamentals",
