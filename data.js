@@ -177,14 +177,51 @@ window.SITE_DATA = {
     heading: "侧像 · Profile",
     blurb: "把一张名片摊开，给路过的人一个安静的坐标。",
     cells: [
-      { k: "本名",  v: "犀牛伯爵" },
+      { k: "名称",  v: "犀牛伯爵" },
       { k: "学历",  v: "北京大学 · 本科" },
+      { k: "勋章",  v: "高考数学 · 满分" },
       { k: "履历",  v: "AI 大厂 · 互联网从业者" },
       { k: "关注",  v: "AI / Models / Agents / Business" },
       { k: "能力",  v: "Content × Product × Marketing" },
       { k: "坐标",  v: "IP 属地 · 北京" },
-      { k: "勋章",  v: "高考数学 · 满分" },
       { k: "频道",  v: "小红书号 1147661654" }
+    ]
+  },
+
+  /* ---------- 犀牛精选 Picks ---------- */
+  picks: {
+    label: "RHINO PICKS · 犀牛精选",
+    headingLine1: "我最近，",
+    headingLine2: "在看什么。",
+    blurb: "我每天看很多关于 AI、产品和商业的内容。这里留下的，是我真正看完、并且觉得值得你花时间的东西。",
+    items: [
+      {
+        type: "YOUTUBE",
+        author: "Andrej Karpathy",
+        title: "Deep Dive into LLMs like ChatGPT",
+        tag: "LLM Fundamentals",
+        reason: "如果只看一个视频理解 LLM 是什么，我依然会推荐这一期。",
+        meta: "2h 14min · YouTube",
+        href: "https://www.youtube.com/watch?v=7xTGNNLPyMI"
+      },
+      {
+        type: "X",
+        author: "Andrej Karpathy",
+        title: "Software Is Changing (Again)",
+        tag: "Agent Software",
+        reason: "这条 Thread 很好地解释了为什么 Agent 会改变软件的交互界面。",
+        meta: "12 posts · X",
+        href: "https://x.com/karpathy"
+      },
+      {
+        type: "ARTICLE",
+        author: "Dwarkesh Patel",
+        title: "The Scaling Era",
+        tag: "Models Scaling",
+        reason: "理解下一阶段模型竞争，这篇比大部分二手解读都有价值。",
+        meta: "15 min read · Article",
+        href: "https://www.dwarkesh.com"
+      }
     ]
   },
 

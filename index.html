@@ -1167,6 +1167,43 @@
     /* =========================================================
      * Journal cards
      * ========================================================= */
+    /* Rhino Picks */
+    .picks-filters { display: flex; gap: 8px; margin: 24px 0 20px; flex-wrap: wrap; }
+    .pick-filter {
+      appearance: none; background: transparent; border: 1px solid var(--line);
+      color: var(--muted); font: inherit; font-size: 12px; letter-spacing: 0.08em;
+      padding: 6px 14px; border-radius: 999px; cursor: pointer; transition: all .2s ease;
+    }
+    .pick-filter:hover { color: var(--ink); border-color: var(--line-2); }
+    .pick-filter.active { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+    .picks-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .pick-card {
+      display: flex; flex-direction: column; gap: 8px;
+      border: 1px solid var(--line); border-radius: 14px; padding: 20px;
+      text-decoration: none; color: inherit;
+      transition: transform .2s ease, border-color .2s ease;
+    }
+    .pick-card:hover { transform: translateY(-3px); border-color: var(--line-2); }
+    .pick-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+    .pick-type {
+      font-size: 11px; letter-spacing: 0.12em; padding: 3px 10px; border-radius: 999px;
+      border: 1px solid currentColor;
+    }
+    .pick-type-youtube { color: #ff4d4d; }
+    .pick-type-x { color: var(--muted); }
+    .pick-type-article { color: #4da3ff; }
+    .pick-tag { font-size: 11px; color: var(--muted); letter-spacing: 0.06em; }
+    .pick-card h3 { font-size: 17px; line-height: 1.35; margin: 4px 0 0; }
+    .pick-author { font-size: 12px; color: var(--muted); }
+    .pick-reason {
+      font-size: 13.5px; line-height: 1.65; color: var(--muted);
+      border-left: 2px solid var(--line); padding-left: 10px; margin: 6px 0 0;
+    }
+    .pick-meta { font-size: 12px; color: var(--muted); margin-top: auto; padding-top: 10px; }
+    .picks-empty { color: var(--muted); font-size: 14px; padding: 32px 0; text-align: center; grid-column: 1 / -1; }
+    @media (max-width: 960px) { .picks-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px) { .picks-grid { grid-template-columns: 1fr; } }
+
     .journal-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -4829,6 +4866,7 @@
     </section>
     <section id="profile"></section>
     <section id="notes"></section>
+    <section id="picks"></section>
     <section id="builds"></section>
     <section id="daily"></section>
     <section id="commentary"></section>
@@ -5124,6 +5162,53 @@
           </div>
         </div>
       `;
+
+      /* Rhino Picks — 犀牛精选（含平台筛选） */
+      const pk = D.picks;
+      if (pk && pk.items && pk.items.length) {
+        document.getElementById('picks').innerHTML = `
+          <div class="container">
+            <div class="section-head fade-in">
+              <div>
+                <div class="label">${esc(pk.label)}</div>
+                <h2>${esc(pk.headingLine1)}<br/>${esc(pk.headingLine2)}</h2>
+              </div>
+              <p class="blurb">${esc(pk.blurb)}</p>
+            </div>
+            <div class="picks-filters fade-in" role="tablist" aria-label="精选内容筛选">
+              ${['ALL','YOUTUBE','X','ARTICLE'].map(f => `
+                <button class="pick-filter${f === 'ALL' ? ' active' : ''}" data-filter="${f}" role="tab" aria-selected="${f === 'ALL'}">${f}</button>
+              `).join('')}
+            </div>
+            <div class="picks-grid" id="picksGrid"></div>
+          </div>
+        `;
+        const grid = document.getElementById('picksGrid');
+        const renderPicks = (filter) => {
+          const list = filter === 'ALL' ? pk.items : pk.items.filter(it => it.type.toUpperCase() === filter);
+          grid.innerHTML = list.length ? list.map((it, i) => `
+            <a class="pick-card fade-in fade-in-delay-${Math.min(i, 3)}" href="${esc(it.href)}" target="_blank" rel="noopener">
+              <div class="pick-top">
+                <span class="pick-type pick-type-${it.type.toLowerCase()}">${esc(it.type)}</span>
+                <span class="pick-tag">${esc(it.tag)}</span>
+              </div>
+              <h3>${esc(it.title)}</h3>
+              <div class="pick-author">${esc(it.author)}</div>
+              <p class="pick-reason">${esc(it.reason)}</p>
+              <span class="pick-meta">${esc(it.meta)} ↗</span>
+            </a>
+          `).join('') : '<p class="picks-empty">这个分类下暂时没有收藏。</p>';
+        };
+        renderPicks('ALL');
+        document.querySelectorAll('.pick-filter').forEach(btn => {
+          btn.addEventListener('click', () => {
+            document.querySelectorAll('.pick-filter').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
+            btn.classList.add('active');
+            btn.setAttribute('aria-selected', 'true');
+            renderPicks(btn.dataset.filter);
+          });
+        });
+      }
 
       /* Creation matrix */
       const lab = D.lab;
