@@ -38,9 +38,14 @@
     "url": "https://rhinocount.cn/",
     "image": "https://rhinocount.cn/temple-of-heaven.png",
     "alumniOf": { "@type": "CollegeOrUniversity", "name": "北京大学" },
-    "sameAs": ["https://www.xiaohongshu.com/user/profile/60572004000000000101ce41"]
+    "sameAs": [
+      "https://www.xiaohongshu.com/user/profile/60572004000000000101ce41",
+      "https://github.com/zjeep-arch",
+      "https://x.com/rhino_count"
+    ]
   }
   </script>
+  <link rel="alternate" type="application/rss+xml" title="RHINO COUNT RSS" href="https://rhinocount.cn/rss.xml" />
 
   <style>
     /* =========================================================
@@ -1167,6 +1172,42 @@
     /* =========================================================
      * Journal cards
      * ========================================================= */
+    /* WHY RHINO COUNT */
+    .profile-why {
+      margin-top: 28px; padding: 24px 26px;
+      border-left: 3px solid var(--accent);
+      background: var(--surface); border-radius: 0 var(--radius) var(--radius) 0;
+    }
+    .why-title { font-size: 12px; letter-spacing: 0.16em; color: var(--accent); }
+    .why-text { font-size: 15.5px; line-height: 1.75; color: var(--ink-soft); margin: 10px 0 14px; max-width: 62ch; }
+    .why-keywords { display: flex; gap: 10px; flex-wrap: wrap; }
+    .why-kw {
+      font-size: 12px; letter-spacing: 0.06em; padding: 4px 12px;
+      border: 1px solid var(--line-2); border-radius: 999px; color: var(--muted);
+    }
+
+    /* NOW — 此刻判断 */
+    .now-wrap {
+      display: grid; grid-template-columns: 1fr 1.4fr; gap: clamp(24px, 5vw, 64px);
+      padding: clamp(40px, 7vw, 72px) 0;
+      border-bottom: 1px solid var(--line);
+      align-items: start;
+    }
+    .now-head .label { font-size: 12px; letter-spacing: 0.14em; color: var(--muted); }
+    .now-head h2 { font-size: clamp(24px, 3vw, 34px); line-height: 1.25; margin: 12px 0 0; }
+    .now-list { list-style: none; margin: 0; padding: 0; }
+    .now-item {
+      display: flex; gap: 20px; align-items: baseline;
+      padding: 18px 0; border-bottom: 1px solid var(--line);
+    }
+    .now-item:last-child { border-bottom: none; }
+    .now-num {
+      font-size: 13px; letter-spacing: 0.1em; color: var(--accent);
+      font-variant-numeric: tabular-nums; flex-shrink: 0;
+    }
+    .now-item p { margin: 0; font-size: clamp(15px, 1.6vw, 18px); line-height: 1.6; color: var(--ink-soft); }
+    @media (max-width: 800px) { .now-wrap { grid-template-columns: 1fr; gap: 16px; } }
+
     /* Rhino Picks */
     .picks-filters { display: flex; gap: 8px; margin: 24px 0 20px; flex-wrap: wrap; }
     .pick-filter {
@@ -4864,6 +4905,7 @@
       </div>
       <div class="hero-cine-scroll">SCROLL ↓</div>
     </section>
+    <section id="now"></section>
     <section id="profile"></section>
     <section id="notes"></section>
     <section id="picks"></section>
@@ -5109,6 +5151,30 @@
 
       /* Profile */
       const p = D.profile;
+      /* NOW — 此刻判断（Hero 后第一模块） */
+      const nw = D.now;
+      if (nw && nw.items && nw.items.length) {
+        document.getElementById('now').innerHTML = `
+          <div class="container">
+            <div class="now-wrap fade-in">
+              <div class="now-head">
+                <span class="label">${esc(nw.label)}</span>
+                <h2>${esc(nw.headingLine1)}<br/>${esc(nw.headingLine2)}</h2>
+              </div>
+              <ol class="now-list">
+                ${nw.items.map(it => `
+                  <li class="now-item">
+                    <span class="now-num">${esc(it.num)}</span>
+                    <p>${esc(it.text)}</p>
+                  </li>
+                `).join('')}
+              </ol>
+            </div>
+          </div>
+        `;
+      }
+
+      /* Profile — 侧像 */
       document.getElementById('profile').innerHTML = `
         <div class="container">
           <div class="section-head fade-in">
@@ -5126,6 +5192,14 @@
               </div>
             `).join('')}
           </div>
+          ${p.why ? `
+          <div class="profile-why fade-in fade-in-delay-2">
+            <div class="why-title">${esc(p.why.title)}</div>
+            <p class="why-text">${esc(p.why.text)}</p>
+            <div class="why-keywords">
+              ${p.why.keywords.map(k => `<span class="why-kw">${esc(k)}</span>`).join('')}
+            </div>
+          </div>` : ''}
         </div>
       `;
 

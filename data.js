@@ -35,7 +35,8 @@ window.SITE_DATA = {
     badge: "EST · BJ",
     nav: [
       { label: "关于", href: "#profile" },
-      { label: "观察", href: "#notes" },
+      { label: "信号", href: "#notes" },
+      { label: "精选", href: "#picks" },
       { label: "文章", href: "articles/" },
       { label: "作品", href: "#builds" }
     ],
@@ -176,6 +177,11 @@ window.SITE_DATA = {
     label: "PROFILE · 侧像",
     heading: "侧像 · Profile",
     blurb: "把一张名片摊开，给路过的人一个安静的坐标。",
+    why: {
+      title: "WHY RHINO COUNT",
+      text: "我相信 AI 时代最大的变化，不只是模型能力提升，而是人类创造、工作和组织方式的重新定义。这里记录的，是我对这场重新定义的长期观察和判断。",
+      keywords: ["AI × Product × Business", "Thinking × Building × Sharing", "Human × Machine Collaboration"]
+    },
     cells: [
       { k: "名称",  v: "犀牛伯爵" },
       { k: "学历",  v: "北京大学 · 本科" },
@@ -185,6 +191,19 @@ window.SITE_DATA = {
       { k: "能力",  v: "Content × Product × Marketing" },
       { k: "坐标",  v: "IP 属地 · 北京" },
       { k: "频道",  v: "小红书号 1147661654" }
+    ]
+  },
+
+  /* ---------- NOW · 此刻判断 ---------- */
+  now: {
+    label: "NOW · 此刻",
+    headingLine1: "此刻，",
+    headingLine2: "我的三个判断。",
+    blurb: "滚过第一屏后，先知道是谁在说话。这三个判断代表我现在的视角，会不定期更新。",
+    items: [
+      { num: "01", text: "Agent 正在从聊天入口进入工作流入口。" },
+      { num: "02", text: "AI Infra 的竞争正在进入 Token Economics 阶段。" },
+      { num: "03", text: "个人创作者正在成为第一批 AI Native 公司。" }
     ]
   },
 
@@ -667,7 +686,7 @@ window.SITE_DATA = {
    * 完整列表由每日 cron job 写入 articles/feed.json，
    * 前端会自动拉取 feed.json 并合并展示。 */
   commentary: {
-    label: "COMMENTARY · 每日时评",
+    label: "ESSAYS · 深度文章",
     headingLine1: "在喧嚣里，",
     headingLine2: "闲聊世界。",
     blurb: "每晚 7 点，闲聊拆解当天宏观大事。纯属瞎扯，打发时间刚好。",
