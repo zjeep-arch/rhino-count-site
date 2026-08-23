@@ -1301,6 +1301,45 @@
     }
     .pick-meta { font-size: 12px; color: var(--muted); margin-top: auto; padding-top: 10px; }
     .picks-empty { color: var(--muted); font-size: 14px; padding: 32px 0; text-align: center; grid-column: 1 / -1; }
+    /* Picks issue bar + reason label + follows */
+    .picks-issuebar {
+      display: flex; justify-content: space-between; align-items: baseline;
+      margin: 18px 0 14px; padding-bottom: 12px;
+      border-bottom: 1px solid var(--line);
+    }
+    .picks-issue {
+      font-family: var(--serif); font-style: italic;
+      font-size: 15px; letter-spacing: 0.1em; color: var(--accent);
+    }
+    .picks-updated { font-size: 11px; letter-spacing: 0.12em; color: var(--muted); }
+    .pick-reason-label {
+      display: block;
+      font-size: 10px; letter-spacing: 0.16em; color: var(--accent);
+      margin-bottom: 5px; font-weight: 600;
+    }
+    .follows-wrap {
+      margin-top: 36px; padding-top: 24px;
+      border-top: 1px solid var(--line);
+    }
+    .follows-label {
+      font-size: 12px; letter-spacing: 0.16em; color: var(--muted);
+      margin-bottom: 14px;
+    }
+    .follows-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 10px;
+    }
+    .follow-item {
+      display: flex; flex-direction: column; gap: 3px;
+      padding: 12px 14px;
+      border: 1px solid var(--line); border-radius: var(--radius-sm);
+      text-decoration: none; color: inherit;
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+    .follow-item:hover { border-color: var(--line-2); transform: translateY(-2px); }
+    .follow-item strong { font-size: 13.5px; }
+    .follow-item span { font-size: 11.5px; color: var(--muted); }
+
     @media (max-width: 960px) { .picks-grid { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 600px) { .picks-grid { grid-template-columns: 1fr; } }
 
@@ -4947,8 +4986,8 @@
       <div class="hero-cine-content">
         <div class="hero-cine-kicker">RHINO COUNT · 犀牛伯爵</div>
         <h1 class="hero-cine-title">
-          <span>AI NATIVE STUDIO</span>
           <strong>RHINO COUNT</strong>
+          <span>AI NATIVE STUDIO</span>
         </h1>
         <p class="hero-cine-lede">在 AI 的噪音里，寻找真正重要的变化。</p>
         <div class="hero-cine-cta">
@@ -4964,8 +5003,8 @@
       </div>
       <div class="hero-cine-scroll">SCROLL ↓</div>
     </section>
-    <section id="now"></section>
     <section id="profile"></section>
+    <section id="now"></section>
     <section id="notes"></section>
     <section id="picks"></section>
     <section id="builds"></section>
@@ -5067,7 +5106,7 @@
       if (numEl) numEl.textContent = 'ISSUE ' + issueNum;
     })();
   </script>
-  <script src="data.js?v=20260823-merge"></script>
+  <script src="data.js?v=20260823-picks2"></script>
   <script>
     /* Fallback: force-show page after 3s if JS hasn't completed */
     setTimeout(function(){var m=document.querySelector('main');if(m&&!m.classList.contains('ready'))m.classList.add('ready');},3000);
@@ -5307,6 +5346,10 @@
               </div>
               <p class="blurb">${esc(pk.blurb)}</p>
             </div>
+            <div class="picks-issuebar fade-in">
+              <span class="picks-issue" id="picksIssue"></span>
+              <span class="picks-updated">UPDATED · ${esc(pk.updated || '')}</span>
+            </div>
             <div class="picks-filters fade-in" role="tablist" aria-label="精选内容筛选">
               ${['ALL','YOUTUBE','X','ARTICLE'].map(f => `
                 <button class="pick-filter${f === 'ALL' ? ' active' : ''}" data-filter="${f}" role="tab" aria-selected="${f === 'ALL'}">${f}</button>
@@ -5316,6 +5359,8 @@
           </div>
         `;
         const grid = document.getElementById('picksGrid');
+        const issueEl = document.getElementById('picksIssue');
+        if (issueEl) issueEl.textContent = 'ISSUE ' + String(Math.floor((new Date() - new Date('2026-06-01')) / 86400000)).padStart(3, '0');
         const renderPicks = (filter) => {
           const list = filter === 'ALL' ? pk.items : pk.items.filter(it => it.type.toUpperCase() === filter);
           grid.innerHTML = list.length ? list.map((it, i) => `
@@ -5326,12 +5371,28 @@
               </div>
               <h3>${esc(it.title)}</h3>
               <div class="pick-author">${esc(it.author)}</div>
-              <p class="pick-reason">${esc(it.reason)}</p>
+              <p class="pick-reason"><span class="pick-reason-label">${esc(pk.reasonLabel || 'WHY I PICKED IT')}</span>${esc(it.reason)}</p>
               <span class="pick-meta">${esc(it.meta)} ↗</span>
             </a>
           `).join('') : '<p class="picks-empty">这个分类下暂时没有收藏。</p>';
         };
         renderPicks('ALL');
+        if (pk.follows && pk.follows.length) {
+          const bar = document.createElement('div');
+          bar.className = 'follows-wrap fade-in';
+          bar.innerHTML = `
+            <div class="follows-label">${esc(pk.followsLabel || 'PEOPLE I FOLLOW')}</div>
+            <div class="follows-grid">
+              ${pk.follows.map(fl => `
+                <a class="follow-item" href="${esc(fl.href)}" target="_blank" rel="noopener">
+                  <strong>${esc(fl.name)}</strong>
+                  <span>${esc(fl.desc)} ↗</span>
+                </a>
+              `).join('')}
+            </div>
+          `;
+          document.querySelector('#picks .container').appendChild(bar);
+        }
         document.querySelectorAll('.pick-filter').forEach(btn => {
           btn.addEventListener('click', () => {
             document.querySelectorAll('.pick-filter').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });

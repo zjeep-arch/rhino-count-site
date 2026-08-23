@@ -212,6 +212,8 @@ window.SITE_DATA = {
     headingLine1: "我最近，",
     headingLine2: "在看什么。",
     blurb: "我每天看很多关于 AI、产品和商业的内容。这里留下的，是我真正看完、并且觉得值得你花时间的东西。",
+    updated: "2026.08.23",
+    reasonLabel: "WHY I PICKED IT · 为什么值得看",
     items: [
       {
         type: "YOUTUBE",
@@ -240,6 +242,15 @@ window.SITE_DATA = {
         meta: "15 min read · Article",
         href: "https://www.dwarkesh.com"
       }
+    ]
+,
+    followsLabel: "PEOPLE I FOLLOW · 我的信息源",
+    follows: [
+      { name: "Andrej Karpathy", desc: "Understanding Models", href: "https://x.com/karpathy" },
+      { name: "Dwarkesh Patel", desc: "Deep Interviews", href: "https://www.dwarkesh.com" },
+      { name: "Simon Willison", desc: "AI Engineering", href: "https://simonwillison.net" },
+      { name: "Benedict Evans", desc: "Technology Strategy", href: "https://www.ben-evans.com" },
+      { name: "Paul Graham", desc: "Startup Thinking", href: "https://www.paulgraham.com" }
     ]
   },
 
