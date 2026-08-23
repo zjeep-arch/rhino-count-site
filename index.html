@@ -5334,9 +5334,11 @@
         </div>
       `;
 
-      /* Rhino Picks — 犀牛精选（含平台筛选） */
+      /* Rhino Picks — 犀牛精选（首页限量展示 + 查看全部入口 + 平台筛选） */
       const pk = D.picks;
       if (pk && pk.items && pk.items.length) {
+        const HOME_PICKS_LIMIT = 6;
+        const homeItems = pk.items.slice(0, HOME_PICKS_LIMIT);
         document.getElementById('picks').innerHTML = `
           <div class="container">
             <div class="section-head fade-in">
@@ -5356,14 +5358,18 @@
               `).join('')}
             </div>
             <div class="picks-grid" id="picksGrid"></div>
+            ${pk.items.length > HOME_PICKS_LIMIT ? `
+            <div class="notes-view-all fade-in fade-in-delay-3">
+              <a class="notes-archive-link" href="picks/">查看全部 ${pk.items.length} 条精选 <span aria-hidden="true">\u2192</span></a>
+            </div>` : ''}
           </div>
         `;
         const grid = document.getElementById('picksGrid');
         const issueEl = document.getElementById('picksIssue');
         if (issueEl) issueEl.textContent = 'ISSUE ' + String(Math.floor((new Date() - new Date('2026-06-01')) / 86400000)).padStart(3, '0');
         const renderPicks = (filter) => {
-          const list = filter === 'ALL' ? pk.items : pk.items.filter(it => it.type.toUpperCase() === filter);
-          grid.innerHTML = list.length ? list.map((it, i) => `
+          const source = filter === 'ALL' ? homeItems : homeItems.filter(it => it.type.toUpperCase() === filter);
+          grid.innerHTML = source.length ? source.map((it, i) => `
             <a class="pick-card fade-in fade-in-delay-${Math.min(i, 3)}" href="${esc(it.href)}" target="_blank" rel="noopener">
               <div class="pick-top">
                 <span class="pick-type pick-type-${it.type.toLowerCase()}">${esc(it.type)}</span>
@@ -5375,6 +5381,17 @@
               <span class="pick-meta">${esc(it.meta)} ↗</span>
             </a>
           `).join('') : '<p class="picks-empty">这个分类下暂时没有收藏。</p>';
+          /* Re-observe re-rendered cards so they actually become visible */
+          if ('IntersectionObserver' in window) {
+            const po = new IntersectionObserver((entries) => {
+              entries.forEach(e => {
+                if (e.isIntersecting) { e.target.classList.add('visible'); po.unobserve(e.target); }
+              });
+            }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+            grid.querySelectorAll('.fade-in:not(.visible)').forEach(el => po.observe(el));
+          } else {
+            grid.querySelectorAll('.fade-in').forEach(el => el.classList.add('visible'));
+          }
         };
         renderPicks('ALL');
         if (pk.follows && pk.follows.length) {
