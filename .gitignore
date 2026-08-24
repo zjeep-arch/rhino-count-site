@@ -10,3 +10,4 @@
 dumate/.hermes_notion.env
 .vercel
 .env*
+.indexnow-submitted.json
