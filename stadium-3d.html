@@ -157,12 +157,12 @@
 </style>
 
   <!-- SEO Optimization -->
-  <link rel="canonical" href="https://zjeep-arch.github.io/rhino-count-site/stadium-3d.html" />
-  <meta property="og:url" content="https://zjeep-arch.github.io/rhino-count-site/stadium-3d.html" />
+  <link rel="canonical" href="https://rhinocount.cn/stadium-3d.html" />
+  <meta property="og:url" content="https://rhinocount.cn/stadium-3d.html" />
   <meta property="og:type" content="article" />
   <meta property="og:title" content="犀牛伯爵 · AI 竞技场 3D" />
   <meta property="og:description" content="3D AI 竞技场 - 多球场切换、天气系统、球迷应援、实时弹幕。" />
-  <meta property="og:image" content="https://zjeep-arch.github.io/rhino-count-site/temple-of-heaven.png" />
+  <meta property="og:image" content="https://rhinocount.cn/temple-of-heaven.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:locale" content="zh_CN" />
@@ -171,7 +171,7 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="犀牛伯爵 · AI 竞技场 3D" />
   <meta name="twitter:description" content="3D AI 竞技场 - 多球场切换、天气系统、球迷应援、实时弹幕。" />
-  <meta name="twitter:image" content="https://zjeep-arch.github.io/rhino-count-site/temple-of-heaven.png" />
+  <meta name="twitter:image" content="https://rhinocount.cn/temple-of-heaven.png" />
   <meta name="robots" content="index,follow,max-image-preview:large" />
 </head>
 <body>
@@ -1529,5 +1529,33 @@ function animate() {
 document.getElementById('loader').classList.add('hide');
 animate();
 </script>
+
+<style>
+  .doi-badge {
+    position: fixed;
+    z-index: 999;
+    right: 14px;
+    bottom: 12px;
+    font-size: 11px;
+    letter-spacing: .04em;
+  }
+  .doi-badge a {
+    display: inline-block;
+    padding: 4px 8px;
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    border-radius: 6px;
+    box-shadow: var(--shadow-sm);
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .doi-badge a:hover { transform: translate(-1px,-1px); box-shadow: var(--shadow-md); }
+</style>
+
+<div class="doi-badge">
+  <a href="https://doi.org/10.5281/zenodo.22070200" target="_blank" rel="noopener"
+     title="Zenodo record: https://zenodo.org/records/22070200">DOI 10.5281/zenodo.22070200</a>
+</div>
+
 </body>
 </html>

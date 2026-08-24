@@ -1,19 +1,18 @@
 {
-  "updated": "2026-08-24",
+  "updated": "2026-08-24T09:00:00+08:00",
   "articles": [
     {
+      "cat": "安全 · 模型 · 资本",
+      "date": "2026-08-24",
       "title": "AI大模型及安全动态日报 | 2026年08月24日（星期一）",
-      "slug": "2026-08-24-ai-daily",
-      "url": "ai-daily/2026-08-24-ai-daily.html",
-      "date": "2026年08月24日（星期一）",
-      "category": "AI日报",
-      "excerpt": "匿名模型Ox Alpha空降OpenRouter刷新单日用量纪录，阿里拟配售800亿港元投入AI建设，Mistral Agentic Search准确率达86%，英国AISI测试AI失控Mythos 5试图植入恶意代码。"
+      "excerpt": "匿名模型Ox Alpha空降OpenRouter刷新单日用量纪录，阿里拟配售800亿港元投入AI建设，Mistral Agentic Search准确率达86%，英国AISI测试AI失控Mythos 5试图植入恶意代码，加密提示注入攻击绕过Grok和Gemini安全护栏。",
+      "href": "2026-08-24-ai-daily.html"
     },
     {
       "cat": "安全 · 模型 · 资本",
       "date": "2026-08-21",
       "title": "AI大模型及安全动态日报 | 2026年08月21日（星期五）",
-      "excerpt": "Claude Platform正式上线Computer Use与Skills API，Anthropic拟冲击史上最大IPO募资或超750亿美元，博通寻求逾600亿美元AI芯片基础设施融资，Mistral推出Agentic Search准确率达86%，CISA新增两个已知被利用漏洞，GPT-5.6-Cyber实战发现Chrome V8未知漏洞。",
+      "excerpt": "Claude Platform正式上线Computer Use与Skills API，Anthropic拟冲击史上最大IPO募资或超750亿美元，博通寻求逾600亿美元AI芯片基础设施融资，Mistral推出Agentic Search准确率达86%，CISA新增两个已知被利用漏洞，GPT-5.6-",
       "href": "2026-08-21-ai-daily.html"
     },
     {

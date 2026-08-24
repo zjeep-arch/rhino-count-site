@@ -8,23 +8,25 @@
   <meta name="theme-color" content="#F4F8FF" media="(prefers-color-scheme: light)" />
   <meta name="theme-color" content="#05050A" media="(prefers-color-scheme: dark)" />
 
-  <title>犀牛伯爵 · AI 创作实验室</title>
-  <meta name="description" content="犀牛伯爵 — AI-native builder。记录 Agent 工作流、AI 写作、宏观科技观察与内容产品化实验。" />
+  <title>犀牛伯爵 · RHINO COUNT — 在 AI 的噪音里，寻找真正重要的变化</title>
+  <meta property="bytedance:published_time" content="2026-06-01T09:00:00+08:00" />
+  <meta property="bytedance:updated_time" content="2026-08-23T09:00:00+08:00" />
+  <meta name="description" content="犀牛伯爵（RHINO COUNT）· AI Native Studio。记录 AI 如何改变技术、商业与人的工作方式。Agent 工作流、模型观察、产业判断与内容实验。" />
   <meta name="keywords" content="犀牛伯爵, AI, Agent, AI-native, 大模型, 学习方法, 北大, 小红书, AI 大厂, Prompt, 时评, 宏观分析, 创作实验室" />
   <meta name="author" content="犀牛伯爵" />
   <meta name="robots" content="index,follow,max-image-preview:large" />
-  <link rel="canonical" href="https://zjeep-arch.github.io/rhino-count-site/" />
+  <link rel="canonical" href="https://rhinocount.cn/" />
 
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="犀牛伯爵 · AI 创作实验室" />
-  <meta property="og:description" content="AI-native builder。记录 Agent 工作流、AI 写作、宏观科技观察与内容产品化实验。" />
-  <meta property="og:url" content="https://zjeep-arch.github.io/rhino-count-site/" />
-  <meta property="og:image" content="https://zjeep-arch.github.io/rhino-count-site/temple-of-heaven.png" />
+  <meta property="og:title" content="犀牛伯爵 · RHINO COUNT — 在 AI 的噪音里，寻找真正重要的变化" />
+  <meta property="og:description" content="犀牛伯爵（RHINO COUNT）· AI Native Studio。记录 AI 如何改变技术、商业与人的工作方式。" />
+  <meta property="og:url" content="https://rhinocount.cn/" />
+  <meta property="og:image" content="https://rhinocount.cn/temple-of-heaven.png" />
   <meta property="og:locale" content="zh_CN" />
 
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="犀牛伯爵 · AI 创作实验室" />
-  <meta name="twitter:description" content="AI-native builder。记录 Agent 工作流、AI 写作、宏观科技观察与内容产品化实验。" />
+  <meta name="twitter:title" content="犀牛伯爵 · RHINO COUNT — 在 AI 的噪音里，寻找真正重要的变化" />
+  <meta name="twitter:description" content="犀牛伯爵（RHINO COUNT）· AI Native Studio。记录 AI 如何改变技术、商业与人的工作方式。" />
 
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%231C1410'/%3E%3Ctext x='50%25' y='54%25' text-anchor='middle' font-size='38' font-family='Georgia,serif' fill='%23E8C77A'%3E犀%3C/text%3E%3C/svg%3E" />
   <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='32' fill='%231C1410'/%3E%3Ctext x='50%25' y='58%25' text-anchor='middle' font-size='110' font-family='Georgia,serif' fill='%23E8C77A'%3E犀%3C/text%3E%3C/svg%3E" />
@@ -35,12 +37,17 @@
     "@type": "Person",
     "name": "犀牛伯爵",
     "description": "AI-native builder，记录 Agent 工作流、AI 写作、宏观科技观察与内容产品化实验。",
-    "url": "https://zjeep-arch.github.io/rhino-count-site/",
-    "image": "https://zjeep-arch.github.io/rhino-count-site/temple-of-heaven.png",
+    "url": "https://rhinocount.cn/",
+    "image": "https://rhinocount.cn/temple-of-heaven.png",
     "alumniOf": { "@type": "CollegeOrUniversity", "name": "北京大学" },
-    "sameAs": ["https://www.xiaohongshu.com/user/profile/60572004000000000101ce41"]
+    "sameAs": [
+      "https://www.xiaohongshu.com/user/profile/60572004000000000101ce41",
+      "https://github.com/zjeep-arch",
+      "https://x.com/rhino_count"
+    ]
   }
   </script>
+  <link rel="alternate" type="application/rss+xml" title="RHINO COUNT RSS" href="https://rhinocount.cn/rss.xml" />
 
   <style>
     /* =========================================================
@@ -381,6 +388,13 @@
       font-size: 11px; letter-spacing: 0.32em;
       text-transform: uppercase; color: var(--muted);
       margin-bottom: var(--s-3);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .section-head .label::before {
+      content: "";
+      width: 24px; height: 1px;
+      background: var(--accent); flex-shrink: 0;
+      opacity: 0.6;
     }
     .section-head h2 {
       font-family: var(--serif); font-weight: 700;
@@ -883,6 +897,16 @@
       content: "\2192";
       transition: transform 0.25s ease;
     }
+    .lab-doi {
+      display: inline-block;
+      margin-top: 10px;
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 3px 10px;
+    }
     .lab-card:hover .lab-link::after,
     .featured-work:hover .lab-link::after {
       transform: translateX(4px);
@@ -1160,6 +1184,177 @@
     /* =========================================================
      * Journal cards
      * ========================================================= */
+    /* WHY RHINO COUNT */
+    .profile-why {
+      margin-top: 28px; padding: 24px 26px;
+      border-left: 3px solid var(--accent);
+      background: var(--surface); border-radius: 0 var(--radius) var(--radius) 0;
+    }
+    .why-title { font-size: 12px; letter-spacing: 0.16em; color: var(--accent); }
+    .why-text { font-size: 15.5px; line-height: 1.75; color: var(--ink-soft); margin: 10px 0 14px; max-width: 62ch; }
+    .why-keywords { display: flex; gap: 10px; flex-wrap: wrap; }
+    .why-kw {
+      font-size: 12px; letter-spacing: 0.06em; padding: 4px 12px;
+      border: 1px solid var(--line-2); border-radius: 999px; color: var(--muted);
+    }
+
+    /* NOW — 此刻判断（杂志卷首语风） */
+    .now-wrap {
+      position: relative;
+      padding: clamp(48px, 8vw, 88px) 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .now-wrap::before {
+      content: "NOW";
+      position: absolute; top: 8px; right: 0;
+      font-family: var(--serif); font-style: italic;
+      font-size: clamp(80px, 14vw, 180px); line-height: 1;
+      color: transparent;
+      -webkit-text-stroke: 1px var(--line-2);
+      opacity: 0.5; pointer-events: none;
+    }
+    .now-head { position: relative; margin-bottom: clamp(24px, 4vw, 40px); }
+    .now-head .label {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 12px; letter-spacing: 0.18em; color: var(--accent); font-weight: 600;
+    }
+    .now-head .label::before {
+      content: ""; width: 24px; height: 1px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+    }
+    .now-head h2 {
+      font-family: var(--serif);
+      font-size: clamp(26px, 3.4vw, 40px); line-height: 1.22;
+      margin: 14px 0 0;
+    }
+    .now-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+    .now-item {
+      position: relative; overflow: hidden;
+      display: flex; gap: 24px; align-items: baseline;
+      padding: 20px 24px;
+      background: var(--surface);
+      border: 1px solid var(--line); border-radius: var(--radius);
+      backdrop-filter: blur(16px);
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+      --spot-x: 50%; --spot-y: 0%;
+    }
+    .now-item::before {
+      content: "";
+      position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+      background: linear-gradient(var(--accent), var(--electric), var(--accent-2));
+      transform: scaleY(0); transform-origin: top;
+      transition: transform 0.4s ease;
+    }
+    .now-item::after {
+      content: "";
+      position: absolute; inset: 0;
+      background: radial-gradient(circle at var(--spot-x) var(--spot-y), color-mix(in oklab, var(--accent) 16%, transparent), transparent 32%);
+      opacity: 0; transition: opacity 0.25s ease; pointer-events: none;
+    }
+    .now-item:hover {
+      transform: translateY(-3px);
+      border-color: var(--line-2);
+      box-shadow: var(--shadow-2), var(--shadow-glow);
+    }
+    .now-item:hover::before { transform: scaleY(1); }
+    .now-item:hover::after { opacity: 1; }
+    .now-num {
+      font-family: var(--serif); font-style: italic;
+      font-size: clamp(20px, 2.4vw, 28px); line-height: 1;
+      background: linear-gradient(135deg, var(--accent), var(--electric));
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent; color: transparent;
+      font-variant-numeric: tabular-nums; flex-shrink: 0; min-width: 2.2em;
+    }
+    .now-item p {
+      margin: 0; position: relative; z-index: 1;
+      font-size: clamp(15px, 1.7vw, 18.5px); line-height: 1.65; color: var(--ink);
+      font-family: var(--serif);
+    }
+    .now-foot {
+      margin-top: 18px; font-size: 12px; letter-spacing: 0.08em; color: var(--muted);
+    }
+    @media (max-width: 800px) {
+      .now-item { gap: 16px; padding: 16px 18px; flex-direction: column; }
+      .now-num { min-width: 0; }
+    }
+
+    /* Rhino Picks */
+    .picks-filters { display: flex; gap: 8px; margin: 24px 0 20px; flex-wrap: wrap; }
+    .pick-filter {
+      appearance: none; background: transparent; border: 1px solid var(--line);
+      color: var(--muted); font: inherit; font-size: 12px; letter-spacing: 0.08em;
+      padding: 6px 14px; border-radius: 999px; cursor: pointer; transition: all .2s ease;
+    }
+    .pick-filter:hover { color: var(--ink); border-color: var(--line-2); }
+    .pick-filter.active { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+    .picks-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .pick-card {
+      display: flex; flex-direction: column; gap: 8px;
+      border: 1px solid var(--line); border-radius: 14px; padding: 20px;
+      text-decoration: none; color: inherit;
+      transition: transform .2s ease, border-color .2s ease;
+    }
+    .pick-card:hover { transform: translateY(-3px); border-color: var(--line-2); }
+    .pick-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+    .pick-type {
+      font-size: 11px; letter-spacing: 0.12em; padding: 3px 10px; border-radius: 999px;
+      border: 1px solid currentColor;
+    }
+    .pick-type-youtube { color: #ff4d4d; }
+    .pick-type-x { color: var(--muted); }
+    .pick-type-article { color: #4da3ff; }
+    .pick-tag { font-size: 11px; color: var(--muted); letter-spacing: 0.06em; }
+    .pick-card h3 { font-size: 17px; line-height: 1.35; margin: 4px 0 0; }
+    .pick-author { font-size: 12px; color: var(--muted); }
+    .pick-reason {
+      font-size: 13.5px; line-height: 1.65; color: var(--muted);
+      border-left: 2px solid var(--line); padding-left: 10px; margin: 6px 0 0;
+    }
+    .pick-meta { font-size: 12px; color: var(--muted); margin-top: auto; padding-top: 10px; }
+    .picks-empty { color: var(--muted); font-size: 14px; padding: 32px 0; text-align: center; grid-column: 1 / -1; }
+    /* Picks issue bar + reason label + follows */
+    .picks-issuebar {
+      display: flex; justify-content: space-between; align-items: baseline;
+      margin: 18px 0 14px; padding-bottom: 12px;
+      border-bottom: 1px solid var(--line);
+    }
+    .picks-issue {
+      font-family: var(--serif); font-style: italic;
+      font-size: 15px; letter-spacing: 0.1em; color: var(--accent);
+    }
+    .picks-updated { font-size: 11px; letter-spacing: 0.12em; color: var(--muted); }
+    .pick-reason-label {
+      display: block;
+      font-size: 10px; letter-spacing: 0.16em; color: var(--accent);
+      margin-bottom: 5px; font-weight: 600;
+    }
+    .follows-wrap {
+      margin-top: 36px; padding-top: 24px;
+      border-top: 1px solid var(--line);
+    }
+    .follows-label {
+      font-size: 12px; letter-spacing: 0.16em; color: var(--muted);
+      margin-bottom: 14px;
+    }
+    .follows-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 10px;
+    }
+    .follow-item {
+      display: flex; flex-direction: column; gap: 3px;
+      padding: 12px 14px;
+      border: 1px solid var(--line); border-radius: var(--radius-sm);
+      text-decoration: none; color: inherit;
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+    .follow-item:hover { border-color: var(--line-2); transform: translateY(-2px); }
+    .follow-item strong { font-size: 13.5px; }
+    .follow-item span { font-size: 11.5px; color: var(--muted); }
+
+    @media (max-width: 960px) { .picks-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px) { .picks-grid { grid-template-columns: 1fr; } }
+
     .journal-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -4441,7 +4636,7 @@
       flex: 1;
       min-height: 100svh;
     }
-    /* Kicker — refined label with accent line */
+    /* Kicker - refined label with accent line */
     .hero-cine-kicker {
       display: flex;
       align-items: center;
@@ -4465,6 +4660,53 @@
     [data-theme="light"] .hero-cine-kicker {
       color: rgba(0,143,154,0.80);
       text-shadow: none;
+    }
+
+    /* Magazine masthead - ISSUE number + date */
+    .hero-masthead {
+      position: absolute;
+      top: clamp(60px, 8vh, 90px);
+      right: var(--pad);
+      z-index: 4;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: rgba(207,255,250,0.42);
+      animation: cineFadeUp 800ms 100ms cubic-bezier(.16,.84,.28,1) both;
+    }
+    .hero-masthead .issue-num {
+      font-family: var(--serif);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: rgba(207,255,250,0.62);
+      border-left: 1px solid rgba(207,255,250,0.16);
+      padding-left: 16px;
+    }
+    .hero-masthead .issue-date {
+      padding-top: 2px;
+    }
+    [data-theme="light"] .hero-masthead {
+      color: rgba(8,17,31,0.36);
+    }
+    [data-theme="light"] .hero-masthead .issue-num {
+      color: rgba(8,17,31,0.56);
+      border-left-color: rgba(8,17,31,0.14);
+    }
+    @media (max-width: 860px) {
+      .hero-masthead {
+        top: 56px;
+        right: 16px;
+        gap: 10px;
+      }
+      .hero-masthead .issue-num {
+        font-size: 12px;
+        padding-left: 10px;
+      }
     }
     /* Title — tighter, more dramatic */
     .hero-cine-title {
@@ -4686,7 +4928,7 @@
   <meta property="og:image:height" content="630" />
   <meta property="og:site_name" content="犀牛伯爵 · AI 创作实验室" />
   <meta property="article:author" content="犀牛伯爵" />
-  <meta name="twitter:image" content="https://zjeep-arch.github.io/rhino-count-site/temple-of-heaven.png" />
+  <meta name="twitter:image" content="https://rhinocount.cn/temple-of-heaven.png" />
 
   <!-- WebSite Schema -->
   <script type="application/ld+json">
@@ -4694,13 +4936,13 @@
   "@context": "https://schema.org",
   "@type": "WebSite",
   "name": "犀牛伯爵 · AI 创作实验室",
-  "url": "https://zjeep-arch.github.io/rhino-count-site/",
+  "url": "https://rhinocount.cn/",
   "description": "AI-native builder。记录 Agent 工作流、AI 写作、宏观科技观察与内容产品化实验。",
   "inLanguage": "zh-CN",
   "author": {
     "@type": "Person",
     "name": "犀牛伯爵",
-    "url": "https://zjeep-arch.github.io/rhino-count-site/"
+    "url": "https://rhinocount.cn/"
   }
 }
   </script>
@@ -4724,16 +4966,12 @@
       </a>
       <nav class="nav-links" id="navLinks" aria-label="主导航">
         <a href="#profile">关于</a>
-        <a href="#notes">笔记</a>
-        <a href="#builds">创作</a>
-        <a href="#daily">日报</a>
-        <a href="#commentary">时评</a>
-        <a href="#manifesto">主张</a>
-        <a href="#contact">联络</a>
-        <a href="games/duck-scare-war.html">游戏</a>
+        <a href="#notes">观察</a>
+        <a href="articles/">文章</a>
+        <a href="#builds">作品</a>
       </nav>
       <div class="nav-actions">
-        <a class="btn ghost" id="headerCta" href="https://www.xiaohongshu.com/user/profile/60572004000000000101ce41" target="_blank" rel="noopener">小红书 \2192</a>
+        <a class="btn ghost" id="headerCta" href="https://www.xiaohongshu.com/user/profile/60572004000000000101ce41" target="_blank" rel="noopener">小红书 →</a>
         <button id="menuBtn" class="icon-btn menu-btn" aria-label="菜单" aria-expanded="false">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
         </button>
@@ -4741,13 +4979,9 @@
     </div>
     <div id="mobilePanel" class="mobile-panel" aria-hidden="true">
       <a href="#profile">关于</a>
-      <a href="#notes">笔记</a>
-      <a href="#builds">创作</a>
-      <a href="#daily">日报</a>
-      <a href="#commentary">时评</a>
-      <a href="#manifesto">主张</a>
-      <a href="#contact">联络</a>
-      <a href="games/duck-scare-war.html">游戏</a>
+      <a href="#notes">观察</a>
+      <a href="articles/">文章</a>
+      <a href="#builds">作品</a>
       <a href="https://www.xiaohongshu.com/user/profile/60572004000000000101ce41" target="_blank" rel="noopener">小红书 →</a>
     </div>
   </header>
@@ -4757,32 +4991,36 @@
       <!-- Static first paint: JavaScript enhances/replaces this, but it is already usable. -->
       <div class="hero-cine-overlay" aria-hidden="true"></div>
       <div class="hero-cine-grain" aria-hidden="true"></div>
+      <div class="hero-masthead">
+        <span class="issue-date" id="staticIssueDate">22 AUG 2026</span>
+        <span class="issue-num" id="staticIssueNum">ISSUE 082</span>
+      </div>
       <div class="hero-cine-content">
-        <div class="hero-cine-kicker">RHINO COUNT · AI NATIVE STUDIO</div>
+        <div class="hero-cine-kicker">RHINO COUNT · 犀牛伯爵</div>
         <h1 class="hero-cine-title">
-          <span>HI, I'M</span>
-          <strong>RHINO</strong>
+          <strong>RHINO COUNT</strong>
+          <span>AI NATIVE STUDIO</span>
         </h1>
-        <p class="hero-cine-lede">把 AI 观察、Agent 工作流、产业判断和内容实验，压缩成一套持续生长的个人创作系统。</p>
+        <p class="hero-cine-lede">在 AI 的噪音里，寻找真正重要的变化。</p>
         <div class="hero-cine-cta">
           <a class="btn" href="#builds">进入创作矩阵 →</a>
-          <a class="btn ghost" href="#notes">阅读最新笔记</a>
+          <a class="btn ghost" href="#profile">了解犀牛伯爵</a>
         </div>
         <div class="hero-cine-keywords">
-          <span>AI NATIVE</span>
-          <span>SIGNAL CURATION</span>
-          <span>AGENT WORKFLOW</span>
-          <span>MODEL WATCH</span>
-          <span>CONTENT SYSTEM</span>
+          <span>AI / MODELS</span>
+          <span>AGENTS</span>
+          <span>BUSINESS</span>
+          <span>FUTURE OF WORK</span>
         </div>
       </div>
       <div class="hero-cine-scroll">SCROLL ↓</div>
     </section>
     <section id="profile"></section>
+    <section id="now"></section>
     <section id="notes"></section>
+    <section id="picks"></section>
     <section id="builds"></section>
     <section id="daily"></section>
-    <section id="commentary"></section>
     <section id="manifesto" class="quote-section"></section>
     <section id="contact"></section>
   </main>
@@ -4865,7 +5103,22 @@
     </div>
   </footer>
 
-  <script src="data.js?v=20260714-restore"></script>
+  <script>
+    /* Dynamic masthead - runs before data.js, updates static HTML */
+    (function() {
+      var d = new Date();
+      var months = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+      var dd = String(d.getDate()).padStart(2, '0');
+      var dateStr = dd + ' ' + months[d.getMonth()] + ' ' + d.getFullYear();
+      var start = new Date('2026-06-01');
+      var issueNum = String(Math.floor((d - start) / 86400000)).padStart(3, '0');
+      var dateEl = document.getElementById('staticIssueDate');
+      var numEl = document.getElementById('staticIssueNum');
+      if (dateEl) dateEl.textContent = dateStr;
+      if (numEl) numEl.textContent = 'ISSUE ' + issueNum;
+    })();
+  </script>
+  <script src="data.js?v=20260824-doi"></script>
   <script>
     /* Fallback: force-show page after 3s if JS hasn't completed */
     setTimeout(function(){var m=document.querySelector('main');if(m&&!m.classList.contains('ready'))m.classList.add('ready');},3000);
@@ -4972,6 +5225,19 @@
         </video>
         <div class="hero-cine-overlay" aria-hidden="true"></div>
         <div class="hero-cine-grain" aria-hidden="true"></div>
+        <div class="hero-masthead">
+          <span class="issue-date">${esc((function(){
+            var d = new Date();
+            var months = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+            var dd = String(d.getDate()).padStart(2,'0');
+            return dd + ' ' + months[d.getMonth()] + ' ' + d.getFullYear();
+          })())}</span>
+          <span class="issue-num">ISSUE ${esc((function(){
+            var start = new Date('2026-06-01');
+            var now = new Date();
+            return String(Math.floor((now - start) / 86400000)).padStart(3,'0');
+          })())}</span>
+        </div>
         <div class="hero-cine-content">
           <div class="hero-cine-kicker">${esc(h.eyebrow)}</div>
           <h1 class="hero-cine-title">
@@ -4994,6 +5260,30 @@
 
       /* Profile */
       const p = D.profile;
+      /* NOW — 此刻判断（Hero 后第一模块） */
+      const nw = D.now;
+      if (nw && nw.items && nw.items.length) {
+        document.getElementById('now').innerHTML = `
+          <div class="container">
+            <div class="now-wrap fade-in">
+              <div class="now-head">
+                <span class="label">${esc(nw.label)}</span>
+                <h2>${esc(nw.headingLine1)}<br/>${esc(nw.headingLine2)}</h2>
+              </div>
+              <ol class="now-list">
+                ${nw.items.map(it => `
+                  <li class="now-item">
+                    <span class="now-num">${esc(it.num)}</span>
+                    <p>${esc(it.text)}</p>
+                  </li>
+                `).join('')}
+              </ol>
+            </div>
+          </div>
+        `;
+      }
+
+      /* Profile — 侧像 */
       document.getElementById('profile').innerHTML = `
         <div class="container">
           <div class="section-head fade-in">
@@ -5011,6 +5301,14 @@
               </div>
             `).join('')}
           </div>
+          ${p.why ? `
+          <div class="profile-why fade-in fade-in-delay-2">
+            <div class="why-title">${esc(p.why.title)}</div>
+            <p class="why-text">${esc(p.why.text)}</p>
+            <div class="why-keywords">
+              ${p.why.keywords.map(k => `<span class="why-kw">${esc(k)}</span>`).join('')}
+            </div>
+          </div>` : ''}
         </div>
       `;
 
@@ -5043,10 +5341,96 @@
             `).join('')}
           </div>
           <div class="notes-view-all fade-in fade-in-delay-3">
-            <a class="notes-archive-link" href="notes/">查看全部 ${j.notes.length} 篇笔记 <span aria-hidden="true">\u2192</span></a>
+            <a class="notes-archive-link" href="notes/">查看全部 ${j.notes.length} 篇观察 <span aria-hidden="true">\u2192</span></a>
           </div>
         </div>
       `;
+
+      /* Rhino Picks — 犀牛精选（首页限量展示 + 查看全部入口 + 平台筛选） */
+      const pk = D.picks;
+      if (pk && pk.items && pk.items.length) {
+        const HOME_PICKS_LIMIT = 6;
+        const homeItems = pk.items.slice(0, HOME_PICKS_LIMIT);
+        document.getElementById('picks').innerHTML = `
+          <div class="container">
+            <div class="section-head fade-in">
+              <div>
+                <div class="label">${esc(pk.label)}</div>
+                <h2>${esc(pk.headingLine1)}<br/>${esc(pk.headingLine2)}</h2>
+              </div>
+              <p class="blurb">${esc(pk.blurb)}</p>
+            </div>
+            <div class="picks-issuebar fade-in">
+              <span class="picks-issue" id="picksIssue"></span>
+              <span class="picks-updated">UPDATED · ${esc(pk.updated || '')}</span>
+            </div>
+            <div class="picks-filters fade-in" role="tablist" aria-label="精选内容筛选">
+              ${['ALL','YOUTUBE','X','ARTICLE'].map(f => `
+                <button class="pick-filter${f === 'ALL' ? ' active' : ''}" data-filter="${f}" role="tab" aria-selected="${f === 'ALL'}">${f}</button>
+              `).join('')}
+            </div>
+            <div class="picks-grid" id="picksGrid"></div>
+            ${pk.items.length > HOME_PICKS_LIMIT ? `
+            <div class="notes-view-all fade-in fade-in-delay-3">
+              <a class="notes-archive-link" href="picks/">查看全部 ${pk.items.length} 条精选 <span aria-hidden="true">\u2192</span></a>
+            </div>` : ''}
+          </div>
+        `;
+        const grid = document.getElementById('picksGrid');
+        const issueEl = document.getElementById('picksIssue');
+        if (issueEl) issueEl.textContent = 'ISSUE ' + String(Math.floor((new Date() - new Date('2026-06-01')) / 86400000)).padStart(3, '0');
+        const renderPicks = (filter) => {
+          const source = filter === 'ALL' ? homeItems : homeItems.filter(it => it.type.toUpperCase() === filter);
+          grid.innerHTML = source.length ? source.map((it, i) => `
+            <a class="pick-card fade-in fade-in-delay-${Math.min(i, 3)}" href="${esc(it.href)}" target="_blank" rel="noopener">
+              <div class="pick-top">
+                <span class="pick-type pick-type-${it.type.toLowerCase()}">${esc(it.type)}</span>
+                <span class="pick-tag">${esc(it.tag)}</span>
+              </div>
+              <h3>${esc(it.title)}</h3>
+              <div class="pick-author">${esc(it.author)}</div>
+              <p class="pick-reason"><span class="pick-reason-label">${esc(pk.reasonLabel || 'WHY I PICKED IT')}</span>${esc(it.reason)}</p>
+              <span class="pick-meta">${esc(it.meta)} ↗</span>
+            </a>
+          `).join('') : '<p class="picks-empty">这个分类下暂时没有收藏。</p>';
+          /* Re-observe re-rendered cards so they actually become visible */
+          if ('IntersectionObserver' in window) {
+            const po = new IntersectionObserver((entries) => {
+              entries.forEach(e => {
+                if (e.isIntersecting) { e.target.classList.add('visible'); po.unobserve(e.target); }
+              });
+            }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+            grid.querySelectorAll('.fade-in:not(.visible)').forEach(el => po.observe(el));
+          } else {
+            grid.querySelectorAll('.fade-in').forEach(el => el.classList.add('visible'));
+          }
+        };
+        renderPicks('ALL');
+        if (pk.follows && pk.follows.length) {
+          const bar = document.createElement('div');
+          bar.className = 'follows-wrap fade-in';
+          bar.innerHTML = `
+            <div class="follows-label">${esc(pk.followsLabel || 'PEOPLE I FOLLOW')}</div>
+            <div class="follows-grid">
+              ${pk.follows.map(fl => `
+                <a class="follow-item" href="${esc(fl.href)}" target="_blank" rel="noopener">
+                  <strong>${esc(fl.name)}</strong>
+                  <span>${esc(fl.desc)} ↗</span>
+                </a>
+              `).join('')}
+            </div>
+          `;
+          document.querySelector('#picks .container').appendChild(bar);
+        }
+        document.querySelectorAll('.pick-filter').forEach(btn => {
+          btn.addEventListener('click', () => {
+            document.querySelectorAll('.pick-filter').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
+            btn.classList.add('active');
+            btn.setAttribute('aria-selected', 'true');
+            renderPicks(btn.dataset.filter);
+          });
+        });
+      }
 
       /* Creation matrix */
       const lab = D.lab;
@@ -5068,6 +5452,7 @@
                     <h3>${esc(item.title)}</h3>
                     <p>${esc(item.desc)}</p>
                     <span class="lab-link">${esc(item.linkLabel)}</span>
+                    ${item.doi ? `<span class="lab-doi" title="Zenodo DOI">DOI ${esc(item.doi)}</span>` : ''}
                   </a>
                 `).join('')}
               </div>
@@ -5124,6 +5509,7 @@
                     <span>${esc(item.v)}</span>
                   </div>
                 `).join('')}
+                <div id="dailyLatestBox">
                 ${(daily.latest || []).map(item => `
                   <a class="daily-latest" href="${esc(item.href)}">
                     <b>${esc(item.tag)}</b>
@@ -5131,99 +5517,35 @@
                     <span>${esc(item.desc)}</span>
                   </a>
                 `).join('')}
+                </div>
               </aside>
             </div>
           </div>
         `;
       }
 
-      /* Commentary — load from feed.json + fallback */
-      const commentarySection = document.getElementById('commentary');
-      const cm = D.commentary;
-
-      function renderArticles(articles) {
-        if (!articles || articles.length === 0) {
-          return `<div class="article-empty fade-in">
-            \u8fd8\u6ca1\u6709\u65f6\u8bc4\u6587\u7ae0\u3002\u6bcf\u665a 7 \u70b9\u751f\u6210\u7b2c\u4e00\u7bc7\u540e\u81ea\u52a8\u663e\u793a\u3002<br/>
-            \u201c\u7eaf\u5c5e\u4e2a\u4eba\u778e\u626f\u95f2\u804a\uff0c\u4f9b\u5927\u5bb6\u6253\u53d1\u7a7a\u95f2\u65f6\u95f4\u3002\u201d
-          </div>`;
-        }
-        return articles.map((a, i) => `
-          <a class="article-card fade-in fade-in-delay-${Math.min(i, 3)}" href="${esc(a.href)}">
-            <span class="art-glow" aria-hidden="true"></span>
-            <div>
-              <div class="art-meta">
-                <span class="art-cat">${esc(a.cat || '时评')}</span>
-                <span class="art-date">${esc(a.date || '')}</span>
-              </div>
-              <h3>${esc(a.title)}</h3>
-              <p class="art-excerpt">${esc(a.excerpt)}</p>
-            </div>
-            <div class="art-arrow" aria-hidden="true">\u2192</div>
-          </a>
-        `).join('');
-      }
-
-      // Initial render with loading state
-      commentarySection.innerHTML = `
-        <div class="container">
-          <div class="section-head fade-in">
-            <div>
-              <div class="label">${esc(cm.label)}</div>
-              <h2>${esc(cm.headingLine1)}<br/>${esc(cm.headingLine2)}</h2>
-            </div>
-            <p class="blurb">${esc(cm.blurb)}</p>
-          </div>
-          <div class="article-list" id="articleList">
-            <div class="article-loading fade-in">
-              <span class="loader-dot">\u8bfb</span>
-              <span class="loader-dot">\u53d6</span>
-              <span class="loader-dot">\u4e2d</span>
-              ...
-            </div>
-          </div>
-          <div class="commentary-footer">
-            <a href="articles/">\u67e5\u770b\u5168\u90e8\u65f6\u8bc4 \u2192</a>
-          </div>
-        </div>
-      `;
-
-      // Mobile uses embedded defaults and avoids another startup connection.
-      var list = document.getElementById('articleList');
-      if (_isMobile) {
-        list.innerHTML = renderArticles(cm.defaultFeatured);
-        observeFadeIns();
-        attachSpotlight('.article-card');
-      } else {
-        var feedUrl = D.siteConfig ? D.siteConfig.articlesFeed : 'articles/feed.json';
+      /* Daily latest — auto-refresh from ai-daily/feed.json so LATEST is always the newest issue */
+      (function () {
+        var box = document.getElementById('dailyLatestBox');
+        if (!box) return;
         var xhr = new XMLHttpRequest();
-        xhr.open('GET', feedUrl, true);
+        xhr.open('GET', (D.siteConfig && D.siteConfig.articlesFeed ? '' : '') + 'ai-daily/feed.json?t=' + Date.now(), true);
         xhr.onload = function () {
-        var list = document.getElementById('articleList');
-        if (xhr.status === 200) {
+          if (xhr.status !== 200) return;
           try {
             var feed = JSON.parse(xhr.responseText);
-            var articles = feed.articles || feed;
-            // Show latest 5, in reverse chronological order
-            if (articles.length > 5) articles = articles.slice(0, 5);
-            list.innerHTML = renderArticles(articles);
-          } catch (e) {
-            list.innerHTML = renderArticles(cm.defaultFeatured);
-          }
-        } else {
-          list.innerHTML = renderArticles(cm.defaultFeatured);
-        }
-        observeFadeIns();
-        attachSpotlight('.article-card');
-        };
-        xhr.onerror = function () {
-          var list = document.getElementById('articleList');
-          list.innerHTML = renderArticles(cm.defaultFeatured);
-          observeFadeIns();
-          attachSpotlight('.article-card');
+            var arts = feed.articles || [];
+            if (!arts.length) return;
+            arts.sort(function (a, b) { return (b.date || '').localeCompare(a.date || ''); });
+            var top = arts[0];
+            box.innerHTML = '<a class="daily-latest" href="ai-daily/' + esc(top.href || '') + '">' +
+              '<b>LATEST · ' + esc((top.date || '').slice(5)) + '</b>' +
+              '<strong>' + esc(top.title || '') + '</strong>' +
+              '<span>' + esc(top.excerpt || '') + '</span></a>';
+          } catch (e) { /* keep static fallback */ }
         };
         xhr.send();
-      }
+      })();
 
       /* Quote */
       const q = D.quote;
@@ -5531,7 +5853,7 @@
       window.addEventListener('scroll', updateScrollProgress, { passive: true });
 
       function updateActiveNav() {
-        const sectionIds = ['profile', 'notes', 'builds', 'daily', 'commentary', 'manifesto', 'contact'];
+        const sectionIds = ['now', 'profile', 'notes', 'picks', 'builds', 'daily', 'manifesto', 'contact'];
         const anchors = document.querySelectorAll('#navLinks a[href^="#"]');
         const activeId = sectionIds.reduce((current, id) => {
           const el = document.getElementById(id);
@@ -5564,6 +5886,7 @@
         });
       }
       attachSpotlight('.note');
+      attachSpotlight('.now-item');
       attachSpotlight('.article-card');
 
       const canvas = document.getElementById('ambientCanvas');

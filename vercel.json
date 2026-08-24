@@ -2,5 +2,56 @@
   "version": 2,
   "buildCommand": null,
   "outputDirectory": ".",
-  "framework": null
+  "framework": null,
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.rhinocount.cn" }],
+      "destination": "https://rhinocount.cn/:path*",
+      "statusCode": 301
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "rhino-count-site.vercel.app" }],
+      "destination": "https://rhinocount.cn/:path*",
+      "statusCode": 301
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "rhino-count-site-jingpeng141-3361s-projects.vercel.app" }],
+      "destination": "https://rhinocount.cn/:path*",
+      "statusCode": 301
+    }
+  ],
+  "headers": [
+    {
+      "source": "/((?!articles/template|ai-daily/template|notes/template|articles/_retired|post-to-wechat|scripts|network-check).*)",
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "index, follow, max-image-preview:large" }
+      ]
+    },
+    {
+      "source": "/articles/template.html",
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
+    },
+    {
+      "source": "/ai-daily/template.html",
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
+    },
+    {
+      "source": "/notes/template.html",
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
+    },
+    {
+      "source": "/articles/_retired-:path*",
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
+    },
+    {
+      "source": "/(.*\\.html)",
+      "headers": [
+        { "key": "Content-Type-Language", "value": "zh-CN" },
+        { "key": "Cache-Control", "value": "public, max-age=3600, s-maxage=86400" }
+      ]
+    }
+  ]
 }

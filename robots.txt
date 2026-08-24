@@ -1,9 +1,16 @@
 # robots.txt for rhino-count-site
-# Updated: 2026-08-03
+# Updated: 2026-08-23
 
 # === All crawlers ===
 User-agent: *
 Allow: /
+Disallow: /articles/template.html
+Disallow: /ai-daily/template.html
+Disallow: /notes/template.html
+Disallow: /articles/_retired-*
+Disallow: /post-to-wechat/
+Disallow: /scripts/
+Disallow: /network-check.html
 
 # === Google ===
 User-agent: Googlebot
@@ -76,4 +83,4 @@ User-agent: CCBot
 Allow: /
 
 # Sitemap
-Sitemap: https://zjeep-arch.github.io/rhino-count-site/sitemap.xml
+Sitemap: https://rhinocount.cn/sitemap.xml

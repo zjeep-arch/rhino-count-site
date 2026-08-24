@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>RHINO COUNT · 犀牛伯爵</title>
+    <link>https://rhinocount.cn/</link>
+    <description>AI Native Magazine — 记录 AI 如何改变技术、商业与人的工作方式。</description>
+    <language>zh-CN</language>
+    <lastBuildDate>2026-07-01T19:00:00+08:00</lastBuildDate>
+    <atom:link href="https://rhinocount.cn/rss.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>（闲聊）全世界都在砸钱建算力，但最赚的偏偏不是建算力的人</title>
+      <link>https://rhinocount.cn/articles/2026-07-01-global-compute-war.html</link>
+      <guid isPermaLink="true">https://rhinocount.cn/articles/2026-07-01-global-compute-war.html</guid>
+      <pubDate>2026-07-01T19:00:00+08:00</pubDate>
+      <description>48小时内：国常会部署AI高质量发展、八部门发文工业互联网、韩国砸14万亿、谷歌因算力不足限供Meta、SpaceX宣布百万颗太空AI卫星。全球算力军备竞赛全面升级，但建基础设施的人往往是最烧钱的那个。</description>
+    </item>
+    <item>
+      <title>（闲聊）巴菲特接班人百亿砸AI基建——不是&quot;追涨&quot;，是&quot;抄底&quot;</title>
+      <link>https://rhinocount.cn/articles/2026-06-23-berkshire-google-ai-infra.html</link>
+      <guid isPermaLink="true">https://rhinocount.cn/articles/2026-06-23-berkshire-google-ai-infra.html</guid>
+      <pubDate>2026-06-23T19:00:00+08:00</pubDate>
+      <description>2026年6月，伯克希尔新任CEO阿贝尔向谷歌定向增发100亿美元。所有人都在问：AI涨了三年，最保守的价值投资者怎么偏偏在这时候重仓？答案比大家想的简单：他不是在追涨，他是在抄底。抄的不是股价的底，是产业周期的底。纯属个人瞎扯闲聊。</description>
+    </item>
+    <item>
+      <title>（瞎聊）瑞士要限制人口到1000万了——全球化的&quot;终点站&quot;比想象中来得更快</title>
+      <link>https://rhinocount.cn/articles/2026-06-13-switzerland-population-cap.html</link>
+      <guid isPermaLink="true">https://rhinocount.cn/articles/2026-06-13-switzerland-population-cap.html</guid>
+      <pubDate>2026-06-13T19:00:00+08:00</pubDate>
+      <description>明天（6月14日）瑞士将举行全民公投——要不要把全国人口控制在1000万以内。瑞士目前约930万人，1/3是外国人，提案由右翼瑞士人民党提出。企业界反对、政府反对、欧盟紧张。CNN说这是瑞士的&quot;脱欧时刻&quot;。纯属个人瞎扯闲聊。</description>
+    </item>
+    <item>
+      <title>（闲聊）美国政府出手了：Anthropic被迫下线Fable 5和Mythos 5，外国人禁访问</title>
+      <link>https://rhinocount.cn/articles/2026-06-13-claude-5-fake-news.html</link>
+      <guid isPermaLink="true">https://rhinocount.cn/articles/2026-06-13-claude-5-fake-news.html</guid>
+      <pubDate>2026-06-13T19:00:00+08:00</pubDate>
+      <description>特朗普政府援引国家安全权力，向Anthropic下达出口管制指令：暂停所有外国国民访问其最先进AI模型。Anthropic宣布暂时下线Fable 5和Mythos 5，全球AI监管进入新阶段。</description>
+    </item>
+    <item>
+      <title>（瞎聊）停战了，SpaceX也上市了——同一天发生的两件事，说的其实是同一回事</title>
+      <link>https://rhinocount.cn/articles/2026-06-12-spacex-ipo-iran-peace-deal.html</link>
+      <guid isPermaLink="true">https://rhinocount.cn/articles/2026-06-12-spacex-ipo-iran-peace-deal.html</guid>
+      <pubDate>2026-06-12T19:00:00+08:00</pubDate>
+      <description>今天有两件大事：一是美伊停战协议草案敲定、霍尔木兹海峡即将重开；二是SpaceX以1.8万亿美元市值创纪录上市。很多人觉得这两件事没有关系，但其实背后是同一只手在推动。纯属个人瞎扯闲聊，供大家打发空闲时间。</description>
+    </item>
+    <item>
+      <title>（瞎聊）通胀飙到4.8%+油价4.62美元：波斯湾的战火烧到美国人的钱包，接下来会怎样？</title>
+      <link>https://rhinocount.cn/articles/2026-06-11-us-inflation-iran-war-consumer-impact.html</link>
+      <guid isPermaLink="true">https://rhinocount.cn/articles/2026-06-11-us-inflation-iran-war-consumer-impact.html</guid>
+      <pubDate>2026-06-11T19:00:00+08:00</pubDate>
+      <description>美国CPI飙到4.8%创三年最快涨幅，特朗普却说&#x27;I love the inflation&#x27;。油价从2.98涨到4.62美元一加仑，霍尔木兹海峡被封，伊朗导弹射向美军在约旦、巴林和科威特的基地。三方面深度闲聊波斯湾的战火如何通过&#x27;价格传导&#x27;打到美国消费者身上。纯属个人瞎扯闲聊。</description>
+    </item>
+    <item>
+      <title>（瞎聊）&quot;停火两天&quot;话音刚落，美军直升机就被打下来了——波斯湾局势反转到底谁在翻脸？</title>
+      <link>https://rhinocount.cn/articles/2026-06-10-iran-helicopter-oil-market-shock.html</link>
+      <guid isPermaLink="true">https://rhinocount.cn/articles/2026-06-10-iran-helicopter-oil-market-shock.html</guid>
+      <pubDate>2026-06-10T19:00:00+08:00</pubDate>
+      <description>昨天刚说伊朗协议&#x27;两三天&#x27;就能谈成，今天美军一架阿帕奇就在霍尔木兹海峡被击落，美国随即发动&#x27;自卫打击&#x27;，伊朗报复性攻击巴林科威特和约旦。股市跌、油价飙到89美元、中国PPI创近四年新高。纯属个人瞎扯闲聊。</description>
+    </item>
+    <item>
+      <title>（瞎聊）伊朗停火、特朗普说「两三天就能谈成协议」——波斯湾的棋局跟你想的不一样</title>
+      <link>https://rhinocount.cn/articles/2026-06-09-iran-ceasefire-trump-deal.html</link>
+      <guid isPermaLink="true">https://rhinocount.cn/articles/2026-06-09-iran-ceasefire-trump-deal.html</guid>
+      <pubDate>2026-06-09T19:00:00+08:00</pubDate>
+      <description>伊朗和以色列刚宣布暂停打击，特朗普就说伊朗协议「两三天」能谈成。同时伊拉克和阿联酋紧急筹建绕开霍尔木兹海峡的石油管道。纯属个人瞎扯闲聊，供大家打发空闲时间。</description>
+    </item>
+    <item>
+      <title>（瞎聊）韩国股市崩8%、三星跌停——为什么全世界最贵的风口，最先摔死的是首尔？</title>
+      <link>https://rhinocount.cn/articles/2026-06-08-korea-stock-crash.html</link>
+      <guid isPermaLink="true">https://rhinocount.cn/articles/2026-06-08-korea-stock-crash.html</guid>
+      <pubDate>2026-06-08T19:00:00+08:00</pubDate>
+      <description>韩国KOSPI暴跌8.29%，三星电子跌超10%，今年第二次触发熔断。中东局势升温、全球资本避险，为什么首尔成了最先被砸的那个？</description>
+    </item>
+    <item>
+      <title>（闲聊）香港2.9万亿超越瑞士登顶全球财富中心，然后呢？</title>
+      <link>https://rhinocount.cn/articles/2026-06-07-hong-kong-wealth-center.html</link>
+      <guid isPermaLink="true">https://rhinocount.cn/articles/2026-06-07-hong-kong-wealth-center.html</guid>
+      <pubDate>2026-06-07T19:00:00+08:00</pubDate>
+      <description>BCG《2026全球财富报告》显示香港以2.9万亿美元超越瑞士，100亿美元的微弱优势登顶全球最大跨境财富管理中心。这到底是百年变局还是富人的游戏？</description>
+    </item>
+    <item>
+      <title>（瞎聊）纳斯达克暴跌、AI泡沫恐慌、SpaceX却估值1.77万亿——美国经济到底在搞什么？</title>
+      <link>https://rhinocount.cn/articles/2026-06-06-us-stocks-ai-bubble.html</link>
+      <guid isPermaLink="true">https://rhinocount.cn/articles/2026-06-06-us-stocks-ai-bubble.html</guid>
+      <pubDate>2026-06-06T19:00:00+08:00</pubDate>
+      <description>纳指创今年最大单日跌幅，AI泡沫引发恐慌，同时SpaceX估值1.77万亿准备IPO。美国一边打仗一边股市崩一边服务业狂飙，这背后发生着什么？纯属个人瞎扯闲聊。</description>
+    </item>
+    <item>
+      <title>（瞎聊）伊朗导弹打向科威特巴林，波斯湾的「围城」里谁先撑不住？</title>
+      <link>https://rhinocount.cn/articles/2026-06-06-iran-missiles-hormuz-blockade.html</link>
+      <guid isPermaLink="true">https://rhinocount.cn/articles/2026-06-06-iran-missiles-hormuz-blockade.html</guid>
+      <pubDate>2026-06-06T19:00:00+08:00</pubDate>
+      <description>伊朗向科威特和巴林发射弹道导弹，美军摧毁伊朗雷达站。同时伊朗通胀飙到80年来最高、石油出口跌到只剩六分之一。这背后有几个大的背景值得闲聊一下。</description>
+    </item>
+    <item>
+      <title>（瞎聊）美国打伊朗打了一百天，全世界的棋局却全变了</title>
+      <link>https://rhinocount.cn/articles/2026-06-05-iran-war-china-north-korea.html</link>
+      <guid isPermaLink="true">https://rhinocount.cn/articles/2026-06-05-iran-war-china-north-korea.html</guid>
+      <pubDate>2026-06-05T19:00:00+08:00</pubDate>
+      <description>美国对伊朗的军事行动进入第98天，同时中国领导人宣布七年来首次访问朝鲜，美国一边打仗一边制裁古巴总统。旧秩序的页码正在翻过去，新秩序的底片上写着的字叫「发展」。</description>
+    </item>
+    <item>
+      <title>（瞎聊）美国对中国电动车加征100%关税，跟你想象的完全不是一回事</title>
+      <link>https://rhinocount.cn/articles/2026-06-02-us-china-ev-tariff.html</link>
+      <guid isPermaLink="true">https://rhinocount.cn/articles/2026-06-02-us-china-ev-tariff.html</guid>
+      <pubDate>2026-06-02T19:00:00+08:00</pubDate>
+      <description>美国把中国电动车关税拉到100%，财政部对华经济会谈也没谈出什么实质结果。表面矛盾的操作背后，美国正在做一件很多人没注意到的事——它在用关税高墙把自己围起来搞「围栏内发育」。纯属瞎聊，几个大背景供大家闲扯。</description>
+    </item>
+    <item>
+      <title>（闲聊）美国在中东开打，股市凭什么还在涨？</title>
+      <link>https://rhinocount.cn/articles/2026-06-01-us-war-ai-stocks.html</link>
+      <guid isPermaLink="true">https://rhinocount.cn/articles/2026-06-01-us-war-ai-stocks.html</guid>
+      <pubDate>2026-06-01T19:00:00+08:00</pubDate>
+      <description>美国在波斯湾对伊朗发动新一轮打击的同一天，Nvidia发布了划时代的AI芯片，美股标普500站上7580点。战争与牛市并行，这里面有几个大的背景值得我们瞎聊一下。</description>
+    </item>
+  </channel>
+</rss>

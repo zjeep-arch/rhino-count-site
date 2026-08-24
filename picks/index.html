@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="color-scheme" content="light dark" />
+  <title>RHINO PICKS · 犀牛精选 · 犀牛伯爵</title>
+  <meta name="description" content="犀牛伯爵真正看完并觉得值得你花时间的内容——YouTube 视频、X 讨论、深度文章，附推荐理由。" />
+  <meta name="author" content="犀牛伯爵" />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://rhinocount.cn/picks/" />
+
+  <style>
+    :root {
+      --bg: #F5EFE6; --bg-soft: #ECE3D2; --surface: #FBF7EE;
+      --ink: #1C1410; --ink-soft: #3B2E24; --muted: #7A6B5B;
+      --line: rgba(28,20,16,0.10); --line-2: rgba(28,20,16,0.22);
+      --accent: #8B3A2E; --gold: #B8862F;
+      --serif: "Playfair Display","Noto Serif SC","Songti SC",Georgia,serif;
+      --sans: "Inter",-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+      --maxw: 860px; --pad: clamp(20px,4vw,32px);
+      --radius: 14px;
+      --s-1:4px;--s-2:8px;--s-3:12px;--s-4:16px;--s-5:24px;--s-6:32px;--s-7:48px;--s-8:64px;
+    }
+    [data-theme="dark"] {
+      --bg: #14100C; --bg-soft: #1A1510; --surface: #1F1813;
+      --ink: #F1E8DA; --ink-soft: #DCCEB8; --muted: #9B8B77;
+      --line: rgba(241,232,218,0.10); --line-2: rgba(241,232,218,0.22);
+      --accent: #D4825F; --gold: #E8C77A;
+    }
+    *,*::before,*::after { box-sizing: border-box; }
+    body {
+      margin: 0; background: var(--bg); color: var(--ink);
+      font-family: var(--sans); font-size: 17px; line-height: 1.8;
+      -webkit-font-smoothing: antialiased;
+    }
+    body::before {
+      content:"";position:fixed;inset:0;
+      background-image:radial-gradient(700px 400px at 10% 0%,rgba(184,134,47,0.06),transparent 60%);
+      pointer-events:none;z-index:0;
+    }
+    .container { max-width: var(--maxw); margin-inline: auto; padding-inline: var(--pad); position: relative; z-index: 1; }
+
+    .archive-header {
+      padding: var(--s-8) 0 var(--s-6);
+      border-bottom: 1px solid var(--line);
+      margin-bottom: var(--s-6);
+    }
+    .archive-header .back {
+      display: inline-flex; align-items: center; gap: var(--s-2);
+      font-size: 13px; color: var(--accent); font-weight: 500;
+      margin-bottom: var(--s-5); text-decoration: none;
+      transition: gap 0.2s ease;
+    }
+    .archive-header .back:hover { gap: var(--s-3); }
+    .archive-header .label {
+      font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: var(--s-4);
+    }
+    .archive-header h1 {
+      font-family: var(--serif); font-size: clamp(26px, 4vw, 36px);
+      line-height: 1.3; letter-spacing: -0.01em; margin: 0 0 var(--s-3);
+    }
+    .archive-header p { margin: 0; color: var(--ink-soft); max-width: 640px; }
+    .issue-bar {
+      display: flex; align-items: center; gap: var(--s-4);
+      margin-top: var(--s-4); font-size: 12px; color: var(--muted);
+      letter-spacing: 0.08em;
+    }
+    .issue-bar b { color: var(--accent); font-weight: 700; }
+
+    /* Filters */
+    .picks-filters { display: flex; gap: var(--s-2); flex-wrap: wrap; margin-bottom: var(--s-5); }
+    .pick-filter {
+      padding: 7px 16px; border: 1px solid var(--line-2); border-radius: 999px;
+      background: transparent; color: var(--muted);
+      font-family: var(--sans); font-size: 13px; font-weight: 600;
+      cursor: pointer; transition: all 0.2s ease;
+    }
+    .pick-filter:hover { border-color: var(--accent); color: var(--accent); }
+    .pick-filter.active { background: var(--accent); border-color: var(--accent); color: var(--surface); }
+
+    /* Cards */
+    .picks-grid { display: grid; gap: var(--s-4); padding-bottom: var(--s-7); }
+    .pick-card {
+      display: grid; gap: var(--s-2);
+      padding: var(--s-5);
+      border: 1px solid var(--line); border-radius: var(--radius);
+      background: var(--surface); text-decoration: none; color: inherit;
+      box-shadow: 0 1px 0 rgba(28,20,16,0.04);
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+    .pick-card:hover {
+      transform: translateY(-3px);
+      border-color: color-mix(in oklab, var(--accent) 45%, var(--line));
+      box-shadow: 0 18px 44px -24px rgba(139,58,46,0.35);
+    }
+    .pick-top { display: flex; align-items: center; justify-content: space-between; gap: var(--s-2); flex-wrap: wrap; }
+    .pick-type {
+      padding: 3px 10px; border-radius: 6px;
+      font-size: 11px; font-weight: 800; letter-spacing: 0.08em;
+    }
+    .pick-type-youtube { color: #B33; background: rgba(187,51,51,0.08); border: 1px solid rgba(187,51,51,0.22); }
+    .pick-type-x { color: var(--ink); background: rgba(28,20,16,0.06); border: 1px solid var(--line-2); }
+    [data-theme="dark"] .pick-type-x { color: var(--ink); background: rgba(241,232,218,0.08); }
+    .pick-type-article { color: var(--gold); background: rgba(184,134,47,0.10); border: 1px solid rgba(184,134,47,0.25); }
+    .pick-tag { font-size: 12px; color: var(--muted); letter-spacing: 0.05em; }
+    .pick-card h3 {
+      margin: 0; font-family: var(--serif);
+      font-size: clamp(19px, 2.5vw, 24px); line-height: 1.35; letter-spacing: -0.005em;
+    }
+    .pick-author { font-size: 14px; color: var(--muted); }
+    .pick-reason { margin: var(--s-1) 0 0; font-size: 15px; color: var(--ink-soft); line-height: 1.75; }
+    .pick-reason-label {
+      display: block; font-size: 11px; font-weight: 800;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: var(--s-1);
+    }
+    .pick-meta { font-size: 12.5px; color: var(--gold); font-weight: 600; letter-spacing: 0.04em; }
+    .picks-empty { color: var(--muted); text-align: center; padding: var(--s-7) 0; }
+
+    /* Follows map */
+    .follows-wrap { border-top: 1px solid var(--line); padding: var(--s-6) 0 var(--s-8); }
+    .follows-label {
+      font-size: 11px; font-weight: 800; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: var(--s-4);
+    }
+    .follows-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: var(--s-3); }
+    .follow-item {
+      display: grid; gap: 2px; padding: var(--s-3) var(--s-4);
+      border: 1px solid var(--line); border-radius: var(--radius);
+      background: var(--surface); text-decoration: none; color: inherit;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+    .follow-item:hover { transform: translateY(-2px); border-color: var(--accent); }
+    .follow-item strong { font-size: 14px; }
+    .follow-item span { font-size: 12px; color: var(--muted); }
+
+    .page-footer {
+      padding: var(--s-6) 0 var(--s-8); border-top: 1px solid var(--line);
+      color: var(--muted); font-size: 12px; text-align: center;
+    }
+    .page-footer a { color: var(--accent); }
+    @media (max-width: 560px) {
+      .archive-header { padding-top: var(--s-7); }
+      .pick-card { padding: var(--s-4); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="archive-header">
+      <a class="back" href="../">← 回到首页</a>
+      <div class="label">RHINO PICKS · 犀牛精选</div>
+      <h1>我最近，在看什么。</h1>
+      <p>我每天看很多关于 AI、产品和商业的内容。这里留下的，是我真正看完、并且觉得值得你花时间的东西。</p>
+      <div class="issue-bar">
+        <b id="issueNum"></b>
+        <span id="updatedDate"></span>
+      </div>
+    </header>
+
+    <div class="picks-filters" role="tablist" aria-label="精选内容筛选">
+      <button class="pick-filter active" data-filter="ALL" role="tab" aria-selected="true">ALL</button>
+      <button class="pick-filter" data-filter="YOUTUBE" role="tab" aria-selected="false">YOUTUBE</button>
+      <button class="pick-filter" data-filter="X" role="tab" aria-selected="false">X</button>
+      <button class="pick-filter" data-filter="ARTICLE" role="tab" aria-selected="false">ARTICLE</button>
+    </div>
+
+    <main id="picksGrid" class="picks-grid">
+      <p class="picks-empty">加载中…</p>
+    </main>
+
+    <section id="followsSection"></section>
+
+    <footer class="page-footer">
+      © 2026 <a href="../">犀牛伯爵</a> · RHINO PICKS
+    </footer>
+  </div>
+
+  <script src="../data.js?v=20260823-picks4"></script>
+  <script>
+    (function () {
+      function esc(s) {
+        return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+          return { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c];
+        });
+      }
+      var pk = window.SITE_DATA && window.SITE_DATA.picks;
+      var grid = document.getElementById('picksGrid');
+      if (!pk || !pk.items || !pk.items.length) {
+        grid.innerHTML = '<p class="picks-empty">暂无精选内容。</p>';
+        return;
+      }
+
+      document.getElementById('issueNum').textContent =
+        'ISSUE ' + String(Math.floor((Date.now() - new Date('2026-06-01').getTime()) / 86400000)).padStart(3, '0');
+      document.getElementById('updatedDate').textContent = 'UPDATED · ' + (pk.updated || '');
+
+      function render(filter) {
+        var list = filter === 'ALL' ? pk.items : pk.items.filter(function (it) { return it.type.toUpperCase() === filter; });
+        grid.innerHTML = list.length ? list.map(function (it) {
+          return '<a class="pick-card" href="' + esc(it.href) + '" target="_blank" rel="noopener">' +
+            '<div class="pick-top">' +
+              '<span class="pick-type pick-type-' + esc(it.type.toLowerCase()) + '">' + esc(it.type) + '</span>' +
+              '<span class="pick-tag">' + esc(it.tag) + '</span>' +
+            '</div>' +
+            '<h3>' + esc(it.title) + '</h3>' +
+            '<div class="pick-author">' + esc(it.author) + '</div>' +
+            '<p class="pick-reason"><span class="pick-reason-label">' + esc(pk.reasonLabel || 'WHY I PICKED IT') + '</span>' + esc(it.reason) + '</p>' +
+            '<span class="pick-meta">' + esc(it.meta) + ' ↗</span>' +
+          '</a>';
+        }).join('') : '<p class="picks-empty">这个分类下暂时没有收藏。</p>';
+      }
+
+      render('ALL');
+
+      document.querySelectorAll('.pick-filter').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          document.querySelectorAll('.pick-filter').forEach(function (b) {
+            b.classList.remove('active'); b.setAttribute('aria-selected', 'false');
+          });
+          btn.classList.add('active'); btn.setAttribute('aria-selected', 'true');
+          render(btn.dataset.filter);
+        });
+      });
+
+      if (pk.follows && pk.follows.length) {
+        document.getElementById('followsSection').innerHTML =
+          '<div class="follows-wrap">' +
+            '<div class="follows-label">' + esc(pk.followsLabel || 'PEOPLE I FOLLOW') + '</div>' +
+            '<div class="follows-grid">' +
+              pk.follows.map(function (fl) {
+                return '<a class="follow-item" href="' + esc(fl.href) + '" target="_blank" rel="noopener">' +
+                  '<strong>' + esc(fl.name) + '</strong>' +
+                  '<span>' + esc(fl.desc) + ' ↗</span></a>';
+              }).join('') +
+            '</div></div>';
+      }
+    })();
+  </script>
+</body>
+</html>

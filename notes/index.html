@@ -9,10 +9,8 @@
   <meta name="author" content="犀牛伯爵" />
   <meta name="robots" content="index,follow" />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,400;1,500&family=Inter:wght@400;500;600&family=Noto+Serif+SC:wght@500;700&display=swap" rel="stylesheet" />
-
+  <meta property="bytedance:published_time" content="2026-08-01T09:00:00+08:00" />
+  <meta property="bytedance:updated_time" content="2026-08-01T09:00:00+08:00" />
   <style>
     :root {
       --bg: #F5EFE6; --bg-soft: #ECE3D2; --surface: #FBF7EE;
@@ -163,12 +161,12 @@
   </style>
 
   <!-- SEO Optimization -->
-  <link rel="canonical" href="https://zjeep-arch.github.io/rhino-count-site/notes/" />
-  <meta property="og:url" content="https://zjeep-arch.github.io/rhino-count-site/notes/" />
+  <link rel="canonical" href="https://rhinocount.cn/notes/" />
+  <meta property="og:url" content="https://rhinocount.cn/notes/" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="全部笔记 · 犀牛伯爵" />
   <meta property="og:description" content="犀牛伯爵的全部笔记——关于模型、关于人、关于我们如何被这个时代重新塑形。" />
-  <meta property="og:image" content="https://zjeep-arch.github.io/rhino-count-site/temple-of-heaven.png" />
+  <meta property="og:image" content="https://rhinocount.cn/temple-of-heaven.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:locale" content="zh_CN" />
@@ -177,7 +175,7 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="全部笔记 · 犀牛伯爵" />
   <meta name="twitter:description" content="犀牛伯爵的全部笔记——关于模型、关于人、关于我们如何被这个时代重新塑形。" />
-  <meta name="twitter:image" content="https://zjeep-arch.github.io/rhino-count-site/temple-of-heaven.png" />
+  <meta name="twitter:image" content="https://rhinocount.cn/temple-of-heaven.png" />
 </head>
 <body>
   <div class="container">
@@ -213,7 +211,7 @@
       var list = document.getElementById('note-list');
       var countEl = document.getElementById('note-count');
 
-      if (countEl) countEl.textContent = '共 ' + notes.length + ' 篇';
+      if (countEl) countEl.textContent = '共 ' + notes.length + ' 篇观察';
 
       list.innerHTML = notes.map(function(n) {
         return '<a class="note-item" href="' + n.href + '">' +
