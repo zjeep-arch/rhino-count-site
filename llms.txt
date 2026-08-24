@@ -1,0 +1,27 @@
+# RHINO COUNT 犀牛伯爵
+
+> 犀牛伯爵（Jeep）主理的 AI 原生杂志。聚焦 AI 大模型动态、具身智能、AI 商业化与行业格局的中文深度观察。每日更新 AI 日报，每周更新观察笔记。
+
+## 每日 AI 资讯
+
+- [AI 日报](https://rhinocount.cn/ai-daily/): 每日 AI 大模型与产业动态速览（工作日更新）
+- [RSS 订阅](https://rhinocount.cn/rss.xml): 全站最新 30 条内容
+
+## 观察笔记（每周更新）
+
+- [DeepSeek 的vision](https://rhinocount.cn/notes/2026-08-21-deepseek-vision.html): DeepSeek 战略路线拆解
+- [宇树 IPO 现实检验](https://rhinocount.cn/notes/2026-08-20-unitree-ipo-reality-check.html): 人形机器人第一股的五层验账
+- [删除了47个工具之后](https://rhinocount.cn/notes/deleted-47-tools.html): 工具链做减法的实践
+- [Agent 是操作系统](https://rhinocount.cn/notes/agent-is-operating-system.html): Agent 架构的操作系统类比
+- [Prompt 是一种技能](https://rhinocount.cn/notes/prompt-is-the-skill.html): 提示词工程的技能本质
+- [三个月 Agent 编程](https://rhinocount.cn/notes/agent-coding-three-months.html): Agent 辅助编程三个月实践
+- [如何学习新技术](https://rhinocount.cn/notes/how-to-learn-new-tech.html): 技术学习方法论
+- [全部笔记](https://rhinocount.cn/notes/): 完整观察笔记索引
+
+## 观察文章
+
+- [文章存档](https://rhinocount.cn/articles/): AI 与地缘、市场、商业交叉的观察文章
+
+## 关于主理人
+
+犀牛伯爵（Jeep），前百度智能云产品市场负责人，关注 AI、Physical AI、机器人仿真与品牌叙事。站点以中文为主。
