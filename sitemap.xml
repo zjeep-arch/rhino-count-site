@@ -679,7 +679,12 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <url>
+    <loc>https://rhinocount.cn/notes/2026-08-24-openai-ipo-2027.html</loc>
+    <lastmod>2026-08-24</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://rhinocount.cn/notes/2026-08-21-deepseek-vision.html</loc>
     <lastmod>2026-08-21</lastmod>
     <changefreq>daily</changefreq>
