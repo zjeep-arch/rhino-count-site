@@ -127,6 +127,12 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "一个没名字的模型干翻GPT-5.6，全网在找牛来是谁",
+        desc: "匿名模型Ox Alpha登顶OpenRouter，DeepSWE测试80%碾压GPT-5.6和Claude。全网猜爹指向智谱。这是OpenRouter第五款Stealth模型，五次都是中国公司。匿名不是噱头，是中国AI厂商发明的出海新打法，能力到了才能这么玩。",
+        href: "notes/2026-08-25-ox-alpha-stealth.html"
+      },
+      {
+        type: "Essay",
         title: "Anthropic营收反超了，估值只有OpenAI一半",
         desc: "OpenAI定下2027年上市时间表，8520亿估值迎来公开市场大考。Anthropic年化营收650亿美元反超OpenAI的400亿，估值却只有对方44%。私有市场给入口故事定价，公开市场只认数字。AI第一股之争没有输家，但考卷比私有市场残酷得多。",
         href: "notes/2026-08-24-openai-ipo-2027.html"
@@ -280,6 +286,13 @@ window.SITE_DATA = {
     headingLine2: "慢慢记。",
     blurb: "每一篇笔记都是一次小型田野调查：关于模型、关于人、关于我们如何被这个时代重新塑形。",
     notes: [{
+        cat: "观察", num: "N° 76",
+        title: "一个没名字的模型干翻GPT-5.6，全网在找牛来是谁",
+        excerpt: "匿名模型Ox Alpha登顶OpenRouter，DeepSWE测试80%通过率碾压GPT-5.6的52%。全网猜爹指向智谱GLM系列。这是OpenRouter第五款Stealth模型，五次都是中国公司。匿名不是噱头，是中国AI厂商发明的出海新打法。能力到了，匿名才是一种选择。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-08-25-ox-alpha-stealth.html"
+      },
+      {
         cat: "观察", num: "N° 75",
         title: "Anthropic营收反超了，估值只有OpenAI一半",
         excerpt: "OpenAI定下2027年上市时间表。Anthropic年化营收650亿美元反超OpenAI的400亿，估值却只有对方44%。私有市场赌的是消费级入口，公开市场只认现金流。AI第一股之争，是两种商业模式定价裂缝的第一次公开考试。",
