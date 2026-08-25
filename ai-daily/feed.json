@@ -1,6 +1,13 @@
 {
-  "updated": "2026-08-24T09:00:00+08:00",
+  "updated": "2026-08-25T10:00:00+08:00",
   "articles": [
+    {
+      "cat": "安全 · 模型 · 资本",
+      "date": "2026-08-25",
+      "title": "AI大模型及安全动态日报 | 2026年08月25日（星期二）",
+      "excerpt": "阿里800亿港元押注AI，OpenAI GPT-5.6降价超20%，英伟达60亿收购Poolside打造开源模型，Hugging Face传130亿被收购，Anthropic Mythos 5安全能力扩展，加密提示绕过Grok和Gemini安全护栏，CSA发布2026云安全洞察报告。",
+      "href": "2026-08-25-ai-daily.html"
+    },
     {
       "cat": "安全 · 模型 · 资本",
       "date": "2026-08-24",
