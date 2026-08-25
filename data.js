@@ -127,6 +127,12 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "Anthropic营收反超了，估值只有OpenAI一半",
+        desc: "OpenAI定下2027年上市时间表，8520亿估值迎来公开市场大考。Anthropic年化营收650亿美元反超OpenAI的400亿，估值却只有对方44%。私有市场给入口故事定价，公开市场只认数字。AI第一股之争没有输家，但考卷比私有市场残酷得多。",
+        href: "notes/2026-08-24-openai-ipo-2027.html"
+      },
+      {
+        type: "Essay",
         title: "一句话寄快递租房，千问把App拆了重建",
         desc: "千问开放平台上线，顺丰自如哈啰被装进同一个对话框。AI从帮你查信息到替你办事，一整套基础设施重构。这不是小程序2.0，是App的解构。但3800亿投入能不能换来可持续回报，谁也说不准。",
         href: "notes/2026-08-11-qianwen-open-platform-app-rebuild.html"
@@ -274,6 +280,13 @@ window.SITE_DATA = {
     headingLine2: "慢慢记。",
     blurb: "每一篇笔记都是一次小型田野调查：关于模型、关于人、关于我们如何被这个时代重新塑形。",
     notes: [{
+        cat: "观察", num: "N° 75",
+        title: "Anthropic营收反超了，估值只有OpenAI一半",
+        excerpt: "OpenAI定下2027年上市时间表。Anthropic年化营收650亿美元反超OpenAI的400亿，估值却只有对方44%。私有市场赌的是消费级入口，公开市场只认现金流。AI第一股之争，是两种商业模式定价裂缝的第一次公开考试。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-08-24-openai-ipo-2027.html"
+      },
+      {
         cat: "观察", num: "N° 74",
         title: "一句话寄快递租房，千问把App拆了重建",
         excerpt: "千问开放平台8月10日上线，顺丰自如哈啰等十余家企业首批接入。AI从帮你查信息到替你办事，一整套基础设施重构。这不是小程序2.0，是App的解构。但3800亿投入能不能换来可持续回报，谁也说不准。",
