@@ -127,6 +127,12 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "跑赢博尔特全网在刷，97%出货量才值得记住",
+        desc: "天工Ultra 9.39秒破博尔特百米纪录，但2026上半年中国人形机器人出货超4万台、占全球97%才是真信号。智元8400台第一，宇树5900台第二，海外全部合计仅3%。产业链从芯片到整机全链闭环，出口同比增长210%。跑赢博尔特是12秒的故事，97%出货量是十年的故事。",
+        href: "notes/2026-08-26-robot-97-percent.html"
+      },
+      {
+        type: "Essay",
         title: "一个没名字的模型干翻GPT-5.6，全网在找牛来是谁",
         desc: "匿名模型Ox Alpha登顶OpenRouter，DeepSWE测试80%碾压GPT-5.6和Claude。全网猜爹指向智谱。这是OpenRouter第五款Stealth模型，五次都是中国公司。匿名不是噱头，是中国AI厂商发明的出海新打法，能力到了才能这么玩。",
         href: "notes/2026-08-25-ox-alpha-stealth.html"
@@ -285,7 +291,15 @@ window.SITE_DATA = {
     headingLine1: "在喧嚣里，",
     headingLine2: "慢慢记。",
     blurb: "每一篇笔记都是一次小型田野调查：关于模型、关于人、关于我们如何被这个时代重新塑形。",
-    notes: [{
+    notes: [
+      {
+        cat: "观察", num: "N° 77",
+        title: "跑赢博尔特全网在刷，97%出货量才值得记住",
+        excerpt: "天工Ultra 9.39秒破博尔特百米纪录，全网刷屏。但2026上半年中国人形机器人出货超4万台、占全球97%才是真信号。智元8400台第一，宇树5900台第二，海外全部合计仅3%。产业链从芯片到整机全链闭环，出口同比增长210%。跑赢博尔特是12秒的故事，97%出货量是十年的故事。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-08-26-robot-97-percent.html"
+      },
+      {
         cat: "观察", num: "N° 76",
         title: "一个没名字的模型干翻GPT-5.6，全网在找牛来是谁",
         excerpt: "匿名模型Ox Alpha登顶OpenRouter，DeepSWE测试80%通过率碾压GPT-5.6的52%。全网猜爹指向智谱GLM系列。这是OpenRouter第五款Stealth模型，五次都是中国公司。匿名不是噱头，是中国AI厂商发明的出海新打法。能力到了，匿名才是一种选择。",
