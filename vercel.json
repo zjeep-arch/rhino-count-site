@@ -5,6 +5,16 @@
   "framework": null,
   "redirects": [
     {
+      "source": "/notes/notes/:path*",
+      "destination": "https://rhinocount.cn/notes/:path*",
+      "statusCode": 301
+    },
+    {
+      "source": "/notes/articles/:path*",
+      "destination": "https://rhinocount.cn/articles/:path*",
+      "statusCode": 301
+    },
+    {
       "source": "/:path*",
       "has": [{ "type": "host", "value": "www.rhinocount.cn" }],
       "destination": "https://rhinocount.cn/:path*",
@@ -43,7 +53,7 @@
       "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
     },
     {
-      "source": "/articles/_retired-:path*",
+      "source": "/articles/_retired-:path",
       "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
     },
     {

@@ -214,7 +214,7 @@
       if (countEl) countEl.textContent = '共 ' + notes.length + ' 篇观察';
 
       list.innerHTML = notes.map(function(n) {
-        return '<a class="note-item" href="' + n.href + '">' +
+        return '<a class="note-item" href="../' + n.href + '">' +
           '<span class="note-item-num">' + (n.num || '') + '</span>' +
           '<div class="note-item-main">' +
             '<div class="note-item-cat">' + (n.cat || '') + '</div>' +
