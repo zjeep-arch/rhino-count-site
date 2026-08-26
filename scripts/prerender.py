@@ -1,56 +1,59 @@
 #!/usr/bin/env python3
-"""Prerender index.html: bake the JS-rendered DOM back into the static file.
+"""Prerender JS-rendered pages: bake the JS-rendered DOM back into static files.
 
-Flow: serve repo dir locally -> headless Chrome renders -> save full DOM
-back to index.html. Visual/JS behavior unchanged (JS still runs on load);
-crawlers / share cards now see full content.
+Pages: index.html, notes/index.html, ai-daily/index.html.
+Flow: serve repo dir locally -> headless Chrome renders each page -> save
+full DOM back. Visual/JS behavior unchanged (JS still runs on load);
+crawlers / share cards / AI bots now see full content.
 
-Run after any data.js/index.html change (daily publish cron calls this).
+Run after any data.js/index.html change; the launchd watchdog calls this.
 """
 import re
 import subprocess
 import sys
-import tempfile
-import time
+import threading
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 import os
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PORT = 8791
 CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
-URL = f"http://127.0.0.1:{PORT}/index.html"
+
+# rel path -> minimum expected visible words after render
+PAGES = {
+    "index.html": 300,
+    "notes/index.html": 100,
+    "ai-daily/index.html": 50,
+}
 
 
 def main():
-    # Marker: if already prerendered, JS re-render is idempotent anyway.
-    with open(os.path.join(REPO, "index.html"), encoding="utf-8") as f:
-        src = f.read()
-    words_before = visible_words(src)
-
-    # Serve repo root
     os.chdir(REPO)
     server = HTTPServer(("127.0.0.1", PORT), SimpleHTTPRequestHandler)
-    import threading
     threading.Thread(target=server.serve_forever, daemon=True).start()
 
+    results = []
     try:
-        out = tempfile.NamedTemporaryFile(suffix=".html", delete=False).name  # noqa
-        dom = subprocess.run(
-            [CHROME, "--headless=new", "--disable-gpu",
-             "--virtual-time-budget=15000", "--dump-dom", URL],
-            check=True, capture_output=True, text=True, timeout=120).stdout
+        for rel, min_words in PAGES.items():
+            url = f"http://127.0.0.1:{PORT}/{rel}"
+            before = visible_words(open(rel, encoding="utf-8").read())
+            dom = subprocess.run(
+                [CHROME, "--headless=new", "--disable-gpu",
+                 "--virtual-time-budget=15000", "--dump-dom", url],
+                check=True, capture_output=True, text=True, timeout=120).stdout
+            after = visible_words(dom)
+            print(f"{rel}: {before} -> {after} words")
+            if after < min_words or after < before:
+                print(f"ERROR: {rel} render looks empty; aborting.", file=sys.stderr)
+                sys.exit(1)
+            with open(rel, "w", encoding="utf-8") as f:
+                f.write(dom)
+            results.append((rel, len(dom)))
     finally:
         server.shutdown()
 
-    words_after = visible_words(dom)
-    print(f"visible words: {words_before} -> {words_after}")
-    if words_after < 300 or words_after < words_before:
-        print("ERROR: rendered DOM looks empty; aborting write.", file=sys.stderr)
-        sys.exit(1)
-
-    with open(os.path.join(REPO, "index.html"), "w", encoding="utf-8") as f:
-        f.write(dom)
-    print(f"prerendered index.html written ({len(dom)} bytes)")
+    for rel, size in results:
+        print(f"prerendered {rel} ({size} bytes)")
 
 
 def visible_words(html: str) -> int:

@@ -23,6 +23,7 @@ if [ -z "$CHANGED" ]; then
     exit 0
 fi
 
+python3 scripts/rebuild-rss.py
 python3 scripts/prerender.py
 
 if ! git diff --quiet index.html; then
