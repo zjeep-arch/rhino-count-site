@@ -210,7 +210,7 @@ window.SITE_DATA = {
       { k: "履历",  v: "AI 大厂从业者" },
       { k: "关注",  v: "AI / Models / Agents / Business" },
       { k: "能力",  v: "Content × Product × Marketing" },
-      { k: "坐标",  v: "北京" },
+      { k: "坐标",  v: "一头恋爱的犀牛，一位远征的伯爵", href: "notes/why-rhino-count.html", aria: "为什么是犀牛伯爵" },
       { k: "频道",  v: "小红书号 1147661654" }
     ]
   },
@@ -292,6 +292,13 @@ window.SITE_DATA = {
     headingLine2: "慢慢记。",
     blurb: "每一篇笔记都是一次小型田野调查：关于模型、关于人、关于我们如何被这个时代重新塑形。",
     notes: [
+      {
+        cat: "宣言", num: "N° ∞",
+        title: "为什么是犀牛伯爵",
+        excerpt: "名字来自两部作品：恋爱的犀牛教我不计成败地热爱，基督山伯爵教我不动声色地等待。2022年底ChatGPT像一头灰犀牛从地平线走来，Count就是把它的轨迹从噪音里算出来——然后与各位同行者一起远征。",
+        img: "assets/note-05.svg",
+        href: "notes/why-rhino-count.html"
+      },
       {
         cat: "观察", num: "N° 77",
         title: "机器人跑赢博尔特，普通人的机会到底在哪？",

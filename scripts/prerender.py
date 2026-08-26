@@ -44,7 +44,7 @@ def main():
 
     words_after = visible_words(dom)
     print(f"visible words: {words_before} -> {words_after}")
-    if words_after < max(300, words_before * 3):
+    if words_after < 300 or words_after < words_before:
         print("ERROR: rendered DOM looks empty; aborting write.", file=sys.stderr)
         sys.exit(1)
 

@@ -9,6 +9,8 @@
 
 ## 观察笔记（每周更新）
 
+- [为什么是犀牛伯爵](https://rhinocount.cn/notes/why-rhino-count.html): 品牌宣言——恋爱的犀牛 × 基督山伯爵 × 灰犀牛，Count 双关与站的世界观
+
 - [DeepSeek 的vision](https://rhinocount.cn/notes/2026-08-21-deepseek-vision.html): DeepSeek 战略路线拆解
 - [宇树 IPO 现实检验](https://rhinocount.cn/notes/2026-08-20-unitree-ipo-reality-check.html): 人形机器人第一股的五层验账
 - [删除了47个工具之后](https://rhinocount.cn/notes/deleted-47-tools.html): 工具链做减法的实践
