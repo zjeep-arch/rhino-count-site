@@ -127,6 +127,12 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "匿名一周骗了全世界，10万张国产芯片才是真底牌",
+        desc: "智谱GLM-5.3-Flash真身揭晓，AA指数57打平Claude Opus 4.8，价格仅四十分之一。但真正改变格局的是10万张国产芯片首次大规模服务全球真实负载，日处理62T tokens。模型是产品可以追赶，芯片是基础设施才是壁垒。匿名不是噱头，是让国产芯片只靠表现说话的认知战。",
+        href: "notes/2026-08-27-glm-flash-domestic-chips.html"
+      },
+      {
+        type: "Essay",
         title: "机器人跑赢博尔特，普通人的机会到底在哪？",
         desc: "天工Ultra 9.39秒破博尔特百米纪录，但2026上半年中国人形机器人出货超4万台、占全球97%才是真信号。智元8400台第一，宇树5900台第二，海外全部合计仅3%。产业链从芯片到整机全链闭环，出口同比增长210%。跑赢博尔特是12秒的故事，97%出货量是十年的故事。",
         href: "notes/2026-08-26-robot-97-percent.html"
@@ -298,6 +304,13 @@ window.SITE_DATA = {
         excerpt: "名字来自两部作品：恋爱的犀牛教我不计成败地热爱，基督山伯爵教我不动声色地等待。2022年底ChatGPT像一头灰犀牛从地平线走来，Count就是把它的轨迹从噪音里算出来——然后与各位同行者一起远征。",
         img: "assets/note-05.svg",
         href: "notes/why-rhino-count.html"
+      },
+      {
+        cat: "观察", num: "N° 78",
+        title: "匿名一周骗了全世界，10万张国产芯片才是真底牌",
+        excerpt: "智谱GLM-5.3-Flash真身揭晓，AA指数57打平Claude Opus 4.8，价格仅四十分之一。但真正改变格局的是10万张国产芯片首次大规模服务全球真实负载，日处理62T tokens。模型是产品可以追赶，芯片是基础设施才是壁垒。匿名不是噱头，是让国产芯片只靠表现说话的认知战。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-08-27-glm-flash-domestic-chips.html"
       },
       {
         cat: "观察", num: "N° 77",
