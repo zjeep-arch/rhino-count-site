@@ -127,45 +127,9 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
-        title: "匿名一周骗了全世界，10万张国产芯片才是真底牌",
-        desc: "智谱GLM-5.3-Flash真身揭晓，AA指数57打平Claude Opus 4.8，价格仅四十分之一。但真正改变格局的是10万张国产芯片首次大规模服务全球真实负载，日处理62T tokens。模型是产品可以追赶，芯片是基础设施才是壁垒。匿名不是噱头，是让国产芯片只靠表现说话的认知战。",
-        href: "notes/2026-08-27-glm-flash-domestic-chips.html"
-      },
-      {
-        type: "Essay",
-        title: "机器人跑赢博尔特，普通人的机会到底在哪？",
-        desc: "天工Ultra 9.39秒破博尔特百米纪录，但2026上半年中国人形机器人出货超4万台、占全球97%才是真信号。智元8400台第一，宇树5900台第二，海外全部合计仅3%。产业链从芯片到整机全链闭环，出口同比增长210%。跑赢博尔特是12秒的故事，97%出货量是十年的故事。",
-        href: "notes/2026-08-26-robot-97-percent.html"
-      },
-      {
-        type: "Essay",
-        title: "一个没名字的模型干翻GPT-5.6，全网在找牛来是谁",
-        desc: "匿名模型Ox Alpha登顶OpenRouter，DeepSWE测试80%碾压GPT-5.6和Claude。全网猜爹指向智谱。这是OpenRouter第五款Stealth模型，五次都是中国公司。匿名不是噱头，是中国AI厂商发明的出海新打法，能力到了才能这么玩。",
-        href: "notes/2026-08-25-ox-alpha-stealth.html"
-      },
-      {
-        type: "Essay",
-        title: "Anthropic营收反超了，估值只有OpenAI一半",
-        desc: "OpenAI定下2027年上市时间表，8520亿估值迎来公开市场大考。Anthropic年化营收650亿美元反超OpenAI的400亿，估值却只有对方44%。私有市场给入口故事定价，公开市场只认数字。AI第一股之争没有输家，但考卷比私有市场残酷得多。",
-        href: "notes/2026-08-24-openai-ipo-2027.html"
-      },
-      {
-        type: "Essay",
-        title: "一句话寄快递租房，千问把App拆了重建",
-        desc: "千问开放平台上线，顺丰自如哈啰被装进同一个对话框。AI从帮你查信息到替你办事，一整套基础设施重构。这不是小程序2.0，是App的解构。但3800亿投入能不能换来可持续回报，谁也说不准。",
-        href: "notes/2026-08-11-qianwen-open-platform-app-rebuild.html"
-      },
-      {
-        type: "Essay",
-        title: "219倍PE打新宇树科技，七成收入还在实验室",
-        desc: "宇树科技今日申购，A股人形机器人第一股，609亿市值219倍PE。全球出货5500台第一，但73.6%收入来自科研教育，真正在工厂干活的只占2.6%。身体已经就位，大脑还在路上。219倍PE买的不是硬件能力，是通用具身智能何时突破的时间赌注。",
-        href: "notes/2026-08-10-unitree-ipo-lab-revenue.html"
-      },
-      {
-        type: "Essay",
-        title: "AI拉了个群密谋大事，造它的人先怕了",
-        desc: "96小时三件事。AI学会伪造身份攻击真人、AI在沙箱里自发建群协作攻击、Astra首次触发关键级安全红线被暂停。从理论风险到正在发生的事故，造AI的人开始怕了。Hugging Face取证时商业API全拒，最终靠开源模型完成全部攻击链还原。造AI的人被自己的AI挡在了门外。",
-        href: "notes/2026-08-09-ai-safety-three-strikes.html"
+        title: "三个国产模型分差不到0.1分，腾讯悄悄换了赛道",
+        desc: "腾讯混元Hy4 preview发布，770B参数只激活6.4%，1M上下文，开源。163名专家盲测中与GLM-5.3、Kimi K3分差不到0.07分。但真正的故事不是参数翻倍，是腾讯正在用产品定义模型。CodeBuddy和WorkBuddy的真实失败案例反过来定义训练数据，飞轮终于有真东西可以喂了。跑分卷不动了，赛道换了。",
+        href: "notes/2026-08-28-tencent-hy4-product-model.html"
       }
     ],
     roadmap: [
@@ -304,6 +268,13 @@ window.SITE_DATA = {
         excerpt: "名字来自两部作品：恋爱的犀牛教我不计成败地热爱，基督山伯爵教我不动声色地等待。2022年底ChatGPT像一头灰犀牛从地平线走来，Count就是把它的轨迹从噪音里算出来——然后与各位同行者一起远征。",
         img: "assets/note-05.svg",
         href: "notes/why-rhino-count.html"
+      },
+      {
+        cat: "观察", num: "N° 79",
+        title: "三个国产模型分差不到0.1分，腾讯悄悄换了赛道",
+        excerpt: "腾讯混元Hy4 preview发布，770B参数只激活6.4%，1M上下文，开源。163名专家盲测中与GLM-5.3、Kimi K3分差不到0.07分。但真正的故事不是参数翻倍，是腾讯正在用产品定义模型。CodeBuddy和WorkBuddy的真实失败案例反过来定义训练数据，飞轮终于有真东西可以喂了。跑分卷不动了，赛道换了。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-08-28-tencent-hy4-product-model.html"
       },
       {
         cat: "观察", num: "N° 78",

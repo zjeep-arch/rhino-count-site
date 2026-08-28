@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>三个国产模型分差不到0.1分，腾讯悄悄换了赛道</title>
+  <style>
+    :root {
+      --accent: #8b2635;
+      --ink: #333;
+      --ink-soft: #555;
+      --muted: #888;
+      --surface: #fafafa;
+      --border: rgba(0,0,0,0.06);
+      --radius: 12px;
+      --font-sans: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-serif: "Noto Serif SC", "Songti SC", Georgia, serif;
+    }
+    body { font-family: var(--font-sans); background: #f5f5f5; margin: 0; padding: 16px; font-size: 16px; line-height: 1.8; color: var(--ink); -webkit-font-smoothing: antialiased; }
+    .container { max-width: 680px; margin: 0 auto; background: var(--surface); padding: 32px; border-radius: var(--radius); }
+    h1 { font-family: var(--font-serif); font-size: 24px; font-weight: 700; color: var(--ink); line-height: 1.4; margin: 0 0 16px; }
+    .meta { color: var(--muted); font-size: 13px; margin-bottom: 16px; }
+    .byline { color: var(--ink-soft); font-size: 14px; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+    h2 { font-family: var(--font-serif); font-size: 20px; font-weight: 600; color: var(--ink); margin: 32px 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+    h3 { font-family: var(--font-serif); font-size: 18px; font-weight: 600; color: var(--ink); margin: 24px 0 12px; }
+    p { margin: 0 0 24px; }
+    .quote-box { border-left: 4px solid var(--accent); background: #f5f5f5; padding: 16px 20px; margin: 24px 0; border-radius: 0 var(--radius) var(--radius) 0; }
+    .quote-box p { margin: 0; color: var(--ink-soft); font-style: italic; font-size: 15px; }
+    .quote-box .attribution { margin-top: 8px; color: var(--muted); font-size: 13px; font-style: normal; }
+    .insight-box { background: #fff8f0; border: 1px solid #ffe4c4; border-radius: var(--radius); padding: 20px; margin: 24px 0; }
+    .insight-box h4 { margin: 0 0 8px; font-size: 16px; color: var(--ink); }
+    .insight-box p { margin: 0; font-size: 15px; color: var(--ink-soft); }
+    .data-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14px; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .data-table th, .data-table td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); }
+    .data-table th { background: #f0f0f0; font-weight: 600; color: var(--ink); }
+    .data-table td { color: var(--ink-soft); }
+    .timeline { position: relative; padding-left: 24px; margin: 24px 0; }
+    .timeline::before { content: ''; position: absolute; left: 6px; top: 0; bottom: 0; width: 2px; background: #e0e0e0; }
+    .timeline-item { position: relative; margin-bottom: 16px; }
+    .timeline-item::before { content: ''; position: absolute; left: -22px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); }
+    .timeline-item .date { font-size: 13px; color: var(--muted); margin-bottom: 4px; }
+    .timeline-item .content { font-size: 15px; color: var(--ink); }
+    .img-caption { text-align: center; color: var(--muted); font-size: 13px; margin-top: 8px; margin-bottom: 24px; }
+    .ending { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--ink-soft); font-size: 14px; }
+    .highlight { color: var(--accent); font-weight: 600; background: linear-gradient(to top, rgba(139,38,53,0.08) 40%, transparent 40%); padding: 0 2px; }
+    .data-callout { display: inline-block; background: var(--accent); color: #fff; padding: 2px 10px; border-radius: 4px; font-weight: 700; font-size: 15px; }
+    .contrast-card { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin: 24px 0; border-radius: var(--radius); overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .contrast-card .side { padding: 16px 20px; }
+    .contrast-card .side-left { background: #fef2f2; border-right: 1px solid var(--border); }
+    .contrast-card .side-right { background: #f0fdf4; }
+    .contrast-card .side h4 { margin: 0 0 8px; font-size: 14px; font-weight: 600; }
+    .contrast-card .side-left h4 { color: #991b1b; }
+    .contrast-card .side-right h4 { color: #166534; }
+    .contrast-card .side p { margin: 0; font-size: 14px; color: var(--ink-soft); line-height: 1.6; }
+    .punchline { font-family: var(--font-serif); font-size: 18px; font-weight: 700; color: var(--accent); text-align: center; margin: 32px 0; padding: 16px 0; border-top: 2px solid var(--accent); border-bottom: 2px solid var(--accent); }
+    strong { color: var(--ink); font-weight: 600; }
+    .article-img { width: 100%; border-radius: 8px; margin: 24px 0 8px; }
+    @media (max-width: 680px) {
+      body { padding: 8px; }
+      .container { padding: 20px; }
+      h1 { font-size: 20px; }
+      h2 { font-size: 18px; }
+      .contrast-card { grid-template-columns: 1fr; }
+      .contrast-card .side-left { border-right: none; border-bottom: 1px solid var(--border); }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+<h1>三个国产模型分差不到0.1分，腾讯悄悄换了赛道</h1>
+<div class="meta">2026年8月28日 · 犀牛伯爵</div>
+<div class="byline">观察 · 国产大模型竞争拐点</div>
+
+<p>163名内部专家，203个工程任务，盲测。</p>
+
+<p>腾讯Hy4 preview均分2.99，智谱GLM-5.3是2.92，月之暗面Kimi K3是2.94。最高和最低差了<span class="data-callout">0.07</span>分。</p>
+
+<p>这个数字小到几乎没有意义。如果是在跑分榜单上，0.07分连测量误差都算不上。但恰恰是这个微不足道的差距，暴露出国产大模型竞争正在发生的一件事。</p>
+
+<p class="punchline">跑分卷不动了。不是能力到顶了，是赛道换了。</p>
+
+<h2>8月大模型密集交卷</h2>
+
+<p>8月28日，腾讯混元发布新一代旗舰模型Hy4 preview，770B总参数，49B激活参数，1M上下文，开源，Apache-2.0协议，BF16和FP8权重都放了出来。从参数到上下文，全面翻倍。但这不是今天最重要的事。</p>
+
+<p>整个8月，国产大模型像商量好了一样集中交卷。DeepSeek更新了V4-Flash和V4 Pro，千问推出Qwen3.8-Max，智谱发布GLM-5.3，前两天智谱和千问还同时掏出Flash模型试图刷新斩杀线。腾讯混元压哨交卷。</p>
+
+<p>Terminal Bench 2.1测试中，Hy4 preview拿下85.4分，跟Claude Opus 5持平，超过DeepSeek V4 Pro的80.3。DeepSWE测试从Hy3的28.0翻到64.3。Toolathlon工具调用测试74.1分，超过千问3.8 Max和GPT-5.6 Sol。</p>
+
+<img class="article-img" src="https://aka.doubaocdn.com/s/6nVGTJq7mi" alt="Hy4 preview在Terminal Bench 2.1等基准测试中的得分对比">
+<div class="img-caption">Hy4 preview基准测试表现，图源，第四波</div>
+
+<p>跑分很漂亮。但如果只看跑分，你会错过这次发布真正值得注意的东西。</p>
+
+<h2>每项都不垫底，但也不是全面领先</h2>
+
+<p>Hy4 preview的每项基准测试都不是最低的。要知道，它的总参数770B、激活参数49B，远不及那些闭源竞争对手。但ProgramBench得分17.5，远低于Claude Opus 5的39.5。不带工具的纯推理任务上，跟最强闭源模型还有差距。</p>
+
+<p>这不是缺陷。这是选择。</p>
+
+<p>腾讯混元团队给Hy4 preview的定位是"为生产力而生"。听起来像套话，但深入架构底层会发现，这四个字是认真写在模型骨头里的。</p>
+
+<h2>770B只激活6.4%，不是堆参数</h2>
+
+<p>78层网络，第一层是标准FFN，其余77层全是MoE。每层256个路由专家加1个共享专家，但每个Token只激活其中8个路由专家。对比上一代Hy3的192个专家，Hy4优先扩充的是专家池的横向宽度，不是每个Token经过的专家数量。</p>
+
+<p>770B是知识容量的指标，49B才是推理成本的指标。庞大的专家池让模型在代码、金融逻辑、科学文献这些不同领域形成更精细的分工，同时推理成本不会跟着总参数线性膨胀。单Token实际调用的计算量仅占总参数的6.4%左右。</p>
+
+<table class="data-table">
+  <thead>
+    <tr><th>维度</th><th>Hy3</th><th>Hy4 preview</th><th>变化</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>总参数</td><td>295B</td><td>770B</td><td>2.6倍</td></tr>
+    <tr><td>激活参数</td><td>21B</td><td>49B</td><td>2.3倍</td></tr>
+    <tr><td>上下文长度</td><td>256K</td><td>1M</td><td>4倍</td></tr>
+    <tr><td>专家数/层</td><td>192</td><td>256+1共享</td><td>扩宽池</td></tr>
+    <tr><td>隐藏层维度</td><td>4096</td><td>6144</td><td>1.5倍</td></tr>
+    <tr><td>网络层数</td><td>80</td><td>78</td><td>微缩</td></tr>
+    <tr><td>残差流</td><td>1条</td><td>4条（iHC）</td><td>新增</td></tr>
+  </tbody>
+</table>
+
+<p>这个设计的取向很鲜明。不是追求极致稀疏换低价，而是在交付质量和服务开销之间，把重心压向了前者。隐藏层维度从4096扩到6144，网络层数反而从80缩到78。它摒弃了单纯"加深网络"的粗放路径，把新增容量倾注到更宽的表征空间和更庞大的专家集群中。</p>
+
+<h2>1M上下文不是"装进去"，是"找得到"</h2>
+
+<p>Hy3是256K，Hy4扩到1M，四倍。但长上下文真正的难点从来不是"装进去"，是"找得到"。</p>
+
+<p>标准全稠密注意力，每个Token要跟前面所有位置算相关性，计算量跟序列长度的平方成正比。窗口从256K扩到1M，注意力运算量激增近十六倍。</p>
+
+<p>Hy4引入了带门控深度稀疏注意力（Gated DSA），每次只从超长历史里选top-2048个最相关的位置做精细计算。1M满载上下文里，单次查询只聚焦约0.2%的核心历史。加上跨层索引复用机制IndexCache，78层网络里只有约21层独立做索引检索，其余层直接复用相邻层的结果，砍掉了近四分之三的索引扫描。</p>
+
+<p>三者协同构成了长上下文落地的技术闭环。DSA负责少看，IndexCache负责少找，门控与Attention Sink负责精准控制吸收的比例。</p>
+
+<h2>四条残差流，Agent内部的信息高速公路</h2>
+
+<p>传统Transformer每层只有一条残差流。所有信息，任务目标、当前计划、代码状态、工具反馈、异常信号，全压进同一条通道。</p>
+
+<p>Hy4引入了identity Hyper-Connections（iHC），把单一残差流扩展成4条并行通道。不同信息可以沿多条路径跨层传播，每层重新组合。</p>
+
+<p>对一次性问答，这个变化可能不明显。但对需要几十轮工具调用的Agent任务，模型既要保持最初目标，又要吸收中间结果，还要不断更新计划，多残差流就不再是锦上添花了。</p>
+
+<p>这三个架构改造，MoE扩容知识储备，稀疏注意力提高外部记忆检索效率，多残差流扩展内部信息带宽，咬合在一起服务于同一件事，<span class="highlight">Agent工作流</span>。</p>
+
+<img class="article-img" src="https://aka.doubaocdn.com/s/GKVHwMnJSP" alt="腾讯混元Hy4 preview为生产力而生的产品定位">
+<div class="img-caption">Hy4 preview定位为生产力而生，图源，爱范儿</div>
+
+<h2>主流报道漏掉了什么</h2>
+
+<p>大部分报道集中在两个数字上，770B和1M。参数翻倍，上下文翻倍，国产又进步了。</p>
+
+<p>但这只是表皮。</p>
+
+<p>真正值得讲的是腾讯正在验证的一种做法，用产品定义模型，不是用模型寻找场景。</p>
+
+<p>Hy4的后训练数据，由腾讯内部软件工程、游戏、金融、安全领域的专家共建，并且跟CodeBuddy和WorkBuddy做了深度协同设计。这里的协同不是把模型接入产品，是把产品里暴露出来的失败案例，反过来决定训练数据怎么构造、强化学习任务怎么设计、评测集怎么定。</p>
+
+<p>真实Agent的失败往往不是"不会写某行代码"，是更长的链条上出了问题。理解错了隐含约束，忘记检查已有文件，调了错误的工具，改完没跑测试，发现报错陷入循环。这类问题靠单轮问答数据修不了，得把完整执行轨迹当训练单位，用环境里的可验证结果当奖励。</p>
+
+<div class="contrast-card">
+  <div class="side side-left">
+    <h4>传统路线</h4>
+    <p>先训练通用模型<br>再找应用场景<br>产品被动接入模型<br>飞轮靠想象</p>
+  </div>
+  <div class="side side-right">
+    <h4>腾讯路线</h4>
+    <p>先有真实场景<br>产品暴露失败案例<br>失败定义训练方向<br>飞轮有真数据</p>
+  </div>
+</div>
+
+<p>Hy4没有公开后训练算法细节。但从能力变化能看出来，优化目标已经从"生成正确答案"转向了"把任务闭环"。</p>
+
+<p>Hy3上线一周，API调用量达到上一代的68倍。WorkBuddy评测里任务成功率推到90%以上。模型变好，产品里任务成功率提高，用户更多调用，新的使用数据和失败案例再回到训练和产品迭代里。</p>
+
+<img class="article-img" src="https://aka.doubaocdn.com/s/vjxJrRts2U" alt="模型与产品协同的Co-Design增长飞轮示意">
+<div class="img-caption">模型与产品协同的Co-Design飞轮，图源，爱范儿</div>
+
+<p>过去大家说Co-design，多少还有点PPT画飞轮的感觉。到了Hy4，这个飞轮开始有真东西可以喂了。</p>
+
+<h2>给混元下结论太早，但信号值得认真对待</h2>
+
+<p>当然，现在给混元下结论太早。ProgramBench 17.5分，不带工具的纯推理任务仍有差距，复杂任务思考时间偏长，过度自我验证导致延迟。官方自己也没回避这些问题。</p>
+
+<p>但有一个信号值得认真对待。腾讯刚刚把大语言模型和多模态团队合并成新的基础模型部，统一交给姚顺雨。文本、图像、视频、语音、3D、强化学习、Agent，不再拆成几条各自发展的路线。</p>
+
+<p>同时，Hy4首次参与自身训练方法、数据策略和评估体系的自动优化。模型提出方案、运行实验、根据结果继续迭代，形成了初步的递归自我改进闭环。</p>
+
+<div class="quote-box">
+  <p>一点不焦虑不可能。混元经历了多个阶段、多次重构，公司整体算力的严重不足，确实拖慢了模型训练和产品发展。但在姚顺雨和研究团队的推进下，Hy4会迎来更多突破。</p>
+  <div class="attribution">汤道生，腾讯集团高级执行副总裁</div>
+</div>
+
+<p>财报数据显示，本季度腾讯研发投入同比增长35%达到273亿元，资本开支528亿元同比增长176%。混元平均每两个月迭代一次大版本。按照这个节奏，Hy4的下一版已经在路上了。</p>
+
+<h2>0.07分的真正含义</h2>
+
+<p>0.07分的差距，与其说是三个模型实力接近，不如说是在告诉我们，单纯靠跑分拉开差距的时代正在收尾。</p>
+
+<p>当三个国产模型在盲测里咬得这么紧，下一个真正拉开身位的机会，不在于谁的参数更大，在于谁能在真实场景里把任务真正闭环。腾讯用Hy4 preview交了一份方向明确的答卷，它不追求每一项都第一，它追求在真实工作流里持续可用。</p>
+
+<p>聊到这里我突然想起一个事。当年安卓刚出来的时候，诺基亚也在比参数，比屏幕分辨率，比摄像头像素。后来赢的不是参数最强的那家，是把生态和应用做起来的那家。</p>
+
+<p>这条赛道上，目前还没有人跑出绝对优势。但至少，飞轮已经转起来了。</p>
+
+<div class="ending">
+  犀牛伯爵 · RHINO COUNT · 在AI的噪音里，寻找真正重要的变化
+</div>
+
+</div>
+</body>
+</html>
