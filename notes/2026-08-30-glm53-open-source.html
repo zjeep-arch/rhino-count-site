@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="一个AI发现了人类40年没找到的DNS协议漏洞，它是智谱GLM-5.3，743B稠密模型，AA指数60与Claude同级，免费开源">
+  <title>40年没人找到的漏洞，一个免费的中国AI找到了</title>
+  <style>
+    :root {
+      --accent: #8b2635;
+      --ink: #333;
+      --ink-soft: #555;
+      --muted: #888;
+      --surface: #fafafa;
+      --border: rgba(0,0,0,0.06);
+      --radius: 12px;
+      --font-sans: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-serif: "Noto Serif SC", "Songti SC", Georgia, serif;
+    }
+    body { font-family: var(--font-sans); background: #f5f5f5; margin: 0; padding: 16px; font-size: 16px; line-height: 1.8; color: var(--ink); -webkit-font-smoothing: antialiased; }
+    .container { max-width: 680px; margin: 0 auto; background: var(--surface); padding: 32px; border-radius: var(--radius); }
+    h1 { font-family: var(--font-serif); font-size: 24px; font-weight: 700; color: var(--ink); line-height: 1.4; margin: 0 0 16px; }
+    .meta { color: var(--muted); font-size: 13px; margin-bottom: 16px; }
+    .byline { color: var(--ink-soft); font-size: 14px; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+    h2 { font-family: var(--font-serif); font-size: 20px; font-weight: 600; color: var(--ink); margin: 32px 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+    h3 { font-family: var(--font-serif); font-size: 18px; font-weight: 600; color: var(--ink); margin: 24px 0 12px; }
+    p { margin: 0 0 24px; }
+    .quote-box { border-left: 4px solid var(--accent); background: #f5f5f5; padding: 16px 20px; margin: 24px 0; border-radius: 0 var(--radius) var(--radius) 0; }
+    .quote-box p { margin: 0; color: var(--ink-soft); font-style: italic; font-size: 15px; }
+    .quote-box .attribution { margin-top: 8px; color: var(--muted); font-size: 13px; font-style: normal; }
+    .insight-box { background: #fff8f0; border: 1px solid #ffe4c4; border-radius: var(--radius); padding: 20px; margin: 24px 0; }
+    .insight-box h4 { margin: 0 0 8px; font-size: 16px; color: var(--ink); }
+    .insight-box p { margin: 0; font-size: 15px; color: var(--ink-soft); }
+    .data-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14px; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .data-table th, .data-table td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); }
+    .data-table th { background: #f0f0f0; font-weight: 600; color: var(--ink); }
+    .data-table td { color: var(--ink-soft); }
+    .timeline { position: relative; padding-left: 24px; margin: 24px 0; }
+    .timeline::before { content: ''; position: absolute; left: 6px; top: 0; bottom: 0; width: 2px; background: #e0e0e0; }
+    .timeline-item { position: relative; margin-bottom: 16px; }
+    .timeline-item::before { content: ''; position: absolute; left: -22px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); }
+    .timeline-item .date { font-size: 13px; color: var(--muted); margin-bottom: 4px; }
+    .timeline-item .content { font-size: 15px; color: var(--ink); }
+    .img-caption { text-align: center; color: var(--muted); font-size: 13px; margin-top: 8px; margin-bottom: 24px; }
+    .ending { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--ink-soft); font-size: 14px; }
+    .highlight { color: var(--accent); font-weight: 600; background: linear-gradient(to top, rgba(139,38,53,0.08) 40%, transparent 40%); padding: 0 2px; }
+    .data-callout { display: inline-block; background: var(--accent); color: #fff; padding: 2px 10px; border-radius: 4px; font-weight: 700; font-size: 15px; }
+    .contrast-card { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin: 24px 0; border-radius: var(--radius); overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .contrast-card .side { padding: 16px 20px; }
+    .contrast-card .side-left { background: #fef2f2; border-right: 1px solid var(--border); }
+    .contrast-card .side-right { background: #f0fdf4; }
+    .contrast-card .side h4 { margin: 0 0 8px; font-size: 14px; font-weight: 600; }
+    .contrast-card .side-left h4 { color: #991b1b; }
+    .contrast-card .side-right h4 { color: #166534; }
+    .contrast-card .side p { margin: 0; font-size: 14px; color: var(--ink-soft); line-height: 1.6; }
+    .punchline { font-family: var(--font-serif); font-size: 18px; font-weight: 700; color: var(--accent); text-align: center; margin: 32px 0; padding: 16px 0; border-top: 2px solid var(--accent); border-bottom: 2px solid var(--accent); }
+    strong { color: var(--ink); font-weight: 600; }
+    .article-img { width: 100%; border-radius: 8px; margin: 24px 0 8px; }
+    @media (max-width: 680px) {
+      body { padding: 8px; }
+      .container { padding: 20px; }
+      h1 { font-size: 20px; }
+      h2 { font-size: 18px; }
+      .contrast-card { grid-template-columns: 1fr; }
+      .contrast-card .side-left { border-right: none; border-bottom: 1px solid var(--border); }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+<h1>40年没人找到的漏洞，一个免费的中国AI找到了</h1>
+<div class="meta">2026年8月30日 · 阅读时间约6分钟</div>
+<div class="byline">观察 · 国产大模型开源拐点</div>
+
+<p>1986年，互联网还在用拨号上网。</p>
+
+<p>那一年有人写下了DNS协议的一段代码。这段代码后来跑在互联网底层，安静地工作了40年。Windows 95发布的时候它在跑，iPhone问世那天它在跑，ChatGPT上线那天它还在跑。全球超过1000万处公网DNS服务，每天用这段40年前写下的逻辑解析域名。</p>
+
+<p>40年，没有一个人发现里面藏着一个漏洞。</p>
+
+<p>直到上个月。一个AI自己看了看。</p>
+
+<p>这个AI不是GPT，不是Claude。是智谱的GLM-5.3，743B参数稠密模型，中国公司做的。8月28日下午3点发布，同步在HuggingFace开放完整权重，支持BF16和FP8两种精度。</p>
+
+<p><span class="data-callout">免</span>费下载。</p>
+
+<p>开源前的安全评估里，GLM-5.3总共找到2404个漏洞。那个藏了40年的DNS协议漏洞，是其中最重的一个。</p>
+
+<p class="punchline">能发现40年没人找到的漏洞，这件事比任何跑分都重。</p>
+
+<h2>跑分也得说，因为差距真的小了</h2>
+
+<p>AA综合智能指数60分。Claude Fable 5也是60分。GPT-5.6 Sol是61分。</p>
+
+<p>半年前，60分是闭源俱乐部的入场券。你交钱，你用API，你拿到这个级别的智能。不交钱，差10分以上。</p>
+
+<p>现在智谱站在同一条线上，然后把成绩单贴到了网上。</p>
+
+<table class="data-table">
+  <thead>
+    <tr><th>测试项目</th><th>GLM-5.3</th><th>对比</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>AA综合智能指数</td><td>60</td><td>Claude Fable 5: 60 / GPT-5.6 Sol: 61</td></tr>
+    <tr><td>Terminal-Bench 3.0</td><td>28.3</td><td>上代: 4.6</td></tr>
+    <tr><td>DeepSWE v1.1</td><td>66.9</td><td>上代: 46.2</td></tr>
+    <tr><td>GDPval-AA v2</td><td>1769</td><td>Kimi K3: 1682</td></tr>
+    <tr><td>CyberGym</td><td>84.5%</td><td>GPT-5.6 Sol: 83.6%</td></tr>
+    <tr><td>ExploitBench</td><td>54.4%</td><td>上代: 24.4%</td></tr>
+  </tbody>
+</table>
+
+<p>Terminal-Bench 3.0从上代4.6跳到28.3，翻了六倍。DeepSWE v1.1从46.2到66.9。GDPval-AA v2拿到1769，超过Kimi K3的1682。CyberGym 84.5%，超过GPT-5.6 Sol的83.6%。ExploitBench从24.4%到54.4%。</p>
+
+<p>这些数字单独看，你可能会想"又一个刷榜的"。坦率地讲，两年前这么想是对的。那时候有模型在榜单上漂亮，一到真实场景就露馅。但那个40年的DNS漏洞，没法刷。</p>
+
+<img class="article-img" src="https://pic.rmb.bdstatic.com/bjh/bc11a232ea56/260227/120589e1e96b57afe9072d0ed676028d.jpeg" alt="智谱AI发布GLM-5.3">
+<div class="img-caption">智谱AI发布GLM-5.3，图源，百度百家号</div>
+
+<h2>当最强模型免费，谁该紧张</h2>
+
+<p>我一直觉得"国产追上来了"这个说法不对。</p>
+
+<p>不是追上来了。是"追赶"这个概念开始松动了。当第一梯队的分数是60、61、60，谁追谁？当排第一的人把成绩免费送的时候，追赶还有什么意义？</p>
+
+<p>半年前你选Claude，是因为Claude确实比别人强一截。贵，但值。你多付的钱买的是能力差。现在GLM-5.3跟Claude同一档了，免费。你作为开发者，决策逻辑就变了。你不再问"谁更强"，你开始问"强出来的那一点，值不值得每个月付那么多钱"。</p>
+
+<div class="contrast-card">
+  <div class="side side-left">
+    <h4>闭源阵营</h4>
+    <p>Claude Fable 5，GPT-5.6 Sol。API按token收费，权重不公开。你只能用它，不能改它，不能看它怎么工作。</p>
+  </div>
+  <div class="side side-right">
+    <h4>开源阵营</h4>
+    <p>GLM-5.3，Kimi K3。权重免费下载，可以本地部署，可以微调，可以二次开发。能力追平了，获取成本是零。</p>
+  </div>
+</div>
+
+<p>这个转变比跑分本身重要得多。一个创业团队用免费的开源模型搭出一套跟Claude API差不多的效果，Claude的定价权还能撑多久？不是说Claude不值那个钱，而是当替代品足够好的时候，<span class="highlight">"足够好"就是"足够致命"</span>。</p>
+
+<p>智谱开源GLM-5.3不是无脑放开。许可协议写得很精准，年营收超过100亿美元的机构如果要对外提供GLM-5.3服务，才需要走安全审查。这个门槛把个人开发者、创业公司、中小企业全部放进来，只把少数巨头挡在门外。</p>
+
+<p>不是天真。是策略。</p>
+
+<div class="quote-box">
+  <p>"当免费的足够好，付费的就必须解释，凭什么贵。"</p>
+  <div class="attribution">一个开发者朋友的原话</div>
+</div>
+
+<p>九十年代Linux刚出来的时候，商业Unix厂商也说开源不靠谱，生产环境不能用。然后Linux用了十年，从"不靠谱"变成了所有云基础设施的底座。不是Linux变强了才被接受，是大家发现够用了就用了，用了就强了。</p>
+
+<p>GLM-5.3站在同一个路口。</p>
+
+<h2>40年的漏洞，怎么刷</h2>
+
+<p>你想想这件事的重量。</p>
+
+<p>DNS协议是互联网最底层的基建之一。全球1000万处公网DNS服务在用它。40年来，无数安全研究者审过这段代码，没发现问题。一个AI模型，在两周的安全评估里，自己找到了。</p>
+
+<p>Terminal-Bench能靠训练数据刷。DeepSWE能靠针对性优化刷。但发现一个真实的、影响千万级基础设施的零日漏洞，靠的不是记住了多少漏洞模式，是理解了协议的工作原理。</p>
+
+<p>做题和研究之间，差的不止一个数量级。你把全世界的安全漏洞报告喂给一个模型，它可能考试满分。但面对一段40年没人碰过的真实协议代码，它得自己理解这段代码在做什么，理解协议的设计意图，然后找出设计者当年没想到的边角情况。这不是匹配题，是开放题。</p>
+
+<p>开源前安全评估总共发现2404个漏洞。我反复看了这个数字，确认没看错。2404个。不是一个模型在跑分，是一个有研究深度的系统在工作。你把2404个漏洞摊开来看，大部分可能是中低危的代码缺陷，但只要有几个是像DNS这样的协议级零日漏洞，这个模型的安全研究价值就已经跑赢了绝大多数闭源系统。</p>
+
+<div class="insight-box">
+  <h4>这次不一样</h4>
+  <p>一个能在40年没人动过的底层协议里找到漏洞的模型，在代码审计、系统运维、渗透测试这些真实场景里的价值，不是跑分能衡量的。模仿可以靠数据，发现只能靠理解。</p>
+</div>
+
+<h2>产业链开始动了</h2>
+
+<p>模型发布当天，金山办公宣布Day 0接入。商汤大装置同步提供算力。</p>
+
+<p>Day 0不是随便说的。说明金山办公在模型公开发布之前就完成了适配。发布即上线。这需要双方在发布前就有深度技术协作，不是发完新闻稿再慢慢接。</p>
+
+<p>商汤提供算力这个细节也值得琢磨。一家AI公司发布模型，另一家AI公司提供算力。不是零和竞争，是产业链协同。国产AI公司之间开始形成上下游配合，而不是各自为战。</p>
+
+<p>同日发布的还有GLM-5.3-Flash，320B总参数，A18B激活，首个多模态版本，AA指数57。旗舰加轻量的组合拳，一边打高端跑分，一边打落地成本。你如果做企业级应用，可能不需要743B全量跑，Flash版本推理成本更低，延迟更短，够用就行。智谱在用产品矩阵覆盖不同场景的需求，而不是只靠一个旗舰模型打天下。</p>
+
+<img class="article-img" src="https://q6.itc.cn/q_70/images03/20260827/b297e319e91a4a52bdcacec14bdd83d1.png" alt="智谱发布并开源GLM-5.3">
+<div class="img-caption">智谱发布GLM-5.3及Flash版本，图源，IT之家</div>
+
+<div class="timeline">
+  <div class="timeline-item">
+    <div class="date">8月14日</div>
+    <div class="content">开源前安全评估启动，发现2404个漏洞，包括40年DNS协议漏洞</div>
+  </div>
+  <div class="timeline-item">
+    <div class="date">8月28日 15:00</div>
+    <div class="content">智谱发布GLM-5.3，同步在HuggingFace开放完整权重</div>
+  </div>
+  <div class="timeline-item">
+    <div class="date">8月28日</div>
+    <div class="content">同日发布GLM-5.3-Flash，320B-A18B，首个多模态版本</div>
+  </div>
+  <div class="timeline-item">
+    <div class="date">8月28日</div>
+    <div class="content">金山办公Day 0接入，商汤大装置提供算力</div>
+  </div>
+</div>
+
+<h2>"刷榜"这个质疑，这次可能不成立了</h2>
+
+<p>当然有人会说，"跑分不等于实战。""中国模型最擅长刷榜。""真实场景才能见分晓。"</p>
+
+<p>这些话在两年前有道理。那时候确实有模型在榜单上表现优异，一到真实场景就拉胯。刷榜这件事在AI圈不算秘密。</p>
+
+<p>但CyberGym和ExploitBench不是知识问答。它们是agentic任务，要求模型自主规划、执行多步骤操作、处理意外情况。这类任务靠训练数据记忆搞不定。你没法通过在训练集里塞更多安全漏洞的描述来让模型在真实环境中发现一个零日漏洞。要么理解了协议的工作原理，要么发现不了。</p>
+
+<p>那个40年的DNS漏洞是真的。它影响的是真实的公网基础设施。金山办公在发布当天就完成接入，如果GLM-5.3只是跑分好看，金山不会在发布前就投入工程资源做适配。企业用真金白银和工程师的时间投票，比任何跑分都有说服力。</p>
+
+<h2>接下来会怎么走</h2>
+
+<p>我目前的看法是这样的，也可能我错了。</p>
+
+<p>闭源厂商会把竞争焦点从"谁更强"转向"谁的生态更完善"。Claude有Anthropic的整套企业级工具链，GPT有OpenAI的消费级入口。这些东西不是靠一个开源权重就能替代的。能力追平了，但产品层、生态层的差距还在。</p>
+
+<p>但开源模型会加速蚕食中长尾市场。当你有一个免费且够强的模型可以自己部署，很多场景没必要为API付费了。创业公司用GLM-5.3自己搭一套，成本从按量计费变成一次性硬件投入，账算得过来。</p>
+
+<p>那个年营收100亿的门槛也值得留意。智谱在用开源建立影响力，同时给自己留了商业化的后路。先让所有人用起来，再从大规模商用中收费。</p>
+
+<h2>对你</h2>
+
+<p>如果你是开发者，现在可以认真考虑在技术选型里加一个开源选项了。不是因为情怀，是因为真的够用了。743B参数的稠密模型，跑分跟Claude打平，能下载，能部署，能改。</p>
+
+<p>如果你做AI产品，模型能力的获取成本正在快速趋近于零。你的竞争力不能再靠"我们用了GPT"来定义，得靠你拿模型做了什么别人做不了的事。模型会越来越便宜，越来越开放，但用模型解决具体问题的判断力和工程能力，不会自动变便宜。</p>
+
+<p>40年前，有人写了一段代码，没人发现里面的漏洞。</p>
+
+<p>40年后，一个免费的AI发现了它。</p>
+
+<p>这个故事比任何跑分都重。</p>
+
+<div class="ending">
+谢谢你看我的文章。
+</div>
+
+</div>
+</body>
+</html>
