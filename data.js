@@ -127,6 +127,12 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "视频还没播完，下一段就做好了",
+        desc: "MiniMax H3 Max生成5秒768p视频不到3秒，生成速度首次超过播放速度。一个中国公司开源的330亿参数模型，被海外开发者搭成了24小时AI直播电视台。H3开源一个月下载超2400万次，衍生300+模型。这不是更快的视频生成，是从制作到运行的范式跳跃。",
+        href: "notes/2026-08-31-minimax-h3max-livestream.html"
+      },
+      {
+        type: "Essay",
         title: "40年没人找到的漏洞，一个免费的中国AI找到了",
         desc: "1986年有人写下了DNS协议的一段代码，跑了40年没人发现里面的漏洞。直到智谱GLM-5.3在开源前安全评估中自己找到了它，影响超过1000万处公网DNS服务。743B稠密模型，AA指数60跟Claude Fable 5打平，完整权重免费下载。发现40年未知漏洞不是刷分，是真研究能力。当最强模型免费的时候，追赶这个概念开始失效了。",
         href: "notes/2026-08-30-glm53-open-source.html"
@@ -274,6 +280,13 @@ window.SITE_DATA = {
         excerpt: "名字来自两部作品：恋爱的犀牛教我不计成败地热爱，基督山伯爵教我不动声色地等待。2022年底ChatGPT像一头灰犀牛从地平线走来，Count就是把它的轨迹从噪音里算出来——然后与各位同行者一起远征。",
         img: "assets/note-05.svg",
         href: "notes/why-rhino-count.html"
+      },
+      {
+        cat: "观察", num: "N° 81",
+        title: "视频还没播完，下一段就做好了",
+        excerpt: "MiniMax H3 Max生成5秒768p视频不到3秒，生成速度首次超过播放速度。一个中国公司开源的330亿参数模型，被海外开发者搭成了24小时AI直播电视台。H3开源一个月下载超2400万次，衍生300+模型。这不是更快的视频生成，是从制作到运行的范式跳跃。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-08-31-minimax-h3max-livestream.html"
       },
       {
         cat: "观察", num: "N° 80",
