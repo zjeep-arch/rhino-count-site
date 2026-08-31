@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="MiniMax H3 Max生成视频比播放还快，一个中国公司开源的模型，让海外开发者搭出了24小时AI直播电视台">
+  <title>视频还没播完，下一段就做好了 | MiniMax H3 Max</title>
+  <style>
+    :root {
+      --accent: #8b2635;
+      --ink: #333;
+      --ink-soft: #555;
+      --muted: #888;
+      --surface: #fafafa;
+      --border: rgba(0,0,0,0.06);
+      --radius: 12px;
+      --font-sans: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-serif: "Noto Serif SC", "Songti SC", Georgia, serif;
+    }
+    body { font-family: var(--font-sans); background: #f5f5f5; margin: 0; padding: 16px; font-size: 16px; line-height: 1.8; color: var(--ink); -webkit-font-smoothing: antialiased; }
+    .container { max-width: 680px; margin: 0 auto; background: var(--surface); padding: 32px; border-radius: var(--radius); }
+    h1 { font-family: var(--font-serif); font-size: 24px; font-weight: 700; color: var(--ink); line-height: 1.4; margin: 0 0 16px; }
+    .meta { color: var(--muted); font-size: 13px; margin-bottom: 16px; }
+    .byline { color: var(--ink-soft); font-size: 14px; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+    h2 { font-family: var(--font-serif); font-size: 20px; font-weight: 600; color: var(--ink); margin: 32px 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+    h3 { font-family: var(--font-serif); font-size: 18px; font-weight: 600; color: var(--ink); margin: 24px 0 12px; }
+    p { margin: 0 0 24px; }
+    .quote-box { border-left: 4px solid var(--accent); background: #f5f5f5; padding: 16px 20px; margin: 24px 0; border-radius: 0 var(--radius) var(--radius) 0; }
+    .quote-box p { margin: 0; color: var(--ink-soft); font-style: italic; font-size: 15px; }
+    .quote-box .attribution { margin-top: 8px; color: var(--muted); font-size: 13px; font-style: normal; }
+    .insight-box { background: #fff8f0; border: 1px solid #ffe4c4; border-radius: var(--radius); padding: 20px; margin: 24px 0; }
+    .insight-box h4 { margin: 0 0 8px; font-size: 16px; color: var(--ink); }
+    .insight-box p { margin: 0; font-size: 15px; color: var(--ink-soft); }
+    .data-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14px; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .data-table th, .data-table td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); }
+    .data-table th { background: #f0f0f0; font-weight: 600; color: var(--ink); }
+    .data-table td { color: var(--ink-soft); }
+    .timeline { position: relative; padding-left: 24px; margin: 24px 0; }
+    .timeline::before { content: ''; position: absolute; left: 6px; top: 0; bottom: 0; width: 2px; background: #e0e0e0; }
+    .timeline-item { position: relative; margin-bottom: 16px; }
+    .timeline-item::before { content: ''; position: absolute; left: -22px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); }
+    .timeline-item .date { font-size: 13px; color: var(--muted); margin-bottom: 4px; }
+    .timeline-item .content { font-size: 15px; color: var(--ink); }
+    .img-caption { text-align: center; color: var(--muted); font-size: 13px; margin-top: 8px; margin-bottom: 24px; }
+    .ending { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--ink-soft); font-size: 14px; }
+    .highlight { color: var(--accent); font-weight: 600; background: linear-gradient(to top, rgba(139,38,53,0.08) 40%, transparent 40%); padding: 0 2px; }
+    .data-callout { display: inline-block; background: var(--accent); color: #fff; padding: 2px 10px; border-radius: 4px; font-weight: 700; font-size: 15px; }
+    .contrast-card { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin: 24px 0; border-radius: var(--radius); overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .contrast-card .side { padding: 16px 20px; }
+    .contrast-card .side-left { background: #fef2f2; border-right: 1px solid var(--border); }
+    .contrast-card .side-right { background: #f0fdf4; }
+    .contrast-card .side h4 { margin: 0 0 8px; font-size: 14px; font-weight: 600; }
+    .contrast-card .side-left h4 { color: #991b1b; }
+    .contrast-card .side-right h4 { color: #166534; }
+    .contrast-card .side p { margin: 0; font-size: 14px; color: var(--ink-soft); line-height: 1.6; }
+    .punchline { font-family: var(--font-serif); font-size: 18px; font-weight: 700; color: var(--accent); text-align: center; margin: 32px 0; padding: 16px 0; border-top: 2px solid var(--accent); border-bottom: 2px solid var(--accent); }
+    strong { color: var(--ink); font-weight: 600; }
+    .article-img { width: 100%; border-radius: 8px; margin: 24px 0 8px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>视频还没播完，下一段就做好了</h1>
+    <div class="meta">2026年8月31日 · 阅读时间约12分钟</div>
+    <div class="byline">文｜犀牛伯爵</div>
+
+    <p>8月31日，一个叫Pieter Levels的程序员在互联网上开了一个电视台。没有节目单，没有库存内容，没有主持人。观众在聊天室打字说想看什么，画面就变成什么。上一秒青蛙统治世界，下一秒主角被送去华尔街搞金融。</p>
+
+    <p>没人知道下一集演什么。</p>
+
+    <p>因为下一集还没被生成出来。</p>
+
+    <p>这不是科幻。这是今天发生的事。而驱动这个电视台的引擎，不是OpenAI，不是Google。是一个叫MiniMax的中国公司做的模型。</p>
+
+    <h2>一个月前，有人把底座开源了</h2>
+
+    <p>事情要从一个月前说起。7月31日，MiniMax在上海WAIC 2026上发布了H3，一个330亿参数的全模态生成模型。能生成2K分辨率、15秒、24帧的视频，还自带32kHz双声道立体声音频。口型、环境音、音效和画面天然对齐。三天后，8月3日，MiniMax把H3的权重全部开源了。</p>
+
+    <p>免费。随便用。</p>
+
+    <p>一个月内，H3的下载量超过2400万次，社区产生了300多个公开衍生模型，成了2026年全球下载量最高的模型。（据东方财富网8月31日报道）</p>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="date">7月31日</div>
+        <div class="content">MiniMax在WAIC 2026发布H3，330亿参数全模态生成模型</div>
+      </div>
+      <div class="timeline-item">
+        <div class="date">8月3日</div>
+        <div class="content">H3模型权重正式开源，Apache 2.0协议</div>
+      </div>
+      <div class="timeline-item">
+        <div class="date">8月（一个月内）</div>
+        <div class="content">下载量超2400万次，衍生300+公开模型，全球下载量第一</div>
+      </div>
+      <div class="timeline-item">
+        <div class="date">8月31日</div>
+        <div class="content">fal推出H3 Max，5秒768p视频生成不到3秒，接入开放平台</div>
+      </div>
+    </div>
+
+    <p>然后fal来了。fal是一个海外AI基础设施平台，他们在H3开放权重的基础上做了后训练和推理优化，推出了H3 Max。根据fal公布的数据，H3 Max生成一段5秒、768p的完整音视频，耗时不到3秒。（据东方财富网8月31日报道）</p>
+
+    <p>3秒。</p>
+
+    <p>5秒的视频3秒就做完了。</p>
+
+    <p class="punchline">生成速度超过了播放速度。</p>
+
+    <h2>从制作到运行，一扇门被推开了</h2>
+
+    <p>说真的，我自己看到这个数字的时候愣了一下。</p>
+
+    <p>生成快过播放，这件事的意义远比"快"本身大得多。</p>
+
+    <p>你想，以前的视频模型是什么角色？是制作工具。你输入一段提示词，等几十秒甚至几分钟，拿到一条视频，任务结束。模型像一个裁缝，你下单，它做衣服，做完交给你，这单生意就结了。</p>
+
+    <p>但生成速度一旦超过播放速度，底层逻辑就彻底变了。上一段视频还在播放，下一段已经在后台生成完毕，无缝衔接。模型不再是一次性的裁缝，它变成了一座持续运转的电视台。</p>
+
+    <div class="contrast-card">
+      <div class="side side-left">
+        <h4>之前，视频模型是裁缝</h4>
+        <p>你下单 → 等几十秒 → 拿到成品 → 任务结束。一次性需求，模型是生产工具。</p>
+      </div>
+      <div class="side side-right">
+        <h4>现在，视频模型是电视台</h4>
+        <p>上一段在播 → 下一段已生成 → 无缝衔接 → 24小时不停。持续性需求，模型是运行环节。</p>
+      </div>
+    </div>
+
+    <p>这是一个从"制作"到"运行"的范式跳跃。</p>
+
+    <p>fal的工程师Rehan Sheikh第一时间把H3 Max接进了Twitch直播，搭了一档没有固定节目单的"跨维度电视"，模型不断生成新的画面和声音，直接进入直播流。这条直播在X上的观看量接近350万次。（据东方财富网8月31日报道）</p>
+
+    <img class="article-img" src="http://i1.hdslb.com/bfs/archive/b5200c8b689cc47732ea97e0994cd1612172c3df.jpg" alt="MiniMax H3 AI视频生成效果展示">
+    <div class="img-caption">MiniMax H3 AI视频生成效果展示（图源，B站）</div>
+
+    <p>紧接着Pieter Levels上线了24小时AI直播网站Infinite Slop。观众在聊天室输入想看的内容，系统把提示词转化为下一段视频，还尝试跟上一段画面衔接。一天烧掉4000美元，3.7万人围观。（据百家号8月31日报道）</p>
+
+    <p>观众不再只是看节目了。他们在决定节目。</p>
+
+    <p>我自己觉得，这才是H3 Max真正打开的那个东西。不是更快的视频生成，是一个全新的内容形态。视频模型的服务对象，从"需要制作一条视频的人"，延伸到了"需要持续产生画面的内容产品"。</p>
+
+    <h2>开源赢了一切</h2>
+
+    <p>坦率地讲，H3 Max不是MiniMax自己做的。是fal在H3开源权重基础上做后训练做出来的。RunningHub做了480P版本，FastVideo做了FastH3，把49次前向传播压缩到4次，单卡最高14倍加速。（据搜狐科技8月31日报道）</p>
+
+    <p>这些事情能发生，前提只有一个，MiniMax把H3开源了。</p>
+
+    <p>我一直觉得，2026年AI行业最被低估的事情之一，就是中国公司的开源策略开始收获全球生态红利。H3开源一个月，2400万次下载，300多个衍生模型。这不是MiniMax一个人在战斗，是全球开发者在它的底座上盖楼。</p>
+
+    <p>而楼盖得越高，MiniMax的地基就越值钱。</p>
+
+    <div class="quote-box">
+      <p>"以更低的成本，将更高水平的智能带给更多人。Minimize the Cost, Maximize the Intelligence。"</p>
+      <div class="attribution">MiniMax创始人兼CEO闫俊杰，2026年中期业绩会，8月26日</div>
+    </div>
+
+    <p>这句话听着像口号，但看财报数据，他是在描述一个正在发生的事实。</p>
+
+    <h2>商业模式变了</h2>
+
+    <p>MiniMax 2026年上半年总收入1.17亿美元，同比增长283.1%，半年收入超过2025年全年。其中开放平台及企业服务收入7390万美元，同比增长703.1%，占总收入的63.4%。（据中国发展网8月28日、中新经纬8月26日报道）</p>
+
+    <table class="data-table">
+      <thead>
+        <tr><th>指标</th><th>2026年上半年</th><th>同比变化</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>总收入</td><td>1.17亿美元</td><td>+283.1%</td></tr>
+        <tr><td>开放平台及企业服务收入</td><td>7390万美元</td><td>+703.1%</td></tr>
+        <tr><td>AI原生产品收入</td><td>4260万美元</td><td>+100.9%</td></tr>
+        <tr><td>毛利</td><td>2081万美元</td><td>+464.8%</td></tr>
+        <tr><td>毛利率</td><td>17.9%</td><td>从12.1%提升</td></tr>
+        <tr><td>海外收入占比</td><td>60.8%</td><td>7083万美元</td></tr>
+      </tbody>
+    </table>
+
+    <p>去年同期，MiniMax的ToB和ToC收入比例是3比7。现在变成了8比2。</p>
+
+    <p>一家过去靠海螺AI和Talkie被外界认识的公司，正在变成一家卖Token的公司。8月ARR超过8亿美元，企业客户和开发者数量突破200万，是2025年底的<span class="data-callout">10倍</span>。（据百家号8月26日报道）</p>
+
+    <div class="insight-box">
+      <h4>关键信号</h4>
+      <p>H3 Max接入开放平台后，视频模型调用从"一次性需求"变成"持续发生的需求"。直播一开就是24小时，Token消耗是持续的。以前做完一条视频就不再调模型了，现在模型要不停工作。对MiniMax来说，这是收入从量变到质变。</p>
+    </div>
+
+    <h2>中国模型，海外开发者，全球产品</h2>
+
+    <p>这个细节很多人可能没注意到。fal是海外平台，Rehan Sheikh是fal的工程师，Pieter Levels是荷兰独立开发者。他们用的模型底座，来自一家中国公司。</p>
+
+    <img class="article-img" src="http://pics7.baidu.com/feed/0ff41bd5ad6eddc465cb59d69ba49fef52663304.jpeg" alt="DeepSeek Harness结合MiniMax H3生成AI短视频">
+    <div class="img-caption">开发者基于MiniMax H3构建的AI视频创作工作流（图源，百度百家号）</div>
+
+    <p>而且这不是孤例。H3在Design Arena图生视频榜单和Artificial Analysis图生视频榜单上双双位于榜首。Design Arena的独立测试口径甚至给出超过50倍加速的判断。（据东方财富网8月31日、百家号8月31日报道）</p>
+
+    <p>中国模型，海外开发者，全球产品。</p>
+
+    <p>这个链路在2024年几乎不可想象。那时候中国AI公司的模型在海外基本没有存在感。但MiniMax从2025年开始出海，2026年上半年海外市场贡献收入7083万美元，占总收入的60.8%。（据中新经纬8月26日报道）</p>
+
+    <p>超过六成的收入来自海外。一家中国AI公司。</p>
+
+    <h2>但也有人在泼冷水</h2>
+
+    <p>但话说回来，也有不少人在质疑。</p>
+
+    <p>一种声音说，这不就是套壳吗，fal做了后训练，真正的功劳是fal不是MiniMax。</p>
+
+    <p>这个说法忽略了一个基本事实。fal是在H3开放权重基础上做的后训练，没有MiniMax开源的330亿参数底座，fal再强也无米之炊。H3 Max的加速来自模型和推理系统的同步调整，fal加入了新数据做了可验证强化学习优化，但底座是MiniMax的。（据东方财富网8月31日报道）</p>
+
+    <p>另一种声音说，AI直播就是个噱头，没人会长期看这种东西。</p>
+
+    <p>这话有一定道理。Infinite Slop确实被调侃为"AI电子榨菜"，内容毫无营养。但这个判断犯了一个常见的错误，用现在的产品形态去评判未来的商业逻辑。</p>
+
+    <p>YouTube在2025年披露，平台抽样统计的300个虚拟创作者在2024年获得超过<span class="data-callout">150亿次</span>观看，覆盖视频、直播和Shorts。（据东方财富网8月31日报道）</p>
+
+    <p>150亿次。</p>
+
+    <p>数字角色已经有观众基础了。当AI视频生成速度快过播放速度，互动内容已有的付费接口就能被接上。Twitch的Extensions已经允许观众用Bits触发投票。投票、礼物、会员权益，未来都可能跟角色、剧情和节目走向结合。</p>
+
+    <p>现阶段的H3 Max直播还没走到商业化，不代表它走不到。</p>
+
+    <p>还有人说，MiniMax市值从3月的4300亿港元跌到8月的1100亿港元，跌了76%。（据百家号8月报道）</p>
+
+    <p>我自己的感受是，市值波动和公司基本面是两件事。半年收入增长283%，B端收入增长7倍，毛利率从12.1%提升到17.9%。现金储备超过30亿美元。这些数字比股价更值得看。</p>
+
+    <h2>接下来可能会怎么发展</h2>
+
+    <p>我的判断是，视频模型从"生产工具"进入"运行环节"，这个趋势会在未来6到12个月内加速。不是因为H3 Max本身多强，是因为开源社区的迭代速度太快了。H3开源才一个月，就已经有了H3 Max、FastH3、480P版本等多个优化分支。</p>
+
+    <p>闫俊杰在业绩会上说，未来一段时间模型的发布周期会显著缩短，智能化提升速度会变快。后面还有M3.1、M3 Pro和H3.1在路上。（据百家号8月26日报道）</p>
+
+    <p>我也可能错了。也许AI直播永远停留在实验阶段，观众的新鲜感过了就散了。也许生成成本降不下来，Infinite Slop每天烧4000美元的模式无法持续。</p>
+
+    <p>但即便如此，生成速度超过播放速度这件事本身，已经把一扇门推开了。</p>
+
+    <p>这扇门后面是什么，现在谁也说不准。</p>
+
+    <h2>有些东西变了</h2>
+
+    <p>聊到这里我突然想起一个事。</p>
+
+    <p>当年YouTube刚上线的时候，所有人都在嘲笑它说那是"猫视频仓库"。没人觉得一个让普通人上传视频的网站能做成什么正经生意。</p>
+
+    <p>20年后，YouTube的全球月活超过25亿。</p>
+
+    <p>我不是说AI直播就是下一个YouTube。但当一个中国公司开源的模型，被一个荷兰程序员用来搭了一个24小时不间断的AI电视台，3.7万人跑来看，聊天区还在决定下一帧播什么的时候。</p>
+
+    <p>你得承认，有什么东西变了。</p>
+
+    <p>MiniMax做了一个底座，全球开发者正在上面盖楼。而楼的方向，不是任何人规划的。</p>
+
+    <p class="punchline">这可能是2026年最被低估的事。</p>
+
+    <div class="ending">谢谢你看我的文章。</div>
+  </div>
+</body>
+</html>
