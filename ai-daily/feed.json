@@ -1,6 +1,13 @@
 {
-  "updated": "2026-08-28T11:00:00+08:00",
+  "updated": "2026-08-31T09:00:00+08:00",
   "articles": [
+    {
+      "cat": "安全 · 模型 · 资本",
+      "date": "2026-08-31",
+      "title": "AI大模型及安全动态日报 | 2026年08月31日（星期一）",
+      "excerpt": "Uber 70%代码PR由AI Agent接管，a16z完成11亿美元AI硬件基金，腾讯混元Hy4-preview 770B开源，阿里Qwen3.8-Max达2.4万亿参数，OpenAI终止向Cursor提供模型，索尼华纳起诉Anthropic版权侵权，Anthropic让Claude自主训练模型缓解对齐失败。",
+      "href": "2026-08-31-ai-daily.html"
+    },
     {
       "cat": "安全 · 模型 · 资本",
       "date": "2026-08-28",
