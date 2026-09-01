@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>智谱终于学会赚钱了，股价却跌了</title>
+  <meta name="description" content="智谱上市后首份半年报，营收9.54亿增400%，API收入暴涨27倍，但股价跌了1.34%。五层验账拆解中国大模型第一股的真实商业逻辑。">
+  <style>
+    :root {
+      --accent: #1e3a8a;
+      --ink: #333;
+      --ink-soft: #555;
+      --muted: #888;
+      --surface: #fafafa;
+      --border: rgba(0,0,0,0.06);
+      --radius: 12px;
+      --font-sans: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-serif: "Noto Serif SC", "Songti SC", Georgia, serif;
+    }
+    body { font-family: var(--font-sans); background: #f5f5f5; margin: 0; padding: 16px; font-size: 16px; line-height: 1.8; color: var(--ink); -webkit-font-smoothing: antialiased; }
+    .container { max-width: 680px; margin: 0 auto; background: var(--surface); padding: 32px; border-radius: var(--radius); }
+    h1 { font-family: var(--font-serif); font-size: 24px; font-weight: 700; color: var(--ink); line-height: 1.4; margin: 0 0 16px; }
+    .meta { color: var(--muted); font-size: 13px; margin-bottom: 16px; }
+    .byline { color: var(--ink-soft); font-size: 14px; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+    h2 { font-family: var(--font-serif); font-size: 20px; font-weight: 600; color: var(--ink); margin: 32px 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+    h3 { font-family: var(--font-serif); font-size: 18px; font-weight: 600; color: var(--ink); margin: 24px 0 12px; }
+    p { margin: 0 0 24px; }
+    .quote-box { border-left: 4px solid var(--accent); background: #f5f5f5; padding: 16px 20px; margin: 24px 0; border-radius: 0 var(--radius) var(--radius) 0; }
+    .quote-box p { margin: 0; color: var(--ink-soft); font-style: italic; font-size: 15px; }
+    .quote-box .attribution { margin-top: 8px; color: var(--muted); font-size: 13px; font-style: normal; }
+    .insight-box { background: #fff8f0; border: 1px solid #ffe4c4; border-radius: var(--radius); padding: 20px; margin: 24px 0; }
+    .insight-box h4 { margin: 0 0 8px; font-size: 16px; color: var(--ink); }
+    .insight-box p { margin: 0; font-size: 15px; color: var(--ink-soft); }
+    .data-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14px; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .data-table th, .data-table td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); }
+    .data-table th { background: #f0f0f0; font-weight: 600; color: var(--ink); }
+    .data-table td { color: var(--ink-soft); }
+    .timeline { position: relative; padding-left: 24px; margin: 24px 0; }
+    .timeline::before { content: ''; position: absolute; left: 6px; top: 0; bottom: 0; width: 2px; background: #e0e0e0; }
+    .timeline-item { position: relative; margin-bottom: 16px; }
+    .timeline-item::before { content: ''; position: absolute; left: -22px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); }
+    .timeline-item .date { font-size: 13px; color: var(--muted); margin-bottom: 4px; }
+    .timeline-item .content { font-size: 15px; color: var(--ink); }
+    .img-caption { text-align: center; color: var(--muted); font-size: 13px; margin-top: 8px; margin-bottom: 24px; }
+    .ending { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--ink-soft); font-size: 14px; }
+    .highlight { color: var(--accent); font-weight: 600; background: linear-gradient(to top, rgba(30,58,138,0.08) 40%, transparent 40%); padding: 0 2px; }
+    .data-callout { display: inline-block; background: var(--accent); color: #fff; padding: 2px 10px; border-radius: 4px; font-weight: 700; font-size: 15px; }
+    .contrast-card { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin: 24px 0; border-radius: var(--radius); overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .contrast-card .side { padding: 16px 20px; }
+    .contrast-card .side-left { background: #fef2f2; border-right: 1px solid var(--border); }
+    .contrast-card .side-right { background: #f0fdf4; }
+    .contrast-card .side h4 { margin: 0 0 8px; font-size: 14px; font-weight: 600; }
+    .contrast-card .side-left h4 { color: #991b1b; }
+    .contrast-card .side-right h4 { color: #166534; }
+    .contrast-card .side p { margin: 0; font-size: 14px; color: var(--ink-soft); line-height: 1.6; }
+    .punchline { font-family: var(--font-serif); font-size: 18px; font-weight: 700; color: var(--accent); text-align: center; margin: 32px 0; padding: 16px 0; border-top: 2px solid var(--accent); border-bottom: 2px solid var(--accent); }
+    strong { color: var(--ink); font-weight: 600; }
+    img { width: 100%; border-radius: 8px; margin: 16px 0 8px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>智谱终于学会赚钱了，股价却跌了</h1>
+    <div class="meta">2026年9月1日 · 阅读时间约12分钟</div>
+    <div class="byline">文｜犀牛伯爵</div>
+
+    <p>8月31日深夜11点，港交所的披露系统跳出来一份公告。</p>
+    <p>智谱，这家今年1月才在港交所挂牌的AI公司，交出了上市后的第一份半年报。营收9.54亿元，同比增长399.7%。API收入从去年同期的2910万冲到8.25亿，涨了27倍。毛利率从负数转正。ARR（年度经常性收入）8月已经到了16亿美元。</p>
+    <p>任何一个数字单独拿出来，都够发一篇公关稿。</p>
+    <p>然后第二天，9月1日开盘，智谱的股价跌了1.34%。</p>
+    <p>我自己看到这个数据的时候愣了一下。营收翻了4倍，API收入涨了27倍，资本市场为什么在卖？</p>
+    <p>这家公司不是OpenAI，不是Anthropic。是智谱，那个被质疑"只会烧钱"的中国大模型公司。</p>
+    <p>它终于学会了赚钱。市场却选择不信。</p>
+
+    <div class="punchline">不是天真。是策略。</div>
+
+    <h2>一份不该被忽视的财报</h2>
+
+    <p>智谱是谁，可能不需要太多介绍。清华系出身，GLM系列模型的缔造者，国产大模型"双雄"之一。今年1月8日在港交所挂牌，顶着"全球大模型第一股"的光环，发行价116.2港元，上市首日涨了13.17%，市值约579亿港元。</p>
+    <p>上市的时候，市场给了一个很贵的价格。当时市销率超过500倍，质疑声铺天盖地。一家年收入不到2亿的公司，凭什么值500多亿港元？</p>
+    <p>这份半年报，是智谱第一次用真实数据回应这个质疑。</p>
+    <p>答案比大多数人预期的要好。但市场的反应比大多数人预期的要冷。</p>
+
+    <img src="http://pic.rmb.bdstatic.com/bjh/260817/dump/63bb7933395d559a2f7d10b32986d514.jpeg" alt="智谱GLM-5.3模型正式发布，国产大模型或重塑全球网络安全攻防格局">
+    <div class="img-caption">图源｜百度百家号</div>
+
+    <p>坦率地讲，看这份财报不能只看营收数字。营收增长400%当然是好事，但真正重要的信号藏在收入结构的变化里。智谱的商业化模式正在经历一次根本性的切换，从"政企项目制"转向"按调用量计费的云端MaaS"。这个切换的深度和速度，才是这份财报最值得看的东西。</p>
+    <p>下面我用五层验账框架，一层一层拆。</p>
+
+    <h2>第一层，需求真实性</h2>
+
+    <p>大模型公司最怕什么？怕收入增长靠的是几个大客户撑面子，合同一断就崩。所以第一层要看的是，需求是真的还是虚的。</p>
+    <p>智谱上半年开放平台及API业务收入达到8.25亿元，同比增长2735.7%。来源是南方都市报的报道，东方财富转载。去年同期这个数字是2910万，今年变成了8.25亿。一年时间，27倍。</p>
+    <p>但比收入增长更猛的是调用量。财报显示，智谱MaaS平台Token调用量较今年年初整体增长超过40倍。Coding Plan产品上线整整365天，调用量增长了234倍。肖磊在财报电话会上透露，Coding Plan已经是全球最大的编程服务之一，也是增速最快的编程服务。</p>
+    <p>说真的，2736%的收入增长配上40倍的调用量增长，说明一件事，收入增长不是靠涨价撑出来的，是用量堆出来的。</p>
+    <p>但是，它确实也在涨价。同期API平均定价提升了101%。价格翻了一倍，调用量还在疯涨。这个组合在商业上叫"量价齐升"，是需求强劲的最硬信号。</p>
+    <p>更关键的一个数据。肖磊在电话会上说，前十大核心用户在日均调用量上，占40万亿总调用中的15万亿，接近40%。而且前十大用户日均调用量较年初增长了98倍。用得更深，不是用得更广。</p>
+    <p>还有一个信息差很大的细节。中国前十大互联网公司中，有4家已经把GLM模型列为全球首要选择，不是国产首选，是全球首选。也就是说，跟海外模型相比，GLM是他们的第一选择。这个说法来自华尔街见闻对智谱电话会的报道。</p>
+
+    <div class="insight-box">
+      <h4>关键发现</h4>
+      <p>API提价101%的同时调用量增长40倍，前十大用户调用量增长98倍。不是"便宜才用你"，是"有能力才用你"。这是从价格驱动到能力驱动的拐点信号。</p>
+    </div>
+
+    <p>ARR的轨迹更能说明问题。智谱7月上旬ARR是10亿美元，8月底到了16亿美元，按周度计算已经到20亿美元。年底指引24亿美元。两个月时间从10亿到16亿，涨了60%。如果这个速度能维持，全年ARR破30亿美元不是梦。</p>
+    <p>需求是真的。不是假的。</p>
+
+    <h2>第二层，供给交付力</h2>
+
+    <p>需求有了，能不能接住？这是第二层要验证的。</p>
+    <p>智谱今年最大的供给侧变化是算力国产化。财报披露，智谱已经实现10万级国产芯片的规模化低成本推理。GLM-5.3-Flash是公司首次在超大规模、真实流量中全面使用国产芯片集群提供服务的模型。单位Token推理成本较年初下降80%。</p>
+    <p>刘德兵在财报电话会上说了一句很重的话。他说，"在全球算力供给持续紧张的情况下，这条路径让我们的成本曲线，开始掌握在我们自己手里。"</p>
+    <p>这句话的分量，需要放在英伟达芯片被管制的背景下来理解。如果算力完全依赖进口芯片，成本曲线就捏在别人手里。10万级国产芯片规模化推理，说明智谱找到了一条不依赖进口高端芯片的降本路径。</p>
+    <p>还有一个数字。单位算力投入所对应的收入提升了14倍。来源是搜狐转载的报道。去年同期花一块钱算力赚回来的收入，现在能赚14块。这个效率提升速度，比收入增长的速度更值得关注。</p>
+
+    <img src="http://q6.itc.cn/q_70/images03/20260827/b297e319e91a4a52bdcacec14bdd83d1.png" alt="智谱发布并开源GLM-5.3-Flash模型">
+    <div class="img-caption">图源｜IT之家</div>
+
+    <p>供给端的结论是，智谱不但能接住需求，而且交付成本在快速下降。这是一个飞轮开始转起来的信号。</p>
+
+    <h2>第三层，商业化生态壁垒</h2>
+
+    <p>第三层要看的是，智谱的商业模式有没有护城河，还是谁都能复制。</p>
+    <p>先看毛利率。开放平台及API业务毛利率从去年同期的-0.4%提升至24.6%。来源是南方都市报和澎湃新闻的报道。从负数到24.6%，这个跃迁主要得益于三个因素，规模效应、定价上调和工程优化。澎湃新闻还提到一个关键细节，毛利润已初步覆盖管理及销售费用，并开始反哺研发投入。</p>
+    <p>这句话的意思是，不算研发投入的话，智谱的API业务已经能自己养活自己了。研发的窟窿还需要外部输血，但日常运营已经转正。这是一个从"烧钱"到"自循环"的临界点。</p>
+    <p>但这里也有一个隐忧。24.6%的毛利率，远低于传统本地化部署业务59.1%的毛利率。智谱在用一个低毛利但高增长的业务，替换一个高毛利但低增长的业务。短期来看，这个替换是正确的，因为MaaS的天花板远高于项目制。长期来看，毛利率能不能持续爬升到50%以上的健康水位，是一个需要跟踪的指标。</p>
+    <p>生态壁垒的另一个维度是用户规模。财报显示，智谱MaaS平台付费日活用户数较年初增长603%，用户规模突破740万，覆盖233个国家和地区。来源是中国证券网的报道。740万付费日活，233个国家，这个数字说明智谱的API已经不只是中国企业在用，全球开发者都在用。</p>
+    <p>生态壁垒最关键的一块拼图，是模型能力的持续领先。刘德兵在电话会上说，"单点领先并不构成壁垒，持续的能力领先才是关键。"他把模型能力演进拆成了五个阶段。</p>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="date">阶段一</div>
+        <div class="content">Chat，交付的是一次性的回答</div>
+      </div>
+      <div class="timeline-item">
+        <div class="date">阶段二</div>
+        <div class="content">Coding，交付的是一段可运行的代码</div>
+      </div>
+      <div class="timeline-item">
+        <div class="date">阶段三</div>
+        <div class="content">Agent，交付是一条被执行完的多步任务链</div>
+      </div>
+      <div class="timeline-item">
+        <div class="date">阶段四</div>
+        <div class="content">Cowork，交付一份可以被专业人士复核的专业成果</div>
+      </div>
+      <div class="timeline-item">
+        <div class="date">阶段五</div>
+        <div class="content">Autonomous AI，交付的是持续运行的能力</div>
+      </div>
+    </div>
+
+    <p>智谱目前处于Coding向Agent、Cowork过渡的阶段。已经在网络安全、法律、金融、教育等领域开展场景验证。肖磊特别提到，网络安全是目前验证最清晰的落地场景。来源是观点新媒体的报道。</p>
+    <p>每一个阶段向上，商业模式的天花板都会抬高一个量级。从卖回答到卖代码到卖任务到卖专业成果到卖持续运行的能力，价格完全不在一个量级。这也是刘德兵说"AGI商业价值等于智能上界乘以Token消耗规模"的底层逻辑。</p>
+
+    <div class="quote-box">
+      <p>"每一级向上，都有一个具体的技术门槛。如果门槛跨不过去，上一层的商业模式就不成立。"</p>
+      <div class="attribution">智谱董事长刘德兵，2026年中期业绩电话会</div>
+    </div>
+
+    <h2>第四层，财务质量</h2>
+
+    <p>前三层讲的是故事，第四层要验账。数字不会撒谎，但数字会被包装。</p>
+    <p>先看亏损。期内亏损20.72亿元，同比收窄12.1%。来源是财新网和中国证券网的报道。亏损在收窄，方向是对的。但20.72亿的亏损额，相对于9.54亿的营收来说，仍然是一个巨大的缺口。研发费用率超过200%，研发投入是收入的2.2倍。</p>
+    <p>研发投入21.31亿元，同比增长33.6%。来源是华尔街见闻和新浪财经的报道。这个数字需要放在行业背景下来看。Anthropic 2025年研发投入约30亿美元，智谱的21.31亿人民币约合3亿美元。规模差了一个数量级，但智谱的研发效率能不能追上，是长期竞争力的关键变量。</p>
+    <p>一个被市场忽略的积极信号是管理费用的压缩。Barrons巴伦的报道指出，智谱管理及行政费用砍掉了44.2%。在收入翻四倍的同时把费用率压下来，运营效率的提升是实打实的。不是靠省钱省出来的增长，是靠效率提升跑出来的增长。</p>
+    <p>应收款项从3亿涨到7.8亿，这个需要盯一下。来源也是Barrons巴伦的报道。应收增长160%，低于营收增长400%，比例上还算健康。但如果后续应收继续膨胀，减值风险就会浮上来。目前减值损失已经翻倍，需要持续跟踪。</p>
+    <p>现金方面，截至6月末公司现金及现金等价物39.94亿元。来源是财华社的报道。资本负债率58.8%，上市后权益由负转正。39.94亿现金加上还在增长的收入，短期内不会有流动性压力。</p>
+
+    <div class="data-table">
+      <table>
+        <thead>
+          <tr>
+            <th>指标</th>
+            <th>2025H1</th>
+            <th>2026H1</th>
+            <th>变动</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>总收入</td><td>1.91亿</td><td>9.54亿</td><td>+399.7%</td></tr>
+          <tr><td>API收入</td><td>0.29亿</td><td>8.25亿</td><td>+2735.7%</td></tr>
+          <tr><td>API毛利率</td><td>-0.4%</td><td>24.6%</td><td>转正</td></tr>
+          <tr><td>净亏损</td><td>23.55亿</td><td>20.72亿</td><td>收窄12.1%</td></tr>
+          <tr><td>研发投入</td><td>15.95亿</td><td>21.31亿</td><td>+33.6%</td></tr>
+          <tr><td>管理费用</td><td>N/A</td><td>N/A</td><td>-44.2%</td></tr>
+          <tr><td>现金</td><td>N/A</td><td>39.94亿</td><td>N/A</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>财务质量的结论是，亏损在收窄但规模仍然很大，运营效率在提升，现金流短期安全。离盈利还有距离，但方向正确。</p>
+
+    <h2>第五层，估值与风险校正</h2>
+
+    <p>这是最关键的一层。市场为什么在卖？</p>
+    <p>智谱9月1日收盘市值约5490亿港元，约合人民币5050亿。来源是东方财富的行情数据。如果用上半年营收年化来算，市销率约26倍。对一家仍在亏损的公司来说，26倍PS不便宜。</p>
+    <p>但是，如果用ARR来算呢？</p>
+    <p>8月ARR 16亿美元，约合107亿人民币。5050亿除以107亿，约4.7倍PS。年底ARR指引24亿美元，约合160亿人民币。5050亿除以160亿，约3.2倍PS。</p>
+
+    <div class="insight-box">
+      <h4>估值核心判断</h4>
+      <p>用静态营收算，PS 26倍偏贵。用ARR算，PS 4.7倍，年底指引到位后PS 3.2倍。对一家营收增速400%的AI公司来说，3到5倍的前瞻PS不算贵。市场的纠结在于，它信不信ARR能兑现。</p>
+    </div>
+
+    <p>高盛预测智谱收入将从2025年的7.24亿增长到2028年的579亿。来源是新浪财经的报道。如果这个预测成立，当前5050亿人民币的市值对应2028年营收的市销率不到9倍。对一家在高增长期的AI基础设施公司来说，这个估值不算离谱。</p>
+    <p>华尔街见闻还透露了一个很有意思的数据。智谱在电话会上承认，收入落后Anthropic大约17个月。也就是说，智谱现在的收入规模大约相当于Anthropic 2024年底的水平。但Anthropic的最新估值已经超过1万亿美元。智谱5490亿港币的市值，不到Anthropic的一半。</p>
+    <p>当然，这个对比不完全公平。Anthropic有美国市场的付费习惯和云计算生态加持，智谱的市场环境不同。但17个月的收入差距在缩小，不是在扩大。GLM-5.3的AA综合指数已经跟Claude Fable 5打平，技术代差在快速收敛。</p>
+
+    <div class="contrast-card">
+      <div class="side side-left">
+        <h4>看空逻辑</h4>
+        <p>亏损20.72亿，研发费用率超200%，应收款膨胀，毛利率24.6%远低于行业健康线，静态PS 26倍偏贵。市场担心的是，收入增长能否跑赢亏损扩大。</p>
+      </div>
+      <div class="side side-right">
+        <h4>看多逻辑</h4>
+        <p>API收入27倍增长，ARR从10亿到16亿只用两个月，前瞻PS 3到5倍，国产芯片降本路径已验证，Coding Plan调用量增长234倍。飞轮已经转起来了。</p>
+      </div>
+    </div>
+
+    <h2>风险边界</h2>
+
+    <p>我自己也清楚，上面这些判断有几个地方可能出错。</p>
+    <p>第一，ARR的增长速度能不能维持。从10亿到16亿用了两个月，但如果增长曲线放缓，前瞻PS的合理性就会打折扣。AI行业的变化太快，今天的领先者明天可能被超越。DeepSeek、月之暗面、MiniMax都在快速迭代，竞争格局随时可能被重塑。</p>
+    <p>第二，国产芯片的推理能力能不能跟上模型规模的增长。10万级国产芯片跑GLM-5.3-Flash可以，但下一代旗舰模型需要的算力可能是现在的几倍。国产芯片的性能天花板在哪里，目前还没有被真正测试过。</p>
+    <p>第三，毛利率能不能从24.6%持续爬升。如果一直停在25%以下，商业模式的健康度就不够。本地化部署的59.1%毛利率在下降，MaaS的24.6%在上升。两条曲线什么时候交叉、交叉后往哪个方向走，是判断长期盈利能力的关键。</p>
+    <p>第四，应收账款的风险。从3亿涨到7.8亿，如果后续有客户拖欠或坏账，对利润表的影响会被放大。</p>
+
+    <h2>该看什么指标</h2>
+
+    <p>如果你在关注智谱，下面这几个指标比股价涨跌更重要。</p>
+    <p>第一，季度ARR的变化速度。8月16亿美元，年底指引24亿。如果三季度ARR到20亿以上，增长曲线就没有减速。如果到不了，飞轮的故事就要打折。</p>
+    <p>第二，API毛利率的爬升轨迹。从-0.4%到24.6%是第一步，从24.6%到35%以上才是真正进入健康区间。每个季度的毛利率变动，比营收增速更能说明商业模式的成熟度。</p>
+    <p>第三，Coding Plan和Agent相关调用量占总调用的比例。这个比例越高，说明智谱正在从卖"回答"升级到卖"任务"和"专业成果"，单价天花板会打开。</p>
+    <p>第四，前十大用户的留存率和调用量增速。98倍的增长很猛，但如果任何一个大客户撤出，对收入的影响会很大。集中度太高是双刃剑。</p>
+
+    <p>说真的，智谱这份半年报的信息量很大。不是那种"数据好看但经不起推敲"的类型。API收入27倍增长、量价齐升、毛利率转正、管理费用砍44%，每一个指标都指向同一个方向，商业化飞轮开始转了。</p>
+    <p>股价跌1.34%，不代表财报不好。可能是市场还在用旧框架看新公司。用亏损额和静态营收来定价一家ARR两个月涨60%的AI基础设施公司，本身就是一种错配。</p>
+    <p>我一直觉得，对大模型公司来说，最重要的不是今天的亏损额，是亏损换来的东西是不是真有壁垒。21亿研发投入换来了GLM-5.3、10万级国产芯片推理能力、740万付费日活和234倍增长的编程服务。这些资产的价值，不在当期利润表里。</p>
+    <p>当然，也可能我错了。市场有时候是对的，它看到的风险我可能低估了。但如果你问我个人的判断，智谱这份半年报给出的信号是，中国大模型公司终于开始从"讲故事"变成"算账本"了。而账本上的数字，比故事好看。</p>
+
+    <div class="punchline">飞轮转起来的声音，比股价涨1%响得多。</div>
+
+    <p>聊到这里我突然想起一个事。当年亚马逊连亏了七年，华尔街每年都在喊"这公司永远赚不到钱"。贝索斯每年在股东信里写同一句话，"你的利润是我的机会。"后来亚马逊成了全球市值最高的公司之一。</p>
+    <p>不是说智谱就是亚马逊。但飞轮一旦开始转，扭转它需要的力量会越来越大。</p>
+
+    <div class="ending">以上不构成投资建议。但你如果关注中国AI，这些数字值得记住。</div>
+  </div>
+</body>
+</html>
