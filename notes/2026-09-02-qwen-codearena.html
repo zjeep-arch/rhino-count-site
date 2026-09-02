@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>打败Claude的编程AI，连发布会都没开 | 犀牛伯爵</title>
+  <meta name="description" content="2026年9月2日，阿里千问Qwen3.8-Max-0902登顶CodeArena，1691分超越Claude Opus 5，每百万Token仅5美元。一个没开发布会的中国AI模型，怎么赢了全球编程榜？">
+  <style>
+    :root {
+      --accent: #8b2635;
+      --ink: #333;
+      --ink-soft: #555;
+      --muted: #888;
+      --surface: #fafafa;
+      --border: rgba(0,0,0,0.06);
+      --radius: 12px;
+      --font-sans: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-serif: "Noto Serif SC", "Songti SC", Georgia, serif;
+    }
+    body { font-family: var(--font-sans); background: #f5f5f5; margin: 0; padding: 16px; font-size: 16px; line-height: 1.8; color: var(--ink); -webkit-font-smoothing: antialiased; }
+    .container { max-width: 680px; margin: 0 auto; background: var(--surface); padding: 32px; border-radius: var(--radius); }
+    h1 { font-family: var(--font-serif); font-size: 24px; font-weight: 700; color: var(--ink); line-height: 1.4; margin: 0 0 16px; }
+    .meta { color: var(--muted); font-size: 13px; margin-bottom: 16px; }
+    .byline { color: var(--ink-soft); font-size: 14px; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+    h2 { font-family: var(--font-serif); font-size: 20px; font-weight: 600; color: var(--ink); margin: 32px 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+    h3 { font-family: var(--font-serif); font-size: 18px; font-weight: 600; color: var(--ink); margin: 24px 0 12px; }
+    p { margin: 0 0 24px; }
+    .quote-box { border-left: 4px solid var(--accent); background: #f5f5f5; padding: 16px 20px; margin: 24px 0; border-radius: 0 var(--radius) var(--radius) 0; }
+    .quote-box p { margin: 0; color: var(--ink-soft); font-style: italic; font-size: 15px; }
+    .quote-box .attribution { margin-top: 8px; color: var(--muted); font-size: 13px; font-style: normal; }
+    .insight-box { background: #fff8f0; border: 1px solid #ffe4c4; border-radius: var(--radius); padding: 20px; margin: 24px 0; }
+    .insight-box h4 { margin: 0 0 8px; font-size: 16px; color: var(--ink); }
+    .insight-box p { margin: 0; font-size: 15px; color: var(--ink-soft); }
+    .data-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14px; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .data-table th, .data-table td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); }
+    .data-table th { background: #f0f0f0; font-weight: 600; color: var(--ink); }
+    .data-table td { color: var(--ink-soft); }
+    .timeline { position: relative; padding-left: 24px; margin: 24px 0; }
+    .timeline::before { content: ''; position: absolute; left: 6px; top: 0; bottom: 0; width: 2px; background: #e0e0e0; }
+    .timeline-item { position: relative; margin-bottom: 16px; }
+    .timeline-item::before { content: ''; position: absolute; left: -22px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); }
+    .timeline-item .date { font-size: 13px; color: var(--muted); margin-bottom: 4px; }
+    .timeline-item .content { font-size: 15px; color: var(--ink); }
+    .article-img { width: 100%; border-radius: 8px; margin: 24px 0 8px; display: block; }
+    .img-caption { text-align: center; color: var(--muted); font-size: 13px; margin-top: 8px; margin-bottom: 24px; }
+    .ending { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--ink-soft); font-size: 14px; }
+    .highlight { color: var(--accent); font-weight: 600; background: linear-gradient(to top, rgba(139,38,53,0.08) 40%, transparent 40%); padding: 0 2px; }
+    .data-callout { display: inline-block; background: var(--accent); color: #fff; padding: 2px 10px; border-radius: 4px; font-weight: 700; font-size: 15px; }
+    .contrast-card { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin: 24px 0; border-radius: var(--radius); overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .contrast-card .side { padding: 16px 20px; }
+    .contrast-card .side-left { background: #fef2f2; border-right: 1px solid var(--border); }
+    .contrast-card .side-right { background: #f0fdf4; }
+    .contrast-card .side h4 { margin: 0 0 8px; font-size: 14px; font-weight: 600; }
+    .contrast-card .side-left h4 { color: #991b1b; }
+    .contrast-card .side-right h4 { color: #166534; }
+    .contrast-card .side p { margin: 0; font-size: 14px; color: var(--ink-soft); line-height: 1.6; }
+    .punchline { font-family: var(--font-serif); font-size: 18px; font-weight: 700; color: var(--accent); text-align: center; margin: 32px 0; padding: 16px 0; border-top: 2px solid var(--accent); border-bottom: 2px solid var(--accent); }
+    strong { color: var(--ink); font-weight: 600; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>打败Claude的编程AI，连发布会都没开</h1>
+    <div class="meta">2026年9月2日 · 阅读时间约12分钟</div>
+    <div class="byline">文｜犀牛伯爵</div>
+
+    <p>2026年9月2日。三家公司同一天发了新模型。</p>
+
+    <p>Anthropic 官网挂出 Claude Fable 5.1 的发布公告，配了一篇完整的系统卡。Artificial Analysis 给了66分，说它登顶了智能指数。谷歌也不甘寂寞，同日发布了 Gemini 3.8 Flash。</p>
+
+    <p>两家都有新闻稿，都有技术博客，都有创始人站出来讲话。</p>
+
+    <p>然后是第三家。</p>
+
+    <p>没有发布会。没有红毯。甚至没有一篇独立的官方博客。阿里千问团队只是把 Qwen3.8-Max 的版本号改成了0902，在千问AI平台后台悄悄上线。</p>
+
+    <p>直到 CodeArena 刷新了排行榜。</p>
+
+    <p><span class="data-callout">1691分</span>。第一名。</p>
+
+    <p>这个模型不是 GPT，不是 Claude。是阿里千问的 Qwen3.8-Max-0902。</p>
+
+    <p>说真的，我自己看到这个消息的时候愣了一下。不是因为又一个模型登顶了榜单，是因为这次登顶的方式。没有发布会，没有CEO站台，改了个版本号就赢了。</p>
+
+    <p>这件事值得聊聊。</p>
+
+    <h2>63万次投票拼出来的第一</h2>
+
+    <p>先说说 CodeArena 是什么。它是 Arena 平台下面的编程能力分榜，专门评估模型做前端 Web 开发的能力，包括多步推理、工具调用和智能体编码工作流。不是跑几个测试用例就出分的那种实验室榜单，而是靠<span class="highlight">63万次真人投票、120多个模型参与PK</span>拼出来的排名。</p>
+
+    <p>9月2日的榜单上，Qwen3.8-Max-0902 拿了1691分，排第一。Claude Opus 5 以1688分排第二。月之暗面的 Kimi K3 拿了1674分，排第三。此前版本 Qwen3.8-Max 是1669分，排第四。</p>
+
+    <p>新版本比旧版本高了22分，比 Claude Opus 5 高了3分。</p>
+
+    <p>3分的差距。在63万次投票的样本量下，统计上是显著的。但说真的，3分本身不重要。</p>
+
+    <img class="article-img" src="http://n.sinaimg.cn/spider20260902/400/w600h600/20260902/5860-532255c2653ba1f9de38d4151a2c92b0.png" alt="CodeArena WebDev 排行榜，Qwen3.8-Max-0902 以1691分排名第一">
+    <div class="img-caption">图源｜新浪科技（快科技），CodeArena:WebDev 排行榜截图</div>
+
+    <p>重要的是价格。Arena 同时发布了一个"帕累托前沿"榜单，把性能和价格放在一起比。Qwen3.8-Max-0902 的综合均价是每百万 Token <span class="data-callout">5美元</span>。Claude Opus 5 是20美元。Kimi K3 是12美元。</p>
+
+    <p>性能第一，价格最低。这两个条件同时满足的时候，所有价格高于5美元的模型，在帕累托前沿上都被挤出了有效选择集。</p>
+
+    <h2>最不重要的就是分数高低</h2>
+
+    <p>我一直觉得，看AI模型排名这件事，得分高低是最不重要的部分。</p>
+
+    <p>重要的是性价比前沿的位置变了。</p>
+
+    <p>什么叫帕累托前沿？简单说，就是在"性能"和"价格"两个维度上，没有任何一个模型能同时比 Qwen3.8-Max-0902 更好又更便宜。1691分加5美元的组合，把所有得分更低但价格更高的模型挤出了有效选择集。</p>
+
+    <div class="contrast-card">
+      <div class="side side-right">
+        <h4>Qwen3.8-Max-0902</h4>
+        <p>1691分 · CodeArena 第一<br>每百万Token综合均价 $5<br>2.4万亿参数 · 95B激活<br>1M上下文 · MoE架构</p>
+      </div>
+      <div class="side side-left">
+        <h4>Claude Opus 5 (Max)</h4>
+        <p>1688分 · CodeArena 第二<br>每百万Token综合均价 $20<br>闭源旗舰 · Anthropic<br>价格是Qwen的4倍</p>
+      </div>
+    </div>
+
+    <p>Claude Opus 5 的1688分，低了3分，但价格贵了4倍。Kimi K3 的1674分，低了17分，价格贵了1.4倍。</p>
+
+    <p>这个差距对普通用户来说可能只是"哦，又换了个第一"。但对每天调几百万次 API 的开发团队来说，这是一个 ROI 的根本性变化。</p>
+
+    <div class="insight-box">
+      <h4>核心判断</h4>
+      <p>当最强的模型同时也是最便宜的，它改变的不是榜单排名，是所有人计算"一美元能买到多少智能"的方式。</p>
+    </div>
+
+    <p>坦率地讲，过去两年中国AI模型在海外的形象一直是"便宜但差半代"。DeepSeek 打破了"差半代"的印象，但价格优势仍然是主要标签。Qwen3.8-Max-0902 这次做的事情不太一样。它不是在"便宜"这个维度上赢了，它是在"最好"这个维度上赢了，然后顺便还是最便宜的。</p>
+
+    <p>这两个条件同时成立的时候，性质就变了。</p>
+
+    <p>过去你跟一个CTO说用中国模型替换Claude，他的第一反应是，能行吗。现在你跟他说，性能更好，价格只有四分之一。他不需要信任你的判断，他只需要看一眼帕累托前沿图。</p>
+
+    <p>决策的门槛从"信不信"变成了"算不算"。这不是一个微妙的区别。信任需要时间，算账只需要一个下午。</p>
+
+    <div class="punchline">性能第一。价格最低。这不是排名故事，是产业格局故事。</div>
+
+    <h2>升级不加价，一个月暴涨</h2>
+
+    <p>说一个细节。Qwen3.8-Max-0902 的 API 定价跟8月发布时一模一样。输入2美元，输出6美元，每百万 Token。升级不加价。</p>
+
+    <p>这不是一次"降价冲量"的操作，是一次"同等价格下性能暴涨"的操作。千问团队做的事情是，在同一个2.4万亿参数的底座上，围绕编程和专业办公两个方向做了进一步的后训练。</p>
+
+    <p>效果有多猛？看几个具体数字。</p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>评测项</th>
+          <th>8月版</th>
+          <th>0902版</th>
+          <th>涨幅</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>TerminalBench 3.0</td>
+          <td>11.3</td>
+          <td>29.0</td>
+          <td>+156%</td>
+        </tr>
+        <tr>
+          <td>DeepSWE 1.1</td>
+          <td>56.6</td>
+          <td>69.3</td>
+          <td>+22%</td>
+        </tr>
+        <tr>
+          <td>QwenSWEbench V2</td>
+          <td>55.1</td>
+          <td>70.0</td>
+          <td>+27%</td>
+        </tr>
+        <tr>
+          <td>JobBench</td>
+          <td>53.4</td>
+          <td>64.0</td>
+          <td>+20%</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>来源｜快科技（新浪科技转载），2026年9月2日</p>
+
+    <p>一个月时间，TerminalBench 翻了将近三倍。不是换了个新模型，是同一个底座做了针对性强化。这背后的逻辑是，底座模型的能力天花板已经到了一个平台期，真正拉开差距的是后训练的精度和方向。</p>
+
+    <p>千问选择的方向很明确，编程和办公。不是泛泛的"通用智能"，而是两个能直接产生商业价值的高频场景。这个选择本身就很务实。</p>
+
+    <img class="article-img" src="http://n.sinaimg.cn/spider20260902/485/w600h685/20260902/6c24-832a603420e2c6cd18f4931b83ef5ccc.png" alt="Qwen3.8-Max-0902 编程能力基准评测对比图">
+    <div class="img-caption">图源｜新浪科技（快科技），Qwen3.8-Max 编程评测性能对比</div>
+
+    <h2>同一天，两种发布哲学</h2>
+
+    <p>9月2日这天其实很有意思。</p>
+
+    <p>同一天，Anthropic 发布了 Claude Fable 5.1 和 Claude Mythos 5.1。Fable 5.1 在 Artificial Analysis 的智能指数上拿了66分，登顶了。缓存读取价格降了75%。有完整的系统卡，有安全研究发现，有新闻稿，有一切你应该有的发布配置。</p>
+
+    <p>然后 Qwen3.8-Max-0902 登顶了 CodeArena。</p>
+
+    <p>一个开了新闻发布会，一个改了个版本号。一个在"综合智能指数"上第一，一个在"编程能力"上第一。</p>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="date">9月2日 03:33 UTC</div>
+        <div class="content">Anthropic 官网发布 Claude Fable 5.1 / Mythos 5.1，配系统卡与安全研究</div>
+      </div>
+      <div class="timeline-item">
+        <div class="date">9月2日 02:57 UTC</div>
+        <div class="content">通义千问 X 官宣 Qwen3.8-Max-0902，CodeArena 登顶，已上线 QwenCloud</div>
+      </div>
+      <div class="timeline-item">
+        <div class="date">同日</div>
+        <div class="content">Google 发布 Gemini 3.8 Flash，三家公司同日上新</div>
+      </div>
+    </div>
+
+    <p>我自己看到这个对比的时候觉得挺有意思。不是说 Anthropic 做得不对，他们的发布流程很专业，系统卡很扎实。但 Qwen 这边的做法是另一种风格，更像是工程师文化而不是市场文化。改个版本号，丢到线上，让榜单说话。</p>
+
+    <h2>但话说回来</h2>
+
+    <p>我也得说几个但。</p>
+
+    <p>先说一个。CodeArena 的 WebDev 榜单评估的是前端 Web 开发能力。多步推理、工具调用、智能体编码工作流。这是一个很具体的能力维度，不是"通用智能"。在 Arena 的综合榜单上，Anthropic 的 Claude 系列仍然占据前五。Qwen3.8-Max 在综合榜上排第八左右。</p>
+
+    <p>这次登顶是一个专项战场的胜利，不是全面战争的决定性战役。但专项战场的胜利也很重要，因为编程是AI商业化最直接的场景。</p>
+
+    <p>另外一点。3分的差距到底有多大意义？在63万次投票的样本下，统计上是显著的。但实际使用中，1691和1688的体验差异可能小到感知不到。真正的差异不在分数本身，而在价格。20美元和5美元的差距，是任何CTO都能算清楚的数字。</p>
+
+    <p>我自己问过一个做AI编程工具的朋友。他团队每天调几百万 Token，API账单每月十几万美元。如果换成 Qwen3.8-Max-0902，账单能砍掉四分之三，性能还不掉。他说他已经在跑了。</p>
+
+    <p>这就是"帕累托前沿"四个字在现实中长什么样。不是PPT上的一条曲线，是一个CTO桌上的成本表。</p>
+
+    <p>还有一点更有意思。当天港股阿里巴巴（9988.HK）跌了1.81%。市场并不 care CodeArena 的排名。或者说，资本市场还没把"模型榜单冠军"当作一个值得定价的因素。</p>
+
+    <p>这可能恰恰说明，技术的意义和市场短期反应之间，存在时间差。</p>
+
+    <h2>接下来会怎样</h2>
+
+    <p>帕累托前沿的移动会倒逼其他模型做选择。要么提升性能，要么降低价格。Claude Opus 5 的20美元定价，在 Qwen 给出1691分加5美元的组合之后，看起来不像一个能长期维持的数字。</p>
+
+    <p>对中国的AI生态来说，这是一个群体性突破的时刻。在同一周的榜单上，Kimi K3 排第三，智谱的 GLM-5.3 进了前十，DeepSeek 的开源模型在全球 Token 消耗量上排前列。不是一个公司赢了，是一个生态在往上走。</p>
+
+    <p>坦率地讲，我关注中国AI快两年了。我见过太多"单点突破"的时刻，一个模型在一个榜单上拿了第一，然后呢。这次不太一样的地方在于，不是一家在突破，是一群在突破。Kimi 在多步推理上硬刚，智谱在 Agent 能力上死磕，DeepSeek 在开源生态上铺路，Qwen 在编程和性价比上拿下了关键一城。</p>
+
+    <p>当四个方向同时有中国模型站住脚的时候，这就不只是"运气好赶上了一个好版本"了。</p>
+
+    <p>对开发者来说，该重新算一笔账了。如果你的团队每天调用几百万 Token 做编程任务，从 Claude Opus 5 切到 Qwen3.8-Max-0902，在性能不降反升的前提下，成本降75%。</p>
+
+    <p>这不是"凑合用个便宜的替代品"。这是"换一个更好的，然后发现它还更便宜"。</p>
+
+    <h2>一个更大的参照</h2>
+
+    <p>聊到这里我突然想起一个事。当年日本汽车进入美国市场的时候，底特律的巨头们也是这个反应。不是说性能不行，是"便宜"这个标签让人低估了它。</p>
+
+    <p>但后来日本车赢的不只是价格。</p>
+
+    <p>Qwen3.8-Max-0902 现在也是这个故事。第一，便宜。第二，最好。</p>
+
+    <p>这两个词放在一起的时候，它就不只是"国产模型又进步了"这么简单了。</p>
+
+    <div class="ending">谢谢你看我的文章。</div>
+  </div>
+</body>
+</html>
