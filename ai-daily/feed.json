@@ -1,6 +1,13 @@
 {
-  "updated": "2026-09-01T09:00:00+08:00",
+  "updated": "2026-09-02T10:52:47+08:00",
   "articles": [
+    {
+      "cat": "安全 · 模型 · 资本",
+      "date": "2026-09-02",
+      "title": "AI大模型及安全动态日报 | 2026年09月02日（星期三）",
+      "excerpt": "Anthropic发布Claude Fable 5.1与Mythos 5.1，OpenAI Astra达到关键级网络安全阈值，Nvidia+Microsoft联合投资Anthropic 150亿美元，xAI估值达1130亿美元，CrowdStrike推出Falcon Guardian与SafeMind，中央网信办清朗专项行动第二阶段启动，EU CRA漏洞报告义务9月11日生效。",
+      "href": "2026-09-02-ai-daily.html"
+    },
     {
       "cat": "安全 · 模型 · 资本",
       "date": "2026-09-01",
