@@ -127,9 +127,9 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
-        title: "打败Claude的编程AI，连发布会都没开",
-        desc: "9月2日Qwen3.8-Max-0902登顶CodeArena:WebDev，1691分超越Claude Opus 5。每百万Token仅5美元，是Claude四分之一。2.4万亿参数MoE架构，1M上下文。没有开发布会，一个中国AI模型安静地坐上了全球编程第一。这可能是AI定价权东移的信号。",
-        href: "notes/2026-09-02-qwen-codearena.html"
+        title: "一个没有发布会的模型，拿下了全球编程第一",
+        desc: "9月2日，Qwen3.8-Max-0902以1691分登顶CodeArena全球第一，领先Claude Opus 5整整37分。没有发布会，没有红毯。每百万Token 5美元，帕累托前沿性价比最优。2.4万亿参数基座没动，22分的提升全部来自后训练。47天前Kimi K3刚拿过第一，王座一个月换一次。不是某一家公司的突破，是整个中国AI生态的上升。",
+        href: "notes/2026-09-02-qwen38-max-codearena.html"
       },
       {
         type: "Essay",
@@ -301,10 +301,10 @@ window.SITE_DATA = {
       },
       {
         cat: "观察", num: "N° 84",
-        title: "打败Claude的编程AI，连发布会都没开",
-        excerpt: "9月2日，阿里Qwen3.8-Max-0902以1691分登顶CodeArena:WebDev，超越Claude Opus 5的1688分。63万次投票、120+模型参战。帕累托前沿价格仅5美元/MToken，是Claude的四分之一。2.4万亿参数MoE架构，TerminalBench一个月从11.3飙到29.0。没有发布会，没有媒体日，一个中国AI模型安静地坐上了全球编程第一。",
+        title: "一个没有发布会的模型，拿下了全球编程第一",
+        excerpt: "9月2日，Qwen3.8-Max-0902以1691分登顶CodeArena全球第一，领先Claude Opus 5整整37分。没有发布会，没有红毯，只有一个分数。每百万Token 5美元，帕累托前沿性价比最优。2.4万亿参数基座没动，22分的提升全部来自后训练。47天前Kimi K3刚拿过第一，王座一个月换一次。不是某一家公司的突破，是整个中国AI生态的上升。",
         img: "assets/note-05.svg",
-        href: "notes/2026-09-02-qwen-codearena.html"
+        href: "notes/2026-09-02-qwen38-max-codearena.html"
       },
       {
         cat: "观察", num: "N° 83",
@@ -553,8 +553,8 @@ window.SITE_DATA = {
       },
       {
         cat: "观察", num: "N° 48",
-        title: "梁文锋4小时只聊一件事，越克制的人越可能赢",
-        excerpt: "梁文锋4小时投资人会议实录曝光，52条语录说了无数个不。不做字节、不做腾讯、不闭源、不追求用户量。每个不背后都是同一个判断，越克制越可能做成AGI。这不是佛系，是精算后的最优解。",
+        title: "梁文锃4小时只聊一件事，越克制的人越可能赢",
+        excerpt: "梁文锃4小时投资人会议实录曝光，52条语录说了无数个不。不做字节、不做腾讯、不闭源、不追求用户量。每个不背后都是同一个判断，越克制越可能做成AGI。这不是佛系，是精算后的最优解。",
         img: "assets/note-05.svg",
         href: "notes/2026-07-23-liangwenfeng-restraint.html"
       },
