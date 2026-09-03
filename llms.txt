@@ -15,13 +15,15 @@
 - [Anthropic营收反超](https://rhinocount.cn/notes/2026-08-24-openai-ipo-2027.html): OpenAI 2027 IPO时间表与Anthropic营收反超的定价裂缝
 - [Ox Alpha匿名模型](https://rhinocount.cn/notes/2026-08-25-ox-alpha-stealth.html): 匿名模型登顶OpenRouter，中国AI厂商的出海新打法
 - [机器人跑赢博尔特](https://rhinocount.cn/notes/2026-08-26-robot-97-percent.html): 人形机器人出货占全球97%背后的产业与普通人的机会
+- [智谱学会赚钱](https://rhinocount.cn/notes/2026-09-01-zhipu-api-revenue-27x.html): 智谱上市后首份半年报——API收入27倍增长的三层验账
+- [Qwen3.8-Max登顶CodeArena](https://rhinocount.cn/notes/2026-09-02-qwen38-max-codearena.html): 没有发布会的模型拿下全球编程第一
+- [全部笔记](https://rhinocount.cn/notes/): 完整观察笔记索引
 - [宇树 IPO 现实检验](https://rhinocount.cn/notes/2026-08-20-unitree-ipo-reality-check.html): 人形机器人第一股的五层验账
 - [删除了47个工具之后](https://rhinocount.cn/notes/deleted-47-tools.html): 工具链做减法的实践
 - [Agent 是操作系统](https://rhinocount.cn/notes/agent-is-operating-system.html): Agent 架构的操作系统类比
 - [Prompt 是一种技能](https://rhinocount.cn/notes/prompt-is-the-skill.html): 提示词工程的技能本质
 - [三个月 Agent 编程](https://rhinocount.cn/notes/agent-coding-three-months.html): Agent 辅助编程三个月实践
 - [如何学习新技术](https://rhinocount.cn/notes/how-to-learn-new-tech.html): 技术学习方法论
-- [全部笔记](https://rhinocount.cn/notes/): 完整观察笔记索引
 
 ## 观察文章
 
