@@ -18,12 +18,12 @@
 
 | 板块 | 内容 | 产出节奏 | 链接 |
 |------|------|----------|------|
-| 📰 **每日时评** | 宏观 · 地缘 · 科技产业信号解读 | 每晚 7 点自动生成 | [进入 ->](https://zjeep-arch.github.io/rhino-count-site/articles/) |
-| ☀️ **AI 早报** | 大模型 / 产品 / 资本 / 产业每日速览 | 每天 8 点自动生成 | [进入 ->](https://zjeep-arch.github.io/rhino-count-site/ai-daily/) |
-| 📝 **AI 笔记** | 行业观察、Agent 思维、学习方法、大厂手记、踩坑实录 | 持续更新 | [进入 ->](https://zjeep-arch.github.io/rhino-count-site/#notes) |
-| 🌐 **3D 交互** | Iron Man 风格 3D AI 工作室 & 沉浸式 3D 创作实验室 | 随灵感产出 | [工作室 ->](https://zjeep-arch.github.io/rhino-count-site/ai-studio-3d.html) / [实验室 ->](https://zjeep-arch.github.io/rhino-count-site/ai-lab-3d.html) |
-| 🎮 **互动实验** | 轻量游戏化内容，测试表达新形态 | 随灵感产出 | [进入 ->](https://zjeep-arch.github.io/rhino-count-site/games/duck-scare-war.html) |
-| 📚 **产品教程** | DuMate 从 0 到 1 上手指南 | 不定期 | [进入 ->](https://zjeep-arch.github.io/rhino-count-site/dumate/) |
+| 📰 **每日时评** | 宏观 · 地缘 · 科技产业信号解读 | 每晚 7 点自动生成 | [进入 ->](https://rhinocount.cn/articles/) |
+| ☀️ **AI 早报** | 大模型 / 产品 / 资本 / 产业每日速览 | 每天 8 点自动生成 | [进入 ->](https://rhinocount.cn/ai-daily/) |
+| 📝 **AI 笔记** | 行业观察、Agent 思维、学习方法、大厂手记、踩坑实录 | 持续更新 | [进入 ->](https://rhinocount.cn/#notes) |
+| 🌐 **3D 交互** | Iron Man 风格 3D AI 工作室 & 沉浸式 3D 创作实验室 | 随灵感产出 | [工作室 ->](https://rhinocount.cn/ai-studio-3d.html) / [实验室 ->](https://rhinocount.cn/ai-lab-3d.html) |
+| 🎮 **互动实验** | 轻量游戏化内容，测试表达新形态 | 随灵感产出 | [进入 ->](https://rhinocount.cn/games/duck-scare-war.html) |
+| 📚 **产品教程** | DuMate 从 0 到 1 上手指南 | 不定期 | [进入 ->](https://rhinocount.cn/dumate/) |
 
 ## 📊 数据
 
@@ -38,17 +38,17 @@
 
 | 类型 | 作品 | 为什么值得读 |
 |------|------|-------------|
-| Essay | [马斯克向 Anthropic 认输，但最骚的操作不是认输](https://zjeep-arch.github.io/rhino-count-site/notes/2026-07-11-anthropic-musk-surrender.html) | Anthropic 月付 12.5 亿租对手 GPU，ARR 18 个月从 90 亿飙到 600 亿 |
-| Essay | [马斯克 600 亿买了 Cursor，但真正吓人的不是 Grok 4.5](https://zjeep-arch.github.io/rhino-count-site/notes/2026-07-10-spacexai-cursor-grok45.html) | 36 天内拼出 AI 编程赛道的垂直整合闭环 |
-| Essay | [两周，三颗芯片，AI 行业换了个赛道](https://zjeep-arch.github.io/rhino-count-site/notes/2026-07-09-deepseek-ai-chip.html) | OpenAI、Anthropic、DeepSeek 两周内集体转向芯片 |
-| Essay | [ChatGPT 终于学会了一件事：别急着抢话](https://zjeep-arch.github.io/rhino-count-site/notes/2026-07-09-gpt-live-voice-model.html) | GPT-Live 全双工架构，BrowseComp 从 0.7% 到 75.2% |
-| Essay | [Agent 不是产品，是新一代操作系统](https://zjeep-arch.github.io/rhino-count-site/notes/agent-is-operating-system.html) | 从 App 思维迁移到 Agent 思维需要的 5 个转变 |
-| Essay | [当大模型开始替你思考，先学会问对问题](https://zjeep-arch.github.io/rhino-count-site/notes/prompt-is-the-skill.html) | 为什么 Prompt 是 2026 年最被低估的核心技能 |
-| Commentary | [全世界都在砸钱建算力，但最赚的偏偏不是建算力的人](https://zjeep-arch.github.io/rhino-count-site/articles/2026-07-01-global-compute-war.html) | 全球算力军备竞赛的底层逻辑 |
-| Commentary | [巴菲特接班人百亿砸 AI 基建——不是"追涨"，是"抄底"](https://zjeep-arch.github.io/rhino-count-site/articles/2026-06-23-berkshire-google-ai-infra.html) | 价值投资者重仓 AI 的产业周期判断 |
-| Brief | [GPT-5.6 正式发布：中国模型、开放生态与产品分发的新信号](https://zjeep-arch.github.io/rhino-count-site/ai-daily/) | AI 行业每日关键信号 |
-| Guide | [百度 DuMate 从 0 到 1 上手教程](https://zjeep-arch.github.io/rhino-count-site/dumate/) | 把一个 AI 产品拆成可操作、可复用的教程资产 |
-| Game | [鸭骗战争：真鸭假鹅](https://zjeep-arch.github.io/rhino-count-site/games/duck-scare-war.html) | 用轻量游戏化测试内容表达的新形态 |
+| Essay | [马斯克向 Anthropic 认输，但最骚的操作不是认输](https://rhinocount.cn/notes/2026-07-11-anthropic-musk-surrender.html) | Anthropic 月付 12.5 亿租对手 GPU，ARR 18 个月从 90 亿飙到 600 亿 |
+| Essay | [马斯克 600 亿买了 Cursor，但真正吓人的不是 Grok 4.5](https://rhinocount.cn/notes/2026-07-10-spacexai-cursor-grok45.html) | 36 天内拼出 AI 编程赛道的垂直整合闭环 |
+| Essay | [两周，三颗芯片，AI 行业换了个赛道](https://rhinocount.cn/notes/2026-07-09-deepseek-ai-chip.html) | OpenAI、Anthropic、DeepSeek 两周内集体转向芯片 |
+| Essay | [ChatGPT 终于学会了一件事：别急着抢话](https://rhinocount.cn/notes/2026-07-09-gpt-live-voice-model.html) | GPT-Live 全双工架构，BrowseComp 从 0.7% 到 75.2% |
+| Essay | [Agent 不是产品，是新一代操作系统](https://rhinocount.cn/notes/agent-is-operating-system.html) | 从 App 思维迁移到 Agent 思维需要的 5 个转变 |
+| Essay | [当大模型开始替你思考，先学会问对问题](https://rhinocount.cn/notes/prompt-is-the-skill.html) | 为什么 Prompt 是 2026 年最被低估的核心技能 |
+| Commentary | [全世界都在砸钱建算力，但最赚的偏偏不是建算力的人](https://rhinocount.cn/articles/2026-07-01-global-compute-war.html) | 全球算力军备竞赛的底层逻辑 |
+| Commentary | [巴菲特接班人百亿砸 AI 基建——不是"追涨"，是"抄底"](https://rhinocount.cn/articles/2026-06-23-berkshire-google-ai-infra.html) | 价值投资者重仓 AI 的产业周期判断 |
+| Brief | [GPT-5.6 正式发布：中国模型、开放生态与产品分发的新信号](https://rhinocount.cn/ai-daily/) | AI 行业每日关键信号 |
+| Guide | [百度 DuMate 从 0 到 1 上手教程](https://rhinocount.cn/dumate/) | 把一个 AI 产品拆成可操作、可复用的教程资产 |
+| Game | [鸭骗战争：真鸭假鹅](https://rhinocount.cn/games/duck-scare-war.html) | 用轻量游戏化测试内容表达的新形态 |
 
 ## 🏗 技术架构
 
@@ -113,7 +113,7 @@ python3 -m http.server 8080
 
 ## 🔗 全平台链接
 
-- 🌐 **个人站**：[zjeep-arch.github.io/rhino-count-site](https://zjeep-arch.github.io/rhino-count-site/)
+- 🌐 **个人站**：[rhinocount.cn](https://rhinocount.cn/)
 - 📱 **小红书**：[犀牛伯爵](https://www.xiaohongshu.com/user/profile/60572004000000000101ce41)（50000+ 粉丝）
 - 🐦 **Twitter**：[@rhinocount](https://twitter.com/rhinocount)
 - 💻 **GitHub**：[zjeep-arch](https://github.com/zjeep-arch)
