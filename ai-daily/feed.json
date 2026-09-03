@@ -1,6 +1,13 @@
 {
-  "updated": "2026-09-02T10:52:47+08:00",
+  "updated": "2026-09-03T10:34:08+08:00",
   "articles": [
+    {
+      "cat": "安全 · 模型 · 资本",
+      "date": "2026-09-03",
+      "title": "AI大模型及安全动态日报 | 2026年9月3日（星期四）",
+      "excerpt": "Google发布Gemini 3.8 Flash与Flash Cyber，Anthropic推出Claude Fable 5.1，Meta发布Muse Spark 1.3编码超GPT-5.6，英伟达接近140亿收购Hugging Face，中央网信办清朗专项行动第二阶段启动，EU CRA漏洞报告义务9月11日生效，Palo Alto收购Console AI平台，CrowdStrike推出Falcon Guardian与SafeMind。",
+      "href": "2026-09-03-ai-daily.html"
+    },
     {
       "cat": "安全 · 模型 · 资本",
       "date": "2026-09-02",
