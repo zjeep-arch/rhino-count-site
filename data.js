@@ -127,6 +127,12 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "110亿美元不选GPT，选了中国开源模型",
+        desc: "美国估值110亿美元的法律AI独角兽Harvey选了月之暗面Kimi K3做底座。Cursor用Kimi K2.5做编程模型，路透社用阿里通义千问造法律AI。1750个法律智能体环境，200位律师当教练，150张B300训练两个月，推理成本降七成。Tenet全通过率19.7%，GPT-5.6 Sol只有2.5%。月之暗面正和微软、亚马逊、谷歌谈30%分成。中国开源模型正在从被引用走向被托付。",
+        href: "notes/2026-09-03-china-open-model-global.html"
+      },
+      {
+        type: "Essay",
         title: "一个没有发布会的模型，拿下了全球编程第一",
         desc: "9月2日，Qwen3.8-Max-0902以1691分登顶CodeArena全球第一，领先Claude Opus 5整整37分。没有发布会，没有红毯。每百万Token 5美元，帕累托前沿性价比最优。2.4万亿参数基座没动，22分的提升全部来自后训练。47天前Kimi K3刚拿过第一，王座一个月换一次。不是某一家公司的突破，是整个中国AI生态的上升。",
         href: "notes/2026-09-02-qwen38-max-codearena.html"
@@ -298,6 +304,13 @@ window.SITE_DATA = {
         excerpt: "名字来自两部作品：恋爱的犀牛教我不计成败地热爱，基督山伯爵教我不动声色地等待。2022年底ChatGPT像一头灰犀牛从地平线走来，Count就是把它的轨迹从噪音里算出来——然后与各位同行者一起远征。",
         img: "assets/note-05.svg",
         href: "notes/why-rhino-count.html"
+      },
+      {
+        cat: "观察", num: "N° 85",
+        title: "110亿美元不选GPT，选了中国开源模型",
+        excerpt: "美国估值110亿美元的法律AI独角兽Harvey选了月之暗面Kimi K3做底座。编程工具Cursor用Kimi K2.5做编程模型，路透社用阿里通义千问造法律AI。1750个法律智能体环境，200位律师当教练，150张B300训练两个月，推理成本降七成。Tenet全通过率19.7%，GPT-5.6 Sol只有2.5%。月之暗面正和微软、亚马逊、谷歌谈30%分成。中国开源模型正在从被引用走向被托付。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-09-03-china-open-model-global.html"
       },
       {
         cat: "观察", num: "N° 84",
