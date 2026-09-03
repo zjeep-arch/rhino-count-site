@@ -22,6 +22,8 @@ SECTIONS = [
     ("ai-daily", "/ai-daily", True, True),
     # Dumate
     ("dumate", "/dumate", False, True),
+    # Picks
+    ("picks", "/picks", False, True),
 ]
 
 # Files to exclude (not content pages, or retired)
@@ -115,7 +117,7 @@ def collect_urls():
     })
     
     # Section index pages and individual files
-    section_dirs = ["notes", "articles", "ai-daily", "dumate"]
+    section_dirs = ["notes", "articles", "ai-daily", "dumate", "picks"]
     
     for section in section_dirs:
         section_path = REPO_ROOT / section

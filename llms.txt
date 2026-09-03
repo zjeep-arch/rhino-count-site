@@ -12,6 +12,9 @@
 - [为什么是犀牛伯爵](https://rhinocount.cn/notes/why-rhino-count.html): 品牌宣言——恋爱的犀牛 × 基督山伯爵 × 灰犀牛，Count 双关与站的世界观
 
 - [DeepSeek 的vision](https://rhinocount.cn/notes/2026-08-21-deepseek-vision.html): DeepSeek 战略路线拆解
+- [Anthropic营收反超](https://rhinocount.cn/notes/2026-08-24-openai-ipo-2027.html): OpenAI 2027 IPO时间表与Anthropic营收反超的定价裂缝
+- [Ox Alpha匿名模型](https://rhinocount.cn/notes/2026-08-25-ox-alpha-stealth.html): 匿名模型登顶OpenRouter，中国AI厂商的出海新打法
+- [机器人跑赢博尔特](https://rhinocount.cn/notes/2026-08-26-robot-97-percent.html): 人形机器人出货占全球97%背后的产业与普通人的机会
 - [宇树 IPO 现实检验](https://rhinocount.cn/notes/2026-08-20-unitree-ipo-reality-check.html): 人形机器人第一股的五层验账
 - [删除了47个工具之后](https://rhinocount.cn/notes/deleted-47-tools.html): 工具链做减法的实践
 - [Agent 是操作系统](https://rhinocount.cn/notes/agent-is-operating-system.html): Agent 架构的操作系统类比
