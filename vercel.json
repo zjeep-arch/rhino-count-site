@@ -35,7 +35,7 @@
   ],
   "headers": [
     {
-      "source": "/((?!articles/template|ai-daily/template|notes/template|articles/_retired|post-to-wechat|scripts|network-check).*)",
+      "source": "/((?!articles/template|ai-daily/template|notes/template|post-to-wechat|scripts).*)",
       "headers": [
         { "key": "X-Robots-Tag", "value": "index, follow, max-image-preview:large" }
       ]

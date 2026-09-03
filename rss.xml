@@ -12,7 +12,7 @@
       <link>https://rhinocount.cn/ai-daily/2026-09-03-ai-daily.html</link>
       <guid isPermaLink="true">https://rhinocount.cn/ai-daily/2026-09-03-ai-daily.html</guid>
       <pubDate>Thu, 03 Sep 2026 09:00:00 +0800</pubDate>
-      <description><![CDATA[Google发布Gemini 3.8 Flash与Flash Cyber，Anthropic推出Claude Fable 5.1，Meta发布Muse Spark 1.3编码超GPT-5.6，英伟达接近140亿收购Hugging Face，中央网信办清朗专项行动第二阶段启动，EU CRA漏洞报告义务9月11日生效，CrowdStrike推出Falcon Guardian与SafeMind安全产品。]]></description>
+      <description><![CDATA[Google发布Gemini 3.8 Flash与Flash Cyber，Anthropic推出Claude Fable 5.1，Meta发布Muse Spark 1.3编码超GPT-5.6，英伟达接近140亿收购Hugging Face，中央网信办清朗专项行动第二阶段启动，EU CRA漏洞报告义务9月11日生效，Palo Alto收购Console AI平台，CrowdStrike推出Falcon Guardian与SafeMind。]]></description>
     </item>
     <item>
       <title><![CDATA[一个没有发布会的模型，拿下了全球编程第一 · 犀牛伯爵笔记]]></title>
@@ -20,13 +20,6 @@
       <guid isPermaLink="true">https://rhinocount.cn/notes/2026-09-02-qwen38-max-codearena.html</guid>
       <pubDate>Wed, 02 Sep 2026 09:00:00 +0800</pubDate>
       <description><![CDATA[9月2日，Qwen3.8-Max-0902以1691分登顶CodeArena全球第一，领先Claude Opus 5整整37分，价格只要5美元。没有发布会，没有红毯，只有一个分数。]]></description>
-    </item>
-    <item>
-      <title><![CDATA[打败Claude的编程AI，连发布会都没开 | 犀牛伯爵]]></title>
-      <link>https://rhinocount.cn/notes/2026-09-02-qwen-codearena.html</link>
-      <guid isPermaLink="true">https://rhinocount.cn/notes/2026-09-02-qwen-codearena.html</guid>
-      <pubDate>Wed, 02 Sep 2026 09:00:00 +0800</pubDate>
-      <description><![CDATA[2026年9月2日，阿里千问Qwen3.8-Max-0902登顶CodeArena，1691分超越Claude Opus 5，每百万Token仅5美元。一个没开发布会的中国AI模型，怎么赢了全球编程榜？]]></description>
     </item>
     <item>
       <title><![CDATA[AI大模型及安全动态日报 | 2026年09月02日（星期三） · AI日报 · 犀牛伯爵]]></title>
@@ -216,6 +209,13 @@
       <guid isPermaLink="true">https://rhinocount.cn/ai-daily/2026-08-17-ai-daily.html</guid>
       <pubDate>Mon, 17 Aug 2026 09:00:00 +0800</pubDate>
       <description><![CDATA[Qwen3.8开源27B多模态模型超越Qwen3.7-Plus，GLM-5.3编程能力提升50%涌现网络安全能力，xAI获200亿美元融资NVIDIA参投，Anthropic季度营收暴涨至115亿美元，SpaceX 600亿美元收购Cursor正式交割。]]></description>
+    </item>
+    <item>
+      <title><![CDATA[中国AI这周连出四招，OpenAI被迫降价80% — 犀牛伯爵]]></title>
+      <link>https://rhinocount.cn/notes/2026-08-16-china-ai-price-war.html</link>
+      <guid isPermaLink="true">https://rhinocount.cn/notes/2026-08-16-china-ai-price-war.html</guid>
+      <pubDate>Sun, 16 Aug 2026 09:00:00 +0800</pubDate>
+      <description><![CDATA[OpenAI把GPT-5.6 Luna砍了80%，不是让利，是被中国AI这一周的集体爆发逼的。小红书、智谱、通义千问、DeepSeek四家在同一周密集发布重磅模型，从技术性能到开源生态全面施压。]]></description>
     </item>
   </channel>
 </rss>

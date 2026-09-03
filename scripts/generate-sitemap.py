@@ -32,6 +32,7 @@ EXCLUDE_FILES = {
     "google549c86588c2e00bb.html",
     "84eb7ec8dcac1b223dc0dda79d8f7997.txt",
     "network-check.html",
+    "GITHUB_PROFILE_README.md",
     # 3D/game experimental pages (thin content)
     "ai-lab-3d.html",
     "ai-studio-3d.html",

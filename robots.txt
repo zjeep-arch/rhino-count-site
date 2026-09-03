@@ -7,10 +7,8 @@ Allow: /
 Disallow: /articles/template.html
 Disallow: /ai-daily/template.html
 Disallow: /notes/template.html
-Disallow: /articles/_retired-*
 Disallow: /post-to-wechat/
 Disallow: /scripts/
-Disallow: /network-check.html
 
 # === Google ===
 User-agent: Googlebot
