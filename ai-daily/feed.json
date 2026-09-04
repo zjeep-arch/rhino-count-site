@@ -1,6 +1,13 @@
 {
-  "updated": "2026-09-03T10:34:08+08:00",
+  "updated": "2026-09-04T10:29:06+08:00",
   "articles": [
+    {
+      "cat": "安全 · 模型 · 资本",
+      "date": "2026-09-04",
+      "title": "AI大模型及安全动态日报 | 2026年9月4日（星期五）",
+      "excerpt": "OpenAI发布GPT-6 Astra首个达到Critical级网络安全能力，NVIDIA 129.3亿美元收购Hugging Face，Google推出Gemini 3.8 Flash与Flash Cyber，李飞飞发布全球首个多模态世界模型Atlas，Meta发布Muse Spark 1.3，CrowdStrike推出SafeMind与Agentic IdP，美国两党推出Stop Rogue AI法案，欧盟CRA 9月11日生效。",
+      "href": "2026-09-04-ai-daily.html"
+    },
     {
       "cat": "安全 · 模型 · 资本",
       "date": "2026-09-03",
