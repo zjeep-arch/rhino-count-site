@@ -5,8 +5,15 @@
     <link>https://rhinocount.cn/</link>
     <description>AI Native Magazine — 记录 AI 如何改变技术、商业与人的工作方式。</description>
     <language>zh-CN</language>
-    <lastBuildDate>Thu, 03 Sep 2026 09:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 04 Sep 2026 09:00:00 +0800</lastBuildDate>
     <atom:link href="https://rhinocount.cn/rss.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title><![CDATA[AI大模型及安全动态日报 | 2026年9月4日（星期五） · AI日报 · 犀牛伯爵]]></title>
+      <link>https://rhinocount.cn/ai-daily/2026-09-04-ai-daily.html</link>
+      <guid isPermaLink="true">https://rhinocount.cn/ai-daily/2026-09-04-ai-daily.html</guid>
+      <pubDate>Fri, 04 Sep 2026 09:00:00 +0800</pubDate>
+      <description><![CDATA[OpenAI发布GPT-6 Astra首个达到Critical级网络安全能力，NVIDIA 129.3亿美元收购Hugging Face，Google推出Gemini 3.8 Flash与Flash Cyber，李飞飞发布全球首个多模态世界模型Atlas，Meta发布Muse Spark 1.3，CrowdStrike推出SafeMind与Agentic IdP，美国两党推出Stop Rogue AI法案，欧盟CRA 9月11日生效。]]></description>
+    </item>
     <item>
       <title><![CDATA[110亿美元不选GPT，选了中国开源模型 | 犀牛伯爵]]></title>
       <link>https://rhinocount.cn/notes/2026-09-03-china-open-model-global.html</link>
@@ -209,13 +216,6 @@
       <guid isPermaLink="true">https://rhinocount.cn/ai-daily/2026-08-18-ai-daily.html</guid>
       <pubDate>Tue, 18 Aug 2026 09:00:00 +0800</pubDate>
       <description><![CDATA[Anthropic年化收入破650亿美元xAI获200亿融资，NVIDIA为OpenAI锁定4.25GW算力，通义千问Qwen3.8开源27B多模态模型，DeepSeek V4涨价350%，信通院AI安全标准11月实施，Stripe 70亿美元收购OpenRouter。]]></description>
-    </item>
-    <item>
-      <title><![CDATA[AI大模型及安全动态日报 | 2026年08月17日（星期一） · AI日报 · 犀牛伯爵]]></title>
-      <link>https://rhinocount.cn/ai-daily/2026-08-17-ai-daily.html</link>
-      <guid isPermaLink="true">https://rhinocount.cn/ai-daily/2026-08-17-ai-daily.html</guid>
-      <pubDate>Mon, 17 Aug 2026 09:00:00 +0800</pubDate>
-      <description><![CDATA[Qwen3.8开源27B多模态模型超越Qwen3.7-Plus，GLM-5.3编程能力提升50%涌现网络安全能力，xAI获200亿美元融资NVIDIA参投，Anthropic季度营收暴涨至115亿美元，SpaceX 600亿美元收购Cursor正式交割。]]></description>
     </item>
   </channel>
 </rss>
