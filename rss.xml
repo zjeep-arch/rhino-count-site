@@ -8,6 +8,13 @@
     <lastBuildDate>Thu, 03 Sep 2026 09:00:00 +0800</lastBuildDate>
     <atom:link href="https://rhinocount.cn/rss.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title><![CDATA[110亿美元不选GPT，选了中国开源模型 | 犀牛伯爵]]></title>
+      <link>https://rhinocount.cn/notes/2026-09-03-china-open-model-global.html</link>
+      <guid isPermaLink="true">https://rhinocount.cn/notes/2026-09-03-china-open-model-global.html</guid>
+      <pubDate>Thu, 03 Sep 2026 09:00:00 +0800</pubDate>
+      <description><![CDATA[估值110亿美元的法律AI独角兽Harvey选了Kimi K3做底座。Cursor用Kimi K2.5做了编程模型。路透社用阿里通义千问造法律AI。中国开源模型正在从被引用走向被托付。]]></description>
+    </item>
+    <item>
       <title><![CDATA[AI大模型及安全动态日报 | 2026年9月3日（星期四） · AI日报 · 犀牛伯爵]]></title>
       <link>https://rhinocount.cn/ai-daily/2026-09-03-ai-daily.html</link>
       <guid isPermaLink="true">https://rhinocount.cn/ai-daily/2026-09-03-ai-daily.html</guid>
@@ -209,13 +216,6 @@
       <guid isPermaLink="true">https://rhinocount.cn/ai-daily/2026-08-17-ai-daily.html</guid>
       <pubDate>Mon, 17 Aug 2026 09:00:00 +0800</pubDate>
       <description><![CDATA[Qwen3.8开源27B多模态模型超越Qwen3.7-Plus，GLM-5.3编程能力提升50%涌现网络安全能力，xAI获200亿美元融资NVIDIA参投，Anthropic季度营收暴涨至115亿美元，SpaceX 600亿美元收购Cursor正式交割。]]></description>
-    </item>
-    <item>
-      <title><![CDATA[中国AI这周连出四招，OpenAI被迫降价80% — 犀牛伯爵]]></title>
-      <link>https://rhinocount.cn/notes/2026-08-16-china-ai-price-war.html</link>
-      <guid isPermaLink="true">https://rhinocount.cn/notes/2026-08-16-china-ai-price-war.html</guid>
-      <pubDate>Sun, 16 Aug 2026 09:00:00 +0800</pubDate>
-      <description><![CDATA[OpenAI把GPT-5.6 Luna砍了80%，不是让利，是被中国AI这一周的集体爆发逼的。小红书、智谱、通义千问、DeepSeek四家在同一周密集发布重磅模型，从技术性能到开源生态全面施压。]]></description>
     </item>
   </channel>
 </rss>
