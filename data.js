@@ -127,6 +127,12 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "GPT-6贵了2.5倍，免费的中国AI已全球第一",
+        desc: "GPT-6 Astra定价涨2.5倍，输出50美元/百万Token。同期中国模型OpenRouter全球调用份额达42%，连续17周超越美国。智谱GLM-5.3-Flash以匿名代号Ox Alpha登顶平台调用量第一，6天62万亿Token，AA指数57分持平Claude Opus，价格约前沿模型百分之一。最强的能力正变成奢侈品，最普及的能力正变成基础设施。国产AI模型，不一定是跑分最高的，但可能是让最多人用上的。",
+        href: "notes/2026-09-04-gpt6-china-ai.html"
+      },
+      {
+        type: "Essay",
         title: "110亿美元不选GPT，选了中国开源模型",
         desc: "美国估值110亿美元的法律AI独角兽Harvey选了月之暗面Kimi K3做底座。Cursor用Kimi K2.5做编程模型，路透社用阿里通义千问造法律AI。1750个法律智能体环境，200位律师当教练，150张B300训练两个月，推理成本降七成。Tenet全通过率19.7%，GPT-5.6 Sol只有2.5%。月之暗面正和微软、亚马逊、谷歌谈30%分成。中国开源模型正在从被引用走向被托付。",
         href: "notes/2026-09-03-china-open-model-global.html"
@@ -304,6 +310,13 @@ window.SITE_DATA = {
         excerpt: "名字来自两部作品：恋爱的犀牛教我不计成败地热爱，基督山伯爵教我不动声色地等待。2022年底ChatGPT像一头灰犀牛从地平线走来，Count就是把它的轨迹从噪音里算出来——然后与各位同行者一起远征。",
         img: "assets/note-05.svg",
         href: "notes/why-rhino-count.html"
+      },
+      {
+        cat: "观察", num: "N° 86",
+        title: "GPT-6贵了2.5倍，免费的中国AI已全球第一",
+        excerpt: "GPT-6 Astra发布当天API定价涨2.5倍，输出50美元/百万Token。而中国模型全球调用份额42%连续17周超美国，智谱GLM-5.3-Flash以匿名代号Ox Alpha登顶OpenRouter，6天62万亿Token，AA指数57持平Claude Opus。最强的能力正变成奢侈品，最普及的能力正变成基础设施。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-09-04-gpt6-china-ai.html"
       },
       {
         cat: "观察", num: "N° 85",
