@@ -127,6 +127,12 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "39块买了个AI大脑，三线城市的人先抢了",
+        desc: "智谱开出国内首个大模型天猫旗舰店，39元起买Token套餐。天猫Token充值中心上线，五大国产厂商全部接入。92%订单来自三线及以下城市，客单价89元，复购率63%。AI从极客黑盒走向家庭标配这一步，可能比从GPT-3到GPT-6那一步还重要。",
+        href: "notes/2026-09-06-tmall-ai-token.html"
+      },
+      {
+        type: "Essay",
         title: "GPT-6贵了2.5倍，免费的中国AI已全球第一",
         desc: "GPT-6 Astra定价涨2.5倍，输出50美元/百万Token。同期中国模型OpenRouter全球调用份额达42%，连续17周超越美国。智谱GLM-5.3-Flash以匿名代号Ox Alpha登顶平台调用量第一，6天62万亿Token，AA指数57分持平Claude Opus，价格约前沿模型百分之一。最强的能力正变成奢侈品，最普及的能力正变成基础设施。国产AI模型，不一定是跑分最高的，但可能是让最多人用上的。",
         href: "notes/2026-09-04-gpt6-china-ai.html"
@@ -310,6 +316,13 @@ window.SITE_DATA = {
         excerpt: "名字来自两部作品：恋爱的犀牛教我不计成败地热爱，基督山伯爵教我不动声色地等待。2022年底ChatGPT像一头灰犀牛从地平线走来，Count就是把它的轨迹从噪音里算出来——然后与各位同行者一起远征。",
         img: "assets/note-05.svg",
         href: "notes/why-rhino-count.html"
+      },
+      {
+        cat: "观察", num: "N° 87",
+        title: "39块买了个AI大脑，三线城市的人先抢了",
+        excerpt: "智谱在天猫开出国内首个大模型旗舰店，39元起买Token套餐。天猫Token充值中心上线，阿里云、智谱、Kimi、MiniMax、DeepSeek五大厂商全部接入。92%订单来自三线及以下城市，客单价89元，复购率63%。AI从极客黑盒走向家庭标配，走的不是技术布道的路，是天猫物流的路。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-09-06-tmall-ai-token.html"
       },
       {
         cat: "观察", num: "N° 86",
