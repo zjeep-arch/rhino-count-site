@@ -1,6 +1,13 @@
 {
-  "updated": "2026-09-04T10:29:06+08:00",
+  "updated": "2026-09-07T10:26:09+08:00",
   "articles": [
+    {
+      "cat": "安全 · 模型 · 资本",
+      "date": "2026-09-07",
+      "title": "AI大模型及安全动态日报 | 2026年09月07日（星期一）",
+      "excerpt": "OpenAI GPT-6 Astra网络安全能力达Critical级，Claude 11天完成费马大定理形式化证明，Anthropic IPO推迟至11月目标估值2万亿美元，EU CRA 9月11日生效AI产品进入24小时漏洞披露时钟，CrowdStrike推出Falcon Guardian与Agentic IdP，HiddenLayer获1亿美元B轮融资ARR增长10倍。",
+      "href": "2026-09-07-ai-daily.html"
+    },
     {
       "cat": "安全 · 模型 · 资本",
       "date": "2026-09-04",
