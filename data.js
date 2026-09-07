@@ -324,18 +324,18 @@ window.SITE_DATA = {
         href: "notes/why-rhino-count.html"
       },
       {
-        cat: "观察", num: "N° 87",
-        title: "39块买了个AI大脑，三线城市的人先抢了",
-        excerpt: "智谱在天猫开出国内首个大模型旗舰店，39元起买Token套餐。天猫Token充值中心上线，阿里云、智谱、Kimi、MiniMax、DeepSeek五大厂商全部接入。92%订单来自三线及以下城市，客单价89元，复购率63%。AI从极客黑盒走向家庭标配，走的不是技术布道的路，是天猫物流的路。",
-        img: "assets/note-05.svg",
-        href: "notes/2026-09-06-tmall-ai-token.html"
-      },
-      {
         cat: "观察", num: "N° 88",
         title: "苹果新手机里，藏了一颗中国AI大脑",
         excerpt: "9月7日努比亚官宣全球首款AI智能体手机NaviX Ultra定档9月16日，搭载字节豆包。苹果国行版iPhone AI敲定阿里千问，联合训练专属模型，覆盖iOS全生态。华为小艺调用200+系统底层数据，vivo蓝心端侧跑分屠榜，小米MiMo三年投入600亿打通人车家。7款端侧AI大模型同日过审，AI手机从能聊天转向能干活。",
         img: "assets/note-05.svg",
         href: "notes/2026-09-07-phone-ai-brain.html"
+      },
+      {
+        cat: "观察", num: "N° 87",
+        title: "39块买了个AI大脑，三线城市的人先抢了",
+        excerpt: "智谱在天猫开出国内首个大模型旗舰店，39元起买Token套餐。天猫Token充值中心上线，阿里云、智谱、Kimi、MiniMax、DeepSeek五大厂商全部接入。92%订单来自三线及以下城市，客单价89元，复购率63%。AI从极客黑盒走向家庭标配，走的不是技术布道的路，是天猫物流的路。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-09-06-tmall-ai-token.html"
       },
       {
         cat: "观察", num: "N° 86",
