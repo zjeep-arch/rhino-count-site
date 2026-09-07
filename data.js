@@ -78,13 +78,6 @@ window.SITE_DATA = {
     blurb: "这里不放想法，放做出来的东西——网站、游戏、H5、交互实验。",
     tracks: [
       {
-        tag: "PLAY",
-        title: "果冻实验室 · 捏捏与冒险",
-        desc: "把软萌果冻玩出新花样：自由揉捏与吹风、45 秒快递挑战、低重力月球跳高。基于 Jelly-Baby 改编，需支持 WebGPU 的浏览器。",
-        linkLabel: "进入果冻实验室",
-        href: "builds/jelly-baby/"
-      },
-      {
         tag: "TOOL",
         title: "犀牛白板 · 录屏创作器",
         desc: "边画边讲的浏览器创作工具：白板、幻灯片、提词器、摄像头画中画与一键录屏，作品只保存在本地。",
@@ -132,6 +125,12 @@ window.SITE_DATA = {
       }
     ],
     featured: [
+      {
+        type: "Essay",
+        title: "苹果新手机里，藏了一颗中国AI大脑",
+        desc: "9月手机AI诸神之战。努比亚联合字节推出全球首款AI智能体手机NaviX Ultra，苹果国行AI敲定阿里千问联合训练。华为小艺重构系统底层，vivo蓝心端侧跑分屠榜，小米MiMo三年投入600亿。AI从能聊天转向能干活，一句话跨应用自动执行任务成为新赛点。",
+        href: "notes/2026-09-07-phone-ai-brain.html"
+      },
       {
         type: "Essay",
         title: "39块买了个AI大脑，三线城市的人先抢了",
@@ -330,6 +329,13 @@ window.SITE_DATA = {
         excerpt: "智谱在天猫开出国内首个大模型旗舰店，39元起买Token套餐。天猫Token充值中心上线，阿里云、智谱、Kimi、MiniMax、DeepSeek五大厂商全部接入。92%订单来自三线及以下城市，客单价89元，复购率63%。AI从极客黑盒走向家庭标配，走的不是技术布道的路，是天猫物流的路。",
         img: "assets/note-05.svg",
         href: "notes/2026-09-06-tmall-ai-token.html"
+      },
+      {
+        cat: "观察", num: "N° 88",
+        title: "苹果新手机里，藏了一颗中国AI大脑",
+        excerpt: "9月7日努比亚官宣全球首款AI智能体手机NaviX Ultra定档9月16日，搭载字节豆包。苹果国行版iPhone AI敲定阿里千问，联合训练专属模型，覆盖iOS全生态。华为小艺调用200+系统底层数据，vivo蓝心端侧跑分屠榜，小米MiMo三年投入600亿打通人车家。7款端侧AI大模型同日过审，AI手机从能聊天转向能干活。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-09-07-phone-ai-brain.html"
       },
       {
         cat: "观察", num: "N° 86",
