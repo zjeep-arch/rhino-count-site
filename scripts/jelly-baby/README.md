@@ -14,6 +14,7 @@ git -C /tmp/jelly-upstream checkout df52c92a8459286bb287f0849764929e73b4f8ce
 cp -R /tmp/jelly-upstream/src/assets src/
 cp -R /tmp/jelly-upstream/public .
 npm ci --ignore-scripts
+node --experimental-strip-types scripts/prepare-web-assets.mjs
 npm run lint
 npm run test:physics
 npm run test:performance
@@ -22,3 +23,5 @@ cp -R dist/. ../../builds/jelly-baby/
 ```
 
 需要 WebGPU；运行在 HTTPS 或 localhost。计分纪录仅存当前浏览器，隐藏页面暂停倒计时。切换模式与重置结束当前挑战。修改后同时检查首页 data.js 中的卡片和 index.html 中的预渲染卡片。
+
+素材优化脚本使用 macOS 自带 sips。运行时下载约 5.6 MB 素材；模型 gzip 无损，木纹 1024px，预计算 HDR 512×256。运行时并行下载并显示进度，网络 30 秒与启动 45 秒超时提供具体诊断。

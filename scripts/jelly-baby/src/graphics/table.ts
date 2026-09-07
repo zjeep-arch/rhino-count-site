@@ -1,13 +1,21 @@
+import { assetResponse, assetComplete } from '../game/assets.ts';
 import * as THREE from 'three/webgpu';
 import { texture, positionWorld, float, vec2, vec3, normalMap } from 'three/tsl';
 import type { RefractiveLightField } from './refractive-light.js';
 
-export async function makeTable(optics:RefractiveLightField,light:{color:THREE.Color;windowFraction:number;irradiance:number}) {
+export async function loadTableTextures() {
   const loader=new THREE.TextureLoader();
-  const urls=[new URL('../assets/wood_texture/wood_base.jpg',import.meta.url).href,
-    new URL('../assets/wood_texture/wood_normal.png',import.meta.url).href,
-    new URL('../assets/wood_texture/wood_roughness.jpg',import.meta.url).href];
-  const [base,normal,roughness]=await Promise.all(urls.map(url=>loader.loadAsync(url)));
+  const urls=[new URL('../assets/optimized/wood_base.jpg',import.meta.url),
+    new URL('../assets/optimized/wood_normal.png',import.meta.url),
+    new URL('../assets/optimized/wood_roughness.jpg',import.meta.url)];
+  return Promise.all(urls.map(async url=>{
+    const blob=await (await assetResponse(url)).blob(),objectURL=URL.createObjectURL(blob);
+    try{const texture=await loader.loadAsync(objectURL);assetComplete();return texture;}finally{URL.revokeObjectURL(objectURL);}
+  }));
+}
+
+export async function makeTable(optics:RefractiveLightField,light:{color:THREE.Color;windowFraction:number;irradiance:number},textures:THREE.Texture[]) {
+  const [base,normal,roughness]=textures;
   base.colorSpace=THREE.SRGBColorSpace;
   for(const t of [base,normal,roughness]) {t.wrapS=t.wrapT=THREE.RepeatWrapping;t.anisotropy=8;}
   const uv=positionWorld.xz.div(2.5).add(.5);

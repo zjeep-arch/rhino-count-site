@@ -25,13 +25,25 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML=`
 `;
 
 let stage='Loading the game',failed=false,game:{stop:()=>void}|undefined;
+const loadingLabels:Record<string,string>={
+  'Loading the game':'正在加载游戏程序', 'Starting WebGPU':'正在连接显卡',
+  'Loading assets':'正在下载果冻和场景素材', 'Making a little jelly':'正在组装果冻宝宝',
+  'Settling in':'正在准备物理与光影', 'Compiling the material':'正在编译画面', 'Drawing the first frame':'正在绘制第一帧',
+};
+const updateLoading=()=>{
+  const assets=document.querySelector('#loading')!.getAttribute('data-assets-loaded')||'0';
+  document.querySelector('#load-message')!.textContent=`${loadingLabels[stage]||stage}${stage==='Loading assets'?`（${assets}/5）`:''} · ${Math.round(performance.now()/1000)} 秒`;
+};
+const progressTimer=setInterval(updateLoading,1000);
+const startupTimer=setTimeout(()=>fail(new Error(`启动等待超过 45 秒：${loadingLabels[stage]||stage}。请检查网络或重新加载。`)),45000);
+
 function fail(reason:unknown) {
-  if(failed)return;failed=true;game?.stop();
+  if(failed)return;failed=true;clearInterval(progressTimer);clearTimeout(startupTimer);game?.stop();
   const error=reason instanceof Error?reason:new Error(String(reason));
   document.querySelector('#loading')!.classList.remove('hidden');
   document.querySelector('#loading')!.classList.add('failed');
-  document.querySelector('h2')!.textContent='这个世界暂时打不开。';
-  document.querySelector('#load-message')!.textContent='需要支持 WebGPU 的浏览器及可用的 GPU。请尝试新版 Chrome / Edge，并开启硬件加速。';
+  document.querySelector('#loading h2')!.textContent='这个世界暂时打不开。';
+  document.querySelector('#load-message')!.textContent=stage==='Starting WebGPU'?'Chrome 未能启用 WebGPU。请在设置中检查图形加速是否开启，然后重新启动浏览器。':`停在「${loadingLabels[stage]||stage}」。请重试；下方诊断信息会显示具体原因。`;
   const fatal=document.querySelector<HTMLPreElement>('#fatal')!;fatal.hidden=false;
   fatal.textContent=`${stage}\n${error.message}\n\nViewport: ${innerWidth} × ${innerHeight} · DPR ${devicePixelRatio}\n${navigator.userAgent}`;
   document.querySelector<HTMLButtonElement>('#retry')!.hidden=false;
@@ -44,9 +56,9 @@ document.querySelector('#retry')!.addEventListener('click',()=>location.reload()
 // One observed chain covers imports, initialization, compilation, warmup and first render.
 void import('./game/runtime.ts').then(({startGame})=>startGame(message=>{
   if(failed)throw new Error('Startup aborted after a GPU failure');
-  stage=message;document.querySelector('#load-message')!.textContent='正在搭建软软的小世界，请稍候…';
+  stage=message;performance.mark(`jelly-stage:${message}`);updateLoading();
 },fail)).then(started=>{
   game=started;
   if(failed){game.stop();return;}
-  stage='Playing';document.querySelector('#loading')!.classList.add('hidden');
+  stage='Playing';clearInterval(progressTimer);clearTimeout(startupTimer);performance.mark('jelly-ready');document.querySelector('#loading')!.classList.add('hidden');
 }).catch(fail);

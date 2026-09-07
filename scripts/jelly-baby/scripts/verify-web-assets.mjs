@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import {readFileSync, readdirSync, statSync} from 'node:fs';
+import {gunzipSync} from 'node:zlib';
+const root='src/assets/optimized/';
+assert.deepEqual(gunzipSync(readFileSync(root+'jelly-baby.bin.gz')),readFileSync('src/assets/model/jelly-baby.bin'),'model transport must stay lossless');
+const m=JSON.parse(readFileSync(root+'studio.json','utf8'));
+assert.equal(gunzipSync(readFileSync(root+'studio.bin.gz')).length,m.width*m.height*8,'HDR layout matches metadata');
+assert(m.width<=512&&m.height<=256,'HDR startup budget');
+const files=readdirSync(root),total=files.reduce((n,f)=>n+statSync(root+f).size,0);
+assert(total<6_000_000,`first-load asset budget exceeded: ${total}`);
+assert(statSync(root+'wood_base.jpg').size<300_000,'table texture budget');
+console.log('PASS: lossless model, HDR layout, first-load assets',total,'bytes');

@@ -1,3 +1,4 @@
+import { unpackAsset, assetResponse } from '../game/assets.ts';
 import { BufferAttribute, BufferGeometry, DynamicDrawUsage } from 'three/webgpu';
 
 export interface ModelManifest {
@@ -40,9 +41,8 @@ export function parseBabyCage(buffer:ArrayBuffer,manifest:ModelManifest) {
 
 export async function loadBabyCage() {
   const [binary,metadata]=await Promise.all([
-    fetch(new URL('../assets/model/jelly-baby.bin',import.meta.url)),
-    fetch(new URL('../assets/model/jelly-baby.json',import.meta.url)),
+    unpackAsset(new URL('../assets/optimized/jelly-baby.bin.gz',import.meta.url)),
+    assetResponse(new URL('../assets/model/jelly-baby.json',import.meta.url)),
   ]);
-  if(!binary.ok||!metadata.ok)throw new Error('Could not load the reference jelly mesh');
-  return parseBabyCage(await binary.arrayBuffer(),await metadata.json() as ModelManifest);
+  return parseBabyCage(binary,await metadata.json() as ModelManifest);
 }

@@ -1,18 +1,16 @@
 import * as THREE from 'three/webgpu';
-import { EXRLoader } from 'three/addons/loaders/EXRLoader.js';
-import { shapeStudioLight } from './studio-light.ts';
+import { unpackAsset, assetResponse } from '../game/assets.ts';
 
 export async function loadEnvironment(renderer:THREE.WebGPURenderer,scene:THREE.Scene) {
-  const source=await new EXRLoader().setDataType(THREE.HalfFloatType).loadAsync(new URL('../assets/bg_room.exr',import.meta.url).href);
-  source.mapping=THREE.EquirectangularReflectionMapping;
-  source.colorSpace=THREE.LinearSRGBColorSpace;
-  const original=source.image as {data:Uint16Array;width:number;height:number};
-  const sourceWindow=measureWindow(original).incoming.negate();
-  const studio=shapeStudioLight(original,sourceWindow);
-  source.image.data=studio.data;source.needsUpdate=true;
-  const lighting=measureWindow(studio);
+  const [buffer,metadata]=await Promise.all([
+    unpackAsset(new URL('../assets/optimized/studio.bin.gz',import.meta.url)),
+    assetResponse(new URL('../assets/optimized/studio.json',import.meta.url)).then(r=>r.json()),
+  ]);
+  const source=new THREE.DataTexture(new Uint16Array(buffer),metadata.width,metadata.height,THREE.RGBAFormat,THREE.HalfFloatType);
+  source.mapping=THREE.EquirectangularReflectionMapping;source.colorSpace=THREE.LinearSRGBColorSpace;source.needsUpdate=true;
+  const lighting={incoming:new THREE.Vector3().fromArray(metadata.incoming),color:new THREE.Color().setRGB(...metadata.color as [number,number,number]),windowFraction:metadata.windowFraction,irradiance:metadata.irradiance};
   const pmrem=new THREE.PMREMGenerator(renderer);
-  const target=await pmrem.fromEquirectangularAsync(source);
+  const target=pmrem.fromEquirectangular(source);
   scene.environment=target.texture;scene.environmentIntensity=.9;
   return {...lighting,dispose:()=>{target.dispose();source.dispose();pmrem.dispose();}};
 }
