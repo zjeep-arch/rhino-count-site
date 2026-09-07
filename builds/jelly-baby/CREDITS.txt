@@ -1,0 +1,4 @@
+Jelly Baby by scottstts
+https://github.com/scottstts/Jelly-Baby
+Upstream: df52c92a8459286bb287f0849764929e73b4f8ce
+Rhino Count adaptation: original challenge modes, Chinese interface and site integration.

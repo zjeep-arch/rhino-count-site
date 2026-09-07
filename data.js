@@ -78,6 +78,13 @@ window.SITE_DATA = {
     blurb: "这里不放想法，放做出来的东西——网站、游戏、H5、交互实验。",
     tracks: [
       {
+        tag: "PLAY",
+        title: "果冻实验室 · 捏捏与冒险",
+        desc: "把软萌果冻玩出新花样：自由揉捏与吹风、45 秒快递挑战、低重力月球跳高。基于 Jelly-Baby 改编，需支持 WebGPU 的浏览器。",
+        linkLabel: "进入果冻实验室",
+        href: "builds/jelly-baby/"
+      },
+      {
         tag: "TOOL",
         title: "犀牛白板 · 录屏创作器",
         desc: "边画边讲的浏览器创作工具：白板、幻灯片、提词器、摄像头画中画与一键录屏，作品只保存在本地。",
