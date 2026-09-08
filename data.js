@@ -76,20 +76,121 @@ window.SITE_DATA = {
     headingLine1: "把想法，",
     headingLine2: "做成作品。",
     blurb: "这里不放想法，放做出来的东西——网站、游戏、H5、交互实验。",
-    // 项目入口由 builds-catalog.js 独立维护，避免文章更新覆盖。
+    tracks: [
+      {
+        tag: "TOOL",
+        title: "犀牛白板 · 录屏创作器",
+        desc: "边画边讲的浏览器创作工具：白板、幻灯片、提词器、摄像头画中画与一键录屏，作品只保存在本地。",
+        linkLabel: "开始创作",
+        href: "whiteboard-recorder.html"
+      },
+      {
+        tag: "GAME",
+        title: "鸭骗战争：真鸭假鹅",
+        desc: "扮演鹅腿阿姨，用鸭腿冒充鹅腿。荒诞答题小游戏，测试轻量游戏化表达。",
+        linkLabel: "玩游戏",
+        href: "games/duck-scare-war.html"
+      },
+      {
+        tag: "PLAY",
+        title: "3D AI 工作室",
+        desc: "Iron Man 风格的 3D AI 工作室——方舟反应堆、全息屏幕、贾维斯 HUD、全球数据流。可拖拽旋转、点击交互。",
+        linkLabel: "进入工作室",
+        href: "ai-studio-3d.html"
+      },
+      {
+        tag: "LAB",
+        title: "AI 创作实验室",
+        desc: "沉浸式 3D 交互页面——悬浮水晶体、滚动驱动的相机运动、作品矩阵、能力图谱、实时数据面板。",
+        linkLabel: "进入实验室",
+        href: "ai-lab-3d.html"
+      },
+      {
+        tag: "EXPERIMENT",
+        title: "反重力文字 · 北京地标",
+        desc: "每个字符在零重力中漂浮上升--用反重力排版讲述故宫、鸟巢、国贸等北京地标的建筑故事。鼠标悬停时字母被推开，松手后弹回原位。",
+        linkLabel: "进入实验",
+        href: "anti-gravity-text.html",
+        doi: "10.5281/zenodo.22065955",
+        doiUrl: "https://doi.org/10.5281/zenodo.22065955"
+      },
+      {
+        tag: "3D",
+        title: "AI 竞技场 3D · 多球场体验",
+        desc: "程序化 3D 体育场--Three.js 构建的沉浸式球场，支持伯纳乌/工体/马拉卡纳三座经典球场切换、日夜模式、雨天天气系统、球迷人浪应援和实时弹幕。点击座位查看视野评分，进入第一人称观赛视角。",
+        linkLabel: "进入竞技场",
+        href: "stadium-3d.html",
+        doi: "10.5281/zenodo.22070200",
+        doiUrl: "https://doi.org/10.5281/zenodo.22070200"
+      }
+    ],
     featured: [
-          {
-                "type": "Essay",
-                "title": "苹果新手机里，藏了一颗中国AI大脑",
-                "desc": "9月手机AI诸神之战。努比亚联合字节推出全球首款AI智能体手机NaviX Ultra，苹果国行AI敲定阿里千问联合训练。华为小艺重构系统底层，vivo蓝心端侧跑分屠榜，小米MiMo三年投入600亿。AI从能聊天转向能干活，一句话跨应用自动执行任务成为新赛点。",
-                "href": "notes/2026-09-07-phone-ai-brain.html"
-          },
-          {
-                "type": "Essay",
-                "title": "39块买了个AI大脑，三线城市的人先抢了",
-                "desc": "智谱开出国内首个大模型天猫旗舰店，39元起买Token套餐。天猫Token充值中心上线，五大国产厂商全部接入。92%订单来自三线及以下城市，客单价89元，复购率63%。AI从极客黑盒走向家庭标配这一步，可能比从GPT-3到GPT-6那一步还重要。",
-                "href": "notes/2026-09-06-tmall-ai-token.html"
-          }
+      {
+        type: "Essay",
+        title: "花几块钱偷你声音，法院说不行了",
+        desc: "最高法首部AI纠纷裁判规则出台，5部分24条。花几元钱就能偷声，AI换脸、AI拟声、大数据杀熟、仿冒名人带货、自动驾驶责任全覆盖。第4条明确，未经同意用AI生成你的肖像和声音构成侵权。平台适用避风港规则，通知即生效。这不是给AI套紧箍咒，是给普通人一把保护伞。",
+        href: "notes/2026-09-08-AI换脸裁判规则.html"
+      },
+      {
+        type: "Essay",
+        title: "苹果新手机里，藏了一颗中国AI大脑",
+        desc: "9月手机AI诸神之战。努比亚联合字节推出全球首款AI智能体手机NaviX Ultra，苹果国行AI敲定阿里千问联合训练。华为小艺重构系统底层，vivo蓝心端侧跑分屠榜，小米MiMo三年投入600亿。AI从能聊天转向能干活，一句话跨应用自动执行任务成为新赛点。",
+        href: "notes/2026-09-07-phone-ai-brain.html"
+      },
+      {
+        type: "Essay",
+        title: "39块买了个AI大脑，三线城市的人先抢了",
+        desc: "智谱开出国内首个大模型天猫旗舰店，39元起买Token套餐。天猫Token充值中心上线，五大国产厂商全部接入。92%订单来自三线及以下城市，客单价89元，复购率63%。AI从极客黑盒走向家庭标配这一步，可能比从GPT-3到GPT-6那一步还重要。",
+        href: "notes/2026-09-06-tmall-ai-token.html"
+      },
+      {
+        type: "Essay",
+        title: "GPT-6贵了2.5倍，免费的中国AI已全球第一",
+        desc: "GPT-6 Astra定价涨2.5倍，输出50美元/百万Token。同期中国模型OpenRouter全球调用份额达42%，连续17周超越美国。智谱GLM-5.3-Flash以匿名代号Ox Alpha登顶平台调用量第一，6天62万亿Token，AA指数57分持平Claude Opus，价格约前沿模型百分之一。最强的能力正变成奢侈品，最普及的能力正变成基础设施。国产AI模型，不一定是跑分最高的，但可能是让最多人用上的。",
+        href: "notes/2026-09-04-gpt6-china-ai.html"
+      },
+      {
+        type: "Essay",
+        title: "110亿美元不选GPT，选了中国开源模型",
+        desc: "美国估值110亿美元的法律AI独角兽Harvey选了月之暗面Kimi K3做底座。Cursor用Kimi K2.5做编程模型，路透社用阿里通义千问造法律AI。1750个法律智能体环境，200位律师当教练，150张B300训练两个月，推理成本降七成。Tenet全通过率19.7%，GPT-5.6 Sol只有2.5%。月之暗面正和微软、亚马逊、谷歌谈30%分成。中国开源模型正在从被引用走向被托付。",
+        href: "notes/2026-09-03-china-open-model-global.html"
+      },
+      {
+        type: "Essay",
+        title: "一个没有发布会的模型，拿下了全球编程第一",
+        desc: "9月2日，Qwen3.8-Max-0902以1691分登顶CodeArena全球第一，领先Claude Opus 5整整37分。没有发布会，没有红毯。每百万Token 5美元，帕累托前沿性价比最优。2.4万亿参数基座没动，22分的提升全部来自后训练。47天前Kimi K3刚拿过第一，王座一个月换一次。不是某一家公司的突破，是整个中国AI生态的上升。",
+        href: "notes/2026-09-02-qwen38-max-codearena.html"
+      },
+      {
+        type: "Essay",
+        title: "智谱终于学会赚钱了，股价却跌了",
+        desc: "智谱上市后首份半年报，营收9.54亿增400%，API收入从2910万冲到8.25亿涨27倍。毛利率从负转正，管理费用砍44%，ARR两个月从10亿到16亿美元。但9月1日股价跌1.34%。五层验账拆解中国大模型第一股的真实商业逻辑，飞轮转起来的声音比股价涨1%响得多。",
+        href: "notes/2026-09-01-zhipu-api-revenue-27x.html"
+      },
+      {
+        type: "Essay",
+        title: "今晚8点，湖南卫视播了一部没有演员的电视剧",
+        desc: "国内首部AIGC长剧《后西游记》8月31日登陆湖南卫视黄金档。30集全AI生成，无真人演员。Seedance 2.5技术支持，四个月完成30集。广电21条首部边审边播剧集，芒果超媒20cm涨停。国产大模型周调用量连续18周超美国，55.16万亿对17.07万亿。这不是一部剧开播，是一个产业打开了新入口。",
+        href: "notes/2026-08-31-ai-drama-hunan-tv.html"
+      },
+      {
+        type: "Essay",
+        title: "视频还没播完，下一段就做好了",
+        desc: "MiniMax H3 Max生成5秒768p视频不到3秒，生成速度首次超过播放速度。一个中国公司开源的330亿参数模型，被海外开发者搭成了24小时AI直播电视台。H3开源一个月下载超2400万次，衍生300+模型。这不是更快的视频生成，是从制作到运行的范式跳跃。",
+        href: "notes/2026-08-31-minimax-h3max-livestream.html"
+      },
+      {
+        type: "Essay",
+        title: "40年没人找到的漏洞，一个免费的中国AI找到了",
+        desc: "1986年有人写下了DNS协议的一段代码，跑了40年没人发现里面的漏洞。直到智谱GLM-5.3在开源前安全评估中自己找到了它，影响超过1000万处公网DNS服务。743B稠密模型，AA指数60跟Claude Fable 5打平，完整权重免费下载。发现40年未知漏洞不是刷分，是真研究能力。当最强模型免费的时候，追赶这个概念开始失效了。",
+        href: "notes/2026-08-30-glm53-open-source.html"
+      },
+      {
+        type: "Essay",
+        title: "三个国产模型分差不到0.1分，腾讯悄悄换了赛道",
+        desc: "腾讯混元Hy4 preview发布，770B参数只激活6.4%，1M上下文，开源。163名专家盲测中与GLM-5.3、Kimi K3分差不到0.07分。但真正的故事不是参数翻倍，是腾讯正在用产品定义模型。CodeBuddy和WorkBuddy的真实失败案例反过来定义训练数据，飞轮终于有真东西可以喂了。跑分卷不动了，赛道换了。",
+        href: "notes/2026-08-28-tencent-hy4-product-model.html"
+      }
     ],
     roadmap: [
       "每周复盘一个 AI workflow 实验",
@@ -227,6 +328,13 @@ window.SITE_DATA = {
         excerpt: "名字来自两部作品：恋爱的犀牛教我不计成败地热爱，基督山伯爵教我不动声色地等待。2022年底ChatGPT像一头灰犀牛从地平线走来，Count就是把它的轨迹从噪音里算出来——然后与各位同行者一起远征。",
         img: "assets/note-05.svg",
         href: "notes/why-rhino-count.html"
+      },
+      {
+        cat: "观察", num: "N° 89",
+        title: "花几块钱偷你声音，法院说不行了",
+        excerpt: "最高法首部AI纠纷裁判规则出台，5部分24条。花几元钱就能偷声，AI换脸、AI拟声、大数据杀熟、仿冒名人带货、自动驾驶责任全覆盖。第4条明确，未经同意用AI生成你的肖像和声音构成侵权。平台适用避风港规则，通知即生效。这不是给AI套紧箍咒，是给普通人一把保护伞。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-09-08-AI换脸裁判规则.html"
       },
       {
         cat: "观察", num: "N° 88",
