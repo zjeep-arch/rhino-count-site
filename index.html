@@ -800,7 +800,7 @@
       display: grid;
       grid-template-columns: 1fr;
       gap: var(--s-6);
-      align-items: stretch;
+      align-items: start;
     }
     @media (min-width: 980px) {
       .lab-layout {
@@ -811,7 +811,7 @@
       display: grid;
       grid-template-columns: 1fr;
       gap: var(--s-4);
-      align-content: stretch;
+      align-content: start;
     }
     @media (min-width: 720px) {
       .lab-grid {
@@ -821,7 +821,7 @@
     .lab-aside {
       display: grid;
       gap: var(--s-4);
-      align-content: stretch;
+      align-content: start;
     }
     .lab-card,
     .lab-panel {
@@ -834,13 +834,21 @@
       overflow: hidden;
     }
     .lab-card {
-      min-height: 200px;
-      padding: clamp(18px, 2.5vw, 26px);
-      display: grid;
-      grid-template-rows: auto auto 1fr auto;
-      gap: var(--s-3);
+      height: 280px;
+      min-height: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
       transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     }
+    /* Never stretch project cards to match a growing editorial sidebar. */
+    .lab-card > * { flex-shrink: 0; }
+    .lab-card-footer { margin-top: auto; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; }
+    .lab-card-footer .lab-link { margin: 0; letter-spacing: .08em; }
+    .lab-card-footer .lab-doi { margin: 0; font-size: 9px; padding: 2px 8px; }
+    .lab-more { display: inline-block; margin-top: 12px; color: var(--accent); font-size: 12px; }
+    @media (min-width: 1280px) { .lab-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
     .lab-card::before,
     .lab-panel::before {
       content: "";
@@ -877,9 +885,10 @@
     .lab-card h3 {
       margin: 0;
       font-family: var(--serif);
-      font-size: clamp(20px, 2.4vw, 28px);
-      line-height: 1.1;
-      max-width: 9em;
+      font-size: 22px;
+      line-height: 1.22;
+      max-height: 2.44em;
+      max-width: 100%;
       display: -webkit-box;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
@@ -1027,7 +1036,8 @@
     }
     @media (max-width: 620px) {
       .lab-card {
-        min-height: 230px;
+        height: 260px;
+        padding: 18px;
       }
       .featured-work {
         grid-template-columns: 1fr;
@@ -5297,110 +5307,21 @@
             </div>
             <div class="lab-layout">
               <div class="lab-grid">
-                  <a class="lab-card fade-in fade-in-delay-0" href="builds/jelly-baby/">
-                    <span class="lab-tag">PLAY</span>
-                    <h3>果冻实验室 · 捏捏与冒险</h3>
-                    <p>把软萌果冻玩出新花样：自由揉捏与吹风、45 秒快递挑战、低重力月球跳高。基于 Jelly-Baby 改编，需支持 WebGPU 的浏览器。</p>
-                    <span class="lab-link">进入果冻实验室</span>
-                  </a>
-
-                
-                  <a class="lab-card fade-in fade-in-delay-0" href="whiteboard-recorder.html">
-                    <span class="lab-tag">TOOL</span>
-                    <h3>犀牛白板 · 录屏创作器</h3>
-                    <p>边画边讲的浏览器创作工具：白板、幻灯片、提词器、摄像头画中画与一键录屏，作品只保存在本地。</p>
-                    <span class="lab-link">开始创作</span>
-                    
-                  </a>
-                
-                  <a class="lab-card fade-in fade-in-delay-1" href="games/duck-scare-war.html">
-                    <span class="lab-tag">GAME</span>
-                    <h3>鸭骗战争：真鸭假鹅</h3>
-                    <p>扮演鹅腿阿姨，用鸭腿冒充鹅腿。荒诞答题小游戏，测试轻量游戏化表达。</p>
-                    <span class="lab-link">玩游戏</span>
-                    
-                  </a>
-                
-                  <a class="lab-card fade-in fade-in-delay-2" href="ai-studio-3d.html">
-                    <span class="lab-tag">PLAY</span>
-                    <h3>3D AI 工作室</h3>
-                    <p>Iron Man 风格的 3D AI 工作室——方舟反应堆、全息屏幕、贾维斯 HUD、全球数据流。可拖拽旋转、点击交互。</p>
-                    <span class="lab-link">进入工作室</span>
-                    
-                  </a>
-                
-                  <a class="lab-card fade-in fade-in-delay-3" href="ai-lab-3d.html">
-                    <span class="lab-tag">LAB</span>
-                    <h3>AI 创作实验室</h3>
-                    <p>沉浸式 3D 交互页面——悬浮水晶体、滚动驱动的相机运动、作品矩阵、能力图谱、实时数据面板。</p>
-                    <span class="lab-link">进入实验室</span>
-                    
-                  </a>
-                
-                  <a class="lab-card fade-in fade-in-delay-3" href="anti-gravity-text.html">
-                    <span class="lab-tag">EXPERIMENT</span>
-                    <h3>反重力文字 · 北京地标</h3>
-                    <p>每个字符在零重力中漂浮上升--用反重力排版讲述故宫、鸟巢、国贸等北京地标的建筑故事。鼠标悬停时字母被推开，松手后弹回原位。</p>
-                    <span class="lab-link">进入实验</span>
-                    <span class="lab-doi" title="Zenodo DOI">DOI 10.5281/zenodo.22065955</span>
-                  </a>
-                
-                  <a class="lab-card fade-in fade-in-delay-3" href="stadium-3d.html">
-                    <span class="lab-tag">3D</span>
-                    <h3>AI 竞技场 3D · 多球场体验</h3>
-                    <p>程序化 3D 体育场--Three.js 构建的沉浸式球场，支持伯纳乌/工体/马拉卡纳三座经典球场切换、日夜模式、雨天天气系统、球迷人浪应援和实时弹幕。点击座位查看视野评分，进入第一人称观赛视角。</p>
-                    <span class="lab-link">进入竞技场</span>
-                    <span class="lab-doi" title="Zenodo DOI">DOI 10.5281/zenodo.22070200</span>
-                  </a>
-                
-              </div>
-              <aside class="lab-aside">
+<a class="lab-card fade-in fade-in-delay-0" href="builds/jelly-baby/"><span class="lab-tag">PLAY</span><h3>果冻实验室 · 捏捏与冒险</h3><p>自由揉捏与吹风、45 秒快递挑战、低重力月球跳高。轻量加载，保留软体物理手感；需支持 WebGPU。</p><div class="lab-card-footer"><span class="lab-link">进入果冻实验室</span></div></a>
+<a class="lab-card fade-in fade-in-delay-1" href="whiteboard-recorder.html"><span class="lab-tag">TOOL</span><h3>犀牛白板 · 录屏创作器</h3><p>边画边讲的浏览器创作工具：白板、幻灯片、提词器、摄像头画中画与一键录屏，作品只保存在本地。</p><div class="lab-card-footer"><span class="lab-link">开始创作</span></div></a>
+<a class="lab-card fade-in fade-in-delay-2" href="games/duck-scare-war.html"><span class="lab-tag">GAME</span><h3>鸭骗战争：真鸭假鹅</h3><p>扮演鹅腿阿姨，用鸭腿冒充鹅腿。荒诞答题小游戏，测试轻量游戏化表达。</p><div class="lab-card-footer"><span class="lab-link">玩游戏</span></div></a>
+<a class="lab-card fade-in fade-in-delay-3" href="ai-studio-3d.html"><span class="lab-tag">PLAY</span><h3>3D AI 工作室</h3><p>Iron Man 风格的 3D AI 工作室——方舟反应堆、全息屏幕、贾维斯 HUD、全球数据流。可拖拽旋转、点击交互。</p><div class="lab-card-footer"><span class="lab-link">进入工作室</span></div></a>
+<a class="lab-card fade-in fade-in-delay-3" href="ai-lab-3d.html"><span class="lab-tag">LAB</span><h3>AI 创作实验室</h3><p>沉浸式 3D 交互页面——悬浮水晶体、滚动驱动的相机运动、作品矩阵、能力图谱、实时数据面板。</p><div class="lab-card-footer"><span class="lab-link">进入实验室</span></div></a>
+<a class="lab-card fade-in fade-in-delay-3" href="anti-gravity-text.html"><span class="lab-tag">EXPERIMENT</span><h3>反重力文字 · 北京地标</h3><p>每个字符在零重力中漂浮上升--用反重力排版讲述故宫、鸟巢、国贸等北京地标的建筑故事。鼠标悬停时字母被推开，松手后弹回原位。</p><div class="lab-card-footer"><span class="lab-link">进入实验</span><span class="lab-doi" title="Zenodo DOI">DOI 10.5281/zenodo.22065955</span></div></a>
+<a class="lab-card fade-in fade-in-delay-3" href="stadium-3d.html"><span class="lab-tag">3D</span><h3>AI 竞技场 3D · 多球场体验</h3><p>程序化 3D 体育场--Three.js 构建的沉浸式球场，支持伯纳乌/工体/马拉卡纳三座经典球场切换、日夜模式、雨天天气系统、球迷人浪应援和实时弹幕。点击座位查看视野评分，进入第一人称观赛视角。</p><div class="lab-card-footer"><span class="lab-link">进入竞技场</span><span class="lab-doi" title="Zenodo DOI">DOI 10.5281/zenodo.22070200</span></div></a>
+</div>
+<aside class="lab-aside">
                 <div class="lab-panel fade-in fade-in-delay-1">
                   <h3>Featured Work</h3>
-                  
-                    <a class="featured-work" href="notes/2026-09-03-china-open-model-global.html">
-                      <b>Essay</b>
-                      <strong>110亿美元不选GPT，选了中国开源模型</strong>
-                      <span>美国估值110亿美元的法律AI独角兽Harvey选了月之暗面Kimi K3做底座。Cursor用Kimi K2.5做编程模型，路透社用阿里通义千问造法律AI。1750个法律智能体环境，200位律师当教练，150张B300训练两个月，推理成本降七成。Tenet全通过率19.7%，GPT-5.6 Sol只有2.5%。月之暗面正和微软、亚马逊、谷歌谈30%分成。中国开源模型正在从被引用走向被托付。</span>
-                    </a>
-                  
-                    <a class="featured-work" href="notes/2026-09-02-qwen38-max-codearena.html">
-                      <b>Essay</b>
-                      <strong>一个没有发布会的模型，拿下了全球编程第一</strong>
-                      <span>9月2日，Qwen3.8-Max-0902以1691分登顶CodeArena全球第一，领先Claude Opus 5整整37分。没有发布会，没有红毯。每百万Token 5美元，帕累托前沿性价比最优。2.4万亿参数基座没动，22分的提升全部来自后训练。47天前Kimi K3刚拿过第一，王座一个月换一次。不是某一家公司的突破，是整个中国AI生态的上升。</span>
-                    </a>
-                  
-                    <a class="featured-work" href="notes/2026-09-01-zhipu-api-revenue-27x.html">
-                      <b>Essay</b>
-                      <strong>智谱终于学会赚钱了，股价却跌了</strong>
-                      <span>智谱上市后首份半年报，营收9.54亿增400%，API收入从2910万冲到8.25亿涨27倍。毛利率从负转正，管理费用砍44%，ARR两个月从10亿到16亿美元。但9月1日股价跌1.34%。五层验账拆解中国大模型第一股的真实商业逻辑，飞轮转起来的声音比股价涨1%响得多。</span>
-                    </a>
-                  
-                    <a class="featured-work" href="notes/2026-08-31-ai-drama-hunan-tv.html">
-                      <b>Essay</b>
-                      <strong>今晚8点，湖南卫视播了一部没有演员的电视剧</strong>
-                      <span>国内首部AIGC长剧《后西游记》8月31日登陆湖南卫视黄金档。30集全AI生成，无真人演员。Seedance 2.5技术支持，四个月完成30集。广电21条首部边审边播剧集，芒果超媒20cm涨停。国产大模型周调用量连续18周超美国，55.16万亿对17.07万亿。这不是一部剧开播，是一个产业打开了新入口。</span>
-                    </a>
-                  
-                    <a class="featured-work" href="notes/2026-08-31-minimax-h3max-livestream.html">
-                      <b>Essay</b>
-                      <strong>视频还没播完，下一段就做好了</strong>
-                      <span>MiniMax H3 Max生成5秒768p视频不到3秒，生成速度首次超过播放速度。一个中国公司开源的330亿参数模型，被海外开发者搭成了24小时AI直播电视台。H3开源一个月下载超2400万次，衍生300+模型。这不是更快的视频生成，是从制作到运行的范式跳跃。</span>
-                    </a>
-                  
-                    <a class="featured-work" href="notes/2026-08-30-glm53-open-source.html">
-                      <b>Essay</b>
-                      <strong>40年没人找到的漏洞，一个免费的中国AI找到了</strong>
-                      <span>1986年有人写下了DNS协议的一段代码，跑了40年没人发现里面的漏洞。直到智谱GLM-5.3在开源前安全评估中自己找到了它，影响超过1000万处公网DNS服务。743B稠密模型，AA指数60跟Claude Fable 5打平，完整权重免费下载。发现40年未知漏洞不是刷分，是真研究能力。当最强模型免费的时候，追赶这个概念开始失效了。</span>
-                    </a>
-                  
-                    <a class="featured-work" href="notes/2026-08-28-tencent-hy4-product-model.html">
-                      <b>Essay</b>
-                      <strong>三个国产模型分差不到0.1分，腾讯悄悄换了赛道</strong>
-                      <span>腾讯混元Hy4 preview发布，770B参数只激活6.4%，1M上下文，开源。163名专家盲测中与GLM-5.3、Kimi K3分差不到0.07分。但真正的故事不是参数翻倍，是腾讯正在用产品定义模型。CodeBuddy和WorkBuddy的真实失败案例反过来定义训练数据，飞轮终于有真东西可以喂了。跑分卷不动了，赛道换了。</span>
-                    </a>
-                  
-                </div>
+<a class="featured-work" href="notes/2026-09-07-phone-ai-brain.html"><b>Essay</b><strong>苹果新手机里，藏了一颗中国AI大脑</strong><span>9月手机AI诸神之战。努比亚联合字节推出全球首款AI智能体手机NaviX Ultra，苹果国行AI敲定阿里千问联合训练。华为小艺重构系统底层，vivo蓝心端侧跑分屠榜，小米MiMo三年投入600亿。AI从能聊天转向能干活，一句话跨应用自动执行任务成为新赛点。</span></a>
+<a class="featured-work" href="notes/2026-09-06-tmall-ai-token.html"><b>Essay</b><strong>39块买了个AI大脑，三线城市的人先抢了</strong><span>智谱开出国内首个大模型天猫旗舰店，39元起买Token套餐。天猫Token充值中心上线，五大国产厂商全部接入。92%订单来自三线及以下城市，客单价89元，复购率63%。AI从极客黑盒走向家庭标配这一步，可能比从GPT-3到GPT-6那一步还重要。</span></a>
+<a class="lab-more" href="notes/">浏览全部文章 →</a>
+</div>
                 <div class="lab-panel fade-in fade-in-delay-2">
                   <h3>Creation Roadmap</h3>
                   <ol class="roadmap-list">
@@ -5579,7 +5500,8 @@
       if (numEl) numEl.textContent = 'ISSUE ' + issueNum;
     })();
   </script>
-  <script src="data.js?v=20260906-jelly"></script>
+  <script src="data.js?v=20260908-builds"></script>
+  <script src="builds-catalog.js?v=20260908"></script>
   <script>
     /* Fallback: force-show page after 3s if JS hasn't completed */
     setTimeout(function(){var m=document.querySelector('main');if(m&&!m.classList.contains('ready'))m.classList.add('ready');},3000);
@@ -5896,6 +5818,9 @@
 
       /* Creation matrix */
       const lab = D.lab;
+      // Hard display cap: incoming article feeds must never lengthen the Builds sidebar.
+      const BUILD_FEATURED_LIMIT = 2;
+      const buildTracks = window.BUILDS_CATALOG || lab?.tracks || [];
       if (lab) {
         document.getElementById('builds').innerHTML = `
           <div class="container">
@@ -5908,26 +5833,27 @@
             </div>
             <div class="lab-layout">
               <div class="lab-grid">
-                ${(lab.tracks || []).map((item, i) => `
+                ${buildTracks.map((item, i) => `
                   <a class="lab-card fade-in fade-in-delay-${Math.min(i, 3)}" href="${esc(item.href)}">
                     <span class="lab-tag">${esc(item.tag)}</span>
                     <h3>${esc(item.title)}</h3>
                     <p>${esc(item.desc)}</p>
-                    <span class="lab-link">${esc(item.linkLabel)}</span>
-                    ${item.doi ? `<span class="lab-doi" title="Zenodo DOI">DOI ${esc(item.doi)}</span>` : ''}
+                    <div class="lab-card-footer"><span class="lab-link">${esc(item.linkLabel)}</span>
+                    ${item.doi ? `<span class="lab-doi" title="Zenodo DOI">DOI ${esc(item.doi)}</span>` : ''}</div>
                   </a>
                 `).join('')}
               </div>
               <aside class="lab-aside">
                 <div class="lab-panel fade-in fade-in-delay-1">
                   <h3>Featured Work</h3>
-                  ${(lab.featured || []).map(item => `
+                  ${(lab.featured || []).slice(0, BUILD_FEATURED_LIMIT).map(item => `
                     <a class="featured-work" href="${esc(item.href)}">
                       <b>${esc(item.type)}</b>
                       <strong>${esc(item.title)}</strong>
                       <span>${esc(item.desc)}</span>
                     </a>
                   `).join('')}
+                  <a class="lab-more" href="notes/">浏览全部文章 →</a>
                 </div>
                 <div class="lab-panel fade-in fade-in-delay-2">
                   <h3>Creation Roadmap</h3>

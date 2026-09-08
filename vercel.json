@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "buildCommand": null,
+  "buildCommand": "node scripts/check-builds-layout.mjs",
   "outputDirectory": ".",
   "framework": null,
   "redirects": [

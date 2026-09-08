@@ -55,7 +55,9 @@
 ```text
 rhino-count-site/
 ├── index.html                # 首页：单页应用，包含所有板块入口
-├── data.js                   # 全站配置文件（唯一需要改的文件）
+├── data.js                   # 文章与首页文案配置
+├── builds-catalog.js         # 独立 Build 项目目录
+├── BUILDS_RULES.md           # Build 数量、高度与发布检查规则
 ├── ai-studio-3d.html         # 3D AI 工作室（Iron Man 风格交互页面）
 ├── ai-lab-3d.html            # 3D 创作实验室（沉浸式滚动驱动 3D 页面）
 ├── articles/                 # 每日时评（自动生成 + feed.json 驱动）
@@ -93,7 +95,9 @@ cd rhino-count-site
 python3 -m http.server 8080
 # 打开 http://localhost:8080
 
-# 修改内容：编辑 data.js
+# 修改文章和首页文案：编辑 data.js
+# 修改 Build 项目：编辑 builds-catalog.js，遵守 BUILDS_RULES.md
+# 发布前：node scripts/check-builds-layout.mjs
 # 新增时评：放入 articles/ 并更新 articles/feed.json
 # 新增早报：放入 ai-daily/ 并更新 ai-daily/feed.json
 # 新增笔记：放入 notes/ 并在 data.js 的 journal.notes 中添加
