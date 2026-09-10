@@ -270,25 +270,43 @@ window.SITE_DATA = {
     headingLine1: "我最近，",
     headingLine2: "在看什么。",
     blurb: "我每天看很多关于 AI、产品和商业的内容。这里留下的，是我真正看完、并且觉得值得你花时间的东西。",
-    updated: "2026.08.23",
+    updated: "2026.09.10",
     reasonLabel: "WHY I PICKED IT · 为什么值得看",
     items: [
       {
         type: "YOUTUBE",
-        author: "Stanford Online",
-        title: "Stanford CME295 Transformers & LLMs | Lecture 1 - Transformer",
-        tag: "LLM Course",
-        reason: "斯坦福官方的 Transformers 与 LLM 课程第一讲，从注意力机制讲起，体系比零散视频完整得多，适合想系统补课的人。",
-        meta: "1h 42min · YouTube",
-        href: "https://www.youtube.com/watch?v=Ub3GoFaUcds"
+        author: "Lenny's Podcast",
+        title: "Inside ChatGPT: The fastest growing product ever",
+        tag: "AI Product",
+        reason: "ChatGPT 增长团队亲口讲 0 到周活 8 亿的完整路径。做增长的人看数据怎么拆，做产品的人看需求是怎么被验证的，比任何二手复盘都直接。",
+        meta: "1h 36min · YouTube",
+        href: "https://www.youtube.com/watch?v=ixY2PvQJ0To"
+      },
+      {
+        type: "YOUTUBE",
+        author: "Y Combinator",
+        title: "Andrew Ng: Building Faster with AI",
+        tag: "Agentic Workflow",
+        reason: "吴恩达在 YC 讲怎么用 Agentic Workflow 把开发速度拉起来。方法论可以当天上手，适合正在把 AI 塞进自己工作流的人。",
+        meta: "44min · YouTube",
+        href: "https://www.youtube.com/watch?v=RNJCfif1dPY"
+      },
+      {
+        type: "YOUTUBE",
+        author: "Anthropic",
+        title: "Prompting 101 | Code w/ Claude",
+        tag: "Prompt Engineering",
+        reason: "Anthropic 官方提示词课，Claude Code 团队自己怎么写 prompt。网上九成提示词教程是从这套官方实践倒推的，不如直接看源头。",
+        meta: "25min · YouTube",
+        href: "https://www.youtube.com/watch?v=ysPbXH0LpIE"
       },
       {
         type: "YOUTUBE",
         author: "Andrej Karpathy",
         title: "Deep Dive into LLMs like ChatGPT",
         tag: "LLM Fundamentals",
-        reason: "如果只看一个视频理解 LLM 是什么，我依然会推荐这一期。",
-        meta: "2h 14min · YouTube",
+        reason: "如果只看一个视频理解 LLM 是什么，我依然会推荐这一期。从预训练到 RLHF 一趟讲透，非技术背景也能跟上。",
+        meta: "3h 31min · YouTube",
         href: "https://www.youtube.com/watch?v=7xTGNNLPyMI"
       },
       {
@@ -317,7 +335,12 @@ window.SITE_DATA = {
       { name: "Dwarkesh Patel", desc: "Deep Interviews", href: "https://x.com/dwarkesh_sp" },
       { name: "Simon Willison", desc: "AI Engineering", href: "https://x.com/simonw" },
       { name: "Benedict Evans", desc: "Technology Strategy", href: "https://x.com/benedictevans" },
-      { name: "Paul Graham", desc: "Startup Thinking", href: "https://x.com/paulg" }
+      { name: "Paul Graham", desc: "Startup Thinking", href: "https://x.com/paulg" },
+      { name: "Swyx", desc: "AI Engineer Community", href: "https://x.com/swyx" },
+      { name: "Cat Wu", desc: "Claude Code PM", href: "https://x.com/_catwu" },
+      { name: "Amanda Askell", desc: "Claude Personality & Alignment", href: "https://x.com/AmandaAskell" },
+      { name: "Hamel Husain", desc: "LLM Evals", href: "https://x.com/HamelHusain" },
+      { name: "Kevin Weil", desc: "Head of Product @ OpenAI", href: "https://x.com/kevinweil" }
     ]
   },
 

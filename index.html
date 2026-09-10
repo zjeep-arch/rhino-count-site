@@ -860,6 +860,21 @@
       opacity: 0.6;
       pointer-events: none;
     }
+    /* Sheen sweep + ambient glow layer, revealed on hover (decorative only) */
+    .lab-card::after,
+    .lab-panel::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(115deg, transparent 30%, color-mix(in oklab, var(--electric) 14%, transparent) 48%, transparent 62%);
+      transform: translateX(-120%);
+      transition: transform 0.7s cubic-bezier(0.25, 0.6, 0.3, 1);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .lab-card:hover::after,
+    .lab-panel:hover::after { transform: translateX(120%); }
     .lab-card > *,
     .lab-panel > * {
       position: relative;
@@ -867,8 +882,16 @@
     }
     .lab-card:hover {
       transform: translateY(-6px);
-      border-color: var(--line-2);
-      box-shadow: var(--shadow-2), var(--shadow-glow);
+      border-color: color-mix(in oklab, var(--accent) 50%, var(--line-2));
+      box-shadow:
+        var(--shadow-2),
+        var(--shadow-glow),
+        0 24px 56px -28px color-mix(in oklab, var(--accent) 42%, transparent);
+    }
+    /* Lift the tag badge on hover for a subtle tactile response */
+    .lab-card:hover .lab-tag {
+      border-color: var(--accent);
+      background: color-mix(in oklab, var(--accent) 10%, var(--surface-strong) 70%);
     }
     .lab-tag {
       width: fit-content;
@@ -931,7 +954,10 @@
       border: 1px solid var(--line);
       border-radius: 999px;
       padding: 3px 10px;
+      background: color-mix(in oklab, var(--surface) 65%, transparent);
+      transition: color 0.2s ease, border-color 0.2s ease;
     }
+    .lab-card:hover .lab-doi { color: var(--ink-soft); border-color: var(--line-2); }
     .lab-card:hover .lab-link::after,
     .featured-work:hover .lab-link::after {
       transform: translateX(4px);
@@ -5020,8 +5046,8 @@
         <div class="hero-cine-overlay" aria-hidden="true"></div>
         <div class="hero-cine-grain" aria-hidden="true"></div>
         <div class="hero-masthead">
-          <span class="issue-date">04 SEP 2026</span>
-          <span class="issue-num">ISSUE 095</span>
+          <span class="issue-date">10 SEP 2026</span>
+          <span class="issue-num">ISSUE 101</span>
         </div>
         <div class="hero-cine-content">
           <div class="hero-cine-kicker">RHINO COUNT · 犀牛伯爵</div>
@@ -5167,11 +5193,11 @@
                 <div class="note-body">
                   <div class="note-meta">
                     <span class="cat">观察</span>
-                    <span>N° 85</span>
+                    <span>N° 90</span>
                   </div>
-                  <h3>110亿美元不选GPT，选了中国开源模型</h3>
-                  <p>美国估值110亿美元的法律AI独角兽Harvey选了月之暗面Kimi K3做底座。编程工具Cursor用Kimi K2.5做编程模型，路透社用阿里通义千问造法律AI。1750个法律智能体环境，200位律师当教练，150张B300训练两个月，推理成本降七成。Tenet全通过率19.7%，GPT-5.6 Sol只有2.5%。月之暗面正和微软、亚马逊、谷歌谈30%分成。中国开源模型正在从被引用走向被托付。</p>
-                  <a class="note-cta" href="notes/2026-09-03-china-open-model-global.html">READ</a>
+                  <h3>16万颗国产芯片，砸出5000亿的DeepSeek</h3>
+                  <p>DeepSeek冲刺科创板IPO，估值5000亿。4.75亿营收，7.15亿亏损，梁文锋个人掏200亿。更猛的是16万颗华为昇腾950DT芯片已在乌兰察布部署，180亿订单全部压在推理侧。训练用英伟达，推理用国产，这条路线正在被全行业复制。这不是一家公司在赌，是国产AI算力从能用变成规模化用。</p>
+                  <a class="note-cta" href="notes/2026-09-10-deepseek-ipo-chip.html">READ</a>
                 </div>
               </article>
             
@@ -5180,23 +5206,23 @@
                 <div class="note-body">
                   <div class="note-meta">
                     <span class="cat">观察</span>
-                    <span>N° 84</span>
+                    <span>N° 89</span>
                   </div>
-                  <h3>一个没有发布会的模型，拿下了全球编程第一</h3>
-                  <p>9月2日，Qwen3.8-Max-0902以1691分登顶CodeArena全球第一，领先Claude Opus 5整整37分。没有发布会，没有红毯，只有一个分数。每百万Token 5美元，帕累托前沿性价比最优。2.4万亿参数基座没动，22分的提升全部来自后训练。47天前Kimi K3刚拿过第一，王座一个月换一次。不是某一家公司的突破，是整个中国AI生态的上升。</p>
-                  <a class="note-cta" href="notes/2026-09-02-qwen38-max-codearena.html">READ</a>
+                  <h3>花几块钱偷你声音，法院说不行了</h3>
+                  <p>最高法首部AI纠纷裁判规则出台，5部分24条。花几元钱就能偷声，AI换脸、AI拟声、大数据杀熟、仿冒名人带货、自动驾驶责任全覆盖。第4条明确，未经同意用AI生成你的肖像和声音构成侵权。平台适用避风港规则，通知即生效。这不是给AI套紧箍咒，是给普通人一把保护伞。</p>
+                  <a class="note-cta" href="notes/2026-09-08-AI换脸裁判规则.html">READ</a>
                 </div>
               </article>
             
           </div>
           <div class="notes-view-all fade-in fade-in-delay-3">
-            <a class="notes-archive-link" href="notes/">查看全部 86 篇观察 <span aria-hidden="true">→</span></a>
+            <a class="notes-archive-link" href="notes/">查看全部 91 篇观察 <span aria-hidden="true">→</span></a>
           </div>
         </div>
       </section>
     <section id="picks">
           <div class="container">
-            <div class="section-head fade-in" style="transform: translateY(-144.511px);">
+            <div class="section-head fade-in" style="transform: translateY(-144.482px);">
               <div>
                 <div class="label">RHINO PICKS · 犀牛精选</div>
                 <h2>我最近，<br>在看什么。</h2>
@@ -5204,8 +5230,8 @@
               <p class="blurb">我每天看很多关于 AI、产品和商业的内容。这里留下的，是我真正看完、并且觉得值得你花时间的东西。</p>
             </div>
             <div class="picks-issuebar fade-in">
-              <span class="picks-issue" id="picksIssue">ISSUE 095</span>
-              <span class="picks-updated">UPDATED · 2026.08.23</span>
+              <span class="picks-issue" id="picksIssue">ISSUE 101</span>
+              <span class="picks-updated">UPDATED · 2026.09.10</span>
             </div>
             <div class="picks-filters fade-in" role="tablist" aria-label="精选内容筛选">
               
@@ -5219,29 +5245,51 @@
               
             </div>
             <div class="picks-grid" id="picksGrid">
-            <a class="pick-card fade-in fade-in-delay-0" href="https://www.youtube.com/watch?v=Ub3GoFaUcds" target="_blank" rel="noopener">
+            <a class="pick-card fade-in fade-in-delay-0" href="https://www.youtube.com/watch?v=ixY2PvQJ0To" target="_blank" rel="noopener">
               <div class="pick-top">
                 <span class="pick-type pick-type-youtube">YOUTUBE</span>
-                <span class="pick-tag">LLM Course</span>
+                <span class="pick-tag">AI Product</span>
               </div>
-              <h3>Stanford CME295 Transformers &amp; LLMs | Lecture 1 - Transformer</h3>
-              <div class="pick-author">Stanford Online</div>
-              <p class="pick-reason"><span class="pick-reason-label">WHY I PICKED IT · 为什么值得看</span>斯坦福官方的 Transformers 与 LLM 课程第一讲，从注意力机制讲起，体系比零散视频完整得多，适合想系统补课的人。</p>
-              <span class="pick-meta">1h 42min · YouTube ↗</span>
+              <h3>Inside ChatGPT: The fastest growing product ever</h3>
+              <div class="pick-author">Lenny's Podcast</div>
+              <p class="pick-reason"><span class="pick-reason-label">WHY I PICKED IT · 为什么值得看</span>ChatGPT 增长团队亲口讲 0 到周活 8 亿的完整路径。做增长的人看数据怎么拆，做产品的人看需求是怎么被验证的，比任何二手复盘都直接。</p>
+              <span class="pick-meta">1h 36min · YouTube ↗</span>
             </a>
           
-            <a class="pick-card fade-in fade-in-delay-1" href="https://www.youtube.com/watch?v=7xTGNNLPyMI" target="_blank" rel="noopener">
+            <a class="pick-card fade-in fade-in-delay-1" href="https://www.youtube.com/watch?v=RNJCfif1dPY" target="_blank" rel="noopener">
+              <div class="pick-top">
+                <span class="pick-type pick-type-youtube">YOUTUBE</span>
+                <span class="pick-tag">Agentic Workflow</span>
+              </div>
+              <h3>Andrew Ng: Building Faster with AI</h3>
+              <div class="pick-author">Y Combinator</div>
+              <p class="pick-reason"><span class="pick-reason-label">WHY I PICKED IT · 为什么值得看</span>吴恩达在 YC 讲怎么用 Agentic Workflow 把开发速度拉起来。方法论可以当天上手，适合正在把 AI 塞进自己工作流的人。</p>
+              <span class="pick-meta">44min · YouTube ↗</span>
+            </a>
+          
+            <a class="pick-card fade-in fade-in-delay-2" href="https://www.youtube.com/watch?v=ysPbXH0LpIE" target="_blank" rel="noopener">
+              <div class="pick-top">
+                <span class="pick-type pick-type-youtube">YOUTUBE</span>
+                <span class="pick-tag">Prompt Engineering</span>
+              </div>
+              <h3>Prompting 101 | Code w/ Claude</h3>
+              <div class="pick-author">Anthropic</div>
+              <p class="pick-reason"><span class="pick-reason-label">WHY I PICKED IT · 为什么值得看</span>Anthropic 官方提示词课，Claude Code 团队自己怎么写 prompt。网上九成提示词教程是从这套官方实践倒推的，不如直接看源头。</p>
+              <span class="pick-meta">25min · YouTube ↗</span>
+            </a>
+          
+            <a class="pick-card fade-in fade-in-delay-3" href="https://www.youtube.com/watch?v=7xTGNNLPyMI" target="_blank" rel="noopener">
               <div class="pick-top">
                 <span class="pick-type pick-type-youtube">YOUTUBE</span>
                 <span class="pick-tag">LLM Fundamentals</span>
               </div>
               <h3>Deep Dive into LLMs like ChatGPT</h3>
               <div class="pick-author">Andrej Karpathy</div>
-              <p class="pick-reason"><span class="pick-reason-label">WHY I PICKED IT · 为什么值得看</span>如果只看一个视频理解 LLM 是什么，我依然会推荐这一期。</p>
-              <span class="pick-meta">2h 14min · YouTube ↗</span>
+              <p class="pick-reason"><span class="pick-reason-label">WHY I PICKED IT · 为什么值得看</span>如果只看一个视频理解 LLM 是什么，我依然会推荐这一期。从预训练到 RLHF 一趟讲透，非技术背景也能跟上。</p>
+              <span class="pick-meta">3h 31min · YouTube ↗</span>
             </a>
           
-            <a class="pick-card fade-in fade-in-delay-2" href="https://x.com/karpathy" target="_blank" rel="noopener">
+            <a class="pick-card fade-in fade-in-delay-3" href="https://x.com/karpathy" target="_blank" rel="noopener">
               <div class="pick-top">
                 <span class="pick-type pick-type-x">X</span>
                 <span class="pick-tag">Agent Software</span>
@@ -5293,12 +5341,37 @@
                   <span>Startup Thinking ↗</span>
                 </a>
               
+                <a class="follow-item" href="https://x.com/swyx" target="_blank" rel="noopener">
+                  <strong>Swyx</strong>
+                  <span>AI Engineer Community ↗</span>
+                </a>
+              
+                <a class="follow-item" href="https://x.com/_catwu" target="_blank" rel="noopener">
+                  <strong>Cat Wu</strong>
+                  <span>Claude Code PM ↗</span>
+                </a>
+              
+                <a class="follow-item" href="https://x.com/AmandaAskell" target="_blank" rel="noopener">
+                  <strong>Amanda Askell</strong>
+                  <span>Claude Personality &amp; Alignment ↗</span>
+                </a>
+              
+                <a class="follow-item" href="https://x.com/HamelHusain" target="_blank" rel="noopener">
+                  <strong>Hamel Husain</strong>
+                  <span>LLM Evals ↗</span>
+                </a>
+              
+                <a class="follow-item" href="https://x.com/kevinweil" target="_blank" rel="noopener">
+                  <strong>Kevin Weil</strong>
+                  <span>Head of Product @ OpenAI ↗</span>
+                </a>
+              
             </div>
           </div></div>
         </section>
     <section id="builds">
           <div class="container">
-            <div class="section-head fade-in" style="transform: translateY(-201.995px);">
+            <div class="section-head fade-in" style="transform: translateY(-221.046px);">
               <div>
                 <div class="label">CREATION MATRIX · 创作矩阵</div>
                 <h2>把想法，<br>做成作品。</h2>
@@ -5307,21 +5380,82 @@
             </div>
             <div class="lab-layout">
               <div class="lab-grid">
-<a class="lab-card fade-in fade-in-delay-0" href="builds/jelly-baby/"><span class="lab-tag">PLAY</span><h3>果冻实验室 · 捏捏与冒险</h3><p>自由揉捏与吹风、45 秒快递挑战、低重力月球跳高。轻量加载，保留软体物理手感；需支持 WebGPU。</p><div class="lab-card-footer"><span class="lab-link">进入果冻实验室</span></div></a>
-<a class="lab-card fade-in fade-in-delay-1" href="whiteboard-recorder.html"><span class="lab-tag">TOOL</span><h3>犀牛白板 · 录屏创作器</h3><p>边画边讲的浏览器创作工具：白板、幻灯片、提词器、摄像头画中画与一键录屏，作品只保存在本地。</p><div class="lab-card-footer"><span class="lab-link">开始创作</span></div></a>
-<a class="lab-card fade-in fade-in-delay-2" href="games/duck-scare-war.html"><span class="lab-tag">GAME</span><h3>鸭骗战争：真鸭假鹅</h3><p>扮演鹅腿阿姨，用鸭腿冒充鹅腿。荒诞答题小游戏，测试轻量游戏化表达。</p><div class="lab-card-footer"><span class="lab-link">玩游戏</span></div></a>
-<a class="lab-card fade-in fade-in-delay-3" href="ai-studio-3d.html"><span class="lab-tag">PLAY</span><h3>3D AI 工作室</h3><p>Iron Man 风格的 3D AI 工作室——方舟反应堆、全息屏幕、贾维斯 HUD、全球数据流。可拖拽旋转、点击交互。</p><div class="lab-card-footer"><span class="lab-link">进入工作室</span></div></a>
-<a class="lab-card fade-in fade-in-delay-3" href="ai-lab-3d.html"><span class="lab-tag">LAB</span><h3>AI 创作实验室</h3><p>沉浸式 3D 交互页面——悬浮水晶体、滚动驱动的相机运动、作品矩阵、能力图谱、实时数据面板。</p><div class="lab-card-footer"><span class="lab-link">进入实验室</span></div></a>
-<a class="lab-card fade-in fade-in-delay-3" href="anti-gravity-text.html"><span class="lab-tag">EXPERIMENT</span><h3>反重力文字 · 北京地标</h3><p>每个字符在零重力中漂浮上升--用反重力排版讲述故宫、鸟巢、国贸等北京地标的建筑故事。鼠标悬停时字母被推开，松手后弹回原位。</p><div class="lab-card-footer"><span class="lab-link">进入实验</span><span class="lab-doi" title="Zenodo DOI">DOI 10.5281/zenodo.22065955</span></div></a>
-<a class="lab-card fade-in fade-in-delay-3" href="stadium-3d.html"><span class="lab-tag">3D</span><h3>AI 竞技场 3D · 多球场体验</h3><p>程序化 3D 体育场--Three.js 构建的沉浸式球场，支持伯纳乌/工体/马拉卡纳三座经典球场切换、日夜模式、雨天天气系统、球迷人浪应援和实时弹幕。点击座位查看视野评分，进入第一人称观赛视角。</p><div class="lab-card-footer"><span class="lab-link">进入竞技场</span><span class="lab-doi" title="Zenodo DOI">DOI 10.5281/zenodo.22070200</span></div></a>
-</div>
-<aside class="lab-aside">
+                
+                  <a class="lab-card fade-in fade-in-delay-0" href="builds/jelly-baby/">
+                    <span class="lab-tag">PLAY</span>
+                    <h3>果冻实验室 · 捏捏与冒险</h3>
+                    <p>自由揉捏与吹风、45 秒快递挑战、低重力月球跳高。轻量加载，保留软体物理手感；需支持 WebGPU。</p>
+                    <div class="lab-card-footer"><span class="lab-link">进入果冻实验室</span>
+                    </div>
+                  </a>
+                
+                  <a class="lab-card fade-in fade-in-delay-1" href="whiteboard-recorder.html">
+                    <span class="lab-tag">TOOL</span>
+                    <h3>犀牛白板 · 录屏创作器</h3>
+                    <p>边画边讲的浏览器创作工具：白板、幻灯片、提词器、摄像头画中画与一键录屏，作品只保存在本地。</p>
+                    <div class="lab-card-footer"><span class="lab-link">开始创作</span>
+                    </div>
+                  </a>
+                
+                  <a class="lab-card fade-in fade-in-delay-2" href="games/duck-scare-war.html">
+                    <span class="lab-tag">GAME</span>
+                    <h3>鸭骗战争：真鸭假鹅</h3>
+                    <p>扮演鹅腿阿姨，用鸭腿冒充鹅腿。荒诞答题小游戏，测试轻量游戏化表达。</p>
+                    <div class="lab-card-footer"><span class="lab-link">玩游戏</span>
+                    </div>
+                  </a>
+                
+                  <a class="lab-card fade-in fade-in-delay-3" href="ai-studio-3d.html">
+                    <span class="lab-tag">PLAY</span>
+                    <h3>3D AI 工作室</h3>
+                    <p>Iron Man 风格的 3D AI 工作室——方舟反应堆、全息屏幕、贾维斯 HUD、全球数据流。可拖拽旋转、点击交互。</p>
+                    <div class="lab-card-footer"><span class="lab-link">进入工作室</span>
+                    </div>
+                  </a>
+                
+                  <a class="lab-card fade-in fade-in-delay-3" href="ai-lab-3d.html">
+                    <span class="lab-tag">LAB</span>
+                    <h3>AI 创作实验室</h3>
+                    <p>沉浸式 3D 交互页面——悬浮水晶体、滚动驱动的相机运动、作品矩阵、能力图谱、实时数据面板。</p>
+                    <div class="lab-card-footer"><span class="lab-link">进入实验室</span>
+                    </div>
+                  </a>
+                
+                  <a class="lab-card fade-in fade-in-delay-3" href="anti-gravity-text.html">
+                    <span class="lab-tag">EXPERIMENT</span>
+                    <h3>反重力文字 · 北京地标</h3>
+                    <p>每个字符在零重力中漂浮上升--用反重力排版讲述故宫、鸟巢、国贸等北京地标的建筑故事。鼠标悬停时字母被推开，松手后弹回原位。</p>
+                    <div class="lab-card-footer"><span class="lab-link">进入实验</span>
+                    <span class="lab-doi" title="Zenodo DOI">DOI 10.5281/zenodo.22065955</span></div>
+                  </a>
+                
+                  <a class="lab-card fade-in fade-in-delay-3" href="stadium-3d.html">
+                    <span class="lab-tag">3D</span>
+                    <h3>AI 竞技场 3D · 多球场体验</h3>
+                    <p>程序化 3D 体育场--Three.js 构建的沉浸式球场，支持伯纳乌/工体/马拉卡纳三座经典球场切换、日夜模式、雨天天气系统、球迷人浪应援和实时弹幕。点击座位查看视野评分，进入第一人称观赛视角。</p>
+                    <div class="lab-card-footer"><span class="lab-link">进入竞技场</span>
+                    <span class="lab-doi" title="Zenodo DOI">DOI 10.5281/zenodo.22070200</span></div>
+                  </a>
+                
+              </div>
+              <aside class="lab-aside">
                 <div class="lab-panel fade-in fade-in-delay-1">
                   <h3>Featured Work</h3>
-<a class="featured-work" href="notes/2026-09-07-phone-ai-brain.html"><b>Essay</b><strong>苹果新手机里，藏了一颗中国AI大脑</strong><span>9月手机AI诸神之战。努比亚联合字节推出全球首款AI智能体手机NaviX Ultra，苹果国行AI敲定阿里千问联合训练。华为小艺重构系统底层，vivo蓝心端侧跑分屠榜，小米MiMo三年投入600亿。AI从能聊天转向能干活，一句话跨应用自动执行任务成为新赛点。</span></a>
-<a class="featured-work" href="notes/2026-09-06-tmall-ai-token.html"><b>Essay</b><strong>39块买了个AI大脑，三线城市的人先抢了</strong><span>智谱开出国内首个大模型天猫旗舰店，39元起买Token套餐。天猫Token充值中心上线，五大国产厂商全部接入。92%订单来自三线及以下城市，客单价89元，复购率63%。AI从极客黑盒走向家庭标配这一步，可能比从GPT-3到GPT-6那一步还重要。</span></a>
-<a class="lab-more" href="notes/">浏览全部文章 →</a>
-</div>
+                  
+                    <a class="featured-work" href="notes/2026-09-10-deepseek-ipo-chip.html">
+                      <b>Essay</b>
+                      <strong>16万颗国产芯片，砸出5000亿的DeepSeek</strong>
+                      <span>DeepSeek冲刺科创板IPO，估值5000亿。4.75亿营收，7.15亿亏损，梁文锋个人掏200亿。更猛的是16万颗华为昇腾950DT芯片已在乌兰察布部署，180亿订单全部压在推理侧。训练用英伟达，推理用国产，这条路线正在被全行业复制。这不是一家公司在赌，是国产AI算力从能用变成规模化用。</span>
+                    </a>
+                  
+                    <a class="featured-work" href="notes/2026-09-08-AI换脸裁判规则.html">
+                      <b>Essay</b>
+                      <strong>花几块钱偷你声音，法院说不行了</strong>
+                      <span>最高法首部AI纠纷裁判规则出台，5部分24条。花几元钱就能偷声，AI换脸、AI拟声、大数据杀熟、仿冒名人带货、自动驾驶责任全覆盖。第4条明确，未经同意用AI生成你的肖像和声音构成侵权。平台适用避风港规则，通知即生效。这不是给AI套紧箍咒，是给普通人一把保护伞。</span>
+                    </a>
+                  
+                  <a class="lab-more" href="notes/">浏览全部文章 →</a>
+                </div>
                 <div class="lab-panel fade-in fade-in-delay-2">
                   <h3>Creation Roadmap</h3>
                   <ol class="roadmap-list">
@@ -5334,7 +5468,7 @@
         </section>
     <section id="daily">
           <div class="container">
-            <div class="section-head fade-in" style="transform: translateY(-293.337px);">
+            <div class="section-head fade-in" style="transform: translateY(-313.655px);">
               <div>
                 <div class="label">AI MORNING BRIEF · 日报</div>
                 <h2>每天 8 点，<br>读懂 AI 世界昨夜的新信号。</h2>
@@ -5369,7 +5503,7 @@
                     <span>MODEL · PRODUCT · CAPITAL</span>
                   </div>
                 
-                <div id="dailyLatestBox"><a class="daily-latest" href="ai-daily/2026-09-04-ai-daily.html"><b>LATEST · 09-04</b><strong>AI大模型及安全动态日报 | 2026年9月4日（星期五）</strong><span>OpenAI发布GPT-6 Astra首个达到Critical级网络安全能力，NVIDIA 129.3亿美元收购Hugging Face，Google推出Gemini 3.8 Flash与Flash Cyber，李飞飞发布全球首个多模态世界模型Atlas，Meta发布Muse Spark 1.3，CrowdStrike推出SafeMind与Agentic IdP，美国两党推出Stop Rogue AI法案，欧盟CRA 9月11日生效。</span></a></div>
+                <div id="dailyLatestBox"><a class="daily-latest" href="ai-daily/2026-09-10-ai-daily.html"><b>LATEST · 09-10</b><strong>AI大模型及安全动态日报 | 2026年09月10日（星期四）</strong><span>DeepSeek预告V4.1 Flash发布性能全面超越V4 Pro，科大讯飞发布星火X2.5全国产算力293B MoE模型，OpenAI发布ChatGPT Images 2.5生成延迟减半，Cylake获2.45亿美元融资，燧原科技科创板上市发行价142.18元，Mercor获3.5亿美元融资布局AI数据标注，OpenAI承认wiki智能体失控事件，NIST发布SP1353草案，中央网信办发布多项AI大模型安全标准。</span></a></div>
               </aside>
             </div>
           </div>
@@ -5383,7 +5517,7 @@
       </section>
     <section id="contact">
         <div class="container">
-          <div class="section-head fade-in" style="transform: translateY(-362.909px);">
+          <div class="section-head fade-in" style="transform: translateY(-383.228px);">
             <div>
               <div class="label">REACH · 联络</div>
               <h2>递一张<br>名片给伯爵。</h2>
@@ -5429,7 +5563,7 @@
 
   <!-- Floating rhino pet -->
   <div class="rhino-pet" id="rhinoPet" aria-live="polite">
-    <div class="rhino-bubble" id="rhinoBubble">今天也适合写点东西。</div>
+    <div class="rhino-bubble" id="rhinoBubble">我换了新造型。</div>
     <button class="rhino-pet-btn" id="rhinoPetBtn" type="button" aria-label="唤醒小犀牛" title="小犀牛">
       <span class="rhino-pet-label" id="rhinoCombo">x2</span>
       <svg class="rhino-svg" viewBox="0 0 160 160" aria-hidden="true">
@@ -5500,7 +5634,7 @@
       if (numEl) numEl.textContent = 'ISSUE ' + issueNum;
     })();
   </script>
-  <script src="data.js?v=20260908-builds"></script>
+  <script src="data.js?v=20260910-picks"></script>
   <script src="builds-catalog.js?v=20260908"></script>
   <script>
     /* Fallback: force-show page after 3s if JS hasn't completed */
@@ -6575,7 +6709,10 @@
       /* Force-show all fade-in elements if JS failed mid-render */
       document.querySelectorAll('.fade-in').forEach(function(el){ el.classList.add('visible'); });
     }
-  </script><div class="letterbox-top"></div><div class="letterbox-bottom"></div><div class="letterbox-top"></div><div class="letterbox-bottom"></div><div class="letterbox-top"></div><div class="letterbox-bottom"></div><div class="letterbox-top"></div><div class="letterbox-bottom"></div><div class="letterbox-top"></div><div class="letterbox-bottom"></div>
+  </script><div class="letterbox-top"></div><div class="letterbox-bottom"></div><div class="letterbox-top"></div><div class="letterbox-bottom"></div><div class="letterbox-top"></div><div class="letterbox-bottom"></div><div class="letterbox-top"></div><div class="letterbox-bottom"></div><div class="letterbox-top"></div><div class="letterbox-bottom"></div><div class="letterbox-top"></div><div class="letterbox-bottom"></div><div class="letterbox-top"></div><div class="letterbox-bottom"></div><div class="letterbox-top"></div><div class="letterbox-bottom"></div>
+
+
+
 
 
 

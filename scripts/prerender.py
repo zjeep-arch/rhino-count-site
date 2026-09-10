@@ -43,7 +43,10 @@ def main():
                 check=True, capture_output=True, text=True, timeout=120).stdout
             after = visible_words(dom)
             print(f"{rel}: {before} -> {after} words")
-            if after < min_words or after < before:
+            if after < min_words or after < before * 0.9:
+                # min_words catches empty renders; the relative check catches
+                # catastrophic loss while tolerating content rotation (a new,
+                # shorter top-N of notes can legitimately shrink word count).
                 print(f"ERROR: {rel} render looks empty; aborting.", file=sys.stderr)
                 sys.exit(1)
             with open(rel, "w", encoding="utf-8") as f:

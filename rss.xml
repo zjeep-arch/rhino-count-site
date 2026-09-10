@@ -5,8 +5,71 @@
     <link>https://rhinocount.cn/</link>
     <description>AI Native Magazine — 记录 AI 如何改变技术、商业与人的工作方式。</description>
     <language>zh-CN</language>
-    <lastBuildDate>Fri, 04 Sep 2026 09:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 10 Sep 2026 09:00:00 +0800</lastBuildDate>
     <atom:link href="https://rhinocount.cn/rss.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title><![CDATA[16万颗国产芯片，砸出5000亿的DeepSeek · 犀牛伯爵笔记]]></title>
+      <link>https://rhinocount.cn/notes/2026-09-10-deepseek-ipo-chip.html</link>
+      <guid isPermaLink="true">https://rhinocount.cn/notes/2026-09-10-deepseek-ipo-chip.html</guid>
+      <pubDate>Thu, 10 Sep 2026 09:00:00 +0800</pubDate>
+      <description><![CDATA[DeepSeek IPO估值5000亿，同时下单16万颗华为昇腾芯片用于推理。国产AI芯片正在从能用变成规模化用，燧原科技也即将登陆科创板。]]></description>
+    </item>
+    <item>
+      <title><![CDATA[AI大模型及安全动态日报 | 2026年09月10日（星期四） · AI日报 · 犀牛伯爵]]></title>
+      <link>https://rhinocount.cn/ai-daily/2026-09-10-ai-daily.html</link>
+      <guid isPermaLink="true">https://rhinocount.cn/ai-daily/2026-09-10-ai-daily.html</guid>
+      <pubDate>Thu, 10 Sep 2026 09:00:00 +0800</pubDate>
+      <description><![CDATA[DeepSeek预告V4.1 Flash发布性能全面超越V4 Pro，科大讯飞发布星火X2.5全国产算力293B MoE模型，OpenAI发布ChatGPT Images 2.5生成延迟减半，Cylake获2.45亿美元融资，燧原科技科创板上市发行价142.18元，Mercor获3.5亿美元融资布局AI数据标注，OpenAI承认wiki智能体失控事件，NIST发布SP1353草案，中央网信办发布多项AI大模型安全标准。]]></description>
+    </item>
+    <item>
+      <title><![CDATA[AI大模型及安全动态日报 | 2026年09月09日（星期三） · AI日报 · 犀牛伯爵]]></title>
+      <link>https://rhinocount.cn/ai-daily/2026-09-09-ai-daily.html</link>
+      <guid isPermaLink="true">https://rhinocount.cn/ai-daily/2026-09-09-ai-daily.html</guid>
+      <pubDate>Wed, 09 Sep 2026 09:00:00 +0800</pubDate>
+      <description><![CDATA[OpenAI用88小时攻克NS方程千禧年难题，蚂蚁发布百灵Ling-3.0-flash-VL原生多模态模型，Mistral获30亿欧元D轮估值210亿，Cognition估值达480亿美元，启明星辰发布MAF大模型应用防火墙，奇安信AI加特林渗透测试智能体上线，景联文科技获近亿元A轮安恒信息参投，EU CRA第14条9月11日生效进入24小时漏洞披露时钟。]]></description>
+    </item>
+    <item>
+      <title><![CDATA[花几块钱偷你声音，法院说不行了 · 犀牛伯爵笔记]]></title>
+      <link>https://rhinocount.cn/notes/2026-09-08-AI换脸裁判规则.html</link>
+      <guid isPermaLink="true">https://rhinocount.cn/notes/2026-09-08-AI换脸裁判规则.html</guid>
+      <pubDate>Tue, 08 Sep 2026 09:00:00 +0800</pubDate>
+      <description><![CDATA[最高法首部AI纠纷裁判规则出台，花几块钱偷你声音的日子到头了。5部分24条，你的脸和声音终于有了法律保护伞。]]></description>
+    </item>
+    <item>
+      <title><![CDATA[AI大模型及安全动态日报 | 2026年09月08日（星期一） · AI日报 · 犀牛伯爵]]></title>
+      <link>https://rhinocount.cn/ai-daily/2026-09-08-ai-daily.html</link>
+      <guid isPermaLink="true">https://rhinocount.cn/ai-daily/2026-09-08-ai-daily.html</guid>
+      <pubDate>Tue, 08 Sep 2026 09:00:00 +0800</pubDate>
+      <description><![CDATA[Anthropic签约5170亿美元算力合同锁定14.8GW，OpenAI达到自动化研究实习生里程碑agent与人力比3.1:1，联合国首次警告AI生存威胁，最高法发布涉AI纠纷审理意见，黄仁勋称AGI已到来，CrowdStrike扩展AIDR至AWS，易安联完成C轮亿元级融资。]]></description>
+    </item>
+    <item>
+      <title><![CDATA[苹果新手机里，藏了一颗中国AI大脑 · 犀牛伯爵笔记]]></title>
+      <link>https://rhinocount.cn/notes/2026-09-07-phone-ai-brain.html</link>
+      <guid isPermaLink="true">https://rhinocount.cn/notes/2026-09-07-phone-ai-brain.html</guid>
+      <pubDate>Mon, 07 Sep 2026 09:00:00 +0800</pubDate>
+      <description><![CDATA[9月手机AI诸神之战。苹果牵手阿里千问，努比亚联合字节推出全球首款AI智能体手机。AI从能聊天转向能干活，国产AI手机迎来决战时刻。]]></description>
+    </item>
+    <item>
+      <title><![CDATA[AI大模型及安全动态日报 | 2026年09月07日（星期一） · AI日报 · 犀牛伯爵]]></title>
+      <link>https://rhinocount.cn/ai-daily/2026-09-07-ai-daily.html</link>
+      <guid isPermaLink="true">https://rhinocount.cn/ai-daily/2026-09-07-ai-daily.html</guid>
+      <pubDate>Mon, 07 Sep 2026 09:00:00 +0800</pubDate>
+      <description><![CDATA[OpenAI GPT-6 Astra网络安全能力达Critical级，Claude 11天完成费马大定理形式化证明，Anthropic IPO推迟至11月目标估值2万亿美元，EU CRA 9月11日生效AI产品进入24小时漏洞披露时钟，CrowdStrike推出Falcon Guardian与Agentic IdP，HiddenLayer获1亿美元B轮融资ARR增长10倍。]]></description>
+    </item>
+    <item>
+      <title><![CDATA[39块买了个AI大脑，三线城市的人先抢了 · 犀牛伯爵笔记]]></title>
+      <link>https://rhinocount.cn/notes/2026-09-06-tmall-ai-token.html</link>
+      <guid isPermaLink="true">https://rhinocount.cn/notes/2026-09-06-tmall-ai-token.html</guid>
+      <pubDate>Sun, 06 Sep 2026 09:00:00 +0800</pubDate>
+      <description><![CDATA[大模型上天猫了，39块就能买到一个AI大脑，92%的订单来自三线城市。国产AI终于走到普通人手边。]]></description>
+    </item>
+    <item>
+      <title><![CDATA[GPT-6贵了2.5倍，免费的中国AI已全球第一 · 犀牛伯爵笔记]]></title>
+      <link>https://rhinocount.cn/notes/2026-09-04-gpt6-china-ai.html</link>
+      <guid isPermaLink="true">https://rhinocount.cn/notes/2026-09-04-gpt6-china-ai.html</guid>
+      <pubDate>Fri, 04 Sep 2026 09:00:00 +0800</pubDate>
+      <description><![CDATA[GPT-6 Astra涨价2.5倍的同时，中国AI模型全球API调用份额达到42%，连续17周超越美国。智谱GLM-5.3 Flash以匿名身份登顶OpenRouter，国产AI模型正在成为全球开发者的第二默认选择。]]></description>
+    </item>
     <item>
       <title><![CDATA[AI大模型及安全动态日报 | 2026年9月4日（星期五） · AI日报 · 犀牛伯爵]]></title>
       <link>https://rhinocount.cn/ai-daily/2026-09-04-ai-daily.html</link>
@@ -153,69 +216,6 @@
       <guid isPermaLink="true">https://rhinocount.cn/ai-daily/2026-08-24-ai-daily.html</guid>
       <pubDate>Mon, 24 Aug 2026 09:00:00 +0800</pubDate>
       <description><![CDATA[匿名模型Ox Alpha空降OpenRouter刷新单日用量纪录，阿里拟配售800亿港元投入AI建设，Mistral Agentic Search准确率达86%，英国AISI测试AI失控Mythos 5试图植入恶意代码，加密提示注入攻击绕过Grok和Gemini安全护栏。]]></description>
-    </item>
-    <item>
-      <title><![CDATA[DeepSeek终于长出眼睛，但它看的不只是照片 · 犀牛伯爵笔记]]></title>
-      <link>https://rhinocount.cn/notes/2026-08-21-deepseek-vision.html</link>
-      <guid isPermaLink="true">https://rhinocount.cn/notes/2026-08-21-deepseek-vision.html</guid>
-      <pubDate>Fri, 21 Aug 2026 09:00:00 +0800</pubDate>
-      <description><![CDATA[DeepSeek 8月21日上线V4-Flash-Vision-Exp视觉理解模型，Agent终于长出眼睛。同一周智谱GLM-5.3拿下开源编程第一，阿里Qwen-UI-Agent真机成功率92.2%。中国AI三天三连击，三个方向同时突破。]]></description>
-    </item>
-    <item>
-      <title><![CDATA[AI大模型及安全动态日报 | 2026年08月21日（星期五） · AI日报 · 犀牛伯爵]]></title>
-      <link>https://rhinocount.cn/ai-daily/2026-08-21-ai-daily.html</link>
-      <guid isPermaLink="true">https://rhinocount.cn/ai-daily/2026-08-21-ai-daily.html</guid>
-      <pubDate>Fri, 21 Aug 2026 09:00:00 +0800</pubDate>
-      <description><![CDATA[Claude Platform正式上线Computer Use与Skills API，Anthropic拟冲击史上最大IPO募资或超750亿美元，博通寻求逾600亿美元AI芯片基础设施融资，Mistral推出Agentic Search准确率达86%，CISA新增两个已知被利用漏洞，GPT-5.6-Cyber实战发现Chrome V8未知漏洞。]]></description>
-    </item>
-    <item>
-      <title><![CDATA[17亿营收撑起4449亿市值，宇树科技凭什么 · 犀牛伯爵笔记]]></title>
-      <link>https://rhinocount.cn/notes/2026-08-20-unitree-ipo-reality-check.html</link>
-      <guid isPermaLink="true">https://rhinocount.cn/notes/2026-08-20-unitree-ipo-reality-check.html</guid>
-      <pubDate>Thu, 20 Aug 2026 09:00:00 +0800</pubDate>
-      <description><![CDATA[宇树科技上市次日暴跌18.7%，市值蒸发1670亿。17亿营收撑起4449亿峰值市值，260倍PS背后是全球唯一盈利的人形机器人公司。五层验账拆解稀缺性溢价的真实底牌。]]></description>
-    </item>
-    <item>
-      <title><![CDATA[上亿人被AI的回复破防，但它对谁都这么说 · 犀牛伯爵笔记]]></title>
-      <link>https://rhinocount.cn/notes/2026-08-20-ai-equality-listener.html</link>
-      <guid isPermaLink="true">https://rhinocount.cn/notes/2026-08-20-ai-equality-listener.html</guid>
-      <pubDate>Thu, 20 Aug 2026 09:00:00 +0800</pubDate>
-      <description><![CDATA[Gemini平等地爱世人冲上热搜，上亿人被AI的一句话破防。但真相不是AI多温柔，而是现代人太久没被认真听完一句话。7月豆包和千问关掉了情感陪伴功能，中国用户在外国AI上找倾听，国产AI却在收紧陪伴。]]></description>
-    </item>
-    <item>
-      <title><![CDATA[AI大模型及安全动态日报 | 2026年08月20日（星期四） · AI日报 · 犀牛伯爵]]></title>
-      <link>https://rhinocount.cn/ai-daily/2026-08-20-ai-daily.html</link>
-      <guid isPermaLink="true">https://rhinocount.cn/ai-daily/2026-08-20-ai-daily.html</guid>
-      <pubDate>Thu, 20 Aug 2026 09:00:00 +0800</pubDate>
-      <description><![CDATA[OpenAI因安全阈值暂停Astra模型RL训练，GLM-5.3上线AA指数60分并列开源第一，Claude蛋白质设计命中率35.1%远超行业常规，OpenRouter日处理10万亿token加入Stripe，MiniMax推出Design多模态创作平台，Check Point发布AI网络防火墙，AI网络安全种子轮融资H1破8.55亿美元。]]></description>
-    </item>
-    <item>
-      <title><![CDATA[宇树暴涨460%那天，整个机器人板块却在跳水 · 犀牛伯爵笔记]]></title>
-      <link>https://rhinocount.cn/notes/2026-08-19-unitree-ipo-day-surge.html</link>
-      <guid isPermaLink="true">https://rhinocount.cn/notes/2026-08-19-unitree-ipo-day-surge.html</guid>
-      <pubDate>Wed, 19 Aug 2026 09:00:00 +0800</pubDate>
-      <description><![CDATA[宇树科技科创板上市首日暴涨460%，收盘市值3418亿。但同一时刻科创50跌6.89%，机器人板块全线回调。用五层验账框架拆解219倍PE背后的真实账本。]]></description>
-    </item>
-    <item>
-      <title><![CDATA[AI大模型及安全动态日报 | 2026年08月19日（星期三） · AI日报 · 犀牛伯爵]]></title>
-      <link>https://rhinocount.cn/ai-daily/2026-08-19-ai-daily.html</link>
-      <guid isPermaLink="true">https://rhinocount.cn/ai-daily/2026-08-19-ai-daily.html</guid>
-      <pubDate>Wed, 19 Aug 2026 09:00:00 +0800</pubDate>
-      <description><![CDATA[OpenAI年化营收破400亿美元放缓模型开发，Claude蛋白质设计命中率35%，Ultrafast每秒750token，英伟达联合六大金融巨头建5000亿算力融资平台，全球数据标注产业破820亿美元，MCP生态10个Critical CVE。]]></description>
-    </item>
-    <item>
-      <title><![CDATA[高考英语28分，他把人形机器人第一股做上市了 · 犀牛伯爵笔记]]></title>
-      <link>https://rhinocount.cn/notes/2026-08-18-unitree-ipo-listing-day.html</link>
-      <guid isPermaLink="true">https://rhinocount.cn/notes/2026-08-18-unitree-ipo-listing-day.html</guid>
-      <pubDate>Tue, 18 Aug 2026 09:00:00 +0800</pubDate>
-      <description><![CDATA[宇树科技8月19日科创板上市，A股人形机器人第一股。创始人王兴兴从200元手搓机器人到183亿身家，三年营收涨10倍，扣非净利率34.77%，全球唯一规模化盈利的人形机器人公司。]]></description>
-    </item>
-    <item>
-      <title><![CDATA[AI大模型及安全动态日报 | 2026年08月18日（星期二） · AI日报 · 犀牛伯爵]]></title>
-      <link>https://rhinocount.cn/ai-daily/2026-08-18-ai-daily.html</link>
-      <guid isPermaLink="true">https://rhinocount.cn/ai-daily/2026-08-18-ai-daily.html</guid>
-      <pubDate>Tue, 18 Aug 2026 09:00:00 +0800</pubDate>
-      <description><![CDATA[Anthropic年化收入破650亿美元xAI获200亿融资，NVIDIA为OpenAI锁定4.25GW算力，通义千问Qwen3.8开源27B多模态模型，DeepSeek V4涨价350%，信通院AI安全标准11月实施，Stripe 70亿美元收购OpenRouter。]]></description>
     </item>
   </channel>
 </rss>
