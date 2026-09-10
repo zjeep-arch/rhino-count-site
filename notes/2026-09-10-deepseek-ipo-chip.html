@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>16万颗国产芯片，砸出5000亿的DeepSeek</title>
+  <meta name="description" content="DeepSeek IPO估值5000亿，同时下单16万颗华为昇腾芯片用于推理。国产AI芯片正在从能用变成规模化用，燧原科技也即将登陆科创板。">
+  <meta name="keywords" content="DeepSeek IPO,华为昇腾,国产AI芯片,科创板,燧原科技,国产算力">
+  <style>
+    :root {
+      --accent: #8b2635;
+      --ink: #333;
+      --ink-soft: #555;
+      --muted: #888;
+      --surface: #fafafa;
+      --border: rgba(0,0,0,0.06);
+      --radius: 12px;
+      --font-sans: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-serif: "Noto Serif SC", "Songti SC", Georgia, serif;
+    }
+    body { font-family: var(--font-sans); background: #f5f5f5; margin: 0; padding: 16px; font-size: 16px; line-height: 1.8; color: var(--ink); -webkit-font-smoothing: antialiased; }
+    .container { max-width: 680px; margin: 0 auto; background: var(--surface); padding: 32px; border-radius: var(--radius); }
+    h1 { font-family: var(--font-serif); font-size: 24px; font-weight: 700; color: var(--ink); line-height: 1.4; margin: 0 0 16px; }
+    .meta { color: var(--muted); font-size: 13px; margin-bottom: 16px; }
+    .byline { color: var(--ink-soft); font-size: 14px; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+    h2 { font-family: var(--font-serif); font-size: 20px; font-weight:600; color: var(--ink); margin: 32px 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+    h3 { font-family: var(--font-serif); font-size: 18px; font-weight: 600; color: var(--ink); margin: 24px 0 12px; }
+    p { margin: 0 0 24px; }
+    img { width: 100%; border-radius: 8px; margin: 24px 0 8px; }
+    .img-caption { text-align: center; color: var(--muted); font-size: 13px; margin-top: 8px; margin-bottom: 24px; }
+    .quote-box { border-left: 4px solid var(--accent); background: #f5f5f5; padding: 16px 20px; margin: 24px 0; border-radius: 0 var(--radius) var(--radius) 0; }
+    .quote-box p { margin: 0; color: var(--ink-soft); font-style: italic; font-size: 15px; }
+    .quote-box .attribution { margin-top: 8px; color: var(--muted); font-size: 13px; font-style: normal; }
+    .insight-box { background: #fff8f0; border: 1px solid #ffe4c4; border-radius: var(--radius); padding: 20px; margin: 24px 0; }
+    .insight-box h4 { margin: 0 0 8px; font-size: 16px; color: var(--ink); }
+    .insight-box p { margin: 0; font-size: 15px; color: var(--ink-soft); }
+    .data-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14px; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .data-table th, .data-table td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); }
+    .data-table th { background: #f0f0f0; font-weight: 600; color: var(--ink); }
+    .data-table td { color: var(--ink-soft); }
+    .timeline { position: relative; padding-left: 24px; margin: 24px 0; }
+    .timeline::before { content: ''; position: absolute; left: 6px; top: 0; bottom: 0; width: 2px; background: #e0e0e0; }
+    .timeline-item { position: relative; margin-bottom: 16px; }
+    .timeline-item::before { content: ''; position: absolute; left: -22px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); }
+    .timeline-item .date { font-size: 13px; color: var(--muted); margin-bottom: 4px; }
+    .timeline-item .content { font-size: 15px; color: var(--ink); }
+    .img-caption { text-align: center; color: var(--muted); font-size: 13px; margin-top: 8px; margin-bottom: 24px; }
+    .ending { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--ink-soft); font-size: 14px; }
+    .highlight { color: var(--accent); font-weight: 600; background: linear-gradient(to top, rgba(139,38,53,0.08) 40%, transparent 40%); padding: 0 2px; }
+    .data-callout { display: inline-block; background: var(--accent); color: #fff; padding: 2px 10px; border-radius: 4px; font-weight: 700; font-size: 15px; }
+    .contrast-card { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin: 24px 0; border-radius: var(--radius); overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .contrast-card .side { padding: 16px 20px; }
+    .contrast-card .side-left { background: #fef2f2; border-right: 1px solid var(--border); }
+    .contrast-card .side-right { background: #f0fdf4; }
+    .contrast-card .side h4 { margin: 0 0 8px; font-size: 14px; font-weight: 600; }
+    .contrast-card .side-left h4 { color: #991b1b; }
+    .contrast-card .side-right h4 { color: #166534; }
+    .contrast-card .side p { margin: 0; font-size: 14px; color: var(--ink-soft); line-height: 1.6; }
+    .punchline { font-family: var(--font-serif); font-size: 18px; font-weight: 700; color: var(--accent); text-align: center; margin: 32px 0; padding: 16px 0; border-top: 2px solid var(--accent); border-bottom: 2px solid var(--accent); }
+    strong { color: var(--ink); font-weight: 600; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>16万颗国产芯片，砸出5000亿的DeepSeek</h1>
+    <div class="meta">2026年9月10日 · 阅读时间约6分钟</div>
+    <div class="byline">文｜犀牛伯爵</div>
+
+    <p>9月9日下午，路透社放出一条消息，整个AI圈炸了。</p>
+
+    <p>DeepSeek已聘请中信证券筹备科创板IPO，目标估值<span class="data-callout">5000亿元</span>。年内递交申请，明年正式挂牌。</p>
+
+    <p>同一天，另一条新闻也在发酵。彭博社9月4日披露，DeepSeek计划在内蒙古乌兰察布部署至少16万颗华为昇腾950DT芯片，订单总额约25.6亿美元。</p>
+
+    <p>5000亿估值的公司，2026年前七个月营收4.75亿元，同期亏损7.15亿元。</p>
+
+    <p>亏着7个亿，估值5000亿。一边疯狂烧钱建数据中心，一边冲刺上市。</p>
+
+    <p>这家公司到底在赌什么？</p>
+
+    <p>说真的，我自己看到这个数字的时候愣了一下。不是被估值吓到，是被这两个数字放在一起的违和感。</p>
+
+    <p>4.75亿营收，5000亿估值，市销率超过1000倍。放眼全球科技公司，这个数字只有一种解释，赌的不是现在，是未来。</p>
+
+    <div class="punchline">赌的是国产AI算力能不能真正站起来。</div>
+
+    <h2>16万颗芯片，到底什么概念</h2>
+
+    <p>先把这16万颗昇腾芯片放到全球坐标里看。</p>
+
+    <p>马斯克旗下xAI的Colossus集群，首期部署了10万颗英伟达H100，后来扩到15万H100加5万H200。谷歌第八代TPU通过Virgo网络支持约13.4万颗芯片组网。亚马逊与英伟达合作的Project Ceiba搭载1.6万颗H200。</p>
+
+    <p>DeepSeek这16万颗昇腾，在芯片数量上已经追平甚至超过上述所有西方顶级集群。</p>
+
+    <p>但真正值得关注的不是数字本身。</p>
+
+    <p>是用途。</p>
+
+    <p>这16万颗芯片主要用来做推理，不是训练。</p>
+
+    <p>坦率地讲，这个细节才是整件事最关键的信号。训练大模型是"一锤子买卖"，训完就结束。推理是日常消耗，用户每次提问、每次对话都在持续吃算力。DeepSeek把16万颗芯片全部压在推理侧，说明它的模型已经进入大规模商用阶段。</p>
+
+    <p>OpenRouter平台数据显示，DeepSeek-V4-Flash曾连续三周位居全球模型调用量榜首，周调用量达3.69万亿Token。激增的用量背后是等比例的算力账单。</p>
+
+    <img src="https://gbres.dfcfw.com/Files/picture/20260909/75DA0FCBBA59E7BF18A030721F14336D_w1420h742.jpg" alt="DeepSeek部署16万颗华为昇腾芯片数据中心规划图" />
+    <div class="img-caption">图源｜东方财富网, DeepSeek国产AI芯片集群部署规划</div>
+
+    <p>这不是一家公司在买芯片。这是一个信号，国产AI芯片从"能用"正在变成"规模化用"。</p>
+
+    <h2>训练用英伟达，推理用国产</h2>
+
+    <p>这条技术路线不是DeepSeek一家的选择。</p>
+
+    <p>智谱在内蒙古建了纯国产芯片的吉瓦级数据中心。美团在5万张国产卡上完成了大模型全周期训练。字节也在内蒙古布局新算力项目。</p>
+
+    <p>当头部大模型公司同时走同一条路，方向已经不是预测，而是既成事实。</p>
+
+    <p>TrendForce数据显示，2026年国产方案占据中国高端AI芯片市场近90%份额，华为昇腾占62%，英伟达份额归零。</p>
+
+    <p>归零。</p>
+
+    <p>这不是政策驱动的结果，是市场驱动的。英伟达面向中国的特供版H20，算力只有H100的15%左右，花接近旗舰的钱买缩水的性能，性价比极低。华为昇腾不存在供应不确定性，且昇腾950PR推理算力已达H20的2.87倍。</p>
+
+    <p>DeepSeek创始人梁文锋今年7月坦言，四张华为芯片才能顶一张英伟达旗舰卡，技术上落后约两年。但他同时说了一句，"华为950超节点可以完全平替英伟达GB300"。</p>
+
+    <p>完全平替，又要四换一？</p>
+
+    <p>拧巴吗？不拧巴。推理端，华为芯片确实够用。训练端，还差得远。梁文锋比谁都清楚这一点。所以他把16万颗芯片全压在推理侧，训练端继续用英伟达库存。</p>
+
+    <p>这不是情怀买单。是算过账的选择。</p>
+
+    <div class="contrast-card">
+      <div class="side side-left">
+        <h4>训练端</h4>
+        <p>仍依赖英伟达。CUDA生态十余年积累的开发者粘性，不是短期能替代的。单卡极致算力要求高，国产芯片四换一差距明显。</p>
+      </div>
+      <div class="side side-right">
+        <h4>推理端</h4>
+        <p>国产芯片已可规模化部署。昇腾950PR推理算力达H20的2.87倍。推理对单卡算力依赖度低于训练，用数量换质量的策略完全成立。</p>
+      </div>
+    </div>
+
+    <h2>燧原科技明天上市，国产芯片四小龙到齐</h2>
+
+    <p>就在DeepSeek冲刺IPO的同时，另一家国产AI芯片公司也站上了资本市场舞台。</p>
+
+    <p>燧原科技，股票代码688801，9月11日登陆科创板。发行价142.18元/股，募集资金61.19亿元。网上发行中签率仅0.0245%，被称为"大肉签"。</p>
+
+    <p>燧原是谁？2018年成立，专注云端AI芯片，已自研迭代四代架构、五款芯片。三年研发投入超36亿元，占累计营收的182.55%。2026年上半年营收11.2亿元，预计前三季度营收23至30亿元，同比增长325%至455%。</p>
+
+    <p>还没盈利。</p>
+
+    <p>但市场追的不是利润表，是国产AI芯片赛道的战略卡位价值。燧原上市后，国产GPU"四小龙"将全部登陆A股资本市场。</p>
+
+    <img src="https://img.ithome.com/newsuploadfiles/2026/9/826a9590-3dc5-400f-a1a5-bc1390fe2a1e.png" alt="DeepSeek聘请中信证券筹备科创板IPO" />
+    <div class="img-caption">图源｜IT之家, DeepSeek IPO消息报道</div>
+
+    <p>灼识咨询数据显示，中国AI加速卡市场规模预计到2028年将超过1万亿元。</p>
+
+    <p>1万亿。这是国产AI芯片公司集体冲刺资本市场的底气。</p>
+
+    <h2>5000亿估值，到底贵不贵</h2>
+
+    <p>回到DeepSeek。5000亿估值，贵吗？</p>
+
+    <p>看怎么比。以当前5000亿元为基础，有资本市场人士分析，公司上市后整体市值区间有望落在1.5万亿至2.5万亿元之间。</p>
+
+    <p>对标全球AI公司，OpenAI最新估值约5000亿美元，Anthropic约1830亿美元。DeepSeek在国内大模型公司中估值第一。</p>
+
+    <p>但DeepSeek和它们不一样。OpenAI有ChatGPT近10亿月活和百亿美元营收。Anthropic有Claude的企业级收入。DeepSeek前七个月营收4.75亿元，还在亏钱。</p>
+
+    <p>不过我一直觉得，用营收给AI公司估值，跟用票房给早期电影公司估值一样，方向就错了。真正值钱的不是今天的营收，是技术壁垒和市场份额。</p>
+
+    <p>DeepSeek的API业务毛利率高达82.9%。旗舰模型V4-Pro高峰输出定价每百万Token 3.96美元，远低于月之暗面Kimi K3的15美元和Anthropic Claude Opus 5的25美元。市场份额达到19%，位居全球榜首。</p>
+
+    <p>高毛利与规模亏损并存。模型一旦训练完成，边际推理成本极低，但前置的算力、研发与人才投入远超当前收入。</p>
+
+    <p>这也是为什么要上市。训练下一代大模型所需的GPU、数据中心与电力投入，已进入百亿美元级别。2026年前七个月，DeepSeek的AI基础设施相关支出约110亿元，去年同期仅约12亿元，一年间增长近十倍。</p>
+
+    <p>钱不够了。</p>
+
+    <div class="insight-box">
+      <h4>如果你关注AI投资，记住三个判断标准</h4>
+      <p>第一，看合同负债和预收款，客户先打钱排队是景气强信号。第二，看基础设施投入增速，超过营收增速说明在赌未来。第三，看推理算力占比，推理端占比越高说明商业化越成熟。DeepSeek三项指标都在指向同一个方向，大规模商用正在发生。</p>
+    </div>
+
+    <h2>国产AI芯片的真正考验</h2>
+
+    <p>当然，短板依然清晰。</p>
+
+    <p>HBM内存供应不足制约昇腾950DT产能爬坡，全年出货量可能只有几十万颗级别。16万颗订单交付周期可能超过一年。训练侧仍依赖英伟达库存。CUDA生态十余年积累的开发者粘性，不是短期能替代的。</p>
+
+    <p>但有一个技术突破值得单独拿出来说。</p>
+
+    <p>昇腾950DT采用华为自研硅通孔和混合键合工艺，绕开了三星、SK海力士等厂商对标准HBM的垄断。144GB自研HiZQ 2.0高带宽内存，4TB/s内存访问带宽，专门针对千亿参数模型的长文本推理做了优化。</p>
+
+    <p>这不是买别人的零件组装。这是从底层架构开始自己造。</p>
+
+    <p>华为的Atlas 950超节点支持8192张卡通过灵衢互联协议协同工作，单超节点算力可达1 EFLOPS。</p>
+
+    <p>从"能用"到"规模化用"，从政策驱动到市场驱动，国产AI算力的替代进程确实跨过了一个关键门槛。</p>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="date">2026年4月</div>
+        <div class="content">DeepSeek-V4发布，华为昇腾首发适配</div>
+      </div>
+      <div class="timeline-item">
+        <div class="date">2026年6月</div>
+        <div class="content">DeepSeek完成首轮融资510亿元，估值500亿美元</div>
+      </div>
+      <div class="timeline-item">
+        <div class="date">2026年7月</div>
+        <div class="content">梁文锋坦言华为芯片落后英伟达约两年，但推理端够用</div>
+      </div>
+      <div class="timeline-item">
+        <div class="date">2026年9月4日</div>
+        <div class="content">彭博社披露16万颗昇腾950DT订单</div>
+      </div>
+      <div class="timeline-item">
+        <div class="date">2026年9月9日</div>
+        <div class="content">路透社披露DeepSeek聘请中信证券筹备科创板IPO</div>
+      </div>
+      <div class="timeline-item">
+        <div class="date">2026年9月11日</div>
+        <div class="content">燧原科技登陆科创板，国产GPU四小龙到齐</div>
+      </div>
+    </div>
+
+    <p>五个月，从适配到大规模采购，从融资到冲刺上市。速度快得让人有点晕。</p>
+
+    <p>聊到这里我突然想起一个事。当年ASML从飞利浦的边缘部门变成全世界咽喉，用了将近二十年。国产AI芯片从被封锁到规模化部署，只用了三年。</p>
+
+    <p>不是AI芯片就是ASML，但这事儿确实有点那个味道。</p>
+
+    <p>速度不一样了。</p>
+
+    <p>如果你正在关注国产AI芯片或DeepSeek IPO，建议收藏这篇文章。三个判断标准，一个时间线，下次和别人聊的时候用得上。</p>
+
+    <p>你觉得5000亿估值合理吗？燧原科技上市首日能涨多少？留言区等你的看法。</p>
+
+    <p>觉得有用，转发给关注AI和投资的朋友。</p>
+
+    <p>更多AI产业深度观察，关注专业网站 犀牛伯爵 rhinocount.cn</p>
+
+    <div class="ending">谢谢你看我的文章。</div>
+  </div>
+</body>
+</html>
