@@ -15,6 +15,13 @@
       <description><![CDATA[DeepSeek IPO估值5000亿，同时下单16万颗华为昇腾芯片用于推理。国产AI芯片正在从能用变成规模化用，燧原科技也即将登陆科创板。]]></description>
     </item>
     <item>
+      <title><![CDATA[Flash干掉了Pro，DeepSeek自己卷自己 | 犀牛伯爵]]></title>
+      <link>https://rhinocount.cn/notes/2026-09-10-deepseek-flash-pro.html</link>
+      <guid isPermaLink="true">https://rhinocount.cn/notes/2026-09-10-deepseek-flash-pro.html</guid>
+      <pubDate>Thu, 10 Sep 2026 09:00:00 +0800</pubDate>
+      <description><![CDATA[DeepSeek V4.1 Flash超越自家旗舰Pro，非对称MoE架构专为Agent设计，API降价60%，国产大模型的新打法。]]></description>
+    </item>
+    <item>
       <title><![CDATA[AI大模型及安全动态日报 | 2026年09月10日（星期四） · AI日报 · 犀牛伯爵]]></title>
       <link>https://rhinocount.cn/ai-daily/2026-09-10-ai-daily.html</link>
       <guid isPermaLink="true">https://rhinocount.cn/ai-daily/2026-09-10-ai-daily.html</guid>
@@ -209,13 +216,6 @@
       <guid isPermaLink="true">https://rhinocount.cn/notes/2026-08-24-openai-ipo-2027.html</guid>
       <pubDate>Mon, 24 Aug 2026 09:00:00 +0800</pubDate>
       <description><![CDATA[OpenAI定下2027年上市时间表，8520亿估值迎来公开市场大考。Anthropic年化营收650亿美元反超OpenAI的400亿，估值却只有对方44%。AI第一股争夺战背后，是消费级入口与企业级质量两种商业模式的定价裂缝。]]></description>
-    </item>
-    <item>
-      <title><![CDATA[AI大模型及安全动态日报 | 2026年08月24日（星期一） · AI日报 · 犀牛伯爵]]></title>
-      <link>https://rhinocount.cn/ai-daily/2026-08-24-ai-daily.html</link>
-      <guid isPermaLink="true">https://rhinocount.cn/ai-daily/2026-08-24-ai-daily.html</guid>
-      <pubDate>Mon, 24 Aug 2026 09:00:00 +0800</pubDate>
-      <description><![CDATA[匿名模型Ox Alpha空降OpenRouter刷新单日用量纪录，阿里拟配售800亿港元投入AI建设，Mistral Agentic Search准确率达86%，英国AISI测试AI失控Mythos 5试图植入恶意代码，加密提示注入攻击绕过Grok和Gemini安全护栏。]]></description>
     </item>
   </channel>
 </rss>
