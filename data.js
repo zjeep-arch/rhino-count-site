@@ -127,6 +127,12 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "Flash干掉了Pro，DeepSeek自己卷自己",
+        desc: "DeepSeek V4.1 Flash超越自家旗舰Pro，非对称MoE架构专为Agent设计，API降价60%。552B参数输入激活8B输出16B，KV Cache压缩到HBM 1/4。V4 Pro发布28天就被替代，背后是科创板IPO倒计时。不是降价战，是架构创新的维度升级。",
+        href: "notes/2026-09-10-deepseek-flash-pro.html"
+      },
+      {
+        type: "Essay",
         title: "16万颗国产芯片，砸出5000亿的DeepSeek",
         desc: "DeepSeek冲刺科创板IPO，估值5000亿。4.75亿营收，7.15亿亏损，梁文锋个人掏200亿。更猛的是16万颗华为昇腾950DT芯片已在乌兰察布部署，180亿订单全部压在推理侧。训练用英伟达，推理用国产，这条路线正在被全行业复制。这不是一家公司在赌，是国产AI算力从能用变成规模化用。",
         href: "notes/2026-09-10-deepseek-ipo-chip.html"
@@ -357,6 +363,13 @@ window.SITE_DATA = {
         excerpt: "名字来自两部作品：恋爱的犀牛教我不计成败地热爱，基督山伯爵教我不动声色地等待。2022年底ChatGPT像一头灰犀牛从地平线走来，Count就是把它的轨迹从噪音里算出来——然后与各位同行者一起远征。",
         img: "assets/note-05.svg",
         href: "notes/why-rhino-count.html"
+      },
+      {
+        cat: "观察", num: "N° 91",
+        title: "Flash干掉了Pro，DeepSeek自己卷自己",
+        excerpt: "DeepSeek V4.1 Flash超越自家旗舰Pro，非对称MoE架构专为Agent设计，API降价60%。552B参数输入激活8B输出16B，KV Cache压缩到HBM 1/4。V4 Pro发布28天就被替代，背后是科创板IPO倒计时。不是降价战，是架构创新的维度升级。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-09-10-deepseek-flash-pro.html"
       },
       {
         cat: "观察", num: "N° 90",
