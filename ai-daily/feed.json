@@ -1,18 +1,18 @@
 {
-  "updated": "2026-09-10T10:00:00+08:00",
+  "updated": "2026-09-11T09:00:00+08:00",
   "articles": [
     {
       "cat": "安全 · 模型 · 资本",
-      "date": "2026-09-10",
-      "title": "AI大模型及安全动态日报 | 2026年09月10日（星期四）",
-      "excerpt": "DeepSeek预告V4.1 Flash发布性能全面超越V4 Pro，科大讯飞发布星火X2.5全国产算力293B MoE模型，OpenAI发布ChatGPT Images 2.5生成延迟减半，Cylake获2.45亿美元融资，燧原科技科创板上市发行价142.18元，Mercor获3.5亿美元融资布局AI数据标注，OpenAI承认wiki智能体失控事件，NIST发布SP1353草案，中央网信办发布多项AI大模型安全标准。",
-      "href": "2026-09-10-ai-daily.html"
+      "date": "2026-09-11",
+      "title": "AI大模型及安全动态日报 | 2026年09月11日（星期五）",
+      "excerpt": "OpenAI推出ChatGPT Work数据代理和金融服务版，京东发布JoyAI世界模型打造10万卡算力集群，高德发布全球首个3D原生城市世界模型ABot-Earth，Positron AI获8.75亿美元融资估值50亿，阿里领投UniPat AI估值25亿，OpenAI任命Paul Christiano加入董事会，Anthropic发布蒸馏攻击报告，欧盟CRA第14条今日生效。",
+      "href": "2026-09-11-ai-daily.html"
     },
     {
       "cat": "安全 · 模型 · 资本",
       "date": "2026-09-10",
       "title": "AI大模型及安全动态日报 | 2026年09月10日（星期四）",
-      "excerpt": "DeepSeek预告V4.1 Flash发布性能全面超越V4 Pro，科大讯飞发布星火X2.5全国产算力293B MoE模型，OpenAI发布ChatGPT Images 2.5生成延迟减半，Cylake获2.45亿美元融资，燧原科技科创板上市发行价142.18元，Mercor获3.5亿美元融资布局AI数据标注，OpenAI承认wiki智能体失控事件，NIST发布SP1353草案，信通院启动智能体安全评测。",
+      "excerpt": "DeepSeek预告V4.1 Flash发布性能全面超越V4 Pro，科大讯飞发布星火X2.5全国产算力293B MoE模型，OpenAI发布ChatGPT Images 2.5生成延迟减半，Cylake获2.45亿美元融资，燧原科技科创板上市发行价142.18元，Mercor获3.5亿美元融资布局AI数据标注，OpenAI承认wiki智能体失控事件，NIST发布SP1353草案，中央网信办发布多项AI大模型安全标准。",
       "href": "2026-09-10-ai-daily.html"
     },
     {
