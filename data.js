@@ -127,6 +127,12 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "一个天天发红包的人，把Codex做到了2500万用户",
+        desc: "OpenAI Codex负责人Tibo把rate limit reset做成了增长引擎。5个月从2M到25M用户，12.5倍。每加100万用户全员重置一次，Astra排队一天赔一个banked reset，前1万人发推换100美元额度。烧的是自家算力不是现金，补贴边际成本随模型迭代递减，一个动作三层收益。国内大模型厂商能抄吗，三个判断标准。",
+        href: "notes/2026-09-11-tibo-codex-reset-growth.html"
+      },
+      {
+        type: "Essay",
         title: "Flash干掉了Pro，DeepSeek自己卷自己",
         desc: "DeepSeek V4.1 Flash超越自家旗舰Pro，非对称MoE架构专为Agent设计，API降价60%。552B参数输入激活8B输出16B，KV Cache压缩到HBM 1/4。V4 Pro发布28天就被替代，背后是科创板IPO倒计时。不是降价战，是架构创新的维度升级。",
         href: "notes/2026-09-10-deepseek-flash-pro.html"
@@ -363,6 +369,13 @@ window.SITE_DATA = {
         excerpt: "名字来自两部作品：恋爱的犀牛教我不计成败地热爱，基督山伯爵教我不动声色地等待。2022年底ChatGPT像一头灰犀牛从地平线走来，Count就是把它的轨迹从噪音里算出来——然后与各位同行者一起远征。",
         img: "assets/note-05.svg",
         href: "notes/why-rhino-count.html"
+      },
+      {
+        cat: "观察", num: "N° 92",
+        title: "一个天天发红包的人，把Codex做到了2500万用户",
+        excerpt: "OpenAI Codex负责人Tibo把rate limit reset做成了增长引擎。每加100万用户全员重置，Astra排队一天赔一个banked reset，前1万人发推换100美元额度。5个月从2M做到25M用户，12.5倍。烧的是自家算力不是现金，补贴成本随模型迭代递减，一个动作同时拿增长、内容、品牌三层收益。他发的不是红包，是每天一篇的小作文。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-09-11-tibo-codex-reset-growth.html"
       },
       {
         cat: "观察", num: "N° 91",

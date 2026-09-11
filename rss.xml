@@ -5,8 +5,15 @@
     <link>https://rhinocount.cn/</link>
     <description>AI Native Magazine — 记录 AI 如何改变技术、商业与人的工作方式。</description>
     <language>zh-CN</language>
-    <lastBuildDate>Thu, 10 Sep 2026 09:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 11 Sep 2026 09:00:00 +0800</lastBuildDate>
     <atom:link href="https://rhinocount.cn/rss.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title><![CDATA[一个天天发红包的人，把Codex做到了2500万用户]]></title>
+      <link>https://rhinocount.cn/notes/2026-09-11-tibo-codex-reset-growth.html</link>
+      <guid isPermaLink="true">https://rhinocount.cn/notes/2026-09-11-tibo-codex-reset-growth.html</guid>
+      <pubDate>Fri, 11 Sep 2026 09:00:00 +0800</pubDate>
+      <description><![CDATA[OpenAI Codex负责人Tibo把rate limit reset做成增长引擎，5个月从2M到25M用户，12.5倍增长。拆解reset经济学五阶段、现金买UGC、渠道生态与人格化IP，一套AI产品运营的完整打法。]]></description>
+    </item>
     <item>
       <title><![CDATA[16万颗国产芯片，砸出5000亿的DeepSeek · 犀牛伯爵笔记]]></title>
       <link>https://rhinocount.cn/notes/2026-09-10-deepseek-ipo-chip.html</link>
@@ -209,13 +216,6 @@
       <guid isPermaLink="true">https://rhinocount.cn/ai-daily/2026-08-25-ai-daily.html</guid>
       <pubDate>Tue, 25 Aug 2026 09:00:00 +0800</pubDate>
       <description><![CDATA[阿里800亿港元押注AI，OpenAI GPT-5.6降价超20%，英伟达60亿收购Poolside，Hugging Face传130亿被收购，Anthropic Mythos 5安全能力扩展，加密提示绕过AI安全过滤。]]></description>
-    </item>
-    <item>
-      <title><![CDATA[Anthropic营收反超了，估值只有OpenAI一半 · 犀牛伯爵笔记]]></title>
-      <link>https://rhinocount.cn/notes/2026-08-24-openai-ipo-2027.html</link>
-      <guid isPermaLink="true">https://rhinocount.cn/notes/2026-08-24-openai-ipo-2027.html</guid>
-      <pubDate>Mon, 24 Aug 2026 09:00:00 +0800</pubDate>
-      <description><![CDATA[OpenAI定下2027年上市时间表，8520亿估值迎来公开市场大考。Anthropic年化营收650亿美元反超OpenAI的400亿，估值却只有对方44%。AI第一股争夺战背后，是消费级入口与企业级质量两种商业模式的定价裂缝。]]></description>
     </item>
   </channel>
 </rss>

@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>一个天天发红包的人，把Codex做到了2500万用户</title>
+  <meta name="description" content="OpenAI Codex负责人Tibo把rate limit reset做成增长引擎，5个月从2M到25M用户，12.5倍增长。拆解reset经济学五阶段、现金买UGC、渠道生态与人格化IP，一套AI产品运营的完整打法。">
+  <meta name="keywords" content="Codex增长,OpenAI运营,AI增长策略,rate limit reset,Tibo,AI产品运营">
+  <style>
+    :root {
+      --accent: #1e3a5f;
+      --ink: #333;
+      --ink-soft: #555;
+      --muted: #888;
+      --surface: #fafafa;
+      --border: rgba(0,0,0,0.06);
+      --radius: 12px;
+      --font-sans: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-serif: "Noto Serif SC", "Songti SC", Georgia, serif;
+    }
+    body { font-family: var(--font-sans); background: #f5f5f5; margin: 0; padding: 16px; font-size: 17px; line-height: 1.9; letter-spacing: 0.01em; color: var(--ink); -webkit-font-smoothing: antialiased; }
+    .container { max-width: 680px; margin: 0 auto; background: var(--surface); padding: 32px; border-radius: var(--radius); }
+    h1 { font-family: var(--font-serif); font-size: clamp(26px, 4vw, 34px); font-weight: 700; color: var(--ink); line-height: 1.35; margin: 8px 0 20px; letter-spacing: -0.01em; }
+    .meta { color: var(--muted); font-size: 13px; margin-bottom: 16px; }
+    .byline { color: var(--ink-soft); font-size: 14px; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+    h2 { font-family: var(--font-serif); font-size: 22px; font-weight: 700; color: var(--ink); margin: 40px 0 18px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+    h3 { font-family: var(--font-serif); font-size: 18px; font-weight: 600; color: var(--ink); margin: 28px 0 12px; }
+    p { margin: 0 0 1.5em; }
+    .quote-box { border-left: 4px solid var(--accent); background: #f0f4f8; padding: 16px 20px; margin: 24px 0; border-radius: 0 var(--radius) var(--radius) 0; }
+    .quote-box p { margin: 0; color: var(--ink-soft); font-style: italic; font-size: 15px; }
+    .quote-box .attribution { margin-top: 8px; color: var(--muted); font-size: 13px; font-style: normal; }
+    .data-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14px; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .data-table th, .data-table td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); }
+    .data-table th { background: #edf1f5; font-weight: 600; color: var(--ink); }
+    .data-table td { color: var(--ink-soft); }
+    .timeline { position: relative; padding-left: 24px; margin: 24px 0; }
+    .timeline::before { content: ''; position: absolute; left: 6px; top: 0; bottom: 0; width: 2px; background: #dfe5ec; }
+    .timeline-item { position: relative; margin-bottom: 16px; }
+    .timeline-item::before { content: ''; position: absolute; left: -22px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); }
+    .timeline-item .date { font-size: 13px; color: var(--muted); margin-bottom: 4px; }
+    .timeline-item .content { font-size: 15px; color: var(--ink); }
+    .insight-box { background: #eef3f9; border: 1px solid #d3e0ec; border-radius: var(--radius); padding: 20px; margin: 24px 0; }
+    .insight-box h4 { margin: 0 0 8px; font-size: 16px; color: var(--ink); }
+    .insight-box p { margin: 0 0 10px; font-size: 15px; color: var(--ink-soft); }
+    .insight-box p:last-child { margin-bottom: 0; }
+    .punchline { font-family: var(--font-serif); font-size: 18px; font-weight: 700; color: var(--accent); text-align: center; margin: 32px 0; padding: 16px 0; border-top: 2px solid var(--accent); border-bottom: 2px solid var(--accent); }
+    .contrast-card { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin: 24px 0; border-radius: var(--radius); overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .contrast-card .side { padding: 16px 20px; }
+    .contrast-card .side-left { background: #fef2f2; border-right: 1px solid var(--border); }
+    .contrast-card .side-right { background: #f0fdf4; }
+    .contrast-card .side h4 { margin: 0 0 8px; font-size: 14px; font-weight: 600; }
+    .contrast-card .side-left h4 { color: #991b1b; }
+    .contrast-card .side-right h4 { color: #166534; }
+    .contrast-card .side p { margin: 0; font-size: 14px; color: var(--ink-soft); line-height: 1.6; }
+    .ending { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--ink-soft); font-size: 14px; }
+    .highlight { color: var(--accent); font-weight: 600; background: linear-gradient(to top, rgba(30,58,95,0.10) 40%, transparent 40%); padding: 0 2px; }
+    .data-callout { display: inline-block; background: var(--accent); color: #fff; padding: 2px 10px; border-radius: 4px; font-weight: 700; font-size: 15px; }
+    strong { color: var(--ink); font-weight: 600; }
+  </style>
+
+  <!-- SEO Optimization -->
+  <link rel="canonical" href="https://rhinocount.cn/notes/2026-09-11-tibo-codex-reset-growth.html" />
+  <meta property="og:url" content="https://rhinocount.cn/notes/2026-09-11-tibo-codex-reset-growth.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="一个天天发红包的人，把Codex做到了2500万用户" />
+  <meta property="og:description" content="OpenAI Codex负责人Tibo把rate limit reset做成增长引擎，5个月从2M到25M用户。烧的是自家算力不是现金，一个动作三层收益。" />
+  <meta property="og:locale" content="zh_CN" />
+  <meta property="og:site_name" content="犀牛伯爵 · AI 创作实验室" />
+  <meta property="article:published_time" content="2026-09-11" />
+  <meta property="article:author" content="犀牛伯爵" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="一个天天发红包的人，把Codex做到了2500万用户" />
+  <meta name="twitter:description" content="OpenAI Codex负责人Tibo把rate limit reset做成增长引擎，5个月从2M到25M用户。烧的是自家算力不是现金，一个动作三层收益。" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta property="bytedance:published_time" content="2026-09-11T19:00:00+08:00" />
+  <meta property="bytedance:updated_time" content="2026-09-11T19:00:00+08:00" />
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "一个天天发红包的人，把Codex做到了2500万用户",
+  "description": "OpenAI Codex负责人Tibo把rate limit reset做成了增长引擎。5个月从2M到25M用户，12.5倍。烧的是自家算力不是现金，一个动作同时拿增长、内容、品牌三层收益。",
+  "datePublished": "2026-09-11",
+  "dateModified": "2026-09-11",
+  "author": {
+    "@type": "Person",
+    "name": "犀牛伯爵",
+    "url": "https://rhinocount.cn/"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "犀牛伯爵",
+    "url": "https://rhinocount.cn/"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://rhinocount.cn/notes/2026-09-11-tibo-codex-reset-growth.html"
+  }
+  }
+  </script>
+</head>
+<body>
+  <div class="container">
+    <h1>一个天天发红包的人，把Codex做到了2500万用户</h1>
+    <div class="meta">2026年9月11日 · 阅读时间约7分钟</div>
+    <div class="byline">文｜犀牛伯爵</div>
+
+    <p>8月31日，OpenAI Codex负责人Tibo发了一条庆祝推文，宣布产品达到25M活跃用户。</p>
+
+    <p>落款他没写OpenAI，写的是See you soon for more news from <span class="highlight">The Reset Company</span>。</p>
+
+    <p>重置公司。</p>
+
+    <p>一家估值几千亿美元的AI巨头，被自家产品负责人戏称为重置公司。这个梗不是他一时兴起，是慢慢长出来的。</p>
+
+    <p>如果你没用过Codex，看不懂这句话在干什么。如果你用过，大概率被这个动作砸中过不止一次。</p>
+
+    <p>你正写到一半的代码，突然收到通知，你的每周额度被重置了。</p>
+
+    <p>还剩三天才刷新的用量上限，重新回到100%。</p>
+
+    <p>这件事在2026年发生了几十次。有用户专门做了统计，4月约8次，7月超过12次，9月GPT-6 Astra排队期间几乎每天一次。</p>
+
+    <p>就这么一个动作，把Codex的活跃用户从3月的200万，做到了8月底的2500万。</p>
+
+    <p>5个月，<span class="data-callout">12.5倍</span>。</p>
+
+    <p>说真的，我第一次把这组数字放在一起看的时候愣了一下。不是惊讶于增长本身，OpenAI的产品从来不缺增长。是惊讶于增长和这个看起来毫无技术含量的动作，绑得这么死。</p>
+
+    <p>这背后其实是一整套被严重低估的运营打法。Tibo今年在X上发了457条推文，432条原创，几乎每一条都在讲这件事。我把他这大半年的推文翻了一遍，试着把这套东西拆开。</p>
+
+    <h2>先看结果，一条不太正常的曲线</h2>
+
+    <p>Tibo的习惯是每过一个里程碑就发推公开数字，增长曲线全是他自己一条条报出来的。</p>
+
+    <table class="data-table">
+      <tr><th>时间</th><th>活跃用户</th><th>间隔</th><th>他做了什么</th></tr>
+      <tr><td>3月5日</td><td>200万</td><td>周环比+25%</td><td>还没人注意这个节奏</td></tr>
+      <tr><td>4月7日</td><td>300万</td><td>33天</td><td>承诺每加100万就全员重置，直到1000万</td></tr>
+      <tr><td>4月21日</td><td>400万</td><td>14天</td><td>两周100万，兑现承诺</td></tr>
+      <tr><td>5月31日</td><td>500万</td><td>40天</td><td>周年节点照旧</td></tr>
+      <tr><td>7月12日至21日</td><td>600万到1000万</td><td>9天加400万</td><td>几乎每天重置一次</td></tr>
+      <tr><td>8月13日</td><td>1500万</td><td>23天</td><td>Old news actually，顺便又发了一次</td></tr>
+      <tr><td>8月21日</td><td>2000万</td><td>8天</td><td>Banked reset，存着慢慢用</td></tr>
+      <tr><td>8月31日</td><td>2500万</td><td>10天</td><td>自称The Reset Company</td></tr>
+    </table>
+
+    <p>注意7月中旬那一段。9天400万，日均百万级净增，曲线是垂直的。</p>
+
+    <p>同期正好是GPT-5.6 Sol发布加上暑期需求爆发，模型热度是底层燃料，这个不用回避。</p>
+
+    <p>但燃料不会自己变成火焰。</p>
+
+    <p>每次模型大版本发布24小时内，他都会配合发重置。7月10日Sol上线当天他连发两次。8月8日那条更直白，为了庆祝这件事，加上我没打算跑路这个事实，我重置了所有付费用户的额度。</p>
+
+    <p>运营和产品节奏咬合到这种程度，不是巧合能解释的。</p>
+
+    <h2>重置这件事，他分五步做成了系统</h2>
+
+    <p>把457条推文按时间排开，重置这个动作有个清晰的进化过程。不是灵感，是迭代。</p>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="date">3月初，被动补偿</div>
+        <div class="content">出了事故，发一次额度当赔礼。Enjoy one on us。</div>
+      </div>
+      <div class="timeline-item">
+        <div class="date">4月初，里程碑化</div>
+        <div class="content">300万庆祝时直接立下机制，每加100万全员重置一次，直到1000万。随机动作变成了公开承诺。</div>
+      </div>
+      <div class="timeline-item">
+        <div class="date">4至5月，梗化</div>
+        <div class="content">4月28日那条，Don't just reset for fun, it costs money，但是气氛到位了，我重置了。1.69万个赞。有一次他数到一条评论只有一个赞，也去发了。</div>
+      </div>
+      <div class="timeline-item">
+        <div class="date">6月，产品化</div>
+        <div class="content">有用户抱怨重置来得突然，打乱使用节奏。6月12日他回应，下次按按钮你自己选什么时候生效。Banked reset诞生，红包进化成存折。6月18日升级成sneaky double reset，到账一个，再存档一个。</div>
+      </div>
+      <div class="timeline-item">
+        <div class="date">8至9月，品牌资产</div>
+        <div class="content">粉丝送他一个实体重置按钮当礼物。9月3日Astra开放排队，他宣布排队一天赔一个banked reset，4.85万个赞，全年互动峰值。公司自称The Reset Company。</div>
+      </div>
+    </div>
+
+    <p>你把这个过程缩到一张卡片上，就是大多数补贴玩不转的原因。</p>
+
+    <p>国内产品发优惠券，用户领完就用，用完就忘。发的人是运营后台，接的人是手机通知栏，中间没有故事。</p>
+
+    <p>重置不一样。它有期待感，用户会猜这次的理由是什么。有仪式感，有梗。</p>
+
+    <p>仪式感这块多说一句。8月29日那次重置，Tibo附了一份长长的技术清单，8项用量漏洞修复，说你们的使用时长会多出10%到50%。红包附带售后报告，头一回见。</p>
+
+    <p>梗就更多了。Rick Roll的完整歌词他发过，最后一句是感谢阅读，我们将重置所有付费用户的用量，好让你继续玩Astra，新的一周要开始了。</p>
+
+    <div class="quote-box">
+      <p>Never gonna give you up, never gonna let you down, never gonna run around and desert you. Thanks for reading. We will do a global reset of the usage for all paid subscriptions.</p>
+      <div class="attribution">Tibo，2026年9月7日，原文照译。3.4万个赞。</div>
+    </div>
+
+    <p>一个动作，三层收益。增长，内容，品牌。这是补贴打法里最高级的一档。</p>
+
+    <div class="punchline">他发的不是红包，是每天一篇的小作文。</div>
+
+    <h2>也有真金白银，买的是你的转发</h2>
+
+    <p>7月15日那天，Tibo发了一条国内运营看了会落泪的推文。</p>
+
+    <div class="quote-box">
+      <p>发推告诉我们你为什么喜欢Sol，或者为什么从别家转投Codex。前一万名，每人100美元Codex额度。</p>
+      <div class="attribution">Tibo，2026年7月15日，大意。1.55万个赞，3600次转发。</div>
+    </div>
+
+    <p>标准的大额红包换晒单。前一万名是个稀缺计时器，逼你马上发。发出来的每一条推文，tag里都带着产品名，等于一万条带背书的广告。</p>
+
+    <p>预算上限100万美元，按X的互动量折算广告价值，这可能是2026年投放效率最高的一笔钱。</p>
+
+    <p>但只有这一条是直接撒现金的。其他所有时刻，他用的都是另一种货币。</p>
+
+    <h2>算力才是他的弹药库</h2>
+
+    <p>重置的代价是算力，不是现金。</p>
+
+    <p>这是整个打法里最反直觉的地方。滴滴打补贴战，每一分钱都是净流出。Tibo的重置，烧的是自家GPU的机会成本。左口袋进右口袋，账面上甚至不算营销费用。</p>
+
+    <p>更妙的是这个成本在递减。模型每迭代一版，token效率就提升一截，8月29日那份漏洞清单能让用量多撑10%到50%，9月6日他发推说新改进让重度用户的长尾场景最多省3到4倍用量。同一份红包，越送越便宜。</p>
+
+    <p>他甚至把这件事做成了公开的供给侧叙事。GPU机队融化，连续三天差点没算力了，面试的人都在问我能用多少推理资源。9月9日Astra需求太大，他说可能暂停新Pro订阅。</p>
+
+    <p>翻译一下。我们家的东西抢手到要限购。</p>
+
+    <p>饥饿营销谁都会喊，但他有一样别人没有的，4月21日的公开承诺。Codex会继续留在免费和20美元的Plus计划里，我们有算力和高效模型撑得住。这句话对着别家涨价的档口发，1.16万个赞。</p>
+
+    <p>补贴能力本身就是供给侧优势的展示。这句话他没说出口，但每条推文都在说。</p>
+
+    <h2>胡萝卜之外，还有大棒</h2>
+
+    <p>光看红包会把这套打法看浅了。渠道生态这边，Tibo一手软一手硬。</p>
+
+    <div class="contrast-card">
+      <div class="side side-left">
+        <h4>胡萝卜</h4>
+        <p>开放ChatGPT账号登录给第三方编程工具。OpenCode，OpenHands，RooCode，Pi，JetBrains，Xcode，Zed，全放进来。约10%的生产流量跑在第三方工具上，照样算Codex的活跃。</p>
+      </div>
+      <div class="side side-right">
+        <h4>大棒</h4>
+        <p>8月29日终止和Cursor的合作，理由是信任，11月12日生效。8月21日公开点名sub2api，把订阅转成API流量再共享的行为会被反欺诈系统标记。</p>
+      </div>
+    </div>
+
+    <p>放第三方工具进来这一手特别值得琢磨。1月份竞品停服的窗口期，他密集宣布和各家开源工具打通，OpenCode一家就接了30万Codex用户登录。用户在哪，入口就在哪，自家App不是唯一归途。</p>
+
+    <p>10%的流量在别人的地盘上跑，他不心疼。因为账号体系在他手里，习惯在他手里，算力也在他手里。</p>
+
+    <h2>套路能复制吗</h2>
+
+    <p>看到这里你可能会想，这套东西国内厂商抄一下不就完了。</p>
+
+    <p>坦率地讲，抄不动。核心卡点不在创意，在供给。</p>
+
+    <table class="data-table">
+      <tr><th>维度</th><th>国内补贴战</th><th>Tibo的重置</th></tr>
+      <tr><td>补贴标的</td><td>现金或代金券</td><td>用量额度</td></tr>
+      <tr><td>资金流向</td><td>真金白银出表</td><td>自家算力，内部转移</td></tr>
+      <tr><td>边际成本</td><td>线性甚至递增</td><td>随模型迭代递减</td></tr>
+      <tr><td>补贴点位</td><td>拉新和订单转化</td><td>重度用户最痛的摩擦点</td></tr>
+      <tr><td>副产品</td><td>获客成本沉淀</td><td>内容加梗加品牌资产</td></tr>
+    </table>
+
+    <p>编程用户天然每周撞额度上限，这个摩擦点的痛感，比打车优惠券深一个量级。重置直接解除最痛的地方，而且竞品如果算力紧或者模型贵，结构性跟不动。</p>
+
+    <p>国内大模型厂商现在其实有两个条件是齐的。模型token效率一直在涨，成本确实在降。缺的是另一头，把补贴做成内容的耐心。红包发出去，故事没跟上，钱花了，声量没攒下。</p>
+
+    <div class="insight-box">
+      <h4>如果你在判断一个AI产品的运营打法值不值得学，三个标准</h4>
+      <p>一，补贴烧的是现金还是自家供给。烧现金的看预算，烧供给的看效率曲线，后者才有复利。</p>
+      <p>二，补贴有没有副产品。只有转化率的补贴是耗材，能沉淀出梗和仪式的补贴是资产。</p>
+      <p>三，补贴收紧时用户会不会反弹。Tibo在9月恢复了5小时限制，收紧前配了完整解释，社区没有出现明显反弹叙事。先给足，再收紧，收紧时讲清楚，这个顺序不能反。</p>
+    </div>
+
+    <p>这三条不只适用于AI产品。你自己做活动做投放，把红包预算换个花法，能不能顺便攒下一个社区梗，一个用户仪式，一句别人会主动复述的话。能，这个预算就花得比对手值。</p>
+
+    <p>建议收藏。下次你老板问增长预算怎么花，把这张表拍给他。</p>
+
+    <p>还有一层是我自己的观察。457条推文里，重置相关只占68条，更多是产品更新，团队表扬，冷笑话，宠物照片。</p>
+
+    <p>We are Codex. We are legion. We do not miss. We do ship，这条拿来招人。每周节奏固定，周二打磨，周四发大版本，周五发轻松内容，做成用户的预期日历。</p>
+
+    <p>一个产品负责人把自己活成了一个IP，用户追着看他的账号像追一部连载。</p>
+
+    <p>这是最难抄的部分。工具可以买，流程可以学，一个愿意每天在社交媒体上跟用户说人话的负责人，买不到。</p>
+
+    <h2>接下来看什么</h2>
+
+    <p>DevDay在10月，Tibo说会把因Astra效率提升而提前6个月的计划拿出来发布。The Reset Company这个梗会不会官方化，周边会不会真出，Astra开放后的下一轮重置怎么发，都值得盯。</p>
+
+    <p>还有一个不确定的地方。这个打法建立在OpenAI供给过剩的前提上，如果算力真的见顶，9月9日他提过暂停新订阅，重置的频率自然会降。仪式感这东西，断了三次就没了。他比谁都清楚，所以节奏一直扣着产品大版本走。</p>
+
+    <p>增长会有天花板，但方法论不会过期。</p>
+
+    <p>你觉得国内哪家大模型厂商最该学这一招？评论区聊聊。还有，你有没有被额度上限卡住过，最狠的一次是怎么绕过去的，我也想听听。</p>
+
+    <p>觉得有用，转发给做运营和增长的朋友。</p>
+
+    <p>更多AI产业深度观察，关注专业网站 犀牛伯爵 rhinocount.cn</p>
+
+    <div class="ending">谢谢你看我的文章。</div>
+  </div>
+</body>
+</html>
