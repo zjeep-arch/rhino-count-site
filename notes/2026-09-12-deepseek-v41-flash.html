@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DeepSeek一降价，智谱两天跌掉三成</title>
+  <meta name="keywords" content="DeepSeek V4.1 Flash,智谱,MiniMax,AI模型降价,大模型,API定价">
+  <meta name="description" content="DeepSeek V4.1 Flash发布并大幅降价，智谱两天跌掉三成。越强越便宜，规则被反过来了。">
+  <style>
+    :root {
+      --accent: #8b2635;
+      --ink: #333;
+      --ink-soft: #555;
+      --muted: #888;
+      --surface: #fafafa;
+      --border: rgba(0,0,0,0.06);
+      --radius: 12px;
+      --font-sans: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-serif: "Noto Serif SC", "Songti SC", Georgia, serif;
+    }
+    body { font-family: var(--font-sans); background: #f5f5f5; margin: 0; padding: 16px; font-size: 16px; line-height: 1.8; color: var(--ink); -webkit-font-smoothing: antialiased; }
+    .container { max-width: 680px; margin: 0 auto; background: var(--surface); padding: 32px; border-radius: var(--radius); }
+    h1 { font-family: var(--font-serif); font-size: 24px; font-weight: 700; color: var(--ink); line-height: 1.4; margin: 0 0 16px; }
+    .meta { color: var(--muted); font-size: 13px; margin-bottom: 16px; }
+    .byline { color: var(--ink-soft); font-size: 14px; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+    h2 { font-family: var(--font-serif); font-size: 20px; font-weight: 600; color: var(--ink); margin: 32px 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+    h3 { font-family: var(--font-serif); font-size: 18px; font-weight: 600; color: var(--ink); margin: 24px 0 12px; }
+    p { margin: 0 0 24px; }
+    .quote-box { border-left: 4px solid var(--accent); background: #f5f5f5; padding: 16px 20px; margin: 24px 0; border-radius: 0 var(--radius) var(--radius) 0; }
+    .quote-box p { margin: 0; color: var(--ink-soft); font-style: italic; font-size: 15px; }
+    .quote-box .attribution { margin-top: 8px; color: var(--muted); font-size: 13px; font-style: normal; }
+    .insight-box { background: #fff8f0; border: 1px solid #ffe4c4; border-radius: var(--radius); padding: 20px; margin: 24px 0; }
+    .insight-box h4 { margin: 0 0 8px; font-size: 16px; color: var(--ink); }
+    .insight-box p { margin: 0; font-size: 15px; color: var(--ink-soft); }
+    .data-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14px; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .data-table th, .data-table td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); }
+    .data-table th { background: #f0f0f0; font-weight: 600; color: var(--ink); }
+    .data-table td { color: var(--ink-soft); }
+    .timeline { position: relative; padding-left: 24px; margin: 24px 0; }
+    .timeline::before { content: ''; position: absolute; left: 6px; top: 0; bottom: 0; width: 2px; background: #e0e0e0; }
+    .timeline-item { position: relative; margin-bottom: 16px; }
+    .timeline-item::before { content: ''; position: absolute; left: -22px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); }
+    .timeline-item .date { font-size: 13px; color: var(--muted); margin-bottom: 4px; }
+    .timeline-item .content { font-size: 15px; color: var(--ink); }
+    .img-caption { text-align: center; color: var(--muted); font-size: 13px; margin-top: 8px; margin-bottom: 24px; }
+    .article-img { width: 100%; border-radius: 8px; margin: 24px 0 8px; }
+    .ending { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--ink-soft); font-size: 14px; }
+    .highlight { color: var(--accent); font-weight: 600; background: linear-gradient(to top, rgba(139,38,53,0.08) 40%, transparent 40%); padding: 0 2px; }
+    .data-callout { display: inline-block; background: var(--accent); color: #fff; padding: 2px 10px; border-radius: 4px; font-weight: 700; font-size: 15px; }
+    .contrast-card { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin: 24px 0; border-radius: var(--radius); overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .contrast-card .side { padding: 16px 20px; }
+    .contrast-card .side-left { background: #fef2f2; border-right: 1px solid var(--border); }
+    .contrast-card .side-right { background: #f0fdf4; }
+    .contrast-card .side h4 { margin: 0 0 8px; font-size: 14px; font-weight: 600; }
+    .contrast-card .side-left h4 { color: #991b1b; }
+    .contrast-card .side-right h4 { color: #166534; }
+    .contrast-card .side p { margin: 0; font-size: 14px; color: var(--ink-soft); line-height: 1.6; }
+    .punchline { font-family: var(--font-serif); font-size: 18px; font-weight: 700; color: var(--accent); text-align: center; margin: 32px 0; padding: 16px 0; border-top: 2px solid var(--accent); border-bottom: 2px solid var(--accent); }
+    strong { color: var(--ink); font-weight: 600; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>DeepSeek一降价，智谱两天跌掉三成</h1>
+    <div class="meta">2026年9月12日 · 阅读时间约6分钟</div>
+    <div class="byline">文｜犀牛伯爵</div>
+
+    <p>9月10日下午三点，香港联交所的屏幕上，智谱的股价开始往下掉。</p>
+    <p>掉得不快，但没停。</p>
+    <p>第二天继续掉。两天累计跌掉三成。智谱跌的同时，MiniMax也跌了将近一成。智谱9月累计跌幅33.64%，MiniMax跌22.98%。</p>
+    <p>原因不复杂。同一天，DeepSeek发布了V4.1 Flash，然后把API价格砍到了行业最低。</p>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="date">9月10日</div>
+        <div class="content">DeepSeek V4.1 Flash发布，MIT开源，同步上线国家超算互联网平台，免费下载</div>
+      </div>
+      <div class="timeline-item">
+        <div class="date">9月10日收盘</div>
+        <div class="content">智谱跌10.34%，MiniMax跌8.98%</div>
+      </div>
+      <div class="timeline-item">
+        <div class="date">9月11日收盘</div>
+        <div class="content">智谱9月累计跌幅33.64%，杰富瑞将目标价砍至1183.79港元，ARR估值倍数从50倍降至30倍</div>
+      </div>
+    </div>
+
+    <img class="article-img" src="http://n.sinaimg.cn/spider20260910/786/w1080h506/20260910/838a-d8ce2d2e0638f4cbe8a213d57cecec13.png" alt="DeepSeek V4.1 Flash上线国家超算互联网平台">
+    <div class="img-caption">图源｜新浪科技</div>
+
+    <h2>这个模型本身就不是来打招呼的</h2>
+
+    <p>说真的，DeepSeek V4.1 Flash这个模型本身就够让人愣一下。</p>
+    <p>5520亿参数的MoE架构，但每次推理只激活80亿参数。输入端激活80亿，输出端激活160亿。不对称设计，意图很明确，推理成本往死里压。</p>
+    <p>KV Cache压缩到HBM的1/4，SSD的1/8。训练用了445万亿token。1M上下文窗口。MIT开源。</p>
+    <p>这些数字单独看是技术参数。放在一起看，是一个信号。DeepSeek在告诉所有人，最强的能力可以变成最便宜的能力。</p>
+
+    <div class="punchline">越强越便宜，规则被反过来了。</div>
+
+    <h2>智谱刚交了一份漂亮的成绩单</h2>
+
+    <p>在DeepSeek出手之前，智谱的资本故事讲得很好。</p>
+    <p>上半年收入9.54亿，同比增长399.7%。API业务占营收86.5%，同比涨了2735.7%。8月ARR做到16亿美元。MiniMax收入1.17亿美元，同比增长283.1%。</p>
+    <p>两家公司都在用API营收增速讲资本故事。杰富瑞给智谱API业务的ARR估值倍数是50倍。</p>
+    <p>然后DeepSeek来了。更强，更便宜，还开源。</p>
+
+    <p>市场的反应很快。我自己看到这个数字的时候愣了一下。不是因为技术多强，是因为定价逻辑变了。</p>
+    <p>之前全行业的玩法是，模型越强，价格越高。GPT-6发布当天API涨了2.5倍，输出50美元/百万token。这是OpenAI的逻辑，能力是奢侈品。</p>
+    <p>DeepSeek把规则反过来了。</p>
+
+    <div class="contrast-card">
+      <div class="side side-left">
+        <h4>旧规则</h4>
+        <p>能力越强，价格越高。GPT-6发布当天API涨2.5倍，输出50美元/百万token。能力是奢侈品。</p>
+      </div>
+      <div class="side side-right">
+        <h4>新规则</h4>
+        <p>能力越强，价格越低。DeepSeek V4.1 Flash开源、免费下载，API定价行业最低。能力是基础设施。</p>
+      </div>
+    </div>
+
+    <p>杰富瑞降的不只是目标价，是估值逻辑。从50倍ARR降到30倍。这等于在说，API业务的增长确定性打折了。</p>
+    <p>不是短期波动，是长期叙事。</p>
+
+    <img class="article-img" src="http://zkres2.myzaker.com/202609/6aa249768e9f0978f923aa10_1024.jpg" alt="DeepSeek V4.1 Flash正式发布，支持原生多模态视觉理解">
+    <div class="img-caption">图源｜ZAKER科技</div>
+
+    <h2>这一刀砍的是三件事</h2>
+
+    <p>拆开来看，DeepSeek这一刀砍的是三件事。</p>
+    <p>第一，技术成本底线。V4.1 Flash的KV Cache压缩到HBM的1/4，cross-layer attention reuse让推理显存占用断崖式下降。这不是营销话术，是架构层面的成本革命。当你的推理成本比同行低一个量级，你定价就有空间往死里压。别人卖50美元，你卖5美元，还有利润。</p>
+    <p>第二，开源策略。MIT协议，1M上下文，免费下载。任何企业都可以拿走自己部署。这对API厂商的杀伤是结构性的。如果客户能免费拿到同等能力的模型自己跑，为什么要按token付费。</p>
+    <p>第三，IPO节奏。DeepSeek已经聘请中信证券筹备科创板上市，估值5000亿。一个即将IPO的公司把价格打到底，这不是善心，是市场策略。低价换规模，规模换估值。</p>
+
+    <div class="insight-box">
+      <h4>三个被忽略的信号</h4>
+      <p>DeepSeek训练用英伟达，推理用华为昇腾950DT。16万颗国产芯片已在乌兰察布部署，180亿订单全部压在推理侧。低价的底气不只是技术，是国产算力规模化落地后成本断崖式下降。这条路线正在被全行业复制。</p>
+    </div>
+
+    <h2>有人说降价不等于能赢</h2>
+
+    <p>有人会说，降价不等于能赢。OpenAI也降过价，没见谁被搞死。</p>
+    <p>这话对一半。但漏了一个关键变量。</p>
+    <p>DeepSeek不是在跟OpenAI打。它打的是国内API厂商。而国内API厂商的收入结构高度依赖API调用。智谱API业务占营收86.5%。MiniMax的商业模式同样压在API上。</p>
+    <p>当DeepSeek开源同等能力、收费只有零头，这些公司的API增速逻辑就被动摇了。2735.7%的同比增长率，在一个免费开源的同等能力面前，还能维持多久。</p>
+    <p>我有时候觉得，市场不是在跌DeepSeek的技术，是在跌"API定价权"这件事的确定性。</p>
+
+    <h2>接下来会怎么走</h2>
+
+    <p>接下来的走向，我目前的看法是，国内大模型行业会分化成两条路。</p>
+    <p>一条路是走DeepSeek路线，把推理成本压到极致，靠规模和生态赚钱。开源，低价，换部署量。</p>
+    <p>另一条路是走垂直深扎。不在通用能力上跟DeepSeek硬扛，而是在特定行业、特定场景里做深。医疗、法律、金融，每个领域的合规和数据壁垒都不是开源模型能直接覆盖的。</p>
+    <p>也可能我错了。也许两条路会融合，也许还有第三条路。但有一点我比较确定，靠API调用量讲增长故事的时代，正在过去。</p>
+
+    <div class="quote-box">
+      <p>如果你正在选AI模型，记住一个判断标准。不要只看跑分，看每百万token的推理成本。这个数字才是决定你能不能规模化用的关键。</p>
+      <div class="attribution">建议收藏，下次选模型的时候用得上。</div>
+    </div>
+
+    <h2>这不是价格战，是定价权的转移</h2>
+
+    <p>这场降价不是价格战。是定价权的转移。</p>
+    <p>从"能力越强越贵"到"能力越强越便宜"，规则被反过来了。这个变化会影响每一个用AI的人，也会影响每一家做AI的公司。</p>
+    <p>DeepSeek的V4.1 Flash只是一个开始。当国产算力规模化落地，当开源模型能力追平闭源，API定价的锚点会继续往下移。</p>
+    <p>你选AI模型的时候会看价格吗，还是只看跑分？评论区聊聊。</p>
+    <p>觉得有用，转发给做AI的朋友。建议收藏，下次选模型的时候用得上。</p>
+    <p>更多AI产业深度观察，关注专业网站 犀牛伯爵 rhinocount.cn</p>
+
+    <div class="ending">谢谢你看我的文章。</div>
+  </div>
+</body>
+</html>
