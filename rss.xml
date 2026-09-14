@@ -15,6 +15,13 @@
       <description><![CDATA[OpenAI Codex负责人Tibo把rate limit reset做成增长引擎，5个月从2M到25M用户，12.5倍增长。拆解reset经济学五阶段、现金买UGC、渠道生态与人格化IP，一套AI产品运营的完整打法。]]></description>
     </item>
     <item>
+      <title><![CDATA[AI大模型及安全动态日报 | 2026年09月11日（星期五） · AI日报 · 犀牛伯爵]]></title>
+      <link>https://rhinocount.cn/ai-daily/2026-09-11-ai-daily.html</link>
+      <guid isPermaLink="true">https://rhinocount.cn/ai-daily/2026-09-11-ai-daily.html</guid>
+      <pubDate>Fri, 11 Sep 2026 09:00:00 +0800</pubDate>
+      <description><![CDATA[OpenAI推出ChatGPT Work数据代理和金融服务版，京东发布JoyAI世界模型打造10万卡算力集群，高德发布全球首个3D原生城市世界模型ABot-Earth，Positron AI获8.75亿美元融资估值50亿，阿里领投UniPat AI估值25亿，OpenAI任命Paul Christiano加入董事会，Anthropic发布蒸馏攻击报告，欧盟CRA第14条今日生效。]]></description>
+    </item>
+    <item>
       <title><![CDATA[16万颗国产芯片，砸出5000亿的DeepSeek · 犀牛伯爵笔记]]></title>
       <link>https://rhinocount.cn/notes/2026-09-10-deepseek-ipo-chip.html</link>
       <guid isPermaLink="true">https://rhinocount.cn/notes/2026-09-10-deepseek-ipo-chip.html</guid>
@@ -209,13 +216,6 @@
       <guid isPermaLink="true">https://rhinocount.cn/notes/2026-08-25-ox-alpha-stealth.html</guid>
       <pubDate>Tue, 25 Aug 2026 09:00:00 +0800</pubDate>
       <description><![CDATA[匿名模型Ox Alpha登顶OpenRouter，DeepSWE测试80%通过率碾压GPT-5.6和Claude，还点燃了A股AI板块。全网猜爹指向智谱。这是OpenRouter第五款Stealth模型，五次都是中国公司。匿名不是噱头，是中国AI厂商发明的出海新打法。]]></description>
-    </item>
-    <item>
-      <title><![CDATA[AI大模型及安全动态日报 | 2026年08月25日 · AI日报 · 犀牛伯爵]]></title>
-      <link>https://rhinocount.cn/ai-daily/2026-08-25-ai-daily.html</link>
-      <guid isPermaLink="true">https://rhinocount.cn/ai-daily/2026-08-25-ai-daily.html</guid>
-      <pubDate>Tue, 25 Aug 2026 09:00:00 +0800</pubDate>
-      <description><![CDATA[阿里800亿港元押注AI，OpenAI GPT-5.6降价超20%，英伟达60亿收购Poolside，Hugging Face传130亿被收购，Anthropic Mythos 5安全能力扩展，加密提示绕过AI安全过滤。]]></description>
     </item>
   </channel>
 </rss>
