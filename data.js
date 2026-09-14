@@ -127,6 +127,12 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "OpenAI说不上市了,中国AI公司排队敲钟",
+        desc: "9月12日Amodei发文呼吁放缓AI,Altman和马斯克同日表态支持,Altman宣布OpenAI不上市。同一周四家中国AI公司排队上市,Kimi ARR破10亿,DeepSeek冲刺科创板。判断AI公司值不值得关注,看三个数字。",
+        href: "notes/2026-09-14-openai-slowdown-china-ipo.html"
+      },
+      {
+        type: "Essay",
         title: "DeepSeek一降价，智谱两天跌掉三成",
         desc: "DeepSeek V4.1 Flash发布，5520亿参数MoE只激活80亿，KV Cache压缩到HBM的1/4，MIT开源免费下载。智谱两天跌掉三成，杰富瑞把ARR估值倍数从50倍砍到30倍。越强越便宜，规则被反过来了。这不是价格战，是定价权的转移。国内大模型行业将分化成两条路，一条走极致低成本规模路线，一条走垂直行业深扎路线。",
         href: "notes/2026-09-12-deepseek-v41-flash.html"
@@ -346,6 +352,13 @@ window.SITE_DATA = {
         excerpt: "名字来自两部作品：恋爱的犀牛教我不计成败地热爱，基督山伯爵教我不动声色地等待。2022年底ChatGPT像一头灰犀牛从地平线走来，Count就是把它的轨迹从噪音里算出来——然后与各位同行者一起远征。",
         img: "assets/note-05.svg",
         href: "notes/why-rhino-count.html"
+      },
+      {
+        cat: "观察", num: "N° 93",
+        title: "OpenAI说不上市了,中国AI公司排队敲钟",
+        excerpt: "9月12日Amodei发文呼吁放缓AI,Altman和马斯克同日表态支持,Altman宣布OpenAI 2026年不上市。同一周,四家中国AI公司在排队上市。Kimi ARR破10亿美元,DeepSeek冲刺科创板,智谱ARR 16亿美元。造AGI的人开始怕AI了,中国公司却在加速。这不是减速,是信心分化。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-09-14-openai-slowdown-china-ipo.html"
       },
       {
         cat: "观察", num: "N° 92",
