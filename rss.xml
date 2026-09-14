@@ -5,8 +5,22 @@
     <link>https://rhinocount.cn/</link>
     <description>AI Native Magazine — 记录 AI 如何改变技术、商业与人的工作方式。</description>
     <language>zh-CN</language>
-    <lastBuildDate>Sat, 12 Sep 2026 09:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 14 Sep 2026 09:00:00 +0800</lastBuildDate>
     <atom:link href="https://rhinocount.cn/rss.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title><![CDATA[OpenAI说不上市了,中国AI公司排队敲钟 | 犀牛伯爵]]></title>
+      <link>https://rhinocount.cn/notes/2026-09-14-openai-slowdown-china-ipo.html</link>
+      <guid isPermaLink="true">https://rhinocount.cn/notes/2026-09-14-openai-slowdown-china-ipo.html</guid>
+      <pubDate>Mon, 14 Sep 2026 09:00:00 +0800</pubDate>
+      <description><![CDATA[OpenAI宣布2026年不上市,Anthropic喊减速,而四家中国AI公司正在排队IPO。Kimi ARR破10亿美元,DeepSeek冲刺科创板。造AGI的人开始怕AI了,中国公司却在加速。]]></description>
+    </item>
+    <item>
+      <title><![CDATA[AI大模型及安全动态日报 | 2026年09月14日（星期一） · AI日报 · 犀牛伯爵]]></title>
+      <link>https://rhinocount.cn/ai-daily/2026-09-14-ai-daily.html</link>
+      <guid isPermaLink="true">https://rhinocount.cn/ai-daily/2026-09-14-ai-daily.html</guid>
+      <pubDate>Mon, 14 Sep 2026 09:00:00 +0800</pubDate>
+      <description><![CDATA[智谱完成约50亿美元融资加码GLM完全自训练，OpenAI DevDay 9月29日将推Managed Agents，欧盟CRA第14条正式生效进入24小时漏洞披露时钟，绿盟发布清风卫AIDR管理AI数字员工，Mistral获30亿欧元D轮估值210亿，Mercor获3.5亿美元布局数据标注。]]></description>
+    </item>
     <item>
       <title><![CDATA[DeepSeek一降价，智谱两天跌掉三成]]></title>
       <link>https://rhinocount.cn/notes/2026-09-12-deepseek-v41-flash.html</link>
@@ -202,20 +216,6 @@
       <guid isPermaLink="true">https://rhinocount.cn/ai-daily/2026-08-27-ai-daily.html</guid>
       <pubDate>Thu, 27 Aug 2026 09:00:00 +0800</pubDate>
       <description><![CDATA[英伟达Q2营收962亿美元同比增106%，DeepSeek估值5000亿元重启融资，欧盟AI法案正式落地执法，OpenAI高管离职潮持续。]]></description>
-    </item>
-    <item>
-      <title><![CDATA[机器人跑赢博尔特，普通人的机会到底在哪？ · 犀牛伯爵笔记]]></title>
-      <link>https://rhinocount.cn/notes/2026-08-26-robot-97-percent.html</link>
-      <guid isPermaLink="true">https://rhinocount.cn/notes/2026-08-26-robot-97-percent.html</guid>
-      <pubDate>Wed, 26 Aug 2026 09:00:00 +0800</pubDate>
-      <description><![CDATA[天工Ultra机器人9.39秒跑完百米，打破博尔特的人类纪录。但更关键的数字是：2026上半年中国人形机器人出货超4万台，占全球97%。表演背后是产业链、成本曲线和普通人的位置——制造业升级、服务业重组、新岗位出现，都在同一张时间表上。]]></description>
-    </item>
-    <item>
-      <title><![CDATA[AI大模型及安全动态日报 | 2026年08月26日（星期三） · AI日报 · 犀牛伯爵]]></title>
-      <link>https://rhinocount.cn/ai-daily/2026-08-26-ai-daily.html</link>
-      <guid isPermaLink="true">https://rhinocount.cn/ai-daily/2026-08-26-ai-daily.html</guid>
-      <pubDate>Wed, 26 Aug 2026 09:00:00 +0800</pubDate>
-      <description><![CDATA[OpenAI自研芯片Jalapeño首秀效率超GB300，Apple M5 Ultra支持512GB本地大模型，DeepSeek启动IPO筹备最快2027年挂牌，GPT-5.6登陆Kiro成本降82%，AI安全公司Alice融资1.4亿估值近10亿，FORGE基准揭示RAG单页污染风险。]]></description>
     </item>
   </channel>
 </rss>
