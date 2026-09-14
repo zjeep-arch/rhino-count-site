@@ -5,8 +5,15 @@
     <link>https://rhinocount.cn/</link>
     <description>AI Native Magazine — 记录 AI 如何改变技术、商业与人的工作方式。</description>
     <language>zh-CN</language>
-    <lastBuildDate>Fri, 11 Sep 2026 09:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 12 Sep 2026 09:00:00 +0800</lastBuildDate>
     <atom:link href="https://rhinocount.cn/rss.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title><![CDATA[DeepSeek一降价，智谱两天跌掉三成]]></title>
+      <link>https://rhinocount.cn/notes/2026-09-12-deepseek-v41-flash.html</link>
+      <guid isPermaLink="true">https://rhinocount.cn/notes/2026-09-12-deepseek-v41-flash.html</guid>
+      <pubDate>Sat, 12 Sep 2026 09:00:00 +0800</pubDate>
+      <description><![CDATA[DeepSeek V4.1 Flash发布并大幅降价，智谱两天跌掉三成。越强越便宜，规则被反过来了。]]></description>
+    </item>
     <item>
       <title><![CDATA[一个天天发红包的人，把Codex做到了2500万用户]]></title>
       <link>https://rhinocount.cn/notes/2026-09-11-tibo-codex-reset-growth.html</link>
@@ -209,13 +216,6 @@
       <guid isPermaLink="true">https://rhinocount.cn/ai-daily/2026-08-26-ai-daily.html</guid>
       <pubDate>Wed, 26 Aug 2026 09:00:00 +0800</pubDate>
       <description><![CDATA[OpenAI自研芯片Jalapeño首秀效率超GB300，Apple M5 Ultra支持512GB本地大模型，DeepSeek启动IPO筹备最快2027年挂牌，GPT-5.6登陆Kiro成本降82%，AI安全公司Alice融资1.4亿估值近10亿，FORGE基准揭示RAG单页污染风险。]]></description>
-    </item>
-    <item>
-      <title><![CDATA[一个没名字的模型干翻GPT-5.6，全网在找牛来是谁 · 犀牛伯爵笔记]]></title>
-      <link>https://rhinocount.cn/notes/2026-08-25-ox-alpha-stealth.html</link>
-      <guid isPermaLink="true">https://rhinocount.cn/notes/2026-08-25-ox-alpha-stealth.html</guid>
-      <pubDate>Tue, 25 Aug 2026 09:00:00 +0800</pubDate>
-      <description><![CDATA[匿名模型Ox Alpha登顶OpenRouter，DeepSWE测试80%通过率碾压GPT-5.6和Claude，还点燃了A股AI板块。全网猜爹指向智谱。这是OpenRouter第五款Stealth模型，五次都是中国公司。匿名不是噱头，是中国AI厂商发明的出海新打法。]]></description>
     </item>
   </channel>
 </rss>
