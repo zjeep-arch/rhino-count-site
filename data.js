@@ -127,6 +127,12 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "Siri还没来，中国语音AI已经全球第一了",
+        desc: "9月14日苹果Siri AI以英语Beta上线，中国大陆暂不可用。第二天阶跃星辰发布StepAudio 3系列五款模型，Conversational Dynamics 98.9%全球第一，Speech Reasoning 99.7%全球第一，ASR词错误率1.7%并列第一。吉利联合阶跃星辰推超级Eva智能体落地车载。三个判断标准帮你选语音AI工具。",
+        href: "notes/2026-09-15-语音AI全球第一.html"
+      },
+      {
+        type: "Essay",
         title: "3个人10万本钱半年赚2000万，AI短剧杀疯了",
         desc: "3人团队10万本钱半年赚2000万，6亿人看AI短剧。红果热播榜前99名AI短剧独占77席，中国出品占海外七成市场，3000块换个50万美元的故事。成本坍塌带来内容工业化，赢者通吃，出海降维。",
         href: "notes/2026-09-15-AI短剧.html"
@@ -358,6 +364,13 @@ window.SITE_DATA = {
         excerpt: "名字来自两部作品：恋爱的犀牛教我不计成败地热爱，基督山伯爵教我不动声色地等待。2022年底ChatGPT像一头灰犀牛从地平线走来，Count就是把它的轨迹从噪音里算出来——然后与各位同行者一起远征。",
         img: "assets/note-05.svg",
         href: "notes/why-rhino-count.html"
+      },
+      {
+        cat: "观察", num: "N° 95",
+        title: "Siri还没来，中国语音AI已经全球第一了",
+        excerpt: "9月14日苹果Siri AI以英语Beta上线，中国大陆暂不可用。第二天阶跃星辰发布StepAudio 3系列五款模型，Conversational Dynamics 98.9%全球第一，Speech Reasoning 99.7%全球第一，ASR词错误率1.7%并列第一。语音大模型赛道，中国从追赶变成反超。三个判断标准帮你选语音AI。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-09-15-语音AI全球第一.html"
       },
       {
         cat: "观察", num: "N° 94",
