@@ -127,6 +127,12 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "3个人10万本钱半年赚2000万，AI短剧杀疯了",
+        desc: "3人团队10万本钱半年赚2000万，6亿人看AI短剧。红果热播榜前99名AI短剧独占77席，中国出品占海外七成市场，3000块换个50万美元的故事。成本坍塌带来内容工业化，赢者通吃，出海降维。",
+        href: "notes/2026-09-15-AI短剧.html"
+      },
+      {
+        type: "Essay",
         title: "OpenAI说不上市了,中国AI公司排队敲钟",
         desc: "9月12日Amodei发文呼吁放缓AI,Altman和马斯克同日表态支持,Altman宣布OpenAI不上市。同一周四家中国AI公司排队上市,Kimi ARR破10亿,DeepSeek冲刺科创板。判断AI公司值不值得关注,看三个数字。",
         href: "notes/2026-09-14-openai-slowdown-china-ipo.html"
@@ -352,6 +358,13 @@ window.SITE_DATA = {
         excerpt: "名字来自两部作品：恋爱的犀牛教我不计成败地热爱，基督山伯爵教我不动声色地等待。2022年底ChatGPT像一头灰犀牛从地平线走来，Count就是把它的轨迹从噪音里算出来——然后与各位同行者一起远征。",
         img: "assets/note-05.svg",
         href: "notes/why-rhino-count.html"
+      },
+      {
+        cat: "观察", num: "N° 94",
+        title: "3个人10万本钱半年赚2000万，AI短剧杀疯了",
+        excerpt: "3人核心团队，10万注册资金，手搓半年连出12季，保守利润600万，乐观2000万。《万妖图录传》八季播放超60亿，红果热播榜前99名AI短剧独占77席，6亿人在看。中国AI短剧占海外七成市场，3000块成本换50万美元营收。这是成本坍塌带来的内容工业化，不是泡沫。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-09-15-AI短剧.html"
       },
       {
         cat: "观察", num: "N° 93",
