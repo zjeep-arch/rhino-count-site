@@ -374,7 +374,7 @@ window.SITE_DATA = {
       {
         cat: "观察", num: "N° 96",
         title: "三个AI巨头突然喊踩刹车，黄仁勋当场掀了桌子",
-        excerpt: "Anthropic CEO Amodei发3800字长文呼吁前沿AI协调放缓，OpenAI和DeepMind同意。黄仁勋当场拒绝，称AI不需要新法律。扎克伯格紧随其后反对集体减速。这到底是安全协议还是卡特尔？三个判断标准帮你辨别AI安全表态的真伪。",
+        excerpt: "Anthropic CEO Amodei发3800字长文呼吁前沿AI协调放缓，OpenAI和DeepMind同意。黄仁勋当场拒绝称AI不需要新法律。扎克伯格反对集体减速。这到底是安全协议还是卡特尔？三个判断标准帮你辨别AI安全表态的真伪。",
         img: "assets/note-05.svg",
         href: "notes/2026-09-16-AI减速.html"
       },
