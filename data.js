@@ -127,6 +127,12 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "三个AI巨头突然喊踩刹车，黄仁勋当场掀了桌子",
+        desc: "Anthropic CEO Amodei发3800字长文呼吁前沿AI协调放缓，OpenAI和DeepMind同意。黄仁勋当场拒绝称AI不需要新法律。扎克伯格紧随其后反对集体减速。这到底是安全协议还是卡特尔？三个判断标准帮你辨别AI安全表态的真伪。",
+        href: "notes/2026-09-16-AI减速.html"
+      },
+      {
+        type: "Essay",
         title: "Siri还没来，中国语音AI已经全球第一了",
         desc: "9月14日苹果Siri AI以英语Beta上线，中国大陆暂不可用。第二天阶跃星辰发布StepAudio 3系列五款模型，Conversational Dynamics 98.9%全球第一，Speech Reasoning 99.7%全球第一，ASR词错误率1.7%并列第一。吉利联合阶跃星辰推超级Eva智能体落地车载。三个判断标准帮你选语音AI工具。",
         href: "notes/2026-09-15-语音AI全球第一.html"
@@ -364,6 +370,13 @@ window.SITE_DATA = {
         excerpt: "名字来自两部作品：恋爱的犀牛教我不计成败地热爱，基督山伯爵教我不动声色地等待。2022年底ChatGPT像一头灰犀牛从地平线走来，Count就是把它的轨迹从噪音里算出来——然后与各位同行者一起远征。",
         img: "assets/note-05.svg",
         href: "notes/why-rhino-count.html"
+      },
+      {
+        cat: "观察", num: "N° 96",
+        title: "三个AI巨头突然喊踩刹车，黄仁勋当场掀了桌子",
+        excerpt: "Anthropic CEO Amodei发3800字长文呼吁前沿AI协调放缓，OpenAI和DeepMind同意。黄仁勋当场拒绝，称AI不需要新法律。扎克伯格紧随其后反对集体减速。这到底是安全协议还是卡特尔？三个判断标准帮你辨别AI安全表态的真伪。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-09-16-AI减速.html"
       },
       {
         cat: "观察", num: "N° 95",
