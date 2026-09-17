@@ -24,6 +24,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Check Builds display rules
+        run: node scripts/check-builds-layout.mjs
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
 

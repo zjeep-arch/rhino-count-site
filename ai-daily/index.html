@@ -1,24 +1,33 @@
 <!DOCTYPE html>
-<html lang="zh-CN" data-theme="dark">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="color-scheme" content="light dark" />
-  <meta name="theme-color" content="#05050A" media="(prefers-color-scheme: dark)" />
-  <meta name="theme-color" content="#F6F7F2" media="(prefers-color-scheme: light)" />
+<html lang="zh-CN" data-theme="dark"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#05050A" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#F6F7F2" media="(prefers-color-scheme: light)">
   <title>AI 早报 · 每天 8 点读懂 AI 世界 · 犀牛伯爵</title>
-  <meta name="description" content="犀牛伯爵 AI 早报 — 每天 8 点精选 AI 大模型、产品、资本与产业关键信号。" />
-  <link rel="canonical" href="https://zjeep-arch.github.io/rhino-count-site/ai-daily/" />
+  <meta name="description" content="犀牛伯爵 AI 早报 — 每天 8 点精选 AI 大模型、产品、资本与产业关键信号。">
+  <link rel="canonical" href="https://rhinocount.cn/ai-daily/">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "AI 早报 · 犀牛伯爵",
+    "description": "犀牛伯爵 AI 早报 — 每天 8 点精选 AI 大模型、产品、资本与产业关键信号。",
+    "url": "https://rhinocount.cn/ai-daily/",
+    "author": {
+      "@type": "Person",
+      "name": "犀牛伯爵",
+      "url": "https://rhinocount.cn"
+    }
+  }
+  </script>
 
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="AI 早报 · 每天 8 点读懂 AI 世界 · 犀牛伯爵" />
-  <meta property="og:description" content="每天 8 点精选 AI 大模型、产品、资本与产业关键信号。" />
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="AI 早报 · 每天 8 点读懂 AI 世界 · 犀牛伯爵">
+  <meta property="og:description" content="每天 8 点精选 AI 大模型、产品、资本与产业关键信号。">
 
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%23080B10'/%3E%3Ctext x='50%25' y='54%25' text-anchor='middle' font-size='38' font-family='Georgia,serif' fill='%23E8C77A'%3E犀%3C/text%3E%3C/svg%3E" />
-
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%23080B10'/%3E%3Ctext x='50%25' y='54%25' text-anchor='middle' font-size='38' font-family='Georgia,serif' fill='%23E8C77A'%3E犀%3C/text%3E%3C/svg%3E">
 
   <style>
     :root {
@@ -195,10 +204,10 @@
     h1 {
       margin: 0;
       max-width: 820px;
-      font-family: var(--display);
-      font-size: clamp(54px, 11vw, 132px);
-      line-height: 0.88; font-weight: 400;
-      letter-spacing: 0; text-transform: uppercase;
+      font-family: var(--sans);
+      font-size: clamp(30px, 5.2vw, 56px);
+      line-height: 1.22; font-weight: 800;
+      letter-spacing: -0.01em;
     }
     h1 span {
       display: block;
@@ -315,8 +324,8 @@
       display: flex; align-items: center; flex-wrap: wrap;
       gap: var(--s-2);
       color: var(--muted);
-      font-size: 11px; font-weight: 800;
-      letter-spacing: 0.16em; text-transform: uppercase;
+      font-size: 12px; font-weight: 700;
+      letter-spacing: 0.04em;
     }
     .art-meta .cat {
       color: var(--accent);
@@ -434,18 +443,37 @@
         margin-bottom: var(--s-7);
       }
       .page-header { padding-top: var(--s-5); }
-      h1 { font-size: clamp(48px, 17vw, 78px); }
-      .section-title { display: grid; align-items: start; }
-      .article-card { min-height: 190px; }
+      h1 { font-size: clamp(26px, 7.2vw, 40px); line-height: 1.3; }
+      .sub { font-size: 16px; line-height: 1.75; margin-top: var(--s-4); }
+      .section-title { display: grid; align-items: start; gap: var(--s-2); }
+      .article-card { min-height: auto; gap: var(--s-2); padding: var(--s-5) var(--s-4); }
+      .article-card p { -webkit-line-clamp: 4; font-size: 15px; }
+      .art-meta { font-size: 11.5px; letter-spacing: 0.02em; }
     }
   </style>
+
+  <!-- SEO Optimization -->
+  <meta property="og:url" content="https://rhinocount.cn/ai-daily/">
+  <meta property="og:image" content="https://rhinocount.cn/temple-of-heaven.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:site_name" content="犀牛伯爵 · AI 创作实验室">
+  <meta property="article:author" content="犀牛伯爵">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="AI 早报 · 每天 8 点读懂 AI 世界 · 犀牛伯爵">
+  <meta name="twitter:description" content="犀牛伯爵 AI 早报 — 每天 8 点精选 AI 大模型、产品、资本与产业关键信号。">
+  <meta name="twitter:image" content="https://rhinocount.cn/temple-of-heaven.png">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <meta property="bytedance:published_time" content="2026-08-01T09:00:00+08:00">
+  <meta property="bytedance:updated_time" content="2026-08-01T09:00:00+08:00">
 </head>
 <body>
   <div class="container">
     <header class="page-header">
       <div class="nav-row">
         <a class="back-link" href="../">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><polyline points="12 19 5 12 12 5"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"></path><polyline points="12 19 5 12 12 5"></polyline></svg>
           回到首页
         </a>
         <span class="time-pill">08:00 AM · DAILY</span>
@@ -475,16 +503,10 @@
         <h2 id="latestTitle">最新早报</h2>
         <p>按日期倒序更新</p>
       </div>
-      <div id="articleList" class="article-list">
-        <div class="loading">
-          <span>读</span><span>取</span><span>中</span> ...
-        </div>
-      </div>
-      <div id="loadMoreWrap" class="load-more-wrap" style="display:none;">
-        <button id="loadMoreBtn" class="load-more" type="button">
-          加载更多 <span class="arrow">↓</span>
-        </button>
-        <span id="loadMoreHint" class="load-more-hint"></span>
+      <div id="articleList" class="article-list"><a class="article-card is-featured" href="2026-09-11-ai-daily.html"><div class="art-meta"><span class="cat">安全 · 模型 · 资本</span><span class="date">2026-09-11</span></div><h2>AI大模型及安全动态日报 | 2026年09月11日（星期五）</h2><p>OpenAI推出ChatGPT Work数据代理和金融服务版，京东发布JoyAI世界模型打造10万卡算力集群，高德发布全球首个3D原生城市世界模型ABot-Earth，Positron AI获8.75亿美元融资估值50亿，阿里领投UniPat AI估值25亿，OpenAI任命Paul Christiano加入董事会，Anthropic发布蒸馏攻击报告，欧盟CRA第14条今日生效。</p><span class="art-arrow" aria-hidden="true"></span></a><a class="article-card" href="2026-09-10-ai-daily.html"><div class="art-meta"><span class="cat">安全 · 模型 · 资本</span><span class="date">2026-09-10</span></div><h2>AI大模型及安全动态日报 | 2026年09月10日（星期四）</h2><p>DeepSeek预告V4.1 Flash发布性能全面超越V4 Pro，科大讯飞发布星火X2.5全国产算力293B MoE模型，OpenAI发布ChatGPT Images 2.5生成延迟减半，Cylake获2.45亿美元融资，燧原科技科创板上市发行价142.18元，Mercor获3.5亿美元融资布局AI数据标注，OpenAI承认wiki智能体失控事件，NIST发布SP1353草案，中央网信办发布多项AI大模型安全标准。</p><span class="art-arrow" aria-hidden="true"></span></a><a class="article-card" href="2026-09-09-ai-daily.html"><div class="art-meta"><span class="cat">安全 · 模型 · 资本</span><span class="date">2026-09-09</span></div><h2>AI大模型及安全动态日报 | 2026年09月09日（星期三）</h2><p>OpenAI用88小时攻克NS方程千禧年难题，蚂蚁发布百灵Ling-3.0-flash-VL原生多模态模型，Mistral获30亿欧元D轮估值210亿，Cognition估值达480亿美元，启明星辰发布MAF大模型应用防火墙，奇安信AI加特林渗透测试智能体上线，景联文科技获近亿元A轮安恒信息参投，EU CRA第14条9月11日生效进入24小时漏洞披露时钟。</p><span class="art-arrow" aria-hidden="true"></span></a><a class="article-card" href="2026-09-08-ai-daily.html"><div class="art-meta"><span class="cat">安全 · 模型 · 资本</span><span class="date">2026-09-08</span></div><h2>AI大模型及安全动态日报 | 2026年09月08日（星期一）</h2><p>Anthropic签约5170亿美元算力合同锁定14.8GW，OpenAI达到自动化研究实习生里程碑agent与人力比3.1:1，联合国首次警告AI生存威胁，最高法发布涉AI纠纷审理意见，黄仁勋称AGI已到来，CrowdStrike扩展AIDR至AWS，易安联完成C轮亿元级融资。</p><span class="art-arrow" aria-hidden="true"></span></a><a class="article-card" href="2026-09-07-ai-daily.html"><div class="art-meta"><span class="cat">安全 · 模型 · 资本</span><span class="date">2026-09-07</span></div><h2>AI大模型及安全动态日报 | 2026年09月07日（星期一）</h2><p>OpenAI GPT-6 Astra网络安全能力达Critical级，Claude 11天完成费马大定理形式化证明，Anthropic IPO推迟至11月目标估值2万亿美元，EU CRA 9月11日生效AI产品进入24小时漏洞披露时钟，CrowdStrike推出Falcon Guardian与Agentic IdP，HiddenLayer获1亿美元B轮融资ARR增长10倍。</p><span class="art-arrow" aria-hidden="true"></span></a><a class="article-card" href="2026-09-04-ai-daily.html"><div class="art-meta"><span class="cat">安全 · 模型 · 资本</span><span class="date">2026-09-04</span></div><h2>AI大模型及安全动态日报 | 2026年9月4日（星期五）</h2><p>OpenAI发布GPT-6 Astra首个达到Critical级网络安全能力，NVIDIA 129.3亿美元收购Hugging Face，Google推出Gemini 3.8 Flash与Flash Cyber，李飞飞发布全球首个多模态世界模型Atlas，Meta发布Muse Spark 1.3，CrowdStrike推出SafeMind与Agentic IdP，美国两党推出Stop Rogue AI法案，欧盟CRA 9月11日生效。</p><span class="art-arrow" aria-hidden="true"></span></a><a class="article-card" href="2026-09-03-ai-daily.html"><div class="art-meta"><span class="cat">安全 · 模型 · 资本</span><span class="date">2026-09-03</span></div><h2>AI大模型及安全动态日报 | 2026年9月3日（星期四）</h2><p>Google发布Gemini 3.8 Flash与Flash Cyber，Anthropic推出Claude Fable 5.1，Meta发布Muse Spark 1.3编码超GPT-5.6，英伟达接近140亿收购Hugging Face，中央网信办清朗专项行动第二阶段启动，EU CRA漏洞报告义务9月11日生效，Palo Alto收购Console AI平台，CrowdStrike推出Falcon Guardian与SafeMind。</p><span class="art-arrow" aria-hidden="true"></span></a><a class="article-card" href="2026-09-02-ai-daily.html"><div class="art-meta"><span class="cat">安全 · 模型 · 资本</span><span class="date">2026-09-02</span></div><h2>AI大模型及安全动态日报 | 2026年09月02日（星期三）</h2><p>Anthropic发布Claude Fable 5.1与Mythos 5.1，OpenAI Astra达到关键级网络安全阈值，Nvidia+Microsoft联合投资Anthropic 150亿美元，xAI估值达1130亿美元，CrowdStrike推出Falcon Guardian与SafeMind，中央网信办清朗专项行动第二阶段启动，EU CRA漏洞报告义务9月11日生效。</p><span class="art-arrow" aria-hidden="true"></span></a></div>
+      <div id="loadMoreWrap" class="load-more-wrap" style="display: flex;">
+        <button id="loadMoreBtn" class="load-more" type="button">加载更多 <span class="arrow">↓</span></button>
+        <span id="loadMoreHint" class="load-more-hint">已显示 8 / 23 篇</span>
       </div>
     </section>
 
@@ -586,5 +608,12 @@
       xhr.send();
     })();
   </script>
-</body>
-</html>
+
+
+
+
+
+
+
+
+</body></html>
