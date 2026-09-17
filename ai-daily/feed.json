@@ -1,6 +1,13 @@
 {
-  "updated": "2026-07-16T08:00:00+08:00",
+  "updated": "2026-09-17T08:00:00+08:00",
   "articles": [
+    {
+      "cat": "数据 · 洞察 · 市场",
+      "date": "2026-09-17",
+      "title": "AI大模型动态日报 | 2026年9月17日（星期四）",
+      "excerpt": "Nvidia拟投资Anthropic IPO至多100亿美元，OpenAI公开六起模型错位事件，《人工智能安全治理框架3.0》发布，Google推出Gemini 3.8 Flash Cyber安全模型，DeepSeek V4.1 Flash发布。",
+      "href": "2026-09-17-ai-daily.html"
+    },
     {
       "cat": "数据 · 洞察 · 市场",
       "date": "2026-07-16",
