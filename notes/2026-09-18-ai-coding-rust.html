@@ -79,7 +79,9 @@
 
     <h2>GitHub到底在干什么</h2>
 
-    <p>先说清楚GitHub在干什么。Copilot的运行时不是一个普通模块。它是GitHub所有AI功能的核心引擎。Copilot CLI、Copilot app、VS Code里的AI、Visual Studio里的AI、Excel里的AI、PowerPoint里的AI、Word里的AI，一长串产品背后，跑的是同一个运行时。</p>
+    <p>先说清楚GitHub在干什么。Copilot的运行时不是一个普通模块。它是GitHub所有AI功能的核心引擎。</p>
+
+    <p>Copilot CLI、Copilot app、VS Code里的AI、Visual Studio里的AI、Excel里的AI、PowerPoint里的AI、Word里的AI，一长串产品背后，跑的是同一个运行时。</p>
 
     <p>问题是，这个运行时原本用TypeScript写的，跑在Node.js上。对一个命令行工具来说没问题。但当它被嵌入到Excel和Outlook这些桌面应用里，麻烦来了。</p>
 
@@ -104,9 +106,10 @@
 
     <p>我自己的判断是，AI编程工具的价值不在"替代程序员"，在"让一个程序员干一个团队的活"。</p>
 
-    <p>GitHub这次迁移是最好的证据。</p>
+    <p>GitHub这次迁移是最好的证据。大约430,000行TypeScript代码需要移植，最终产出了832,378行Rust生产代码，加上468,689行Rust单元测试。全部通过128个Pull Request完成，历时14个半星期，期间发布了135次，平均每天1.3次。</p>
 
-    <p>大约430,000行TypeScript代码需要移植。最终产出了832,378行Rust生产代码，加上468,689行Rust单元测试。全部通过128个Pull Request完成，历时14个半星期。期间发布了135次，平均每天1.3次。</p>
+    <img src="https://github.blog/wp-content/uploads/2026/09/runtime-line-history.svg?resize=1024,563" alt="GitHub Copilot运行时从TypeScript迁移到Rust的代码量变化图，TypeScript降至零，Rust达到约83万行" loading="lazy">
+    <div class="img-caption">图源｜GitHub Blog，TypeScript代码量（蓝线）逐步降至零，Rust代码量（橙线）攀升至约83万行</div>
 
     <p>关键是，大部分代码是AI写的。Stephen Toub主要做的是架构决策和代码审查。</p>
 
