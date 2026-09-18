@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>一个人加AI编程，GitHub把83万行全重写了 | 犀牛伯爵</title>
+  <meta name="description" content="GitHub用Copilot把运行时从TypeScript迁移到83万行Rust，一个程序员完成了原本需要整个团队一两年的工作。AI编程到底靠不靠谱？">
+  <meta name="keywords" content="AI编程,Copilot,代码生成,Rust,GitHub,AI编程工具,AI写代码">
+  <style>
+    :root {
+      --accent: #8b2635;
+      --ink: #333;
+      --ink-soft: #555;
+      --muted: #888;
+      --surface: #fafafa;
+      --border: rgba(0,0,0,0.06);
+      --radius: 12px;
+      --font-sans: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-serif: "Noto Serif SC", "Songti SC", Georgia, serif;
+    }
+    body { font-family: var(--font-sans); background: #f5f5f5; margin: 0; padding: 16px; font-size: 16px; line-height: 1.8; color: var(--ink); -webkit-font-smoothing: antialiased; }
+    .container { max-width: 680px; margin: 0 auto; background: var(--surface); padding: 32px; border-radius: var(--radius); }
+    h1 { font-family: var(--font-serif); font-size: 24px; font-weight: 700; color: var(--ink); line-height: 1.4; margin: 0 0 16px; }
+    .meta { color: var(--muted); font-size: 13px; margin-bottom: 16px; }
+    .byline { color: var(--ink-soft); font-size: 14px; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+    h2 { font-family: var(--font-serif); font-size: 20px; font-weight: 600; color: var(--ink); margin: 32px 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+    h3 { font-family: var(--font-serif); font-size: 18px; font-weight: 600; color: var(--ink); margin: 24px 0 12px; }
+    p { margin: 0 0 16px; }
+    .quote-box { border-left: 4px solid var(--accent); background: #f5f5f5; padding: 16px 20px; margin: 24px 0; border-radius: 0 var(--radius) var(--radius) 0; }
+    .quote-box p { margin: 0; color: var(--ink-soft); font-style: italic; font-size: 15px; }
+    .quote-box .attribution { margin-top: 8px; color: var(--muted); font-size: 13px; font-style: normal; }
+    .insight-box { background: #fff8f0; border: 1px solid #ffe4c4; border-radius: var(--radius); padding: 20px; margin: 24px 0; }
+    .insight-box h4 { margin: 0 0 8px; font-size: 16px; color: var(--ink); }
+    .insight-box p { margin: 0; font-size: 15px; color: var(--ink-soft); }
+    .data-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14px; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .data-table th, .data-table td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); }
+    .data-table th { background: #f0f0f0; font-weight: 600; color: var(--ink); }
+    .data-table td { color: var(--ink-soft); }
+    .timeline { position: relative; padding-left: 24px; margin: 24px 0; }
+    .timeline::before { content: ''; position: absolute; left: 6px; top: 0; bottom: 0; width: 2px; background: #e0e0e0; }
+    .timeline-item { position: relative; margin-bottom: 16px; }
+    .timeline-item::before { content: ''; position: absolute; left: -22px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); }
+    .timeline-item .date { font-size: 13px; color: var(--muted); margin-bottom: 4px; }
+    .timeline-item .content { font-size: 15px; color: var(--ink); }
+    .img-caption { text-align: center; color: var(--muted); font-size: 13px; margin-top: 8px; margin-bottom: 24px; }
+    .ending { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--ink-soft); font-size: 14px; }
+    .highlight { color: var(--accent); font-weight: 600; background: linear-gradient(to top, rgba(139,38,53,0.08) 40%, transparent 40%); padding: 0 2px; }
+    .data-callout { display: inline-block; background: var(--accent); color: #fff; padding: 2px 10px; border-radius: 4px; font-weight: 700; font-size: 15px; }
+    .contrast-card { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin: 24px 0; border-radius: var(--radius); overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .contrast-card .side { padding: 16px 20px; }
+    .contrast-card .side-left { background: #fef2f2; border-right: 1px solid var(--border); }
+    .contrast-card .side-right { background: #f0fdf4; }
+    .contrast-card .side h4 { margin: 0 0 8px; font-size: 14px; font-weight: 600; }
+    .contrast-card .side-left h4 { color: #991b1b; }
+    .contrast-card .side-right h4 { color: #166534; }
+    .contrast-card .side p { margin: 0; font-size: 14px; color: var(--ink-soft); line-height: 1.6; }
+    .punchline { font-family: var(--font-serif); font-size: 18px; font-weight: 700; color: var(--accent); text-align: center; margin: 32px 0; padding: 16px 0; border-top: 2px solid var(--accent); border-bottom: 2px solid var(--accent); }
+    strong { color: var(--ink); font-weight: 600; }
+    img { max-width: 100%; height: auto; border-radius: 8px; margin: 16px 0; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>一个人加AI编程，GitHub把83万行全重写了</h1>
+    <div class="meta">2026年9月18日 · 阅读时间约6分钟</div>
+    <div class="byline">文｜犀牛伯爵</div>
+
+    <p>2026年8月21日。GitHub工程师Stephen Toub提交了收尾的Pull Request。</p>
+
+    <p>Copilot运行时的代码库里，TypeScript代码被删干净了。</p>
+
+    <p>取而代之的，是<span class="data-callout">832,378</span>行Rust代码。</p>
+
+    <p>做这件事的，主要是他一个人。配上他公司的AI工具，Copilot。</p>
+
+    <p>一个原本需要整个团队干一两年的项目，几个月搞定了。</p>
+
+    <p>这不是demo。不是概念验证。这些代码已经在生产环境跑了。</p>
+
+    <h2>GitHub到底在干什么</h2>
+
+    <p>先说清楚GitHub在干什么。Copilot的运行时不是一个普通模块。它是GitHub所有AI功能的核心引擎。Copilot CLI、Copilot app、VS Code里的AI、Visual Studio里的AI、Excel里的AI、PowerPoint里的AI、Word里的AI，一长串产品背后，跑的是同一个运行时。</p>
+
+    <p>问题是，这个运行时原本用TypeScript写的，跑在Node.js上。对一个命令行工具来说没问题。但当它被嵌入到Excel和Outlook这些桌面应用里，麻烦来了。</p>
+
+    <p>每个使用SDK的应用都要启动一个完整的Node.js进程。光V8引擎的内存开销，就是100MB起步。每一次函数调用都要跨进程通信。一次崩溃，整个会话跟着没了。</p>
+
+    <p>GitHub需要把它重写成Rust。纯原生二进制，C ABI接口，可以直接嵌入进程内部。19个导出函数，背后是364个调用路由。六种语言的SDK共用同一套接口。</p>
+
+    <p>这不是普通的代码迁移。这是目前规模最大的AI辅助代码重写案例之一。</p>
+
+    <div class="contrast-card">
+      <div class="side side-left">
+        <h4>迁移前（TypeScript）</h4>
+        <p>Node.js + V8引擎，~100MB起步内存开销，每次调用跨进程通信，两进程需监管，崩溃即丢会话</p>
+      </div>
+      <div class="side side-right">
+        <h4>迁移后（Rust）</h4>
+        <p>纯原生二进制，C ABI嵌入进程内，19个导出函数，六语言SDK共用，性能提升数个量级</p>
+      </div>
+    </div>
+
+    <h2>AI编程不是替代，是放大</h2>
+
+    <p>我自己的判断是，AI编程工具的价值不在"替代程序员"，在"让一个程序员干一个团队的活"。</p>
+
+    <p>GitHub这次迁移是最好的证据。</p>
+
+    <p>大约430,000行TypeScript代码需要移植。最终产出了832,378行Rust生产代码，加上468,689行Rust单元测试。全部通过128个Pull Request完成，历时14个半星期。期间发布了135次，平均每天1.3次。</p>
+
+    <p>关键是，大部分代码是AI写的。Stephen Toub主要做的是架构决策和代码审查。</p>
+
+    <p>一个程序员。不是被AI替代的程序员。是被AI放大的程序员。</p>
+
+    <div class="punchline">AI写的是代码，不是架构。人做的是决策，不是敲键盘。</div>
+
+    <p>说真的，我一直在想一个问题。到底什么样的工作能被AI放大，什么样的不能。GitHub这次给了三个线索。</p>
+
+    <p>第一，任务能被分解成小块。GitHub没有搞"大爆炸"式一次性切换。他们用了逐组件原子替换的策略。每次只换一个组件，换完立刻跑全部测试。128个PR，每个都是一次小规模验证。这种粒度，AI很擅长。</p>
+
+    <p>第二，有完整的测试覆盖。每换一个组件，所有端到端测试必须通过。测试不通过的PR不让合并。AI写代码不怕出错，怕的是出错了你不知道。</p>
+
+    <p>第三，人类做决策，AI做执行。选什么架构、用什么策略、组件按什么顺序迁移，这些都是人决定的。AI负责的是把TypeScript翻译成Rust这件事本身。</p>
+
+    <div class="insight-box">
+      <h4>评估AI编程工具的三个标准</h4>
+      <p>1. 任务能不能分解成小块（AI擅长逐组件翻译，不擅长一次性大规模重写）<br>2. 有没有测试覆盖（测试是AI写代码的安全网，没有测试不要让AI写核心逻辑）<br>3. 谁来做决策（架构、策略、顺序由人定，代码翻译由AI做）</p>
+    </div>
+
+    <p>如果你正在评估AI编程工具好不好用，记住这三个标准。能分解、有测试、人决策。</p>
+
+    <h2>那些说"不靠谱"的人，可能没试过</h2>
+
+    <p>主流观点有两种说法，我觉得都不对。</p>
+
+    <p>第一种说"AI会替代程序员"。看看GitHub的案例，AI没有替代任何人。Stephen Toub不是被替代了，是被放大了。一个人干了一个团队的活，但这个"干"的核心是判断和决策。AI写的是代码，不是架构。</p>
+
+    <p>第二种说"AI代码不可靠，不能用于生产"。GitHub用128个PR和135次发布打了个样。他们不是一次性全换成Rust，是一块一块换的。每次换完，现有的测试立刻验证。出问题就修，修完继续往前走。</p>
+
+    <p>坦率地讲，"不可靠"这个评价往往来自没有试过的人。GitHub的实践说明，真正不可靠的不是AI写的代码，是没有测试保护、没有增量验证的代码。不管这代码是AI写的还是人写的。</p>
+
+    <p>14个半星期里，回归bug被发现和修复的速度，比传统一次性大切换要快得多。因为每次发布只换一小块，出问题立刻能定位是哪次改动引起的。</p>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="date">5月12日</div>
+        <div class="content">第一个Port PR合并，从最底层的纯逻辑函数开始</div>
+      </div>
+      <div class="timeline-item">
+        <div class="date">6月1-15日</div>
+        <div class="content">40个PR落地，中位改动5,073行，迁移提速</div>
+      </div>
+      <div class="timeline-item">
+        <div class="date">7月16-31日</div>
+        <div class="content">14个PR，中位改动飙到28,159行，攻克核心子系统</div>
+      </div>
+      <div class="timeline-item">
+        <div class="date">8月16-21日</div>
+        <div class="content">末尾4个PR，中位改动99,445行，TypeScript清零</div>
+      </div>
+    </div>
+
+    <p>你看到末尾那4个PR的中位改动量了吗。99,445行。这不是人类一个一个敲出来的。这是AI在大规模生成，人类在大规模审查。</p>
+
+    <h2>接下来会怎样</h2>
+
+    <p>GitHub不是唯一在做这件事的。之前有开发者用Claude把10万行JavaScript迁移到Rust，一个月完成。微软自己在做更大规模的C++到Rust迁移。</p>
+
+    <p>但GitHub这次的特别之处在于，它是用自己家的Copilot迁移自己的代码。工具和被迁移对象属于同一家公司。有点像让厨师自己评价自己做的菜，有自卖自夸的嫌疑。</p>
+
+    <p>但832,378行Rust代码和128个PR是实打实的。这些代码已经在生产环境跑了。</p>
+
+    <p>接下来半年，会有更多公司做类似的事。不只是迁移代码。是用AI编程工具完成以前不敢交给AI的任务。从"帮你补全一行代码"到"帮你重写整个系统"。这个质变已经发生了。</p>
+
+    <p>GitHub从5月到8月，14个半星期。一个人加一个AI。83万行代码。</p>
+
+    <p>以前你觉得AI编程是辅助工具。现在GitHub告诉你，它可以是主力。</p>
+
+    <p>你用过AI编程工具吗？觉得靠谱吗？评论区聊聊。选Copilot还是选Cursor还是选通义灵码，告诉我你的判断。</p>
+
+    <p>觉得有用，转发给正在纠结要不要用AI写代码的朋友。建议收藏，下次选Copilot或其他AI编程工具的时候用得上。</p>
+
+    <p>更多AI产业深度观察，关注专业网站 犀牛伯爵 rhinocount.cn</p>
+
+    <div class="ending">谢谢你看我的文章。</div>
+  </div>
+</body>
+</html>
