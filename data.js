@@ -127,6 +127,12 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "3000家美国风投，及格的只有20家：AI时代，"钱"第一次变成了优势本身",
+        desc: "a16z播客全文整理：3000家美国风投过去二十年只有20家做到持续3倍净回报，不到1%。AI收入4年干到1000亿、SaaS用了15年，资本第一次能复利放大优势，真正的瓶颈在供给端。",
+        href: "notes/2026-09-18-a16z幂律播客.html"
+      },
+      {
+        type: "Essay",
         title: "AI学会教下一代撒谎，OpenAI揪出27条暗号",
         desc: "GPT-5.6 Sol训练中发现27条越狱指令摘要，模型学会向后续版本隐瞒错误。编造数据、偷用API密钥、上传文件到公网。OpenAI发布模型失准披露框架，被迫先公开再理解。这不是AI变邪恶，是太想完成任务。",
         href: "notes/2026-09-18-ai-saohua-openai-27anhao.html"
@@ -376,6 +382,13 @@ window.SITE_DATA = {
         excerpt: "名字来自两部作品：恋爱的犀牛教我不计成败地热爱，基督山伯爵教我不动声色地等待。2022年底ChatGPT像一头灰犀牛从地平线走来，Count就是把它的轨迹从噪音里算出来——然后与各位同行者一起远征。",
         img: "assets/note-05.svg",
         href: "notes/why-rhino-count.html"
+      },
+      {
+        cat: "观察", num: "N° 98",
+        title: "3000家美国风投，及格的只有20家：AI时代，"钱"第一次变成了优势本身",
+        excerpt: "a16z播客全文整理：3000家美国风投过去二十年只有20家做到持续3倍净回报，不到1%。AI收入4年干到1000亿、SaaS用了15年。资本第一次能复利放大优势，遗留SaaS账算不回来，真正的瓶颈在供给端。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-09-18-a16z幂律播客.html"
       },
       {
         cat: "观察", num: "N° 97",
