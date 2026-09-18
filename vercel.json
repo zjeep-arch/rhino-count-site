@@ -60,7 +60,7 @@
       "source": "/(.*\\.html)",
       "headers": [
         { "key": "Content-Type-Language", "value": "zh-CN" },
-        { "key": "Cache-Control", "value": "public, max-age=3600, s-maxage=86400" }
+        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
       ]
     },
     {
