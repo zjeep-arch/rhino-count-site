@@ -127,6 +127,12 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "那个教ChatGPT说话的人，做了个哑巴模型JEV",
+        desc: "ChatGPT共同发明人Diogo的新模型JEV发布三天，X上3613万浏览。不写字只做判断，比前沿模型快20到200倍，成本低40到400倍。tamara用插件把Claude Code上下文瘦身做成4000星开源项目，创始人亲自回复认可。哑巴模型，判断从不含糊。",
+        href: "notes/2026-09-19-jev-moxing.html"
+      },
+      {
+        type: "Essay",
         title: "一个人加AI编程，GitHub把83万行全重写了",
         desc: "GitHub用自家Copilot把运行时从TypeScript迁移到832378行Rust，128个PR历时14个半星期。一个程序员加一个AI，干完了整个团队一两年的活。AI编程到底靠不靠谱？这是目前最大规模的实战验证。",
         href: "notes/2026-09-18-ai-coding-rust.html"
@@ -388,6 +394,13 @@ window.SITE_DATA = {
         excerpt: "名字来自两部作品：恋爱的犀牛教我不计成败地热爱，基督山伯爵教我不动声色地等待。2022年底ChatGPT像一头灰犀牛从地平线走来，Count就是把它的轨迹从噪音里算出来——然后与各位同行者一起远征。",
         img: "assets/note-05.svg",
         href: "notes/why-rhino-count.html"
+      },
+      {
+        cat: "观察", num: "N° 100",
+        title: "那个教ChatGPT说话的人，做了个哑巴模型JEV",
+        excerpt: "ChatGPT共同发明人Diogo的哑巴模型JEV发布三天，X上3613万浏览。它不写字只做判断，比前沿模型快20到200倍，成本低40到400倍。tamara用JEV给Claude Code上下文做瘦身，插件开源两天3637颗星，创始人亲自下场回复认可。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-09-19-jev-moxing.html"
       },
       {
         cat: "观察", num: "N° 99",

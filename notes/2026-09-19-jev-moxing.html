@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="keywords" content="JEV,JEV模型,System One模型,Claude Code插件,AI决策模型">
+  <meta name="description" content="教ChatGPT说话的人做了个哑巴模型JEV，X上三天3613万浏览，只做选择不打字。学会用它，Agent不再卡10秒写总结。">
+  <title>那个教ChatGPT说话的人，做了个哑巴模型JEV</title>
+  <style>
+    :root {
+      --accent: #92400e;
+      --ink: #333;
+      --ink-soft: #555;
+      --muted: #888;
+      --surface: #fafafa;
+      --border: rgba(0,0,0,0.06);
+      --radius: 12px;
+      --font-sans: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-serif: "Noto Serif SC", "Songti SC", Georgia, serif;
+    }
+    body { font-family: var(--font-sans); background: #f5f5f5; margin: 0; padding: 16px; font-size: 16px; line-height: 1.8; color: var(--ink); -webkit-font-smoothing: antialiased; }
+    .container { max-width: 680px; margin: 0 auto; background: var(--surface); padding: 32px; border-radius: var(--radius); }
+    h1 { font-family: var(--font-serif); font-size: 24px; font-weight: 700; color: var(--ink); line-height: 1.4; margin: 0 0 16px; }
+    .meta { color: var(--muted); font-size: 13px; margin-bottom: 16px; }
+    .byline { color: var(--ink-soft); font-size: 14px; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+    h2 { font-family: var(--font-serif); font-size: 20px; font-weight: 600; color: var(--ink); margin: 32px 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+    h3 { font-family: var(--font-serif); font-size: 18px; font-weight: 600; color: var(--ink); margin: 24px 0 12px; }
+    p { margin: 0 0 24px; }
+    .quote-box { border-left: 4px solid var(--accent); background: #f5f5f5; padding: 16px 20px; margin: 24px 0; border-radius: 0 var(--radius) var(--radius) 0; }
+    .quote-box p { margin: 0; color: var(--ink-soft); font-style: italic; font-size: 15px; }
+    .quote-box .attribution { margin-top: 8px; color: var(--muted); font-size: 13px; font-style: normal; }
+    .insight-box { background: #fff8f0; border: 1px solid #ffe4c4; border-radius: var(--radius); padding: 20px; margin: 24px 0; }
+    .insight-box h4 { margin: 0 0 8px; font-size: 16px; color: var(--ink); }
+    .insight-box p { margin: 0; font-size: 15px; color: var(--ink-soft); }
+    .data-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14px; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .data-table th, .data-table td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); }
+    .data-table th { background: #f0f0f0; font-weight: 600; color: var(--ink); }
+    .data-table td { color: var(--ink-soft); }
+    .timeline { position: relative; padding-left: 24px; margin: 24px 0; }
+    .timeline::before { content: ''; position: absolute; left: 6px; top: 0; bottom: 0; width: 2px; background: #e0e0e0; }
+    .timeline-item { position: relative; margin-bottom: 16px; }
+    .timeline-item::before { content: ''; position: absolute; left: -22px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); }
+    .timeline-item .date { font-size: 13px; color: var(--muted); margin-bottom: 4px; }
+    .timeline-item .content { font-size: 15px; color: var(--ink); }
+    figure { margin: 24px 0; }
+    figure img { width: 100%; border-radius: 8px; }
+    .img-caption { text-align: center; color: var(--muted); font-size: 13px; margin-top: 8px; }
+    .ending { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--ink-soft); font-size: 14px; }
+    .highlight { color: var(--accent); font-weight: 600; background: linear-gradient(to top, rgba(146,64,14,0.10) 40%, transparent 40%); padding: 0 2px; }
+    .data-callout { display: inline-block; background: var(--accent); color: #fff; padding: 2px 10px; border-radius: 4px; font-weight: 700; font-size: 15px; }
+    .contrast-card { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin: 24px 0; border-radius: var(--radius); overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .contrast-card .side { padding: 16px 20px; }
+    .contrast-card .side-left { background: #fef2f2; border-right: 1px solid var(--border); }
+    .contrast-card .side-right { background: #f0fdf4; }
+    .contrast-card .side h4 { margin: 0 0 8px; font-size: 14px; font-weight: 600; }
+    .contrast-card .side-left h4 { color: #991b1b; }
+    .contrast-card .side-right h4 { color: #166534; }
+    .contrast-card .side p { margin: 0; font-size: 14px; color: var(--ink-soft); line-height: 1.6; }
+    .punchline { font-family: var(--font-serif); font-size: 18px; font-weight: 700; color: var(--accent); text-align: center; margin: 32px 0; padding: 16px 0; border-top: 2px solid var(--accent); border-bottom: 2px solid var(--accent); }
+    strong { color: var(--ink); font-weight: 600; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>那个教ChatGPT说话的人，做了个哑巴模型JEV</h1>
+    <div class="meta">2026-09-19 · 阅读时间约 7 分钟</div>
+    <div class="byline">文｜犀牛伯爵</div>
+
+    <p>在 Claude Code 里写长代码，最糟心的时刻不是报错，是上下文快满的那一瞬间。</p>
+    <p>屏幕一暗，光标转圈，系统开始写总结小作文。10 秒。你什么都做不了，只能等它把这堆对话揉成一团，然后祈祷精华别被揉碎。</p>
+    <p>我经历过太多次了。几千行终端日志、几十个文件内容堆在上下文里，Agent 记不住核心状态，越写越傻，账单越滚越大。</p>
+    <p>直到上个月，我在 X 上刷到一条帖子，直接看愣住了。</p>
+
+    <h2>一条让创始人亲自下场的帖子</h2>
+    <p>发帖的是开发者 tamara。标题很直白，找到了 JEV 的完美用法。</p>
+    <p>她用 JEV 给 Claude Code 做了一次瘦身手术。几千行废话毫秒级打分，没用的直接丢，核心代码和状态 100% 原样保留。卡 10 秒的总结，变成几十毫秒的无感清理。</p>
+    <p>这条帖子炸了。323 万浏览，1 万赞，609 次转发。我写这篇文章的时候，数字还在涨。</p>
+    <p>更炸的是评论区。TypeSafe AI 的创始人 Diogo Almeida 本人下场，就回了一句话，YES。</p>
+    <p>free coding agents from designing around the KV cache。让编码 Agent 摆脱围绕 KV 缓存设计的日子。</p>
+    <p>这条回复自己都拿了 11 万浏览、551 个赞。</p>
+
+    <h2>教ChatGPT说话的人，转头去做了哑巴模型</h2>
+    <p>就在三天前，这个 Diogo 发了一条官宣，把自己推到风暴中心。</p>
+    <p>他的原话是，在共同发明 ChatGPT 之后，我一直在问自己，为什么超人般的聊天模型没有通往 AGI？</p>
+    <p>是的，ChatGPT 的共同发明人之一。RLHF 这项让模型学会听话的技术，他是核心贡献者之一。他花了两年时间，做了个新东西，今天发布。</p>
+    <p>这个模型叫 JEV。</p>
+    <p>它不做别的，就是发选择、打分、给判断。它是 System One 模型的第一个成员。每条回复只有三种形态，一个选项 Choice，一个概率 Score，一个都不是 Noul。</p>
+    <figure>
+      <img src="http://dingyue.ws.126.net/2026/0917/4e0761b6j00tlhvs900hkd000u000s2m.jpg" alt="Diogo Almeida在X发布的JEV官宣推文，宣布20-200倍提速和40-400倍降本">
+      <figcaption class="img-caption">图源｜网易科技转引自 X 平台，Diogo Almeida 官宣推文</figcaption>
+    </figure>
+    <p>官宣带了一段 2 分 56 秒的视频。现在的数字是 3613 万浏览，7.1 万赞，7646 次转发。</p>
+
+    <h2>它不是来聊天的，它是来干活的</h2>
+    <p>我盯着这个数据愣了很久。3613 万浏览什么概念，一个模型的发布，热度比很多明星绯闻还高。</p>
+    <p>它快。端到端延迟 70 到 500 毫秒，官方口径比前沿大模型快 20 到 200 倍，最高一档测算到了 193.6 倍。</p>
+    <p>它便宜。输入每百万 token 0.042 美元，输出免费。按官方口径，成本是前沿模型的四十分之一到四百分之一。</p>
+    <figure>
+      <img src="http://dingyue.ws.126.net/2026/0917/4306b469j00tlhvs800obd000u000jim.jpg" alt="JEV与前沿大模型的速度与成本对比表，JEV最快193.6倍、成本最低444.6倍">
+      <figcaption class="img-caption">图源｜网易科技转引自官方，JEV 与前沿模型速度成本对比</figcaption>
+    </figure>
+    <p>一句话总结，它不写文章，不解释推理。你把数据丢给它，它回你一个能直接写进 if 语句的判断。就是一个哑巴，但判断从不含糊。</p>
+
+    <div class="data-table-wrapper">
+      <table class="data-table">
+        <tr><th>维度</th><th>JEV</th><th>传统前沿大模型</th></tr>
+        <tr><td>回复内容</td><td>选项 / 概率 / 评分</td><td>长篇文字</td></tr>
+        <tr><td>端到端延迟</td><td>70-500 毫秒</td><td>数秒级</td></tr>
+        <tr><td>输入价格</td><td>$0.042 每百万 token</td><td>常用 $3-15</td></tr>
+        <tr><td>输出价格</td><td>免费</td><td>按量计费</td></tr>
+        <tr><td>代表作</td><td>判断、分类、路由</td><td>写作、长推理</td></tr>
+      </table>
+    </div>
+
+    <h2>X 上正在发生的五个真实案例</h2>
+    <p>光看参数没意思，我翻了 X 上最近三天关于 JEV 的所有热门帖子，挑出五个值得抄作业的用法。</p>
+    <p>第一个就是 tamara 的插件 fast-jev-compaction。把 Claude Code 每一步的 tool_use 和 tool_result 都交给 JEV 打分，无用的直接扔。</p>
+    <p>几个字就能让上下文瘦一圈。GitHub 上 3637 颗星，上线才两天。</p>
+    <p>第二个来自 Venice。昨天它官宣把 JEV 接进自家 API，beta 试用。原话是，它会回答，不会写作。</p>
+    <p>你送它应用状态和结构化问题，它回你一个能分支的概率、选项或评分。不用再从聊天模型里挤 JSON 了。</p>
+    <p>第三个是 Doom。TypeSafe 的 Allie 在 Discord 的 town-hall 里现场演示 JEV 打 Doom，每秒大约 10 次决策，每次决策就是一个选择。</p>
+    <p>官方说没剪进发布视频的料还有很多。</p>
+    <p>第四个来自评测界。Every 的 Mike Taylor 拿 37 篇文档做了 777 次判断，总耗时不到 0.7 秒。这是开发圈转发最多的一张图。</p>
+    <p>第五个是定价战的姿势。有投资人问联合创始人 Erik，会不会涨价？Erik 回，我们现在这个价格就是盈利的，还会让它更便宜。</p>
+    <p>Diogo 转发时补了一句，如果你是想建议涨价的投资人，你会非常难过。</p>
+
+    <div class="timeline">
+      <div class="timeline-item"><div class="date">9 月 16 日</div><div class="content">Diogo 官宣 JEV，3613 万浏览</div></div>
+      <div class="timeline-item"><div class="date">9 月 18 日</div><div class="content">tamara 发布 fast-jev-compaction，323 万浏览</div></div>
+      <div class="timeline-item"><div class="date">9 月 18 日</div><div class="content">Diogo 亲自回复插件帖，认证 KV cache 解法</div></div>
+      <div class="timeline-item"><div class="date">9 月 19 日</div><div class="content">Venice 接入 API，TechCrunch 报道，Doom 演示</div></div>
+    </div>
+
+    <p>TechCrunch 也下场了，标题是，JEV，一种新型 AI 模型，正在给开发者展示一条更便宜、更快的软件智能路径。官方认领这条转发时，拿了 4.1 万浏览。</p>
+
+    <h2>别急着 all in，它的短板同样真诚</h2>
+    <p>但别把全部家当押上去。我翻完了官方的坦白帖，越看越冷静。</p>
+    <p>联合创始人 Sasha 自己说，JEV 还不够好，太慢、太贵、太笨。他们需要社区帮忙找毛病。这条就挂在官方主页上，没人删。</p>
+    <p>JEV 的边界非常清楚。它不写文章，不解释推理，一次最多给你 255 个选项，上下文只有 32K，不支持图像。你没法拿它当 ChatGPT 用，它也不干这个。</p>
+    <p>更刺耳的是质疑声。研究者 Niels Rogge 发推嘲讽，一个 JSON 分类器竟然有 1200 万浏览？是啊，我们正处在泡沫里。</p>
+    <figure>
+      <img src="http://dingyue.ws.126.net/2026/0917/f56d0151j00tlhvs8002xd000u0006om.jpg" alt="Niels Rogge发推质疑JEV热度，称一个JSON分类器获得了1200万浏览">
+      <figcaption class="img-caption">图源｜网易科技转引自 X 平台，Niels Rogge 质疑推文</figcaption>
+    </figure>
+    <p>这话对不对，我说不好。但有一点是确定的，JEV 的 20 到 200 倍提速，不是靠优化聊天模型挤出来的，是换了一条赛道。</p>
+    <p>它不赌文采，赌的是判断的可验证性。选择是对的，概率是真的，代码就能直接调用它。</p>
+    <p>这可能就是它自称的 System One。直给，不内耗。</p>
+
+    <h2>什么活该交给JEV，三句话背下来</h2>
+    <p>围绕这三天 X 上的讨论，我整理了三句判断标准。</p>
+
+    <div class="insight-box">
+      <h4>三句判断标准</h4>
+      <p>第一，任务的结果是不是一个选择？打分、分类、路由、判断真伪，交给 JEV。要写长文、要推理、要解释，别找它。</p>
+      <p>第二，Agent 是不是被上下文卡住了？先用 fast-jev-compaction 这类插件瘦身，让 JEV 把关哪些 token 值得留下，别急着加钱买更大的上下文。</p>
+      <p>第三，你愿不愿意为每次判断花大钱？场景每天跑几百万次小判断的话，换 JEV，账单可能直接少两个数量级。</p>
+    </div>
+
+    <p>上手也很简单。模型在 typesafe.ai 官网就能申请，插件在 GitHub 开源，API 从 Venice 也能接。从一次瘦身、一次打分开始，你会慢慢适应它的节奏。</p>
+
+    <h2>AI 的下一场革命，可能是从闭嘴开始的</h2>
+    <p>回到开头那个卡 10 秒的瞬间。</p>
+    <p>其实真正的问题从来不是上下文不够大，而是我们还在用写总结的方式治理上下文，用聊天的思路养干活的模型。JEV 给的答案是，判断不需要解释，只需要正确。</p>
+    <p>教 ChatGPT 说话的人，转头去做了个哑巴模型。也许 AI 的下一场革命，就是从闭嘴开始的。</p>
+
+    <div class="punchline">判断不需要解释，只需要正确。</div>
+
+    <p>你被 AI 编程工具的上下文卡过吗？你的 Agent 失忆过几次？评论区聊聊，我想听听你的故事。</p>
+    <p>觉得有用的话，转发给正在被上下文折磨的朋友，说不定能救他一次。</p>
+    <p>想看更多 AI 热点与判断，关注专业网站 犀牛伯爵 rhinocount.cn</p>
+
+    <div class="ending">以上。如果对你有帮助，欢迎转发。</div>
+  </div>
+</body>
+</html>
