@@ -388,14 +388,14 @@ window.SITE_DATA = {
         excerpt: "名字来自两部作品：恋爱的犀牛教我不计成败地热爱，基督山伯爵教我不动声色地等待。2022年底ChatGPT像一头灰犀牛从地平线走来，Count就是把它的轨迹从噪音里算出来——然后与各位同行者一起远征。",
         img: "assets/note-05.svg",
         href: "notes/why-rhino-count.html"
-      },,
+      },
       {
         cat: "观察", num: "N° 99",
         title: "一个人加AI编程，GitHub把83万行全重写了",
         excerpt: "GitHub用自家Copilot把运行时从TypeScript迁移到832378行Rust，128个PR历时14个半星期，一个程序员完成了原本需要整个团队一两年的工作。AI编程不是替代程序员，是让一个人干一个团队的活。",
         img: "assets/note-05.svg",
         href: "notes/2026-09-18-ai-coding-rust.html"
-      }
+      },
       {
         cat: "观察", num: "N° 98",
         title: '3000家美国风投，及格的只有20家：AI时代，"钱"第一次变成了优势本身',
