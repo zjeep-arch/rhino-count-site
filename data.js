@@ -127,6 +127,12 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "24小时不休息，阶跃开源模型跑赢了Claude",
+        desc: "阶跃星辰Step 5 Preview发布，600B总参数仅激活27B，AA指数44分全球开源前三，单任务成本仅Claude Opus 5的八分之一。ESP32上连续执行3小时跑赢Claude，10月15日开源权重。国产开源模型正在改写AI性价比规则。",
+        href: "notes/2026-09-20-step5-preview.html"
+      },
+      {
+        type: "Essay",
         title: "那个教ChatGPT说话的人，做了个哑巴模型JEV",
         desc: "ChatGPT共同发明人Diogo的新模型JEV发布三天，X上3613万浏览。不写字只做判断，比前沿模型快20到200倍，成本低40到400倍。tamara用插件把Claude Code上下文瘦身做成4000星开源项目，创始人亲自回复认可。哑巴模型，判断从不含糊。",
         href: "notes/2026-09-19-jev-moxing.html"
@@ -394,6 +400,13 @@ window.SITE_DATA = {
         excerpt: "名字来自两部作品：恋爱的犀牛教我不计成败地热爱，基督山伯爵教我不动声色地等待。2022年底ChatGPT像一头灰犀牛从地平线走来，Count就是把它的轨迹从噪音里算出来——然后与各位同行者一起远征。",
         img: "assets/note-05.svg",
         href: "notes/why-rhino-count.html"
+      },
+      {
+        cat: "观察", num: "N° 101",
+        title: "24小时不休息，阶跃开源模型跑赢了Claude",
+        excerpt: "阶跃星辰发布Step 5 Preview，600B总参数仅激活27B，AA指数44分全球开源前三，单任务成本仅Claude Opus 5的八分之一。ESP32上连续执行3小时跑赢Claude，10月15日开源权重。国产开源模型正在改写AI性价比规则。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-09-20-step5-preview.html"
       },
       {
         cat: "观察", num: "N° 100",
