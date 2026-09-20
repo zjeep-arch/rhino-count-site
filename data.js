@@ -127,6 +127,12 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "2万块把人形机器人抱回家，这次不是期货",
+        desc: "9月20日启元机器人发布Q1与T1，19999元人形机器人发售即发货。88厘米、15公斤、可折叠进背包，开放SDK/HDK搭PrimeStore技能商店，安卓式生态复制手机打法。上纬新材621亿市值背后，是在赌个人机器人成为下一个手机品类。",
+        href: "notes/2026-09-20-qi-yuan-robot.html"
+      },
+      {
+        type: "Essay",
         title: "24小时不休息，阶跃开源模型跑赢了Claude",
         desc: "阶跃星辰Step 5 Preview发布，600B总参数仅激活27B，AA指数44分全球开源前三，单任务成本仅Claude Opus 5的八分之一。ESP32上连续执行3小时跑赢Claude，10月15日开源权重。国产开源模型正在改写AI性价比规则。",
         href: "notes/2026-09-20-step5-preview.html"
@@ -400,6 +406,13 @@ window.SITE_DATA = {
         excerpt: "名字来自两部作品：恋爱的犀牛教我不计成败地热爱，基督山伯爵教我不动声色地等待。2022年底ChatGPT像一头灰犀牛从地平线走来，Count就是把它的轨迹从噪音里算出来——然后与各位同行者一起远征。",
         img: "assets/note-05.svg",
         href: "notes/why-rhino-count.html"
+      },
+      {
+        cat: "观察", num: "N° 102",
+        title: "2万块把人形机器人抱回家，这次不是期货",
+        excerpt: "9月20日启元机器人发布Q1与T1，19999元人形机器人发售即发货。88厘米、15公斤、可折叠进背包，开放SDK/HDK搭PrimeStore技能商店，安卓式生态复制手机打法。上纬新材621亿市值背后，是在赌个人机器人成为下一个手机品类。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-09-20-qi-yuan-robot.html"
       },
       {
         cat: "观察", num: "N° 101",
