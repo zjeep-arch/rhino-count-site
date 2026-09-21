@@ -127,6 +127,12 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "AI编程选哪个，Claude在合Kimi在拆",
+        desc: "9月21日月之暗面发布Kimi Code Desktop桌面客户端，内置终端、浏览器和Git状态查看。同期Claude合并Chat和Cowork入口，OpenAI把Codex并入ChatGPT。一边做加法一边做减法，AI编程工具到底怎么选，三个判断标准帮你决定。",
+        href: "notes/2026-09-21-kimi-code-desktop.html"
+      },
+      {
+        type: "Essay",
         title: "2万块把人形机器人抱回家，这次不是期货",
         desc: "9月20日启元机器人发布Q1与T1，19999元人形机器人发售即发货。88厘米、15公斤、可折叠进背包，开放SDK/HDK搭PrimeStore技能商店，安卓式生态复制手机打法。上纬新材621亿市值背后，是在赌个人机器人成为下一个手机品类。",
         href: "notes/2026-09-20-qi-yuan-robot.html"
@@ -406,6 +412,13 @@ window.SITE_DATA = {
         excerpt: "名字来自两部作品：恋爱的犀牛教我不计成败地热爱，基督山伯爵教我不动声色地等待。2022年底ChatGPT像一头灰犀牛从地平线走来，Count就是把它的轨迹从噪音里算出来——然后与各位同行者一起远征。",
         img: "assets/note-05.svg",
         href: "notes/why-rhino-count.html"
+      },
+      {
+        cat: "观察", num: "N° 103",
+        title: "AI编程选哪个，Claude在合Kimi在拆",
+        excerpt: "9月21日月之暗面发布Kimi Code Desktop桌面客户端，内置终端、浏览器和Git状态查看。同期Claude合并Chat和Cowork入口，OpenAI把Codex并入ChatGPT。一边做加法一边做减法，AI编程工具到底怎么选，三个判断标准帮你决定。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-09-21-kimi-code-desktop.html"
       },
       {
         cat: "观察", num: "N° 102",
