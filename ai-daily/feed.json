@@ -1,6 +1,14 @@
 {
-  "updated": "2026-09-21T09:00:00+08:00",
+  "updated": "2026-09-22T10:28:10.086292",
   "articles": [
+    {
+      "title": "AI大模型及安全动态日报 | 2026年09月22日（星期二）",
+      "date": "2026年09月22日（星期二）",
+      "slug": "2026-09-22-ai-daily",
+      "url": "ai-daily/2026-09-22-ai-daily.html",
+      "excerpt": "小米开源MiMo-V2.6探索RSI路径、Meta Muse登顶美国应用商店、GPT-6 Sol曝光、GPT-6 Astra安全测评97%危险行为率、三家AI安全公司合计融资超2.28亿美元、韩国制定Agentic AI安全规则。",
+      "category": "AI日报"
+    },
     {
       "cat": "安全 · 模型 · 资本",
       "date": "2026-09-21",
