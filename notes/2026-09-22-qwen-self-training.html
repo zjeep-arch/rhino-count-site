@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>阿里AI自己训练自己，33轮迭代没有一个人参与 | 犀牛伯爵</title>
+  <meta name="description" content="2026云栖大会，阿里Qwen团队公布RSI递归式自我改进进展，AI零人类参与完成33轮迭代。吴泳铭说，未来机器思考总量将达到人类1000倍。人要干什么？">
+  <meta name="keywords" content="云栖大会, 阿里云, 通义千问, Qwen, AI自我进化, 吴泳铭">
+  <style>
+    :root {
+      --accent: #8b2635;
+      --accent-soft: #a83847;
+      --bg: #faf8f6;
+      --ink: #2d2d2d;
+      --ink-soft: #6b6b6b;
+      --card-bg: #ffffff;
+      --border: #e8e0dc;
+      --font-sans: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+      --font-serif: "Noto Serif CJK SC", "Songti SC", "SimSun", serif;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: var(--font-sans); background: var(--bg); color: var(--ink); line-height: 1.8; font-size: 16px; }
+    .container { max-width: 680px; margin: 0 auto; padding: 40px 24px 80px; }
+    h1 { font-family: var(--font-serif); font-size: 28px; font-weight: 700; color: var(--ink); line-height: 1.4; margin-bottom: 8px; letter-spacing: -0.01em; }
+    .meta { font-size: 13px; color: var(--ink-soft); margin-bottom: 4px; }
+    .byline { font-size: 13px; color: var(--ink-soft); margin-bottom: 32px; }
+    p { margin-bottom: 16px; font-size: 16px; line-height: 1.8; color: var(--ink); }
+    strong { color: var(--ink); font-weight: 600; }
+
+    /* data-table */
+    .data-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14px; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .data-table th { background: var(--accent); color: #fff; padding: 10px 12px; text-align: left; font-weight: 600; font-size: 13px; }
+    .data-table td { padding: 8px 12px; border-bottom: 1px solid var(--border); color: var(--ink); }
+    .data-table tr:last-child td { border-bottom: none; }
+    .data-table tr:nth-child(even) td { background: rgba(139, 38, 53, 0.03); }
+    .data-table .num { font-family: var(--font-serif); font-weight: 700; color: var(--accent); }
+
+    /* insight-box */
+    .insight-box { background: rgba(139, 38, 53, 0.05); border-left: 4px solid var(--accent); padding: 16px 20px; margin: 24px 0; border-radius: 0 8px 8px 0; }
+    .insight-box p { margin-bottom: 10px; font-size: 15px; line-height: 1.7; }
+    .insight-box p:last-child { margin-bottom: 0; }
+
+    /* punchline */
+    .punchline { font-family: var(--font-serif); font-size: 18px; font-weight: 700; color: var(--accent); text-align: center; margin: 32px 0; padding: 16px 0; border-top: 2px solid var(--accent); border-bottom: 2px solid var(--accent); }
+
+    /* article image */
+    .article-img { width: 100%; border-radius: 8px; margin: 24px 0 8px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
+    .img-caption { font-size: 13px; color: var(--ink-soft); text-align: center; margin-bottom: 24px; }
+
+    /* ending */
+    .ending { margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--border); }
+    .ending p { margin-bottom: 12px; }
+    .site-rec { font-size: 14px; color: var(--ink-soft); margin: 16px 0; padding: 12px 16px; background: rgba(139, 38, 53, 0.03); border-radius: 8px; }
+    .site-rec a { color: var(--accent); text-decoration: none; font-weight: 600; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>阿里AI自己训练自己，33轮迭代没有一个人参与</h1>
+    <div class="meta">2026年9月22日 · 阅读时间约5分钟</div>
+    <div class="byline">文｜犀牛伯爵</div>
+
+    <p>9月22日上午10点。杭州国际博览中心，2026云栖大会主论坛开场前一小时。</p>
+    <p>阿里云的工作人员往我手里塞了一份材料。我盯着其中一行字，看了很久。</p>
+    <p>AA智能指数，40分，涨到了45分。</p>
+    <p>数字本身不算惊艳。真正让我愣住的，是描述它的一句话。零人类参与。</p>
+    <p>一个一个字读。零。人类。参与。</p>
+
+    <p>这说的不是某个测试。这是说，一个AI，自己训练了自己。</p>
+    <p>我在云栖大会的媒体席上坐了三年，见过参数表，见过架构图，见过按亿计的融资额。但零人类参与的迭代，这是头一回。</p>
+    <p>Qwen团队管这条路叫RSI，递归式自我改进。模型从真实反馈里发现自己的短板，自己设计实验，自己构建数据，自己评价结果。然后循环，再循环。</p>
+    <p>过去这段时间，它持续迭代了一个多月，完成33轮有效迭代。没有一个人碰过它。</p>
+
+    <p>我的第一反应是不信。训练一个模型，就像养一个孩子。喂数据，调参数，纠偏，再喂。每一步都踩在工程师的手上。现在你告诉我，这孩子能自己长大？</p>
+    <p>是的。而且它长得比人类工程师盯着的时候更快。这个速度，在主流大模型里和Claude、GPT站到了同一阵营，把智谱GLM、Kimi K3甩在了后面。</p>
+    <p>这不是速度问题。这是生产关系问题。</p>
+
+    <table class="data-table">
+      <tr><th>云栖现场关键信号</th><th>数据</th></tr>
+      <tr><td>Qwen RSI自我改进</td><td class="num">零人类参与，33轮迭代</td></tr>
+      <tr><td>AA智能指数</td><td class="num">40 → 45</td></tr>
+      <tr><td>真武V900算力</td><td class="num">M890的3倍</td></tr>
+      <tr><td>单一集群规模</td><td class="num">可扩展至50万卡</td></tr>
+      <tr><td>下一代模型参数</td><td class="num">5万亿-10万亿</td></tr>
+      <tr><td>2032年数据中心</td><td class="num">全球超20GW</td></tr>
+    </table>
+    <div class="img-caption">数据来源｜2026云栖大会发布会现场公布</div>
+
+    <p>紧接着，吴泳铭上台了。他的第一句话，比33轮迭代更冷。</p>
+    <p>"未来机器思考的总量，将达到人类的1000倍以上。"</p>
+    <p>我快速算了一笔账。今天机器思考的总量，还不到人类的3%。到1000倍，意味着还有几万倍的增长空间。</p>
+    <p>吴泳铭补了一句，机器动力已经承担了99.9%的物理工作。接下来，机器要承担99.9%的思考工作。</p>
+    <p>顶级思考，他说，会从奢侈品变成可规模化供给的商品。每个细分领域，都可以拥有上百万个AI科学家。</p>
+
+    <p class="punchline">每个领域，上百万个AI科学家。</p>
+
+    <p>先别急着想这句话背后有多少岗位要重新定义。先看阿里的牌。</p>
+    <p>吴泳铭一次性亮了三张。AI模型，AI芯片，AI云。这是机器思考规模化供给的三大基石。</p>
+    <p>芯片这张牌，平头哥亮出来的是真武V900，算力是真武M890的3倍，单一集群可扩展到50万卡。模型这张牌，Qwen接下来要奔着5万亿到10万亿参数去。数据中心这张牌最重，到2032年，阿里云运营的全球数据中心规模要超过20GW。</p>
+    <p>换算成人话，电站要先建够，电网要先铺广，那台会思考的机器才转得起来。</p>
+
+    <p>吴泳铭讲了个历史上的数字。1900年前后，电器已经进家门了，但当时全世界一整年的发电量，放到今天只够用两个小时。</p>
+    <p>今天也是两个小时的发电量时刻。算力就是当年的电。</p>
+
+    <p>说实话，我担心的不是芯片。我担心的是人。</p>
+    <p>吴泳铭在现场讲了一个罕见病的例子。新生儿早衰症，每年全球新发只有几十例，有记录的患者不过几百人。没有药企愿意花十几年，给几百人研发新药。因为全球懂这个病的顶级科学家就那么几个，他们的思考是稀缺品，资源要优先给大市场。</p>
+    <p>但如果每个细分领域都有上百万个AI科学家呢。没人做的研究，便宜的思考，会把它做完。</p>
+    <p>这不是科幻。这是稀缺正在被消灭。</p>
+
+    <div class="insight-box">
+      <p><strong>机器思考1000倍，人干什么？给你三个判断标准。</strong></p>
+      <p>第一，看你做的事是不是在跑路。凡是重复执行、答案确定、结果可验证的事，机器会做得比你快。</p>
+      <p>第二，看你能否定方向。定义问题、判断取舍、扛责任，这份能力机器暂时学不会，也不该学会。</p>
+      <p>第三，看你的思考是不是稀缺品。如果有一万个人和你做一样的事，你就是被定价者。如果只有你一个，你就是定价者。</p>
+    </div>
+
+    <p>吴泳铭给的答案是，机器替代现有工作，和创造新时代，是两回事。今天的AI Coding，像1882年的电灯。电灯替代了油灯，但空调、洗衣机、冰箱，都是几十年后才出现的。第一台计算机，要到1946年。</p>
+    <p>今天所有喊AI抢饭碗的焦虑，都还停留在油灯被替代的阶段。真正的分水岭是，那个新时代里，你手上有没有新发明。</p>
+
+    <p>对了，现场还有个小东西。无影团队做了一台叫QwenBook的原生智能体电脑，键盘上专门有一个千问按键，150人的团队做了大半年。演示版今天亮相，完整版预计今年底或明年初发布。硬件本身不重要，重要的是，阿里正在把机器思考往每个人的桌面上摆。</p>
+
+    <img class="article-img" src="https://x0.ifengimg.com/res/2026/6911DBC7B5CFE671B7E4ED17ABD1CEF7B417CA75_size42_w640_h480.jpg" alt="2026云栖大会现场展示的阿里千问平板QwenBook" loading="lazy">
+    <div class="img-caption">图源｜IT之家云栖大会现场实拍 2026-09-22</div>
+
+    <p>回到那个问题。人干什么？云栖大会散场时，我脑子里一直转着这个问号。</p>
+    <p>机器思考的1000倍，就是把思考的价格打到地板。上个时代是电力普及，这个时代是思考普及。AI自我进化这条路上，人真正的位置，从来不在跑路上，在方向里，在取舍里，在那些机器永远对齐的对象里。</p>
+    <p>你是不是那个定方向的人，决定了你是下一个时代的工程师，还是被替代的油灯。</p>
+
+    <p class="punchline">不是天真。是策略。</p>
+
+    <div class="ending">
+      <p>你身边有没有那种，做了一辈子执行岗，突然被AI替代的人？评论区聊聊你的判断。</p>
+      <p>觉得有用，转发给正在跟AI抢活干的朋友。建议收藏，回头对照那三个判断标准，给自己做个定位。</p>
+      <p class="site-rec">更多AI产业深度观察，关注专业网站 <a href="https://zjeep-arch.github.io/rhino-count-site/">犀牛伯爵 rhinocount.cn</a></p>
+      <p>谢谢你看我的文章。</p>
+    </div>
+  </div>
+</body>
+</html>

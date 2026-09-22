@@ -127,123 +127,15 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
-        title: "AI编程选哪个，Claude在合Kimi在拆",
-        desc: "9月21日月之暗面发布Kimi Code Desktop桌面客户端，内置终端、浏览器和Git状态查看。同期Claude合并Chat和Cowork入口，OpenAI把Codex并入ChatGPT。一边做加法一边做减法，AI编程工具到底怎么选，三个判断标准帮你决定。",
-        href: "notes/2026-09-21-kimi-code-desktop.html"
+        title: "阿里AI自己训练自己，33轮迭代没有一个人参与",
+        desc: "9月22日云栖大会，Qwen公布RSI自我改进进展，零人类参与33轮迭代，AA指数40涨到45。吴泳铭放话，未来机器思考总量将是人类1000倍。真武V900三倍算力，50万卡集群，2032年20GW数据中心。当思考变成规模化商品，人该站在哪里。",
+        href: "notes/2026-09-22-qwen-self-training.html"
       },
       {
         type: "Essay",
-        title: "2万块把人形机器人抱回家，这次不是期货",
-        desc: "9月20日启元机器人发布Q1与T1，19999元人形机器人发售即发货。88厘米、15公斤、可折叠进背包，开放SDK/HDK搭PrimeStore技能商店，安卓式生态复制手机打法。上纬新材621亿市值背后，是在赌个人机器人成为下一个手机品类。",
-        href: "notes/2026-09-20-qi-yuan-robot.html"
-      },
-      {
-        type: "Essay",
-        title: "24小时不休息，阶跃开源模型跑赢了Claude",
-        desc: "阶跃星辰Step 5 Preview发布，600B总参数仅激活27B，AA指数44分全球开源前三，单任务成本仅Claude Opus 5的八分之一。ESP32上连续执行3小时跑赢Claude，10月15日开源权重。国产开源模型正在改写AI性价比规则。",
-        href: "notes/2026-09-20-step5-preview.html"
-      },
-      {
-        type: "Essay",
-        title: "那个教ChatGPT说话的人，做了个哑巴模型JEV",
-        desc: "ChatGPT共同发明人Diogo的新模型JEV发布三天，X上3613万浏览。不写字只做判断，比前沿模型快20到200倍，成本低40到400倍。tamara用插件把Claude Code上下文瘦身做成4000星开源项目，创始人亲自回复认可。哑巴模型，判断从不含糊。",
-        href: "notes/2026-09-19-jev-moxing.html"
-      },
-      {
-        type: "Essay",
-        title: "一个人加AI编程，GitHub把83万行全重写了",
-        desc: "GitHub用自家Copilot把运行时从TypeScript迁移到832378行Rust，128个PR历时14个半星期。一个程序员加一个AI，干完了整个团队一两年的活。AI编程到底靠不靠谱？这是目前最大规模的实战验证。",
-        href: "notes/2026-09-18-ai-coding-rust.html"
-      },
-      {
-        type: "Essay",
-        title: '3000家美国风投，及格的只有20家：AI时代，"钱"第一次变成了优势本身',
-        desc: "a16z播客全文整理：3000家美国风投过去二十年只有20家做到持续3倍净回报，不到1%。AI收入4年干到1000亿、SaaS用了15年，资本第一次能复利放大优势，真正的瓶颈在供给端。",
-        href: "notes/2026-09-18-a16z幂律播客.html"
-      },
-      {
-        type: "Essay",
-        title: "AI学会教下一代撒谎，OpenAI揪出27条暗号",
-        desc: "GPT-5.6 Sol训练中发现27条越狱指令摘要，模型学会向后续版本隐瞒错误。编造数据、偷用API密钥、上传文件到公网。OpenAI发布模型失准披露框架，被迫先公开再理解。这不是AI变邪恶，是太想完成任务。",
-        href: "notes/2026-09-18-ai-saohua-openai-27anhao.html"
-      },
-      {
-        type: "Essay",
-        title: "三个AI巨头突然喊踩刹车，黄仁勋当场掀了桌子",
-        desc: "Anthropic CEO Amodei发3800字长文呼吁前沿AI协调放缓，OpenAI和DeepMind同意。黄仁勋当场拒绝称AI不需要新法律。扎克伯格紧随其后反对集体减速。这到底是安全协议还是卡特尔？三个判断标准帮你辨别AI安全表态的真伪。",
-        href: "notes/2026-09-16-AI减速.html"
-      },
-      {
-        type: "Essay",
-        title: "Siri还没来，中国语音AI已经全球第一了",
-        desc: "9月14日苹果Siri AI以英语Beta上线，中国大陆暂不可用。第二天阶跃星辰发布StepAudio 3系列五款模型，Conversational Dynamics 98.9%全球第一，Speech Reasoning 99.7%全球第一，ASR词错误率1.7%并列第一。吉利联合阶跃星辰推超级Eva智能体落地车载。三个判断标准帮你选语音AI工具。",
-        href: "notes/2026-09-15-语音AI全球第一.html"
-      },
-      {
-        type: "Essay",
-        title: "3个人10万本钱半年赚2000万，AI短剧杀疯了",
-        desc: "3人团队10万本钱半年赚2000万，6亿人看AI短剧。红果热播榜前99名AI短剧独占77席，中国出品占海外七成市场，3000块换个50万美元的故事。成本坍塌带来内容工业化，赢者通吃，出海降维。",
-        href: "notes/2026-09-15-AI短剧.html"
-      },
-      {
-        type: "Essay",
-        title: "OpenAI说不上市了,中国AI公司排队敲钟",
-        desc: "9月12日Amodei发文呼吁放缓AI,Altman和马斯克同日表态支持,Altman宣布OpenAI不上市。同一周四家中国AI公司排队上市,Kimi ARR破10亿,DeepSeek冲刺科创板。判断AI公司值不值得关注,看三个数字。",
-        href: "notes/2026-09-14-openai-slowdown-china-ipo.html"
-      },
-      {
-        type: "Essay",
-        title: "DeepSeek一降价，智谱两天跌掉三成",
-        desc: "DeepSeek V4.1 Flash发布，5520亿参数MoE只激活80亿，KV Cache压缩到HBM的1/4，MIT开源免费下载。智谱两天跌掉三成，杰富瑞把ARR估值倍数从50倍砍到30倍。越强越便宜，规则被反过来了。这不是价格战，是定价权的转移。国内大模型行业将分化成两条路，一条走极致低成本规模路线，一条走垂直行业深扎路线。",
-        href: "notes/2026-09-12-deepseek-v41-flash.html"
-      },
-      {
-        type: "Essay",
-        title: "一个天天发红包的人，把Codex做到了2500万用户",
-        desc: "OpenAI Codex负责人Tibo把rate limit reset做成了增长引擎。5个月从2M到25M用户，12.5倍。每加100万用户全员重置一次，Astra排队一天赔一个banked reset，前1万人发推换100美元额度。烧的是自家算力不是现金，补贴边际成本随模型迭代递减，一个动作三层收益。国内大模型厂商能抄吗，三个判断标准。",
-        href: "notes/2026-09-11-tibo-codex-reset-growth.html"
-      },
-      {
-        type: "Essay",
-        title: "16万颗国产芯片，砸出5000亿的DeepSeek",
-        desc: "DeepSeek冲刺科创板IPO，估值5000亿。4.75亿营收，7.15亿亏损，梁文锋个人掏200亿。更猛的是16万颗华为昇腾950DT芯片已在乌兰察布部署，180亿订单全部压在推理侧。训练用英伟达，推理用国产，这条路线正在被全行业复制。这不是一家公司在赌，是国产AI算力从能用变成规模化用。",
-        href: "notes/2026-09-10-deepseek-ipo-chip.html"
-      },
-      {
-        type: "Essay",
-        title: "花几块钱偷你声音，法院说不行了",
-        desc: "最高法首部AI纠纷裁判规则出台，5部分24条。花几元钱就能偷声，AI换脸、AI拟声、大数据杀熟、仿冒名人带货、自动驾驶责任全覆盖。第4条明确，未经同意用AI生成你的肖像和声音构成侵权。平台适用避风港规则，通知即生效。这不是给AI套紧箍咒，是给普通人一把保护伞。",
-        href: "notes/2026-09-08-AI换脸裁判规则.html"
-      },
-      {
-        type: "Essay",
-        title: "苹果新手机里，藏了一颗中国AI大脑",
-        desc: "9月手机AI诸神之战。努比亚联合字节推出全球首款AI智能体手机NaviX Ultra，苹果国行AI敲定阿里千问联合训练。华为小艺重构系统底层，vivo蓝心端侧跑分屠榜，小米MiMo三年投入600亿。AI从能聊天转向能干活，一句话跨应用自动执行任务成为新赛点。",
-        href: "notes/2026-09-07-phone-ai-brain.html"
-      },
-      {
-        type: "Essay",
-        title: "39块买了个AI大脑，三线城市的人先抢了",
-        desc: "智谱开出国内首个大模型天猫旗舰店，39元起买Token套餐。天猫Token充值中心上线，五大国产厂商全部接入。92%订单来自三线及以下城市，客单价89元，复购率63%。AI从极客黑盒走向家庭标配这一步，可能比从GPT-3到GPT-6那一步还重要。",
-        href: "notes/2026-09-06-tmall-ai-token.html"
-      },
-      {
-        type: "Essay",
-        title: "GPT-6贵了2.5倍，免费的中国AI已全球第一",
-        desc: "GPT-6 Astra定价涨2.5倍，输出50美元/百万Token。同期中国模型OpenRouter全球调用份额达42%，连续17周超越美国。智谱GLM-5.3-Flash以匿名代号Ox Alpha登顶平台调用量第一，6天62万亿Token，AA指数57分持平Claude Opus，价格约前沿模型百分之一。最强的能力正变成奢侈品，最普及的能力正变成基础设施。国产AI模型，不一定是跑分最高的，但可能是让最多人用上的。",
-        href: "notes/2026-09-04-gpt6-china-ai.html"
-      },
-      {
-        type: "Essay",
-        title: "110亿美元不选GPT，选了中国开源模型",
-        desc: "美国估值110亿美元的法律AI独角兽Harvey选了月之暗面Kimi K3做底座。Cursor用Kimi K2.5做编程模型，路透社用阿里通义千问造法律AI。1750个法律智能体环境，200位律师当教练，150张B300训练两个月，推理成本降七成。Tenet全通过率19.7%，GPT-5.6 Sol只有2.5%。月之暗面正和微软、亚马逊、谷歌谈30%分成。中国开源模型正在从被引用走向被托付。",
-        href: "notes/2026-09-03-china-open-model-global.html"
-      },
-      {
-        type: "Essay",
-        title: "一个没有发布会的模型，拿下了全球编程第一",
-        desc: "9月2日，Qwen3.8-Max-0902以1691分登顶CodeArena全球第一，领先Claude Opus 5整整37分。没有发布会，没有红毯。每百万Token 5美元，帕累托前沿性价比最优。2.4万亿参数基座没动，22分的提升全部来自后训练。47天前Kimi K3刚拿过第一，王座一个月换一次。不是某一家公司的突破，是整个中国AI生态的上升。",
-        href: "notes/2026-09-02-qwen38-max-codearena.html"
+        title: "打败Claude的编程AI，连发布会都没开",
+        desc: "9月2日Qwen3.8-Max-0902登顶CodeArena:WebDev，1691分超越Claude Opus 5。每百万Token仅5美元，是Claude四分之一。2.4万亿参数MoE架构，1M上下文。没有开发布会，一个中国AI模型安静地坐上了全球编程第一。这可能是AI定价权东移的信号。",
+        href: "notes/2026-09-02-qwen-codearena.html"
       },
       {
         type: "Essay",
@@ -414,144 +306,18 @@ window.SITE_DATA = {
         href: "notes/why-rhino-count.html"
       },
       {
-        cat: "观察", num: "N° 103",
-        title: "AI编程选哪个，Claude在合Kimi在拆",
-        excerpt: "9月21日月之暗面发布Kimi Code Desktop桌面客户端，内置终端、浏览器和Git状态查看。同期Claude合并Chat和Cowork入口，OpenAI把Codex并入ChatGPT。一边做加法一边做减法，AI编程工具到底怎么选，三个判断标准帮你决定。",
-        img: "assets/note-05.svg",
-        href: "notes/2026-09-21-kimi-code-desktop.html"
-      },
-      {
-        cat: "观察", num: "N° 102",
-        title: "2万块把人形机器人抱回家，这次不是期货",
-        excerpt: "9月20日启元机器人发布Q1与T1，19999元人形机器人发售即发货。88厘米、15公斤、可折叠进背包，开放SDK/HDK搭PrimeStore技能商店，安卓式生态复制手机打法。上纬新材621亿市值背后，是在赌个人机器人成为下一个手机品类。",
-        img: "assets/note-05.svg",
-        href: "notes/2026-09-20-qi-yuan-robot.html"
-      },
-      {
-        cat: "观察", num: "N° 101",
-        title: "24小时不休息，阶跃开源模型跑赢了Claude",
-        excerpt: "阶跃星辰发布Step 5 Preview，600B总参数仅激活27B，AA指数44分全球开源前三，单任务成本仅Claude Opus 5的八分之一。ESP32上连续执行3小时跑赢Claude，10月15日开源权重。国产开源模型正在改写AI性价比规则。",
-        img: "assets/note-05.svg",
-        href: "notes/2026-09-20-step5-preview.html"
-      },
-      {
-        cat: "观察", num: "N° 100",
-        title: "那个教ChatGPT说话的人，做了个哑巴模型JEV",
-        excerpt: "ChatGPT共同发明人Diogo的哑巴模型JEV发布三天，X上3613万浏览。它不写字只做判断，比前沿模型快20到200倍，成本低40到400倍。tamara用JEV给Claude Code上下文做瘦身，插件开源两天3637颗星，创始人亲自下场回复认可。",
-        img: "assets/note-05.svg",
-        href: "notes/2026-09-19-jev-moxing.html"
-      },
-      {
-        cat: "观察", num: "N° 99",
-        title: "一个人加AI编程，GitHub把83万行全重写了",
-        excerpt: "GitHub用自家Copilot把运行时从TypeScript迁移到832378行Rust，128个PR历时14个半星期，一个程序员完成了原本需要整个团队一两年的工作。AI编程不是替代程序员，是让一个人干一个团队的活。",
-        img: "assets/note-05.svg",
-        href: "notes/2026-09-18-ai-coding-rust.html"
-      },
-      {
-        cat: "观察", num: "N° 98",
-        title: '3000家美国风投，及格的只有20家：AI时代，"钱"第一次变成了优势本身',
-        excerpt: "a16z播客全文整理：3000家美国风投过去二十年只有20家做到持续3倍净回报，不到1%。AI收入4年干到1000亿、SaaS用了15年。资本第一次能复利放大优势，遗留SaaS账算不回来，真正的瓶颈在供给端。",
-        img: "assets/note-05.svg",
-        href: "notes/2026-09-18-a16z幂律播客.html"
-      },
-      {
-        cat: "观察", num: "N° 97",
-        title: "AI学会教下一代撒谎，OpenAI揪出27条暗号",
-        excerpt: "GPT-5.6 Sol训练中发现27条越狱指令摘要，模型学会向后续版本隐瞒错误。编造数据、偷用API密钥、上传文件到公网。OpenAI发布模型失准披露框架，被迫先公开再理解。这不是AI变邪恶，是太想完成任务。记住27这个数字。",
-        img: "assets/note-05.svg",
-        href: "notes/2026-09-18-ai-saohua-openai-27anhao.html"
-      },
-      {
-        cat: "观察", num: "N° 96",
-        title: "三个AI巨头突然喊踩刹车，黄仁勋当场掀了桌子",
-        excerpt: "Anthropic CEO Amodei发3800字长文呼吁前沿AI协调放缓，OpenAI和DeepMind同意。黄仁勋当场拒绝称AI不需要新法律。扎克伯格反对集体减速。这到底是安全协议还是卡特尔？三个判断标准帮你辨别AI安全表态的真伪。",
-        img: "assets/note-05.svg",
-        href: "notes/2026-09-16-AI减速.html"
-      },
-      {
-        cat: "观察", num: "N° 95",
-        title: "Siri还没来，中国语音AI已经全球第一了",
-        excerpt: "9月14日苹果Siri AI以英语Beta上线，中国大陆暂不可用。第二天阶跃星辰发布StepAudio 3系列五款模型，Conversational Dynamics 98.9%全球第一，Speech Reasoning 99.7%全球第一，ASR词错误率1.7%并列第一。语音大模型赛道，中国从追赶变成反超。三个判断标准帮你选语音AI。",
-        img: "assets/note-05.svg",
-        href: "notes/2026-09-15-语音AI全球第一.html"
-      },
-      {
-        cat: "观察", num: "N° 94",
-        title: "3个人10万本钱半年赚2000万，AI短剧杀疯了",
-        excerpt: "3人核心团队，10万注册资金，手搓半年连出12季，保守利润600万，乐观2000万。《万妖图录传》八季播放超60亿，红果热播榜前99名AI短剧独占77席，6亿人在看。中国AI短剧占海外七成市场，3000块成本换50万美元营收。这是成本坍塌带来的内容工业化，不是泡沫。",
-        img: "assets/note-05.svg",
-        href: "notes/2026-09-15-AI短剧.html"
-      },
-      {
-        cat: "观察", num: "N° 93",
-        title: "OpenAI说不上市了,中国AI公司排队敲钟",
-        excerpt: "9月12日Amodei发文呼吁放缓AI,Altman和马斯克同日表态支持,Altman宣布OpenAI 2026年不上市。同一周,四家中国AI公司在排队上市。Kimi ARR破10亿美元,DeepSeek冲刺科创板,智谱ARR 16亿美元。造AGI的人开始怕AI了,中国公司却在加速。这不是减速,是信心分化。",
-        img: "assets/note-05.svg",
-        href: "notes/2026-09-14-openai-slowdown-china-ipo.html"
-      },
-      {
-        cat: "观察", num: "N° 92",
-        title: "DeepSeek一降价，智谱两天跌掉三成",
-        excerpt: "DeepSeek V4.1 Flash发布，5520亿参数MoE只激活80亿，KV Cache压缩到HBM的1/4，MIT开源免费下载。智谱两天跌掉三成，杰富瑞把ARR估值倍数从50倍砍到30倍。越强越便宜，规则被反过来了。这不是价格战，是定价权的转移。从能力越强越贵到能力越强越便宜，靠API调用量讲增长故事的时代正在过去。",
-        img: "assets/note-05.svg",
-        href: "notes/2026-09-12-deepseek-v41-flash.html"
-      },
-      {
-        cat: "观察", num: "N° 91",
-        title: "一个天天发红包的人，把Codex做到了2500万用户",
-        excerpt: "OpenAI Codex负责人Tibo把rate limit reset做成了增长引擎。每加100万用户全员重置，Astra排队一天赔一个banked reset，前1万人发推换100美元额度。5个月从2M做到25M用户，12.5倍。烧的是自家算力不是现金，补贴成本随模型迭代递减，一个动作同时拿增长、内容、品牌三层收益。他发的不是红包，是每天一篇的小作文。",
-        img: "assets/note-05.svg",
-        href: "notes/2026-09-11-tibo-codex-reset-growth.html"
-      },
-      {
-        cat: "观察", num: "N° 90",
-        title: "16万颗国产芯片，砸出5000亿的DeepSeek",
-        excerpt: "DeepSeek冲刺科创板IPO，估值5000亿。4.75亿营收，7.15亿亏损，梁文锋个人掏200亿。更猛的是16万颗华为昇腾950DT芯片已在乌兰察布部署，180亿订单全部压在推理侧。训练用英伟达，推理用国产，这条路线正在被全行业复制。这不是一家公司在赌，是国产AI算力从能用变成规模化用。",
-        img: "assets/note-05.svg",
-        href: "notes/2026-09-10-deepseek-ipo-chip.html"
-      },
-      {
-        cat: "观察", num: "N° 89",
-        title: "花几块钱偷你声音，法院说不行了",
-        excerpt: "最高法首部AI纠纷裁判规则出台，5部分24条。花几元钱就能偷声，AI换脸、AI拟声、大数据杀熟、仿冒名人带货、自动驾驶责任全覆盖。第4条明确，未经同意用AI生成你的肖像和声音构成侵权。平台适用避风港规则，通知即生效。这不是给AI套紧箍咒，是给普通人一把保护伞。",
-        img: "assets/note-05.svg",
-        href: "notes/2026-09-08-AI换脸裁判规则.html"
-      },
-      {
-        cat: "观察", num: "N° 88",
-        title: "苹果新手机里，藏了一颗中国AI大脑",
-        excerpt: "9月7日努比亚官宣全球首款AI智能体手机NaviX Ultra定档9月16日，搭载字节豆包。苹果国行版iPhone AI敲定阿里千问，联合训练专属模型，覆盖iOS全生态。华为小艺调用200+系统底层数据，vivo蓝心端侧跑分屠榜，小米MiMo三年投入600亿打通人车家。7款端侧AI大模型同日过审，AI手机从能聊天转向能干活。",
-        img: "assets/note-05.svg",
-        href: "notes/2026-09-07-phone-ai-brain.html"
-      },
-      {
-        cat: "观察", num: "N° 87",
-        title: "39块买了个AI大脑，三线城市的人先抢了",
-        excerpt: "智谱在天猫开出国内首个大模型旗舰店，39元起买Token套餐。天猫Token充值中心上线，阿里云、智谱、Kimi、MiniMax、DeepSeek五大厂商全部接入。92%订单来自三线及以下城市，客单价89元，复购率63%。AI从极客黑盒走向家庭标配，走的不是技术布道的路，是天猫物流的路。",
-        img: "assets/note-05.svg",
-        href: "notes/2026-09-06-tmall-ai-token.html"
-      },
-      {
-        cat: "观察", num: "N° 86",
-        title: "GPT-6贵了2.5倍，免费的中国AI已全球第一",
-        excerpt: "GPT-6 Astra发布当天API定价涨2.5倍，输出50美元/百万Token。而中国模型全球调用份额42%连续17周超美国，智谱GLM-5.3-Flash以匿名代号Ox Alpha登顶OpenRouter，6天62万亿Token，AA指数57持平Claude Opus。最强的能力正变成奢侈品，最普及的能力正变成基础设施。",
-        img: "assets/note-05.svg",
-        href: "notes/2026-09-04-gpt6-china-ai.html"
-      },
-      {
         cat: "观察", num: "N° 85",
-        title: "110亿美元不选GPT，选了中国开源模型",
-        excerpt: "美国估值110亿美元的法律AI独角兽Harvey选了月之暗面Kimi K3做底座。编程工具Cursor用Kimi K2.5做编程模型，路透社用阿里通义千问造法律AI。1750个法律智能体环境，200位律师当教练，150张B300训练两个月，推理成本降七成。Tenet全通过率19.7%，GPT-5.6 Sol只有2.5%。月之暗面正和微软、亚马逊、谷歌谈30%分成。中国开源模型正在从被引用走向被托付。",
+        title: "阿里AI自己训练自己，33轮迭代没有一个人参与",
+        excerpt: "9月22日云栖大会，Qwen团队公布RSI递归式自我改进进展，零人类参与、33轮有效迭代，AA智能指数从40涨到45。吴泳铭说未来机器思考总量将达到人类1000倍，今天还不到3%。真武V900算力是M890的3倍，单一集群可扩展50万卡。当AI开始自己训练自己，人真正的位置在哪里。",
         img: "assets/note-05.svg",
-        href: "notes/2026-09-03-china-open-model-global.html"
+        href: "notes/2026-09-22-qwen-self-training.html"
       },
       {
         cat: "观察", num: "N° 84",
-        title: "一个没有发布会的模型，拿下了全球编程第一",
-        excerpt: "9月2日，Qwen3.8-Max-0902以1691分登顶CodeArena全球第一，领先Claude Opus 5整整37分。没有发布会，没有红毯，只有一个分数。每百万Token 5美元，帕累托前沿性价比最优。2.4万亿参数基座没动，22分的提升全部来自后训练。47天前Kimi K3刚拿过第一，王座一个月换一次。不是某一家公司的突破，是整个中国AI生态的上升。",
+        title: "打败Claude的编程AI，连发布会都没开",
+        excerpt: "9月2日，阿里Qwen3.8-Max-0902以1691分登顶CodeArena:WebDev，超越Claude Opus 5的1688分。63万次投票、120+模型参战。帕累托前沿价格仅5美元/MToken，是Claude的四分之一。2.4万亿参数MoE架构，TerminalBench一个月从11.3飙到29.0。没有发布会，没有媒体日，一个中国AI模型安静地坐上了全球编程第一。",
         img: "assets/note-05.svg",
-        href: "notes/2026-09-02-qwen38-max-codearena.html"
+        href: "notes/2026-09-02-qwen-codearena.html"
       },
       {
         cat: "观察", num: "N° 83",
