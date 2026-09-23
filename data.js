@@ -127,6 +127,12 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "美国大厂开打价格战，导火索在中国",
+        desc: "9月23日凌晨，OpenAI和Anthropic同一天发布降价新模型，API最高直降50%。一年前还在卖天价的美国大模型，为什么突然打折？答案藏在中国。三层证据讲清价格战真相，以及开发者现在该怎么选模型。",
+        href: "notes/2026-09-23-大模型价格战.html"
+      },
+      {
+        type: "Essay",
         title: "6天烧掉2000万，小米直播炼大模型",
         desc: "小米MiMo-V2.6开源登顶，46分加1/60价格，RL训练全程直播。开源榜首正在变成获客工具，真正值钱的可能是那7000个开源训练环境。",
         href: "notes/2026-09-23-mimo-v26.html"
@@ -426,7 +432,7 @@ window.SITE_DATA = {
         href: "notes/why-rhino-count.html"
       },
       {
-        cat: "观察", num: "N° 105",
+        cat: "观察", num: "N° 106",
         title: "美国大厂开打价格战，导火索在中国",
         excerpt: "9月23日凌晨，OpenAI和Anthropic在同一天发布降价新模型，API最高直降50%。一年前还在卖天价的美国大模型，为什么突然打折？答案藏在中国。三层证据讲清价格战真相，以及开发者现在该怎么选模型。",
         img: "assets/note-05.svg",
