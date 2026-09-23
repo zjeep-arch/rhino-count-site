@@ -1,6 +1,16 @@
 {
-  "updated": "2026-09-22T10:28:10.086292",
+  "updated": "2026-09-23T10:59:57.399858",
   "articles": [
+    {
+      "title": "AI大模型及安全动态日报 | 2026年09月23日（星期三）",
+      "date": "2026年09月23日（星期三）",
+      "slug": "2026-09-23-ai-daily",
+      "url": "ai-daily/2026-09-23-ai-daily.html",
+      "excerpt": "OpenAI与Anthropic同日发布新模型价格战开打、阿里发布真武V900 AI芯片性能三倍、绿盟入选Gartner AI应用安全象限国内唯一、奇安信全球发布Qcode Agents、Deccan AI获2500万数据标注融资、欧盟发布AI网络安全行动计划。",
+      "category": "AI日报",
+      "cat": "安全 · 模型 · 资本",
+      "href": "2026-09-23-ai-daily.html"
+    },
     {
       "title": "AI大模型及安全动态日报 | 2026年09月22日（星期二）",
       "date": "2026年09月22日（星期二）",
