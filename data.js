@@ -127,6 +127,12 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "Amodei长文：AI必须减速，三巨头罕见同调",
+        desc: "Dario Amodei 9月12日近4000词长文全文编译：前沿AI必须减速，9小时内Musk、Altman、Hassabis罕见同调。三步计划从嵌入式审计员到全球四级协议，外加反对者声音和三个可复用框架。",
+        href: "notes/2026-09-23-amodei-pace-the-frontier.html"
+      },
+      {
+        type: "Essay",
         title: "美国大厂开打价格战，导火索在中国",
         desc: "9月23日凌晨，OpenAI和Anthropic同一天发布降价新模型，API最高直降50%。一年前还在卖天价的美国大模型，为什么突然打折？答案藏在中国。三层证据讲清价格战真相，以及开发者现在该怎么选模型。",
         href: "notes/2026-09-23-大模型价格战.html"
@@ -430,6 +436,13 @@ window.SITE_DATA = {
         excerpt: "名字来自两部作品：恋爱的犀牛教我不计成败地热爱，基督山伯爵教我不动声色地等待。2022年底ChatGPT像一头灰犀牛从地平线走来，Count就是把它的轨迹从噪音里算出来——然后与各位同行者一起远征。",
         img: "assets/note-05.svg",
         href: "notes/why-rhino-count.html"
+      },
+      {
+        cat: "观察", num: "N° 107",
+        title: "Amodei长文：AI必须减速，三巨头罕见同调",
+        excerpt: "Anthropic CEO Dario Amodei 9月12日发表近4000词长文《We Must Pace the Frontier》，呼吁前沿AI能力增速慢下来。发文9小时内，马斯克、Altman、Hassabis相继附议。三步限速计划：嵌入式审计员进驻实验室、民主国家协调检查点、全球四级协议。全文编译，附三巨头逐字回应、反对者声音和三个犀牛伯爵框架。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-09-23-amodei-pace-the-frontier.html"
       },
       {
         cat: "观察", num: "N° 106",
