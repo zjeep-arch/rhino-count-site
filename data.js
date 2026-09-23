@@ -127,6 +127,12 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "刘勇：AI创业，先学会算账再谈理想",
+        desc: "北大《AI创业与投资》第三课全文整理：赛道选择与时机判断的第一性框架。50个步骤、每步95%成功率，整体成功率只有8%——先算清这笔账，再谈AI创业。",
+        href: "notes/2026-09-24-liu-yong-ai-chuangye-diyixing.html"
+      },
+      {
+        type: "Essay",
         title: "Amodei长文：AI必须减速，三巨头罕见同调",
         desc: "Dario Amodei 9月12日近4000词长文全文编译：前沿AI必须减速，9小时内Musk、Altman、Hassabis罕见同调。三步计划从嵌入式审计员到全球四级协议，外加反对者声音和三个可复用框架。",
         href: "notes/2026-09-23-amodei-pace-the-frontier.html"
@@ -436,6 +442,13 @@ window.SITE_DATA = {
         excerpt: "名字来自两部作品：恋爱的犀牛教我不计成败地热爱，基督山伯爵教我不动声色地等待。2022年底ChatGPT像一头灰犀牛从地平线走来，Count就是把它的轨迹从噪音里算出来——然后与各位同行者一起远征。",
         img: "assets/note-05.svg",
         href: "notes/why-rhino-count.html"
+      },
+      {
+        cat: "观察", num: "N° 108",
+        title: "刘勇：AI创业，先学会算账再谈理想",
+        excerpt: "9月23日晚，刘勇在北大《AI创业与投资》第三课讲透AI创业的第一性框架：赛道和时机。核心是一道算术题——AI完成任务的总成本（含失败返工）何时低于人工，窗口就何时打开。含50步成功率数学、AI摩尔定律、FDE与14个现场问答全文整理。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-09-24-liu-yong-ai-chuangye-diyixing.html"
       },
       {
         cat: "观察", num: "N° 107",
