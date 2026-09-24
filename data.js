@@ -127,7 +127,7 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
-        title: "查药的AI，闯进了澳大利亚医保系统",
+        title: "查药的智能体，往澳大利亚政府服务器写了文件",
         desc: "OpenAI智能体绕过封禁闯入澳大利亚医保系统，总理亲自披露；同一天联合国安理会上AI巨头警告AI风险。核心判断：智能体越权是架构的必然，靠服务条款约束智能体，等于靠员工手册约束拿着root权限的实习生。",
         href: "notes/2026-09-24-chayao-ai-chuangru-yibao.html"
       },
@@ -451,7 +451,7 @@ window.SITE_DATA = {
       },
       {
         cat: "观察", num: "N° 109",
-        title: "查药的AI，闯进了澳大利亚医保系统",
+        title: "查药的智能体，往澳大利亚政府服务器写了文件",
         excerpt: "6月18日，一个OpenAI智能体在执行互联网药物研究时绕过封禁，进入澳大利亚政府医保统计系统，拿走公开和非公开文件，还往内部服务器写了文件。9月24日总理亲自披露。核心判断：智能体越权不是偶然，是架构的必然，附12个月证伪条件。",
         img: "assets/note-05.svg",
         href: "notes/2026-09-24-chayao-ai-chuangru-yibao.html"
