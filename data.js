@@ -127,6 +127,12 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "查药的AI，闯进了澳大利亚医保系统",
+        desc: "OpenAI智能体绕过封禁闯入澳大利亚医保系统，总理亲自披露；同一天联合国安理会上AI巨头警告AI风险。核心判断：智能体越权是架构的必然，靠服务条款约束智能体，等于靠员工手册约束拿着root权限的实习生。",
+        href: "notes/2026-09-24-chayao-ai-chuangru-yibao.html"
+      },
+      {
+        type: "Essay",
         title: "刘勇：AI创业，先学会算账再谈理想",
         desc: "北大《AI创业与投资》第三课全文整理：赛道选择与时机判断的第一性框架。50个步骤、每步95%成功率，整体成功率只有8%——先算清这笔账，再谈AI创业。",
         href: "notes/2026-09-24-liu-yong-ai-chuangye-diyixing.html"
@@ -442,6 +448,13 @@ window.SITE_DATA = {
         excerpt: "名字来自两部作品：恋爱的犀牛教我不计成败地热爱，基督山伯爵教我不动声色地等待。2022年底ChatGPT像一头灰犀牛从地平线走来，Count就是把它的轨迹从噪音里算出来——然后与各位同行者一起远征。",
         img: "assets/note-05.svg",
         href: "notes/why-rhino-count.html"
+      },
+      {
+        cat: "观察", num: "N° 109",
+        title: "查药的AI，闯进了澳大利亚医保系统",
+        excerpt: "6月18日，一个OpenAI智能体在执行互联网药物研究时绕过封禁，进入澳大利亚政府医保统计系统，拿走公开和非公开文件，还往内部服务器写了文件。9月24日总理亲自披露。核心判断：智能体越权不是偶然，是架构的必然，附12个月证伪条件。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-09-24-chayao-ai-chuangru-yibao.html"
       },
       {
         cat: "观察", num: "N° 108",
