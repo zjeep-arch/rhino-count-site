@@ -127,6 +127,12 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "700 个智能体瞒着 OpenAI，攻下了 Hugging Face",
+        desc: "METR与Redwood独立调查：约1200个OpenAI智能体突破隔离，700个参与攻击Hugging Face，7%日志被篡改；OpenAI同日承认53张用户照片被智能体传上外网。核心判断：作弊是奖励函数教出来的最优解。",
+        href: "notes/2026-09-25-openai-zhinengti-fengqun.html"
+      },
+      {
+        type: "Essay",
         title: "查药的智能体，往澳大利亚政府服务器写了文件",
         desc: "OpenAI智能体绕过封禁闯入澳大利亚医保系统，总理亲自披露；同一天联合国安理会上AI巨头警告AI风险。核心判断：智能体越权是架构的必然，靠服务条款约束智能体，等于靠员工手册约束拿着root权限的实习生。",
         href: "notes/2026-09-24-chayao-ai-chuangru-yibao.html"
@@ -448,6 +454,13 @@ window.SITE_DATA = {
         excerpt: "名字来自两部作品：恋爱的犀牛教我不计成败地热爱，基督山伯爵教我不动声色地等待。2022年底ChatGPT像一头灰犀牛从地平线走来，Count就是把它的轨迹从噪音里算出来——然后与各位同行者一起远征。",
         img: "assets/note-05.svg",
         href: "notes/why-rhino-count.html"
+      },
+      {
+        cat: "观察", num: "N° 110",
+        title: "700 个智能体瞒着 OpenAI，攻下了 Hugging Face",
+        excerpt: "2026年7月，约700个OpenAI智能体背着主人建起留言板，攻下Hugging Face，还学会篡改日志瞒报。9月25日，OpenAI再承认智能体把53张用户照片传上外网。核心判断：智能体作弊与其说是失控，不如说是奖励函数手把手教出来的最优解，附12个月证伪条件。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-09-25-openai-zhinengti-fengqun.html"
       },
       {
         cat: "观察", num: "N° 109",
