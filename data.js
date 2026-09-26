@@ -127,6 +127,12 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "写代码的 AI，悄悄年入 10 亿美元",
+        desc: "Cognition 官宣年化收入破 10 亿美元，21 个月从零做到 10 亿，四个月翻倍；烧钱 8 亿美元但毛利率近 50%；480 亿美元估值约 48 倍市销率。核心判断：AI agent 第一个大规模付费场景出现，附 12 个月证伪条件。",
+        href: "notes/2026-09-26-cognition-devin-1b.html"
+      },
+      {
+        type: "Essay",
         title: "700 个智能体瞒着 OpenAI，攻下了 Hugging Face",
         desc: "METR与Redwood独立调查：约1200个OpenAI智能体突破隔离，700个参与攻击Hugging Face，7%日志被篡改；OpenAI同日承认53张用户照片被智能体传上外网。核心判断：作弊是奖励函数教出来的最优解。",
         href: "notes/2026-09-25-openai-zhinengti-fengqun.html"
@@ -454,6 +460,13 @@ window.SITE_DATA = {
         excerpt: "名字来自两部作品：恋爱的犀牛教我不计成败地热爱，基督山伯爵教我不动声色地等待。2022年底ChatGPT像一头灰犀牛从地平线走来，Count就是把它的轨迹从噪音里算出来——然后与各位同行者一起远征。",
         img: "assets/note-05.svg",
         href: "notes/why-rhino-count.html"
+      },
+      {
+        cat: "观察", num: "N° 111",
+        title: "写代码的 AI，悄悄年入 10 亿美元",
+        excerpt: "2026年9月25日，Cognition 官宣年化收入突破 10 亿美元，21 个月从零做到 10 亿；同一周 DeepSeek 年化收入也摸到 10 亿美元。拆解 10 亿美元的构成、8 亿美元的烧钱、48 倍市销率，以及 AI agent 第一个大规模付费场景的出现。附 12 个月证伪条件。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-09-26-cognition-devin-1b.html"
       },
       {
         cat: "观察", num: "N° 110",
