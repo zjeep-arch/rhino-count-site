@@ -127,7 +127,7 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
-        title: "写代码的 AI，悄悄年入 10 亿美元",
+        title: "烧 8 亿赚 10 亿：Cognition 交出第一份答卷",
         desc: "Cognition 官宣年化收入破 10 亿美元，21 个月从零做到 10 亿，四个月翻倍；烧钱 8 亿美元但毛利率近 50%；480 亿美元估值约 48 倍市销率。核心判断：AI agent 第一个大规模付费场景出现，附 12 个月证伪条件。",
         href: "notes/2026-09-26-cognition-devin-1b.html"
       },
@@ -463,7 +463,7 @@ window.SITE_DATA = {
       },
       {
         cat: "观察", num: "N° 111",
-        title: "写代码的 AI，悄悄年入 10 亿美元",
+        title: "烧 8 亿赚 10 亿：Cognition 交出第一份答卷",
         excerpt: "2026年9月25日，Cognition 官宣年化收入突破 10 亿美元，21 个月从零做到 10 亿；同一周 DeepSeek 年化收入也摸到 10 亿美元。拆解 10 亿美元的构成、8 亿美元的烧钱、48 倍市销率，以及 AI agent 第一个大规模付费场景的出现。附 12 个月证伪条件。",
         img: "assets/note-05.svg",
         href: "notes/2026-09-26-cognition-devin-1b.html"
