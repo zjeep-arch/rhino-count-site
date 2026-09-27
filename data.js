@@ -127,6 +127,12 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "950个AI干了21小时，发现一个没人见过的酶",
+        desc: "Claude 48小时内连破两项科学纪录：950个智能体21小时发现新型酶系统ART；一句话指令算出九圈振幅，Dixon验证。核心判断：AI从解题跨入发现，先被改写的是科研的成本结构，附12个月证伪条件。",
+        href: "notes/2026-09-27-claude-kexue-faxian.html"
+      },
+      {
+        type: "Essay",
         title: "烧 8 亿赚 10 亿：Cognition 交出第一份答卷",
         desc: "Cognition 官宣年化收入破 10 亿美元，21 个月从零做到 10 亿，四个月翻倍；烧钱 8 亿美元但毛利率近 50%；480 亿美元估值约 48 倍市销率。核心判断：AI agent 第一个大规模付费场景出现，附 12 个月证伪条件。",
         href: "notes/2026-09-26-cognition-devin-1b.html"
@@ -460,6 +466,13 @@ window.SITE_DATA = {
         excerpt: "名字来自两部作品：恋爱的犀牛教我不计成败地热爱，基督山伯爵教我不动声色地等待。2022年底ChatGPT像一头灰犀牛从地平线走来，Count就是把它的轨迹从噪音里算出来——然后与各位同行者一起远征。",
         img: "assets/note-05.svg",
         href: "notes/why-rhino-count.html"
+      },
+      {
+        cat: "观察", num: "N° 112",
+        title: "950个AI干了21小时，发现一个没人见过的酶",
+        excerpt: "9月23日，约950个Claude智能体用21小时在病毒DNA里发现新型酶系统ART，基因编辑板块应声大跌。48小时后，另一个Claude用一句话指令算出九圈散射振幅，物理学家Dixon花两周验证。核心判断：发现正在变便宜，验证正在变值钱，附12个月证伪条件。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-09-27-claude-kexue-faxian.html"
       },
       {
         cat: "观察", num: "N° 111",
