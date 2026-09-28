@@ -87,6 +87,31 @@ if [ -n "$NEW_ARTICLES" ]; then
     [ "$MISS" -eq 0 ] && ok "新文章全部在 sitemap"
 fi
 
+# 6) WeChat 导出副本必须 noindex + canonical 指回原文
+# The cron publishing agent emits `notes/<slug>-wechat.html` next to the real
+# article but never runs scripts/noindex-wechat-dupes.py, so every new article
+# shipped a duplicate that competed in search. Caught in the wild on
+# 2026-09-28 (2026-09-28-nscale-nvidia-wechat.html was index,follow with a
+# self-referencing canonical). Fix: python3 scripts/noindex-wechat-dupes.py
+WECHAT_DUPES=$(echo "$FILES" | grep -- '-wechat\.html' || true)
+if [ -n "$WECHAT_DUPES" ]; then
+    BAD=0
+    for f in $WECHAT_DUPES; do
+        [ -f "$f" ] || continue
+        original="notes/$(basename "$f" -wechat.html).html"
+        if ! grep -q 'content="noindex,follow"' "$f"; then
+            fail "$f 缺 noindex（重复内容）→ 修复: python3 scripts/noindex-wechat-dupes.py"
+            BAD=$((BAD+1))
+            continue
+        fi
+        if ! grep -q "<link rel=\"canonical\" href=\"https://rhinocount.cn/${original}\"" "$f"; then
+            fail "$f canonical 未指向原文 ${original} → 修复: python3 scripts/noindex-wechat-dupes.py"
+            BAD=$((BAD+1))
+        fi
+    done
+    [ "$BAD" -eq 0 ] && ok "wechat 副本均已 noindex 且 canonical 指回原文"
+fi
+
 echo ""
 echo "== 结果: $( [ $FAIL -eq 0 ] && echo '✅ 全部通过，可以 push' || echo "⛔ $FAIL 项阻断，禁止 push" ) =="
 exit $([ $FAIL -eq 0 ] && echo 0 || echo 1)
