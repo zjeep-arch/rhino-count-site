@@ -225,6 +225,15 @@ def has_footer_links(html):
 def process_old_format_note(filepath, relative_path):
     """Process old-format note (no data-theme, minimal head)."""
     html = filepath.read_text(encoding="utf-8")
+
+    # Idempotence guard. Unlike process_new_format_note (which only writes when
+    # something actually changed), this function unconditionally injects a
+    # second SEO block + nav + footer. Running it twice therefore duplicated
+    # the whole head on every old-format note — caught the first time
+    # seo-pipeline.sh ran with --apply on 2026-09-28.
+    if '<link rel="canonical"' in html:
+        return False
+
     filename = filepath.name
     title = extract_title(html)
     description = extract_description(html)

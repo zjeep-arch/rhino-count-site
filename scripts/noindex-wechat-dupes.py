@@ -144,20 +144,16 @@ def main() -> int:
         return 0
 
     changed = 0
-    failures = []
     for f in targets:
         if fix_file(f):
             changed += 1
             print(f"  fixed {f.name}")
-        else:
-            failures.append(f.name)
+        # fix_file returns False for "already correct, nothing to do" — that is
+        # the desired steady state, not an error. Treating it as a failure made
+        # the pipeline non-idempotent: the second run always reported 5 failures
+        # even though every file was already correct.
 
     print(f"\nchecked={len(targets)} fixed={changed}")
-    if failures:
-        print("FAILED:", file=sys.stderr)
-        for name in failures:
-            print("  " + name, file=sys.stderr)
-        return 1
     return 0
 
 
