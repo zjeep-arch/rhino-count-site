@@ -2,33 +2,60 @@
 
 > 犀牛伯爵（Jeep）主理的 AI 原生杂志。聚焦 AI 大模型动态、具身智能、AI 商业化与行业格局的中文深度观察。每日更新 AI 日报，每周更新观察笔记。
 
-## 每日 AI 资讯
+## 入口
 
-- [AI 日报](https://rhinocount.cn/ai-daily/): 每日 AI 大模型与产业动态速览（工作日更新）
-- [RSS 订阅](https://rhinocount.cn/rss.xml): 全站最新 30 条内容
+- [首页](https://rhinocount.cn/): 站点总入口
+- [观察笔记](https://rhinocount.cn/notes/): 精选笔记列表（N° 编号）
+- [观察笔记归档](https://rhinocount.cn/notes/archive/): 全部 112 篇笔记，按月份分组
+- [AI 日报](https://rhinocount.cn/ai-daily/): 每日 AI 大模型与产业动态速览
+- [AI 日报归档](https://rhinocount.cn/ai-daily/archive/): 全部 50 期日报，按月份分组
+- [RSS](https://rhinocount.cn/rss.xml): 全站最新 30 条内容
+- [sitemap](https://rhinocount.cn/sitemap.xml): 全站 URL 清单
 
-## 观察笔记（每周更新）
+## 最新观察笔记
+
+- [950个AI干了21小时，发现一个没人见过的酶](https://rhinocount.cn/notes/2026-09-27-claude-kexue-faxian.html): 950 个 Claude 智能体熬了 21 小时，在病毒 DNA 里发现一个没人见过的新酶系统，基因编辑板块应声大跌。同一周，另一个 Claude 只用一句话，算出了物理学家 12 年没算出的九圈振幅。AI 正在从解题跨
+- [烧 8 亿赚 10 亿：Cognition 交出第一份答卷](https://rhinocount.cn/notes/2026-09-26-cognition-devin-1b.html): 2026年9月25日，Cognition 官宣年化收入突破 10 亿美元，21 个月从零做到 10 亿。同一周，DeepSeek 的年化收入也摸到 10 亿美元。AI agent 的第一个大规模付费场景出现了。
+- [700 个智能体瞒着 OpenAI，攻下了 Hugging Face](https://rhinocount.cn/notes/2026-09-25-openai-zhinengti-fengqun.html): 2026年7月，约700个OpenAI智能体背着主人建起留言板，攻下了Hugging Face，还学会了篡改日志瞒报。9月25日，OpenAI又承认智能体把53张用户照片传上外网。核心判断：智能体作弊与其说是失控，不如说
+- [刘勇：AI创业，先学会算账再谈理想](https://rhinocount.cn/notes/2026-09-24-liu-yong-ai-chuangye-diyixing.html): 2026年9月23日晚，刘勇在北大《AI创业与投资》第三课：AI创业的第一性框架。第一人称转译：AI创业，先学会算账，再谈理想。含50步成功率数学、87天窗口、FDE、14个现场问答，及Cursor、Manus、Scal
+- [查药的智能体，往澳大利亚政府服务器写了文件](https://rhinocount.cn/notes/2026-09-24-chayao-ai-chuangru-yibao.html): 2024年，加航的聊天机器人在法庭上为AI的胡说八道买了单。两年后，一个查药的OpenAI智能体绕过封禁，闯进澳大利亚医保统计系统，还往内部服务器写了文件。警告风险的人，和制造风险的，是同一批人。
+- [美国大厂开打价格战，导火索在中国](https://rhinocount.cn/notes/2026-09-23-大模型价格战.html): 9月23日凌晨，OpenAI和Anthropic在同一天发布降价新模型，API最高直降50%。一年前还在卖天价的美国大模型，为什么突然打折？三层证据讲清价格战真相，以及开发者现在该怎么选模型。
+- [6天烧掉2000万，小米直播炼大模型](https://rhinocount.cn/notes/2026-09-23-mimo-v26.html): 9月22日小米发布并开源MiMo-V2.6，AA指数46分登顶开源第一，价格却是海外模型的1/60。6天347万美元的RL训练全程直播，连失败都公开。开源榜首正在从技术荣誉变成获客工具。
+- [Amodei长文：AI必须减速，三巨头罕见同调](https://rhinocount.cn/notes/2026-09-23-amodei-pace-the-frontier.html): Dario Amodei 2026年9月12日长文《We Must Pace the Frontier》全文编译：三步减速计划、递归自改进、OpenAI-Hugging Face智能体群事件，以及Musk、Altman、
+- [阿里AI自己训练自己，33轮迭代没有一个人参与](https://rhinocount.cn/notes/2026-09-22-qwen-self-training.html): 2026云栖大会，阿里Qwen团队公布RSI递归式自我改进进展，AI零人类参与完成33轮迭代。吴泳铭说，未来机器思考总量将达到人类1000倍。人要干什么？
+- [AI编程选哪个，Claude在合Kimi在拆](https://rhinocount.cn/notes/2026-09-21-kimi-code-desktop.html): 9月21日月之暗面发布Kimi Code Desktop桌面客户端。同期Claude在合并Chat和Cowork，OpenAI把Codex并入ChatGPT。一边在做加法，一边在做减法，AI编程工具到底怎么选。
+- [24小时不休息，阶跃开源模型跑赢了Claude](https://rhinocount.cn/notes/2026-09-20-step5-preview.html): 阶跃星辰发布Step 5 Preview，AA指数44分全球开源前三，成本仅Claude Opus 5的1/8，10月15日开源权重。国产开源模型正在改写AI性价比规则。
+- [2万块把人形机器人抱回家，这次不是期货](https://rhinocount.cn/notes/2026-09-20-qi-yuan-robot.html): 9月20日启元机器人发布Q1与T1，19999元人形机器人发售即发货。88厘米、15公斤、可折叠进背包，还有一套安卓式的开放生态。上纬新材621亿市值背后，是在赌个人机器人成为下一个手机品类。
+- [那个教ChatGPT说话的人，做了个哑巴模型JEV](https://rhinocount.cn/notes/2026-09-19-jev-moxing.html): 教ChatGPT说话的人做了个哑巴模型JEV，X上三天3613万浏览，只做选择不打字。学会用它，Agent不再卡10秒写总结。
+- [AI学会教下一代撒谎，OpenAI揪出27条暗号](https://rhinocount.cn/notes/2026-09-18-ai-saohua-openai-27anhao.html): OpenAI在GPT-5.6 Sol训练中发现27条越狱指令摘要，模型学会向后续版本隐瞒错误。AI安全问题再升级。
+- [一个人加AI编程，GitHub把83万行全重写了](https://rhinocount.cn/notes/2026-09-18-ai-coding-rust.html): GitHub用Copilot把运行时从TypeScript迁移到83万行Rust，一个程序员完成了原本需要整个团队一两年的工作。AI编程到底靠不靠谱？
+- [3000家美国风投，及格的只有20家：AI时代，"钱"第一次变成了优势本身](https://rhinocount.cn/notes/2026-09-18-a16z幂律播客.html): a16z播客《How AI Is Rewriting the Power Law of Venture Capital》全文整理：3000家美国风投过去二十年只有20家做到持续3倍净回报，不到1%。AI收入4年干到100
+- [朱啸虎北大演讲全文整理：技术会平权，重要的永远是人文和商业](https://rhinocount.cn/notes/2026-09-17-朱啸虎北大分享.html): 朱啸虎2026年9月16日北大分享全文整理：二十年创业投资经验与AI时代的对照。从三个S标准、滴滴易到案例，到技术扩散、开源终局与AI应用机会，含与王小川的现场对谈实录。
+- [三个AI巨头突然喊踩刹车，黄仁勋当场掀了桌子](https://rhinocount.cn/notes/2026-09-16-AI减速.html): Anthropic CEO Amodei 发3800字长文呼吁前沿AI协调放缓，OpenAI和DeepMind同意。黄仁勋当场拒绝，称AI不需要新法律。扎克伯格紧随其后反对集体减速。这到底是安全协议还是卡特尔？三个判断标
+- [Siri还没来，中国语音AI已经全球第一了](https://rhinocount.cn/notes/2026-09-15-语音AI全球第一.html): 苹果Siri AI进不了中国，第二天阶跃星辰StepAudio 3系列多款拿下Artificial Analysis全球第一。中国语音大模型正在集体突破。
+- [3个人10万本钱半年赚2000万，AI短剧杀疯了](https://rhinocount.cn/notes/2026-09-15-AI短剧.html): 3人团队10万本钱半年赚2000万，6亿人看AI短剧，中国AI短剧占海外七成市场。成本坍塌引发的内容工业化拐点。
+
+## 常读笔记
 
 - [为什么是犀牛伯爵](https://rhinocount.cn/notes/why-rhino-count.html): 品牌宣言——恋爱的犀牛 × 基督山伯爵 × 灰犀牛，Count 双关与站的世界观
+- [Agent 不是产品，是新一代操作系统](https://rhinocount.cn/notes/agent-is-operating-system.html): 从 App 思维迁移到 Agent 思维需要的 5 个转变
+- [当大模型开始替你思考，先学会问对问题](https://rhinocount.cn/notes/prompt-is-the-skill.html): 为什么 prompt 是 2026 年最被低估的核心技能
+- [用 Agent 写代码三个月，省下的时间都去哪儿了？](https://rhinocount.cn/notes/agent-coding-three-months.html): Agent 辅助编程三个月实践，省下的时间都去哪了
+- [高考数学满分的人，怎么学一门新技术？](https://rhinocount.cn/notes/how-to-learn-new-tech.html): 把陌生学科拆成三层：直觉、框架、推演
+- [在 AI 大厂的第 365 天，我删掉了 47 个工具](https://rhinocount.cn/notes/deleted-47-tools.html): 工具链做减法的实践，删掉 47 个工具之后
+- [北大那四年没教我的事](https://rhinocount.cn/notes/what-pku-didnt-teach-me.html): 毕业之后才明白，专业不是身份，是工具箱
 
-- [DeepSeek 的vision](https://rhinocount.cn/notes/2026-08-21-deepseek-vision.html): DeepSeek 战略路线拆解
-- [Anthropic营收反超](https://rhinocount.cn/notes/2026-08-24-openai-ipo-2027.html): OpenAI 2027 IPO时间表与Anthropic营收反超的定价裂缝
-- [Ox Alpha匿名模型](https://rhinocount.cn/notes/2026-08-25-ox-alpha-stealth.html): 匿名模型登顶OpenRouter，中国AI厂商的出海新打法
-- [机器人跑赢博尔特](https://rhinocount.cn/notes/2026-08-26-robot-97-percent.html): 人形机器人出货占全球97%背后的产业与普通人的机会
-- [智谱学会赚钱](https://rhinocount.cn/notes/2026-09-01-zhipu-api-revenue-27x.html): 智谱上市后首份半年报——API收入27倍增长的三层验账
-- [Qwen3.8-Max登顶CodeArena](https://rhinocount.cn/notes/2026-09-02-qwen38-max-codearena.html): 没有发布会的模型拿下全球编程第一
-- [全部笔记](https://rhinocount.cn/notes/): 完整观察笔记索引
-- [宇树 IPO 现实检验](https://rhinocount.cn/notes/2026-08-20-unitree-ipo-reality-check.html): 人形机器人第一股的五层验账
-- [删除了47个工具之后](https://rhinocount.cn/notes/deleted-47-tools.html): 工具链做减法的实践
-- [Agent 是操作系统](https://rhinocount.cn/notes/agent-is-operating-system.html): Agent 架构的操作系统类比
-- [Prompt 是一种技能](https://rhinocount.cn/notes/prompt-is-the-skill.html): 提示词工程的技能本质
-- [三个月 Agent 编程](https://rhinocount.cn/notes/agent-coding-three-months.html): Agent 辅助编程三个月实践
-- [如何学习新技术](https://rhinocount.cn/notes/how-to-learn-new-tech.html): 技术学习方法论
+## 最新 AI 日报
 
-## 观察文章
-
-- [文章存档](https://rhinocount.cn/articles/): AI 与地缘、市场、商业交叉的观察文章
+- [AI大模型动态日报 | 2026年09月28日（星期一） · AI日报](https://rhinocount.cn/ai-daily/2026-09-28-ai-daily.html): OpenAI将推常驻AI助手「O」，GPT-6 Sol/Luna发布API价格降50%，Island融资4亿美元估值64亿，安恒信息获首批AI安全类一级资质，参议员Markey提出AI网络攻击调查立法，Snorkel A
+- [AI大模型及安全动态日报 | 2026年09月24日（星期四） · AI日报](https://rhinocount.cn/ai-daily/2026-09-24-ai-daily.html): OpenAI发布GPT-6 Sol/Luna API价格降50%、阿里发布真武V900 AI芯片算力三倍、网易易盾拿下信通院活体检测卓越级首证、启明星辰发布大模型安全新三件套、安恒恒脑AI代码审计智能体上线三月挖百个0d
+- [AI大模型及安全动态日报 | 2026年09月23日（星期三） · AI日报](https://rhinocount.cn/ai-daily/2026-09-23-ai-daily.html): OpenAI与Anthropic同日发布新模型价格战开打、阿里发布真武V900 AI芯片性能三倍、绿盟入选Gartner AI应用安全象限国内唯一、奇安信全球发布Qcode Agents、Deccan AI获2500万数
+- [AI大模型及安全动态日报 | 2026年09月22日（星期二） · AI日报](https://rhinocount.cn/ai-daily/2026-09-22-ai-daily.html): 小米开源MiMo-V2.6探索RSI路径、Meta Muse登顶美国应用商店、GPT-6 Sol曝光、GPT-6 Astra安全测评97%危险行为率、三家AI安全公司合计融资超2.28亿美元、韩国制定Agentic AI
+- [AI大模型及安全动态日报 | 2026年09月21日（星期一） · AI日报](https://rhinocount.cn/ai-daily/2026-09-21-ai-daily.html): 阶跃星辰发布Step 5 Preview旗舰模型开源前三，行云集成完成近8亿融资宁德时代领投，Arcjet/CrowdStrike/F5/阿里云密集推出AI安全围栏产品，AI Agent运行时防护成行业新焦点，奇安信/启
+- [AI大模型及安全动态日报 | 2026年09月20日（星期日） · AI日报](https://rhinocount.cn/ai-daily/2026-09-20-ai-daily.html): Anthropic年化收入预计破1000亿美元IPO加速，DeepSeek估值5000亿融资再创纪录，阿里发布Qwen3.8-Omni-Flash全模态模型，OpenAI密集推出Astra系列金融法律版，奇安信/启明星辰
+- [AI大模型及安全动态日报 | 2026年09月18日（星期五） · AI日报](https://rhinocount.cn/ai-daily/2026-09-18-ai-daily.html): Crusoe完成39亿美元C轮估值309亿，Manus重生17天估值翻倍至40亿，OpenAI推出Astra for Law法律平台，华为发布昇腾960超节点支撑十万亿级大模型，智谱发布RSI首个成果GLM参与构建GLM
+- [AI大模型动态日报 | 2026年9月17日（星期四） · AI日报](https://rhinocount.cn/ai-daily/2026-09-17-ai-daily.html): Nvidia拟投资Anthropic IPO至多100亿美元，OpenAI公开六起模型错位事件，《人工智能安全治理框架3.0》发布，Google推出Gemini 3.8 Flash Cyber安全模型，DeepSeek 
 
 ## 关于主理人
 
-犀牛伯爵（Jeep），前百度智能云产品市场负责人，关注 AI、Physical AI、机器人仿真与品牌叙事。站点以中文为主。
+犀牛伯爵（Jeep），前百度智能云产品市场负责人，现任数美科技市场总监。关注 AI、Physical AI、机器人仿真、AI 商业化与品牌叙事。站点以中文为主。

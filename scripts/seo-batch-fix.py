@@ -28,10 +28,21 @@ def extract_title(html):
     return ""
 
 def extract_description(html):
-    """Extract meta description content."""
-    m = re.search(r'<meta\s+name="description"\s+content="([^"]*)"', html, re.IGNORECASE)
-    if m:
-        return m.group(1).strip()
+    """Extract meta description content.
+
+    Attribute order varies: the wechat-export template emits
+    `<meta content="..." name="description"/>` while the site template
+    emits `<meta name="description" content="...">`. Accept both, or
+    og:description is injected as an empty string.
+    """
+    for pat in (
+        r'<meta\s+name="description"\s+content="([^"]*)"',
+        r'<meta\s+content="([^"]*)"\s+name="description"',
+        r'<meta\s+property="og:description"\s+content="([^"]*)"',
+    ):
+        m = re.search(pat, html, re.IGNORECASE)
+        if m and m.group(1).strip():
+            return m.group(1).strip()
     return ""
 
 def extract_date(filename):

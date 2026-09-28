@@ -59,7 +59,11 @@ for b in blocks: json.loads(b)
         fail "$f 缺 JSON-LD"
     fi
     # 4) meta description 非空
-    if grep -qE '<meta name="description" content="[^"]{20,}' "$f"; then
+    # The wechat-export template writes attributes in the order
+    # `<meta content="..." name="description"/>` while the site template writes
+    # `<meta name="description" content="...">`. Matching only the latter
+    # reported 40+ false "missing description" failures.
+    if grep -qE '<meta content="[^"]{20,}" name="description"|<meta name="description" content="[^"]{20,}' "$f"; then
         ok "$f description 就位"
     else
         fail "$f 缺 meta description（RSS 空描述根因）"
@@ -67,7 +71,10 @@ for b in blocks: json.loads(b)
 done
 
 # 5) 新文章必须进 sitemap
-NEW_ARTICLES=$(echo "$FILES" | grep -E '^(notes|ai-daily|articles)/' | grep -v 'template\.html\|index\.html' || true)
+# `-wechat.html` copies are deliberately excluded from sitemap.xml: they carry
+# noindex,follow and a canonical pointing at the original. Requiring them here
+# would fight that decision.
+NEW_ARTICLES=$(echo "$FILES" | grep -E '^(notes|ai-daily|articles)/' | grep -v 'template\.html\|index\.html' | grep -v -- '-wechat\.html' || true)
 if [ -n "$NEW_ARTICLES" ]; then
     MISS=0
     for f in $NEW_ARTICLES; do

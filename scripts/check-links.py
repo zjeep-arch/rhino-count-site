@@ -11,6 +11,7 @@ Prints a per-issue report and exits non-zero on failure.
 import os
 import re
 import sys
+import urllib.parse
 from html.parser import HTMLParser
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -72,6 +73,12 @@ def main():
                 continue
             target = href.split("#")[0].split("?")[0]
             fragment = href.split("#")[1].split("?")[0] if "#" in href else None
+            # Notes with CJK slugs are linked percent-encoded
+            # (../notes/2026-09-15-AI%E7%9F%AD%E5%89%A7.html) while the file on
+            # disk is 2026-09-15-AI短剧.html. Without decoding, every CJK-titled
+            # note reads as a broken link.
+            if target:
+                target = urllib.parse.unquote(target)
             if target:
                 if target.startswith("/"):
                     tpath = os.path.normpath(os.path.join(ROOT, target.lstrip("/")))

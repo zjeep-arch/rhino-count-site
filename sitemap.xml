@@ -8,9 +8,15 @@
   </url>
   <url>
     <loc>https://rhinocount.cn/notes/</loc>
-    <lastmod>2026-09-14</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://rhinocount.cn/notes/archive/</loc>
+    <lastmod>2026-09-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://rhinocount.cn/notes/2026-07-04-anthropic-chip-xai-voice-sonnet5-agent.html</loc>
@@ -523,31 +529,37 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://rhinocount.cn/notes/2026-09-15-AI%E7%9F%AD%E5%89%A7.html</loc>
+    <loc>https://rhinocount.cn/notes/2026-09-15-AI短剧.html</loc>
     <lastmod>2026-09-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://rhinocount.cn/notes/2026-09-15-%E8%AF%AD%E9%9F%B3AI%E5%85%A8%E7%90%83%E7%AC%AC%E4%B8%80.html</loc>
+    <loc>https://rhinocount.cn/notes/2026-09-15-语音AI全球第一.html</loc>
     <lastmod>2026-09-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://rhinocount.cn/notes/2026-09-16-AI%E5%87%8F%E9%80%9F.html</loc>
+    <loc>https://rhinocount.cn/notes/2026-09-16-AI减速.html</loc>
     <lastmod>2026-09-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://rhinocount.cn/notes/2026-09-17-%E6%9C%B1%E5%95%B8%E8%99%8E%E5%8C%97%E5%A4%A7%E5%88%86%E4%BA%AB.html</loc>
+    <loc>https://rhinocount.cn/notes/2026-09-17-朱啸虎北大分享.html</loc>
     <lastmod>2026-09-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://rhinocount.cn/notes/2026-09-18-a16z%E5%B9%82%E5%BE%8B%E6%92%AD%E5%AE%A2.html</loc>
+    <loc>https://rhinocount.cn/notes/2026-09-18-a16z幂律播客.html</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://rhinocount.cn/notes/2026-09-18-ai-coding-rust.html</loc>
     <lastmod>2026-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -555,6 +567,84 @@
   <url>
     <loc>https://rhinocount.cn/notes/2026-09-18-ai-saohua-openai-27anhao.html</loc>
     <lastmod>2026-09-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://rhinocount.cn/notes/2026-09-19-jev-moxing.html</loc>
+    <lastmod>2026-09-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://rhinocount.cn/notes/2026-09-20-qi-yuan-robot.html</loc>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://rhinocount.cn/notes/2026-09-20-step5-preview.html</loc>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://rhinocount.cn/notes/2026-09-21-kimi-code-desktop.html</loc>
+    <lastmod>2026-09-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://rhinocount.cn/notes/2026-09-22-qwen-self-training.html</loc>
+    <lastmod>2026-09-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://rhinocount.cn/notes/2026-09-23-amodei-pace-the-frontier.html</loc>
+    <lastmod>2026-09-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://rhinocount.cn/notes/2026-09-23-mimo-v26.html</loc>
+    <lastmod>2026-09-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://rhinocount.cn/notes/2026-09-23-大模型价格战.html</loc>
+    <lastmod>2026-09-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://rhinocount.cn/notes/2026-09-24-chayao-ai-chuangru-yibao.html</loc>
+    <lastmod>2026-09-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://rhinocount.cn/notes/2026-09-24-liu-yong-ai-chuangye-diyixing.html</loc>
+    <lastmod>2026-09-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://rhinocount.cn/notes/2026-09-25-openai-zhinengti-fengqun.html</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://rhinocount.cn/notes/2026-09-26-cognition-devin-1b.html</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://rhinocount.cn/notes/2026-09-27-claude-kexue-faxian.html</loc>
+    <lastmod>2026-09-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -701,6 +791,12 @@
     <lastmod>2026-09-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://rhinocount.cn/ai-daily/archive/</loc>
+    <lastmod>2026-09-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://rhinocount.cn/ai-daily/2026-06-27-gpt-5-6-deepseek-dspark.html</loc>
@@ -957,6 +1053,48 @@
   <url>
     <loc>https://rhinocount.cn/ai-daily/2026-09-17-ai-daily.html</loc>
     <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://rhinocount.cn/ai-daily/2026-09-18-ai-daily.html</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://rhinocount.cn/ai-daily/2026-09-20-ai-daily.html</loc>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://rhinocount.cn/ai-daily/2026-09-21-ai-daily.html</loc>
+    <lastmod>2026-09-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://rhinocount.cn/ai-daily/2026-09-22-ai-daily.html</loc>
+    <lastmod>2026-09-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://rhinocount.cn/ai-daily/2026-09-23-ai-daily.html</loc>
+    <lastmod>2026-09-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://rhinocount.cn/ai-daily/2026-09-24-ai-daily.html</loc>
+    <lastmod>2026-09-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://rhinocount.cn/ai-daily/2026-09-28-ai-daily.html</loc>
+    <lastmod>2026-09-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>

@@ -49,6 +49,11 @@ EXCLUDE_FILES = {
 EXCLUDE_PATTERNS = [
     "_retired",
     "draft",
+    # WeChat export duplicates carry <meta name="robots" content="noindex,follow">
+    # and canonical pointing at the original (scripts/noindex-wechat-dupes.py).
+    # Listing them in sitemap.xml would contradict the noindex and waste crawl
+    # budget on duplicate content.
+    "-wechat.html",
 ]
 
 
@@ -136,6 +141,17 @@ def collect_urls():
                 "priority": "0.9"
             })
         
+        # Archive pages live one level down (notes/archive/index.html).
+        # glob("*.html") does not recurse, so without this the archive never
+        # reaches sitemap.xml and stays undiscoverable.
+        for archive_index in sorted(section_path.glob("archive/index.html")):
+            urls.append({
+                "loc": f"{SITE_URL}/{section}/archive/",
+                "lastmod": get_file_lastmod(f"{section}/archive/index.html"),
+                "changefreq": "weekly",
+                "priority": "0.8"
+            })
+
         # Individual HTML files in this section
         html_files = sorted(section_path.glob("*.html"))
         for f in html_files:
