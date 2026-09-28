@@ -127,6 +127,12 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "Nvidia 投 10 亿：左手卖卡，右手下注",
+        desc: "Nscale 募 33.6 亿美元，Nvidia 出 10 亿转无投票权股份。供需闭环、腾讯式生态投资、中美资本化竞赛与中国开源牌，三个判断附 12 个月证伪条件。",
+        href: "notes/2026-09-28-nscale-nvidia.html"
+      },
+      {
+        type: "Essay",
         title: "950个AI干了21小时，发现一个没人见过的酶",
         desc: "Claude 48小时内连破两项科学纪录：950个智能体21小时发现新型酶系统ART；一句话指令算出九圈振幅，Dixon验证。核心判断：AI从解题跨入发现，先被改写的是科研的成本结构，附12个月证伪条件。",
         href: "notes/2026-09-27-claude-kexue-faxian.html"
@@ -466,6 +472,13 @@ window.SITE_DATA = {
         excerpt: "名字来自两部作品：恋爱的犀牛教我不计成败地热爱，基督山伯爵教我不动声色地等待。2022年底ChatGPT像一头灰犀牛从地平线走来，Count就是把它的轨迹从噪音里算出来——然后与各位同行者一起远征。",
         img: "assets/note-05.svg",
         href: "notes/why-rhino-count.html"
+      },
+      {
+        cat: "观察", num: "N° 113",
+        title: "Nvidia 投 10 亿：左手卖卡，右手下注",
+        excerpt: "Nscale 上市前募 33.6 亿美元可转债，Nvidia 出 10 亿，IPO 后转无投票权股份。三个判断：Nvidia 买的是自己的需求（供需闭环）；腾讯式上下游生态投资正在被复制；中美 AI 资本化竞赛开哨，中国的牌是开源，兑现需要时间。附 12 个月证伪条件。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-09-28-nscale-nvidia.html"
       },
       {
         cat: "观察", num: "N° 112",
