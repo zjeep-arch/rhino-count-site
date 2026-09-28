@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>24小时不休息，阶跃开源模型跑赢了Claude | 犀牛伯爵</title>
+  <meta name="keywords" content="阶跃星辰, Step 5, 开源大模型, AI模型选型, Claude对比, 国产AI, 大模型, MoE架构">
+  <meta name="description" content="阶跃星辰发布Step 5 Preview，AA指数44分全球开源前三，成本仅Claude Opus 5的1/8，10月15日开源权重。国产开源模型正在改写AI性价比规则。">
+  <style>
+    :root {
+      --accent: #8b2635;
+      --ink: #333;
+      --ink-soft: #555;
+      --muted: #888;
+      --surface: #fafafa;
+      --border: rgba(0,0,0,0.06);
+      --radius: 12px;
+      --font-sans: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-serif: "Noto Serif SC", "Songti SC", Georgia, serif;
+    }
+    body { font-family: var(--font-sans); background: #f5f5f5; margin: 0; padding: 16px; font-size: 16px; line-height: 1.8; color: var(--ink); -webkit-font-smoothing: antialiased; }
+    .container { max-width: 680px; margin: 0 auto; background: var(--surface); padding: 32px; border-radius: var(--radius); }
+    h1 { font-family: var(--font-serif); font-size: 24px; font-weight: 700; color: var(--ink); line-height: 1.4; margin: 0 0 16px; }
+    .meta { color: var(--muted); font-size: 13px; margin-bottom: 16px; }
+    .byline { color: var(--ink-soft); font-size: 14px; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+    h2 { font-family: var(--font-serif); font-size: 20px; font-weight: 600; color: var(--ink); margin: 32px 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+    h3 { font-family: var(--font-serif); font-size: 18px; font-weight: 600; color: var(--ink); margin: 24px 0 12px; }
+    p { margin: 0 0 24px; }
+    .quote-box { border-left: 4px solid var(--accent); background: #f5f5f5; padding: 16px 20px; margin: 24px 0; border-radius: 0 var(--radius) var(--radius) 0; }
+    .quote-box p { margin: 0; color: var(--ink-soft); font-style: italic; font-size: 15px; }
+    .quote-box .attribution { margin-top: 8px; color: var(--muted); font-size: 13px; font-style: normal; }
+    .insight-box { background: #fff8f0; border: 1px solid #ffe4c4; border-radius: var(--radius); padding: 20px; margin: 24px 0; }
+    .insight-box h4 { margin: 0 0 8px; font-size: 16px; color: var(--ink); }
+    .insight-box p { margin: 0; font-size: 15px; color: var(--ink-soft); }
+    .data-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14px; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .data-table th, .data-table td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); }
+    .data-table th { background: #f0f0f0; font-weight: 600; color: var(--ink); }
+    .data-table td { color: var(--ink-soft); }
+    .timeline { position: relative; padding-left: 24px; margin: 24px 0; }
+    .timeline::before { content: ''; position: absolute; left: 6px; top: 0; bottom: 0; width: 2px; background: #e0e0e0; }
+    .timeline-item { position: relative; margin-bottom: 16px; }
+    .timeline-item::before { content: ''; position: absolute; left: -22px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); }
+    .timeline-item .date { font-size: 13px; color: var(--muted); margin-bottom: 4px; }
+    .timeline-item .content { font-size: 15px; color: var(--ink); }
+    .img-caption { text-align: center; color: var(--muted); font-size: 13px; margin-top: 8px; margin-bottom: 24px; }
+    .ending { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--ink-soft); font-size: 14px; }
+    .highlight { color: var(--accent); font-weight: 600; background: linear-gradient(to top, rgba(139,38,53,0.08) 40%, transparent 40%); padding: 0 2px; }
+    .data-callout { display: inline-block; background: var(--accent); color: #fff; padding: 2px 10px; border-radius: 4px; font-weight: 700; font-size: 15px; }
+    .contrast-card { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin: 24px 0; border-radius: var(--radius); overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .contrast-card .side { padding: 16px 20px; }
+    .contrast-card .side-left { background: #fef2f2; border-right: 1px solid var(--border); }
+    .contrast-card .side-right { background: #f0fdf4; }
+    .contrast-card .side h4 { margin: 0 0 8px; font-size: 14px; font-weight: 600; }
+    .contrast-card .side-left h4 { color: #991b1b; }
+    .contrast-card .side-right h4 { color: #166534; }
+    .contrast-card .side p { margin: 0; font-size: 14px; color: var(--ink-soft); line-height: 1.6; }
+    .punchline { font-family: var(--font-serif); font-size: 18px; font-weight: 700; color: var(--accent); text-align: center; margin: 32px 0; padding: 16px 0; border-top: 2px solid var(--accent); border-bottom: 2px solid var(--accent); }
+    strong { color: var(--ink); font-weight: 600; }
+    img { width: 100%; border-radius: 8px; margin: 24px 0 0; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>24小时不休息，阶跃开源模型跑赢了Claude</h1>
+    <div class="meta">2026年9月20日 · 约5分钟</div>
+    <div class="byline">文｜犀牛伯爵</div>
+
+    <p>凌晨两点，一块ESP32开发板还在自己改自己的固件。</p>
+
+    <p>没有人在旁边盯着。一个AI模型连续跑了三个多小时，把开发板的硬件参数调了又调，中间没断过一次。这不是实验室演示视频，是阶跃星辰今天发布的Step 5 Preview在干真实活。</p>
+
+    <p>我看到这个测试记录的时候愣了一下。不是因为AI能写代码，大家都习惯了。是因为它跑的时间太长了。三个多小时不间断执行，对现在的大模型来说非常难。</p>
+
+    <p>直到今天。</p>
+
+    <p>这个AI不是GPT，不是Claude。是阶跃星辰的Step 5 Preview。</p>
+
+    <p>一个国产开源模型，今天正式发布，10月15日把完整权重放出来免费下载。在Artificial Analysis Intelligence Index，全球最权威的AI综合能力榜单上，它拿了44分，排在全球开源前三。单任务成本只有Claude Opus 5的八分之一。</p>
+
+    <p>你可能没听过阶跃星辰。但如果你关注国产大模型，这家公司绕不过去。</p>
+
+    <h2>不是更大，是更聪明地用算力</h2>
+
+    <p>说真的，现在聊大模型最怕听到的就是参数数字。你跟我说600B，我第一反应是，又一个堆参数的。</p>
+
+    <p>但Step 5 Preview的600B总参数，实际只激活了27B。</p>
+
+    <p>想象一个600人的公司，每次接到任务只需要27个人同时上班，其他人待命。每人只干自己最擅长的事。这就是稀疏MoE架构的核心思路，不是让所有人一起上，是让最对的人上。</p>
+
+    <p>阶跃自己的说法叫"帕累托前沿"。讲得直白一点，就是同样的成本下买到更强的智能，或者同样的智能花更少的钱。它直接决定你用这个模型要花多少钱。</p>
+
+    <div class="contrast-card">
+      <div class="side side-left">
+        <h4>Claude Opus 5</h4>
+        <p>Anthropic旗舰闭源模型，AA指数约60分，单任务成本为基准线</p>
+      </div>
+      <div class="side side-right">
+        <h4>Step 5 Preview</h4>
+        <p>阶跃星辰开源模型，AA指数44分，单任务成本仅1/8，10月15日开源权重</p>
+      </div>
+    </div>
+
+    <p>差距在不在。在。44分对比60分，能力上确实还有距离。但成本差了8倍。如果你是要跑大量Agent任务的创业团队，一个月API账单从80万降到10万，你会在意那16分的差距吗。</p>
+
+    <img src="https://x0.ifengimg.com/ucms/2026_39/FB77449CD36284B861031B42819969CB2CF29FB1_size806_w1470_h1578.png" alt="阶跃星辰Step 5 Preview模型发布及评测数据展示" />
+    <div class="img-caption">图源｜凤凰网科技, 阶跃Step 5 Preview发布及评测表现</div>
+
+    <p>这是阶跃今天发布会传递的最重要的信号。不是"我又做出了更强的模型"，是"我把智能效率的边界又往外推了一步"。</p>
+
+    <h2>跑赢了Claude的那个瞬间</h2>
+
+    <p>我自己最感兴趣的是一组数据。在24小时GPU Kernel优化任务中，Step 5 Preview把MLA内核峰值性能做到了<span class="data-callout">508 TFLOPS</span>。</p>
+
+    <p>Claude Opus 5的成绩是493。</p>
+
+    <p>对，你没看错。在这个具体任务上，阶跃的开源模型跑赢了Anthropic旗舰闭源模型。</p>
+
+    <p>我不敢说这代表Step 5整体强于Claude Opus 5。那不客观。但在某些需要长时间持续执行的场景里，国产开源模型已经能和全球最强模型掰手腕了。放到一年前，没人敢想。</p>
+
+    <p>还有一个数据值得说。Step 5 Preview在自动化后训练实验中，把Qwen3-30B-A3B在AIME24数学竞赛上的准确率从53.3%拉到60%。它不只会做任务，还能帮别的模型变强。这个能力在AI圈叫"模型当教练"，非常前沿。</p>
+
+    <p>在Agents' Last Exam的CLI子集、FrontierFinance金融评测、DRACO跨领域研究评测上，Step 5 Preview都仅次于GPT-6 Astra或Claude Opus 5，领先其他所有开源模型。包括Llama、Mistral这一票。</p>
+
+    <p>阶跃还自建了StepCodeBench，覆盖553个代码仓库、9类任务、33种编程语言。不是刷跑分榜，是在真实代码库里干活。</p>
+
+    <p class="punchline">不是参数更大，是算力花得更值。</p>
+
+    <h2>如果你正在选AI模型，记住三个判断标准</h2>
+
+    <p>很多朋友不知道怎么判断一个模型适不适合自己。聊一下我自己总结的三个标准。</p>
+
+    <p>第一，看任务需不需要长时间执行。一问一答的场景大部分模型都行。但如果你需要模型连续跑几小时做代码迁移、数据分析，就得关注Agent能力。Step 5 Preview在ESP32上连续执行超3小时，这个数字可以当参照线。</p>
+
+    <p>第二，看单任务成本而不是单价。有些模型单价便宜但调用次数多，总成本反而高。Claude Opus 5完成同一任务的实际花费是Step 5的8倍。</p>
+
+    <p>第三，看你能不能拿到权重。闭源模型再强，数据要发到别人服务器上。开源模型可以本地部署、微调、自控安全边界。10月15日之后，Step 5 Preview是AA榜单前三里唯一免费拿到的模型。</p>
+
+    <p>建议收藏这三个标准，下次选AI模型的时候直接对号入座。</p>
+
+    <h2>国产开源正在改变游戏规则</h2>
+
+    <p>我一直觉得，国产AI模型最有价值的不是跑分最高那个，而是让最多人用上的那个。</p>
+
+    <p>过去半年，从智谱GLM-5.3发现40年未知DNS漏洞，到DeepSeek V4.1把推理成本压到0.02元每百万token，到通义千问拿下CodeArena全球第一，再到今天阶跃Step 5 Preview进入全球开源前三。国产开源模型的节奏已经不是偶尔冒头，是持续上攻。</p>
+
+    <p>阶跃星辰在这条路上走了三年。连续三代基座模型都在做同一件事，把计算转化为智能的效率提上去。</p>
+
+    <img src="https://pic.rmb.bdstatic.com/bjh/260722/dump/817120b3491d840661bae502d52a88a8.jpeg" alt="阶跃星辰模型技术发展与开放生态" />
+    <div class="img-caption">图源｜百家号, 阶跃星辰模型生态与开放平台</div>
+
+    <p>这条路线逻辑很清晰。大模型Scaling的旧逻辑是用更多计算换更强智能，但计算成本也在飙升。下一阶段的竞争核心是谁能把同样多的算力变成更多有效智能。27B激活参数做到44分AA指数，就是在回答这个问题。</p>
+
+    <p>44分对比60分，差距是真实的。但国产开源模型正在用成本优势快速缩小能力差距。当最强的那批模型中有几个是免费下载的，追赶这个概念就变了。</p>
+
+    <p>10月15日，Step 5 Preview权重开源。全球开发者可以免费拿到一个AA指数44分、支持百万token上下文、原生多模态输入的模型。两年前花多少钱都买不到。</p>
+
+    <p>觉得有用，转发给做AI的朋友，建议收藏下次选模型的时候用得上。</p>
+
+    <p>你自己用AI模型的时候，最看重什么，成本还是能力？评论区聊聊你的选择。</p>
+
+    <p>你觉得开源模型和闭源模型，3年后谁会更强？留言区等你的判断。</p>
+
+    <p>更多AI产业深度观察，关注专业网站 犀牛伯爵 rhinocount.cn</p>
+
+    <div class="ending">谢谢你看我的文章。</div>
+  </div>
+</body>
+</html>

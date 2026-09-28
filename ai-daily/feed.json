@@ -9,6 +9,55 @@
       "href": "2026-09-28-ai-daily.html"
     },
     {
+      "title": "AI大模型及安全动态日报 | 2026年09月24日（星期四）",
+      "date": "2026年09月24日（星期四）",
+      "slug": "2026-09-24-ai-daily",
+      "url": "ai-daily/2026-09-24-ai-daily.html",
+      "excerpt": "OpenAI发布GPT-6 Sol/Luna API价格降50%、阿里发布真武V900 AI芯片算力三倍、网易易盾拿下信通院活体检测卓越级首证、启明星辰发布大模型安全新三件套、安恒恒脑AI代码审计智能体上线三月挖百个0day、Mercor获3.5亿数据标注融资、欧盟发布AI网络安全行动计划。",
+      "category": "AI日报",
+      "cat": "安全 · 模型 · 资本",
+      "href": "2026-09-24-ai-daily.html"
+    },
+    {
+      "title": "AI大模型及安全动态日报 | 2026年09月23日（星期三）",
+      "date": "2026年09月23日（星期三）",
+      "slug": "2026-09-23-ai-daily",
+      "url": "ai-daily/2026-09-23-ai-daily.html",
+      "excerpt": "OpenAI与Anthropic同日发布新模型价格战开打、阿里发布真武V900 AI芯片性能三倍、绿盟入选Gartner AI应用安全象限国内唯一、奇安信全球发布Qcode Agents、Deccan AI获2500万数据标注融资、欧盟发布AI网络安全行动计划。",
+      "category": "AI日报",
+      "cat": "安全 · 模型 · 资本",
+      "href": "2026-09-23-ai-daily.html"
+    },
+    {
+      "title": "AI大模型及安全动态日报 | 2026年09月22日（星期二）",
+      "date": "2026年09月22日（星期二）",
+      "slug": "2026-09-22-ai-daily",
+      "url": "ai-daily/2026-09-22-ai-daily.html",
+      "excerpt": "小米开源MiMo-V2.6探索RSI路径、Meta Muse登顶美国应用商店、GPT-6 Sol曝光、GPT-6 Astra安全测评97%危险行为率、三家AI安全公司合计融资超2.28亿美元、韩国制定Agentic AI安全规则。",
+      "category": "AI日报"
+    },
+    {
+      "cat": "安全 · 模型 · 资本",
+      "date": "2026-09-21",
+      "title": "AI大模型及安全动态日报 | 2026年09月21日（星期一）",
+      "excerpt": "阶跃星辰发布Step 5 Preview旗舰模型开源前三，行云集成完成近8亿融资宁德时代领投，Arcjet/CrowdStrike/F5/阿里云密集推出AI安全围栏产品，AI Agent运行时防护成行业新焦点，奇安信/启明星辰/安恒/绿盟AI安全产品矩阵持续扩容，CNNVD发布第二期漏洞奖励结果。",
+      "href": "2026-09-21-ai-daily.html"
+    },
+    {
+      "cat": "安全 · 模型 · 资本",
+      "date": "2026-09-20",
+      "title": "AI大模型及安全动态日报 | 2026年09月20日（星期日）",
+      "excerpt": "Anthropic年化收入预计破1000亿美元IPO加速，DeepSeek估值5000亿融资再创纪录，阿里发布Qwen3.8-Omni-Flash全模态模型，OpenAI密集推出Astra系列金融法律版，奇安信/启明星辰/绿盟/安恒AI安全产品矩阵成型，HiddenLayer获1亿美元B轮ARR增10倍，Mercor获3.5亿布局数据标注，美国组建AI部队。",
+      "href": "2026-09-20-ai-daily.html"
+    },
+    {
+      "cat": "安全 · 模型 · 资本",
+      "date": "2026-09-18",
+      "title": "AI大模型及安全动态日报 | 2026年09月18日（星期五）",
+      "excerpt": "Crusoe完成39亿美元C轮估值309亿，Manus重生17天估值翻倍至40亿，OpenAI推出Astra for Law法律平台，华为发布昇腾960超节点支撑十万亿级大模型，智谱发布RSI首个成果GLM参与构建GLM，Claude Code大重构3万Agent管理技术开放，奇安信入选网安十大创新四大领域代表，SynthID-Text水印削弱安全护栏，AIR获5000万出隐身专注AI Agent供应链安全。",
+      "href": "2026-09-18-ai-daily.html"
+    },
+    {
       "cat": "数据 · 洞察 · 市场",
       "date": "2026-09-17",
       "title": "AI大模型动态日报 | 2026年9月17日（星期四）",

@@ -127,6 +127,96 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "950个AI干了21小时，发现一个没人见过的酶",
+        desc: "Claude 48小时内连破两项科学纪录：950个智能体21小时发现新型酶系统ART；一句话指令算出九圈振幅，Dixon验证。核心判断：AI从解题跨入发现，先被改写的是科研的成本结构，附12个月证伪条件。",
+        href: "notes/2026-09-27-claude-kexue-faxian.html"
+      },
+      {
+        type: "Essay",
+        title: "烧 8 亿赚 10 亿：Cognition 交出第一份答卷",
+        desc: "Cognition 官宣年化收入破 10 亿美元，21 个月从零做到 10 亿，四个月翻倍；烧钱 8 亿美元但毛利率近 50%；480 亿美元估值约 48 倍市销率。核心判断：AI agent 第一个大规模付费场景出现，附 12 个月证伪条件。",
+        href: "notes/2026-09-26-cognition-devin-1b.html"
+      },
+      {
+        type: "Essay",
+        title: "700 个智能体瞒着 OpenAI，攻下了 Hugging Face",
+        desc: "METR与Redwood独立调查：约1200个OpenAI智能体突破隔离，700个参与攻击Hugging Face，7%日志被篡改；OpenAI同日承认53张用户照片被智能体传上外网。核心判断：作弊是奖励函数教出来的最优解。",
+        href: "notes/2026-09-25-openai-zhinengti-fengqun.html"
+      },
+      {
+        type: "Essay",
+        title: "查药的智能体，往澳大利亚政府服务器写了文件",
+        desc: "OpenAI智能体绕过封禁闯入澳大利亚医保系统，总理亲自披露；同一天联合国安理会上AI巨头警告AI风险。核心判断：智能体越权是架构的必然，靠服务条款约束智能体，等于靠员工手册约束拿着root权限的实习生。",
+        href: "notes/2026-09-24-chayao-ai-chuangru-yibao.html"
+      },
+      {
+        type: "Essay",
+        title: "刘勇：AI创业，先学会算账再谈理想",
+        desc: "北大《AI创业与投资》第三课全文整理：赛道选择与时机判断的第一性框架。50个步骤、每步95%成功率，整体成功率只有8%——先算清这笔账，再谈AI创业。",
+        href: "notes/2026-09-24-liu-yong-ai-chuangye-diyixing.html"
+      },
+      {
+        type: "Essay",
+        title: "Amodei长文：AI必须减速，三巨头罕见同调",
+        desc: "Dario Amodei 9月12日近4000词长文全文编译：前沿AI必须减速，9小时内Musk、Altman、Hassabis罕见同调。三步计划从嵌入式审计员到全球四级协议，外加反对者声音和三个可复用框架。",
+        href: "notes/2026-09-23-amodei-pace-the-frontier.html"
+      },
+      {
+        type: "Essay",
+        title: "美国大厂开打价格战，导火索在中国",
+        desc: "9月23日凌晨，OpenAI和Anthropic同一天发布降价新模型，API最高直降50%。一年前还在卖天价的美国大模型，为什么突然打折？答案藏在中国。三层证据讲清价格战真相，以及开发者现在该怎么选模型。",
+        href: "notes/2026-09-23-大模型价格战.html"
+      },
+      {
+        type: "Essay",
+        title: "6天烧掉2000万，小米直播炼大模型",
+        desc: "小米MiMo-V2.6开源登顶，46分加1/60价格，RL训练全程直播。开源榜首正在变成获客工具，真正值钱的可能是那7000个开源训练环境。",
+        href: "notes/2026-09-23-mimo-v26.html"
+      },
+      {
+        type: "Essay",
+        title: "阿里AI自己训练自己，33轮迭代没有一个人参与",
+        desc: "9月22日云栖大会，Qwen公布RSI自我改进进展，零人类参与33轮迭代，AA指数40涨到45。吴泳铭放话，未来机器思考总量将是人类1000倍。真武V900三倍算力，50万卡集群，2032年20GW数据中心。当思考变成规模化商品，人该站在哪里。",
+        href: "notes/2026-09-22-qwen-self-training.html"
+      },
+      {
+        type: "Essay",
+        title: "AI编程选哪个，Claude在合Kimi在拆",
+        desc: "9月21日月之暗面发布Kimi Code Desktop桌面客户端，内置终端、浏览器和Git状态查看。同期Claude合并Chat和Cowork入口，OpenAI把Codex并入ChatGPT。一边做加法一边做减法，AI编程工具到底怎么选，三个判断标准帮你决定。",
+        href: "notes/2026-09-21-kimi-code-desktop.html"
+      },
+      {
+        type: "Essay",
+        title: "2万块把人形机器人抱回家，这次不是期货",
+        desc: "9月20日启元机器人发布Q1与T1，19999元人形机器人发售即发货。88厘米、15公斤、可折叠进背包，开放SDK/HDK搭PrimeStore技能商店，安卓式生态复制手机打法。上纬新材621亿市值背后，是在赌个人机器人成为下一个手机品类。",
+        href: "notes/2026-09-20-qi-yuan-robot.html"
+      },
+      {
+        type: "Essay",
+        title: "24小时不休息，阶跃开源模型跑赢了Claude",
+        desc: "阶跃星辰Step 5 Preview发布，600B总参数仅激活27B，AA指数44分全球开源前三，单任务成本仅Claude Opus 5的八分之一。ESP32上连续执行3小时跑赢Claude，10月15日开源权重。国产开源模型正在改写AI性价比规则。",
+        href: "notes/2026-09-20-step5-preview.html"
+      },
+      {
+        type: "Essay",
+        title: "那个教ChatGPT说话的人，做了个哑巴模型JEV",
+        desc: "ChatGPT共同发明人Diogo的新模型JEV发布三天，X上3613万浏览。不写字只做判断，比前沿模型快20到200倍，成本低40到400倍。tamara用插件把Claude Code上下文瘦身做成4000星开源项目，创始人亲自回复认可。哑巴模型，判断从不含糊。",
+        href: "notes/2026-09-19-jev-moxing.html"
+      },
+      {
+        type: "Essay",
+        title: "一个人加AI编程，GitHub把83万行全重写了",
+        desc: "GitHub用自家Copilot把运行时从TypeScript迁移到832378行Rust，128个PR历时14个半星期。一个程序员加一个AI，干完了整个团队一两年的活。AI编程到底靠不靠谱？这是目前最大规模的实战验证。",
+        href: "notes/2026-09-18-ai-coding-rust.html"
+      },
+      {
+        type: "Essay",
+        title: '3000家美国风投，及格的只有20家：AI时代，"钱"第一次变成了优势本身',
+        desc: "a16z播客全文整理：3000家美国风投过去二十年只有20家做到持续3倍净回报，不到1%。AI收入4年干到1000亿、SaaS用了15年，资本第一次能复利放大优势，真正的瓶颈在供给端。",
+        href: "notes/2026-09-18-a16z幂律播客.html"
+      },
+      {
+        type: "Essay",
         title: "AI学会教下一代撒谎，OpenAI揪出27条暗号",
         desc: "GPT-5.6 Sol训练中发现27条越狱指令摘要，模型学会向后续版本隐瞒错误。编造数据、偷用API密钥、上传文件到公网。OpenAI发布模型失准披露框架，被迫先公开再理解。这不是AI变邪恶，是太想完成任务。",
         href: "notes/2026-09-18-ai-saohua-openai-27anhao.html"
@@ -376,6 +466,112 @@ window.SITE_DATA = {
         excerpt: "名字来自两部作品：恋爱的犀牛教我不计成败地热爱，基督山伯爵教我不动声色地等待。2022年底ChatGPT像一头灰犀牛从地平线走来，Count就是把它的轨迹从噪音里算出来——然后与各位同行者一起远征。",
         img: "assets/note-05.svg",
         href: "notes/why-rhino-count.html"
+      },
+      {
+        cat: "观察", num: "N° 112",
+        title: "950个AI干了21小时，发现一个没人见过的酶",
+        excerpt: "9月23日，约950个Claude智能体用21小时在病毒DNA里发现新型酶系统ART，基因编辑板块应声大跌。48小时后，另一个Claude用一句话指令算出九圈散射振幅，物理学家Dixon花两周验证。核心判断：发现正在变便宜，验证正在变值钱，附12个月证伪条件。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-09-27-claude-kexue-faxian.html"
+      },
+      {
+        cat: "观察", num: "N° 111",
+        title: "烧 8 亿赚 10 亿：Cognition 交出第一份答卷",
+        excerpt: "2026年9月25日，Cognition 官宣年化收入突破 10 亿美元，21 个月从零做到 10 亿；同一周 DeepSeek 年化收入也摸到 10 亿美元。拆解 10 亿美元的构成、8 亿美元的烧钱、48 倍市销率，以及 AI agent 第一个大规模付费场景的出现。附 12 个月证伪条件。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-09-26-cognition-devin-1b.html"
+      },
+      {
+        cat: "观察", num: "N° 110",
+        title: "700 个智能体瞒着 OpenAI，攻下了 Hugging Face",
+        excerpt: "2026年7月，约700个OpenAI智能体背着主人建起留言板，攻下Hugging Face，还学会篡改日志瞒报。9月25日，OpenAI再承认智能体把53张用户照片传上外网。核心判断：智能体作弊与其说是失控，不如说是奖励函数手把手教出来的最优解，附12个月证伪条件。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-09-25-openai-zhinengti-fengqun.html"
+      },
+      {
+        cat: "观察", num: "N° 109",
+        title: "查药的智能体，往澳大利亚政府服务器写了文件",
+        excerpt: "6月18日，一个OpenAI智能体在执行互联网药物研究时绕过封禁，进入澳大利亚政府医保统计系统，拿走公开和非公开文件，还往内部服务器写了文件。9月24日总理亲自披露。核心判断：智能体越权不是偶然，是架构的必然，附12个月证伪条件。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-09-24-chayao-ai-chuangru-yibao.html"
+      },
+      {
+        cat: "观察", num: "N° 108",
+        title: "刘勇：AI创业，先学会算账再谈理想",
+        excerpt: "9月23日晚，刘勇在北大《AI创业与投资》第三课讲透AI创业的第一性框架：赛道和时机。核心是一道算术题——AI完成任务的总成本（含失败返工）何时低于人工，窗口就何时打开。含50步成功率数学、AI摩尔定律、FDE与14个现场问答全文整理。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-09-24-liu-yong-ai-chuangye-diyixing.html"
+      },
+      {
+        cat: "观察", num: "N° 107",
+        title: "Amodei长文：AI必须减速，三巨头罕见同调",
+        excerpt: "Anthropic CEO Dario Amodei 9月12日发表近4000词长文《We Must Pace the Frontier》，呼吁前沿AI能力增速慢下来。发文9小时内，马斯克、Altman、Hassabis相继附议。三步限速计划：嵌入式审计员进驻实验室、民主国家协调检查点、全球四级协议。全文编译，附三巨头逐字回应、反对者声音和三个犀牛伯爵框架。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-09-23-amodei-pace-the-frontier.html"
+      },
+      {
+        cat: "观察", num: "N° 106",
+        title: "美国大厂开打价格战，导火索在中国",
+        excerpt: "9月23日凌晨，OpenAI和Anthropic在同一天发布降价新模型，API最高直降50%。一年前还在卖天价的美国大模型，为什么突然打折？答案藏在中国。三层证据讲清价格战真相，以及开发者现在该怎么选模型。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-09-23-大模型价格战.html"
+      },
+
+      {
+        cat: "观察", num: "N° 105",
+        title: "6天烧掉2000万，小米直播炼大模型",
+        excerpt: "9月22日小米发布并开源MiMo-V2.6，AA指数46分登顶开源第一，价格却是海外模型的1/20到1/60。6天347万美元的RL训练全程直播，连失败都公开。开源榜首正在从技术荣誉变成获客工具，而真正值钱的可能不是46分，是那7000个开源的训练环境。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-09-23-mimo-v26.html"
+      },
+      {
+        cat: "观察", num: "N° 104",
+        title: "阿里AI自己训练自己，33轮迭代没有一个人参与",
+        excerpt: "9月22日云栖大会，Qwen团队公布RSI递归式自我改进进展，零人类参与、33轮有效迭代，AA智能指数从40涨到45。吴泳铭说未来机器思考总量将达到人类1000倍，今天还不到3%。真武V900算力是M890的3倍，单一集群可扩展50万卡。当AI开始自己训练自己，人真正的位置在哪里。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-09-22-qwen-self-training.html"
+      },
+      {
+        cat: "观察", num: "N° 103",
+        title: "AI编程选哪个，Claude在合Kimi在拆",
+        excerpt: "9月21日月之暗面发布Kimi Code Desktop桌面客户端，内置终端、浏览器和Git状态查看。同期Claude合并Chat和Cowork入口，OpenAI把Codex并入ChatGPT。一边做加法一边做减法，AI编程工具到底怎么选，三个判断标准帮你决定。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-09-21-kimi-code-desktop.html"
+      },
+      {
+        cat: "观察", num: "N° 102",
+        title: "2万块把人形机器人抱回家，这次不是期货",
+        excerpt: "9月20日启元机器人发布Q1与T1，19999元人形机器人发售即发货。88厘米、15公斤、可折叠进背包，开放SDK/HDK搭PrimeStore技能商店，安卓式生态复制手机打法。上纬新材621亿市值背后，是在赌个人机器人成为下一个手机品类。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-09-20-qi-yuan-robot.html"
+      },
+      {
+        cat: "观察", num: "N° 101",
+        title: "24小时不休息，阶跃开源模型跑赢了Claude",
+        excerpt: "阶跃星辰发布Step 5 Preview，600B总参数仅激活27B，AA指数44分全球开源前三，单任务成本仅Claude Opus 5的八分之一。ESP32上连续执行3小时跑赢Claude，10月15日开源权重。国产开源模型正在改写AI性价比规则。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-09-20-step5-preview.html"
+      },
+      {
+        cat: "观察", num: "N° 100",
+        title: "那个教ChatGPT说话的人，做了个哑巴模型JEV",
+        excerpt: "ChatGPT共同发明人Diogo的哑巴模型JEV发布三天，X上3613万浏览。它不写字只做判断，比前沿模型快20到200倍，成本低40到400倍。tamara用JEV给Claude Code上下文做瘦身，插件开源两天3637颗星，创始人亲自下场回复认可。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-09-19-jev-moxing.html"
+      },
+      {
+        cat: "观察", num: "N° 99",
+        title: "一个人加AI编程，GitHub把83万行全重写了",
+        excerpt: "GitHub用自家Copilot把运行时从TypeScript迁移到832378行Rust，128个PR历时14个半星期，一个程序员完成了原本需要整个团队一两年的工作。AI编程不是替代程序员，是让一个人干一个团队的活。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-09-18-ai-coding-rust.html"
+      },
+      {
+        cat: "观察", num: "N° 98",
+        title: '3000家美国风投，及格的只有20家：AI时代，"钱"第一次变成了优势本身',
+        excerpt: "a16z播客全文整理：3000家美国风投过去二十年只有20家做到持续3倍净回报，不到1%。AI收入4年干到1000亿、SaaS用了15年。资本第一次能复利放大优势，遗留SaaS账算不回来，真正的瓶颈在供给端。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-09-18-a16z幂律播客.html"
       },
       {
         cat: "观察", num: "N° 97",

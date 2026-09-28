@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>6天烧掉2000万，小米直播炼大模型 | 犀牛伯爵</title>
+  <meta name="description" content="9月22日小米发布并开源MiMo-V2.6，AA指数46分登顶开源第一，价格却是海外模型的1/60。6天347万美元的RL训练全程直播，连失败都公开。开源榜首正在从技术荣誉变成获客工具。">
+  <meta name="keywords" content="小米大模型, MiMo V2.6, 开源模型, AI模型价格, 强化学习">
+  <style>
+    :root {
+      --accent: #8b2635;
+      --accent-soft: #a83847;
+      --bg: #faf8f6;
+      --ink: #2d2d2d;
+      --ink-soft: #6b6b6b;
+      --card-bg: #ffffff;
+      --border: #e8e0dc;
+      --font-sans: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+      --font-serif: "Noto Serif CJK SC", "Songti SC", "SimSun", serif;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: var(--font-sans); background: var(--bg); color: var(--ink); line-height: 1.8; font-size: 16px; }
+    .container { max-width: 680px; margin: 0 auto; padding: 40px 24px 80px; }
+    h1 { font-family: var(--font-serif); font-size: 28px; font-weight: 700; color: var(--ink); line-height: 1.4; margin-bottom: 8px; letter-spacing: -0.01em; }
+    .meta { font-size: 13px; color: var(--ink-soft); margin-bottom: 4px; }
+    .byline { font-size: 13px; color: var(--ink-soft); margin-bottom: 32px; }
+    p { margin-bottom: 16px; font-size: 16px; line-height: 1.8; color: var(--ink); }
+    strong { color: var(--ink); font-weight: 600; }
+
+    /* data-table */
+    .data-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14px; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .data-table th { background: var(--accent); color: #fff; padding: 10px 12px; text-align: left; font-weight: 600; font-size: 13px; }
+    .data-table td { padding: 8px 12px; border-bottom: 1px solid var(--border); color: var(--ink); }
+    .data-table tr:last-child td { border-bottom: none; }
+    .data-table tr:nth-child(even) td { background: rgba(139, 38, 53, 0.03); }
+    .data-table .num { font-family: var(--font-serif); font-weight: 700; color: var(--accent); }
+
+    /* insight-box */
+    .insight-box { background: rgba(139, 38, 53, 0.05); border-left: 4px solid var(--accent); padding: 16px 20px; margin: 24px 0; border-radius: 0 8px 8px 0; }
+    .insight-box p { margin-bottom: 10px; font-size: 15px; line-height: 1.7; }
+    .insight-box p:last-child { margin-bottom: 0; }
+
+    /* punchline */
+    .punchline { font-family: var(--font-serif); font-size: 18px; font-weight: 700; color: var(--accent); text-align: center; margin: 32px 0; padding: 16px 0; border-top: 2px solid var(--accent); border-bottom: 2px solid var(--accent); }
+
+    /* article image */
+    .article-img { width: 100%; border-radius: 8px; margin: 24px 0 8px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
+    .img-caption { font-size: 13px; color: var(--ink-soft); text-align: center; margin-bottom: 24px; }
+
+    /* ending */
+    .ending { margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--border); }
+    .ending p { margin-bottom: 12px; }
+    .site-rec { font-size: 14px; color: var(--ink-soft); margin: 16px 0; padding: 12px 16px; background: rgba(139, 38, 53, 0.03); border-radius: 8px; }
+    .site-rec a { color: var(--accent); text-decoration: none; font-weight: 600; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>6天烧掉2000万，小米直播炼大模型</h1>
+    <div class="meta">2026年9月23日 · 阅读时间约5分钟</div>
+    <div class="byline">文｜犀牛伯爵</div>
+
+    <p>9月17日凌晨，北京已经睡了，旧金山还是下午。小米 MiMo 团队负责人罗福莉在 X 上发了一条推文，附了一个链接。</p>
+    <p>点进去的人都愣了一下。那是一个大模型的实时训练仪表盘，进度条、Token 消耗、样本数量，还有一行不断跳动的数字，训练成本。</p>
+    <p>当时两个版本已经烧掉了 128 万美元。每一小时，3 万美元。</p>
+    <p>大模型训练，第一次被全程直播。</p>
+
+    <p>先把判断摆在前面。小米这次真正的杀招不是 46 分本身。它是把 46 分卖出了 2 块钱的价格，还把烧钱的 6 天全程直播了出来。说白了，开源榜首正在从技术荣誉变成获客工具，而 MiMo-V2.6 是第一个把这件事做透的国产模型。</p>
+
+    <p>5 天后，9 月 22 日，小米正式发布并开源 MiMo-V2.6 系列。两个模型，Pro 和 Flash，都是原生全模态，文字、图片、视频、音频都能直接吃。权重挂在 Hugging Face 上，MIT 许可，下载就能商用。</p>
+    <p>上一代 V2.5 还是纯文字模型。这一代，连模态都换了。</p>
+
+    <p>成绩单先看。第三方评测平台 Artificial Analysis 的综合智能指数，MiMo-V2.6-Pro 拿到 46 分，登顶开源权重模型第一。Kimi K3 是 44 分，GLM-5.3 是 45 分，都被压在了下面。</p>
+    <p>更扎眼的是对比上一代。V2.5-Pro 的成绩是 26 分。从 26 到 46，版本号只涨了 0.1，分数翻了近一倍。</p>
+
+    <img class="article-img" src="https://itpromag.com/wp-content/uploads/2026/09/aaindex-trim-1024x401.png" alt="Artificial Analysis综合智能指数榜单，MiMo-V2.6-Pro以46分登顶开源第一" loading="lazy">
+    <div class="img-caption">图源｜IT PRO Magazine 2026-09-22</div>
+
+    <p>但 46 分这个数字，我自己看到的时候愣了一下，不是因为高，是因为它上面还有人。</p>
+    <p>总榜上排在它前面的四款，清一色闭源，其中 GPT-6 Astra 和 Fable 5.1 都是 53 分。7 分的差距，摆在那。</p>
+    <p>开源和闭源旗舰之间这 7 分，本质上是算力账，不是路线账。高盛测算，这次训练用了约 4000 到 8000 个 H200 等效 GPU。347 万美元，买 20 分的涨幅。这笔账算得过来，差距就填得上。</p>
+
+    <table class="data-table">
+      <tr><th>MiMo-V2.6 关键数字</th><th>数据</th></tr>
+      <tr><td>AA 综合智能指数</td><td class="num">46 分，开源第一（上一代 26 分）</td></tr>
+      <tr><td>RL 训练总成本</td><td class="num">超 347 万美元（Pro 262 万＋Flash 85 万）</td></tr>
+      <tr><td>训练时长与规模</td><td class="num">不到 6 天，各 30 步，累计约 75 万条轨迹</td></tr>
+      <tr><td>DeepSWE v1.1 提升</td><td class="num">Flash 48.8→65.68，Pro 58.4→72.57</td></tr>
+      <tr><td>API 定价（每百万 token）</td><td class="num">Pro 输入 3 元/输出 6 元，Flash 输入 1 元/输出 2 元</td></tr>
+      <tr><td>单任务成本</td><td class="num">0.13 美元，约为海外模型的 1/20 至 1/60</td></tr>
+    </table>
+    <div class="img-caption">数据来源｜小米官方发布、21世纪经济报道、高盛研报综合整理</div>
+
+    <p>347 万美元这个数字值得拆开看。不到 6 天，Pro 烧了约 262 万美元，Flash 烧了约 85 万美元，各跑了 30 步强化学习，累计约 75 万条轨迹。</p>
+    <p>回报是实打实的。训练任务的平均通过率，Flash 相对提升 25%，Pro 提升 12%。样本外的长程软件工程评测 DeepSWE v1.1，Flash 从 48.8 涨到 65.68，Pro 从 58.4 涨到 72.57。</p>
+    <p>坦率地讲，6 天 347 万美元，买的是"强化学习究竟能走多远"这个问题的答案。罗福莉在发布时就把问题摆在了台面上。</p>
+
+    <p>而真正让我觉得狠的，是直播本身。</p>
+    <p>9 月 17 日那个实时页面，公开的不只是成本和进度。训练中途的干预记录也都在上面，基建错误重跑、不良模式数据集、零梯度任务、GPU 显存不足。连翻车现场都直播。</p>
+    <p>RL 训练直播，注定会变成大厂的军备竞赛。谁先公开，谁就定义了技术自信的标准。</p>
+    <p>在国内大模型厂商里，这是第一次。以前大家只晒成绩单，小米这次把草稿纸也贴出来了。</p>
+
+    <p>再看价格。MiMo-V2.6 沿用了上一代的 API 定价，Pro 每百万 token 输入 3 元、输出 6 元，Flash 输入 1 元、输出 2 元。</p>
+    <p>单任务成本 0.13 美元。同等智能水平下，价格是海外模型的二十分之一到六十分之一。小米自己说的，第一次把全球前沿智能带入 0.1 美元成本区间。</p>
+
+    <img class="article-img" src="https://itpromag.com/wp-content/uploads/2026/09/cost-per-task-1024x439.jpg" alt="Artificial Analysis单任务成本榜单，MiMo-V2.6-Pro单任务成本0.13美元" loading="lazy">
+    <div class="img-caption">图源｜IT PRO Magazine 2026-09-22</div>
+
+    <p>每个月底被 API 账单刺痛过的开发者，看到 1/60 这个数字，心头都会动一下。</p>
+    <p>说白了，小米是在用 1/60 的价格，给自家 Agent 生态买流量入口。模型发布同一天，MiMo Desktop 桌面客户端正式版上线，还推了会员订阅。Pro 还有个 UltraSpeed 超高速模式，输出速度最高能到 20 倍。</p>
+    <p>模型、桌面端、订阅、高速模式，一套组合拳。开源的 46 分，是这套拳的拳头。</p>
+
+    <p>当然，冷静的话也要说在前面。小米自己公布的评测表里，Pro 并不是全胜。ProgramBench 上 26.5 分，Claude Opus 5 是 37 分。Terminal Bench 4.0，34.9 对 49。AI 前线的第三方实测结论是，很惊艳，但也有幻觉。</p>
+    <p>还有那两个科研案例。MOF 材料设计，把研发周期从约一个月压缩到 2 到 3 天。Lean 4 里完成《周期三蕴含混沌》的形式化证明，6000 多行源码全部通过内核核验。听起来很科幻，但两次都是研究人员多轮提示、设计流程、筛选结果之后做成的。</p>
+    <p>它证明的是科研辅助的潜力，离独立做科研还差得远。把辅助说成自主，就是另一种浮夸。</p>
+
+    <p>罗福莉在 X 上写了一句话，我印象很深。"在我看来，它背后的研究创新和工程挑战超过了 DeepSeek R1，后者我曾部分参与。"</p>
+    <p>她是 DeepSeek 出来的，R1 她参与过。现在她说，新东家的活，难度超过了老东家。这话的锐气，隔着屏幕都能感觉到。</p>
+
+    <p>市场都在欢呼 46 分登顶，但我有一个反共识的判断。分数只是热搜，MiMo-V2.6 真正值钱的东西，是那 7000 个开源的 RL 训练任务环境。</p>
+    <p>分数决定的是这周的热搜，环境决定的是未来一年谁还能追上来。小米这次开源的不只是两个模型权重，还有蒸馏版、端到端 RL 训练框架、轻量 Agent 框架。同行拿回去，是可以直接开工的。</p>
+    <p>分歧变量只有一个，第三方团队用这套开源框架复现出接近成绩的速度。</p>
+    <p>证伪条件我也摆出来，如果 3 个月内没有第三方团队基于这套环境训出有竞争力的模型，那我这个判断就是错的。</p>
+
+    <p>再往前看一步。小米的模型发布已经进入季度节奏，3 月 V2-Pro，4 月 V2.5 开源，5 月降价，6 月 MiMo Code，9 月 V2.6。按这个节奏，下一版不会太远。</p>
+    <p>开源榜首这个位置，现在成了明牌的军备竞赛。Kimi、Qwen、DeepSeek，每一家都要接招。而"智能×成本"的帕累托前沿每被推进一次，Agent 应用的成本门槛就降一截。最终受益的，是每一个用模型干活的人。</p>
+
+    <div class="insight-box">
+      <p><strong>如果你正在选开源模型，记住三个判断标准。</strong></p>
+      <p>第一，看 AA 指数能不能稳定在开源前三，单次登顶说明不了问题。</p>
+      <p>第二，看单任务成本，记住 0.13 美元这个数字，超过 0.2 美元还自称便宜的，都是伪命题。</p>
+      <p>第三，看有没有第三方实测背书，官方榜单永远只看一半。</p>
+    </div>
+
+    <p class="punchline">46 分是热搜。2 块钱是生意。</p>
+
+    <div class="ending">
+      <p>你会为了 1/60 的价格换模型吗？评论区聊聊你的判断。</p>
+      <p>觉得有用，转发给还在为 API 账单肉疼、想试试小米开源模型的朋友。建议收藏，下次选模型的时候对照那三个标准。</p>
+      <p class="site-rec">更多AI产业深度观察，关注专业网站 <a href="https://zjeep-arch.github.io/rhino-count-site/">犀牛伯爵 rhinocount.cn</a></p>
+      <p>谢谢你看我的文章。</p>
+    </div>
+  </div>
+</body>
+</html>
