@@ -127,7 +127,7 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
-        title: "Nvidia 投 10 亿：左手卖卡，右手下注",
+        title: "有 1030 亿合同，Nscale 却不敢给自己定价",
         desc: "Nscale 募 33.6 亿美元，Nvidia 出 10 亿转无投票权股份。供需闭环、腾讯式生态投资、中美资本化竞赛与中国开源牌，三个判断附 12 个月证伪条件。",
         href: "notes/2026-09-28-nscale-nvidia.html"
       },
@@ -475,7 +475,7 @@ window.SITE_DATA = {
       },
       {
         cat: "观察", num: "N° 113",
-        title: "Nvidia 投 10 亿：左手卖卡，右手下注",
+        title: "有 1030 亿合同，Nscale 却不敢给自己定价",
         excerpt: "Nscale 上市前募 33.6 亿美元可转债，Nvidia 出 10 亿，IPO 后转无投票权股份。三个判断：Nvidia 买的是自己的需求（供需闭环）；腾讯式上下游生态投资正在被复制；中美 AI 资本化竞赛开哨，中国的牌是开源，兑现需要时间。附 12 个月证伪条件。",
         img: "assets/note-05.svg",
         href: "notes/2026-09-28-nscale-nvidia.html"
