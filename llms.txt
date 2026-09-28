@@ -6,7 +6,7 @@
 
 - [首页](https://rhinocount.cn/): 站点总入口
 - [观察笔记](https://rhinocount.cn/notes/): 精选笔记列表（N° 编号）
-- [观察笔记归档](https://rhinocount.cn/notes/archive/): 全部 112 篇笔记，按月份分组
+- [观察笔记归档](https://rhinocount.cn/notes/archive/): 全部 113 篇笔记，按月份分组
 - [AI 日报](https://rhinocount.cn/ai-daily/): 每日 AI 大模型与产业动态速览
 - [AI 日报归档](https://rhinocount.cn/ai-daily/archive/): 全部 50 期日报，按月份分组
 - [RSS](https://rhinocount.cn/rss.xml): 全站最新 30 条内容
@@ -14,6 +14,7 @@
 
 ## 最新观察笔记
 
+- [有 1030 亿合同，Nscale 却不敢给自己定价](https://rhinocount.cn/notes/2026-09-28-nscale-nvidia.html): Nscale 上市前募 33.6 亿美元，Nvidia 出了 10 亿。条款不披露、转股无投票权，芯片巨头左手卖卡右手下注。同一条赛道上，月之暗面正以 500 亿美元估值冲刺。AI 资本化大竞赛，中美各执一子。
 - [950个AI干了21小时，发现一个没人见过的酶](https://rhinocount.cn/notes/2026-09-27-claude-kexue-faxian.html): 950 个 Claude 智能体熬了 21 小时，在病毒 DNA 里发现一个没人见过的新酶系统，基因编辑板块应声大跌。同一周，另一个 Claude 只用一句话，算出了物理学家 12 年没算出的九圈振幅。AI 正在从解题跨
 - [烧 8 亿赚 10 亿：Cognition 交出第一份答卷](https://rhinocount.cn/notes/2026-09-26-cognition-devin-1b.html): 2026年9月25日，Cognition 官宣年化收入突破 10 亿美元，21 个月从零做到 10 亿。同一周，DeepSeek 的年化收入也摸到 10 亿美元。AI agent 的第一个大规模付费场景出现了。
 - [700 个智能体瞒着 OpenAI，攻下了 Hugging Face](https://rhinocount.cn/notes/2026-09-25-openai-zhinengti-fengqun.html): 2026年7月，约700个OpenAI智能体背着主人建起留言板，攻下了Hugging Face，还学会了篡改日志瞒报。9月25日，OpenAI又承认智能体把53张用户照片传上外网。核心判断：智能体作弊与其说是失控，不如说
@@ -33,7 +34,6 @@
 - [朱啸虎北大演讲全文整理：技术会平权，重要的永远是人文和商业](https://rhinocount.cn/notes/2026-09-17-朱啸虎北大分享.html): 朱啸虎2026年9月16日北大分享全文整理：二十年创业投资经验与AI时代的对照。从三个S标准、滴滴易到案例，到技术扩散、开源终局与AI应用机会，含与王小川的现场对谈实录。
 - [三个AI巨头突然喊踩刹车，黄仁勋当场掀了桌子](https://rhinocount.cn/notes/2026-09-16-AI减速.html): Anthropic CEO Amodei 发3800字长文呼吁前沿AI协调放缓，OpenAI和DeepMind同意。黄仁勋当场拒绝，称AI不需要新法律。扎克伯格紧随其后反对集体减速。这到底是安全协议还是卡特尔？三个判断标
 - [Siri还没来，中国语音AI已经全球第一了](https://rhinocount.cn/notes/2026-09-15-语音AI全球第一.html): 苹果Siri AI进不了中国，第二天阶跃星辰StepAudio 3系列多款拿下Artificial Analysis全球第一。中国语音大模型正在集体突破。
-- [3个人10万本钱半年赚2000万，AI短剧杀疯了](https://rhinocount.cn/notes/2026-09-15-AI短剧.html): 3人团队10万本钱半年赚2000万，6亿人看AI短剧，中国AI短剧占海外七成市场。成本坍塌引发的内容工业化拐点。
 
 ## 常读笔记
 
