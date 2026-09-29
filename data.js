@@ -127,6 +127,12 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "两年过去，被 AI 替代的不是你，是应届生",
+        desc: "2024 年“死亡名单”两年复盘：斯坦福 ADP 数据显示 22-25 岁高暴露岗位就业缺口从 13% 扩大到 19%。判断：AI 拿走的是年轻人的入场券。",
+        href: "notes/2026-09-29-ai-jobs.html"
+      },
+      {
+        type: "Essay",
         title: "AI出海，短剧数钱大模型烧钱",
         desc: "MiniMax 海外收入占 73% 却年亏 18.7 亿美元，真正盈利的是短剧 ReelShort。判断：中国 AI 出海真正赚到钱的不是模型，是把模型藏起来的内容。",
         href: "notes/2026-09-29-china-ai-overseas.html"
@@ -515,6 +521,14 @@ window.SITE_DATA = {
         img: "assets/note-05.svg",
         href: "notes/why-rhino-count.html"
       },
+      {
+        cat: "观察", num: "N° 121",
+        title: "两年过去，被 AI 替代的不是你，是应届生",
+        excerpt: "2024 年“死亡名单”两年复盘：斯坦福 ADP 数据显示 22-25 岁高暴露岗位就业缺口从 13% 扩大到 19%。判断：AI 拿走的是年轻人的入场券。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-09-29-ai-jobs.html"
+      },
+
       {
         cat: "观察", num: "N° 120",
         title: "AI出海，短剧数钱大模型烧钱",
