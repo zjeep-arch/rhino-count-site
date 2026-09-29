@@ -127,6 +127,12 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "大模型价格战打了一年，降价最狠的没赢",
+        desc: "从 DeepSeek 2024 年底掀桌到 2026 年 9 月同日降价，API 价格一年降了十几次。判断：价格战不会结束，只会从明面标价转入暗处成本战。",
+        href: "notes/2026-09-29-llm-price-war.html"
+      },
+      {
+        type: "Essay",
         title: "26 亿美元 AI 融资，律师拿走近一半",
         desc: "2026 年前三季度 AI 应用层官宣融资超 30 亿美元，26.3 亿美元样本中 43.7% 流向法律 AI。判断：钱只流向能把 token 变成账单的公司。",
         href: "notes/2026-09-29-ai-app-funding.html"
@@ -491,6 +497,14 @@ window.SITE_DATA = {
         img: "assets/note-05.svg",
         href: "notes/why-rhino-count.html"
       },
+      {
+        cat: "观察", num: "N° 117",
+        title: "大模型价格战打了一年，降价最狠的没赢",
+        excerpt: "从 DeepSeek 2024 年底掀桌到 2026 年 9 月同日降价，API 价格一年降了十几次。判断：价格战不会结束，只会从明面标价转入暗处成本战。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-09-29-llm-price-war.html"
+      },
+
       {
         cat: "观察", num: "N° 116",
         title: "26 亿美元 AI 融资，律师拿走近一半",

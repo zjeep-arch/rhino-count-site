@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>大模型价格战打了一年，降价最狠的没赢｜犀牛伯爵</title>
+<meta name="description" content="从 DeepSeek 掀桌到 OpenAI、Anthropic 同日降价，大模型 API 价格一年降了十几次。降价最狠的为什么没赢，敢不降价的凭什么活得好，2027 年谷歌还要涨价？一篇复盘价格战的来龙去脉。"/>
+<meta name="keywords" content="大模型价格战,DeepSeek API 定价,GPT-6 Luna,Claude Opus 5.5,AI 成本"/>
+</head>
+<body style='font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;line-height:1.8;color:#1a1a1a;margin:0;padding:0;'>
+<section style="max-width:680px;margin:0 auto;padding:40px 20px;">
+<p style="font-size:12px;letter-spacing:0.28em;color:#999999;margin:0 0 18px 0;line-height:1.8;text-align:left;">N°117 · 犀牛伯爵 · AI 热点深观察</p>
+<h1 style='font-family:"Songti SC","STSong",serif;font-size:28px;line-height:1.4;margin:0 0 12px 0;color:#1a1a1a;text-align:left;'>大模型价格战打了一年，降价最狠的没赢</h1>
+<div style="color:#999999;font-size:13px;margin:0 0 30px 0;line-height:1.8;text-align:left;">2026-09-29 · 犀牛伯爵 · 阅读约8分钟</div>
+<div style="font-size:14px;color:#666666;margin:0 0 8px 0;line-height:1.8;text-align:left;">作者｜犀牛伯爵，一家 AI Native Studio，记录 AI 如何改变技术、商业与人的工作方式</div>
+<div style="font-size:12px;color:#aaaaaa;margin:0 0 30px 0;line-height:1.7;text-align:left;">价格数字来自 DeepSeek、OpenAI、Anthropic、Google 四家官方定价页（2026 年 9 月 29 日逐一核实）及各家发布时的官方定价，历史降价事件据第一财经、澎湃、时代周报等媒体报道，梁文锋相关表述据 2026 年网传投资者交流纪要（DeepSeek 未予证实）。第五节核心判断为作者分析，附证伪条件与复盘日期。</div>
+
+<section style="border:1px solid #ececec;border-left:4px solid #14532d;padding:16px 20px;margin:24px 0;border-radius:0 8px 8px 0;box-shadow:0 1px 4px rgba(0,0,0,0.04);">
+<span style="display:inline-block;font-size:12px;color:#14532d;border:1px solid #14532d;padding:2px 8px;margin:0 0 10px 0;line-height:1.8;">核心判断</span>
+<p style="margin:14px 0;font-size:16px;line-height:1.8;color:#1a1a1a;text-align:left;">降价最狠的，不一定是赢家。</p>
+<p style="margin:14px 0;font-size:16px;line-height:1.8;color:#1a1a1a;text-align:left;">这场战争里只有两类赢家，敢降价的，和敢不降价的。</p>
+<p style="margin:14px 0;font-size:16px;line-height:1.8;color:#1a1a1a;text-align:left;">出场，奥特曼、梁文锋、谭待，一张两年没动过的 Anthropic 价格表，以及 AWS 的 20 年。</p>
+<p style="margin:14px 0 0 0;font-size:16px;line-height:1.8;color:#1a1a1a;text-align:left;">从 2024 年 12 月掀桌，到 2026 年 9 月同日降价，一年复盘，回答两个问题，价格战打完了吗，谁是赢家。</p>
+</section>
+
+<section style="border:1px solid #ececec;padding:14px 20px;margin:24px 0;line-height:1.8;">
+<p style="font-size:13px;color:#999999;margin:0 0 8px 0;letter-spacing:0.2em;text-align:left;">目录</p>
+<p style="font-size:15px;margin:8px 0;color:#1a1a1a;text-align:left;">一、掀桌，2024 年冬天那场 27 倍的降价</p>
+<p style="font-size:15px;margin:8px 0;color:#1a1a1a;text-align:left;">二、还手，美国大厂被迫学会打折</p>
+<p style="font-size:15px;margin:8px 0;color:#1a1a1a;text-align:left;">三、坚守，有人把价格表焊死了两年</p>
+<p style="font-size:15px;margin:8px 0;color:#1a1a1a;text-align:left;">四、今天，价格战打到了 DeepSeek 家门口</p>
+<p style="font-size:15px;margin:8px 0;color:#1a1a1a;text-align:left;">五、复盘，大模型价格战的赢家有两类</p>
+<p style="font-size:15px;margin:8px 0 0 0;color:#1a1a1a;text-align:left;">六、清单，给做预算的人三个建议</p>
+</section>
+
+<h2 style="font-size:20px;line-height:1.5;margin:36px 0 16px 0;color:#1a1a1a;text-align:left;">一、掀桌，2024 年冬天那场 27 倍的降价</h2>
+<p style="font-size:16px;line-height:1.9;margin:14px 0;color:#1a1a1a;text-align:left;"><span style="float:left;font-family:'Songti SC','STSong',serif;font-size:54px;line-height:1;padding:6px 10px 0 0;color:#14532d;">2</span>024 年 12 月底，DeepSeek 往 API 定价页上贴了两个数字，输入 0.27 美元，输出 1.10 美元，每百万 token 计。当时 GPT-4o 的官方定价是 2.5 美元和 10 美元。也就是说，一个中国团队把旗舰模型的价格，打到了 OpenAI 的十分之一。这场大模型价格战，就从这两个数字开始。</p>
+<p style="font-size:16px;line-height:1.9;margin:14px 0;color:#1a1a1a;text-align:left;">25 天后，2025 年 1 月 20 日，DeepSeek 发布 R1。推理模型的输入 0.55 美元，输出 2.19 美元。而当时 OpenAI o1 的定价是 15 美元和 60 美元。27 倍。做同一件事，一个收 60 美元，一个收 2.19 美元。</p>
+<p style="font-size:16px;line-height:1.9;margin:14px 0;color:#1a1a1a;text-align:left;">说实话，我第一次看到这两个数字，以为是限时促销。结果 DeepSeek 的 V3 技术报告里写得很清楚，训练只用了 278.8 万个 H800 GPU 小时。这不是补贴战，是成本结构真的不一样。MoE 架构每次只激活一小部分参数，KV 缓存做了极限压缩，别人用一百份算力干的事，它用一份就干了。</p>
+<p style="font-size:16px;line-height:1.9;margin:14px 0;color:#1a1a1a;text-align:left;">这组数字贴出来之后，硅谷的开发者论坛炸了锅。有人算了一笔账，原来跑在 GPT-4o 上的客服机器人，换成 V3，一年的 API 账单从几十万美元掉到几万美元。价格战的第一批赢家不是厂商，是开发者。</p>
+<p style="font-size:16px;line-height:1.9;margin:14px 0;color:#1a1a1a;text-align:left;">其实早在 2024 年 5 月，国内已经打过一轮。火山引擎总裁谭待在发布会上宣布，豆包主力模型定价 0.0008 元每千 token，"比行业便宜 99.3%"，随后阿里、百度、腾讯、智谱一周内全部跟进。但那一轮只烧了国内。真正把战火烧到全球的，是 7 个月后的 V3。</p>
+<p style="font-size:16px;line-height:1.9;margin:14px 0;color:#1a1a1a;text-align:left;"><strong style="color:#8b2635;">价格战的第一枪不是打折，是成本结构。</strong></p>
+
+<h2 style="font-size:20px;line-height:1.5;margin:36px 0 16px 0;color:#1a1a1a;text-align:left;">二、还手，美国大厂被迫学会打折</h2>
+<p style="font-size:16px;line-height:1.9;margin:14px 0;color:#1a1a1a;text-align:left;">转折发生在 2025 年 1 月底。</p>
+<p style="font-size:16px;line-height:1.9;margin:14px 0;color:#1a1a1a;text-align:left;">2025 年 1 月 31 日，OpenAI 发布 o3-mini，输入 1.10 美元，输出 4.40 美元，不到 o1 的十分之一。R1 发布 11 天后，OpenAI 就把推理价格砍到了原来的零头。</p>
+<p style="font-size:16px;line-height:1.9;margin:14px 0;color:#1a1a1a;text-align:left;">2025 年 2 月，DeepSeek 宣布错峰优惠，每天北京时间 0 点半到 8 点半，V3 降价 50%，R1 降价 75%。注意，这不是官方降价，是"错峰"，但信号很清楚，闲时算力便宜到可以半卖半送。</p>
+<p style="font-size:16px;line-height:1.9;margin:14px 0;color:#1a1a1a;text-align:left;">同一个月，奥特曼在官方博客《Three Observations》里写下了一年后被引用无数次的判断，同等智能的成本，每 12 个月下降约 10 倍。他举的例子是，从 2023 年 3 月的 GPT-4 到 2024 年 5 月的 GPT-4o，token 单价降了约 150 倍。</p>
+<p style="font-size:16px;line-height:1.9;margin:14px 0;color:#1a1a1a;text-align:left;">接下来的一年，美国大厂把降价做成了季度动作。2025 年 4 月，GPT-4.1 定价 2 美元和 8 美元，o3 定价 10 美元和 40 美元，两个月后 o3 再降 80%，到 2 美元和 8 美元。2025 年 6 月，谷歌 Gemini 2.5 Flash 定价 0.30 美元和 2.50 美元。2025 年 8 月，GPT-5 定价 1.25 美元和 10 美元，mini 版 0.25 美元和 2 美元，nano 版 0.05 美元和 0.4 美元。</p>
+<p style="font-size:16px;line-height:1.9;margin:14px 0;color:#1a1a1a;text-align:left;">进入 2026 年，降价烧到了轻量模型。GPT-6 系列里，Sol 定价 2 美元和 10 美元，Luna 直接打到 0.10 美元和 0.50 美元。Anthropic 的 Haiku 4.5 定价 1 美元和 5 美元。轻量模型的战场，价格已经比 2024 年的旗舰便宜了两个数量级。</p>
+<p style="font-size:16px;line-height:1.9;margin:14px 0;color:#1a1a1a;text-align:left;">国内也没闲着。2025 年 7 月，智谱 GLM-4.5、月之暗面 Kimi K2、豆包 Seed 1.6 在一个月内密集发布。据第三方价格快照，Kimi K2 官方定价约 4 元输入、21 元输出每百万 token，国产旗舰也杀进了个位数人民币。</p>
+<p style="font-size:16px;line-height:1.9;margin:14px 0;color:#1a1a1a;text-align:left;"><strong style="color:#8b2635;">2025 年，美国大厂学会的第一件事不是把模型做得更强，是把价格做得更低。</strong></p>
+
+<h2 style="font-size:20px;line-height:1.5;margin:36px 0 16px 0;color:#1a1a1a;text-align:left;">三、坚守，有人把价格表焊死了两年</h2>
+<p style="font-size:16px;line-height:1.9;margin:14px 0;color:#1a1a1a;text-align:left;">如果说降价派赌的是成本曲线，那么另一派赌的，则是有人愿意为智能付溢价。</p>
+<p style="font-size:16px;line-height:1.9;margin:14px 0;color:#1a1a1a;text-align:left;">Anthropic 的 Claude Sonnet，从 2024 年 6 月的 3 美元和 15 美元，到 2026 年 6 月之前，这个价格两年没动过。OpenAI 一年降价十几次，谷歌跟进，DeepSeek 掀桌，Anthropic 的定价页像焊死了一样。</p>
+<p style="font-size:16px;line-height:1.9;margin:14px 0;color:#1a1a1a;text-align:left;">更夸张的是涨价。2025 年 3 月，OpenAI 发布 o1-pro，输入 150 美元，输出 600 美元，是 o1 的 10 倍。有人愿意为最强的推理付 10 倍的价钱，至少 OpenAI 是这么赌的。</p>
+<p style="font-size:16px;line-height:1.9;margin:14px 0;color:#1a1a1a;text-align:left;">举个例子，2026 年 9 月 23 日那轮降价里，AI 编程社区创始人韦斯·温德公开质疑，GPT-6 Sol 在 DeepSWE 测试里的表现不如 GPT-5.6 Sol。OpenAI 产品负责人 Thibault Sottiaux 回应说，Sol 是"各方面都更好的模型"，重点在综合体验和效率。温德不买账，在基准上变差就是变差。这场争吵说明一件事，当能力拉不开差距，价格和体验就成了唯一的战场，而有人偏偏不信这个邪。</p>
+<p style="font-size:16px;line-height:1.9;margin:14px 0;color:#1a1a1a;text-align:left;">不过，"不降价"不等于"账单不涨"。R1 这类推理模型，思考过程的 token 也计入输出，复杂任务上实际消耗可能是名义价格的 2 到 4 倍。单价降了，总账不一定降，这是很多团队迁移之后才发现的坑。</p>
+<p style="font-size:16px;line-height:1.9;margin:14px 0;color:#1a1a1a;text-align:left;">明面上的标价只是冰山一角，真正的暗战在缓存定价里。OpenAI 官方定价页上，GPT-6 Sol 的缓存输入是 0.20 美元，只有正常输入的 1 折。DeepSeek 的缓存命中价是未命中的 50 分之一。Anthropic 在 9 月 23 日把缓存读取降了 60%。谁的缓存命中率高，谁的实际账单就低，标价战早就打成了缓存战。</p>
+<p style="font-size:16px;line-height:1.9;margin:14px 0;color:#1a1a1a;text-align:left;"><strong style="color:#8b2635;">不降价也是一种定价策略，只是赌注更大。</strong></p>
+<h2 style="font-size:20px;line-height:1.5;margin:36px 0 16px 0;color:#1a1a1a;text-align:left;">四、今天，价格战打到了 DeepSeek 家门口</h2>
+<p style="font-size:16px;line-height:1.9;margin:14px 0;color:#1a1a1a;text-align:left;">就在所有人以为价格战是"中国掀桌、美国跟进"的时候，2026 年 9 月，剧本翻到了下一页。</p>
+<p style="font-size:16px;line-height:1.9;margin:14px 0;color:#1a1a1a;text-align:left;">截至 9 月底，OpenAI 官方定价页上最便宜的模型是 GPT-6 Luna，输入 0.10 美元，输出 0.50 美元。DeepSeek 官方定价页上，deepseek-flash 非高峰时段是 0.15 美元和 0.60 美元。也就是说，美国大厂最便宜的模型，已经杀进了 DeepSeek 的价格带，甚至更便宜。</p>
+<p style="font-size:16px;line-height:1.9;margin:14px 0;color:#1a1a1a;text-align:left;">2026 年 9 月 23 日，OpenAI 和 Anthropic 在相隔一个半小时内先后发布新模型。OpenAI 的 GPT-6 Sol 定价 2 美元和 10 美元，Luna 定价 0.10 美元和 0.50 美元，官方宣布较上一代永久降价 50%。Anthropic 的 Claude Opus 5.5 定价 4 美元和 20 美元，运行成本较上一代降 40%，缓存读取降 60%。据第一财经报道，这次两家都把卖点从"更强"换成了"更便宜、更快"。</p>
+<p style="font-size:16px;line-height:1.9;margin:14px 0;color:#1a1a1a;text-align:left;">第一财经还写了一句值得划线的话，"中国开源模型凭借更优性价比占领更多的市场份额，倒逼美国模型厂商在数月前也开始走性价比路线"。价格战的第二阶段，是美国大厂主动打折，不再是被动还手。</p>
+<p style="font-size:16px;line-height:1.9;margin:14px 0;color:#1a1a1a;text-align:left;">大多数媒体没讲的细节，藏在谷歌的官方定价页里。Gemini 3.x Flash 现在是 0.75 美元和 3.75 美元，但页面上白纸黑字写着，这个价格只到 2026 年 12 月 31 日，2027 年 1 月 1 日起涨到 1.50 美元和 7.50 美元。连谷歌都觉得，现在的降价是限时促销，不是永久状态。</p>
+<p style="font-size:16px;line-height:1.9;margin:14px 0;color:#1a1a1a;text-align:left;">还有一个细节。DeepSeek 自己的定价页现在分高峰和非高峰，北京时间每天 9 点到 12 点、14 点到 18 点是高峰，价格贵一倍。掀桌的人，也开始用价格手段管理自己的算力了。</p>
+<p style="font-size:16px;line-height:1.9;margin:14px 0;color:#1a1a1a;text-align:left;">看 DeepSeek 今天的定价页，战争形态已经变了。V4.1-Flash 缓存命中只要 0.003 美元，非高峰输出 0.60 美元。旗舰 V4-Pro 输出非高峰 1.98 美元。一张价格表里藏着高峰和非高峰、命中和未命中四种价格。掀桌的人，现在玩的是价格工程。</p>
+<p style="font-size:16px;line-height:1.9;margin:14px 0;color:#1a1a1a;text-align:left;"><strong style="color:#8b2635;">价格战最讽刺的一幕出现了，掀桌的人，开始为守桌而战。</strong></p>
+
+<h2 style="font-size:20px;line-height:1.5;margin:36px 0 16px 0;color:#1a1a1a;text-align:left;">五、复盘，大模型价格战的赢家有两类</h2>
+<section style="margin:28px 0;padding:8px 0 8px 20px;border-left:3px solid #14532d;">
+<p style="font-family:'Songti SC','STSong',serif;font-size:21px;line-height:1.9;margin:0 0 10px 0;color:#1a1a1a;text-align:left;">"The cost to use a given level of AI falls about 10x every 12 months."</p>
+<p style="font-size:16px;line-height:1.9;margin:0 0 10px 0;color:#1a1a1a;text-align:left;">同等智能的使用成本，每 12 个月下降约 10 倍。</p>
+<p style="font-size:12px;color:#999999;margin:0;line-height:1.8;text-align:left;">山姆·奥特曼，OpenAI CEO，2025 年 2 月官方博客《Three Observations》</p>
+</section>
+<p style="font-size:18px;font-weight:700;line-height:1.9;margin:20px 0;color:#1a1a1a;text-align:left;">价格战没有打完，也不会打完，因为降价的发动机不是竞争，是成本本身。</p>
+<p style="font-size:16px;line-height:1.9;margin:14px 0;color:#1a1a1a;text-align:left;">先看证据。第一，从 2024 年 12 月到 2026 年 9 月，主流 API 降价了十几次，2026 年 9 月还在降，OpenAI 官方宣布"永久降价 50%"。如果价格战打完了，不会有"永久降价"这种词。</p>
+<p style="font-size:16px;line-height:1.9;margin:14px 0;color:#1a1a1a;text-align:left;">第二，奥特曼那条曲线，过去一年基本应验了。2024 年 5 月 GPT-4o 的输入 2.5 美元，到 2026 年 9 月 GPT-6 Luna 的 0.10 美元，25 倍。能力在涨，价格中枢在下移。</p>
+<p style="font-size:16px;line-height:1.9;margin:14px 0;color:#1a1a1a;text-align:left;">第三，敢不降价的也活得很好。Sonnet 两年没降价，Anthropic 照样是企业市场最贵的香饽饽，o1-pro 敢定 10 倍的价格。这说明价格从来不是唯一的武器，场景溢价真实存在。</p>
+<p style="font-size:16px;line-height:1.9;margin:14px 0;color:#1a1a1a;text-align:left;">第四，看历史。AWS 的 S3 存储，2006 年上线时每 GB 15 美分，20 年后的今天降到 2 美分出头，价格降了 85%，这是 AWS 官方博客 2026 年 3 月自己写的。上一轮把计算变成水电的价格战，打了 20 年还没打完，API 凭什么一年就打完。</p>
+<section style="margin:24px 0;overflow-x:auto;">
+<table style="width:100%;border-collapse:collapse;font-size:14px;line-height:1.8;">
+<tr>
+<td style="padding:10px 12px;border-bottom:2px solid #1a1a1a;color:#999999;font-size:12px;text-align:left;">时间</td>
+<td style="padding:10px 12px;border-bottom:2px solid #1a1a1a;color:#999999;font-size:12px;text-align:left;">事件</td>
+<td style="padding:10px 12px;border-bottom:2px solid #1a1a1a;color:#999999;font-size:12px;text-align:left;">价格（每百万 token）</td>
+<td style="padding:10px 12px;border-bottom:2px solid #1a1a1a;color:#999999;font-size:12px;text-align:left;">来源</td>
+</tr>
+<tr><td style="padding:10px 12px;border-bottom:1px solid #ececec;text-align:left;">2024.05</td><td style="padding:10px 12px;border-bottom:1px solid #ececec;text-align:left;">豆包降价，阿里百度腾讯智谱跟进</td><td style="padding:10px 12px;border-bottom:1px solid #ececec;text-align:left;">0.0008 元/千 token</td><td style="padding:10px 12px;border-bottom:1px solid #ececec;text-align:left;">据当时发布会报道</td></tr>
+<tr><td style="padding:10px 12px;border-bottom:1px solid #ececec;text-align:left;">2024.12</td><td style="padding:10px 12px;border-bottom:1px solid #ececec;text-align:left;">DeepSeek V3 发布</td><td style="padding:10px 12px;border-bottom:1px solid #ececec;text-align:left;">输入 0.27，输出 1.10 美元</td><td style="padding:10px 12px;border-bottom:1px solid #ececec;text-align:left;">发布时官方定价</td></tr>
+<tr><td style="padding:10px 12px;border-bottom:1px solid #ececec;text-align:left;">2025.01</td><td style="padding:10px 12px;border-bottom:1px solid #ececec;text-align:left;">R1 发布，o3-mini 跟进</td><td style="padding:10px 12px;border-bottom:1px solid #ececec;text-align:left;">R1 输出 2.19，o1 输出 60 美元</td><td style="padding:10px 12px;border-bottom:1px solid #ececec;text-align:left;">发布时官方定价</td></tr>
+<tr><td style="padding:10px 12px;border-bottom:1px solid #ececec;text-align:left;">2025.02</td><td style="padding:10px 12px;border-bottom:1px solid #ececec;text-align:left;">DeepSeek 错峰优惠</td><td style="padding:10px 12px;border-bottom:1px solid #ececec;text-align:left;">V3 降 50%，R1 降 75%</td><td style="padding:10px 12px;border-bottom:1px solid #ececec;text-align:left;">DeepSeek 官方公告</td></tr>
+<tr><td style="padding:10px 12px;border-bottom:1px solid #ececec;text-align:left;">2025.08</td><td style="padding:10px 12px;border-bottom:1px solid #ececec;text-align:left;">GPT-5 发布</td><td style="padding:10px 12px;border-bottom:1px solid #ececec;text-align:left;">输入 1.25，输出 10 美元</td><td style="padding:10px 12px;border-bottom:1px solid #ececec;text-align:left;">发布时官方定价</td></tr>
+<tr><td style="padding:10px 12px;border-bottom:1px solid #ececec;text-align:left;">2026.06</td><td style="padding:10px 12px;border-bottom:1px solid #ececec;text-align:left;">Claude 5.5 系列发布</td><td style="padding:10px 12px;border-bottom:1px solid #ececec;text-align:left;">Sonnet 输入 2，输出 10 美元</td><td style="padding:10px 12px;border-bottom:1px solid #ececec;text-align:left;">Anthropic 官方文档</td></tr>
+<tr><td style="padding:10px 12px;border-bottom:1px solid #ececec;text-align:left;">2026.09</td><td style="padding:10px 12px;border-bottom:1px solid #ececec;text-align:left;">OpenAI、Anthropic 同日降价</td><td style="padding:10px 12px;border-bottom:1px solid #ececec;text-align:left;">Luna 0.10/0.50，Opus 5.5 4/20 美元</td><td style="padding:10px 12px;border-bottom:1px solid #ececec;text-align:left;">官方定价页，据媒体报道</td></tr>
+<tr><td style="padding:10px 12px;border-bottom:2px solid #1a1a1a;text-align:left;">2027.01</td><td style="padding:10px 12px;border-bottom:2px solid #1a1a1a;text-align:left;">谷歌 Gemini 3.x Flash 涨价</td><td style="padding:10px 12px;border-bottom:2px solid #1a1a1a;text-align:left;">从 0.75/3.75 涨到 1.50/7.50 美元</td><td style="padding:10px 12px;border-bottom:2px solid #1a1a1a;text-align:left;">Google 官方定价页</td></tr>
+</table>
+</section>
+<p style="font-size:16px;line-height:1.9;margin:14px 0;color:#1a1a1a;text-align:left;">关键在，赢家有两类。一类是 DeepSeek，把成本结构吃透，敢用价格换规模，降价还有利润。另一类是 Anthropic，把场景吃透，敢不降价，用编程和智能体场景收溢价。最难受的是中间地带，既没成本优势，又没差异化，只能被动跟降。</p>
+<p style="font-size:16px;line-height:1.9;margin:14px 0;color:#1a1a1a;text-align:left;">据 2026 年网传的一份投资者交流纪要（DeepSeek 未予证实），梁文锋说 DeepSeek"只赚合理利润，不追求利润最大化"，还提到在这个价格区间"再降价需求也不会明显增加"。如果这话是真的，意味着连掀桌的人都认为，名义降价到头了，下一阶段拼的是暗处的成本。</p>
+<p style="font-size:16px;line-height:1.9;margin:14px 0;color:#1a1a1a;text-align:left;">所以下一阶段的战争不在标价上，在三个看不见的地方。第一，推理效率，同样的任务谁用的 token 少。第二，缓存架构，谁的命中率高。第三，任务分流，简单任务自动路由到小模型。这三件事都不体现在"每百万 token 多少钱"里，但决定了一年的总账单。</p>
+<p style="font-size:16px;line-height:1.9;margin:14px 0;color:#1a1a1a;text-align:left;">算笔账就更清楚了。一个每天跑 1 亿 token 的智能体，按输出计，用 o1 一年要花约 219 万美元，用 R1 只要约 8 万美元，差出 27 倍，差出一家中型公司一年的利润。当成本差是几十倍的时候，价格战根本停不下来，因为降价的那一方，账是算得过来的。</p>
+<p style="font-size:16px;line-height:1.9;margin:14px 0;color:#1a1a1a;text-align:left;"><strong style="color:#8b2635;">降价最狠的没赢，成本最低的和溢价最高的赢了。</strong></p>
+<section style="margin:24px 0;">
+<table style="width:100%;border-collapse:collapse;font-size:14px;line-height:1.8;">
+<tr>
+<td style="padding:10px 12px;border-bottom:2px solid #1a1a1a;text-align:left;"><span style="font-size:12px;color:#8b2635;letter-spacing:0.2em;">对照</span></td>
+<td style="padding:10px 12px;border-bottom:2px solid #1a1a1a;text-align:left;">降价派</td>
+<td style="padding:10px 12px;border-bottom:2px solid #1a1a1a;text-align:left;"><span style="color:#14532d;font-weight:700;">不降价派</span></td>
+</tr>
+<tr>
+<td style="padding:10px 12px;border-bottom:1px solid #ececec;color:#999999;font-size:12px;text-align:left;">代表玩家</td>
+<td style="padding:10px 12px;border-bottom:1px solid #ececec;text-align:left;">DeepSeek、OpenAI、谷歌</td>
+<td style="padding:10px 12px;border-bottom:1px solid #ececec;text-align:left;">Anthropic</td>
+</tr>
+<tr>
+<td style="padding:10px 12px;border-bottom:1px solid #ececec;color:#999999;font-size:12px;text-align:left;">定价动作</td>
+<td style="padding:10px 12px;border-bottom:1px solid #ececec;text-align:left;">一年降价十几次，Luna 打到 0.10 美元</td>
+<td style="padding:10px 12px;border-bottom:1px solid #ececec;text-align:left;">Sonnet 两年没动过 3 美元和 15 美元</td>
+</tr>
+<tr>
+<td style="padding:10px 12px;border-bottom:1px solid #ececec;color:#999999;font-size:12px;text-align:left;">赌的是什么</td>
+<td style="padding:10px 12px;border-bottom:1px solid #ececec;text-align:left;">成本曲线每年一个数量级，规模换利润</td>
+<td style="padding:10px 12px;border-bottom:1px solid #ececec;text-align:left;">有人愿意为最好用的编程模型付溢价</td>
+</tr>
+<tr>
+<td style="padding:10px 12px;border-bottom:2px solid #1a1a1a;color:#999999;font-size:12px;text-align:left;">软肋</td>
+<td style="padding:10px 12px;border-bottom:2px solid #1a1a1a;text-align:left;">推理 token 越用越多，单价降了总账不一定降</td>
+<td style="padding:10px 12px;border-bottom:2px solid #1a1a1a;text-align:left;">成本差距拉到 10 倍以上，溢价故事就难讲了</td>
+</tr>
+</table>
+</section>
+<section style="border:1px solid #ececec;border-left:4px solid #14532d;padding:16px 20px;margin:24px 0;border-radius:0 8px 8px 0;box-shadow:0 1px 4px rgba(0,0,0,0.04);">
+<p style="margin:0 0 10px 0;font-size:14px;line-height:1.9;color:#1a1a1a;text-align:left;"><strong style="color:#14532d;">我的判断，</strong>价格战不会结束，只会从明面降价转入暗处的成本战，赢家是成本结构最好的和差异化最强的两类玩家。</p>
+<p style="margin:0 0 10px 0;font-size:14px;line-height:1.9;color:#1a1a1a;text-align:left;"><strong style="color:#14532d;">市场共识，</strong>格局稳定后价格会企稳，头部玩家开始收割利润。</p>
+<p style="margin:0 0 10px 0;font-size:14px;line-height:1.9;color:#1a1a1a;text-align:left;"><strong style="color:#14532d;">分歧变量，</strong>推理 token 的用量膨胀有多快，编程等场景的溢价能维持多久，谷歌 2027 年是不是真的涨价。</p>
+<p style="margin:0 0 10px 0;font-size:14px;line-height:1.9;color:#1a1a1a;text-align:left;"><strong style="color:#14532d;">证伪条件，</strong>如果到 2027 年 6 月，主流 API 名义单价连续四个季度不再下降，且头部玩家开始普遍提价，那么"成本驱动降价不止"这个判断不成立。</p>
+<p style="margin:0;font-size:14px;line-height:1.9;color:#1a1a1a;text-align:left;"><strong style="color:#14532d;">复盘日期，</strong>2027 年 6 月 30 日。</p>
+</section>
+
+<h2 style="font-size:20px;line-height:1.5;margin:36px 0 16px 0;color:#1a1a1a;text-align:left;">六、清单，给做预算的人三个建议</h2>
+<p style="font-size:16px;line-height:1.9;margin:14px 0;color:#1a1a1a;text-align:left;">如果你是那个每季度要签 API 账单的人，这场价格战跟你关系最大。三个建议，每条都对应一个真实的坑。</p>
+<p style="font-size:16px;line-height:1.9;margin:14px 0;color:#1a1a1a;text-align:left;"><strong style="color:#14532d;">第一，看总账，不看单价。</strong>推理模型的思考 token 计入输出，缓存命中和没命中的价差能到 50 倍。只比输入单价，账单可能差出几倍。不看总账的代价，是预算做到一半发现钱不够了。</p>
+<p style="font-size:16px;line-height:1.9;margin:14px 0;color:#1a1a1a;text-align:left;"><strong style="color:#14532d;">第二，问清折扣。</strong>DeepSeek 分高峰非高峰，贵一倍，谷歌批量任务直接打 5 折，OpenAI 的缓存读取是 1 折。这些折扣页上都写着，但没人替你算。不问的代价，是把本该省下的钱送给了云厂商。</p>
+<p style="font-size:16px;line-height:1.9;margin:14px 0;color:#1a1a1a;text-align:left;"><strong style="color:#14532d;">第三，小任务用小模型。</strong>0.10 美元的 Luna 和 10 美元的 Astra，差 100 倍。很多分类、摘要、改写任务，小模型完全够用。拿旗舰跑全量的代价，是每个月多烧掉一台服务器的钱。</p>
+<p style="font-size:16px;line-height:1.9;margin:14px 0;color:#1a1a1a;text-align:left;"><strong style="color:#8b2635;">模型选型不是选最强的，是选"够用且最便宜"的。</strong></p>
+
+<p style="font-size:16px;line-height:1.9;margin:28px 0 14px 0;color:#1a1a1a;text-align:left;">2024 年 12 月底，DeepSeek 贴出那两个数字的时候，没人想到一年后美国大厂会为 0.10 美元争得头破血流。下一个贴数字的人，可能已经在路上了。</p>
+
+<section style="border-top:1px solid #ececec;margin:36px 0 0 0;padding:24px 0 0 0;">
+<p style="font-size:16px;line-height:1.9;margin:14px 0;color:#1a1a1a;text-align:left;">转给那个还在按 2024 年价格表做预算的同事，他的成本模型可能已经过期一年了。</p>
+<p style="font-size:16px;line-height:1.9;margin:14px 0;color:#1a1a1a;text-align:left;">建议收藏，下次续约 API 或者做明年预算时，把这篇的时间线翻出来对照着看。</p>
+<p style="font-size:16px;line-height:1.9;margin:14px 0;color:#666666;text-align:left;">你觉得 2027 年，谷歌会真的涨价吗？</p>
+<p style="font-size:16px;line-height:1.9;margin:14px 0;color:#1a1a1a;text-align:left;">下一篇复盘中国 AI 出海，关注犀牛伯爵不迷路。</p>
+<p style="font-size:16px;line-height:1.9;margin:14px 0;color:#1a1a1a;text-align:left;">更多 AI 产业深度观察，在犀牛伯爵 rhinocount.cn。</p>
+<p style="font-size:16px;line-height:1.9;margin:14px 0;color:#1a1a1a;text-align:left;">价格战还没打完，犀牛伯爵继续数。</p>
+</section>
+
+<section style="border-top:1px solid #ececec;margin:24px 0 0 0;padding:16px 0 0 0;">
+<p style="font-size:12px;color:#aaaaaa;line-height:1.8;margin:0;text-align:center;">价格数字来自 DeepSeek、OpenAI、Anthropic、Google 官方定价页及各家发布时的官方定价，历史事件据公开报道整理。如需引用，请注明出处，犀牛伯爵 rhinocount.cn</p>
+</section>
+</section>
+</body>
+</html>
+
