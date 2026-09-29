@@ -127,6 +127,12 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "26 亿美元 AI 融资，律师拿走近一半",
+        desc: "2026 年前三季度 AI 应用层官宣融资超 30 亿美元，26.3 亿美元样本中 43.7% 流向法律 AI。判断：钱只流向能把 token 变成账单的公司。",
+        href: "notes/2026-09-29-ai-app-funding.html"
+      },
+      {
+        type: "Essay",
         title: "所有人都在加码算力，Amodei 在算另一笔账",
         desc: "转译 Dwarkesh Podcast 2026 年 2 月 Dario Amodei 访谈：模型能力指数曲线一到两年走完，收入扩散慢半拍，差一年买算力就破产。附 Sutton、LeCun、Musk 三个对立面。",
         href: "notes/2026-09-29-amodei-end-of-exponential.html"
@@ -485,6 +491,14 @@ window.SITE_DATA = {
         img: "assets/note-05.svg",
         href: "notes/why-rhino-count.html"
       },
+      {
+        cat: "观察", num: "N° 116",
+        title: "26 亿美元 AI 融资，律师拿走近一半",
+        excerpt: "2026 年前三季度 AI 应用层官宣融资超 30 亿美元，26.3 亿美元样本中 43.7% 流向法律 AI。判断：钱只流向能把 token 变成账单的公司。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-09-29-ai-app-funding.html"
+      },
+
       {
         cat: "观察", num: "N° 115",
         title: "所有人都在加码算力，Amodei 在算另一笔账",
