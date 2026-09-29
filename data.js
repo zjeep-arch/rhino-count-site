@@ -127,6 +127,12 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "所有人都在加码算力，Amodei 在算另一笔账",
+        desc: "转译 Dwarkesh Podcast 2026 年 2 月 Dario Amodei 访谈：模型能力指数曲线一到两年走完，收入扩散慢半拍，差一年买算力就破产。附 Sutton、LeCun、Musk 三个对立面。",
+        href: "notes/2026-09-29-amodei-end-of-exponential.html"
+      },
+      {
+        type: "Essay",
         title: "警告产品灭绝人类，Anthropic 照常 IPO",
         desc: "Anthropic IPO 招股书 80 页警告 AI 灭绝风险，业务只写 48 页。三个判断：法律免责优先于营销；10% 灭绝概率无法证伪；安全标签要看行为对照。附证伪条件。",
         href: "notes/2026-09-29-anthropic-ipo.html"
@@ -479,6 +485,14 @@ window.SITE_DATA = {
         img: "assets/note-05.svg",
         href: "notes/why-rhino-count.html"
       },
+      {
+        cat: "观察", num: "N° 115",
+        title: "所有人都在加码算力，Amodei 在算另一笔账",
+        excerpt: "转译 Dwarkesh Podcast 2026 年 2 月 Dario Amodei 访谈：模型能力指数曲线一到两年走完，收入扩散慢半拍，差一年买算力就破产。附 Sutton、LeCun、Musk 三个对立面。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-09-29-amodei-end-of-exponential.html"
+      },
+
       {
         cat: "观察", num: "N° 114",
         title: "警告产品灭绝人类，Anthropic 照常 IPO",

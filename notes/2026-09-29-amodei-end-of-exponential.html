@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>所有人都在加码算力，Amodei 在算另一笔账｜犀牛伯爵 N°115</title>
+<meta name="keywords" content="Amodei, 指数曲线, AI算力成本, Anthropic, 缩放定律">
+<meta name="description" content="Anthropic CEO Dario Amodei 在 2026 年 2 月的 Dwarkesh 播客里说，我们离指数曲线的终点只剩一两年。可年入百亿的 Anthropic，为什么不敢买下 1 万亿的算力？第一人称转译这场对谈，还原他的破产算术、RL 缩放律，以及三位反对者的声音。">
+</head>
+<body style="font-family:'Noto Sans SC','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;background:#ffffff;margin:0;padding:16px;font-size:16px;line-height:1.8;color:#333333;">
+<section style="max-width:680px;margin:0 auto;background:#ffffff;padding:32px 24px;">
+<p style="font-size:12px;letter-spacing:0.28em;color:#888888;text-align:center;margin:0 0 18px;line-height:1.8;">N°115 · 犀牛伯爵 · AI 热点深观察</p>
+<h1 style="font-family:'Noto Serif SC','Songti SC',serif;font-size:24px;font-weight:700;color:#1a1a1a;margin:0 0 10px;line-height:1.4;">所有人都在加码算力，Amodei 在算另一笔账</h1>
+<p style="font-size:13px;color:#888888;margin:0 0 6px;line-height:1.8;">2026年9月29日 · 约 8000 字 · 转译自 Dwarkesh Podcast（2026年2月13日）</p>
+<p style="font-size:13px;color:#888888;margin:0 0 24px;padding-bottom:20px;border-bottom:1px solid #ececec;line-height:1.8;">整理｜犀牛伯爵｜第一人称转译，保留讲者口吻与播客问答节奏，未经讲者审定</p>
+
+<section style="border:1px solid #ececec;padding:20px 22px;margin:0 0 24px;line-height:1.8;">
+<p style="margin:0 0 10px;line-height:1.8;"><span style="display:inline-block;font-size:12px;font-weight:700;color:#ffffff;background:#14532d;padding:2px 10px;margin-bottom:10px;line-height:1.8;">犀牛伯爵导读</span></p>
+<p style="margin:0 0 10px;font-size:15px;color:#555555;line-height:1.8;">别把指数曲线的终点理解成算力停摆，它其实是一道差一年就破产的算术题。</p>
+<p style="margin:0 0 10px;font-size:15px;color:#555555;line-height:1.8;">这期对谈其实只讲了两条曲线，一条是模型能力的指数曲线，一条是扩散进经济的指数曲线。前者决定你能做什么，后者决定世界多久之后能用上。Amodei 的全部论证，都落在这两条曲线的时差上。</p>
+<p style="margin:0 0 10px;font-size:15px;color:#555555;line-height:1.8;">出场的人不少，Anthropic CEO Dario Amodei，主持人 Dwarkesh Patel，被摆上台面的 Rich Sutton，还有播客之外的 Elon Musk 和 Yann LeCun。转译中加入了背景补充与案例参考，帮你把播客里的判断落到真实的商业世界里。</p>
+<p style="margin:0 0 10px;font-size:15px;color:#555555;line-height:1.8;">以下为第一人称转译，以 Amodei 的讲述口吻重组播客实录，保留原意、原顺序与关键问答。凡播客之外的信息，均以背景补充或案例参考标出，与讲者原话严格区分。</p>
+<p style="margin:0;font-size:15px;color:#555555;line-height:1.8;">建议带着一个问题读，如果能力先到、需求后到，中间这两年谁在买单。</p>
+</section>
+
+<section style="border:1px solid #ececec;padding:18px 22px;margin:0 0 28px;line-height:1.8;">
+<p style="font-weight:700;font-size:15px;margin:0 0 8px;color:#1a1a1a;line-height:1.8;">目录</p>
+<p style="margin:4px 0;font-size:14px;color:#555555;line-height:1.8;">一、我们离指数曲线的终点，可能只剩一两年</p>
+<p style="margin:4px 0;font-size:14px;color:#555555;line-height:1.8;">二、一个 2017 年的假设，重要的只有七件事</p>
+<p style="margin:4px 0;font-size:14px;color:#555555;line-height:1.8;">三、持续学习，AI 还缺的那半年</p>
+<p style="margin:4px 0;font-size:14px;color:#555555;line-height:1.8;">四、Amodei 的算力账，年入百亿为何不敢买下 1 万亿算力</p>
+<p style="margin:4px 0;font-size:14px;color:#555555;line-height:1.8;">五、实验室怎么赚钱，盈利是低估了需求</p>
+<p style="margin:4px 0;font-size:14px;color:#555555;line-height:1.8;">六、第二条指数曲线，扩散</p>
+<p style="margin:4px 0;font-size:14px;color:#555555;line-height:1.8;">七、播客之外，三个不买终点论账的人</p>
+<p style="margin:4px 0;font-size:14px;color:#555555;line-height:1.8;">八、事实核验</p>
+<p style="margin:4px 0;font-size:14px;color:#555555;line-height:1.8;">九、我的判断，终点不是算力停摆</p>
+</section>
+
+<p style="margin:0 0 14px;line-height:1.8;"><span style="float:left;font-family:'Songti SC','Noto Serif SC',serif;font-size:54px;line-height:1;padding:6px 10px 0 0;color:#1a1a1a;">我</span>是 Dario Amodei，Anthropic 的 CEO。我跟 Dwarkesh 第一次长谈是2023年2月。那次我们聊的都是技术细节，缩放律为什么成立，loss 曲线为什么那么漂亮。2026年2月13日，他再把我请回播客间，问的还是同一个问题，这三年最大的变化是什么。</p>
+<p style="margin:0 0 14px;line-height:1.8;">2026 年这次，Dwarkesh 开门见山，Amodei，你三年前说的天才之国，现在到哪了。2023 年我们聊的是 loss 曲线为什么漂亮，2026 年我们聊的是曲线走完之后怎么办。2023 年，Scaling 是论文里的问题。2026 年，Scaling 是资产负债表上的问题。论文可以错，资产负债表不行。</p>
+<p style="margin:0 0 14px;line-height:1.8;">我的回答是，指数曲线本身基本按我预期的在走。模型从聪明的高中生走到了聪明的大学生，开始干博士的活，写代码甚至超过了博士。真正让我吃惊的只有一件事，圈内圈外，几乎没人意识到我们离这条指数曲线的终点有多近。</p>
+<p style="margin:0 0 14px;line-height:1.8;">注意，这里的终点指曲线走完，而非曲线停下。2024年10月，我在《Machines of Loving Grace》里写下那个判断，几年之内，数据中心里将出现一个天才之国。现在我的时间表更具体了，一到两年。走完之后是什么，是另一个世界。</p>
+<p style="margin:0 0 14px;line-height:1.8;">这期对谈其实只讲了两条曲线。第一条是模型能力的指数曲线，第二条是它扩散进经济的指数曲线。两条都是指数级，都极快，但第二条不是瞬时的。Dwarkesh 问得很凶，他把 Sutton 的质疑、持续学习的难题、算力的三笔账、实验室靠什么赚钱，一个个摆到我面前。下面是我算过的账。</p>
+<p style="margin:0 0 14px;line-height:1.8;">终点之后是什么。不是智能停下，是智能的供给第一次超过社会的消化能力。模型够强了，问题变成谁来用、怎么用、钱从哪来。这也是为什么这期对谈的后半段，我们聊的全是钱，算力、收入、破产。</p>
+
+<h2 style="font-family:'Noto Serif SC','Songti SC',serif;font-size:20px;font-weight:700;color:#1a1a1a;margin:40px 0 16px;padding-bottom:8px;border-bottom:2px solid #14532d;line-height:1.6;">一、我们离指数曲线的终点，可能只剩一两年</h2>
+<p style="margin:0 0 14px;line-height:1.8;">先说我凭什么这么确定。两个数字。第一，10 年之内出现天才之国，我的把握是 90%。我很少把话说到 90%，世界太不可预测。剩下的 10% 里，5% 是各种黑天鹅把事情推迟十年，5% 是我在某些不可验证的任务上想错了。</p>
+<p style="margin:0 0 14px;line-height:1.8;">第二，在代码这种可验证的任务上，一到两年内必到，10 年内不到是不可能的。说 2035 年还到不了，在我看来已经是非主流观点了。</p>
+<p style="margin:0 0 14px;line-height:1.8;">这里要区分两种任务。可验证的任务，数学、代码，有标准答案，强化学习一压就上去。不可验证的任务，规划一次火星任务、做出 CRISPR 级别的发现、写一部小说，没有标准答案。我的不确定性几乎全在后者。</p>
+<p style="margin:0 0 14px;line-height:1.8;">但即使只看可验证的任务，泛化正在发生，我们已经看到从可验证泛化到不可验证的例子。说实话，三年前我对 scaling 的把握是五五开，2019 年我第一次看到那条曲线时并不确定。现在不一样了，走过的每一段都对上了，差一两年。</p>
+<p style="margin:0 0 14px;line-height:1.8;"><span style="font-weight:700;color:#14532d;">我们离指数曲线的终点，可能只剩一到两年，而大多数人还在聊旧话题。</span></p>
+
+<section style="background:#f7f5f0;border-left:3px solid #b89b5e;padding:12px 16px;margin:20px 0;font-size:14px;color:#666666;line-height:1.75;">
+<p style="margin:0;line-height:1.75;"><span style="font-weight:700;color:#b89b5e;">背景补充</span>《Machines of Loving Grace》是 Amodei 2024年10月发表的长文，首次提出天才之国，预测 2026 年、也许 2027 年出现。本期播客标题「We are near the end of the exponential」，副标题「这就是我发出紧急讯息的原因」，即脱胎于此。</p>
+</section>
+
+<h2 style="font-family:'Noto Serif SC','Songti SC',serif;font-size:20px;font-weight:700;color:#1a1a1a;margin:40px 0 16px;padding-bottom:8px;border-bottom:2px solid #14532d;line-height:1.6;">二、一个 2017 年的假设，重要的只有七件事</h2>
+<p style="margin:0 0 14px;line-height:1.8;">Dwarkesh 问我，现在的 scaling 到底在 scale 什么。2023 年他问过我一遍，那时还有公开的 loss 曲线可以指给他看。现在不一样了，主角变成了 RL，而 RL 没有公开的缩放定律。我的回答是，我的假设从2017年就没变过。</p>
+<p style="margin:0 0 14px;line-height:1.8;">那年 GPT-1 刚出来，我写了一篇内部备忘录，叫一大团算力假说。当时做机器人的、做推理的、做语言模型的各干各的，我的判断是，这些花活都不重要，重要的只有七件事。第一，原始算力有多少。第二，数据量。第三，数据的质量和分布，得足够广。第四，训练时长。</p>
+<p style="margin:0 0 14px;line-height:1.8;">第五，目标函数得能扩展到月球，预训练的目标函数是一个，RL 的目标函数是另一个。第六和第七，是归一化之类的数值稳定性，让这一大团算力像层流一样流过去，别出岔子。</p>
+<p style="margin:0 0 14px;line-height:1.8;">这七件事里，没有一条是关于巧思的。全是规模，全是工程。其他的花活，都是噪音。</p>
+<p style="margin:0 0 14px;line-height:1.8;">两年后，Rich Sutton 发表了《苦涩的教训》，2019年，说的是同一件事。预训练的缩放定律是这个假说的一个实例，它一直在成立。现在，RL 正在复刻同一条路。我们看到，在数学竞赛、代码等一大批 RL 任务上，表现和训练时长呈对数线性关系。其他公司公开发布的东西里也写过同样的话。</p>
+<p style="margin:0 0 14px;line-height:1.8;">Sutton 写《苦涩的教训》时，针对的是下棋和游戏。2026 年，同样的教训在 RL 上重演，只是棋盘换成了数学和代码。</p>
+<p style="margin:0 0 14px;line-height:1.8;"><span style="font-weight:700;color:#4a6b3a;">Dwarkesh</span> Sutton 去年接受我采访时其实没那么亲 LLM，我转述一下他的质疑。一个真正拥有人类学习核心的东西，不需要几十亿美元的数据和算力，不需要一个个手工搭建的环境，才能学会用 Excel、用浏览器。我们在 RL 里拼命搭环境、教技能，恰恰说明我们缺的，是人类那种随时学习的核心算法。我们是不是在错误的东西上做规模。</p>
+<p style="margin:0 0 14px;line-height:1.8;"><span style="font-weight:700;color:#8b2635;">Amodei</span> 这个问题把几件本该分开的事混在一起了。先拿掉 RL，RL 和预训练在这件事上没有本质区别。2017 年做 GPT-1 的时候，用的都是同人文这种窄分布数据，模型泛化很差。直到 GPT-2 用全网抓取覆盖了足够广的分布，泛化才出现。</p>
+<p style="margin:0 0 14px;line-height:1.8;">RL 也一样，先从数学竞赛这种简单任务起步，再到代码，再到所有任务。我们的目标从来只有一个，泛化，至于覆盖每一个具体技能，那只是手段。</p>
+<p style="margin:0 0 14px;line-height:1.8;">还有一个真问题，预训练用掉几万亿 token，人类一辈子也看不了这么多字，样本效率差了好几个数量级。如果非要类比，预训练和 RL 更接近进化，离学习还差着一层。人类大脑不是白板，进化给了我们大量先验。语言模型是真白板，权重随机初始化。</p>
+<p style="margin:0 0 14px;line-height:1.8;">真正的学习，发生在模型拿到 100 万 token 上下文之后，在上下文里现学现用，效率其实很高。所以别拿预训练对比人类学习，它对比的是人类进化。</p>
+<p style="margin:0 0 14px;line-height:1.8;">Dwarkesh 问，数据墙呢。我的回答是，预训练的数据墙真实存在，但 RL 自己造数据。数学题、代码题、环境交互，模型自己生成训练信号。数据从资产变成了副产品，真正的墙变成了算力和环境。</p>
+<p style="margin:0 0 14px;line-height:1.8;">预训练吃的是存量，RL 造的是增量。这是两套完全不同的供给逻辑。</p>
+<p style="margin:0 0 14px;line-height:1.8;"><span style="font-weight:700;color:#14532d;">RL 正在重演预训练的故事，从数学竞赛到代码再到所有任务，目标始终是泛化。</span></p>
+
+<h2 style="font-family:'Noto Serif SC','Songti SC',serif;font-size:20px;font-weight:700;color:#1a1a1a;margin:40px 0 16px;padding-bottom:8px;border-bottom:2px solid #14532d;line-height:1.6;">三、持续学习，AI 还缺的那半年</h2>
+<p style="margin:0 0 14px;line-height:1.8;">Dwarkesh 换了个问法，很具体。他说，我有剪辑师，合作半年后，他们懂我的观众，懂我的口味，懂各种取舍。一个 AI，什么时候能像我的剪辑师一样，在工作中现学。</p>
+<p style="margin:0 0 14px;line-height:1.8;">这个例子不是随口说的。Dwarkesh 有一支剪辑团队，合作了半年以上。AI 要替代的不是剪辑这个动作，是这半年里积累的默契。</p>
+<p style="margin:0 0 14px;line-height:1.8;">我的回答是，天才之国能做到，靠的是通用计算机操控。你把这期三小时的访谈丢给它，它能上网看我以前的采访，看网友在评论区说什么，找我和我的员工聊天，看我历史上的剪辑记录，然后动手干。但这依赖几件事，其中一件正在卡住部署，计算机操控的可靠性。</p>
+<p style="margin:0 0 14px;line-height:1.8;">约2024年底我们第一次发布 computer use 时，基准测试大概是 15%，我记不太清。现在爬到了 65% 到 70%。还得再往上爬，可靠性过了线，部署才成立。</p>
+<p style="margin:0 0 14px;line-height:1.8;">Dwarkesh 追问，可文本任务呢。模型写个 7 分的东西没问题，但它不会像人类员工那样，在合作中越变越好。缺的这个能力，即使计算机操控解决了，还是会卡住真正的岗位交接。</p>
+<p style="margin:0 0 14px;line-height:1.8;">说实话，写代码这件事给了我信心。Anthropic 内部现在有工程师一行代码都不写。有人跟我说，这个芯片，我以前自己写，现在全丢给 Claude。也有反例，2025 年一项研究让资深开发者在熟悉的仓库里关 issue，他们自述效率提升了，但实际合并的代码量反而掉了 20%。</p>
+<p style="margin:0 0 14px;line-height:1.8;">两种说法都对。我的判断是，代码模型的整体加速现在是 15% 到 20%，半年前只有 5%。5% 没感觉，15% 开始成为变量之一。这个雪球会越滚越快，10%，20%，25%，40%。</p>
+<p style="margin:0 0 14px;line-height:1.8;">回到剪辑师的问题。我的猜测是，一到三年，概率五五开。10 年内，95% 到 99%。注意，这里的学习分两层。一层是预训练加 RL 扔进去再泛化，像进化，不像学习。另一层是上下文学习，100 万 token 的上下文，相当于人类读几天到几周的量。</p>
+<p style="margin:0 0 14px;line-height:1.8;">光这两层，可能就够挣出几万亿美元。持续学习本身，我们也在做，一两年内很可能解决。但即使没有它，大部分路也已经通了。</p>
+<p style="margin:0 0 14px;line-height:1.8;">如果持续学习解决了，会发生什么。AI 变成真正的员工，入职时是白板，半年后是老手。公司的知识不再只锁在人的脑子里，而是在模型的权重里。这也是为什么我说，即使没有持续学习，几万亿美元的市场也已经开张了。有了它，开张的是另一个量级。</p>
+<p style="margin:0 0 14px;line-height:1.8;"><span style="font-weight:700;color:#14532d;">AI 不缺智商，缺的是在岗的那半年。而这半年，一到三年内就可能补上。</span></p>
+
+<h2 style="font-family:'Noto Serif SC','Songti SC',serif;font-size:20px;font-weight:700;color:#1a1a1a;margin:40px 0 16px;padding-bottom:8px;border-bottom:2px solid #14532d;line-height:1.6;">四、Amodei 的算力账，年入百亿为何不敢买下 1 万亿算力</h2>
+<p style="margin:0 0 14px;line-height:1.8;">Dwarkesh 算了一笔账，当场问我，如果一到三年内真有天才之国，为什么 Anthropic 不把能买的算力全买下来。一个诺贝尔奖得主级的智能，价值是几万亿美元，买多少算力都是赚的。他说得没错，但这笔账漏了一项，时间。</p>
+<p style="margin:0 0 14px;line-height:1.8;">先看我们的收入曲线。2023 年，我们从 0 做到 1 亿美元。2024 年，1 亿到 10 亿。2025 年，10 亿到 90 亿到 100 亿。2026年1月，单月又加了几十亿。年初我们的年化收入是 100 亿美元。每年 10 倍，漂亮得不真实。</p>
+<p style="margin:0 0 14px;line-height:1.8;">假设这个 10 倍继续下去，2026 年底 1000 亿，2027 年底 1 万亿。数据中心要提前一两年下单，我现在就要决定 2027 年买多少算力。按 1 万亿收入去买，我得买下 5 万亿美元的算力，分五年烧。</p>
+<p style="margin:0 0 14px;line-height:1.8;">可如果 2027 年的收入不是 1 万亿，是 8000 亿呢。那没有任何对冲、没有任何保险能阻止我破产。增长率从 10 倍掉到 5 倍，或者时间差一年，结果都一样，破产。</p>
+<p style="margin:0 0 14px;line-height:1.8;">电子表格不会骗人。收入差 2000 亿，时间差一年，两个数字一乘，破产就写在格子里。</p>
+<p style="margin:0 0 14px;line-height:1.8;">所以我们买的是几千亿，不是几万亿。我们接受一种风险，需求爆了，我们接不住。也接受另一种风险，我们看错了，增长没来。我说的负责任，跟花多花少无关，关键在算没算过账。我感觉有些公司根本没写过电子表格，没算过自己在冒什么险，只是觉得这么干很酷。</p>
+<p style="margin:0 0 14px;line-height:1.8;">我们是企业级生意，收入比消费级稳定，毛利更高，缓冲更厚。我们买的量，能抓住偏好的世界，亏也亏不到哪里去。</p>
+<p style="margin:0 0 14px;line-height:1.8;">还有一个细节，训练和推理的账不是静态的。模型越强，单个 token 越便宜，但需求涨得更快。推理的毛利率超过 50%，这是我们敢买几千亿算力的底气。训练是沉没成本，推理是印钞机，前提是你猜对了需求。</p>
+<p style="margin:0 0 14px;line-height:1.8;"><span style="font-weight:700;color:#14532d;">差一年，你就破产。这就是年入百亿的 Anthropic，不敢买 1 万亿算力的全部原因。</span></p>
+
+<section style="border-left:4px solid #14532d;padding:16px 20px;margin:24px 0;line-height:1.8;">
+<p style="margin:0 0 8px;line-height:1.2;"><span style="font-size:40px;color:#14532d;line-height:1;">"</span></p>
+<p style="font-family:'Noto Serif SC','Songti SC',serif;font-size:21px;font-weight:700;color:#1a1a1a;margin:0 0 8px;line-height:1.6;">If you're off by only a year, you destroy yourselves.</p>
+<p style="font-size:16px;color:#333333;margin:0 0 8px;line-height:1.8;">差一年，你就自我毁灭。</p>
+<p style="font-size:12px;color:#888888;margin:0;line-height:1.8;">Dario Amodei，Dwarkesh Podcast，2026年2月13日</p>
+</section>
+
+<p style="margin:0 0 14px;line-height:1.8;">Dwarkesh 追问，那整个行业呢。我说，不谈 Anthropic，只谈行业。2026 年，全行业在建的算力大概是 10 到 15 GW，每年涨 3 倍。2027 年就是 30 到 40 GW，2028 年 100 GW，2029 年 300 GW。</p>
+<p style="margin:0 0 14px;line-height:1.8;">每 GW 一年烧掉 100 亿到 150 亿美元，这是我心算的量级。乘一下，2028、2029 年，全行业一年就是几万亿美元，正好对上。</p>
+<p style="margin:0 0 14px;line-height:1.8;">对比一下，人类一年的工资总共约 50 万亿美元。按上面的心算，2029 年 300 GW，一年就是 3 万亿到 4.5 万亿美元，相当于人类工资总额的 6% 到 9%。换算一下，到 2029 年，人类每挣 100 美元，就有 6 到 9 美元变成数据中心的电费和折旧。按 3 倍年增速推，这就是一道算术题，不是科幻。</p>
+<p style="margin:0 0 14px;line-height:1.8;">Dwarkesh 还是不服，你都有天才之国了，让它自己开公司赚钱不就行了。举个例子，临床试验。大多数临床试验失败，不是因为流程慢，是因为药本身无效。AI 能把试验设计得更快，但快不是无限快。</p>
+<p style="margin:0 0 14px;line-height:1.8;">新冠疫苗 1 年半铺到全世界，已经是人类极限速度。而脊髓灰质炎疫苗用了 50 年，非洲最偏远的角落还没根除。技术走完指数曲线，和价值铺满全世界，是两件速度完全不同的事。</p>
+
+<section style="background:#f2f7f4;border-left:3px solid #1a7a5c;padding:12px 16px;margin:20px 0;font-size:14px;color:#4a4a4a;line-height:1.75;">
+<p style="margin:0;line-height:1.75;"><span style="font-weight:700;color:#1a7a5c;">案例参考</span>Anthropic 收入曲线，2023 年 0 到 1 亿美元，2024 年 1 亿到 10 亿，2025 年 10 亿到 90 亿到 100 亿，2026年1月单月再加几十亿。以上数字均为 Amodei 在播客中的自述，Anthropic 未单独披露经审计的 2025 年收入，引用时请认准这是讲者口径。</p>
+</section>
+
+<h2 style="font-family:'Noto Serif SC','Songti SC',serif;font-size:20px;font-weight:700;color:#1a1a1a;margin:40px 0 16px;padding-bottom:8px;border-bottom:2px solid #14532d;line-height:1.6;">五、实验室怎么赚钱，盈利是低估了需求</h2>
+<p style="margin:0 0 14px;line-height:1.8;">Dwarkesh 问我，你们跟投资人说 2028 年开始盈利。可那正是天才之国到来的时候，最该砸钱扩张的时点，为什么反而盈利。坦率地讲，在这个行业，盈利和亏损的分水岭很奇怪，它不看你花钱还是省钱，只看需求猜错了方向。</p>
+<p style="margin:0 0 14px;line-height:1.8;">给你一个玩具模型，数字都是示意，别当财报看。假设一半算力用来训练，一半用来推理，推理的毛利率超过 50%。稳态下，你一年花 1000 亿美元买算力，其中 500 亿支撑 1500 亿收入，500 亿拿去训练，净赚 500 亿。</p>
+<p style="margin:0 0 14px;line-height:1.8;">现在唯一能打破这个算术的，是需求猜错了。需求比你买的多，训练被挤占，但你更赚钱。需求比你买的少，算力全拿去搞研究，你更强，但你亏钱。</p>
+<p style="margin:0 0 14px;line-height:1.8;">Dwarkesh 问，智能的需求有上限吗。我的回答是，边际成本趋近于零的东西，需求只会被低估，不会被高估。问题从来不是有没有需求，是需求什么时候到。</p>
+<p style="margin:0 0 14px;line-height:1.8;">所以盈利发生在你低估需求的时候，亏损发生在你高估需求的时候。数据中心是提前买的，需求是事后才知道的。这个地狱级的需求预测题，才是这个行业真正的商业模式。</p>
+<p style="margin:0 0 14px;line-height:1.8;"><span style="font-weight:700;color:#14532d;">前沿实验室的盈利，不看规模到了没有，只看需求猜对没有，猜少了赚钱，猜多了亏钱。</span></p>
+<p style="margin:0 0 14px;line-height:1.8;">那为什么不把 100% 的算力都拿去训练，做出最强的模型。因为那就没收入，没收入就融不到钱，签不下算力大单，明年就没得玩。为什么不把 100% 拿去服务客户。因为不训练下代模型，你很快就没需求了。</p>
+<p style="margin:0 0 14px;line-height:1.8;">均衡点不在 10%，也不在 90%，姑且说 50%。这不是我拍脑袋，是小玩家博弈的均衡，不会压到零利润。有人问我，既然对数收益递减，为什么不多投训练。因为多花 200 亿美元，可能只换来 1.4 倍的模型。这 200 亿拿去服务推理，或者多招几个好工程师，回报更高。</p>
+<p style="margin:0 0 14px;line-height:1.8;">这个 50% 不是最优，是纳什均衡。谁先把训练砍到零，谁下代模型就掉队。谁先把推理砍到零，谁这个季度就断粮。都不敢先动。</p>
+<p style="margin:0 0 14px;line-height:1.8;">云就是前车之鉴，三四家玩家，高进入成本，利润不离谱也不归零。模型比云更分化，Claude 和 GPT 擅长的东西不一样，连写代码的风格都不一样，分化只会更深。</p>
+
+<section style="background:#f7f5f0;border-left:3px solid #b89b5e;padding:12px 16px;margin:20px 0;font-size:14px;color:#666666;line-height:1.75;">
+<p style="margin:0;line-height:1.75;"><span style="font-weight:700;color:#b89b5e;">背景补充</span>Amodei 在播客中确认，曾告诉投资人 Anthropic 计划 2028 年起实现盈利。这只是讲者在 2026年2月对投资人的表述，别当成财报指引。</p>
+</section>
+
+<h2 style="font-family:'Noto Serif SC','Songti SC',serif;font-size:20px;font-weight:700;color:#1a1a1a;margin:40px 0 16px;padding-bottom:8px;border-bottom:2px solid #14532d;line-height:1.6;">六、第二条指数曲线，扩散</h2>
+<p style="margin:0 0 14px;line-height:1.8;">很多人只盯着第一条曲线，模型能力的指数曲线。但还有第二条，扩散进经济的指数曲线。我的判断是，两条都是指数级的，都极快，但第二条不是瞬时的。第一条决定你能做什么，第二条决定世界多久之后能用上。</p>
+<p style="margin:0 0 14px;line-height:1.8;">举个例子，Claude Code。装上就能用，大企业的开发者没理由比个人开发者用得慢。我们天天跟客户开会，一个 3000 名开发者的 rollout，一张 5000 万美元的单子，要一层层解释这是什么、为什么值。法务、安全合规、采购，一个都少不了。</p>
+<p style="margin:0 0 14px;line-height:1.8;">大企业比小公司慢好几个月，这是常态。我们想尽一切办法，想让收入一年涨 20 倍、30 倍，而不是 10 倍。但企业有自己的节奏。</p>
+<p style="margin:0 0 14px;line-height:1.8;">一个反直觉的细节，越大的企业，法务和安全流程越长，但单子也越大。一张 5000 万美元的单子，要过三道关，每道关都要重新解释一遍这是什么。这就是扩散曲线的形状，个体快如闪电，企业慢如冰川。</p>
+<p style="margin:0 0 14px;line-height:1.8;">冰川也在动。一年 10 倍，是历史上任何企业软件都没做到过的速度。慢，只是相对的慢。</p>
+<p style="margin:0 0 14px;line-height:1.8;">所以即使天才之国真的来了，它也不会是一个无限 compelling 的产品。它足够好，好到一年涨 3 到 5 倍、涨 10 倍，好到在几千亿的规模上做到历史上从没人做到过的事。但它快不过一家大企业走完采购流程的速度。</p>
+<p style="margin:0 0 14px;line-height:1.8;"><span style="font-weight:700;color:#4a6b3a;">Dwarkesh</span> 我有个 hot take 想抛给你。我觉得扩散是个借口。每当模型做不到某件事，人们就说，哦，这是扩散问题。可你想想，AI 上手明明比人容易得多。AI 几分钟读完你整个 Slack 和硬盘，同个模型的无数拷贝共享知识，招 AI 没有逆向选择。</p>
+<p style="margin:0 0 14px;line-height:1.8;">人呢，我们一年付 50 万亿美元工资雇人，明明雇人麻烦得多。扩散解释不了这么多。</p>
+<p style="margin:0 0 14px;line-height:1.8;"><span style="font-weight:700;color:#8b2635;">Amodei</span> 扩散是真实存在的，而且不只是模型能力的问题。有些人拿扩散当挡箭牌，论证这技术没那么重要，我要说的是另一回事。我说的是，AI 的扩散会比历史上任何技术都快，但不是无限快。</p>
+<p style="margin:0 0 14px;line-height:1.8;">就拿 Claude Code 说，个体开发者和小公司 adoption 快，大企业慢几个月，不是因为模型不行，是因为 3000 人的公司要过法务、安全、预算。连 AGI 来了也一样，一年 10 倍已经是历史级速度，但它不是无限。</p>
+<p style="margin:0 0 14px;line-height:1.8;">顺带澄清一个被误读最多的预言。约2025年年中，我说过 AI 将在三到六个月内写下 90% 的代码，至少在有些地方，这事发生了。但 90% 的代码行数，和 90% 的端到端软件工程任务，是两回事。从 90% 到 100%，中间隔着编译、搭环境、联调、写文档。</p>
+<p style="margin:0 0 14px;line-height:1.8;">从模型写了 90% 的行，到对程序员的需求降 90%，更隔着好几层。需求下降 90% 会发生，但这是一个光谱，不是一个开关。</p>
+<p style="margin:0 0 14px;line-height:1.8;">下次再看到 90% 写代码的标题，先问一句，是 90% 的行，还是 90% 的活。这是两道题。</p>
+<p style="margin:0 0 14px;line-height:1.8;"><span style="font-weight:700;color:#14532d;">扩散是第二条指数曲线，它比历史上任何技术都快，但快不过一家大企业走完采购流程。</span></p>
+
+<section style="background:#f2f7f4;border-left:3px solid #1a7a5c;padding:12px 16px;margin:20px 0;font-size:14px;color:#4a4a4a;line-height:1.75;">
+<p style="margin:0;line-height:1.75;"><span style="font-weight:700;color:#1a7a5c;">案例参考</span>Claude Code 的企业落地。Amodei 在播客中描述，大型金融、制药企业 adoption 速度远超历史上任何企业软件，但即便如此，从个体开发者到 3000 人规模企业的 rollout，仍有数月时差，瓶颈在法务、安全合规与预算流程，不在模型能力。</p>
+</section>
+
+<h2 style="font-family:'Noto Serif SC','Songti SC',serif;font-size:20px;font-weight:700;color:#1a1a1a;margin:40px 0 16px;padding-bottom:8px;border-bottom:2px solid #14532d;line-height:1.6;">七、播客之外，三个不买终点论账的人</h2>
+<p style="margin:0 0 14px;line-height:1.8;">以下切换到整理者视角。终点论在播客里听起来自洽，但播客之外，至少有三个人不买账。他们的分歧，恰恰是这期对谈最值得带走的东西。</p>
+<p style="margin:0 0 14px;line-height:1.8;"><span style="font-weight:700;color:#1a1a1a;">第一，Rich Sutton。</span>吊诡的是，Sutton 是 2019 年《苦涩的教训》的作者，终点论的思想源头之一。但据 Dwarkesh 在播客中转述，Sutton 本人并没有那么亲 LLM。</p>
+<p style="margin:0 0 14px;line-height:1.8;">他的质疑是，如果我们真缺的是一种像人类一样随时学习的核心算法，那现在这种靠几十亿美元算力和手工搭建 RL 环境去教模型用 Excel、用浏览器的做法，恰恰说明我们在错误的东西上做规模。</p>
+<p style="margin:0 0 14px;line-height:1.8;">Amodei 在播客里的回应是，RL 和预训练没有本质区别，目标都是泛化。但 Sutton 的问题没有被真正回答，样本效率差了几个数量级，到底是进化的代价，还是路线错了的证据。截至2026年9月，这个问题依然没有答案。</p>
+<p style="margin:0 0 14px;line-height:1.8;"><span style="font-weight:700;color:#1a1a1a;">第二，Yann LeCun。</span>他把质疑变成了 10 亿美元的赌注。2025 年底离开 Meta 后，他创办了 AMI Labs。</p>
+<p style="margin:0 0 14px;line-height:1.8;">2026年3月，公司完成 10.3 亿美元种子轮，领投方包括 Cathay Innovation、Greycroft、Hiro Capital、HV Capital 和 Bezos Expeditions。</p>
+<p style="margin:0 0 14px;line-height:1.8;">Tim Berners-Lee、Mark Cuban、Eric Schmidt 都写了支票，投前估值 35 亿美元，据 TechCrunch 报道。</p>
+<p style="margin:0 0 14px;line-height:1.8;">10 亿美元押注一个假设，LLM 这条路走不通。这是整个 AI 行业里最贵的一张反对方票。</p>
+<p style="margin:0 0 14px;line-height:1.8;">2026年5月，他在 Bloomberg《The Close》节目里说，大语言模型不是通往真正智能的路，是条岔路，据 StartupHub 援引彭博报道。</p>
+<p style="margin:0 0 14px;line-height:1.8;">更早的 2026年1月，MIT Technology Review 的特写里他说，只要扩大规模就能达到人类智能，这种想法大错特错。LeCun 把赌注押在世界模型上。在他那里，出路是换架构，不是把 LLM 做大。如果他是对的，Amodei 的指数曲线走的根本不是通往天才之国的路。</p>
+<p style="margin:0 0 14px;line-height:1.8;"><span style="font-weight:700;color:#1a1a1a;">第三，Elon Musk。</span>同样在 2026 年 2 月，同样是 Dwarkesh 的播客间，这次搭档是 Stripe 联创 John Collison，Musk 给出了另一个版本的终点，不是智能到终点，是地球到终点。</p>
+<p style="margin:0 0 14px;line-height:1.8;">他的原话是，36 个月，很可能是 30 个月，太空将是放 AI 最划算的地方，据 wccftech、eWeek 等多家媒体报道。</p>
+<p style="margin:0 0 14px;line-height:1.8;">理由是地球电网撞上了硬件墙，美国全国用电才约 0.5 太瓦，而 AI 要的电是这个量级的数倍。就在这期播客几天前，2026年1月31日，SpaceX 与 xAI 完成合并，合并估值约 1.25 万亿美元，据 Reuters 报道。</p>
+<p style="margin:0 0 14px;line-height:1.8;">Musk 的解法是 Starship，一次发射能带上去的算力，正在逼近地面数据中心的量级。他的赌注是，发射成本降得比电网扩建快。他的逻辑和 Amodei 完全相反，Amodei 担心买多了算力会破产，Musk 担心地球根本放不下他要买的算力。</p>
+
+<table style="width:100%;border-collapse:collapse;margin:24px 0;line-height:1.8;">
+<tr><td colspan="3" style="font-size:12px;letter-spacing:0.2em;color:#14532d;padding:0 0 8px;line-height:1.8;">对照</td></tr>
+<tr>
+<td style="width:22%;font-size:13px;color:#888888;padding:10px 12px;border-bottom:2px solid #1a1a1a;line-height:1.8;">维度</td>
+<td style="font-size:14px;font-weight:700;color:#1a1a1a;background:#f7f7f7;padding:10px 12px;border-bottom:2px solid #1a1a1a;line-height:1.8;">Amodei，终点将至</td>
+<td style="font-size:14px;font-weight:700;color:#14532d;padding:10px 12px;border-bottom:2px solid #1a1a1a;line-height:1.8;">Musk，继续加注</td>
+</tr>
+<tr>
+<td style="font-size:13px;color:#888888;padding:10px 12px;border-bottom:1px solid #ececec;line-height:1.8;">时间表</td>
+<td style="font-size:14px;color:#333333;background:#f7f7f7;padding:10px 12px;border-bottom:1px solid #ececec;line-height:1.8;">一到两年内出现天才之国，10 年内把握 90%</td>
+<td style="font-size:14px;color:#333333;padding:10px 12px;border-bottom:1px solid #ececec;line-height:1.8;">30 到 36 个月后，太空成为放 AI 最划算的地方</td>
+</tr>
+<tr>
+<td style="font-size:13px;color:#888888;padding:10px 12px;border-bottom:1px solid #ececec;line-height:1.8;">瓶颈在哪</td>
+<td style="font-size:14px;color:#333333;background:#f7f7f7;padding:10px 12px;border-bottom:1px solid #ececec;line-height:1.8;">需求扩散跟不上，买早一年就破产</td>
+<td style="font-size:14px;color:#333333;padding:10px 12px;border-bottom:1px solid #ececec;line-height:1.8;">地球电力跟不上，电网是极慢的行业，撞上硬件墙</td>
+</tr>
+<tr>
+<td style="font-size:13px;color:#888888;padding:10px 12px;border-bottom:1px solid #ececec;line-height:1.8;">钱怎么花</td>
+<td style="font-size:14px;color:#333333;background:#f7f7f7;padding:10px 12px;border-bottom:1px solid #ececec;line-height:1.8;">几千亿，不上万亿，先算电子表格再下单</td>
+<td style="font-size:14px;color:#333333;padding:10px 12px;border-bottom:1px solid #ececec;line-height:1.8;">把数据中心发射上天，靠 Starship 高频发射</td>
+</tr>
+<tr>
+<td style="font-size:13px;color:#888888;padding:10px 12px;border-bottom:2px solid #1a1a1a;line-height:1.8;">对规模的态度</td>
+<td style="font-size:14px;color:#333333;background:#f7f7f7;padding:10px 12px;border-bottom:2px solid #1a1a1a;line-height:1.8;">对数收益递减，多花 200 亿只换 1.4 倍模型</td>
+<td style="font-size:14px;color:#333333;padding:10px 12px;border-bottom:2px solid #1a1a1a;line-height:1.8;">规模就是一切，太瓦级 GPU，太空管够地方</td>
+</tr>
+</table>
+<p style="margin:0 0 14px;line-height:1.8;"><span style="font-weight:700;color:#14532d;">三个人，三个方向，终点论要成立，得先过这三关。</span></p>
+
+<h2 style="font-family:'Noto Serif SC','Songti SC',serif;font-size:20px;font-weight:700;color:#1a1a1a;margin:40px 0 16px;padding-bottom:8px;border-bottom:2px solid #14532d;line-height:1.6;">八、事实核验</h2>
+<p style="margin:0 0 14px;line-height:1.8;">转译到此结束，以下是整理者的核验。所有 Amodei 说，都可以在 dwarkesh.com 的完整实录里逐句找到。播客之外的数字，我都标了出处链。</p>
+<section style="border:1px dashed #14532d;padding:16px 20px;margin:24px 0;font-size:14px;color:#555555;line-height:1.75;">
+<p style="font-weight:700;color:#14532d;margin:0 0 8px;line-height:1.8;">事实核验</p>
+<p style="margin:0 0 8px;line-height:1.75;"><span style="font-weight:700;color:#1a1a1a;">收入数字</span>，2023 年 0 到 1 亿美元，2024 年 1 亿到 10 亿，2025 年 10 亿到 90 亿到 100 亿，均为 Amodei 在播客中的自述。Anthropic 未单独披露经审计的 2025 年收入，引用时请认准这是讲者口径。</p>
+<p style="margin:0 0 8px;line-height:1.75;"><span style="font-weight:700;color:#1a1a1a;">算力成本</span>，每 GW 每年 100 亿到 150 亿美元，是 Amodei 在播客中现场心算的量级，是估算，不是报价。</p>
+<p style="margin:0 0 8px;line-height:1.75;"><span style="font-weight:700;color:#1a1a1a;">SpaceX 与 xAI 合并估值约 1.25 万亿美元</span>，据 Reuters 报道，经二手转引，链条已写清。</p>
+<p style="margin:0 0 8px;line-height:1.75;"><span style="font-weight:700;color:#1a1a1a;">Musk 的 36 个月</span>，出自 2026 年 2 月初的 Dwarkesh 播客，据 wccftech、eWeek 等多家媒体报道，二手信源。</p>
+<p style="margin:0 0 8px;line-height:1.75;"><span style="font-weight:700;color:#1a1a1a;">AMI Labs 10.3 亿美元种子轮</span>，据 TechCrunch 2026年3月报道，二手信源。</p>
+<p style="margin:0 0 8px;line-height:1.75;"><span style="font-weight:700;color:#1a1a1a;">LeCun 引语</span>，2026年5月 Bloomberg《The Close》及 2026年1月 MIT Technology Review，均据 StartupHub 援引转述，二手链条，引用时请保留出处链。</p>
+<p style="margin:0;line-height:1.75;"><span style="font-weight:700;color:#1a1a1a;">人类工资约 50 万亿美元</span>，Amodei 在播客中的口头估算。</p>
+<p style="margin:8px 0 0;line-height:1.75;"><span style="font-weight:700;color:#1a1a1a;">计算机操控 15% 到 65% 到 70%</span>，Amodei 在播客中自述，约2024年底到 2026年2月，基准测试口径，讲者称记不太清 15% 的精确值。</p>
+</section>
+<p style="margin:0 0 14px;line-height:1.8;"><span style="font-weight:700;color:#14532d;">核验结论，所有讲者原话可逐句回查实录，所有外部数字都标了出处链，超过二手的链条已经写清。</span></p>
+
+<h2 style="font-family:'Noto Serif SC','Songti SC',serif;font-size:20px;font-weight:700;color:#1a1a1a;margin:40px 0 16px;padding-bottom:8px;border-bottom:2px solid #14532d;line-height:1.6;">九、我的判断，终点不是算力停摆</h2>
+<p style="margin:0 0 14px;line-height:1.8;"><span style="font-weight:700;color:#14532d;">Amodei 终点论的真正含义，可以一句话概括，技术走完指数曲线之后，会先撞上一个能力先到、需求后到的空窗期。它说的不是算力到头。能力一到两年到位，万亿收入三到五年才到，中间这两年，就是 2026 年所有前沿实验室的生死线。</span></p>
+<p style="margin:0 0 14px;line-height:1.8;">证据有四组。第一，Anthropic 自己的收入曲线，2023 年 0 到 1 亿美元，2024 年 1 亿到 10 亿，2025 年 10 亿到 90 亿到 100 亿，年年 10 倍。但 Amodei 自己说，这条曲线不可能永远持续，GDP 就那么大，2026 年大概率走平。这是讲者亲口承认的天花板。</p>
+<p style="margin:0 0 14px;line-height:1.8;">第二，破产算术，2027 年买 1 万亿算力，收入差 2000 亿就是破产，差一年就自我毁灭。技术时间表和收入时间表之间，容错率不到一年。</p>
+<p style="margin:0 0 14px;line-height:1.8;">第三，扩散证据，Claude Code 在大企业落地，要过法务、安全、采购，3000 名开发者的 rollout 要一层层解释。Amodei 想尽办法想让收入一年涨 20 倍、30 倍，但企业流程决定了上限。能力是指数，采购流程是线性的。</p>
+<p style="margin:0 0 14px;line-height:1.8;">第四，反方也在印证，Musk 把数据中心搬上天，恰恰说明连最激进的加注派都不指望地球的需求侧能自然消化，瓶颈从模型够不够强，变成了电和钱跟不跟得上。</p>
+<p style="margin:0 0 14px;line-height:1.8;">第五，电的硬约束。Musk 给的数字是，美国全国用电约 0.5 太瓦，AI 要的是这个量级的数倍。电网扩建按十年计，数据中心按年计。当算力规划开始用太瓦做单位，电就从成本项变成了准入项。</p>
+<p style="margin:0 0 14px;line-height:1.8;">证伪条件有两个。如果 2028 年底，前沿实验室合计年收入达到数千亿美元且增速仍超 3 倍，也就是 Amodei 说的 2028 年低几千亿兑现，本判断失效。如果出现能力到位后收入 5 年没跟上，本判断同样失效。复盘时间点定在 2028 年底。</p>
+<p style="margin:0 0 14px;line-height:1.8;">如果收入提前兑现，说明扩散比我想象的快，空窗期假设要修正。如果收入迟迟不到，说明瓶颈比我想象的深，终点论本身要打折。</p>
+<p style="margin:0 0 14px;line-height:1.8;"><span style="font-weight:700;color:#1a1a1a;">给读者的四条行动清单，每条都标了代价。</span>如果你是 AI 应用创业者，别再按模型每月变强做 roadmap，按企业扩散 12 到 24 个月做。否则你会为用不上的能力提前付费，代价是烧掉本该用来获客的钱。</p>
+<p style="margin:0 0 14px;line-height:1.8;">如果你在大公司负责 AI 选型，记住 50 比 50 和 50% 毛利率这两组数。供应商的报价里，训练成本占比决定了他还能降价多少。不懂这组数，你在谈判桌上就是裸奔。</p>
+<p style="margin:0 0 14px;line-height:1.8;">如果你看 AI 投资，别再盯模型跑分，盯需求预测差。盈利的实验室是低估了需求，亏损的是高估了。财报季看谁在扩算力、谁在收缩，比看跑分管用。</p>
+<p style="margin:0 0 14px;line-height:1.8;">如果你只是好奇，记住一句话，指数曲线会走完，但账要天天算。</p>
+<p style="margin:0 0 14px;line-height:1.8;">你的公司是不是也在纠结，要不要给全员买 AI 工具，买了又怕大家不用。Amodei 在播客里说，大企业走流程就是慢，连他自己都急。这不是你的问题，是扩散曲线的常态。</p>
+<p style="margin:0 0 14px;line-height:1.8;">这期播客的副标题就叫，这就是我发出紧急讯息的原因。指数曲线快走完了，大多数人还在聊旧话题。曲终之前，先把账算清楚。</p>
+
+<section style="margin-top:36px;padding-top:20px;border-top:1px solid #ececec;line-height:1.8;">
+<p style="margin:0 0 14px;line-height:1.8;">转给那个还在按模型每月翻倍做明年预算的朋友，顺手问他一句，如果 2027 年的收入差 2000 亿，你的算力单还敢下吗。建议收藏，下次看到某实验室又融了几百亿的新闻，对照 Amodei 的破产算术看一眼，再决定要不要激动。</p>
+<p style="margin:0 0 14px;line-height:1.8;">二选一，你觉得先到的是天才之国，还是需求跟不上。评论区留 A 或 B，附一句理由。</p>
+<p style="margin:0 0 14px;line-height:1.8;">每天一个 AI 产业判断，关注犀牛伯爵。</p>
+<p style="margin:0 0 14px;line-height:1.8;">更多 AI 产业深度观察，访问 犀牛伯爵 rhinocount.cn。</p>
+<p style="margin:0 0 14px;line-height:1.8;">指数曲线会走完，账要天天算。我们下篇见。</p>
+<p style="margin:0 0 14px;line-height:1.8;">记住 Amodei 的算法，能力是指数，扩散是线性，破产只差一年。</p>
+<p style="margin:0;line-height:1.8;">曲终之前，先把账算清楚，这就是这期播客的全部，也是下一期的起点。</p>
+</section>
+
+<section style="margin-top:40px;padding-top:20px;border-top:1px solid #ececec;font-size:13px;color:#888888;line-height:1.8;">
+<p style="margin:0 0 8px;line-height:1.8;">出处声明，本文转译自 Dwarkesh Podcast 2026年2月13日播出的 Dario Amodei 访谈实录，dwarkesh.com/p/dario-amodei-2，第一人称重构保留讲者原意，未经讲者审定。对立面信源出处见文中标注。</p>
+<p style="margin:0;line-height:1.8;">如需引用，请注明出处，犀牛伯爵 rhinocount.cn</p>
+</section>
+</section>
+</body>
+</html>
