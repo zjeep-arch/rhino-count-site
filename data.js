@@ -127,6 +127,12 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "2.5亿美元买单，2026年AI翻车的三个账本",
+        desc: "苹果为没交货的 Siri 赔出 2.5 亿美元，Sora 六个月收入不够付一天账单。判断：2026 年 AI 竞争已从能不能做出来变成算不算得过账。",
+        href: "notes/2026-09-29-ai-failures-2026.html"
+      },
+      {
+        type: "Essay",
         title: "两年过去，被 AI 替代的不是你，是应届生",
         desc: "2024 年“死亡名单”两年复盘：斯坦福 ADP 数据显示 22-25 岁高暴露岗位就业缺口从 13% 扩大到 19%。判断：AI 拿走的是年轻人的入场券。",
         href: "notes/2026-09-29-ai-jobs.html"
@@ -521,6 +527,14 @@ window.SITE_DATA = {
         img: "assets/note-05.svg",
         href: "notes/why-rhino-count.html"
       },
+      {
+        cat: "观察", num: "N° 122",
+        title: "2.5亿美元买单，2026年AI翻车的三个账本",
+        excerpt: "苹果为没交货的 Siri 赔出 2.5 亿美元，Sora 六个月收入不够付一天账单。判断：2026 年 AI 竞争已从能不能做出来变成算不算得过账。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-09-29-ai-failures-2026.html"
+      },
+
       {
         cat: "观察", num: "N° 121",
         title: "两年过去，被 AI 替代的不是你，是应届生",
