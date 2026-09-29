@@ -127,6 +127,12 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "AI出海，短剧数钱大模型烧钱",
+        desc: "MiniMax 海外收入占 73% 却年亏 18.7 亿美元，真正盈利的是短剧 ReelShort。判断：中国 AI 出海真正赚到钱的不是模型，是把模型藏起来的内容。",
+        href: "notes/2026-09-29-china-ai-overseas.html"
+      },
+      {
+        type: "Essay",
         title: "闭源拿走万亿估值，开源大模型拿走30亿下载",
         desc: "Anthropic 以 9650 亿美元估值创史上最大私募融资，阿里 Qwen 在 HF 下载量破 30 亿次。五年账本：开源没打赢闭源，但把闭源赢的每一分钱都变贵了。",
         href: "notes/2026-09-29-china-us-open-closed.html"
@@ -509,6 +515,14 @@ window.SITE_DATA = {
         img: "assets/note-05.svg",
         href: "notes/why-rhino-count.html"
       },
+      {
+        cat: "观察", num: "N° 120",
+        title: "AI出海，短剧数钱大模型烧钱",
+        excerpt: "MiniMax 海外收入占 73% 却年亏 18.7 亿美元，真正盈利的是短剧 ReelShort。判断：中国 AI 出海真正赚到钱的不是模型，是把模型藏起来的内容。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-09-29-china-ai-overseas.html"
+      },
+
       {
         cat: "观察", num: "N° 119",
         title: "闭源拿走万亿估值，开源大模型拿走30亿下载",
