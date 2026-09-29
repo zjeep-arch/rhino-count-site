@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>英伟达，2016 年靠游戏赚钱，十年后靠"铲子"收租</title>
+  <meta name="keywords" content="英伟达, 黄仁勋, CUDA, AI 芯片, 数据中心收入">
+  <meta name="description" content="复盘英伟达 2016-2026 十年，从游戏显卡公司到 AI 算力军火商。CUDA 护城河、A100/H100、数据中心收入反超游戏、Blackwell，以及黄仁勋真正的产品。">
+</head>
+<body style="margin:0;padding:0;font-family:'Noto Sans SC','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;font-size:16px;line-height:1.8;color:#333333;-webkit-font-smoothing:antialiased;">
+  <section style="max-width:680px;margin:0 auto;padding:32px 20px;">
+    <p style="font-size:12px;letter-spacing:0.28em;color:#888888;text-align:center;margin:0 0 18px;line-height:1.6;">N°118 · 犀牛伯爵 · AI 热点深观察</p>
+    <h1 style="font-family:'Noto Serif SC','Songti SC',serif;font-size:24px;font-weight:700;color:#222222;line-height:1.45;margin:0 0 14px;text-align:left;">英伟达，2016 年靠游戏赚钱，十年后靠"铲子"收租</h1>
+    <p style="font-size:13px;color:#888888;margin:0 0 14px;line-height:1.6;text-align:left;">2026 年 9 月 · 约 2900 字 · 整理自英伟达财报与公开报道</p>
+    <p style="font-size:14px;color:#555555;margin:0 0 8px;padding-bottom:16px;border-bottom:1px solid #e5e5e5;line-height:1.8;text-align:left;">整理｜犀牛伯爵｜十年财报、一代产品、一个人物，复盘英伟达如何从游戏公司变成 AI 军火商</p>
+
+    <section style="border:1px solid #ececec;border-left:4px solid #1e3a5f;padding:20px;margin:24px 0;">
+      <span style="display:inline-block;font-size:12px;color:#8b2635;border:1px solid #8b2635;padding:2px 10px;letter-spacing:2px;margin-bottom:12px;line-height:1.8;">核心判断</span>
+      <p style="margin:0 0 10px;font-size:16px;line-height:1.8;color:#333333;font-weight:700;">英伟达赢的不是芯片，是让全世界只会用 CUDA 写代码。</p>
+      <p style="margin:0 0 10px;font-size:15px;line-height:1.8;color:#555555;">从 2016 年数据中心收入只占 6.8%，到 2026 年一个季度进账 962 亿美元，这十年英伟达做对了三件事，提前二十年布下的 CUDA 生态，卡准每一次算力拐点，以及一个从不换赛道的 CEO。</p>
+      <p style="margin:0 0 10px;font-size:15px;line-height:1.8;color:#555555;">黄仁勋、迈克尔·伯里、萨姆·奥特曼先后出场，泡沫质疑与财报数字正面相撞。</p>
+      <p style="margin:0;font-size:15px;line-height:1.8;color:#555555;">文末有一个可验证的核心判断，附证伪条件，复盘时间定在 2027 年 Q1 财报季。</p>
+    </section>
+
+    <section style="border:1px solid #ececec;padding:20px 24px;margin:24px 0;">
+      <p style="font-weight:700;margin:0 0 10px;font-size:15px;line-height:1.8;color:#333333;text-align:left;">目录</p>
+      <p style="margin:5px 0;font-size:14px;color:#555555;line-height:1.8;text-align:left;">一、2016 年，英伟达还是一家游戏公司</p>
+      <p style="margin:5px 0;font-size:14px;color:#555555;line-height:1.8;text-align:left;">二、护城河 2006 年就挖好了，只是当时没人看</p>
+      <p style="margin:5px 0;font-size:14px;color:#555555;line-height:1.8;text-align:left;">三、2018 年，加密矿难差点要了它的命</p>
+      <p style="margin:5px 0;font-size:14px;color:#555555;line-height:1.8;text-align:left;">四、2020 年，A100 把"算力"变成了"权力"</p>
+      <p style="margin:5px 0;font-size:14px;color:#555555;line-height:1.8;text-align:left;">五、2022 到 2024，英伟达把显卡卖成了印钞机</p>
+      <p style="margin:5px 0;font-size:14px;color:#555555;line-height:1.8;text-align:left;">六、黄仁勋真正的产品，从来不是显卡</p>
+      <p style="margin:5px 0;font-size:14px;color:#555555;line-height:1.8;text-align:left;">七、军火商开始给客户递钱，这是最值得警惕的一节</p>
+      <p style="margin:5px 0;font-size:14px;color:#555555;line-height:1.8;text-align:left;">八、核心判断，英伟达赢的不是芯片</p>
+    </section>
+
+    <p style="margin:0 0 20px;line-height:1.8;text-align:left;"><span style="float:left;font-family:'宋体',serif;font-size:54px;line-height:1;padding:4px 8px 0 0;color:#1e3a5f;">那</span>是 2016 年 8 月的一个下午，黄仁勋开车来到旧金山，把一台有他亲笔签名的机器搬进了 OpenAI 的办公室。机箱上写着，"To Elon and the OpenAI team! To the future of computing and humanity."，译成中文是，致埃隆和 OpenAI 团队，致计算与人类的未来。</p>
+    <p style="margin:0 0 20px;line-height:1.8;text-align:left;">这台机器叫 DGX-1，售价 12.9 万美元，里面装着 8 块 Tesla P100，是当时全世界第一台为深度学习设计的"AI 超级计算机"。在场的人可能没有意识到，他们见证的是一家游戏显卡公司转身的起点。</p>
+    <p style="margin:0 0 20px;line-height:1.8;text-align:left;">当时的英伟达，财报上还是一家纯粹的游戏公司。截至 2016 年 1 月的财年，总收入 50.1 亿美元，其中游戏业务 28.2 亿，数据中心只有 3.39 亿，占比 6.8%。公司市值约 200 亿美元，据市场数据。</p>
+    <p style="margin:0 0 20px;line-height:1.8;text-align:left;">2016 年 5 月发布的 GTX 1080，国行首发四五千块，不少年轻人省吃俭用也要买一块。没人能想到，十年后，这家公司一个季度的收入就达 962 亿美元，成了人类历史上第一家市值突破 4 万亿美元的公司。</p>
+    <p style="margin:0 0 20px;line-height:1.8;text-align:left;">这十年到底发生了什么？是芯片越来越强吗？是，但不只如此。说实话，芯片每代都在变强，可英伟达真正的杀招，早在 2006 年就埋好了。那一年发生的事，当时很少有人在意。</p>
+
+    <h2 style="font-family:'Noto Serif SC','Songti SC',serif;font-size:20px;font-weight:600;color:#222222;margin:40px 0 16px;padding-bottom:8px;border-bottom:1px solid #e5e5e5;line-height:1.6;text-align:left;">一、2016 年，英伟达还是一家游戏公司</h2>
+    <p style="margin:0 0 20px;line-height:1.8;text-align:left;">2016 年 4 月的 GTC 大会上，黄仁勋发布了 Tesla P100 和 DGX-1。这是英伟达第一款从零开始为深度学习设计的芯片，也是它第一次把"AI 超级计算机"做成开箱即用的产品。黄仁勋后来回忆，DGX-1 刚发布时，几乎没有客户下单，除了马斯克。于是他亲自开车，把第一台机器送到了旧金山。</p>
+    <p style="margin:0 0 20px;line-height:1.8;text-align:left;">这个细节很说明问题。2016 年的英伟达，数据中心业务刚起步，DGX-1 的销量只是个零头。公司的基本盘是游戏，玩家买单，矿工还没进场。黄仁勋却已经认定，加速计算是未来的计算形态。他在财报电话会上反复讲，深度学习对算力的需求是指数级的。这在当时听起来像推销，如今回看，是整整提前了六年的预判。</p>
+
+    <h2 style="font-family:'Noto Serif SC','Songti SC',serif;font-size:20px;font-weight:600;color:#222222;margin:40px 0 16px;padding-bottom:8px;border-bottom:1px solid #e5e5e5;line-height:1.6;text-align:left;">二、护城河 2006 年就挖好了，只是当时没人看</h2>
+    <p style="margin:0 0 20px;line-height:1.8;text-align:left;">2006 年 11 月，英伟达发布了 CUDA，业界第一个用 C 语言给 GPU 编程的开发环境。2007 年 2 月，CUDA 的软件开发包开始公开测试。当时的华尔街没人关心这个，游戏显卡卖得好好的，为什么要教一帮科学家写代码？</p>
+    <p style="margin:0 0 20px;line-height:1.8;text-align:left;">答案在 2012 年揭晓。那一年，AlexNet 用两块 GTX 580 拿下 ImageNet 图像识别大赛，深度学习一夜爆发。而全世界做深度学习的人发现，能用的顺手的并行计算工具，只有 CUDA。从 2006 年到 2016 年，CUDA 做了十年几乎不赚钱的基础设施，却买到了整个 AI 时代最重要的东西，开发者的习惯。</p>
+    <p style="margin:0 0 20px;line-height:1.8;text-align:left;"><span style="color:#8b2635;font-weight:700;">CUDA 发布后的头十年几乎没赚到什么钱，但它替英伟达锁定了未来二十年 AI 算力的人才供给。</span>框架、教程、论文代码，全都长在 CUDA 上面。竞争对手后来也能做出算力相当的芯片，却发现工程师们只会用 CUDA 写代码。这就是护城河最坚硬的形态，不是技术，是习惯。</p>
+
+    <h2 style="font-family:'Noto Serif SC','Songti SC',serif;font-size:20px;font-weight:600;color:#222222;margin:40px 0 16px;padding-bottom:8px;border-bottom:1px solid #e5e5e5;line-height:1.6;text-align:left;">三、2018 年，加密矿难差点要了它的命</h2>
+    <p style="margin:0 0 20px;line-height:1.8;text-align:left;">转折之前，先是一场差点致命的危机。2018 年，加密货币矿难，之前被矿工抢光的游戏显卡，大量回流到渠道，库存积压。2019 年初，英伟达交出一份远低预期的财报，股价在两个月里跌去近一半，据市场数据。黄仁勋把这段经历叫做"加密宿醉"。</p>
+    <p style="margin:0 0 20px;line-height:1.8;text-align:left;">一家靠游戏吃饭的公司，凭什么敢把未来押在当时还不赚钱的数据中心上？事后看，恰恰是这场矿难，让英伟达彻底想明白一件事，游戏和挖矿的需求都是周期性的，只有数据中心的算力需求是结构性向上的。从 2019 年起，英伟达的研发和产能，开始毫不犹豫地向数据中心倾斜。</p>
+
+    <h2 style="font-family:'Noto Serif SC','Songti SC',serif;font-size:20px;font-weight:600;color:#222222;margin:40px 0 16px;padding-bottom:8px;border-bottom:1px solid #e5e5e5;line-height:1.6;text-align:left;">四、2020 年，A100 把"算力"变成了"权力"</h2>
+    <p style="margin:0 0 20px;line-height:1.8;text-align:left;">2020 年 5 月，疫情中的 GTC 改到线上，黄仁勋在自家厨房发布了 A100。这是第一款为 AI 训练和推理同时设计的通用加速卡。三个月后，英伟达发布季度财报，数据中心收入 17.5 亿美元，第一次超过游戏的 16.5 亿美元。财报的主角，从这一季开始换人了。</p>
+    <p style="margin:0 0 20px;line-height:1.8;text-align:left;"><span style="color:#8b2635;font-weight:700;">从 2020 年三季度起，游戏负责情怀，数据中心负责赚钱，英伟达的估值逻辑彻底变了。</span>疫情加速了云计算，大模型开始吞噬算力，A100 成了全世界 AI 实验室的硬通货。黄仁勋 2026 年还在社交媒体上感慨，A100 从 2020 年服役，一路要干到 2029 年。一块芯片的服役期拉到九年，在半导体史上是罕见的事。</p>
+
+    <h2 style="font-family:'Noto Serif SC','Songti SC',serif;font-size:20px;font-weight:600;color:#222222;margin:40px 0 16px;padding-bottom:8px;border-bottom:1px solid #e5e5e5;line-height:1.6;text-align:left;">五、2022 到 2024，英伟达把显卡卖成了印钞机</h2>
+    <p style="margin:0 0 20px;line-height:1.8;text-align:left;">2022 年 3 月，H100 在 GTC 上发布。2022 年 11 月，ChatGPT 引爆全球，算力需求一夜失控。2023 年 2 月公布的 2023 财年财报里，数据中心收入 150.1 亿美元，游戏 90.7 亿美元，全年口径第一次反超。2023 年 5 月，英伟达市值突破 1 万亿美元。</p>
+    <p style="margin:0 0 20px;line-height:1.8;text-align:left;">接下来的节奏快得离谱。2024 年 3 月，Blackwell 平台发布。2024 年 5 月的财报电话会上，黄仁勋说，"The next industrial revolution has begun."，下一个工业革命已经开始，各个国家和公司正在和英伟达合作，把万亿美元级别的传统数据中心转向加速计算。</p>
+    <p style="margin:0 0 20px;line-height:1.8;text-align:left;">2024 年 6 月，市值突破 3 万亿美元。同一个月，黄仁勋在台北电脑展上公布了下一代 Rubin 平台的路线图。</p>
+    <p style="margin:0 0 20px;line-height:1.8;text-align:left;"><span style="color:#8b2635;font-weight:700;">当全世界都在抢卡的时候，英伟达卖的不再是芯片，是"AI 工厂"的入场券。</span>财报数字是最诚实的，2025 财年总收入 1305 亿美元，同比涨 114%，数据中心 1152 亿美元，涨 142%，净利润 729 亿美元，毛利率维持在 75% 左右。一家硬件公司，卖出了软件公司的毛利率。</p>
+
+    <section style="margin:28px 0;">
+      <p style="font-size:12px;color:#8b2635;letter-spacing:2px;margin:0 0 6px;line-height:1.6;text-align:left;">对照</p>
+      <table style="width:100%;border-collapse:collapse;font-size:14px;line-height:1.8;">
+        <tr>
+          <td style="padding:10px 12px;color:#888888;font-size:12px;border-bottom:2px solid #222222;text-align:left;"></td>
+          <td style="padding:10px 12px;color:#333333;font-weight:600;border-bottom:2px solid #222222;text-align:left;">2016 年</td>
+          <td style="padding:10px 12px;color:#1e3a5f;font-weight:700;border-bottom:2px solid #222222;text-align:left;">2026 年</td>
+        </tr>
+        <tr>
+          <td style="padding:10px 12px;color:#888888;font-size:12px;border-bottom:1px solid #ececec;text-align:left;">主业</td>
+          <td style="padding:10px 12px;color:#555555;border-bottom:1px solid #ececec;text-align:left;">游戏显卡</td>
+          <td style="padding:10px 12px;color:#333333;border-bottom:1px solid #ececec;text-align:left;">AI 算力基础设施</td>
+        </tr>
+        <tr>
+          <td style="padding:10px 12px;color:#888888;font-size:12px;border-bottom:1px solid #ececec;text-align:left;">数据中心收入占比</td>
+          <td style="padding:10px 12px;color:#555555;border-bottom:1px solid #ececec;text-align:left;">6.8%</td>
+          <td style="padding:10px 12px;color:#333333;border-bottom:1px solid #ececec;text-align:left;">92.5%</td>
+        </tr>
+        <tr>
+          <td style="padding:10px 12px;color:#888888;font-size:12px;border-bottom:1px solid #ececec;text-align:left;">年收入</td>
+          <td style="padding:10px 12px;color:#555555;border-bottom:1px solid #ececec;text-align:left;">50.1 亿美元</td>
+          <td style="padding:10px 12px;color:#333333;border-bottom:1px solid #ececec;text-align:left;">2159 亿美元</td>
+        </tr>
+        <tr>
+          <td style="padding:10px 12px;color:#888888;font-size:12px;border-bottom:1px solid #ececec;text-align:left;">市值</td>
+          <td style="padding:10px 12px;color:#555555;border-bottom:1px solid #ececec;text-align:left;">约 200 亿美元</td>
+          <td style="padding:10px 12px;color:#333333;border-bottom:1px solid #ececec;text-align:left;">首破 4 万亿美元</td>
+        </tr>
+        <tr>
+          <td style="padding:10px 12px;color:#888888;font-size:12px;border-bottom:2px solid #222222;text-align:left;">代表产品</td>
+          <td style="padding:10px 12px;color:#555555;border-bottom:2px solid #222222;text-align:left;">GTX 1080，DGX-1</td>
+          <td style="padding:10px 12px;color:#333333;border-bottom:2px solid #222222;text-align:left;">Vera Rubin</td>
+        </tr>
+      </table>
+    </section>
+
+    <h2 style="font-family:'Noto Serif SC','Songti SC',serif;font-size:20px;font-weight:600;color:#222222;margin:40px 0 16px;padding-bottom:8px;border-bottom:1px solid #e5e5e5;line-height:1.6;text-align:left;">六、黄仁勋真正的产品，从来不是显卡</h2>
+    <p style="margin:0 0 20px;line-height:1.8;text-align:left;">黄仁勋，英伟达联合创始人兼 CEO，1993 年创立公司，掌舵超过 30 年。他的动机从第一天就很清楚，1993 年创立时赌的是"3D 图形是未来"，2006 年推出 CUDA 时赌的是"并行计算是未来"，2016 年押注数据中心时赌的是"加速计算是未来"。三次大赌，他赌的从来不是一款产品，是一种计算范式的转移。</p>
+    <p style="margin:0 0 20px;line-height:1.8;text-align:left;">他的立场在 2026 年 8 月的财报电话会上说得最直白，AI 已经到达拐点，token 开始产生利润，现在，算力就是收入。这句话值得琢磨，卖芯片是一锤子买卖，卖"能持续产生收入的算力"，才是他想要的生意。</p>
+
+    <section style="margin:28px 0;padding:6px 0 6px 20px;border-left:3px solid #1e3a5f;">
+      <p style="margin:0 0 6px;line-height:1;"><span style="font-size:42px;color:#1e3a5f;line-height:1;">"</span></p>
+      <p style="margin:0 0 10px;font-family:'宋体',serif;font-size:21px;line-height:1.7;color:#333333;text-align:left;">AI has reached its inflection point. It's doing useful work. Its tokens are productive and profitable. Now, compute is revenue.</p>
+      <p style="margin:0 0 10px;font-size:16px;line-height:1.8;color:#555555;text-align:left;">AI 已经到达拐点。它在做有用的工作，token 开始变得 productive 且 profitable。现在，算力就是收入。</p>
+      <p style="margin:0;font-size:12px;color:#888888;line-height:1.6;text-align:left;">黄仁勋，2026 年 8 月 26 日财报电话会</p>
+    </section>
+
+    <p style="margin:0 0 20px;line-height:1.8;text-align:left;"><span style="color:#8b2635;font-weight:700;">他的产品从来不是显卡，是"算力即收入"这套叙事，而全世界都买了单。</span>云厂商、大模型公司、主权基金，排着队跟他签长期协议。</p>
+    <p style="margin:0 0 20px;line-height:1.8;text-align:left;">2026 年 8 月公布的季度财报，收入 962 亿美元，同比涨 106%，数据中心 890 亿美元，涨 117%，下个季度的指引直接给到 1080 亿美元。算一笔账，962 亿美元一个季度，平均下来每天进账超过 10 亿美元。</p>
+
+    <h2 style="font-family:'Noto Serif SC','Songti SC',serif;font-size:20px;font-weight:600;color:#222222;margin:40px 0 16px;padding-bottom:8px;border-bottom:1px solid #e5e5e5;line-height:1.6;text-align:left;">七、军火商开始给客户递钱，这是最值得警惕的一节</h2>
+    <p style="margin:0 0 20px;line-height:1.8;text-align:left;">2025 年 9 月，英伟达宣布向英特尔投资 50 亿美元，每股 23.28 美元，拿下超过 2.14 亿股，同时联手开发多代定制化 x86 CPU 和集成 RTX GPU 芯粒的 SoC，用 NVLink 互联。2025 年 12 月，这笔投资获得美国联邦贸易委员会反垄断放行后完成交割，据路透社报道。一个卖铲子的人，开始入股挖矿工具厂。</p>
+    <p style="margin:0 0 20px;line-height:1.8;text-align:left;">这不是孤例。2025 年底英伟达参投英国算力云厂商 Nscale 一案，本号 N°113 已经细拆过，此处不赘述。从参投算力云，到入股英特尔，英伟达这两年在做的事可以概括成一句话，左手卖卡，右手下注，确保买卡的人一直有钱买卡。</p>
+    <p style="margin:0 0 20px;line-height:1.8;text-align:left;">当军火商开始给客户递钱，这门生意还是纯粹的卖方市场吗？坦率地讲，这是全篇最值得警惕的信号。质疑者已经进场了。</p>
+    <p style="margin:0 0 20px;line-height:1.8;text-align:left;">迈克尔·伯里，Scion Asset Management 创始人，电影《大空头》的原型，2025 年 11 月 3 日披露的 13F 文件显示，他持有英伟达看跌期权，名义价值约 1.87 亿美元。此前他在社交媒体上预警，"sometimes, we see bubbles."，有时候，我们能看到泡沫。</p>
+    <p style="margin:0 0 20px;line-height:1.8;text-align:left;">不过要补一句公允的话，期权名义价值不等于真金白银的投入，据测算他实际下注的资金远小于名义值。</p>
+    <p style="margin:0 0 20px;line-height:1.8;text-align:left;">另一个质疑者更有意思，萨姆·奥特曼，OpenAI 首席执行官。2025 年 8 月，他在接受 The Verge 采访时说，"Are we in a phase where investors as a whole are overexcited about AI? My opinion is yes."</p>
+    <p style="margin:0 0 20px;line-height:1.8;text-align:left;">译成中文是，我们是不是处在一个投资者整体对 AI 过度兴奋的阶段，我的看法是肯定的。</p>
+    <p style="margin:0 0 20px;line-height:1.8;text-align:left;">另据报道，MIT 一项研究发现，95% 的企业级生成式 AI 试点没能拿到回报。最大的买家承认市场过热，这话的分量，和空头不一样。</p>
+    <p style="margin:0 0 20px;line-height:1.8;text-align:left;">作者也要主动降温一句。这套叙事最脆弱的一环，恰恰是英伟达自己。它一边卖铲子，一边开始给挖矿的人递钱，这正是"循环融资"质疑的靶心。如果有一天，客户的钱续不上了，第一个被反噬的就是军火商自己。</p>
+
+    <h2 style="font-family:'Noto Serif SC','Songti SC',serif;font-size:20px;font-weight:600;color:#222222;margin:40px 0 16px;padding-bottom:8px;border-bottom:1px solid #e5e5e5;line-height:1.6;text-align:left;">八、核心判断，英伟达赢的不是芯片</h2>
+    <p style="margin:0 0 20px;line-height:1.8;text-align:left;">写了这么多，可以下判断了。</p>
+    <p style="margin:0 0 24px;line-height:1.8;text-align:left;font-size:18px;font-weight:700;color:#1e3a5f;">英伟达这十年的胜利，不是芯片的胜利，是生态的胜利。</p>
+    <p style="margin:0 0 20px;line-height:1.8;text-align:left;"><span style="color:#8b2635;font-weight:700;">第一，</span>财报结构。2016 财年数据中心收入 3.39 亿美元，占 6.8%，2026 年 8 月公布的季度财报，数据中心 890 亿美元，占 92.5%。十年，同一家公司，换了一套赚钱逻辑。</p>
+    <p style="margin:0 0 20px;line-height:1.8;text-align:left;"><span style="color:#8b2635;font-weight:700;">第二，</span>硬件可复制，生态难复制。谷歌的 TPU 只供自家云，AMD 的 ROCm 追了十年仍是配角，据券商测算，英伟达在 AI 加速卡市场的份额超过九成。以上份额为券商测算口径，非官方披露，单独说明，避免误读。</p>
+    <p style="margin:0 0 20px;line-height:1.8;text-align:left;"><span style="color:#8b2635;font-weight:700;">第三，</span>芯片在保值。CoreWeave 首席执行官迈克·英特拉特在财报电话会上披露，到期的 H100 合同以 95% 的原价续租，六年机龄的 A100，二手残值还有约 5000 美元，据 Silicon Data 统计。客户买的不是消耗品，是能持续收租的生产资料。</p>
+    <p style="margin:0 0 20px;line-height:1.8;text-align:left;">再算一笔账，据 2026 年 9 月高盛峰会上黄仁勋引用的第三方数据，H100 出租价每小时 3.28 美元，一年租金约 2.9 万美元，而一块 Blackwell 约 2.5 万美元，出租一年就把卡钱赚了回来。</p>
+    <p style="margin:0 0 20px;line-height:1.8;text-align:left;"><span style="color:#8b2635;font-weight:700;">第四，</span>时间。CUDA 发布于 2006 年 11 月，到 2026 年整整 20 年。框架、教程、论文代码全长在它上面，迁移的成本高到没人愿意做第一个吃螃蟹的人。</p>
+    <p style="margin:0 0 20px;line-height:1.8;text-align:left;">关键在，这个判断是可以被证伪的。如果到 2028 年底，非 CUDA 生态，包括 AMD ROCm、国产加速卡软件栈、对外开放的云厂商自研芯片，在数据中心 AI 加速卡市场合计拿下 15% 以上份额，以 Mercury Research 或 Omdia 口径为准，本判断失效。</p>
+    <p style="margin:0 0 20px;line-height:1.8;text-align:left;">或者，出现头部云厂商把核心训练负载大规模迁出 CUDA 的公开案例，本判断同样失效。</p>
+    <p style="margin:0 0 20px;line-height:1.8;text-align:left;">复盘时间点定在 2027 年 Q1 财报季，到时候看 Rubin 的量产爬坡和数据中心收入占比说话。</p>
+    <p style="margin:0 0 20px;line-height:1.8;text-align:left;">给读者留一个实用的方法。下次看英伟达财报，别只看总收入，看三个数，数据中心收入占比、毛利率、渠道库存水位。占比掉说明基本盘松动，毛利率掉说明定价权松动，库存涨说明需求见顶。三个数，比十篇研报都诚实。</p>
+    <p style="margin:0 0 20px;line-height:1.8;text-align:left;">2016 年那个下午，黄仁勋在 DGX-1 机箱上签下"致计算与人类的未来"。十年后再看，他签的不是一台机器，是一张船票。而这张船票，只有 CUDA 能印。</p>
+
+    <section style="border:1px solid #ececec;border-left:4px solid #1e3a5f;padding:20px;margin:32px 0;">
+      <p style="margin:0 0 12px;font-size:15px;line-height:1.8;color:#333333;text-align:left;">把这篇转给那个还说"英伟达就是卖显卡的"的朋友，第八节的四个证据，够他消化一晚上。</p>
+      <p style="margin:0 0 12px;font-size:15px;line-height:1.8;color:#333333;text-align:left;">建议收藏，下次再有人跟你争论 AI 是不是泡沫，直接翻出第七节和第八节的证伪条件对照。</p>
+      <p style="margin:0 0 12px;font-size:15px;line-height:1.8;color:#333333;text-align:left;">每天一个 AI 产业判断，关注犀牛伯爵。</p>
+      <p style="margin:0 0 12px;font-size:15px;line-height:1.8;color:#333333;text-align:left;">更多 AI 产业深度观察，访问专业网站 犀牛伯爵 rhinocount.cn。</p>
+      <p style="margin:0;font-size:15px;line-height:1.8;color:#333333;text-align:left;">保持观察，我们下期见。</p>
+    </section>
+
+    <section style="margin-top:36px;padding-top:16px;border-top:1px solid #e5e5e5;">
+      <p style="font-size:13px;color:#888888;line-height:1.8;margin:0;text-align:left;">数字来源，英伟达历年财报及季度新闻稿，第三方数据已在文中注明机构或"据测算"。<br>如需引用，请注明出处，犀牛伯爵 rhinocount.cn</p>
+    </section>
+  </section>
+</body>
+</html>

@@ -127,6 +127,12 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "英伟达，2016 年靠游戏赚钱，十年后靠\"铲子\"收租",
+        desc: "复盘英伟达 2016-2026：从游戏显卡公司到 AI 算力军火商。判断：CUDA 把芯片、开发者与客户资本锁成了同一个生态。",
+        href: "notes/2026-09-29-nvidia-decade.html"
+      },
+      {
+        type: "Essay",
         title: "大模型价格战打了一年，降价最狠的没赢",
         desc: "从 DeepSeek 2024 年底掀桌到 2026 年 9 月同日降价，API 价格一年降了十几次。判断：价格战不会结束，只会从明面标价转入暗处成本战。",
         href: "notes/2026-09-29-llm-price-war.html"
@@ -497,6 +503,14 @@ window.SITE_DATA = {
         img: "assets/note-05.svg",
         href: "notes/why-rhino-count.html"
       },
+      {
+        cat: "观察", num: "N° 118",
+        title: "英伟达，2016 年靠游戏赚钱，十年后靠\"铲子\"收租",
+        excerpt: "复盘英伟达 2016-2026：从游戏显卡公司到 AI 算力军火商。判断：CUDA 把芯片、开发者与客户资本锁成了同一个生态。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-09-29-nvidia-decade.html"
+      },
+
       {
         cat: "观察", num: "N° 117",
         title: "大模型价格战打了一年，降价最狠的没赢",
