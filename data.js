@@ -127,6 +127,12 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "警告产品灭绝人类，Anthropic 照常 IPO",
+        desc: "Anthropic IPO 招股书 80 页警告 AI 灭绝风险，业务只写 48 页。三个判断：法律免责优先于营销；10% 灭绝概率无法证伪；安全标签要看行为对照。附证伪条件。",
+        href: "notes/2026-09-29-anthropic-ipo.html"
+      },
+      {
+        type: "Essay",
         title: "有 1030 亿合同，Nscale 却不敢给自己定价",
         desc: "Nscale 募 33.6 亿美元，Nvidia 出 10 亿转无投票权股份。供需闭环、腾讯式生态投资、中美资本化竞赛与中国开源牌，三个判断附 12 个月证伪条件。",
         href: "notes/2026-09-28-nscale-nvidia.html"
@@ -472,6 +478,13 @@ window.SITE_DATA = {
         excerpt: "名字来自两部作品：恋爱的犀牛教我不计成败地热爱，基督山伯爵教我不动声色地等待。2022年底ChatGPT像一头灰犀牛从地平线走来，Count就是把它的轨迹从噪音里算出来——然后与各位同行者一起远征。",
         img: "assets/note-05.svg",
         href: "notes/why-rhino-count.html"
+      },
+      {
+        cat: "观察", num: "N° 114",
+        title: "警告产品灭绝人类，Anthropic 照常 IPO",
+        excerpt: "Anthropic IPO 招股书主体 261 页，80 页警告 AI 带来灾难性或生存性风险，业务介绍只有 48 页。三个判断：80 页首先是法律免责；Hubinger 的 10% 灭绝概率无法证伪；安全标签越牢越要看行为证据。附证伪条件与复盘时间点。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-09-29-anthropic-ipo.html"
       },
       {
         cat: "观察", num: "N° 113",
