@@ -5,8 +5,148 @@
     <link>https://rhinocount.cn/</link>
     <description>AI Native Magazine — 记录 AI 如何改变技术、商业与人的工作方式。</description>
     <language>zh-CN</language>
-    <lastBuildDate>Mon, 28 Sep 2026 09:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 30 Sep 2026 09:00:00 +0800</lastBuildDate>
     <atom:link href="https://rhinocount.cn/rss.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title><![CDATA[AI大模型及安全动态日报 | 2026年09月30日（星期三） · AI日报 · 犀牛伯爵]]></title>
+      <link>https://rhinocount.cn/ai-daily/2026-09-30-ai-daily.html</link>
+      <guid isPermaLink="true">https://rhinocount.cn/ai-daily/2026-09-30-ai-daily.html</guid>
+      <pubDate>Wed, 30 Sep 2026 09:00:00 +0800</pubDate>
+      <description><![CDATA[OpenAI DevDay发布21项更新含GPT-6.1 Sol和Dot智能体、OpenAI因安全评测不达标取消GPT-6.1 Astra发布、华为发布星河AI三层安全围栏、中国生成式AI用户突破7亿、深信服AI原生方案获网安周双料第一、安恒九大智能体矩阵发布、专家呼吁建立动态Agent安全围栏。]]></description>
+    </item>
+    <item>
+      <title><![CDATA[英伟达，2016 年靠游戏赚钱，十年后靠"铲子"收租]]></title>
+      <link>https://rhinocount.cn/notes/2026-09-29-nvidia-decade.html</link>
+      <guid isPermaLink="true">https://rhinocount.cn/notes/2026-09-29-nvidia-decade.html</guid>
+      <pubDate>Tue, 29 Sep 2026 09:00:00 +0800</pubDate>
+      <description><![CDATA[复盘英伟达 2016-2026 十年，从游戏显卡公司到 AI 算力军火商。CUDA 护城河、A100/H100、数据中心收入反超游戏、Blackwell，以及黄仁勋真正的产品。]]></description>
+    </item>
+    <item>
+      <title><![CDATA[英伟达，2016 年靠游戏赚钱，十年后靠"铲子"收租]]></title>
+      <link>https://rhinocount.cn/notes/2026-09-29-nvidia-decade-wechat.html</link>
+      <guid isPermaLink="true">https://rhinocount.cn/notes/2026-09-29-nvidia-decade-wechat.html</guid>
+      <pubDate>Tue, 29 Sep 2026 09:00:00 +0800</pubDate>
+      <description><![CDATA[复盘英伟达 2016-2026 十年，从游戏显卡公司到 AI 算力军火商。CUDA 护城河、A100/H100、数据中心收入反超游戏、Blackwell，以及黄仁勋真正的产品。]]></description>
+    </item>
+    <item>
+      <title><![CDATA[大模型价格战打了一年，降价最狠的没赢｜犀牛伯爵]]></title>
+      <link>https://rhinocount.cn/notes/2026-09-29-llm-price-war.html</link>
+      <guid isPermaLink="true">https://rhinocount.cn/notes/2026-09-29-llm-price-war.html</guid>
+      <pubDate>Tue, 29 Sep 2026 09:00:00 +0800</pubDate>
+      <description><![CDATA[从 DeepSeek 掀桌到 OpenAI、Anthropic 同日降价，大模型 API 价格一年降了十几次。降价最狠的为什么没赢，敢不降价的凭什么活得好，2027 年谷歌还要涨价？一篇复盘价格战的来龙去脉。]]></description>
+    </item>
+    <item>
+      <title><![CDATA[大模型价格战打了一年，降价最狠的没赢｜犀牛伯爵]]></title>
+      <link>https://rhinocount.cn/notes/2026-09-29-llm-price-war-wechat.html</link>
+      <guid isPermaLink="true">https://rhinocount.cn/notes/2026-09-29-llm-price-war-wechat.html</guid>
+      <pubDate>Tue, 29 Sep 2026 09:00:00 +0800</pubDate>
+      <description><![CDATA[从 DeepSeek 掀桌到 OpenAI、Anthropic 同日降价，大模型 API 价格一年降了十几次。降价最狠的为什么没赢，敢不降价的凭什么活得好，2027 年谷歌还要涨价？一篇复盘价格战的来龙去脉。]]></description>
+    </item>
+    <item>
+      <title><![CDATA[闭源拿走万亿估值，开源大模型拿走30亿下载｜犀牛伯爵]]></title>
+      <link>https://rhinocount.cn/notes/2026-09-29-china-us-open-closed.html</link>
+      <guid isPermaLink="true">https://rhinocount.cn/notes/2026-09-29-china-us-open-closed.html</guid>
+      <pubDate>Tue, 29 Sep 2026 09:00:00 +0800</pubDate>
+      <description><![CDATA[2026年5月，Anthropic 以9650亿美元估值创下史上最大私募融资。同一年，阿里 Qwen 在 Hugging Face 的下载量突破30亿次。五年时间，中美两条路线交出两份完全不同的账本。闭源赢了什么，开源赢了什么，各自的代价又是什么。]]></description>
+    </item>
+    <item>
+      <title><![CDATA[闭源拿走万亿估值，开源大模型拿走30亿下载｜犀牛伯爵]]></title>
+      <link>https://rhinocount.cn/notes/2026-09-29-china-us-open-closed-wechat.html</link>
+      <guid isPermaLink="true">https://rhinocount.cn/notes/2026-09-29-china-us-open-closed-wechat.html</guid>
+      <pubDate>Tue, 29 Sep 2026 09:00:00 +0800</pubDate>
+      <description><![CDATA[2026年5月，Anthropic 以9650亿美元估值创下史上最大私募融资。同一年，阿里 Qwen 在 Hugging Face 的下载量突破30亿次。五年时间，中美两条路线交出两份完全不同的账本。闭源赢了什么，开源赢了什么，各自的代价又是什么。]]></description>
+    </item>
+    <item>
+      <title><![CDATA[AI出海，短剧数钱大模型烧钱｜犀牛伯爵]]></title>
+      <link>https://rhinocount.cn/notes/2026-09-29-china-ai-overseas.html</link>
+      <guid isPermaLink="true">https://rhinocount.cn/notes/2026-09-29-china-ai-overseas.html</guid>
+      <pubDate>Tue, 29 Sep 2026 09:00:00 +0800</pubDate>
+      <description><![CDATA[]]></description>
+    </item>
+    <item>
+      <title><![CDATA[AI出海，短剧数钱大模型烧钱｜犀牛伯爵]]></title>
+      <link>https://rhinocount.cn/notes/2026-09-29-china-ai-overseas-wechat.html</link>
+      <guid isPermaLink="true">https://rhinocount.cn/notes/2026-09-29-china-ai-overseas-wechat.html</guid>
+      <pubDate>Tue, 29 Sep 2026 09:00:00 +0800</pubDate>
+      <description><![CDATA[]]></description>
+    </item>
+    <item>
+      <title><![CDATA[警告产品灭绝人类，Anthropic 照常 IPO｜犀牛伯爵]]></title>
+      <link>https://rhinocount.cn/notes/2026-09-29-anthropic-ipo.html</link>
+      <guid isPermaLink="true">https://rhinocount.cn/notes/2026-09-29-anthropic-ipo.html</guid>
+      <pubDate>Tue, 29 Sep 2026 09:00:00 +0800</pubDate>
+      <description><![CDATA[]]></description>
+    </item>
+    <item>
+      <title><![CDATA[警告产品灭绝人类，Anthropic 照常 IPO｜犀牛伯爵]]></title>
+      <link>https://rhinocount.cn/notes/2026-09-29-anthropic-ipo-wechat.html</link>
+      <guid isPermaLink="true">https://rhinocount.cn/notes/2026-09-29-anthropic-ipo-wechat.html</guid>
+      <pubDate>Tue, 29 Sep 2026 09:00:00 +0800</pubDate>
+      <description><![CDATA[]]></description>
+    </item>
+    <item>
+      <title><![CDATA[所有人都在加码算力，Amodei 在算另一笔账｜犀牛伯爵 N°115]]></title>
+      <link>https://rhinocount.cn/notes/2026-09-29-amodei-end-of-exponential.html</link>
+      <guid isPermaLink="true">https://rhinocount.cn/notes/2026-09-29-amodei-end-of-exponential.html</guid>
+      <pubDate>Tue, 29 Sep 2026 09:00:00 +0800</pubDate>
+      <description><![CDATA[Anthropic CEO Dario Amodei 在 2026 年 2 月的 Dwarkesh 播客里说，我们离指数曲线的终点只剩一两年。可年入百亿的 Anthropic，为什么不敢买下 1 万亿的算力？第一人称转译这场对谈，还原他的破产算术、RL 缩放律，以及三位反对者的声音。]]></description>
+    </item>
+    <item>
+      <title><![CDATA[所有人都在加码算力，Amodei 在算另一笔账｜犀牛伯爵 N°115]]></title>
+      <link>https://rhinocount.cn/notes/2026-09-29-amodei-end-of-exponential-wechat.html</link>
+      <guid isPermaLink="true">https://rhinocount.cn/notes/2026-09-29-amodei-end-of-exponential-wechat.html</guid>
+      <pubDate>Tue, 29 Sep 2026 09:00:00 +0800</pubDate>
+      <description><![CDATA[Anthropic CEO Dario Amodei 在 2026 年 2 月的 Dwarkesh 播客里说，我们离指数曲线的终点只剩一两年。可年入百亿的 Anthropic，为什么不敢买下 1 万亿的算力？第一人称转译这场对谈，还原他的破产算术、RL 缩放律，以及三位反对者的声音。]]></description>
+    </item>
+    <item>
+      <title><![CDATA[两年过去，被 AI 替代的不是你，是应届生｜犀牛伯爵]]></title>
+      <link>https://rhinocount.cn/notes/2026-09-29-ai-jobs.html</link>
+      <guid isPermaLink="true">https://rhinocount.cn/notes/2026-09-29-ai-jobs.html</guid>
+      <pubDate>Tue, 29 Sep 2026 09:00:00 +0800</pubDate>
+      <description><![CDATA[]]></description>
+    </item>
+    <item>
+      <title><![CDATA[两年过去，被 AI 替代的不是你，是应届生｜犀牛伯爵]]></title>
+      <link>https://rhinocount.cn/notes/2026-09-29-ai-jobs-wechat.html</link>
+      <guid isPermaLink="true">https://rhinocount.cn/notes/2026-09-29-ai-jobs-wechat.html</guid>
+      <pubDate>Tue, 29 Sep 2026 09:00:00 +0800</pubDate>
+      <description><![CDATA[]]></description>
+    </item>
+    <item>
+      <title><![CDATA[2.5亿美元买单，2026年AI翻车的三个账本]]></title>
+      <link>https://rhinocount.cn/notes/2026-09-29-ai-failures-2026.html</link>
+      <guid isPermaLink="true">https://rhinocount.cn/notes/2026-09-29-ai-failures-2026.html</guid>
+      <pubDate>Tue, 29 Sep 2026 09:00:00 +0800</pubDate>
+      <description><![CDATA[]]></description>
+    </item>
+    <item>
+      <title><![CDATA[2.5亿美元买单，2026年AI翻车的三个账本]]></title>
+      <link>https://rhinocount.cn/notes/2026-09-29-ai-failures-2026-wechat.html</link>
+      <guid isPermaLink="true">https://rhinocount.cn/notes/2026-09-29-ai-failures-2026-wechat.html</guid>
+      <pubDate>Tue, 29 Sep 2026 09:00:00 +0800</pubDate>
+      <description><![CDATA[]]></description>
+    </item>
+    <item>
+      <title><![CDATA[26 亿美元 AI 融资，律师拿走近一半｜犀牛伯爵]]></title>
+      <link>https://rhinocount.cn/notes/2026-09-29-ai-app-funding.html</link>
+      <guid isPermaLink="true">https://rhinocount.cn/notes/2026-09-29-ai-app-funding.html</guid>
+      <pubDate>Tue, 29 Sep 2026 09:00:00 +0800</pubDate>
+      <description><![CDATA[]]></description>
+    </item>
+    <item>
+      <title><![CDATA[26 亿美元 AI 融资，律师拿走近一半｜犀牛伯爵]]></title>
+      <link>https://rhinocount.cn/notes/2026-09-29-ai-app-funding-wechat.html</link>
+      <guid isPermaLink="true">https://rhinocount.cn/notes/2026-09-29-ai-app-funding-wechat.html</guid>
+      <pubDate>Tue, 29 Sep 2026 09:00:00 +0800</pubDate>
+      <description><![CDATA[]]></description>
+    </item>
+    <item>
+      <title><![CDATA[AI大模型及安全动态日报 | 2026年09月29日（星期二） · AI日报 · 犀牛伯爵]]></title>
+      <link>https://rhinocount.cn/ai-daily/2026-09-29-ai-daily.html</link>
+      <guid isPermaLink="true">https://rhinocount.cn/ai-daily/2026-09-29-ai-daily.html</guid>
+      <pubDate>Tue, 29 Sep 2026 09:00:00 +0800</pubDate>
+      <description><![CDATA[AMD 82亿美元收购李飞飞World Labs创世界模型最大交易、OpenAI暂停最新模型训练智能体绕过沙盒、英伟达发布开放智能体安全平台DPU毫秒级隔离、Snorkel AI获3.5亿E轮估值35亿、启明星辰/安恒/绿盟AI安全产品矩阵扩容、信通院生成式AI安全分级指南10月实施。]]></description>
+    </item>
     <item>
       <title><![CDATA[有 1030 亿合同，Nscale 却不敢给自己定价｜犀牛伯爵]]></title>
       <link>https://rhinocount.cn/notes/2026-09-28-nscale-nvidia.html</link>
@@ -76,146 +216,6 @@
       <guid isPermaLink="true">https://rhinocount.cn/notes/2026-09-24-liu-yong-ai-chuangye-diyixing.html</guid>
       <pubDate>Thu, 24 Sep 2026 09:00:00 +0800</pubDate>
       <description><![CDATA[2026年9月23日晚，刘勇在北大《AI创业与投资》第三课：AI创业的第一性框架。第一人称转译：AI创业，先学会算账，再谈理想。含50步成功率数学、87天窗口、FDE、14个现场问答，及Cursor、Manus、Scale AI、Ray-Ban Meta商业案例参考。]]></description>
-    </item>
-    <item>
-      <title><![CDATA[查药的智能体，往澳大利亚政府服务器写了文件｜犀牛伯爵]]></title>
-      <link>https://rhinocount.cn/notes/2026-09-24-chayao-ai-chuangru-yibao.html</link>
-      <guid isPermaLink="true">https://rhinocount.cn/notes/2026-09-24-chayao-ai-chuangru-yibao.html</guid>
-      <pubDate>Thu, 24 Sep 2026 09:00:00 +0800</pubDate>
-      <description><![CDATA[]]></description>
-    </item>
-    <item>
-      <title><![CDATA[查药的智能体，往澳大利亚政府服务器写了文件（公众号粘贴版）｜犀牛伯爵]]></title>
-      <link>https://rhinocount.cn/notes/2026-09-24-chayao-ai-chuangru-yibao-wechat.html</link>
-      <guid isPermaLink="true">https://rhinocount.cn/notes/2026-09-24-chayao-ai-chuangru-yibao-wechat.html</guid>
-      <pubDate>Thu, 24 Sep 2026 09:00:00 +0800</pubDate>
-      <description><![CDATA[]]></description>
-    </item>
-    <item>
-      <title><![CDATA[AI大模型及安全动态日报 | 2026年09月24日（星期四） · AI日报 · 犀牛伯爵]]></title>
-      <link>https://rhinocount.cn/ai-daily/2026-09-24-ai-daily.html</link>
-      <guid isPermaLink="true">https://rhinocount.cn/ai-daily/2026-09-24-ai-daily.html</guid>
-      <pubDate>Thu, 24 Sep 2026 09:00:00 +0800</pubDate>
-      <description><![CDATA[OpenAI发布GPT-6 Sol/Luna API价格降50%、阿里发布真武V900 AI芯片算力三倍、网易易盾拿下信通院活体检测卓越级首证、启明星辰发布大模型安全新三件套、安恒恒脑AI代码审计智能体上线三月挖百个0day、Mercor获3.5亿数据标注融资、欧盟发布AI网络安全行动计划。]]></description>
-    </item>
-    <item>
-      <title><![CDATA[美国大厂开打价格战，导火索在中国｜犀牛伯爵]]></title>
-      <link>https://rhinocount.cn/notes/2026-09-23-大模型价格战.html</link>
-      <guid isPermaLink="true">https://rhinocount.cn/notes/2026-09-23-大模型价格战.html</guid>
-      <pubDate>Wed, 23 Sep 2026 09:00:00 +0800</pubDate>
-      <description><![CDATA[9月23日凌晨，OpenAI和Anthropic在同一天发布降价新模型，API最高直降50%。一年前还在卖天价的美国大模型，为什么突然打折？三层证据讲清价格战真相，以及开发者现在该怎么选模型。]]></description>
-    </item>
-    <item>
-      <title><![CDATA[6天烧掉2000万，小米直播炼大模型 | 犀牛伯爵]]></title>
-      <link>https://rhinocount.cn/notes/2026-09-23-mimo-v26.html</link>
-      <guid isPermaLink="true">https://rhinocount.cn/notes/2026-09-23-mimo-v26.html</guid>
-      <pubDate>Wed, 23 Sep 2026 09:00:00 +0800</pubDate>
-      <description><![CDATA[9月22日小米发布并开源MiMo-V2.6，AA指数46分登顶开源第一，价格却是海外模型的1/60。6天347万美元的RL训练全程直播，连失败都公开。开源榜首正在从技术荣誉变成获客工具。]]></description>
-    </item>
-    <item>
-      <title><![CDATA[Amodei长文：AI必须减速，三巨头罕见同调 · 犀牛伯爵笔记]]></title>
-      <link>https://rhinocount.cn/notes/2026-09-23-amodei-pace-the-frontier.html</link>
-      <guid isPermaLink="true">https://rhinocount.cn/notes/2026-09-23-amodei-pace-the-frontier.html</guid>
-      <pubDate>Wed, 23 Sep 2026 09:00:00 +0800</pubDate>
-      <description><![CDATA[Dario Amodei 2026年9月12日长文《We Must Pace the Frontier》全文编译：三步减速计划、递归自改进、OpenAI-Hugging Face智能体群事件，以及Musk、Altman、Hassabis的回应与反对者声音。]]></description>
-    </item>
-    <item>
-      <title><![CDATA[AI大模型及安全动态日报 | 2026年09月23日（星期三） · AI日报 · 犀牛伯爵]]></title>
-      <link>https://rhinocount.cn/ai-daily/2026-09-23-ai-daily.html</link>
-      <guid isPermaLink="true">https://rhinocount.cn/ai-daily/2026-09-23-ai-daily.html</guid>
-      <pubDate>Wed, 23 Sep 2026 09:00:00 +0800</pubDate>
-      <description><![CDATA[OpenAI与Anthropic同日发布新模型价格战开打、阿里发布真武V900 AI芯片性能三倍、绿盟入选Gartner AI应用安全象限国内唯一、奇安信全球发布Qcode Agents、Deccan AI获2500万数据标注融资、欧盟发布AI网络安全行动计划。]]></description>
-    </item>
-    <item>
-      <title><![CDATA[阿里AI自己训练自己，33轮迭代没有一个人参与 | 犀牛伯爵]]></title>
-      <link>https://rhinocount.cn/notes/2026-09-22-qwen-self-training.html</link>
-      <guid isPermaLink="true">https://rhinocount.cn/notes/2026-09-22-qwen-self-training.html</guid>
-      <pubDate>Tue, 22 Sep 2026 09:00:00 +0800</pubDate>
-      <description><![CDATA[2026云栖大会，阿里Qwen团队公布RSI递归式自我改进进展，AI零人类参与完成33轮迭代。吴泳铭说，未来机器思考总量将达到人类1000倍。人要干什么？]]></description>
-    </item>
-    <item>
-      <title><![CDATA[AI大模型及安全动态日报 | 2026年09月22日（星期二） · AI日报 · 犀牛伯爵]]></title>
-      <link>https://rhinocount.cn/ai-daily/2026-09-22-ai-daily.html</link>
-      <guid isPermaLink="true">https://rhinocount.cn/ai-daily/2026-09-22-ai-daily.html</guid>
-      <pubDate>Tue, 22 Sep 2026 09:00:00 +0800</pubDate>
-      <description><![CDATA[小米开源MiMo-V2.6探索RSI路径、Meta Muse登顶美国应用商店、GPT-6 Sol曝光、GPT-6 Astra安全测评97%危险行为率、三家AI安全公司合计融资超2.28亿美元、韩国制定Agentic AI安全规则。]]></description>
-    </item>
-    <item>
-      <title><![CDATA[AI编程选哪个，Claude在合Kimi在拆 | 犀牛伯爵]]></title>
-      <link>https://rhinocount.cn/notes/2026-09-21-kimi-code-desktop.html</link>
-      <guid isPermaLink="true">https://rhinocount.cn/notes/2026-09-21-kimi-code-desktop.html</guid>
-      <pubDate>Mon, 21 Sep 2026 09:00:00 +0800</pubDate>
-      <description><![CDATA[9月21日月之暗面发布Kimi Code Desktop桌面客户端。同期Claude在合并Chat和Cowork，OpenAI把Codex并入ChatGPT。一边在做加法，一边在做减法，AI编程工具到底怎么选。]]></description>
-    </item>
-    <item>
-      <title><![CDATA[AI大模型及安全动态日报 | 2026年09月21日（星期一） · AI日报 · 犀牛伯爵]]></title>
-      <link>https://rhinocount.cn/ai-daily/2026-09-21-ai-daily.html</link>
-      <guid isPermaLink="true">https://rhinocount.cn/ai-daily/2026-09-21-ai-daily.html</guid>
-      <pubDate>Mon, 21 Sep 2026 09:00:00 +0800</pubDate>
-      <description><![CDATA[阶跃星辰发布Step 5 Preview旗舰模型开源前三，行云集成完成近8亿融资宁德时代领投，Arcjet/CrowdStrike/F5/阿里云密集推出AI安全围栏产品，AI Agent运行时防护成行业新焦点，奇安信/启明星辰/安恒/绿盟AI安全产品矩阵持续扩容，CNNVD发布第二期漏洞奖励结果。]]></description>
-    </item>
-    <item>
-      <title><![CDATA[24小时不休息，阶跃开源模型跑赢了Claude | 犀牛伯爵]]></title>
-      <link>https://rhinocount.cn/notes/2026-09-20-step5-preview.html</link>
-      <guid isPermaLink="true">https://rhinocount.cn/notes/2026-09-20-step5-preview.html</guid>
-      <pubDate>Sun, 20 Sep 2026 09:00:00 +0800</pubDate>
-      <description><![CDATA[阶跃星辰发布Step 5 Preview，AA指数44分全球开源前三，成本仅Claude Opus 5的1/8，10月15日开源权重。国产开源模型正在改写AI性价比规则。]]></description>
-    </item>
-    <item>
-      <title><![CDATA[2万块把人形机器人抱回家，这次不是期货 | 犀牛伯爵]]></title>
-      <link>https://rhinocount.cn/notes/2026-09-20-qi-yuan-robot.html</link>
-      <guid isPermaLink="true">https://rhinocount.cn/notes/2026-09-20-qi-yuan-robot.html</guid>
-      <pubDate>Sun, 20 Sep 2026 09:00:00 +0800</pubDate>
-      <description><![CDATA[9月20日启元机器人发布Q1与T1，19999元人形机器人发售即发货。88厘米、15公斤、可折叠进背包，还有一套安卓式的开放生态。上纬新材621亿市值背后，是在赌个人机器人成为下一个手机品类。]]></description>
-    </item>
-    <item>
-      <title><![CDATA[AI大模型及安全动态日报 | 2026年09月20日（星期日） · AI日报 · 犀牛伯爵]]></title>
-      <link>https://rhinocount.cn/ai-daily/2026-09-20-ai-daily.html</link>
-      <guid isPermaLink="true">https://rhinocount.cn/ai-daily/2026-09-20-ai-daily.html</guid>
-      <pubDate>Sun, 20 Sep 2026 09:00:00 +0800</pubDate>
-      <description><![CDATA[Anthropic年化收入预计破1000亿美元IPO加速，DeepSeek估值5000亿融资再创纪录，阿里发布Qwen3.8-Omni-Flash全模态模型，OpenAI密集推出Astra系列金融法律版，奇安信/启明星辰/绿盟/安恒AI安全产品矩阵成型，HiddenLayer获1亿美元B轮ARR增10倍，Mercor获3.5亿布局数据标注，美国组建AI部队。]]></description>
-    </item>
-    <item>
-      <title><![CDATA[那个教ChatGPT说话的人，做了个哑巴模型JEV · 犀牛伯爵笔记]]></title>
-      <link>https://rhinocount.cn/notes/2026-09-19-jev-moxing.html</link>
-      <guid isPermaLink="true">https://rhinocount.cn/notes/2026-09-19-jev-moxing.html</guid>
-      <pubDate>Sat, 19 Sep 2026 09:00:00 +0800</pubDate>
-      <description><![CDATA[教ChatGPT说话的人做了个哑巴模型JEV，X上三天3613万浏览，只做选择不打字。学会用它，Agent不再卡10秒写总结。]]></description>
-    </item>
-    <item>
-      <title><![CDATA[AI学会教下一代撒谎，OpenAI揪出27条暗号 · 犀牛伯爵笔记]]></title>
-      <link>https://rhinocount.cn/notes/2026-09-18-ai-saohua-openai-27anhao.html</link>
-      <guid isPermaLink="true">https://rhinocount.cn/notes/2026-09-18-ai-saohua-openai-27anhao.html</guid>
-      <pubDate>Fri, 18 Sep 2026 09:00:00 +0800</pubDate>
-      <description><![CDATA[OpenAI在GPT-5.6 Sol训练中发现27条越狱指令摘要，模型学会向后续版本隐瞒错误。AI安全问题再升级。]]></description>
-    </item>
-    <item>
-      <title><![CDATA[一个人加AI编程，GitHub把83万行全重写了 | 犀牛伯爵]]></title>
-      <link>https://rhinocount.cn/notes/2026-09-18-ai-coding-rust.html</link>
-      <guid isPermaLink="true">https://rhinocount.cn/notes/2026-09-18-ai-coding-rust.html</guid>
-      <pubDate>Fri, 18 Sep 2026 09:00:00 +0800</pubDate>
-      <description><![CDATA[GitHub用Copilot把运行时从TypeScript迁移到83万行Rust，一个程序员完成了原本需要整个团队一两年的工作。AI编程到底靠不靠谱？]]></description>
-    </item>
-    <item>
-      <title><![CDATA[3000家美国风投，及格的只有20家：AI时代，"钱"第一次变成了优势本身 · 犀牛伯爵笔记]]></title>
-      <link>https://rhinocount.cn/notes/2026-09-18-a16z幂律播客.html</link>
-      <guid isPermaLink="true">https://rhinocount.cn/notes/2026-09-18-a16z幂律播客.html</guid>
-      <pubDate>Fri, 18 Sep 2026 09:00:00 +0800</pubDate>
-      <description><![CDATA[a16z播客《How AI Is Rewriting the Power Law of Venture Capital》全文整理：3000家美国风投过去二十年只有20家做到持续3倍净回报，不到1%。AI收入4年干到1000亿、资本第一次能复利放大优势、遗留SaaS账算不回来、真正的瓶颈在供给端。]]></description>
-    </item>
-    <item>
-      <title><![CDATA[AI大模型及安全动态日报 | 2026年09月18日（星期五） · AI日报 · 犀牛伯爵]]></title>
-      <link>https://rhinocount.cn/ai-daily/2026-09-18-ai-daily.html</link>
-      <guid isPermaLink="true">https://rhinocount.cn/ai-daily/2026-09-18-ai-daily.html</guid>
-      <pubDate>Fri, 18 Sep 2026 09:00:00 +0800</pubDate>
-      <description><![CDATA[Crusoe完成39亿美元C轮估值309亿，Manus重生17天估值翻倍至40亿，OpenAI推出Astra for Law法律平台，华为发布昇腾960超节点支撑十万亿级大模型，智谱发布RSI首个成果GLM参与构建GLM，Claude Code大重构3万Agent管理技术开放，奇安信入选网安十大创新四大领域代表，SynthID-Text水印削弱安全护栏，AIR获5000万出隐身专注AI Agent供应链安全。]]></description>
-    </item>
-    <item>
-      <title><![CDATA[朱啸虎北大演讲全文整理：技术会平权，重要的永远是人文和商业 · 犀牛伯爵笔记]]></title>
-      <link>https://rhinocount.cn/notes/2026-09-17-朱啸虎北大分享.html</link>
-      <guid isPermaLink="true">https://rhinocount.cn/notes/2026-09-17-朱啸虎北大分享.html</guid>
-      <pubDate>Thu, 17 Sep 2026 09:00:00 +0800</pubDate>
-      <description><![CDATA[朱啸虎2026年9月16日北大分享全文整理：二十年创业投资经验与AI时代的对照。从三个S标准、滴滴易到案例，到技术扩散、开源终局与AI应用机会，含与王小川的现场对谈实录。]]></description>
     </item>
   </channel>
 </rss>
