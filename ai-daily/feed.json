@@ -1,6 +1,16 @@
 {
-  "updated": "2026-09-30T10:00:00.000000",
+  "updated": "2026-10-08T09:00:00.000000",
   "articles": [
+    {
+      "title": "AI大模型及安全动态日报 | 2026年10月08日（星期四）",
+      "date": "2026年10月08日（星期四）",
+      "slug": "2026-10-08-ai-daily",
+      "url": "ai-daily/2026-10-08-ai-daily.html",
+      "excerpt": "OpenAI发布GPT-6全球推送带Intelligent UI、Anthropic Haiku 5.5成本大降75%、美国六家AI企业签署自愿安全协议、Armadin获2.55亿B轮估值超25亿、NVIDIA发布开放Agent安全平台、Mercor获3.5亿数据标注融资、奇安信十大领域入选Gartner安全曲线、启明星辰AIDR获公安部首证。",
+      "category": "AI日报",
+      "cat": "安全 · 模型 · 资本",
+      "href": "2026-10-08-ai-daily.html"
+    },
     {
       "title": "AI大模型及安全动态日报 | 2026年09月30日（星期三）",
       "date": "2026年09月30日（星期三）",
