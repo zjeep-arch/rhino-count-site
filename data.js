@@ -127,6 +127,12 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "可灵AI要单独上市，估值追平整个快手",
+        desc: "8月增资成交价推算可灵约1228亿元，同口径已略超快手市值。判断：一级市场买的是AI时代竞争位，可灵要守住它，先得守住正被Seedance收窄的技术身位。",
+        href: "notes/2026-10-08-keling-ipo.html"
+      },
+      {
+        type: "Essay",
         title: "2.5亿美元买单，2026年AI翻车的三个账本",
         desc: "苹果为没交货的 Siri 赔出 2.5 亿美元，Sora 六个月收入不够付一天账单。判断：2026 年 AI 竞争已从能不能做出来变成算不算得过账。",
         href: "notes/2026-09-29-ai-failures-2026.html"
@@ -527,6 +533,14 @@ window.SITE_DATA = {
         img: "assets/note-05.svg",
         href: "notes/why-rhino-count.html"
       },
+      {
+        cat: "观察", num: "N° 123",
+        title: "可灵AI要单独上市，估值追平整个快手",
+        excerpt: "同一交易日、同一口径测算，可灵估值约1228亿元，已略超母公司快手约1117亿元的折算市值，上半年收入却只占集团约2%。判断：买的是AI时代的竞争位，守不守得住看技术身位。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-10-08-keling-ipo.html"
+      },
+
       {
         cat: "观察", num: "N° 122",
         title: "2.5亿美元买单，2026年AI翻车的三个账本",
