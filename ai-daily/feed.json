@@ -1,6 +1,13 @@
 {
-  "updated": "2026-10-08T09:00:00.000000",
+  "updated": "2026-10-09T09:00:00+08:00",
   "articles": [
+    {
+      "date": "2026-10-09",
+      "title": "AI大模型及安全动态日报 | 2026年10月09日（星期五）",
+      "url": "2026-10-09-ai-daily.html",
+      "category": "AI日报",
+      "excerpt": "OpenAI推出GPT-6.1 Sol Ultrafast、谷歌云发布Gemini Agent、Rein Security获2500万美元融资、CrowdStrike发布Falcon Guardian等。"
+    },
     {
       "title": "AI大模型及安全动态日报 | 2026年10月08日（星期四）",
       "date": "2026年10月08日（星期四）",
