@@ -127,6 +127,12 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "OpenAI年化营收500亿，A股跌得比美股重",
+        desc: "500亿、680亿、700亿，同一家公司的三个数字差在量法上。美股芯片跌完，A股硬件龙头跌得更深，数字的主人全程拒绝置评。",
+        href: "notes/2026-10-09-openai-revenue.html"
+      },
+      {
+        type: "Essay",
         title: "7万台机车造完，厂门关了，AI时代谁在重演鲍德温",
         desc: "世界最大的蒸汽机车厂死于柴油时代，富国、运通、康宁却靠信任与底层能力穿了过来。判断：每个时代都留着机会，要抓的是能穿越周期的价值。",
         href: "notes/2026-10-09-穿越周期.html"
@@ -538,6 +544,13 @@ window.SITE_DATA = {
         excerpt: "名字来自两部作品：恋爱的犀牛教我不计成败地热爱，基督山伯爵教我不动声色地等待。2022年底ChatGPT像一头灰犀牛从地平线走来，Count就是把它的轨迹从噪音里算出来——然后与各位同行者一起远征。",
         img: "assets/note-05.svg",
         href: "notes/why-rhino-count.html"
+      },
+      {
+        cat: "观察", num: "N° 125",
+        title: "OpenAI年化营收500亿，A股跌得比美股重",
+        excerpt: "FT披露的500亿与市场此前用的700亿之间，差的是毛净口径。判断：AI产业链的估值锚有一层是软锚，系在未上市公司自报数字上，锚一晃，A股硬件先于基本面挨打。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-10-09-openai-revenue.html"
       },
       {
         cat: "观察", num: "N° 124",
