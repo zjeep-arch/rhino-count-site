@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mythos免费扫漏洞，开源攻击只要20美元 | 犀牛伯爵</title>
+<meta name="description" content="Anthropic把最强模型免费开放给开源项目扫漏洞，报告不经人工复核直接交付，六个月已标出29000多个候选漏洞。它自家红队同时证明，开源模型GLM-5.3造利用链已与Mythos近乎平价。攻防平价之后，防御的先手在修复吞吐。">
+<meta name="keywords" content="AI漏洞扫描, Claude Mythos, Anthropic, 开源安全, GLM-5.3, 犀牛伯爵">
+</head>
+<body style="margin:0;padding:0;font-family:-apple-system,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;color:#1a1a1a;">
+<section style="max-width:680px;margin:0 auto;padding:36px 22px 60px 22px;">
+
+<p style="font-size:12px;letter-spacing:0.28em;color:#999999;text-align:center;line-height:1.6;margin:0 0 18px 0;">N°126 · 犀牛伯爵 · AI 热点深观察</p>
+
+<h1 style="font-size:28px;line-height:1.5;text-align:center;color:#1a1a1a;margin:0 0 14px 0;font-weight:bold;">Mythos免费扫漏洞，开源攻击只要20美元</h1>
+
+<p style="font-size:13px;color:#999999;text-align:center;line-height:1.8;margin:0 0 6px 0;">2026年10月10日 · 约3000字 · 信源，Anthropic 官方公告与 Frontier Red Team 报告、The Hacker News、The Verge、SecurityWeek 等报道</p>
+<p style="font-size:14px;color:#666666;text-align:center;line-height:1.8;margin:0;">撰文｜犀牛伯爵</p>
+
+<p style="text-align:center;color:#dddddd;line-height:1.6;margin:26px 0;font-size:14px;letter-spacing:0.5em;">···</p>
+
+<section style="border:1px solid #ececec;border-left:3px solid #8b2635;padding:20px 22px;margin:0 0 8px 0;">
+<p style="margin:0 0 12px 0;line-height:1.6;"><span style="display:inline-block;color:#8b2635;border:1px solid #8b2635;font-size:12px;padding:3px 14px;border-radius:20px;line-height:1.6;">核心判断</span></p>
+<p style="font-size:15px;line-height:1.9;color:#333333;margin:0;">攻防平价之后，先手算在修复这一端</p>
+</section>
+
+<section style="border:1px solid #ececec;padding:16px 22px;margin:24px 0 8px 0;">
+<p style="font-size:13px;color:#999999;line-height:2;margin:0;">一、发现漏洞的产能，已经溢出来了<br>二、攻击用的平价版本，已经摆上了货架<br>三、漏洞扫描免费之后，慢的是修复这一端<br>四、半年前，这能力还锁在一份名单里</p>
+</section>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:24px 0 16px 0;text-align:justify;"><span style="float:left;font-family:宋体,SimSun,serif;font-size:54px;line-height:1;color:#1a1a1a;padding:6px 10px 0 0;font-weight:bold;">1</span>0月8日，Anthropic 发布 Cyber Mission 计划，给开源项目的 OSS Scanner 打头阵。它把自家最强的模型拿出来给开源项目免费扫漏洞，报告不经任何人工复核，直接送到维护者的邮箱。每份报告带着可运行的复现程序、漏洞成因的解释，能给出修复办法的地方，连候选补丁一并附上。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">项目想加入，在 GitHub 上提交一个申请即可。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">这个决定扎眼的地方，在于它撤掉了自家过去最看重的一道工序。今年早些时候的 Glasswing 阶段，模型找出的漏洞先过它的人工分诊，才递到维护者手里。这一次，维护者成为每份报告见到的第一个人。Anthropic 在公告里把丑话说在前头，报告由模型生成，可能不准，严重程度也可能标高。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">理由同样写在公告里。过去六个月，它的最强模型在一批全球重要的开源软件上标出了 29000 多个候选漏洞，自家团队手工只审完约 6000 个。平均下来，模型每标出五个候选，人工才审得完一个。近 5000 份没等到复核的报告，维护者主动开口要，已经先行发出。</p>
+
+<h2 style="font-size:20px;line-height:1.6;color:#1a1a1a;margin:40px 0 16px 0;padding-left:12px;border-left:4px solid #8b2635;">一、发现漏洞的产能，已经溢出来了</h2>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">底气来自一条陡峭的能力曲线。CyberGym 这套学术基准上，大模型找出已知漏洞的比例，去年初还在 20% 以下，今年已经过了 85%。这个口径出自 Anthropic 官方帖，The Hacker News、TechGig 等多家报道转引一致。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">它请外部渗透测试专家抽查了 97 条高危和严重发现，覆盖 48 个项目。85 条达到它自家协调披露流程的标准，占 88%，剩下的 11 条真实但与已知问题重复，只有 1 条纯属误报。官方给自己定的预期，是真实阳性率 90% 以上。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">三个最有代表性的项目已经交了成绩单。wolfSSL 的 Todd Ouska 在官方帖里说，他们收到 74 份报告，72 份有效，5 份最后走完流程，成为正式的 CVE。PostgreSQL 的 Noah Misch 提到，这批报告让项目赶在正式版发布之前补上了问题。</p>
+
+<section style="margin:28px 0;padding:6px 0 6px 20px;border-left:3px solid #8b2635;">
+<p style="margin:0 0 6px 0;line-height:1;"><span style="font-size:42px;color:#8b2635;line-height:1;">"</span></p>
+<p style="margin:0 0 10px 0;font-family:宋体,SimSun,serif;font-size:21px;line-height:1.7;color:#333333;">As good and sometimes better.</p>
+<p style="font-size:14px;line-height:1.7;color:#555555;margin:0 0 10px 0;">和人类研究者交来的报告一样好，有时还更好。</p>
+<p style="font-size:12px;color:#888888;line-height:1.6;margin:0;">Anton Arapov，OpenSSL Corporation · 引自 Anthropic 2026 年 10 月 8 日官方公告</p>
+</section>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;"><span style="color:#8b2635;font-weight:700;">发现漏洞这一端，第一次不缺产能了。</span>积压的形成方式也变了，过去是找不到，如今是审不完。</p>
+
+<h2 style="font-size:20px;line-height:1.6;color:#1a1a1a;margin:40px 0 16px 0;padding-left:12px;border-left:4px solid #8b2635;">二、攻击用的平价版本，已经摆上了货架</h2>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">把日历往回拨一周多。9 月 30 日前后，Anthropic 自己的 Frontier Red Team 发了一份测评报告，主角是智谱的开源模型 GLM-5.3。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">在 ExploitBench 这套利用构建基准上，410 次尝试里，GLM-5.3 成功造出 50 个端到端利用，Anthropic 自家的 Mythos Preview 是 56 个。再往前一代，GLM-5.2 和 Claude Opus 4.6 在同类任务上还是零。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">这组数字要标清口径，它出自 Anthropic 自测，到今天还没有第三方复现。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">同一份报告里还有一笔小账。GLM-5.3 的轻量版本把一个已披露的 Chrome 漏洞 CVE-2026-11645 做成了可用的利用链，人工在场值守 20 分钟，机器跑了 8 小时，总成本 20.40 美元，约合 150 元人民币。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">红队给出的结论并不含蓄，开源权重让攻击者拿到无实质限制的漏洞发现和利用能力，这是一个台阶式的变化。给模型装的护栏，在去掉护栏的处理之后，拒答率从 90% 以上掉到个位数百分比。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;"><span style="color:#8b2635;font-weight:700;">权重摆在公开货架上，这套能力就不挑人了。</span>它不再只存在于某一家的机房里，任何人下载下来，就能在自己的机器上跑。</p>
+
+<h2 style="font-size:20px;line-height:1.6;color:#1a1a1a;margin:40px 0 16px 0;padding-left:12px;border-left:4px solid #8b2635;">三、漏洞扫描免费之后，慢的是修复这一端</h2>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;"><span style="color:#8b2635;font-weight:700;">Anthropic 这次的赌注，押在防御方的组织速度上。模型强弱已经分不出先手，报告递到维护者手里之后，修补跑在利用前面，防御才有先手可言。</span></p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">压缩修复时间被写进了产品设计本身。每份报告自带复现程序和成因解释，能给补丁就给候选补丁，未核验的发现不设 90 天披露期限，让维护者先动手。同批上线的还有 Claude for OSS，给维护者免费的 Claude Max 订阅，修漏洞要用的工具直接递到干活的人手里。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">赌注的风险同样摆在明处。The Verge 记者 Stevie Bonifield 在发布当天的报道里点明，这些报告不带任何人工复核，而开源维护者过去一年正在被 AI 写的漏洞邮件淹没，Linus Torvalds 公开抱怨过，Google 今年干脆暂停了自家的开源漏洞赏金，理由是 AI 垃圾投稿太多。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">88% 这个数字的适用范围也要看清，它跑在 48 个受邀项目的受控试验里，公开放量之后的结果尚未出现。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">据 Help Net Security 的报道，curl 维护者 Daniel Stenberg 算过一笔账，2025 年 curl 收到的安全投稿里约两成是 AI 垃圾，每处理一份，要占安全团队三四个人，单人耗时从半小时到三小时不等。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">Anthropic 自己也留了后手。它的 FAQ 把话说得很白，这项服务只适合已经能跟上已核验高危报告的项目，消化不了的项目，请走回原来那条人工复核的协调披露通道。换言之，它承认报告的量会压垮一部分人，只是请这部分人先别进来。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">受控试验、维护者背书、官方预期，几样凑齐，也不等于放量之后的成绩单。到今天为止，90% 的真实阳性率仍是 Anthropic 一家的预期，没有独立审计给它盖过章。</p>
+
+<h2 style="font-size:20px;line-height:1.6;color:#1a1a1a;margin:40px 0 16px 0;padding-left:12px;border-left:4px solid #8b2635;">四、半年前，这能力还锁在一份名单里</h2>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">转折发生在今年春天。4 月 7 日，Anthropic 发布 Project Glasswing，最强的 Mythos Preview 只给 40 多家大机构做防御扫描。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">配套的承诺是最高 1 亿美元的使用额度，外加 400 万美元直接捐赠，其中 250 万美元经 Linux 基金会给 Alpha-Omega 与 OpenSSF，150 万美元给 Apache 软件基金会。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">最强能力的待遇，当时是锁在一份名单里发放。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">九月底的红队报告等于宣布，能力扩散的速度比名单扩容的速度快。就在同期，10 月 6 日，Glasswing 被并入扩大版的 Cyber Verification Program，10 月 8 日，Cyber Mission 发布，OSS Scanner 向所有自愿加入的开源项目打开。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">同批落地的还有 Critical Infrastructure Defense Program，11 家创始伙伴包括 CrowdStrike、Palo Alto Networks、Dragos、Nozomi Networks 与 Rockwell Automation，防线指向电网、水务和交通的运营技术。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">Cointelegraph 记了一笔，Nethermind、ZEUS 等加密项目在 10 月 9 日已经排队提交了加入申请，防御方在抢名额。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">它在公告里交代了灵感来源，Google 的 OSS-Fuzz。那套公共品用模糊测试给开源项目找程序崩溃，跑了很多年。这一次被换掉的，是找漏洞的工具本身，从随机变异的测试程序，换成能读代码、能写利用链的前沿模型。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">当标出一个漏洞的成本被压到几十美元量级，稀缺的东西就换了位置。<span style="color:#8b2635;font-weight:700;">值钱的从发现漏洞的能力，换成把报告按轻重排好、逐个修掉、并且为误报和漏报负起责任的组织。</span>安全这一行竞争的中心，正在从检测的一端，往处置的一端挪。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">这条判断留了明确的复盘点。如果到 2027 年 4 月中旬，OSS Scanner 公开渠道的误报率明显高于官方 90% 的预期，或者出现未核验报告被攻击者抢先利用的公开案例，防御靠组织速度占先手的说法就此作废。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">漏洞只会继续变便宜，防御的先手，往后只能从修补的速度里挣。</p>
+
+<section style="margin:48px 0 0 0;padding-top:22px;border-top:1px solid #e5e5e5;">
+<p style="font-size:13px;color:#999999;line-height:1.8;margin:0 0 8px 0;">数据来源，Anthropic 官方公告（2026 年 10 月 8 日）与 Frontier Red Team 报告（2026 年 9 月 30 日前后，其中 GLM-5.3 相关为 Anthropic 自测口径，尚无第三方复现），The Hacker News、Pondero（2026 年 10 月 9 日），The Verge、SecurityWeek、Cointelegraph 与 Help Net Security 相关报道。本文为行业观察，不对任何具体产品作推荐，不构成采购或投资建议。谢谢读到这里。</p>
+<p style="font-size:13px;color:#999999;line-height:1.8;margin:0;">如需引用，请注明出处，犀牛伯爵 rhinocount.cn</p>
+</section>
+
+</section>
+</body>
+</html>

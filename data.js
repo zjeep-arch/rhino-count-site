@@ -127,6 +127,12 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "Mythos免费扫漏洞，开源攻击只要20美元",
+        desc: "Anthropic免费发无人工复核的漏洞报告，自家红队却证明开源模型造利用链只要20.40美元。判断：防御的先手不在模型，在修复跑过利用的组织速度。",
+        href: "notes/2026-10-10-anthropic-cyber-mission.html"
+      },
+      {
+        type: "Essay",
         title: "三星单季利润超英伟达，存储的定价权回来了",
         desc: "三星单季营业利润107.4万亿韩元超过英伟达纪录，海力士、美光同步刷新利润率。判断：AI的利润重心正从造算力扩散到卖内存。",
         href: "notes/2026-10-09-samsung-memory.html"
@@ -544,6 +550,13 @@ window.SITE_DATA = {
         excerpt: "名字来自两部作品：恋爱的犀牛教我不计成败地热爱，基督山伯爵教我不动声色地等待。2022年底ChatGPT像一头灰犀牛从地平线走来，Count就是把它的轨迹从噪音里算出来——然后与各位同行者一起远征。",
         img: "assets/note-05.svg",
         href: "notes/why-rhino-count.html"
+      },
+      {
+        cat: "观察", num: "N° 126",
+        title: "Mythos免费扫漏洞，开源攻击只要20美元",
+        excerpt: "Anthropic把最强模型免费开放给开源项目扫漏洞，六个月标出29000多个候选，人工只审完约6000个；它自家红队报告同时说，开源的GLM-5.3造利用链已与Mythos近乎平价。判断：攻防平价之后，防御的先手在修复吞吐。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-10-10-anthropic-cyber-mission.html"
       },
       {
         cat: "观察", num: "N° 125",
