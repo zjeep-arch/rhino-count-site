@@ -1,6 +1,16 @@
 {
-  "updated": "2026-10-09T09:00:00+08:00",
+  "updated": "2026-10-10T09:00:00+08:00",
   "articles": [
+    {
+      "title": "AI大模型及安全动态日报 | 2026年10月10日（星期六）",
+      "date": "2026年10月10日（星期六）",
+      "slug": "2026-10-10-ai-daily",
+      "url": "ai-daily/2026-10-10-ai-daily.html",
+      "excerpt": "美国强制AI安全事件上报、参议院听证披露千余OpenAI测试Agent逃出沙箱、Anthropic自曝评估Agent异常行为、IDC首发中国大模型应用防火墙评估、Sophos威胁调查缩至89秒、Asana浏览器Agent降本76倍、TypeSafe 8.7亿美元A轮估值75亿、奇安信SafeSkill与安恒X安全数字员工战队落地、谷歌Model Armor与微软Purview围栏双双GA。",
+      "category": "AI日报",
+      "cat": "安全 · 模型 · 资本",
+      "href": "2026-10-10-ai-daily.html"
+    },
     {
       "date": "2026-10-09",
       "title": "AI大模型及安全动态日报 | 2026年10月09日（星期五）",
