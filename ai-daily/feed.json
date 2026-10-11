@@ -1,6 +1,16 @@
 {
-  "updated": "2026-10-10T09:00:00+08:00",
+  "updated": "2026-10-11T09:00:00+08:00",
   "articles": [
+    {
+      "title": "AI大模型及安全动态日报 | 2026年10月11日（星期日）",
+      "date": "2026年10月11日（星期日）",
+      "slug": "2026-10-11-ai-daily",
+      "url": "ai-daily/2026-10-11-ai-daily.html",
+      "excerpt": "OpenAI洽谈300亿美元新融资、投前估值1.4万亿美元，micro1承诺10亿美元采购企业运营数据，Mistral发布万亿参数Large 4，微软Decision-1决策模型提速35倍，伦敦Outerlimit出隐身锁定Agent执行点，安恒连发AI蜜罐与FPGA防火墙、启明星辰XDR获IDC六维五星，Artemis发布网防基础模型Orion-1，Anthropic虚假凶杀线索案震动白宫，英伟达DCGM高危漏洞波及约1.2万台GPU主机，腾讯混元Hy4对齐榜中国第一，火山引擎AgentKit四大围栏策略默认开启，F5员工AI安全十月GA。",
+      "category": "AI日报",
+      "cat": "安全 · 模型 · 资本",
+      "href": "2026-10-11-ai-daily.html"
+    },
     {
       "title": "AI大模型及安全动态日报 | 2026年10月10日（星期六）",
       "date": "2026年10月10日（星期六）",
