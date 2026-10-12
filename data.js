@@ -127,6 +127,12 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "4.3万star，他把Photoshop重写了，下一步呢",
+        desc: "亚特兰大程序员用 AI 两周复刻 Adobe 全家桶开源，PhotoCraft 12 天约 4.3 万 star。判断：旧护城河漏的是「写出来」，第二步拼用户体验和数据资产。",
+        href: "notes/2026-10-12-artcraft-photoshop.html"
+      },
+      {
+        type: "Essay",
         title: "Mythos免费扫漏洞，开源攻击只要20美元",
         desc: "Anthropic免费发无人工复核的漏洞报告，自家红队却证明开源模型造利用链只要20.40美元。判断：防御的先手不在模型，在修复跑过利用的组织速度。",
         href: "notes/2026-10-10-anthropic-cyber-mission.html"
@@ -550,6 +556,13 @@ window.SITE_DATA = {
         excerpt: "名字来自两部作品：恋爱的犀牛教我不计成败地热爱，基督山伯爵教我不动声色地等待。2022年底ChatGPT像一头灰犀牛从地平线走来，Count就是把它的轨迹从噪音里算出来——然后与各位同行者一起远征。",
         img: "assets/note-05.svg",
         href: "notes/why-rhino-count.html"
+      },
+      {
+        cat: "观察", num: "N° 127",
+        title: "4.3万star，他把Photoshop重写了，下一步呢",
+        excerpt: "亚特兰大程序员 Brandon Thomas 用 Claude Opus 5.5 两周复刻 Adobe 全家桶 7 个应用并开源，PhotoCraft 12 天拿到约 4.3 万 GitHub star。判断：漏的是「写出来」的壁垒，第二步拼用户体验和手里的数据资产。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-10-12-artcraft-photoshop.html"
       },
       {
         cat: "观察", num: "N° 126",
