@@ -127,6 +127,13 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "所有人都在算DeepSeek值多少，它在算另一笔账",
+        desc: "DeepSeek 还没花完自己的 800 亿融资，就先领投机器人头脑公司 Winverse AI，投后估值约 4 亿美元。判断：生态卡位，AGI 的下一幕不在对话框里。",
+        href: "notes/2026-10-13-deepseek-winverse.html"
+      },
+
+      {
+        type: "Essay",
         title: "4.3万star，他把Photoshop重写了，下一步呢",
         desc: "亚特兰大程序员用 AI 两周复刻 Adobe 全家桶开源，PhotoCraft 12 天约 4.3 万 star。判断：旧护城河漏的是「写出来」，第二步拼用户体验和数据资产。",
         href: "notes/2026-10-12-artcraft-photoshop.html"
@@ -557,6 +564,14 @@ window.SITE_DATA = {
         img: "assets/note-05.svg",
         href: "notes/why-rhino-count.html"
       },
+      {
+        cat: "观察", num: "N° 128",
+        title: "所有人都在算DeepSeek值多少，它在算另一笔账",
+        excerpt: "10 月 12 日彭博独家，DeepSeek 同意领投机器人公司 Winverse AI，投后估值约 4 亿美元，交易尚未最终敲定。判断：生态卡位不是追高，AGI 的下一幕不在对话框里。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-10-13-deepseek-winverse.html"
+      },
+
       {
         cat: "观察", num: "N° 127",
         title: "4.3万star，他把Photoshop重写了，下一步呢",
