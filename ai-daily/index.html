@@ -516,6 +516,14 @@
       </div>
     </section>
 
+    <section aria-labelledby="naEventsTitle" id="naEventsSection" style="display:none;">
+      <div class="section-title">
+        <h2 id="naEventsTitle">北美AI活动</h2>
+        <p>美国市场 TOB 拓客活动 · 每周更新 · <a href="na-events.html" style="color:inherit;text-decoration:underline;">查看全部 →</a></p>
+      </div>
+      <div id="naEventList" class="article-list"></div>
+    </section>
+
     <footer class="page-footer">
       <p style="margin:0 0 10px;">
         <a href="archive/" style="color:inherit;text-decoration:underline;">查看全部 AI 日报归档（按月份）</a>
@@ -617,16 +625,44 @@
       xhr.send();
     })();
   </script>
-
-
-
-
-
-
-
-
-
-
-
-
+  <script>
+    /* 北美AI活动预览：从 na-events.json 取最近 4 场未来活动，用本站 article-card 样式渲染 */
+    (function () {
+      var section = document.getElementById('naEventsSection');
+      var list = document.getElementById('naEventList');
+      if (!section || !list) return;
+      function esc(s) {
+        return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+          return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+        });
+      }
+      function ds(e) {
+        var s = e.date_start, t = e.date_end || e.date_start;
+        return s === t ? s : s + ' ~ ' + t;
+      }
+      fetch('na-events.json', { cache: 'no-store' })
+        .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+        .then(function (d) {
+          var today = new Date().toISOString().slice(0, 10);
+          var evs = (d.events || [])
+            .filter(function (e) { return (e.date_end || e.date_start) >= today; })
+            .sort(function (a, b) { return a.date_start < b.date_start ? -1 : 1; })
+            .slice(0, 4);
+          if (!evs.length) return;
+          section.style.display = '';
+          list.innerHTML = evs.map(function (e, i) {
+            return '<a class="article-card' + (i === 0 ? ' is-featured' : '') + '" href="na-events.html">' +
+              '<div class="art-meta">' +
+              '<span class="cat">北美AI活动</span>' +
+              '<span class="date">' + esc(ds(e)) + ' · ' + esc(e.city) + '</span>' +
+              '</div>' +
+              '<h2>' + esc(e.name) + '</h2>' +
+              '<p>' + esc(e.highlights || '') + '</p>' +
+              '<span class="art-arrow" aria-hidden="true"></span>' +
+              '</a>';
+          }).join('');
+        })
+        .catch(function () { /* 无数据时整个板块保持隐藏 */ });
+    })();
+  </script>
 </body></html>
