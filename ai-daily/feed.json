@@ -1,6 +1,13 @@
 {
- "updated": "2026-10-13T11:30:00+08:00",
+ "updated": "2026-10-14T10:13:31+08:00",
  "articles": [
+  {
+   "title": "AI大模型及安全动态日报 | 2026年10月14日（星期三）",
+   "date": "2026年10月14日（星期三）",
+   "slug": "2026-10-14",
+   "url": "ai-daily/2026-10-14-ai-daily.html",
+   "excerpt": "Google 发布 Gemini 4 Argon、OpenAI 被曝暂停 GPT-6.1 Astra 发布、Character.ai 申请破产、Manus 母公司完成超 5 亿美元融资、赛西实验室首批 AI 防火墙测评华为通过、XBOW 团队 6 天拿下 Chrome 全链赏金。"
+  },
   {
    "title": "AI大模型及安全动态日报 | 2026年10月13日（星期二）",
    "date": "2026年10月13日（星期二）",
