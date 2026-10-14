@@ -127,6 +127,13 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "微软总裁喊\"管管我\"，在抬门槛",
+        desc: "微软总裁 Brad Smith 对 BBC 称 AI 受到的监管还不如洗衣机和牛奶，列五点清单要强制紧急制动和第三方评测。判断：门槛一旦成法，就是后来者的护城河。",
+        href: "notes/2026-10-14-brad-smith-ai-regulation.html"
+      },
+
+      {
+        type: "Essay",
         title: "所有人都在算DeepSeek值多少，它在算另一笔账",
         desc: "DeepSeek 还没花完自己的 800 亿融资，就先领投机器人头脑公司 Winverse AI，投后估值约 4 亿美元。判断：生态卡位，AGI 的下一幕不在对话框里。",
         href: "notes/2026-10-13-deepseek-winverse.html"
@@ -564,6 +571,14 @@ window.SITE_DATA = {
         img: "assets/note-05.svg",
         href: "notes/why-rhino-count.html"
       },
+      {
+        cat: "观察", num: "N° 129",
+        title: "微软总裁喊\"管管我\"，在抬门槛",
+        excerpt: "10 月 11 日，Brad Smith 对 BBC 称 AI 受到的监管还不如洗衣机和牛奶，要求强制紧急制动、事故报告和第三方评测；一个月前参议院连紧急制动法案都没推成。判断：门槛一旦成法，就是后来者的护城河。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-10-14-brad-smith-ai-regulation.html"
+      },
+
       {
         cat: "观察", num: "N° 128",
         title: "所有人都在算DeepSeek值多少，它在算另一笔账",
