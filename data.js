@@ -258,6 +258,12 @@ window.SITE_DATA = {
       },
       {
         type: "Essay",
+        title: "杨锦方：看人这件事，可以学、可以练、可以复用",
+        desc: "北大《AI创业与投资》课全文整理：识人与自我认知。曾任美团副总裁的杨锦方：人是组织里比资金更强的杠杆；识人像数学，入门容易差距极大；人才模型是一套观察人的工具语言。附筛选一二级市场投资人的六条实战逻辑。",
+        href: "notes/2026-10-15-yang-jinfang-kanren.html"
+      },
+      {
+        type: "Essay",
         title: "烧 8 亿赚 10 亿：Cognition 交出第一份答卷",
         desc: "Cognition 官宣年化收入破 10 亿美元，21 个月从零做到 10 亿，四个月翻倍；烧钱 8 亿美元但毛利率近 50%；480 亿美元估值约 48 倍市销率。核心判断：AI agent 第一个大规模付费场景出现，附 12 个月证伪条件。",
         href: "notes/2026-09-26-cognition-devin-1b.html"
@@ -592,6 +598,14 @@ window.SITE_DATA = {
         img: "assets/note-05.svg",
         href: "notes/why-rhino-count.html"
       },
+      {
+        cat: "观察", num: "N° 133",
+        title: "杨锦方：看人这件事，可以学、可以练、可以复用",
+        excerpt: "杨锦方在北大《AI创业与投资》课讲透识人与自我认知：两次代价高昂的职业弯路打底，人是比资金更强的杠杆，识人三级可以训练，人才模型是观察人的工具语言。含汉武帝识人、曹溪3000万美元投月之暗面、筛选投资人六条逻辑全文整理。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-10-15-yang-jinfang-kanren.html"
+      },
+
       {
         cat: "观察", num: "N° 132",
         title: "Meta不开源了：Llama的旗手，举起了收费牌",
