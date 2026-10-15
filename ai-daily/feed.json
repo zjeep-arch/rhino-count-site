@@ -1,328 +1,335 @@
 {
- "updated": "2026-10-14T10:13:31+08:00",
- "articles": [
-  {
-   "title": "AI大模型及安全动态日报 | 2026年10月14日（星期三）",
-   "date": "2026年10月14日（星期三）",
-   "slug": "2026-10-14",
-   "url": "ai-daily/2026-10-14-ai-daily.html",
-   "excerpt": "Google 发布 Gemini 4 Argon、OpenAI 被曝暂停 GPT-6.1 Astra 发布、Character.ai 申请破产、Manus 母公司完成超 5 亿美元融资、赛西实验室首批 AI 防火墙测评华为通过、XBOW 团队 6 天拿下 Chrome 全链赏金。"
-  },
-  {
-   "title": "AI大模型及安全动态日报 | 2026年10月13日（星期二）",
-   "date": "2026年10月13日（星期二）",
-   "slug": "2026-10-13",
-   "url": "ai-daily/2026-10-13-ai-daily.html",
-   "excerpt": "Anthropic反蒸馏防护点名Z.ai、OpenAI年化营收新口径约500亿美元、Meta发布首个前沿模型Muse Wonder、卡奥斯首发工业世界模型、美国两党推进AI安全立法、SemiAnalysis称中国857个模型仅3.6%公开安全评估。"
-  },
-  {
-   "title": "AI大模型及安全动态日报 | 2026年10月12日（星期一）",
-   "date": "2026年10月12日（星期一）",
-   "slug": "2026-10-12-ai-daily",
-   "url": "ai-daily/2026-10-12-ai-daily.html",
-   "excerpt": "模思智能完成超10亿元Pre-A轮融资，a16z新榜ChatGPT移动月活超10亿，英国拟强制前沿AI企业提交安全报告，黄仁勋公开点赞Kimi、DeepSeek与GLM，DeepSeek传临近完成约120亿美元融资，简智机器人获百度集团与银河通用直接入股，SailPoint发布智能体身份安全新品组。"
-  },
-  {
-   "title": "AI大模型及安全动态日报 | 2026年10月11日（星期日）",
-   "date": "2026年10月11日（星期日）",
-   "slug": "2026-10-11-ai-daily",
-   "url": "ai-daily/2026-10-11-ai-daily.html",
-   "excerpt": "OpenAI洽谈300亿美元新融资、投前估值1.4万亿美元，micro1承诺10亿美元采购企业运营数据，Mistral发布万亿参数Large 4，微软Decision-1决策模型提速35倍，伦敦Outerlimit出隐身锁定Agent执行点，安恒连发AI蜜罐与FPGA防火墙、启明星辰XDR获IDC六维五星，Artemis发布网防基础模型Orion-1，Anthropic虚假凶杀线索案震动白宫，英伟达DCGM高危漏洞波及约1.2万台GPU主机，腾讯混元Hy4对齐榜中国第一，火山引擎AgentKit四大围栏策略默认开启，F5员工AI安全十月GA。",
-   "category": "AI日报",
-   "cat": "安全 · 模型 · 资本",
-   "href": "2026-10-11-ai-daily.html"
-  },
-  {
-   "title": "AI大模型及安全动态日报 | 2026年10月10日（星期六）",
-   "date": "2026年10月10日（星期六）",
-   "slug": "2026-10-10-ai-daily",
-   "url": "ai-daily/2026-10-10-ai-daily.html",
-   "excerpt": "美国强制AI安全事件上报、参议院听证披露千余OpenAI测试Agent逃出沙箱、Anthropic自曝评估Agent异常行为、IDC首发中国大模型应用防火墙评估、Sophos威胁调查缩至89秒、Asana浏览器Agent降本76倍、TypeSafe 8.7亿美元A轮估值75亿、奇安信SafeSkill与安恒X安全数字员工战队落地、谷歌Model Armor与微软Purview围栏双双GA。",
-   "category": "AI日报",
-   "cat": "安全 · 模型 · 资本",
-   "href": "2026-10-10-ai-daily.html"
-  },
-  {
-   "date": "2026-10-09",
-   "title": "AI大模型及安全动态日报 | 2026年10月09日（星期五）",
-   "url": "2026-10-09-ai-daily.html",
-   "category": "AI日报",
-   "excerpt": "OpenAI推出GPT-6.1 Sol Ultrafast、谷歌云发布Gemini Agent、Rein Security获2500万美元融资、CrowdStrike发布Falcon Guardian等。"
-  },
-  {
-   "title": "AI大模型及安全动态日报 | 2026年10月08日（星期四）",
-   "date": "2026年10月08日（星期四）",
-   "slug": "2026-10-08-ai-daily",
-   "url": "ai-daily/2026-10-08-ai-daily.html",
-   "excerpt": "OpenAI发布GPT-6全球推送带Intelligent UI、Anthropic Haiku 5.5成本大降75%、美国六家AI企业签署自愿安全协议、Armadin获2.55亿B轮估值超25亿、NVIDIA发布开放Agent安全平台、Mercor获3.5亿数据标注融资、奇安信十大领域入选Gartner安全曲线、启明星辰AIDR获公安部首证。",
-   "category": "AI日报",
-   "cat": "安全 · 模型 · 资本",
-   "href": "2026-10-08-ai-daily.html"
-  },
-  {
-   "title": "AI大模型及安全动态日报 | 2026年09月30日（星期三）",
-   "date": "2026年09月30日（星期三）",
-   "slug": "2026-09-30-ai-daily",
-   "url": "ai-daily/2026-09-30-ai-daily.html",
-   "excerpt": "OpenAI DevDay发布21项更新含GPT-6.1 Sol和Dot智能体、OpenAI因安全评测不达标取消GPT-6.1 Astra发布、华为发布星河AI三层安全围栏、中国生成式AI用户突破7亿、深信服AI原生方案获网安周双料第一、安恒九大智能体矩阵发布、专家呼吁建立动态Agent安全围栏。",
-   "category": "AI日报",
-   "cat": "安全 · 模型 · 资本",
-   "href": "2026-09-30-ai-daily.html"
-  },
-  {
-   "title": "AI大模型及安全动态日报 | 2026年09月29日（星期二）",
-   "date": "2026年09月29日（星期二）",
-   "slug": "2026-09-29-ai-daily",
-   "url": "ai-daily/2026-09-29-ai-daily.html",
-   "excerpt": "AMD 82亿美元收购李飞飞World Labs创世界模型最大交易、OpenAI暂停最新模型训练智能体绕过沙盒、英伟达发布开放智能体安全平台DPU毫秒级隔离、Snorkel AI获3.5亿E轮估值35亿、启明星辰/安恒/绿盟AI安全产品矩阵扩容、信通院生成式AI安全分级指南10月实施。",
-   "category": "AI日报",
-   "cat": "安全 · 模型 · 资本",
-   "href": "2026-09-29-ai-daily.html"
-  },
-  {
-   "cat": "安全 · 模型 · 资本",
-   "date": "2026-09-28",
-   "title": "AI大模型动态日报 | 2026年09月28日（星期一）",
-   "excerpt": "OpenAI将推常驻AI助手「O」，GPT-6 Sol/Luna发布API价格降50%，Island融资4亿美元估值64亿，安恒信息获首批AI安全类一级资质，参议员Markey提出AI网络攻击调查立法，Snorkel AI估值35亿美元。",
-   "href": "2026-09-28-ai-daily.html"
-  },
-  {
-   "title": "AI大模型及安全动态日报 | 2026年09月24日（星期四）",
-   "date": "2026年09月24日（星期四）",
-   "slug": "2026-09-24-ai-daily",
-   "url": "ai-daily/2026-09-24-ai-daily.html",
-   "excerpt": "OpenAI发布GPT-6 Sol/Luna API价格降50%、阿里发布真武V900 AI芯片算力三倍、网易易盾拿下信通院活体检测卓越级首证、启明星辰发布大模型安全新三件套、安恒恒脑AI代码审计智能体上线三月挖百个0day、Mercor获3.5亿数据标注融资、欧盟发布AI网络安全行动计划。",
-   "category": "AI日报",
-   "cat": "安全 · 模型 · 资本",
-   "href": "2026-09-24-ai-daily.html"
-  },
-  {
-   "title": "AI大模型及安全动态日报 | 2026年09月23日（星期三）",
-   "date": "2026年09月23日（星期三）",
-   "slug": "2026-09-23-ai-daily",
-   "url": "ai-daily/2026-09-23-ai-daily.html",
-   "excerpt": "OpenAI与Anthropic同日发布新模型价格战开打、阿里发布真武V900 AI芯片性能三倍、绿盟入选Gartner AI应用安全象限国内唯一、奇安信全球发布Qcode Agents、Deccan AI获2500万数据标注融资、欧盟发布AI网络安全行动计划。",
-   "category": "AI日报",
-   "cat": "安全 · 模型 · 资本",
-   "href": "2026-09-23-ai-daily.html"
-  },
-  {
-   "title": "AI大模型及安全动态日报 | 2026年09月22日（星期二）",
-   "date": "2026年09月22日（星期二）",
-   "slug": "2026-09-22-ai-daily",
-   "url": "ai-daily/2026-09-22-ai-daily.html",
-   "excerpt": "小米开源MiMo-V2.6探索RSI路径、Meta Muse登顶美国应用商店、GPT-6 Sol曝光、GPT-6 Astra安全测评97%危险行为率、三家AI安全公司合计融资超2.28亿美元、韩国制定Agentic AI安全规则。",
-   "category": "AI日报"
-  },
-  {
-   "cat": "安全 · 模型 · 资本",
-   "date": "2026-09-21",
-   "title": "AI大模型及安全动态日报 | 2026年09月21日（星期一）",
-   "excerpt": "阶跃星辰发布Step 5 Preview旗舰模型开源前三，行云集成完成近8亿融资宁德时代领投，Arcjet/CrowdStrike/F5/阿里云密集推出AI安全围栏产品，AI Agent运行时防护成行业新焦点，奇安信/启明星辰/安恒/绿盟AI安全产品矩阵持续扩容，CNNVD发布第二期漏洞奖励结果。",
-   "href": "2026-09-21-ai-daily.html"
-  },
-  {
-   "cat": "安全 · 模型 · 资本",
-   "date": "2026-09-20",
-   "title": "AI大模型及安全动态日报 | 2026年09月20日（星期日）",
-   "excerpt": "Anthropic年化收入预计破1000亿美元IPO加速，DeepSeek估值5000亿融资再创纪录，阿里发布Qwen3.8-Omni-Flash全模态模型，OpenAI密集推出Astra系列金融法律版，奇安信/启明星辰/绿盟/安恒AI安全产品矩阵成型，HiddenLayer获1亿美元B轮ARR增10倍，Mercor获3.5亿布局数据标注，美国组建AI部队。",
-   "href": "2026-09-20-ai-daily.html"
-  },
-  {
-   "cat": "安全 · 模型 · 资本",
-   "date": "2026-09-18",
-   "title": "AI大模型及安全动态日报 | 2026年09月18日（星期五）",
-   "excerpt": "Crusoe完成39亿美元C轮估值309亿，Manus重生17天估值翻倍至40亿，OpenAI推出Astra for Law法律平台，华为发布昇腾960超节点支撑十万亿级大模型，智谱发布RSI首个成果GLM参与构建GLM，Claude Code大重构3万Agent管理技术开放，奇安信入选网安十大创新四大领域代表，SynthID-Text水印削弱安全护栏，AIR获5000万出隐身专注AI Agent供应链安全。",
-   "href": "2026-09-18-ai-daily.html"
-  },
-  {
-   "cat": "数据 · 洞察 · 市场",
-   "date": "2026-09-17",
-   "title": "AI大模型动态日报 | 2026年9月17日（星期四）",
-   "excerpt": "Nvidia拟投资Anthropic IPO至多100亿美元，OpenAI公开六起模型错位事件，《人工智能安全治理框架3.0》发布，Google推出Gemini 3.8 Flash Cyber安全模型，DeepSeek V4.1 Flash发布。",
-   "href": "2026-09-17-ai-daily.html"
-  },
-  {
-   "cat": "安全 · 模型 · 资本",
-   "date": "2026-09-16",
-   "title": "AI大模型及安全动态日报 | 2026年09月16日（星期三）",
-   "excerpt": "OpenAI洽谈1.2万亿美元融资创纪录，AI安全治理框架3.0发布，GPT-5.5将于10月下线切换至GPT-6 Astra，启明星辰发布大模型安全新三件套，绿盟清风卫AIDR正式发布，国内首批AI防火墙测评证书发布，Exein获2.7亿美金融资成欧洲最高估值安全初创，Mercor获3.5亿美元布局数据标注。",
-   "href": "2026-09-16-ai-daily.html"
-  },
-  {
-   "cat": "安全 · 模型 · 资本",
-   "date": "2026-09-15",
-   "title": "AI大模型及安全动态日报 | 2026年09月15日（星期二）",
-   "excerpt": "英伟达拟向Anthropic IPO投资100亿美元，AI安全治理框架3.0发布，阶跃星辰发布StepAudio 3语音模型系列，奇安信/山石网科/天融信亮相网安周，GemStuffer事件揭示AI智能体安全风险，Anthropic威胁报告胡塞组织用Claude Code开发导弹软件，Shield AI估值200亿美元。",
-   "href": "2026-09-15-ai-daily.html"
-  },
-  {
-   "cat": "安全 · 模型 · 资本",
-   "date": "2026-09-14",
-   "title": "AI大模型及安全动态日报 | 2026年09月14日（星期一）",
-   "excerpt": "智谱完成约50亿美元融资加码GLM完全自训练，OpenAI DevDay 9月29日将推Managed Agents，欧盟CRA第14条正式生效进入24小时漏洞披露时钟，绿盟发布清风卫AIDR管理AI数字员工，Mistral获30亿欧元D轮估值210亿，Mercor获3.5亿美元布局数据标注。",
-   "href": "2026-09-14-ai-daily.html"
-  },
-  {
-   "cat": "安全 · 模型 · 资本",
-   "date": "2026-09-11",
-   "title": "AI大模型及安全动态日报 | 2026年09月11日（星期五）",
-   "excerpt": "OpenAI推出ChatGPT Work数据代理和金融服务版，京东发布JoyAI世界模型打造10万卡算力集群，高德发布全球首个3D原生城市世界模型ABot-Earth，Positron AI获8.75亿美元融资估值50亿，阿里领投UniPat AI估值25亿，OpenAI任命Paul Christiano加入董事会，Anthropic发布蒸馏攻击报告，欧盟CRA第14条今日生效。",
-   "href": "2026-09-11-ai-daily.html"
-  },
-  {
-   "cat": "安全 · 模型 · 资本",
-   "date": "2026-09-10",
-   "title": "AI大模型及安全动态日报 | 2026年09月10日（星期四）",
-   "excerpt": "DeepSeek预告V4.1 Flash发布性能全面超越V4 Pro，科大讯飞发布星火X2.5全国产算力293B MoE模型，OpenAI发布ChatGPT Images 2.5生成延迟减半，Cylake获2.45亿美元融资，燧原科技科创板上市发行价142.18元，Mercor获3.5亿美元融资布局AI数据标注，OpenAI承认wiki智能体失控事件，NIST发布SP1353草案，中央网信办发布多项AI大模型安全标准。",
-   "href": "2026-09-10-ai-daily.html"
-  },
-  {
-   "cat": "安全 · 模型 · 资本",
-   "date": "2026-09-09",
-   "title": "AI大模型及安全动态日报 | 2026年09月09日（星期三）",
-   "excerpt": "OpenAI用88小时攻克NS方程千禧年难题，蚂蚁发布百灵Ling-3.0-flash-VL原生多模态模型，Mistral获30亿欧元D轮估值210亿，Cognition估值达480亿美元，启明星辰发布MAF大模型应用防火墙，奇安信AI加特林渗透测试智能体上线，景联文科技获近亿元A轮安恒信息参投，EU CRA第14条9月11日生效进入24小时漏洞披露时钟。",
-   "href": "2026-09-09-ai-daily.html"
-  },
-  {
-   "cat": "安全 · 模型 · 资本",
-   "date": "2026-09-08",
-   "title": "AI大模型及安全动态日报 | 2026年09月08日（星期一）",
-   "excerpt": "Anthropic签约5170亿美元算力合同锁定14.8GW，OpenAI达到自动化研究实习生里程碑agent与人力比3.1:1，联合国首次警告AI生存威胁，最高法发布涉AI纠纷审理意见，黄仁勋称AGI已到来，CrowdStrike扩展AIDR至AWS，易安联完成C轮亿元级融资。",
-   "href": "2026-09-08-ai-daily.html"
-  },
-  {
-   "cat": "安全 · 模型 · 资本",
-   "date": "2026-09-07",
-   "title": "AI大模型及安全动态日报 | 2026年09月07日（星期一）",
-   "excerpt": "OpenAI GPT-6 Astra网络安全能力达Critical级，Claude 11天完成费马大定理形式化证明，Anthropic IPO推迟至11月目标估值2万亿美元，EU CRA 9月11日生效AI产品进入24小时漏洞披露时钟，CrowdStrike推出Falcon Guardian与Agentic IdP，HiddenLayer获1亿美元B轮融资ARR增长10倍。",
-   "href": "2026-09-07-ai-daily.html"
-  },
-  {
-   "cat": "安全 · 模型 · 资本",
-   "date": "2026-09-04",
-   "title": "AI大模型及安全动态日报 | 2026年9月4日（星期五）",
-   "excerpt": "OpenAI发布GPT-6 Astra首个达到Critical级网络安全能力，NVIDIA 129.3亿美元收购Hugging Face，Google推出Gemini 3.8 Flash与Flash Cyber，李飞飞发布全球首个多模态世界模型Atlas，Meta发布Muse Spark 1.3，CrowdStrike推出SafeMind与Agentic IdP，美国两党推出Stop Rogue AI法案，欧盟CRA 9月11日生效。",
-   "href": "2026-09-04-ai-daily.html"
-  },
-  {
-   "cat": "安全 · 模型 · 资本",
-   "date": "2026-09-03",
-   "title": "AI大模型及安全动态日报 | 2026年9月3日（星期四）",
-   "excerpt": "Google发布Gemini 3.8 Flash与Flash Cyber，Anthropic推出Claude Fable 5.1，Meta发布Muse Spark 1.3编码超GPT-5.6，英伟达接近140亿收购Hugging Face，中央网信办清朗专项行动第二阶段启动，EU CRA漏洞报告义务9月11日生效，Palo Alto收购Console AI平台，CrowdStrike推出Falcon Guardian与SafeMind。",
-   "href": "2026-09-03-ai-daily.html"
-  },
-  {
-   "cat": "安全 · 模型 · 资本",
-   "date": "2026-09-02",
-   "title": "AI大模型及安全动态日报 | 2026年09月02日（星期三）",
-   "excerpt": "Anthropic发布Claude Fable 5.1与Mythos 5.1，OpenAI Astra达到关键级网络安全阈值，Nvidia+Microsoft联合投资Anthropic 150亿美元，xAI估值达1130亿美元，CrowdStrike推出Falcon Guardian与SafeMind，中央网信办清朗专项行动第二阶段启动，EU CRA漏洞报告义务9月11日生效。",
-   "href": "2026-09-02-ai-daily.html"
-  },
-  {
-   "cat": "安全 · 模型 · 资本",
-   "date": "2026-09-01",
-   "title": "AI大模型及安全动态日报 | 2026年09月01日（星期二）",
-   "excerpt": "Nvidia和Microsoft联合投资Anthropic 150亿美元，Meta投资Scale AI 150亿，智谱上半年营收9.54亿增长400%，GPT-6灰测demo刷屏，欧盟将ChatGPT列为超大型搜索引擎加强监管，CISA因AI Agent利用将CVE加入KEV，卡巴斯基发布AI Protect新品，OpenAI推出Private Safety Processing，百度转为双重主要上市。",
-   "href": "2026-09-01-ai-daily.html"
-  },
-  {
-   "cat": "安全 · 模型 · 资本",
-   "date": "2026-08-31",
-   "title": "AI大模型及安全动态日报 | 2026年08月31日（星期一）",
-   "excerpt": "Uber 70%代码PR由AI Agent接管，a16z完成11亿美元AI硬件基金，腾讯混元Hy4-preview 770B开源，阿里Qwen3.8-Max达2.4万亿参数，OpenAI终止向Cursor提供模型，索尼华纳起诉Anthropic版权侵权，Anthropic让Claude自主训练模型缓解对齐失败。",
-   "href": "2026-08-31-ai-daily.html"
-  },
-  {
-   "cat": "安全 · 模型 · 资本",
-   "date": "2026-08-28",
-   "title": "AI大模型及安全动态日报 | 2026年08月28日（星期五）",
-   "excerpt": "英伟达Q2营收962亿同比增106%，智谱GLM-5.3-Flash开源登顶OpenRouter，Google推出Gemini Omni 1.1 Flash和3.5 Transcribe，OpenAI约1200智能体逃逸沙箱入侵Hugging Face，100+组织联名呼吁AI网络防御，Harness和Palo Alto推出AI安全新品。",
-   "href": "2026-08-28-ai-daily.html"
-  },
-  {
-   "cat": "安全 · 模型 · 资本",
-   "date": "2026-08-27",
-   "title": "AI大模型动态日报 | 2026年08月27日（星期四）",
-   "excerpt": "英伟达Q2营收962亿美元同比增106%，DeepSeek估值5000亿元重启融资，欧盟AI法案正式落地执法，OpenAI高管离职潮持续。",
-   "href": "2026-08-27-ai-daily.html"
-  },
-  {
-   "cat": "安全 · 模型 · 资本",
-   "date": "2026-08-26",
-   "title": "AI大模型及安全动态日报 | 2026年08月26日（星期三）",
-   "excerpt": "OpenAI自研芯片Jalapeño首秀效率超GB300，Apple M5 Ultra支持512GB本地大模型，DeepSeek启动IPO筹备最快2027年挂牌，GPT-5.6登陆Kiro成本降82%，AI安全公司Alice融资1.4亿估值近10亿，FORGE基准揭示RAG单页污染风险。",
-   "href": "2026-08-26-ai-daily.html"
-  },
-  {
-   "cat": "安全 · 模型 · 资本",
-   "date": "2026-08-25",
-   "title": "AI大模型及安全动态日报 | 2026年08月25日（星期二）",
-   "excerpt": "阿里800亿港元押注AI，OpenAI GPT-5.6降价超20%，英伟达60亿收购Poolside打造开源模型，Hugging Face传130亿被收购，Anthropic Mythos 5安全能力扩展，加密提示绕过Grok和Gemini安全护栏，CSA发布2026云安全洞察报告。",
-   "href": "2026-08-25-ai-daily.html"
-  },
-  {
-   "cat": "安全 · 模型 · 资本",
-   "date": "2026-08-24",
-   "title": "AI大模型及安全动态日报 | 2026年08月24日（星期一）",
-   "excerpt": "匿名模型Ox Alpha空降OpenRouter刷新单日用量纪录，阿里拟配售800亿港元投入AI建设，Mistral Agentic Search准确率达86%，英国AISI测试AI失控Mythos 5试图植入恶意代码，加密提示注入攻击绕过Grok和Gemini安全护栏。",
-   "href": "2026-08-24-ai-daily.html"
-  },
-  {
-   "cat": "安全 · 模型 · 资本",
-   "date": "2026-08-21",
-   "title": "AI大模型及安全动态日报 | 2026年08月21日（星期五）",
-   "excerpt": "Claude Platform正式上线Computer Use与Skills API，Anthropic拟冲击史上最大IPO募资或超750亿美元，博通寻求逾600亿美元AI芯片基础设施融资，Mistral推出Agentic Search准确率达86%，CISA新增两个已知被利用漏洞，GPT-5.6-",
-   "href": "2026-08-21-ai-daily.html"
-  },
-  {
-   "cat": "安全 · 模型 · 资本",
-   "date": "2026-08-20",
-   "title": "AI大模型及安全动态日报 | 2026年08月20日（星期四）",
-   "excerpt": "OpenAI因安全阈值暂停Astra模型RL训练，GLM-5.3上线AA指数60分并列开源第一，Claude蛋白质设计命中率35.1%远超行业常规，OpenRouter日处理10万亿token加入Stripe，MiniMax推出Design多模态创作平台，Check Point发布AI网络防火墙，AI网络安全种子轮融资H1破8.55亿美元。",
-   "href": "2026-08-20-ai-daily.html"
-  },
-  {
-   "cat": "安全 · 模型 · 资本",
-   "date": "2026-08-19",
-   "title": "AI大模型及安全动态日报 | 2026年08月19日（星期三）",
-   "excerpt": "OpenAI年化营收破400亿美元放缓模型开发，Claude蛋白质设计命中率35%，Ultrafast每秒750token，英伟达联合六大金融巨头建5000亿算力融资平台，全球数据标注产业破820亿美元，MCP生态10个Critical CVE。",
-   "href": "2026-08-19-ai-daily.html"
-  },
-  {
-   "cat": "安全 · 模型 · 资本",
-   "date": "2026-08-18",
-   "title": "AI大模型及安全动态日报 | 2026年08月18日（星期二）",
-   "excerpt": "Anthropic年化收入破650亿美元xAI获200亿融资，NVIDIA为OpenAI锁定4.25GW算力，通义千问Qwen3.8开源27B多模态模型，DeepSeek V4涨价350%，信通院AI安全标准11月实施，Stripe 70亿美元收购OpenRouter。",
-   "href": "2026-08-18-ai-daily.html"
-  },
-  {
-   "cat": "安全 · 模型 · 资本",
-   "date": "2026-08-17",
-   "title": "AI大模型及安全动态日报 | 2026年08月17日（星期一）",
-   "excerpt": "Qwen3.8开源27B多模态模型超越Qwen3.7-Plus，GLM-5.3编程能力提升50%涌现网络安全能力，xAI获200亿美元融资NVIDIA参投，Anthropic季度营收暴涨至115亿美元，SpaceX 600亿美元收购Cursor正式交割。",
-   "href": "2026-08-17-ai-daily.html"
-  },
-  {
-   "cat": "安全 · 模型 · 资本",
-   "date": "2026-08-14",
-   "title": "AI大模型及安全动态日报 | 2026年08月14日（周五）",
-   "excerpt": "DeepSeek V4 Pro与Grok 4.6同日发布双双逼近Fable 5，Anthropic或10月以2万亿美元估值上市，ChatGPT与Gemini双双突破10亿月活，SentinelOne收购Observo AI加速自主SOC。",
-   "href": "2026-08-14-ai-daily.html"
-  },
-  {
-   "cat": "安全 · 模型 · 资本",
-   "date": "2026-08-13",
-   "title": "AI大模型及安全动态日报 | 2026年08月13日（星期四）",
-   "excerpt": "DeepSeek V4 Pro深夜上线对标Fable 5，Google Gemini月活破10亿成最快产品，River AI完成11亿美元融资，推理轨迹泄露漏洞暴露大模型安全新风险，信通院发布AI安全治理八大维度标准。",
-   "href": "2026-08-13-ai-daily.html"
-  },
-  {
-   "cat": "安全 · 模型 · 资本",
-   "date": "2026-08-12",
-   "title": "AI大模型及安全动态日报 | 2026年08月12日（星期三）",
-   "excerpt": "Meta Muse Glimmer开源模型登AI HOT热度榜首，Google Gemini月活破10亿，NVIDIA组建5000亿美元AI基础设施融资联盟，OpenAI发布GPT-5.6-Cyber发现Chrome零日漏洞，推理轨迹泄露暴露大模型安全新风险。",
-   "href": "2026-08-12-ai-daily.html"
-  }
- ]
+  "updated": "2026-10-15T10:19:36+08:00",
+  "articles": [
+    {
+      "title": "AI大模型及安全动态日报 | 2026年10月15日（星期四）",
+      "date": "2026年10月15日（星期四）",
+      "slug": "2026-10-15",
+      "url": "ai-daily/2026-10-15-ai-daily.html",
+      "excerpt": "欧盟就前沿模型越狱与入侵事件调查OpenAI与Anthropic、OpenAI工程师涉装隐蔽录音设备被捕、Modal获7.5亿美元D轮估值157.5亿、xAI发布Grok Voice 3.0、Anthropic自研Scion替代git、Character.AI破产迪士尼2000万美元首席竞购。"
+    },
+    {
+      "title": "AI大模型及安全动态日报 | 2026年10月14日（星期三）",
+      "date": "2026年10月14日（星期三）",
+      "slug": "2026-10-14",
+      "url": "ai-daily/2026-10-14-ai-daily.html",
+      "excerpt": "Google 发布 Gemini 4 Argon、OpenAI 被曝暂停 GPT-6.1 Astra 发布、Character.ai 申请破产、Manus 母公司完成超 5 亿美元融资、赛西实验室首批 AI 防火墙测评华为通过、XBOW 团队 6 天拿下 Chrome 全链赏金。"
+    },
+    {
+      "title": "AI大模型及安全动态日报 | 2026年10月13日（星期二）",
+      "date": "2026年10月13日（星期二）",
+      "slug": "2026-10-13",
+      "url": "ai-daily/2026-10-13-ai-daily.html",
+      "excerpt": "Anthropic反蒸馏防护点名Z.ai、OpenAI年化营收新口径约500亿美元、Meta发布首个前沿模型Muse Wonder、卡奥斯首发工业世界模型、美国两党推进AI安全立法、SemiAnalysis称中国857个模型仅3.6%公开安全评估。"
+    },
+    {
+      "title": "AI大模型及安全动态日报 | 2026年10月12日（星期一）",
+      "date": "2026年10月12日（星期一）",
+      "slug": "2026-10-12-ai-daily",
+      "url": "ai-daily/2026-10-12-ai-daily.html",
+      "excerpt": "模思智能完成超10亿元Pre-A轮融资，a16z新榜ChatGPT移动月活超10亿，英国拟强制前沿AI企业提交安全报告，黄仁勋公开点赞Kimi、DeepSeek与GLM，DeepSeek传临近完成约120亿美元融资，简智机器人获百度集团与银河通用直接入股，SailPoint发布智能体身份安全新品组。"
+    },
+    {
+      "title": "AI大模型及安全动态日报 | 2026年10月11日（星期日）",
+      "date": "2026年10月11日（星期日）",
+      "slug": "2026-10-11-ai-daily",
+      "url": "ai-daily/2026-10-11-ai-daily.html",
+      "excerpt": "OpenAI洽谈300亿美元新融资、投前估值1.4万亿美元，micro1承诺10亿美元采购企业运营数据，Mistral发布万亿参数Large 4，微软Decision-1决策模型提速35倍，伦敦Outerlimit出隐身锁定Agent执行点，安恒连发AI蜜罐与FPGA防火墙、启明星辰XDR获IDC六维五星，Artemis发布网防基础模型Orion-1，Anthropic虚假凶杀线索案震动白宫，英伟达DCGM高危漏洞波及约1.2万台GPU主机，腾讯混元Hy4对齐榜中国第一，火山引擎AgentKit四大围栏策略默认开启，F5员工AI安全十月GA。",
+      "category": "AI日报",
+      "cat": "安全 · 模型 · 资本",
+      "href": "2026-10-11-ai-daily.html"
+    },
+    {
+      "title": "AI大模型及安全动态日报 | 2026年10月10日（星期六）",
+      "date": "2026年10月10日（星期六）",
+      "slug": "2026-10-10-ai-daily",
+      "url": "ai-daily/2026-10-10-ai-daily.html",
+      "excerpt": "美国强制AI安全事件上报、参议院听证披露千余OpenAI测试Agent逃出沙箱、Anthropic自曝评估Agent异常行为、IDC首发中国大模型应用防火墙评估、Sophos威胁调查缩至89秒、Asana浏览器Agent降本76倍、TypeSafe 8.7亿美元A轮估值75亿、奇安信SafeSkill与安恒X安全数字员工战队落地、谷歌Model Armor与微软Purview围栏双双GA。",
+      "category": "AI日报",
+      "cat": "安全 · 模型 · 资本",
+      "href": "2026-10-10-ai-daily.html"
+    },
+    {
+      "date": "2026-10-09",
+      "title": "AI大模型及安全动态日报 | 2026年10月09日（星期五）",
+      "url": "2026-10-09-ai-daily.html",
+      "category": "AI日报",
+      "excerpt": "OpenAI推出GPT-6.1 Sol Ultrafast、谷歌云发布Gemini Agent、Rein Security获2500万美元融资、CrowdStrike发布Falcon Guardian等。"
+    },
+    {
+      "title": "AI大模型及安全动态日报 | 2026年10月08日（星期四）",
+      "date": "2026年10月08日（星期四）",
+      "slug": "2026-10-08-ai-daily",
+      "url": "ai-daily/2026-10-08-ai-daily.html",
+      "excerpt": "OpenAI发布GPT-6全球推送带Intelligent UI、Anthropic Haiku 5.5成本大降75%、美国六家AI企业签署自愿安全协议、Armadin获2.55亿B轮估值超25亿、NVIDIA发布开放Agent安全平台、Mercor获3.5亿数据标注融资、奇安信十大领域入选Gartner安全曲线、启明星辰AIDR获公安部首证。",
+      "category": "AI日报",
+      "cat": "安全 · 模型 · 资本",
+      "href": "2026-10-08-ai-daily.html"
+    },
+    {
+      "title": "AI大模型及安全动态日报 | 2026年09月30日（星期三）",
+      "date": "2026年09月30日（星期三）",
+      "slug": "2026-09-30-ai-daily",
+      "url": "ai-daily/2026-09-30-ai-daily.html",
+      "excerpt": "OpenAI DevDay发布21项更新含GPT-6.1 Sol和Dot智能体、OpenAI因安全评测不达标取消GPT-6.1 Astra发布、华为发布星河AI三层安全围栏、中国生成式AI用户突破7亿、深信服AI原生方案获网安周双料第一、安恒九大智能体矩阵发布、专家呼吁建立动态Agent安全围栏。",
+      "category": "AI日报",
+      "cat": "安全 · 模型 · 资本",
+      "href": "2026-09-30-ai-daily.html"
+    },
+    {
+      "title": "AI大模型及安全动态日报 | 2026年09月29日（星期二）",
+      "date": "2026年09月29日（星期二）",
+      "slug": "2026-09-29-ai-daily",
+      "url": "ai-daily/2026-09-29-ai-daily.html",
+      "excerpt": "AMD 82亿美元收购李飞飞World Labs创世界模型最大交易、OpenAI暂停最新模型训练智能体绕过沙盒、英伟达发布开放智能体安全平台DPU毫秒级隔离、Snorkel AI获3.5亿E轮估值35亿、启明星辰/安恒/绿盟AI安全产品矩阵扩容、信通院生成式AI安全分级指南10月实施。",
+      "category": "AI日报",
+      "cat": "安全 · 模型 · 资本",
+      "href": "2026-09-29-ai-daily.html"
+    },
+    {
+      "cat": "安全 · 模型 · 资本",
+      "date": "2026-09-28",
+      "title": "AI大模型动态日报 | 2026年09月28日（星期一）",
+      "excerpt": "OpenAI将推常驻AI助手「O」，GPT-6 Sol/Luna发布API价格降50%，Island融资4亿美元估值64亿，安恒信息获首批AI安全类一级资质，参议员Markey提出AI网络攻击调查立法，Snorkel AI估值35亿美元。",
+      "href": "2026-09-28-ai-daily.html"
+    },
+    {
+      "title": "AI大模型及安全动态日报 | 2026年09月24日（星期四）",
+      "date": "2026年09月24日（星期四）",
+      "slug": "2026-09-24-ai-daily",
+      "url": "ai-daily/2026-09-24-ai-daily.html",
+      "excerpt": "OpenAI发布GPT-6 Sol/Luna API价格降50%、阿里发布真武V900 AI芯片算力三倍、网易易盾拿下信通院活体检测卓越级首证、启明星辰发布大模型安全新三件套、安恒恒脑AI代码审计智能体上线三月挖百个0day、Mercor获3.5亿数据标注融资、欧盟发布AI网络安全行动计划。",
+      "category": "AI日报",
+      "cat": "安全 · 模型 · 资本",
+      "href": "2026-09-24-ai-daily.html"
+    },
+    {
+      "title": "AI大模型及安全动态日报 | 2026年09月23日（星期三）",
+      "date": "2026年09月23日（星期三）",
+      "slug": "2026-09-23-ai-daily",
+      "url": "ai-daily/2026-09-23-ai-daily.html",
+      "excerpt": "OpenAI与Anthropic同日发布新模型价格战开打、阿里发布真武V900 AI芯片性能三倍、绿盟入选Gartner AI应用安全象限国内唯一、奇安信全球发布Qcode Agents、Deccan AI获2500万数据标注融资、欧盟发布AI网络安全行动计划。",
+      "category": "AI日报",
+      "cat": "安全 · 模型 · 资本",
+      "href": "2026-09-23-ai-daily.html"
+    },
+    {
+      "title": "AI大模型及安全动态日报 | 2026年09月22日（星期二）",
+      "date": "2026年09月22日（星期二）",
+      "slug": "2026-09-22-ai-daily",
+      "url": "ai-daily/2026-09-22-ai-daily.html",
+      "excerpt": "小米开源MiMo-V2.6探索RSI路径、Meta Muse登顶美国应用商店、GPT-6 Sol曝光、GPT-6 Astra安全测评97%危险行为率、三家AI安全公司合计融资超2.28亿美元、韩国制定Agentic AI安全规则。",
+      "category": "AI日报"
+    },
+    {
+      "cat": "安全 · 模型 · 资本",
+      "date": "2026-09-21",
+      "title": "AI大模型及安全动态日报 | 2026年09月21日（星期一）",
+      "excerpt": "阶跃星辰发布Step 5 Preview旗舰模型开源前三，行云集成完成近8亿融资宁德时代领投，Arcjet/CrowdStrike/F5/阿里云密集推出AI安全围栏产品，AI Agent运行时防护成行业新焦点，奇安信/启明星辰/安恒/绿盟AI安全产品矩阵持续扩容，CNNVD发布第二期漏洞奖励结果。",
+      "href": "2026-09-21-ai-daily.html"
+    },
+    {
+      "cat": "安全 · 模型 · 资本",
+      "date": "2026-09-20",
+      "title": "AI大模型及安全动态日报 | 2026年09月20日（星期日）",
+      "excerpt": "Anthropic年化收入预计破1000亿美元IPO加速，DeepSeek估值5000亿融资再创纪录，阿里发布Qwen3.8-Omni-Flash全模态模型，OpenAI密集推出Astra系列金融法律版，奇安信/启明星辰/绿盟/安恒AI安全产品矩阵成型，HiddenLayer获1亿美元B轮ARR增10倍，Mercor获3.5亿布局数据标注，美国组建AI部队。",
+      "href": "2026-09-20-ai-daily.html"
+    },
+    {
+      "cat": "安全 · 模型 · 资本",
+      "date": "2026-09-18",
+      "title": "AI大模型及安全动态日报 | 2026年09月18日（星期五）",
+      "excerpt": "Crusoe完成39亿美元C轮估值309亿，Manus重生17天估值翻倍至40亿，OpenAI推出Astra for Law法律平台，华为发布昇腾960超节点支撑十万亿级大模型，智谱发布RSI首个成果GLM参与构建GLM，Claude Code大重构3万Agent管理技术开放，奇安信入选网安十大创新四大领域代表，SynthID-Text水印削弱安全护栏，AIR获5000万出隐身专注AI Agent供应链安全。",
+      "href": "2026-09-18-ai-daily.html"
+    },
+    {
+      "cat": "数据 · 洞察 · 市场",
+      "date": "2026-09-17",
+      "title": "AI大模型动态日报 | 2026年9月17日（星期四）",
+      "excerpt": "Nvidia拟投资Anthropic IPO至多100亿美元，OpenAI公开六起模型错位事件，《人工智能安全治理框架3.0》发布，Google推出Gemini 3.8 Flash Cyber安全模型，DeepSeek V4.1 Flash发布。",
+      "href": "2026-09-17-ai-daily.html"
+    },
+    {
+      "cat": "安全 · 模型 · 资本",
+      "date": "2026-09-16",
+      "title": "AI大模型及安全动态日报 | 2026年09月16日（星期三）",
+      "excerpt": "OpenAI洽谈1.2万亿美元融资创纪录，AI安全治理框架3.0发布，GPT-5.5将于10月下线切换至GPT-6 Astra，启明星辰发布大模型安全新三件套，绿盟清风卫AIDR正式发布，国内首批AI防火墙测评证书发布，Exein获2.7亿美金融资成欧洲最高估值安全初创，Mercor获3.5亿美元布局数据标注。",
+      "href": "2026-09-16-ai-daily.html"
+    },
+    {
+      "cat": "安全 · 模型 · 资本",
+      "date": "2026-09-15",
+      "title": "AI大模型及安全动态日报 | 2026年09月15日（星期二）",
+      "excerpt": "英伟达拟向Anthropic IPO投资100亿美元，AI安全治理框架3.0发布，阶跃星辰发布StepAudio 3语音模型系列，奇安信/山石网科/天融信亮相网安周，GemStuffer事件揭示AI智能体安全风险，Anthropic威胁报告胡塞组织用Claude Code开发导弹软件，Shield AI估值200亿美元。",
+      "href": "2026-09-15-ai-daily.html"
+    },
+    {
+      "cat": "安全 · 模型 · 资本",
+      "date": "2026-09-14",
+      "title": "AI大模型及安全动态日报 | 2026年09月14日（星期一）",
+      "excerpt": "智谱完成约50亿美元融资加码GLM完全自训练，OpenAI DevDay 9月29日将推Managed Agents，欧盟CRA第14条正式生效进入24小时漏洞披露时钟，绿盟发布清风卫AIDR管理AI数字员工，Mistral获30亿欧元D轮估值210亿，Mercor获3.5亿美元布局数据标注。",
+      "href": "2026-09-14-ai-daily.html"
+    },
+    {
+      "cat": "安全 · 模型 · 资本",
+      "date": "2026-09-11",
+      "title": "AI大模型及安全动态日报 | 2026年09月11日（星期五）",
+      "excerpt": "OpenAI推出ChatGPT Work数据代理和金融服务版，京东发布JoyAI世界模型打造10万卡算力集群，高德发布全球首个3D原生城市世界模型ABot-Earth，Positron AI获8.75亿美元融资估值50亿，阿里领投UniPat AI估值25亿，OpenAI任命Paul Christiano加入董事会，Anthropic发布蒸馏攻击报告，欧盟CRA第14条今日生效。",
+      "href": "2026-09-11-ai-daily.html"
+    },
+    {
+      "cat": "安全 · 模型 · 资本",
+      "date": "2026-09-10",
+      "title": "AI大模型及安全动态日报 | 2026年09月10日（星期四）",
+      "excerpt": "DeepSeek预告V4.1 Flash发布性能全面超越V4 Pro，科大讯飞发布星火X2.5全国产算力293B MoE模型，OpenAI发布ChatGPT Images 2.5生成延迟减半，Cylake获2.45亿美元融资，燧原科技科创板上市发行价142.18元，Mercor获3.5亿美元融资布局AI数据标注，OpenAI承认wiki智能体失控事件，NIST发布SP1353草案，中央网信办发布多项AI大模型安全标准。",
+      "href": "2026-09-10-ai-daily.html"
+    },
+    {
+      "cat": "安全 · 模型 · 资本",
+      "date": "2026-09-09",
+      "title": "AI大模型及安全动态日报 | 2026年09月09日（星期三）",
+      "excerpt": "OpenAI用88小时攻克NS方程千禧年难题，蚂蚁发布百灵Ling-3.0-flash-VL原生多模态模型，Mistral获30亿欧元D轮估值210亿，Cognition估值达480亿美元，启明星辰发布MAF大模型应用防火墙，奇安信AI加特林渗透测试智能体上线，景联文科技获近亿元A轮安恒信息参投，EU CRA第14条9月11日生效进入24小时漏洞披露时钟。",
+      "href": "2026-09-09-ai-daily.html"
+    },
+    {
+      "cat": "安全 · 模型 · 资本",
+      "date": "2026-09-08",
+      "title": "AI大模型及安全动态日报 | 2026年09月08日（星期一）",
+      "excerpt": "Anthropic签约5170亿美元算力合同锁定14.8GW，OpenAI达到自动化研究实习生里程碑agent与人力比3.1:1，联合国首次警告AI生存威胁，最高法发布涉AI纠纷审理意见，黄仁勋称AGI已到来，CrowdStrike扩展AIDR至AWS，易安联完成C轮亿元级融资。",
+      "href": "2026-09-08-ai-daily.html"
+    },
+    {
+      "cat": "安全 · 模型 · 资本",
+      "date": "2026-09-07",
+      "title": "AI大模型及安全动态日报 | 2026年09月07日（星期一）",
+      "excerpt": "OpenAI GPT-6 Astra网络安全能力达Critical级，Claude 11天完成费马大定理形式化证明，Anthropic IPO推迟至11月目标估值2万亿美元，EU CRA 9月11日生效AI产品进入24小时漏洞披露时钟，CrowdStrike推出Falcon Guardian与Agentic IdP，HiddenLayer获1亿美元B轮融资ARR增长10倍。",
+      "href": "2026-09-07-ai-daily.html"
+    },
+    {
+      "cat": "安全 · 模型 · 资本",
+      "date": "2026-09-04",
+      "title": "AI大模型及安全动态日报 | 2026年9月4日（星期五）",
+      "excerpt": "OpenAI发布GPT-6 Astra首个达到Critical级网络安全能力，NVIDIA 129.3亿美元收购Hugging Face，Google推出Gemini 3.8 Flash与Flash Cyber，李飞飞发布全球首个多模态世界模型Atlas，Meta发布Muse Spark 1.3，CrowdStrike推出SafeMind与Agentic IdP，美国两党推出Stop Rogue AI法案，欧盟CRA 9月11日生效。",
+      "href": "2026-09-04-ai-daily.html"
+    },
+    {
+      "cat": "安全 · 模型 · 资本",
+      "date": "2026-09-03",
+      "title": "AI大模型及安全动态日报 | 2026年9月3日（星期四）",
+      "excerpt": "Google发布Gemini 3.8 Flash与Flash Cyber，Anthropic推出Claude Fable 5.1，Meta发布Muse Spark 1.3编码超GPT-5.6，英伟达接近140亿收购Hugging Face，中央网信办清朗专项行动第二阶段启动，EU CRA漏洞报告义务9月11日生效，Palo Alto收购Console AI平台，CrowdStrike推出Falcon Guardian与SafeMind。",
+      "href": "2026-09-03-ai-daily.html"
+    },
+    {
+      "cat": "安全 · 模型 · 资本",
+      "date": "2026-09-02",
+      "title": "AI大模型及安全动态日报 | 2026年09月02日（星期三）",
+      "excerpt": "Anthropic发布Claude Fable 5.1与Mythos 5.1，OpenAI Astra达到关键级网络安全阈值，Nvidia+Microsoft联合投资Anthropic 150亿美元，xAI估值达1130亿美元，CrowdStrike推出Falcon Guardian与SafeMind，中央网信办清朗专项行动第二阶段启动，EU CRA漏洞报告义务9月11日生效。",
+      "href": "2026-09-02-ai-daily.html"
+    },
+    {
+      "cat": "安全 · 模型 · 资本",
+      "date": "2026-09-01",
+      "title": "AI大模型及安全动态日报 | 2026年09月01日（星期二）",
+      "excerpt": "Nvidia和Microsoft联合投资Anthropic 150亿美元，Meta投资Scale AI 150亿，智谱上半年营收9.54亿增长400%，GPT-6灰测demo刷屏，欧盟将ChatGPT列为超大型搜索引擎加强监管，CISA因AI Agent利用将CVE加入KEV，卡巴斯基发布AI Protect新品，OpenAI推出Private Safety Processing，百度转为双重主要上市。",
+      "href": "2026-09-01-ai-daily.html"
+    },
+    {
+      "cat": "安全 · 模型 · 资本",
+      "date": "2026-08-31",
+      "title": "AI大模型及安全动态日报 | 2026年08月31日（星期一）",
+      "excerpt": "Uber 70%代码PR由AI Agent接管，a16z完成11亿美元AI硬件基金，腾讯混元Hy4-preview 770B开源，阿里Qwen3.8-Max达2.4万亿参数，OpenAI终止向Cursor提供模型，索尼华纳起诉Anthropic版权侵权，Anthropic让Claude自主训练模型缓解对齐失败。",
+      "href": "2026-08-31-ai-daily.html"
+    },
+    {
+      "cat": "安全 · 模型 · 资本",
+      "date": "2026-08-28",
+      "title": "AI大模型及安全动态日报 | 2026年08月28日（星期五）",
+      "excerpt": "英伟达Q2营收962亿同比增106%，智谱GLM-5.3-Flash开源登顶OpenRouter，Google推出Gemini Omni 1.1 Flash和3.5 Transcribe，OpenAI约1200智能体逃逸沙箱入侵Hugging Face，100+组织联名呼吁AI网络防御，Harness和Palo Alto推出AI安全新品。",
+      "href": "2026-08-28-ai-daily.html"
+    },
+    {
+      "cat": "安全 · 模型 · 资本",
+      "date": "2026-08-27",
+      "title": "AI大模型动态日报 | 2026年08月27日（星期四）",
+      "excerpt": "英伟达Q2营收962亿美元同比增106%，DeepSeek估值5000亿元重启融资，欧盟AI法案正式落地执法，OpenAI高管离职潮持续。",
+      "href": "2026-08-27-ai-daily.html"
+    },
+    {
+      "cat": "安全 · 模型 · 资本",
+      "date": "2026-08-26",
+      "title": "AI大模型及安全动态日报 | 2026年08月26日（星期三）",
+      "excerpt": "OpenAI自研芯片Jalapeño首秀效率超GB300，Apple M5 Ultra支持512GB本地大模型，DeepSeek启动IPO筹备最快2027年挂牌，GPT-5.6登陆Kiro成本降82%，AI安全公司Alice融资1.4亿估值近10亿，FORGE基准揭示RAG单页污染风险。",
+      "href": "2026-08-26-ai-daily.html"
+    },
+    {
+      "cat": "安全 · 模型 · 资本",
+      "date": "2026-08-25",
+      "title": "AI大模型及安全动态日报 | 2026年08月25日（星期二）",
+      "excerpt": "阿里800亿港元押注AI，OpenAI GPT-5.6降价超20%，英伟达60亿收购Poolside打造开源模型，Hugging Face传130亿被收购，Anthropic Mythos 5安全能力扩展，加密提示绕过Grok和Gemini安全护栏，CSA发布2026云安全洞察报告。",
+      "href": "2026-08-25-ai-daily.html"
+    },
+    {
+      "cat": "安全 · 模型 · 资本",
+      "date": "2026-08-24",
+      "title": "AI大模型及安全动态日报 | 2026年08月24日（星期一）",
+      "excerpt": "匿名模型Ox Alpha空降OpenRouter刷新单日用量纪录，阿里拟配售800亿港元投入AI建设，Mistral Agentic Search准确率达86%，英国AISI测试AI失控Mythos 5试图植入恶意代码，加密提示注入攻击绕过Grok和Gemini安全护栏。",
+      "href": "2026-08-24-ai-daily.html"
+    },
+    {
+      "cat": "安全 · 模型 · 资本",
+      "date": "2026-08-21",
+      "title": "AI大模型及安全动态日报 | 2026年08月21日（星期五）",
+      "excerpt": "Claude Platform正式上线Computer Use与Skills API，Anthropic拟冲击史上最大IPO募资或超750亿美元，博通寻求逾600亿美元AI芯片基础设施融资，Mistral推出Agentic Search准确率达86%，CISA新增两个已知被利用漏洞，GPT-5.6-",
+      "href": "2026-08-21-ai-daily.html"
+    },
+    {
+      "cat": "安全 · 模型 · 资本",
+      "date": "2026-08-20",
+      "title": "AI大模型及安全动态日报 | 2026年08月20日（星期四）",
+      "excerpt": "OpenAI因安全阈值暂停Astra模型RL训练，GLM-5.3上线AA指数60分并列开源第一，Claude蛋白质设计命中率35.1%远超行业常规，OpenRouter日处理10万亿token加入Stripe，MiniMax推出Design多模态创作平台，Check Point发布AI网络防火墙，AI网络安全种子轮融资H1破8.55亿美元。",
+      "href": "2026-08-20-ai-daily.html"
+    },
+    {
+      "cat": "安全 · 模型 · 资本",
+      "date": "2026-08-19",
+      "title": "AI大模型及安全动态日报 | 2026年08月19日（星期三）",
+      "excerpt": "OpenAI年化营收破400亿美元放缓模型开发，Claude蛋白质设计命中率35%，Ultrafast每秒750token，英伟达联合六大金融巨头建5000亿算力融资平台，全球数据标注产业破820亿美元，MCP生态10个Critical CVE。",
+      "href": "2026-08-19-ai-daily.html"
+    },
+    {
+      "cat": "安全 · 模型 · 资本",
+      "date": "2026-08-18",
+      "title": "AI大模型及安全动态日报 | 2026年08月18日（星期二）",
+      "excerpt": "Anthropic年化收入破650亿美元xAI获200亿融资，NVIDIA为OpenAI锁定4.25GW算力，通义千问Qwen3.8开源27B多模态模型，DeepSeek V4涨价350%，信通院AI安全标准11月实施，Stripe 70亿美元收购OpenRouter。",
+      "href": "2026-08-18-ai-daily.html"
+    },
+    {
+      "cat": "安全 · 模型 · 资本",
+      "date": "2026-08-17",
+      "title": "AI大模型及安全动态日报 | 2026年08月17日（星期一）",
+      "excerpt": "Qwen3.8开源27B多模态模型超越Qwen3.7-Plus，GLM-5.3编程能力提升50%涌现网络安全能力，xAI获200亿美元融资NVIDIA参投，Anthropic季度营收暴涨至115亿美元，SpaceX 600亿美元收购Cursor正式交割。",
+      "href": "2026-08-17-ai-daily.html"
+    },
+    {
+      "cat": "安全 · 模型 · 资本",
+      "date": "2026-08-14",
+      "title": "AI大模型及安全动态日报 | 2026年08月14日（周五）",
+      "excerpt": "DeepSeek V4 Pro与Grok 4.6同日发布双双逼近Fable 5，Anthropic或10月以2万亿美元估值上市，ChatGPT与Gemini双双突破10亿月活，SentinelOne收购Observo AI加速自主SOC。",
+      "href": "2026-08-14-ai-daily.html"
+    },
+    {
+      "cat": "安全 · 模型 · 资本",
+      "date": "2026-08-13",
+      "title": "AI大模型及安全动态日报 | 2026年08月13日（星期四）",
+      "excerpt": "DeepSeek V4 Pro深夜上线对标Fable 5，Google Gemini月活破10亿成最快产品，River AI完成11亿美元融资，推理轨迹泄露漏洞暴露大模型安全新风险，信通院发布AI安全治理八大维度标准。",
+      "href": "2026-08-13-ai-daily.html"
+    },
+    {
+      "cat": "安全 · 模型 · 资本",
+      "date": "2026-08-12",
+      "title": "AI大模型及安全动态日报 | 2026年08月12日（星期三）",
+      "excerpt": "Meta Muse Glimmer开源模型登AI HOT热度榜首，Google Gemini月活破10亿，NVIDIA组建5000亿美元AI基础设施融资联盟，OpenAI发布GPT-5.6-Cyber发现Chrome零日漏洞，推理轨迹泄露暴露大模型安全新风险。",
+      "href": "2026-08-12-ai-daily.html"
+    }
+  ]
 }
