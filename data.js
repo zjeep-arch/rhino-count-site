@@ -127,6 +127,20 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "Meta不开源了：Llama的旗手，举起了收费牌",
+        desc: "Meta 发布 Muse Wonder 转向闭源收费。判断：不开源是补入场券，北美头部没有一家开源；Muse 登顶下载榜，700 万副眼镜等着装上它，模型是大脑，眼镜是身体。",
+        href: "notes/2026-10-18-meta-muse-wonder.html"
+      },
+
+      {
+        type: "Essay",
+        title: "台积电史上最赚钱季度，真正的增量在苹果",
+        desc: "台积电 Q3 净利润 7630 亿新台币，同比增长 69%，连续六季创纪录，但毛利率环比下滑。判断：2nm 的学费先付了，Agent 把 Mac mini 变成抢手货，苹果代工是第二条增长曲线。",
+        href: "notes/2026-10-17-taishidian-apple.html"
+      },
+
+      {
+        type: "Essay",
         title: "中欧电动车\"价格承诺\"：欧盟不要税了，45%的关税去哪了？",
         desc: "10 月 14 日中汽协宣布中欧电动车贸易达成共识，价格承诺替代反补贴税。判断：欧盟不要税了，中国车企自己涨价，涨出来的钱留在自己口袋里。",
         href: "notes/2026-10-15-zhongou-ev-jiage-chengnuo.html"
@@ -578,6 +592,22 @@ window.SITE_DATA = {
         img: "assets/note-05.svg",
         href: "notes/why-rhino-count.html"
       },
+      {
+        cat: "观察", num: "N° 132",
+        title: "Meta不开源了：Llama的旗手，举起了收费牌",
+        excerpt: "Meta 发布 Muse Wonder 转向闭源收费，基础版 20 美分/百万 token。判断：不开源是补入场券；Muse 登顶下载榜，700 万副眼镜等着装上它，未来靠交易抽佣赚钱。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-10-18-meta-muse-wonder.html"
+      },
+
+      {
+        cat: "观察", num: "N° 131",
+        title: "台积电史上最赚钱季度，真正的增量在苹果",
+        excerpt: "台积电 Q3 净利润 7630 亿新台币（+68.7%）六连创纪录，毛利率环比下滑，2nm 占比从 3% 跳到 8%。判断：学费先付了，Agent 带火 Mac mini（部门营收 +29%），苹果代工是第二条增长曲线。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-10-17-taishidian-apple.html"
+      },
+
       {
         cat: "观察", num: "N° 130",
         title: "中欧电动车\"价格承诺\"：欧盟不要税了，45%的关税去哪了？",
