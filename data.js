@@ -127,6 +127,13 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "中欧电动车\"价格承诺\"：欧盟不要税了，45%的关税去哪了？",
+        desc: "10 月 14 日中汽协宣布中欧电动车贸易达成共识，价格承诺替代反补贴税。判断：欧盟不要税了，中国车企自己涨价，涨出来的钱留在自己口袋里。",
+        href: "notes/2026-10-15-zhongou-ev-jiage-chengnuo.html"
+      },
+
+      {
+        type: "Essay",
         title: "微软总裁喊\"管管我\"，在抬门槛",
         desc: "微软总裁 Brad Smith 对 BBC 称 AI 受到的监管还不如洗衣机和牛奶，列五点清单要强制紧急制动和第三方评测。判断：门槛一旦成法，就是后来者的护城河。",
         href: "notes/2026-10-14-brad-smith-ai-regulation.html"
@@ -571,6 +578,14 @@ window.SITE_DATA = {
         img: "assets/note-05.svg",
         href: "notes/why-rhino-count.html"
       },
+      {
+        cat: "观察", num: "N° 130",
+        title: "中欧电动车\"价格承诺\"：欧盟不要税了，45%的关税去哪了？",
+        excerpt: "10 月 14 日，中汽协宣布中欧就电动车贸易达成共识，价格承诺替代反补贴税。判断：欧盟不要税了，中国车企自己涨价，涨出来的钱留在自己口袋里；美国100%关税是\"围栏内发育\"的宣告，欧盟这条路是\"体面地各退一步\"。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-10-15-zhongou-ev-jiage-chengnuo.html"
+      },
+
       {
         cat: "观察", num: "N° 129",
         title: "微软总裁喊\"管管我\"，在抬门槛",
