@@ -5,8 +5,29 @@
     <link>https://rhinocount.cn/</link>
     <description>AI Native Magazine — 记录 AI 如何改变技术、商业与人的工作方式。</description>
     <language>zh-CN</language>
-    <lastBuildDate>Wed, 30 Sep 2026 09:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 08 Oct 2026 09:00:00 +0800</lastBuildDate>
     <atom:link href="https://rhinocount.cn/rss.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title><![CDATA[可灵AI要单独上市，估值追平整个快手]]></title>
+      <link>https://rhinocount.cn/notes/2026-10-08-keling-ipo.html</link>
+      <guid isPermaLink="true">https://rhinocount.cn/notes/2026-10-08-keling-ipo.html</guid>
+      <pubDate>Thu, 08 Oct 2026 09:00:00 +0800</pubDate>
+      <description><![CDATA[]]></description>
+    </item>
+    <item>
+      <title><![CDATA[可灵AI要单独上市，估值追平整个快手]]></title>
+      <link>https://rhinocount.cn/notes/2026-10-08-keling-ipo-wechat.html</link>
+      <guid isPermaLink="true">https://rhinocount.cn/notes/2026-10-08-keling-ipo-wechat.html</guid>
+      <pubDate>Thu, 08 Oct 2026 09:00:00 +0800</pubDate>
+      <description><![CDATA[]]></description>
+    </item>
+    <item>
+      <title><![CDATA[AI大模型及安全动态日报 | 2026年10月08日（星期四） · AI日报 · 犀牛伯爵]]></title>
+      <link>https://rhinocount.cn/ai-daily/2026-10-08-ai-daily.html</link>
+      <guid isPermaLink="true">https://rhinocount.cn/ai-daily/2026-10-08-ai-daily.html</guid>
+      <pubDate>Thu, 08 Oct 2026 09:00:00 +0800</pubDate>
+      <description><![CDATA[OpenAI发布GPT-6全球推送带Intelligent UI、Anthropic Haiku 5.5成本大降75%、美国六家AI企业签署自愿安全协议、Armadin获2.55亿B轮估值超25亿、NVIDIA发布开放Agent安全平台、Mercor获3.5亿数据标注融资、奇安信十大领域入选Gartner安全曲线、启明星辰AIDR获公安部首证。]]></description>
+    </item>
     <item>
       <title><![CDATA[AI大模型及安全动态日报 | 2026年09月30日（星期三） · AI日报 · 犀牛伯爵]]></title>
       <link>https://rhinocount.cn/ai-daily/2026-09-30-ai-daily.html</link>
@@ -195,27 +216,6 @@
       <guid isPermaLink="true">https://rhinocount.cn/notes/2026-09-26-cognition-devin-1b-wechat.html</guid>
       <pubDate>Sat, 26 Sep 2026 09:00:00 +0800</pubDate>
       <description><![CDATA[]]></description>
-    </item>
-    <item>
-      <title><![CDATA[700 个智能体瞒着 OpenAI，攻下了 Hugging Face｜犀牛伯爵]]></title>
-      <link>https://rhinocount.cn/notes/2026-09-25-openai-zhinengti-fengqun.html</link>
-      <guid isPermaLink="true">https://rhinocount.cn/notes/2026-09-25-openai-zhinengti-fengqun.html</guid>
-      <pubDate>Fri, 25 Sep 2026 09:00:00 +0800</pubDate>
-      <description><![CDATA[]]></description>
-    </item>
-    <item>
-      <title><![CDATA[700 个智能体瞒着 OpenAI，攻下了 Hugging Face｜犀牛伯爵]]></title>
-      <link>https://rhinocount.cn/notes/2026-09-25-openai-zhinengti-fengqun-wechat.html</link>
-      <guid isPermaLink="true">https://rhinocount.cn/notes/2026-09-25-openai-zhinengti-fengqun-wechat.html</guid>
-      <pubDate>Fri, 25 Sep 2026 09:00:00 +0800</pubDate>
-      <description><![CDATA[]]></description>
-    </item>
-    <item>
-      <title><![CDATA[刘勇：AI创业，先学会算账再谈理想｜犀牛伯爵 N°108]]></title>
-      <link>https://rhinocount.cn/notes/2026-09-24-liu-yong-ai-chuangye-diyixing.html</link>
-      <guid isPermaLink="true">https://rhinocount.cn/notes/2026-09-24-liu-yong-ai-chuangye-diyixing.html</guid>
-      <pubDate>Thu, 24 Sep 2026 09:00:00 +0800</pubDate>
-      <description><![CDATA[2026年9月23日晚，刘勇在北大《AI创业与投资》第三课：AI创业的第一性框架。第一人称转译：AI创业，先学会算账，再谈理想。含50步成功率数学、87天窗口、FDE、14个现场问答，及Cursor、Manus、Scale AI、Ray-Ban Meta商业案例参考。]]></description>
     </item>
   </channel>
 </rss>
