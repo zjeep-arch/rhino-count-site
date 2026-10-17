@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>紫微小馆 · 紫微斗数在线排盘</title>
+<meta name="description" content="紫微小馆：免费紫微斗数在线排盘。输入生日时辰，浏览器本地排出紫微命盘：十二宫现代语解读、四化格局、大限流年、13维深度解读。数据只存手机，不上传。">
+<meta name="keywords" content="紫微斗数排盘,紫微斗数在线排盘,紫微命盘,免费排盘,紫微斗数算命,紫微小馆">
+<meta property="og:title" content="紫微小馆 · 紫微斗数在线排盘">
+<meta property="og:description" content="输入生日时辰，本地排出你的紫微命盘：十二宫解读、四化格局、大限流年。">
+<meta property="og:type" content="website">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<div id="stars-bg" aria-hidden="true"></div>
+
+<header id="app-header">
+  <div class="brand" data-nav="home">
+    <span class="brand-mark">✦</span>
+    <div><h1>紫微小馆</h1><p>紫微斗数在线排盘</p></div>
+  </div>
+  <button id="nav-archive" class="icon-btn" data-nav="archive" aria-label="我的命盘">☰</button>
+</header>
+
+<main id="app">
+  <!-- 首页 -->
+  <section class="view active" id="view-home">
+    <div class="hero">
+      <div class="hero-moon" aria-hidden="true">☾</div>
+      <h2 class="hero-title">先认宫位，<br>再看星曜</h2>
+      <p class="hero-sub">十二宫对应人生的 12 个生活领域。<br>输入生日时辰，看看星星怎么说。</p>
+      <button class="btn-primary" data-nav="input">开始排盘 →</button>
+      <button class="btn-ghost" data-nav="guide">我是新手，先看看怎么玩</button>
+    </div>
+    <div class="card" id="daily-card">
+      <div class="card-kicker">今日小运</div>
+      <div id="daily-text">正在翻开今天的星语…</div>
+      <div class="card-foot" id="daily-date"></div>
+    </div>
+    <div class="card">
+      <div class="card-kicker">十二宫 · 先睹为快</div>
+      <div id="palace-preview" class="palace-grid"></div>
+    </div>
+  </section>
+
+  <!-- 输入 -->
+  <section class="view" id="view-input">
+    <h2 class="view-title">排出你的命盘</h2>
+    <p class="view-sub">所有计算都在你的手机/浏览器里完成，不上传。</p>
+    <form id="birth-form" autocomplete="off">
+      <label class="field"><span>称呼（可选）</span><input id="f-name" type="text" maxlength="12" placeholder="怎么称呼你"></label>
+      <div class="field"><span>性别</span>
+        <div class="seg" id="f-gender">
+          <button type="button" data-v="male" class="on">男</button>
+          <button type="button" data-v="female">女</button>
+        </div>
+      </div>
+      <div class="field"><span>公历生日</span>
+        <div class="date-row">
+          <select id="f-year"></select><select id="f-month"></select><select id="f-day"></select>
+        </div>
+      </div>
+      <div class="field"><span>出生时辰</span>
+        <select id="f-hour"></select>
+        <label class="check"><input type="checkbox" id="f-unknown-hour"> 时辰不确定（去定盘辅助）</label>
+      </div>
+      <div class="field"><span>出生地（真太阳时校正）</span>
+        <div class="date-row">
+          <select id="f-province"></select><select id="f-city"></select>
+        </div>
+        <label class="check"><input type="checkbox" id="f-true-solar" checked> 按出生地校正真太阳时（推荐）</label>
+        <div class="hint" id="dst-hint"></div>
+      </div>
+      <div class="field"><span>存为</span>
+        <div class="seg" id="f-tag">
+          <button type="button" data-v="我" class="on">我</button>
+          <button type="button" data-v="家人">家人</button>
+          <button type="button" data-v="朋友">朋友</button>
+        </div>
+      </div>
+      <button type="submit" class="btn-primary btn-block">排出命盘 ✦</button>
+      <div class="form-error" id="form-error"></div>
+    </form>
+  </section>
+
+  <!-- 命盘 -->
+  <section class="view" id="view-chart">
+    <div id="chart-head"></div>
+    <div class="tabs" id="luck-tabs">
+      <button data-mode="natal" class="on">本命</button>
+      <button data-mode="daxian">大限</button>
+      <button data-mode="liunian">流年</button>
+      <button data-mode="liuyue">流月</button>
+      <button data-mode="liuri">流日</button>
+    </div>
+    <div id="luck-picker"></div>
+    <div id="sihua-strip"></div>
+    <div id="chart-grid-wrap"><div id="chart-grid"></div></div>
+    <div id="chart-list"></div>
+    <div class="card"><div class="card-kicker">格局</div><div id="pattern-list"></div></div>
+    <div class="row-2">
+      <button class="btn-ghost" data-nav="palaces">十二宫解读 →</button>
+      <button class="btn-ghost" data-nav="reading">13维深度解读 →</button>
+    </div>
+    <div class="row-2">
+      <button class="btn-ghost" data-nav="topics">专题报告 →</button>
+      <button class="btn-primary" id="btn-share">生成分享图 ✦</button>
+    </div>
+  </section>
+
+  <!-- 十二宫 -->
+  <section class="view" id="view-palaces">
+    <h2 class="view-title">紫微斗数十二宫</h2>
+    <p class="view-sub">十二宫对应人生的 12 个生活领域。宫位并非孤立存在，需结合星曜与整张命盘理解。</p>
+    <div id="palace-cards" class="palace-grid"></div>
+  </section>
+
+  <!-- 13维解读 -->
+  <section class="view" id="view-reading">
+    <h2 class="view-title">13 维深度解读</h2>
+    <p class="view-sub" id="reading-status">正在按出生年份加载解读数据…</p>
+    <div class="tabs tabs-scroll" id="reading-tabs"></div>
+    <article id="reading-body" class="reading-body"></article>
+  </section>
+
+  <!-- 专题 -->
+  <section class="view" id="view-topics">
+    <h2 class="view-title">一键专题</h2>
+    <p class="view-sub">跨宫位综合：不只看一宫，看一组宫位的合力。</p>
+    <div class="tabs" id="topic-tabs"></div>
+    <article id="topic-body" class="reading-body"></article>
+  </section>
+
+  <!-- 新手导览 -->
+  <section class="view" id="view-guide">
+    <h2 class="view-title">新手三步</h2>
+    <div id="guide-steps"></div>
+    <button class="btn-primary btn-block" data-nav="input">我懂了，去排盘 →</button>
+  </section>
+
+  <!-- 存档 -->
+  <section class="view" id="view-archive">
+    <h2 class="view-title">我的命盘</h2>
+    <p class="view-sub">只存在你的浏览器里，换设备不会同步，清除缓存会消失。</p>
+    <div id="archive-list"></div>
+    <div class="row-2">
+      <button class="btn-ghost" data-nav="input">＋ 新排一张</button>
+      <button class="btn-ghost" data-nav="compare">双人合盘</button>
+    </div>
+    <div class="row-2">
+      <button class="btn-ghost" data-nav="favorites">我的收藏</button>
+      <button class="btn-ghost" data-nav="dingpan">时辰不确定？定盘辅助</button>
+    </div>
+  </section>
+
+  <!-- 合盘 -->
+  <section class="view" id="view-compare">
+    <h2 class="view-title">双人合盘</h2>
+    <p class="view-sub">选存档里的两张盘对照看看。娱乐参考，别拿它做决定。</p>
+    <div class="date-row">
+      <select id="cmp-a"></select><select id="cmp-b"></select>
+    </div>
+    <button class="btn-primary btn-block" id="btn-compare">开始合盘</button>
+    <div id="compare-result"></div>
+  </section>
+
+  <!-- 定盘辅助 -->
+  <section class="view" id="view-dingpan">
+    <h2 class="view-title">定盘辅助</h2>
+    <p class="view-sub">时辰拿不准？先圈出候选时辰，再用人生大事帮你对一对。</p>
+    <div id="dingpan-step1">
+      <div class="card-kicker">第一步：选出候选时辰（2–3 个）</div>
+      <div id="dingpan-hours" class="chip-row"></div>
+      <button class="btn-primary btn-block" id="btn-dingpan-next">下一步：对照人生大事</button>
+    </div>
+    <div id="dingpan-step2" hidden>
+      <div class="card-kicker">第二步：选一件大事发生的年份</div>
+      <div class="date-row">
+        <select id="dp-year"></select>
+        <select id="dp-event">
+          <option value="job">换工作/升职</option>
+          <option value="marry">结婚/重要感情</option>
+          <option value="move">搬家/换城市</option>
+          <option value="money">大的财务变动</option>
+          <option value="study">升学/考试</option>
+        </select>
+      </div>
+      <button class="btn-primary btn-block" id="btn-dingpan-run">对照看看</button>
+      <div id="dingpan-result"></div>
+    </div>
+  </section>
+
+  <!-- 收藏 -->
+  <section class="view" id="view-favorites">
+    <h2 class="view-title">我的收藏</h2>
+    <div id="fav-list"></div>
+  </section>
+</main>
+
+<!-- 星曜解释弹窗 -->
+<div id="modal" class="modal" hidden>
+  <div class="modal-card">
+    <button class="modal-x" id="modal-x">×</button>
+    <h3 id="modal-title"></h3>
+    <p id="modal-body"></p>
+  </div>
+</div>
+
+<!-- 分享图 -->
+<div id="share-modal" class="modal" hidden>
+  <div class="modal-card wide">
+    <button class="modal-x" id="share-x">×</button>
+    <h3>分享给朋友</h3>
+    <div class="tabs" id="share-tabs">
+      <button data-k="chart" class="on">命盘图</button>
+      <button data-k="quote">金句卡</button>
+      <button data-k="year">年度运势卡</button>
+    </div>
+    <canvas id="share-canvas" width="1080" height="1440"></canvas>
+    <button class="btn-primary btn-block" id="btn-save-img">保存图片</button>
+    <p class="hint">长按图片也可以保存。分享出去，朋友扫码/点链接就能来排自己的盘。</p>
+  </div>
+</div>
+
+<nav id="tabbar">
+  <button data-nav="home" class="on"><span>✦</span>首页</button>
+  <button data-nav="input"><span>◉</span>排盘</button>
+  <button data-nav="palaces"><span>▦</span>十二宫</button>
+  <button data-nav="archive"><span>☰</span>我的</button>
+</nav>
+
+<footer id="app-footer">
+  <p>紫微小馆 · 紫微斗数在线排盘</p>
+  <p class="fine">排盘引擎基于 <a href="https://github.com/Renhuai123/ziwei-doushu" target="_blank" rel="noopener">Renhuai123/ziwei-doushu</a>（MIT）。解读数据：紫微斗数开源解读数据集 v4.0（CC BY 4.0），来源 github.com/Renhuai123/ziwei-doushu，作者：王多鱼AI。</p>
+  <p class="fine">出生信息只保存在你的浏览器本地，不上传。内容为传统文化参考，不构成人生决策建议。涉及父母、兄弟、子女的推断仅供参考。</p>
+</footer>
+
+<script src="assets/js/ziwei-engine.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>
