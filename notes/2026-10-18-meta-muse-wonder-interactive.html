@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#F2EFE7">
+<meta name="color-scheme" content="light">
+<meta name="description" content="Meta 不开源了：Llama 的旗手，举起了收费牌。犀牛伯爵 N°132 交互阅读版：收费牌、入场券、身体、抽佣、证伪条件，逐节互动+金句卡。">
+<title>Meta不开源了：Llama的旗手，举起了收费牌 | 犀牛伯爵</title>
+<style>
+:root{
+  --paper:#F2EFE7; --ink:#171A19; --accent:#14532D; --stone:#8C948F; --mid:#567069;
+  --line:#D7D6CB; --card:#FBFAF6;
+  --sans:"Inter","Arial",-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
+  --serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 16px/1.8 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.grain{position:fixed;inset:0;z-index:80;pointer-events:none;opacity:.09;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 150 150' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.7' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='150' height='150' filter='url(%23n)' opacity='.2'/%3E%3C/svg%3E")}
+/* header */
+.site-header{position:sticky;top:0;z-index:50;height:60px;display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:12px;padding:0 clamp(16px,4vw,44px);background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.brand{font-family:var(--serif);font-weight:700;font-size:17px;letter-spacing:.06em}
+.brand small{font-family:var(--sans);font-weight:400;font-size:11px;color:var(--stone);letter-spacing:.24em;margin-left:8px}
+.hdr-btns{display:flex;gap:8px}
+.btn{font:500 13px/1 var(--sans);border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:9px 16px;cursor:pointer}
+.btn:hover{border-color:var(--accent);color:var(--accent)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+/* toc drawer */
+.toc{position:fixed;inset:0;z-index:90;display:none}
+.toc.open{display:block}
+.toc .scrim{position:absolute;inset:0;background:rgba(23,26,25,.35)}
+.toc .panel{position:absolute;top:0;right:0;bottom:0;width:min(340px,86vw);background:var(--paper);padding:28px 26px;overflow:auto;box-shadow:-8px 0 30px rgba(0,0,0,.12)}
+.toc h3{font-family:var(--serif);font-size:18px;margin:0 0 16px}
+.toc a{display:block;padding:10px 0;border-bottom:1px solid var(--line);text-decoration:none;color:var(--ink);font-size:14px}
+.toc a span{color:var(--stone);margin-right:10px;font-size:12px}
+/* layout */
+.wrap{max-width:720px;margin:0 auto;padding:0 clamp(20px,5.5vw,34px)}
+.hero{padding:64px 0 8px;text-align:center}
+.kicker{font-size:12px;letter-spacing:.3em;color:var(--stone);margin:0 0 18px}
+h1{font-family:var(--serif);font-size:clamp(26px,5.4vw,38px);line-height:1.5;margin:0 0 16px;font-weight:700}
+.hero .meta{font-size:13px;color:var(--stone);line-height:1.9;margin:0}
+.hero .byline{font-size:13px;color:var(--mid);margin:14px 0 0}
+/* 核心判断 */
+.judge{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:6px;padding:22px 24px;margin:36px 0}
+.judge .tag{display:inline-block;background:var(--accent);color:#fff;font-size:12px;padding:4px 14px;border-radius:20px;margin-bottom:12px}
+.judge p{margin:0;font-size:15px;line-height:1.9}
+/* sections */
+.sec{margin:56px 0;padding-top:8px}
+.sec-num{font-size:12px;letter-spacing:.28em;color:var(--stone);margin:0 0 10px}
+h2{font-family:var(--serif);font-size:clamp(20px,4.4vw,26px);line-height:1.5;margin:0 0 20px}
+.sec p.body{font-size:16px;line-height:1.95;color:#2b2e2c;margin:0 0 16px;text-align:justify}
+.sec p.body strong{color:var(--ink)}
+.drop::first-letter{font-family:var(--serif);font-size:52px;line-height:1;float:left;padding:4px 10px 0 0;font-weight:700}
+/* widget */
+.widget{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:22px;margin:26px 0}
+.widget .w-title{font-size:12px;letter-spacing:.22em;color:var(--stone);margin:0 0 16px}
+.seg{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.seg button{flex:1;min-width:120px;border:1px solid var(--line);background:var(--paper);border-radius:8px;padding:12px 10px;font:500 14px/1.5 var(--sans);cursor:pointer;color:var(--ink)}
+.seg button.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.w-panel{display:none;font-size:14px;line-height:1.9}
+.w-panel.show{display:block}
+.w-panel .big{font-family:var(--serif);font-size:30px;font-weight:700;color:var(--accent);margin:4px 0}
+.w-panel .note{color:var(--stone);font-size:13px}
+/* table */
+.cmp{width:100%;border-collapse:collapse;font-size:14px;margin:6px 0 4px}
+.cmp th,.cmp td{border-bottom:1px solid var(--line);padding:10px 8px;text-align:left;line-height:1.7}
+.cmp th{font-size:12px;color:var(--stone);font-weight:500;letter-spacing:.08em}
+.cmp td .closed{display:inline-block;background:#1a1a1a;color:#fff;font-size:11px;border-radius:4px;padding:2px 8px}
+/* question cycler */
+.qbox{border-left:3px solid var(--accent);padding:2px 0 2px 16px;margin:6px 0}
+.qbox .q{font-family:var(--serif);font-size:17px;line-height:1.8;margin:0 0 12px}
+/* steps */
+.steps{display:flex;gap:0;margin:8px 0}
+.step{flex:1;text-align:center;padding:12px 4px;border:1px solid var(--line);background:var(--paper);cursor:pointer;font-size:12.5px;line-height:1.6;color:var(--mid)}
+.step:first-child{border-radius:8px 0 0 8px}.step:last-child{border-radius:0 8px 8px 0}
+.step.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.step .n{display:block;font-family:var(--serif);font-size:18px;margin-bottom:4px}
+/* risk cards */
+.risk{border:1px solid var(--line);border-radius:8px;margin-bottom:10px;overflow:hidden}
+.risk .rh{width:100%;text-align:left;background:var(--paper);border:0;padding:14px 16px;font:600 14px/1.6 var(--sans);cursor:pointer;display:flex;justify-content:space-between;align-items:center;color:var(--ink)}
+.risk .rb{display:none;padding:0 16px 16px;font-size:14px;line-height:1.9;color:#2b2e2c}
+.risk.open .rb{display:block}
+/* falsify card */
+.falsify{background:#1a1a1a;color:#F2EFE7;border-radius:10px;padding:22px;margin:26px 0}
+.falsify .w-title{color:#9aa39e}
+.falsify p{font-size:14.5px;line-height:1.95;margin:0}
+/* quote card */
+.quote{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:24px;margin:30px 0;position:relative}
+.quote::before{content:"“";font-family:var(--serif);font-size:44px;color:var(--line);position:absolute;top:6px;left:16px}
+.quote p{font-family:var(--serif);font-size:18px;line-height:1.85;margin:8px 0 18px;text-indent:1.6em}
+.quote .q-btns{display:flex;gap:8px;flex-wrap:wrap}
+/* nav */
+.sec-nav{display:flex;justify-content:space-between;gap:10px;margin:34px 0 0}
+.sec-nav .btn{flex:1;text-align:center}
+/* footer */
+.footer{border-top:1px solid var(--line);margin:64px 0 0;padding:28px 0 70px;font-size:13px;color:var(--stone);line-height:2}
+/* toast */
+.toast{position:fixed;left:50%;bottom:34px;transform:translateX(-50%) translateY(20px);background:#1a1a1a;color:#fff;font-size:13px;padding:10px 20px;border-radius:999px;opacity:0;pointer-events:none;transition:.25s;z-index:99}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+@media (max-width:560px){.steps{flex-direction:column}.step:first-child{border-radius:8px 8px 0 0}.step:last-child{border-radius:0 0 8px 8px}}
+</style>
+</head>
+<body>
+<div class="grain"></div>
+
+<header class="site-header">
+  <div class="brand">犀牛伯爵<small>N°132</small></div>
+  <div></div>
+  <div class="hdr-btns">
+    <button class="btn" id="tocBtn">目录</button>
+    <button class="btn primary" id="shareBtn">分享</button>
+  </div>
+</header>
+
+<div class="toc" id="toc">
+  <div class="scrim" data-close></div>
+  <div class="panel">
+    <h3>目录</h3>
+    <a href="#s1" data-close><span>01</span>收费牌：20 美分和 200 美元</a>
+    <a href="#s2" data-close><span>02</span>入场券：北美头部，没有一家开源</a>
+    <a href="#s3" data-close><span>03</span>身体：700 万副眼镜等着装上它</a>
+    <a href="#s4" data-close><span>04</span>怎么赚钱：从交易里抽佣</a>
+    <a href="#s5" data-close><span>05</span>别急着开香槟</a>
+  </div>
+</div>
+
+<main class="wrap">
+  <div class="hero">
+    <p class="kicker">N°132 · AI 热点深观察 · 交互阅读版</p>
+    <h1>Meta不开源了：Llama的旗手，举起了收费牌</h1>
+    <p class="meta">2026年10月18日 · 约2300字<br>信源：英国《金融时报》、路透社、Meta Connect 大会及扎克伯格访谈</p>
+    <p class="byline">撰文｜犀牛伯爵</p>
+    <div style="margin-top:26px"><button class="btn primary" id="startBtn" style="font-size:15px;padding:13px 34px">开始阅读 ↓</button></div>
+  </div>
+
+  <div class="judge">
+    <span class="tag">核心判断</span>
+    <p>Meta 不开源，不是掉队，是补入场券。北美头部模型没有一家开源，付费习惯已经养成，闭源才是主流玩法。真正的牌在另一边：Muse 两周数百万用户登顶下载榜，700 万副眼镜等着装上它。模型是大脑，眼镜是身体，Meta 第一次把 Agent 的"身体"和"大脑"凑齐，往后靠交易抽佣赚钱。</p>
+  </div>
+
+  <!-- S1 -->
+  <section class="sec" id="s1">
+    <p class="sec-num">01</p>
+    <h2>收费牌：20 美分和 200 美元</h2>
+    <p class="body drop">10 月 12 日，Meta 发布了 Muse Wonder 和 Muse Wonder Full 两款模型。扎克伯格对《金融时报》说，Meta 已经在 AI 的"前沿领域"追上竞争对手，部分基准测试超过了 Anthropic 的 Claude Opus 5.5 和 OpenAI 的 GPT-6 Astra。</p>
+    <p class="body">但比"追上"更值得看的，是"不开源"。Llama 时代，Meta 是开源阵营的旗手。这一次，Muse Wonder 明确走闭源路线，用户和公司都要付费才能用。</p>
+    <p class="body">价格已经摆出来了。基础版每百万 token 低至 <strong>20 美分</strong>，功能更强的 Wonder Full 走订阅，<strong>月费 50 到 200 美元</strong>。API 的价格，Meta 说比 OpenAI 和 Anthropic 的主力模型"大幅要低"。</p>
+    <p class="body">Meta 的算盘不难拆。过去一年，扎克伯格投了数十亿美元，重组 AI 团队、建数据中心、开数百万美元年薪挖顶尖研究员。这笔钱不能只换一篇论文，必须换回收入。广告之外，Meta 需要第二条赚钱的路。</p>
+
+    <div class="widget">
+      <p class="w-title">互动 · 这套定价在打谁</p>
+      <div class="seg" id="seg1">
+        <button class="on" data-p="p1a">开发者 API</button>
+        <button data-p="p1b">重度订阅用户</button>
+        <button data-p="p1c">免费额度</button>
+      </div>
+      <div class="w-panel show" id="p1a">
+        <div class="big">20 美分 <span style="font-size:15px">/ 百万 token</span></div>
+        <p>打的是开发者的算账心态。Meta 宣称比 OpenAI 和 Anthropic 的主力模型"大幅要低"——先用价格把调用量抢过来，再谈别的。</p>
+      </div>
+      <div class="w-panel" id="p1b">
+        <div class="big">$50 – $200 <span style="font-size:15px">/ 月</span></div>
+        <p>打的是重度用户和企业的钱包。Wonder Full 定位旗舰，订阅制锁定高价值用户，顺带给 Muse 应用导流。</p>
+      </div>
+      <div class="w-panel" id="p1c">
+        <div class="big">先免费 <span style="font-size:15px">再收钱</span></div>
+        <p>中间留了一档免费额度，先把人圈进来。Muse 上线两周用户数百万、登顶美区下载榜，流量入口已经备好。</p>
+      </div>
+    </div>
+
+    <div class="quote" data-quote="这不是技术发布，这是一份价目表。">
+      <p>这不是技术发布，这是一份价目表。</p>
+      <div class="q-btns">
+        <button class="btn" data-copy>复制金句</button>
+        <button class="btn" data-shareimg>制作分享图 ↗</button>
+      </div>
+    </div>
+
+    <div class="sec-nav">
+      <button class="btn" data-goto="#s2">下一节 →</button>
+    </div>
+  </section>
+
+  <!-- S2 -->
+  <section class="sec" id="s2">
+    <p class="sec-num">02</p>
+    <h2>入场券：北美头部，没有一家开源</h2>
+    <p class="body">有人会问，Meta 当年举开源大旗，如今改闭源，算不算认输？恰恰相反，这是在<strong>补入场券</strong>。</p>
+    <p class="body">扎克伯格自己也把路线说清楚了。OpenAI 和 Anthropic 要做通用人工智能，Meta 要做"个人超级智能"，给普通人用的 AI 助手。两条路线，收钱的方式都一样：订阅加 API。</p>
+
+    <div class="widget">
+      <p class="w-title">数一数 · 北美头部模型，开源情况</p>
+      <table class="cmp">
+        <tr><th>公司</th><th>旗舰模型</th><th>开源？</th></tr>
+        <tr><td>OpenAI</td><td>GPT-6 Astra</td><td><span class="closed">闭源</span></td></tr>
+        <tr><td>Anthropic</td><td>Claude Opus 5.5</td><td><span class="closed">闭源</span></td></tr>
+        <tr><td>Google</td><td>Gemini 主力版本</td><td><span class="closed">闭源</span></td></tr>
+        <tr><td>Meta</td><td>Muse Wonder</td><td><span class="closed">闭源</span></td></tr>
+      </table>
+      <p class="note">最强的模型，没有一家开源。客户已经被教育出来了，为好模型付费是天经地义的事。</p>
+      <div class="seg" id="seg2" style="margin-top:14px">
+        <button class="on" data-p="p2a">开源是情怀</button>
+        <button data-p="p2b">闭源是账本</button>
+      </div>
+      <div class="w-panel show" id="p2a">
+        <p>Llama 时代 Meta 是开源旗手，赢得了开发者口碑。但口碑换不回数十亿美元的投入，开源谈的不是生意。</p>
+      </div>
+      <div class="w-panel" id="p2b">
+        <p>继续只谈开源，谈的就不是生意，是情怀。北美头部全员闭源收费，Meta 不跟进，等于把"个人超级智能"的入场券让给别人。</p>
+      </div>
+    </div>
+
+    <div class="quote" data-quote="开源还是闭源，从来不是信仰问题，是账本问题。">
+      <p>开源还是闭源，从来不是信仰问题，是账本问题。</p>
+      <div class="q-btns">
+        <button class="btn" data-copy>复制金句</button>
+        <button class="btn" data-shareimg>制作分享图 ↗</button>
+      </div>
+    </div>
+
+    <div class="sec-nav">
+      <button class="btn" data-goto="#s1">← 上一节</button>
+      <button class="btn" data-goto="#s3">下一节 →</button>
+    </div>
+  </section>
+
+  <!-- S3 -->
+  <section class="sec" id="s3">
+    <p class="sec-num">03</p>
+    <h2>身体：700 万副眼镜等着装上它</h2>
+    <p class="body">模型是大脑，Agent 需要身体。Meta 的身体早就备好了，藏在眼镜里。</p>
+    <p class="body">9 月 25 日的一档访谈里，扎克伯格宣布，Muse 将整合进全线 Ray-Ban 智能眼镜。用户不用再喊"嘿 Meta"，自定义一个唤醒词，直接叫出自己的个人 Agent。他说，多年来被外界看作三场独立豪赌的元宇宙、智能眼镜和大模型，正在产品层面完成交汇。</p>
+    <p class="body">扎克伯格有一句很关键的话：眼镜是<strong>"唯一能让你的 Muse 看到你所见、听到你所闻的形态"</strong>。手机是口袋里的，电脑是桌上的，眼镜是脸上的。OpenAI 和 Anthropic 有大脑，没有身体，这就是 Meta 手里独一无二的牌。</p>
+
+    <div class="widget">
+      <p class="w-title">数字卡 · 身体已经备好</p>
+      <div class="seg">
+        <div style="flex:1;min-width:140px;text-align:center;padding:10px">
+          <div style="font-family:var(--serif);font-size:28px;font-weight:700;color:var(--accent)">700万+</div>
+          <div class="note">去年智能眼镜销量，市占龙头</div>
+        </div>
+        <div style="flex:1;min-width:140px;text-align:center;padding:10px">
+          <div style="font-family:var(--serif);font-size:28px;font-weight:700;color:var(--accent)">$349</div>
+          <div class="note">Ray-Ban Meta Audio，10月13日开卖</div>
+        </div>
+        <div style="flex:1;min-width:140px;text-align:center;padding:10px">
+          <div style="font-family:var(--serif);font-size:28px;font-weight:700;color:var(--accent)">数百万</div>
+          <div class="note">Muse 两周用户，登顶下载榜</div>
+        </div>
+      </div>
+      <div class="qbox">
+        <p class="q" id="q3">如果 Agent 的身体只能是眼镜，那手机厂商的 AI 助手算什么？</p>
+        <button class="btn" id="q3btn">换一个问题 ↗</button>
+      </div>
+    </div>
+
+    <div class="quote" data-quote="模型是大脑，眼镜是身体，Meta 第一次把 Agent 的“身体”和“大脑”凑齐。">
+      <p>模型是大脑，眼镜是身体，Meta 第一次把 Agent 的"身体"和"大脑"凑齐。</p>
+      <div class="q-btns">
+        <button class="btn" data-copy>复制金句</button>
+        <button class="btn" data-shareimg>制作分享图 ↗</button>
+      </div>
+    </div>
+
+    <div class="sec-nav">
+      <button class="btn" data-goto="#s2">← 上一节</button>
+      <button class="btn" data-goto="#s4">下一节 →</button>
+    </div>
+  </section>
+  <!-- S4 -->
+  <section class="sec" id="s4">
+    <p class="sec-num">04</p>
+    <h2>怎么赚钱：从交易里抽佣</h2>
+    <p class="body">订阅和 API 是第一步，更大的钱在后面。扎克伯格在 Connect 大会上透露，未来 Meta 会从 Muse 经手的交易里抽取<strong>"一小笔佣金"</strong>。</p>
+    <p class="body">想想 Muse 能干什么：订餐厅、订行程、买杂货。Agent 每替用户完成一笔消费，Meta 就从中切一刀。这是从"卖广告"到"抽交易税"的转身——苹果靠 App Store 抽佣吃到了软件时代最大的红利，Meta 想在 Agent 时代复制一遍。</p>
+    <p class="body">为此 Meta 配了全套基础设施。每个 Muse 背后都有一台专属的安全虚拟机，用户数据加密存放，敏感凭证独立管理，还有一个叫 Sentinel 的安全 Agent 专门盯着数据流。Agent 要经手真金白银，<strong>信任就是地基</strong>。</p>
+
+    <div class="widget">
+      <p class="w-title">互动 · 点一点，看抽佣链条怎么转</p>
+      <div class="steps" id="steps4">
+        <div class="step on" data-s="s4a"><span class="n">1</span>用户下单<br>订餐厅 / 行程 / 杂货</div>
+        <div class="step" data-s="s4b"><span class="n">2</span>Muse 经手<br>Agent 代为执行</div>
+        <div class="step" data-s="s4c"><span class="n">3</span>交易完成<br>商家收到钱</div>
+        <div class="step" data-s="s4d"><span class="n">4</span>Meta 抽佣<br>"一小笔佣金"</div>
+      </div>
+      <div class="w-panel show" id="s4a"><p>一切从真实消费开始。Muse 不是聊天框，是替你花钱的 Agent——订座、订票、下单，动作都发生在真实世界。</p></div>
+      <div class="w-panel" id="s4b"><p>Muse 经手每一笔交易：比价、下单、支付。安全虚拟机 + Sentinel 盯着数据流，解决"敢不敢让 AI 碰我的钱"。</p></div>
+      <div class="w-panel" id="s4c"><p>商家完成履约。注意：Meta 不需要自己开店，它站在所有交易的水管上。</p></div>
+      <div class="w-panel" id="s4d"><p>水管上收过路费。苹果 App Store 抽佣吃到软件时代最大红利，Meta 要把这套搬到 Agent 时代——这才是"第二条命"。</p></div>
+    </div>
+
+    <div class="quote" data-quote="这是从“卖广告”到“抽交易税”的转身。">
+      <p>这是从"卖广告"到"抽交易税"的转身。</p>
+      <div class="q-btns">
+        <button class="btn" data-copy>复制金句</button>
+        <button class="btn" data-shareimg>制作分享图 ↗</button>
+      </div>
+    </div>
+
+    <div class="sec-nav">
+      <button class="btn" data-goto="#s3">← 上一节</button>
+      <button class="btn" data-goto="#s5">下一节 →</button>
+    </div>
+  </section>
+
+  <!-- S5 -->
+  <section class="sec" id="s5">
+    <p class="sec-num">05</p>
+    <h2>别急着开香槟</h2>
+    <p class="body">降温的话照例说在前面。发布当天就出了 bug：Meta Code 订阅服务对 Wonder 调用额度的统计出了漏洞，首席 AI 官 Alexandr Wang 在 X 上承认"还有不少漏洞正在排查"。追上了模型，没追上工程细节。</p>
+    <p class="body">第二，"追上"是自家基准说的。第三方独立评测还没大规模跟上，榜单是 Meta 自己画的。Llama 4 的失败扎克伯格自己都承认是"最可怕的时刻"。新团队的第一份答卷，需要第三方验票。</p>
+    <p class="body">第三，眼镜这条线有隐忧。加州已经有集体诉讼指控 Meta 在隐私保护上误导用户，英国多家餐厅酒吧开始限制顾客佩戴智能眼镜。身体有了，社会能不能接受这个身体，是另一道题。</p>
+
+    <div class="widget">
+      <p class="w-title">点开展开 · 三个降温项</p>
+      <div class="risk">
+        <button class="rh">① 发布日 bug：追上了模型，没追上工程 <span>＋</span></button>
+        <div class="rb">Meta Code 订阅对 Wonder 调用额度的统计出漏洞，Alexandr Wang 在 X 上承认"还有不少漏洞正在排查"。模型分数可以靠砸钱追，工程细节靠的是组织能力——而这正是 Llama 4 翻车的原因。</div>
+      </div>
+      <div class="risk">
+        <button class="rh">② "追上"是自家榜单：等第三方验票 <span>＋</span></button>
+        <div class="rb">超过 Claude Opus 5.5 和 GPT-6 Astra 的说法来自 Meta 自己的基准测试。第三方独立评测还没大规模跟上，在验票之前，"追上"先打个问号。</div>
+      </div>
+      <div class="risk">
+        <button class="rh">③ 眼镜的社会接受度：身体有了，社会呢 <span>＋</span></button>
+        <div class="rb">加州集体诉讼指控 Meta 隐私误导，英国多家餐厅酒吧限制佩戴智能眼镜。眼镜是"脸上的设备"，社会接受度是独立的一道题，和技术无关。</div>
+      </div>
+    </div>
+
+    <div class="falsify">
+      <p class="w-title">证伪条件 · 犀牛判断留档</p>
+      <p>未来两个季度，如果 Muse 的订阅收入和企业 API 调用量没有起量，或者眼镜销量增速放缓，"身体加大脑"的故事就降级为"又一个硬件梦"。反过来，如果交易抽佣真的跑通，Meta 就找到了广告之外的第二条命。<br><span style="color:#9aa39e;font-size:12.5px">复盘日：2027-04-15</span></p>
+    </div>
+
+    <div class="quote" data-quote="开源的旗手举起了收费牌。这不是背叛，是账本翻到了新的一页。">
+      <p>开源的旗手举起了收费牌。这不是背叛，是账本翻到了新的一页。</p>
+      <div class="q-btns">
+        <button class="btn" data-copy>复制金句</button>
+        <button class="btn" data-shareimg>制作分享图 ↗</button>
+      </div>
+    </div>
+
+    <p class="body" style="font-family:var(--serif);font-size:19px;text-align:center;margin-top:40px">工作可以消失。价值不能。</p>
+
+    <div class="sec-nav">
+      <button class="btn" data-goto="#s4">← 上一节</button>
+      <button class="btn" data-goto="#top">回到顶部 ↑</button>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p style="margin:0 0 10px">数据来源：Muse Wonder 发布据英国《金融时报》、路透社 10 月 12 日至 13 日报道；扎克伯格访谈据 9 月 25 日节目实录（据媒体报道）；Meta Connect 大会据 9 月 23 日发布会报道；眼镜销量及定价据多家媒体报道；Alexandr Wang 言论据其 X 平台发文。</p>
+    <p style="margin:0 0 10px">本文为行业观察，不构成投资建议。如需引用，请注明出处：犀牛伯爵 rhinocount.cn</p>
+    <p style="margin:0">交互阅读版 · 基于 N°132 原文改编 · <a href="2026-10-18-meta-muse-wonder.html" style="color:var(--mid)">阅读标准版 →</a></p>
+  </footer>
+</main>
+
+<div class="toast" id="toast"></div>
+<canvas id="shareCanvas" width="1080" height="1350" style="display:none"></canvas>
+
+<script>
+(function(){
+  var $=function(s,c){return (c||document).querySelector(s)};
+  var $$=function(s,c){return Array.prototype.slice.call((c||document).querySelectorAll(s))};
+  var toastEl=$('#toast'),tt=null;
+  function toast(msg){toastEl.textContent=msg;toastEl.classList.add('show');clearTimeout(tt);tt=setTimeout(function(){toastEl.classList.remove('show')},1800)}
+  /* toc */
+  var toc=$('#toc');
+  $('#tocBtn').addEventListener('click',function(){toc.classList.add('open')});
+  $$('[data-close]',toc).forEach(function(el){el.addEventListener('click',function(){toc.classList.remove('open')})});
+  /* start */
+  $('#startBtn').addEventListener('click',function(){$('#s1').scrollIntoView({behavior:'smooth'})});
+  /* goto */
+  $$('[data-goto]').forEach(function(b){b.addEventListener('click',function(){
+    var t=$(b.getAttribute('data-goto'));
+    if(t)t.scrollIntoView({behavior:'smooth'});else window.scrollTo({top:0,behavior:'smooth'});
+  })});
+  /* segmented panels */
+  $$('.seg').forEach(function(seg){
+    var btns=$$('button[data-p]',seg);if(!btns.length)return;
+    btns.forEach(function(b){b.addEventListener('click',function(){
+      btns.forEach(function(x){x.classList.remove('on')});b.classList.add('on');
+      var w=seg.closest('.widget');
+      $$('.w-panel',w).forEach(function(p){p.classList.remove('show')});
+      var p=document.getElementById(b.getAttribute('data-p'));if(p)p.classList.add('show');
+    })});
+  });
+  /* steps */
+  var steps=$('#steps4');
+  if(steps){$$('.step',steps).forEach(function(st){st.addEventListener('click',function(){
+    $$('.step',steps).forEach(function(x){x.classList.remove('on')});st.classList.add('on');
+    var w=steps.closest('.widget');
+    $$('.w-panel',w).forEach(function(p){p.classList.remove('show')});
+    var p=document.getElementById(st.getAttribute('data-s'));if(p)p.classList.add('show');
+  })})}
+  /* risks */
+  $$('.risk .rh').forEach(function(h){h.addEventListener('click',function(){
+    var r=h.closest('.risk');r.classList.toggle('open');
+    h.querySelector('span').textContent=r.classList.contains('open')?'－':'＋';
+  })});
+  /* question cycler */
+  var qs=[
+    '如果 Agent 的身体只能是眼镜，那手机厂商的 AI 助手算什么？',
+    '700 万副眼镜是存量，Muse 要装进多少副，才能算"交汇完成"？',
+    '眼镜看到你所见、听到你所闻——你愿意为这种"看见"付多少钱？'
+  ],qi=0;
+  $('#q3btn').addEventListener('click',function(){qi=(qi+1)%qs.length;$('#q3').textContent=qs[qi]});
+  /* copy quote */
+  $$('[data-copy]').forEach(function(b){b.addEventListener('click',function(){
+    var q=b.closest('.quote').getAttribute('data-quote');
+    var txt='“'+q+'” —— 犀牛伯爵 N°132《Meta不开源了》rhinocount.cn';
+    function done(){toast('金句已复制')};
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(done,function(){fallback()})}else fallback();
+    function fallback(){var ta=document.createElement('textarea');ta.value=txt;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');done()}catch(e){toast('复制失败，请手动复制')};ta.remove()}
+  })});
+  /* share button: copy link */
+  $('#shareBtn').addEventListener('click',function(){
+    var url=location.href;
+    function done(){toast('链接已复制，去分享吧')};
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(url).then(done,function(){toast('复制失败，请手动复制地址栏')})}else toast('请手动复制地址栏链接');
+  });
+  /* share image via canvas */
+  function wrap(ctx,text,x,y,maxW,lh,maxLines){
+    var chars=text.split(''),line='',lines=0;
+    for(var i=0;i<chars.length;i++){
+      var t=line+chars[i];
+      if(ctx.measureText(t).width>maxW&&line){ctx.fillText(line,x,y);line=chars[i];y+=lh;lines++;if(lines>=maxLines-1&&i<chars.length-1){/* keep going one more */}
+      }else line=t;
+    }
+    if(line){ctx.fillText(line,x,y);y+=lh}
+    return y;
+  }
+  $$('[data-shareimg]').forEach(function(b){b.addEventListener('click',function(){
+    var q=b.closest('.quote').getAttribute('data-quote');
+    var cv=$('#shareCanvas'),ctx=cv.getContext('2d');
+    ctx.fillStyle='#F2EFE7';ctx.fillRect(0,0,1080,1350);
+    ctx.strokeStyle='#D7D6CB';ctx.lineWidth=2;ctx.strokeRect(40,40,1000,1270);
+    ctx.fillStyle='#8C948F';ctx.font='500 30px sans-serif';ctx.textAlign='center';
+    ctx.fillText('犀 牛 伯 爵 · N°132',540,180);
+    ctx.fillStyle='#171A19';ctx.font='700 52px "Noto Serif SC","Songti SC",serif';ctx.textAlign='left';
+    var y=wrap(ctx,'“'+q+'”',110,420,860,84,10);
+    ctx.fillStyle='#14532D';ctx.font='500 28px sans-serif';ctx.textAlign='center';
+    ctx.fillText('——《Meta不开源了：Llama的旗手，举起了收费牌》',540,Math.min(y+80,1050));
+    ctx.fillStyle='#8C948F';ctx.font='400 26px sans-serif';
+    ctx.fillText('rhinocount.cn',540,1180);
+    var a=document.createElement('a');
+    a.download='rhino-n132-quote.png';
+    a.href=cv.toDataURL('image/png');
+    document.body.appendChild(a);a.click();a.remove();
+    toast('分享图已生成');
+  })});
+})();
+</script>
+</body>
+</html>
