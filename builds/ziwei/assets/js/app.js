@@ -973,6 +973,21 @@ function buildLocalReading(chart){
   });
   return out;
 }
+/* 上游语料去绝对化：人格类绝对断语是"一望即知真假"的高危区，转为外界视角+或然表述。
+   只作用于完整版（上游预生成语料），本地版文案已按此标准写。规则按用户反馈持续加。 */
+const GXG_SOFTEN = [
+  [/麻烦的是脾气硬、爱争，情绪起伏大/g, '要留意的是，在不熟的人眼里，你容易显得脾气硬、爱争，情绪起伏也不小'],
+  [/压力一来或者感情出事，反应容易走极端，不是爆发就是把自己整个关起来/g, '压力一大或感情出状况、情绪上头时，反应容易偏极端——要么爆发，要么把自己关起来'],
+  [/你脾气硬/g, '外人容易觉得你脾气硬'],
+  [/脾气臭/g, '外人容易觉得你脾气急'],
+  [/你就是个急脾气/g, '外人看你是个急脾气'],
+];
+function softenFullText(t){
+  if(!t) return t;
+  let s = t;
+  for(const [re, rep] of GXG_SOFTEN) s = s.replace(re, rep);
+  return s;
+}
 let readingTopic = 'overview';
 function renderReadingTabs(){
   $('#reading-tabs').innerHTML = Object.entries(D.datasetTopics).map(([k, v]) =>
@@ -1026,7 +1041,8 @@ async function tryLoadFull(rec){
 }
 function renderReadingBody(){
   const data = window.GXG_READING; if(!data) return;
-  const text = data[readingTopic] || '暂无';
+  const rawText = data[readingTopic] || '暂无';
+  const text = window.GXG_READING_LOCAL ? rawText : softenFullText(rawText);
   const paras = text.split(/\n\n+/);
   const rec = cur();
   const key = rec ? readingKeyOf(rec.chart) : '';
