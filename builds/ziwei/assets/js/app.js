@@ -807,6 +807,41 @@ function palaceTextBrief(chart, p){
   L.push(`三方四正：${sf.join(' · ')}。`);
   return L.join('\n\n');
 }
+/* 13维本地精编版：每个维度的总述（一句话定调） */
+const LOCAL_READING_INTROS = {
+  personality: '性格看命宫：命宫是你的出厂设置，身宫是你后半程想成为的样子。两宫一起看，才是完整的你。',
+  love: '感情看夫妻宫，合看命宫（你的相处打法）和福德宫（你的精神底色）。',
+  career: '事业看官禄宫，合看命宫（你的打法）和财帛宫（回报）。',
+  wealth: '财运看财帛宫，合看命宫和福德宫：怎么赚钱、怎么花钱、存不存得住。',
+  health: '健康看疾厄宫，合看命宫（体质底子）和福德宫（压力与恢复节奏）。只提示倾向，不做医疗判断。',
+  family: '家庭看三宫：父母宫（原生关系）、田宅宫（安稳基地）、兄弟宫（同辈缘）。',
+  children: '子女宫看孩子，也看你的作品、表达与创造力投射。',
+  move: '迁移宫看你和外部世界的关系：异地、外出、发展环境。',
+  friends: '交友宫看你的社交圈：朋友、团队、人际资源。',
+  home: '田宅宫是你的安稳基地：家庭、房产、居住环境。',
+  spirit: '福德宫是精神宫：快乐来源、内在电量、兴趣所向。',
+  parents: '父母宫看你与长辈的关系：支持方式、期待与课题。',
+};
+/* 每个维度的时间维度：当前大限 + 今年流年，大限若落在主题宫位上则点出来 */
+function topicTimeLine(chart, topicCn, palNames){
+  const dx = chart.daXians[chart.currentDaXianIndex] || {};
+  const dxName = disp(dx.palaceName || '');
+  const y = new Date().getFullYear();
+  const lp = palaceByBranch(chart, ((y - 4) % 12 + 12) % 12);
+  let s = `时间维度：当前大限 ${dx.startAge || '—'}–${dx.endAge || '—'} 岁在${dxName}；${y} 年流年命宫在${disp(lp.name)}。`;
+  if(palNames.includes(dxName)) s += `大限正好走在${topicCn}相关的宫位上，这十年这个主题的动静会比较大，大限的四化值得细看。`;
+  return s;
+}
+/* 每个维度的化忌功课：主题宫位里有化忌就点出来 */
+function topicJiLine(chart, palNames){
+  const hits = [];
+  chart.palaces.forEach(p => p.stars.forEach(st => {
+    if(st.siHua === '忌' && palNames.includes(disp(p.name))) hits.push(`${st.name}在${disp(p.name)}`);
+  }));
+  if(!hits.length) return '';
+  const intro = (window.GXG_HUAJI || {}).intro || '';
+  return `功课题：${hits.join('、')}化忌。${intro}`;
+}
 function buildLocalReading(chart){
   const out = {};
   const ming = chart.palaces.find(p => p.isMingGong);
@@ -814,6 +849,8 @@ function buildLocalReading(chart){
   const shen = chart.palaces.find(p => p.isShenGong);
   Object.keys(D.datasetTopics).forEach(topic => {
     const parts = [];
+    const palNames = LOCAL_READING_PALACES[topic] || ['命宫'];
+    const topicCn = D.datasetTopics[topic];
     if(topic === 'overview'){
       parts.push(`你的命宫主星是${mingMajors}，${chart.wuxingJuName}。命宫定一生的底色，身宫（在${shen ? disp(shen.name) : '—'}）定中年后发力的方向。`);
       try{
@@ -828,12 +865,18 @@ function buildLocalReading(chart){
         const v2 = (window.GXG_PATTERNS_V2 || {})[pt.name];
         parts.push(`${pt.name}：${v2 ? v2.text : (pt.description || '')}`);
       });
+    } else if(LOCAL_READING_INTROS[topic]){
+      parts.push(LOCAL_READING_INTROS[topic]);
     }
-    (LOCAL_READING_PALACES[topic] || ['命宫']).forEach(pn => {
+    palNames.forEach(pn => {
       const p = palaceByName(chart, pn);
       if(p) parts.push(palaceTextBrief(chart, p));
     });
-    if(topic === 'overview'){
+    if(topic !== 'overview'){
+      parts.push(topicTimeLine(chart, topicCn, palNames));
+      const ji = topicJiLine(chart, palNames);
+      if(ji) parts.push(ji);
+    } else {
       parts.push('以上是本地精编版：根据你的命盘实时生成，离线可用。完整版（三万字语料库解读）在有网络时会自动加载。命理说的是概率性倾向，约六七成或然律，地图不是导航。');
     }
     out[topic] = parts.join('\n\n');
