@@ -250,6 +250,26 @@
     <p class="hint">长按图片也可以保存。分享出去，朋友扫码/点链接就能来排自己的盘。</p>
   </div>
 </div>
+<div id="unlock-modal" class="modal" hidden>
+  <div class="modal-card">
+    <button class="modal-x" data-unlock-close>×</button>
+    <h3>解锁完整版 · ¥0.9</h3>
+    <p class="hint">13 维深度解读全文约 3 万字，解锁后这张盘永久可看。</p>
+    <img class="qr-img" src="assets/img/alipay-qr.jpg" alt="支付宝收款码">
+    <ol class="unlock-steps">
+      <li>支付宝扫码付 ¥0.9，备注你的称呼</li>
+      <li>截图付款记录发给 <b id="unlock-contact"></b>，并附上这串命盘编号：<br>
+        <code class="key-mono" id="unlock-key"></code>
+        <button class="chip" id="unlock-copy">复制编号</button></li>
+      <li>收到 8 位解锁码后，在下方输入：</li>
+    </ol>
+    <div class="unlock-row">
+      <input id="unlock-code" inputmode="numeric" maxlength="8" placeholder="8 位解锁码">
+      <button class="btn-primary" id="unlock-verify">验证并解锁</button>
+    </div>
+    <p class="form-error" id="unlock-err"></p>
+  </div>
+</div>
 
 <nav id="tabbar">
   <button data-nav="home" class="on"><span>✦</span>首页</button>

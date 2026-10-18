@@ -743,10 +743,29 @@ document.addEventListener('click', e => {
   if(c && !e.target.closest('[data-star]')) glossary('palace', c.dataset.palace);
 });
 
-/* ---------- 13维解读（v4.0 数据集按需加载） ---------- */
-const RELEASE_BASE = 'https://github.com/Renhuai123/ziwei-doushu/releases/download/v4.0-13d';
+/* ---------- 13维解读（v4.0 数据集按需加载，走自建 CDN 月包） ---------- */
+const DATA_CDN = 'https://cdn.jsdelivr.net/gh/zjeep-arch/ziwei-data@main/data';
 const ZSTD_ESM = 'https://cdn.jsdelivr.net/npm/@bokuweb/zstd-wasm@0.0.27/dist/esm/index.web.js';
 const ZSTD_WASM = 'https://cdn.jsdelivr.net/npm/@bokuweb/zstd-wasm@0.0.27/dist/esm/zstd.wasm';
+/* 解锁码：SALT|chartKey 的 SHA-256 取 8 位数字。SALT 公开在前端，仅防君子（0.9 元内容此强度足够）。 */
+const GXG_UNLOCK_SALT = 'ae8f94fe28773c4be2cf110caac7f535';
+const GXG_CONTACT = ''; // 站长微信（用户提供后填入，解锁弹窗第 2 步会显示）
+function readingKeyOf(chart){
+  const bi = chart.birthInfo;
+  return `${bi.year}-${pad2(bi.month)}-${pad2(bi.day)}-${bi.hour}-${bi.gender}`;
+}
+async function sha256hex(s){
+  const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s));
+  return [...new Uint8Array(b)].map(x => x.toString(16).padStart(2, '0')).join('');
+}
+async function makeUnlockCode(key){
+  const h = await sha256hex(GXG_UNLOCK_SALT + '|' + key);
+  return (h.replace(/\D/g, '') + '00000000').slice(0, 8);
+}
+async function verifyUnlockCode(key, code){
+  return (String(code).trim() === await makeUnlockCode(key));
+}
+function isUnlocked(key){ return !!store.get('gxg_unlock_' + key, false); }
 let zstdApi = null, readingCache = {}; // key -> {topic: text}
 async function getZstd(){
   if(zstdApi) return zstdApi;
@@ -784,17 +803,16 @@ async function fetchWithRetry(url, tries){
 }
 async function loadReading(chart, onStep){
   const bi = chart.birthInfo;
-  const key = `${bi.year}-${pad2(bi.month)}-${pad2(bi.day)}-${bi.hour}-${bi.gender}`;
+  const key = readingKeyOf(chart);
   if(readingCache[key]) return { key, data: readingCache[key], local: false };
   const cached = store.get('gxg_reading_' + key, null);
   if(cached){ readingCache[key] = cached; return { key, data: cached, local: false }; }
-  const url = `${RELEASE_BASE}/year-${bi.year}.jsonl.zst`;
-  if(onStep) onStep('正在下载解读数据（约 2MB，失败会自动重试）…');
+  const url = `${DATA_CDN}/${bi.year}/${pad2(bi.month)}.jsonl.zst`;
+  if(onStep) onStep('正在下载解读数据（约 2MB）…');
   const res = await fetchWithRetry(url, 3);
   const buf = new Uint8Array(await res.arrayBuffer());
   if(onStep) onStep('下载完成，正在解压并匹配你的命盘…');
   const zstd = await getZstd();
-  // 注意：年份文件解压后约 700MB，手机上可能吃紧；失败会走本地精编版降级
   const raw = zstd.decompress(buf);
   const lineBytes = findLineBytes(raw, new TextEncoder().encode(`"k":"${key}"`));
   if(!lineBytes) throw new Error('这张盘暂无深度解读数据');
@@ -945,31 +963,72 @@ async function renderReading(){
     $('#reading-body').innerHTML = '';
     return;
   }
-  setStep('本地精编版 · 已按你的命盘生成 <span class="hint">· 正在尝试加载完整版…</span>');
-  try{
-    const { data } = await loadReading(rec.chart, null);
-    window.GXG_READING = data;
-    window.GXG_READING_LOCAL = false;
-    renderReadingBody();
-    setStep('已加载完整版 · 命宫主星' + esc(rec.chart.palaces.find(p=>p.isMingGong).stars.filter(s=>s.type==='major').map(s=>s.name).join('、') || '（空宫）'));
-  }catch(err){
-    // 完整版不可用：保留本地精编版，只在状态栏小字说明，不再弹失败提示
-    setStep('本地精编版 · 已按你的命盘生成 <span class="hint">· 完整版因网络原因暂不可用</span>');
+  setStep('本地精编版 · 已按你的命盘生成');
+  const key = readingKeyOf(rec.chart);
+  if(isUnlocked(key)){
+    setStep('本地精编版 · 已按你的命盘生成 <span class="hint">· 正在加载完整版…</span>');
+    try{
+      const { data } = await loadReading(rec.chart, null);
+      window.GXG_READING = data;
+      window.GXG_READING_LOCAL = false;
+      renderReadingBody();
+      setStep('已加载完整版 · 命宫主星' + esc(rec.chart.palaces.find(p=>p.isMingGong).stars.filter(s=>s.type==='major').map(s=>s.name).join('、') || '（空宫）'));
+    }catch(err){
+      setStep('本地精编版 · 已按你的命盘生成 <span class="hint">· 完整版加载失败，稍后重试</span>');
+    }
   }
 }
 function renderReadingBody(){
   const data = window.GXG_READING; if(!data) return;
   const text = data[readingTopic] || '暂无';
   const paras = text.split(/\n\n+/);
+  const rec = cur();
+  const key = rec ? readingKeyOf(rec.chart) : '';
+  const unlocked = key && isUnlocked(key);
+  const upsell = (!window.GXG_READING_LOCAL || unlocked) ? '' :
+    `<div class="unlock-card"><div><b>想要更详细的完整版？</b><br>
+     <span class="hint">13 维深度解读全文约 3 万字，¥0.9 解锁这张盘，解锁后永久可看。</span></div>
+     <button class="btn-primary" data-unlock-open>¥0.9 解锁</button></div>`;
   $('#reading-body').innerHTML = paras.map((p, i) =>
     `<button class="fav-btn" data-fav="${readingTopic}:${i}" title="收藏这段">☆</button><p>${md2html(p)}</p>`
-  ).join('') +
+  ).join('') + upsell +
   `<div class="hint" style="margin-top:16px">点 ☆ 收藏打动你的段落。${
     window.GXG_READING_LOCAL
-      ? '本地精编版：按你的命盘实时生成，离线可用；联网后可重试完整版。'
-      : '解读数据：紫微斗数开源解读数据集 v4.0（CC BY 4.0）。'
+      ? '本地精编版：按你的命盘实时生成，离线可用。'
+      : '完整版解读数据：紫微斗数开源解读数据集 v4.0（CC BY 4.0），已获解锁。'
   }</div>`;
 }
+/* ---------- 解锁弹窗 ---------- */
+function openUnlock(){
+  const rec = cur(); if(!rec) return;
+  const key = readingKeyOf(rec.chart);
+  $('#unlock-key').textContent = key;
+  $('#unlock-code').value = '';
+  $('#unlock-err').textContent = '';
+  $('#unlock-contact').textContent = GXG_CONTACT || '站长微信（请截图后私聊发送）';
+  $('#unlock-modal').hidden = false;
+}
+document.addEventListener('click', async e => {
+  if(e.target.closest('[data-unlock-open]')){ openUnlock(); return; }
+  if(e.target.closest('[data-unlock-close]')){ $('#unlock-modal').hidden = true; return; }
+  if(e.target.closest('#unlock-copy')){
+    try{ await navigator.clipboard.writeText($('#unlock-key').textContent); $('#unlock-copy').textContent = '已复制'; }
+    catch(err){ $('#unlock-copy').textContent = '长按复制'; }
+    return;
+  }
+  if(e.target.closest('#unlock-verify')){
+    const rec = cur(); if(!rec) return;
+    const key = readingKeyOf(rec.chart);
+    const code = $('#unlock-code').value;
+    if(await verifyUnlockCode(key, code)){
+      store.set('gxg_unlock_' + key, true);
+      $('#unlock-modal').hidden = true;
+      renderReading();
+    } else {
+      $('#unlock-err').textContent = '解锁码不对，请检查后重试。';
+    }
+  }
+});
 document.addEventListener('click', e => {
   const f = e.target.closest('[data-fav]');
   if(f){

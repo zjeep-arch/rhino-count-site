@@ -344,3 +344,16 @@ body{font-family:var(--font-body); padding-bottom:calc(104px + env(safe-area-ins
 /* 收紧：view 底部不再留 110px，悬浮导航由 body padding 承接 */
 .view{padding-bottom:12px;}
 #app-footer{padding:16px 20px 4px;}
+
+/* 解锁完整版 */
+.unlock-card{display:flex; gap:12px; align-items:center; justify-content:space-between;
+  background:linear-gradient(135deg, #F3EDFB, #EDE4F7); border:1px solid #D9C9F0;
+  border-radius:var(--r-lg); padding:14px 16px; margin-top:18px;}
+.qr-img{width:220px; height:220px; border-radius:12px; display:block; margin:12px auto; border:1px solid #E4D8F2;}
+.unlock-steps{margin:12px 0; padding-left:20px; font-size:14px; color:var(--ink-soft); line-height:1.9;}
+.key-mono{display:inline-block; background:#F4F0FA; border:1px dashed #C9B8E8; border-radius:8px;
+  padding:4px 10px; font-family:monospace; font-size:13px; margin:6px 8px 6px 0;}
+.unlock-row{display:flex; gap:10px; margin-top:8px;}
+.unlock-row input{flex:1; border:1.5px solid #D9C9F0; border-radius:12px; padding:12px;
+  font-size:16px; letter-spacing:2px; text-align:center;}
+.unlock-row .btn-primary{white-space:nowrap;}
