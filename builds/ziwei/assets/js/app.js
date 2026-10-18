@@ -544,8 +544,6 @@ function renderKoujingCard(rec){
   if(rec.note && rec.note.length) items.push(rec.note.join('；'));
   items.push('晚子时按次日排盘' + (li.isLeapMonth ? '；闰月按十五分界（十五及以前归本月）' : ''));
   items.push('大限起法：按五行局对应岁数起运，阳男阴女顺行、阴男阳女逆行');
-  if(E.ENGINE_CREDIT) items.push(E.ENGINE_CREDIT);
-  items.push('方法论参考：中州派（陆斌兆《紫微斗数讲义》、王亭之注）及《紫微斗数全书》');
   body.innerHTML = items.map(esc).join('<br>');
   card.hidden = false;
 }
@@ -1194,8 +1192,6 @@ function wireDisclaimer(){
     if(G.full) $('#reading-disclaimer').textContent = G.full;
     if(G.short){ const f = $('#footer-disclaimer'); if(f) f.textContent = G.short; }
   }
-  const c = $('#footer-credit');
-  if(c) c.textContent = (E.ENGINE_CREDIT ? E.ENGINE_CREDIT + '；' : '') + '方法论参考：中州派（陆斌兆《紫微斗数讲义》·王亭之注）与《紫微斗数全书》';
 }
 
 /* ---------- 启动 ---------- */
