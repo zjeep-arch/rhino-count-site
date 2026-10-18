@@ -272,6 +272,11 @@ function onSubmit(e){
   const y = +$('#f-year').value, m = +$('#f-month').value, d = +$('#f-day').value;
   const shichen = $('#f-hour').value === '' ? null : +$('#f-hour').value;
   if(!y || !m || !d){ err.textContent = '请把生日选完整。'; return; }
+  // 防止 new Date 静默滚日（如 2 月 30 日变成 3 月 2 日）：先验日期真实存在
+  const chk = new Date(y, m - 1, d);
+  if(chk.getFullYear() !== y || chk.getMonth() !== m - 1 || chk.getDate() !== d){
+    err.textContent = '这天不存在，请检查日期（比如 2 月没有 30 日）。'; return;
+  }
   if(shichen == null){ err.textContent = '请选择出生时辰（实在不知道可以去定盘辅助）。'; return; }
   const cityVal = $('#f-city').value;
   const longitude = cityVal ? parseFloat(cityVal.split('|')[1]) : null;
@@ -300,7 +305,8 @@ function onSubmit(e){
     renderChart();
     nav('chart');
   }catch(ex){
-    err.textContent = '排盘失败：' + (ex.message || '日期无效');
+    const bad = /does not exist/i.test(ex.message || '');
+    err.textContent = bad ? '这天不存在，请检查日期（比如 2 月没有 30 日）。' : ('排盘失败：' + (ex.message || '日期无效'));
   }
 }
 
@@ -443,7 +449,7 @@ function renderChart(){
   const mingMajors = ming.stars.filter(s=>s.type==='major').map(s=>s.name).join('、') || '（空宫）';
   const bi = chart.birthInfo;
   $('#chart-head').innerHTML =
-    `<h3>${esc(rec.name)} 的命盘</h3>
+    `<h3>${esc(rec.name)}的命盘</h3>
      <div class="meta">公历 ${bi.year} 年 ${bi.month} 月 ${bi.day} 日 · ${BR[bi.hour]}时 · ${bi.gender==='male'?'男':'女'} · ${esc(chart.wuxingJuName)} · 命主${esc(chart.mingZhu||'')} / 身主${esc(chart.shenZhu||'')}</div>
      <div class="meta">命宫主星：${esc(mingMajors)}${rec.note && rec.note.length ? ' · ' + esc(rec.note.join('；')) : ''}</div>`;
   renderLuckPicker();
@@ -541,9 +547,10 @@ function renderChartBody(){
     const hl = ov.hlBranch === p.branch ? ' style="border:2px solid var(--primary)"' : '';
     const sfAttr = (sfSet && sfSet.has(p.branch)) ? ' data-sf="1"' : '';
     const tags = (p.isMingGong?'命':'') + (p.isShenGong?'身':'');
+    const majors0 = p.stars.filter(s => s.type === 'major').map(s => s.name).join('、') || '空宫';
     return `<div class="palace-row"${hl}${sfAttr} data-branch="${p.branch}">
       <div class="palace-row-head"><div><span class="t">${disp(p.name)}</span>${tags?` <span class="star-chip">${tags}宫</span>`:''}
-        <div class="s">${ST[p.stem]}${BR[p.branch]}${p.daXianAge?` · 大限${p.daXianAge[0]}–${p.daXianAge[1]}`:''}</div></div>
+        <div class="s">${ST[p.stem]}${BR[p.branch]}${p.daXianAge?` · 大限${p.daXianAge[0]}–${p.daXianAge[1]}`:''} · ${majors0}</div></div>
         <span class="arrow">›</span></div>
       <div class="palace-row-body">${palaceStarsHtml(p)}
         ${p.selfSihua && p.selfSihua.length ? `<div class="hint">自化：${p.selfSihua.map(s=>s.starName+s.siHua).join('、')}</div>` : ''}
@@ -730,7 +737,7 @@ function renderPalaceCards(){
   let banner = '';
   if(chart){
     const bi = chart.birthInfo;
-    banner = `<div class="card" style="margin-bottom:12px"><div class="card-kicker">${esc(rec.name)} 的十二宫</div>`
+    banner = `<div class="card" style="margin-bottom:12px"><div class="card-kicker">${esc(rec.name)}的十二宫</div>`
       + `<p class="hint" style="margin:0">${bi.year} 年 ${bi.month} 月 ${bi.day} 日 · ${bi.gender==='male'?'男':'女'} · ${esc(chart.wuxingJuName)} · 下面每张卡都是按你的命盘填的：点宫看详解，点星看星的解释</p></div>`;
   } else {
     banner = `<div class="card" style="margin-bottom:12px"><p style="margin:0 0 10px">先排一张盘，这里的十二宫就会结合你的命盘来展示——每宫的星曜、四化、干支、大限都会填上。</p><button class="btn" data-nav="input">去排盘 →</button></div>`;
@@ -1432,8 +1439,8 @@ function drawCelestialBG(ctx, W, H, rnd){
     ctx.fillStyle = gold ? `rgba(221,189,119,${.25 + rnd() * .5})` : `rgba(216,201,245,${.15 + rnd() * .45})`;
     ctx.beginPath(); ctx.arc(x, y, r, 0, 7); ctx.fill();
   }
-  // 月相（右上，大而淡）
-  const mx = W - 210, my = 230, mr = 120;
+  // 月相（右上角，大而淡，不压标题）
+  const mx = W - 110, my = 110, mr = 70;
   const mg = ctx.createRadialGradient(mx, my, mr * .4, mx, my, mr * 2.2);
   mg.addColorStop(0, 'rgba(245,239,224,.20)'); mg.addColorStop(1, 'rgba(245,239,224,0)');
   ctx.fillStyle = mg; ctx.beginPath(); ctx.arc(mx, my, mr * 2.2, 0, 7); ctx.fill();
@@ -1463,7 +1470,8 @@ function drawShare(){
     const bi = chart.birthInfo;
     // 标题区
     ctx.fillStyle = '#F5EFE0'; ctx.font = '600 76px "Songti SC","Noto Serif SC",serif';
-    ctx.fillText(rec.name + ' 的命盘', W/2, 170);
+    const shareTitle = /^命盘\d+$/.test(rec.name) ? rec.name : rec.name + '的命盘';
+    ctx.fillText(shareTitle, W/2, 170);
     ctx.fillStyle = '#B9A8D9'; ctx.font = '34px sans-serif';
     try{ ctx.letterSpacing = '2px'; }catch(e){}
     ctx.fillText(`${bi.year}年${bi.month}月${bi.day}日 · ${BR[bi.hour]}时 · ${chart.wuxingJuName}`, W/2, 232);
