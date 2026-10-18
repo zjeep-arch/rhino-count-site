@@ -334,3 +334,12 @@ body{font-family:var(--font-body); padding-bottom:calc(104px + env(safe-area-ins
 /* 宫位行 hover */
 .palace-row{transition:transform .15s ease;}
 .palace-row:active{transform:scale(.985);}
+
+/* ═══════════════ v3.1：回退链路 + 收紧板块尾部空白 ═══════════════ */
+/* 子功能页回解读菜单 */
+.back-link{border:none; background:none; color:var(--primary); font-size:14px; font-weight:600;
+  cursor:pointer; padding:10px 4px 2px; display:inline-flex; align-items:center; gap:2px;}
+.back-link:active{opacity:.6;}
+/* 收紧：view 底部不再留 110px，悬浮导航由 body padding 承接 */
+.view{padding-bottom:12px;}
+#app-footer{padding:16px 20px 4px;}
