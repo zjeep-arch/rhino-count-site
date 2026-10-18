@@ -10,6 +10,12 @@ if(!E || !E.generateChart || !D){ document.body.innerHTML = '<p style="padding:4
 const $ = s => document.querySelector(s);
 const $$ = s => Array.from(document.querySelectorAll(s));
 const esc = s => String(s==null?'':s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+/* 印章式四化徽章：禄=鎏金 权=深紫 科=雾紫 忌=豆沙红 */
+function shBadge(h){
+  if(!h) return '';
+  const cls = { '禄': 'sh-lu', '权': 'sh-quan', '科': 'sh-ke', '忌': 'sh-ji' }[h] || '';
+  return `<span class="sihua ${cls}">${esc(h)}</span>`;
+}
 const pad2 = n => String(n).padStart(2,'0');
 const BR = E.BRANCHES, ST = E.STEMS;
 /* 北京时间日期：今日小运按东八区日期翻篇，不跟随设备时区 */
@@ -111,7 +117,7 @@ function glossary(kind, name){
       const pl = palaceByName(rec0.chart, name);
       if(pl){
         const majors = pl.stars.filter(s => s.type === 'major')
-          .map(s => `${esc(s.name)}${s.siHua ? `(化${esc(s.siHua)})` : ''}${s.brightnessRaw ? esc(s.brightnessRaw) : ''}`).join('、') || '空宫';
+          .map(s => `${esc(s.name)}${s.siHua ? shBadge(s.siHua) : ''}${s.brightnessRaw ? esc(s.brightnessRaw) : ''}`).join('、') || '空宫';
         const dx = pl.daXianAge ? ` · 大限${pl.daXianAge[0]}–${pl.daXianAge[1]}岁` : '';
         const ms = (pl.isMingGong ? '（命宫）' : '') + (pl.isShenGong ? '（身宫）' : '');
         html += `<br><br><b>${esc(rec0.name)} 的${esc(name)}${ms}</b>：${ST[pl.stem]}${BR[pl.branch]}${dx}<br>主星：${majors}`;
@@ -281,7 +287,7 @@ function palaceByName(chart, name){ return chart.palaces.find(p => p.name === na
 function palaceByBranch(chart, b){ return chart.palaces.find(p => p.branch === ((b%12)+12)%12); }
 
 function starHtml(s){
-  const sihua = s.siHua ? `<span class="sihua">(${s.siHua})</span>` : '';
+  const sihua = s.siHua ? shBadge(s.siHua) : '';
   const br = s.brightnessRaw ? `<span class="br">${s.brightnessRaw}</span>` : '';
   return `<span class="star-chip" data-star="${esc(s.name)}">${esc(s.name)}${sihua}${br}</span>`;
 }
@@ -652,7 +658,7 @@ function renderPalaceCards(){
   }
   $('#palace-cards').innerHTML = banner + D.palaces.map((p, i) => {
     if(!chart){
-      return `<div class="palace-card" data-palace="${p.name}">`
+      return `<div class="palace-card" data-palace="${p.name}" style="--i:${i}">`
         + `<span class="num">${i+1}</span><h4>${p.name}</h4>`
         + `<div><span class="modern">${p.modern}</span></div>`
         + `<div class="kw">${p.keywords}</div>`
@@ -671,7 +677,7 @@ function renderPalaceCards(){
       starBlock = `<div class="stars-line">空宫，借对宫（${bname}）来看</div>`;
     }
     if(minors.length){
-      const show = minors.slice(0, 8).map(s => esc(s.name) + (s.siHua ? `<span class="sihua">(${s.siHua})</span>` : '')).join(' ');
+      const show = minors.slice(0, 8).map(s => esc(s.name) + (s.siHua ? shBadge(s.siHua) : '')).join(' ');
       starBlock += `<div class="kw">辅煞 ${show}${minors.length > 8 ? ' …' : ''}</div>`;
     }
     // 四化入宫断语（取前两条）
@@ -680,7 +686,7 @@ function renderPalaceCards(){
       return say ? `<div class="kw" style="color:var(--primary-deep)">化${esc(s.siHua)}在${esc(p.name)}：${esc(say)}</div>` : '';
     }).filter(Boolean).slice(0, 2).join('');
     const dx = pl.daXianAge ? ` · 大限 ${pl.daXianAge[0]}–${pl.daXianAge[1]} 岁` : '';
-    return `<div class="palace-card" data-palace="${p.name}">`
+    return `<div class="palace-card" data-palace="${p.name}" style="--i:${i}">`
       + `<span class="num">${i+1}</span><h4>${p.name}</h4>${tags}`
       + `<div class="kw">${ST[pl.stem]}${BR[pl.branch]}${dx}</div>`
       + `<div><span class="modern">${p.modern}</span></div>`
@@ -830,7 +836,10 @@ async function renderReading(){
   renderReadingTabs();
   const setStep = t => { $('#reading-status').textContent = t; };
   setStep('正在按出生年份加载解读数据（约 2MB，只下一次）…');
-  $('#reading-body').innerHTML = '<div class="empty">星星正在排版…</div>';
+  $('#reading-body').innerHTML = '<div class="skel" style="height:22px;width:42%"></div>'
+    + '<div class="skel" style="height:15px"></div>'.repeat(3)
+    + '<div class="skel" style="height:22px;width:36%;margin-top:18px"></div>'
+    + '<div class="skel" style="height:15px"></div>'.repeat(4);
   try{
     const { data } = await loadReading(rec.chart, setStep);
     window.GXG_READING = data;
@@ -924,7 +933,7 @@ function renderTopicBody(){
     const tags = (p.isMingGong ? '命宫' : '') + (p.isMingGong && p.isShenGong ? '·' : '') + (p.isShenGong ? '身宫' : '');
     let majorLine;
     if(majors.length){
-      majorLine = majors.map(s => `${esc(s.name)}${s.siHua ? `<span class="sihua">(化${s.siHua})</span>` : ''}${s.brightnessRaw ? `【${s.brightnessRaw}】` : ''}`).join(' ');
+      majorLine = majors.map(s => `${esc(s.name)}${s.siHua ? shBadge(s.siHua) : ''}${s.brightnessRaw ? `【${s.brightnessRaw}】` : ''}`).join(' ');
     } else {
       const bname = p.borrowedStars && p.borrowedStars.length ? p.borrowedStars.map(esc).join('、') : '对宫';
       majorLine = `空宫，借对宫（${bname}）来看`;
@@ -934,7 +943,7 @@ function renderTopicBody(){
       return t ? `<p class="hint" style="margin:6px 0 0"><b>${esc(s.name)}</b>：${esc(t)}</p>` : '';
     }).join('');
     const minorLine = minors.length
-      ? `<p class="hint" style="margin:6px 0 0">辅星煞星：${minors.map(s => esc(s.name) + (s.siHua ? `(化${s.siHua})` : '')).join('、')}</p>` : '';
+      ? `<p class="hint" style="margin:6px 0 0">辅星煞星：${minors.map(s => esc(s.name) + (s.siHua ? shBadge(s.siHua) : '')).join('、')}</p>` : '';
     const selfLine = (p.selfSihua && p.selfSihua.length)
       ? `<p class="hint" style="margin:6px 0 0">自化：${p.selfSihua.map(s => esc(s.starName + s.siHua)).join('、')}——这宫的事容易自己起变化</p>` : '';
     const sf = [p.branch, (p.branch + 6) % 12, (p.branch + 4) % 12, (p.branch + 8) % 12].map(b => {
@@ -1266,7 +1275,7 @@ const AI_BRIEF_TOPICS = [
 function palaceMainStars(chart, name){
   const p = palaceByName(chart, name);
   if(!p) return '—';
-  const ms = p.stars.filter(s => s.type === 'major').map(s => s.name + (s.siHua ? '(化' + s.siHua + ')' : '')).join('、');
+  const ms = p.stars.filter(s => s.type === 'major').map(s => s.name + (s.siHua ? shBadge(s.siHua) : '')).join('、');
   return (ms || '空宫') + `（${ST[p.stem]}${BR[p.branch]}）`;
 }
 function buildAiBrief(chart, rec, topicKey){
@@ -1332,8 +1341,8 @@ function renderMenu(){
   const head = rec
     ? `<div class="card" style="margin-bottom:12px"><div class="card-kicker">当前命盘</div><p style="margin:0">${esc(rec.name)} · 命宫${esc(rec.chart.palaces.find(p=>p.isMingGong).stars.filter(s=>s.type==='major').map(s=>s.name).join('、') || '空宫')} · <button class="btn-ghost" data-nav="archive" style="padding:4px 10px">换一张</button></p></div>`
     : `<div class="card" style="margin-bottom:12px"><div class="card-kicker">先排一张盘</div><p style="margin:0 0 10px">下面的解读都要基于你的命盘，先花 1 分钟排一张。</p><button class="btn-primary" data-nav="input">去排盘 →</button></div>`;
-  $('#menu-list').innerHTML = head + MENU_ITEMS.map(m =>
-    `<div class="card menu-item" data-menu="${m.k}" style="cursor:pointer">
+  $('#menu-list').innerHTML = head + MENU_ITEMS.map((m, i) =>
+    `<div class="card menu-item" data-menu="${m.k}" style="cursor:pointer;--i:${i}">
        <div style="display:flex;justify-content:space-between;align-items:center">
          <b style="font-size:16px">${m.t}</b><span style="color:var(--muted)">→</span>
        </div>

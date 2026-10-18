@@ -210,3 +210,82 @@ body{
 .sihua-table{width:100%; border-collapse:collapse; font-size:14px; margin:6px 0;}
 .sihua-table th,.sihua-table td{border:1px solid var(--line); padding:8px 6px; text-align:center;}
 .sihua-table th{background:var(--primary-soft); color:var(--primary-deep);}
+
+/* ═══════════════ 问星 · 设计升级 v2（mobbin 案例研究落地） ═══════════════ */
+:root{
+  --ink-soft:#6B5B8E;
+  --danger-soft:#B0655A;
+  --grad-sky:linear-gradient(180deg,#FBF9FE 0%,#F1E9FB 55%,#EADFF7 100%);
+  --grad-primary:linear-gradient(135deg,#A48FCE 0%,#7A639F 100%);
+  --grad-gold:linear-gradient(135deg,#DDBD77 0%,#B98F3E 100%);
+  --grad-menu-hero:linear-gradient(135deg,#8B7AB8 0%,#6A5490 60%,#57457E 100%);
+  --r-sm:10px; --r-md:14px; --r-lg:20px; --r-xl:28px; --r-pill:999px;
+  --sh-sm:0 2px 8px rgba(139,122,184,.10);
+  --sh-md:0 6px 24px rgba(139,122,184,.14);
+  --sh-lg:0 12px 40px rgba(94,75,139,.20);
+  --font-title:"Songti SC","Noto Serif SC","STSong",serif;
+  --font-body:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",sans-serif;
+}
+body{font-family:var(--font-body); padding-bottom:calc(104px + env(safe-area-inset-bottom));}
+/* 衬线中文标题：典籍感 */
+.view-title,.hero-title,.brand h1,.card h4,.modal-card h3,#chart-head h3{
+  font-family:var(--font-title); font-weight:600; letter-spacing:.05em;}
+.view-title{font-size:23px;}
+.hero-title{font-size:36px;}
+/* 星空 twinkle */
+#stars-bg{animation:twinkle 6s ease-in-out infinite alternate;}
+@keyframes twinkle{from{opacity:.55;} to{opacity:1;}}
+/* 渐变天空 hero */
+.hero{margin:0 -16px; padding:46px 28px 36px; background:var(--grad-sky);
+  border-radius:0 0 var(--r-xl) var(--r-xl);}
+/* 页面转场升级 */
+.view{animation:fadeUp .26s ease-out;}
+@keyframes fadeUp{from{opacity:0; transform:translateY(10px) scale(.998);} to{opacity:1; transform:none;}}
+/* 卡片入场 stagger */
+.palace-card,.menu-item{animation:rise .45s backwards; animation-delay:calc(var(--i,0)*55ms);}
+@keyframes rise{from{opacity:0; transform:translateY(14px);} to{opacity:1; transform:none;}}
+/* 按压反馈推广 */
+.palace-card:active,.menu-item:active,.star-chip:active,.chip:active,.tabs button:active{
+  transform:scale(.97); transition:transform .15s ease;}
+/* iOS 式胶囊分段选择器 */
+#luck-tabs{background:var(--primary-soft); border-radius:var(--r-pill); padding:4px; gap:4px;}
+#luck-tabs button{border:none; background:transparent;}
+#luck-tabs button.on{background:#fff; color:var(--primary-deep); box-shadow:var(--sh-sm); font-weight:700;}
+/* Bento 解读菜单 */
+#menu-list{display:grid; grid-template-columns:1fr 1fr; gap:12px;}
+#menu-list .card{margin:0; border-radius:var(--r-lg);}
+#menu-list .menu-item[data-menu="reading"]{grid-column:span 2; background:var(--grad-menu-hero);
+  border:none; box-shadow:var(--sh-lg);}
+#menu-list .menu-item[data-menu="reading"] b{color:#fff; font-size:18px;}
+#menu-list .menu-item[data-menu="reading"] .hint{color:rgba(255,255,255,.85);}
+#menu-list .menu-item[data-menu="reading"] span{color:#fff;}
+/* 浮动胶囊底部导航 */
+#tabbar{left:16px; right:16px; bottom:calc(12px + env(safe-area-inset-bottom));
+  border-radius:24px; background:rgba(255,255,255,.85); backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px); border:1px solid rgba(228,217,242,.8); box-shadow:var(--sh-lg);
+  padding-bottom:0;}
+#tabbar button{padding:10px 0;}
+#tabbar button.on{color:var(--primary-deep);}
+/* bottom-sheet 弹窗 */
+.modal{align-items:flex-end; padding:0;}
+.modal-card{border-radius:24px 24px 0 0; max-height:88vh; width:100%;
+  animation:sheetUp .32s cubic-bezier(.32,.72,.35,1);}
+@keyframes sheetUp{from{transform:translateY(48px); opacity:0;} to{transform:none; opacity:1;}}
+/* 印章式四化徽章 */
+.sihua{display:inline-block; min-width:22px; height:22px; line-height:22px; padding:0 6px;
+  border-radius:7px; color:#fff !important; font-size:12px; font-weight:700; text-align:center;
+  vertical-align:2px; margin-left:4px; box-shadow:var(--sh-sm);}
+.sihua.sh-lu{background:var(--grad-gold);}
+.sihua.sh-quan{background:#6A5490;}
+.sihua.sh-ke{background:#A48FCE;}
+.sihua.sh-ji{background:var(--danger-soft);}
+.cell .star .sihua,.star-chip .sihua{color:#fff;}
+/* 骨架屏 shimmer */
+.skel{border-radius:12px; margin:10px 0;
+  background:linear-gradient(90deg,var(--primary-soft) 25%,#F8F4FD 50%,var(--primary-soft) 75%);
+  background-size:200% 100%; animation:shimmer 1.3s infinite;}
+@keyframes shimmer{to{background-position:-200% 0;}}
+/* 降级：减弱动效 */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.01ms !important; transition-duration:.01ms !important;}
+}
