@@ -289,3 +289,48 @@ body{font-family:var(--font-body); padding-bottom:calc(104px + env(safe-area-ins
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{animation-duration:.01ms !important; transition-duration:.01ms !important;}
 }
+
+/* ═══════════════ 问星 · 设计升级 v3（去土味 + 十二宫阅读排版） ═══════════════ */
+/* 十二宫：手机单列阅读，双列只在宽屏 */
+.palace-grid{grid-template-columns:1fr;}
+@media(min-width:640px){.palace-grid{grid-template-columns:repeat(2,1fr);}}
+@media(min-width:1024px){.palace-grid{grid-template-columns:repeat(3,1fr);}}
+/* 十二宫阅读卡：左对齐、信息分层 */
+.palace-card{text-align:left; padding:20px 18px;}
+.palace-card .p-top{display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:2px;}
+.palace-card .p-top h4{margin:0; font-size:19px;}
+.palace-card .p-tag{font-size:11px; background:var(--grad-primary); color:#fff; border-radius:999px; padding:2px 10px; font-weight:700;}
+.palace-card .p-gz{font-size:13px; color:var(--muted);}
+.palace-card .p-sec{font-size:13px; font-weight:700; color:var(--primary); letter-spacing:.14em; margin:14px 0 4px;}
+.palace-card .p-stars{font-size:15px; color:var(--ink); font-weight:700; margin:2px 0;}
+.palace-card .p-say{font-size:13.5px; color:var(--ink-soft); margin:7px 0; line-height:1.75;}
+.palace-card .p-say b{color:var(--ink);}
+.palace-card .p-line{font-size:13px; color:var(--muted); margin:7px 0; line-height:1.7;}
+.palace-card .p-line b{color:var(--primary-deep); font-weight:600;}
+/* 去土味：命盘格质感 */
+.cell{background:linear-gradient(180deg,#FFFFFF 0%,#FAF7FE 100%); border-radius:16px;
+  box-shadow:var(--sh-sm); transition:transform .15s ease, box-shadow .15s ease;}
+.cell:active{transform:scale(.97);}
+.cell.center{background:var(--grad-menu-hero); border:none; box-shadow:var(--sh-md);}
+.cell.center .gz{color:rgba(255,255,255,.8);}
+.cell .pname{font-family:var(--font-title); font-size:14px;}
+/* 去土味：品牌标识 */
+.brand-mark{display:inline-flex; width:36px; height:36px; border-radius:13px; font-size:19px;
+  background:var(--grad-primary); color:#fff; align-items:center; justify-content:center;
+  box-shadow:var(--sh-sm);}
+/* 去土味：排盘表单装进卡片 */
+#birth-form{background:var(--card); border:1px solid var(--line); border-radius:var(--r-xl);
+  box-shadow:var(--sh-md); padding:22px 20px; margin:14px 0;}
+/* 去土味：底部导航选中态胶囊 */
+#tabbar{padding:6px;}
+#tabbar button{border-radius:18px; padding:9px 0 10px;}
+#tabbar button.on{background:var(--primary-soft);}
+/* 去土味：主按钮更柔 */
+.btn-primary{box-shadow:0 10px 26px rgba(122,99,159,.38);}
+/* 通用段落标题（命盘页十二宫等） */
+.sec-head{display:flex; align-items:baseline; justify-content:space-between; margin:24px 4px 10px;}
+.sec-head h3{font-family:var(--font-title); font-size:20px; color:var(--primary-deep); margin:0; letter-spacing:.05em;}
+.sec-head .more{font-size:12.5px;}
+/* 宫位行 hover */
+.palace-row{transition:transform .15s ease;}
+.palace-row:active{transform:scale(.985);}
