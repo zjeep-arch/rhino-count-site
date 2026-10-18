@@ -9,7 +9,7 @@ window.BUILDS_CATALOG = [
   },
   {
     "tag": "TOOL",
-    "title": "紫微小馆 · 紫微斗数在线排盘",
+    "title": "问星 · 紫微斗数在线排盘",
     "desc": "输入生日时辰，本地排出紫微命盘：十二宫现代语解读、四化格局、大限流年，数据只存手机不上传。",
     "linkLabel": "开始排盘",
     "href": "builds/ziwei/"

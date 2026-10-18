@@ -1,4 +1,4 @@
-/* 紫微小馆 · 应用主逻辑 */
+/* 问星 · 应用主逻辑 */
 (function(){
 'use strict';
 const _ZW = window.ZiweiEngine;
@@ -475,7 +475,7 @@ function renderChartBody(){
   const order = [5,6,7,8, 4,-1,-1,9, 3,-1,-1,10, 2,1,0,11];
   let h = '';
   order.forEach(b => {
-    if(b === -1){ h += '<div class="cell center"><div style="font-size:40px">✦</div><div class="gz">紫微小馆</div></div>'; return; }
+    if(b === -1){ h += '<div class="cell center"><div style="font-size:40px">✦</div><div class="gz">问星</div></div>'; return; }
     const p = palaceByBranch(chart, b);
     const tags = [];
     if(p.isMingGong) tags.push('<span class="tag">命</span>');
@@ -1063,7 +1063,7 @@ function drawShare(){
   }
   // 落款
   ctx.fillStyle = '#5E4B8B'; ctx.font = '700 40px sans-serif';
-  ctx.fillText('✦ 紫微小馆 · 紫微斗数在线排盘', W/2, H-140);
+  ctx.fillText('✦ 问星 · 紫微斗数在线排盘', W/2, H-140);
   ctx.fillStyle = '#8A7BA8'; ctx.font = '30px sans-serif';
   ctx.fillText('rhinocount.cn/builds/ziwei/', W/2, H-90);
 }
@@ -1079,7 +1079,7 @@ function wrapText(ctx, text, x, y, maxW, lh){
 }
 $('#btn-save-img').addEventListener('click', () => {
   const a = document.createElement('a');
-  a.download = '紫微小馆-' + shareKind + '.png';
+  a.download = '问星-' + shareKind + '.png';
   a.href = $('#share-canvas').toDataURL('image/png');
   a.click();
 });
@@ -1115,7 +1115,7 @@ function buildAiBrief(chart, rec, topicKey){
   const ySh = normSihua(E.getLiuNianSiHua(y));
   const ySihuaLine = ySh ? [['禄','lu'],['权','quan'],['科','ke'],['忌','ji']].map(([cn, k]) => cn + (ySh[k] || '—')).join('、') : '—';
   const L = [];
-  L.push('【紫微斗数 AI 解读任务书】（紫微小馆生成）');
+  L.push('【紫微斗数 AI 解读任务书】（问星生成）');
   L.push('用法：把下面整段复制，粘贴给任意大模型（DeepSeek、豆包、Claude 等），它会按要求做深度解读。解读仅供娱乐参考，不构成决策建议。');
   L.push('');
   L.push('一、命盘事实（已排好，请直接引用，不要重新排盘）');
