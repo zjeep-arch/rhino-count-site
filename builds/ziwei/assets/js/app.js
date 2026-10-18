@@ -987,7 +987,7 @@ function renderReadingBody(){
   const unlocked = key && isUnlocked(key);
   const upsell = (!window.GXG_READING_LOCAL || unlocked) ? '' :
     `<div class="unlock-card"><div><b>想要更详细的完整版？</b><br>
-     <span class="hint">13 维深度解读全文约 3 万字，¥0.9 解锁这张盘，解锁后永久可看。</span></div>
+     <span class="hint">67.5 万张命盘语料库 · 13 个维度 · 全文约 3 万字，¥0.9 解锁这张盘，永久可看。</span></div>
      <button class="btn-primary" data-unlock-open>¥0.9 解锁</button></div>`;
   $('#reading-body').innerHTML = paras.map((p, i) =>
     `<button class="fav-btn" data-fav="${readingTopic}:${i}" title="收藏这段">☆</button><p>${md2html(p)}</p>`
@@ -1558,7 +1558,7 @@ function buildAiBrief(chart, rec, topicKey){
 /* ---------- 解读 · 功能菜单 ---------- */
 const MENU_ITEMS = [
   { k: 'palaces', t: '十二宫解读', d: '十二宫结合你的命盘，一宫一卡：星曜、四化、干支大限全填上', need: true },
-  { k: 'reading', t: '13维深度解读', d: '三万字长解读：性格、事业、感情、财运……共十三维度', need: true },
+  { k: 'reading', t: '13维深度解读', d: '67.5 万张命盘语料库 · 每盘三万字长解读：性格、事业、感情、财运……共十三维度', need: true },
   { k: 'topics', t: '专题报告', d: '事业、财运、感情、健康：跨宫综合，一次看一组宫位的合力', need: true },
   { k: 'sihua', t: '十干四化表', d: '十干四化速查：生年天干决定四化落在哪颗星', need: false },
   { k: 'aibrief', t: 'AI 解读任务书', d: '一键生成自包含任务书，复制后粘贴给任意大模型追问', need: true },
