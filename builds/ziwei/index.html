@@ -62,7 +62,12 @@
       </div>
       <div class="field"><span>出生时辰</span>
         <select id="f-hour"></select>
-        <label class="check"><input type="checkbox" id="f-unknown-hour"> 时辰不确定（去定盘辅助）</label>
+        <div class="date-row" style="margin-top:8px">
+          <select id="f-exhour"><option value="">精确时间：时（可选）</option></select>
+          <select id="f-exmin"><option value="">分（可选）</option></select>
+        </div>
+        <div class="hint" id="boundary-hint"></div>
+        <label class="check"><input type="checkbox" id="f-unknown-hour"> 时辰不确定（去定盘验证辅助）</label>
       </div>
       <div class="field"><span>出生地（真太阳时校正）</span>
         <div class="date-row">
@@ -95,9 +100,15 @@
     </div>
     <div id="luck-picker"></div>
     <div id="sihua-strip"></div>
+    <div id="overlay-strip"></div>
+    <div id="sanfang-hint"></div>
     <div id="chart-grid-wrap"><div id="chart-grid"></div></div>
     <div id="chart-list"></div>
     <div class="card"><div class="card-kicker">格局</div><div id="pattern-list"></div></div>
+    <div class="card" id="shengong-card" hidden><div class="card-kicker">身宫</div><div id="shengong-body"></div></div>
+    <div class="card" id="wuxingju-card" hidden><div class="card-kicker">五行局</div><div id="wuxingju-body"></div></div>
+    <div class="card" id="huaji-card" hidden><div class="card-kicker">化忌化解</div><div id="huaji-body"></div></div>
+    <div class="card" id="koujing-card" hidden><div class="card-kicker">本次排盘口径</div><div id="koujing-body" class="hint"></div></div>
     <div class="row-2">
       <button class="btn-ghost" data-nav="palaces">十二宫解读 →</button>
       <button class="btn-ghost" data-nav="reading">13维深度解读 →</button>
@@ -106,6 +117,11 @@
       <button class="btn-ghost" data-nav="topics">专题报告 →</button>
       <button class="btn-primary" id="btn-share">生成分享图 ✦</button>
     </div>
+    <div class="row-2">
+      <button class="btn-ghost" id="btn-ai-brief">AI 解读任务书</button>
+      <button class="btn-ghost" id="btn-sihua-table">十干四化表</button>
+    </div>
+    <div class="hint" id="ai-brief-hint" style="text-align:center"></div>
   </section>
 
   <!-- 十二宫 -->
@@ -118,6 +134,7 @@
   <!-- 13维解读 -->
   <section class="view" id="view-reading">
     <h2 class="view-title">13 维深度解读</h2>
+    <div class="card" id="reading-disclaimer-card"><div class="card-kicker">先看这段</div><p class="hint" id="reading-disclaimer" style="margin:0"></p></div>
     <p class="view-sub" id="reading-status">正在按出生年份加载解读数据…</p>
     <div class="tabs tabs-scroll" id="reading-tabs"></div>
     <article id="reading-body" class="reading-body"></article>
@@ -133,7 +150,8 @@
 
   <!-- 新手导览 -->
   <section class="view" id="view-guide">
-    <h2 class="view-title">新手三步</h2>
+    <h2 class="view-title">新手六步</h2>
+    <p class="view-sub">看盘的标准顺序：先定大方向，再看细节，最后看格局。跟着走一遍，就入门了。</p>
     <div id="guide-steps"></div>
     <button class="btn-primary btn-block" data-nav="input">我懂了，去排盘 →</button>
   </section>
@@ -164,10 +182,11 @@
     <div id="compare-result"></div>
   </section>
 
-  <!-- 定盘辅助 -->
+  <!-- 定盘验证辅助 -->
   <section class="view" id="view-dingpan">
-    <h2 class="view-title">定盘辅助</h2>
-    <p class="view-sub">时辰拿不准？先圈出候选时辰，再用人生大事帮你对一对。</p>
+    <h2 class="view-title">定盘验证辅助</h2>
+    <p class="view-sub">时辰拿不准？先圈出候选时辰，再用人生大事帮你对一对。<br>「非稽其已往，无以测其将来。」——陈素庵</p>
+    <div class="card"><div class="card-kicker">怎么用</div><p class="hint" style="margin:0">用<strong>已经发生、年份明确</strong>的大事，去验证哪个候选时辰的盘更吻合。这叫"验证"，不是"反推"：如果几个时辰都不吻合，我们会直说，而不是硬凑一个答案。你填的大事只保存在本机，不上传。</p></div>
     <div id="dingpan-step1">
       <div class="card-kicker">第一步：选出候选时辰（2–3 个）</div>
       <div id="dingpan-hours" class="chip-row"></div>
@@ -202,7 +221,7 @@
   <div class="modal-card">
     <button class="modal-x" id="modal-x">×</button>
     <h3 id="modal-title"></h3>
-    <p id="modal-body"></p>
+    <div id="modal-body"></div>
   </div>
 </div>
 
@@ -231,11 +250,14 @@
 
 <footer id="app-footer">
   <p>紫微小馆 · 紫微斗数在线排盘</p>
-  <p class="fine">出生信息只保存在你的浏览器本地，不上传。内容为传统文化参考，不构成人生决策建议。涉及父母、兄弟、子女的推断仅供参考。</p>
+  <p class="fine" id="footer-disclaimer">命理说的是倾向，不是你的判决书。内容为传统文化参考，不构成人生决策建议。</p>
+  <p class="fine">出生信息只保存在你的浏览器本地，不上传。涉及父母、兄弟、子女的推断仅供参考。本站不是医疗、法律、金融、心理或博彩建议渠道。</p>
+  <p class="fine" id="footer-credit"></p>
 </footer>
 
 <script src="assets/js/ziwei-engine.js"></script>
 <script src="assets/js/data.js"></script>
+<script src="assets/js/data-v2.js"></script>
 <script src="assets/js/app.js"></script>
 </body>
 </html>

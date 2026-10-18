@@ -196,3 +196,17 @@ body{
 .empty{color:var(--muted); text-align:center; padding:20px; font-size:14px;}
 #compare-result .vs-row{display:flex; gap:10px; margin:8px 0;}
 #compare-result .vs-col{flex:1; background:var(--card); border:1px solid var(--line); border-radius:12px; padding:12px;}
+
+/* 三方四正联动 */
+.cell.sf{border:2px solid var(--gold); box-shadow:0 0 0 3px rgba(201,169,106,.25);}
+.palace-row[data-sf="1"]{border:2px solid var(--gold);}
+.sf-hint{background:var(--primary-soft); border:1px dashed var(--primary); border-radius:12px;
+  padding:10px 14px; margin:8px 0; font-size:13.5px; color:var(--primary-deep);}
+/* 四化叠加提示 */
+.overlay-bar{background:#FFF8E7; border:1px solid #F0DDA8; border-radius:12px;
+  padding:10px 14px; margin:8px 0; font-size:13.5px; color:#7A5C1E;}
+.overlay-bar div{margin:4px 0;}
+/* 十干四化表 */
+.sihua-table{width:100%; border-collapse:collapse; font-size:14px; margin:6px 0;}
+.sihua-table th,.sihua-table td{border:1px solid var(--line); padding:8px 6px; text-align:center;}
+.sihua-table th{background:var(--primary-soft); color:var(--primary-deep);}
