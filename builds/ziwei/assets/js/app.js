@@ -1401,10 +1401,25 @@ function renderHome(){
   const li = todayLunar();
   const gz = (li && li.fourPillars && li.fourPillars[2]) ? ` · ${li.fourPillars[2]}日` : '';
   $('#daily-date').textContent = `${bd.m} 月 ${bd.d} 日${gz}${custom ? '' : ' · 排一张盘，小运按你的命盘定制'}`;
-  // 十二宫预览
-  $('#palace-preview').innerHTML = D.palaces.map((p, i) =>
-    `<div class="palace-card" data-palace="${p.name}"><span class="num">${i+1}</span><h4>${p.name}</h4>
-     <div><span class="modern">${p.modern}</span></div><div class="kw">${p.keywords}</div></div>`).join('');
+  // 十二宫预览：有盘则每张小卡填上该盘的主星，没盘保持通用版
+  $('#palace-preview').innerHTML = D.palaces.map((p, i) => {
+    let starsLine = '';
+    if(rec && rec.chart){
+      const pl = palaceByName(rec.chart, p.name);
+      if(pl){
+        const tags = (pl.isMingGong ? '<span class="p-tag sm">命</span>' : '')
+          + (pl.isShenGong ? '<span class="p-tag sm">身</span>' : '');
+        const majors = pl.stars.filter(s => s.type === 'major');
+        const ms = majors.length
+          ? majors.map(s => `${esc(s.name)}${s.siHua ? shBadge(s.siHua) : ''}`).join(' ')
+          : '<span class="hint">空宫</span>';
+        starsLine = `<div class="pv-head"><h4>${p.name}</h4>${tags}</div><div class="pv-stars">${ms}</div>`;
+      }
+    }
+    if(!starsLine) starsLine = `<h4>${p.name}</h4>`;
+    return `<div class="palace-card" data-palace="${p.name}"><span class="num">${i+1}</span>${starsLine}`
+      + `<div><span class="modern">${p.modern}</span></div><div class="kw">${p.keywords}</div></div>`;
+  }).join('');
 }
 
 /* ---------- 存档 ---------- */
