@@ -1256,12 +1256,68 @@ function renderGuide(){
 }
 
 /* ---------- 首页 ---------- */
+/* 今日小运 · 流日定制版：流日命宫点亮本命哪一宫＋流日四化飞到哪＝每天每人都不一样 */
+const DAILY_FOCUS_SAY = {
+  '命宫': '今天是你自己的主场，适合主动推进重要的事',
+  '兄弟宫': '今天适合跟朋友、同辈多走动，有人能搭把手',
+  '夫妻宫': '今天感情和人际的事会被放大，对人多点耐心',
+  '子女宫': '今天适合陪孩子/晚辈，也适合给创意留点时间',
+  '财帛宫': '今天和钱有关的事多留一眼，进出都算清楚点',
+  '疾厄宫': '今天身体在说话，别硬扛，早点休息不丢人',
+  '迁移宫': '今天适合出门、见人、换个环境，动起来有收获',
+  '交友宫': '今天人脉有动静，主动组个局、回个人情',
+  '官禄宫': '今天正事运在线，最重要的事排在最前面',
+  '田宅宫': '今天适合处理家里、房子、家人的事，宜安内',
+  '福德宫': '今天给自己留点空白，别把日程排太满',
+  '父母宫': '今天适合跟长辈、上级通个气，开口比想的顺',
+};
+/* 今日的农历信息：借引擎排一张"今日盘"读 lunarInfo（本地计算，不存档） */
+function todayLunar(){
+  try{
+    const bd = bjDate();
+    const tc = E.generateChart({ year: bd.y, month: bd.m, day: bd.d, hour: 6, gender: 'male' });
+    return (tc && tc.lunarInfo) || null;
+  }catch(e){ return null; }
+}
+/* 按命盘定制的今日小运文本；无盘或算不出时返回 null（调用方用通用版兜底） */
+function dailyFortuneFor(chart){
+  if(!chart) return null;
+  const li = todayLunar(); if(!li || !li.lunarMonth || !li.lunarDay) return null;
+  let sh = null;
+  try{ sh = normSihua(E.getLiuRiSiHua(li.lunarYear, li.lunarMonth, li.lunarDay)); }catch(e){}
+  if(!sh) return null;
+  const dj = doujunBranch(chart, li.lunarYear);
+  const hl = (((dj + (li.lunarMonth - 1) + (li.lunarDay - 1)) % 12) + 12) % 12;
+  const focusP = palaceByBranch(chart, hl);
+  const focusName = disp(focusP.name);
+  let focusSay = DAILY_FOCUS_SAY[focusName] || '今天这块多分一点注意力';
+  if(focusP.isMingGong){
+    const ms = focusP.stars.filter(s => s.type === 'major').map(s => s.name).join('、') || '空宫';
+    focusSay = `流日命宫回到你的命宫（${ms}坐镇），${DAILY_FOCUS_SAY['命宫']}`;
+  }
+  const natal = natalSihuaMap(chart);
+  const natalJiPal = (natal['忌'] || []).map(e => e.palace);
+  const parts = [`今天流日命宫点亮你的【${focusName}】：${focusSay}`];
+  const luPal = sh.lu ? sihuaStarPalace(chart, sh.lu) : '';
+  const jiPal = sh.ji ? sihuaStarPalace(chart, sh.ji) : '';
+  if(luPal) parts.push(`流日化禄在【${luPal}】，这块有小顺风，适合把好事往前推`);
+  if(jiPal){
+    const dbl = natalJiPal.includes(jiPal) ? '，又和你的本命化忌叠在一处，今天这块别硬扛' : '';
+    parts.push(`要留神的是流日化忌在【${jiPal}】${dbl}，慢半拍、留余地`);
+  }
+  return parts.join('；') + '。';
+}
 function renderHome(){
-  // 每日小运（按北京时间日期确定性轮换）
+  // 每日小运：有盘就按流日定制，没盘用通用版
   const bd = bjDate();
+  const rec = cur();
+  const custom = rec ? dailyFortuneFor(rec.chart) : null;
   const key = bd.y*372 + bd.m*31 + bd.d;
-  $('#daily-text').textContent = '☾ ' + D.dailyFortunes[key % D.dailyFortunes.length];
-  $('#daily-date').textContent = `${bd.y} 年 ${bd.m} 月 ${bd.d} 日`;
+  const generic = D.dailyFortunes[key % D.dailyFortunes.length];
+  $('#daily-text').textContent = '☾ ' + (custom || generic);
+  const li = todayLunar();
+  const gz = (li && li.fourPillars && li.fourPillars[2]) ? ` · ${li.fourPillars[2]}日` : '';
+  $('#daily-date').textContent = `${bd.m} 月 ${bd.d} 日${gz}${custom ? '' : ' · 排一张盘，小运按你的命盘定制'}`;
   // 十二宫预览
   $('#palace-preview').innerHTML = D.palaces.map((p, i) =>
     `<div class="palace-card" data-palace="${p.name}"><span class="num">${i+1}</span><h4>${p.name}</h4>
@@ -1542,7 +1598,8 @@ function drawShare(){
     ctx.fillText(`流年命宫在${disp(lp.name)}`, W/2, 360);
     const lm = lp.stars.filter(s=>s.type==='major').map(s=>s.name).join('、') || '空宫';
     wrapText(ctx, `主星：${lm}。${(D.palaces.find(p=>p.name===disp(lp.name))||{}).desc||''}`, W/2, 480, 880, 72);
-    const bd = bjDate(); const fi = D.dailyFortunes[(bd.y*372+bd.m*31+bd.d) % D.dailyFortunes.length];
+    const bd = bjDate();
+    const fi = (typeof dailyFortuneFor === 'function' && dailyFortuneFor(chart)) || D.dailyFortunes[(bd.y*372+bd.m*31+bd.d) % D.dailyFortunes.length];
     ctx.fillStyle = '#8B7AB8'; ctx.font = '40px sans-serif';
     wrapText(ctx, '☾ ' + fi, W/2, 900, 880, 68);
   }
