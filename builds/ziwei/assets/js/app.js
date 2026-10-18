@@ -1250,41 +1250,102 @@ function openShare(kind){
   $('#share-modal').hidden = false;
   drawShare();
 }
+/* 星空底纹：深空渐变 + 星野 + 月相 + 金线双框（分享图命盘专用） */
+function drawCelestialBG(ctx, W, H, rnd){
+  const g = ctx.createLinearGradient(0, 0, 0, H);
+  g.addColorStop(0, '#221B44'); g.addColorStop(.55, '#372A63'); g.addColorStop(1, '#4E3A7D');
+  ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+  // 星野
+  for(let i = 0; i < 110; i++){
+    const x = rnd() * W, y = rnd() * H, r = .8 + rnd() * 2.4;
+    const gold = rnd() > .82;
+    ctx.fillStyle = gold ? `rgba(221,189,119,${.25 + rnd() * .5})` : `rgba(216,201,245,${.15 + rnd() * .45})`;
+    ctx.beginPath(); ctx.arc(x, y, r, 0, 7); ctx.fill();
+  }
+  // 月相（右上，大而淡）
+  const mx = W - 210, my = 230, mr = 120;
+  const mg = ctx.createRadialGradient(mx, my, mr * .4, mx, my, mr * 2.2);
+  mg.addColorStop(0, 'rgba(245,239,224,.20)'); mg.addColorStop(1, 'rgba(245,239,224,0)');
+  ctx.fillStyle = mg; ctx.beginPath(); ctx.arc(mx, my, mr * 2.2, 0, 7); ctx.fill();
+  ctx.strokeStyle = 'rgba(245,239,224,.5)'; ctx.lineWidth = 3;
+  ctx.beginPath(); ctx.arc(mx, my, mr, 0, 7); ctx.stroke();
+  ctx.fillStyle = 'rgba(245,239,224,.10)';
+  ctx.beginPath(); ctx.arc(mx, my, mr, 0, 7); ctx.fill();
+  // 金线双框
+  ctx.strokeStyle = 'rgba(221,189,119,.55)'; ctx.lineWidth = 2;
+  ctx.strokeRect(36, 36, W - 72, H - 72);
+  ctx.strokeStyle = 'rgba(221,189,119,.28)'; ctx.lineWidth = 1;
+  ctx.strokeRect(52, 52, W - 104, H - 104);
+}
 function drawShare(){
   const rec = cur(); if(!rec) return;
   const cv = $('#share-canvas'), ctx = cv.getContext('2d');
   const W = 1080, H = 1440;
-  // 背景
-  const g = ctx.createLinearGradient(0,0,0,H);
-  g.addColorStop(0,'#F5F1FA'); g.addColorStop(1,'#E9E0F5');
-  ctx.fillStyle = g; ctx.fillRect(0,0,W,H);
-  // 星星
-  ctx.fillStyle = 'rgba(139,122,184,.5)';
   const rnd = mulberry(rec.id.length * 7919 + shareKind.length);
-  for(let i=0;i<40;i++){ const x=rnd()*W, y=rnd()*H, r=1+rnd()*2.5; ctx.beginPath(); ctx.arc(x,y,r,0,7); ctx.fill(); }
+  try{ ctx.letterSpacing = '4px'; }catch(e){}
   ctx.textAlign = 'center';
   const chart = rec.chart;
   const ming = chart.palaces.find(p=>p.isMingGong);
   const majors = ming.stars.filter(s=>s.type==='major').map(s=>s.name).join(' ');
   if(shareKind === 'chart'){
-    ctx.fillStyle = '#5E4B8B'; ctx.font = '700 64px sans-serif';
-    ctx.fillText(rec.name + ' 的命盘', W/2, 150);
-    ctx.fillStyle = '#8A7BA8'; ctx.font = '36px sans-serif';
-    ctx.fillText(`${chart.birthInfo.year}年${chart.birthInfo.month}月${chart.birthInfo.day}日 · ${chart.wuxingJuName}`, W/2, 215);
-    ctx.fillStyle = '#3A2E5C'; ctx.font = '700 52px sans-serif';
-    ctx.fillText('命宫 ' + (majors || '空宫'), W/2, 320);
-    // 十二宫简化
-    ctx.font = '30px sans-serif';
+    // 深空星野底
+    drawCelestialBG(ctx, W, H, rnd);
+    const bi = chart.birthInfo;
+    // 标题区
+    ctx.fillStyle = '#F5EFE0'; ctx.font = '600 76px "Songti SC","Noto Serif SC",serif';
+    ctx.fillText(rec.name + ' 的命盘', W/2, 170);
+    ctx.fillStyle = '#B9A8D9'; ctx.font = '34px sans-serif';
+    try{ ctx.letterSpacing = '2px'; }catch(e){}
+    ctx.fillText(`${bi.year}年${bi.month}月${bi.day}日 · ${BR[bi.hour]}时 · ${chart.wuxingJuName}`, W/2, 232);
+    // 金线分隔
+    ctx.strokeStyle = 'rgba(221,189,119,.5)'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(W/2 - 180, 272); ctx.lineTo(W/2 + 180, 272); ctx.stroke();
+    ctx.fillStyle = 'rgba(221,189,119,.9)'; ctx.font = '28px sans-serif';
+    ctx.fillText('✦', W/2, 282);
+    // 命宫主星
+    ctx.fillStyle = '#E8D9B8'; ctx.font = '600 46px "Songti SC","Noto Serif SC",serif';
+    try{ ctx.letterSpacing = '4px'; }catch(e){}
+    ctx.fillText('命宫 ' + (majors || '空宫'), W/2, 350);
+    // 十二宫 3×4（卡宽 280，左右留白 90）
+    const mingBranch = chart.mingGongBranch;
     PALACE_ORDER.forEach((pn, i) => {
       const p = palaceByName(chart, pn);
       const ms = p.stars.filter(s=>s.type==='major').map(s=>s.name).join('') || '—';
-      const x = 140 + (i%3)*400, y = 420 + Math.floor(i/3)*180;
-      ctx.fillStyle = '#fff';
-      roundRect(ctx, x-160, y-70, 320, 140, 20); ctx.fill();
-      ctx.fillStyle = '#5E4B8B'; ctx.font = '700 32px sans-serif'; ctx.fillText(pn, x, y-25);
-      ctx.fillStyle = '#3A2E5C'; ctx.font = '30px sans-serif'; ctx.fillText(ms, x, y+25);
+      const x = 230 + (i%3)*310, y = 470 + Math.floor(i/3)*200;
+      const isMing = p.branch === mingBranch;
+      ctx.fillStyle = isMing ? 'rgba(221,189,119,.14)' : 'rgba(255,255,255,.055)';
+      roundRect(ctx, x-140, y-78, 280, 156, 18); ctx.fill();
+      ctx.strokeStyle = isMing ? 'rgba(221,189,119,.8)' : 'rgba(255,255,255,.16)';
+      ctx.lineWidth = isMing ? 2 : 1;
+      roundRect(ctx, x-140, y-78, 280, 156, 18); ctx.stroke();
+      ctx.fillStyle = '#F5EFE0'; ctx.font = '600 34px "Songti SC","Noto Serif SC",serif';
+      ctx.fillText(pn, x, y-28);
+      ctx.fillStyle = '#D9C9F5'; ctx.font = '30px sans-serif';
+      ctx.fillText(ms, x, y+22);
+      ctx.fillStyle = 'rgba(185,168,217,.85)'; ctx.font = '24px sans-serif';
+      ctx.fillText(`${ST[p.stem]}${BR[p.branch]}`, x, y+58);
     });
-  } else if(shareKind === 'quote'){
+    // 落款
+    ctx.strokeStyle = 'rgba(221,189,119,.4)'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(W/2 - 140, H-196); ctx.lineTo(W/2 + 140, H-196); ctx.stroke();
+    ctx.fillStyle = '#E8D9B8'; ctx.font = '600 38px "Songti SC","Noto Serif SC",serif';
+    try{ ctx.letterSpacing = '6px'; }catch(e){}
+    ctx.fillText('✦ 问星 · 紫微斗数在线排盘', W/2, H-140);
+    ctx.fillStyle = 'rgba(185,168,217,.8)'; ctx.font = '28px sans-serif';
+    try{ ctx.letterSpacing = '2px'; }catch(e){}
+    ctx.fillText('rhinocount.cn/builds/ziwei/', W/2, H-92);
+    try{ ctx.letterSpacing = '0px'; }catch(e){}
+    return;
+  }
+  // 浅色底（金句卡 / 年度运势卡）
+  const g = ctx.createLinearGradient(0,0,0,H);
+  g.addColorStop(0,'#F5F1FA'); g.addColorStop(1,'#E9E0F5');
+  ctx.fillStyle = g; ctx.fillRect(0,0,W,H);
+  // 星星
+  ctx.fillStyle = 'rgba(139,122,184,.5)';
+  for(let i=0;i<40;i++){ const x=rnd()*W, y=rnd()*H, r=1+rnd()*2.5; ctx.beginPath(); ctx.arc(x,y,r,0,7); ctx.fill(); }
+  try{ ctx.letterSpacing = '4px'; }catch(e){}
+  if(shareKind === 'quote'){
     const pats = E.detectPatterns(chart);
     const q = pats.length ? (D.patterns[pats[0].name] || pats[0].description) : D.palaces[0].desc;
     ctx.fillStyle = '#5E4B8B'; ctx.font = '700 72px sans-serif';
