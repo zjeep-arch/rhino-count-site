@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=20261018m">
+<link rel="stylesheet" href="assets/css/style.css?v=20261018n">
 </head>
 <body>
 <div id="stars-bg" aria-hidden="true"></div>
@@ -28,17 +28,17 @@
 <main id="app">
   <!-- 首页 -->
   <section class="view active" id="view-home">
-    <div class="hero">
+    <div class="hero hero-slim">
       <div class="hero-moon" aria-hidden="true">☾</div>
-      <h2 class="hero-title">先认宫位，<br>再看星曜</h2>
-      <p class="hero-sub">十二宫对应人生的 12 个生活领域。<br>输入生日时辰，看看星星怎么说。</p>
+      <h2 class="hero-title">先认宫位，再看星曜</h2>
+      <p class="hero-sub">十二宫对应人生的 12 个生活领域，输入生日时辰，看看星星怎么说。</p>
       <button class="btn-primary" data-nav="input">开始排盘 →</button>
-      <button class="btn-ghost" data-nav="guide">我是新手，先看看怎么玩</button>
+      <div><button class="link-btn" data-nav="guide" style="margin-top:10px">我是新手，先看看怎么玩</button></div>
     </div>
-    <div class="card" id="daily-card">
-      <div class="card-kicker">今日小运</div>
+    <div class="card daily-card" id="daily-card">
+      <div class="card-kicker">☾ <span id="daily-kicker">今日小运</span></div>
       <div id="daily-text">正在翻开今天的星语…</div>
-      <div class="card-foot" id="daily-date"></div>
+      <div class="card-foot"><span class="date-pill" id="daily-date"></span></div>
     </div>
     <div class="card">
       <div class="card-kicker">十二宫 · 先睹为快</div>
@@ -284,6 +284,6 @@
 <script src="assets/js/ziwei-engine.js"></script>
 <script src="assets/js/data.js"></script>
 <script src="assets/js/data-v2.js"></script>
-<script src="assets/js/app.js?v=20261018m"></script>
+<script src="assets/js/app.js?v=20261018n"></script>
 </body>
 </html>

@@ -1314,7 +1314,8 @@ function renderHome(){
   const custom = rec ? dailyFortuneFor(rec.chart) : null;
   const key = bd.y*372 + bd.m*31 + bd.d;
   const generic = D.dailyFortunes[key % D.dailyFortunes.length];
-  $('#daily-text').textContent = '☾ ' + (custom || generic);
+  $('#daily-kicker').textContent = rec ? `${rec.name}的今日小运` : '今日小运';
+  $('#daily-text').textContent = custom || generic;
   const li = todayLunar();
   const gz = (li && li.fourPillars && li.fourPillars[2]) ? ` · ${li.fourPillars[2]}日` : '';
   $('#daily-date').textContent = `${bd.m} 月 ${bd.d} 日${gz}${custom ? '' : ' · 排一张盘，小运按你的命盘定制'}`;

@@ -367,3 +367,17 @@ body{font-family:var(--font-body); padding-bottom:calc(104px + env(safe-area-ins
 /* 状态栏文字按钮 */
 .link-btn{background:none; border:none; color:var(--c-plum); font-size:13px;
   text-decoration:underline; padding:2px 4px; cursor:pointer;}
+
+/* 首页紧凑 hero：把首屏让给今日小运 */
+.hero-slim{padding:30px 24px 26px !important;}
+.hero-slim .hero-moon{font-size:38px; opacity:.7;}
+.hero-slim .hero-title{font-size:26px; margin:8px 0 6px; letter-spacing:.06em;}
+.hero-slim .hero-sub{font-size:13.5px; margin:0 0 16px; line-height:1.7;}
+.hero-slim .btn-primary{padding:12px 34px; font-size:16px;}
+/* 今日小运卡：淡紫渐变底，和普通卡拉开层次 */
+.daily-card{background:linear-gradient(135deg,#FDFBFF 0%,#F4EFFB 100%);
+  border:1px solid #E2D6F3; box-shadow:0 6px 18px rgba(139,122,184,.10);}
+.daily-card #daily-text{font-size:16px; line-height:1.8; color:var(--ink);}
+.daily-card .card-foot{margin-top:10px;}
+.date-pill{display:inline-block; background:#EFE7FA; color:#6E5A9E; font-size:12.5px;
+  border-radius:999px; padding:4px 12px; letter-spacing:.03em;}
