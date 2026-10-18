@@ -798,6 +798,13 @@ function palaceTextBrief(chart, p){
     const say = (SP[s.siHua] || {})[disp(p.name)];
     if(say) L.push(`${s.name}化${s.siHua}在${disp(p.name)}：${say}`);
   });
+  // 三方四正：看一宫要合看四宫
+  const sf = [p.branch, (p.branch + 6) % 12, (p.branch + 4) % 12, (p.branch + 8) % 12].map(b => {
+    const q = palaceByBranch(chart, b);
+    const qm = q.stars.filter(s => s.type === 'major').map(s => s.name).join('') || '空';
+    return `${disp(q.name)}${qm}`;
+  });
+  L.push(`三方四正：${sf.join(' · ')}。`);
   return L.join('\n\n');
 }
 function buildLocalReading(chart){
@@ -809,6 +816,12 @@ function buildLocalReading(chart){
     const parts = [];
     if(topic === 'overview'){
       parts.push(`你的命宫主星是${mingMajors}，${chart.wuxingJuName}。命宫定一生的底色，身宫（在${shen ? disp(shen.name) : '—'}）定中年后发力的方向。`);
+      try{
+        const dx = chart.daXians[chart.currentDaXianIndex] || {};
+        const y = new Date().getFullYear();
+        const lp = palaceByBranch(chart, ((y - 4) % 12 + 12) % 12);
+        parts.push(`时间上：当前大限 ${dx.startAge || '—'}–${dx.endAge || '—'} 岁（${disp(dx.palaceName || '')}）是这十年的大背景；${y} 年流年命宫在${disp(lp.name)}。大限定调子，流年看动静。`);
+      }catch(e){}
       let pats = [];
       try{ pats = E.detectPatterns(chart).slice(0, 3); }catch(e){}
       pats.forEach(pt => {
@@ -847,32 +860,28 @@ async function renderReading(){
   const rec = cur();
   if(!rec){ $('#reading-status').textContent = '先排一张盘，才能看深度解读。'; $('#reading-body').innerHTML = ''; return; }
   renderReadingTabs();
-  const setStep = t => { $('#reading-status').textContent = t; };
-  setStep('正在按出生年份加载解读数据（约 2MB，只下一次）…');
-  $('#reading-body').innerHTML = '<div class="skel" style="height:22px;width:42%"></div>'
-    + '<div class="skel" style="height:15px"></div>'.repeat(3)
-    + '<div class="skel" style="height:22px;width:36%;margin-top:18px"></div>'
-    + '<div class="skel" style="height:15px"></div>'.repeat(4);
+  // 本地优先：先瞬间渲染本地精编版（离线可用），完整版在后台静默尝试
+  const setStep = t => { $('#reading-status').innerHTML = t; };
   try{
-    const { data } = await loadReading(rec.chart, setStep);
+    const localData = buildLocalReading(rec.chart);
+    window.GXG_READING = localData;
+    window.GXG_READING_LOCAL = true;
+    renderReadingBody();
+  }catch(e){
+    $('#reading-status').textContent = '解读生成失败，请稍后重试。';
+    $('#reading-body').innerHTML = '';
+    return;
+  }
+  setStep('本地精编版 · 已按你的命盘生成 <span class="hint">· 正在尝试加载完整版…</span>');
+  try{
+    const { data } = await loadReading(rec.chart, null);
     window.GXG_READING = data;
     window.GXG_READING_LOCAL = false;
-    setStep('已加载完整版 · 命宫主星' + esc(rec.chart.palaces.find(p=>p.isMingGong).stars.filter(s=>s.type==='major').map(s=>s.name).join('、') || '（空宫）'));
     renderReadingBody();
+    setStep('已加载完整版 · 命宫主星' + esc(rec.chart.palaces.find(p=>p.isMingGong).stars.filter(s=>s.type==='major').map(s=>s.name).join('、') || '（空宫）'));
   }catch(err){
-    // 兜底：远程语料库加载失败时，用本地精编版（按命盘实时生成），页面永不落空
-    try{
-      const data = buildLocalReading(rec.chart);
-      window.GXG_READING = data;
-      window.GXG_READING_LOCAL = true;
-      renderReadingBody();
-      $('#reading-status').innerHTML = '完整版暂时加载不出来（' + esc(err.message || '网络异常') + '），已为你生成<b>本地精编版</b>（按你的命盘实时编写，离线可用）。'
-        + ' <button class="btn-ghost" id="btn-retry-reading" style="margin-left:6px">重试完整版</button>';
-      $('#btn-retry-reading').addEventListener('click', renderReading);
-    }catch(e2){
-      $('#reading-status').textContent = '深度解读暂时加载不出来，可以先看十二宫和格局，换个网络再试。';
-      $('#reading-body').innerHTML = '';
-    }
+    // 完整版不可用：保留本地精编版，只在状态栏小字说明，不再弹失败提示
+    setStep('本地精编版 · 已按你的命盘生成 <span class="hint">· 完整版因网络原因暂不可用</span>');
   }
 }
 function renderReadingBody(){
