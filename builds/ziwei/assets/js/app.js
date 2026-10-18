@@ -682,6 +682,80 @@ let palaceDetailName = null;
 /* 分享按钮已移入"解读"菜单，openShare 由菜单调用 */
 
 /* ---------- 十二宫卡片（结合命主命盘的专属展示） ---------- */
+/* 命宫专属：命主画像 —— 综合主星、四化、身宫、官禄，回答"我是谁/天赋/人生方向" */
+const STAR_GIFT = {
+  '紫微': ['天生的组织者和定盘的人，适合当主心骨', '往管理、平台、能说了算的位置走'],
+  '天机': ['脑子快、点子多，适合谋划和参谋', '往策划、咨询、技术型路线走'],
+  '太阳': ['发光体，适合需要露脸、带团队的事', '往外走、往高处走，名声就是资产'],
+  '武曲': ['执行力强，对钱和资源敏感', '往实业、金融、能直接看到结果的事走'],
+  '天同': ['亲和力强，适合让人舒服的事', '往与人打交道、偏安稳可持续的路线走'],
+  '廉贞': ['魅力与原则并存，适合需要个人风格的事', '往有发挥空间、能建立个人品牌的领域走'],
+  '天府': ['守成与整合的高手，适合管钱管事', '往稳定平台、资源整合型位置走'],
+  '太阴': ['细腻周到，适合幕后、财务、服务', '往需要耐心和审美的领域走，细水长流'],
+  '贪狼': ['欲望即动力，适合开拓、社交、跨界', '往人多的地方走，舞台越大越来劲'],
+  '巨门': ['嘴和脑子是武器，适合表达、研究、深挖', '往内容、表达、专业深耕的路线走'],
+  '天相': ['天生的协调者，适合当关键的二把手', '往平台型、服务型位置走，辅佐也能成事'],
+  '天梁': ['老成持重，适合需要经验和公信力的事', '往专业、公益、越老越吃香的路线走'],
+  '七杀': ['开路先锋，适合攻坚、开拓、从零到一', '往有挑战、能独立负责的领域走'],
+  '破军': ['破局者，适合变革、创新、不走寻常路', '往变化快、能折腾的领域走，安稳反而埋没你'],
+};
+const SIHUA_GIFT = {
+  '禄': '化禄在命宫：天生的福气，来财和机会相对顺，适合把"顺"变成积累',
+  '权': '化权在命宫：能扛事、说了算，一生多半有实权或主导权',
+  '科': '化科在命宫：名声和专业是你的护城河，适合把本事变成招牌',
+  '忌': '化忌在命宫：这辈子有个反复要做的功课，多半和"放不下"有关，看清它就过了一半',
+};
+function mingPortraitHTML(chart){
+  const ming = chart.palaces.find(p => p.isMingGong);
+  const shen = chart.palaces.find(p => p.isShenGong);
+  const majors = ming.stars.filter(s => s.type === 'major');
+  const L = [];
+  // 一、你是谁
+  let who;
+  if(majors.length){
+    const lead = majors[0], second = majors[1];
+    const g = STAR_GIFT[lead.name] || ['', ''];
+    who = `命宫${majors.map(s => s.name).join('、')}坐镇，${g[0]}。`;
+    const traps = majors.filter(s => s.brightnessRaw === '陷').map(s => s.name);
+    if(traps.length) who += `${traps.join('、')}落陷，这块的优点要打折看，短板容易冒头，后天的选择更重要`;
+    else if(majors.every(s => s.brightnessRaw === '庙' || s.brightnessRaw === '旺')) who += '主星庙旺，能量足，你的特质比一般人更明显';
+  } else {
+    const b = (ming.borrowedStars || []).join('、') || '对宫星曜';
+    who = `命宫无主星，借对宫${b}来看：可塑性强，不被单一标签定义，人生下半场往往比上半场精彩，方向感来得晚一些，但后劲足`;
+  }
+  L.push(`<p class="p-say"><b>你是谁：</b>${esc(who)}。</p>`);
+  // 二、天赋
+  const gifts = [];
+  ming.stars.forEach(s => { if(s.siHua && SIHUA_GIFT[s.siHua]) gifts.push(SIHUA_GIFT[s.siHua].replace('在命宫', `（${s.name}化${s.siHua}）`)); });
+  let pats = []; try{ pats = E.detectPatterns(chart).slice(0, 2); }catch(e){}
+  if(pats.length){
+    const v2 = (window.GXG_PATTERNS_V2 || {})[pats[0].name];
+    const say = v2 ? v2.text.split('。')[0] : '';
+    gifts.push(`格局加持：${pats.map(p => p.name).join('、')}${say ? '——' + say : ''}`);
+  }
+  if(gifts.length) L.push(`<p class="p-say"><b>天赋：</b>${esc(gifts.join('；'))}。</p>`);
+  // 三、人生方向
+  const dirs = [];
+  if(shen){
+    const sg = (window.GXG_SHENGONG && window.GXG_SHENGONG.palaces && window.GXG_SHENGONG.palaces[disp(shen.name)]) || '';
+    if(sg) dirs.push(sg);
+  }
+  const guan = palaceByName(chart, '官禄宫') || palaceByName(chart, '官禄');
+  if(guan){
+    const gm = guan.stars.filter(s => s.type === 'major');
+    if(gm.length){
+      const gd = STAR_GIFT[gm[0].name];
+      if(gd) dirs.push(`事业上${gd[1]}`);
+    }
+  }
+  if(chart.wuxingJuName){
+    const ju = (window.GXG_WUXINGJU && window.GXG_WUXINGJU.jus && window.GXG_WUXINGJU.jus[chart.wuxingJuName]) || '';
+    if(ju) dirs.push(`${chart.wuxingJuName}：${ju}`);
+  }
+  if(dirs.length) L.push(`<p class="p-say"><b>人生方向：</b>${esc(dirs.map(d => d.replace(/。+$/, '')).join('；'))}。</p>`);
+  if(!L.length) return '';
+  return `<div class="portrait-card"><div class="p-sec">✦ 命主画像</div>${L.join('')}</div>`;
+}
 /* 十二宫阅读卡：单列排版，命盘页与十二宫页复用 */
 function palaceCardHTML(p, i, chart){
   const SP = window.GXG_SIHUA_PALACE || {};
@@ -700,6 +774,7 @@ function palaceCardHTML(p, i, chart){
   const dx = pl.daXianAge ? ` · 大限 ${pl.daXianAge[0]}–${pl.daXianAge[1]} 岁` : '';
   let h = `<div class="palace-card" data-palace="${p.name}" style="--i:${i}">`
     + `<div class="p-top"><h4>${p.name}</h4>${tags}<span class="p-gz">${ST[pl.stem]}${BR[pl.branch]}${dx}</span></div>`
+    + (pl.isMingGong ? mingPortraitHTML(chart) : '')
     + `<div style="margin:2px 0 4px"><span class="modern">${p.modern}</span></div>`;
   // 主星 + 白话
   if(majors.length){

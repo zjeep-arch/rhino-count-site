@@ -381,3 +381,8 @@ body{font-family:var(--font-body); padding-bottom:calc(104px + env(safe-area-ins
 .daily-card .card-foot{margin-top:10px;}
 .date-pill{display:inline-block; background:#EFE7FA; color:#6E5A9E; font-size:12.5px;
   border-radius:999px; padding:4px 12px; letter-spacing:.03em;}
+
+/* 命主画像卡：命宫专属综合 */
+.portrait-card{background:linear-gradient(135deg,#FDFBFF 0%,#F1EBFA 100%);
+  border:1px solid #DDCFF2; border-radius:var(--r-lg); padding:12px 14px; margin:10px 0 4px;}
+.portrait-card .p-sec{margin-top:0;}
