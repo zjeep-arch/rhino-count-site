@@ -109,19 +109,17 @@
     <div class="card" id="wuxingju-card" hidden><div class="card-kicker">五行局</div><div id="wuxingju-body"></div></div>
     <div class="card" id="huaji-card" hidden><div class="card-kicker">化忌化解</div><div id="huaji-body"></div></div>
     <div class="card" id="koujing-card" hidden><div class="card-kicker">本次排盘口径</div><div id="koujing-body" class="hint"></div></div>
-    <div class="row-2">
-      <button class="btn-ghost" data-nav="palaces">十二宫解读 →</button>
-      <button class="btn-ghost" data-nav="reading">13维深度解读 →</button>
+    <div class="card" style="margin-top:14px"><div class="card-kicker">下一步</div>
+      <p class="hint" style="margin:0 0 10px">命盘是底子，解读在"解读"菜单里：十二宫、13 维、专题报告都在那。</p>
+      <button class="btn-primary btn-block" data-nav="menu">去解读菜单 →</button>
     </div>
-    <div class="row-2">
-      <button class="btn-ghost" data-nav="topics">专题报告 →</button>
-      <button class="btn-primary" id="btn-share">生成分享图 ✦</button>
-    </div>
-    <div class="row-2">
-      <button class="btn-ghost" id="btn-ai-brief">AI 解读任务书</button>
-      <button class="btn-ghost" id="btn-sihua-table">十干四化表</button>
-    </div>
-    <div class="hint" id="ai-brief-hint" style="text-align:center"></div>
+  </section>
+
+  <!-- 解读 · 功能菜单 -->
+  <section class="view" id="view-menu">
+    <h2 class="view-title">解读</h2>
+    <p class="view-sub">排盘是底子，解读在这里选。先排一张盘，再进来看。</p>
+    <div id="menu-list"></div>
   </section>
 
   <!-- 十二宫 -->
@@ -244,7 +242,7 @@
 <nav id="tabbar">
   <button data-nav="home" class="on"><span>✦</span>首页</button>
   <button data-nav="input"><span>◉</span>排盘</button>
-  <button data-nav="palaces"><span>▦</span>十二宫</button>
+  <button data-nav="menu"><span>▦</span>解读</button>
   <button data-nav="archive"><span>☰</span>我的</button>
 </nav>
 

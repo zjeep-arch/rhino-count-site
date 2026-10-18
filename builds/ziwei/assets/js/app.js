@@ -55,7 +55,7 @@ const uid = () => 'c' + Date.now().toString(36) + Math.floor(Math.random()*1e4).
 const cur = () => archive.find(a => a.id === currentId) || null;
 
 /* ---------- 导航 ---------- */
-const VIEWS = ['home','input','chart','palaces','reading','topics','guide','archive','compare','dingpan','favorites'];
+const VIEWS = ['home','input','chart','menu','palaces','reading','topics','guide','archive','compare','dingpan','favorites'];
 function nav(name){
   if(!VIEWS.includes(name)) return;
   $$('.view').forEach(v => v.classList.remove('active'));
@@ -66,6 +66,7 @@ function nav(name){
   if(name==='archive') renderArchive();
   if(name==='favorites') renderFavs();
   if(name==='palaces') renderPalaceCards();
+  if(name==='menu') renderMenu();
   if(name==='guide') renderGuide();
 }
 document.addEventListener('click', e => {
@@ -634,7 +635,7 @@ function showPalaceDetail(name){
   });
 }
 let palaceDetailName = null;
-$('#btn-share').addEventListener('click', () => { openShare('chart'); });
+/* 分享按钮已移入"解读"菜单，openShare 由菜单调用 */
 
 /* ---------- 十二宫卡片（结合命主命盘的专属展示） ---------- */
 function renderPalaceCards(){
@@ -717,25 +718,95 @@ function findLineBytes(raw, needleBytes){
   }
   return null;
 }
-async function loadReading(chart){
+/* 带重试的下载：GitHub Releases 在部分网络下不稳定，失败自动重试 */
+async function fetchWithRetry(url, tries){
+  let last = null;
+  for(let i = 0; i < tries; i++){
+    try{
+      const ctl = new AbortController();
+      const timer = setTimeout(() => ctl.abort(), 30000);
+      const res = await fetch(url, { signal: ctl.signal });
+      clearTimeout(timer);
+      if(!res.ok) throw new Error('数据文件加载失败（' + res.status + '）');
+      return res;
+    }catch(e){ last = e; await new Promise(r => setTimeout(r, 900 * (i + 1))); }
+  }
+  throw last;
+}
+async function loadReading(chart, onStep){
   const bi = chart.birthInfo;
   const key = `${bi.year}-${pad2(bi.month)}-${pad2(bi.day)}-${bi.hour}-${bi.gender}`;
-  if(readingCache[key]) return { key, data: readingCache[key] };
+  if(readingCache[key]) return { key, data: readingCache[key], local: false };
   const cached = store.get('gxg_reading_' + key, null);
-  if(cached){ readingCache[key] = cached; return { key, data: cached }; }
+  if(cached){ readingCache[key] = cached; return { key, data: cached, local: false }; }
   const url = `${RELEASE_BASE}/year-${bi.year}.jsonl.zst`;
-  const res = await fetch(url);
-  if(!res.ok) throw new Error('数据文件加载失败（' + res.status + '）');
+  if(onStep) onStep('正在下载解读数据（约 2MB，失败会自动重试）…');
+  const res = await fetchWithRetry(url, 3);
   const buf = new Uint8Array(await res.arrayBuffer());
+  if(onStep) onStep('下载完成，正在解压并匹配你的命盘…');
   const zstd = await getZstd();
-  // 注意：年份文件解压后约 700MB，手机上可能吃紧；失败会走降级提示
+  // 注意：年份文件解压后约 700MB，手机上可能吃紧；失败会走本地精编版降级
   const raw = zstd.decompress(buf);
   const lineBytes = findLineBytes(raw, new TextEncoder().encode(`"k":"${key}"`));
   if(!lineBytes) throw new Error('这张盘暂无深度解读数据');
   const rec = JSON.parse(new TextDecoder().decode(lineBytes));
   readingCache[key] = rec.c;
   store.set('gxg_reading_' + key, rec.c);
-  return { key, data: rec.c };
+  return { key, data: rec.c, local: false };
+}
+/* 本地精编版：远程语料库加载失败时的兜底，按命主命盘实时生成 13 维解读 */
+const LOCAL_READING_PALACES = {
+  overview: ['命宫'], personality: ['命宫'],
+  love: ['夫妻宫', '命宫', '福德宫'], career: ['官禄宫', '命宫', '财帛宫'],
+  wealth: ['财帛宫', '命宫', '福德宫'], health: ['疾厄宫', '命宫', '福德宫'],
+  family: ['父母宫', '田宅宫', '兄弟宫'], children: ['子女宫', '命宫'],
+  move: ['迁移宫', '命宫'], friends: ['交友宫', '命宫'],
+  home: ['田宅宫', '命宫'], spirit: ['福德宫', '命宫'], parents: ['父母宫', '命宫'],
+};
+function palaceTextBrief(chart, p){
+  const SP = window.GXG_SIHUA_PALACE || {};
+  const L = [];
+  const head = `${disp(p.name)}（${ST[p.stem]}${BR[p.branch]}）`;
+  const majors = p.stars.filter(s => s.type === 'major');
+  if(majors.length){
+    L.push(head + '主星：' + majors.map(s => `${s.name}${s.siHua ? '化' + s.siHua : ''}${s.brightnessRaw || ''}`).join('、') + '。');
+    majors.forEach(s => { if(D.stars[s.name]) L.push(`${s.name}：${D.stars[s.name]}`); });
+  } else {
+    const bname = p.borrowedStars && p.borrowedStars.length ? p.borrowedStars.join('、') : '对宫';
+    L.push(`${head}为空宫，借对宫（${bname}）来看，力量打些折扣。`);
+  }
+  p.stars.filter(s => s.siHua).forEach(s => {
+    const say = (SP[s.siHua] || {})[disp(p.name)];
+    if(say) L.push(`${s.name}化${s.siHua}在${disp(p.name)}：${say}`);
+  });
+  return L.join('\n\n');
+}
+function buildLocalReading(chart){
+  const out = {};
+  const ming = chart.palaces.find(p => p.isMingGong);
+  const mingMajors = ming.stars.filter(s => s.type === 'major').map(s => s.name).join('、') || '空宫';
+  const shen = chart.palaces.find(p => p.isShenGong);
+  Object.keys(D.datasetTopics).forEach(topic => {
+    const parts = [];
+    if(topic === 'overview'){
+      parts.push(`你的命宫主星是${mingMajors}，${chart.wuxingJuName}。命宫定一生的底色，身宫（在${shen ? disp(shen.name) : '—'}）定中年后发力的方向。`);
+      let pats = [];
+      try{ pats = E.detectPatterns(chart).slice(0, 3); }catch(e){}
+      pats.forEach(pt => {
+        const v2 = (window.GXG_PATTERNS_V2 || {})[pt.name];
+        parts.push(`${pt.name}：${v2 ? v2.text : (pt.description || '')}`);
+      });
+    }
+    (LOCAL_READING_PALACES[topic] || ['命宫']).forEach(pn => {
+      const p = palaceByName(chart, pn);
+      if(p) parts.push(palaceTextBrief(chart, p));
+    });
+    if(topic === 'overview'){
+      parts.push('以上是本地精编版：根据你的命盘实时生成，离线可用。完整版（三万字语料库解读）在有网络时会自动加载。命理说的是概率性倾向，约六七成或然律，地图不是导航。');
+    }
+    out[topic] = parts.join('\n\n');
+  });
+  return out;
 }
 let readingTopic = 'overview';
 function renderReadingTabs(){
@@ -757,16 +828,29 @@ async function renderReading(){
   const rec = cur();
   if(!rec){ $('#reading-status').textContent = '先排一张盘，才能看深度解读。'; $('#reading-body').innerHTML = ''; return; }
   renderReadingTabs();
-  $('#reading-status').textContent = '正在按出生年份加载解读数据（约 2MB，只下一次）…';
+  const setStep = t => { $('#reading-status').textContent = t; };
+  setStep('正在按出生年份加载解读数据（约 2MB，只下一次）…');
   $('#reading-body').innerHTML = '<div class="empty">星星正在排版…</div>';
   try{
-    const { data } = await loadReading(rec.chart);
+    const { data } = await loadReading(rec.chart, setStep);
     window.GXG_READING = data;
-    $('#reading-status').textContent = '已加载 · 命宫主星' + esc(rec.chart.palaces.find(p=>p.isMingGong).stars.filter(s=>s.type==='major').map(s=>s.name).join('、') || '（空宫）');
+    window.GXG_READING_LOCAL = false;
+    setStep('已加载完整版 · 命宫主星' + esc(rec.chart.palaces.find(p=>p.isMingGong).stars.filter(s=>s.type==='major').map(s=>s.name).join('、') || '（空宫）'));
     renderReadingBody();
   }catch(err){
-    $('#reading-status').textContent = '深度解读暂时加载不出来（' + err.message + '），可以先看十二宫和格局，换个网络再试。';
-    $('#reading-body').innerHTML = '';
+    // 兜底：远程语料库加载失败时，用本地精编版（按命盘实时生成），页面永不落空
+    try{
+      const data = buildLocalReading(rec.chart);
+      window.GXG_READING = data;
+      window.GXG_READING_LOCAL = true;
+      renderReadingBody();
+      $('#reading-status').innerHTML = '完整版暂时加载不出来（' + esc(err.message || '网络异常') + '），已为你生成<b>本地精编版</b>（按你的命盘实时编写，离线可用）。'
+        + ' <button class="btn-ghost" id="btn-retry-reading" style="margin-left:6px">重试完整版</button>';
+      $('#btn-retry-reading').addEventListener('click', renderReading);
+    }catch(e2){
+      $('#reading-status').textContent = '深度解读暂时加载不出来，可以先看十二宫和格局，换个网络再试。';
+      $('#reading-body').innerHTML = '';
+    }
   }
 }
 function renderReadingBody(){
@@ -776,7 +860,11 @@ function renderReadingBody(){
   $('#reading-body').innerHTML = paras.map((p, i) =>
     `<button class="fav-btn" data-fav="${readingTopic}:${i}" title="收藏这段">☆</button><p>${md2html(p)}</p>`
   ).join('') +
-  `<div class="hint" style="margin-top:16px">点 ☆ 收藏打动你的段落。解读数据：紫微斗数开源解读数据集 v4.0（CC BY 4.0）。</div>`;
+  `<div class="hint" style="margin-top:16px">点 ☆ 收藏打动你的段落。${
+    window.GXG_READING_LOCAL
+      ? '本地精编版：按你的命盘实时生成，离线可用；联网后可重试完整版。'
+      : '解读数据：紫微斗数开源解读数据集 v4.0（CC BY 4.0）。'
+  }</div>`;
 }
 document.addEventListener('click', e => {
   const f = e.target.closest('[data-fav]');
@@ -1230,7 +1318,43 @@ function buildAiBrief(chart, rec, topicKey){
   L.push('- 上文已用代称，粘贴前请自行删改不愿透露的个人信息');
   return L.join('\n');
 }
-$('#btn-ai-brief').addEventListener('click', () => {
+/* ---------- 解读 · 功能菜单 ---------- */
+const MENU_ITEMS = [
+  { k: 'palaces', t: '十二宫解读', d: '十二宫结合你的命盘，一宫一卡：星曜、四化、干支大限全填上', need: true },
+  { k: 'reading', t: '13维深度解读', d: '三万字长解读：性格、事业、感情、财运……共十三维度', need: true },
+  { k: 'topics', t: '专题报告', d: '事业、财运、感情、健康：跨宫综合，一次看一组宫位的合力', need: true },
+  { k: 'sihua', t: '十干四化表', d: '十干四化速查：生年天干决定四化落在哪颗星', need: false },
+  { k: 'aibrief', t: 'AI 解读任务书', d: '一键生成自包含任务书，复制后粘贴给任意大模型追问', need: true },
+  { k: 'share', t: '生成分享图', d: '命盘图、金句卡、年度运势卡，带问星落款，保存发朋友圈', need: true },
+];
+function renderMenu(){
+  const rec = cur();
+  const head = rec
+    ? `<div class="card" style="margin-bottom:12px"><div class="card-kicker">当前命盘</div><p style="margin:0">${esc(rec.name)} · 命宫${esc(rec.chart.palaces.find(p=>p.isMingGong).stars.filter(s=>s.type==='major').map(s=>s.name).join('、') || '空宫')} · <button class="btn-ghost" data-nav="archive" style="padding:4px 10px">换一张</button></p></div>`
+    : `<div class="card" style="margin-bottom:12px"><div class="card-kicker">先排一张盘</div><p style="margin:0 0 10px">下面的解读都要基于你的命盘，先花 1 分钟排一张。</p><button class="btn-primary" data-nav="input">去排盘 →</button></div>`;
+  $('#menu-list').innerHTML = head + MENU_ITEMS.map(m =>
+    `<div class="card menu-item" data-menu="${m.k}" style="cursor:pointer">
+       <div style="display:flex;justify-content:space-between;align-items:center">
+         <b style="font-size:16px">${m.t}</b><span style="color:var(--muted)">→</span>
+       </div>
+       <p class="hint" style="margin:6px 0 0">${m.d}</p>
+     </div>`
+  ).join('');
+}
+document.addEventListener('click', e => {
+  const m = e.target.closest('[data-menu]');
+  if(!m) return;
+  const k = m.dataset.menu;
+  const needChart = (MENU_ITEMS.find(x => x.k === k) || {}).need;
+  if(needChart && !cur()){ nav('input'); return; }
+  if(k === 'palaces') nav('palaces');
+  else if(k === 'reading') nav('reading');
+  else if(k === 'topics') nav('topics');
+  else if(k === 'sihua') openSihuaTable();
+  else if(k === 'aibrief') openAiBrief();
+  else if(k === 'share') openShare('chart');
+});
+function openAiBrief(){
   const rec = cur(); if(!rec){ nav('input'); return; }
   const opts = AI_BRIEF_TOPICS.map(([k, v]) => `<option value="${k}">${v}</option>`).join('');
   modal('AI 解读任务书',
@@ -1249,9 +1373,9 @@ $('#btn-ai-brief').addEventListener('click', () => {
       hint.textContent = '已复制，去粘贴给大模型吧 ✦';
     }catch(e){ hint.textContent = '复制失败，请手动长按全选复制。'; }
   });
-});
+}
 /* ---------- 十干四化表 ---------- */
-$('#btn-sihua-table').addEventListener('click', () => {
+function openSihuaTable(){
   const GAN = ['甲','乙','丙','丁','戊','己','庚','辛','壬','癸'];
   const T = window.GXG_SIHUA_TABLE;
   const keyMap = { lu: ['lu','禄'], quan: ['quan','权'], ke: ['ke','科'], ji: ['ji','忌'] };
@@ -1269,7 +1393,7 @@ $('#btn-sihua-table').addEventListener('click', () => {
   modal('十干四化表',
     `<table class="sihua-table"><tr><th>天干</th><th>化禄</th><th>化权</th><th>化科</th><th>化忌</th></tr>${rows}</table>
      <p class="hint">生年天干决定四化落在哪颗星上，是整张盘动态变化的总开关。点命盘上任意化星可看解释。</p>`);
-});
+}
 
 /* ---------- 免责声明接入 ---------- */
 function wireDisclaimer(){
