@@ -750,6 +750,17 @@ const ZSTD_WASM = 'https://cdn.jsdelivr.net/npm/@bokuweb/zstd-wasm@0.0.27/dist/e
 /* 解锁码：SALT|chartKey 的 SHA-256 取 8 位数字。SALT 公开在前端，仅防君子（0.9 元内容此强度足够）。 */
 const GXG_UNLOCK_SALT = 'ae8f94fe28773c4be2cf110caac7f535';
 const GXG_CONTACT = ''; // 站长微信（用户提供后填入，解锁弹窗第 2 步会显示）
+/* 卡密体系（发卡平台全自动）：WX- + 6位序列 + 2位校验，可离线验证，不依赖服务端 */
+const GXG_KAMI_URL = ''; // 发卡平台商品链接（用户提供后填入）
+const GXG_KAMI_SECRET = 'e957886927d41e3bd32c6531cb687e02';
+const GXG_KAMI_ABC = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789';
+async function verifyKami(code){
+  const m = /^WX-([A-Z2-9]{6})([A-Z2-9]{2})$/.exec(String(code).trim().toUpperCase());
+  if(!m) return false;
+  const h = await sha256hex(GXG_KAMI_SECRET + '|' + m[1]);
+  const b0 = parseInt(h.slice(0, 2), 16), b1 = parseInt(h.slice(2, 4), 16);
+  return GXG_KAMI_ABC[b0 % GXG_KAMI_ABC.length] + GXG_KAMI_ABC[b1 % GXG_KAMI_ABC.length] === m[2];
+}
 function readingKeyOf(chart){
   const bi = chart.birthInfo;
   return `${bi.year}-${pad2(bi.month)}-${pad2(bi.day)}-${bi.hour}-${bi.gender}`;
@@ -1000,12 +1011,12 @@ function renderReadingBody(){
 }
 /* ---------- 解锁弹窗 ---------- */
 function openUnlock(){
-  const rec = cur(); if(!rec) return;
-  const key = readingKeyOf(rec.chart);
-  $('#unlock-key').textContent = key;
+  if(!cur()){ nav('input'); return; }
+  const buy = $('#unlock-buy');
+  if(GXG_KAMI_URL){ buy.href = GXG_KAMI_URL; $('#unlock-buy-wrap').hidden = false; $('#unlock-coming').hidden = true; }
+  else { $('#unlock-buy-wrap').hidden = true; $('#unlock-coming').hidden = false; }
   $('#unlock-code').value = '';
   $('#unlock-err').textContent = '';
-  $('#unlock-contact').textContent = GXG_CONTACT || '站长微信（请截图后私聊发送）';
   $('#unlock-modal').hidden = false;
 }
 document.addEventListener('click', async e => {
@@ -1019,13 +1030,22 @@ document.addEventListener('click', async e => {
   if(e.target.closest('#unlock-verify')){
     const rec = cur(); if(!rec) return;
     const key = readingKeyOf(rec.chart);
-    const code = $('#unlock-code').value;
-    if(await verifyUnlockCode(key, code)){
+    const code = $('#unlock-code').value.trim();
+    let ok = await verifyUnlockCode(key, code);
+    let kamiKey = '';
+    if(!ok && await verifyKami(code)){
+      ok = true;
+      kamiKey = 'gxg_kami_used_' + code.toUpperCase();
+      const usedFor = store.get(kamiKey, null);
+      if(usedFor && usedFor !== key){ ok = false; } // 同一卡密在本机只解一张盘
+    }
+    if(ok){
       store.set('gxg_unlock_' + key, true);
+      if(kamiKey) store.set(kamiKey, key);
       $('#unlock-modal').hidden = true;
       renderReading();
     } else {
-      $('#unlock-err').textContent = '解锁码不对，请检查后重试。';
+      $('#unlock-err').textContent = '解锁码不对，或该卡密已在本机用过，请检查后重试。';
     }
   }
 });
