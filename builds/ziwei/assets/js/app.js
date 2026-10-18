@@ -69,6 +69,7 @@ function nav(name){
   $$('#tabbar button').forEach(b => b.classList.toggle('on', b.dataset.nav === name));
   window.scrollTo({top:0});
   if(name==='home') renderHome();
+  if(name==='input') renderInputHistory();
   if(name==='archive') renderArchive();
   if(name==='favorites') renderFavs();
   if(name==='palaces') renderPalaceCards();
@@ -121,6 +122,19 @@ function glossary(kind, name){
         const dx = pl.daXianAge ? ` · 大限${pl.daXianAge[0]}–${pl.daXianAge[1]}岁` : '';
         const ms = (pl.isMingGong ? '（命宫）' : '') + (pl.isShenGong ? '（身宫）' : '');
         html += `<br><br><b>${esc(rec0.name)} 的${esc(name)}${ms}</b>：${ST[pl.stem]}${BR[pl.branch]}${dx}<br>主星：${majors}`;
+        // 干货：主星白话 + 辅煞 + 三方四正
+        const majorList = pl.stars.filter(s => s.type === 'major');
+        majorList.slice(0, 2).forEach(s => {
+          if(D.stars[s.name]) html += `<br><br><b>${esc(s.name)}</b>：${esc(D.stars[s.name])}`;
+        });
+        const minors0 = pl.stars.filter(s => s.type !== 'major');
+        if(minors0.length) html += `<br><br>辅煞：${minors0.map(s => esc(s.name) + (s.siHua ? shBadge(s.siHua) : '')).join('、')}`;
+        const sf0 = [pl.branch, (pl.branch + 6) % 12, (pl.branch + 4) % 12, (pl.branch + 8) % 12].map(b => {
+          const q = palaceByBranch(rec0.chart, b);
+          const qm = q.stars.filter(s => s.type === 'major').map(s => s.name).join('') || '空';
+          return `${disp(q.name)}${qm}`;
+        });
+        html += `<br><br>三方四正：${sf0.map(esc).join(' · ')}`;
       }
       // 四化入宫断语（有盘时）：本宫的化星各一句
       const SP = window.GXG_SIHUA_PALACE || {};
@@ -134,6 +148,22 @@ function glossary(kind, name){
   }
   modal(name, isHtml ? html : html.replace(/\n/g, '<br>'));
 }
+
+/* ---------- 排盘页：排过的盘快捷入口 ---------- */
+function renderInputHistory(){
+  const box = $('#input-history-card');
+  if(!archive.length){ box.hidden = true; return; }
+  box.hidden = false;
+  $('#input-history').innerHTML = archive.map(a =>
+    `<button class="chip${a.id===currentId?' on':''}" data-open-arch="${a.id}">${esc(a.name)}</button>`).join('');
+}
+document.addEventListener('click', e => {
+  const c = e.target.closest('[data-open-arch]');
+  if(!c) return;
+  currentId = c.dataset.openArch; store.set('gxg_current', currentId);
+  luckMode = 'natal'; luckParam = null;
+  renderChart(); nav('chart');
+});
 
 /* ---------- 表单初始化 ---------- */
 function fillSelect(sel, items, placeholder){
@@ -1036,7 +1066,7 @@ function renderTopicBody(){
     const brk = v2 && v2.breaker ? `<br><span class="hint">破格提醒：${esc(v2.breaker)}</span>` : '';
     return `<p><b>${esc(pt.name)}</b>：${esc(txt)}${brk}</p>`;
   }).join('') : '';
-  // 四、时间窗口：当前大限 + 今年流年（含流年四化落点）
+  // 四、时间窗口：当前大限 + 今年流年（含流年四化落点）+ 大限年份轴 + 未来三年
   const dx = chart.daXians[chart.currentDaXianIndex] || {};
   const y = new Date().getFullYear();
   const yBranch = ((y - 4) % 12 + 12) % 12;
@@ -1049,7 +1079,20 @@ function renderTopicBody(){
       if(jp) jiNote = `今年${esc(lsh.ji)}化忌在${esc(disp(jp.name))}，是今年要多留意的功课；`;
     }
   }catch(e){}
-  const timeHtml = `<h4>时间窗口</h4><p>当前大限 ${dx.startAge||'—'}–${dx.endAge||'—'} 岁（${esc(disp(dx.palaceName||''))}）是这十年的大背景；${y} 年流年命宫在${esc(disp(lp.name))}，是今年的具体表现。${jiNote}大限定调子，流年看动静，权重别倒置。</p>`;
+  // 大限年份轴：把"几岁"翻译成"哪年"
+  const birthY = chart.birthInfo.year;
+  const dxYears = chart.daXians.map(d =>
+    `${birthY + d.startAge}–${birthY + d.endAge}年${esc(disp(d.palaceName || ''))}`).join('；');
+  // 未来三年流年命宫
+  const futYears = [1, 2].map(k => {
+    const yy = y + k;
+    const lp2 = palaceByBranch(chart, ((yy - 4) % 12 + 12) % 12);
+    const majors2 = lp2.stars.filter(s => s.type === 'major').map(s => s.name).join('、') || '空宫';
+    return `${yy}年流年命宫在${esc(disp(lp2.name))}（${esc(majors2)}）`;
+  }).join('；');
+  const timeHtml = `<h4>时间窗口</h4><p>当前大限 ${dx.startAge||'—'}–${dx.endAge||'—'} 岁（${esc(disp(dx.palaceName||''))}）是这十年的大背景；${y} 年流年命宫在${esc(disp(lp.name))}，是今年的具体表现。${jiNote}大限定调子，流年看动静，权重别倒置。</p>`
+    + `<p class="hint">大限年份轴：${dxYears}。</p>`
+    + `<p class="hint">往后看：${futYears}。</p>`;
   // 五、现实核验
   const verifyHtml = `<h4>现实核验</h4><p class="hint">上面说的倾向，拿你已经发生的事对一对：吻合的可以多信半分，对不上的先打个问号——命理是概率性描述（约六七成或然律），地图不是导航，走哪条路还是你自己定。</p>`;
   $('#topic-body').innerHTML =

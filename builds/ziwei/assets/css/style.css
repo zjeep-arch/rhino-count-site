@@ -65,8 +65,9 @@ body{
 @media(min-width:640px){.palace-grid{grid-template-columns:repeat(4,1fr);}}
 .palace-card{background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
   padding:16px 12px; text-align:center; box-shadow:var(--shadow); cursor:pointer;}
-.palace-card .num{display:inline-block; width:26px; height:26px; line-height:26px; border-radius:50%;
-  background:var(--primary); color:#fff; font-size:14px; margin-right:6px; vertical-align:2px;}
+.palace-card .num{display:inline-flex; align-items:center; justify-content:center; min-width:28px; height:28px;
+  padding:0 7px; border-radius:999px; background:var(--primary); color:#fff; font-size:14px;
+  margin-right:8px; vertical-align:2px; font-weight:700;}
 .palace-card h4{margin:6px 0 2px; font-size:17px; color:var(--ink); display:inline;}
 .palace-card .modern{display:inline-block; background:var(--primary-soft); color:var(--primary-deep);
   font-size:12px; border-radius:999px; padding:3px 12px; margin:8px 0;}
