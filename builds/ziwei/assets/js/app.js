@@ -859,21 +859,32 @@ const LOCAL_READING_PALACES = {
   move: ['迁移宫', '命宫'], friends: ['交友宫', '命宫'],
   home: ['田宅宫', '命宫'], spirit: ['福德宫', '命宫'], parents: ['父母宫', '命宫'],
 };
-function palaceTextBrief(chart, p){
+function palaceTextBrief(chart, p, skipJi){
   const SP = window.GXG_SIHUA_PALACE || {};
   const L = [];
   const head = `${disp(p.name)}（${ST[p.stem]}${BR[p.branch]}）`;
   const majors = p.stars.filter(s => s.type === 'major');
+  /* 亮度定调：同一颗星，庙旺和落陷完全是两回事，不写就是"对不上"的主要来源 */
+  const brightSay = b => {
+    if(b === '庙' || b === '旺') return '这颗星在你盘里是庙旺状态，能量足，上面的特质会表现得更明显。';
+    if(b === '陷') return '这颗星在你盘里落陷，能量偏弱，上面的优点要打折看，短板那面更容易冒头——后天的选择比先天更重要。';
+    return '这颗星在你盘里能量中平，特质发挥得温和，关键看组合与后天。';
+  };
   if(majors.length){
-    L.push(head + '主星：' + majors.map(s => `${s.name}${s.siHua ? '化' + s.siHua : ''}${s.brightnessRaw || ''}`).join('、') + '。');
-    majors.forEach(s => { if(D.stars[s.name]) L.push(`${s.name}：${D.stars[s.name]}`); });
+    L.push(head + '主星：' + majors.map(s => `${s.name}${s.siHua ? '化' + s.siHua : ''}`).join('、') + '。');
+    majors.forEach(s => { if(D.stars[s.name]) L.push(`${s.name}：${D.stars[s.name]}${brightSay(s.brightnessRaw)}`); });
   } else {
-    const bname = p.borrowedStars && p.borrowedStars.length ? p.borrowedStars.join('、') : '对宫';
-    L.push(`${head}为空宫，借对宫（${bname}）来看，力量打些折扣。`);
+    const bstars = ((p.borrowedStars && p.borrowedStars.length) ? p.borrowedStars : []).filter(nm => (D.stars || {})[nm]);
+    const bname = (p.borrowedStars && p.borrowedStars.length) ? p.borrowedStars.join('、') : '对宫';
+    L.push(`${head}无主星（空宫），借对宫（${bname}）来看，力量打些折扣。`);
+    bstars.forEach(nm => L.push(`借来的${nm}：${D.stars[nm]}`));
   }
   p.stars.filter(s => s.siHua).forEach(s => {
     const say = (SP[s.siHua] || {})[disp(p.name)];
-    if(say) L.push(`${s.name}化${s.siHua}在${disp(p.name)}：${say}`);
+    if(say){
+      L.push(`${s.name}化${s.siHua}在${disp(p.name)}：${say}`);
+      if(skipJi) skipJi.add(s.name + '@' + disp(p.name));
+    }
   });
   // 三方四正：看一宫要合看四宫
   const sf = [p.branch, (p.branch + 6) % 12, (p.branch + 4) % 12, (p.branch + 8) % 12].map(b => {
@@ -909,11 +920,11 @@ function topicTimeLine(chart, topicCn, palNames){
   if(palNames.includes(dxName)) s += `大限正好走在${topicCn}相关的宫位上，这十年这个主题的动静会比较大，大限的四化值得细看。`;
   return s;
 }
-/* 每个维度的化忌功课：主题宫位里有化忌就点出来 */
-function topicJiLine(chart, palNames){
+/* 每个维度的化忌功课：主题宫位里有化忌就点出来；宫位详述里已讲过的不重复 */
+function topicJiLine(chart, palNames, skip){
   const hits = [];
   chart.palaces.forEach(p => p.stars.forEach(st => {
-    if(st.siHua === '忌' && palNames.includes(disp(p.name))) hits.push(`${st.name}在${disp(p.name)}`);
+    if(st.siHua === '忌' && palNames.includes(disp(p.name)) && !(skip && skip.has(st.name + '@' + disp(p.name)))) hits.push(`${st.name}在${disp(p.name)}`);
   }));
   if(!hits.length) return '';
   const intro = (window.GXG_HUAJI || {}).intro || '';
@@ -922,14 +933,16 @@ function topicJiLine(chart, palNames){
 function buildLocalReading(chart){
   const out = {};
   const ming = chart.palaces.find(p => p.isMingGong);
-  const mingMajors = ming.stars.filter(s => s.type === 'major').map(s => s.name).join('、') || '空宫';
+  const mingMajors = ming.stars.filter(s => s.type === 'major').map(s => s.name).join('、');
+  const mingSay = mingMajors ? `主星是${mingMajors}` : '无主星';
   const shen = chart.palaces.find(p => p.isShenGong);
+  const jiCovered = new Set(); // 宫位详述里已用四化入宫文案讲过的化忌，功课题里不再重复
   Object.keys(D.datasetTopics).forEach(topic => {
     const parts = [];
     const palNames = LOCAL_READING_PALACES[topic] || ['命宫'];
     const topicCn = D.datasetTopics[topic];
     if(topic === 'overview'){
-      parts.push(`你的命宫主星是${mingMajors}，${chart.wuxingJuName}。命宫定一生的底色，身宫（在${shen ? disp(shen.name) : '—'}）定中年后发力的方向。`);
+      parts.push(`你的命宫${mingSay}，${chart.wuxingJuName}。命宫定一生的底色，身宫（在${shen ? disp(shen.name) : '—'}）定中年后发力的方向。`);
       try{
         const dx = chart.daXians[chart.currentDaXianIndex] || {};
         const y = new Date().getFullYear();
@@ -947,11 +960,11 @@ function buildLocalReading(chart){
     }
     palNames.forEach(pn => {
       const p = palaceByName(chart, pn);
-      if(p) parts.push(palaceTextBrief(chart, p));
+      if(p) parts.push(palaceTextBrief(chart, p, jiCovered));
     });
     if(topic !== 'overview'){
       parts.push(topicTimeLine(chart, topicCn, palNames));
-      const ji = topicJiLine(chart, palNames);
+      const ji = topicJiLine(chart, palNames, jiCovered);
       if(ji) parts.push(ji);
     } else {
       parts.push('以上是本地精编版：根据你的命盘实时生成，离线可用。完整版（三万字语料库解读）在有网络时会自动加载。命理说的是概率性倾向，约六七成或然律，地图不是导航。');
