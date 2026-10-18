@@ -1568,29 +1568,58 @@ const AI_BRIEF_TOPICS = [
   ['love', '婚姻感情'],
   ['year', '年度运势'],
 ];
-function palaceMainStars(chart, name){
-  const p = palaceByName(chart, name);
-  if(!p) return '—';
-  const ms = p.stars.filter(s => s.type === 'major').map(s => s.name + (s.siHua ? shBadge(s.siHua) : '')).join('、');
-  return (ms || '空宫') + `（${ST[p.stem]}${BR[p.branch]}）`;
+/* 纯文本版宫位全星曜（给 AI 任务书用，不含 HTML） */
+function palaceBriefLine(chart, p){
+  const majors = p.stars.filter(s => s.type === 'major')
+    .map(s => s.name + (s.siHua ? '化' + s.siHua : '') + (s.brightnessRaw ? '【' + s.brightnessRaw + '】' : ''));
+  const minors = p.stars.filter(s => s.type === 'minor' || s.type === 'lucky').map(s => s.name + (s.siHua ? '化' + s.siHua : ''));
+  const shas = p.stars.filter(s => s.type === 'sha').map(s => s.name + (s.siHua ? '化' + s.siHua : ''));
+  const parts = [];
+  parts.push('主星：' + (majors.join('、') || ('无（空宫' + ((p.borrowedStars && p.borrowedStars.length) ? '，借对宫' + p.borrowedStars.join('、') : '') + '）')));
+  if(minors.length) parts.push('辅星：' + minors.join('、'));
+  if(shas.length) parts.push('煞星：' + shas.join('、'));
+  if(p.selfSihua && p.selfSihua.length) parts.push('自化：' + p.selfSihua.map(s => s.starName + s.siHua).join('、'));
+  return `${disp(p.name)}（${ST[p.stem]}${BR[p.branch]}）：${parts.join('；')}`;
 }
+const AI_TOPIC_FOCUS = {
+  overview: '给命局总评：先天配置、大运走向、一生主线，最后给三条可执行的人生建议',
+  career: '重点看官禄宫三方四正＋财帛宫＋当前大限：给行业方向、打法、节奏与风险点',
+  love: '重点看夫妻宫三方四正＋命宫＋福德宫：给相处模式、择偶画像、关键年份',
+  year: '重点看流年四宫（流年命/财/官/迁）叠大限：给今年的行动清单与避坑点',
+};
 function buildAiBrief(chart, rec, topicKey){
   const bi = chart.birthInfo;
   const topicName = (AI_BRIEF_TOPICS.find(t => t[0] === topicKey) || [])[1] || '命局综述';
   const ming = chart.palaces.find(p => p.isMingGong);
   const shen = chart.palaces.find(p => p.isShenGong);
-  const mingMajors = ming.stars.filter(s => s.type === 'major').map(s => s.name + (s.siHua ? '化' + s.siHua : '') + (s.brightnessRaw || '')).join('、') || '空宫';
+  const mingMajors = ming.stars.filter(s => s.type === 'major').map(s => s.name + (s.siHua ? '化' + s.siHua : '') + (s.brightnessRaw ? '【' + s.brightnessRaw + '】' : '')).join('、') || '无（空宫）';
   const natal = natalSihuaMap(chart);
   const sihuaLine = ['禄','权','科','忌'].map(k => `${k}：${(natal[k]||[]).map(e => e.star + '在' + e.palace).join('、') || '—'}`).join('；');
-  const palLines = PALACE_ORDER.map(n => `${n}：${palaceMainStars(chart, n)}`).join('\n');
+  const palLines = PALACE_ORDER.map(n => palaceBriefLine(chart, palaceByName(chart, n))).join('\n');
+  // 命宫三方四正（LLM 不用自己算，直接给）
+  const sfNames = [ming.branch, (ming.branch + 6) % 12, (ming.branch + 4) % 12, (ming.branch + 8) % 12]
+    .map(b => disp(palaceByBranch(chart, b).name)).join('、');
   let pats = []; try{ pats = E.detectPatterns(chart); }catch(e){}
-  const patLine = pats.length ? pats.map(p => p.name).join('、') : '无明显格局';
+  const lvlCn = { excellent: '上格', good: '吉格', neutral: '中性格', caution: '需留意' };
+  const patLines = pats.length ? pats.map(p => {
+    const v2 = (window.GXG_PATTERNS_V2 || {})[p.name];
+    const cond = (p.conditions && p.conditions.required || []).join('＋');
+    const brk = (p.conditions && p.conditions.breaking || []).join('＋');
+    return `- ${p.name}（${lvlCn[p.level] || p.level || ''}）：${v2 ? v2.text : (p.description || '')}｜成立：${cond || '—'}${brk ? '｜破格：' + brk : ''}`;
+  }).join('\n') : '无明显格局（无格局也是一种格局）';
   const dxIdx = chart.currentDaXianIndex, dx = chart.daXians[dxIdx] || {};
+  const dxYears = (dx.startAge != null) ? `${bi.year + dx.startAge}–${bi.year + dx.endAge} 年` : '—';
+  const dxPal = (dx.palaceBranch != null) ? palaceByBranch(chart, dx.palaceBranch) : null;
+  const dxGanzhi = dxPal ? ST[dxPal.stem] + BR[dxPal.branch] : '';
+  const shLine = map => [['禄','lu'],['权','quan'],['科','ke'],['忌','ji']]
+    .map(([cn, k]) => `${cn}→${map[k] || '—'}${map[k] ? '在' + sihuaStarPalace(chart, map[k]) : ''}`).join('、');
+  let dxShLine = '—';
+  try{ const d = normSihua(E.getDaXianSiHua(chart, dxIdx)); if(d) dxShLine = `（${d.stemName || ''}干）` + shLine(d); }catch(e){}
   const y = new Date().getFullYear();
   const yBranch = ((y - 4) % 12 + 12) % 12;
   const liuP = palaceByBranch(chart, yBranch);
-  const ySh = normSihua(E.getLiuNianSiHua(y));
-  const ySihuaLine = ySh ? [['禄','lu'],['权','quan'],['科','ke'],['忌','ji']].map(([cn, k]) => cn + (ySh[k] || '—')).join('、') : '—';
+  let yShLine = '—';
+  try{ const d = normSihua(E.getLiuNianSiHua(y)); if(d) yShLine = `（${d.stemName || ''}干）` + shLine(d); }catch(e){}
   const L = [];
   L.push('【紫微斗数 AI 解读任务书】（问星生成）');
   L.push('用法：把下面整段复制，粘贴给任意大模型（DeepSeek、豆包、Claude 等），它会按要求做深度解读。解读仅供娱乐参考，不构成决策建议。');
@@ -1599,27 +1628,38 @@ function buildAiBrief(chart, rec, topicKey){
   L.push(`- 命主代称：${rec.name || '命主'}（${bi.gender === 'male' ? '男' : '女'}），公历 ${bi.year} 年 ${bi.month} 月 ${bi.day} 日 ${BR[bi.hour]}时生`);
   L.push(`- 五行局：${chart.wuxingJuName}；命主 ${chart.mingZhu || ''}、身主 ${chart.shenZhu || ''}`);
   L.push(`- 命宫：${disp(ming.name)}（${ST[ming.stem]}${BR[ming.branch]}），主星 ${mingMajors}；身宫在${shen ? disp(shen.name) : '—'}`);
+  L.push(`- 命宫三方四正：${sfNames}（看命宫必须合看这四宫）`);
   L.push(`- 生年四化：${sihuaLine}`);
-  L.push('- 十二宫主星：');
+  L.push(`- 当前大限四化：${dxShLine}`);
+  L.push(`- ${y} 年流年四化：${yShLine}`);
+  L.push('- 十二宫全星曜（【】内为亮度，庙旺能量足、落陷能量弱要打折看）：');
   L.push(palLines);
-  L.push(`- 格局：${patLine}`);
-  L.push(`- 当前大限：${dx.startAge}–${dx.endAge} 岁，宫位 ${disp(dx.palaceName || '')}`);
-  L.push(`- ${y} 年流年：命宫在${disp(liuP.name)}，流年四化 ${ySihuaLine}`);
+  L.push('- 格局（已按引擎成立条件校验，只列命中的）：');
+  L.push(patLines);
+  L.push(`- 当前大限：${dx.startAge}–${dx.endAge} 岁（公历 ${dxYears}），宫位 ${disp(dx.palaceName || '')}${dxGanzhi ? '（' + dxGanzhi + '）' : ''}`);
+  L.push(`- ${y} 年流年：命宫在${disp(liuP.name)}（${ST[liuP.stem]}${BR[liuP.branch]}）`);
   L.push('');
-  L.push('二、传统依据（解读时遵守）');
-  L.push('- 取用顺序：先看命身宫与五行局定大方向，再看三方四正与庙旺辅煞，再看四化飞动，最后看格局收束');
-  L.push('- 大限是十年大背景，流年是一年具体表现；解读权重不可倒置，流年不压大限');
-  L.push('- 看任何一宫必须合看三方四正（本宫＋对宫＋三合两宫），不可单宫铁断');
-  L.push('- 格局是总结标签：接近某格就说"带有某格意味"，不要硬判成格；见煞星冲破要提示破格');
+  L.push('二、解盘方法（必须遵守）');
+  L.push('- 取用顺序：命身宫＋五行局定大方向 → 三方四正＋庙旺＋辅煞星定成色 → 生年/大限/流年四化看动向 → 格局收束定标签');
+  L.push('- 亮度是权重：同一颗星，庙旺和落陷完全是两回事，落陷的星其优点要打折、短板更容易冒头');
+  L.push('- 空宫借对宫看，力量打折扣；煞星多则吉格也要打折看');
+  L.push('- 大限是十年大背景，流年是一年具体表现，权重不可倒置，流年不压大限');
+  L.push('- 看任何一宫必须合看三方四正，不可单宫铁断；四化要叠看（双忌、禄忌交战、化禄解忌都要讲）');
+  L.push('- 格局是总结标签：接近某格说"带有某格意味"，不要硬判成格；见煞忌冲破必须提示破格到什么程度');
   L.push('');
-  L.push('三、输出要求');
-  L.push('- 按五段式组织：核心判断 → 盘面依据 → 条件展开 → 时间窗口 → 现实核验');
-  L.push('- 凶象一律转译为"风险/课题/代价"，不用恐吓式、宿命式表述；禁用"注定""百分百""一定会"');
-  L.push('- 开头声明：这是概率性倾向描述（约六七成或然律），不是宿命决定论；命理是地图不是导航');
+  L.push('三、表达铁律（违反则整段作废）');
+  L.push('- 人格断语一律转"外界视角＋或然表述"：不说"你脾气差"，说"在不熟的人眼里容易显得脾气急"；不说"你注定孤独"，说"独处时反而充电快，亲密关系需要刻意经营"');
+  L.push('- 凶象一律转译为"风险/课题/代价"；禁用"注定""百分百""一定会""从不"');
+  L.push('- 每个核心判断后面必须跟盘面依据（哪宫、哪星、什么亮度、什么四化），没有依据的判断不许写');
+  L.push('- 开头声明：这是概率性倾向描述（约六七成或然律），命理是地图不是导航');
   L.push('- 不做医疗诊断、不做法律判断、不给具体投资买卖点位；健康只提示"注意倾向"');
-  L.push(`- 本次主题：${topicName}。多给可执行的建议，少讲空话`);
   L.push('');
-  L.push('四、隐私');
+  L.push('四、输出要求');
+  L.push('- 按五段式组织：核心判断 → 盘面依据 → 条件展开 → 时间窗口 → 现实核验');
+  L.push(`- 本次主题：${topicName}。${AI_TOPIC_FOCUS[topicKey] || ''}`);
+  L.push('- 多给可执行的具体建议，少讲空话；每条建议注明"这么做在盘面上的理由"');
+  L.push('');
+  L.push('五、隐私');
   L.push('- 上文已用代称，粘贴前请自行删改不愿透露的个人信息');
   return L.join('\n');
 }
