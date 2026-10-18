@@ -743,16 +743,22 @@ document.addEventListener('click', e => {
   if(c && !e.target.closest('[data-star]')) glossary('palace', c.dataset.palace);
 });
 
-/* ---------- 13维解读（v4.0 数据集按需加载，走自建 CDN 月包） ---------- */
-const DATA_CDN = 'https://cdn.jsdelivr.net/gh/zjeep-arch/ziwei-data@main/data';
-const ZSTD_ESM = 'https://cdn.jsdelivr.net/npm/@bokuweb/zstd-wasm@0.0.27/dist/esm/index.web.js';
-const ZSTD_WASM = 'https://cdn.jsdelivr.net/npm/@bokuweb/zstd-wasm@0.0.27/dist/esm/zstd.wasm';
+/* ---------- 13维解读（v4.0 数据集按需加载，走自建 CDN 月包，双镜像） ---------- */
+const DATA_MIRRORS = [
+  'https://cdn.jsdelivr.net/gh/zjeep-arch/ziwei-data@main/data',
+  'https://cdn.statically.io/gh/zjeep-arch/ziwei-data@main/data',
+];
+const ZSTD_MIRRORS = [
+  ['https://cdn.jsdelivr.net/npm/@bokuweb/zstd-wasm@0.0.27/dist/esm/index.web.js',
+   'https://cdn.jsdelivr.net/npm/@bokuweb/zstd-wasm@0.0.27/dist/esm/zstd.wasm'],
+  ['https://unpkg.com/@bokuweb/zstd-wasm@0.0.27/dist/esm/index.web.js',
+   'https://unpkg.com/@bokuweb/zstd-wasm@0.0.27/dist/esm/zstd.wasm'],
+];
 /* 解锁码：SALT|chartKey 的 SHA-256 取 8 位数字。SALT 公开在前端，仅防君子（0.9 元内容此强度足够）。 */
 const GXG_UNLOCK_SALT = 'ae8f94fe28773c4be2cf110caac7f535';
 const GXG_CONTACT = ''; // 站长微信（用户提供后填入，解锁弹窗第 2 步会显示）
 /* 公众号/小红书口令解锁：用户关注后回复「解锁」获取口令，两边用同一个口令 */
 const GXG_KOULING = '问星888';
-const GXG_XHS_QR = 'assets/img/xhs-qr.jpg'; // 小红书主页二维码（站长手工回复私信）
 function verifyKouling(code){ return String(code).replace(/\s+/g,'').toLowerCase() === GXG_KOULING.toLowerCase(); }
 /* 卡密体系（发卡平台全自动）：WX- + 6位序列 + 2位校验，可离线验证，不依赖服务端 */
 const GXG_KAMI_URL = ''; // 发卡平台商品链接（用户提供后填入）
@@ -784,10 +790,16 @@ function isUnlocked(key){ return !!store.get('gxg_unlock_' + key, false); }
 let zstdApi = null, readingCache = {}; // key -> {topic: text}
 async function getZstd(){
   if(zstdApi) return zstdApi;
-  const mod = await import(ZSTD_ESM);
-  await mod.init(ZSTD_WASM);
-  zstdApi = mod; // { decompress }
-  return zstdApi;
+  let last = null;
+  for(const [esmUrl, wasmUrl] of ZSTD_MIRRORS){
+    try{
+      const mod = await import(esmUrl);
+      await mod.init(wasmUrl);
+      zstdApi = mod; // { decompress }
+      return zstdApi;
+    }catch(e){ last = e; }
+  }
+  throw last || new Error('解压组件加载失败');
 }
 /* 在字节层面找 key，避免把 700MB+ 全转成 JS 字符串（省一半内存） */
 function findLineBytes(raw, needleBytes){
@@ -801,18 +813,21 @@ function findLineBytes(raw, needleBytes){
   }
   return null;
 }
-/* 带重试的下载：GitHub Releases 在部分网络下不稳定，失败自动重试 */
-async function fetchWithRetry(url, tries){
+/* 多镜像轮询下载：一个 CDN 不通自动换下一个 */
+async function fetchFirst(urls, tries, onStep){
   let last = null;
-  for(let i = 0; i < tries; i++){
-    try{
-      const ctl = new AbortController();
-      const timer = setTimeout(() => ctl.abort(), 30000);
-      const res = await fetch(url, { signal: ctl.signal });
-      clearTimeout(timer);
-      if(!res.ok) throw new Error('数据文件加载失败（' + res.status + '）');
-      return res;
-    }catch(e){ last = e; await new Promise(r => setTimeout(r, 900 * (i + 1))); }
+  for(let u = 0; u < urls.length; u++){
+    for(let i = 0; i < tries; i++){
+      try{
+        if(onStep) onStep(`正在下载解读数据（约 2MB）${urls.length > 1 ? ' · 线路' + (u + 1) : ''}…`);
+        const ctl = new AbortController();
+        const timer = setTimeout(() => ctl.abort(), 20000);
+        const res = await fetch(urls[u], { signal: ctl.signal });
+        clearTimeout(timer);
+        if(!res.ok) throw new Error('数据文件加载失败（' + res.status + '）');
+        return res;
+      }catch(e){ last = e; await new Promise(r => setTimeout(r, 700)); }
+    }
   }
   throw last;
 }
@@ -822,9 +837,8 @@ async function loadReading(chart, onStep){
   if(readingCache[key]) return { key, data: readingCache[key], local: false };
   const cached = store.get('gxg_reading_' + key, null);
   if(cached){ readingCache[key] = cached; return { key, data: cached, local: false }; }
-  const url = `${DATA_CDN}/${bi.year}/${pad2(bi.month)}.jsonl.zst`;
-  if(onStep) onStep('正在下载解读数据（约 2MB）…');
-  const res = await fetchWithRetry(url, 3);
+  const urls = DATA_MIRRORS.map(m => `${m}/${bi.year}/${pad2(bi.month)}.jsonl.zst`);
+  const res = await fetchFirst(urls, 2, onStep);
   const buf = new Uint8Array(await res.arrayBuffer());
   if(onStep) onStep('下载完成，正在解压并匹配你的命盘…');
   const zstd = await getZstd();
@@ -962,12 +976,13 @@ function md2html(md){
     .replace(/\*\*(.+?)\*\*/g, '<b>$1</b>')
     .replace(/\n\n/g, '</p><p>').replace(/\n/g, '<br>');
 }
+function setReadingStep(t){ $('#reading-status').innerHTML = t; }
 async function renderReading(){
   const rec = cur();
   if(!rec){ $('#reading-status').textContent = '先排一张盘，才能看深度解读。'; $('#reading-body').innerHTML = ''; return; }
   renderReadingTabs();
   // 本地优先：先瞬间渲染本地精编版（离线可用），完整版在后台静默尝试
-  const setStep = t => { $('#reading-status').innerHTML = t; };
+  const setStep = setReadingStep;
   try{
     const localData = buildLocalReading(rec.chart);
     window.GXG_READING = localData;
@@ -980,17 +995,20 @@ async function renderReading(){
   }
   setStep('本地精编版 · 已按你的命盘生成');
   const key = readingKeyOf(rec.chart);
-  if(isUnlocked(key)){
-    setStep('本地精编版 · 已按你的命盘生成 <span class="hint">· 正在加载完整版…</span>');
-    try{
-      const { data } = await loadReading(rec.chart, null);
-      window.GXG_READING = data;
-      window.GXG_READING_LOCAL = false;
-      renderReadingBody();
-      setStep('已加载完整版 · 命宫主星' + esc(rec.chart.palaces.find(p=>p.isMingGong).stars.filter(s=>s.type==='major').map(s=>s.name).join('、') || '（空宫）'));
-    }catch(err){
-      setStep('本地精编版 · 已按你的命盘生成 <span class="hint">· 完整版加载失败，稍后重试</span>');
-    }
+  if(isUnlocked(key)) tryLoadFull(rec);
+}
+async function tryLoadFull(rec){
+  const setStep = setReadingStep;
+  const key = readingKeyOf(rec.chart);
+  setStep('本地精编版 · 已按你的命盘生成 <span class="hint">· 正在加载完整版…</span>');
+  try{
+    const { data } = await loadReading(rec.chart, null);
+    window.GXG_READING = data;
+    window.GXG_READING_LOCAL = false;
+    renderReadingBody();
+    setStep('已加载完整版 · 命宫主星' + esc(rec.chart.palaces.find(p=>p.isMingGong).stars.filter(s=>s.type==='major').map(s=>s.name).join('、') || '（空宫）'));
+  }catch(err){
+    setStep('本地精编版 · 已按你的命盘生成 <span class="hint">· 完整版加载失败（' + esc(String(err && err.message || err)).slice(0, 60) + '）</span> <button class="link-btn" id="reading-retry">点此重试</button>');
   }
 }
 function renderReadingBody(){
@@ -1016,14 +1034,12 @@ function renderReadingBody(){
 /* ---------- 解锁弹窗 ---------- */
 function openUnlock(){
   if(!cur()){ nav('input'); return; }
-  const xhs = $('#unlock-xhs');
-  if(GXG_XHS_QR){ xhs.hidden = false; xhs.querySelector('img').src = GXG_XHS_QR; }
-  else xhs.hidden = true;
   $('#unlock-code').value = '';
   $('#unlock-err').textContent = '';
   $('#unlock-modal').hidden = false;
 }
 document.addEventListener('click', async e => {
+  if(e.target.closest('#reading-retry')){ const rec = cur(); if(rec) tryLoadFull(rec); return; }
   if(e.target.closest('[data-unlock-open]')){ openUnlock(); return; }
   if(e.target.closest('[data-unlock-close]')){ $('#unlock-modal').hidden = true; return; }
   if(e.target.closest('#unlock-copy')){

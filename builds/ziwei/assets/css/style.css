@@ -363,3 +363,7 @@ body{font-family:var(--font-body); padding-bottom:calc(104px + env(safe-area-ins
   border:1px solid #E4D8F2; border-radius:var(--r-lg); padding:12px 14px; margin:10px 0;}
 .qr-img.sm{width:96px; height:96px; margin:0; flex:none;}
 .channel-card b{font-size:15px;}
+
+/* 状态栏文字按钮 */
+.link-btn{background:none; border:none; color:var(--c-plum); font-size:13px;
+  text-decoration:underline; padding:2px 4px; cursor:pointer;}
