@@ -357,3 +357,9 @@ body{font-family:var(--font-body); padding-bottom:calc(104px + env(safe-area-ins
 .unlock-row input{flex:1; border:1.5px solid #D9C9F0; border-radius:12px; padding:12px;
   font-size:16px; letter-spacing:2px; text-align:center;}
 .unlock-row .btn-primary{white-space:nowrap;}
+
+/* 解锁双通道 */
+.channel-card{display:flex; gap:14px; align-items:center; background:#F7F3FD;
+  border:1px solid #E4D8F2; border-radius:var(--r-lg); padding:12px 14px; margin:10px 0;}
+.qr-img.sm{width:96px; height:96px; margin:0; flex:none;}
+.channel-card b{font-size:15px;}
