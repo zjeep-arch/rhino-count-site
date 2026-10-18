@@ -1391,6 +1391,13 @@ function renderHome(){
   const generic = D.dailyFortunes[key % D.dailyFortunes.length];
   $('#daily-kicker').textContent = rec ? `${rec.name}的今日小运` : '今日小运';
   $('#daily-text').textContent = custom || generic;
+  // 首页命主画像卡：有盘才显示，复用十二宫命宫卡的画像
+  const phc = $('#portrait-home-card');
+  if(rec && rec.chart && typeof mingPortraitHTML === 'function'){
+    const mp = mingPortraitHTML(rec.chart);
+    if(mp){ phc.hidden = false; $('#portrait-home-body').innerHTML = mp; }
+    else phc.hidden = true;
+  } else if(phc) phc.hidden = true;
   const li = todayLunar();
   const gz = (li && li.fourPillars && li.fourPillars[2]) ? ` · ${li.fourPillars[2]}日` : '';
   $('#daily-date').textContent = `${bd.m} 月 ${bd.d} 日${gz}${custom ? '' : ' · 排一张盘，小运按你的命盘定制'}`;
