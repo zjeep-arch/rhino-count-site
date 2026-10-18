@@ -752,8 +752,8 @@ const GXG_UNLOCK_SALT = 'ae8f94fe28773c4be2cf110caac7f535';
 const GXG_CONTACT = ''; // 站长微信（用户提供后填入，解锁弹窗第 2 步会显示）
 /* 公众号/小红书口令解锁：用户关注后回复「解锁」获取口令，两边用同一个口令 */
 const GXG_KOULING = '问星888';
-const GXG_XHS_QR = ''; // 小红书主页二维码（用户提供后填入，如 'assets/img/xhs-qr.jpg'）
-function verifyKouling(code){ return String(code).trim().toLowerCase() === GXG_KOULING.toLowerCase(); }
+const GXG_XHS_QR = 'assets/img/xhs-qr.jpg'; // 小红书主页二维码（站长手工回复私信）
+function verifyKouling(code){ return String(code).replace(/\s+/g,'').toLowerCase() === GXG_KOULING.toLowerCase(); }
 /* 卡密体系（发卡平台全自动）：WX- + 6位序列 + 2位校验，可离线验证，不依赖服务端 */
 const GXG_KAMI_URL = ''; // 发卡平台商品链接（用户提供后填入）
 const GXG_KAMI_SECRET = 'e957886927d41e3bd32c6531cb687e02';
@@ -1034,7 +1034,7 @@ document.addEventListener('click', async e => {
   if(e.target.closest('#unlock-verify')){
     const rec = cur(); if(!rec) return;
     const key = readingKeyOf(rec.chart);
-    const code = $('#unlock-code').value.trim();
+    const code = $('#unlock-code').value.replace(/\s+/g,'');
     let ok = await verifyUnlockCode(key, code) || verifyKouling(code);
     let kamiKey = '';
     if(!ok && await verifyKami(code)){
