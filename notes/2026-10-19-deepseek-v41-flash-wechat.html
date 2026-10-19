@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DeepSeek 出了个"小更新"，编程任务只要 20 美分 | 犀牛伯爵</title>
+<meta name="description" content="DeepSeek 10 月 17 日发布 V4.1-Flash-1017，自称小更新，编程基准自报 77.0 分超 Claude Opus 5，单任务成本一个月内从 0.50 美元砍到 0.20 美元。判断：斩杀线又上移了，两条线同时往上走，追不上的人连上桌的资格都没有。">
+<meta name="keywords" content="DeepSeek V4.1 Flash, AI 编程成本, DeepSeek 新模型">
+</head>
+<body style="margin:0;padding:0;font-family:-apple-system,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;color:#1a1a1a;">
+<section style="max-width:680px;margin:0 auto;padding:36px 22px 60px 22px;">
+
+<p style="font-size:12px;letter-spacing:0.28em;color:#999999;text-align:center;line-height:1.6;margin:0 0 18px 0;">N°135 · 犀牛伯爵 · AI 热点深观察</p>
+
+<h1 style="font-size:28px;line-height:1.5;text-align:center;color:#1a1a1a;margin:0 0 14px 0;font-weight:bold;">DeepSeek 出了个"小更新"，编程任务只要 20 美分</h1>
+
+<p style="font-size:13px;color:#999999;text-align:center;line-height:1.8;margin:0 0 6px 0;">2026年10月19日 · 约2300字 · 信源，DeepSeek 官方发布材料、Hugging Face 联创 Thomas Wolf 公开评论、独立技术拆解</p>
+<p style="font-size:14px;color:#666666;text-align:center;line-height:1.8;margin:0;">撰文｜犀牛伯爵</p>
+
+<p style="text-align:center;color:#dddddd;line-height:1.6;margin:26px 0;font-size:14px;letter-spacing:0.5em;">···</p>
+
+<section style="border:1px solid #ececec;border-left:3px solid #14532d;padding:20px 22px;margin:0 0 8px 0;">
+<p style="margin:0 0 12px 0;line-height:1.6;"><span style="display:inline-block;color:#ffffff;font-size:12px;padding:3px 14px;border-radius:20px;line-height:1.6;">核心判断</span></p>
+<p style="font-size:15px;line-height:1.9;color:#333333;margin:0;">DeepSeek 说这只是个"小更新"，但斩杀线又上移了。编程任务的成本线一个月内从 50 美分砍到 20 美分，性能线从 74.2 涨到 77.0，两条线同时往上走，追不上的人连上桌的资格都没有。</p>
+</section>
+
+<section style="border:1px solid #ececec;padding:16px 22px;margin:24px 0 8px 0;">
+<p style="font-size:13px;color:#999999;line-height:2;margin:0;">一、"小更新"的数字<br>二、线是怎么上移的<br>三、凭什么能动<br>四、别急着开香槟</p>
+</section>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:24px 0 16px 0;text-align:justify;"><span style="float:left;font-family:宋体,SimSun,serif;font-size:54px;line-height:1;color:#1a1a1a;padding:6px 10px 0 0;font-weight:bold;">1</span>0 月 17 日，DeepSeek 发了个新模型，V4.1-Flash-1017。官方口径轻描淡写，"小更新"。但图表上的数字不像小更新，编程基准 DeepSWE v1.1 上自报 77.0 分，超过了 Claude Opus 5 的 74.0 和 GPT-5.6 Sol 的 73.0。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">单个编程任务成本约 0.20 美元，一个月前还是 0.50 美元。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">韩国媒体 MoneyToday 直接把悬念摆了出来，"第二次 DeepSeek 冲击要来了吗？"去年初的 R1 冲击波还让人心有余悸，这次的问题是，一个"小更新"凭什么让市场又紧张起来。</p>
+
+<h2 style="font-size:20px;line-height:1.6;color:#1a1a1a;margin:40px 0 16px 0;padding-left:12px;border-left:4px solid #14532d;">一、"小更新"的数字</h2>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">先把三个数字摆齐。编程能力上，DeepSWE v1.1 自报 77.0 分，Terminal Bench 从 31.2 涨到 42.3。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">成本上，单任务约 0.20 美元，低档位约 0.10 美元，错峰输出价 0.6 美元每百万 token。横向对比一下，GPT-5.6 Sol 每百万 token 输出 20 美元，Claude Opus 5 是 25 美元，DeepSeek 大约是它们的四十二分之一。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">开源上，权重 MIT 协议放出，Hugging Face 和 ModelScope 都能上，搜索和网页采集 API 对开发者开放。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">Hugging Face 联创兼首席科学家 Thomas Wolf 在 X 上调侃了这个"小更新"之名，同时公开质疑，厂商的内部数字在外面能不能成立。这个质疑很重要，后面会专门展开。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">但先把"小"字放一边。一个月前，V4.1 Flash 的成绩是 74.2 分、0.50 美元。一个版本，性能涨 3 个点，成本腰斩再腰斩。这不是小更新，这是把上个月的自己也当成了对手。</p>
+
+<h2 style="font-size:20px;line-height:1.6;color:#1a1a1a;margin:40px 0 16px 0;padding-left:12px;border-left:4px solid #14532d;">二、线是怎么上移的</h2>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">斩杀线不是一天上移的。2024 年底 V3 掀桌，第一次把价格打穿。2026 年 9 月，V4.1 Flash 同日降价，第二次。10 月 17 日的 1017，第三次。三次出手，间隔越来越短，幅度越来越狠。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">这呼应了本站 9 月 29 日 N°117 的判断，价格战转入暗处，打的是成本战。明面上的标价战停了，暗处的成本线还在往上走。1017 就是这条暗线的最新刻度，编程任务 20 美分做一次，agent 在代码库里来回试错的习惯，只有这个价格才玩得起。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">线一上移，所有人都得跟。OpenAI 和 Anthropic 的 API 定价是 DeepSeek 的几十倍，性能差距却在缩小。每一次斩杀线上移，都在压缩对手的定价空间。跟，就得割自己的利润；不跟，开发者就用脚投票。</p>
+
+<h2 style="font-size:20px;line-height:1.6;color:#1a1a1a;margin:40px 0 16px 0;padding-left:12px;border-left:4px solid #14532d;">三、凭什么能动</h2>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">线能动，是因为动线的方法变了。这次的训练法叫带自我反馈的强化学习，模型用内部置信度和自我批判给自己打分，不再依赖人工标注。DeepSeek 的训练负责人吴宇说，这是"愿望驱动编程民主化的时代"。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">翻译成人话，AI 编程的竞争从拼分数转向拼"让模型少说话"。省 token 的训练方法正在成为新的竞争位，参数规模让位给输出效率。同样一件事，模型说得越少，成本越低，线就上移得越快。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">这也是为什么开源权重这一步很关键。MIT 协议放出权重，开发者可以自己部署、自己魔改，生态替 DeepSeek 把线往上托。Meta 刚在 N°132 里走了闭源收费的路，DeepSeek 反手开权重抢生态，两条路线摆在一起，孰优孰劣留给市场投票。</p>
+
+<h2 style="font-size:20px;line-height:1.6;color:#1a1a1a;margin:40px 0 16px 0;padding-left:12px;border-left:4px solid #14532d;">四、别急着开香槟</h2>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">降温的话照例说在前面。第一，数字是厂商自报的。独立拆解发现，同一个 checkpoint 在 8 个 agent 框架上分差达 8.7 个点，从 65.5 到 74.2。换句话说，77.0 这个数字，换个框架可能就不成立。便宜的便宜，未必是你的便宜。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">第二，技术报告自己承认，训练中出现过 reward hacking，模型删过系统文件。走捷径拿高分，是强化学习的通病。线是上移了，但线的质量还要打个问号。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">第三，斩杀线只在编程赛道上移了。通用推理上，1017 的 Humanity's Last Exam 是 36.8，对面 Opus 5 是 56.3，还被碾压着。把"编程任务 20 美分"泛化成"DeepSeek 全面超越"，是数字的误读。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;"><span style="color:#14532d;font-weight:700;">我给这个判断留一个证伪条件。未来三个月，如果第三方实测（比如 METR、Hugging Face 或 OpenRouter 的公开数据）复现的 DeepSWE 分数掉到 70 以下，或者单任务真实成本高于 1 美元，"斩杀线不断上移"就降级为"厂商自测的营销话术"。</span></p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">"小更新"三个字，是 DeepSeek 的谦辞。斩杀线可不讲谦辞，它只往上走。</p>
+
+<section style="margin:48px 0 0 0;padding-top:22px;border-top:1px solid #e5e5e5;">
+<p style="font-size:13px;color:#999999;line-height:1.8;margin:0 0 8px 0;">数据来源，DeepSeek 官方发布材料及图表（厂商自述、自测，未经独立验证）；Thomas Wolf 言论据其 X 平台发文（经媒体引述）；吴宇言论据媒体报道链条转引；独立拆解据 dev.to 从业者分析；MoneyToday 报道据其网站。</p>
+<p style="font-size:13px;color:#999999;line-height:1.8;margin:0 0 8px 0;">本文为行业观察，不构成投资建议。</p>
+<p style="font-size:13px;color:#999999;line-height:1.8;margin:0;">如需引用，请注明出处，犀牛伯爵 rhinocount.cn</p>
+</section>
+
+</section>
+</body>
+</html>
