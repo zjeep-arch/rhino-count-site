@@ -127,6 +127,13 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "27 亿美元的技术，迪士尼只肯付 2,000 万",
+        desc: "Character.AI 破产，迪士尼以 2,000 万美元底价竞购技术 IP，同时用 1.8 亿美元三年薪酬抢下 60 多名员工。判断：差价一半是安全债，一半是技术折旧；破产法正在成为 AI 并购的新交易结构。",
+        href: "notes/2026-10-20-disney-character-ai.html"
+      },
+
+      {
+        type: "Essay",
         title: "DeepSeek 出了个\"小更新\"，编程任务只要 20 美分",
         desc: "DeepSeek 发布 V4.1-Flash-1017，自称小更新，编程基准自报 77.0 分超 Claude Opus 5，单任务成本一个月内从 0.50 美元砍到 0.20 美元。判断：斩杀线又上移了，追不上的人连上桌的资格都没有。",
         href: "notes/2026-10-19-deepseek-v41-flash.html"
@@ -605,6 +612,14 @@ window.SITE_DATA = {
         img: "assets/note-05.svg",
         href: "notes/why-rhino-count.html"
       },
+      {
+        cat: "观察", num: "N° 136",
+        title: "27 亿美元的技术，迪士尼只肯付 2,000 万",
+        excerpt: "Character.AI 申请破产，迪士尼以 2,000 万美元底价竞购技术 IP、1.8 亿美元抢下 60 多名员工。判断：差价一半是安全债，一半是技术折旧，谷歌抽走人的那天它的时钟就停了。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-10-20-disney-character-ai.html"
+      },
+
       {
         cat: "观察", num: "N° 135",
         title: "DeepSeek 出了个\"小更新\"，编程任务只要 20 美分",
