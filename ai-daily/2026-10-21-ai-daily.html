@@ -439,9 +439,9 @@
  <blockquote><strong>趋势建议：</strong>把“是否公开披露内部安全事件及处置”纳入模型供应商的尽调清单；敢公开事故、给出处置的实验室，其安全流程反而更可审计、更值得信任。</blockquote>
 </div>
 <div class="insight-card">
- <h3>2. 云与模型的竞合绷紧：Anthropic 云合作生变</h3>
- <p><strong>核心发现：</strong>据 TechCrunch 10 月 20 日报道，AWS、Google、微软开始把 Anthropic 视为竞争者而非单纯的客户，云合作出现裂痕。云厂商从“算力管道”变成“模型竞争者”，其中立性正在消失。</p>
- <blockquote><strong>趋势建议：</strong>云选型要做“竞合压力测试”：当云厂商同时是模型竞争者时，评估其资源倾斜与中立性承诺的可信度；多云与可迁移架构的议价价值正在上升。</blockquote>
+ <h3>2. 安全智能体的信任锚是“验证独立性”，不是模型自评</h3>
+ <p><strong>核心发现：</strong>Snyk 本周发布 Evo Agentic AppSec 时援引其 VulnBench 研究：通用大模型做安全审查，结论有 49.7% 在下一次运行时消失，产出修复能直接合并的只有 59.6%——用产出者自评产出，本质是利益冲突。微步在线 RedAgents 的出发点相同：不同渗透智能体挖出的风险几乎不重叠，单一智能体视角必然有盲区。两家不约而同把“独立验证”做成产品架构：Snyk 用确定性引擎复核智能体结论，微步用多智能体交叉挖洞。</p>
+ <blockquote><strong>趋势建议：</strong>采购 AI 安全工具时，把“结论是否经独立引擎复核、是否支持多智能体交叉验证”列为硬指标；自产自验的智能体安全产品，其报告可信度应当打折。</blockquote>
 </div>
 <div class="insight-card">
  <h3>3. AI 故障进入金融监管：FCA 提议重大事件报告覆盖严重 AI 故障</h3>
@@ -454,9 +454,9 @@
  <blockquote><strong>趋势建议：</strong>评估数据供应商时，把版权合规链条（确权、授权、可追溯）作为与价格并列的采购维度；合规数据供给商正在吃到溢价，提前锁定合规供给是成本优化。</blockquote>
 </div>
 <div class="insight-card">
- <h3>5. 芯片战争打到软件栈：推理/训练框架开源成新战场</h3>
- <p><strong>核心发现：</strong>Google 与 Meta 开源 TorchTPU（TPU 原生 PyTorch 后端），AWS 开源 TorchNeuron（Trainium），DeepSeek 开源生产级推理框架 DeepInfer——一周之内，三家同时把“怎么跑模型”的软件栈摆上台面。CUDA 的护城河从来不止是硅片，更是软件层。</p>
- <blockquote><strong>趋势建议：</strong>跟踪各家原生框架的成熟度与生态进展，它决定未来 2-3 年算力采购的议价空间与锁定成本；软件栈开放度应进入算力供应商评估清单。</blockquote>
+ <h3>5. 数据权限治理成为 AI 安全的第一入口</h3>
+ <p><strong>核心发现：</strong>Proofpoint 以约 63 亿美元收购 Varonis，是今年网安行业最大并购，买的正是敏感数据发现、权限治理与用户行为监测；同期 ESET 新增智能体行为监控，Tenable 把暴露情报开放给智能体工作流。逻辑一致：当 AI Agent 能跨系统访问数据并自主执行，风险不再从网络边界进来，而是从“ Agent 有权碰哪些数据”开始。安全厂商的并购与产品动作都在向数据层收拢。</p>
+ <blockquote><strong>趋势建议：</strong>部署 Agent 前，先做数据资产盘点与权限最小化：哪些数据可被智能体读取、调用、写回，要有清单和审计。安全预算正从边界防护向数据层治理迁移，选型时优先看数据发现、权限治理与行为审计是否一体化。</blockquote>
 </div>
     </div>
 
