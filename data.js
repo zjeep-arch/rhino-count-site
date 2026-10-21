@@ -127,6 +127,13 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "万科还在水里，保利已经上岸了",
+        desc: "一线房价连涨 7 个月，房企榜千亿只剩 5 家。万科短债 1,789 亿对现金 531 亿，王健林因 36 亿对赌被裁决个人连带，保利以 1.85% 借钱拿地。判断：分层上岸，名单在收缩。",
+        href: "notes/2026-10-21-fangjia-fenceng.html"
+      },
+
+      {
+        type: "Essay",
         title: "27 亿美元的技术，迪士尼只肯付 2,000 万",
         desc: "Character.AI 破产，迪士尼以 2,000 万美元底价竞购技术 IP，同时用 1.8 亿美元三年薪酬抢下 60 多名员工。判断：差价一半是安全债，一半是技术折旧；破产法正在成为 AI 并购的新交易结构。",
         href: "notes/2026-10-20-disney-character-ai.html"
@@ -611,6 +618,13 @@ window.SITE_DATA = {
         excerpt: "名字来自两部作品：恋爱的犀牛教我不计成败地热爱，基督山伯爵教我不动声色地等待。2022年底ChatGPT像一头灰犀牛从地平线走来，Count就是把它的轨迹从噪音里算出来——然后与各位同行者一起远征。",
         img: "assets/note-05.svg",
         href: "notes/why-rhino-count.html"
+      },
+      {
+        cat: "观察", num: "N° 137",
+        title: "万科还在水里，保利已经上岸了",
+        excerpt: "9 月 70 城房价发布，一线二手连涨 7 个月，上海同比率先转正；同一周房企榜出炉，千亿房企只剩 5 家。判断：这不是回暖，是分层上岸，能上岸的名单在收缩。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-10-21-fangjia-fenceng.html"
       },
       {
         cat: "观察", num: "N° 136",
