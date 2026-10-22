@@ -127,6 +127,13 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "攻防用的是同一个 AI，拼的是谁先打上补丁",
+        desc: "PHP2Shell 事件，AI 一周挖出藏了十几年的漏洞，修复却要两个月。判断：攻防同模型，胜负在补丁速度与信息公私域边界。",
+        href: "notes/2026-10-22-php2shell-ai.html"
+      },
+
+      {
+        type: "Essay",
         title: "万科还在水里，保利已经上岸了",
         desc: "一线房价连涨 7 个月，房企榜千亿只剩 5 家。万科短债 1,789 亿对现金 531 亿，王健林因 36 亿对赌被裁决个人连带，保利以 1.85% 借钱拿地。判断：分层上岸，名单在收缩。",
         href: "notes/2026-10-21-fangjia-fenceng.html"
@@ -618,6 +625,13 @@ window.SITE_DATA = {
         excerpt: "名字来自两部作品：恋爱的犀牛教我不计成败地热爱，基督山伯爵教我不动声色地等待。2022年底ChatGPT像一头灰犀牛从地平线走来，Count就是把它的轨迹从噪音里算出来——然后与各位同行者一起远征。",
         img: "assets/note-05.svg",
         href: "notes/why-rhino-count.html"
+      },
+      {
+        cat: "观察", num: "N° 138",
+        title: "攻防用的是同一个 AI，拼的是谁先打上补丁",
+        excerpt: "藏在 PHP 核心十几年的两个 9.2 分漏洞被 AI 一周挖出，修复走了两个月，细节提前泄露逼多国政府网站下线。判断：攻防用同一套模型，拼的是补丁速度和信息的公私域边界。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-10-22-php2shell-ai.html"
       },
       {
         cat: "观察", num: "N° 137",

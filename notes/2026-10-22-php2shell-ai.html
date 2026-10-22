@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>攻防用的是同一个 AI，拼的是谁先打上补丁 | 犀牛伯爵</title>
+<meta name="description" content="PHP2Shell 事件，藏在 PHP 核心十几年的两个 9.2 分漏洞被 AI 一周挖出，补丁却走了两个月，细节提前泄露逼多国政府网站下线。判断，攻防用同一套模型，拼的是补丁速度和信息的公私域边界。">
+<meta name="keywords" content="PHP2Shell, AI安全, Wiz, OpenAI, 漏洞">
+</head>
+<body style="margin:0;padding:0;background:#ffffff;font-family:-apple-system,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;color:#1a1a1a;">
+<section style="max-width:680px;margin:0 auto;padding:36px 22px 60px 22px;">
+
+<p style="font-size:12px;letter-spacing:0.28em;color:#999999;text-align:center;line-height:1.6;margin:0 0 18px 0;">N°138 · 犀牛伯爵 · 热点点评</p>
+
+<h1 style="font-size:28px;line-height:1.5;text-align:center;color:#1a1a1a;margin:0 0 14px 0;font-weight:bold;">攻防用的是同一个 AI，拼的是谁先打上补丁</h1>
+
+<p style="font-size:13px;color:#999999;text-align:center;line-height:1.8;margin:0 0 6px 0;">2026年10月22日 · 约2500字 · 信源，Wiz 官方博客、OpenAI 官方博客、PHP 官方公告</p>
+<p style="font-size:14px;color:#666666;text-align:center;line-height:1.8;margin:0;">撰文｜犀牛伯爵</p>
+
+<p style="text-align:center;color:#dddddd;line-height:1.6;margin:26px 0;font-size:14px;letter-spacing:0.5em;">···</p>
+
+<section style="background:#fdf7f7;border:1px solid #ececec;border-left:3px solid #14532d;padding:20px 22px;margin:0 0 8px 0;">
+<p style="margin:0 0 12px 0;line-height:1.6;"><span style="display:inline-block;background:#14532d;color:#ffffff;font-size:12px;padding:3px 14px;border-radius:20px;line-height:1.6;">核心判断</span></p>
+<p style="font-size:15px;line-height:1.9;color:#333333;margin:0;">攻防双方用的是同一套模型，胜负手已经从谁能找到漏洞，变成谁先修好、谁来决定哪些信息留在私域。AI 把发现漏洞的成本打到一周，把修复和披露的迟缓放大成了风险本身。</p>
+</section>
+
+<section style="background:#fafafa;border:1px solid #ececec;padding:16px 22px;margin:24px 0 8px 0;">
+<p style="font-size:13px;color:#999999;line-height:2;margin:0;">一、十几年的漏洞，一周的发现<br>二、同一套模型，两边都在用<br>三、找到用一周，修好用两个月<br>四、接下来要重划的，是信息的公域和私域</p>
+</section>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:24px 0 16px 0;text-align:justify;"><span style="float:left;font-family:宋体,SimSun,serif;font-size:54px;line-height:1;color:#1a1a1a;padding:6px 10px 0 0;font-weight:bold;">1</span>0 月 21 日，芬兰、荷兰、法国的多个政府网站预防性下线。同一天，PHP 官方发布紧急安全更新，版本一路排到 8.5.12、8.4.27、8.3.36、8.2.35。美国 NSA 的建议更直接，打不上补丁的，先下线。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">让全球一起动起来的，是两个藏在 PHP 核心引擎里的漏洞，CVE-2026-109618 和 CVE-2026-109619，合称 PHP2Shell，CVSS 评分 9.2。它们在代码里躺了十几年，影响回溯到 2012 年的 PHP 5.4。而把它们挖出来的，是 AI。</p>
+
+<h2 style="font-size:20px;line-height:1.6;color:#1a1a1a;margin:40px 0 16px 0;padding-left:12px;border-left:4px solid #14532d;">一、十几年的漏洞，一周的发现</h2>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">PHP 是互联网的地基之一。按 W3Techs 的口径，它驱动全球约 70% 的网站，WordPress、Drupal、维基百科跑的 MediaWiki 都建在它上面。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">这次出事的不是某个应用写错了代码，是引擎本身。漏洞的形态是内存安全问题，PHP 处理内存不足等致命错误时，会留下一截没清理干净的内部状态，下一个请求可以踩着这截状态读走服务器内存里的密码、令牌和 API 密钥，或者直接执行任意代码，不需要登录。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">Wiz Research 在官方博客里交代了发现过程。他们用自家的 Wiz Atlas 工具，加上 Gemini 4 Argon 和 GPT-5.6 Sol，把漏洞找出来，再写出能在 WordPress、Drupal、Joomla 上跑通的完整 exploit。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">博客结尾那句话值得全文引用，单人研究者一周完成了以前需要世界级团队数月的工作。难点从来不是漏洞不存在，是把内存 bug 串成稳定可用的攻击链，需要在不同版本和配置之间反复试错，这道工序以前贵到没人愿意对十几年前的老代码做，AI 把它的价格打下来了。</p>
+
+<h2 style="font-size:20px;line-height:1.6;color:#1a1a1a;margin:40px 0 16px 0;padding-left:12px;border-left:4px solid #14532d;">二、同一套模型，两边都在用</h2>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">这次发现漏洞的不止 Wiz 一家。安全公司 Calif 用 GPT-5.6 Sol，通过 OpenAI 的 Patch the Planet 项目，独立发现了其中一个漏洞。也就是说，同一个 GPT-5.6 Sol，在两家机构手里干着同一件事。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">OpenAI 把这次事件称为近年最具影响力的安全事件之一，同时自己承认，同一套能力也可以帮助攻击者开发 exploit，并预告这类发现会在接下来几个月急剧增加。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">这句话是这次事件真正的分水岭。模型不会区分拿它的人是 Wiz 的研究员还是攻击者，它对所有人一视同仁地降价。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">以前的安全平衡，建立在"能挖这种洞的人全世界没几个"这个稀缺性上。稀缺性消失之后，攻防双方唯一的差别只剩下谁先动手。这也是为什么 OpenAI 要拿出 10 亿美元，补贴资源不足的防御方使用它的 Daybreak 安全工具，模型的厂商已经意识到，光卖模型不够，得给防御方买时间。</p>
+
+<h2 style="font-size:20px;line-height:1.6;color:#1a1a1a;margin:40px 0 16px 0;padding-left:12px;border-left:4px solid #14532d;">三、找到用一周，修好用两个月</h2>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">把时间线摊开，速度差一目了然。8 月 19 日，Wiz 找到第一个漏洞；8 月 24 日，上报 PHP 安全团队；9 月 21 日，PHP 确认着手修复；</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">补丁原定 10 月 22 日发布，临门一脚细节提前泄露，只好提前一天到 10 月 21 日。发现用一周，修复走完流程用了两个月，这还是有 Wiz、OpenAI、Cloudflare、AWS 一整个联盟在旁边催着、帮着验证补丁的结果。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">补丁发布只是开始。全球几千万台独立管理的服务器，不会因为一个公告就同时升级。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">2021 年的 Log4Shell 演过同一出戏，补丁很快就有了，但没人说得清自己家里哪些系统用了那个组件，清点和修复拖了以年计。这次 PHP 的版本碎片化只会更严重，老版本 8.1 及以下已经没有官方更新。NSA 那句"打不上就下线"，翻译过来就是，官方对全网的补丁速度没有信心，只能先保命。</p>
+
+<h2 style="font-size:20px;line-height:1.6;color:#1a1a1a;margin:40px 0 16px 0;padding-left:12px;border-left:4px solid #14532d;">四、接下来要重划的，是信息的公域和私域</h2>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">这次事件里还有一条容易被忽略的线。PHP 的源代码是公开的，漏洞在公域里躺了十几年，等于一份所有人都能下载、但几乎没人能读懂的秘密。AI 改变的是"公开"的含义，公开不再等于安全，因为读懂的成本消失了。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">同理，漏洞细节在披露期本该留在私域，这次没守住，提前泄露直接逼补丁提前一天发布，连发布日期都被信息边界的失守改写了。哪些代码要按"随时会被 AI 体检"的标准重新审计，哪些细节在补丁就位前必须锁在私域、锁多久，这套规则过去是行业惯例，接下来要变成真金白银的安全预算。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;"><span style="color:#14532d;font-weight:700;">降温的话说全。第一，Imperva 公开表态，触发这个 bug 容易，把它变成稳定的远程代码执行很难，攻击复杂度是高的。第二，70% 这个数字是 W3Techs 的统计口径，BBC 表示未能独立核实。</span></p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;"><span style="color:#14532d;font-weight:700;">第三，Wiz 自己也说，这套能力同样给防御者机会，这次就是防御者先找到的。证伪条件摆在这里，若 30 天内出现 PHP2Shell 的大规模蠕虫级利用，"防御者先手"的叙事要修正；若 90 天内 PHP 补丁覆盖率超过八成，"修复长尾"的判断也要修正。</span></p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">漏洞在代码里躺了十几年，谁都没有错，错的是那个"没人看得懂就等于安全"的旧世界，已经结束了。</p>
+
+<section style="margin:48px 0 0 0;padding-top:22px;border-top:1px solid #e5e5e5;">
+<p style="font-size:13px;color:#999999;line-height:1.8;margin:0 0 8px 0;">数据来源，漏洞机制、发现过程与"单人一周"原话据 Wiz Research 官方博客（2026 年 10 月 21 日）；Calif 独立发现、OpenAI 定性与 Daybreak 补贴据 OpenAI 官方博客；补丁版本与泄露提前发布据 PHP 官方公告及 OpenAI 总裁 Greg Brockman 公开说明；政府网站下线与 NSA 建议据多家媒体公开报道；70% 口径为 W3Techs 统计，BBC 称未独立核实；攻击复杂度表态据 Imperva 公开博客。</p>
+<p style="font-size:13px;color:#999999;line-height:1.8;margin:0 0 8px 0;">本文为行业观察，不构成投资建议。</p>
+<p style="font-size:13px;color:#999999;line-height:1.8;margin:0;">如需引用，请注明出处，犀牛伯爵 rhinocount.cn</p>
+</section>
+
+</section>
+</body>
+</html>
