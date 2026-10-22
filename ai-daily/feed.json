@@ -1,6 +1,13 @@
 {
-  "updated": "2026-10-21T09:36:27+08:00",
+  "updated": "2026-10-22T09:35:36+08:00",
   "articles": [
+    {
+      "title": "AI大模型及安全动态日报 | 2026年10月22日（星期四）",
+      "date": "2026年10月22日（星期四）",
+      "slug": "2026-10-22",
+      "url": "ai-daily/2026-10-22-ai-daily.html",
+      "excerpt": "Anthropic CEO 长文回应安全批评承认三项失误、PHP2Shell 漏洞应急与 OpenAI 协调披露、OpenAI 模型上架 Google Cloud、Claude Duet 研究预览、CrowdStrike×NVIDIA 把智能体安全延伸到硅片。"
+    },
     {
       "title": "AI大模型及安全动态日报 | 2026年10月21日（星期三）",
       "date": "2026年10月21日（星期三）",

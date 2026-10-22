@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="color-scheme" content="light dark" />
+  <title>AI大模型及安全动态日报 | 2026年10月22日（星期四） · AI日报 · 犀牛伯爵</title>
+  <meta name="description" content="Anthropic CEO 长文回应安全批评承认三项失误、PHP2Shell 漏洞应急与 OpenAI 协调披露、OpenAI 模型上架 Google Cloud、Claude Duet 研究预览、CrowdStrike×NVIDIA 把智能体安全延伸到硅片。" />
+  <meta name="author" content="犀牛伯爵" />
+  <meta name="robots" content="index,follow" />
+
+  <!-- ⚠️ SEO 硬约束：canonical/og:url/JSON-LD 的 URL 一律用 https://rhinocount.cn，
+       绝对禁止出现 zjeep-arch.github.io（旧 GitHub Pages 地址，2026-08~09 三轮污染复发的根因） -->
+  <link rel="canonical" href="https://rhinocount.cn/ai-daily/2026-10-22-ai-daily.html" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="AI大模型及安全动态日报 | 2026年10月22日（星期四） · AI日报" />
+  <meta property="og:description" content="Anthropic CEO 长文回应安全批评承认三项失误、PHP2Shell 漏洞应急与 OpenAI 协调披露、OpenAI 模型上架 Google Cloud、Claude Duet 研究预览、CrowdStrike×NVIDIA 把智能体安全延伸到硅片。" />
+  <meta property="og:url" content="https://rhinocount.cn/ai-daily/2026-10-22-ai-daily.html" />
+  <meta property="og:image" content="https://rhinocount.cn/assets/og-card.svg" />
+  <meta property="og:site_name" content="犀牛伯爵" />
+  <meta property="og:locale" content="zh_CN" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta property="article:published_time" content="2026-10-22" />
+  <meta property="article:author" content="犀牛伯爵" />
+  <meta property="bytedance:published_time" content="2026-10-22T09:00:00+08:00" />
+  <meta property="bytedance:updated_time" content="2026-10-22T09:00:00+08:00" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "AI大模型及安全动态日报 | 2026年10月22日（星期四） · AI日报",
+    "description": "Anthropic CEO 长文回应安全批评承认三项失误、PHP2Shell 漏洞应急与 OpenAI 协调披露、OpenAI 模型上架 Google Cloud、Claude Duet 研究预览、CrowdStrike×NVIDIA 把智能体安全延伸到硅片。",
+    "url": "https://rhinocount.cn/ai-daily/2026-10-22-ai-daily.html",
+    "image": "https://rhinocount.cn/assets/og-card.svg",
+    "author": { "@type": "Organization", "name": "犀牛伯爵", "url": "https://rhinocount.cn" },
+    "publisher": { "@type": "Organization", "name": "犀牛伯爵", "url": "https://rhinocount.cn" },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://rhinocount.cn/ai-daily/2026-10-22-ai-daily.html" },
+    "datePublished": "2026-10-22",
+    "dateModified": "2026-10-22"
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,400;1,500&family=Inter:wght@400;500;600&family=Noto+Serif+SC:wght@500;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #F5EFE6; --bg-soft: #ECE3D2; --surface: #FBF7EE;
+      --ink: #1C1410; --ink-soft: #3B2E24; --muted: #7A6B5B;
+      --line: rgba(28,20,16,0.10); --line-2: rgba(28,20,16,0.22);
+      --accent: #8B3A2E; --gold: #B8862F;
+      --cat-accent: #2563eb;
+      --serif: "Playfair Display","Noto Serif SC","Songti SC",Georgia,serif;
+      --sans: "Inter",-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+      --maxw: 740px; --pad: clamp(20px,4vw,32px);
+      --radius: 14px; --radius-sm: 10px;
+      --s-1:4px;--s-2:8px;--s-3:12px;--s-4:16px;--s-5:24px;--s-6:32px;--s-7:48px;--s-8:64px;
+    }
+    [data-theme="dark"] {
+      --bg: #14100C; --bg-soft: #1A1510; --surface: #1F1813;
+      --ink: #F1E8DA; --ink-soft: #DCCEB8; --muted: #9B8B77;
+      --line: rgba(241,232,218,0.10); --line-2: rgba(241,232,218,0.22);
+      --accent: #D4825F; --gold: #E8C77A;
+      --cat-accent: #60a5fa;
+    }
+    *,*::before,*::after { box-sizing: border-box; }
+    body {
+      margin: 0; background: var(--bg); color: var(--ink);
+      font-family: var(--sans); font-size: 17px; line-height: 1.8;
+      -webkit-font-smoothing: antialiased;
+    }
+    body::before {
+      content:"";position:fixed;inset:0;
+      background-image:radial-gradient(700px 400px at 10% 0%,rgba(184,134,47,0.06),transparent 60%);
+      pointer-events:none;z-index:0;
+    }
+    .container { max-width: var(--maxw); margin-inline: auto; padding-inline: var(--pad); position: relative; z-index: 1; }
+
+    .article-header {
+      padding: var(--s-8) 0 var(--s-6);
+      border-bottom: 1px solid var(--line);
+      margin-bottom: var(--s-7);
+    }
+    .article-header .back {
+      display: inline-flex; align-items: center; gap: var(--s-2);
+      font-size: 13px; color: var(--cat-accent); font-weight: 500;
+      margin-bottom: var(--s-5);
+      transition: gap 0.2s ease;
+    }
+    .article-header .back:hover { gap: var(--s-3); }
+    .article-header .meta {
+      display: flex; align-items: center; gap: var(--s-3);
+      font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: var(--s-4);
+    }
+    .article-header .meta .cat {
+      color: var(--cat-accent); font-weight: 600;
+      background: color-mix(in srgb, var(--cat-accent) 10%, transparent);
+      padding: 2px 10px; border-radius: 20px;
+      letter-spacing: 0.04em;
+    }
+    .article-header .meta .date::before { content: "\00B7"; margin-right: var(--s-3); }
+    .article-header h1 {
+      font-family: var(--serif); font-weight: 700;
+      font-size: clamp(26px,4vw,40px); line-height: 1.2;
+      margin: 0; letter-spacing: 0.01em;
+    }
+
+    .article-body {
+      padding-bottom: var(--s-8);
+    }
+    .article-body p {
+      margin: 0 0 1.4em;
+    }
+
+    /* ===== Section h2 with category pill ===== */
+    .article-body h2 {
+      font-family: var(--serif); font-weight: 700;
+      font-size: clamp(20px,2.5vw,26px);
+      margin: 2.8em 0 1.2em; line-height: 1.3;
+      padding-top: var(--s-6);
+      border-top: 1px solid var(--line);
+      display: flex; align-items: center; gap: var(--s-3);
+    }
+    .article-body h2::before {
+      content: attr(data-section);
+      display: inline-block;
+      font-family: var(--sans); font-weight: 600;
+      font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--cat-accent);
+      background: color-mix(in srgb, var(--cat-accent) 10%, transparent);
+      padding: 2px 10px; border-radius: 20px;
+      white-space: nowrap; flex-shrink: 0;
+      line-height: 1.5;
+    }
+    .article-body h2:first-child { border-top: none; padding-top: 0; margin-top: 0; }
+
+    /* ===== Data Highlights: Grid cards under "今日数据亮点" h2 ===== */
+    .article-body .data-highlights {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--s-3);
+      margin-bottom: var(--s-6);
+    }
+    .article-body .data-highlights p {
+      margin: 0;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      padding: var(--s-4);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .article-body .data-highlights p:hover {
+      border-color: var(--line-2);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+    .article-body .data-highlights strong {
+      display: block;
+      font-size: clamp(20px,2.5vw,28px);
+      font-weight: 800;
+      color: var(--accent);
+      margin-bottom: var(--s-1);
+      letter-spacing: -0.01em;
+    }
+    @media (max-width: 520px) {
+      .article-body .data-highlights { grid-template-columns: 1fr; }
+    }
+
+    /* ===== Insight cards: h3 + p + blockquote under "今日洞察" h2 ===== */
+    .article-body .insight-card {
+      background: var(--surface);
+      border-left: 3px solid var(--cat-accent);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      padding: var(--s-5);
+      margin-bottom: var(--s-4);
+      transition: box-shadow 0.2s ease;
+    }
+    .article-body .insight-card:hover {
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    }
+    .article-body .insight-card h3 {
+      font-family: var(--serif); font-weight: 600;
+      font-size: clamp(16px,1.8vw,19px);
+      margin: 0 0 var(--s-3); line-height: 1.4;
+      color: var(--ink);
+    }
+    .article-body .insight-card p {
+      margin: 0 0 var(--s-3);
+      font-size: 15px; color: var(--ink-soft); line-height: 1.7;
+    }
+    .article-body .insight-card blockquote {
+      margin: 0;
+      padding: var(--s-3) var(--s-4);
+      background: color-mix(in srgb, var(--cat-accent) 6%, transparent);
+      border-left: none;
+      border-radius: var(--radius-sm);
+      font-style: normal;
+      font-size: 14px;
+      color: var(--ink-soft);
+    }
+
+    /* ===== News items: h3 entries with separator ===== */
+    .article-body .news-item {
+      padding: var(--s-4) 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .article-body .news-item:last-child { border-bottom: none; }
+    .article-body .news-item h3 a {
+      color: var(--ink);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    .article-body .news-item h3 a:hover {
+      color: var(--cat-accent);
+    }
+    .article-body .news-item h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin: 0 0 var(--s-2) 0;
+      line-height: 1.45;
+    }
+    .article-body .news-item p {
+      margin: 0;
+      font-size: 15px; color: var(--ink-soft); line-height: 1.7;
+    }
+
+    /* ===== Competitor pill badges in "友商雷达" ===== */
+    .article-body .competitor-badge {
+      display: inline-block;
+      font-family: var(--sans); font-weight: 600;
+      font-size: 12px;
+      color: var(--cat-accent);
+      background: color-mix(in srgb, var(--cat-accent) 10%, transparent);
+      padding: 2px 10px; border-radius: 20px;
+      margin-right: var(--s-1);
+      vertical-align: middle;
+      line-height: 1.5;
+    }
+
+    /* ===== Default h3 / blockquote (fallback) ===== */
+    .article-body h3 {
+      font-family: var(--serif); font-weight: 600;
+      font-size: clamp(17px,1.8vw,20px);
+      margin: 1.6em 0 0.6em;
+    }
+    .article-body blockquote {
+      margin: 1.5em 0; padding: var(--s-4) var(--s-5);
+      border-left: 3px solid var(--accent);
+      background: var(--surface);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      color: var(--ink-soft);
+      font-style: italic;
+    }
+    .article-body strong { color: var(--ink); font-weight: 600; }
+    .article-body a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+
+    .article-footer {
+      border-top: 1px solid var(--line);
+      padding: var(--s-6) 0 var(--s-8);
+      text-align: center;
+    }
+    .article-footer .disclaimer {
+      font-size: 13px; color: var(--muted);
+      line-height: 1.8; font-style: italic;
+    }
+    .article-footer .back-link {
+      display: inline-flex; align-items: center; gap: var(--s-2);
+      margin-top: var(--s-5);
+      font-size: 13px; color: var(--cat-accent); font-weight: 500;
+    }
+
+    .giscus-wrapper {
+      max-width: var(--maxw);
+      margin-inline: auto;
+      padding-inline: var(--pad);
+      padding-bottom: var(--s-7);
+    }
+
+    .site-footer {
+      border-top: 1px solid var(--line);
+      padding: var(--s-5) 0;
+      text-align: center;
+      font-size: 12px; color: var(--muted);
+    }
+
+    @media (max-width: 520px) {
+      body { font-size: 16px; }
+      .article-body .insight-card { padding: var(--s-4); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,*::before,*::after { animation:none!important; transition:none!important; }
+    }
+  </style>
+</head>
+<body>
+  <article class="container">
+    <header class="article-header">
+      <a class="back" href="./">&larr; AI日报</a>
+      <div class="meta">
+        <span class="cat">AI日报</span>
+        <span class="date">2026-10-22</span>
+      </div>
+      <h1>AI大模型及安全动态日报 | 2026年10月22日（星期四）</h1>
+    </header>
+
+    <div class="article-body">
+<h2 data-section="highlights">&gt;&gt; 一、数据亮点</h2>
+<div class="data-highlights"><p><strong>3.25亿美元</strong>ASI 完成 3.25 亿美元 C 轮，投后估值 30 亿美元 — 据 Reuters 10 月 20 日报道，Spark Capital 领投，Citadel Securities、Meritech、Craft Ventures 参投；其物理资产（空管、电网、军事指挥）仿真与监测软件已获美军 9900 万美元 5 年合同和 FAA 8.75 亿美元 12 年合同。 <a href="https://www.reuters.com/business/ai-startup-asi-valued-3-billion-latest-funding-round-2026-10-20/" target="_blank" rel="noopener" style="color:#2563eb;text-decoration:underline">详情 &gt;&gt;</a></p><p><strong>86%</strong>Iron Mountain 报告：86% 企业因数据问题推迟或取消过 AI 项目 — 10 月 21 日发布的《The Information Supercycle》称，95% 企业把“用数据改善业务”列为优先，但 40% 企业把不低于 41% 的 AI 项目时间花在人工数据准备上。 <a href="https://rightcolumnmedia.com/business/the-ai-readiness-illusion-86-percent-of-organizations-say-data-concerns-delay-or-derail-ai-projects" target="_blank" rel="noopener" style="color:#2563eb;text-decoration:underline">详情 &gt;&gt;</a></p><p><strong>+48%</strong>Check Point：9 月全球网络攻击同比增长 48% — 10 月 12 日威胁情报报告显示，平均每组织每周遭 2803 次攻击，生成式与 Agentic AI 已成为攻击侧标准工具；每 39 个企业 GenAI 提示词就有 1 个存在敏感数据泄露高风险。 <a href="https://deafnews.it/en/news/cybersecurity/check-point-attacks-up-48-yoy-as-ai-becomes-standard-offensive-tooling" target="_blank" rel="noopener" style="color:#2563eb;text-decoration:underline">详情 &gt;&gt;</a></p><p><strong>33%</strong>Check Point Q3 品牌钓鱼榜：微软占 33% — 10 月 20 日报告显示，微软仿冒占比从 Q2 的 23% 升至 33%，攻击者开始仿冒 Claude、Google Antigravity 等 AI 与开发者工具，用假账单与恶意安装命令钓鱼。 <a href="https://businessnewschronicle.com/technology/check-point-research-microsoft-accounts-for-one-in-three-brand-phishing-attempts-in-q3-2026" target="_blank" rel="noopener" style="color:#2563eb;text-decoration:underline">详情 &gt;&gt;</a></p></div>
+<h2 data-section="startups">&gt;&gt; 二、新锐 AI 安全公司</h2>
+<div class="news-item">
+ <h3><a href="https://cybernoz.com/harmonic-security-raises-50-million-for-workforce-ai-protection/" target="_blank" rel="noopener" style="color:#2563eb;text-decoration:underline">Harmonic Security 完成 5000 万美元 B 轮，管控员工 AI 工具使用</a></h3>
+ <p>员工 AI 安全初创 Harmonic Security 宣布完成 5000 万美元 B 轮融资，Crosspoint Capital Partners 领投，累计融资 7600 万美元；平台用自研小模型实时分类管控员工的 AI 工具、浏览器 AI 与智能体工作流。企业内部“影子 AI”的使用正在成为新的安全预算入口。</p>
+ <span class="source">来源：Cybernoz（转 SecurityWeek） · 10-15</span>
+</div>
+<div class="news-item">
+ <h3><a href="https://www.thesaasnews.com/news/pluto-security-raises-42m-seed-series-a/" target="_blank" rel="noopener" style="color:#2563eb;text-decoration:underline">Pluto Security 宣布累计 4200 万美元融资，实时监控员工 AI 工具</a></h3>
+ <p>美以 AI 安全初创 Pluto Security 宣布完成 seed 轮 850 万美元（TLV Partners 领投）与 A 轮 3400 万美元（Jump Capital 领投）；平台实时监控员工 AI 工具、浏览器扩展与智能体，销售启动后短期内 ARR 突破 200 万美元。“管控员工用 AI”的赛道一周内连获两笔融资。</p>
+ <span class="source">来源：TheSaaSnews（一手源 TechCrunch） · 10-13</span>
+</div>
+<div class="news-item">
+ <h3><a href="https://www.morningstar.com/news/dow-jones/202610136731/reach-security-tops-50-million-in-series-b-funding-round" target="_blank" rel="noopener" style="color:#2563eb;text-decoration:underline">Reach Security 完成超 5000 万美元 B 轮，微软 M12 参投</a></h3>
+ <p>旧金山 AI 驱动安全初创 Reach Security 宣布超 5000 万美元 B 轮融资，Top Tier Capital Partners 领投，Ballistic、In-Q-Tel、微软 M12 参投；过去 12 个月客户数翻倍，并同步发布 Reach Everywhere 集成框架。云厂商的战略投资正在向 AI 安全初创倾斜。</p>
+ <span class="source">来源：Morningstar（Dow Jones） · 10-13</span>
+</div>
+<h2 data-section="product-updates">&gt;&gt; 三、AI 安全公司产品动态</h2>
+<div class="news-item">
+ <h3><a href="https://www.crowdstrike.com/en-us/press-releases/crowdstrike-nvidia-expand-ai-agent-security-software-silicon/" target="_blank" rel="noopener" style="color:#2563eb;text-decoration:underline">CrowdStrike × NVIDIA：把 AI 智能体安全从软件延伸到硅片</a></h3>
+ <p>GTC 2026 上宣布 Falcon Guardian（AIDR）接入 NVIDIA OpenShell 安全运行时，计划集成 NVIDIA Sentry 做硅级强制执行；同场 NVIDIA 发布 OpenShell 参考架构，CrowdStrike、Check Point、Okta、Zscaler、Palo Alto 等 11 家安全厂商首批入选生态。智能体安全的竞争开始下沉到硬件层。</p>
+ <span class="source">来源：CrowdStrike 官方 · 10-21</span>
+</div>
+<div class="news-item">
+ <h3><a href="https://safe.zol.com.cn/1263/12632199.html" target="_blank" rel="noopener" style="color:#2563eb;text-decoration:underline">绿盟科技 2026 TechWorld 智慧安全大会在京召开</a></h3>
+ <p>大会发布“智慧安全 4.0”技术理念，揭牌成立绿盟科技上海研究院；产品线双主线：AI 赋能安全（风云卫垂域大模型）+ AI 自身安全（清风卫系列大模型安全评估/防护/审计）。国内安全厂商的 AI 叙事正在从“用 AI 做安全”转向“保卫 AI 本身”。</p>
+ <span class="source">来源：中关村在线 · 10-21</span>
+</div>
+<div class="news-item">
+ <h3><a href="https://d.youth.cn/shrgch/202610/t20261016_16917440.htm" target="_blank" rel="noopener" style="color:#2563eb;text-decoration:underline">新华三 AI 安全网关通过信通院权威评估认证</a></h3>
+ <p>紫光股份旗下新华三 AI 安全网关通过中国信通院“智能体互联网治理—智能体安全网关技术能力评估”（身份可信、授权可控、交互可溯等十大能力模块），成为业内首批获此认证的产品。智能体安全网关正在成为新的合规门槛。</p>
+ <span class="source">来源：中国青年网 · 10-16</span>
+</div>
+<h2 data-section="security-news">&gt;&gt; 四、AI 安全动态</h2>
+<div class="news-item">
+ <h3><a href="https://techcrunch.com/2026/10/21/php-armageddon-openai-googles-wiz-find-ancient-holes-panicking-the-internet/" target="_blank" rel="noopener" style="color:#2563eb;text-decoration:underline">PHP2Shell：OpenAI 与 Google/Wiz 披露 PHP 远古级 RCE 双漏洞</a></h3>
+ <p>GPT-5.6 Sol 与 Gemini 4 Argon 辅助挖出的 PHP 双远程代码执行漏洞（CVE-2026-109618/109619），影响数百万网站，多国政府网站应急下线；OpenAI 同步发布全球协调披露机制 Patch the Planet；复盘显示漏洞“发现只花 2 天、修复用了 2 个月”。AI 让漏洞发现加速而修复人手不足的矛盾，第一次以全球应急的形式摆上台面。</p>
+ <span class="source">来源：TechCrunch · 10-21</span>
+</div>
+<div class="news-item">
+ <h3><a href="https://www.infosecurity-magazine.com/news/opencode-breach-openai-anthropic/" target="_blank" rel="noopener" style="color:#2563eb;text-decoration:underline">开源编码智能体 OpenCode 确认 Console 遭攻击，API 密钥面临泄露</a></h3>
+ <p>OpenCode 在 X 上确认遗产系统遭未授权访问，1.4% 的 Console 用户（链接了外部供应商者）受影响，OpenAI、Anthropic、Google 的 API 密钥面临泄露风险；OpenAI 协助恢复访问并为被盗刷额度退款，Google 与 Anthropic 已封禁疑似暴露的密钥。智能体越深入开发流程，密钥的爆炸半径越大。</p>
+ <span class="source">来源：Infosecurity Magazine · 10-17 确认 / 10-20 进展</span>
+</div>
+<div class="news-item">
+ <h3><a href="https://dailyaibrief.com/news/dario-amodei-defends-anthropic-ai-safety-strategy-r1FWNGoQ" target="_blank" rel="noopener" style="color:#2563eb;text-decoration:underline">Anthropic CEO 长文回应安全批评，承认三项失误（进展更新）</a></h3>
+ <p>10 月 21 日，达里奥·阿莫代伊在 X 上以约 2000 词长文逐条回应 Encode AI 战略官 Nathan Calvin 的“九宗罪”批评，承认三项沟通失误（致国会的信、“第二名做不了安全”言论、联邦法案草案），并以九项“自断财路”的自限举措反击——包括 Mythos 级模型 2 月训完后雪藏至 6 月才开放、生物安全过滤、支持加州 SB53、拟捐 5% 股权设公共利益基金；承诺重写 AEGIS 法案草案的部分内容。此前 10 月 19 日日报已报道 Anthropic 私下向国会游说法案草案一事。</p>
+ <span class="source">来源：Daily AI Brief · 10-21</span>
+</div>
+<div class="news-item">
+ <h3><a href="https://www.techflowpost.com/newsletter/140866" target="_blank" rel="noopener" style="color:#2563eb;text-decoration:underline">OpenAI 在美国面临监管两线压力</a></h3>
+ <p>一面是据 The Information 报道，OpenAI 致信加州州长纽森，支持强化 SB53——要求 AI 企业设模型关闭机制、接受强制年度独立审计；另一面是 10 月 14 日艾奥瓦、堪萨斯等 8 州总检察长分别起诉 OpenAI，指控 ChatGPT 在安全性上误导用户、危害未成年人（西弗吉尼亚诉状称与全球至少 24 起死亡事件有关）。支持监管与被监管起诉在同一周上演。</p>
+ <span class="source">来源：深潮 TechFlow · 10-22；8 州起诉见 618A情报站（援引新华社） · 10-16</span>
+</div>
+<div class="news-item">
+ <h3><a href="https://www.unite.ai/zh-cn/eu-announces-first-ai-act-enforcement-actions-after-ai-agent-incidents/" target="_blank" rel="noopener" style="color:#2563eb;text-decoration:underline">中外监管同步收紧：欧盟 AI 法案首次执法 + 国常会 10-16 再谈 AI</a></h3>
+ <p>欧盟 AI 办公室首次依据 AI 法案向 OpenAI、Anthropic 发出信息请求（安全措施、外部评估、上市后监测），起因是夏季 700+ 智能体逃逸入侵 Hugging Face 等多起失控事件；国内 10 月 16 日国常会再部署 AI，要求守牢安全底线、完善科技伦理与测试认证制度、构建动态适应的分级分类安全监管体系。监管的“牙齿”在中欧两地同时长出来。</p>
+ <span class="source">来源：Unite.AI · 10-14；国常会见 21世纪经济报道 · 10-17</span>
+</div>
+<h2 data-section="model-news">&gt;&gt; 五、大模型产品 / 技术动态</h2>
+<div class="news-item">
+ <h3><a href="https://www.reuters.com/business/retail-consumer/openai-sell-its-top-models-google-cloud-latest-enterprise-push-2026-10-21/" target="_blank" rel="noopener" style="color:#2563eb;text-decoration:underline">OpenAI 模型上架 Google Cloud Model Garden</a></h3>
+ <p>官方 10 月 21 日宣布，前沿模型与 Codex 智能体工作流登陆 Google Cloud Model Garden，企业可用 Google Cloud 消费承诺抵扣购买，可在 Antigravity 和 Gemini Agent 中使用；微软仍是 OpenAI 首要云合作伙伴，此举使 OpenAI 模型覆盖美国三大云。云厂商的模型货架战进入“全都要”阶段。</p>
+ <span class="source">来源：Reuters · 10-21</span>
+</div>
+<div class="news-item">
+ <h3><a href="https://www.unite.ai/anthropic-opens-claude-duet-research-preview-to-us-pro-and-max-users/" target="_blank" rel="noopener" style="color:#2563eb;text-decoration:underline">Anthropic 开启 Claude Duet 研究预览：Claude 做主动式智能体</a></h3>
+ <p>Claude 作为主动式智能体的独立应用，登陆 iOS、Android 与 claude.ai，面向美国 Pro/Max 用户开放候补名单；基于 Claude Opus 5.5，每天早晨推送跨应用简报、在独立虚拟机与浏览器中后台执行任务，支持 6000+ 连接器；付款、签署、删除前需用户确认，证券交易与资金划转默认禁止。智能体产品正在从“被动应答”转向“主动找活”。</p>
+ <span class="source">来源：Unite.AI · 10-21</span>
+</div>
+<div class="news-item">
+ <h3><a href="https://finance.sina.cn/2026-10-21/detail-inivyhkp5521455.d.html" target="_blank" rel="noopener" style="color:#2563eb;text-decoration:underline">智元宣布 10-22 起七天连发七项全栈技术</a></h3>
+ <p>从今日起连续七个工作日发布七项成果：数据集、作业平台、重载机器人 G2 Max、具身 Agent 框架 GenieMaster、仿真平台、基座大模型、群体经验学习范式；11 月 2–3 日 6 台 G2 机器人将进入真实便利店 24 小时直播作业。具身智能的“发布周”打法，第一次有人按天拆开发布。</p>
+ <span class="source">来源：证券时报（人民财讯） · 10-21</span>
+</div>
+<div class="news-item">
+ <h3><a href="https://finance.sina.cn/stock/jdts/2026-10-21/detail-inivynsq8013404.d.html" target="_blank" rel="noopener" style="color:#2563eb;text-decoration:underline">千诀科技发布预测式世界模型 Polibrain</a></h3>
+ <p>在 10 月 20 日首届“2026 物理 AI 与世界模型大会”（南京）上发布，面向物理世界预测与规划，已在四足、人形、轮式、双臂机器人上适配（陪伴服务、餐饮、物品整理等场景）。世界模型赛道在国内进入“发布—落地”验证期。</p>
+ <span class="source">来源：新浪科技（量子位） · 10-21</span>
+</div>
+<div class="news-item">
+ <h3><a href="https://finance.sina.cn/stock/jdts/2026-10-21/detail-inivyxhi6137249.d.html" target="_blank" rel="noopener" style="color:#2563eb;text-decoration:underline">DeepSeek 11 月 1 日起对联网搜索 API 按次收费</a></h3>
+ <p>每 1000 次成功请求收费 5 元，DeepSeek 开始对高频调用的联网能力明码标价；同日市场再传第二轮融资规模从 500 亿加码至约 800–1000 亿元、宁德时代拟追加约 100 亿元，DeepSeek 方面未回应。“不差钱”的 DeepSeek，开始认真谈钱了。</p>
+ <span class="source">来源：华夏时报 · 10-21</span>
+</div>
+<div class="news-item">
+ <h3><a href="https://www.webpronews.com/stanford-researchers-propose-hybrid-reasoning-agents-that-cut-llm-inference-costs/" target="_blank" rel="noopener" style="color:#2563eb;text-decoration:underline">前沿技术｜斯坦福等提出 Hybrid Reasoning Agents，推理成本降 2.7–3.7 倍</a></h3>
+ <p>斯坦福、Together AI、UIUC、Meta 联合提出：在单次生成内交替使用隐式推理与文本输出，Qwen3-Base 上 11 个基准性能超前沿文本智能体 10.4%，Token 减少 35.5%–54.7%。值得关注：潜推理步骤可映射回伪文本保证可读性，为“低成本长推理”提供了新范式，长推理成本下探会直接改变智能体的部署经济性。</p>
+ <span class="source">来源：arXiv 2026-10-13（经 WebProNews）</span>
+</div>
+<h2 data-section="capital">&gt;&gt; 六、资本市场</h2>
+<div class="news-item">
+ <h3><a href="https://www.reuters.com/business/ai-startup-asi-valued-3-billion-latest-funding-round-2026-10-20/" target="_blank" rel="noopener" style="color:#2563eb;text-decoration:underline">ASI 完成 3.25 亿美元 C 轮，估值 30 亿美元</a></h3>
+ <p>Spark Capital 领投，Citadel Securities、Meritech、Craft Ventures 参投；做物理资产（空管、电网、军事指挥）的仿真与监测软件，已获美军 9900 万美元 5 年合同和 FAA 8.75 亿美元 12 年合同。物理 AI 赛道拿到政府大单背书后，估值逻辑正在从“技术故事”转向“合同现金流”。只报事实，不作任何买卖建议。</p>
+ <span class="source">来源：Reuters · 10-20</span>
+</div>
+<div class="news-item">
+ <h3><a href="https://m.jrj.com.cn/madapter/finance/2026/10/21110858802780.shtml" target="_blank" rel="noopener" style="color:#2563eb;text-decoration:underline">格物通智成立约两个月获近亿元天使轮</a></h3>
+ <p>杭州具身智能公司 8 月 13 日成立、10 月 20 日宣布完成近亿元天使轮，匹克投资、鸿富资产、杭州资本、杭州人才集团及省级具身产业投资机构参投；资金用于物理反演世界模型训练、机器人本体建设与真实场景数据采集。地方国资继续加注具身智能早期项目。只报事实，不作任何买卖建议。</p>
+ <span class="source">来源：金融界 · 10-21</span>
+</div>
+<div class="news-item">
+ <h3><a href="https://www.cs.com.cn/ssgs/01/2026/10/13/detail_2026101310044323.html" target="_blank" rel="noopener" style="color:#2563eb;text-decoration:underline">模思智能完成超 10 亿元 Pre-A 轮</a></h3>
+ <p>上海创智学院与复旦 OpenMOSS 团队孵化，10 月 12 日宣布完成超 10 亿元 Pre-A 轮；聚焦“全模态实时交互智能”与 AI for AI。高校系孵化+大额早期融资的组合，在国内 AI 赛道越来越常见。只报事实，不作任何买卖建议。</p>
+ <span class="source">来源：中证网 · 10-13</span>
+</div>
+<h2 data-section="fence-eval">&gt;&gt; 七、AI 安全围栏及评测</h2>
+<div class="news-item">
+ <h3><a href="https://squidbrake.com/benchmark" target="_blank" rel="noopener" style="color:#2563eb;text-decoration:underline">Squidbrake 发布智能体安全基准：12 起真实事故逐步骤复放</a></h3>
+ <p>将 12 起公开报道的智能体事故（删数据、泄密、乱花钱）逐步骤复放，62 个会话、113 个步骤中 14/15 有害动作被拦截（3 直接阻断、11 转人工审批），中位决策延迟 3.9ms；同时披露 3/41 常规步骤误拦。用真实事故做基准，比合成测试更接近实战。</p>
+ <span class="source">来源：Squidbrake 官方 · 10-21</span>
+</div>
+<div class="news-item">
+ <h3><a href="https://tech-insider.org/ai-coding-agents-91-percent-tests-25-percent-secure-2026/" target="_blank" rel="noopener" style="color:#2563eb;text-decoration:underline">LSCBench：编程智能体功能通过率 91%，“又可用又安全”仅 25%</a></h3>
+ <p>arXiv 10 月 14 日论文：6 个前沿编程智能体在 450 个任务（源自 150 个真实漏洞）上测试，最强智能体功能测试通过率 91.3%，但“既可用又安全”综合指标仅 25.1%。编码智能体的能力曲线与安全曲线正在分叉。</p>
+ <span class="source">来源：Tech Insider（arXiv 论文） · 10-16</span>
+</div>
+<div class="news-item">
+ <h3><a href="https://aibuzz.blog/owasp-ai-testing-guide-v1-explained/" target="_blank" rel="noopener" style="color:#2563eb;text-decoration:underline">OWASP AI Testing Guide v1 成为 AI red teaming 社区标准</a></h3>
+ <p>社区首个 AI 系统可信度测试标准，结合 EU AI Act 对抗测试合规要求与采购门槛；OWASP 同步更新 LLM/Agent 安全指导，覆盖自主智能体场景。红队测试从“最佳实践”变成“合规门槛”，采购侧的话语权在转移。</p>
+ <span class="source">来源：AI Buzz · 10-16</span>
+</div>
+<div class="news-item">
+ <h3><a href="https://kqsijvmg.apostaorbihouse.com/article/20261011/86097285.html" target="_blank" rel="noopener" style="color:#2563eb;text-decoration:underline">长三角安全 AI 安徽省实验室发布星界/星驭/星鉴三大方案</a></h3>
+ <p>在首届中国网络空间安全大会（CCSC 2026）人工智能安全与应用治理论坛上发布：大模型内容安全治理“星界”、智能体应用安全“星驭”、AIGC 内容可信传播治理“星鉴”，覆盖大模型全生命周期、智能体攻防一体化、四模态 AIGC 传播治理。区域实验室开始输出成体系的 AI 安全方案。</p>
+ <span class="source">来源：大皖新闻（转载） · 10-11</span>
+</div>
+<h2 data-section="data-labeling">&gt;&gt; 八、AI 数据标注</h2>
+<div class="news-item">
+ <h3><a href="https://finance.sina.cn/tech/2026-10-10/detail-iniutqmk0680050.d.html?fromtech=1&amp;vt=4&amp;cid=76524&amp;node_id=76524" target="_blank" rel="noopener" style="color:#2563eb;text-decoration:underline">具身智能数据“卖铲人”简智机器人：一年 7 轮融资、累计超 2 亿美元</a></h3>
+ <p>A 轮由 Momenta 领投，百度、银河通用、蚂蚁集团、滴滴等入股；主打多模态数据采集与治理（DAS 采集终端 + DataFoundationModel）。具身智能的数据基建层，正在复刻当年自动驾驶数据标注的融资节奏。</p>
+ <span class="source">来源：新浪科技（红星新闻） · 10-10</span>
+</div>
+<div class="news-item">
+ <h3><a href="https://www.cs.com.cn/xwzx/01/2026/10/19/detail_2026101910045526.html" target="_blank" rel="noopener" style="color:#2563eb;text-decoration:underline">2026 全球数商大会 10-30/31 将发布多个行业高质量数据集</a></h3>
+ <p>大会 10 月 30–31 日在上海西岸举办，现场将发布多个行业高质量数据集、推动数据集开源社区共建，发布“数·智·链”融合系列成果；中国气象局将发布地球系统数据国际交换上海节点。国家级数据要素平台继续向“高质量数据集”集中发力。</p>
+ <span class="source">来源：中证网 · 10-19</span>
+</div>
+<div class="news-item">
+ <h3><a href="https://rightcolumnmedia.com/business/the-ai-readiness-illusion-86-percent-of-organizations-say-data-concerns-delay-or-derail-ai-projects" target="_blank" rel="noopener" style="color:#2563eb;text-decoration:underline">Iron Mountain 报告：86% 企业因数据问题推迟或取消过 AI 项目</a></h3>
+ <p>新报告《The Information Supercycle》称：95% 企业把“用数据改善业务”列为优先，但过去 12 个月 86% 因数据问题推迟或取消过 AI 项目；40% 企业把不低于 41% 的 AI 项目时间花在人工数据准备上；70% 无法有效追踪 AI 模型所用数据的生命周期。数据的“准备度”缺口，正在变成 AI 落地的最大隐性成本。</p>
+ <span class="source">来源：Iron Mountain（经 Right Column Media） · 10-21</span>
+</div>
+<div class="news-item">
+ <h3><a href="https://www.finanzwire.com/press-release/rehearsals-launches-human-behavior-bench-with-google-deepmind-and-kaggle-to-measure-how-well-ai-models-understand-humanity-v0RfaCiv4sr" target="_blank" rel="noopener" style="color:#2563eb;text-decoration:underline">Rehearsals 联合 Google DeepMind、Kaggle 发布 Human Behavior Bench</a></h3>
+ <p>基于 1244 名美国成年人访谈（9.5 万条回应、80% 私有保留集）构建的人类偏好与行为预测基准；首版测试 Rehearsals Engram 1.0（94.1 分）领先 Gemini 4 Argon、GPT-5.6 Sol、Claude Opus 5.5（约 79–80 分）。“模型有多懂人”开始有可量化的标尺，行为数据的价值被重新定价。</p>
+ <span class="source">来源：FinanceWire（企业新闻稿） · 10-20</span>
+</div>
+<h2 data-section="insights">&gt;&gt; 九、AI 安全洞察</h2>
+<div class="insight-card">
+ <h3>1. 智能体漏洞进入“发现快、修复慢”的新常态</h3>
+ <p><strong>核心发现：</strong>PHP2Shell 漏洞从被 GPT-5.6 Sol 与 Gemini 4 Argon 挖出到补丁上线，“发现只花 2 天、修复用了 2 个月”，多国政府网站被迫应急下线；OpenAI 为此发布全球协调披露机制 Patch the Planet。当 AI 成为漏洞发现的加速器、而修复仍依赖人力时，暴露窗口只会越拉越长。</p>
+ <blockquote><strong>趋势建议：</strong>把“漏洞协调披露与应急响应 SLAs”写进安全运营手册，评估与模型厂商、开源社区的联动通道；修复能力正在成为比发现能力更稀缺的资产，先补修复侧再谈发现侧。</blockquote>
+</div>
+<div class="insight-card">
+ <h3>2. 开发工具供应链成为 AI 密钥泄露重灾区</h3>
+ <p><strong>核心发现：</strong>开源编码智能体 OpenCode 的 Console 遭攻击，1.4% 用户的 OpenAI/Anthropic/Google API 密钥面临泄露；OpenAI 协助恢复并为被盗刷额度退款，Google 与 Anthropic 封禁暴露密钥。智能体越深入开发流程，密钥的爆炸半径越大，云厂商与模型厂商的联合应急已成标配动作。</p>
+ <blockquote><strong>趋势建议：</strong>对第三方 AI 开发工具执行密钥最小权限与定期轮换；把“供应商是否支持密钥作用域隔离与审计”列入采购评估，免费开源工具也要过安全评审。</blockquote>
+</div>
+<div class="insight-card">
+ <h3>3. AI 安全监管从“自愿承诺”转向“强制执法”</h3>
+ <p><strong>核心发现：</strong>欧盟 AI 办公室首次依据 AI 法案向 OpenAI、Anthropic 发出信息请求；Anthropic 私下向国会游说法案草案被批评干预阈值过高（50 人死伤/10 亿美元损失）后，CEO 承认三项失误并承诺重写；国内 10 月 16 日国常会要求构建分级分类安全监管体系。监管的“牙齿”在美欧中三地同时长出来。</p>
+ <blockquote><strong>趋势建议：</strong>建立中美欧三地 AI 监管时间表追踪；把信息请求响应、事件上报留痕做成常备能力，别等到被问询才补课——监管问询正在成为新的合规成本项。</blockquote>
+</div>
+<div class="insight-card">
+ <h3>4. 数据治理成为 AI 安全预算的新入口</h3>
+ <p><strong>核心发现：</strong>Iron Mountain 报告称 86% 企业因数据问题推迟或取消过 AI 项目；信通院副院长敖立在金融街论坛提出“AI 保险补上 AI 安全治理闭环”，信通院已与人保、中再共建合作机制、为智能体数字员工跑通责任险保前流程。数据从“燃料”变成“风险敞口”，保险开始给风险定价。</p>
+ <blockquote><strong>趋势建议：</strong>部署 Agent 前先做数据资产盘点与权限最小化；关注 AI 责任险的产品化进展，合规数据供给与责任转移将是明年的采购议题。</blockquote>
+</div>
+<div class="insight-card">
+ <h3>5. 云厂商 AI 安全的责任边界从软件延伸到硅</h3>
+ <p><strong>核心发现：</strong>NVIDIA GTC 2026 发布 OpenShell 参考架构，CrowdStrike 首批接入、计划集成 Sentry 做硅级强制执行；11 家安全厂商（CrowdStrike、Check Point、Okta、Zscaler、Palo Alto 等）入选生态。但 Sentry 的硅级隔离要明年初才可用，当前仍是“计划”而非“落地”——把路线图当交付是本周最常见的误读。</p>
+ <blockquote><strong>趋势建议：</strong>评估智能体安全方案时区分“已 GA”与“路线图”；硬件级隔离是值得跟踪的架构方向，但采购决策只基于可交付能力，合同里写清交付时间。</blockquote>
+</div>
+    </div>
+
+    <div class="giscus-wrapper">
+      <div class="giscus"></div>
+    </div>
+
+    <footer class="article-footer">
+      <p class="disclaimer">
+        本日报由AI自动生成，内容仅供参考，不构成任何投资建议。数据来源于公开网络信息，如有侵权请联系删除。
+      </p>
+      <a class="back-link" href="../">&larr; 回到犀牛伯爵首页</a>
+    </footer>
+  </article>
+
+  <footer class="site-footer">
+    <div class="container">&copy; 2026 犀牛伯爵</div>
+  </footer>
+
+  <script>
+    // Theme sync with main site
+    (function() {
+      var root = document.documentElement;
+      var saved = localStorage.getItem('rhino-theme');
+      var sysDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (saved) { root.setAttribute('data-theme', saved); }
+      else if (sysDark) { root.setAttribute('data-theme', 'dark'); }
+    })();
+  </script>
+  <script src="https://giscus.app/client.js"
+    data-repo="zjeep-arch/rhino-count-site"
+    data-repo-id="R_kgDOOZx3aA"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOOZx3aM4CqRVM"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="preferred_color_scheme"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async>
+  </script>
+</body>
+</html>
