@@ -14,7 +14,7 @@
 
 <h1 style="font-size:28px;line-height:1.5;text-align:center;color:#1a1a1a;margin:0 0 14px 0;font-weight:bold;">攻防用的是同一个 AI，拼的是谁先打上补丁</h1>
 
-<p style="font-size:13px;color:#999999;text-align:center;line-height:1.8;margin:0 0 6px 0;">2026年10月22日 · 约2500字 · 信源，Wiz 官方博客、OpenAI 官方博客、PHP 官方公告</p>
+<p style="font-size:13px;color:#999999;text-align:center;line-height:1.8;margin:0 0 6px 0;">2026年10月22日 · 约3400字 · 信源，Wiz 官方博客、OpenAI 官方博客、PHP 官方公告</p>
 <p style="font-size:14px;color:#666666;text-align:center;line-height:1.8;margin:0;">撰文｜犀牛伯爵</p>
 
 <p style="text-align:center;color:#dddddd;line-height:1.6;margin:26px 0;font-size:14px;letter-spacing:0.5em;">···</p>
@@ -25,7 +25,7 @@
 </section>
 
 <section style="background:#fafafa;border:1px solid #ececec;padding:16px 22px;margin:24px 0 8px 0;">
-<p style="font-size:13px;color:#999999;line-height:2;margin:0;">一、十几年的漏洞，一周的发现<br>二、同一套模型，两边都在用<br>三、找到用一周，修好用两个月<br>四、接下来要重划的，是信息的公域和私域</p>
+<p style="font-size:13px;color:#999999;line-height:2;margin:0;">一、十几年的漏洞，一周的发现<br>二、同一套模型，两边都在用<br>三、找到用一周，修好用两个月<br>四、接下来要重划的，是信息的公域和私域<br>五、钱比补丁先到</p>
 </section>
 
 <p style="font-size:16px;line-height:1.9;color:#333333;margin:24px 0 16px 0;text-align:justify;"><span style="float:left;font-family:宋体,SimSun,serif;font-size:54px;line-height:1;color:#1a1a1a;padding:6px 10px 0 0;font-weight:bold;">1</span>0 月 21 日，芬兰、荷兰、法国的多个政府网站预防性下线。同一天，PHP 官方发布紧急安全更新，版本一路排到 8.5.12、8.4.27、8.3.36、8.2.35。美国 NSA 的建议更直接，打不上补丁的，先下线。</p>
@@ -68,6 +68,20 @@
 
 <p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">同理，漏洞细节在披露期本该留在私域，这次没守住，提前泄露直接逼补丁提前一天发布，连发布日期都被信息边界的失守改写了。哪些代码要按"随时会被 AI 体检"的标准重新审计，哪些细节在补丁就位前必须锁在私域、锁多久，这套规则过去是行业惯例，接下来要变成真金白银的安全预算。</p>
 
+<h2 style="font-size:20px;line-height:1.6;color:#1a1a1a;margin:40px 0 16px 0;padding-left:12px;border-left:4px solid #14532d;">五、钱比补丁先到</h2>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">先说这篇的主角公司。发现 PHP2Shell 的 Wiz，今年 3 月刚被谷歌以 320 亿美元全现金收购并完成交割，是史上最大的纯安全并购。一家 2020 年才成立的公司，六年卖出这个价格，它不是个例，是一个品类在被重新定价。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">总盘先摆出来。按 Crunchbase 的统计，2025 年全球网络安全领域的风险投资达到 180 亿美元，同比增长 26%；其中 AI 安全初创拿走的份额涨得更快，有第三方基于 Crunchbase 数据的统计显示，这个细分 2024 年融资 21.6 亿美元，2025 年跳到 63.4 亿美元，接近 3 倍。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">2026 年还在加速，数据安全公司 Cyera 累计融资超过 27 亿美元，估值 120 亿美元；企业浏览器公司 Island 估值 64 亿美元；云安全公司 Upwind 八个月内估值从 15 亿美元涨到 38 亿美元。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">更值得看的是用 AI 打仗的新物种。XBOW 做 AI 自主渗透，今年 3 月 C 轮融资 1.2 亿美元，估值超过 10 亿美元。它是第一个登顶 HackerOne 美国榜的 AI，约 90 天提交了 1,060 个验证过的漏洞；就在这个月，它用 GPT-5.6 Sol 链式利用，拿下了谷歌 25 万美元的 Chrome 漏洞赏金。和 Wiz 挖 PHP 用的是同一个模型。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">AI 安全分析公司 7AI 的 A 轮融了 1.3 亿美元，号称网络安全史上最大的 A 轮；攻防 agent 公司 RunSybil 的投资人名单里，有 Anthropic 自家的基金，卖模型的开始下场投用模型打仗的人。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">钱的流向，是对"AI 安全空前值得关注"这句话最诚实的市场投票。资本在按独立新品类给 AI 安全定价，融资以月为单位翻倍，而上一节那张时间线里，全世界打补丁还在以年为单位推进。融资的速度和补丁的速度，差了一个数量级。一个对照是，公开报道里，国内暂时没有对等量级的 AI 安全初创融资，这个空白本身就是信息。</p>
+
 <p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;"><span style="color:#14532d;font-weight:700;">降温的话说全。第一，Imperva 公开表态，触发这个 bug 容易，把它变成稳定的远程代码执行很难，攻击复杂度是高的。第二，70% 这个数字是 W3Techs 的统计口径，BBC 表示未能独立核实。</span></p>
 
 <p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;"><span style="color:#14532d;font-weight:700;">第三，Wiz 自己也说，这套能力同样给防御者机会，这次就是防御者先找到的。证伪条件摆在这里，若 30 天内出现 PHP2Shell 的大规模蠕虫级利用，"防御者先手"的叙事要修正；若 90 天内 PHP 补丁覆盖率超过八成，"修复长尾"的判断也要修正。</span></p>
@@ -75,7 +89,7 @@
 <p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">漏洞在代码里躺了十几年，谁都没有错，错的是那个"没人看得懂就等于安全"的旧世界，已经结束了。</p>
 
 <section style="margin:48px 0 0 0;padding-top:22px;border-top:1px solid #e5e5e5;">
-<p style="font-size:13px;color:#999999;line-height:1.8;margin:0 0 8px 0;">数据来源，漏洞机制、发现过程与"单人一周"原话据 Wiz Research 官方博客（2026 年 10 月 21 日）；Calif 独立发现、OpenAI 定性与 Daybreak 补贴据 OpenAI 官方博客；补丁版本与泄露提前发布据 PHP 官方公告及 OpenAI 总裁 Greg Brockman 公开说明；政府网站下线与 NSA 建议据多家媒体公开报道；70% 口径为 W3Techs 统计，BBC 称未独立核实；攻击复杂度表态据 Imperva 公开博客。</p>
+<p style="font-size:13px;color:#999999;line-height:1.8;margin:0 0 8px 0;">数据来源，漏洞机制、发现过程与"单人一周"原话据 Wiz Research 官方博客（2026 年 10 月 21 日）；Calif 独立发现、OpenAI 定性与 Daybreak 补贴据 OpenAI 官方博客；补丁版本与泄露提前发布据 PHP 官方公告及 OpenAI 总裁 Greg Brockman 公开说明；政府网站下线与 NSA 建议据多家媒体公开报道；70% 口径为 W3Techs 统计，BBC 称未独立核实；攻击复杂度表态据 Imperva 公开博客；融资与并购数据据 Crunchbase News、Calcalist 等公开报道（2025 至 2026 年），AI 安全细分口径为第三方基于 Crunchbase 数据的统计。</p>
 <p style="font-size:13px;color:#999999;line-height:1.8;margin:0 0 8px 0;">本文为行业观察，不构成投资建议。</p>
 <p style="font-size:13px;color:#999999;line-height:1.8;margin:0;">如需引用，请注明出处，犀牛伯爵 rhinocount.cn</p>
 </section>
