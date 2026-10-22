@@ -127,7 +127,7 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
-        title: "攻防用的是同一个 AI，拼的是谁先打上补丁",
+        title: "AI 一周挖出藏了 14 年的漏洞，全世界连夜打补丁",
         desc: "PHP2Shell 事件，AI 一周挖出藏了十几年的漏洞，修复却要两个月。判断：攻防同模型，胜负在补丁速度与信息公私域边界。",
         href: "notes/2026-10-22-php2shell-ai.html"
       },
@@ -628,7 +628,7 @@ window.SITE_DATA = {
       },
       {
         cat: "观察", num: "N° 138",
-        title: "攻防用的是同一个 AI，拼的是谁先打上补丁",
+        title: "AI 一周挖出藏了 14 年的漏洞，全世界连夜打补丁",
         excerpt: "藏在 PHP 核心十几年的两个 9.2 分漏洞被 AI 一周挖出，修复走了两个月，细节提前泄露逼多国政府网站下线。判断：攻防用同一套模型，拼的是补丁速度和信息的公私域边界。",
         img: "assets/note-05.svg",
         href: "notes/2026-10-22-php2shell-ai.html"
