@@ -1072,3 +1072,13 @@ body{color:var(--ink);
 /* tabbar 五项适配窄屏 */
 #tabbar button{font-size:11px; padding:9px 0 10px;}
 #tabbar button span{font-size:18px;}
+
+/* v10.3：中枢信息卡夜色化（去掉米白底，金色双线框+朱砂印保留中心地位） */
+.center-info{background:linear-gradient(180deg,rgba(30,37,84,.92) 0%,rgba(21,26,60,.94) 100%) !important;
+  border:1px solid rgba(201,169,106,.55) !important;
+  box-shadow:inset 0 0 0 4px rgba(21,26,60,.94), inset 0 0 0 5px rgba(201,169,106,.32),
+    0 0 34px rgba(134,162,255,.07), var(--sh-sm) !important;}
+.center-info .ci-brand{color:#D9B36A !important;}
+.center-info .ci-name{color:#F0F2FB !important;}
+.center-info .ci-row{color:#B9C0E3 !important;}
+.center-info .gzline{color:#D9B36A !important;}
