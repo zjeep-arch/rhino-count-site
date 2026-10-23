@@ -65,11 +65,13 @@ const cur = () => archive.find(a => a.id === currentId) || null;
 const VIEWS = ['home','input','chart','menu','palaces','reading','topics','answer','guide','archive','compare','dingpan','favorites'];
 function nav(name){
   if(!VIEWS.includes(name)) return;
+  if(name === 'chart' && !cur()) name = 'input'; // 还没排过盘时，"命盘"入口直接引导去排盘
   $$('.view').forEach(v => v.classList.remove('active'));
   $('#view-'+name).classList.add('active');
   $$('#tabbar button, #topnav button').forEach(b => b.classList.toggle('on', b.dataset.nav === name));
   window.scrollTo({top:0});
   if(name==='home') renderHome();
+  if(name==='chart') renderChart();
   if(name==='input') renderInputHistory();
   if(name==='archive') renderArchive();
   if(name==='favorites') renderFavs();
@@ -325,9 +327,14 @@ function onSubmit(e){
   if(shichen == null){ err.textContent = '请选择出生时辰（实在不知道可以去定盘辅助）。'; return; }
   const cityVal = $('#f-city').value;
   const longitude = cityVal ? parseFloat(cityVal.split('|')[1]) : null;
-  // 真太阳时勾了但没选出生地：不能静默按平太阳时排，必须让用户知情
+  // 真太阳时勾了但没选出生地：不硬阻断，给一键改用普通时间的出口
   if($('#f-true-solar').checked && longitude == null){
-    err.textContent = '你勾选了「真太阳时校正」，但还没选出生地——校正需要出生地经度。请先选省市，或取消勾选按普通时间排盘。';
+    err.innerHTML = '勾了「真太阳时校正」但还没选出生地（校正需要经度）。' +
+      '<button type="button" class="link-btn" id="skip-truesolar">不校正，直接排 ›</button>' +
+      ' <span class="hint">或先在上方选省市</span>';
+    const skip = $('#skip-truesolar');
+    if(skip) skip.addEventListener('click', () => { $('#f-true-solar').checked = false; $('#birth-form').requestSubmit(); });
+    err.scrollIntoView({ block: 'center', behavior: 'smooth' });
     return;
   }
   const exHour = $('#f-exhour').value, exMin = $('#f-exmin').value;
@@ -1780,46 +1787,53 @@ function renderOverlayGrid(chart, ov){
   wrap.hidden = false;
 }
 /* ---------- 流月日历热力图 ---------- */
-/* 农历月初一的公历日期（按年缓存；用引擎 lunarInfo 线性定位） */
-function lunarMonthStarts(year){
-  const key = 'gxg_lunar_' + year;
-  const cached = store.get(key, null);
-  if(cached && cached.length) return cached.map(s => new Date(s));
-  const infoOf = d => E.generateChart({ year: d.getFullYear(), month: d.getMonth() + 1, day: d.getDate(), hour: 0, gender: 'male' }).lunarInfo;
-  const starts = [];
-  // 正月初一在 1/21–2/21 之间
-  let d = new Date(year, 0, 21);
-  let li = null;
-  for(let i = 0; i < 34; i++){
-    li = infoOf(d);
-    if(li.lunarYear === year && li.lunarMonth === 1 && li.lunarDay === 1 && !li.isLeapMonth) break;
-    d = new Date(+d + 864e5);
-  }
-  if(!(li && li.lunarYear === year && li.lunarMonth === 1 && li.lunarDay === 1)) return starts;
-  starts.push(new Date(d));
-  // 依次找下一个"月首"（跳过闰月行，只取平月）
-  let m = 1, g = 0;
-  while(m < 12 && g++ < 40){
-    const cand = new Date(+starts[starts.length - 1] + 29 * 864e5);
-    const li2 = infoOf(cand);
-    // 月首判定：lunarDay===1；若是闰月则再走一个月
-    if(li2.lunarDay === 1){
-      m = li2.isLeapMonth ? m : li2.lunarMonth;
-      if(!li2.isLeapMonth){ starts.push(new Date(cand)); }
-    } else {
-      const cand2 = new Date(+starts[starts.length - 1] + 30 * 864e5);
-      const li3 = infoOf(cand2);
-      if(li3.lunarDay === 1 && !li3.isLeapMonth){ starts.push(new Date(cand2)); m = li3.lunarMonth; }
-    }
-  }
-  store.set(key, starts.map(x => x.getTime()));
-  return starts;
+/* 农历月初一的公历日期（按年缓存）。首次定位约需几十次引擎查询——分片异步执行，不冻结页面 */
+function lunarMonthStartsAsync(year, onProgress){
+  return new Promise(resolve => {
+    const key = 'gxg_lunar_' + year;
+    const cached = store.get(key, null);
+    if(cached && cached.length){ resolve(cached.map(Number).map(t => new Date(t))); return; }
+    const infoOf = d => E.generateChart({ year: d.getFullYear(), month: d.getMonth() + 1, day: d.getDate(), hour: 0, gender: 'male' }).lunarInfo;
+    const starts = [];
+    let probe = null, scanned = 0;
+    const step = () => {
+      const t0 = Date.now();
+      while(Date.now() - t0 < 55){
+        if(!probe){
+          if(!starts.length){
+            if(scanned >= 40) break;
+            probe = { phase: 1, d: new Date(year, 0, 21 + scanned) }; scanned++;
+          } else if(starts.length < 12){
+            probe = { phase: 2, base: starts[starts.length - 1], d: new Date(+starts[starts.length - 1] + 29 * 864e5) };
+          } else break;
+        }
+        const li = infoOf(probe.d);
+        if(probe.phase === 1){
+          if(li.lunarYear === year && li.lunarMonth === 1 && li.lunarDay === 1 && !li.isLeapMonth) starts.push(probe.d);
+          probe = null;
+        } else if(li.lunarDay === 1 && !li.isLeapMonth){
+          starts.push(probe.d); probe = null;
+        } else {
+          // 逐日找月首；若踩到闰月初一，直接跳过整个闰月（至少 29 天）
+          probe = { phase: 2, base: probe.base, d: new Date(+probe.d + ((li.lunarDay === 1 && li.isLeapMonth) ? 29 : 1) * 864e5) };
+        }
+      }
+      if(onProgress) onProgress(Math.min(.95, (scanned + starts.length * 4) / 55));
+      if(starts.length >= 12 || scanned >= 40){
+        if(starts.length >= 12) store.set(key, starts.map(x => +x));
+        if(onProgress) onProgress(1);
+        resolve(starts);
+        return;
+      }
+      setTimeout(step, 0);
+    };
+    setTimeout(step, 0);
+  });
 }
 let heatCache = null; // {chartId, year, rows:[{lm,days,scores[]}], today:{lm,ld}}
-function buildHeatData(chart, year){
+function buildHeatData(chart, year, starts){
   if(heatCache && heatCache.chartId === cur().id && heatCache.year === year) return heatCache;
-  const starts = lunarMonthStarts(year);
-  if(starts.length < 12) return null;
+  if(!starts || starts.length < 12) return null;
   const dj = doujunBranch(chart, year);
   const palByStar = {}, palByBranch = {};
   chart.palaces.forEach(p => {
@@ -1854,15 +1868,23 @@ function buildHeatData(chart, year){
   heatCache = { chartId: cur().id, year, rows, today };
   return heatCache;
 }
-function renderHeatCard(chart){
+async function renderHeatCard(chart){
   const card = $('#heat-card'), body = $('#heat-body');
   if(!card) return;
   const year = new Date().getFullYear();
-  body.innerHTML = '<p class="hint">正在按农历月推热力…</p>';
+  const cachedData = (heatCache && heatCache.chartId === (cur() || {}).id && heatCache.year === year) ? heatCache : null;
+  if(!cachedData && !store.get('gxg_lunar_' + year, null)){
+    body.innerHTML = '<p class="hint" id="heat-progress">首次推算农历月界（约几秒，仅此一次）… 0%</p>';
+  }
   card.hidden = false;
-  setTimeout(() => {
+  const starts = await lunarMonthStartsAsync(year, p => {
+    const el = $('#heat-progress');
+    if(el) el.textContent = `首次推算农历月界（约几秒，仅此一次）… ${Math.round(p * 100)}%`;
+  });
+  if(!starts || starts.length < 12){ body.innerHTML = '<p class="hint">农历数据暂缺，稍后再试。</p>'; return; }
+  {
     try{
-      const data = buildHeatData(chart, year);
+      const data = buildHeatData(chart, year, starts);
       if(!data){ body.innerHTML = '<p class="hint">农历数据暂缺，稍后再试。</p>'; return; }
       const COLORS = ['#1A2145', '#2B3768', '#3E4F99', '#5F74C4', '#86A2FF', '#C9A96A'];
       const CNUM = ['正','二','三','四','五','六','七','八','九','十','冬','腊'];
@@ -1893,7 +1915,7 @@ function renderHeatCard(chart){
         $('#heat-detail').innerHTML = `<b>${year}年农历${lm}月${ld}日</b> · 流日命宫落本命【${disp(lp.name)}】 · 四化：${esc(shTxt)}`;
       }));
     }catch(e){ body.innerHTML = '<p class="hint">热力图计算失败：' + esc(String(e.message || e)) + '</p>'; }
-  }, 30);
+  }
 }
 /* 30 支签：克制白话+古风意象，不做宿命断言。同一张盘（或无盘）同一天抽同一支，明早自动换。 */
 /* ---------- 十二宫强度量化：把庙旺/四化/辅煞折成分数，三方四正加权 ---------- */
@@ -2008,7 +2030,7 @@ function sceneVerdict(chart, sc){
   let v, badge;
   if(strong && lu >= ji){ v = '支持'; badge = 'go'; }
   else if(strong && ji > lu){ v = '有条件支持'; badge = 'cond'; }
-  else if(ok){ v = '看条件'; badge = 'cond'; }
+  else if(ok){ v = '看条件'; badge = 'maybe'; }
   else { v = '先补课'; badge = 'wait'; }
   return { v, badge, s, ji, lu };
 }
@@ -2058,8 +2080,8 @@ function renderZeri(){
   const chart = rec.chart;
   const year = new Date().getFullYear();
   box.innerHTML = '<p class="hint">正在按农历推日…</p>';
-  setTimeout(() => {
-    const starts = lunarMonthStarts(year);
+  setTimeout(async () => {
+    const starts = await lunarMonthStartsAsync(year, p => { box.innerHTML = `<p class="hint">推算农历月界… ${Math.round(p * 100)}%</p>`; });
     if(!starts.length){ box.innerHTML = '<div class="empty">农历数据暂缺，稍后再试。</div>'; return; }
     box.innerHTML = `<select id="zeri-type">${ZERI_TYPES.map(t => `<option value="${t.k}">${t.name}</option>`).join('')}</select><div id="zeri-out"></div>`;
     const sel = box.querySelector('#zeri-type'), out = box.querySelector('#zeri-out');
@@ -2102,7 +2124,7 @@ function renderZeri(){
     };
     sel.addEventListener('change', draw);
     draw();
-  }, 30);
+  })();
 }
 const SIGN_LIB = [
   { lv:'吉', t:'云开月明', s:'浮云散尽月当空，守得安静自光明。', yi:'静候 · 复盘', jie:'急事缓办，答案会自己浮上来' },
@@ -2875,7 +2897,7 @@ const MENU_ITEMS = [
 function renderMenu(){
   const rec = cur();
   const head = rec
-    ? `<div class="card" style="margin-bottom:12px"><div class="card-kicker">当前命盘</div><p style="margin:0">${esc(rec.name)} · 命宫${esc(rec.chart.palaces.find(p=>p.isMingGong).stars.filter(s=>s.type==='major').map(s=>s.name).join('、') || '空宫')} · <button class="btn-ghost" data-nav="archive" style="padding:4px 10px">换一张</button></p></div>`
+    ? `<div class="card" style="margin-bottom:12px"><div class="card-kicker">当前命盘</div><p style="margin:0">${esc(rec.name)} · 命宫${esc(rec.chart.palaces.find(p=>p.isMingGong).stars.filter(s=>s.type==='major').map(s=>s.name).join('、') || '空宫')} · <button class="btn-ghost" data-nav="chart" style="padding:4px 10px">查看命盘 →</button> <button class="btn-ghost" data-nav="archive" style="padding:4px 10px">换一张</button></p></div>`
     : `<div class="card" style="margin-bottom:12px"><div class="card-kicker">先排一张盘</div><p style="margin:0 0 10px">下面的解读都要基于你的命盘，先花 1 分钟排一张。</p><button class="btn-primary" data-nav="input">去排盘 →</button></div>`;
   $('#menu-list').innerHTML = head + MENU_ITEMS.map((m, i) =>
     `<div class="card menu-item" data-menu="${m.k}" style="cursor:pointer;--i:${i}">

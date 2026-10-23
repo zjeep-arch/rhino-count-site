@@ -1066,3 +1066,9 @@ body{color:var(--ink);
 
 /* v10.1：回溯卡按钮不换行 */
 #retro-card .btn-primary,#retro-card .btn-ghost{white-space:nowrap;}
+
+/* v10.2：问星答徽章四色区分 */
+.ans-badge.maybe{background:rgba(138,147,194,.16); color:#B9C0E3; border:1px solid rgba(138,147,194,.3);}
+/* tabbar 五项适配窄屏 */
+#tabbar button{font-size:11px; padding:9px 0 10px;}
+#tabbar button span{font-size:18px;}

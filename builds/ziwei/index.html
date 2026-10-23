@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;700;900&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=20261024d">
+<link rel="stylesheet" href="assets/css/style.css?v=20261024e">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <meta name="theme-color" content="#0B1026">
@@ -29,6 +29,7 @@
     <nav id="topnav" aria-label="主导航">
       <button data-nav="home">首页</button>
       <button data-nav="input">排盘</button>
+      <button data-nav="chart">命盘</button>
       <button data-nav="menu">解读</button>
       <button data-nav="guide">新手导览</button>
       <button data-nav="archive">我的命盘</button>
@@ -241,6 +242,7 @@
 
   <!-- 合盘 -->
   <section class="view" id="view-compare">
+    <button class="back-link" data-nav="archive">‹ 返回我的命盘</button>
     <h2 class="view-title">双人合盘</h2>
     <p class="view-sub">选存档里的两张盘对照看看。娱乐参考，别拿它做决定。</p>
     <div class="date-row">
@@ -252,6 +254,7 @@
 
   <!-- 定盘验证辅助 -->
   <section class="view" id="view-dingpan">
+    <button class="back-link" data-nav="archive">‹ 返回我的命盘</button>
     <h2 class="view-title">定盘验证辅助</h2>
     <p class="view-sub">时辰拿不准？先圈出候选时辰，再用人生大事帮你对一对。<br>「非稽其已往，无以测其将来。」——陈素庵</p>
     <div class="card"><div class="card-kicker">怎么用</div><p class="hint" style="margin:0">用<strong>已经发生、年份明确</strong>的大事，去验证哪个候选时辰的盘更吻合。这叫"验证"，不是"反推"：如果几个时辰都不吻合，我们会直说，而不是硬凑一个答案。你填的大事只保存在本机，不上传。</p></div>
@@ -279,6 +282,7 @@
 
   <!-- 收藏 -->
   <section class="view" id="view-favorites">
+    <button class="back-link" data-nav="archive">‹ 返回我的命盘</button>
     <h2 class="view-title">我的收藏</h2>
     <div id="fav-list"></div>
   </section>
@@ -338,6 +342,7 @@
 <nav id="tabbar">
   <button data-nav="home" class="on"><span>✦</span>首页</button>
   <button data-nav="input"><span>◉</span>排盘</button>
+  <button data-nav="chart"><span>✧</span>命盘</button>
   <button data-nav="menu"><span>▦</span>解读</button>
   <button data-nav="archive"><span>☰</span>我的</button>
 </nav>
@@ -351,6 +356,6 @@
 <script src="assets/js/ziwei-engine.js"></script>
 <script src="assets/js/data.js"></script>
 <script src="assets/js/data-v2.js"></script>
-<script src="assets/js/app.js?v=20261024d"></script>
+<script src="assets/js/app.js?v=20261024e"></script>
 </body>
 </html>
