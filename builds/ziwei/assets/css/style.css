@@ -841,3 +841,187 @@ body{background:
 
 /* v8.2：hero 字号收敛微调 */
 .hn-wordmark{font-size:clamp(42px,6vw,64px); letter-spacing:.14em;}
+
+/* ═══════════════ v9：全站夜化（蓝调时刻铺满整屏 · 夜读命书） ═══════════════ */
+:root{
+  --bg:#0B1026; --card:rgba(17,23,54,.68); --ink:#E9EBF8; --ink-soft:#B9C0E3; --muted:#8A93C2;
+  --primary:#86A2FF; --primary-deep:#C9D1F2; --primary-soft:rgba(134,162,255,.13);
+  --line:#2A3358; --gold:#C9A96A; --clay:#C96A4A;
+  --shadow:0 2px 10px rgba(3,6,20,.4), 0 12px 40px rgba(3,6,20,.35);
+  --sh-sm:0 1px 4px rgba(3,6,20,.35); --sh-md:0 4px 14px rgba(3,6,20,.4); --sh-lg:0 10px 40px rgba(3,6,20,.5);
+}
+*{scrollbar-color:#2A3358 transparent;}
+input,select,textarea,button{color-scheme:dark;}
+body{color:var(--ink);
+  background:
+    radial-gradient(1200px 800px at 85% -10%, rgba(176,82,58,.10), transparent 60%),
+    radial-gradient(1000px 700px at -12% 30%, rgba(134,162,255,.08), transparent 55%),
+    radial-gradient(900px 700px at 55% 115%, rgba(160,131,255,.12), transparent 60%),
+    linear-gradient(180deg,#0A0E24 0%,#0D1330 35%,#141B42 70%,#191E4C 100%);
+  background-attachment:fixed;}
+#stars-bg{background-image:
+  radial-gradient(2px 2px at 12% 16%, rgba(223,227,251,.6), transparent 60%),
+  radial-gradient(1.6px 1.6px at 84% 10%, rgba(160,131,255,.5), transparent 60%),
+  radial-gradient(2.4px 2.4px at 66% 26%, rgba(223,227,251,.5), transparent 60%),
+  radial-gradient(1.6px 1.6px at 30% 52%, rgba(134,162,255,.4), transparent 60%),
+  radial-gradient(2px 2px at 92% 64%, rgba(223,227,251,.42), transparent 60%),
+  radial-gradient(2.2px 2.2px at 44% 86%, rgba(201,169,106,.4), transparent 60%);}
+/* 头部：夜玻璃 */
+#app-header{background:rgba(11,16,38,.82); border-bottom:1px solid var(--line); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);}
+.brand-mark{background:linear-gradient(135deg,#86A2FF,#A083FF); color:#0B1026;}
+.brand h1{color:#F0F2FB;} .brand p{color:#8A93C2;}
+#topnav button{color:#B9C0E3;}
+#topnav button:hover{color:#F0F2FB; background:rgba(223,227,251,.08);}
+#topnav button.on{background:#E5E9FC; color:#141B42;}
+.icon-btn{background:rgba(223,227,251,.06); border-color:var(--line); color:#DFE3FB;}
+/* 按钮 */
+.btn-primary{background:linear-gradient(135deg,#86A2FF 0%,#A083FF 100%); color:#0B1026;
+  box-shadow:0 6px 24px rgba(134,162,255,.28); font-weight:600;}
+.btn-primary:hover{filter:brightness(1.08);}
+.btn-ghost{background:rgba(223,227,251,.05); border-color:var(--line); color:#C9D1F2;}
+.btn-ghost:hover{border-color:#86A2FF; color:#F0F2FB;}
+.link-btn{color:#B09BF0;}
+/* 卡片：夜玻璃 + 发丝线 */
+.card{background:var(--card); border:1px solid var(--line); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); box-shadow:var(--sh-sm);}
+.card-kicker{color:var(--gold);}
+.view-title{color:#F0F2FB;}
+.view-sub{color:#8A93C2;}
+.daily-card{background:linear-gradient(160deg,rgba(23,29,66,.85) 0%,rgba(18,22,54,.8) 100%); border:1px solid #2E3866;}
+.date-pill{background:rgba(134,162,255,.14); color:#B9C4EA;}
+.sign-lvl.lv-ji{background:rgba(201,169,106,.16); color:#D9B36A;}
+.sign-lvl.lv-zhong{background:rgba(134,162,255,.14); color:#A9BCF2;}
+.sign-lvl.lv-ping{background:rgba(138,147,194,.14); color:#9AA3CE;}
+.daily-card .sign-no{color:#F0F2FB;}
+.daily-card .sign-title{color:#C9A96A;}
+.daily-card .sign-text{color:#E9EBF8;}
+.daily-card .sign-yi{color:#B9C0E3;}
+/* 表单 */
+#birth-form{background:rgba(17,23,54,.6); border-color:var(--line);}
+.field>span{color:#E9EBF8;}
+.field input[type=text], .field select{background:#151B40; border-color:var(--line); color:#E9EBF8;}
+.seg button{background:#151B40; border-color:var(--line); color:#8A93C2;}
+.seg button.on{background:#E5E9FC; border-color:#E5E9FC; color:#141B42;}
+.chip{background:#151B40; border-color:var(--line); color:#B9C0E3;}
+.chip.on{background:#E5E9FC; border-color:#E5E9FC; color:#141B42;}
+.check input{accent-color:#86A2FF;}
+/* tabs */
+.tabs button{background:rgba(223,227,251,.05); border-color:transparent; color:#8A93C2;}
+.tabs button.on{background:#E5E9FC; color:#141B42; border-color:#E5E9FC;}
+#luck-tabs{background:rgba(223,227,251,.07);}
+#luck-tabs button.on{background:#E5E9FC; color:#141B42;}
+#luck-picker select{background:#151B40; border-color:var(--line); color:#E9EBF8;}
+.sihua-chip{background:rgba(134,162,255,.13); color:#C9D1F2;}
+/* 命盘格：夜卡 */
+.cell{background:linear-gradient(180deg,rgba(22,28,62,.9) 0%,rgba(16,21,50,.9) 100%); border:1px solid var(--line);}
+.cell:hover{border-color:#46528C;}
+.cell .pname{color:#F0F2FB;}
+.cell .gz{color:#8A93C2;}
+.cell .dx{color:#7C85B4; border-top-color:var(--line);}
+.cell.hl{border:1.5px solid var(--gold); box-shadow:0 0 0 3px rgba(201,169,106,.15);}
+.cell .tag{background:var(--clay);}
+.ov-tag{background:#46528C;}
+#chart-grid .star-chip{background:rgba(223,227,251,.075); color:#DFE3FB;}
+#chart-grid .star-chip:hover{background:rgba(201,169,106,.16);}
+.star-chip{background:rgba(223,227,251,.075); color:#C9D1F2;}
+/* 庙旺分级（夜色提亮） */
+.br-庙{color:#D9B36A;} .br-旺{color:#C9A96A;} .br-利{color:#9AA5D6;} .br-不,.br-平{color:#7A82A8;} .br-陷{color:#D9785E;}
+/* 中枢命书卡：保留宣纸暖光（夜读命书的视觉锚点） */
+.center-info{background:linear-gradient(180deg,#FFFDF4 0%,#F3EBD6 100%); border:1px solid var(--gold);
+  box-shadow:inset 0 0 0 4px #FFFDF4, inset 0 0 0 5px rgba(140,109,63,.35), 0 0 44px rgba(201,169,106,.10);}
+.center-info .ci-name{color:#2A2415;} .center-info .ci-row{color:#57503C;} .center-info .ci-brand{color:#A85438;} .center-info .gzline{color:#5F4A33;}
+.ci-seal{box-shadow:inset 0 0 0 2px rgba(251,246,234,.55), inset 0 0 0 3.5px rgba(176,82,58,.85), 0 2px 10px rgba(176,82,58,.3);}
+/* 其余面板 */
+#chart-head{background:rgba(17,23,54,.6); border-color:var(--line);}
+#chart-head h3{color:#F0F2FB;}
+.palace-row{background:rgba(17,23,54,.6); border-color:var(--line);}
+.palace-row-head .t{color:#F0F2FB;} .palace-row-head .s{color:#8A93C2;}
+.sf-hint{background:rgba(201,169,106,.1); border:1px dashed rgba(201,169,106,.5); color:#D9C9A0;}
+.overlay-bar{background:rgba(201,169,106,.09); border:1px solid rgba(201,169,106,.3); color:#D9C9A0;}
+.palace-card{background:rgba(17,23,54,.6); border-color:var(--line);}
+.palace-card h4{color:#F0F2FB;}
+.palace-card .modern{background:rgba(134,162,255,.14); color:#B9C4EA;}
+.palace-card .p-sec{color:var(--gold);}
+.palace-card .num{background:linear-gradient(135deg,#86A2FF,#A083FF); color:#0B1026;}
+.portrait-card{background:linear-gradient(160deg,rgba(23,29,66,.8),rgba(18,22,54,.75)); border-color:#2E3866;}
+.pv-stars{color:#C9D1F2;}
+#pattern-list .pat{border-left:3px solid var(--clay); background:rgba(201,106,74,.08);}
+#pattern-list .pat h5{color:#F0F2FB;}
+.lvl.excellent{background:rgba(201,169,106,.15); color:#D9B36A;} .lvl.good{background:rgba(134,162,255,.14); color:#A9BCF2;}
+.lvl.neutral{background:rgba(138,147,194,.13); color:#9AA3CE;} .lvl.caution{background:rgba(201,106,74,.14); color:#E09B7E;}
+/* 表格（八字/飞星/四化） */
+.bazi-table th{background:#1B2248; color:#B9C4EA;}
+.bazi-table td{border-color:var(--line);} .bazi-table th{border-color:#333E70;}
+.bazi-table .lab{background:#151B40; color:#8A93C2;}
+.bazi-table .gz-b{color:#F0F2FB;} .bazi-table .ss{color:#E09B7E;} .bazi-table .ny{color:#8A93C2;}
+.wx-row .wx-name{color:#C9D1F2;} .wx-track{background:rgba(223,227,251,.09);}
+.fx-table th{background:#1B2248; color:#B9C4EA;}
+.fx-table th,.fx-table td{border-color:var(--line);}
+.fx-table .fx-g b{color:#F0F2FB;} .fx-table .fx-gz{color:#8A93C2;}
+.fx-table .fx-star{color:#D9B36A; background:rgba(201,169,106,.13);}
+.fx-table .fx-star.fx-ji{color:#E09B7E; background:rgba(201,106,74,.13);}
+#sihua-table th{background:#1B2248; color:#B9C4EA;}
+#sihua-table th,#sihua-table td{border-color:var(--line); color:#DFE3FB;}
+/* 弹窗：夜玻璃居中 */
+.modal{background:rgba(4,8,28,.6); backdrop-filter:blur(4px); -webkit-backdrop-filter:blur(4px);}
+.modal-card{background:rgba(19,25,56,.92); border:1px solid #333E70; color:#E9EBF8;}
+.modal-card h3{color:#F0F2FB;}
+#share-link-input{background:#151B40 !important; color:#C9D1F2; border-color:var(--line);}
+/* 解读菜单封面 */
+#menu-list .menu-item[data-menu="reading"]{background:linear-gradient(150deg,#2A2B5E 0%,#191B44 70%);}
+.reading-body{background:rgba(17,23,54,.6); border-color:var(--line); color:#DFE3FB;}
+.reading-body h4{color:#F0F2FB;}
+/* 底部导航（手机）：夜玻璃 */
+#tabbar{background:rgba(13,18,42,.88); border-color:#2A3358;}
+#tabbar button{color:#8A93C2;}
+#tabbar button.on{background:rgba(134,162,255,.14); color:#DFE3FB;}
+.arch-item{background:rgba(17,23,54,.6); border-color:var(--line);}
+.arch-item .t{color:#F0F2FB;} .arch-item .s{color:#8A93C2;}
+.arch-item button{background:#151B40; border-color:var(--line); color:#C9D1F2;}
+.empty{color:#8A93C2;}
+#compare-result .vs-col{background:rgba(17,23,54,.6); border-color:var(--line);}
+.unlock-card{background:linear-gradient(135deg,rgba(23,29,66,.85),rgba(18,22,54,.8)); border-color:#333E70;}
+.key-mono{background:#151B40; border-color:#333E70; color:#C9D1F2;}
+.unlock-row input{background:#151B40; border-color:#333E70; color:#E9EBF8;}
+.channel-card{background:rgba(23,29,66,.7); border-color:var(--line);}
+.channel-card b{color:#F0F2FB;}
+#guide-steps .step-n{background:linear-gradient(135deg,#86A2FF,#A083FF); color:#0B1026;}
+.sec-head h3{color:#F0F2FB;}
+.back-link{color:#B09BF0;}
+/* hero 与整页夜空无缝衔接 */
+.hero-night{margin:0 -16px 0; border-radius:0; background:transparent; min-height:72vh;}
+@media(min-width:1024px){ .hero-night{margin:0 -32px 0; min-height:78vh;} }
+.hn-sweep{opacity:.75;}
+
+/* ═══════════════ v9.1：叠盘 / 大运 / 热力图 / 太岁 ═══════════════ */
+.sec-mini{font-size:12px; color:var(--gold); letter-spacing:.18em; margin:14px 0 6px; font-weight:600;}
+.sec-mini::before{content:""; display:inline-block; width:14px; height:1px; background:var(--gold); vertical-align:middle; margin-right:7px; opacity:.7;}
+#overlay-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:6px;}
+#overlay-grid .cell.oc{min-height:96px; padding:7px 6px; font-size:11px; border-radius:9px; cursor:pointer;}
+#overlay-grid .cell.oc .pname{font-size:12.5px;}
+#overlay-grid .cell.oc .pname.sm{color:#D9C9A0; font-size:12.5px; font-weight:700;}
+#overlay-grid .cell.oc .gz{font-size:9.5px;}
+#overlay-grid .cell.oc .star-chip{font-size:10.5px; padding:0 6px;}
+#overlay-grid .cell.oc .sihua{min-width:15px; height:15px; line-height:15px; font-size:9px;}
+/* 八字大运 */
+.dy-table td{color:#C9D1F2;}
+.dy-table .dy-gz b{font-family:var(--font-title); font-size:14.5px; color:#F0F2FB; letter-spacing:.08em;}
+.dy-table tr.cur td{background:rgba(201,169,106,.13); color:#E9D9B0;}
+.dy-table tr.cur .dy-gz b{color:#D9B36A;}
+/* 流月热力 */
+.heat-grid{overflow-x:auto; padding-bottom:4px;}
+.heat-row{display:flex; align-items:center; gap:6px; margin:3px 0;}
+.heat-lm{flex:none; width:32px; font-size:11px; color:#8A93C2; text-align:right;}
+.heat-days{display:flex; gap:2px;}
+.heat-cell{width:12px; height:12px; border-radius:3px; border:1px solid rgba(223,227,251,.07); cursor:pointer; padding:0;}
+.heat-cell:hover{border-color:#DFE3FB;}
+#heat-today{outline:2px solid #C9A96A; outline-offset:1px;}
+.heat-legend{display:flex; align-items:center; gap:4px; font-size:11px; color:#8A93C2; margin-top:8px;}
+.heat-legend i{width:14px; height:9px; border-radius:2px; display:inline-block;}
+/* 太岁卡 */
+.ts-year{display:flex; align-items:baseline; gap:10px; margin-bottom:8px;}
+.ts-year b{font-family:var(--font-title); font-size:19px; color:#F0F2FB;}
+.ts-year span{font-size:11px; color:#8A93C2; letter-spacing:.1em;}
+.ts-row{display:flex; align-items:baseline; gap:8px; padding:7px 0; border-top:1px solid rgba(42,51,88,.6); flex-wrap:wrap;}
+.ts-k{flex:none; font-size:12px; color:#D9B36A; width:56px; font-weight:700;}
+.ts-z{flex:none; font-size:12.5px; background:rgba(201,106,74,.16); color:#E09B7E; border-radius:5px; padding:1px 9px; font-weight:700;}
+.ts-say{flex:1 1 240px; font-size:12px; color:#9AA3CE; line-height:1.7; min-width:200px;}

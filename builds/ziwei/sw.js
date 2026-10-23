@@ -1,5 +1,5 @@
 /* 问星 Service Worker：network-first，离线回退缓存（解读语料走 CDN 不拦截） */
-const CACHE = 'gxg-shell-v1';
+const CACHE = 'gxg-shell-v2';
 const SHELL = [
   './',
   './index.html',

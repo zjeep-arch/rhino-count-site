@@ -751,10 +751,115 @@ function renderChartBody(){
   renderWuxingjuCard(chart);
   renderHuajiCard(chart);
   renderBaziCard(chart);
+  renderDayunCard(chart);
   renderFeixingCard(chart);
+  renderHeatCard(chart);
+  renderOverlayGrid(chart, ov);
   renderKoujingCard(rec);
 }
-/* ---------- 八字四柱卡：紫微看"局"，八字看"格"，同屏互参 ---------- */
+/* ---------- 节气与八字大运（Meeus 低精度太阳黄经，日界级精度足够） ---------- */
+function sunLongitude(jd){
+  const T = (jd - 2451545) / 36525;
+  const L0 = 280.46646 + 36000.76983 * T + 0.0003032 * T * T;
+  const Mr = (357.52911 + 35999.05029 * T - 0.0001537 * T * T) * Math.PI / 180;
+  const C = (1.914602 - 0.004817 * T - 0.000014 * T * T) * Math.sin(Mr)
+    + (0.019993 - 0.000101 * T) * Math.sin(2 * Mr) + 0.000289 * Math.sin(3 * Mr);
+  const omega = (125.04 - 1934.136 * T) * Math.PI / 180;
+  return ((L0 + C - 0.00569 - 0.00478 * Math.sin(omega)) % 360 + 360) % 360;
+}
+const _angDiff = (a, b) => { let d = (a - b) % 360; if(d > 180) d -= 360; if(d < -180) d += 360; return d; };
+/* 求 jd0 起第一个黄经==target 的 JD（若 jd0 已过 target，先回退） */
+function _seekTerm(jd0, target){
+  let lo = jd0;
+  const f = j => _angDiff(sunLongitude(j), target);
+  if(f(lo) > 0){ let t = lo - 1, g = 0; while(f(t) > 0 && g++ < 45) t -= 1; lo = t; }
+  let hi = lo + 36, g = 0;
+  while(hi - lo > 1e-6 && g++ < 60){ const m = (lo + hi) / 2; if(f(m) < 0) lo = m; else hi = m; }
+  return (lo + hi) / 2;
+}
+/* 某时刻的前一节与后一节（大运用"节"，不用中气）：黄经 = 15°×奇数 */
+function prevNextJie(dateMs){
+  const jd = dateMs / 86400000 + 2440587.5;
+  const lam = sunLongitude(jd);
+  let nd = Math.ceil(lam / 15) * 15; if((nd / 15) % 2 !== 1) nd += 15;
+  let pd = Math.floor(lam / 15) * 15; if((pd / 15) % 2 !== 1) pd -= 15;
+  return { prevJD: _seekTerm(jd - 31, ((pd % 360) + 360) % 360), nextJD: _seekTerm(jd, nd % 360) };
+}
+function renderDayunCard(chart){
+  const card = $('#dayun-card'), body = $('#dayun-body');
+  const fp = chart.lunarInfo && chart.lunarInfo.fourPillars;
+  if(!fp || fp.length !== 4){ card.hidden = true; return; }
+  try{
+    const bi = chart.birthInfo;
+    const birthMs = Date.UTC(bi.year, bi.month - 1, bi.day, 12);
+    const { prevJD, nextJD } = prevNextJie(birthMs);
+    const birthJD = birthMs / 86400000 + 2440587.5;
+    const yearStem = ST.indexOf(fp[0][0]);
+    const yangYear = YANG_STEM[yearStem] === 1;
+    const male = bi.gender !== 'female';
+    const forward = (yangYear && male) || (!yangYear && !male); // 阳男阴女顺
+    const distDays = Math.abs((forward ? nextJD : prevJD) - birthJD);
+    const years = Math.floor(distDays / 3), remDays = distDays - years * 3;
+    const remMonths = Math.round(remDays * 4); // 1日=4月
+    const monthK = gz60(ST.indexOf(fp[1][0]), BR.indexOf(fp[1][1]));
+    const startAge = years + remMonths / 12;
+    const birthY = bi.year;
+    const nowAge = chart.currentAge != null ? chart.currentAge : null;
+    const rows = [];
+    for(let i = 1; i <= 9; i++){
+      const k = ((forward ? monthK + i : monthK - i) % 60 + 60) % 60;
+      const a1 = Math.round(years + (i - 1) * 10 + remMonths / 12), a2 = a1 + 9;
+      const cur = nowAge != null && nowAge >= a1 && nowAge <= a2;
+      rows.push(`<tr${cur ? ' class="cur"' : ''}><td>${cur ? '▶' : i}</td><td class="dy-gz"><b>${ST[k % 10]}${BR[k % 12]}</b></td>` +
+        `<td>${a1}–${a2} 岁</td><td>${birthY + a1}–${birthY + a2}</td></tr>`);
+    }
+    body.innerHTML =
+      `<p class="hint" style="margin:0 0 8px">${yangYear ? '阳' : '阴'}年${male ? '男' : '女'}，大运${forward ? '顺' : '逆'}排；` +
+      `距${forward ? '下一' : '上一'}个节气 ${distDays.toFixed(1)} 天，按「3 日折 1 年」约 <b>${years} 岁${remMonths ? ' ' + remMonths + ' 个月' : ''}</b>起运。</p>` +
+      `<table class="fx-table dy-table"><tr><th></th><th>大运</th><th>岁段</th><th>年份</th></tr>${rows.join('')}</table>` +
+      `<p class="hint" style="margin:8px 0 0">起运时间由天文节气计算（误差约数分钟）；岁段按虚岁习惯四舍五入对齐，仅供参照。</p>`;
+    card.hidden = false;
+  }catch(e){ card.hidden = true; }
+}
+/* ---------- 犯太岁提醒（民俗参考，克制表述） ---------- */
+const XING_GROUPS = [[2,5,8],[1,7,10],[0,3]];            // 寅巳申 / 丑未戌 / 子卯
+const ZIXING = [4,6,9,11];                                // 辰午酉亥自刑
+const HAI_PAIRS = [[0,7],[1,6],[2,5],[3,4],[8,11],[9,10]]; // 六害
+function taisuiOf(year){
+  const yb = ((year - 4) % 12 + 12) % 12;
+  const zodiac = b => E.ZODIAC_CN ? E.ZODIAC_CN[b] : '鼠牛虎兔龙蛇马羊猴鸡狗猪'[b];
+  const out = { year, ygz: ST[((year - 4) % 10 + 10) % 10] + BR[yb], items: [] };
+  out.items.push({ k:'值太岁', branches:[yb], say:'本命年，民俗里宜拜太岁、穿红、多行善事——当作"这一年多留一分心"的自我提醒就好' });
+  out.items.push({ k:'冲太岁', branches:[(yb + 6) % 12], say:'与太岁相冲，民俗认为变动较多：搬迁、换工作这类大事，多备一手方案' });
+  const xg = XING_GROUPS.find(g => g.includes(yb));
+  const xb = xg ? xg.filter(x => x !== yb) : (ZIXING.includes(yb) ? [yb] : []);
+  if(xb.length) out.items.push({ k:'刑太岁', branches:xb, say:'民俗称"刑"为磨合与纠缠：人际关系里少较劲，法务合约类多看两遍' });
+  const hai = (HAI_PAIRS.find(p => p.includes(yb)) || []).filter(x => x !== yb);
+  if(hai.length) out.items.push({ k:'害太岁', branches:hai, say:'民俗称"害"为暗损：少掺和是非，健康上别拖小病' });
+  return out;
+}
+function renderTaisuiCard(){
+  const card = $('#taisui-card'), body = $('#taisui-body');
+  if(!card) return;
+  const year = new Date().getFullYear();
+  const ts = taisuiOf(year);
+  const rec = cur();
+  let mine = '';
+  if(rec){
+    const myB = ((rec.chart.birthInfo.year - 4) % 12 + 12) % 12;
+    const hits = [];
+    ts.items.forEach(it => { if(it.branches.includes(myB)) hits.push(it.k); });
+    if(hits.length) mine = `<p style="margin:8px 0 0"><b style="color:var(--gold)">你属${'鼠牛虎兔龙蛇马羊猴鸡狗猪'[myB]}，今年${hits.join('＋')}</b>——民俗做法参考即可，心态上当作"今年谨慎些、好事多做些"。</p>`;
+    else mine = `<p class="hint" style="margin:8px 0 0">你属${'鼠牛虎兔龙蛇马羊猴鸡狗猪'[myB]}，今年不犯太岁。</p>`;
+  }
+  body.innerHTML =
+    `<div class="ts-year"><b>${ts.year} ${ts.ygz}年</b><span>太岁值年 · 民俗提醒</span></div>` +
+    ts.items.map(it => `<div class="ts-row"><span class="ts-k">${it.k}</span>` +
+      it.branches.map(b => `<span class="ts-z">${'鼠牛虎兔龙蛇马羊猴鸡狗猪'[b]}</span>`).join('') +
+      `<span class="ts-say">${esc(it.say)}</span></div>`).join('') + mine +
+    `<p class="hint" style="margin:8px 0 0">民俗参考，不构成任何决策建议。</p>`;
+  card.hidden = false;
+}
 const WX_OF_STEM = ['木','木','火','火','土','土','金','金','水','水'];   // 甲乙丙丁戊己庚辛壬癸
 const YANG_STEM  = [1,0,1,0,1,0,1,0,1,0];
 const HIDDEN_MAIN = [9,5,0,1,4,2,3,5,6,7,4,8]; // 支本气：子癸 丑己 寅甲 卯乙 辰戊 巳丙 午丁 未己 申庚 酉辛 戌戊 亥壬
@@ -1646,7 +1751,147 @@ function renderGuide(){
     `<div class="card"><span class="step-n">${n}</span><b>${esc(t)}</b><p style="margin:10px 0 0;color:var(--muted)">${esc(d)}</p></div>`).join('');
 }
 
-/* ---------- 每日一签 ---------- */
+/* ---------- 大限/流年 整盘叠视图 ---------- */
+function renderOverlayGrid(chart, ov){
+  const wrap = $('#overlay-grid-wrap'), grid = $('#overlay-grid');
+  if(!wrap || !ov || ov.hlBranch == null || ov.hlBranch < 0){ wrap.hidden = true; return; }
+  const pre = luckMode === 'daxian' ? '大限' : luckMode === 'liunian' ? '流年' : '流';
+  const ovSi = {};
+  if(ov.sihua) [['lu','禄'],['quan','权'],['ke','科'],['ji','忌']].forEach(([k, cn]) => { if(ov.sihua[k]) ovSi[ov.sihua[k]] = cn; });
+  const order = [5,6,7,8, 4,-1,-1,9, 3,-1,-1,10, 2,1,0,11];
+  let h = '';
+  order.forEach(b => {
+    if(b === -1){ h += '<div class="cell oc center-dup"></div>'; return; }
+    const p = palaceByBranch(chart, b);
+    const ovName = overlayPalaceAt(ov.hlBranch, b).replace('宫','');
+    const isOvMing = ovName === '命';
+    const stars = p.stars.filter(s => s.type === 'major' || ovSi[s.name]).map(s =>
+      `<span class="star-chip">${esc(s.name)}${ovSi[s.name] ? shBadge(ovSi[s.name]) : ''}</span>`).join('') || '<span class="hint">—</span>';
+    h += `<div class="cell oc${ov.hlBranch === b ? ' hl' : ''}" data-branch="${b}">` +
+      (isOvMing ? '<span class="tag">' + pre + '命</span>' : '') +
+      `<div class="pname sm">${pre}${ovName}</div><div class="gz">${disp(p.name).replace('宫','')} · ${ST[p.stem]}${BR[p.branch]}</div>` +
+      `<div class="stars">${stars}</div></div>`;
+  });
+  grid.innerHTML = h;
+  wrap.querySelector('.sec-mini').textContent = `${pre}盘叠加 · 大字为${pre}宫位，星曜挂${pre}四化`;
+  wrap.hidden = false;
+}
+/* ---------- 流月日历热力图 ---------- */
+/* 农历月初一的公历日期（按年缓存；用引擎 lunarInfo 线性定位） */
+function lunarMonthStarts(year){
+  const key = 'gxg_lunar_' + year;
+  const cached = store.get(key, null);
+  if(cached && cached.length) return cached.map(s => new Date(s));
+  const infoOf = d => E.generateChart({ year: d.getFullYear(), month: d.getMonth() + 1, day: d.getDate(), hour: 0, gender: 'male' }).lunarInfo;
+  const starts = [];
+  // 正月初一在 1/21–2/21 之间
+  let d = new Date(year, 0, 21);
+  let li = null;
+  for(let i = 0; i < 34; i++){
+    li = infoOf(d);
+    if(li.lunarYear === year && li.lunarMonth === 1 && li.lunarDay === 1 && !li.isLeapMonth) break;
+    d = new Date(+d + 864e5);
+  }
+  if(!(li && li.lunarYear === year && li.lunarMonth === 1 && li.lunarDay === 1)) return starts;
+  starts.push(new Date(d));
+  // 依次找下一个"月首"（跳过闰月行，只取平月）
+  let m = 1, g = 0;
+  while(m < 12 && g++ < 40){
+    const cand = new Date(+starts[starts.length - 1] + 29 * 864e5);
+    const li2 = infoOf(cand);
+    // 月首判定：lunarDay===1；若是闰月则再走一个月
+    if(li2.lunarDay === 1){
+      m = li2.isLeapMonth ? m : li2.lunarMonth;
+      if(!li2.isLeapMonth){ starts.push(new Date(cand)); }
+    } else {
+      const cand2 = new Date(+starts[starts.length - 1] + 30 * 864e5);
+      const li3 = infoOf(cand2);
+      if(li3.lunarDay === 1 && !li3.isLeapMonth){ starts.push(new Date(cand2)); m = li3.lunarMonth; }
+    }
+  }
+  store.set(key, starts.map(x => x.getTime()));
+  return starts;
+}
+let heatCache = null; // {chartId, year, rows:[{lm,days,scores[]}], today:{lm,ld}}
+function buildHeatData(chart, year){
+  if(heatCache && heatCache.chartId === cur().id && heatCache.year === year) return heatCache;
+  const starts = lunarMonthStarts(year);
+  if(starts.length < 12) return null;
+  const dj = doujunBranch(chart, year);
+  const palByStar = {}, palByBranch = {};
+  chart.palaces.forEach(p => {
+    palByBranch[p.branch] = p;
+    p.stars.forEach(s => { palByStar[s.name] = p; });
+  });
+  const rows = [];
+  for(let m = 0; m < 12; m++){
+    const next = starts[m + 1] || new Date(+starts[m] + 30 * 864e5);
+    const days = Math.round((next - starts[m]) / 864e5);
+    const scores = [];
+    for(let ld = 1; ld <= days; ld++){
+      let sh = null;
+      try{ sh = E.getLiuRiSiHua(year, m + 1, ld); }catch(e){}
+      const hl = ((dj + m + ld - 1) % 12 + 12) % 12;
+      const tri = [hl, (hl + 4) % 12, (hl + 8) % 12, (hl + 6) % 12];
+      const triSet = new Set(tri);
+      let sc = 0;
+      if(sh) ['lu','quan','ke','ji'].forEach(k => {
+        const pal = palByStar[sh[k]];
+        if(pal && triSet.has(pal.branch)) sc += 2;
+      });
+      let sha = 0;
+      tri.forEach(b => (palByBranch[b] || {stars:[]}).stars.forEach(s => { if(s.type === 'sha') sha++; }));
+      sc += Math.min(2, Math.floor(sha / 2));
+      scores.push(Math.min(5, sc));
+    }
+    rows.push({ lm: m + 1, days, scores });
+  }
+  const tl = todayLunar();
+  const today = (tl && tl.lunarYear === year) ? { lm: tl.lunarMonth, ld: tl.lunarDay } : null;
+  heatCache = { chartId: cur().id, year, rows, today };
+  return heatCache;
+}
+function renderHeatCard(chart){
+  const card = $('#heat-card'), body = $('#heat-body');
+  if(!card) return;
+  const year = new Date().getFullYear();
+  body.innerHTML = '<p class="hint">正在按农历月推热力…</p>';
+  card.hidden = false;
+  setTimeout(() => {
+    try{
+      const data = buildHeatData(chart, year);
+      if(!data){ body.innerHTML = '<p class="hint">农历数据暂缺，稍后再试。</p>'; return; }
+      const COLORS = ['#1A2145', '#2B3768', '#3E4F99', '#5F74C4', '#86A2FF', '#C9A96A'];
+      const CNUM = ['正','二','三','四','五','六','七','八','九','十','冬','腊'];
+      let h = `<div class="heat-grid">`;
+      const dayCn = ld => ld <= 10 ? '初' + '一二三四五六七八九十'[ld - 1]
+        : ld <= 19 ? '十' + '一二三四五六七八九'[ld - 11]
+        : ld === 20 ? '二十'
+        : ld <= 29 ? '廿' + '一二三四五六七八九'[ld - 21] : '三十';
+      data.rows.forEach(r => {
+        h += `<div class="heat-row"><span class="heat-lm">${CNUM[r.lm - 1]}月</span><div class="heat-days">`;
+        r.scores.forEach((sc, i) => {
+          const isToday = data.today && data.today.lm === r.lm && data.today.ld === i + 1;
+          h += `<button class="heat-cell" data-hm="${r.lm}" data-hd="${i + 1}" ${isToday ? 'id="heat-today"' : ''} title="${year}年${CNUM[r.lm - 1]}月${dayCn(i + 1)} · 热度${sc}" style="background:${COLORS[sc]}"></button>`;
+        });
+        h += '</div></div>';
+      });
+      h += '</div>';
+      h += `<div class="heat-legend"><span>静</span>${COLORS.map(c => `<i style="background:${c}"></i>`).join('')}<span>动</span>` +
+        `<span class="hint" style="margin-left:8px">${data.today ? '金框为今天 · ' : ''}点任一天看流日详情</span></div>` +
+        `<p id="heat-detail" class="hint" style="min-height:34px;margin:6px 0 0">热度 = 流日四化落进当日命宫三方四正的数目＋煞星密度，只是"动静指数"，不是吉凶。</p>`;
+      body.innerHTML = h;
+      body.querySelectorAll('.heat-cell').forEach(c => c.addEventListener('click', () => {
+        const lm = +c.dataset.hm, ld = +c.dataset.hd;
+        let sh = null; try{ sh = E.getLiuRiSiHua(year, lm, ld); }catch(e){}
+        const hl = ((doujunBranch(chart, year) + lm - 1 + ld - 1) % 12 + 12) % 12;
+        const lp = palaceByBranch(chart, hl);
+        const shTxt = sh ? `禄${sh.lu} 权${sh.quan} 科${sh.ke} 忌${sh.ji}` : '';
+        $('#heat-detail').innerHTML = `<b>${year}年农历${lm}月${ld}日</b> · 流日命宫落本命【${disp(lp.name)}】 · 四化：${esc(shTxt)}`;
+      }));
+    }catch(e){ body.innerHTML = '<p class="hint">热力图计算失败：' + esc(String(e.message || e)) + '</p>'; }
+  }, 30);
+}
 /* 30 支签：克制白话+古风意象，不做宿命断言。同一张盘（或无盘）同一天抽同一支，明早自动换。 */
 const SIGN_LIB = [
   { lv:'吉', t:'云开月明', s:'浮云散尽月当空，守得安静自光明。', yi:'静候 · 复盘', jie:'急事缓办，答案会自己浮上来' },
@@ -1772,7 +2017,8 @@ function renderHome(){
   // 今日顺时（地支三合/六合）
   const lh = luckyHoursToday();
   $('#daily-lucky-hours').textContent = lh ? `今日顺时：${lh} ｜ 按日支合气推的顺时，供参考` : '';
-  // hero 今日一行
+  // hero 今日一行 + 犯太岁
+  renderTaisuiCard();
   const li2 = todayLunar();
   const gz2 = (li2 && li2.fourPillars && li2.fourPillars[2]) ? ` · ${li2.fourPillars[2]}日` : '';
   const hnToday = $('#hn-today');
