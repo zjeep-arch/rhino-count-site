@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;700;900&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=20261024c">
+<link rel="stylesheet" href="assets/css/style.css?v=20261024d">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <meta name="theme-color" content="#0B1026">
@@ -161,6 +161,8 @@
     <div class="card" id="huaji-card" hidden><div class="card-kicker">化忌化解</div><div id="huaji-body"></div></div>
     <div class="card" id="bazi-card" hidden><div class="card-kicker">八字四柱</div><div id="bazi-body"></div></div>
     <div class="card" id="dayun-card" hidden><div class="card-kicker">八字大运</div><div id="dayun-body"></div></div>
+    <div class="card" id="strength-card" hidden><div class="card-kicker">十二宫强度</div><div id="strength-body"></div></div>
+    <div class="card" id="timeline-card" hidden><div class="card-kicker">人生时间轴</div><div id="timeline-body"></div></div>
     <div class="card" id="heat-card" hidden><div class="card-kicker">流月热力 · 今年十二月</div><div id="heat-body"></div></div>
     <div class="card" id="feixing-card" hidden><div class="card-kicker">宫干飞星 · 禄忌速查</div><div id="feixing-body"></div></div>
     <div class="card" id="koujing-card" hidden><div class="card-kicker">本次排盘口径</div><div id="koujing-body" class="hint"></div></div>
@@ -203,6 +205,15 @@
     <p class="view-sub">跨宫位综合：不只看一宫，看一组宫位的合力。</p>
     <div class="tabs" id="topic-tabs"></div>
     <article id="topic-body" class="reading-body"></article>
+  </section>
+
+  <!-- 问星答 -->
+  <section class="view" id="view-answer">
+    <button class="back-link" data-nav="menu">‹ 返回解读菜单</button>
+    <h2 class="view-title">问星答</h2>
+    <p class="view-sub">把盘面翻译成人话：每个问题给倾向、条件与行动清单。倾向描述，不替你做决定。</p>
+    <div id="answer-list"></div>
+    <div class="card"><div class="card-kicker">择日助手 · 未来 30 天</div><div id="zeri-body"></div></div>
   </section>
 
   <!-- 新手导览 -->
@@ -340,6 +351,6 @@
 <script src="assets/js/ziwei-engine.js"></script>
 <script src="assets/js/data.js"></script>
 <script src="assets/js/data-v2.js"></script>
-<script src="assets/js/app.js?v=20261024c"></script>
+<script src="assets/js/app.js?v=20261024d"></script>
 </body>
 </html>

@@ -1025,3 +1025,44 @@ body{color:var(--ink);
 .ts-k{flex:none; font-size:12px; color:#D9B36A; width:56px; font-weight:700;}
 .ts-z{flex:none; font-size:12.5px; background:rgba(201,106,74,.16); color:#E09B7E; border-radius:5px; padding:1px 9px; font-weight:700;}
 .ts-say{flex:1 1 240px; font-size:12px; color:#9AA3CE; line-height:1.7; min-width:200px;}
+
+/* ═══════════════ v10：宫位强度 / 时间轴 / 问星答 / 择日 ═══════════════ */
+.st-row{display:flex; align-items:center; gap:8px; margin:5px 0;}
+.st-name{flex:none; width:52px; font-size:12.5px; color:#C9D1F2; text-align:right;}
+.st-track{flex:1; height:9px; background:rgba(223,227,251,.08); border-radius:99px; overflow:hidden;}
+.st-fill{height:100%; border-radius:99px; transition:width .5s ease;}
+.st-fill.strong{background:linear-gradient(90deg,#C9A96A,#D9B36A);}
+.st-fill.mid{background:linear-gradient(90deg,#5F74C4,#86A2FF);}
+.st-fill.weak{background:linear-gradient(90deg,#7A4A3C,#A9604A);}
+.st-n{flex:none; width:24px; font-size:11px; color:#8A93C2; text-align:right;}
+.tl-row{display:flex; gap:12px; padding:10px 0; border-top:1px solid rgba(42,51,88,.6);}
+.tl-row:first-of-type{border-top:none;}
+.tl-row.cur{background:rgba(201,169,106,.08); border-radius:10px; padding:10px 10px; border-top-color:transparent;}
+.tl-age{flex:none; width:76px; font-size:13px; color:#D9B36A; font-weight:700; line-height:1.4;}
+.tl-age span{display:block; font-size:10.5px; color:#8A93C2; font-weight:400;}
+.tl-body{flex:1; font-size:13px; color:#C9D1F2; line-height:1.8; min-width:0;}
+.tl-body b{color:#F0F2FB;}
+.tl-sh{display:inline-block; margin-left:8px; font-size:11px; color:#D9B36A; background:rgba(201,169,106,.13); border-radius:4px; padding:0 7px;}
+.tl-sh.ji{color:#E09B7E; background:rgba(201,106,74,.13);}
+.tl-marks{font-size:11.5px; color:#8A93C2; margin-top:2px;}
+/* 问星答 */
+.ans-card{background:rgba(17,23,54,.6); border:1px solid var(--line); border-radius:14px; padding:16px 18px; margin:12px 0;}
+.ans-head{display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap;}
+.ans-head b{font-size:15.5px; color:#F0F2FB;}
+.ans-badge{flex:none; font-size:12px; font-weight:700; border-radius:6px; padding:3px 12px; letter-spacing:.1em;}
+.ans-badge.go{background:rgba(201,169,106,.16); color:#D9B36A;}
+.ans-badge.cond{background:rgba(134,162,255,.15); color:#A9BCF2;}
+.ans-badge.wait{background:rgba(138,147,194,.14); color:#9AA3CE;}
+.ans-meta{font-size:12px; color:#8A93C2; margin:6px 0 8px;}
+.ans-card ul{margin:0; padding-left:18px; font-size:13.5px; color:#B9C0E3; line-height:1.9;}
+#zeri-type{width:100%; padding:10px 12px; border:1px solid var(--line); border-radius:10px; background:#151B40; color:#E9EBF8; margin-bottom:10px;}
+.zeri-block{margin:8px 0;}
+.z-title{display:block; font-size:13px; letter-spacing:.14em; margin-bottom:6px;}
+.z-title.ok{color:#D9B36A;} .z-title.bad{color:#E09B7E;}
+.z-row{display:flex; gap:12px; align-items:baseline; padding:6px 10px; border-radius:8px; background:rgba(223,227,251,.05); margin:4px 0; font-size:13px;}
+.z-date{flex:none; width:74px; color:#F0F2FB; font-weight:700;}
+.z-lunar{flex:none; width:88px; color:#8A93C2; font-size:12px;}
+.z-why{flex:1; color:#B9C0E3; font-size:12px; min-width:120px;}
+
+/* v10.1：回溯卡按钮不换行 */
+#retro-card .btn-primary,#retro-card .btn-ghost{white-space:nowrap;}
