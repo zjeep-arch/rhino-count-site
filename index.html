@@ -48,6 +48,17 @@
   </script>
   <link rel="alternate" type="application/rss+xml" title="RHINO COUNT RSS" href="https://rhinocount.cn/rss.xml">
 
+  <!-- 字体升级：Cormorant Garamond + 思源宋 + Schibsted Grotesk（jsDelivr fontsource，国内可达；异步加载不阻塞） -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet" media="print" onload="this.media='all'" href="https://cdn.jsdelivr.net/npm/@fontsource/cormorant-garamond@5/500.css">
+  <link rel="stylesheet" media="print" onload="this.media='all'" href="https://cdn.jsdelivr.net/npm/@fontsource/cormorant-garamond@5/500-italic.css">
+  <link rel="stylesheet" media="print" onload="this.media='all'" href="https://cdn.jsdelivr.net/npm/@fontsource/cormorant-garamond@5/600.css">
+  <link rel="stylesheet" media="print" onload="this.media='all'" href="https://cdn.jsdelivr.net/npm/@fontsource/noto-serif-sc@5/500.css">
+  <link rel="stylesheet" media="print" onload="this.media='all'" href="https://cdn.jsdelivr.net/npm/@fontsource/noto-serif-sc@5/700.css">
+  <link rel="stylesheet" media="print" onload="this.media='all'" href="https://cdn.jsdelivr.net/npm/@fontsource/noto-serif-sc@5/900.css">
+  <link rel="stylesheet" media="print" onload="this.media='all'" href="https://cdn.jsdelivr.net/npm/@fontsource/schibsted-grotesk@5/500.css">
+  <link rel="stylesheet" media="print" onload="this.media='all'" href="https://cdn.jsdelivr.net/npm/@fontsource/schibsted-grotesk@5/700.css">
+
   <style>
     /* =========================================================
      * Design tokens
@@ -1170,6 +1181,177 @@
       .lab-row { grid-template-columns: 40px minmax(0, 1fr); }
       .lab-row .lab-tag { display: none; }
     }
+
+    /* =========================================================
+     * Profile — guscastillo.com 设计迁移（2026-10）
+     * 媒体素材来自参考站（assets/ref/gus_*），文字与链接已本地化。
+     * ========================================================= */
+    #profile.gc { background:#060608; color:#F4F5F7; padding:clamp(28px,4vw,54px) 0 clamp(40px,5vw,64px); }
+    #profile.gc .container { max-width:1180px; }
+    .gc * { box-sizing:border-box; }
+    .gc-nav { display:flex; justify-content:space-between; align-items:center; gap:14px; flex-wrap:wrap;
+      font:500 11px/1 "Schibsted Grotesk",var(--sans); letter-spacing:.2em; color:#8A8F98; margin-bottom:clamp(26px,4vw,46px); }
+    .gc-nav .gc-online { display:flex; align-items:center; gap:9px; color:#F4F5F7; }
+    .gc-nav .gc-online i { width:8px; height:8px; border-radius:50%; background:#2FD9CB; box-shadow:0 0 10px #2FD9CB; }
+    .gc-name { font-family:"Noto Serif SC","Songti SC",var(--serif); font-weight:900;
+      font-size:clamp(76px,14vw,196px); line-height:1; letter-spacing:.02em; margin:0 0 0 -.04em; color:#F4F5F7; }
+    .gc-name em { display:block; font:italic 500 clamp(19px,2.4vw,32px)/1.2 "Cormorant Garamond",Georgia,serif;
+      letter-spacing:.14em; color:#8A8F98; margin-top:12px; }
+    .gc-sub { margin:clamp(20px,3vw,28px) 0 clamp(26px,4vw,42px); font-size:15px; line-height:2; color:#8A8F98; max-width:38em; }
+    .gc-rows { border-top:1px solid rgba(244,245,247,.12); }
+    .gc-row { display:grid; grid-template-columns:clamp(48px,6vw,80px) minmax(0,1fr) auto clamp(104px,12vw,160px);
+      gap:clamp(12px,2vw,26px); align-items:center; padding:clamp(16px,2.2vw,24px) 4px;
+      border-bottom:1px solid rgba(244,245,247,.12); cursor:pointer; text-decoration:none; color:inherit;
+      transition:background .25s ease, padding .25s ease; }
+    .gc-row:hover { background:rgba(244,245,247,.035); padding-left:12px; }
+    .gc-row .num { font:500 clamp(26px,3.2vw,40px)/1 "Cormorant Garamond",Georgia,serif; color:#8A8F98; transition:color .25s ease; }
+    .gc-row:hover .num { color:#2FD9CB; }
+    .gc-row .t { min-width:0; }
+    .gc-row .t b { display:block; font:700 clamp(17px,1.9vw,23px)/1.4 "Schibsted Grotesk",var(--sans); }
+    .gc-row .t b .cn { font-family:"Noto Serif SC","Songti SC",var(--serif); }
+    .gc-row .t span { display:block; margin-top:4px; font:500 11px/1.6 "Schibsted Grotesk",var(--sans); letter-spacing:.08em; color:#8A8F98; }
+    .gc-row .meta { font:500 10px/1 "Schibsted Grotesk",var(--sans); letter-spacing:.2em; color:#8A8F98;
+      border:1px solid rgba(244,245,247,.14); border-radius:999px; padding:6px 11px; white-space:nowrap; }
+    .gc-row .thumb { width:100%; aspect-ratio:16/10; border-radius:10px; overflow:hidden; background:#101216;
+      border:1px solid rgba(244,245,247,.12); display:block; }
+    .gc-row .thumb img { width:100%; height:100%; object-fit:cover; display:block; filter:saturate(.92); transition:transform .5s ease; }
+    .gc-row:hover .thumb img { transform:scale(1.06); }
+    .gc-hint { margin:16px 0 0; font:500 10px/1.7 "Schibsted Grotesk",var(--sans); letter-spacing:.22em; color:#8A8F98; }
+    .gc-overlay { position:fixed; inset:0; z-index:200; background:rgba(0,0,0,.72); backdrop-filter:blur(10px);
+      display:flex; align-items:center; justify-content:center; padding:22px;
+      opacity:0; pointer-events:none; transition:opacity .28s ease; }
+    .gc-overlay.open { opacity:1; pointer-events:auto; }
+    .gc-panel { width:min(780px,94vw); background:rgba(16,17,22,.95); border:1px solid rgba(244,245,247,.14);
+      border-radius:16px; overflow:hidden; box-shadow:0 44px 130px -30px rgba(0,0,0,.95);
+      transform:translateY(16px) scale(.98); transition:transform .28s ease; }
+    .gc-overlay.open .gc-panel { transform:none; }
+    .gc-panel video { width:100%; aspect-ratio:16/9; object-fit:cover; display:block; background:#000; }
+    .gc-pbar { display:flex; justify-content:space-between; align-items:center; gap:10px; padding:14px 18px;
+      border-top:1px solid rgba(244,245,247,.1); }
+    .gc-pbar .txt { min-width:0; }
+    .gc-pbar .txt b { display:block; font:700 15px/1.4 "Schibsted Grotesk",var(--sans); color:#F4F5F7; }
+    .gc-pbar .txt b .cn { font-family:"Noto Serif SC",var(--serif); }
+    .gc-pbar .txt span { font:500 10px/1.7 "Schibsted Grotesk",var(--sans); letter-spacing:.16em; color:#8A8F98; }
+    .gc-pbar .btns { display:flex; gap:8px; flex:none; }
+    .gc-pbar button { width:38px; height:38px; border-radius:50%; border:1px solid rgba(244,245,247,.18);
+      background:transparent; color:#F4F5F7; font:400 15px/1 "Cormorant Garamond",serif; cursor:pointer;
+      transition:background .2s, border-color .2s; }
+    .gc-pbar button:hover { background:rgba(244,245,247,.08); border-color:rgba(244,245,247,.4); }
+    @media (max-width:840px) {
+      .gc-row { grid-template-columns:44px minmax(0,1fr) clamp(84px,20vw,120px); }
+      .gc-row .meta { display:none; }
+    }
+
+    /* =========================================================
+     * Signals — jintao.co.uk 档案设计迁移（2026-10）
+     * 插画/照片素材来自参考站（assets/ref/jin_*），文字与链接已本地化。
+     * ========================================================= */
+    #notes.jin { background:#1D1C19; color:#F1EADF; padding:clamp(32px,4vw,56px) 0 clamp(44px,5vw,68px);
+      transition:background .35s ease, color .35s ease; }
+    #notes.jin.day { background:#EFEBE5; color:#1B1916; }
+    #notes .container { max-width:1180px; }
+    .jin * { box-sizing:border-box; }
+    .jin-head { display:flex; justify-content:space-between; align-items:center; gap:14px; flex-wrap:wrap;
+      margin-bottom:clamp(24px,3vw,36px); }
+    .jin-head .id { font:500 11px/1.7 ui-monospace,"SF Mono",Consolas,monospace; letter-spacing:.2em; color:#8F887B; }
+    #notes.jin.day .jin-head .id { color:#7A7468; }
+    .jin-head .id b { color:inherit; font-weight:500; }
+    .jin-right { display:flex; align-items:center; gap:14px; flex-wrap:wrap; }
+    .jin-tabs { display:flex; gap:6px; flex-wrap:wrap; }
+    .jin-tabs button { font:500 13px/1 "Noto Serif SC","Songti SC",serif; letter-spacing:.08em;
+      background:#F1EADF; color:#1D1C19; border:0; border-radius:999px; padding:9px 18px; cursor:pointer; }
+    .jin-tabs button:not(.on) { background:transparent; color:#F1EADF; border:1px solid rgba(241,234,223,.16); }
+    #notes.jin.day .jin-tabs button:not(.on) { color:#1B1916; border-color:rgba(27,25,22,.2); }
+    .day-night { display:flex; border:1px solid rgba(241,234,223,.16); border-radius:999px; overflow:hidden;
+      font:500 10px/1 ui-monospace,"SF Mono",Consolas,monospace; letter-spacing:.18em; }
+    #notes.jin.day .day-night { border-color:rgba(27,25,22,.2); }
+    .day-night button { border:0; cursor:pointer; padding:8px 14px; background:transparent; color:#8F887B;
+      transition:background .2s, color .2s; }
+    .day-night button.on { background:#F1EADF; color:#1D1C19; }
+    #notes.jin.day .day-night button.on { background:#1B1916; color:#EFEBE5; }
+    .jin-workbench { display:grid; grid-template-columns:minmax(260px,430px) minmax(0,1fr);
+      gap:clamp(24px,4vw,52px); align-items:center; margin-bottom:clamp(28px,4vw,44px); }
+    .jin-workbench .mac { width:100%; display:block; filter:drop-shadow(0 24px 50px rgba(0,0,0,.35)); }
+    .jin-workbench .frame { position:relative; }
+    .jin-workbench .frame .lcd { position:absolute; right:2%; bottom:16%; width:34%; border-radius:4px;
+      box-shadow:0 6px 18px rgba(0,0,0,.4); }
+    .wb-txt .file { font:italic 500 15px/1.5 "Cormorant Garamond",Georgia,serif; letter-spacing:.16em; color:#FF8B80; margin-bottom:12px; }
+    .wb-txt h2 { font-family:"Noto Serif SC","Songti SC",var(--serif); font-weight:700;
+      font-size:clamp(26px,3.4vw,40px); line-height:1.4; margin:0; color:inherit; }
+    .wb-txt p { margin:14px 0 0; font-size:13.5px; line-height:2; color:#8F887B; max-width:36em; }
+    #notes.jin.day .wb-txt p { color:#7A7468; }
+    .wb-txt .stat { margin-top:18px; display:flex; gap:10px; flex-wrap:wrap;
+      font:500 10px/1 ui-monospace,"SF Mono",Consolas,monospace; letter-spacing:.18em; color:#8F887B; }
+    #notes.jin.day .wb-txt .stat { color:#7A7468; }
+    .wb-txt .stat span { border:1px solid rgba(241,234,223,.16); border-radius:999px; padding:6px 12px; }
+    #notes.jin.day .wb-txt .stat span { border-color:rgba(27,25,22,.2); }
+    .jin-list-head { display:flex; justify-content:space-between; align-items:baseline; gap:12px; flex-wrap:wrap;
+      font:italic 500 15px/1.5 "Cormorant Garamond",Georgia,serif; letter-spacing:.16em; color:#FF8B80;
+      border-bottom:1px solid rgba(241,234,223,.16); padding-bottom:12px; }
+    #notes.jin.day .jin-list-head { border-color:rgba(27,25,22,.2); }
+    .jin-list-head span:last-child { font:400 10px/1.7 ui-monospace,"SF Mono",Consolas,monospace; letter-spacing:.22em;
+      color:#8F887B; font-style:normal; }
+    .jin-item { display:grid; grid-template-columns:clamp(84px,9vw,140px) minmax(0,1fr) auto;
+      gap:clamp(12px,2vw,24px); align-items:baseline; padding:clamp(16px,2.2vw,24px) 4px;
+      border-bottom:1px solid rgba(241,234,223,.09); text-decoration:none; color:inherit;
+      transition:background .2s ease, padding .2s ease; }
+    #notes.jin.day .jin-item { border-color:rgba(27,25,22,.12); }
+    .jin-item:hover { background:rgba(128,120,100,.07); padding-left:12px; }
+    .jin-item .no { font:500 clamp(20px,2.4vw,30px)/1 "Cormorant Garamond",Georgia,serif; letter-spacing:.04em;
+      color:#8F887B; transition:color .2s; }
+    #notes.jin.day .jin-item .no { color:#7A7468; }
+    .jin-item:hover .no { color:#FF8B80; }
+    .jin-item .bd { min-width:0; }
+    .jin-item .bd b { display:block; font-family:"Noto Serif SC","Songti SC",var(--serif); font-weight:700;
+      font-size:clamp(16px,1.9vw,21px); line-height:1.5; }
+    .jin-item .bd p { margin:5px 0 0; font-size:12.5px; line-height:1.8; color:#8F887B;
+      display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+    #notes.jin.day .jin-item .bd p { color:#7A7468; }
+    .jin-item .cat { font:italic 500 13px/1.5 "Cormorant Garamond",Georgia,serif; letter-spacing:.12em;
+      color:#8F887B; white-space:nowrap; transition:color .2s; }
+    #notes.jin.day .jin-item .cat { color:#7A7468; }
+    .jin-item:hover .cat { color:#FF8B80; }
+    .jin-cards { margin-top:clamp(22px,3vw,32px); display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+    .jin-cards a { border:1px solid rgba(241,234,223,.16); border-radius:12px; overflow:hidden; text-decoration:none;
+      color:inherit; transition:transform .25s ease, border-color .25s ease; display:block; }
+    #notes.jin.day .jin-cards a { border-color:rgba(27,25,22,.2); }
+    .jin-cards a:hover { transform:translateY(-4px); border-color:#FF8B80; }
+    .jin-cards .im { aspect-ratio:16/9; overflow:hidden; background:#0D0C0A; }
+    .jin-cards .im img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .5s ease; }
+    .jin-cards a:hover .im img { transform:scale(1.05); }
+    .jin-cards .cb { padding:13px 16px 15px; display:flex; justify-content:space-between; align-items:baseline; gap:10px; }
+    .jin-cards .cb b { font-family:"Noto Serif SC","Songti SC",var(--serif); font-weight:700; font-size:14px; line-height:1.5; }
+    .jin-cards .cb span { font:italic 500 12px/1.5 "Cormorant Garamond",serif; letter-spacing:.1em; color:#8F887B; white-space:nowrap; }
+    .jin-more { display:block; margin-top:24px; text-align:right; text-decoration:none;
+      font:italic 500 15px/1.6 "Cormorant Garamond",Georgia,serif; letter-spacing:.14em; color:#FF8B80; }
+    .jin-floppy { margin-top:clamp(30px,4vw,46px); border-top:1px solid rgba(241,234,223,.16); padding-top:clamp(24px,3vw,34px); }
+    #notes.jin.day .jin-floppy { border-color:rgba(27,25,22,.2); }
+    .jin-floppy .cap { display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap;
+      font:500 10px/1.7 ui-monospace,"SF Mono",Consolas,monospace; letter-spacing:.24em; color:#8F887B; margin-bottom:18px; }
+    #notes.jin.day .jin-floppy .cap { color:#7A7468; }
+    .jin-floppy .cap .arrows { display:flex; gap:8px; }
+    .jin-floppy .cap .arrows button { width:36px; height:36px; border-radius:50%;
+      border:1px solid rgba(241,234,223,.16); background:transparent; color:inherit; font:400 14px/1 "Cormorant Garamond",serif;
+      cursor:pointer; transition:background .2s; }
+    #notes.jin.day .jin-floppy .cap .arrows button { border-color:rgba(27,25,22,.2); }
+    .jin-floppy .cap .arrows button:hover { background:rgba(128,120,100,.16); }
+    .flop-row { display:flex; gap:16px; overflow-x:auto; padding:4px 2px 14px; scrollbar-width:thin; }
+    .flop { flex:0 0 clamp(196px,20vw,244px); border:1px solid rgba(241,234,223,.16); border-radius:12px; padding:12px;
+      display:flex; flex-direction:column; gap:10px; text-decoration:none; color:inherit; cursor:pointer;
+      transition:border-color .25s, transform .25s; }
+    #notes.jin.day .flop { border-color:rgba(27,25,22,.2); }
+    .flop:hover { transform:translateY(-4px); }
+    .flop.on { border-color:#FF8B80; }
+    .flop img.cover { width:100%; aspect-ratio:16/10; object-fit:cover; border-radius:8px; display:block; }
+    .flop b { font-family:"Noto Serif SC","Songti SC",var(--serif); font-weight:700; font-size:13.5px; line-height:1.5; }
+    .flop span { font:italic 500 12px/1.5 "Cormorant Garamond",serif; letter-spacing:.1em; color:#8F887B; }
+    @media (max-width:840px) {
+      .jin-workbench { grid-template-columns:1fr; }
+      .jin-item { grid-template-columns:64px minmax(0,1fr); }
+      .jin-item .cat { grid-column:2; }
+      .jin-cards { grid-template-columns:1fr 1fr; }
+    }
+    @media (max-width:560px) { .jin-cards { grid-template-columns:1fr; } }
 
     /* =========================================================
      * AI daily brief
@@ -5141,72 +5323,60 @@
         </div>
         <div class="hero-cine-scroll">SCROLL</div>
       </section>
-    <section id="profile">
+    <section id="profile" class="gc">
         <div class="container">
-          <div class="section-head fade-in" style="transform: translateY(-21.317px);">
-            <div>
-              <div class="label">PROFILE · 侧像</div>
-              <h2>侧像 · Profile</h2>
+          <nav class="gc-nav fade-in">
+            <span class="gc-online"><i></i>犀牛伯爵 · RHINO COUNT</span>
+            <span>AI NATIVE STUDIO — BEIJING</span>
+          </nav>
+          <h2 class="gc-name fade-in">犀牛伯爵<em>The Rhino Count — Personal Card, since 2026</em></h2>
+          <p class="gc-sub fade-in">把一张名片摊开，给路过的人一个安静的坐标。每一行是一段注脚——点开行，看一段小视频。</p>
+          <div class="gc-rows fade-in">
+            <div class="gc-row" data-gc="0" role="button" tabindex="0">
+              <span class="num">01</span>
+              <span class="t"><b><span class="cn">北京大学 · 本科</span></b><span>PEKING UNIVERSITY — UNDERGRADUATE</span></span>
+              <span class="meta">EDU</span>
+              <img class="thumb" src="assets/ref/gus_banana.d799972ea1.webp" alt="" loading="lazy">
             </div>
-            <p class="blurb">把一张名片摊开，给路过的人一个安静的坐标。</p>
+            <div class="gc-row" data-gc="1" role="button" tabindex="0">
+              <span class="num">02</span>
+              <span class="t"><b><span class="cn">高考数学 · 满分</span></b><span>MATHEMATICS — 150/150</span></span>
+              <span class="meta">MEDAL</span>
+              <img class="thumb" src="assets/ref/gus_robotaxi.617412fb70.webp" alt="" loading="lazy">
+            </div>
+            <div class="gc-row" data-gc="2" role="button" tabindex="0">
+              <span class="num">03</span>
+              <span class="t"><b><span class="cn">AI 大厂从业者</span></b><span>FRONTIER MODELS, IN PRODUCTION</span></span>
+              <span class="meta">WORK</span>
+              <img class="thumb" src="assets/ref/gus_squishy.f96eccc01c.webp" alt="" loading="lazy">
+            </div>
+            <div class="gc-row" data-gc="3" role="button" tabindex="0">
+              <span class="num">04</span>
+              <span class="t"><b><span class="cn">Content × Product × Marketing</span></b><span>CAPABILITY STACK</span></span>
+              <span class="meta">CRAFT</span>
+              <img class="thumb" src="assets/ref/gus_quickcombat.e1520d4f20.webp" alt="" loading="lazy">
+            </div>
+            <a class="gc-row" href="https://www.xiaohongshu.com/user/profile/60572004000000000101ce41">
+              <span class="num">05</span>
+              <span class="t"><b><span class="cn">小红书号 1147661654</span></b><span>XIAOHONGSHU — DAILY POSTS ↗</span></span>
+              <span class="meta">CHANNEL</span>
+              <img class="thumb" src="assets/ref/gus_batpop.9911dd8738.webp" alt="" loading="lazy">
+            </a>
           </div>
-          <div class="profile-grid fade-in fade-in-delay-1">
-            
-              <div class="profile-cell fade-in fade-in-delay-1">
-                <div class="k">主理人</div>
-                <div class="v">犀牛伯爵</div>
-                
+          <p class="gc-hint fade-in">CLICK A ROW — 点击行打开视频注脚 · 坐标见<a href="notes/why-rhino-count.html" style="color:#2FD9CB">为什么是犀牛伯爵 →</a></p>
+        </div>
+        <div class="gc-overlay" id="gc-player" role="dialog" aria-modal="true" aria-label="侧像视频注脚">
+          <div class="gc-panel">
+            <video id="gc-video" controls muted loop playsinline preload="none" poster="assets/ref/gus_banana.d799972ea1.webp">
+              <source src="assets/ref/gus_bfps-dash.mp4" type="video/mp4">
+            </video>
+            <div class="gc-pbar">
+              <div class="txt"><b><span class="cn" id="gc-title">北京大学 · 本科</span></b><span id="gc-counter">FILE 01 / 04</span></div>
+              <div class="btns">
+                <button type="button" id="gc-prev" aria-label="上一条">←</button>
+                <button type="button" id="gc-next" aria-label="下一条">→</button>
+                <button type="button" id="gc-close" aria-label="关闭">✕</button>
               </div>
-            
-              <div class="profile-cell fade-in fade-in-delay-1">
-                <div class="k">学历</div>
-                <div class="v">北京大学 · 本科</div>
-                
-              </div>
-            
-              <div class="profile-cell fade-in fade-in-delay-1">
-                <div class="k">勋章</div>
-                <div class="v">高考数学 · 满分</div>
-                
-              </div>
-            
-              <div class="profile-cell fade-in fade-in-delay-1">
-                <div class="k">履历</div>
-                <div class="v">AI 大厂从业者</div>
-                
-              </div>
-            
-              <div class="profile-cell fade-in fade-in-delay-1">
-                <div class="k">关注</div>
-                <div class="v">AI / Models / Agents / Business</div>
-                
-              </div>
-            
-              <div class="profile-cell fade-in fade-in-delay-1">
-                <div class="k">能力</div>
-                <div class="v">Content × Product × Marketing</div>
-                
-              </div>
-            
-              <div class="profile-cell fade-in fade-in-delay-1 has-link">
-                <div class="k">坐标</div>
-                <div class="v">一头恋爱的犀牛，一位远征的伯爵</div>
-                <span class="cell-badge" aria-hidden="true">↗</span><a class="cell-link" href="notes/why-rhino-count.html" aria-label="为什么是犀牛伯爵"></a>
-              </div>
-            
-              <div class="profile-cell fade-in fade-in-delay-1">
-                <div class="k">频道</div>
-                <div class="v">小红书号 1147661654</div>
-                
-              </div>
-            
-          </div>
-          
-          <div class="profile-why fade-in fade-in-delay-2">
-            <div class="why-title">WHY RHINO COUNT</div>
-            <p class="why-text">我相信 AI 时代最大的变化，不只是模型能力提升，而是人类创造、工作和组织方式的重新定义。这里记录的，是我对这场重新定义的长期观察和判断。</p>
-            <div class="why-keywords">
-              <span class="why-kw">AI × Product × Business</span><span class="why-kw">Thinking × Building × Sharing</span><span class="why-kw">Human × Machine Collaboration</span>
             </div>
           </div>
         </div>
@@ -5239,60 +5409,88 @@
             </div>
           </div>
         </section>
-    <section id="notes">
+    <section id="notes" class="jin">
         <div class="container">
-          <div class="section-head fade-in" style="transform: translateY(-99.4946px);">
-            <div>
-              <div class="label">SIGNALS · 观察</div>
-              <h2>在喧嚣里，<br>慢慢记。</h2>
+          <div class="jin-head fade-in">
+            <span class="id">FIELD DOSSIER — <b>犀牛观察</b> · 142 FILES</span>
+            <div class="jin-right">
+              <div class="jin-tabs" role="tablist" aria-label="观察筛选">
+                <button class="on" data-jf="all" role="tab" aria-selected="true">/ 全部</button>
+                <button data-jf="宣言" role="tab" aria-selected="false">/ 宣言</button>
+                <button data-jf="观察" role="tab" aria-selected="false">/ 观察</button>
+              </div>
+              <div class="day-night" role="group" aria-label="日夜间切换">
+                <button type="button" data-jm="day">DAY</button>
+                <button type="button" data-jm="night" class="on">NIGHT</button>
+              </div>
             </div>
-            <p class="blurb">每一篇笔记都是一次小型田野调查：关于模型、关于人、关于我们如何被这个时代重新塑形。</p>
           </div>
-          <div class="journal-grid">
-            
-              <article class="note fade-in fade-in-delay-0">
-                
-                <div class="note-body">
-                  <div class="note-meta">
-                    <span class="cat">宣言</span>
-                    <span>N° ∞</span>
-                  </div>
-                  <h3>为什么是犀牛伯爵</h3>
-                  <p>名字来自两部作品：恋爱的犀牛教我不计成败地热爱，基督山伯爵教我不动声色地等待。2022年底ChatGPT像一头灰犀牛从地平线走来，Count就是把它的轨迹从噪音里算出来——然后与各位同行者一起远征。</p>
-                  <a class="note-cta" href="notes/why-rhino-count.html">READ</a>
-                </div>
-              </article>
-            
-              <article class="note fade-in fade-in-delay-1">
-                
-                <div class="note-body">
-                  <div class="note-meta">
-                    <span class="cat">观察</span>
-                    <span>N° 123</span>
-                  </div>
-                  <h3>可灵AI要单独上市，估值追平整个快手</h3>
-                  <p>同一交易日、同一口径测算，可灵估值约1228亿元，已略超母公司快手约1117亿元的折算市值，上半年收入却只占集团约2%。判断：买的是AI时代的竞争位，守不守得住看技术身位。</p>
-                  <a class="note-cta" href="notes/2026-10-08-keling-ipo.html">READ</a>
-                </div>
-              </article>
-            
-              <article class="note fade-in fade-in-delay-2">
-                
-                <div class="note-body">
-                  <div class="note-meta">
-                    <span class="cat">观察</span>
-                    <span>N° 122</span>
-                  </div>
-                  <h3>2.5亿美元买单，2026年AI翻车的三个账本</h3>
-                  <p>苹果为没交货的 Siri 赔出 2.5 亿美元，Sora 六个月收入不够付一天账单。判断：2026 年 AI 竞争已从能不能做出来变成算不算得过账。</p>
-                  <a class="note-cta" href="notes/2026-09-29-ai-failures-2026.html">READ</a>
-                </div>
-              </article>
-            
+          <div class="jin-workbench fade-in">
+            <div class="frame">
+              <img class="mac" src="assets/ref/jin_hero_macintosh-workstation-transparent-v2.webp" alt="复古 Macintosh 工作台插画">
+              <img class="lcd" id="jin-lcd" src="assets/ref/jin_navigation_dossier-lcd-night.webp" alt="">
+            </div>
+            <div class="wb-txt">
+              <div class="file">File 142 — Field Notes</div>
+              <h2>在喧嚣里，<br>慢慢记。</h2>
+              <p>每一篇笔记都是一次小型田野调查：关于模型、关于人、关于我们如何被这个时代重新塑形。工作台的相框里，存着 142 份观察。</p>
+              <div class="stat"><span>142 NOTES</span><span>SINCE 2026</span><span>WEEKLY ×7</span></div>
+            </div>
           </div>
-          <div class="notes-view-all fade-in fade-in-delay-3">
-            <a class="notes-archive-link" href="notes/">查看全部 124 篇观察 <span aria-hidden="true">→</span></a>
+          <div class="jin-list-head fade-in"><span>Index — 最近归档</span><span>OCT 2026</span></div>
+          <a class="jin-item fade-in" data-cat="宣言" href="notes/why-rhino-count.html">
+            <span class="no">N° ∞</span>
+            <span class="bd"><b>为什么是犀牛伯爵</b><p>名字来自两部作品：恋爱的犀牛教我不计成败地热爱，基督山伯爵教我不动声色地等待。2022年底ChatGPT像一头灰犀牛从地平线走来，Count就是把它的轨迹从噪音里算出来——然后与各位同行者一起远征。</p></span>
+            <span class="cat">MANIFESTO</span>
+          </a>
+          <a class="jin-item fade-in" data-cat="观察" href="notes/2026-10-25-musk-watt-currency.html">
+            <span class="no">N° 141</span>
+            <span class="bd"><b>马斯克说，以后的钱要按瓦特算</b><p>马斯克在《The Builders》首期说，货币将按瓦特、吨位等物理量计价，只有 AI 和机器人能解美国国债。判断：信用印得出钞票，印不出瓦特。</p></span>
+            <span class="cat">ESSAY</span>
+          </a>
+          <a class="jin-item fade-in" data-cat="观察" href="notes/2026-10-24-zhiyuan-jiangtan.html">
+            <span class="no">N° 140</span>
+            <span class="bd"><b>智元的机器人，已经在武汉夜市上班了</b><p>智元远征 A3 Ultra 在武汉汉口江滩夜市连续卖了 18 天零食，827 单，抓取成功率 97% 以上。判断：出货量是入场券，工时才是验真器。</p></span>
+            <span class="cat">ESSAY</span>
+          </a>
+          <div class="jin-cards fade-in">
+            <a href="notes/2026-10-25-musk-watt-currency.html">
+              <div class="im"><img loading="lazy" src="assets/ref/jin_works_aihub.jpg" alt=""></div>
+              <div class="cb"><b>马斯克说，以后的钱要按瓦特算</b><span>N° 141</span></div>
+            </a>
+            <a href="notes/2026-10-24-zhiyuan-jiangtan.html">
+              <div class="im"><img loading="lazy" src="assets/ref/jin_works_reader.jpg" alt=""></div>
+              <div class="cb"><b>智元的机器人，已经在武汉夜市上班了</b><span>N° 140</span></div>
+            </a>
+            <a href="notes/2026-10-23-huangrenxun-shuigong.html">
+              <div class="im"><img loading="lazy" src="assets/ref/jin_works_prompt.jpg" alt=""></div>
+              <div class="cb"><b>黄仁勋说，AI 卡在了水管工手里</b><span>N° 139</span></div>
+            </a>
           </div>
+          <div class="jin-floppy fade-in">
+            <div class="cap">
+              <span>DISK BROWSER — 观察软盘 · ← → 切换</span>
+              <span class="arrows">
+                <button type="button" id="jf-prev" aria-label="上一张">←</button>
+                <button type="button" id="jf-next" aria-label="下一张">→</button>
+              </span>
+            </div>
+            <div class="flop-row" id="flop-row">
+              <a class="flop on" href="notes/why-rhino-count.html">
+                <img class="cover" loading="lazy" src="assets/ref/jin_works_gallery.jpg" alt="">
+                <b>为什么是犀牛伯爵</b><span>MANIFESTO</span>
+              </a>
+              <a class="flop" href="notes/2026-10-25-musk-watt-currency.html">
+                <img class="cover" loading="lazy" src="assets/ref/jin_works_aihub.jpg" alt="">
+                <b>马斯克说，以后的钱要按瓦特算</b><span>ESSAY</span>
+              </a>
+              <a class="flop" href="notes/2026-10-24-zhiyuan-jiangtan.html">
+                <img class="cover" loading="lazy" src="assets/ref/jin_works_reader.jpg" alt="">
+                <b>智元的机器人，已经在武汉夜市上班了</b><span>ESSAY</span>
+              </a>
+            </div>
+          </div>
+          <a class="jin-more fade-in" href="notes/">All 142 notes — 查看全部观察 →</a>
         </div>
       </section>
     <section id="picks">
@@ -5841,69 +6039,215 @@
         `;
       }
 
-      /* Profile — 侧像 */
+      /* Profile — guscastillo.com 设计迁移（2026-10）：巨幅名字 + 大编号行 + 视频注脚弹层 */
+      const GC_THUMBS = [
+        'assets/ref/gus_banana.d799972ea1.webp',
+        'assets/ref/gus_squishy.f96eccc01c.webp',
+        'assets/ref/gus_robotaxi.617412fb70.webp',
+        'assets/ref/gus_quickcombat.e1520d4f20.webp',
+        'assets/ref/gus_batpop.9911dd8738.webp'
+      ];
+      const GC_META = { '学历': ['PEKING UNIVERSITY — UNDERGRADUATE', 'EDU'], '勋章': ['MATHEMATICS — 150/150', 'MEDAL'], '履历': ['FRONTIER MODELS, IN PRODUCTION', 'WORK'], '关注': ['AI / MODELS / AGENTS / BUSINESS', 'FOCUS'], '能力': ['CAPABILITY STACK', 'CRAFT'], '频道': ['XIAOHONGSHU — DAILY POSTS ↗', 'CHANNEL'], '坐标': ['A RHINO IN LOVE, AN EARL ON A JOURNEY', 'MOTTO'], '主理人': ['THE RHINO COUNT', 'AUTHOR'] };
+      const gcRows = p.cells
+        .filter(c => ['学历', '勋章', '履历', '能力', '频道'].includes(c.k))
+        .map((c, i) => {
+          const [en, meta] = GC_META[c.k] || [String(c.v).toUpperCase(), 'FILE'];
+          const thumb = GC_THUMBS[i % GC_THUMBS.length];
+          const href = c.k === '频道'
+            ? 'https://www.xiaohongshu.com/user/profile/60572004000000000101ce41'
+            : (c.href || '');
+          const inner = `
+              <span class="num">${String(i + 1).padStart(2, '0')}</span>
+              <span class="t"><b><span class="cn">${esc(c.v)}</span></b><span>${esc(en)}</span></span>
+              <span class="meta">${esc(meta)}</span>
+              <img class="thumb" src="${esc(thumb)}" alt="" loading="lazy">`;
+          return href
+            ? `<a class="gc-row" href="${esc(href)}">${inner}</a>`
+            : `<div class="gc-row" data-gc="${i}" role="button" tabindex="0">${inner}</div>`;
+        }).join('');
       document.getElementById('profile').innerHTML = `
         <div class="container">
-          <div class="section-head fade-in">
-            <div>
-              <div class="label">${esc(p.label)}</div>
-              <h2>${esc(p.heading)}</h2>
-            </div>
-            <p class="blurb">${esc(p.blurb)}</p>
-          </div>
-          <div class="profile-grid fade-in fade-in-delay-1">
-            ${p.cells.map(c => `
-              <div class="profile-cell fade-in fade-in-delay-1${c.href ? ' has-link' : ''}">
-                <div class="k">${esc(c.k)}</div>
-                <div class="v">${esc(c.v)}</div>
-                ${c.href ? `<span class="cell-badge" aria-hidden="true">↗</span><a class="cell-link" href="${esc(c.href)}" aria-label="${esc(c.aria || c.k)}"></a>` : ''}
+          <nav class="gc-nav fade-in">
+            <span class="gc-online"><i></i>犀牛伯爵 · RHINO COUNT</span>
+            <span>AI NATIVE STUDIO — BEIJING</span>
+          </nav>
+          <h2 class="gc-name fade-in">犀牛伯爵<em>The Rhino Count — Personal Card, since 2026</em></h2>
+          <p class="gc-sub fade-in">${esc(p.blurb)}每一行是一段注脚——点开行，看一段小视频。</p>
+          <div class="gc-rows fade-in">${gcRows}</div>
+          <p class="gc-hint fade-in">CLICK A ROW — 点击行打开视频注脚 · 坐标见<a href="notes/why-rhino-count.html" style="color:#2FD9CB">为什么是犀牛伯爵 →</a></p>
+        </div>
+        <div class="gc-overlay" id="gc-player" role="dialog" aria-modal="true" aria-label="侧像视频注脚">
+          <div class="gc-panel">
+            <video id="gc-video" controls muted loop playsinline preload="none" poster="${GC_THUMBS[0]}">
+              <source src="assets/ref/gus_bfps-dash.mp4" type="video/mp4">
+            </video>
+            <div class="gc-pbar">
+              <div class="txt"><b><span class="cn" id="gc-title"></span></b><span id="gc-counter"></span></div>
+              <div class="btns">
+                <button type="button" id="gc-prev" aria-label="上一条">←</button>
+                <button type="button" id="gc-next" aria-label="下一条">→</button>
+                <button type="button" id="gc-close" aria-label="关闭">✕</button>
               </div>
-            `).join('')}
-          </div>
-          ${p.why ? `
-          <div class="profile-why fade-in fade-in-delay-2">
-            <div class="why-title">${esc(p.why.title)}</div>
-            <p class="why-text">${esc(p.why.text)}</p>
-            <div class="why-keywords">
-              ${p.why.keywords.map(k => `<span class="why-kw">${esc(k)}</span>`).join('')}
             </div>
-          </div>` : ''}
+          </div>
         </div>
       `;
 
-      /* Journal — 首页只展示最新 3 篇 + 查看全部入口 */
+      /* Journal — jintao.co.uk 档案设计迁移（2026-10）：卷宗 + 工作台插画 + 软盘浏览器 */
       const j = D.journal;
       const featuredNotes = j.notes.slice(0, 3);
+      const cardNotes = j.notes.slice(1, 4);
+      const jinCat = c => c === '宣言' ? 'MANIFESTO' : 'ESSAY';
+      const JIN_COVERS = [
+        'assets/ref/jin_works_gallery.jpg',
+        'assets/ref/jin_works_aihub.jpg',
+        'assets/ref/jin_works_reader.jpg',
+        'assets/ref/jin_works_prompt.jpg'
+      ];
       document.getElementById('notes').innerHTML = `
         <div class="container">
-          <div class="section-head fade-in">
-            <div>
-              <div class="label">${esc(j.label)}</div>
-              <h2>${esc(j.headingLine1)}<br/>${esc(j.headingLine2)}</h2>
+          <div class="jin-head fade-in">
+            <span class="id">FIELD DOSSIER — <b>犀牛观察</b> · ${j.notes.length} FILES</span>
+            <div class="jin-right">
+              <div class="jin-tabs" role="tablist" aria-label="观察筛选">
+                <button class="on" data-jf="all" role="tab" aria-selected="true">/ 全部</button>
+                <button data-jf="宣言" role="tab" aria-selected="false">/ 宣言</button>
+                <button data-jf="观察" role="tab" aria-selected="false">/ 观察</button>
+              </div>
+              <div class="day-night" role="group" aria-label="日夜间切换">
+                <button type="button" data-jm="day">DAY</button>
+                <button type="button" data-jm="night" class="on">NIGHT</button>
+              </div>
             </div>
-            <p class="blurb">${esc(j.blurb)}</p>
           </div>
-          <div class="journal-grid">
-            ${featuredNotes.map((n, i) => `
-              <article class="note fade-in fade-in-delay-${Math.min(i, 3)}">
-                ${(!_isMobile && n.img) ? `<div class="note-cover"><img src="${esc(n.img)}" alt="" loading="lazy"/></div>` : ''}
-                <div class="note-body">
-                  <div class="note-meta">
-                    <span class="cat">${esc(n.cat)}</span>
-                    <span>${esc(n.num)}</span>
-                  </div>
-                  <h3>${esc(n.title)}</h3>
-                  <p>${esc(n.excerpt)}</p>
-                  <a class="note-cta" href="${esc(n.href)}">READ</a>
-                </div>
-              </article>
-            `).join('')}
+          <div class="jin-workbench fade-in">
+            <div class="frame">
+              <img class="mac" src="assets/ref/jin_hero_macintosh-workstation-transparent-v2.webp" alt="复古 Macintosh 工作台插画">
+              <img class="lcd" id="jin-lcd" src="assets/ref/jin_navigation_dossier-lcd-night.webp" alt="">
+            </div>
+            <div class="wb-txt">
+              <div class="file">File ${j.notes.length} — Field Notes</div>
+              <h2>${esc(j.headingLine1)}<br/>${esc(j.headingLine2)}</h2>
+              <p>${esc(j.blurb)}工作台的相框里，存着 ${j.notes.length} 份观察。</p>
+              <div class="stat"><span>${j.notes.length} NOTES</span><span>SINCE 2026</span><span>WEEKLY ×7</span></div>
+            </div>
           </div>
-          <div class="notes-view-all fade-in fade-in-delay-3">
-            <a class="notes-archive-link" href="notes/">查看全部 ${j.notes.length} 篇观察 <span aria-hidden="true">\u2192</span></a>
+          <div class="jin-list-head fade-in"><span>Index — 最近归档</span><span>OCT 2026</span></div>
+          ${featuredNotes.map(n => `
+          <a class="jin-item fade-in" data-cat="${esc(n.cat)}" href="${esc(n.href)}">
+            <span class="no">${esc(n.num)}</span>
+            <span class="bd"><b>${esc(n.title)}</b><p>${esc(n.excerpt)}</p></span>
+            <span class="cat">${jinCat(n.cat)}</span>
+          </a>`).join('')}
+          <div class="jin-cards fade-in">
+            ${cardNotes.map((n, i) => `
+            <a href="${esc(n.href)}">
+              <div class="im"><img loading="lazy" src="${JIN_COVERS[i % JIN_COVERS.length]}" alt=""></div>
+              <div class="cb"><b>${esc(n.title)}</b><span>${esc(n.num)}</span></div>
+            </a>`).join('')}
           </div>
+          <div class="jin-floppy fade-in">
+            <div class="cap">
+              <span>DISK BROWSER — 观察软盘 · ← → 切换</span>
+              <span class="arrows">
+                <button type="button" id="jf-prev" aria-label="上一张">←</button>
+                <button type="button" id="jf-next" aria-label="下一张">→</button>
+              </span>
+            </div>
+            <div class="flop-row" id="flop-row">
+              ${featuredNotes.map((n, i) => `
+              <a class="flop${i === 0 ? ' on' : ''}" href="${esc(n.href)}">
+                <img class="cover" loading="lazy" src="${JIN_COVERS[i % JIN_COVERS.length]}" alt="">
+                <b>${esc(n.title)}</b><span>${jinCat(n.cat)}</span>
+              </a>`).join('')}
+            </div>
+          </div>
+          <a class="jin-more fade-in" href="notes/">All ${j.notes.length} notes — 查看全部观察 →</a>
         </div>
       `;
+
+      /* === 迁移板块交互：视频弹层 / 档案标签 / 日夜切换 / 软盘浏览器 === */
+      (function initMigratedSections() {
+        // Profile 视频注脚弹层
+        const secP = document.getElementById('profile');
+        const rows = [...secP.querySelectorAll('.gc-row[data-gc]')];
+        const titles = rows.map(r => r.querySelector('.cn').textContent);
+        const ov = document.getElementById('gc-player');
+        const vid = document.getElementById('gc-video');
+        const tEl = document.getElementById('gc-title');
+        const cEl = document.getElementById('gc-counter');
+        let cur = 0;
+        const total = titles.length;
+        function show(i) {
+          cur = (i + total) % total;
+          tEl.textContent = titles[cur];
+          cEl.textContent = 'FILE ' + String(cur + 1).padStart(2, '0') + ' / ' + String(total).padStart(2, '0');
+          vid.poster = GC_THUMBS[cur % GC_THUMBS.length];
+          ov.classList.add('open');
+          vid.play().catch(() => {});
+        }
+        function hide() { ov.classList.remove('open'); vid.pause(); }
+        rows.forEach(r => {
+          r.addEventListener('click', () => show(+r.dataset.gc));
+          r.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); show(+r.dataset.gc); } });
+        });
+        if (total) {
+          document.getElementById('gc-prev').addEventListener('click', () => show(cur - 1));
+          document.getElementById('gc-next').addEventListener('click', () => show(cur + 1));
+          document.getElementById('gc-close').addEventListener('click', hide);
+          ov.addEventListener('click', e => { if (e.target === ov) hide(); });
+        }
+        document.addEventListener('keydown', e => {
+          if (e.key === 'Escape' && ov.classList.contains('open')) hide();
+        });
+
+        // Signals 标签筛选
+        const secJ = document.getElementById('notes');
+        secJ.querySelectorAll('.jin-tabs button').forEach(b => {
+          b.addEventListener('click', () => {
+            secJ.querySelectorAll('.jin-tabs button').forEach(x => { x.classList.remove('on'); x.setAttribute('aria-selected', 'false'); });
+            b.classList.add('on'); b.setAttribute('aria-selected', 'true');
+            const f = b.dataset.jf;
+            secJ.querySelectorAll('.jin-item').forEach(it => {
+              it.style.display = (f === 'all' || it.dataset.cat === f) ? '' : 'none';
+            });
+          });
+        });
+
+        // DAY / NIGHT
+        const lcd = document.getElementById('jin-lcd');
+        secJ.querySelectorAll('.day-night button').forEach(b => {
+          b.addEventListener('click', () => {
+            secJ.querySelectorAll('.day-night button').forEach(x => x.classList.remove('on'));
+            b.classList.add('on');
+            const day = b.dataset.jm === 'day';
+            secJ.classList.toggle('day', day);
+            if (lcd) lcd.src = 'assets/ref/jin_navigation_dossier-lcd-' + (day ? 'day' : 'night') + '.webp';
+          });
+        });
+
+        // 软盘浏览器
+        const flops = [...secJ.querySelectorAll('.flop')];
+        let fi = 0;
+        function selFlop(i) {
+          fi = (i + flops.length) % flops.length;
+          flops.forEach((f, x) => f.classList.toggle('on', x === fi));
+          flops[fi].scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' });
+        }
+        const fprev = document.getElementById('jf-prev'), fnext = document.getElementById('jf-next');
+        if (fprev && fnext) {
+          fprev.addEventListener('click', () => selFlop(fi - 1));
+          fnext.addEventListener('click', () => selFlop(fi + 1));
+          flops.forEach((f, x) => f.addEventListener('click', e => {
+            if (x !== fi) { e.preventDefault(); selFlop(x); }
+          }));
+          document.addEventListener('keydown', e => {
+            if (ov.classList.contains('open')) return;
+            if (e.key === 'ArrowLeft') selFlop(fi - 1);
+            if (e.key === 'ArrowRight') selFlop(fi + 1);
+          });
+        }
+      })();
 
       /* Rhino Picks — 犀牛精选（首页限量展示 + 查看全部入口 + 平台筛选） */
       const pk = D.picks;
