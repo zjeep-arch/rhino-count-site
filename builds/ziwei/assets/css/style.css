@@ -723,3 +723,121 @@ body{background:
   border-radius:4px; padding:0 5px; white-space:nowrap;}
 .fx-table .fx-star.fx-ji{color:var(--clay); background:rgba(176,82,58,.1);}
 #share-link-input{background:#FFFDF6 !important; cursor:text;}
+
+/* ═══════════════ v8：夜幕电影感 hero（蓝调时刻 · murmur 风） ═══════════════ */
+.hero-night{position:relative; margin:10px -16px 0; overflow:hidden; text-align:center;
+  min-height:76vh; display:flex; flex-direction:column; align-items:center; justify-content:center;
+  background:linear-gradient(180deg,#070B1E 0%,#101741 46%,#2B2456 78%,#4A3563 100%);
+  border-radius:0 0 var(--r-xl) var(--r-xl); padding:56px 24px 64px;}
+@media(min-width:1024px){ .hero-night{margin:14px -32px 0; min-height:82vh; } }
+.hn-scene{position:absolute; inset:0; pointer-events:none;}
+/* 星野（hero 内加密度） */
+.hn-stars{position:absolute; inset:0; opacity:.9;
+  background-image:
+    radial-gradient(1.6px 1.6px at 11% 22%, rgba(223,227,251,.9), transparent 60%),
+    radial-gradient(1.2px 1.2px at 28% 12%, rgba(223,227,251,.6), transparent 60%),
+    radial-gradient(2.2px 2.2px at 61% 16%, rgba(223,227,251,.75), transparent 60%),
+    radial-gradient(1.4px 1.4px at 78% 9%, rgba(223,227,251,.6), transparent 60%),
+    radial-gradient(1.8px 1.8px at 88% 28%, rgba(160,131,255,.65), transparent 60%),
+    radial-gradient(1.2px 1.2px at 44% 30%, rgba(223,227,251,.5), transparent 60%),
+    radial-gradient(1.6px 1.6px at 18% 44%, rgba(160,131,255,.5), transparent 60%),
+    radial-gradient(2px 2px at 68% 38%, rgba(223,227,251,.55), transparent 60%),
+    radial-gradient(1.3px 1.3px at 8% 62%, rgba(223,227,251,.45), transparent 60%),
+    radial-gradient(1.5px 1.5px at 92% 52%, rgba(223,227,251,.5), transparent 60%);
+  animation:hn-twinkle 4.6s ease-in-out infinite alternate;}
+@keyframes hn-twinkle{from{opacity:.55;} to{opacity:1;}}
+/* 城市光斑呼吸（screen 混合，只做光） */
+.hn-bloom{position:absolute; border-radius:50%; mix-blend-mode:screen; filter:blur(2px);
+  animation:hn-breathe 5.2s ease-in-out infinite alternate;}
+.hn-bloom.b1{width:46vw; height:30vh; left:2%; top:34%; background:radial-gradient(closest-side, rgba(214,120,170,.34), transparent 70%); animation-delay:0s;}
+.hn-bloom.b2{width:40vw; height:26vh; right:4%; top:44%; background:radial-gradient(closest-side, rgba(230,168,94,.28), transparent 70%); animation-delay:1.4s;}
+.hn-bloom.b3{width:52vw; height:32vh; left:28%; top:26%; background:radial-gradient(closest-side, rgba(134,162,255,.26), transparent 70%); animation-delay:2.6s;}
+@keyframes hn-breathe{from{opacity:.35;} to{opacity:1;}}
+/* 掠过的光带（车灯扫过感） */
+.hn-sweep{position:absolute; top:-20%; bottom:-20%; left:-30%; width:34%;
+  background:linear-gradient(100deg, transparent 0%, rgba(223,227,251,.05) 30%, rgba(223,227,251,.13) 50%, rgba(223,227,251,.05) 70%, transparent 100%);
+  transform:rotate(16deg); animation:hn-sweep 7s linear infinite;}
+@keyframes hn-sweep{0%{left:-34%; opacity:0;} 12%{opacity:1;} 55%{left:105%; opacity:0;} 100%{left:105%; opacity:0;}}
+/* 远山剪影压角 */
+.hn-hill{position:absolute; bottom:-2px; width:64%; height:34%; opacity:.95;}
+.hn-hill.h-l{left:-6%;}
+.hn-hill.h-r{right:-6%; transform:scaleX(-1);}
+.hn-moon{position:relative; font-size:44px; color:#E9DFC8; opacity:.9; text-shadow:0 0 34px rgba(233,223,200,.45); z-index:1;}
+/* 刊名 */
+.hn-wordmark{position:relative; z-index:1; font-family:var(--font-title); font-weight:900;
+  font-size:clamp(64px, 12vw, 118px); color:#F5F2EA; letter-spacing:.24em; text-indent:.24em;
+  margin:10px 0 6px; line-height:1.1; text-shadow:0 6px 42px rgba(7,11,30,.8);}
+.hn-sub{position:relative; z-index:1; color:#DFE3FB; font-size:clamp(15px,2.4vw,21px); letter-spacing:.42em; text-indent:.42em; margin:0 0 18px;}
+.hn-label{position:relative; z-index:1; font-family:"IBM Plex Mono","PingFang SC",monospace; font-size:12px;
+  color:#B9C4EA; letter-spacing:.05em; margin:0 0 30px;}
+/* 玻璃行动卡 */
+.hn-card{position:relative; z-index:1; display:inline-flex; flex-direction:column; align-items:center; gap:4px;
+  background:rgba(8,21,62,.84); backdrop-filter:blur(18px); -webkit-backdrop-filter:blur(18px);
+  border:1px solid rgba(132,146,255,.38); border-radius:16px; padding:22px 34px 16px;
+  box-shadow:0 24px 70px rgba(4,8,28,.6);}
+.hn-card .btn-primary{margin-top:0;}
+.hn-ghost{background:transparent; color:#DFE3FB; border:1px solid rgba(132,146,255,.42); border-radius:10px;
+  padding:10px 26px; font-size:14px; cursor:pointer; margin-top:10px;}
+.hn-ghost:hover{border-color:#DFE3FB; color:#fff;}
+.hn-today{font-family:"IBM Plex Mono","PingFang SC",monospace; font-size:11px; color:#7583BD; margin:12px 0 0; letter-spacing:.04em;}
+/* 每日一签卡微调 */
+.daily-card .sign-head{display:flex; align-items:baseline; gap:10px; margin:2px 0 6px; flex-wrap:wrap;}
+.daily-card .sign-no{font-family:var(--font-title); font-size:19px; color:var(--ink); font-weight:700;}
+.daily-card .sign-lvl{font-size:11px; border-radius:4px; padding:1px 8px; font-weight:700; letter-spacing:.1em;}
+.sign-lvl.lv-ji{background:rgba(140,109,63,.14); color:#8C6D3F;}
+.sign-lvl.lv-zhong{background:rgba(117,133,95,.16); color:#5D6C4B;}
+.sign-lvl.lv-ping{background:rgba(139,132,119,.14); color:#6B6558;}
+.daily-card .sign-title{font-family:var(--font-title); font-size:15px; color:#5F4A33; letter-spacing:.2em;}
+.daily-card .sign-text{font-family:var(--font-title); font-size:17.5px; color:var(--ink); letter-spacing:.08em; line-height:2; margin:6px 0;}
+.daily-card .sign-yi{font-size:13px; color:var(--ink-soft);}
+.btn-sm{padding:8px 16px; font-size:13px;}
+@media (prefers-reduced-motion: reduce){
+  .hn-stars,.hn-bloom,.hn-sweep{animation:none !important;}
+}
+
+/* ═══ v8.1：夜幕 hero 重排版（左对齐编辑部式 · 城市灯火 · SVG 弦月 · 夜色按钮） ═══ */
+.hero-night{text-align:left; align-items:center;}
+.hn-copy{position:relative; z-index:2; max-width:660px; margin-left:8%; padding:56px 0 60px;}
+@media(max-width:820px){ .hn-copy{margin:0 auto; padding:44px 10px 52px; max-width:540px; text-align:center;} }
+.hn-moon{position:absolute; z-index:1; top:16%; right:11%; width:58px; height:58px;
+  filter:drop-shadow(0 0 18px rgba(233,223,200,.5));}
+@media(max-width:820px){ .hn-moon{top:11%; right:9%; width:40px; height:40px;} }
+.hn-kicker{font-family:"IBM Plex Mono","PingFang SC",monospace; font-size:12px; color:#B9C4EA;
+  letter-spacing:.28em; margin:0 0 18px;}
+.hn-wordmark{font-family:var(--font-title); font-weight:700; font-size:clamp(44px,7vw,74px);
+  color:#F5F2EA; letter-spacing:.16em; line-height:1.15; margin:0 0 14px;
+  text-shadow:0 2px 16px rgba(7,11,30,.55);}
+.hn-sub{color:#DFE3FB; font-size:clamp(14px,1.9vw,16.5px); line-height:1.95; margin:0 0 26px; max-width:32em;}
+.hn-cta-row{display:flex; gap:12px; align-items:center; flex-wrap:wrap;}
+@media(max-width:820px){ .hn-cta-row{justify-content:center;} }
+.hn-cta{background:rgba(223,227,251,.07); color:#F5F2EA; border:1px solid rgba(132,146,255,.5);
+  border-radius:10px; padding:13px 32px; font-size:15.5px; letter-spacing:.1em; cursor:pointer;
+  backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); transition:border-color .15s ease, background .15s ease;}
+.hn-cta:hover{border-color:#DFE3FB; background:rgba(223,227,251,.13);}
+.hn-ghost{margin-top:0; background:transparent; border:1px solid rgba(132,146,255,.28);
+  color:#B9C4EA; border-radius:10px; padding:12px 26px; font-size:14px;}
+.hn-ghost:hover{color:#DFE3FB; border-color:rgba(132,146,255,.55);}
+.hn-today{font-family:"IBM Plex Mono","PingFang SC",monospace; font-size:11px; color:#7583BD;
+  margin:16px 0 0; letter-spacing:.04em;}
+/* 城市灯火：山脊上方一排微光（暖橙/粉/长春花），轻微呼吸 */
+.hn-citydots{position:absolute; left:0; right:0; bottom:25%; height:90px; opacity:.8;
+  background-image:
+    radial-gradient(2.2px 2.2px at 6% 64%, rgba(230,168,94,.85), transparent 60%),
+    radial-gradient(1.6px 1.6px at 13% 44%, rgba(214,120,170,.7), transparent 60%),
+    radial-gradient(1.8px 1.8px at 21% 72%, rgba(223,227,251,.7), transparent 60%),
+    radial-gradient(2px 2px at 29% 38%, rgba(230,168,94,.65), transparent 60%),
+    radial-gradient(1.5px 1.5px at 36% 66%, rgba(134,162,255,.75), transparent 60%),
+    radial-gradient(2.2px 2.2px at 44% 50%, rgba(230,168,94,.7), transparent 60%),
+    radial-gradient(1.7px 1.7px at 52% 74%, rgba(214,120,170,.6), transparent 60%),
+    radial-gradient(1.9px 1.9px at 60% 40%, rgba(223,227,251,.65), transparent 60%),
+    radial-gradient(2.1px 2.1px at 68% 68%, rgba(230,168,94,.75), transparent 60%),
+    radial-gradient(1.6px 1.6px at 75% 46%, rgba(134,162,255,.7), transparent 60%),
+    radial-gradient(1.8px 1.8px at 83% 72%, rgba(214,120,170,.6), transparent 60%),
+    radial-gradient(2px 2px at 90% 52%, rgba(223,227,251,.65), transparent 60%),
+    radial-gradient(1.7px 1.7px at 96% 66%, rgba(230,168,94,.7), transparent 60%);
+  animation:hn-twinkle 6.4s ease-in-out infinite alternate; animation-delay:1.2s;}
+/* 远山层次：far 层更浅更远 */
+.hn-hill.h-far{width:88%; height:26%; bottom:1%; left:-4%; opacity:.85;}
+
+/* v8.2：hero 字号收敛微调 */
+.hn-wordmark{font-size:clamp(42px,6vw,64px); letter-spacing:.14em;}

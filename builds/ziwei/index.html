@@ -11,8 +11,8 @@
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;700;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=20261024a">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;700;900&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css?v=20261024b">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <meta name="theme-color" content="#F6F2E9">
@@ -40,17 +40,36 @@
 <main id="app">
   <!-- 首页 -->
   <section class="view active" id="view-home">
-    <div class="hero hero-slim">
-      <div class="hero-moon" aria-hidden="true">☾</div>
-      <h2 class="hero-title">先认宫位，再看星曜</h2>
-      <p class="hero-sub">十二宫对应人生的 12 个生活领域，输入生日时辰，看看星星怎么说。</p>
-      <button class="btn-primary" data-nav="input">开始排盘 →</button>
-      <div><button class="link-btn" data-nav="guide" style="margin-top:10px">我是新手，先看看怎么玩</button></div>
+    <div class="hero hero-night">
+      <div class="hn-scene" aria-hidden="true">
+        <div class="hn-stars"></div>
+        <div class="hn-bloom b1"></div><div class="hn-bloom b2"></div><div class="hn-bloom b3"></div>
+        <div class="hn-citydots"></div>
+        <div class="hn-sweep"></div>
+        <svg class="hn-hill h-far" viewBox="0 0 480 160" preserveAspectRatio="none"><path d="M0,160 L0,96 Q60,52 130,88 Q200,124 265,74 Q330,30 400,84 Q444,118 480,96 L480,160 Z" fill="#0D1330"/></svg>
+        <svg class="hn-hill h-l" viewBox="0 0 480 220" preserveAspectRatio="none"><path d="M0,220 L0,150 Q60,88 135,138 Q205,186 265,118 Q332,48 402,128 Q442,172 480,148 L480,220 Z" fill="#080D20"/></svg>
+        <svg class="hn-hill h-r" viewBox="0 0 480 220" preserveAspectRatio="none"><path d="M0,220 L0,132 Q70,70 150,120 Q225,166 295,104 Q365,44 430,124 Q458,166 480,144 L480,220 Z" fill="#0B1128"/></svg>
+      </div>
+      <svg class="hn-moon" viewBox="0 0 64 64" aria-hidden="true"><path d="M42 8a26 26 0 1 0 14 30 20 20 0 0 1-14-30Z" fill="#E9DFC8" opacity=".92"/></svg>
+      <div class="hn-copy">
+        <p class="hn-kicker">問星 · ZIWEI ASTROLOGY</p>
+        <h2 class="hn-wordmark">夜观星象</h2>
+        <p class="hn-sub">紫微斗数在线排盘——输入生日时辰，浏览器本地排出你的命盘，数据不出手机。</p>
+        <div class="hn-cta-row">
+          <button class="hn-cta" data-nav="input">开始排盘 →</button>
+          <button class="hn-ghost" data-nav="guide">新手导览</button>
+        </div>
+        <p class="hn-today" id="hn-today"></p>
+      </div>
     </div>
     <div class="card daily-card" id="daily-card">
-      <div class="card-kicker">☾ <span id="daily-kicker">今日小运</span></div>
+      <div class="card-kicker">☾ <span id="daily-kicker">每日一签</span></div>
       <div id="daily-text">正在翻开今天的星语…</div>
-      <div class="card-foot"><span class="date-pill" id="daily-date"></span></div>
+      <div id="daily-lucky-hours" class="hint"></div>
+      <div class="card-foot" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
+        <span class="date-pill" id="daily-date"></span>
+        <button class="btn-ghost btn-sm" data-share-sign style="margin-top:0;padding:8px 16px;font-size:13px">⚑ 签文做成卡片</button>
+      </div>
     </div>
     <div class="card" id="portrait-home-card" hidden>
       <div id="portrait-home-body"></div>
@@ -268,6 +287,8 @@
       <button data-k="chart" class="on">命盘图</button>
       <button data-k="quote">金句卡</button>
       <button data-k="year">年度运势卡</button>
+      <button data-k="persona">主星人格卡</button>
+      <button data-k="sign">签文卡</button>
       <button data-k="link">链接</button>
     </div>
     <canvas id="share-canvas" width="1080" height="1440"></canvas>
@@ -315,6 +336,6 @@
 <script src="assets/js/ziwei-engine.js"></script>
 <script src="assets/js/data.js"></script>
 <script src="assets/js/data-v2.js"></script>
-<script src="assets/js/app.js?v=20261024a"></script>
+<script src="assets/js/app.js?v=20261024b"></script>
 </body>
 </html>
