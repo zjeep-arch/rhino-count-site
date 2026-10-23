@@ -15,17 +15,21 @@ assert(block,'Build renderer not found');
 let rendered='';
 const document={getElementById:id=>{assert.equal(id,'builds');return {set innerHTML(value){rendered=value;}};}};
 const D=context.window.SITE_DATA;
-const original=D.lab.featured;
-// Exercise the actual renderer with a future oversized feed and a missing legacy tracks field.
-D.lab.featured=Array.from({length:50},(_,i)=>({...original[0],title:'Future essay '+i}));
+// Exercise the actual renderer with a future oversized article feed and a
+// missing legacy tracks field: article data must never leak into Builds.
+D.lab.featured=Array.from({length:50},(_,i)=>({title:'Future essay '+i}));
 delete D.lab.tracks;
 vm.runInNewContext(block,{D,window:context.window,document,esc:String});
-assert.equal((rendered.match(/class="featured-work"/g)||[]).length,2,'Featured Work must render at most two entries');
-assert.equal((rendered.match(/class="lab-card /g)||[]).length,catalog.length,'Article updates must not replace Build projects');
+assert.equal((rendered.match(/class="lab-card /g)||[]).length,catalog.length,'Every catalog entry must render exactly one lab-card');
+assert.equal((rendered.match(/class="lab-card lab-hero/g)||[]).length,1,'Exactly one cover-story hero card');
+assert.equal((rendered.match(/class="featured-work"/g)||[]).length,0,'Article feeds must never reintroduce a Featured Work sidebar');
 assert(rendered.includes('href="builds/jelly-baby/"'),'Jelly Lab is missing from runtime output');
+assert(rendered.includes('class="lab-index '),'Index rows block is missing');
 const staticBuild=html.split('<section id="builds">')[1]?.split('</section>')[0];
 assert(staticBuild,'Static Builds section missing');
-assert((staticBuild.match(/class="featured-work"/g)||[]).length<=2,'Prerendered Featured Work exceeds two');
+assert.equal((staticBuild.match(/class="lab-card /g)||[]).length,catalog.length,'Prerendered card count must match catalog');
+assert.equal((staticBuild.match(/class="lab-card lab-hero/g)||[]).length,1,'Prerendered hero card is missing');
 assert(staticBuild.includes('href="builds/jelly-baby/"'),'Prerendered Jelly Lab is missing');
+assert(!staticBuild.includes('featured-work'),'Prerendered section must not contain the removed Featured Work sidebar');
 assert(html.includes('<script src="builds-catalog.js?'),'Build catalog script must be loaded');
-console.log('PASS: Jelly Lab is pinned, destinations exist, static and dynamic featured limits hold with 50 incoming essays.');
+console.log('PASS: Jelly Lab pinned as cover story, '+catalog.length+' cards render and pre-render identically, article feeds cannot leak in.');

@@ -794,37 +794,34 @@
     }
 
     /* =========================================================
-     * Creation matrix
+     * Creation matrix — magazine spread
+     * 果冻实验室 = 封面特稿（hero），随后 3 张中卡，其余进索引行。
      * ========================================================= */
-    .lab-layout {
+    #builds {
+      --lab-mono: ui-monospace, "SF Mono", "Cascadia Mono", Consolas, Menlo, monospace;
+      /* 类别色（改版定稿：亮色主题用加深值保证对比度，暗色主题用第一版原值） */
+      --tint-play: #0B9288; --tint-tool: #5566D6; --tint-game: #A8720F;
+      --tint-lab: #7A3FC8; --tint-exp: #D0475F; --tint-3d: #0E9377;
+    }
+    [data-theme="dark"] #builds {
+      --tint-play: #2FF7E8; --tint-tool: #8FA6FF; --tint-game: #FFC46B;
+      --tint-lab: #C792EA; --tint-exp: #FF8FA3; --tint-3d: #7BE0C0;
+    }
+    .lab-spread {
       display: grid;
-      grid-template-columns: 1fr;
       gap: var(--s-6);
-      align-items: start;
-    }
-    @media (min-width: 980px) {
-      .lab-layout {
-        grid-template-columns: minmax(0, 1.8fr) minmax(280px, 0.55fr);
-      }
-    }
-    .lab-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: var(--s-4);
       align-content: start;
     }
-    @media (min-width: 720px) {
-      .lab-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-    .lab-aside {
-      display: grid;
-      gap: var(--s-4);
-      align-content: start;
-    }
-    .lab-card,
-    .lab-panel {
+    /* 类别点缀色：只挂在标签、编号、封面渐晕与悬停色上，保持克制 */
+    .lab-card { --tint: var(--accent); }
+    .lab-card[data-tag="PLAY"] { --tint: var(--tint-play); }
+    .lab-card[data-tag="TOOL"] { --tint: var(--tint-tool); }
+    .lab-card[data-tag="GAME"] { --tint: var(--tint-game); }
+    .lab-card[data-tag="LAB"] { --tint: var(--tint-lab); }
+    .lab-card[data-tag="EXPERIMENT"] { --tint: var(--tint-exp); }
+    .lab-card[data-tag="3D"] { --tint: var(--tint-3d); }
+
+    .lab-card {
       background: var(--surface);
       border: 1px solid var(--line);
       border-radius: var(--radius);
@@ -834,35 +831,22 @@
       overflow: hidden;
     }
     .lab-card {
-      height: 280px;
-      min-height: 0;
-      padding: 20px;
       display: flex;
       flex-direction: column;
-      gap: 10px;
       transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     }
-    /* Never stretch project cards to match a growing editorial sidebar. */
-    .lab-card > * { flex-shrink: 0; }
-    .lab-card-footer { margin-top: auto; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; }
-    .lab-card-footer .lab-link { margin: 0; letter-spacing: .08em; }
-    .lab-card-footer .lab-doi { margin: 0; font-size: 9px; padding: 2px 8px; }
-    .lab-more { display: inline-block; margin-top: 12px; color: var(--accent); font-size: 12px; }
-    @media (min-width: 1280px) { .lab-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-    .lab-card::before,
-    .lab-panel::before {
+    .lab-card::before {
       content: "";
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(135deg, color-mix(in oklab, var(--accent) 12%, transparent), transparent 38%),
-        radial-gradient(circle at 86% 12%, color-mix(in oklab, var(--electric) 16%, transparent), transparent 34%);
+        linear-gradient(135deg, color-mix(in oklab, var(--tint) 10%, transparent), transparent 38%),
+        radial-gradient(circle at 86% 12%, color-mix(in oklab, var(--electric) 14%, transparent), transparent 34%);
       opacity: 0.6;
       pointer-events: none;
     }
-    /* Sheen sweep + ambient glow layer, revealed on hover (decorative only) */
-    .lab-card::after,
-    .lab-panel::after {
+    /* Sheen sweep on hover (decorative only) */
+    .lab-card::after {
       content: "";
       position: absolute;
       inset: 0;
@@ -873,45 +857,12 @@
       pointer-events: none;
       z-index: 0;
     }
-    .lab-card:hover::after,
-    .lab-panel:hover::after { transform: translateX(120%); }
-    .lab-card > *,
-    .lab-panel > * {
-      position: relative;
-      z-index: 1;
-    }
-    .lab-card:hover {
-      transform: translateY(-6px);
-      border-color: color-mix(in oklab, var(--accent) 50%, var(--line-2));
-      box-shadow:
-        var(--shadow-2),
-        var(--shadow-glow),
-        0 24px 56px -28px color-mix(in oklab, var(--accent) 42%, transparent);
-    }
-    /* Lift the tag badge on hover for a subtle tactile response */
-    .lab-card:hover .lab-tag {
-      border-color: var(--accent);
-      background: color-mix(in oklab, var(--accent) 10%, var(--surface-strong) 70%);
-    }
-    .lab-tag {
-      width: fit-content;
-      padding: 6px 9px;
-      border: 1px solid color-mix(in oklab, var(--accent) 42%, var(--line));
-      border-radius: 6px;
-      color: var(--accent);
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.24em;
-      text-transform: uppercase;
-      background: color-mix(in oklab, var(--surface-strong) 58%, transparent);
-    }
+    .lab-card:hover::after { transform: translateX(120%); }
+    .lab-card > * { position: relative; z-index: 1; flex-shrink: 0; }
     .lab-card h3 {
       margin: 0;
       font-family: var(--serif);
-      font-size: 22px;
-      line-height: 1.22;
-      max-height: 2.44em;
-      max-width: 100%;
+      color: var(--ink);
       display: -webkit-box;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
@@ -921,21 +872,35 @@
     .lab-card p {
       margin: 0;
       color: var(--ink-soft);
-      font-size: 13px;
-      line-height: 1.65;
-      max-width: 32em;
       display: -webkit-box;
-      -webkit-line-clamp: 3;
       -webkit-box-orient: vertical;
       overflow: hidden;
       text-overflow: ellipsis;
     }
+    .lab-tag {
+      width: fit-content;
+      padding: 5px 8px;
+      border: 1px solid color-mix(in oklab, var(--tint) 46%, var(--line));
+      border-radius: 4px;
+      color: color-mix(in oklab, var(--tint) 76%, var(--ink));
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      background: color-mix(in oklab, var(--tint) 8%, var(--surface-strong) 60%);
+    }
+    .lab-no {
+      font-family: var(--lab-mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: color-mix(in oklab, var(--tint) 82%, var(--ink));
+    }
     .lab-link {
-      margin-top: auto;
       display: inline-flex;
       align-items: center;
       gap: var(--s-2);
-      color: var(--accent);
+      color: color-mix(in oklab, var(--tint) 76%, var(--ink));
       font-size: 12px;
       font-weight: 700;
       letter-spacing: 0.18em;
@@ -945,132 +910,259 @@
       content: "\2192";
       transition: transform 0.25s ease;
     }
+    .lab-card:hover .lab-link::after { transform: translateX(4px); }
     .lab-doi {
-      display: inline-block;
-      margin-top: 10px;
+      font-family: var(--lab-mono);
       font-size: 10px;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.04em;
       color: var(--muted);
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      padding: 3px 10px;
-      background: color-mix(in oklab, var(--surface) 65%, transparent);
-      transition: color 0.2s ease, border-color 0.2s ease;
+      white-space: nowrap;
     }
-    .lab-card:hover .lab-doi { color: var(--ink-soft); border-color: var(--line-2); }
-    .lab-card:hover .lab-link::after,
-    .featured-work:hover .lab-link::after {
-      transform: translateX(4px);
+    .lab-card-footer {
+      margin-top: auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px 10px;
     }
-    .lab-panel {
-      padding: clamp(18px, 2.5vw, 26px);
-      min-height: 0;
+
+    /* 封面版面：类别色渐晕 + 巨幅汉字底纹 + 英文 word */
+    .lab-cover {
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(130% 120% at 88% -12%, color-mix(in oklab, var(--tint) 24%, transparent), transparent 55%),
+        radial-gradient(120% 130% at -12% 112%, color-mix(in oklab, var(--tint) 12%, transparent), transparent 52%),
+        color-mix(in oklab, var(--bg-soft) 74%, var(--surface-strong));
     }
-    .lab-panel h3 {
-      margin: 0 0 var(--s-4);
-      font-size: 12px;
+    .lab-cover::before {
+      content: attr(data-glyph);
+      position: absolute;
+      right: -4%;
+      bottom: -26%;
+      font-family: var(--serif);
+      font-weight: 700;
+      font-size: clamp(120px, 16vw, 220px);
+      line-height: 1;
+      color: color-mix(in oklab, var(--tint) 17%, transparent);
+      pointer-events: none;
+    }
+    .lab-cover .lab-no { position: absolute; top: 12px; left: 14px; }
+    .lab-word {
+      position: absolute;
+      left: 16px;
+      bottom: 12px;
+      font-family: Impact, "Arial Narrow", var(--sans);
+      font-size: clamp(24px, 3.2vw, 44px);
+      line-height: 0.95;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      color: color-mix(in oklab, var(--ink) 92%, var(--tint));
+      max-width: 88%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    /* 封面特稿（目录第一位） */
+    .lab-hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.04fr) minmax(0, 1fr);
+    }
+    .lab-hero .lab-cover { min-height: 320px; }
+    .lab-hero-body {
+      padding: clamp(22px, 3vw, 34px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: var(--s-3);
+    }
+    .lab-hero-body h3 {
+      font-size: clamp(24px, 2.6vw, 32px);
+      line-height: 1.25;
+    }
+    .lab-hero-body > p {
+      font-size: 14px;
+      line-height: 1.8;
+      -webkit-line-clamp: 3;
+      max-width: 34em;
+    }
+    .lab-kicker {
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .lab-kicker-note {
+      font-size: 10px;
       letter-spacing: 0.26em;
       text-transform: uppercase;
       color: var(--muted);
+    }
+    .lab-chips {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: var(--s-3);
-    }
-    .lab-panel h3::after {
-      content: "";
-      flex: 1;
-      height: 1px;
-      min-width: 32px;
-      background: linear-gradient(90deg, color-mix(in oklab, var(--accent) 44%, transparent), transparent);
-    }
-    .featured-work {
-      display: grid;
-      grid-template-columns: minmax(48px, 0.2fr) minmax(0, 1fr);
-      column-gap: var(--s-3);
-      row-gap: 2px;
-      padding: var(--s-3) 0;
-      border-top: 1px solid var(--line);
-    }
-    .featured-work:first-of-type {
-      border-top: 0;
-      padding-top: 0;
-    }
-    .featured-work b {
-      display: block;
-      margin-bottom: 4px;
-      color: var(--accent);
-      font-size: 9px;
-      letter-spacing: 0.20em;
-      text-transform: uppercase;
-      grid-row: 1 / span 2;
-    }
-    .featured-work strong {
-      display: block;
-      color: var(--ink);
-      font-family: var(--serif);
-      font-size: 15px;
-      line-height: 1.3;
-      margin-bottom: 3px;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-    .featured-work span {
-      display: block;
-      color: var(--ink-soft);
-      font-size: 12px;
-      line-height: 1.55;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-    .roadmap-list {
-      display: grid;
-      gap: var(--s-3);
-      margin: 0;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 2px 0 0;
       padding: 0;
       list-style: none;
     }
-    .roadmap-list li {
-      display: grid;
-      grid-template-columns: 28px 1fr;
-      gap: var(--s-3);
-      align-items: start;
-      color: var(--ink-soft);
-      font-size: 14px;
-      line-height: 1.6;
+    .lab-chips li {
+      font-family: var(--lab-mono);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 5px 9px;
     }
-    .roadmap-list li::before {
-      content: counter(roadmap);
-      counter-increment: roadmap;
-      width: 28px;
-      height: 28px;
-      display: inline-grid;
-      place-items: center;
-      border-radius: 999px;
-      color: var(--accent);
-      border: 1px solid color-mix(in oklab, var(--accent) 42%, var(--line));
+    .lab-card.lab-hero:hover,
+    .lab-card.lab-med:hover {
+      transform: translateY(-4px);
+      border-color: color-mix(in oklab, var(--tint) 46%, var(--line-2));
+      box-shadow:
+        var(--shadow-2),
+        var(--shadow-glow),
+        0 24px 56px -28px color-mix(in oklab, var(--tint) 42%, transparent);
+    }
+
+    /* 中卡 */
+    .lab-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--s-5);
+      align-content: start;
+    }
+    @media (min-width: 680px) {
+      .lab-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (min-width: 1100px) {
+      .lab-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+    .lab-med .lab-cover { height: 148px; }
+    .lab-med .lab-word { font-size: clamp(20px, 2.2vw, 30px); }
+    .lab-med-body {
+      padding: 18px 20px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+    }
+    .lab-med-body h3 {
+      font-size: 19px;
+      line-height: 1.3;
+    }
+    .lab-med-body p {
+      font-size: 12.5px;
+      line-height: 1.7;
+      -webkit-line-clamp: 2;
+    }
+
+    /* 索引行（hairline 分隔，杂志目录式） */
+    .lab-index-head {
+      margin: 0 0 var(--s-2);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 8px 12px;
       font-size: 11px;
       font-weight: 700;
-      line-height: 1;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--muted);
     }
-    .roadmap-list {
-      counter-reset: roadmap;
+    .lab-index-head span {
+      font-weight: 400;
+      letter-spacing: 0.2em;
+    }
+    .lab-index-list {
+      display: flex;
+      flex-direction: column;
+      border-top: 1px solid var(--line);
+    }
+    .lab-row {
+      display: grid;
+      grid-template-columns: 56px minmax(0, 1fr) auto auto 20px;
+      gap: 16px;
+      align-items: center;
+      padding: 16px 8px;
+      border: 0;
+      border-bottom: 1px solid var(--line);
+      border-radius: 0;
+      background: transparent;
+      backdrop-filter: none;
+      box-shadow: none;
+      transition: background 0.2s ease;
+    }
+    .lab-row::before,
+    .lab-row::after { content: none; }
+    .lab-row:hover {
+      background: color-mix(in oklab, var(--tint) 5%, transparent);
+      transform: none;
+    }
+    .lab-row-main { min-width: 0; }
+    .lab-row-main strong {
+      display: block;
+      font-family: var(--serif);
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 1.3;
+      color: var(--ink);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .lab-row-main em {
+      font-style: normal;
+      display: block;
+      margin-top: 3px;
+      font-size: 12px;
+      line-height: 1.5;
+      color: var(--muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .lab-row .lab-tag { justify-self: end; }
+    .lab-row .lab-doi { justify-self: end; }
+    .lab-row-arrow {
+      color: var(--muted);
+      transition: transform 0.2s ease, color 0.2s ease;
+    }
+    .lab-row:hover .lab-row-arrow {
+      color: color-mix(in oklab, var(--tint) 76%, var(--ink));
+      transform: translateX(3px);
+    }
+
+    @media (max-width: 920px) {
+      .lab-hero { grid-template-columns: 1fr; }
+      .lab-hero .lab-cover { min-height: 0; height: 220px; }
+    }
+    @media (max-width: 880px) {
+      .lab-row { grid-template-columns: 48px minmax(0, 1fr) auto 18px; }
+      .lab-row .lab-doi { display: none; }
     }
     @media (max-width: 620px) {
-      .lab-card {
-        height: 260px;
-        padding: 18px;
+      .lab-spread { gap: var(--s-5); }
+      .lab-row {
+        grid-template-columns: 44px minmax(0, 1fr) auto;
+        gap: 12px;
+        padding: 14px 4px;
       }
-      .featured-work {
-        grid-template-columns: 1fr;
-      }
-      .featured-work b {
-        grid-row: auto;
-      }
+      .lab-row .lab-row-arrow { display: none; }
+      .lab-row-main em { display: none; }
+      .lab-hero .lab-cover { height: 180px; }
+      .lab-hero-body { padding: 20px; }
+      .lab-med .lab-cover { height: 132px; }
+      .lab-med-body { padding: 16px 16px 18px; }
+    }
+    /* 超窄屏（360px 及以下）：索引行去掉标签列，保留编号+标题 */
+    @media (max-width: 360px) {
+      .lab-row { grid-template-columns: 40px minmax(0, 1fr); }
+      .lab-row .lab-tag { display: none; }
     }
 
     /* =========================================================
@@ -2042,33 +2134,10 @@
     }
 
     /* =========================================================
-     * C: Builds 3D Flip Cards
+     * C: Builds 3D Flip Cards — removed with the 2026-10 magazine
+     *    spread redesign. Cards now use the shared fade-in system;
+     *    index rows must never carry a card transform.
      * ========================================================= */
-    .lab-grid { perspective: 1400px; }
-    .lab-card {
-      opacity: 0;
-      transform: rotateY(80deg) translateZ(-60px) translateX(-40px);
-      transform-origin: left center;
-      transition: transform 0.7s cubic-bezier(0.2, 0.8, 0.3, 1),
-                  opacity 0.5s ease,
-                  border-color 0.3s ease, box-shadow 0.3s ease;
-    }
-    .lab-card.flip-in {
-      opacity: 1;
-      transform: rotateY(0) translateZ(0) translateX(0);
-    }
-    .lab-card.flip-in:nth-child(1) { transition-delay: 0s; }
-    .lab-card.flip-in:nth-child(2) { transition-delay: 0.1s; }
-    .lab-card.flip-in:nth-child(3) { transition-delay: 0.2s; }
-    .lab-card.flip-in:nth-child(4) { transition-delay: 0.3s; }
-    .lab-card.flip-in:nth-child(5) { transition-delay: 0.4s; }
-    .lab-card.flip-in:nth-child(6) { transition-delay: 0.5s; }
-    .lab-card.flip-in:nth-child(7) { transition-delay: 0.6s; }
-    .lab-card.flip-in:nth-child(8) { transition-delay: 0.7s; }
-    .lab-card.flip-in:hover {
-      transform: rotateY(-8deg) translateZ(20px);
-      transition: transform 0.25s ease;
-    }
 
     /* =========================================================
      * D: Section Transition — Light Scan Line
@@ -5324,101 +5393,114 @@
         </section>
     <section id="builds">
           <div class="container">
-            <div class="section-head fade-in" style="transform: translateY(-201.995px);">
+            <div class="section-head fade-in">
               <div>
                 <div class="label">CREATION MATRIX · 创作矩阵</div>
-                <h2>把想法，<br>做成作品。</h2>
+                <h2>把想法，<br/>做成作品。</h2>
               </div>
               <p class="blurb">这里不放想法，放做出来的东西——网站、游戏、H5、交互实验。</p>
             </div>
-            <div class="lab-layout">
+            <div class="lab-spread">
+              <a class="lab-card lab-hero fade-in" href="builds/jelly-baby/" data-tag="PLAY">
+                <div class="lab-cover" data-glyph="果">
+                  <span class="lab-no">N°01</span>
+                  <span class="lab-word">Jelly Lab</span>
+                </div>
+                <div class="lab-hero-body">
+                  <p class="lab-kicker"><span class="lab-tag">PLAY</span><span class="lab-kicker-note">COVER STORY · 本期特稿</span></p>
+                  <h3>果冻实验室 · 捏捏与冒险</h3>
+                  <p>自由揉捏与吹风、45 秒快递挑战、低重力月球跳高。轻量加载，保留软体物理手感；需支持 WebGPU。</p>
+                  <ul class="lab-chips"><li>WEBGPU</li><li>软体物理</li><li>3 种玩法</li></ul>
+                  <div class="lab-card-footer"><span class="lab-link">进入果冻实验室</span></div>
+                </div>
+              </a>
               <div class="lab-grid">
-                
-                  <a class="lab-card fade-in fade-in-delay-0" href="builds/jelly-baby/">
-                    <span class="lab-tag">PLAY</span>
-                    <h3>果冻实验室 · 捏捏与冒险</h3>
-                    <p>自由揉捏与吹风、45 秒快递挑战、低重力月球跳高。轻量加载，保留软体物理手感；需支持 WebGPU。</p>
-                    <div class="lab-card-footer"><span class="lab-link">进入果冻实验室</span>
-                    </div>
-                  </a>
-                
-                  <a class="lab-card fade-in fade-in-delay-1" href="whiteboard-recorder.html">
+                <a class="lab-card lab-med fade-in fade-in-delay-1" href="builds/ziwei/" data-tag="TOOL">
+                  <div class="lab-cover" data-glyph="问">
+                    <span class="lab-no">N°02</span>
+                    <span class="lab-word">Ziwei</span>
+                  </div>
+                  <div class="lab-med-body">
+                    <span class="lab-tag">TOOL</span>
+                    <h3>问星 · 紫微斗数在线排盘</h3>
+                    <p>输入生日时辰，本地排出紫微命盘：十二宫现代语解读、四化格局、大限流年，数据只存手机不上传。</p>
+                    <div class="lab-card-footer"><span class="lab-link">开始排盘</span></div>
+                  </div>
+                </a>
+                <a class="lab-card lab-med fade-in fade-in-delay-2" href="whiteboard-recorder.html" data-tag="TOOL">
+                  <div class="lab-cover" data-glyph="犀">
+                    <span class="lab-no">N°03</span>
+                    <span class="lab-word">Whiteboard</span>
+                  </div>
+                  <div class="lab-med-body">
                     <span class="lab-tag">TOOL</span>
                     <h3>犀牛白板 · 录屏创作器</h3>
                     <p>边画边讲的浏览器创作工具：白板、幻灯片、提词器、摄像头画中画与一键录屏，作品只保存在本地。</p>
-                    <div class="lab-card-footer"><span class="lab-link">开始创作</span>
-                    </div>
-                  </a>
-                
-                  <a class="lab-card fade-in fade-in-delay-2" href="games/duck-scare-war.html">
+                    <div class="lab-card-footer"><span class="lab-link">开始创作</span></div>
+                  </div>
+                </a>
+                <a class="lab-card lab-med fade-in fade-in-delay-3" href="games/duck-scare-war.html" data-tag="GAME">
+                  <div class="lab-cover" data-glyph="鸭">
+                    <span class="lab-no">N°04</span>
+                    <span class="lab-word">Duck War</span>
+                  </div>
+                  <div class="lab-med-body">
                     <span class="lab-tag">GAME</span>
                     <h3>鸭骗战争：真鸭假鹅</h3>
                     <p>扮演鹅腿阿姨，用鸭腿冒充鹅腿。荒诞答题小游戏，测试轻量游戏化表达。</p>
-                    <div class="lab-card-footer"><span class="lab-link">玩游戏</span>
-                    </div>
-                  </a>
-                
-                  <a class="lab-card fade-in fade-in-delay-3" href="ai-studio-3d.html">
-                    <span class="lab-tag">PLAY</span>
-                    <h3>3D AI 工作室</h3>
-                    <p>Iron Man 风格的 3D AI 工作室——方舟反应堆、全息屏幕、贾维斯 HUD、全球数据流。可拖拽旋转、点击交互。</p>
-                    <div class="lab-card-footer"><span class="lab-link">进入工作室</span>
-                    </div>
-                  </a>
-                
-                  <a class="lab-card fade-in fade-in-delay-3" href="ai-lab-3d.html">
-                    <span class="lab-tag">LAB</span>
-                    <h3>AI 创作实验室</h3>
-                    <p>沉浸式 3D 交互页面——悬浮水晶体、滚动驱动的相机运动、作品矩阵、能力图谱、实时数据面板。</p>
-                    <div class="lab-card-footer"><span class="lab-link">进入实验室</span>
-                    </div>
-                  </a>
-                
-                  <a class="lab-card fade-in fade-in-delay-3" href="anti-gravity-text.html">
-                    <span class="lab-tag">EXPERIMENT</span>
-                    <h3>反重力文字 · 北京地标</h3>
-                    <p>每个字符在零重力中漂浮上升--用反重力排版讲述故宫、鸟巢、国贸等北京地标的建筑故事。鼠标悬停时字母被推开，松手后弹回原位。</p>
-                    <div class="lab-card-footer"><span class="lab-link">进入实验</span>
-                    <span class="lab-doi" title="Zenodo DOI">DOI 10.5281/zenodo.22065955</span></div>
-                  </a>
-                
-                  <a class="lab-card fade-in fade-in-delay-3" href="stadium-3d.html">
-                    <span class="lab-tag">3D</span>
-                    <h3>AI 竞技场 3D · 多球场体验</h3>
-                    <p>程序化 3D 体育场--Three.js 构建的沉浸式球场，支持伯纳乌/工体/马拉卡纳三座经典球场切换、日夜模式、雨天天气系统、球迷人浪应援和实时弹幕。点击座位查看视野评分，进入第一人称观赛视角。</p>
-                    <div class="lab-card-footer"><span class="lab-link">进入竞技场</span>
-                    <span class="lab-doi" title="Zenodo DOI">DOI 10.5281/zenodo.22070200</span></div>
-                  </a>
-                
+                    <div class="lab-card-footer"><span class="lab-link">玩游戏</span></div>
+                  </div>
+                </a>
               </div>
-              <aside class="lab-aside">
-                <div class="lab-panel fade-in fade-in-delay-1">
-                  <h3>Featured Work</h3>
-                  
-                    <a class="featured-work" href="notes/2026-10-08-keling-ipo.html">
-                      <b>Essay</b>
-                      <strong>可灵AI要单独上市，估值追平整个快手</strong>
-                      <span>8月增资成交价推算可灵约1228亿元，同口径已略超快手市值。判断：一级市场买的是AI时代竞争位，可灵要守住它，先得守住正被Seedance收窄的技术身位。</span>
-                    </a>
-                  
-                    <a class="featured-work" href="notes/2026-09-29-ai-failures-2026.html">
-                      <b>Essay</b>
-                      <strong>2.5亿美元买单，2026年AI翻车的三个账本</strong>
-                      <span>苹果为没交货的 Siri 赔出 2.5 亿美元，Sora 六个月收入不够付一天账单。判断：2026 年 AI 竞争已从能不能做出来变成算不算得过账。</span>
-                    </a>
-                  
-                  <a class="lab-more" href="notes/">浏览全部文章 →</a>
+              <div class="lab-index fade-in fade-in-delay-2">
+                <p class="lab-index-head">MORE EXPERIMENTS <span>更多实验 · 04</span></p>
+                <div class="lab-index-list">
+                  <a class="lab-card lab-row" href="ai-studio-3d.html" data-tag="PLAY">
+                    <span class="lab-no">N°05</span>
+                    <span class="lab-row-main">
+                      <strong>3D AI 工作室</strong>
+                      <em>Iron Man 风格的 3D AI 工作室——方舟反应堆、全息屏幕、贾维斯 HUD、全球数据流。可拖拽旋转、点击交互。</em>
+                    </span>
+                    <span class="lab-tag">PLAY</span>
+                    
+                    <span class="lab-row-arrow" aria-hidden="true">→</span>
+                  </a>
+                  <a class="lab-card lab-row" href="ai-lab-3d.html" data-tag="LAB">
+                    <span class="lab-no">N°06</span>
+                    <span class="lab-row-main">
+                      <strong>AI 创作实验室</strong>
+                      <em>沉浸式 3D 交互页面——悬浮水晶体、滚动驱动的相机运动、作品矩阵、能力图谱、实时数据面板。</em>
+                    </span>
+                    <span class="lab-tag">LAB</span>
+                    
+                    <span class="lab-row-arrow" aria-hidden="true">→</span>
+                  </a>
+                  <a class="lab-card lab-row" href="anti-gravity-text.html" data-tag="EXPERIMENT">
+                    <span class="lab-no">N°07</span>
+                    <span class="lab-row-main">
+                      <strong>反重力文字 · 北京地标</strong>
+                      <em>每个字符在零重力中漂浮上升--用反重力排版讲述故宫、鸟巢、国贸等北京地标的建筑故事。鼠标悬停时字母被推开，松手后弹回原位。</em>
+                    </span>
+                    <span class="lab-tag">EXPERIMENT</span>
+                    <span class="lab-doi" title="Zenodo DOI">DOI 10.5281/zenodo.22065955</span>
+                    <span class="lab-row-arrow" aria-hidden="true">→</span>
+                  </a>
+                  <a class="lab-card lab-row" href="stadium-3d.html" data-tag="3D">
+                    <span class="lab-no">N°08</span>
+                    <span class="lab-row-main">
+                      <strong>AI 竞技场 3D · 多球场体验</strong>
+                      <em>程序化 3D 体育场--Three.js 构建的沉浸式球场，支持伯纳乌/工体/马拉卡纳三座经典球场切换、日夜模式、雨天天气系统、球迷人浪应援和实时弹幕。点击座位查看视野评分，进入第一人称观赛视角。</em>
+                    </span>
+                    <span class="lab-tag">3D</span>
+                    <span class="lab-doi" title="Zenodo DOI">DOI 10.5281/zenodo.22070200</span>
+                    <span class="lab-row-arrow" aria-hidden="true">→</span>
+                  </a>
                 </div>
-                <div class="lab-panel fade-in fade-in-delay-2">
-                  <h3>Creation Roadmap</h3>
-                  <ol class="roadmap-list">
-                    <li>每周复盘一个 AI workflow 实验</li><li>每月发布一个交互实验或小游戏</li><li>把聊天、网页、文章和自动化流程串成个人创作系统</li><li>探索 H5 内容产品化的新形态</li>
-                  </ol>
-                </div>
-              </aside>
+              </div>
             </div>
           </div>
         </section>
+
     <section id="daily">
           <div class="container">
             <div class="section-head fade-in" style="transform: translateY(-294.604px);">
@@ -5905,10 +5987,22 @@
 
       /* Creation matrix */
       const lab = D.lab;
-      // Hard display cap: incoming article feeds must never lengthen the Builds sidebar.
-      const BUILD_FEATURED_LIMIT = 2;
       const buildTracks = window.BUILDS_CATALOG || lab?.tracks || [];
-      if (lab) {
+      if (lab && buildTracks.length) {
+        // Magazine spread: catalog[0] is the cover story, next 3 are medium
+        // cards, the rest become hairline index rows. Numbers derive from
+        // catalog order (N°01…), so no hand-maintained field is needed.
+        const hero = buildTracks[0];
+        const meds = buildTracks.slice(1, 4);
+        const rows = buildTracks.slice(4);
+        const pad2 = n => String(n).padStart(2, '0');
+        const labNo = i => 'N°' + pad2(i + 1);
+        const glyphOf = item => (item.title || '').trim().charAt(0);
+        const cover = (item, i) => `
+                  <div class="lab-cover" data-glyph="${esc(glyphOf(item))}">
+                    <span class="lab-no">${labNo(i)}</span>
+                    <span class="lab-word">${esc(item.word || item.tag)}</span>
+                  </div>`;
         document.getElementById('builds').innerHTML = `
           <div class="container">
             <div class="section-head fade-in">
@@ -5918,37 +6012,47 @@
               </div>
               <p class="blurb">${esc(lab.blurb)}</p>
             </div>
-            <div class="lab-layout">
+            <div class="lab-spread">
+              <a class="lab-card lab-hero fade-in" href="${esc(hero.href)}" data-tag="${esc(hero.tag)}">
+                ${cover(hero, 0)}
+                <div class="lab-hero-body">
+                  <p class="lab-kicker"><span class="lab-tag">${esc(hero.tag)}</span><span class="lab-kicker-note">COVER STORY · 本期特稿</span></p>
+                  <h3>${esc(hero.title)}</h3>
+                  <p>${esc(hero.desc)}</p>
+                  ${hero.chips ? `<ul class="lab-chips">${hero.chips.map(c => `<li>${esc(c)}</li>`).join('')}</ul>` : ''}
+                  <div class="lab-card-footer"><span class="lab-link">${esc(hero.linkLabel)}</span></div>
+                </div>
+              </a>
+              ${meds.length ? `
               <div class="lab-grid">
-                ${buildTracks.map((item, i) => `
-                  <a class="lab-card fade-in fade-in-delay-${Math.min(i, 3)}" href="${esc(item.href)}">
+                ${meds.map((item, i) => `
+                <a class="lab-card lab-med fade-in fade-in-delay-${Math.min(i + 1, 3)}" href="${esc(item.href)}" data-tag="${esc(item.tag)}">
+                  ${cover(item, i + 1)}
+                  <div class="lab-med-body">
                     <span class="lab-tag">${esc(item.tag)}</span>
                     <h3>${esc(item.title)}</h3>
                     <p>${esc(item.desc)}</p>
-                    <div class="lab-card-footer"><span class="lab-link">${esc(item.linkLabel)}</span>
-                    ${item.doi ? `<span class="lab-doi" title="Zenodo DOI">DOI ${esc(item.doi)}</span>` : ''}</div>
-                  </a>
-                `).join('')}
-              </div>
-              <aside class="lab-aside">
-                <div class="lab-panel fade-in fade-in-delay-1">
-                  <h3>Featured Work</h3>
-                  ${(lab.featured || []).slice(0, BUILD_FEATURED_LIMIT).map(item => `
-                    <a class="featured-work" href="${esc(item.href)}">
-                      <b>${esc(item.type)}</b>
+                    <div class="lab-card-footer"><span class="lab-link">${esc(item.linkLabel)}</span></div>
+                  </div>
+                </a>`).join('')}
+              </div>` : ''}
+              ${rows.length ? `
+              <div class="lab-index fade-in fade-in-delay-2">
+                <p class="lab-index-head">MORE EXPERIMENTS <span>更多实验 · ${pad2(rows.length)}</span></p>
+                <div class="lab-index-list">
+                ${rows.map((item, i) => `
+                  <a class="lab-card lab-row" href="${esc(item.href)}" data-tag="${esc(item.tag)}">
+                    <span class="lab-no">${labNo(i + 4)}</span>
+                    <span class="lab-row-main">
                       <strong>${esc(item.title)}</strong>
-                      <span>${esc(item.desc)}</span>
-                    </a>
-                  `).join('')}
-                  <a class="lab-more" href="notes/">浏览全部文章 →</a>
+                      <em>${esc(item.desc)}</em>
+                    </span>
+                    <span class="lab-tag">${esc(item.tag)}</span>
+                    ${item.doi ? `<span class="lab-doi" title="Zenodo DOI">DOI ${esc(item.doi)}</span>` : ''}
+                    <span class="lab-row-arrow" aria-hidden="true">→</span>
+                  </a>`).join('')}
                 </div>
-                <div class="lab-panel fade-in fade-in-delay-2">
-                  <h3>Creation Roadmap</h3>
-                  <ol class="roadmap-list">
-                    ${(lab.roadmap || []).map(item => `<li>${esc(item)}</li>`).join('')}
-                  </ol>
-                </div>
-              </aside>
+              </div>` : ''}
             </div>
           </div>
         `;
@@ -6240,21 +6344,8 @@
         obs.observe(section);
       })();
 
-      /* === C: Builds 3D Flip Cards === */
-      (function initBuildsFlip() {
-        const grid = document.querySelector('.lab-grid');
-        if (!grid) return;
-        const cards = grid.querySelectorAll('.lab-card');
-        const obs = new IntersectionObserver(entries => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('flip-in');
-              obs.unobserve(entry.target);
-            }
-          });
-        }, { threshold: 0.15 });
-        cards.forEach(card => obs.observe(card));
-      })();
+      /* === C: Builds 3D Flip Cards — removed with the magazine spread
+         redesign (2026-10). Builds cards animate with .fade-in only. === */
 
       /* === D: Section Glow Line + Vignette + Parallax + Letterbox === */
       (function initCinematicSystem() {

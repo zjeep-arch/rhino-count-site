@@ -5,42 +5,49 @@ window.BUILDS_CATALOG = [
     "title": "果冻实验室 · 捏捏与冒险",
     "desc": "自由揉捏与吹风、45 秒快递挑战、低重力月球跳高。轻量加载，保留软体物理手感；需支持 WebGPU。",
     "linkLabel": "进入果冻实验室",
-    "href": "builds/jelly-baby/"
+    "href": "builds/jelly-baby/",
+    "word": "Jelly Lab",
+    "chips": ["WEBGPU", "软体物理", "3 种玩法"]
   },
   {
     "tag": "TOOL",
     "title": "问星 · 紫微斗数在线排盘",
     "desc": "输入生日时辰，本地排出紫微命盘：十二宫现代语解读、四化格局、大限流年，数据只存手机不上传。",
     "linkLabel": "开始排盘",
-    "href": "builds/ziwei/"
+    "href": "builds/ziwei/",
+    "word": "Ziwei"
   },
   {
     "tag": "TOOL",
     "title": "犀牛白板 · 录屏创作器",
     "desc": "边画边讲的浏览器创作工具：白板、幻灯片、提词器、摄像头画中画与一键录屏，作品只保存在本地。",
     "linkLabel": "开始创作",
-    "href": "whiteboard-recorder.html"
+    "href": "whiteboard-recorder.html",
+    "word": "Whiteboard"
   },
   {
     "tag": "GAME",
     "title": "鸭骗战争：真鸭假鹅",
     "desc": "扮演鹅腿阿姨，用鸭腿冒充鹅腿。荒诞答题小游戏，测试轻量游戏化表达。",
     "linkLabel": "玩游戏",
-    "href": "games/duck-scare-war.html"
+    "href": "games/duck-scare-war.html",
+    "word": "Duck War"
   },
   {
     "tag": "PLAY",
     "title": "3D AI 工作室",
     "desc": "Iron Man 风格的 3D AI 工作室——方舟反应堆、全息屏幕、贾维斯 HUD、全球数据流。可拖拽旋转、点击交互。",
     "linkLabel": "进入工作室",
-    "href": "ai-studio-3d.html"
+    "href": "ai-studio-3d.html",
+    "word": "Iron Suite"
   },
   {
     "tag": "LAB",
     "title": "AI 创作实验室",
     "desc": "沉浸式 3D 交互页面——悬浮水晶体、滚动驱动的相机运动、作品矩阵、能力图谱、实时数据面板。",
     "linkLabel": "进入实验室",
-    "href": "ai-lab-3d.html"
+    "href": "ai-lab-3d.html",
+    "word": "AI Lab"
   },
   {
     "tag": "EXPERIMENT",
@@ -49,7 +56,8 @@ window.BUILDS_CATALOG = [
     "linkLabel": "进入实验",
     "href": "anti-gravity-text.html",
     "doi": "10.5281/zenodo.22065955",
-    "doiUrl": "https://doi.org/10.5281/zenodo.22065955"
+    "doiUrl": "https://doi.org/10.5281/zenodo.22065955",
+    "word": "Anti-Gravity"
   },
   {
     "tag": "3D",
@@ -58,6 +66,7 @@ window.BUILDS_CATALOG = [
     "linkLabel": "进入竞技场",
     "href": "stadium-3d.html",
     "doi": "10.5281/zenodo.22070200",
-    "doiUrl": "https://doi.org/10.5281/zenodo.22070200"
+    "doiUrl": "https://doi.org/10.5281/zenodo.22070200",
+    "word": "Arena 3D"
   }
 ];
