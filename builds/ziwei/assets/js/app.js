@@ -683,6 +683,7 @@ function renderChartBody(){
         ${lx ? `<div class="ci-row">${esc(lx)}</div>` : ''}
         ${fp ? `<div class="ci-row gzline">${esc(fp)}</div>` : ''}
         <div class="ci-row">${esc(chart.wuxingJuName || '')} · 命主${esc(chart.mingZhu || '—')} · 身主${esc(chart.shenZhu || '—')}</div>
+        <div class="ci-seal" aria-hidden="true">問星</div>
       </div>`;
       return;
     }

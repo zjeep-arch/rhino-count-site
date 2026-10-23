@@ -518,3 +518,184 @@ body{font-family:var(--font-body); padding-bottom:calc(104px + env(safe-area-ins
 .center-info .ci-brand{margin-bottom:3px;}
 .center-info .gzline{font-size:11px; letter-spacing:.02em;}
 .center-info .ci-row{font-size:11.5px;}
+
+/* ═══════════════ v6：「宣纸·墨·朱砂」艺术重设计（编辑部风：暖纸底/墨字/克莱色/发丝线） ═══════════════ */
+:root{
+  --bg:#F6F2E9;             /* 暖宣纸底 */
+  --card:#FFFDF6;           /* 纸白卡 */
+  --ink:#26231C;            /* 墨 */
+  --ink-soft:#4E493E;
+  --muted:#8B8477;          /* 暖灰 */
+  --primary:#A85B38;        /* 克莱/赭 */
+  --primary-deep:#5F4A33;   /* 深褐（标题） */
+  --primary-soft:#F1E6D9;   /* 赭洗底 */
+  --line:#E2DAC8;           /* 纸发丝线 */
+  --gold:#8C6D3F;           /* 哑金 */
+  --clay:#B0523A;           /* 朱砂 */
+  --shadow:0 1px 2px rgba(80,66,40,.05), 0 6px 22px rgba(80,66,40,.07);
+  --sh-sm:0 1px 2px rgba(80,66,40,.06);
+  --sh-md:0 2px 6px rgba(80,66,40,.06), 0 10px 28px rgba(80,66,40,.08);
+  --sh-lg:0 4px 12px rgba(60,50,30,.10), 0 18px 48px rgba(60,50,30,.12);
+  --grad-sky:linear-gradient(180deg,#FBF8F0 0%,#F3EDDD 60%,#EDE5D0 100%);
+  --grad-primary:linear-gradient(135deg,#B96A42 0%,#96502F 100%);
+  --grad-gold:linear-gradient(135deg,#A8854B 0%,#7F6338 100%);
+  --grad-menu-hero:linear-gradient(150deg,#332E24 0%,#211D15 70%);
+  --radius:14px;
+}
+::selection{background:#EBDCC6;}
+body{background:
+  radial-gradient(1100px 700px at 88% -8%, rgba(176,82,58,.045), transparent 60%),
+  radial-gradient(900px 600px at -10% 30%, rgba(140,109,63,.05), transparent 55%),
+  var(--bg);}
+/* 星野改为墨金两点，去掉紫 */
+#stars-bg{background-image:
+  radial-gradient(2px 2px at 12% 18%, rgba(95,74,51,.35), transparent 60%),
+  radial-gradient(2px 2px at 82% 12%, rgba(95,74,51,.28), transparent 60%),
+  radial-gradient(2.5px 2.5px at 68% 32%, rgba(176,82,58,.28), transparent 60%),
+  radial-gradient(2px 2px at 28% 58%, rgba(140,109,63,.26), transparent 60%),
+  radial-gradient(2px 2px at 90% 68%, rgba(95,74,51,.24), transparent 60%),
+  radial-gradient(2.5px 2.5px at 45% 82%, rgba(176,82,58,.20), transparent 60%);}
+/* 头部：纸面 + 发丝线 */
+#app-header{background:rgba(246,242,233,.9); border-bottom:1px solid var(--line);}
+.brand-mark{background:var(--ink); border-radius:9px; color:#F6F2E9; box-shadow:none;}
+.brand h1{color:var(--ink);}
+#topnav button{color:var(--ink-soft); border-radius:8px;}
+#topnav button:hover{color:var(--ink); background:rgba(38,35,28,.05);}
+#topnav button.on{background:var(--ink); color:#F6F2E9;}
+.icon-btn{border-color:var(--line);}
+/* 按钮：墨底纸字，收圆角 */
+.btn-primary{background:var(--ink); color:#F6F2E9; border-radius:10px;
+  box-shadow:0 2px 10px rgba(38,35,28,.22); letter-spacing:.12em;}
+.btn-primary:hover{filter:none; background:#3A352A;}
+.btn-ghost{border-radius:10px; border-color:var(--line); color:var(--ink-soft);}
+.btn-ghost:hover{border-color:var(--ink-soft); color:var(--ink);}
+.link-btn{color:var(--clay);}
+/* 卡片：发丝线替代重阴影 */
+.card{border:1px solid var(--line); box-shadow:var(--sh-sm);}
+.card-kicker{color:var(--clay); letter-spacing:.24em;}
+.view-title{color:var(--ink); letter-spacing:.08em;}
+/* hero：纸面 + 墨字 + 朱砂细线 */
+.hero-slim .hero-title{color:var(--ink); letter-spacing:.1em;}
+.hero-slim .hero-moon{color:var(--clay); opacity:.75;}
+.hero-slim .hero-sub{color:var(--muted);}
+.daily-card{background:linear-gradient(135deg,#FFFDF6 0%,#F5EFE0 100%); border:1px solid var(--line); box-shadow:var(--sh-sm);}
+.date-pill{background:#F0E7D6; color:#6B5B3F;}
+/* tabs：墨胶囊 */
+.tabs button{background:transparent; border:1px solid transparent; color:var(--muted); border-radius:9px;}
+.tabs button.on{background:var(--ink); color:#F6F2E9; border-color:var(--ink);}
+#luck-tabs{background:rgba(38,35,28,.06);}
+#luck-tabs button.on{background:#FFFDF6; color:var(--ink);}
+#luck-picker select{border-radius:9px; border-color:var(--line); background:#FFFDF6;}
+.sihua-chip{background:#F0E7D6; color:#5F4A33;}
+/* 命盘格：纸卡发丝线；命宫朱砂；流年金；三方四正虚线 */
+.cell{background:linear-gradient(180deg,#FFFDF6 0%,#FAF6EA 100%); border:1px solid var(--line);
+  box-shadow:none; border-radius:10px;}
+.cell:hover{border-color:#C9BFA6;}
+.cell .pname{color:var(--ink);}
+.cell .gz{color:var(--muted);}
+.cell.hl{border:1.5px solid var(--gold); box-shadow:0 0 0 3px rgba(140,109,63,.14);}
+.cell.sf{border:1.5px dashed var(--gold); box-shadow:none;}
+.cell .tag{background:var(--clay); border-radius:4px; box-shadow:inset 0 0 0 1.5px rgba(255,253,246,.5);}
+.cell .dx{color:var(--muted); border-top:1px solid var(--line); padding-top:3px;}
+.ov-tag{background:var(--ink); border-radius:4px;}
+/* 星曜 chip：纸底墨字 */
+#chart-grid .star-chip{background:rgba(38,35,28,.055); color:var(--ink); border-radius:6px;}
+#chart-grid .star-chip:hover{background:rgba(176,82,58,.12);}
+/* 四化徽章：禄=哑金 权=墨 科=苔绿 忌=朱砂 */
+.sihua.sh-lu{background:var(--grad-gold);}
+.sihua.sh-quan{background:#3A352A;}
+.sihua.sh-ke{background:#75855F;}
+.sihua.sh-ji{background:var(--clay);}
+/* 庙旺分级：金/褐/灰/朱 */
+.br-庙{color:#8C6D3F; font-weight:700;}
+.br-旺{color:#A08040; font-weight:600;}
+.br-利{color:#8B8477;}
+.br-不, .br-平{color:#A39C8D;}
+.br-陷{color:#A6503C; font-weight:600;}
+/* 中枢信息卡：命书样式 + 朱砂印章 */
+.center-info{background:linear-gradient(180deg,#FFFCF2 0%,#F4EDDB 100%);
+  border:1px solid var(--gold); position:relative;
+  box-shadow:inset 0 0 0 4px #FFFCF2, inset 0 0 0 5px rgba(140,109,63,.35), var(--sh-sm);}
+.center-info .ci-brand{color:var(--clay); letter-spacing:.42em;}
+.center-info .ci-name{color:var(--ink); letter-spacing:.06em;}
+.center-info .ci-row{color:var(--ink-soft);}
+.center-info .gzline{color:#5F4A33;}
+.ci-seal{position:absolute; right:12px; bottom:12px; width:44px; height:44px;
+  background:var(--clay); color:#FBF6EA; font-family:var(--font-title); font-weight:700;
+  writing-mode:vertical-rl; font-size:15px; letter-spacing:.14em;
+  display:flex; align-items:center; justify-content:center;
+  border-radius:5px; transform:rotate(-4deg);
+  box-shadow:inset 0 0 0 2px rgba(251,246,234,.55), inset 0 0 0 3.5px rgba(176,82,58,.85), 0 1px 4px rgba(60,40,20,.25);
+  opacity:.92;}
+/* 中栏其余 */
+#chart-head{border:1px solid var(--line); box-shadow:var(--sh-sm);}
+#chart-head h3{color:var(--ink);}
+.star-chip{background:rgba(38,35,28,.055); color:var(--ink-soft); border-radius:6px;}
+.palace-row{border-color:var(--line); box-shadow:none;}
+.palace-row-head .t{color:var(--ink);}
+.palace-row[data-sf="1"]{border:1.5px dashed var(--gold);}
+.sf-hint{background:#F4EDDC; border:1px dashed var(--gold); color:#5F4A33;}
+.overlay-bar{background:#F4EDDC; border:1px solid #E0D3B4; color:#6B5B3F;}
+/* 右栏宫位卡 */
+.palace-card{border:1px solid var(--line); box-shadow:var(--sh-sm);}
+.palace-card h4{color:var(--ink);}
+.palace-card .modern{background:#F0E7D6; color:#5F4A33;}
+.palace-card .p-sec{color:var(--clay);}
+.palace-card .p-tag{background:var(--grad-primary);}
+.palace-card .num{background:var(--ink);}
+.portrait-card{background:linear-gradient(135deg,#FFFCF2 0%,#F2EBD8 100%); border:1px solid var(--line);}
+/* 格局卡 */
+#pattern-list .pat{border-left:3px solid var(--clay); background:#F6F0E1;}
+#pattern-list .pat h5{color:var(--ink);}
+.lvl.excellent{background:#EDF2E4; color:#4E6335;} .lvl.good{background:#EDE7D6; color:#6B5B3F;}
+.lvl.neutral{background:#EFECE3; color:#6B6558;} .lvl.caution{background:#F6E3DC; color:#9A4A34;}
+/* 表单/选单 */
+#birth-form{border:1px solid var(--line); box-shadow:var(--sh-sm);}
+.field>span{color:var(--ink);}
+.field input[type=text], .field select{border-color:var(--line); background:#FFFDF6; border-radius:10px;}
+.seg button{border-color:var(--line); border-radius:10px; color:var(--muted);}
+.seg button.on{background:var(--ink); border-color:var(--ink); color:#F6F2E9;}
+.check input{accent-color:var(--clay);}
+.chip{border-color:var(--line); background:#FFFDF6; border-radius:9px; color:var(--ink-soft);}
+.chip.on{background:var(--ink); border-color:var(--ink); color:#F6F2E9;}
+.arch-item{border-color:var(--line); box-shadow:none;}
+.arch-item button{border-color:var(--line); border-radius:8px; color:var(--ink-soft);}
+/* 弹窗：纸面居中 */
+.modal{background:rgba(38,35,28,.4);}
+.modal-card{background:#FFFDF6; border:1px solid var(--line); box-shadow:var(--sh-lg);}
+.modal-card h3{color:var(--ink);}
+/* 解读菜单：墨底封面卡 */
+#menu-list .menu-item[data-menu="reading"] b{color:#F6F2E9;}
+#menu-list .menu-item[data-menu="reading"] .hint{color:rgba(246,242,233,.8);}
+.reading-body{border-color:var(--line); font-size:16px;}
+.reading-body h4{color:var(--ink);}
+/* 底部导航（手机）：纸面墨字 */
+#tabbar{background:rgba(255,253,246,.88); border:1px solid var(--line); box-shadow:var(--sh-md);}
+#tabbar button.on{background:rgba(38,35,28,.07); color:var(--ink);}
+#app-footer{color:var(--muted);}
+/* 解锁卡 */
+.unlock-card{background:linear-gradient(135deg,#F6F0E1,#EFE6D2); border-color:#E0D3B4;}
+.key-mono{background:#F4EDDC; border-color:#D8CCAA;}
+.unlock-row input{border-color:#E0D3B4;}
+.channel-card{background:#F6F0E1; border-color:var(--line);}
+/* 首页小卡 */
+.pv-stars{color:#5F4A33;}
+.p-tag.sm{background:var(--grad-primary);}
+/* 引导步骤序号：墨圆 */
+#guide-steps .step-n{background:var(--ink);}
+.back-link{color:var(--clay);}
+.sec-head h3{color:var(--ink);}
+#sihua-table th{background:#F0E7D6; color:#5F4A33;}
+#sihua-table th,#sihua-table td{border-color:var(--line);}
+.empty{color:var(--muted);}
+#compare-result .vs-col{border-color:var(--line);}
+
+/* v6.1：编辑部字重与细节 */
+.hero-title,.view-title,.ci-name,#chart-head h3{font-weight:700;}
+.brand h1{font-weight:700; letter-spacing:.18em;}
+.card-kicker::before{content:""; display:inline-block; width:18px; height:1px; background:var(--clay); vertical-align:middle; margin-right:8px; opacity:.7;}
+.sec-head h3{font-weight:700;}
+@media(min-width:1024px){
+  .hero-slim .hero-title{font-size:34px; letter-spacing:.14em;}
+  .hero-slim .hero-sub{letter-spacing:.06em;}
+}
