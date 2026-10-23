@@ -127,6 +127,13 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "马斯克说，以后的钱要按瓦特算",
+        desc: "人物转译：马斯克在 Isaacson 新播客说货币将按瓦特、吨位计价，只有 AI 和机器人能解 40 万亿美元国债。二十年失败史撑起他的方向感，跳票记录提醒时间表打折。周日破圈实验位，与黄仁勋篇同属能源母题。",
+        href: "notes/2026-10-25-musk-watt-currency.html"
+      },
+
+      {
+        type: "Essay",
         title: "智元的机器人，已经在武汉夜市上班了",
         desc: "智元远征 A3 Ultra 在武汉江滩夜市连续卖了 18 天零食，827 单。这家公司三年下线 2 万台机器人，2025 年出货全球第一。判断：出货量是入场券，出货之后的工时才是验真器。周六破圈实验位。",
         href: "notes/2026-10-24-zhiyuan-jiangtan.html"
@@ -639,6 +646,13 @@ window.SITE_DATA = {
         excerpt: "名字来自两部作品：恋爱的犀牛教我不计成败地热爱，基督山伯爵教我不动声色地等待。2022年底ChatGPT像一头灰犀牛从地平线走来，Count就是把它的轨迹从噪音里算出来——然后与各位同行者一起远征。",
         img: "assets/note-05.svg",
         href: "notes/why-rhino-count.html"
+      },
+      {
+        cat: "观察", num: "N° 141",
+        title: "马斯克说，以后的钱要按瓦特算",
+        excerpt: "马斯克在《The Builders》首期说，货币将按瓦特、吨位等物理量计价，只有 AI 和机器人能解美国国债。联邦债务 40.3 万亿美元，年净利息 1.05 万亿美元已超国防。判断：他的方向感是二十年失败史换来的，时间表照例打折，信用印得出钞票，印不出瓦特。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-10-25-musk-watt-currency.html"
       },
       {
         cat: "观察", num: "N° 140",
