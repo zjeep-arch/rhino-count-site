@@ -476,3 +476,45 @@ body{font-family:var(--font-body); padding-bottom:calc(104px + env(safe-area-ins
 @media(min-width:1024px){
   .palace-card,.menu-item{animation-duration:.28s; animation-delay:calc(var(--i,0)*22ms);}
 }
+
+/* ═══════════════ v5：命盘格重做（正方格 + 中枢信息卡 + 星曜分级） ═══════════════ */
+/* 宫位格：纵向弹性布局，星曜区可滚，大限沉底 —— 格子不再被内容撑成长条 */
+#chart-grid .cell{display:flex; flex-direction:column; overflow:hidden; min-height:0;}
+#chart-grid .cell .stars{flex:1 1 auto; min-height:0; overflow:auto; line-height:1.55; scrollbar-width:thin;}
+#chart-grid .cell .dx{flex:none; margin-top:4px;}
+#chart-grid .star-chip{padding:1px 7px; font-size:12px; margin:1px 2px 1px 0;}
+#chart-grid .sihua{min-width:18px; height:18px; line-height:18px; font-size:10.5px; vertical-align:1px;}
+/* 庙旺利平陷分级着色：一眼看出星的成色 */
+.br-庙{color:#B8860B; font-weight:700;}
+.br-旺{color:#C9A96A; font-weight:600;}
+.br-利{color:#8A7BA8;}
+.br-不{color:#8A7BA8;}
+.br-平{color:#9AA0A6;}
+.br-陷{color:#B0655A; font-weight:600;}
+/* 中枢信息卡：中间 2x2 放命主生辰信息（替代原来的大 logo 占位块） */
+.center-dup{display:none !important;}
+.center-info{grid-area:2/2/4/4; cursor:default;
+  background:linear-gradient(180deg,#FFFDF8 0%,#F6F0E3 100%); border:1px solid var(--gold);
+  display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;
+  gap:5px; padding:12px; box-shadow:var(--sh-sm);}
+.center-info .ci-brand{font-family:var(--font-title); color:var(--primary-deep); letter-spacing:.34em; font-size:14px;}
+.center-info .ci-name{font-family:var(--font-title); font-size:22px; color:var(--ink); line-height:1.3;}
+.center-info .ci-row{font-size:12px; color:var(--ink-soft); line-height:1.5;}
+.center-info .gzline{font-family:var(--font-title); color:var(--primary-deep); letter-spacing:.05em;}
+@media(min-width:1024px){
+  /* 容器与左栏放宽，命盘格正方形化（4x4，遵循排盘惯例） */
+  #app,.header-inner,#app-footer{max-width:1240px;}
+  #view-chart{grid-template-columns:minmax(0,7fr) minmax(380px,5fr);}
+  #chart-grid{max-width:780px; margin:0 auto; aspect-ratio:1/1; gap:8px;}
+  .cell{padding:10px 9px; min-height:0;}
+  .cell .pname{font-size:14.5px;}
+  /* 右栏十二宫卡：单列完整宽度（不再被压成 3 列细条） */
+  #chart-palaces{grid-template-columns:1fr; gap:12px;}
+  #chart-palaces .palace-card{animation:none;} /* 单列长列表取消逐卡入场动画 */
+  .chart-right .card{padding:22px;}
+}
+
+/* v5.1：信息卡文字呼吸感微调 */
+.center-info .ci-brand{margin-bottom:3px;}
+.center-info .gzline{font-size:11px; letter-spacing:.02em;}
+.center-info .ci-row{font-size:11.5px;}

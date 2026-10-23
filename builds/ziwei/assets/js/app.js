@@ -375,7 +375,7 @@ function palaceByBranch(chart, b){ return chart.palaces.find(p => p.branch === (
 
 function starHtml(s){
   const sihua = s.siHua ? shBadge(s.siHua) : '';
-  const br = s.brightnessRaw ? `<span class="br">${s.brightnessRaw}</span>` : '';
+  const br = s.brightnessRaw ? `<span class="br br-${s.brightnessRaw}">${s.brightnessRaw}</span>` : '';
   return `<span class="star-chip" data-star="${esc(s.name)}">${esc(s.name)}${sihua}${br}</span>`;
 }
 function palaceStarsHtml(p){
@@ -667,8 +667,25 @@ function renderChartBody(){
   // 传统田字格：巳午未申 / 辰··酉 / 卯··戌 / 寅丑子亥（子=0…亥=11）
   const order = [5,6,7,8, 4,-1,-1,9, 3,-1,-1,10, 2,1,0,11];
   let h = '';
+  let centerDone = false;
   order.forEach(b => {
-    if(b === -1){ h += '<div class="cell center"><div style="font-size:40px">✦</div><div class="gz">问星</div></div>'; return; }
+    if(b === -1){
+      // 中枢信息卡只渲染一次，第二个占位 div 隐藏（保持自动流占位）
+      if(centerDone){ h += '<div class="cell center-dup"></div>'; return; }
+      centerDone = true;
+      const li = chart.lunarInfo || {}, bi = chart.birthInfo || {};
+      const fp = (li.fourPillars || []).join('　');
+      const lx = li.lunarMonth ? `农历${li.isLeapMonth ? '闰' : ''}${li.lunarMonth}月${li.lunarDay}日` : '';
+      h += `<div class="cell center-info">
+        <div class="ci-brand">✦ 问星</div>
+        <div class="ci-name">${esc(rec.name)}</div>
+        <div class="ci-row">${bi.year}年${bi.month}月${bi.day}日 · ${BR[bi.hour]}时 · ${bi.gender === 'male' ? '男' : '女'}</div>
+        ${lx ? `<div class="ci-row">${esc(lx)}</div>` : ''}
+        ${fp ? `<div class="ci-row gzline">${esc(fp)}</div>` : ''}
+        <div class="ci-row">${esc(chart.wuxingJuName || '')} · 命主${esc(chart.mingZhu || '—')} · 身主${esc(chart.shenZhu || '—')}</div>
+      </div>`;
+      return;
+    }
     const p = palaceByBranch(chart, b);
     const tags = [];
     if(p.isMingGong) tags.push('<span class="tag">命</span>');
@@ -678,9 +695,9 @@ function renderChartBody(){
     const ovNameG = ov.hlBranch != null ? overlayPalaceAt(ov.hlBranch, b) : '';
     const ovTagG = ovNameG && ['命宫','官禄宫','财帛宫','夫妻宫'].includes(ovNameG)
       ? `<span class="ov-tag">${LUCK_PREFIX[luckMode] || '流'}${ovNameG.replace('宫','')}</span>` : '';
-    h += `<div class="cell${hl}${sf}" data-branch="${b}">${tags.join('')}${ovTagG}}
+    h += `<div class="cell${hl}${sf}" data-branch="${b}">${tags.join('')}${ovTagG}
       <div class="pname">${disp(p.name)}</div><div class="gz">${ST[p.stem]}${BR[p.branch]}</div>
-      <div>${palaceStarsHtml(p)}</div>
+      <div class="stars">${palaceStarsHtml(p)}</div>
       ${p.daXianAge ? `<div class="dx">大限 ${p.daXianAge[0]}–${p.daXianAge[1]}</div>` : ''}</div>`;
   });
   grid.innerHTML = h;
