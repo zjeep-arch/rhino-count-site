@@ -127,6 +127,13 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "黄仁勋说，AI 卡在了水管工手里",
+        desc: "人物转译：黄仁勋谈 AI 的实体瓶颈。美国缺电工缺到 AI 头上，能源股订单极热股价先冷，中国是镜像的另一面。本周破圈实验位。",
+        href: "notes/2026-10-23-huangrenxun-shuigong.html"
+      },
+
+      {
+        type: "Essay",
         title: "AI 一周挖出藏了 14 年的漏洞，全世界连夜打补丁",
         desc: "PHP2Shell 事件，AI 一周挖出藏了十几年的漏洞，修复却要两个月。判断：攻防同模型，胜负在补丁速度与信息公私域边界。",
         href: "notes/2026-10-22-php2shell-ai.html"
@@ -625,6 +632,13 @@ window.SITE_DATA = {
         excerpt: "名字来自两部作品：恋爱的犀牛教我不计成败地热爱，基督山伯爵教我不动声色地等待。2022年底ChatGPT像一头灰犀牛从地平线走来，Count就是把它的轨迹从噪音里算出来——然后与各位同行者一起远征。",
         img: "assets/note-05.svg",
         href: "notes/why-rhino-count.html"
+      },
+      {
+        cat: "观察", num: "N° 139",
+        title: "黄仁勋说，AI 卡在了水管工手里",
+        excerpt: "黄仁勋在 Dwarkesh 播客说 AI 的瓶颈是水管工和电工。美国制造业就业占比从 22% 掉到 8%，电工年缺 8 万人，数据中心用电 2030 年占全美 11.8%。判断：瓶颈从硅变成了人，空心化的账单寄到了 AI 头上。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-10-23-huangrenxun-shuigong.html"
       },
       {
         cat: "观察", num: "N° 138",
