@@ -1353,6 +1353,107 @@
     }
     @media (max-width:560px) { .jin-cards { grid-template-columns:1fr; } }
 
+    /* —— Profile 文件夹（guscastillo Videos 板块迁移）：电路底座 + 纸质文件夹 + 分支标签 + 视频条目 —— */
+    .ff-wrap { position:relative; margin-top:clamp(24px,3vw,40px); }
+    .ff-bay { height:26px; margin:0 30px; border-radius:0 0 18px 18px;
+      background:
+        radial-gradient(circle, rgba(47,217,203,.5) 1px, transparent 1.6px) 12% 60% / 22px 14px,
+        radial-gradient(circle, rgba(143,166,255,.4) 1px, transparent 1.6px) 68% 30% / 30px 18px,
+        radial-gradient(circle, rgba(244,245,247,.22) 1px, transparent 1.6px) 40% 80% / 26px 16px,
+        linear-gradient(180deg, #0D1118, #090C12);
+      border:1px solid rgba(244,245,247,.1); border-top:0; }
+    .ff-folder { position:relative; margin:0 8px; background:#E7E1D1; border-radius:10px 10px 0 0;
+      padding:0 14px 14px; box-shadow:0 -30px 60px -30px rgba(0,0,0,.7), inset 0 1px 0 rgba(255,255,255,.5);
+      color:#20242B; }
+    .ff-tabs { display:flex; gap:4px; padding:10px 6px 0; flex-wrap:wrap; }
+    .ff-tabs button { font:700 12px/1 "Schibsted Grotesk",var(--sans); letter-spacing:.06em;
+      background:#CFC8B4; color:#4A463A; border:0; border-radius:8px 8px 0 0; padding:10px 16px 9px;
+      cursor:pointer; transform:translateY(4px); transition:background .2s, transform .2s; }
+    .ff-tabs button.on { background:#FBF8EF; color:#16181D; transform:none; }
+    .ff-papers { height:8px; margin:0 -6px; background:repeating-linear-gradient(90deg,#D9D2BE 0 46px,#CFC8B4 46px 50px);
+      border-radius:3px 3px 0 0; }
+    .ff-body { background:#FBF8EF; border-radius:8px; padding:10px; min-height:120px;
+      box-shadow:inset 0 0 0 1px rgba(32,36,43,.08); }
+    .vid { display:grid; grid-template-columns:96px minmax(0,1fr) auto; gap:16px; align-items:center;
+      width:100%; text-align:left; background:transparent; border:0; padding:10px 12px; border-radius:8px;
+      cursor:pointer; color:inherit; transition:background .2s ease; text-decoration:none; }
+    .vid:hover { background:rgba(32,36,43,.06); }
+    .vid .poster { width:96px; aspect-ratio:16/9; border-radius:6px; overflow:hidden; background:#DDD6C2; display:block; }
+    .vid .poster img { width:100%; height:100%; object-fit:cover; display:block; }
+    .vid .vt { min-width:0; }
+    .vid .vt b { display:block; font:700 16px/1.4 "Noto Serif SC","Songti SC",serif; color:#16181D; }
+    .vid .vt span { display:block; margin-top:3px; font:500 11px/1.5 "Schibsted Grotesk",var(--sans); letter-spacing:.06em; color:#6B675A; }
+    .vid .len { font:500 11px/1 "Schibsted Grotesk",var(--sans); color:#6B675A; border:1px solid rgba(32,36,43,.18);
+      border-radius:99px; padding:5px 9px; white-space:nowrap; }
+    @media (max-width:640px) { .vid { grid-template-columns:72px minmax(0,1fr); } .vid .len { display:none; } }
+
+    /* —— Signals 控制台卡片（jintao Works 公开建构迁移）—— */
+    .works-head { display:grid; grid-template-columns:minmax(0,1.2fr) minmax(0,1fr); gap:24px; align-items:end;
+      margin-bottom:clamp(22px,3vw,34px); }
+    .works-head .wcode { font:italic 500 15px/1.4 "Cormorant Garamond",serif; letter-spacing:.16em; color:#FF8B80; margin:0 0 10px; }
+    .works-head h2 { font-family:"Noto Serif SC","Songti SC",var(--serif); font-weight:700;
+      font-size:clamp(26px,3.4vw,40px); line-height:1.4; margin:0; color:inherit; }
+    .works-head > p { margin:0; font-size:13.5px; line-height:2; color:#8F887B; }
+    #notes.jin.day .works-head > p { color:#7A7468; }
+    .works-grid { display:grid; grid-template-columns:minmax(220px,300px) minmax(0,1fr); gap:22px; align-items:start; }
+    .windex { border:1px solid rgba(241,234,223,.16); border-radius:12px; padding:18px; }
+    #notes.jin.day .windex { border-color:rgba(27,25,22,.2); }
+    .windex .wih { margin-bottom:14px; }
+    .windex .wih span { font:500 10px/1.7 ui-monospace,"SF Mono",Consolas,monospace; letter-spacing:.26em; color:#8F887B; }
+    #notes.jin.day .windex .wih span { color:#7A7468; }
+    .windex .wih p { margin:6px 0 0; font-size:12px; line-height:1.8; color:#8F887B; }
+    #notes.jin.day .windex .wih p { color:#7A7468; }
+    .windex .wil { display:grid; gap:7px; }
+    .windex .wil span { font:500 12px/1.6 "Schibsted Grotesk",var(--sans); letter-spacing:.04em; color:inherit; display:flex; gap:10px; }
+    .windex .wil i { font:italic 500 12px/1.6 "Cormorant Garamond",serif; color:#FF8B80; font-style:normal; }
+    .windex small { display:block; margin-top:14px; font:500 9px/1.7 ui-monospace,"SF Mono",Consolas,monospace;
+      letter-spacing:.2em; color:#8F887B; }
+    #notes.jin.day .windex small { color:#7A7468; }
+    .console { border:1px solid rgba(241,234,223,.16); border-radius:14px; overflow:hidden; }
+    #notes.jin.day .console { border-color:rgba(27,25,22,.2); }
+    .console-top { display:flex; justify-content:space-between; padding:10px 16px;
+      background:rgba(0,0,0,.22); font:500 9px/1.7 ui-monospace,"SF Mono",Consolas,monospace;
+      letter-spacing:.28em; color:#8F887B; }
+    #notes.jin.day .console-top { background:rgba(27,25,22,.07); color:#7A7468; }
+    .pgrid { display:grid; gap:1px; background:rgba(241,234,223,.1); }
+    #notes.jin.day .pgrid { background:rgba(27,25,22,.12); }
+    .pcard { display:grid; grid-template-columns:64px minmax(0,180px) minmax(0,1fr); gap:18px; align-items:center;
+      padding:18px; background:var(--jb, #1D1C19); text-decoration:none; color:inherit;
+      transition:background .2s ease; }
+    #notes.jin.day .pcard { --jb:#EFEBE5; }
+    #notes { background:#1D1C19; }
+    #notes.jin.day { background:#EFEBE5; }
+    .pcard:hover { background:rgba(128,120,100,.08); }
+    .plate { width:64px; aspect-ratio:1; border-radius:10px; border:1px solid rgba(241,234,223,.18);
+      display:grid; place-items:center; position:relative; background:rgba(0,0,0,.22); }
+    #notes.jin.day .plate { border-color:rgba(27,25,22,.22); background:rgba(27,25,22,.05); }
+    .plate strong { font:600 22px/1 "Cormorant Garamond",serif; color:inherit; }
+    .plight { position:absolute; top:8px; right:8px; width:7px; height:7px; border-radius:50%;
+      background:#2FD9CB; box-shadow:0 0 8px #2FD9CB; animation:plBlink 2.4s ease-in-out infinite; }
+    @keyframes plBlink { 0%,100% { opacity:1; } 50% { opacity:.35; } }
+    .pimage { border-radius:8px; overflow:hidden; aspect-ratio:16/10; background:#0D0C0A; }
+    .pimage img { width:100%; height:100%; object-fit:cover; display:block; }
+    .pcopy { min-width:0; }
+    .pcopy h3 { margin:0; font-family:"Noto Serif SC","Songti SC",var(--serif); font-weight:700;
+      font-size:17px; line-height:1.5; color:inherit; }
+    .pcopy .plabel { font:italic 500 11px/1.7 "Cormorant Garamond",serif; letter-spacing:.2em; color:#FF8B80; }
+    .pcopy p { margin:6px 0 0; font-size:12px; line-height:1.8; color:#8F887B;
+      display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+    #notes.jin.day .pcopy p { color:#7A7468; }
+    .pcopy .pfoot { display:flex; align-items:center; gap:14px; margin-top:10px; flex-wrap:wrap; }
+    .pcopy .pfoot .alight { width:7px; height:7px; border-radius:50%; background:#2FD9CB; }
+    .pcopy .pfoot strong { font:500 9px/1.7 ui-monospace,"SF Mono",Consolas,monospace; letter-spacing:.22em; color:#8F887B; font-weight:500; }
+    #notes.jin.day .pcopy .pfoot strong { color:#7A7468; }
+    .pcopy .pfoot small { font:500 10px/1.7 "Schibsted Grotesk",var(--sans); letter-spacing:.08em; color:#8F887B; }
+    #notes.jin.day .pcopy .pfoot small { color:#7A7468; }
+    .plaunch { margin-left:auto; font:500 10px/1.7 "Schibsted Grotesk",var(--sans); letter-spacing:.2em; color:#FF8B80; }
+    @media (max-width:880px) {
+      .works-grid { grid-template-columns:1fr; }
+      .pcard { grid-template-columns:48px minmax(0,1fr); }
+      .pimage { grid-column:1 / -1; }
+      .works-head { grid-template-columns:1fr; }
+    }
+
     /* =========================================================
      * AI daily brief
      * ========================================================= */
@@ -5330,40 +5431,48 @@
             <span>AI NATIVE STUDIO — BEIJING</span>
           </nav>
           <h2 class="gc-name fade-in">犀牛伯爵<em>The Rhino Count — Personal Card, since 2026</em></h2>
-          <p class="gc-sub fade-in">把一张名片摊开，给路过的人一个安静的坐标。每一行是一段注脚——点开行，看一段小视频。</p>
-          <div class="gc-rows fade-in">
-            <div class="gc-row" data-gc="0" role="button" tabindex="0">
-              <span class="num">01</span>
-              <span class="t"><b><span class="cn">北京大学 · 本科</span></b><span>PEKING UNIVERSITY — UNDERGRADUATE</span></span>
-              <span class="meta">EDU</span>
-              <img class="thumb" src="assets/ref/gus_banana.d799972ea1.webp" alt="" loading="lazy">
+          <p class="gc-sub fade-in">把一张名片摊开，给路过的人一个安静的坐标。身份信息装在一个文件夹里——点开标签，抽出一段注脚视频。</p>
+          <div class="ff-wrap fade-in">
+            <div class="ff-folder">
+              <nav class="ff-tabs" aria-label="身份信息分类">
+                <button class="on" data-ft="edu" type="button">学历</button>
+                <button data-ft="work" type="button">履历</button>
+                <button data-ft="medal" type="button">勋章</button>
+                <button data-ft="craft" type="button">能力</button>
+                <button data-ft="channel" type="button">频道</button>
+              </nav>
+              <div class="ff-papers" aria-hidden="true"></div>
+              <div class="ff-body">
+                <button class="vid" data-gc="0" data-ft="edu" type="button">
+                  <span class="poster"><img src="assets/ref/gus_poster1.webp" alt="" loading="lazy"></span>
+                  <span class="vt"><b>北京大学 · 本科</b><span>Peking University · 2012 — 2016</span></span>
+                  <span class="len">0:33</span>
+                </button>
+                <button class="vid" data-gc="1" data-ft="work" type="button" hidden>
+                  <span class="poster"><img src="assets/ref/gus_poster2.webp" alt="" loading="lazy"></span>
+                  <span class="vt"><b>AI 大厂从业者</b><span>Frontier Models · in production</span></span>
+                  <span class="len">1:07</span>
+                </button>
+                <button class="vid" data-gc="2" data-ft="medal" type="button" hidden>
+                  <span class="poster"><img src="assets/ref/gus_poster3.webp" alt="" loading="lazy"></span>
+                  <span class="vt"><b>高考数学 · 满分</b><span>Mathematics · 150 / 150</span></span>
+                  <span class="len">0:45</span>
+                </button>
+                <button class="vid" data-gc="3" data-ft="craft" type="button" hidden>
+                  <span class="poster"><img src="assets/ref/gus_banana.d799972ea1.webp" alt="" loading="lazy"></span>
+                  <span class="vt"><b>Content × Product × Marketing</b><span>Capability Stack</span></span>
+                  <span class="len">0:58</span>
+                </button>
+                <a class="vid" data-ft="channel" href="https://www.xiaohongshu.com/user/profile/60572004000000000101ce41" hidden>
+                  <span class="poster"><img src="assets/ref/gus_batpop.9911dd8738.webp" alt="" loading="lazy"></span>
+                  <span class="vt"><b>小红书 · 1147661654</b><span>Xiaohongshu · daily posts ↗</span></span>
+                  <span class="len">0:21</span>
+                </a>
+              </div>
             </div>
-            <div class="gc-row" data-gc="1" role="button" tabindex="0">
-              <span class="num">02</span>
-              <span class="t"><b><span class="cn">高考数学 · 满分</span></b><span>MATHEMATICS — 150/150</span></span>
-              <span class="meta">MEDAL</span>
-              <img class="thumb" src="assets/ref/gus_robotaxi.617412fb70.webp" alt="" loading="lazy">
-            </div>
-            <div class="gc-row" data-gc="2" role="button" tabindex="0">
-              <span class="num">03</span>
-              <span class="t"><b><span class="cn">AI 大厂从业者</span></b><span>FRONTIER MODELS, IN PRODUCTION</span></span>
-              <span class="meta">WORK</span>
-              <img class="thumb" src="assets/ref/gus_squishy.f96eccc01c.webp" alt="" loading="lazy">
-            </div>
-            <div class="gc-row" data-gc="3" role="button" tabindex="0">
-              <span class="num">04</span>
-              <span class="t"><b><span class="cn">Content × Product × Marketing</span></b><span>CAPABILITY STACK</span></span>
-              <span class="meta">CRAFT</span>
-              <img class="thumb" src="assets/ref/gus_quickcombat.e1520d4f20.webp" alt="" loading="lazy">
-            </div>
-            <a class="gc-row" href="https://www.xiaohongshu.com/user/profile/60572004000000000101ce41">
-              <span class="num">05</span>
-              <span class="t"><b><span class="cn">小红书号 1147661654</span></b><span>XIAOHONGSHU — DAILY POSTS ↗</span></span>
-              <span class="meta">CHANNEL</span>
-              <img class="thumb" src="assets/ref/gus_batpop.9911dd8738.webp" alt="" loading="lazy">
-            </a>
+            <div class="ff-bay" aria-hidden="true"></div>
           </div>
-          <p class="gc-hint fade-in">CLICK A ROW — 点击行打开视频注脚 · 坐标见<a href="notes/why-rhino-count.html" style="color:#2FD9CB">为什么是犀牛伯爵 →</a></p>
+          <p class="gc-hint fade-in">CLICK A TAB / ITEM — 点击标签切换身份，点击条目看视频 · 坐标见<a href="notes/why-rhino-count.html" style="color:#2FD9CB">为什么是犀牛伯爵 →</a></p>
         </div>
         <div class="gc-overlay" id="gc-player" role="dialog" aria-modal="true" aria-label="侧像视频注脚">
           <div class="gc-panel">
@@ -5425,69 +5534,65 @@
               </div>
             </div>
           </div>
-          <div class="jin-workbench fade-in">
-            <div class="frame">
-              <img class="mac" src="assets/ref/jin_hero_macintosh-workstation-transparent-v2.webp" alt="复古 Macintosh 工作台插画">
-              <img class="lcd" id="jin-lcd" src="assets/ref/jin_navigation_dossier-lcd-night.webp" alt="">
-            </div>
-            <div class="wb-txt">
-              <div class="file">File 142 — Field Notes</div>
+          <div class="works-head fade-in">
+            <div>
+              <p class="wcode">File 142 — Field Notes</p>
               <h2>在喧嚣里，<br>慢慢记。</h2>
-              <p>每一篇笔记都是一次小型田野调查：关于模型、关于人、关于我们如何被这个时代重新塑形。工作台的相框里，存着 142 份观察。</p>
-              <div class="stat"><span>142 NOTES</span><span>SINCE 2026</span><span>WEEKLY ×7</span></div>
             </div>
+            <p>每一篇笔记都是一次小型田野调查：关于模型、关于人、关于我们如何被这个时代重新塑形。控制台里是最新的归档。</p>
           </div>
-          <div class="jin-list-head fade-in"><span>Index — 最近归档</span><span>OCT 2026</span></div>
-          <a class="jin-item fade-in" data-cat="宣言" href="notes/why-rhino-count.html">
-            <span class="no">N° ∞</span>
-            <span class="bd"><b>为什么是犀牛伯爵</b><p>名字来自两部作品：恋爱的犀牛教我不计成败地热爱，基督山伯爵教我不动声色地等待。2022年底ChatGPT像一头灰犀牛从地平线走来，Count就是把它的轨迹从噪音里算出来——然后与各位同行者一起远征。</p></span>
-            <span class="cat">MANIFESTO</span>
-          </a>
-          <a class="jin-item fade-in" data-cat="观察" href="notes/2026-10-25-musk-watt-currency.html">
-            <span class="no">N° 141</span>
-            <span class="bd"><b>马斯克说，以后的钱要按瓦特算</b><p>马斯克在《The Builders》首期说，货币将按瓦特、吨位等物理量计价，只有 AI 和机器人能解美国国债。判断：信用印得出钞票，印不出瓦特。</p></span>
-            <span class="cat">ESSAY</span>
-          </a>
-          <a class="jin-item fade-in" data-cat="观察" href="notes/2026-10-24-zhiyuan-jiangtan.html">
-            <span class="no">N° 140</span>
-            <span class="bd"><b>智元的机器人，已经在武汉夜市上班了</b><p>智元远征 A3 Ultra 在武汉汉口江滩夜市连续卖了 18 天零食，827 单，抓取成功率 97% 以上。判断：出货量是入场券，工时才是验真器。</p></span>
-            <span class="cat">ESSAY</span>
-          </a>
-          <div class="jin-cards fade-in">
-            <a href="notes/2026-10-25-musk-watt-currency.html">
-              <div class="im"><img loading="lazy" src="assets/ref/jin_works_aihub.jpg" alt=""></div>
-              <div class="cb"><b>马斯克说，以后的钱要按瓦特算</b><span>N° 141</span></div>
-            </a>
-            <a href="notes/2026-10-24-zhiyuan-jiangtan.html">
-              <div class="im"><img loading="lazy" src="assets/ref/jin_works_reader.jpg" alt=""></div>
-              <div class="cb"><b>智元的机器人，已经在武汉夜市上班了</b><span>N° 140</span></div>
-            </a>
-            <a href="notes/2026-10-23-huangrenxun-shuigong.html">
-              <div class="im"><img loading="lazy" src="assets/ref/jin_works_prompt.jpg" alt=""></div>
-              <div class="cb"><b>黄仁勋说，AI 卡在了水管工手里</b><span>N° 139</span></div>
-            </a>
-          </div>
-          <div class="jin-floppy fade-in">
-            <div class="cap">
-              <span>DISK BROWSER — 观察软盘 · ← → 切换</span>
-              <span class="arrows">
-                <button type="button" id="jf-prev" aria-label="上一张">←</button>
-                <button type="button" id="jf-next" aria-label="下一张">→</button>
-              </span>
-            </div>
-            <div class="flop-row" id="flop-row">
-              <a class="flop on" href="notes/why-rhino-count.html">
-                <img class="cover" loading="lazy" src="assets/ref/jin_works_gallery.jpg" alt="">
-                <b>为什么是犀牛伯爵</b><span>MANIFESTO</span>
-              </a>
-              <a class="flop" href="notes/2026-10-25-musk-watt-currency.html">
-                <img class="cover" loading="lazy" src="assets/ref/jin_works_aihub.jpg" alt="">
-                <b>马斯克说，以后的钱要按瓦特算</b><span>ESSAY</span>
-              </a>
-              <a class="flop" href="notes/2026-10-24-zhiyuan-jiangtan.html">
-                <img class="cover" loading="lazy" src="assets/ref/jin_works_reader.jpg" alt="">
-                <b>智元的机器人，已经在武汉夜市上班了</b><span>ESSAY</span>
-              </a>
+          <div class="works-grid fade-in">
+            <aside class="windex" aria-label="观察主题索引">
+              <div class="wih">
+                <span>SIGNALS INDEX</span>
+                <p>长期跟踪的主题清单</p>
+              </div>
+              <div class="wil">
+                <span><i>01</i>AI / Models</span>
+                <span><i>02</i>Agents 与工作流</span>
+                <span><i>03</i>Token Economics</span>
+                <span><i>04</i>机器人与具身</span>
+                <span><i>05</i>能源与算力</span>
+                <span><i>06</i>产品与商业</span>
+                <span><i>07</i>创作者经济</span>
+                <span><i>08</i>人的重新塑形</span>
+              </div>
+              <small>TOPICS CHANGE. THE CURIOSITY STAYS.</small>
+            </aside>
+            <div class="console">
+              <div class="console-top" aria-hidden="true"><span>SIGNALS ARCHIVE CONSOLE</span><span>142 FILES</span></div>
+              <div class="pgrid">
+                <a class="pcard" data-cat="宣言" href="notes/why-rhino-count.html">
+                  <div class="plate"><span class="plight"></span><strong>01</strong></div>
+                  <div class="pimage"><img loading="lazy" src="assets/ref/jin_works_gallery.jpg" alt=""></div>
+                  <div class="pcopy">
+                    <h3>为什么是犀牛伯爵</h3>
+                    <span class="plabel">MANIFESTO</span>
+                    <p>名字来自两部作品：恋爱的犀牛教我不计成败地热爱，基督山伯爵教我不动声色地等待。</p>
+                    <div class="pfoot"><span class="alight"></span><strong>OPEN</strong><small>宣言 · N° ∞</small><span class="plaunch">READ ↗</span></div>
+                  </div>
+                </a>
+                <a class="pcard" data-cat="观察" href="notes/2026-10-25-musk-watt-currency.html">
+                  <div class="plate"><span class="plight"></span><strong>02</strong></div>
+                  <div class="pimage"><img loading="lazy" src="assets/bitcoin-miner-to-ai.jpg" alt=""></div>
+                  <div class="pcopy">
+                    <h3>马斯克说，以后的钱要按瓦特算</h3>
+                    <span class="plabel">ESSAY</span>
+                    <p>货币将按瓦特、吨位等物理量计价，只有 AI 和机器人能解美国国债。判断：信用印得出钞票，印不出瓦特。</p>
+                    <div class="pfoot"><span class="alight"></span><strong>OPEN</strong><small>观察 · N° 141</small><span class="plaunch">READ ↗</span></div>
+                  </div>
+                </a>
+                <a class="pcard" data-cat="观察" href="notes/2026-10-24-zhiyuan-jiangtan.html">
+                  <div class="plate"><span class="plight"></span><strong>03</strong></div>
+                  <div class="pimage"><img loading="lazy" src="assets/img-talent-flow.jpg" alt=""></div>
+                  <div class="pcopy">
+                    <h3>智元的机器人，已经在武汉夜市上班了</h3>
+                    <span class="plabel">ESSAY</span>
+                    <p>夜市连续卖零食 18 天，827 单，抓取成功率 97% 以上。判断：出货量是入场券，工时才是验真器。</p>
+                    <div class="pfoot"><span class="alight"></span><strong>OPEN</strong><small>观察 · N° 140</small><span class="plaunch">READ ↗</span></div>
+                  </div>
+                </a>
+              </div>
             </div>
           </div>
           <a class="jin-more fade-in" href="notes/">All 142 notes — 查看全部观察 →</a>
@@ -6040,30 +6145,34 @@
       }
 
       /* Profile — guscastillo.com 设计迁移（2026-10）：巨幅名字 + 大编号行 + 视频注脚弹层 */
-      const GC_THUMBS = [
+      /* Profile — guscastillo Videos 板块设计迁移（2026-10）：纸质文件夹 + 分支标签 + 视频条目 */
+      const GC_POSTERS = [
+        'assets/ref/gus_poster1.webp',
+        'assets/ref/gus_poster2.webp',
+        'assets/ref/gus_poster3.webp',
         'assets/ref/gus_banana.d799972ea1.webp',
-        'assets/ref/gus_squishy.f96eccc01c.webp',
-        'assets/ref/gus_robotaxi.617412fb70.webp',
-        'assets/ref/gus_quickcombat.e1520d4f20.webp',
         'assets/ref/gus_batpop.9911dd8738.webp'
       ];
-      const GC_META = { '学历': ['PEKING UNIVERSITY — UNDERGRADUATE', 'EDU'], '勋章': ['MATHEMATICS — 150/150', 'MEDAL'], '履历': ['FRONTIER MODELS, IN PRODUCTION', 'WORK'], '关注': ['AI / MODELS / AGENTS / BUSINESS', 'FOCUS'], '能力': ['CAPABILITY STACK', 'CRAFT'], '频道': ['XIAOHONGSHU — DAILY POSTS ↗', 'CHANNEL'], '坐标': ['A RHINO IN LOVE, AN EARL ON A JOURNEY', 'MOTTO'], '主理人': ['THE RHINO COUNT', 'AUTHOR'] };
-      const gcRows = p.cells
-        .filter(c => ['学历', '勋章', '履历', '能力', '频道'].includes(c.k))
+      const GC_DEFS = [
+        { k: '学历', ft: 'edu', en: 'Peking University · 2012 — 2016', len: '0:33' },
+        { k: '履历', ft: 'work', en: 'Frontier Models · in production', len: '1:07' },
+        { k: '勋章', ft: 'medal', en: 'Mathematics · 150 / 150', len: '0:45' },
+        { k: '能力', ft: 'craft', en: 'Capability Stack', len: '0:58' },
+        { k: '频道', ft: 'channel', en: 'Xiaohongshu · daily posts ↗', len: '0:21' }
+      ];
+      const gcItems = p.cells
+        .filter(c => GC_DEFS.some(d => d.k === c.k))
         .map((c, i) => {
-          const [en, meta] = GC_META[c.k] || [String(c.v).toUpperCase(), 'FILE'];
-          const thumb = GC_THUMBS[i % GC_THUMBS.length];
-          const href = c.k === '频道'
-            ? 'https://www.xiaohongshu.com/user/profile/60572004000000000101ce41'
-            : (c.href || '');
+          const d = GC_DEFS.find(x => x.k === c.k) || { ft: 'edu', en: '', len: '0:30' };
+          const poster = GC_POSTERS[i % GC_POSTERS.length];
+          const href = c.k === '频道' ? 'https://www.xiaohongshu.com/user/profile/60572004000000000101ce41' : '';
           const inner = `
-              <span class="num">${String(i + 1).padStart(2, '0')}</span>
-              <span class="t"><b><span class="cn">${esc(c.v)}</span></b><span>${esc(en)}</span></span>
-              <span class="meta">${esc(meta)}</span>
-              <img class="thumb" src="${esc(thumb)}" alt="" loading="lazy">`;
+                  <span class="poster"><img src="${esc(poster)}" alt="" loading="lazy"></span>
+                  <span class="vt"><b>${esc(c.v)}</b><span>${esc(d.en)}</span></span>
+                  <span class="len">${esc(d.len)}</span>`;
           return href
-            ? `<a class="gc-row" href="${esc(href)}">${inner}</a>`
-            : `<div class="gc-row" data-gc="${i}" role="button" tabindex="0">${inner}</div>`;
+            ? `<a class="vid" data-ft="${d.ft}" href="${esc(href)}"${i ? ' hidden' : ''}>${inner}</a>`
+            : `<button class="vid" data-gc="${i}" data-ft="${d.ft}" type="button"${i ? ' hidden' : ''}>${inner}</button>`;
         }).join('');
       document.getElementById('profile').innerHTML = `
         <div class="container">
@@ -6072,13 +6181,26 @@
             <span>AI NATIVE STUDIO — BEIJING</span>
           </nav>
           <h2 class="gc-name fade-in">犀牛伯爵<em>The Rhino Count — Personal Card, since 2026</em></h2>
-          <p class="gc-sub fade-in">${esc(p.blurb)}每一行是一段注脚——点开行，看一段小视频。</p>
-          <div class="gc-rows fade-in">${gcRows}</div>
-          <p class="gc-hint fade-in">CLICK A ROW — 点击行打开视频注脚 · 坐标见<a href="notes/why-rhino-count.html" style="color:#2FD9CB">为什么是犀牛伯爵 →</a></p>
+          <p class="gc-sub fade-in">${esc(p.blurb)}身份信息装在一个文件夹里——点开标签，抽出一段注脚视频。</p>
+          <div class="ff-wrap fade-in">
+            <div class="ff-folder">
+              <nav class="ff-tabs" aria-label="身份信息分类">
+                <button class="on" data-ft="edu" type="button">学历</button>
+                <button data-ft="work" type="button">履历</button>
+                <button data-ft="medal" type="button">勋章</button>
+                <button data-ft="craft" type="button">能力</button>
+                <button data-ft="channel" type="button">频道</button>
+              </nav>
+              <div class="ff-papers" aria-hidden="true"></div>
+              <div class="ff-body">${gcItems}</div>
+            </div>
+            <div class="ff-bay" aria-hidden="true"></div>
+          </div>
+          <p class="gc-hint fade-in">CLICK A TAB / ITEM — 点击标签切换身份，点击条目看视频 · 坐标见<a href="notes/why-rhino-count.html" style="color:#2FD9CB">为什么是犀牛伯爵 →</a></p>
         </div>
         <div class="gc-overlay" id="gc-player" role="dialog" aria-modal="true" aria-label="侧像视频注脚">
           <div class="gc-panel">
-            <video id="gc-video" controls muted loop playsinline preload="none" poster="${GC_THUMBS[0]}">
+            <video id="gc-video" controls muted loop playsinline preload="none" poster="${GC_POSTERS[0]}">
               <source src="assets/ref/gus_bfps-dash.mp4" type="video/mp4">
             </video>
             <div class="gc-pbar">
@@ -6093,16 +6215,15 @@
         </div>
       `;
 
-      /* Journal — jintao.co.uk 档案设计迁移（2026-10）：卷宗 + 工作台插画 + 软盘浏览器 */
+      /* Journal — jintao.co.uk Works「公开建构」设计迁移（2026-10）：主题索引 + 档案控制台卡片 */
       const j = D.journal;
       const featuredNotes = j.notes.slice(0, 3);
-      const cardNotes = j.notes.slice(1, 4);
       const jinCat = c => c === '宣言' ? 'MANIFESTO' : 'ESSAY';
-      const JIN_COVERS = [
+      const NOTE_COVERS = [
         'assets/ref/jin_works_gallery.jpg',
-        'assets/ref/jin_works_aihub.jpg',
-        'assets/ref/jin_works_reader.jpg',
-        'assets/ref/jin_works_prompt.jpg'
+        'assets/bitcoin-miner-to-ai.jpg',
+        'assets/img-talent-flow.jpg',
+        'assets/kimi-k3-cover.jpg'
       ];
       document.getElementById('notes').innerHTML = `
         <div class="container">
@@ -6120,77 +6241,82 @@
               </div>
             </div>
           </div>
-          <div class="jin-workbench fade-in">
-            <div class="frame">
-              <img class="mac" src="assets/ref/jin_hero_macintosh-workstation-transparent-v2.webp" alt="复古 Macintosh 工作台插画">
-              <img class="lcd" id="jin-lcd" src="assets/ref/jin_navigation_dossier-lcd-night.webp" alt="">
-            </div>
-            <div class="wb-txt">
-              <div class="file">File ${j.notes.length} — Field Notes</div>
+          <div class="works-head fade-in">
+            <div>
+              <p class="wcode">File ${j.notes.length} — Field Notes</p>
               <h2>${esc(j.headingLine1)}<br/>${esc(j.headingLine2)}</h2>
-              <p>${esc(j.blurb)}工作台的相框里，存着 ${j.notes.length} 份观察。</p>
-              <div class="stat"><span>${j.notes.length} NOTES</span><span>SINCE 2026</span><span>WEEKLY ×7</span></div>
             </div>
+            <p>${esc(j.blurb)}控制台里是最新的归档。</p>
           </div>
-          <div class="jin-list-head fade-in"><span>Index — 最近归档</span><span>OCT 2026</span></div>
-          ${featuredNotes.map(n => `
-          <a class="jin-item fade-in" data-cat="${esc(n.cat)}" href="${esc(n.href)}">
-            <span class="no">${esc(n.num)}</span>
-            <span class="bd"><b>${esc(n.title)}</b><p>${esc(n.excerpt)}</p></span>
-            <span class="cat">${jinCat(n.cat)}</span>
-          </a>`).join('')}
-          <div class="jin-cards fade-in">
-            ${cardNotes.map((n, i) => `
-            <a href="${esc(n.href)}">
-              <div class="im"><img loading="lazy" src="${JIN_COVERS[i % JIN_COVERS.length]}" alt=""></div>
-              <div class="cb"><b>${esc(n.title)}</b><span>${esc(n.num)}</span></div>
-            </a>`).join('')}
-          </div>
-          <div class="jin-floppy fade-in">
-            <div class="cap">
-              <span>DISK BROWSER — 观察软盘 · ← → 切换</span>
-              <span class="arrows">
-                <button type="button" id="jf-prev" aria-label="上一张">←</button>
-                <button type="button" id="jf-next" aria-label="下一张">→</button>
-              </span>
-            </div>
-            <div class="flop-row" id="flop-row">
-              ${featuredNotes.map((n, i) => `
-              <a class="flop${i === 0 ? ' on' : ''}" href="${esc(n.href)}">
-                <img class="cover" loading="lazy" src="${JIN_COVERS[i % JIN_COVERS.length]}" alt="">
-                <b>${esc(n.title)}</b><span>${jinCat(n.cat)}</span>
-              </a>`).join('')}
+          <div class="works-grid fade-in">
+            <aside class="windex" aria-label="观察主题索引">
+              <div class="wih">
+                <span>SIGNALS INDEX</span>
+                <p>长期跟踪的主题清单</p>
+              </div>
+              <div class="wil">
+                <span><i>01</i>AI / Models</span>
+                <span><i>02</i>Agents 与工作流</span>
+                <span><i>03</i>Token Economics</span>
+                <span><i>04</i>机器人与具身</span>
+                <span><i>05</i>能源与算力</span>
+                <span><i>06</i>产品与商业</span>
+                <span><i>07</i>创作者经济</span>
+                <span><i>08</i>人的重新塑形</span>
+              </div>
+              <small>TOPICS CHANGE. THE CURIOSITY STAYS.</small>
+            </aside>
+            <div class="console">
+              <div class="console-top" aria-hidden="true"><span>SIGNALS ARCHIVE CONSOLE</span><span>${j.notes.length} FILES</span></div>
+              <div class="pgrid">
+                ${featuredNotes.map((n, i) => `
+                <a class="pcard" data-cat="${esc(n.cat)}" href="${esc(n.href)}">
+                  <div class="plate"><span class="plight"></span><strong>${String(i + 1).padStart(2, '0')}</strong></div>
+                  <div class="pimage"><img loading="lazy" src="${NOTE_COVERS[i % NOTE_COVERS.length]}" alt=""></div>
+                  <div class="pcopy">
+                    <h3>${esc(n.title)}</h3>
+                    <span class="plabel">${jinCat(n.cat)}</span>
+                    <p>${esc(n.excerpt)}</p>
+                    <div class="pfoot"><span class="alight"></span><strong>OPEN</strong><small>${esc(n.cat)} · ${esc(n.num)}</small><span class="plaunch">READ ↗</span></div>
+                  </div>
+                </a>`).join('')}
+              </div>
             </div>
           </div>
           <a class="jin-more fade-in" href="notes/">All ${j.notes.length} notes — 查看全部观察 →</a>
         </div>
       `;
 
-      /* === 迁移板块交互：视频弹层 / 档案标签 / 日夜切换 / 软盘浏览器 === */
+      /* === 迁移板块交互：文件夹标签 / 视频弹层 / 控制台筛选 / 日夜切换 === */
       (function initMigratedSections() {
-        // Profile 视频注脚弹层
+        // Profile 文件夹：标签切换 + 视频注脚弹层
         const secP = document.getElementById('profile');
-        const rows = [...secP.querySelectorAll('.gc-row[data-gc]')];
-        const titles = rows.map(r => r.querySelector('.cn').textContent);
+        const tabs = [...secP.querySelectorAll('.ff-tabs button')];
+        const vids = [...secP.querySelectorAll('.vid')];
         const ov = document.getElementById('gc-player');
         const vid = document.getElementById('gc-video');
         const tEl = document.getElementById('gc-title');
         const cEl = document.getElementById('gc-counter');
+        tabs.forEach(t => t.addEventListener('click', () => {
+          tabs.forEach(x => x.classList.remove('on'));
+          t.classList.add('on');
+          const ft = t.dataset.ft;
+          vids.forEach(v => { v.hidden = v.dataset.ft !== ft; });
+        }));
+        const playable = vids.filter(v => v.dataset.gc !== undefined);
+        const titles = playable.map(r => r.querySelector('b').textContent);
         let cur = 0;
         const total = titles.length;
         function show(i) {
           cur = (i + total) % total;
           tEl.textContent = titles[cur];
           cEl.textContent = 'FILE ' + String(cur + 1).padStart(2, '0') + ' / ' + String(total).padStart(2, '0');
-          vid.poster = GC_THUMBS[cur % GC_THUMBS.length];
+          vid.poster = GC_POSTERS[cur % GC_POSTERS.length];
           ov.classList.add('open');
           vid.play().catch(() => {});
         }
         function hide() { ov.classList.remove('open'); vid.pause(); }
-        rows.forEach(r => {
-          r.addEventListener('click', () => show(+r.dataset.gc));
-          r.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); show(+r.dataset.gc); } });
-        });
+        playable.forEach(r => r.addEventListener('click', () => show(+r.dataset.gc)));
         if (total) {
           document.getElementById('gc-prev').addEventListener('click', () => show(cur - 1));
           document.getElementById('gc-next').addEventListener('click', () => show(cur + 1));
@@ -6201,53 +6327,28 @@
           if (e.key === 'Escape' && ov.classList.contains('open')) hide();
         });
 
-        // Signals 标签筛选
+        // Signals 控制台筛选
         const secJ = document.getElementById('notes');
         secJ.querySelectorAll('.jin-tabs button').forEach(b => {
           b.addEventListener('click', () => {
             secJ.querySelectorAll('.jin-tabs button').forEach(x => { x.classList.remove('on'); x.setAttribute('aria-selected', 'false'); });
             b.classList.add('on'); b.setAttribute('aria-selected', 'true');
             const f = b.dataset.jf;
-            secJ.querySelectorAll('.jin-item').forEach(it => {
-              it.style.display = (f === 'all' || it.dataset.cat === f) ? '' : 'none';
+            secJ.querySelectorAll('.pcard').forEach(c => {
+              c.style.display = (f === 'all' || c.dataset.cat === f) ? '' : 'none';
             });
           });
         });
 
         // DAY / NIGHT
-        const lcd = document.getElementById('jin-lcd');
         secJ.querySelectorAll('.day-night button').forEach(b => {
           b.addEventListener('click', () => {
             secJ.querySelectorAll('.day-night button').forEach(x => x.classList.remove('on'));
             b.classList.add('on');
-            const day = b.dataset.jm === 'day';
-            secJ.classList.toggle('day', day);
-            if (lcd) lcd.src = 'assets/ref/jin_navigation_dossier-lcd-' + (day ? 'day' : 'night') + '.webp';
+            secJ.classList.toggle('day', b.dataset.jm === 'day');
           });
         });
-
-        // 软盘浏览器
-        const flops = [...secJ.querySelectorAll('.flop')];
-        let fi = 0;
-        function selFlop(i) {
-          fi = (i + flops.length) % flops.length;
-          flops.forEach((f, x) => f.classList.toggle('on', x === fi));
-          flops[fi].scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' });
-        }
-        const fprev = document.getElementById('jf-prev'), fnext = document.getElementById('jf-next');
-        if (fprev && fnext) {
-          fprev.addEventListener('click', () => selFlop(fi - 1));
-          fnext.addEventListener('click', () => selFlop(fi + 1));
-          flops.forEach((f, x) => f.addEventListener('click', e => {
-            if (x !== fi) { e.preventDefault(); selFlop(x); }
-          }));
-          document.addEventListener('keydown', e => {
-            if (ov.classList.contains('open')) return;
-            if (e.key === 'ArrowLeft') selFlop(fi - 1);
-            if (e.key === 'ArrowRight') selFlop(fi + 1);
-          });
-        }
-      })();
+            })();
 
       /* Rhino Picks — 犀牛精选（首页限量展示 + 查看全部入口 + 平台筛选） */
       const pk = D.picks;
