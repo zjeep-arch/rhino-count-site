@@ -1365,6 +1365,19 @@
     .ff-folder { position:relative; margin:0 8px; background:#E7E1D1; border-radius:10px 10px 0 0;
       padding:0 14px 14px; box-shadow:0 -30px 60px -30px rgba(0,0,0,.7), inset 0 1px 0 rgba(255,255,255,.5);
       color:#20242B; }
+    .ff-front { display:block; width:100%; border:0; cursor:pointer; text-align:left;
+      border-radius:10px 10px 0 0; padding:34px 26px 30px; color:#F6EFDD;
+      background:linear-gradient(115deg, #7D670F, #753C56 38%, #615237 70%, #734E25);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.25), inset 0 -14px 30px rgba(0,0,0,.28);
+      transition:transform .3s ease, box-shadow .3s ease; }
+    .ff-front:hover { transform:translateY(-2px); }
+    .ff-front b { display:block; font:700 22px/1.3 "Schibsted Grotesk",var(--sans); letter-spacing:.04em; }
+    .ff-front b .cn { font-family:"Noto Serif SC","Songti SC",serif; }
+    .ff-front span { display:block; margin-top:8px; font:500 11px/1.6 "Schibsted Grotesk",var(--sans); letter-spacing:.2em; color:rgba(246,239,221,.72); }
+    .ff-folder .ff-tabs, .ff-folder .ff-papers, .ff-folder .ff-body { display:none; }
+    .ff-folder.open .ff-front { display:none; }
+    .ff-folder.open .ff-tabs, .ff-folder.open .ff-papers, .ff-folder.open .ff-body { display:block; }
+    .ff-tabs button .cnt { font:400 10px/1 "Schibsted Grotesk",var(--sans); opacity:.65; margin-left:5px; }
     .ff-tabs { display:flex; gap:4px; padding:10px 6px 0; flex-wrap:wrap; }
     .ff-tabs button { font:700 12px/1 "Schibsted Grotesk",var(--sans); letter-spacing:.06em;
       background:#CFC8B4; color:#4A463A; border:0; border-radius:8px 8px 0 0; padding:10px 16px 9px;
@@ -5434,12 +5447,16 @@
           <p class="gc-sub fade-in">把一张名片摊开，给路过的人一个安静的坐标。身份信息装在一个文件夹里——点开标签，抽出一段注脚视频。</p>
           <div class="ff-wrap fade-in">
             <div class="ff-folder">
+              <button class="ff-front" type="button" aria-expanded="false">
+                <b><span class="cn">身份档案</span> Identity Files</b>
+                <span>5 IDENTITIES · 5 FILMS — 点击抽出文件夹</span>
+              </button>
               <nav class="ff-tabs" aria-label="身份信息分类">
-                <button class="on" data-ft="edu" type="button">学历</button>
-                <button data-ft="work" type="button">履历</button>
-                <button data-ft="medal" type="button">勋章</button>
-                <button data-ft="craft" type="button">能力</button>
-                <button data-ft="channel" type="button">频道</button>
+                <button class="on" data-ft="edu" type="button">学历<span class="cnt">1</span></button>
+                <button data-ft="work" type="button">履历<span class="cnt">1</span></button>
+                <button data-ft="medal" type="button">勋章<span class="cnt">1</span></button>
+                <button data-ft="craft" type="button">能力<span class="cnt">1</span></button>
+                <button data-ft="channel" type="button">频道<span class="cnt">1</span></button>
               </nav>
               <div class="ff-papers" aria-hidden="true"></div>
               <div class="ff-body">
@@ -5528,10 +5545,6 @@
                 <button data-jf="宣言" role="tab" aria-selected="false">/ 宣言</button>
                 <button data-jf="观察" role="tab" aria-selected="false">/ 观察</button>
               </div>
-              <div class="day-night" role="group" aria-label="日夜间切换">
-                <button type="button" data-jm="day">DAY</button>
-                <button type="button" data-jm="night" class="on">NIGHT</button>
-              </div>
             </div>
           </div>
           <div class="works-head fade-in">
@@ -5593,6 +5606,29 @@
                   </div>
                 </a>
               </div>
+            </div>
+          </div>
+          <div class="jin-floppy fade-in">
+            <div class="cap">
+              <span>DISK PRINTER — 观察软盘打印机 · ← → 切换</span>
+              <span class="arrows">
+                <button type="button" id="jf-prev" aria-label="上一张">←</button>
+                <button type="button" id="jf-next" aria-label="下一张">→</button>
+              </span>
+            </div>
+            <div class="flop-row" id="flop-row">
+              <a class="flop on" href="notes/why-rhino-count.html">
+                <img class="cover" loading="lazy" src="assets/ref/jin_works_gallery.jpg" alt="">
+                <b>为什么是犀牛伯爵</b><span>MANIFESTO</span>
+              </a>
+              <a class="flop" href="notes/2026-10-25-musk-watt-currency.html">
+                <img class="cover" loading="lazy" src="assets/bitcoin-miner-to-ai.jpg" alt="">
+                <b>马斯克说，以后的钱要按瓦特算</b><span>ESSAY</span>
+              </a>
+              <a class="flop" href="notes/2026-10-24-zhiyuan-jiangtan.html">
+                <img class="cover" loading="lazy" src="assets/img-talent-flow.jpg" alt="">
+                <b>智元的机器人，已经在武汉夜市上班了</b><span>ESSAY</span>
+              </a>
             </div>
           </div>
           <a class="jin-more fade-in" href="notes/">All 142 notes — 查看全部观察 →</a>
@@ -6184,12 +6220,16 @@
           <p class="gc-sub fade-in">${esc(p.blurb)}身份信息装在一个文件夹里——点开标签，抽出一段注脚视频。</p>
           <div class="ff-wrap fade-in">
             <div class="ff-folder">
+              <button class="ff-front" type="button" aria-expanded="false">
+                <b><span class="cn">身份档案</span> Identity Files</b>
+                <span>5 IDENTITIES · 5 FILMS — 点击抽出文件夹</span>
+              </button>
               <nav class="ff-tabs" aria-label="身份信息分类">
-                <button class="on" data-ft="edu" type="button">学历</button>
-                <button data-ft="work" type="button">履历</button>
-                <button data-ft="medal" type="button">勋章</button>
-                <button data-ft="craft" type="button">能力</button>
-                <button data-ft="channel" type="button">频道</button>
+                <button class="on" data-ft="edu" type="button">学历<span class="cnt">1</span></button>
+                <button data-ft="work" type="button">履历<span class="cnt">1</span></button>
+                <button data-ft="medal" type="button">勋章<span class="cnt">1</span></button>
+                <button data-ft="craft" type="button">能力<span class="cnt">1</span></button>
+                <button data-ft="channel" type="button">频道<span class="cnt">1</span></button>
               </nav>
               <div class="ff-papers" aria-hidden="true"></div>
               <div class="ff-body">${gcItems}</div>
@@ -6235,10 +6275,6 @@
                 <button data-jf="宣言" role="tab" aria-selected="false">/ 宣言</button>
                 <button data-jf="观察" role="tab" aria-selected="false">/ 观察</button>
               </div>
-              <div class="day-night" role="group" aria-label="日夜间切换">
-                <button type="button" data-jm="day">DAY</button>
-                <button type="button" data-jm="night" class="on">NIGHT</button>
-              </div>
             </div>
           </div>
           <div class="works-head fade-in">
@@ -6283,20 +6319,42 @@
               </div>
             </div>
           </div>
+          <div class="jin-floppy fade-in">
+            <div class="cap">
+              <span>DISK PRINTER — 观察软盘打印机 · ← → 切换</span>
+              <span class="arrows">
+                <button type="button" id="jf-prev" aria-label="上一张">←</button>
+                <button type="button" id="jf-next" aria-label="下一张">→</button>
+              </span>
+            </div>
+            <div class="flop-row" id="flop-row">
+              ${featuredNotes.map((n, i) => `
+              <a class="flop${i === 0 ? ' on' : ''}" href="${esc(n.href)}">
+                <img class="cover" loading="lazy" src="${NOTE_COVERS[i % NOTE_COVERS.length]}" alt="">
+                <b>${esc(n.title)}</b><span>${jinCat(n.cat)}</span>
+              </a>`).join('')}
+            </div>
+          </div>
           <a class="jin-more fade-in" href="notes/">All ${j.notes.length} notes — 查看全部观察 →</a>
         </div>
       `;
 
-      /* === 迁移板块交互：文件夹标签 / 视频弹层 / 控制台筛选 / 日夜切换 === */
+      /* === 迁移板块交互：文件夹抽出 / 视频弹层 / 控制台筛选 / 软盘打印机 === */
       (function initMigratedSections() {
-        // Profile 文件夹：标签切换 + 视频注脚弹层
+        // Profile 文件夹：封面抽出 + 标签切换 + 视频注脚弹层
         const secP = document.getElementById('profile');
+        const folder = secP.querySelector('.ff-folder');
+        const front = secP.querySelector('.ff-front');
         const tabs = [...secP.querySelectorAll('.ff-tabs button')];
         const vids = [...secP.querySelectorAll('.vid')];
         const ov = document.getElementById('gc-player');
         const vid = document.getElementById('gc-video');
         const tEl = document.getElementById('gc-title');
         const cEl = document.getElementById('gc-counter');
+        if (front) front.addEventListener('click', () => {
+          folder.classList.add('open');
+          front.setAttribute('aria-expanded', 'true');
+        });
         tabs.forEach(t => t.addEventListener('click', () => {
           tabs.forEach(x => x.classList.remove('on'));
           t.classList.add('on');
@@ -6340,14 +6398,27 @@
           });
         });
 
-        // DAY / NIGHT
-        secJ.querySelectorAll('.day-night button').forEach(b => {
-          b.addEventListener('click', () => {
-            secJ.querySelectorAll('.day-night button').forEach(x => x.classList.remove('on'));
-            b.classList.add('on');
-            secJ.classList.toggle('day', b.dataset.jm === 'day');
+        // 软盘打印机（←→ 切换）
+        const flops = [...secJ.querySelectorAll('.flop')];
+        let fi = 0;
+        function selFlop(i) {
+          fi = (i + flops.length) % flops.length;
+          flops.forEach((f, x) => f.classList.toggle('on', x === fi));
+          flops[fi].scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' });
+        }
+        const fprev = document.getElementById('jf-prev'), fnext = document.getElementById('jf-next');
+        if (fprev && fnext) {
+          fprev.addEventListener('click', () => selFlop(fi - 1));
+          fnext.addEventListener('click', () => selFlop(fi + 1));
+          flops.forEach((f, x) => f.addEventListener('click', e => {
+            if (x !== fi) { e.preventDefault(); selFlop(x); }
+          }));
+          document.addEventListener('keydown', e => {
+            if (ov.classList.contains('open')) return;
+            if (e.key === 'ArrowLeft') selFlop(fi - 1);
+            if (e.key === 'ArrowRight') selFlop(fi + 1);
           });
-        });
+        }
             })();
 
       /* Rhino Picks — 犀牛精选（首页限量展示 + 查看全部入口 + 平台筛选） */
