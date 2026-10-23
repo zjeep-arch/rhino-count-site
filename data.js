@@ -127,6 +127,13 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "智元的机器人，已经在武汉夜市上班了",
+        desc: "智元远征 A3 Ultra 在武汉江滩夜市连续卖了 18 天零食，827 单。这家公司三年下线 2 万台机器人，2025 年出货全球第一。判断：出货量是入场券，出货之后的工时才是验真器。周六破圈实验位。",
+        href: "notes/2026-10-24-zhiyuan-jiangtan.html"
+      },
+
+      {
+        type: "Essay",
         title: "黄仁勋说，AI 卡在了水管工手里",
         desc: "人物转译：黄仁勋谈 AI 的实体瓶颈。美国缺电工缺到 AI 头上，能源股订单极热股价先冷，中国是镜像的另一面。本周破圈实验位。",
         href: "notes/2026-10-23-huangrenxun-shuigong.html"
@@ -632,6 +639,13 @@ window.SITE_DATA = {
         excerpt: "名字来自两部作品：恋爱的犀牛教我不计成败地热爱，基督山伯爵教我不动声色地等待。2022年底ChatGPT像一头灰犀牛从地平线走来，Count就是把它的轨迹从噪音里算出来——然后与各位同行者一起远征。",
         img: "assets/note-05.svg",
         href: "notes/why-rhino-count.html"
+      },
+      {
+        cat: "观察", num: "N° 140",
+        title: "智元的机器人，已经在武汉夜市上班了",
+        excerpt: "智元远征 A3 Ultra 在武汉汉口江滩夜市连续卖了 18 天零食，827 单，抓取成功率 97% 以上。这家公司三年累计下线 2 万台通用具身机器人，2025 年出货全球第一，营收从 30 万元做到 10.5 亿元。判断：出货量是核心指标，验真看工时，质疑层逐项摆全。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-10-24-zhiyuan-jiangtan.html"
       },
       {
         cat: "观察", num: "N° 139",
