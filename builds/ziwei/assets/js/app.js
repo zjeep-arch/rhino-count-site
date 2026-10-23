@@ -1973,33 +1973,89 @@ const DX_THEME = {
   '迁移宫':'往外走、见世面的十年', '交友宫':'人脉圈层洗牌的十年', '官禄宫':'事业主战场、最出成绩的十年',
   '田宅宫':'安家置业的十年', '福德宫':'向内修、攒后劲的十年', '父母宫':'与长辈和平台打交道的十年',
 };
+/* 大限十年成色：宫位强度 + 限禄权科入命三方加分、限忌入命三方减分 */
+function decadeQuality(chart, i, dx){
+  const pal = palaceByBranch(chart, dx.palaceBranch);
+  let s = palaceStrength(chart, pal);
+  let sh = null;
+  try{ sh = normSihua(E.getDaXianSiHua(chart, i)); }catch(e){}
+  const mingFang = new Set(sanfangBranches(chart.mingGongBranch));
+  if(sh){
+    ['lu','quan','ke'].forEach(k => {
+      const p = chart.palaces.find(pl => pl.stars.some(x => x.name === sh[k]));
+      if(p && mingFang.has(p.branch)) s += 1.2;
+    });
+    const jiP = chart.palaces.find(pl => pl.stars.some(x => x.name === sh.ji));
+    if(jiP && mingFang.has(jiP.branch)) s -= 1.5;
+  }
+  return { s, sh, pal, lvl: s > 4 ? '旺限' : s > 1.5 ? '平顺' : '辛劳' };
+}
 function renderTimelineCard(chart){
   const card = $('#timeline-card'), body = $('#timeline-body');
   if(!card) return;
   const birthY = chart.birthInfo.year;
+  const nowY = new Date().getFullYear();
   const keyBranches = ['命宫','官禄宫','财帛宫','夫妻宫'].map(n => palaceByName(chart, n).branch);
   const rows = chart.daXians.map((dx, i) => {
-    const pal = palaceByBranch(chart, dx.palaceBranch);
+    const { sh, pal, lvl } = decadeQuality(chart, i, dx);
     const name = disp(pal.name);
-    let sh = null;
-    try{ sh = normSihua(E.getDaXianSiHua(chart, i)); }catch(e){}
+    const majors = pal.stars.filter(x => x.type === 'major').map(x => x.name).join('·') || '空宫';
     const y1 = birthY + dx.startAge, y2 = birthY + dx.endAge;
-    const marks = [];
+    // 逐年动静（迷你柱）+ 换挡/禄忌标记
+    const years = [];
     for(let y = y1; y <= y2; y++){
+      const act = yearActivity(chart, y);
       const yb = ((y - 4) % 12 + 12) % 12;
-      if(keyBranches.includes(yb)) marks.push(y);
+      const isMark = keyBranches.includes(yb);
+      let lsh = null;
+      try{ lsh = normSihua(E.getLiuNianSiHua(y)); }catch(e){}
+      const luPal = lsh && lsh.lu ? sihuaStarPalace(chart, lsh.lu) : '';
+      const jiPal = lsh && lsh.ji ? sihuaStarPalace(chart, lsh.ji) : '';
+      const mingFangSet = new Set(sanfangBranches(chart.mingGongBranch));
+      const jiHit = lsh && lsh.ji && mingFangSet.includes
+        ? (() => { const p = chart.palaces.find(pl => pl.stars.some(x => x.name === lsh.ji)); return p && mingFangSet.has(p.branch); })() : false;
+      years.push({ y, act, isMark, luPal, jiPal, jiHit });
     }
+    const marks = years.filter(o => o.isMark).map(o => o.y);
+    const spark = years.map(o =>
+      `<i class="sp-bar${o.act.level === '高' ? ' hi' : o.act.level === '中' ? ' mid' : ''}${o.isMark ? ' mk' : ''}${o.jiHit ? ' ji' : ''}" title="${o.y}年 动静${o.act.level}${o.isMark ? ' · 换挡' : ''}${o.jiHit ? ' · 忌入命方' : ''}"></i>`).join('');
     const cur = i === chart.currentDaXianIndex;
-    return `<div class="tl-row${cur ? ' cur' : ''}">
+    // 展开层：逐年明细
+    const detail = years.map(o => {
+      const lp = palaceByBranch(chart, ((o.y - 4) % 12 + 12) % 12);
+      return `<tr${o.y === nowY ? ' class="now"' : ''}><td>${o.y}</td>` +
+        `<td>${disp(lp.name).replace('宫','')}${o.isMark ? ' ◆换挡' : ''}</td>` +
+        `<td>${o.luPal ? '禄→' + o.luPal : '—'}</td>` +
+        `<td>${o.jiPal ? '忌→' + o.jiPal + (o.jiHit ? '（入命方）' : '') : '—'}</td>` +
+        `<td class="act-${o.act.level}">${o.act.level}</td></tr>`;
+    }).join('');
+    return `<div class="tl-row${cur ? ' cur' : ''}" data-dx="${i}">
       <div class="tl-age">${dx.startAge}–${dx.endAge}<span>${y1}–${y2}</span></div>
-      <div class="tl-body"><b>${name}</b> · ${esc(DX_THEME[name] || '')}
-        ${sh && sh.lu ? `<span class="tl-sh">限禄落${esc(sihuaStarPalace(chart, sh.lu))}</span>` : ''}
-        ${sh && sh.ji ? `<span class="tl-sh ji">限忌落${esc(sihuaStarPalace(chart, sh.ji))}</span>` : ''}
-        ${marks.length ? `<div class="tl-marks">换挡年份：${marks.slice(0, 3).join('、')}${marks.length > 3 ? '…' : ''}</div>` : ''}
+      <div class="tl-body">
+        <div class="tl-line1"><b>${name}</b><span class="tl-stars">${esc(majors)}</span>
+          <span class="tl-lvl lv-${lvl === '旺限' ? 'hi' : lvl === '平顺' ? 'mid' : 'lo'}">${lvl}</span></div>
+        <div class="tl-theme">${esc(DX_THEME[name] || '')}</div>
+        <div class="tl-line2">
+          ${sh && sh.lu ? `<span class="tl-sh">限禄 ${esc(sh.lu)}→${esc(sihuaStarPalace(chart, sh.lu))}</span>` : ''}
+          ${sh && sh.ji ? `<span class="tl-sh ji">限忌 ${esc(sh.ji)}→${esc(sihuaStarPalace(chart, sh.ji))}</span>` : ''}
+          ${marks.length ? `<span class="tl-mk">换挡 ${marks.slice(0, 3).join('、')}${marks.length > 3 ? '…' : ''}</span>` : ''}
+        </div>
+        <div class="tl-spark" title="十年逐年动静：高=金柱 中=蓝柱 ◆=换挡年 红=忌入命方">${spark}</div>
+        <div class="tl-expand"><table class="tl-table"><tr><th>年</th><th>流年命宫</th><th>禄</th><th>忌</th><th>动静</th></tr>${detail}</table>
+          <p class="hint">◆换挡＝流年命宫踩进命/官/财/夫；"忌入命方"＝流年化忌落本命命宫三方四正，该年功课重。</p></div>
       </div></div>`;
   }).join('');
+  const curDx = chart.daXians[chart.currentDaXianIndex] || {};
+  const nextMark = (() => {
+    for(let y = nowY + 1; y <= (birthY + (curDx.endAge || 0)); y++){
+      if(keyBranches.includes(((y - 4) % 12 + 12) % 12)) return y;
+    }
+    return null;
+  })();
   body.innerHTML =
-    `<p class="hint" style="margin:0 0 8px">十年一层底色（大限宫位定主题），并标出"换挡年份"——流年命宫踩进命宫/官禄/财帛/夫妻的年份，大事多发生在附近。</p>` + rows;
+    `<p class="hint" style="margin:0 0 8px">十年一层底色：强度评定（宫位成色＋限四化入命方）＋逐年动静柱（点每一层展开逐年明细）。</p>` + rows +
+    `<p class="hint" style="margin:10px 0 0">当前 ${curDx.startAge || '—'}–${curDx.endAge || '—'} 岁走【${curDx.palaceName ? disp(curDx.palaceName) : ''}】大限${nextMark ? `，下一个换挡年是 <b style="color:#D9B36A">${nextMark} 年</b>` : ''}。走势是"动静与主题"，不是吉凶判决。</p>`;
+  body.querySelectorAll('.tl-row').forEach(r => r.addEventListener('click', () => r.classList.toggle('open')));
   card.hidden = false;
 }
 /* ---------- 问星答：场景化决策参考 ---------- */

@@ -1082,3 +1082,31 @@ body{color:var(--ink);
 .center-info .ci-name{color:#F0F2FB !important;}
 .center-info .ci-row{color:#B9C0E3 !important;}
 .center-info .gzline{color:#D9B36A !important;}
+
+/* v11：人生时间轴丰富版 */
+.tl-line1{display:flex; align-items:center; gap:8px; flex-wrap:wrap;}
+.tl-line1 b{color:#F0F2FB;}
+.tl-stars{font-size:11.5px; color:#9AA3CE;}
+.tl-lvl{font-size:10.5px; font-weight:700; border-radius:4px; padding:1px 8px; letter-spacing:.08em;}
+.tl-lvl.lv-hi{background:rgba(201,169,106,.18); color:#D9B36A;}
+.tl-lvl.lv-mid{background:rgba(134,162,255,.16); color:#A9BCF2;}
+.tl-lvl.lv-lo{background:rgba(138,147,194,.14); color:#9AA3CE;}
+.tl-theme{font-size:12.5px; color:#B9C0E3; margin-top:2px;}
+.tl-line2{margin-top:4px; display:flex; gap:6px; flex-wrap:wrap;}
+.tl-mk{font-size:11px; color:#D9B36A;}
+.tl-spark{display:flex; gap:2px; align-items:flex-end; height:18px; margin-top:6px;}
+.sp-bar{width:9px; height:8px; border-radius:2px; background:#262F5E;}
+.sp-bar.mid{height:12px; background:#5F74C4;}
+.sp-bar.hi{height:18px; background:#C9A96A;}
+.sp-bar.mk{outline:1px solid rgba(223,227,251,.45); outline-offset:1px;}
+.sp-bar.ji{background:#A9604A;}
+.tl-expand{display:none; margin-top:8px;}
+.tl-row.open .tl-expand{display:block;}
+.tl-row{cursor:pointer;}
+.tl-table{width:100%; border-collapse:collapse; font-size:12px; margin:4px 0;}
+.tl-table th,.tl-table td{border:1px solid var(--line); padding:4px 7px; text-align:left; color:#C9D1F2;}
+.tl-table th{background:#1B2248; color:#8A93C2; font-weight:600; font-size:11px;}
+.tl-table tr.now td{background:rgba(201,169,106,.13); color:#E9D9B0;}
+.tl-table td.act-高{color:#D9B36A; font-weight:700;}
+.tl-table td.act-中{color:#A9BCF2;}
+.tl-table td.act-低{color:#6E779F;}
