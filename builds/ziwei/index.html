@@ -12,7 +12,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;700;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=20261023c">
+<link rel="stylesheet" href="assets/css/style.css?v=20261024a">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#F6F2E9">
 </head>
 <body>
 <div id="stars-bg" aria-hidden="true"></div>
@@ -134,8 +137,10 @@
       <div class="card"><div class="card-kicker">格局</div><div id="pattern-list"></div></div>
       <div class="card" id="shengong-card" hidden><div class="card-kicker">身宫</div><div id="shengong-body"></div></div>
       <div class="card" id="wuxingju-card" hidden><div class="card-kicker">五行局</div><div id="wuxingju-body"></div></div>
-      <div class="card" id="huaji-card" hidden><div class="card-kicker">化忌化解</div><div id="huaji-body"></div></div>
-      <div class="card" id="koujing-card" hidden><div class="card-kicker">本次排盘口径</div><div id="koujing-body" class="hint"></div></div>
+    <div class="card" id="huaji-card" hidden><div class="card-kicker">化忌化解</div><div id="huaji-body"></div></div>
+    <div class="card" id="bazi-card" hidden><div class="card-kicker">八字四柱</div><div id="bazi-body"></div></div>
+    <div class="card" id="feixing-card" hidden><div class="card-kicker">宫干飞星 · 禄忌速查</div><div id="feixing-body"></div></div>
+    <div class="card" id="koujing-card" hidden><div class="card-kicker">本次排盘口径</div><div id="koujing-body" class="hint"></div></div>
       <div class="card" style="margin-top:14px"><div class="card-kicker">下一步</div>
         <p class="hint" style="margin:0 0 10px">十二宫已在上面逐宫展开。13 维深度解读、专题报告等更多解读在"解读"菜单里。</p>
         <button class="btn-primary btn-block" data-nav="menu">去解读菜单 →</button>
@@ -263,8 +268,15 @@
       <button data-k="chart" class="on">命盘图</button>
       <button data-k="quote">金句卡</button>
       <button data-k="year">年度运势卡</button>
+      <button data-k="link">链接</button>
     </div>
     <canvas id="share-canvas" width="1080" height="1440"></canvas>
+    <div id="share-link-box" hidden>
+      <p class="hint" style="margin:6px 0 10px">把链接发给朋友，点开就是这张盘。生日只编码在链接里，不经过任何服务器。</p>
+      <input id="share-link-input" readonly onclick="this.select()" style="width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;font-size:12.5px;color:var(--ink-soft)">
+      <button class="btn-primary btn-block" id="btn-copy-link">复制链接</button>
+      <p class="hint" id="copy-link-hint" style="text-align:center;min-height:18px"></p>
+    </div>
     <button class="btn-primary btn-block" id="btn-save-img">保存图片</button>
     <p class="hint">长按图片也可以保存。分享出去，朋友扫码/点链接就能来排自己的盘。</p>
   </div>
@@ -303,6 +315,6 @@
 <script src="assets/js/ziwei-engine.js"></script>
 <script src="assets/js/data.js"></script>
 <script src="assets/js/data-v2.js"></script>
-<script src="assets/js/app.js?v=20261023c"></script>
+<script src="assets/js/app.js?v=20261024a"></script>
 </body>
 </html>

@@ -1,0 +1,15 @@
+{
+  "name": "问星 · 紫微斗数在线排盘",
+  "short_name": "问星",
+  "description": "紫微斗数在线排盘：十二宫解读、四化格局、大限流年。数据只存在本机，不上传。",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F6F2E9",
+  "theme_color": "#F6F2E9",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "icon-maskable.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "maskable" }
+  ]
+}

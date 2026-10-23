@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <rect width="128" height="128" rx="28" fill="#B0523A"/>
+  <rect x="8" y="8" width="112" height="112" rx="22" fill="none" stroke="#FBF6EA" stroke-opacity=".55" stroke-width="4"/>
+  <text x="64" y="66" text-anchor="middle" dominant-baseline="central"
+        font-family="Songti SC, Noto Serif SC, STSong, serif" font-weight="700"
+        font-size="52" fill="#FBF6EA" letter-spacing="2">問</text>
+  <text x="64" y="108" text-anchor="middle" dominant-baseline="central"
+        font-family="Songti SC, Noto Serif SC, STSong, serif" font-weight="700"
+        font-size="26" fill="#FBF6EA" opacity=".9" letter-spacing="8">星</text>
+</svg>

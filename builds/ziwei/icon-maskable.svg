@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <rect width="128" height="128" fill="#B0523A"/>
+  <text x="64" y="58" text-anchor="middle" dominant-baseline="central"
+        font-family="Songti SC, Noto Serif SC, STSong, serif" font-weight="700"
+        font-size="40" fill="#FBF6EA">問</text>
+  <text x="64" y="96" text-anchor="middle" dominant-baseline="central"
+        font-family="Songti SC, Noto Serif SC, STSong, serif" font-weight="700"
+        font-size="40" fill="#FBF6EA">星</text>
+</svg>

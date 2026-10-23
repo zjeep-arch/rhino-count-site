@@ -750,7 +750,72 @@ function renderChartBody(){
   renderShengongCard(chart);
   renderWuxingjuCard(chart);
   renderHuajiCard(chart);
+  renderBaziCard(chart);
+  renderFeixingCard(chart);
   renderKoujingCard(rec);
+}
+/* ---------- 八字四柱卡：紫微看"局"，八字看"格"，同屏互参 ---------- */
+const WX_OF_STEM = ['木','木','火','火','土','土','金','金','水','水'];   // 甲乙丙丁戊己庚辛壬癸
+const YANG_STEM  = [1,0,1,0,1,0,1,0,1,0];
+const HIDDEN_MAIN = [9,5,0,1,4,2,3,5,6,7,4,8]; // 支本气：子癸 丑己 寅甲 卯乙 辰戊 巳丙 午丁 未己 申庚 酉辛 戌戊 亥壬
+const NA_YIN = ['海中金','炉中火','大林木','路旁土','剑锋金','山头火','涧下水','城头土','白蜡金','杨柳木',
+  '泉中水','屋上土','霹雳火','松柏木','长流水','沙中金','山下火','平地木','壁上土','金箔金',
+  '覆灯火','天河水','大驿土','钗钏金','桑柘木','大溪水','沙中土','天上火','石榴木','大海水'];
+function shiShen(dayStem, t){
+  const dw = WX_OF_STEM[dayStem], tw = WX_OF_STEM[t];
+  const same = YANG_STEM[dayStem] === YANG_STEM[t];
+  if(dw === tw) return same ? '比肩' : '劫财';
+  const sheng = {木:'火',火:'土',土:'金',金:'水',水:'木'}, ke = {木:'土',土:'水',水:'火',火:'金',金:'木'};
+  if(sheng[dw] === tw) return same ? '食神' : '伤官';
+  if(ke[dw] === tw) return same ? '偏财' : '正财';
+  if(ke[tw] === dw) return same ? '七杀' : '正官';
+  return same ? '偏印' : '正印';
+}
+function gz60(stem, branch){ for(let k = 0; k < 60; k++){ if(k % 10 === stem && k % 12 === branch) return k; } return 0; }
+function renderBaziCard(chart){
+  const card = $('#bazi-card'), body = $('#bazi-body');
+  const fp = chart.lunarInfo && chart.lunarInfo.fourPillars;
+  if(!fp || fp.length !== 4){ card.hidden = true; return; }
+  const cols = fp.map(gz => ST.indexOf(gz[0]) !== -1 ? { s: ST.indexOf(gz[0]), b: BR.indexOf(gz[1]) } : null);
+  if(cols.some(c => c == null || c.s < 0 || c.b < 0)){ card.hidden = true; return; }
+  const dayS = cols[2].s;
+  const pillarNames = ['年柱','月柱','日柱','时柱'];
+  let h = '<table class="bazi-table"><tr><th></th>' + pillarNames.map(n => `<th>${n}</th>`).join('') + '</tr>';
+  h += '<tr><td class="lab">天干</td>' + cols.map((c, i) =>
+    `<td><b class="gz-b">${fp[i][0]}</b><span class="ss">${i === 2 ? '日主' : shiShen(dayS, c.s)}</span></td>`).join('') + '</tr>';
+  h += '<tr><td class="lab">地支</td>' + cols.map((c, i) =>
+    `<td><b class="gz-b">${fp[i][1]}</b><span class="ss">${shiShen(dayS, HIDDEN_MAIN[c.b])}</span></td>`).join('') + '</tr>';
+  h += '<tr><td class="lab">纳音</td>' + cols.map((c, i) =>
+    `<td><span class="ny">${NA_YIN[Math.floor(gz60(c.s, c.b) / 2)]}</span></td>`).join('') + '</tr></table>';
+  // 五行分布：四柱八字（干 + 支本气）
+  const wx = {金:0, 木:0, 水:0, 火:0, 土:0};
+  cols.forEach(c => { wx[WX_OF_STEM[c.s]]++; wx[WX_OF_STEM[HIDDEN_MAIN[c.b]]]++; });
+  const total = 8, WXC = {金:'#8C6D3F', 木:'#75855F', 水:'#5F6E7A', 火:'#B0523A', 土:'#8B8477'};
+  h += `<div class="wx-bars">` + Object.keys(wx).map(k =>
+    `<div class="wx-row"><span class="wx-name">${k}</span><div class="wx-track"><div class="wx-fill" style="width:${wx[k] / total * 100}%;background:${WXC[k]}"></div></div><span class="wx-n">${wx[k]}</span></div>`).join('') + '</div>';
+  h += `<p class="hint" style="margin:10px 0 0">日主 ${fp[2][0]}（${WX_OF_STEM[dayS]}）。紫微看宫位格局，八字看干支生克，两张盘互相印证着看。五行仅为字面统计，喜用神需结合全局与大运，不宜单看此条。</p>`;
+  body.innerHTML = h;
+  card.hidden = false;
+}
+/* ---------- 宫干飞星卡：十二宫天干各自飞出的禄/忌落在哪 ---------- */
+function renderFeixingCard(chart){
+  const card = $('#feixing-card'), body = $('#feixing-body');
+  try{
+    const findPal = star => {
+      const q = chart.palaces.find(pl => pl.stars.some(s => s.name === star));
+      return q ? disp(q.name).replace('宫','') : '命外';
+    };
+    const rows = chart.palaces.map(p => {
+      const sh = E.getSiHuaByStem(p.stem) || {};
+      return `<tr><td class="fx-g"><b>${disp(p.name).replace('宫','')}</b><span class="fx-gz">${ST[p.stem]}</span></td>` +
+        `<td>${sh['禄'] ? `${findPal(sh['禄'])}<span class="fx-star">${sh['禄']}禄</span>` : '—'}</td>` +
+        `<td>${sh['忌'] ? `${findPal(sh['忌'])}<span class="fx-star fx-ji">${sh['忌']}忌</span>` : '—'}</td></tr>`;
+    }).join('');
+    body.innerHTML =
+      `<table class="fx-table"><tr><th>宫（干）</th><th>化禄飞入</th><th>化忌飞入</th></tr>${rows}</table>` +
+      `<p class="hint" style="margin:10px 0 0">看法：A 宫天干让某星化禄、该星落在 B 宫，就是「A 宫把禄送给 B 宫」——A 的人事给 B 那边送顺、送资源；化忌同理，是牵挂与较真的流向。例：夫妻宫化忌飞入命宫，感情上的在意直接落在你身上。自化（宫干化在本宫）已在各宫标注。</p>`;
+    card.hidden = false;
+  }catch(e){ card.hidden = true; }
 }
 /* 本次排盘口径：把已有的 note + 历法信息整理成固定尾注块 */
 function renderKoujingCard(rec){
@@ -1847,11 +1912,44 @@ document.addEventListener('click', e => {
 
 /* ---------- 分享图 ---------- */
 let shareKind = 'chart';
+/* 链接分享：生日编码进 URL，对方点开自动排盘（纯前端，不经过服务器） */
+function shareLinkOf(rec){
+  const i = rec.input || {};
+  const p = { y: i.year, m: i.month, d: i.day, h: i.shichen, g: i.gender === 'female' ? 'f' : 'm',
+    n: (i.name || '').slice(0, 12), ts: i.trueSolar ? 1 : 0, lz: i.lateZiNextDay ? 1 : 0,
+    ln: (i.longitude != null && isFinite(i.longitude)) ? Math.round(i.longitude * 100) / 100 : '', pv: i.province || '', ct: i.city || '' };
+  const b = btoa(unescape(encodeURIComponent(JSON.stringify(p)))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+  return location.origin + location.pathname + '?b=' + b;
+}
+function setShareMode(k){
+  const isLink = k === 'link';
+  $('#share-canvas').hidden = isLink;
+  $('#btn-save-img').hidden = isLink;
+  $('#share-link-box').hidden = !isLink;
+  if(isLink){
+    const rec = cur();
+    if(rec){
+      const url = shareLinkOf(rec);
+      $('#share-link-input').value = url;
+      const hint = $('#copy-link-hint'); hint.textContent = '';
+    }
+  }
+}
 $('#share-tabs').addEventListener('click', e => {
   const b = e.target.closest('button'); if(!b) return;
   shareKind = b.dataset.k;
   $$('#share-tabs button').forEach(x => x.classList.toggle('on', x===b));
+  setShareMode(shareKind);
   drawShare();
+});
+document.addEventListener('click', async e => {
+  if(!e.target.closest('#btn-copy-link')) return;
+  const url = $('#share-link-input').value, hint = $('#copy-link-hint');
+  try{
+    if(navigator.clipboard && navigator.clipboard.writeText){ await navigator.clipboard.writeText(url); }
+    else { const ta = document.createElement('textarea'); ta.value = url; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove(); }
+    hint.textContent = '已复制，去发给朋友吧 ✦';
+  }catch(err){ hint.textContent = '复制失败，请手动全选复制。'; }
 });
 $('#share-x').addEventListener('click', () => $('#share-modal').hidden = true);
 function openShare(kind){
@@ -1859,6 +1957,7 @@ function openShare(kind){
   shareKind = kind || 'chart';
   $$('#share-tabs button').forEach(x => x.classList.toggle('on', x.dataset.k===shareKind));
   $('#share-modal').hidden = false;
+  setShareMode(shareKind);
   drawShare();
 }
 /* 星空底纹：深空渐变 + 星野 + 月相 + 金线双框（分享图命盘专用） */
@@ -2192,9 +2291,45 @@ function wireDisclaimer(){
   }
 }
 
+/* ---------- 分享链接解析：?b=… 打开即自动排盘 ---------- */
+function openSharedChart(){
+  const q = new URLSearchParams(location.search);
+  const b = q.get('b');
+  if(!b) return false;
+  try{
+    const norm = b.replace(/-/g, '+').replace(/_/g, '/');
+    const pad = norm + '='.repeat((4 - norm.length % 4) % 4);
+    const p = JSON.parse(decodeURIComponent(escape(atob(pad))));
+    if(!p || !p.y || !p.m || !p.d || p.h == null) return false;
+    const input = {
+      name: p.n || '', gender: p.g === 'f' ? 'female' : 'male',
+      year: +p.y, month: +p.m, day: +p.d, shichen: +p.h,
+      exHour: '', exMin: '',
+      province: p.pv || '', city: p.ct || '',
+      longitude: (p.ln !== '' && p.ln != null && isFinite(p.ln)) ? +p.ln : null,
+      trueSolar: !!p.ts && p.ln !== '' && p.ln != null,
+      lateZiNextDay: !!p.lz,
+      tag: '分享',
+    };
+    const { chart, note } = computeChart(input);
+    const rec = { id: uid(), name: input.name || '分享的盘', tag: '分享', gender: input.gender,
+      input, chart, note, createdAt: Date.now() };
+    archive.unshift(rec);
+    if(archive.length > 20) archive.length = 20;
+    store.set('gxg_archive', archive);
+    currentId = rec.id; store.set('gxg_current', currentId);
+    luckMode = 'natal'; luckParam = null;
+    renderChart();
+    nav('chart');
+    try{ history.replaceState(null, '', location.pathname); }catch(e){} // 清参，避免刷新重复入档
+    return true;
+  }catch(e){ return false; }
+}
+
 /* ---------- 启动 ---------- */
 initForm();
 wireDisclaimer();
 renderHome();
-if(currentId && cur()){ renderChart(); }
+if(!openSharedChart() && currentId && cur()){ renderChart(); }
+if('serviceWorker' in navigator){ addEventListener('load', () => { navigator.serviceWorker.register('sw.js').catch(() => {}); }); }
 })();
