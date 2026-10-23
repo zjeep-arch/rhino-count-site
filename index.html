@@ -936,15 +936,16 @@
         color-mix(in oklab, var(--bg-soft) 74%, var(--surface-strong));
     }
     .lab-cover::before {
-      content: attr(data-glyph);
+      content: attr(data-initial);
       position: absolute;
-      right: -4%;
-      bottom: -26%;
+      right: 2%;
+      bottom: -14%;
       font-family: var(--serif);
+      font-style: italic;
       font-weight: 700;
-      font-size: clamp(120px, 16vw, 220px);
+      font-size: clamp(130px, 15vw, 230px);
       line-height: 1;
-      color: color-mix(in oklab, var(--tint) 17%, transparent);
+      color: color-mix(in oklab, var(--tint) 20%, transparent);
       pointer-events: none;
     }
     .lab-cover .lab-no { position: absolute; top: 12px; left: 14px; }
@@ -1085,7 +1086,7 @@
     }
     .lab-row {
       display: grid;
-      grid-template-columns: 56px minmax(0, 1fr) auto auto 20px;
+      grid-template-columns: 56px minmax(0, 1fr) auto 20px;
       gap: 16px;
       align-items: center;
       padding: 16px 8px;
@@ -1126,8 +1127,14 @@
       overflow: hidden;
       text-overflow: ellipsis;
     }
+    /* DOI 作为引用元数据挂在摘要下方，不再占用网格列，
+       保证所有行的类型标签右缘对齐 */
+    .lab-row-main .lab-doi {
+      display: block;
+      margin-top: 5px;
+      letter-spacing: 0.04em;
+    }
     .lab-row .lab-tag { justify-self: end; }
-    .lab-row .lab-doi { justify-self: end; }
     .lab-row-arrow {
       color: var(--muted);
       transition: transform 0.2s ease, color 0.2s ease;
@@ -1143,7 +1150,6 @@
     }
     @media (max-width: 880px) {
       .lab-row { grid-template-columns: 48px minmax(0, 1fr) auto 18px; }
-      .lab-row .lab-doi { display: none; }
     }
     @media (max-width: 620px) {
       .lab-spread { gap: var(--s-5); }
@@ -5402,7 +5408,7 @@
             </div>
             <div class="lab-spread">
               <a class="lab-card lab-hero fade-in" href="builds/jelly-baby/" data-tag="PLAY">
-                <div class="lab-cover" data-glyph="果">
+                <div class="lab-cover" data-initial="J">
                   <span class="lab-no">N°01</span>
                   <span class="lab-word">Jelly Lab</span>
                 </div>
@@ -5416,7 +5422,7 @@
               </a>
               <div class="lab-grid">
                 <a class="lab-card lab-med fade-in fade-in-delay-1" href="builds/ziwei/" data-tag="TOOL">
-                  <div class="lab-cover" data-glyph="问">
+                  <div class="lab-cover" data-initial="Z">
                     <span class="lab-no">N°02</span>
                     <span class="lab-word">Ziwei</span>
                   </div>
@@ -5428,7 +5434,7 @@
                   </div>
                 </a>
                 <a class="lab-card lab-med fade-in fade-in-delay-2" href="whiteboard-recorder.html" data-tag="TOOL">
-                  <div class="lab-cover" data-glyph="犀">
+                  <div class="lab-cover" data-initial="W">
                     <span class="lab-no">N°03</span>
                     <span class="lab-word">Whiteboard</span>
                   </div>
@@ -5440,7 +5446,7 @@
                   </div>
                 </a>
                 <a class="lab-card lab-med fade-in fade-in-delay-3" href="games/duck-scare-war.html" data-tag="GAME">
-                  <div class="lab-cover" data-glyph="鸭">
+                  <div class="lab-cover" data-initial="D">
                     <span class="lab-no">N°04</span>
                     <span class="lab-word">Duck War</span>
                   </div>
@@ -5460,9 +5466,9 @@
                     <span class="lab-row-main">
                       <strong>3D AI 工作室</strong>
                       <em>Iron Man 风格的 3D AI 工作室——方舟反应堆、全息屏幕、贾维斯 HUD、全球数据流。可拖拽旋转、点击交互。</em>
+                      
                     </span>
                     <span class="lab-tag">PLAY</span>
-                    
                     <span class="lab-row-arrow" aria-hidden="true">→</span>
                   </a>
                   <a class="lab-card lab-row" href="ai-lab-3d.html" data-tag="LAB">
@@ -5470,9 +5476,9 @@
                     <span class="lab-row-main">
                       <strong>AI 创作实验室</strong>
                       <em>沉浸式 3D 交互页面——悬浮水晶体、滚动驱动的相机运动、作品矩阵、能力图谱、实时数据面板。</em>
+                      
                     </span>
                     <span class="lab-tag">LAB</span>
-                    
                     <span class="lab-row-arrow" aria-hidden="true">→</span>
                   </a>
                   <a class="lab-card lab-row" href="anti-gravity-text.html" data-tag="EXPERIMENT">
@@ -5480,9 +5486,9 @@
                     <span class="lab-row-main">
                       <strong>反重力文字 · 北京地标</strong>
                       <em>每个字符在零重力中漂浮上升--用反重力排版讲述故宫、鸟巢、国贸等北京地标的建筑故事。鼠标悬停时字母被推开，松手后弹回原位。</em>
+                      <span class="lab-doi" title="Zenodo DOI">DOI 10.5281/zenodo.22065955</span>
                     </span>
                     <span class="lab-tag">EXPERIMENT</span>
-                    <span class="lab-doi" title="Zenodo DOI">DOI 10.5281/zenodo.22065955</span>
                     <span class="lab-row-arrow" aria-hidden="true">→</span>
                   </a>
                   <a class="lab-card lab-row" href="stadium-3d.html" data-tag="3D">
@@ -5490,9 +5496,9 @@
                     <span class="lab-row-main">
                       <strong>AI 竞技场 3D · 多球场体验</strong>
                       <em>程序化 3D 体育场--Three.js 构建的沉浸式球场，支持伯纳乌/工体/马拉卡纳三座经典球场切换、日夜模式、雨天天气系统、球迷人浪应援和实时弹幕。点击座位查看视野评分，进入第一人称观赛视角。</em>
+                      <span class="lab-doi" title="Zenodo DOI">DOI 10.5281/zenodo.22070200</span>
                     </span>
                     <span class="lab-tag">3D</span>
-                    <span class="lab-doi" title="Zenodo DOI">DOI 10.5281/zenodo.22070200</span>
                     <span class="lab-row-arrow" aria-hidden="true">→</span>
                   </a>
                 </div>
@@ -5997,9 +6003,10 @@
         const rows = buildTracks.slice(4);
         const pad2 = n => String(n).padStart(2, '0');
         const labNo = i => 'N°' + pad2(i + 1);
-        const glyphOf = item => (item.title || '').trim().charAt(0);
+        // 封面底纹取英文 word 首字母（斜体衬线）：跨平台渲染一致，比汉字底纹更利落
+        const initialOf = item => String(item.word || item.tag || '?').trim().charAt(0).toUpperCase();
         const cover = (item, i) => `
-                  <div class="lab-cover" data-glyph="${esc(glyphOf(item))}">
+                  <div class="lab-cover" data-initial="${esc(initialOf(item))}">
                     <span class="lab-no">${labNo(i)}</span>
                     <span class="lab-word">${esc(item.word || item.tag)}</span>
                   </div>`;
@@ -6046,9 +6053,9 @@
                     <span class="lab-row-main">
                       <strong>${esc(item.title)}</strong>
                       <em>${esc(item.desc)}</em>
+                      ${item.doi ? `<span class="lab-doi" title="Zenodo DOI">DOI ${esc(item.doi)}</span>` : ''}
                     </span>
                     <span class="lab-tag">${esc(item.tag)}</span>
-                    ${item.doi ? `<span class="lab-doi" title="Zenodo DOI">DOI ${esc(item.doi)}</span>` : ''}
                     <span class="lab-row-arrow" aria-hidden="true">→</span>
                   </a>`).join('')}
                 </div>
