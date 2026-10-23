@@ -12,17 +12,26 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=20261021a">
+<link rel="stylesheet" href="assets/css/style.css?v=20261023a">
 </head>
 <body>
 <div id="stars-bg" aria-hidden="true"></div>
 
 <header id="app-header">
-  <div class="brand" data-nav="home">
-    <span class="brand-mark">✦</span>
-    <div><h1>问星</h1><p>紫微斗数在线排盘</p></div>
+  <div class="header-inner">
+    <div class="brand" data-nav="home">
+      <span class="brand-mark">✦</span>
+      <div><h1>问星</h1><p>紫微斗数在线排盘</p></div>
+    </div>
+    <nav id="topnav" aria-label="主导航">
+      <button data-nav="home">首页</button>
+      <button data-nav="input">排盘</button>
+      <button data-nav="menu">解读</button>
+      <button data-nav="guide">新手导览</button>
+      <button data-nav="archive">我的命盘</button>
+    </nav>
+    <button id="nav-archive" class="icon-btn" data-nav="archive" aria-label="我的命盘">☰</button>
   </div>
-  <button id="nav-archive" class="icon-btn" data-nav="archive" aria-label="我的命盘">☰</button>
 </header>
 
 <main id="app">
@@ -74,6 +83,7 @@
           <select id="f-exmin"><option value="">分（可选）</option></select>
         </div>
         <div class="hint" id="boundary-hint"></div>
+        <label class="check" id="latezi-row" hidden><input type="checkbox" id="f-latezi-next"> 晚子时按次日排盘（换日派口径；不勾选＝同多数工具，不换日）</label>
         <label class="check"><input type="checkbox" id="f-unknown-hour"> 时辰不确定（去定盘验证辅助）</label>
       </div>
       <div class="field"><span>出生地（真太阳时校正）</span>
@@ -99,33 +109,37 @@
     </div>
   </section>
 
-  <!-- 命盘 -->
+  <!-- 命盘（桌面端左盘右读双栏；移动端按原顺序单列） -->
   <section class="view" id="view-chart">
-    <div id="chart-head"></div>
-    <div class="tabs" id="luck-tabs">
-      <button data-mode="natal" class="on">本命</button>
-      <button data-mode="daxian">大限</button>
-      <button data-mode="liunian">流年</button>
-      <button data-mode="liuyue">流月</button>
-      <button data-mode="liuri">流日</button>
+    <div class="chart-left">
+      <div id="chart-head"></div>
+      <div class="tabs" id="luck-tabs">
+        <button data-mode="natal" class="on">本命</button>
+        <button data-mode="daxian">大限</button>
+        <button data-mode="liunian">流年</button>
+        <button data-mode="liuyue">流月</button>
+        <button data-mode="liuri">流日</button>
+      </div>
+      <div id="luck-picker"></div>
+      <div id="sihua-strip"></div>
+      <div id="overlay-strip"></div>
+      <div id="sanfang-hint"></div>
+      <div id="chart-grid-wrap"><div id="chart-grid"></div></div>
+      <div id="chart-list"></div>
     </div>
-    <div id="luck-picker"></div>
-    <div id="sihua-strip"></div>
-    <div id="overlay-strip"></div>
-    <div id="sanfang-hint"></div>
-    <div id="chart-grid-wrap"><div id="chart-grid"></div></div>
-    <div id="chart-list"></div>
-    <div class="card" id="retro-card" hidden></div>
-    <div class="sec-head"><h3>十二宫</h3><span class="more hint">结合你的命盘 · 点宫看详解</span></div>
-    <div id="chart-palaces" class="palace-grid"></div>
-    <div class="card"><div class="card-kicker">格局</div><div id="pattern-list"></div></div>
-    <div class="card" id="shengong-card" hidden><div class="card-kicker">身宫</div><div id="shengong-body"></div></div>
-    <div class="card" id="wuxingju-card" hidden><div class="card-kicker">五行局</div><div id="wuxingju-body"></div></div>
-    <div class="card" id="huaji-card" hidden><div class="card-kicker">化忌化解</div><div id="huaji-body"></div></div>
-    <div class="card" id="koujing-card" hidden><div class="card-kicker">本次排盘口径</div><div id="koujing-body" class="hint"></div></div>
-    <div class="card" style="margin-top:14px"><div class="card-kicker">下一步</div>
-      <p class="hint" style="margin:0 0 10px">十二宫已在上面逐宫展开。13 维深度解读、专题报告等更多解读在"解读"菜单里。</p>
-      <button class="btn-primary btn-block" data-nav="menu">去解读菜单 →</button>
+    <div class="chart-right">
+      <div class="card" id="retro-card" hidden></div>
+      <div class="sec-head"><h3>十二宫</h3><span class="more hint">结合你的命盘 · 点宫看详解</span></div>
+      <div id="chart-palaces" class="palace-grid"></div>
+      <div class="card"><div class="card-kicker">格局</div><div id="pattern-list"></div></div>
+      <div class="card" id="shengong-card" hidden><div class="card-kicker">身宫</div><div id="shengong-body"></div></div>
+      <div class="card" id="wuxingju-card" hidden><div class="card-kicker">五行局</div><div id="wuxingju-body"></div></div>
+      <div class="card" id="huaji-card" hidden><div class="card-kicker">化忌化解</div><div id="huaji-body"></div></div>
+      <div class="card" id="koujing-card" hidden><div class="card-kicker">本次排盘口径</div><div id="koujing-body" class="hint"></div></div>
+      <div class="card" style="margin-top:14px"><div class="card-kicker">下一步</div>
+        <p class="hint" style="margin:0 0 10px">十二宫已在上面逐宫展开。13 维深度解读、专题报告等更多解读在"解读"菜单里。</p>
+        <button class="btn-primary btn-block" data-nav="menu">去解读菜单 →</button>
+      </div>
     </div>
   </section>
 
@@ -289,6 +303,6 @@
 <script src="assets/js/ziwei-engine.js"></script>
 <script src="assets/js/data.js"></script>
 <script src="assets/js/data-v2.js"></script>
-<script src="assets/js/app.js?v=20261021a"></script>
+<script src="assets/js/app.js?v=20261023a"></script>
 </body>
 </html>

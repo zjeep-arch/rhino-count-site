@@ -397,3 +397,82 @@ body{font-family:var(--font-body); padding-bottom:calc(104px + env(safe-area-ins
 /* 叠盘角标（流命/流官/流财/流夫） */
 .ov-tag{display:inline-block; background:var(--gold); color:#fff; font-size:10.5px; font-weight:700;
   border-radius:6px; padding:1px 6px; margin:0 2px 2px 0; vertical-align:2px;}
+
+/* ═══════════════ v4：PC/桌面端适配（≥1024px 双栏 + 顶部导航） ═══════════════ */
+.header-inner{display:flex; justify-content:space-between; align-items:center; gap:16px; width:100%;}
+#topnav{display:none;}
+
+@media(min-width:1024px){
+  body{max-width:none; padding-bottom:40px; font-size:15.5px;}
+  #app{max-width:1180px; margin:0 auto; padding:0 32px;}
+  #app-header{padding:0 32px;}
+  .header-inner{max-width:1180px; margin:0 auto;}
+  #topnav{display:flex; gap:4px;}
+  #topnav button{border:none; background:none; font-size:14.5px; color:var(--muted); cursor:pointer;
+    padding:9px 18px; border-radius:999px; font-weight:600; transition:background .15s ease, color .15s ease;}
+  #topnav button:hover{color:var(--primary-deep); background:var(--primary-soft);}
+  #topnav button.on{background:var(--primary); color:#fff;}
+  #nav-archive{display:none;}
+  #tabbar{display:none;}
+
+  /* 弹窗：桌面改居中对话框（不再从底部升起） */
+  .modal{align-items:center; padding:28px;}
+  .modal-card{border-radius:24px; animation:fadeUp .22s ease-out; max-width:480px;}
+  .modal-card.wide{max-width:560px;}
+
+  /* 命盘页：左盘右读双栏，左侧网格吸附视口 */
+  #view-chart{display:grid; grid-template-columns:minmax(0,7fr) minmax(0,5fr); column-gap:44px; align-items:start;}
+  .chart-left{grid-column:1; align-self:stretch;}
+  .chart-right{grid-column:2; min-width:0;}
+  #chart-grid-wrap{position:sticky; top:86px;}
+  #chart-grid{gap:10px;}
+  .cell{min-height:152px; padding:12px 10px; font-size:13px;}
+  .cell .pname{font-size:15px;}
+  #chart-head{padding:22px 24px;}
+
+  /* 排盘表单：居中卡片，宽度收敛 */
+  #birth-form{max-width:660px;}
+
+  /* 长文阅读宽度与字号 */
+  .reading-body{font-size:16px; line-height:1.95; padding:28px;}
+  #view-reading .view-title,#view-reading .view-sub,#view-topics .view-title,#view-topics .view-sub{max-width:820px;}
+
+  /* 宫位卡三列，超宽屏四列 */
+  .palace-grid{grid-template-columns:repeat(3,1fr); gap:14px;}
+  #menu-list{gap:14px;}
+
+  /* 首页 hero 适度放大 */
+  .hero-slim{padding:52px 32px 42px !important;}
+  .hero-slim .hero-title{font-size:32px;}
+  .hero-slim .hero-sub{font-size:15px;}
+
+  /* 桌面 hover 反馈（无触摸按压） */
+  .palace-card{transition:transform .15s ease, box-shadow .15s ease;}
+  .palace-card:hover{transform:translateY(-2px); box-shadow:var(--sh-md);}
+  .btn-primary:hover{filter:brightness(1.05);}
+  .btn-ghost:hover{border-color:var(--primary); color:var(--primary-deep);}
+  .cell:hover{border-color:var(--primary);}
+  .chip:hover{border-color:var(--primary); color:var(--primary-deep);}
+  .arch-item button:hover{border-color:var(--primary);}
+
+  #app-footer{max-width:1180px; margin:0 auto;}
+}
+@media(min-width:1280px){
+  .palace-grid{grid-template-columns:repeat(4,1fr);}
+  #view-home .palace-grid{grid-template-columns:repeat(4,1fr);}
+}
+
+/* v4.1：桌面细节微调（截图走查反馈） */
+@media(min-width:1024px){
+  /* 中心"问星"块：桌面端收敛比例，不再突兀 */
+  .cell.center > div:first-child{font-size:26px;}
+  .cell.center .gz{font-size:13px; margin-top:4px;}
+  /* 星曜密集的格子：稍增行距与最小高度 */
+  .cell{min-height:158px; line-height:1.6;}
+  .cell .star-chip{font-size:12.5px;}
+}
+
+/* v4.2：桌面端入场动画提速（避免渐入中帧被误读为半透明） */
+@media(min-width:1024px){
+  .palace-card,.menu-item{animation-duration:.28s; animation-delay:calc(var(--i,0)*22ms);}
+}
