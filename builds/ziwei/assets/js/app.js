@@ -62,7 +62,7 @@ const uid = () => 'c' + Date.now().toString(36) + Math.floor(Math.random()*1e4).
 const cur = () => archive.find(a => a.id === currentId) || null;
 
 /* ---------- 导航 ---------- */
-const VIEWS = ['home','input','chart','menu','palaces','reading','topics','answer','guide','archive','compare','dingpan','favorites'];
+const VIEWS = ['home','input','chart','menu','palaces','reading','topics','answer','life','guide','archive','compare','dingpan','favorites'];
 function nav(name){
   if(!VIEWS.includes(name)) return;
   if(name === 'chart' && !cur()) name = 'input'; // 还没排过盘时，"命盘"入口直接引导去排盘
@@ -618,7 +618,10 @@ function renderLuckPicker(){
   } else if(luckMode === 'liunian'){
     const sel = document.createElement('select');
     const thisY = new Date().getFullYear();
-    for(let y = thisY - 60; y <= thisY + 30; y++){
+    const bi = chart.birthInfo || {};
+    const yMin = Math.min(thisY - 60, bi.year || thisY);
+    const yMax = Math.max(thisY + 30, (bi.year || thisY) + 121);
+    for(let y = yMin; y <= yMax; y++){
       const o = document.createElement('option'); o.value = y; o.textContent = y + ' 年';
       if(y === luckParam) o.selected = true; sel.appendChild(o);
     }
@@ -1629,6 +1632,7 @@ nav = function(name){
   if(name === 'reading') renderReading();
   if(name === 'topics') renderTopics();
   if(name === 'answer'){ renderAnswer(); renderZeri(); }
+  if(name === 'life') renderLifeView();
 };
 
 /* ---------- 一键专题 ---------- */
@@ -2054,11 +2058,101 @@ function renderTimelineCard(chart){
   })();
   body.innerHTML =
     `<p class="hint" style="margin:0 0 8px">十年一层底色：强度评定（宫位成色＋限四化入命方）＋逐年动静柱（点每一层展开逐年明细）。</p>` + rows +
-    `<p class="hint" style="margin:10px 0 0">当前 ${curDx.startAge || '—'}–${curDx.endAge || '—'} 岁走【${curDx.palaceName ? disp(curDx.palaceName) : ''}】大限${nextMark ? `，下一个换挡年是 <b style="color:#D9B36A">${nextMark} 年</b>` : ''}。走势是"动静与主题"，不是吉凶判决。</p>`;
+    `<p class="hint" style="margin:10px 0 0">当前 ${curDx.startAge || '—'}–${curDx.endAge || '—'} 岁走【${curDx.palaceName ? disp(curDx.palaceName) : ''}】大限${nextMark ? `，下一个换挡年是 <b style="color:#D9B36A">${nextMark} 年</b>` : ''}。走势是"动静与主题"，不是吉凶判决。</p>` +
+    `<button class="btn-ghost btn-block" data-nav="life" style="margin-top:12px">展开人生全景 · 十二层＋流年热力 →</button>`;
   body.querySelectorAll('.tl-row').forEach(r => r.addEventListener('click', () => r.classList.toggle('open')));
   card.hidden = false;
 }
-/* ---------- 问星答：场景化决策参考 ---------- */
+/* ---------- 人生全景：十二层全展开 + 120 年流年热力 + 年份联动 ---------- */
+function jumpToYear(y){
+  if(!y || y < 1900 || y > 2200) return;
+  luckMode = 'liunian'; luckParam = y;
+  nav('chart');
+}
+function lifeYearsOf(chart, dx, keyBranches, mingFangSet){
+  const birthY = chart.birthInfo.year;
+  const y1 = birthY + dx.startAge, y2 = birthY + dx.endAge;
+  const years = [];
+  for(let y = y1; y <= y2; y++){
+    const act = yearActivity(chart, y);
+    const yb = ((y - 4) % 12 + 12) % 12;
+    let lsh = null;
+    try{ lsh = normSihua(E.getLiuNianSiHua(y)); }catch(e){}
+    const jiP = lsh && lsh.ji ? chart.palaces.find(pl => pl.stars.some(x => x.name === lsh.ji)) : null;
+    years.push({
+      y, act,
+      isMark: keyBranches.includes(yb),
+      luPal: lsh && lsh.lu ? sihuaStarPalace(chart, lsh.lu) : '',
+      jiPal: lsh && lsh.ji ? sihuaStarPalace(chart, lsh.ji) : '',
+      jiHit: !!(jiP && mingFangSet.has(jiP.branch)),
+      liuPal: palaceByBranch(chart, yb),
+    });
+  }
+  return years;
+}
+function renderLifeView(){
+  const rec = cur();
+  const box = $('#life-body');
+  if(!box) return;
+  if(!rec){ box.innerHTML = '<div class="empty">先排一张盘，再看人生全景。</div>'; return; }
+  const chart = rec.chart;
+  const birthY = chart.birthInfo.year;
+  const nowY = new Date().getFullYear();
+  const keyBranches = ['命宫','官禄宫','财帛宫','夫妻宫'].map(n => palaceByName(chart, n).branch);
+  const mingFangSet = new Set(sanfangBranches(chart.mingGongBranch));
+  // 顶部：120 年流年热力（行=大限，列=年）
+  let heat = '', sections = '';
+  chart.daXians.forEach((dx, i) => {
+    const { sh, pal, lvl } = decadeQuality(chart, i, dx);
+    const name = disp(pal.name);
+    const majors = pal.stars.filter(x => x.type === 'major').map(x => x.name).join('·') || '空宫';
+    const years = lifeYearsOf(chart, dx, keyBranches, mingFangSet);
+    const marks = years.filter(o => o.isMark).map(o => o.y);
+    heat += `<div class="ly-row${i === chart.currentDaXianIndex ? ' cur' : ''}"><span class="ly-lab">${dx.startAge}–${dx.endAge}</span><div class="ly-cells">` +
+      years.map(o => `<button class="ly-cell${o.act.level === '高' ? ' hi' : o.act.level === '中' ? ' mid' : ''}${o.isMark ? ' mk' : ''}${o.jiHit ? ' ji' : ''}${o.y === nowY ? ' now' : ''}" data-year="${o.y}" title="${o.y} 年 · 动静${o.act.level}${o.isMark ? ' · 换挡' : ''}${o.jiHit ? ' · 忌入命方' : ''}">${String(o.y).slice(2)}</button>`).join('') +
+      '</div></div>';
+    const spark = years.map(o =>
+      `<i class="sp-bar${o.act.level === '高' ? ' hi' : o.act.level === '中' ? ' mid' : ''}${o.isMark ? ' mk' : ''}${o.jiHit ? ' ji' : ''}" title="${o.y}"></i>`).join('');
+    const detail = years.map(o =>
+      `<tr${o.y === nowY ? ' class="now"' : ''}><td class="ly-y" data-year="${o.y}">${o.y}</td>` +
+      `<td>${disp(o.liuPal.name).replace('宫','')}${o.isMark ? ' ◆换挡' : ''}</td>` +
+      `<td>${o.luPal ? '禄→' + o.luPal : '—'}</td>` +
+      `<td>${o.jiPal ? '忌→' + o.jiPal + (o.jiHit ? '（命方）' : '') : '—'}</td>` +
+      `<td class="act-${o.act.level}">${o.act.level}</td>` +
+      `<td><button class="link-btn" data-year="${o.y}">看流年盘 →</button></td></tr>`).join('');
+    sections += `<div class="tl-row open${i === chart.currentDaXianIndex ? ' cur' : ''}">
+      <div class="tl-age">${dx.startAge}–${dx.endAge}<span>${birthY + dx.startAge}–${birthY + dx.endAge}</span></div>
+      <div class="tl-body">
+        <div class="tl-line1"><b>${name}</b><span class="tl-stars">${esc(majors)}</span>
+          <span class="tl-lvl lv-${lvl === '旺限' ? 'hi' : lvl === '平顺' ? 'mid' : 'lo'}">${lvl}</span></div>
+        <div class="tl-theme">${esc(DX_THEME[name] || '')}</div>
+        <div class="tl-line2">
+          ${sh && sh.lu ? `<span class="tl-sh">限禄 ${esc(sh.lu)}→${esc(sihuaStarPalace(chart, sh.lu))}</span>` : ''}
+          ${sh && sh.ji ? `<span class="tl-sh ji">限忌 ${esc(sh.ji)}→${esc(sihuaStarPalace(chart, sh.ji))}</span>` : ''}
+          ${marks.length ? `<span class="tl-mk">换挡 ${marks.slice(0, 3).join('、')}${marks.length > 3 ? '…' : ''}</span>` : ''}
+        </div>
+        <div class="tl-spark">${spark}</div>
+        <div class="tl-expand"><table class="tl-table"><tr><th>年</th><th>流年命宫</th><th>禄</th><th>忌</th><th>动静</th><th></th></tr>${detail}</table></div>
+      </div></div>`;
+  });
+  const curDx = chart.daXians[chart.currentDaXianIndex] || {};
+  let nextMark = null;
+  for(let y = nowY + 1; y <= birthY + (curDx.endAge || 0); y++){
+    if(keyBranches.includes(((y - 4) % 12 + 12) % 12)){ nextMark = y; break; }
+  }
+  box.innerHTML =
+    `<div class="card"><div class="card-kicker">120 年流年热力</div>` +
+    `<div class="ly-heat">${heat}</div>` +
+    `<div class="heat-legend"><span>静</span><i style="background:#262F5E"></i><i style="background:#5F74C4"></i><i style="background:#C9A96A"></i><span>动</span>` +
+    `<span class="hint" style="margin-left:8px">描边=换挡年 · 红=忌入命方 · 点年份直达流年盘</span></div></div>` +
+    `<div class="card"><div class="card-kicker">十二层 · 全展开</div>` +
+    `<p class="hint" style="margin:0 0 6px">当前 ${curDx.startAge || '—'}–${curDx.endAge || '—'} 岁走【${curDx.palaceName ? disp(curDx.palaceName) : ''}】大限${nextMark ? `，下一个换挡年是 <b style="color:#D9B36A">${nextMark} 年</b>` : ''}。</p>` +
+    sections + `</div>`;
+  box.onclick = e => {
+    const t = e.target.closest('[data-year]');
+    if(t) jumpToYear(+t.dataset.year);
+  };
+}
 const ANSWER_SCENES = [
   { k:'job', q:'现在适合跳槽 / 转行吗？', w:{ '官禄宫':.4, '迁移宫':.25, '命宫':.2, '财帛宫':.15 },
     act:['更新简历、放风试水，让机会来找你', '官禄偏弱时先谈好下家再提离职，别裸辞', '若强在技能（化科/文昌），考证升级比硬跳划算'] },
@@ -2945,6 +3039,7 @@ const MENU_ITEMS = [
   { k: 'palaces', t: '十二宫解读', d: '十二宫结合你的命盘，一宫一卡：星曜、四化、干支大限全填上', need: true },
   { k: 'reading', t: '13维深度解读', d: '67.5 万张命盘语料库 · 每盘三万字长解读：性格、事业、感情……共十三维度，关注公众号免费解锁', need: true },
   { k: 'answer', t: '问星答 · 决策参考', d: '跳槽、异地、合伙、感情推进……按你的盘面逐题给倾向、条件与行动清单，附择日助手', need: true },
+  { k: 'life', t: '人生全景 · 时间轴', d: '十二层大限全展开：十年成色、限四化流向、逐年明细与 120 年流年热力，点年份直达流年盘', need: true },
   { k: 'topics', t: '专题报告', d: '事业、财运、感情、健康：跨宫综合，一次看一组宫位的合力', need: true },
   { k: 'sihua', t: '十干四化表', d: '十干四化速查：生年天干决定四化落在哪颗星', need: false },
   { k: 'aibrief', t: 'AI 解读任务书', d: '一键生成自包含任务书，复制后粘贴给任意大模型追问', need: true },
@@ -2972,6 +3067,7 @@ document.addEventListener('click', e => {
   if(needChart && !cur()){ nav('input'); return; }
   if(k === 'palaces') nav('palaces');
   else if(k === 'answer') nav('answer');
+  else if(k === 'life') nav('life');
   else if(k === 'reading') nav('reading');
   else if(k === 'topics') nav('topics');
   else if(k === 'sihua') openSihuaTable();

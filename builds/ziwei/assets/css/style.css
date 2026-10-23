@@ -1110,3 +1110,22 @@ body{color:var(--ink);
 .tl-table td.act-高{color:#D9B36A; font-weight:700;}
 .tl-table td.act-中{color:#A9BCF2;}
 .tl-table td.act-低{color:#6E779F;}
+
+/* v12：人生全景（120 年热力 + 十二层全展开） */
+#life-body .tl-row{cursor:default;}
+#life-body .tl-table td.ly-y{color:#F0F2FB; font-weight:700; cursor:pointer; text-decoration:underline dotted rgba(201,169,106,.5); text-underline-offset:3px;}
+#life-body .tl-table td.ly-y:hover{color:#D9B36A;}
+.ly-heat{overflow-x:auto; padding:2px 0;}
+.ly-row{display:flex; align-items:center; gap:8px; margin:3px 0;}
+.ly-row.cur .ly-lab{color:#D9B36A;}
+.ly-lab{flex:none; width:52px; font-size:11px; color:#8A93C2; text-align:right;}
+.ly-cells{display:flex; gap:2px;}
+.ly-cell{width:34px; height:22px; border-radius:4px; border:1px solid rgba(223,227,251,.07);
+  background:#262F5E; color:#8A93C2; font-size:10px; cursor:pointer; padding:0; line-height:1;}
+.ly-cell.mid{background:#3E4F99; color:#C9D1F2;}
+.ly-cell.hi{background:#8C6D3F; color:#FFF8E8;}
+.ly-cell.mk{outline:1px solid rgba(223,227,251,.5); outline-offset:1px;}
+.ly-cell.ji{background:#7A3A2C; color:#F2C9BC;}
+.ly-cell.now{box-shadow:0 0 0 2px #C9A96A;}
+.ly-cell:hover{border-color:#DFE3FB; transform:translateY(-1px);}
+@media(max-width:640px){ .ly-cell{width:26px; height:19px; font-size:9px;} }
