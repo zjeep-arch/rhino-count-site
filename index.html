@@ -1312,6 +1312,9 @@
 #gus-videos .bay-floor{ position: absolute; left: calc(50% - 1000px); bottom: 0px; width: 2000px; height: 1300px; transform-origin: 50% 100%; background: linear-gradient(90deg, color-mix(in srgb, var(--g) 18%, transparent) 2px, transparent 2px) -1px 0 / 50px 50px,
     linear-gradient(color-mix(in srgb, var(--g) 18%, transparent) 2px, transparent 2px) 0 0 / 50px 50px; mask-image: linear-gradient(to top, transparent, rgb(0, 0, 0) 4%, rgb(0, 0, 0) 30%, transparent 96%); }
 #gus-videos .ff[data-open] .bay-traces{ opacity: 1; }
+#gus-videos .bay-traces path{ fill:none; stroke: color-mix(in srgb, var(--tc) 62%, transparent); stroke-width:4; stroke-linecap:round; stroke-linejoin:round; transition: stroke .6s; }
+#gus-videos .bay-traces path.pin{ stroke: color-mix(in srgb, var(--g) 45%, transparent); stroke-width:5; stroke-linecap:butt; }
+#gus-videos .bay-traces .die{ fill: color-mix(in srgb, var(--g) 10%, transparent); stroke: color-mix(in srgb, var(--g) 30%, transparent); stroke-width:2; }
 #gus-videos .bay-traces .chip{ fill: rgb(11, 11, 16); stroke: color-mix(in srgb, var(--g) 45%, transparent); stroke-width: 3; transition: stroke 0.6s; }
 #gus-videos .bay-wall{ position: absolute; left: 0px; right: 0px; top: 0px; bottom: var(--hz, 300px); --wl: color-mix(in srgb, var(--g) 9%, transparent); background: linear-gradient(90deg, transparent calc(50% - .75px), var(--wl) calc(50% - .75px) calc(50% + .75px), transparent calc(50% + .75px)) 50% 100% / var(--wc, 24px) var(--wc, 24px),
     linear-gradient(to top, var(--wl) 1.5px, transparent 1.5px) 50% 100% / var(--wc, 24px) var(--wc, 24px); mask-image: linear-gradient(to top, rgb(0, 0, 0), transparent 70%); transition: opacity 0.6s; }
@@ -1874,11 +1877,7 @@
 
 
 /* —— 电路板点光脉冲（原站由 JS 注入，此处 CSS 等效） —— */
-#gus-videos .bay-traces circle.dot{ animation: gk-dotpulse 2.8s ease-in-out infinite; }
-#gus-videos .bay-traces circle.dot:nth-child(3n){ animation-delay: -.9s; }
-#gus-videos .bay-traces circle.dot:nth-child(3n+1){ animation-delay: -1.7s; }
-#gus-videos .bay-traces circle.dot:nth-child(4n+2){ animation-duration: 3.6s; }
-@keyframes gk-dotpulse{ 0%,100%{ opacity:.25; } 50%{ opacity:1; } }
+
 
     /* =========================================================
      * AI daily brief
@@ -7474,5 +7473,192 @@
       });
     }
     })();
+  </script>
+
+  <script>
+  /* ===== guscastillo 文件夹引擎（原文移植）：动态电路板 + 扇形排布 ===== */
+  (function () {
+    var P = document.getElementById('profile');
+    if (!P) return;
+    var ff = P.querySelector('.ff');
+    if (!ff) return;
+    var folder = ff.querySelector('.ff-folder');
+    var bay = ff.querySelector('.ff-bay');
+    var board = bay ? bay.querySelector('.bay-floor') : null;
+    var traceSvg = board ? board.querySelector('svg') : null;
+    if (!board || !traceSvg) return;
+    var pulseKeys = document.createElement('style');
+    bay.appendChild(pulseKeys);
+    var front = ff.querySelector('.ff-front');
+
+    var jit = function (i) { var x = Math.sin(i * 12.9898 + 4.1414) * 43758.5453; return x - Math.floor(x); };
+    var clamp = function (v, a, b) { return Math.max(a, Math.min(b, v)); };
+
+    function drawBay() {
+      var PW = 2000, PH = 1300, P = 900, TILT = clamp(50 + (640 - ff.clientHeight) / 10, 50, 60), CX = PW / 2, SPEED = 330, TONES = ['banana', 'squish', 'taxi', 'night'];
+      var sin = Math.sin(TILT * Math.PI / 180), cos = Math.cos(TILT * Math.PI / 180);
+      var back = function (h) { return h * P / (P * cos - h * sin); };
+      var base = ff.clientHeight - folder.offsetTop - folder.offsetHeight;
+      var sBase = back(base), sEnd = back(base + Math.min(60, folder.offsetHeight * .3));
+      var Y = function (sv) { return +(PH - sv).toFixed(1); };
+      board.style.transform = 'perspective(' + P + 'px) rotateX(' + TILT + 'deg)';
+      bay.style.setProperty('--hz', (PH * cos * P / (P + PH * sin)).toFixed(1) + 'px');
+      bay.style.setProperty('--wc', (50 * P / (P + PH * sin)).toFixed(2) + 'px');
+      var T = [], chips = [];
+      for (var sideI = 0; sideI < 2; sideI++) for (var j = 0; j < 6; j++) {
+        var side = sideI ? 1 : -1;
+        var sv = sEnd + 70 + j * 110 + (side > 0 ? 45 : 0) + jit(j * 3 + side + 5) * 30;
+        var px = CX + side * (34 + (5 - j) * 22), k = 40 + jit(j + 9 + side) * 50;
+        var chip = j >= 1 && j <= 3, via = !chip && jit(j * 5 + side + 2) > .3;
+        var x0 = chip ? CX + side * 600 : via ? CX + side * (560 + jit(j * 7 + side * 2) * 300) : side < 0 ? -10 : PW + 10;
+        T.push({ pts: [[x0, Y(sv)], [px + side * k, Y(sv)], [px, Y(sv - k)], [px, Y(sEnd)]], tone: TONES[(j + (side > 0 ? 2 : 0)) % 4], via: via });
+        if (j === 2) chips.push({ x: side < 0 ? CX - 820 : CX + 600, y: Y(sv) - 170, w: 220, h: 340 });
+      }
+      [-1, 0, 1].forEach(function (j) { T.push({ pts: [[CX + j * 18, Y(PH - 80 - Math.abs(j) * 70)], [CX + j * 18, Y(sEnd)]], tone: TONES[j + 1], via: true }); });
+      for (var s2 = 0; s2 < 2; s2++) for (var j2 = 0; j2 < 2; j2++) {
+        var sd = s2 ? 1 : -1;
+        var x0b = CX + sd * (150 + j2 * 72), pxb = CX + sd * (60 + j2 * 44);
+        var s1 = Math.max(0, sBase - (x0b - pxb) * sd - 24);
+        T.push({ pts: [[x0b, PH + 10], [x0b, Y(s1)], [pxb, Y(Math.max(s1, sBase - 24))], [pxb, Y(sBase)]], tone: TONES[(j2 * 2 + (sd > 0 ? 1 : 0)) % 4], via: false });
+      }
+      var svg = '', keys = '';
+      for (var i = 0; i < 26; i++) {
+        var x = jit(i * 11 + 3) * PW, sv2 = sEnd + jit(i * 13 + 7) * (PH - sEnd - 60);
+        if (Math.abs(x - CX) > 300) svg += '<circle class="dot" cx="' + x.toFixed(0) + '" cy="' + Y(sv2) + '" r="5"/>';
+      }
+      chips.forEach(function (c) {
+        for (var q = c.y + 26; q < c.y + c.h - 16; q += 26) svg += '<path class="pin" d="M' + (c.x - 14) + ' ' + q + 'H' + c.x + 'M' + (c.x + c.w) + ' ' + q + 'H' + (c.x + c.w + 14) + '"/>';
+        svg += '<rect class="chip" x="' + c.x + '" y="' + c.y + '" width="' + c.w + '" height="' + c.h + '" rx="12"/><rect class="die" x="' + (c.x + 50) + '" y="' + (c.y + 90) + '" width="' + (c.w - 100) + '" height="' + (c.h - 180) + '" rx="6"/>';
+      });
+      T.forEach(function (t, i) {
+        var cls = ' class="t-' + t.tone + '"';
+        svg += '<path' + cls + ' d="M' + t.pts.map(function (p2) { return p2.join(' '); }).join('L') + '"/>';
+        if (t.via) svg += '<circle' + cls + ' cx="' + t.pts[0][0].toFixed(0) + '" cy="' + t.pts[0][1] + '" r="8"/>';
+        var seg = t.pts.slice(1).map(function (p2, k2) { return Math.hypot(p2[0] - t.pts[k2][0], p2[1] - t.pts[k2][1]); });
+        var len = seg.reduce(function (a, b) { return a + b; }, 0);
+        var RUN = 64, at = 0;
+        keys += '@keyframes bp' + i + '{' + t.pts.map(function (p2, k2) {
+          if (k2) at += seg[k2 - 1];
+          return (at / len * RUN).toFixed(2) + '%{transform:translate(' + p2[0].toFixed(0) + 'px,' + p2[1] + 'px)' + (k2 ? '' : ';opacity:0') + '}';
+        }).join('') + '3%{opacity:1}' + (RUN - 2) + '%{opacity:1}' + RUN + '%,100%{opacity:0;transform:translate(' + t.pts[t.pts.length - 1][0].toFixed(0) + 'px,' + t.pts[t.pts.length - 1][1] + 'px)}}';
+        t.dur = len / SPEED / (RUN / 100);
+      });
+      traceSvg.setAttribute('viewBox', '0 0 ' + PW + ' ' + PH);
+      traceSvg.innerHTML = svg;
+      pulseKeys.textContent = keys;
+      Array.prototype.forEach.call(board.querySelectorAll('.bay-pulse'), function (e) { e.remove(); });
+      T.forEach(function (t, i) {
+        var d = document.createElement('i');
+        d.className = 'bay-pulse t-' + t.tone;
+        d.style.animationName = 'bp' + i;
+        d.style.animationDuration = t.dur.toFixed(2) + 's';
+        d.style.animationDelay = (-jit(i * 17 + 1) * t.dur).toFixed(2) + 's';
+        board.appendChild(d);
+      });
+    }
+
+    /* —— 扇形排布（原文 layout/fit） —— */
+    var LIFT = 46, GAP = 14;
+    var els = Array.prototype.slice.call(ff.querySelectorAll('.ff-dir'));
+    var spread = 200;
+    function layout(sz) {
+      function pack(cap) {
+        var rows = [], row = [], w = 0;
+        sz.forEach(function (sw, i) {
+          if (row.length && (row.length >= cap || w + GAP + sw.w > spread * 2)) { rows.push({ row: row, w: w }); row = []; w = 0; }
+          row.push(i); w += (row.length > 1 ? GAP : 0) + sw.w;
+        });
+        if (row.length) rows.push({ row: row, w: w });
+        return rows;
+      }
+      var rows = pack(Infinity);
+      rows = pack(Math.ceil(sz.length / rows.length));
+      var out = [];
+      var y = -LIFT;
+      rows.forEach(function (r, ri) {
+        var h = Math.max.apply(null, r.row.map(function (i) { return sz[i].h; }));
+        var shift = (ri % 2 ? 1 : -1) * Math.min(14, spread * .08);
+        var x = -r.w / 2;
+        r.row.forEach(function (i) {
+          var j = jit(i + 5 * 7), hw = sz[i].w / 2;
+          out[i] = { x: clamp(x + hw + shift + (j - .5) * 8, -spread + hw, spread - hw), y: y - h / 2 - j * 6, r: 5 * (j * 2 - 1) };
+          x += sz[i].w + GAP;
+        });
+        y -= h + GAP;
+      });
+      return out;
+    }
+    function fit() {
+      spread = clamp(ff.clientWidth / 2 - 10, 120, 520);
+      var sizes = els.map(function (el) { return { w: el.offsetWidth, h: el.offsetHeight }; });
+      var pos = layout(sizes);
+      els.forEach(function (el, i) { place(el, pos[i]); });
+    }
+    function place(el, p2) {
+      el.style.setProperty('--x', p2.x.toFixed(1) + 'px');
+      el.style.setProperty('--y', p2.y.toFixed(1) + 'px');
+      el.style.setProperty('--r', p2.r.toFixed(2) + 'deg');
+    }
+    function redrawAll() { fit(); drawBay(); }
+    if (document.readyState === 'complete') redrawAll();
+    else window.addEventListener('load', redrawAll);
+    window.addEventListener('resize', redrawAll);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { redrawAll(); });
+    if (front) front.addEventListener('click', function () {
+      [80, 300, 800, 1600].forEach(function (t) { setTimeout(redrawAll, t); });
+    });
+  })();
+
+  /* ===== Signals 软盘打印机：左右切换 + 方向键 + 页码同步 ===== */
+  (function () {
+    var stage = document.querySelector('#notes .github-archive-stage');
+    if (!stage) return;
+    var disks = Array.prototype.slice.call(stage.querySelectorAll('.floppy-disk'));
+    var dots = Array.prototype.slice.call(stage.querySelectorAll('[aria-label^="查看 "]'));
+    var pv = stage.querySelector('.coverflow-previous');
+    var nx = stage.querySelector('.coverflow-next');
+    var live = stage.querySelector('[aria-live]');
+    var cur = 0;
+    var N = disks.length;
+    function layout() {
+      disks.forEach(function (d, i) {
+        var k = (cur - i + N * 2) % N;
+        var on = k === 0;
+        d.classList.toggle('is-active', on);
+        d.setAttribute('aria-hidden', on ? 'false' : 'true');
+        d.style.setProperty('--disk-x', (k * 44) + 'px');
+        d.style.setProperty('--disk-y', (k * 8) + 'px');
+        d.style.setProperty('--disk-z', (-k * 58) + 'px');
+        d.style.setProperty('--disk-rotate-y', (-k * 3.5) + 'deg');
+        d.style.setProperty('--disk-rotate-z', (-k * 1.2) + 'deg');
+        d.style.setProperty('--disk-scale', 1 - k * 0.055);
+        d.style.setProperty('--disk-opacity', on ? 1 : 0.92 - k * 0.05);
+        d.style.setProperty('--disk-blur', k === 0 ? '0px' : (k * 0.3) + 'px');
+        d.style.zIndex = N - k;
+        var a = d.querySelector('a');
+        if (a) a.tabIndex = on ? 0 : -1;
+      });
+      dots.forEach(function (dot, i) {
+        dot.classList.toggle('is-current', i === cur);
+        dot.setAttribute('aria-current', i === cur ? 'true' : 'false');
+        var a = disks[i] ? disks[i].querySelector('a') : null;
+        if (a) a.tabIndex = i === cur ? 0 : -1;
+      });
+      if (live) {
+        var t = disks[cur].querySelector('h3');
+        live.textContent = '当前观察 0' + (cur + 1) + ' / 0' + N + '：' + (t ? t.textContent : '');
+      }
+    }
+    function go(k) { cur = (k + N) % N; layout(); }
+    if (pv) pv.addEventListener('click', function () { go(cur - 1); });
+    if (nx) nx.addEventListener('click', function () { go(cur + 1); });
+    dots.forEach(function (dot, i) { dot.addEventListener('click', function () { go(i); }); });
+    stage.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft') { e.preventDefault(); go(cur - 1); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); go(cur + 1); }
+    });
+    disks.forEach(function (d, i) { d.addEventListener('click', function () { if (i !== cur) go(i); }); });
+    layout();
+  })();
   </script>
 </body></html>
