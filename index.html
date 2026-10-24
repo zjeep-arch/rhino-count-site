@@ -1852,7 +1852,7 @@
 #notes .coverflow-status button::before{ border: 1px solid var(--red-dark); content: ""; width: 10px; height: 10px; }
 #notes .coverflow-status button.is-current::before{ background: var(--red); }
 /* —— 完全复用补丁 —— */
-#gus-videos{ display:block; padding-top: clamp(220px, 24vw, 320px); }
+#gus-videos{ display:block; padding-top: clamp(220px, 24vw, 320px); overflow-x:clip; }
 #notes .works-section{ max-width:1180px; margin:0 auto; }
 #notes .github-archive-stage{ max-width:100%; overflow:hidden; position:relative; min-height:700px; }
 @media (min-width:1100px){ #notes .github-archive-stage{ min-height:850px; } }
@@ -1869,7 +1869,13 @@
 #gus-videos .icon-btn{ width:38px; height:38px; border-radius:50%; border:1px solid rgba(244,245,247,.18); background:transparent; color:#F4F5F7; font:400 15px/1 "Cormorant Garamond",serif; cursor:pointer; transition:background .2s, border-color .2s; }
 #gus-videos .icon-btn:hover{ background:rgba(244,245,247,.08); border-color:rgba(244,245,247,.4); }
 
-#notes.jin{ background:#1D1C19; color:#F1EADF; }
+#notes.jin{
+      background:#1D1C19; color:#F1EADF;
+      /* jintao 原版变量（夜）——移植规则所依赖 */
+      --red:#E86A5E; --red-dark:#C0473E; --mono:"IBM Plex Mono","Courier New",monospace;
+      --display:"Cormorant Garamond","Noto Serif SC",serif; --sans:"Schibsted Grotesk",-apple-system,sans-serif;
+      --line:#362b1f33; --dark-panel:#24211d;
+    }
 #notes.jin .works-section, #notes.jin .container{ color:#F1EADF; }
 
 
@@ -1889,6 +1895,100 @@
 
 /* —— 电路板点光脉冲（原站由 JS 注入，此处 CSS 等效） —— */
 
+
+
+/* ===== Signals 页码指示器（对齐 jintao 红框样式） ===== */
+#notes .coverflow-status button.is-current::before{ box-shadow:0 0 10px color-mix(in srgb, var(--red) 60%, transparent); }
+
+/* ===== Signals 移动端适配（jintao 断点移植） ===== */
+@media (max-width:1000px){
+  #notes .github-archive-stage{ min-height:850px; }
+  #notes .portable-computer{ width:min(92%,760px); top:30px; left:-10px; }
+  #notes .floppy-coverflow{ width:98%; bottom:20px; right:-12%; }
+}
+@media (max-width:700px){
+  #notes .works-section{ margin-bottom:90px; }
+  #notes .github-archive-stage{ min-height:590px; margin-inline:-2px; }
+  #notes .portable-computer{ width:680px; top:16px; left:-148px; }
+  #notes .portable-terminal-screen{ padding:1.1%; }
+  #notes .terminal-pane{ padding:7% 6%; }
+  #notes .floppy-coverflow{ perspective-origin:44%; width:650px; height:460px; bottom:4px; right:-120px; }
+  #notes .floppy-disk{ width:340px; top:43%; left:44%; }
+  #notes .floppy-kicker{ font-size:4px; }
+  #notes .floppy-label h3{ margin-bottom:3px; font-size:17px; }
+  #notes .floppy-label > p{ margin-bottom:3px; font-size:6px; }
+  #notes .floppy-label dl > div{ font-size:4px; }
+  #notes .floppy-label a{ font-size:5px; }
+  #notes .coverflow-control{ width:44px; height:44px; bottom:22px; }
+  #notes .coverflow-previous{ left:14px; }
+  #notes .coverflow-next{ right:14px; }
+  #notes .coverflow-status{ min-width:150px; font-size:8px; bottom:21px; padding:12px 24px 10px; }
+  #notes .coverflow-status > div{ gap:6px; }
+  #notes .coverflow-status button{ width:40px; height:40px; }
+  #notes .coverflow-status button::before{ width:8px; height:8px; }
+  #notes .project-grid{ grid-template-columns:1fr; gap:10px; padding:10px; }
+  #notes .works-grid{ grid-template-columns:1fr; }
+  #notes .windex{ margin-bottom:16px; }
+  #notes .project-console{ border-width:6px; }
+  #notes .project-card{ grid-template-rows:auto 1fr; grid-template-columns:minmax(108px,.8fr) minmax(0,1.2fr); display:grid; }
+  #notes .project-plate{ grid-column:1/-1; }
+  #notes .project-image{ aspect-ratio:auto; border-radius:4px 0 0 4px; height:100%; min-height:238px; }
+  #notes .project-copy{ border-top:1px solid #8b775f; border-left:0; min-height:238px; padding:14px 12px; }
+  #notes .project-copy h3{ min-height:40px; font-size:22px; }
+  #notes .project-copy > p{ -webkit-line-clamp:2; min-height:38px; }
+  #notes .workbench-index{ margin-bottom:18px; }
+}
+@media (prefers-reduced-motion:reduce){
+  #notes .terminal-type{ border-right:0; width:13ch; }
+}
+
+
+/* ===== Signals 移动端补充（jintao ≤1000/≤700 完整移植，按真实类名） ===== */
+@media (max-width:1000px){
+  #notes .section-heading{ grid-template-columns:1fr; gap:18px; }
+  #notes .project-grid{ grid-template-columns:repeat(2,minmax(0,1fr)); }
+  #notes .github-archive-stage{ min-height:850px; }
+  #notes .portable-computer{ width:min(92%,760px); top:30px; left:-10px; }
+  #notes .floppy-coverflow{ width:98%; bottom:20px; right:-12%; }
+}
+@media (max-width:700px){
+  #notes .works-section{ margin-bottom:90px; }
+  #notes .section-heading{ margin-bottom:28px; }
+  #notes .workbench-index{ border-width:6px; grid-template-columns:1fr; gap:16px; margin:-8px 0 24px; padding:20px 18px 17px; }
+  #notes .workbench-index > small{ grid-column:auto; }
+  #notes .workbench-index .wil span{ font-size:13px; }
+  #notes .github-archive-stage{ min-height:590px; margin-inline:-2px; }
+  #notes .portable-computer{ width:680px; top:16px; left:-148px; }
+  #notes .portable-terminal-screen{ padding:1.1%; }
+  #notes .terminal-pane{ padding:7% 6%; }
+  #notes .floppy-coverflow{ perspective-origin:44%; width:650px; height:460px; bottom:4px; right:-120px; }
+  #notes .floppy-disk{ width:340px; top:43%; left:44%; }
+  #notes .floppy-kicker{ font-size:4px; }
+  #notes .floppy-label h3{ margin-bottom:3px; font-size:17px; }
+  #notes .floppy-label > p{ margin-bottom:3px; font-size:6px; }
+  #notes .floppy-label dl > div{ font-size:4px; }
+  #notes .floppy-label a{ font-size:5px; }
+  #notes .coverflow-control{ width:44px; height:44px; bottom:22px; }
+  #notes .coverflow-previous{ left:14px; }
+  #notes .coverflow-next{ right:14px; }
+  #notes .coverflow-status{ min-width:150px; font-size:8px; bottom:21px; }
+  #notes .coverflow-status > div{ gap:6px; }
+  #notes .coverflow-status button{ width:40px; height:40px; }
+  #notes .coverflow-status button::before{ width:8px; height:8px; }
+  #notes .project-grid{ grid-template-columns:1fr; gap:10px; padding:10px; }
+  #notes .project-console{ border-width:6px; }
+  #notes .console-top{ min-height:62px; }
+  #notes .console-top > span{ width:calc(100% - 64px); min-width:0; font-size:8px; }
+  #notes .project-card{ grid-template-rows:auto 1fr; grid-template-columns:minmax(108px,.8fr) minmax(0,1.2fr); display:grid; }
+  #notes .project-plate{ grid-column:1/-1; }
+  #notes .project-image{ aspect-ratio:auto; border-radius:4px 0 0 4px; height:100%; min-height:238px; }
+  #notes .project-copy{ border-top:1px solid #8b775f; border-left:0; min-height:238px; padding:14px 12px; }
+  #notes .project-copy h3{ min-height:40px; font-size:22px; }
+  #notes .project-copy > p{ -webkit-line-clamp:2; min-height:38px; }
+}
+@media (prefers-reduced-motion:reduce){
+  #notes .terminal-type{ border-right:0; width:13ch; }
+}
 
     /* =========================================================
      * AI daily brief
@@ -7687,6 +7787,8 @@
         var a = disks[i] ? disks[i].querySelector('a') : null;
         if (a) a.tabIndex = i === cur ? 0 : -1;
       });
+      var counter = stage.querySelector('.coverflow-status > span:nth-child(2)');
+      if (counter) counter.textContent = '0' + (cur + 1) + ' / 0' + N;
       if (live) {
         var t = disks[cur].querySelector('h3');
         live.textContent = '当前观察 0' + (cur + 1) + ' / 0' + N + '：' + (t ? t.textContent : '');
