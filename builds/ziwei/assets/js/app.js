@@ -220,7 +220,7 @@ function initForm(){
   // 精确时间（可选）：时 0-23，分 0-59
   const eh = $('#f-exhour'), em = $('#f-exmin');
   for(let h=0; h<24; h++){ const o=document.createElement('option'); o.value=h; o.textContent=pad2(h)+' 时'; eh.appendChild(o); }
-  for(let m=0; m<60; m+=5){ const o=document.createElement('option'); o.value=m; o.textContent=pad2(m)+' 分'; em.appendChild(o); }
+  for(let m=0; m<60; m+=1){ const o=document.createElement('option'); o.value=m; o.textContent=pad2(m)+' 分'; em.appendChild(o); }
   const checkBoundary = () => {
     const hint = $('#boundary-hint'); hint.textContent = '';
     if(eh.value === '' || em.value === '') return;
@@ -232,7 +232,17 @@ function initForm(){
   };
   eh.addEventListener('change', checkBoundary); em.addEventListener('change', checkBoundary);
   // 选了晚子时才显示"换日派"口径开关（默认不勾＝同多数工具不换日）
-  $('#f-hour').addEventListener('change', () => { $('#latezi-row').hidden = (+$('#f-hour').value) !== 12; });
+  const syncLateziRow = () => { $('#latezi-row').hidden = (+$('#f-hour').value) !== 12; };
+  $('#f-hour').addEventListener('change', syncLateziRow);
+  // 填精确时间时自动同步时辰下拉，避免"精确 0:10 + 下拉停在默认午时"的错位
+  const syncHourFromExact = () => {
+    if(eh.value === '') return;
+    const h = +eh.value;
+    const b = Math.floor(((h + 1) % 24) / 2);
+    $('#f-hour').value = h === 23 ? 12 : b;
+    syncLateziRow();
+  };
+  eh.addEventListener('change', syncHourFromExact);
   $('#birth-form').addEventListener('submit', onSubmit);
   $('#f-unknown-hour').addEventListener('change', e => {
     if(e.target.checked){ nav('dingpan'); e.target.checked = false; }
@@ -276,15 +286,23 @@ function computeChart(input){
   if(input.trueSolar && input.longitude != null){
     let ch = clockHour, cm = clockMinute;
     if(dstApplies(input.year, input.month, input.day, input.province)){ cm -= 60; note.push('已按夏令时扣回 1 小时'); }
+    // 夏令时扣回可能使分钟为负，先归一化再送引擎
+    let tot = ch * 60 + cm;
+    if(tot < 0) tot += 1440;
+    ch = Math.floor(tot / 60); cm = tot % 60;
     const solar = E.calculateTrueSolarTime({ year: input.year, month: input.month, day: input.day, clockHour: ch, clockMinute: cm, longitude: input.longitude });
     branch = solar.branch;
-    // 晚子时换日与否由用户口径决定：默认不换日（同多数工具），勾选"换日派"才顺延
-    dayOffset = E.resolveZiweiDayOffset(solar, input.lateZiNextDay ? 'next-day' : 'same-day');
+    // 口径对齐测测/问真等主流工具：真太阳时只用来定时辰，排盘日一律按公历出生日，
+    // 不因校正跨午夜而前后挪日。换日派仅在真太阳钟点为 23 点（晚子时）时按次日。
+    dayOffset = 0;
+    if(input.lateZiNextDay && branch === 0 && solar.hour === 23){
+      dayOffset = solar.dayOffset === -1 ? 0 : 1;
+      note.push('晚子时按次日排盘（换日派）');
+    }
     const corrMin = Math.round(solar.totalCorrectionMinutes);
-    note.push('真太阳时校正 ' + (corrMin>=0?'+':'') + corrMin + ' 分钟');
-    if(branch !== shichenBranch) note.push('校正后时辰由' + branchName(shichenBranch) + '变为' + branchName(branch) + '（多数工具不做真太阳时校正，若与他家不一致先核对这里）');
-    if(solar.dayOffset !== 0) note.push('真太阳时跨日，已顺延');
-    else if(dayOffset === 1) note.push('晚子时按次日排盘（换日派）');
+    note.push('真太阳时校正 ' + (corrMin>=0?'+':'') + corrMin + ' 分钟（只定时辰，排盘日按公历出生日不变）');
+    const baseBranch = hasExact ? exBranch : shichenBranch;
+    if(branch !== baseBranch) note.push('校正后时辰由' + branchName(baseBranch) + '变为' + branchName(branch));
   } else {
     // 未勾真太阳时：精确时间直接决定时辰（此前只记提示未生效，属口径与行为不一致，已修正）
     branch = hasExact ? exBranch : shichenBranch;
@@ -945,7 +963,7 @@ function renderKoujingCard(rec){
   items.push((inp.lateZiNextDay ? '晚子时按次日排盘（换日派）' : '晚子时不换日（与多数排盘工具一致）')
     + (li.isLeapMonth ? '；闰月按十五分界（十五及以前归本月，之后归下月）' : ''));
   items.push('大限起法：按五行局对应岁数起运，阳男阴女顺行、阴男阳女逆行');
-  items.push('与其他工具排盘对不上时先核对三处：①本站是否做了真太阳时校正（多数工具不校正，校正后时辰可能差一格）②晚子时是否换日 ③闰月口径是否一致');
+  items.push('与其他工具排盘对不上时先核对三处：①是否开启真太阳时校正（本站默认关闭，与测测/问真等一致；开启后只定时辰、排盘日仍按公历出生日）②晚子时是否换日 ③闰月口径是否一致');
   body.innerHTML = items.map(esc).join('<br>');
   card.hidden = false;
 }
