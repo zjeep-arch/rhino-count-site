@@ -1908,12 +1908,13 @@
 }
 @media (max-width:700px){
   #notes .works-section{ margin-bottom:90px; }
-  #notes .github-archive-stage{ min-height:590px; margin-inline:-2px; }
-  #notes .portable-computer{ width:680px; top:16px; left:-148px; }
+  #notes .github-archive-stage{ min-height:0; margin-inline:0; padding:6px 0 20px; }
+  /* 电脑在上（居中），软盘叠层在下（独立一行） */
+  #notes .portable-computer{ position:relative; width:min(86%,380px); top:0; left:0; margin:0 auto; }
   #notes .portable-terminal-screen{ padding:1.1%; }
   #notes .terminal-pane{ padding:7% 6%; }
-  #notes .floppy-coverflow{ perspective-origin:44%; width:650px; height:460px; bottom:4px; right:-120px; }
-  #notes .floppy-disk{ width:340px; top:43%; left:44%; }
+  #notes .floppy-coverflow{ position:relative; perspective-origin:50% 42%; width:min(92%,360px); height:330px; bottom:0; right:0; margin:10px auto 0; }
+  #notes .floppy-disk{ width:min(80%,300px); top:48%; left:50%; }
   #notes .floppy-kicker{ font-size:4px; }
   #notes .floppy-label h3{ margin-bottom:3px; font-size:17px; }
   #notes .floppy-label > p{ margin-bottom:3px; font-size:6px; }
@@ -1957,24 +1958,25 @@
   #notes .workbench-index{ border-width:6px; grid-template-columns:1fr; gap:16px; margin:-8px 0 24px; padding:20px 18px 17px; }
   #notes .workbench-index > small{ grid-column:auto; }
   #notes .workbench-index .wil span{ font-size:13px; }
-  #notes .github-archive-stage{ min-height:590px; margin-inline:-2px; }
-  #notes .portable-computer{ width:680px; top:16px; left:-148px; }
+  #notes .github-archive-stage{ min-height:0; margin-inline:0; padding:6px 0 20px; }
+  /* 电脑在上（居中），软盘叠层在下（独立一行） */
+  #notes .portable-computer{ position:relative; width:min(86%,380px); top:0; left:0; margin:0 auto; }
   #notes .portable-terminal-screen{ padding:1.1%; }
   #notes .terminal-pane{ padding:7% 6%; }
-  #notes .floppy-coverflow{ perspective-origin:44%; width:650px; height:460px; bottom:4px; right:-120px; }
-  #notes .floppy-disk{ width:340px; top:43%; left:44%; }
+  #notes .floppy-coverflow{ position:relative; perspective-origin:50% 42%; width:min(92%,360px); height:330px; bottom:0; right:0; margin:10px auto 0; }
+  #notes .floppy-disk{ width:min(80%,300px); top:48%; left:50%; }
   #notes .floppy-kicker{ font-size:4px; }
   #notes .floppy-label h3{ margin-bottom:3px; font-size:17px; }
   #notes .floppy-label > p{ margin-bottom:3px; font-size:6px; }
   #notes .floppy-label dl > div{ font-size:4px; }
   #notes .floppy-label a{ font-size:5px; }
-  #notes .coverflow-control{ width:44px; height:44px; bottom:22px; }
-  #notes .coverflow-previous{ left:14px; }
-  #notes .coverflow-next{ right:14px; }
-  #notes .coverflow-status{ min-width:150px; font-size:8px; bottom:21px; }
-  #notes .coverflow-status > div{ gap:6px; }
-  #notes .coverflow-status button{ width:40px; height:40px; }
-  #notes .coverflow-status button::before{ width:8px; height:8px; }
+  #notes .coverflow-control{ width:40px; height:40px; bottom:16px; }
+  #notes .coverflow-previous{ left:8px; }
+  #notes .coverflow-next{ right:8px; }
+  #notes .coverflow-status{ min-width:0; font-size:8px; bottom:12px; left:50%; padding:0; }
+  #notes .coverflow-status > div{ gap:3px; }
+  #notes .coverflow-status button{ width:16px; height:22px; }
+  #notes .coverflow-status button::before{ width:7px; height:7px; }
   #notes .project-grid{ grid-template-columns:1fr; gap:10px; padding:10px; }
   #notes .project-console{ border-width:6px; }
   #notes .console-top{ min-height:62px; }
@@ -7763,20 +7765,22 @@
     var live = stage.querySelector('[aria-live]');
     var cur = 0;
     var N = disks.length;
+    var mobFactor = function () { return Math.min(1, window.innerWidth / 700); };
     function layout() {
+      var f = mobFactor();
       disks.forEach(function (d, i) {
         var k = (cur - i + N * 2) % N;
         var on = k === 0;
         d.classList.toggle('is-active', on);
         d.setAttribute('aria-hidden', on ? 'false' : 'true');
-        d.style.setProperty('--disk-x', (k * 44) + 'px');
-        d.style.setProperty('--disk-y', (k * 8) + 'px');
-        d.style.setProperty('--disk-z', (-k * 58) + 'px');
+        d.style.setProperty('--disk-x', (k * 44 * f) + 'px');
+        d.style.setProperty('--disk-y', (k * 8 * f) + 'px');
+        d.style.setProperty('--disk-z', (-k * 58 * f) + 'px');
         d.style.setProperty('--disk-rotate-y', (-k * 3.5) + 'deg');
         d.style.setProperty('--disk-rotate-z', (-k * 1.2) + 'deg');
         d.style.setProperty('--disk-scale', 1 - k * 0.055);
         d.style.setProperty('--disk-opacity', on ? 1 : 0.92 - k * 0.05);
-        d.style.setProperty('--disk-blur', k === 0 ? '0px' : (k * 0.3) + 'px');
+        d.style.setProperty('--disk-blur', k === 0 ? '0px' : (k * 0.3 * f) + 'px');
         d.style.zIndex = N - k;
         var a = d.querySelector('a');
         if (a) a.tabIndex = on ? 0 : -1;
@@ -7795,6 +7799,7 @@
       }
     }
     function go(k) { cur = (k + N) % N; layout(); }
+    window.addEventListener('resize', function () { layout(); });
     if (pv) pv.addEventListener('click', function () { go(cur - 1); });
     if (nx) nx.addEventListener('click', function () { go(cur + 1); });
     dots.forEach(function (dot, i) { dot.addEventListener('click', function () { go(i); }); });
