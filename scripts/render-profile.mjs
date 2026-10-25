@@ -1,0 +1,10 @@
+import fs from 'node:fs';
+import vm from 'node:vm';
+const context={window:{}};
+vm.runInNewContext(fs.readFileSync('data.js','utf8'),context);
+vm.runInNewContext(fs.readFileSync('profile-folders.js','utf8'),context);
+const html=fs.readFileSync('index.html','utf8');
+const pattern=/(<section id="profile"[^>]*>)[\s\S]*?(<\/section>)/;
+if(!pattern.test(html))throw Error('Profile section missing');
+fs.writeFileSync('index.html',html.replace(pattern,(_,open,close)=>open+'\n'+context.window.RhinoProfile.profile(context.window.SITE_DATA)+'\n'+close));
+console.log('Profile static content synchronized.');

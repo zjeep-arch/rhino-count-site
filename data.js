@@ -559,7 +559,7 @@ window.SITE_DATA = {
       { k: "关注",  v: "AI / Models / Agents / Business" },
       { k: "能力",  v: "Content × Product × Marketing" },
       { k: "坐标",  v: "一头恋爱的犀牛，一位远征的伯爵", href: "notes/why-rhino-count.html", aria: "为什么是犀牛伯爵" },
-      { k: "频道",  v: "小红书号 1147661654" }
+      { k: "频道",  v: "小红书 · 1147661654", href: "https://www.xiaohongshu.com/user/profile/60572004000000000101ce41" }
     ]
   },
 

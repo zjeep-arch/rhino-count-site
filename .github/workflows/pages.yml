@@ -24,6 +24,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Synchronize and check Profile
+        run: node scripts/render-profile.mjs && node scripts/check-profile.mjs
+
       - name: Check Builds display rules
         run: node scripts/check-builds-layout.mjs
 

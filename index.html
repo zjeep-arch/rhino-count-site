@@ -1,6 +1,4 @@
-
-        
-      <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN" data-theme="dark"><head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -1185,269 +1183,266 @@
     }
 
     <!-- ===== 完全复用区块原始样式（guscastillo Videos / jintao Works，命名空间化） ===== -->
-#gus-videos, #gus-videos{ animation: auto ease 0s 1 normal none running none; }
-#gus-videos .suggest:not(.lit) .ghost .ch, #gus-videos .pv:not(.show) .pv-ch::before{ animation: auto ease 0s 1 normal none running none; }
-#gus-videos .pg-tiles i:nth-child(2){ animation-delay: -0.8s; }
-#gus-videos .pg-tiles i:nth-child(3){ animation-delay: -2.4s; }
-#gus-videos .pg-tiles i:nth-child(4){ animation-delay: -3.2s; }
-#gus-videos .pg-tiles i:nth-child(5){ animation-delay: -1.6s; }
-#gus-videos .pg-tiles i:nth-child(6){ animation-delay: -4s; }
-#gus-videos .label-row{ display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 14px 28px; margin: 0px 0px clamp(18px, 2.2vw, 28px); }
-#gus-videos .label-row .label{ margin: 0px; }
-#gus-videos .fxt{ --l1: var(--c, var(--blue)); --l2: var(--squish); --l3: var(--banana); }
-#gus-videos .banana .fxt, #gus-videos .fxt.banana{ --l2: var(--ember); --l3: var(--squish); }
-#gus-videos .squish .fxt, #gus-videos .fxt.squish{ --l2: var(--site); --l3: var(--blue); }
-#gus-videos .site .fxt{ --l2: var(--squish); --l3: var(--blue); }
-#gus-videos .ch{ transition: color 0.45s, text-shadow 0.45s; }
-#gus-videos .ch.scr{ position: relative; color: transparent; text-shadow: none; transition: none; }
-#gus-videos .ch.scr::after{ content: attr(data-g); position: absolute; left: 50%; top: 0px; translate: -50%; color: var(--gc); text-shadow: 0 0 .5em var(--gc); }
-#gus-videos .ch.on{ color: var(--l1); text-shadow: color-mix(in srgb, currentcolor 55%, transparent) 0px 0px 0.45em, color-mix(in srgb, currentcolor 40%, transparent) 0px 0px 0.1em; animation-duration: 2.6s; animation-timing-function: linear; animation-iteration-count: infinite; animation-direction: normal; animation-fill-mode: none; animation-play-state: running; gk-litcol; animation-timeline: auto; animation-range: normal; animation-delay: calc(var(--i) * -.16s); transition: none; }
-#gus-videos .chapters{ flex: 1 1 0%; min-width: 0px; display: flex; gap: clamp(5px, 0.7vw, 10px); margin: 0px; padding: 0px; list-style: none; }
-#gus-videos .chapters li{ flex: 1 1 auto; min-width: 0px; }
-#gus-videos .chapters a{ --p: 0; display: grid; gap: 9px; padding: 8px 0px 5px; text-decoration: none; font: 500 15px/1 var(--sans); letter-spacing: -0.005em; color: var(--muted); white-space: nowrap; transition: color 0.3s; }
-#gus-videos .chapters a i{ position: relative; display: block; height: 3px; border-radius: 3px; background: color-mix(in srgb, var(--text) 15%, transparent); transition: height 0.2s, margin 0.2s; }
-#gus-videos .chapters a i::before{ content: ""; position: absolute; inset: 0px; border-radius: inherit; transform-origin: left center; scale: var(--p) 1; background: var(--c); box-shadow: 0 0 10px color-mix(in srgb, var(--c) 60%, transparent); }
-#gus-videos .chapters a i::after{ content: ""; position: absolute; top: 50%; left: calc(var(--p) * 100%); width: 9px; height: 9px; margin: -4.5px 0px 0px -4.5px; border-radius: 50%; background: rgb(255, 255, 255); box-shadow: 0 0 0 2px var(--c), 0 0 14px var(--c); opacity: 0; scale: 0.4; transition: opacity 0.25s, scale 0.3s cubic-bezier(0.3, 1.6, 0.5, 1); }
-#gus-videos .chapters a.past{ color: var(--soft); }
-#gus-videos .chapters a.past i::before{ opacity: 0.45; box-shadow: none; }
-#gus-videos .chapters a.now{ color: var(--text); }
-#gus-videos .chapters a.now i::after{ opacity: 1; scale: 1; }
-#gus-videos .chapters a:hover{ color: var(--text); }
-#gus-videos .chapters a:hover i{ height: 6px; margin-top: -3px; }
-#gus-videos .chapters a:focus-visible{ outline-offset: 4px; border-radius: 4px; }
-#gus-videos .name.glitch .gl{ opacity: 0.9; }
-#gus-videos .name.glitch::after{ opacity: 1; }
-#gus-videos .name.glitch .gm{ translate: var(--mx, 0) 0; }
-#gus-videos .ghost .ch.on{ text-shadow: currentcolor 0px 0px 0.35em, color-mix(in srgb, currentcolor 60%, transparent) 0px 0px 1.2em; }
-#gus-videos .label{ display: flex; align-items: baseline; gap: 14px; margin: 0px 0px clamp(18px, 2.2vw, 28px); font: 800 clamp(38px, 3.9vw, 56px)/.9 var(--display); letter-spacing: 0.005em; color: var(--text); }
-#gus-videos .label small{ font: 400 clamp(15px, 1.2vw, 17px)/1 var(--sans); letter-spacing: -0.01em; color: var(--muted); }
-#gus-videos .row.banana{ --c: var(--banana); --w: 150; --wt: 900; --hw: 128; }
-#gus-videos .row.squish{ --c: var(--squish); --w: 122; --wt: 760; --hw: 140; --hwt: 900; }
-#gus-videos .row.squish h3{ font-size: clamp(32px, 4.6vw, 80px); }
-#gus-videos .row.taxi{ --c: var(--taxi); --w: 132; --wt: 560; --hw: 150; --hwt: 820; }
-#gus-videos .row.combat{ --c: var(--combat); --w: 68; --wt: 820; --hw: 112; --hwt: 900; }
-#gus-videos .row.updraft{ --c: var(--updraft); --w: 64; --wt: 420; --hw: 146; --hwt: 640; }
-#gus-videos .row.zero{ --c: var(--zero); --w: 58; --wt: 520; --hw: 150; --hwt: 900; }
-#gus-videos .row.stuffed{ --c: var(--stuffed); --w: 72; --wt: 860; --hw: 150; --hwt: 900; }
-#gus-videos .taxi .fxt{ --l2: var(--banana); --l3: var(--blue); }
-#gus-videos .combat .fxt{ --l2: var(--blue); --l3: var(--squish); }
-#gus-videos .bat .fxt{ --l2: var(--squish); --l3: var(--banana); }
-#gus-videos .mpack .fxt{ --l2: var(--taxi); --l3: var(--ember); }
-#gus-videos .updraft .fxt{ --l2: var(--ember); --l3: var(--blue); }
-#gus-videos .zero .fxt{ --l2: var(--blue); --l3: var(--banana); }
-#gus-videos .six .fxt{ --l2: var(--banana); --l3: var(--teal); }
-#gus-videos .stuffed .fxt{ --l2: var(--blue); --l3: var(--ember); }
-#gus-videos .pv-feed, #gus-videos .pv-feed img, #gus-videos .pv-feed video{ position: absolute; inset: 0px; width: 100%; height: 100%; object-fit: cover; }
-#gus-videos .pv-feed video{ opacity: 0; transition: opacity 0.3s; }
-#gus-videos .pv-feed video.live{ opacity: 1; }
-#gus-videos .pv-ch{ display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; }
-#gus-videos .pv-ch::before{ content: ""; width: 6px; height: 6px; border-radius: 50%; background: rgb(255, 59, 48); box-shadow: rgb(255, 59, 48) 0px 0px 8px; animation: 1.2s steps(1) 0s infinite normal none running pv-rec; }
-#gus-videos .pv-go .ch.on{ animation: auto ease 0s 1 normal none running none; color: var(--c); }
-#gus-videos .vtree{ display: grid; grid-template-columns: minmax(0px, 0.92fr) minmax(0px, 1.08fr); gap: clamp(24px, 3.4vw, 56px); align-items: start; }
-#gus-videos .tree{ --row: 52px; --mid: 26px; --indent: 30px; --line: color-mix(in srgb, var(--text) 22%, transparent); min-width: 0px; font: 400 16px/1 var(--sans); }
-#gus-videos .tree ul{ list-style: none; margin: 0px; padding: 0 0 0 var(--indent); }
-#gus-videos .tree li{ position: relative; }
-#gus-videos .tree li::before, #gus-videos .tree li::after{ content: ""; position: absolute; pointer-events: none; }
-#gus-videos .tree li::before{ left: calc(var(--indent) / -2 - 1px); top: 0px; bottom: 0px; border-left: 1.5px solid var(--lc, var(--line)); transform-origin: center top; }
-#gus-videos .tree li:last-child::before{ bottom: auto; height: var(--mid); }
-#gus-videos .tree li::after{ left: calc(var(--indent) / -2); top: calc(var(--mid) - .75px); width: calc(var(--indent) / 2 - 4px); border-top: 1.5px solid var(--lc, var(--line)); transition: border-color 0.25s, width 0.25s; }
-#gus-videos .branch{ --c: var(--text); }
-#gus-videos .branch.banana{ --c: var(--banana); }
-#gus-videos .branch.squish{ --c: var(--squish); }
-#gus-videos .branch.taxi{ --c: var(--taxi); }
-#gus-videos .branch.combat{ --c: var(--combat); }
-#gus-videos .branch.creek{ --c: var(--creek); }
-#gus-videos .branch.updraft{ --c: var(--updraft); }
-#gus-videos .branch.zero{ --c: var(--zero); }
-#gus-videos .branch.stuffed{ --c: var(--stuffed); }
-#gus-videos .branch > .reel > li{ --lc: color-mix(in srgb, var(--c) 42%, transparent); }
-#gus-videos .vt-root, #gus-videos .branch > summary{ display: flex; align-items: center; gap: 12px; height: var(--row); margin: 0px; padding: 0px 12px 0px 6px; border-radius: 12px; }
-#gus-videos .vt-root{ padding-left: 0px; font: 500 15px/1 var(--sans); color: var(--muted); }
-#gus-videos .vt-root .ficon{ --c: var(--muted); }
-#gus-videos .branch > summary{ list-style: none; cursor: pointer; user-select: none; transition: background 0.2s; }
-#gus-videos .branch > summary::-webkit-details-marker{ display: none; }
-#gus-videos .branch > summary:hover{ background: var(--glass); }
-#gus-videos .branch > summary:focus-visible{ outline: 2px solid var(--c); outline-offset: -2px; }
-#gus-videos .branch[open] > summary .flap{ transform: skewX(-14deg) scaleY(0.82); }
-#gus-videos .branch > summary .fname{ font: 800 25px/1 var(--display); letter-spacing: 0.01em; color: var(--text); }
-#gus-videos .branch .branch > summary .fname{ font: 600 16.5px/1 var(--sans); letter-spacing: -0.01em; color: var(--soft); }
-#gus-videos .fcount{ margin-left: auto; min-width: 26px; padding: 4px 8px; border-radius: 999px; text-align: center; font-style: ; font-variant-ligatures: ; font-variant-caps: ; font-variant-east-asian: ; font-variant-alternates: ; font-variant-position: ; font-variant-emoji: ; font-weight: ; font-stretch: ; font-size: ; line-height: ; font-family: ; font-optical-sizing: ; font-size-adjust: ; font-kerning: ; font-feature-settings: ; font-variation-settings: ; font-language-override: ; font-variant-numeric: tabular-nums; color: var(--muted); background: var(--glass); }
-#gus-videos .branch > summary .fcount{ color: var(--c); background: color-mix(in srgb, var(--c) 12%, transparent); }
-#gus-videos .branch[open] > .reel > li{ animation-duration: 0.45s; animation-timing-function: cubic-bezier(0.2, 0.9, 0.3, 1); animation-iteration-count: 1; animation-direction: normal; animation-fill-mode: backwards; animation-play-state: running; gk-sprout; animation-timeline: auto; animation-range: normal; animation-delay: calc(var(--n, 0) * 45ms); }
-#gus-videos .branch[open] > .reel > li::before{ animation-duration: 0.4s; animation-timing-function: ease-out; animation-iteration-count: 1; animation-direction: normal; animation-fill-mode: backwards; animation-play-state: running; gk-grow; animation-timeline: auto; animation-range: normal; animation-delay: calc(var(--n, 0) * 45ms); }
-#gus-videos .vid{ --c: var(--text); display: flex; align-items: center; gap: 14px; width: 100%; height: var(--row); margin: 0px; padding: 0px 12px 0px 6px; border: 0px; border-radius: 12px; font: inherit; color: inherit; text-align: left; cursor: pointer; background: none; transition: background 0.2s; }
-#gus-videos .vid.banana{ --c: var(--banana); }
-#gus-videos .vid.squish{ --c: var(--squish); }
-#gus-videos .vid.taxi{ --c: var(--taxi); }
-#gus-videos .vid.combat{ --c: var(--combat); }
-#gus-videos .vid.creek{ --c: var(--creek); }
-#gus-videos .vid.updraft{ --c: var(--updraft); }
-#gus-videos .vid.zero{ --c: var(--zero); }
-#gus-videos .vid.stuffed{ --c: var(--stuffed); }
-#gus-videos .vid:hover, #gus-videos .vid.on{ background: color-mix(in srgb, var(--c) 9%, transparent); }
-#gus-videos li:has(> .vid:hover)::after, #gus-videos li:has(> .vid.on)::after{ border-color: var(--c); width: calc(var(--indent) / 2); }
-#gus-videos .vid:focus-visible{ outline: 2px solid var(--c); outline-offset: -2px; }
-#gus-videos .vid .poster{ flex: 0 0 auto; width: 64px; aspect-ratio: 16 / 9; border-radius: 6px; overflow: hidden; background: rgb(0, 0, 0); box-shadow: rgba(255, 255, 255, 0.12) 0px 0px 0px 1px; }
-#gus-videos .vid img{ display: block; width: 100%; height: 100%; object-fit: cover; }
-#gus-videos .vid-text{ flex: 1 1 0%; min-width: 0px; display: flex; align-items: baseline; gap: 12px; }
-#gus-videos .vid-text b{ font: 600 16.5px/1.15 var(--sans); letter-spacing: -0.015em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-#gus-videos .vid-text > span{ flex: 0 0 auto; color: var(--muted); font-size: 13px; white-space: nowrap; }
-#gus-videos .vid-text .game, #gus-videos .vid-text .sep{ display: none; }
-#gus-videos .vid .len{ flex: 0 0 auto; font-style: ; font-variant-ligatures: ; font-variant-caps: ; font-variant-east-asian: ; font-variant-alternates: ; font-variant-position: ; font-variant-emoji: ; font-weight: ; font-stretch: ; font-size: ; line-height: ; font-family: ; font-optical-sizing: ; font-size-adjust: ; font-kerning: ; font-feature-settings: ; font-variation-settings: ; font-language-override: ; color: var(--muted); font-variant-numeric: tabular-nums; }
-#gus-videos li:has(> .vid[hidden]){ display: none; }
-#gus-videos .branch:not(:has(.vid:not([hidden]))){ display: none; }
-#gus-videos .vtree.ffon{ display: block; }
-#gus-videos .vtree.ffon .tree{ display: none; }
-#gus-videos .ff{ --c: var(--text); --fw: clamp(220px, 23vw, 290px); --fh: calc(var(--fw) * .64); --base: clamp(64px, 7vw, 104px); --tab: 30px; --open: 520ms; --close: 320ms; --stagger: 45ms; --spring: cubic-bezier(.34, 1.57, .64, 1); --out: cubic-bezier(.23, 1, .32, 1); position: relative; height: clamp(580px, 50vw, 720px); min-width: 0px; user-select: none; }
-#gus-videos .ff-folder{ position: absolute; left: 50%; bottom: var(--base); width: var(--fw); height: var(--fh); translate: -50%; }
-#gus-videos .ff-pool{ position: absolute; left: -48%; right: -48%; bottom: -44px; height: 88px; z-index: -1; pointer-events: none; opacity: 0.7; background: radial-gradient(closest-side, color-mix(in srgb, var(--c) 30%, transparent), transparent); transition: opacity 0.5s; }
-#gus-videos .ff[data-tone=""] .ff-pool{ background: radial-gradient(closest-side, color-mix(in srgb, var(--blue) 26%, transparent), transparent); }
-#gus-videos .ff[data-open] .ff-pool{ opacity: 1; }
-#gus-videos .ff-bay{ --g: var(--c); --tc: var(--c); position: absolute; inset: 0px; z-index: 0; overflow: hidden; pointer-events: none; --side: linear-gradient(90deg, transparent, #000 16%, #000 84%, transparent); mask-image: var(--side), linear-gradient(transparent, #000 16%); mask-composite: intersect; }
-#gus-videos .ff[data-tone=""] .ff-bay{ --g: var(--blue); }
-#gus-videos .ff[data-tone=""] .t-banana{ --tc: var(--banana); }
-#gus-videos .ff[data-tone=""] .t-squish{ --tc: var(--squish); }
-#gus-videos .ff[data-tone=""] .t-taxi{ --tc: var(--taxi); }
-#gus-videos .ff[data-tone=""] .t-night{ --tc: var(--night); }
-#gus-videos .bay-floor{ position: absolute; left: calc(50% - 1000px); bottom: 0px; width: 2000px; height: 1300px; transform-origin: 50% 100%; background: linear-gradient(90deg, color-mix(in srgb, var(--g) 18%, transparent) 2px, transparent 2px) -1px 0 / 50px 50px,
-    linear-gradient(color-mix(in srgb, var(--g) 18%, transparent) 2px, transparent 2px) 0 0 / 50px 50px; mask-image: linear-gradient(to top, transparent, rgb(0, 0, 0) 4%, rgb(0, 0, 0) 30%, transparent 96%); }
-#gus-videos .ff[data-open] .bay-traces{ opacity: 1; }
-#gus-videos .ff-dir .d-paper{ position:absolute; left:10%; right:10%; top:16px; height:52px; border-radius:4px; rotate:-3deg; background:linear-gradient(180deg, color-mix(in srgb, var(--c) 72%, #fff), color-mix(in srgb, var(--c) 45%, #101014)); box-shadow:0 0 0 1px rgba(255,255,255,.18), 0 6px 18px rgba(0,0,0,.35); }
-#gus-videos .ff-dir .d-front{ background:linear-gradient(180deg, color-mix(in srgb, var(--c) 62%, #17171c), color-mix(in srgb, var(--c) 34%, #0c0c10) 72%); border-radius:12px; }
-#gus-videos .ff-dir .d-front b{ color:#fff; text-shadow:0 1px 6px rgba(0,0,0,.4); }
-#gus-videos .ff-dir .d-front small{ color:rgba(255,255,255,.72); }
-
-#gus-videos .bay-traces path{ fill:none; stroke: color-mix(in srgb, var(--tc) 62%, transparent); stroke-width:4; stroke-linecap:round; stroke-linejoin:round; transition: stroke .6s; }
-#gus-videos .bay-traces path.pin{ stroke: color-mix(in srgb, var(--g) 45%, transparent); stroke-width:5; stroke-linecap:butt; }
-#gus-videos .bay-traces .die{ fill: color-mix(in srgb, var(--g) 10%, transparent); stroke: color-mix(in srgb, var(--g) 30%, transparent); stroke-width:2; }
-#gus-videos .bay-traces .chip{ fill: rgb(11, 11, 16); stroke: color-mix(in srgb, var(--g) 45%, transparent); stroke-width: 3; transition: stroke 0.6s; }
-#gus-videos .bay-wall{ position: absolute; left: 0px; right: 0px; top: 0px; bottom: var(--hz, 300px); --wl: color-mix(in srgb, var(--g) 9%, transparent); background: linear-gradient(90deg, transparent calc(50% - .75px), var(--wl) calc(50% - .75px) calc(50% + .75px), transparent calc(50% + .75px)) 50% 100% / var(--wc, 24px) var(--wc, 24px),
-    linear-gradient(to top, var(--wl) 1.5px, transparent 1.5px) 50% 100% / var(--wc, 24px) var(--wc, 24px); mask-image: linear-gradient(to top, rgb(0, 0, 0), transparent 70%); transition: opacity 0.6s; }
-#gus-videos .bay-pulse{ position: absolute; left: 0px; top: 0px; width: 12px; height: 12px; margin: -6px 0px 0px -6px; border-radius: 50%; opacity: 0; background: rgb(255, 255, 255); box-shadow: 0 0 10px 4px var(--tc), 0 0 26px 8px color-mix(in srgb, var(--tc) 50%, transparent); animation-timing-function: linear; animation-iteration-count: infinite; }
-#gus-videos .bay-scan{ position: absolute; left: 0px; right: 0px; top: 0px; height: 240px; opacity: 0.8; background: linear-gradient(transparent, color-mix(in srgb, var(--g) 16%, transparent) 75%, color-mix(in srgb, var(--g) 34%, transparent) 96%, transparent); animation: 7s cubic-bezier(0.45, 0, 0.7, 1) 0s infinite normal none running bay-scan; }
-#gus-videos .bay-hz{ position: absolute; left: 0px; right: 0px; bottom: var(--hz, 300px); height: 2px; background: linear-gradient(90deg, transparent 6%, color-mix(in srgb, var(--g) 60%, transparent) 35%, color-mix(in srgb, var(--g) 60%, transparent) 65%, transparent 94%); box-shadow: 0 0 22px 3px color-mix(in srgb, var(--g) 28%, transparent); transition: background 0.6s, box-shadow 0.6s; }
-#gus-videos .bay-hz::before{ content: ""; position: absolute; left: 10%; right: 10%; bottom: 0px; height: 220px; background: radial-gradient(ellipse 50% 100% at 50% 100%, color-mix(in srgb, var(--g) 12%, transparent), transparent); }
-#gus-videos .bay-beam{ position: absolute; left: 50%; top: 0px; bottom: calc(var(--base) + var(--fh) * .5); width: min(100%, 1100px); translate: -50%; opacity: 0; background: radial-gradient(ellipse 48% 100% at 50% 100%, color-mix(in srgb, var(--g) 14%, transparent), transparent 80%); transition: opacity 0.6s; }
-#gus-videos .ff[data-open] .bay-beam{ opacity: 1; }
 
 
-#gus-videos .ff-glow{ position: absolute; inset: -45% -55% -25%; z-index: -1; pointer-events: none; opacity: 0.45; background: radial-gradient(closest-side, color-mix(in srgb, var(--c) 24%, transparent), transparent 72%); transition: opacity 0.5s; }
-#gus-videos .ff[data-open] .ff-glow{ opacity: 0.9; }
-#gus-videos .ff-back{ position: absolute; inset: 0px; z-index: 0; border-radius: 0px 16px 16px; transform: perspective(700px) rotateX(8deg); transform-origin: 50% 100%; background: linear-gradient(180deg, color-mix(in srgb, var(--c) 34%, #121216), color-mix(in srgb, var(--c) 14%, #08080b)); box-shadow: rgba(255, 255, 255, 0.14) 0px 1px 0px inset, rgba(0, 0, 0, 0.9) 0px 30px 60px -30px; transition: background 0.6s; }
-#gus-videos .ff-tab{ position: absolute; left: 0px; bottom: calc(100% - 1px); display: flex; align-items: center; gap: 6px; height: var(--tab); max-width: 100%; padding: 0px 14px 0px 12px; border-radius: 12px 12px 0px 0px; background: color-mix(in srgb, var(--c) 34%, #121216); box-shadow: rgba(255, 255, 255, 0.14) 0px 1px 0px inset; font: 600 13px/1 var(--sans); letter-spacing: -0.005em; white-space: nowrap; overflow: hidden; transition: background 0.6s; }
-#gus-videos .ff-tab i{ font-style: normal; color: rgba(255, 255, 255, 0.35); }
-#gus-videos .ff-tab .crumb{ margin: 0px; padding: 4px 2px; border: 0px; background: none; font: inherit; color: rgba(255, 255, 255, 0.72); }
-#gus-videos .ff-tab button.crumb{ cursor: pointer; }
-#gus-videos .ff-tab button.crumb:hover, #gus-videos .ff-tab button.crumb:focus-visible{ color: rgb(255, 255, 255); outline: none; text-decoration: underline; text-underline-offset: 3px; }
-#gus-videos .ff-tab span.crumb{ color: rgb(255, 255, 255); }
-#gus-videos .ff-papers{ position: absolute; z-index: 1; left: 9%; right: 9%; top: 7%; height: 62%; pointer-events: none; }
-#gus-videos .ff-papers img{ position: absolute; inset: 0px; width: 100%; height: 100%; object-fit: cover; border-radius: 7px; background: rgb(0, 0, 0); box-shadow: rgba(255, 255, 255, 0.14) 0px 0px 0px 1px, rgba(0, 0, 0, 0.4) 0px -6px 14px; translate: 0px 16px; transition: translate var(--close) var(--out); }
-#gus-videos .ff-papers img:nth-child(1){ rotate: -5deg; left: -4%; right: 8%; }
-#gus-videos .ff-papers img:nth-child(2){ rotate: 3deg; left: 10%; right: -3%; }
-#gus-videos .ff-papers img:nth-child(3){ rotate: -1deg; }
-#gus-videos .ff[data-open] .ff-papers img{ translate: 0px -12px; transition: translate var(--open) var(--spring); }
-#gus-videos .ff[data-open] .ff-papers img:nth-child(1){ translate: -8px -4px; }
-#gus-videos .ff[data-open] .ff-papers img:nth-child(2){ translate: 8px -8px; }
-#gus-videos .ff-papers img.peep{ gk-ff-peep 1.3s var(--out); }
-#gus-videos .ff-sky{ position: absolute; left: 50%; top: 0px; z-index: 2; width: 0px; height: 0px; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @keyframes litcol{ 0%{ color:var(--l1); text-shadow:0 0 .4em color-mix(in srgb, var(--l1) 70%, transparent); } 33%{ color:var(--l2); text-shadow:0 0 .4em color-mix(in srgb, var(--l2) 70%, transparent); } 66%{ color:var(--l3); text-shadow:0 0 .4em color-mix(in srgb, var(--l3) 70%, transparent); } 100%{ color:var(--l1); text-shadow:0 0 .4em color-mix(in srgb, var(--l1) 70%, transparent); } }
-#gus-videos .ff-front .ch{ color:inherit; transition:color .45s, text-shadow .45s; }
-#gus-videos .ff-front:hover .ch{ animation:litcol 2.6s linear infinite; animation-delay:calc(var(--i) * -.16s); }
 
-#gus-videos .ff-front{ position: absolute; left: 0px; right: 0px; bottom: 0px; z-index: 3; display: flex; flex-direction: column; justify-content: flex-end; gap: 7px; height: 74%; margin: 0px; padding: 16px 20px; border: 0px; border-radius: 16px; color: rgb(255, 255, 255); text-align: left; cursor: pointer; font: inherit; background: linear-gradient(180deg, color-mix(in srgb, var(--c) 58%, #1b1b21), color-mix(in srgb, var(--c) 34%, #0c0c10) 72%); box-shadow: rgba(255, 255, 255, 0.34) 0px 1px 0px inset, rgba(255, 255, 255, 0.06) 0px 0px 0px 1px inset, rgba(0, 0, 0, 0.42) 0px -12px 28px; transform: perspective(700px) rotateX(-14deg); transform-origin: 50% 100%; transition: transform var(--open) var(--out), box-shadow .3s, background .6s; }
-#gus-videos .ff[data-tone=""] .ff-front{ background: linear-gradient(115deg, color-mix(in srgb, var(--banana) 46%, #17171c), color-mix(in srgb, var(--squish) 44%, #141419) 38%, color-mix(in srgb, var(--taxi) 40%, #111115) 70%, color-mix(in srgb, var(--night) 46%, #0f0f13)); }
-#gus-videos .ff[data-tone=""] .ff-back, #gus-videos .ff[data-tone=""] .ff-tab{ background: linear-gradient(115deg, color-mix(in srgb, var(--banana) 22%, #121216), color-mix(in srgb, var(--squish) 22%, #101014)); }
-#gus-videos .ff[data-tone=""] .ff-glow{ background: radial-gradient(closest-side, color-mix(in srgb, var(--squish) 16%, transparent), transparent 72%); }
-#gus-videos .ff-front::before{ content: ""; position: absolute; inset: 0px; border-radius: inherit; pointer-events: none; background: repeating-linear-gradient(transparent 0px, transparent 3px, rgba(0, 0, 0, 0.12) 3px, rgba(0, 0, 0, 0.12) 4px); mix-blend-mode: multiply; opacity: 0.5; }
-#gus-videos .ff-front:focus-visible{ outline: rgb(255, 255, 255) solid 2px; outline-offset: 3px; }
-#gus-videos .ff[data-open] .ff-front{ transform: perspective(700px) rotateX(-34deg); }
-#gus-videos .ff.feed .ff-front{ transform: perspective(700px) rotateX(-48deg); box-shadow: inset 0 1px 0 rgba(255,255,255,.5), 0 0 0 2px var(--c), 0 0 46px color-mix(in srgb, var(--c) 60%, transparent); }
-#gus-videos .ff-name{ position: relative; font: 800 clamp(30px, 2.9vw, 42px)/.88 var(--display); letter-spacing: 0.005em; white-space: nowrap; }
-#gus-videos .ff-sub{ position: relative; font: 500 13px/1 var(--sans); color: rgba(255, 255, 255, 0.72); }
-#gus-videos .ff.gulp .ff-folder{ gk-ff-gulp .55s var(--out); }
-#gus-videos .ff.burp .ff-folder{ gk-ff-burp .45s var(--out); }
-#gus-videos .ff-item{ position: absolute; left: 0px; top: 0px; margin: 0px; padding: 0px; border: 0px; background: none; font: inherit; color: rgb(255, 255, 255); text-align: left; cursor: pointer; opacity: 0; pointer-events: none; touch-action: none; -webkit-tap-highlight-color: transparent; transform: translate(-50%, calc(-50% + var(--fh) * .3)) scale(.45); transition: transform var(--close) var(--out) calc((var(--n) - 1 - var(--i)) * var(--stagger) * .5),
-              opacity 160ms ease calc((var(--n) - 1 - var(--i)) * var(--stagger) * .5 + var(--close) * .45), scale .18s var(--out); }
-#gus-videos .ff[data-open] .ff-item{ opacity: 1; pointer-events: auto; transform: translate(calc(-50% + var(--x)), calc(-50% + var(--y))) rotate(var(--r)); transition: transform var(--open) var(--spring) calc(var(--i) * var(--stagger)), opacity 160ms ease calc(var(--i) * var(--stagger)), scale .18s var(--out); }
-#gus-videos .ff[data-live] .ff-item{ cursor: grab; transition: scale .18s var(--out); }
-#gus-videos .ff .ff-item[data-drag]{ z-index: 2; cursor: grabbing; scale: 1.07; }
-#gus-videos .ff .ff-item.dive{ opacity: 0 !important; transform: translate(-50%, calc(-50% + var(--fh) * .32)) rotate(calc(var(--r) * -4)) scale(.28) !important; transition: transform 0.42s cubic-bezier(0.55, 0, 0.75, 0.1), opacity 0.16s 0.28s !important; }
-#gus-videos .ff-item.from{ gk-ff-flash 1s ease-out calc(var(--i) * var(--stagger) + 200ms) backwards; }
-#gus-videos .ff[data-open] .ff-item:active{ scale: 0.97; }
-#gus-videos .ff-item:focus-visible{ outline: 2px solid var(--c); outline-offset: 4px; border-radius: 12px; }
-#gus-videos .ff-item img{ -webkit-user-drag: none; pointer-events: none; }
-#gus-videos .ff-dir{ min-width: 136px; padding-top: 30px; }
-#gus-videos .ff-dir .d-back{ position: absolute; inset: 12px 0px 0px; border-radius: 0px 12px 12px; background: color-mix(in srgb, var(--c) 38%, #111115); }
-#gus-videos .ff-dir .d-back::before{ content: ""; position: absolute; left: 0px; bottom: 100%; width: 46%; height: 10px; border-radius: 8px 8px 0px 0px; background: inherit; }
-#gus-videos .ff-dir:hover .d-paper, #gus-videos .ff-dir:focus-visible .d-paper{ translate: 0px -14px; }
-#gus-videos .ff-dir .d-front{ position: relative; display: grid; gap: 5px; padding: 12px 16px; border-radius: 12px; white-space: nowrap; background: linear-gradient(180deg, color-mix(in srgb, var(--c) 62%, #1d1d23), color-mix(in srgb, var(--c) 38%, #0e0e12)); box-shadow: rgba(255, 255, 255, 0.32) 0px 1px 0px inset, rgba(0, 0, 0, 0.9) 0px 14px 26px -12px; }
-#gus-videos .ff-dir b{ font: 800 23px/.9 var(--display); letter-spacing: 0.01em; }
-#gus-videos .ff-dir small{ font: 500 12px/1 var(--sans); color: rgba(255, 255, 255, 0.74); }
-#gus-videos .ff-film{ width: var(--cw, 150px); padding: 6px 6px 9px; border-radius: 12px; background: color-mix(in srgb, var(--c) 13%, #0d0d11); box-shadow: 0 0 0 1px color-mix(in srgb, var(--c) 38%, transparent), 0 14px 26px -12px rgba(0,0,0,.9); transition: box-shadow 0.25s; }
-#gus-videos .ff-film .poster{ position: relative; display: block; aspect-ratio: 16 / 9; border-radius: 7px; overflow: hidden; background: rgb(0, 0, 0); }
-#gus-videos .ff-film .poster img{ display: block; width: 100%; height: 100%; object-fit: cover; }
-#gus-videos .ff-film .poster::after{ content: ""; position: absolute; inset: 0px; opacity: 0; transition: opacity 0.2s; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 6.5v11l9-5.5z' fill='white'/%3E%3C/svg%3E") 54% 50% / 26px no-repeat rgba(0, 0, 0, 0.25); }
-#gus-videos .ff-film small{ position: absolute; right: 5px; bottom: 5px; padding: 3px 5px; border-radius: 5px; font-style: ; font-variant-ligatures: ; font-variant-caps: ; font-variant-east-asian: ; font-variant-alternates: ; font-variant-position: ; font-variant-emoji: ; font-weight: ; font-stretch: ; font-size: ; line-height: ; font-family: ; font-optical-sizing: ; font-size-adjust: ; font-kerning: ; font-feature-settings: ; font-variation-settings: ; font-language-override: ; font-variant-numeric: tabular-nums; background: rgba(0, 0, 0, 0.66); }
-#gus-videos .ff-film b{ display: block; margin: 8px 2px 0px; font: 600 13.5px/1.1 var(--sans); letter-spacing: -0.01em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-#gus-videos .ff-film:hover .poster::after, #gus-videos .ff-film.on .poster::after{ opacity: 1; }
-#gus-videos .ff-film.on{ box-shadow: 0 0 0 2px var(--c), 0 0 30px color-mix(in srgb, var(--c) 45%, transparent), 0 14px 26px -12px rgba(0,0,0,.9); }
-#gus-videos .player video{ display: block; width: 100%; max-height: calc(-150px + 100vh); aspect-ratio: 16 / 9; border-radius: 14px; background: rgb(0, 0, 0); }
-#gus-videos .ach-cap{ --cc: var(--text); position: relative; z-index: 4; display: grid; justify-items: start; gap: 12px; margin: clamp(14px, 2.6vw, 38px) 0px 0px 2px; }
-#gus-videos .ach-cap time{ font: 500 15px/1 var(--sans); letter-spacing: -0.005em; color: var(--muted); }
-#gus-videos .ach-cap b{ --c: var(--cc); max-width: 100%; margin-bottom: 0.1em; font: 900 clamp(46px, 7.4vw, 118px)/.84 var(--display); letter-spacing: 0.004em; color: var(--cc); overflow-wrap: anywhere; text-shadow: 0 0 48px color-mix(in srgb, var(--cc) 32%, transparent); transition: color 0.4s; }
-#gus-videos .ach-cap > span{ font: 400 clamp(17px, 1.45vw, 21px)/1.35 var(--sans); letter-spacing: -0.015em; color: var(--soft); }
-#gus-videos .day:first-child .day-foot{ border-image: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2) 60%) 1 / 1 / 0 stretch; }
-#gus-videos .day:last-child .day-foot{ border-image: linear-gradient(90deg, rgba(255, 255, 255, 0.2) 40%, transparent) 1 / 1 / 0 stretch; }
-#gus-videos .ach{ --c: #fff; --n: 0; position: relative; width: clamp(42px, 3.8vw, 58px); aspect-ratio: 1 / 1; padding: 0px; border: 0px; background: none; cursor: pointer; display: grid; place-items: center; color: var(--c); opacity: 0.58; -webkit-tap-highlight-color: transparent; transition: opacity 0.3s, scale 0.45s cubic-bezier(0.3, 1.6, 0.5, 1), filter 0.3s; }
-#gus-videos .ach.banana{ --c: #ffd21a; }
-#gus-videos .ach.money{ --c: #2fdc55; }
-#gus-videos .ach.squish{ --c: #ff45b0; }
-#gus-videos .ach.web{ --c: #2fa8ff; }
-#gus-videos .ach.taxi{ --c: #f4c06a; }
-#gus-videos .ach.site{ --c: #d97cf2; }
-#gus-videos .ach.me{ --c: #ff9a3c; }
-#gus-videos .ach.film{ --c: #4fe3ff; }
-#gus-videos .ach.trophy{ --c: #fff0b3; }
-#gus-videos .ach.combat{ --c: #e4e9f2; }
-#gus-videos .ach.bat{ --c: #bba4ff; }
-#gus-videos .ach.mpack{ --c: #ff5864; }
-#gus-videos .ach.creek{ --c: #a8d98c; }
-#gus-videos .ach.updraft{ --c: #ffb35c; }
-#gus-videos .ach.zero{ --c: #ff8a2a; }
-#gus-videos .ach.six{ --c: #ff3fb4; }
-#gus-videos .ach.stuffed{ --c: #c98a4b; }
-#gus-videos .ach svg text{ font: 900 10.5px/1 var(--display); letter-spacing: 0.02em; }
-#gus-videos .ach svg{ width: 74%; height: 74%; overflow: visible; }
-#gus-videos .ach:hover{ opacity: 0.85; scale: 1.1; }
-#gus-videos .ach[aria-pressed="true"]{ opacity: 1; scale: 1.25; filter: drop-shadow(0 0 10px color-mix(in srgb, var(--c) 70%, transparent)); }
-#gus-videos .ach:focus-visible{ outline: rgba(160, 235, 255, 0.55) solid 1px; outline-offset: 2px; border-radius: 6px; }
-#gus-videos .ach.glitch svg{ animation: 0.36s steps(1) 0s 1 normal none running glitch-now; }
-#gus-videos .ach.pop{ animation-duration: 0.5s; animation-timing-function: cubic-bezier(0.3, 1.6, 0.5, 1); animation-iteration-count: 1; animation-direction: normal; animation-fill-mode: backwards; animation-play-state: running; gk-ach-pop; animation-timeline: auto; animation-range: normal; animation-delay: var(--dl, 0s); }
-#gus-videos .ach-text{ position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
-#gus-videos .vtree.vlist{ display: block; }
-#gus-videos .vlist .tree{ --row: 64px; --indent: 0px; }
-#gus-videos .vlist .vt-root{ display: none; }
-#gus-videos .vlist .tree ul{ padding-left: 0px; }
-#gus-videos .vlist .tree li::before, #gus-videos .vlist .tree li::after{ content: none; }
-#gus-videos .vlist .branch > summary{ pointer-events: none; height: auto; gap: 10px; align-items: baseline; margin-top: 30px; padding: 0px 2px 9px; border-radius: 0px; border-bottom: 1px solid color-mix(in srgb, var(--c) 42%, transparent); }
-#gus-videos .vlist .trunk > li:first-child > .branch > summary{ margin-top: 2px; }
-#gus-videos .vlist .branch > summary .ficon{ display: none; }
-#gus-videos .vlist .branch > summary .fname{ font: 800 28px/1 var(--display); letter-spacing: 0.01em; color: var(--text); }
-#gus-videos .vlist .branch > summary .fcount{ min-width: 0px; padding: 0px; border-radius: 0px; background: none; font: 500 14px/1 var(--sans); color: var(--muted); }
-#gus-videos .vlist .branch .branch > summary{ margin-top: 16px; padding: 0px 2px 3px; border-bottom: 0px; }
-#gus-videos .vlist .trunk .branch .reel > li:first-child > .branch > summary{ margin-top: 12px; }
-#gus-videos .vlist .branch .branch > summary .fname{ font: 600 15px/1 var(--sans); letter-spacing: -0.005em; color: var(--soft); }
-#gus-videos .vlist .branch .branch > summary .fcount{ font-size: 13px; }
-#gus-videos .vlist .branch > .reel{ padding-top: 4px; }
-#gus-videos .vlist .branch[open] > .reel > li, #gus-videos .vlist .branch[open] > .reel > li::before{ animation: auto ease 0s 1 normal none running none; }
-#gus-videos .vlist .vid{ height: auto; min-height: var(--row); gap: 12px; padding: 5px 2px; border-radius: 10px; }
-#gus-videos .vlist .vid:hover{ background: none; }
-#gus-videos .vlist .vid .poster{ position: relative; width: 96px; border-radius: 7px; }
-#gus-videos .vlist .vid .poster::after{ content: ""; position: absolute; inset: 0px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 6.5v11l9-5.5z' fill='white'/%3E%3C/svg%3E") 54% 50% / 22px no-repeat rgba(0, 0, 0, 0.18); }
-#gus-videos .vlist .vid-text{ flex-direction: column; align-items: flex-start; gap: 6px; }
-#gus-videos .vlist .vid-text b{ max-width: 100%; font-size: 16px; white-space: normal; overflow: visible; }
-#gus-videos .vlist .vid-text > span{ font-size: 13px; }
-#gus-videos .vlist .vid .len{ font-size: 14px; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @keyframes gk-pg-flip { 
   0% { background: var(--banana); color: var(--banana); }
   16.6% { background: var(--squish); color: var(--squish); }
@@ -1852,22 +1847,22 @@
 #notes .coverflow-status button::before{ border: 1px solid var(--red-dark); content: ""; width: 10px; height: 10px; }
 #notes .coverflow-status button.is-current::before{ background: var(--red); }
 /* —— 完全复用补丁 —— */
-#gus-videos{ display:block; padding-top: clamp(220px, 24vw, 320px); overflow-x:clip; }
+
 #notes .works-section{ max-width:1180px; margin:0 auto; }
 #notes .github-archive-stage{ max-width:100%; overflow:hidden; position:relative; min-height:700px; }
 @media (min-width:1100px){ #notes .github-archive-stage{ min-height:850px; } }
-#gus-videos .ff-bay{ overflow:hidden; }
-#gus-videos .bay-traces{ max-width:100%; }
 
-#gus-videos dialog.player{ border:0; padding:0; background:transparent; max-width:min(820px,94vw); width:94vw; }
-#gus-videos dialog.player::backdrop{ background:rgba(0,0,0,.72); backdrop-filter:blur(10px); }
-#gus-videos .player-box{ border:1px solid rgba(244,245,247,.16); border-radius:16px; overflow:hidden; background:rgba(14,15,20,.96); box-shadow:0 44px 130px -30px rgba(0,0,0,.95); }
-#gus-videos .player-bar{ display:flex; justify-content:space-between; align-items:center; gap:12px; padding:14px 18px; border-top:1px solid rgba(244,245,247,.1); }
-#gus-videos .player-text b{ display:block; font:700 15px/1.4 "Schibsted Grotesk",var(--sans); color:#F4F5F7; }
-#gus-videos .player-text b .cn, #gus-videos .player-text b{ font-family:"Noto Serif SC","Songti SC",serif; }
-#gus-videos .player-text span{ font:500 10px/1.7 "Schibsted Grotesk",var(--sans); letter-spacing:.16em; color:#8A8F98; }
-#gus-videos .icon-btn{ width:38px; height:38px; border-radius:50%; border:1px solid rgba(244,245,247,.18); background:transparent; color:#F4F5F7; font:400 15px/1 "Cormorant Garamond",serif; cursor:pointer; transition:background .2s, border-color .2s; }
-#gus-videos .icon-btn:hover{ background:rgba(244,245,247,.08); border-color:rgba(244,245,247,.4); }
+
+
+
+
+
+
+
+
+
+
+
 
 #notes.jin{
       background:#1D1C19; color:#F1EADF;
@@ -1880,17 +1875,17 @@
 
 
 /* —— 文件夹闭合/张开布局（对齐 guscastillo 视觉） —— */
-#gus-videos .vtree{ display:block; }
-#gus-videos .reel-list{ display:none; }
-#gus-videos:has(.ff[data-open]) .reel-list{ display:grid; gap:10px; align-content:start; }
-#gus-videos .reel-list .vid{ width:100%; text-align:left; display:grid; grid-template-columns:96px minmax(0,1fr); gap:14px; align-items:center; background:rgba(244,245,247,.03); border:1px solid rgba(244,245,247,.1); border-radius:10px; padding:10px 12px; cursor:pointer; color:inherit; transition:background .2s ease,border-color .2s ease; }
-#gus-videos .reel-list .vid:hover{ background:rgba(244,245,247,.06); border-color:rgba(47,217,203,.4); }
-#gus-videos .reel-list .vid .poster{ width:96px; aspect-ratio:16/9; border-radius:6px; overflow:hidden; }
-#gus-videos .reel-list .vid .poster img{ width:100%; height:100%; object-fit:cover; display:block; }
-#gus-videos .reel-list .vid .vid-text b{ display:block; font:700 15px/1.4 "Noto Serif SC","Songti SC",serif; color:#F4F5F7; }
-#gus-videos .reel-list .vid .vid-text span{ display:block; margin-top:2px; font:500 10px/1.6 "Schibsted Grotesk",var(--sans); letter-spacing:.1em; color:#8A8F98; }
-#gus-videos .reel-list .vid .vid-text .vd{ display:block; margin-top:5px; font:400 11.5px/1.7 var(--sans); color:#B9C0CC; font-style:normal; }
-#gus-videos .tree{ display:none; }
+
+
+
+
+
+
+
+
+
+
+
 
 
 /* —— 电路板点光脉冲（原站由 JS 注入，此处 CSS 等效） —— */
@@ -5894,6 +5889,7 @@
   }
 }
   </script>
+<link rel="stylesheet" href="profile-folders.css?v=20261025">
 </head>
 <body>
   <div class="scroll-progress" id="scrollProgress" aria-hidden="true" style="transform: scaleX(0);"></div>
@@ -5963,128 +5959,21 @@
         <div class="hero-cine-scroll">SCROLL</div>
       </section>
     <section id="profile" class="gc">
-<section id="gus-videos" aria-labelledby="vid-h" class="">
-    <h2 class="label fxt" id="vid-h">身份档案 · Identity Files</h2>
-    
-    <div class="vtree ffon"><div class="ff" style="--n: 10; --c: var(--text);" data-tone=""><div class="ff-bay" aria-hidden="true" style="--hz: 396.7px; --wc: 23.74px;"><div class="bay-wall"></div><div class="bay-beam"></div><div class="bay-hz"></div><div class="bay-floor" style="transform: perspective(900px) rotateX(50deg);"><svg class="bay-traces" viewBox="0 0 2000 1300"><circle class="dot" cx="1741" cy="940.2" r="5"></circle><circle class="dot" cx="501" cy="1006.2" r="5"></circle><circle class="dot" cx="537" cy="985" r="5"></circle><circle class="dot" cx="513" cy="636.8" r="5"></circle><circle class="dot" cx="1524" cy="413.7" r="5"></circle><circle class="dot" cx="583" cy="219.3" r="5"></circle><circle class="dot" cx="1516" cy="449" r="5"></circle><circle class="dot" cx="1772" cy="384.6" r="5"></circle><circle class="dot" cx="425" cy="998.7" r="5"></circle><circle class="dot" cx="1455" cy="983.8" r="5"></circle><circle class="dot" cx="1495" cy="822.6" r="5"></circle><circle class="dot" cx="564" cy="1013.5" r="5"></circle><circle class="dot" cx="1828" cy="605.3" r="5"></circle><circle class="dot" cx="607" cy="1007.1" r="5"></circle><circle class="dot" cx="1570" cy="813.8" r="5"></circle><circle class="dot" cx="1338" cy="94.2" r="5"></circle><circle class="dot" cx="519" cy="671.9" r="5"></circle><path class="pin" d="M166 580.7H180M400 580.7H414"></path><path class="pin" d="M166 606.7H180M400 606.7H414"></path><path class="pin" d="M166 632.7H180M400 632.7H414"></path><path class="pin" d="M166 658.7H180M400 658.7H414"></path><path class="pin" d="M166 684.7H180M400 684.7H414"></path><path class="pin" d="M166 710.7H180M400 710.7H414"></path><path class="pin" d="M166 736.7H180M400 736.7H414"></path><path class="pin" d="M166 762.7H180M400 762.7H414"></path><path class="pin" d="M166 788.7H180M400 788.7H414"></path><path class="pin" d="M166 814.7H180M400 814.7H414"></path><path class="pin" d="M166 840.7H180M400 840.7H414"></path><path class="pin" d="M166 866.7H180M400 866.7H414"></path><rect class="chip" x="180" y="554.7" width="220" height="340" rx="12"></rect><rect class="die" x="230" y="644.7" width="120" height="160" rx="6"></rect><path class="pin" d="M1586 515.4H1600M1820 515.4H1834"></path><path class="pin" d="M1586 541.4H1600M1820 541.4H1834"></path><path class="pin" d="M1586 567.4H1600M1820 567.4H1834"></path><path class="pin" d="M1586 593.4H1600M1820 593.4H1834"></path><path class="pin" d="M1586 619.4H1600M1820 619.4H1834"></path><path class="pin" d="M1586 645.4H1600M1820 645.4H1834"></path><path class="pin" d="M1586 671.4H1600M1820 671.4H1834"></path><path class="pin" d="M1586 697.4H1600M1820 697.4H1834"></path><path class="pin" d="M1586 723.4H1600M1820 723.4H1834"></path><path class="pin" d="M1586 749.4H1600M1820 749.4H1834"></path><path class="pin" d="M1586 775.4H1600M1820 775.4H1834"></path><path class="pin" d="M1586 801.4H1600M1820 801.4H1834"></path><rect class="chip" x="1600" y="489.4" width="220" height="340" rx="12"></rect><rect class="die" x="1650" y="579.4" width="120" height="160" rx="6"></rect><path class="t-banana" d="M362.96630010741865 930L777.542844948417 930L856 1008.4L856 1021.3"></path><circle class="t-banana" cx="363" cy="930" r="8"></circle><path class="t-squish" d="M400 838.8L819.3908217802236 838.8L878 897.4L878 1021.3"></path><path class="t-taxi" d="M400 724.7L848.9594239983126 724.7L900 775.7L900 1021.3"></path><path class="t-night" d="M400 615.9L870.3123447600155 615.9L922 667.6L922 1021.3"></path><path class="t-banana" d="M309.62575056277274 481.8L859.2209099003449 481.8L944 566.5L944 1021.3"></path><circle class="t-banana" cx="310" cy="481.8" r="8"></circle><path class="t-squish" d="M281.09221577491553 380.6L917.0798073780825 380.6L966 429.6L966 1021.3"></path><circle class="t-squish" cx="281" cy="380.6" r="8"></circle><path class="t-taxi" d="M1567.3831015150063 887.1L1195.0405760016874 887.1L1144 938.1L1144 1021.3"></path><circle class="t-taxi" cx="1567" cy="887.1" r="8"></circle><path class="t-night" d="M1600 785.1L1173.6876552399845 785.1L1122 836.8L1122 1021.3"></path><path class="t-banana" d="M1600 659.4L1184.7790900996551 659.4L1100 744.2L1100 1021.3"></path><path class="t-squish" d="M1600 553.7L1126.9201926219175 553.7L1078 602.6L1078 1021.3"></path><path class="t-taxi" d="M1579.8630147395306 440L1108.5195023856577 440L1056 492.5L1056 1021.3"></path><circle class="t-taxi" cx="1580" cy="440" r="8"></circle><path class="t-night" d="M1789.1678994377435 346.4L1111.658478873709 346.4L1034 424L1034 1021.3"></path><circle class="t-night" cx="1789" cy="346.4" r="8"></circle><path class="t-banana" d="M982 150L982 1021.3"></path><circle class="t-banana" cx="982" cy="150" r="8"></circle><path class="t-squish" d="M1000 80L1000 1021.3"></path><circle class="t-squish" cx="1000" cy="80" r="8"></circle><path class="t-taxi" d="M1018 150L1018 1021.3"></path><circle class="t-taxi" cx="1018" cy="150" r="8"></circle><path class="t-banana" d="M850 1310L850 1257L940 1167L940 1143"></path><path class="t-taxi" d="M778 1310L778 1285L896 1167L896 1143"></path><path class="t-squish" d="M1150 1310L1150 1257L1060 1167L1060 1143"></path><path class="t-night" d="M1222 1310L1222 1285L1104 1167L1104 1143"></path></svg><div class="bay-scan"></div><i class="bay-pulse t-banana" style="animation-name: bp0; animation-duration: 2.55s; animation-delay: -2.51s;"></i><i class="bay-pulse t-squish" style="animation-name: bp1; animation-duration: 2.96s; animation-delay: -2.6s;"></i><i class="bay-pulse t-taxi" style="animation-name: bp2; animation-duration: 3.63s; animation-delay: -0.64s;"></i><i class="bay-pulse t-night" style="animation-name: bp3; animation-duration: 4.25s; animation-delay: -0.45s;"></i><i class="bay-pulse t-banana" style="animation-name: bp4; animation-duration: 5.32s; animation-delay: -3.23s;"></i><i class="bay-pulse t-squish" style="animation-name: bp5; animation-duration: 6.14s; animation-delay: -5.47s;"></i><i class="bay-pulse t-taxi" style="animation-name: bp6; animation-duration: 2.5s; animation-delay: -2.08s;"></i><i class="bay-pulse t-night" style="animation-name: bp7; animation-duration: 3.24s; animation-delay: -0.22s;"></i><i class="bay-pulse t-banana" style="animation-name: bp8; animation-duration: 3.85s; animation-delay: -2.29s;"></i><i class="bay-pulse t-squish" style="animation-name: bp9; animation-duration: 4.55s; animation-delay: -0.17s;"></i><i class="bay-pulse t-taxi" style="animation-name: bp10; animation-duration: 5.09s; animation-delay: -0.47s;"></i><i class="bay-pulse t-night" style="animation-name: bp11; animation-duration: 6.56s; animation-delay: -3.9s;"></i><i class="bay-pulse t-banana" style="animation-name: bp12; animation-duration: 4.13s; animation-delay: -2.8s;"></i><i class="bay-pulse t-squish" style="animation-name: bp13; animation-duration: 4.46s; animation-delay: -1.54s;"></i><i class="bay-pulse t-taxi" style="animation-name: bp14; animation-duration: 4.13s; animation-delay: -0.01s;"></i><i class="bay-pulse t-banana" style="animation-name: bp15; animation-duration: 0.97s; animation-delay: -0.76s;"></i><i class="bay-pulse t-taxi" style="animation-name: bp16; animation-duration: 1.02s; animation-delay: -0.24s;"></i><i class="bay-pulse t-squish" style="animation-name: bp17; animation-duration: 0.97s; animation-delay: -0.43s;"></i><i class="bay-pulse t-night" style="animation-name: bp18; animation-duration: 1.02s; animation-delay: -0.06s;"></i></div><style>@keyframes bp0{0.00%{transform:translate(363px,930px);opacity:0}49.28%{transform:translate(778px,930px)}62.47%{transform:translate(856px,1008.4px)}64.00%{transform:translate(856px,1021.3px)}3%{opacity:1}62%{opacity:1}64%,100%{opacity:0;transform:translate(856px,1021.3px)}}@keyframes bp1{0.00%{transform:translate(400px,838.8px);opacity:0}42.87%{transform:translate(819px,838.8px)}51.34%{transform:translate(878px,897.4px)}64.00%{transform:translate(878px,1021.3px)}3%{opacity:1}62%{opacity:1}64%,100%{opacity:0;transform:translate(878px,1021.3px)}}@keyframes bp2{0.00%{transform:translate(400px,724.7px);opacity:0}37.48%{transform:translate(849px,724.7px)}43.50%{transform:translate(900px,775.7px)}64.00%{transform:translate(900px,1021.3px)}3%{opacity:1}62%{opacity:1}64%,100%{opacity:0;transform:translate(900px,1021.3px)}}@keyframes bp3{0.00%{transform:translate(400px,615.9px);opacity:0}33.55%{transform:translate(870px,615.9px)}38.77%{transform:translate(922px,667.6px)}64.00%{transform:translate(922px,1021.3px)}3%{opacity:1}62%{opacity:1}64%,100%{opacity:0;transform:translate(922px,1021.3px)}}@keyframes bp4{0.00%{transform:translate(310px,481.8px);opacity:0}31.29%{transform:translate(859px,481.8px)}38.11%{transform:translate(944px,566.5px)}64.00%{transform:translate(944px,1021.3px)}3%{opacity:1}62%{opacity:1}64%,100%{opacity:0;transform:translate(944px,1021.3px)}}@keyframes bp5{0.00%{transform:translate(281px,380.6px);opacity:0}31.38%{transform:translate(917px,380.6px)}34.80%{transform:translate(966px,429.6px)}64.00%{transform:translate(966px,1021.3px)}3%{opacity:1}62%{opacity:1}64%,100%{opacity:0;transform:translate(966px,1021.3px)}}@keyframes bp6{0.00%{transform:translate(1567px,887.1px);opacity:0}45.16%{transform:translate(1195px,887.1px)}53.91%{transform:translate(1144px,938.1px)}64.00%{transform:translate(1144px,1021.3px)}3%{opacity:1}62%{opacity:1}64%,100%{opacity:0;transform:translate(1144px,1021.3px)}}@keyframes bp7{0.00%{transform:translate(1600px,785.1px);opacity:0}39.89%{transform:translate(1174px,785.1px)}46.73%{transform:translate(1122px,836.8px)}64.00%{transform:translate(1122px,1021.3px)}3%{opacity:1}62%{opacity:1}64%,100%{opacity:0;transform:translate(1122px,1021.3px)}}@keyframes bp8{0.00%{transform:translate(1600px,659.4px);opacity:0}32.72%{transform:translate(1185px,659.4px)}42.17%{transform:translate(1100px,744.2px)}64.00%{transform:translate(1100px,1021.3px)}3%{opacity:1}62%{opacity:1}64%,100%{opacity:0;transform:translate(1100px,1021.3px)}}@keyframes bp9{0.00%{transform:translate(1600px,553.7px);opacity:0}31.51%{transform:translate(1127px,553.7px)}36.11%{transform:translate(1078px,602.6px)}64.00%{transform:translate(1078px,1021.3px)}3%{opacity:1}62%{opacity:1}64%,100%{opacity:0;transform:translate(1078px,1021.3px)}}@keyframes bp10{0.00%{transform:translate(1580px,440px);opacity:0}28.08%{transform:translate(1109px,440px)}32.50%{transform:translate(1056px,492.5px)}64.00%{transform:translate(1056px,1021.3px)}3%{opacity:1}62%{opacity:1}64%,100%{opacity:0;transform:translate(1056px,1021.3px)}}@keyframes bp11{0.00%{transform:translate(1789px,346.4px);opacity:0}31.32%{transform:translate(1112px,346.4px)}36.39%{transform:translate(1034px,424px)}64.00%{transform:translate(1034px,1021.3px)}3%{opacity:1}62%{opacity:1}64%,100%{opacity:0;transform:translate(1034px,1021.3px)}}@keyframes bp12{0.00%{transform:translate(982px,150px);opacity:0}64.00%{transform:translate(982px,1021.3px)}3%{opacity:1}62%{opacity:1}64%,100%{opacity:0;transform:translate(982px,1021.3px)}}@keyframes bp13{0.00%{transform:translate(1000px,80px);opacity:0}64.00%{transform:translate(1000px,1021.3px)}3%{opacity:1}62%{opacity:1}64%,100%{opacity:0;transform:translate(1000px,1021.3px)}}@keyframes bp14{0.00%{transform:translate(1018px,150px);opacity:0}64.00%{transform:translate(1018px,1021.3px)}3%{opacity:1}62%{opacity:1}64%,100%{opacity:0;transform:translate(1018px,1021.3px)}}@keyframes bp15{0.00%{transform:translate(850px,1310px);opacity:0}16.60%{transform:translate(850px,1257px)}56.48%{transform:translate(940px,1167px)}64.00%{transform:translate(940px,1143px)}3%{opacity:1}62%{opacity:1}64%,100%{opacity:0;transform:translate(940px,1143px)}}@keyframes bp16{0.00%{transform:translate(778px,1310px);opacity:0}7.41%{transform:translate(778px,1285px)}56.88%{transform:translate(896px,1167px)}64.00%{transform:translate(896px,1143px)}3%{opacity:1}62%{opacity:1}64%,100%{opacity:0;transform:translate(896px,1143px)}}@keyframes bp17{0.00%{transform:translate(1150px,1310px);opacity:0}16.60%{transform:translate(1150px,1257px)}56.48%{transform:translate(1060px,1167px)}64.00%{transform:translate(1060px,1143px)}3%{opacity:1}62%{opacity:1}64%,100%{opacity:0;transform:translate(1060px,1143px)}}@keyframes bp18{0.00%{transform:translate(1222px,1310px);opacity:0}7.41%{transform:translate(1222px,1285px)}56.88%{transform:translate(1104px,1167px)}64.00%{transform:translate(1104px,1143px)}3%{opacity:1}62%{opacity:1}64%,100%{opacity:0;transform:translate(1104px,1143px)}}</style></div><div class="ff-folder"><span class="ff-pool"></span><span class="ff-glow"></span><span class="ff-back"><nav class="ff-tab" aria-label="Folder path"><span class="crumb" aria-current="location">videos</span></nav></span><span class="ff-papers" aria-hidden="true"><img alt="" src="assets/ref/gus_poster1.webp" class="peep"><img alt="" src="assets/ref/gus_poster1.webp"><img alt="" src="assets/ref/gus_poster1.webp"></span><div class="ff-sky">
-        <button type="button" class="ff-item ff-dir" tabindex="0" data-tip="打开学历" data-ft="edu" style="--c: var(--banana); --i: 0; --x: -268.0px; --y: -118.0px; --r: -0.6deg;"><span class="d-back"></span><span class="d-paper" style="background:linear-gradient(180deg, #39D0C4, color-mix(in srgb, #39D0C4 55%, #101014))"></span><span class="d-front"><b>北京大学 · 本科</b><small>学历</small></span></button>
-        <button type="button" class="ff-item ff-dir" tabindex="0" data-tip="打开履历" data-ft="work" style="--c: var(--squish); --i: 0; --x: -186.0px; --y: -98.0px; --r: 1.1deg;"><span class="d-back"></span><span class="d-paper" style="background:linear-gradient(180deg, #7FA8FF, color-mix(in srgb, #7FA8FF 55%, #101014))"></span><span class="d-front"><b>AI 大厂从业者</b><small>履历</small></span></button>
-        <button type="button" class="ff-item ff-dir" tabindex="0" data-tip="打开勋章" data-ft="medal" style="--c: var(--taxi); --i: 0; --x: -95.0px; --y: -88.0px; --r: 4.3deg;"><span class="d-back"></span><span class="d-paper" style="background:linear-gradient(180deg, #E8B54A, color-mix(in srgb, #E8B54A 55%, #101014))"></span><span class="d-front"><b>高考数学 · 满分</b><small>勋章</small></span></button>
-        <button type="button" class="ff-item ff-dir" tabindex="0" data-tip="打开能力" data-ft="craft" style="--c: var(--night); --i: 0; --x: 0.0px; --y: -84.0px; --r: -2.7deg;"><span class="d-back"></span><span class="d-paper" style="background:linear-gradient(180deg, #8B7BE8, color-mix(in srgb, #8B7BE8 55%, #101014))"></span><span class="d-front"><b>Content × Product × Marketing</b><small>能力</small></span></button>
-        <button type="button" class="ff-item ff-dir" tabindex="0" data-tip="打开频道" data-ft="channel" style="--c: var(--banana); --i: 0; --x: 95.0px; --y: -88.0px; --r: 3.6deg;"><span class="d-back"></span><span class="d-paper" style="background:linear-gradient(180deg, #FF8FA3, color-mix(in srgb, #FF8FA3 55%, #101014))"></span><span class="d-front"><b>小红书 · 1147661654</b><small>频道</small></span></button>
-        <button type="button" class="ff-item ff-dir" tabindex="0" data-tip="关注" data-ft="focus" style="--c: var(--squish); --i: 0; --x: 186.0px; --y: -98.0px; --r: -1.1deg;"><span class="d-back"></span><span class="d-paper" style="background:linear-gradient(180deg, #5FC9A8, color-mix(in srgb, #5FC9A8 55%, #101014))"></span><span class="d-front"><b>AI / Models / Agents / Business</b><small>关注</small></span></button>
-        <button type="button" class="ff-item ff-dir" tabindex="0" data-tip="坐标" data-ft="motto" style="--c: var(--taxi); --i: 0; --x: 268.0px; --y: -118.0px; --r: 0.6deg;"><span class="d-back"></span><span class="d-paper" style="background:linear-gradient(180deg, #E8896B, color-mix(in srgb, #E8896B 55%, #101014))"></span><span class="d-front"><b>一头恋爱的犀牛，一位远征的伯爵</b><small>坐标</small></span></button>
-        <button type="button" class="ff-item ff-dir" tabindex="0" data-tip="主理人" data-ft="author" style="--c: var(--night); --i: 0; --x: 0.0px; --y: -134.0px; --r: 0.0deg;"><span class="d-back"></span><span class="d-paper" style="background:linear-gradient(180deg, #C9A0FF, color-mix(in srgb, #C9A0FF 55%, #101014))"></span><span class="d-front"><b>犀牛伯爵</b><small>主理人</small></span></button>
-      </div><button class="ff-front" type="button" aria-expanded="false" aria-label="身份档案，5 条身份 · 5 段视频" data-tip="Open the folder"><span class="ff-name"><b>身份档案</b>Identity Files</span><span class="ff-sub">8 identities · 8 files</span></button></div></div>
-      <div class="reel-list">
-                </div><div class="tree">
-      
-      
-      
-      
-      
-        <p class="vt-root"><svg class="ficon" viewBox="0 0 24 24" aria-hidden="true"><path class="back" d="M2.5 6.5a2 2 0 0 1 2-2h4.6l2 2.2h8.4a2 2 0 0 1 2 2v9.8a2 2 0 0 1-2 2h-15a2 2 0 0 1-2-2z"></path><path class="flap" d="M2.5 10a1.6 1.6 0 0 1 1.6-1.6h15.8a1.6 1.6 0 0 1 1.6 1.6v8.5a2 2 0 0 1-2 2h-15a2 2 0 0 1-2-2z"></path></svg><span class="fname">videos</span><span class="fcount">43</span></p>
-        <ul class="trunk">
-        <li><details class="branch banana" open=""><summary><svg class="ficon" viewBox="0 0 24 24" aria-hidden="true"><path class="back" d="M2.5 6.5a2 2 0 0 1 2-2h4.6l2 2.2h8.4a2 2 0 0 1 2 2v9.8a2 2 0 0 1-2 2h-15a2 2 0 0 1-2-2z"></path><path class="flap" d="M2.5 10a1.6 1.6 0 0 1 1.6-1.6h15.8a1.6 1.6 0 0 1 1.6 1.6v8.5a2 2 0 0 1-2 2h-15a2 2 0 0 1-2-2z"></path></svg><span class="fname">Banana FPS</span><span class="fcount">27</span></summary>
-          <ul class="reel">
-            <li style="--n: 0;"><details class="branch banana" open=""><summary><svg class="ficon" viewBox="0 0 24 24" aria-hidden="true"><path class="back" d="M2.5 6.5a2 2 0 0 1 2-2h4.6l2 2.2h8.4a2 2 0 0 1 2 2v9.8a2 2 0 0 1-2 2h-15a2 2 0 0 1-2-2z"></path><path class="flap" d="M2.5 10a1.6 1.6 0 0 1 1.6-1.6h15.8a1.6 1.6 0 0 1 1.6 1.6v8.5a2 2 0 0 1-2 2h-15a2 2 0 0 1-2-2z"></path></svg><span class="fname">Characters</span><span class="fcount">5</span></summary>
-              <ul class="reel">
-                <li style="--n: 0;"></li>
-                <li style="--n: 1;"></li>
-                <li style="--n: 2;"></li>
-                <li style="--n: 3;"></li>
-                <li style="--n: 4;"></li>
-              </ul>
-            </details></li>
-            <li style="--n: 1;"><details class="branch banana"><summary><svg class="ficon" viewBox="0 0 24 24" aria-hidden="true"><path class="back" d="M2.5 6.5a2 2 0 0 1 2-2h4.6l2 2.2h8.4a2 2 0 0 1 2 2v9.8a2 2 0 0 1-2 2h-15a2 2 0 0 1-2-2z"></path><path class="flap" d="M2.5 10a1.6 1.6 0 0 1 1.6-1.6h15.8a1.6 1.6 0 0 1 1.6 1.6v8.5a2 2 0 0 1-2 2h-15a2 2 0 0 1-2-2z"></path></svg><span class="fname">Features</span><span class="fcount">16</span></summary>
-              <ul class="reel">
-                <li style="--n: 0;"></li>
-                <li style="--n: 1;"></li>
-                <li style="--n: 2;"></li>
-                <li style="--n: 3;"></li>
-                <li style="--n: 4;"></li>
-                <li style="--n: 5;"></li>
-                <li style="--n: 6;"></li>
-                <li style="--n: 7;"></li>
-                <li style="--n: 8;"></li>
-                <li style="--n: 9;"></li>
-                <li style="--n: 10;"></li>
-                <li style="--n: 11;"></li>
-                <li style="--n: 12;"></li>
-                <li style="--n: 13;"></li>
-                <li style="--n: 14;"></li>
-                <li style="--n: 15;"></li>
-              </ul>
-            </details></li>
-            <li style="--n: 2;"><details class="branch banana"><summary><svg class="ficon" viewBox="0 0 24 24" aria-hidden="true"><path class="back" d="M2.5 6.5a2 2 0 0 1 2-2h4.6l2 2.2h8.4a2 2 0 0 1 2 2v9.8a2 2 0 0 1-2 2h-15a2 2 0 0 1-2-2z"></path><path class="flap" d="M2.5 10a1.6 1.6 0 0 1 1.6-1.6h15.8a1.6 1.6 0 0 1 1.6 1.6v8.5a2 2 0 0 1-2 2h-15a2 2 0 0 1-2-2z"></path></svg><span class="fname">Trailers</span><span class="fcount">6</span></summary>
-              <ul class="reel">
-                <li style="--n: 0;"></li>
-                <li style="--n: 1;"></li>
-                <li style="--n: 2;"></li>
-                <li style="--n: 3;"></li>
-                <li style="--n: 4;"></li>
-                <li style="--n: 5;"></li>
-              </ul>
-            </details></li>
-          </ul>
-        </details></li>
-        <li><details class="branch squish" open=""><summary><svg class="ficon" viewBox="0 0 24 24" aria-hidden="true"><path class="back" d="M2.5 6.5a2 2 0 0 1 2-2h4.6l2 2.2h8.4a2 2 0 0 1 2 2v9.8a2 2 0 0 1-2 2h-15a2 2 0 0 1-2-2z"></path><path class="flap" d="M2.5 10a1.6 1.6 0 0 1 1.6-1.6h15.8a1.6 1.6 0 0 1 1.6 1.6v8.5a2 2 0 0 1-2 2h-15a2 2 0 0 1-2-2z"></path></svg><span class="fname">Squishy Studio</span><span class="fcount">4</span></summary>
-          <ul class="reel">
-            <li style="--n: 0;"></li>
-            <li style="--n: 1;"></li>
-            <li style="--n: 2;"></li>
-            <li style="--n: 3;"></li>
-          </ul>
-        </details></li>
-        <li><details class="branch taxi" open=""><summary><svg class="ficon" viewBox="0 0 24 24" aria-hidden="true"><path class="back" d="M2.5 6.5a2 2 0 0 1 2-2h4.6l2 2.2h8.4a2 2 0 0 1 2 2v9.8a2 2 0 0 1-2 2h-15a2 2 0 0 1-2-2z"></path><path class="flap" d="M2.5 10a1.6 1.6 0 0 1 1.6-1.6h15.8a1.6 1.6 0 0 1 1.6 1.6v8.5a2 2 0 0 1-2 2h-15a2 2 0 0 1-2-2z"></path></svg><span class="fname">Robotaxi</span><span class="fcount">4</span></summary>
-          <ul class="reel">
-            <li style="--n: 0;"></li>
-            <li style="--n: 1;"></li>
-            <li style="--n: 2;"></li>
-            <li style="--n: 3;"></li>
-          </ul>
-        </details></li>
-        <li><details class="branch combat" open=""><summary><svg class="ficon" viewBox="0 0 24 24" aria-hidden="true"><path class="back" d="M2.5 6.5a2 2 0 0 1 2-2h4.6l2 2.2h8.4a2 2 0 0 1 2 2v9.8a2 2 0 0 1-2 2h-15a2 2 0 0 1-2-2z"></path><path class="flap" d="M2.5 10a1.6 1.6 0 0 1 1.6-1.6h15.8a1.6 1.6 0 0 1 1.6 1.6v8.5a2 2 0 0 1-2 2h-15a2 2 0 0 1-2-2z"></path></svg><span class="fname">QuickCombat</span><span class="fcount">1</span></summary>
-          <ul class="reel">
-            <li style="--n: 0;"></li>
-          </ul>
-        </details></li>
-        <li><details class="branch" open=""><summary><svg class="ficon" viewBox="0 0 24 24" aria-hidden="true"><path class="back" d="M2.5 6.5a2 2 0 0 1 2-2h4.6l2 2.2h8.4a2 2 0 0 1 2 2v9.8a2 2 0 0 1-2 2h-15a2 2 0 0 1-2-2z"></path><path class="flap" d="M2.5 10a1.6 1.6 0 0 1 1.6-1.6h15.8a1.6 1.6 0 0 1 1.6 1.6v8.5a2 2 0 0 1-2 2h-15a2 2 0 0 1-2-2z"></path></svg><span class="fname">Website</span><span class="fcount">1</span></summary>
-          <ul class="reel">
-            <li style="--n: 0;"></li>
-          </ul>
-        </details></li>
-        <li><details class="branch" open=""><summary><svg class="ficon" viewBox="0 0 24 24" aria-hidden="true"><path class="back" d="M2.5 6.5a2 2 0 0 1 2-2h4.6l2 2.2h8.4a2 2 0 0 1 2 2v9.8a2 2 0 0 1-2 2h-15a2 2 0 0 1-2-2z"></path><path class="flap" d="M2.5 10a1.6 1.6 0 0 1 1.6-1.6h15.8a1.6 1.6 0 0 1 1.6 1.6v8.5a2 2 0 0 1-2 2h-15a2 2 0 0 1-2-2z"></path></svg><span class="fname">WPMable</span><span class="fcount">1</span></summary>
-          <ul class="reel">
-            <li style="--n: 0;"></li>
-          </ul>
-        </details></li>
-        <li><details class="branch creek" open=""><summary><svg class="ficon" viewBox="0 0 24 24" aria-hidden="true"><path class="back" d="M2.5 6.5a2 2 0 0 1 2-2h4.6l2 2.2h8.4a2 2 0 0 1 2 2v9.8a2 2 0 0 1-2 2h-15a2 2 0 0 1-2-2z"></path><path class="flap" d="M2.5 10a1.6 1.6 0 0 1 1.6-1.6h15.8a1.6 1.6 0 0 1 1.6 1.6v8.5a2 2 0 0 1-2 2h-15a2 2 0 0 1-2-2z"></path></svg><span class="fname">Hell Creek</span><span class="fcount">1</span></summary>
-          <ul class="reel">
-            <li style="--n: 0;"></li>
-          </ul>
-        </details></li>
-        <li><details class="branch updraft" open=""><summary><svg class="ficon" viewBox="0 0 24 24" aria-hidden="true"><path class="back" d="M2.5 6.5a2 2 0 0 1 2-2h4.6l2 2.2h8.4a2 2 0 0 1 2 2v9.8a2 2 0 0 1-2 2h-15a2 2 0 0 1-2-2z"></path><path class="flap" d="M2.5 10a1.6 1.6 0 0 1 1.6-1.6h15.8a1.6 1.6 0 0 1 1.6 1.6v8.5a2 2 0 0 1-2 2h-15a2 2 0 0 1-2-2z"></path></svg><span class="fname">Updraft</span><span class="fcount">1</span></summary>
-          <ul class="reel">
-            <li style="--n: 0;"></li>
-          </ul>
-        </details></li>
-        <li><details class="branch zero" open=""><summary><svg class="ficon" viewBox="0 0 24 24" aria-hidden="true"><path class="back" d="M2.5 6.5a2 2 0 0 1 2-2h4.6l2 2.2h8.4a2 2 0 0 1 2 2v9.8a2 2 0 0 1-2 2h-15a2 2 0 0 1-2-2z"></path><path class="flap" d="M2.5 10a1.6 1.6 0 0 1 1.6-1.6h15.8a1.6 1.6 0 0 1 1.6 1.6v8.5a2 2 0 0 1-2 2h-15a2 2 0 0 1-2-2z"></path></svg><span class="fname">Zero to Gone</span><span class="fcount">1</span></summary>
-          <ul class="reel">
-            <li style="--n: 0;"></li>
-          </ul>
-        </details></li>
-        <li><details class="branch stuffed" open=""><summary><svg class="ficon" viewBox="0 0 24 24" aria-hidden="true"><path class="back" d="M2.5 6.5a2 2 0 0 1 2-2h4.6l2 2.2h8.4a2 2 0 0 1 2 2v9.8a2 2 0 0 1-2 2h-15a2 2 0 0 1-2-2z"></path><path class="flap" d="M2.5 10a1.6 1.6 0 0 1 1.6-1.6h15.8a1.6 1.6 0 0 1 1.6 1.6v8.5a2 2 0 0 1-2 2h-15a2 2 0 0 1-2-2z"></path></svg><span class="fname">STUFFED</span><span class="fcount">2</span></summary>
-          <ul class="reel">
-            <li style="--n: 0;"></li>
-            <li style="--n: 1;"></li>
-          </ul>
-        </details></li>
-        </ul>
+<div class="pf-stage" aria-label="Profile · 犀牛伯爵的八个侧面">
+      <div class="pf-horizon" aria-hidden="true"></div><div class="pf-floor" aria-hidden="true"></div>
+      <svg class="pf-traces" viewBox="0 0 1440 560" preserveAspectRatio="none" aria-hidden="true"><g fill="none" stroke-width="1.3"><path stroke="#72b7ad" d="M718 0V160L520 260V360L270 560M690 0V200L250 290V410L90 560M744 0V200L1070 290V410L1290 560"/><path stroke="#8b80b3" d="M708 0V240L430 330V430L350 560M734 0V180L900 290V430L1080 560"/></g><g fill="#a6ded3"><circle cx="520" cy="330" r="3"/><circle cx="250" cy="380" r="2"/><circle cx="1070" cy="370" r="3"/></g></svg>
+      <div class="pf-files" id="identity-files" inert>
+      <button class="pf-file" type="button" aria-expanded="false" data-profile-file="0" style="--col:0;--row:0;--mobile-col:0;--mobile-row:0;--i:0;--tone:#39766e;--angle:-3deg" aria-label="主理人：犀牛伯爵"><span class="pf-back"></span><span class="pf-paper" aria-hidden="true"><span class="pf-number">01</span><span class="pf-paper-rule"></span><span class="pf-stamp">RHINO COUNT</span></span><span class="pf-front"><b>主理人</b><span>犀牛伯爵</span></span></button><button class="pf-file" type="button" aria-expanded="false" data-profile-file="1" style="--col:1;--row:0;--mobile-col:1;--mobile-row:0;--i:1;--tone:#486581;--angle:2deg" aria-label="学历：北京大学 · 本科"><span class="pf-back"></span><span class="pf-paper" aria-hidden="true"><span class="pf-number">02</span><span class="pf-paper-rule"></span><span class="pf-stamp">RHINO COUNT</span></span><span class="pf-front"><b>学历</b><span>北京大学 · 本科</span></span></button><button class="pf-file" type="button" aria-expanded="false" data-profile-file="2" style="--col:2;--row:0;--mobile-col:0;--mobile-row:1;--i:2;--tone:#79704d;--angle:-2deg" aria-label="勋章：高考数学 · 满分"><span class="pf-back"></span><span class="pf-paper" aria-hidden="true"><span class="pf-number">03</span><span class="pf-paper-rule"></span><span class="pf-stamp">RHINO COUNT</span></span><span class="pf-front"><b>勋章</b><span>高考数学 · 满分</span></span></button><button class="pf-file" type="button" aria-expanded="false" data-profile-file="3" style="--col:3;--row:0;--mobile-col:1;--mobile-row:1;--i:3;--tone:#66577c;--angle:3deg" aria-label="履历：AI 大厂从业者"><span class="pf-back"></span><span class="pf-paper" aria-hidden="true"><span class="pf-number">04</span><span class="pf-paper-rule"></span><span class="pf-stamp">RHINO COUNT</span></span><span class="pf-front"><b>履历</b><span>AI 大厂从业者</span></span></button><button class="pf-file" type="button" aria-expanded="false" data-profile-file="4" style="--col:0;--row:1;--mobile-col:0;--mobile-row:2;--i:4;--tone:#3d787b;--angle:2deg" aria-label="关注：AI / Models / Agents / Business"><span class="pf-back"></span><span class="pf-paper" aria-hidden="true"><span class="pf-number">05</span><span class="pf-paper-rule"></span><span class="pf-stamp">RHINO COUNT</span></span><span class="pf-front"><b>关注</b><span>AI / Models / Agents / Business</span></span></button><button class="pf-file" type="button" aria-expanded="false" data-profile-file="5" style="--col:1;--row:1;--mobile-col:1;--mobile-row:2;--i:5;--tone:#70516b;--angle:-3deg" aria-label="能力：Content × Product × Marketing"><span class="pf-back"></span><span class="pf-paper" aria-hidden="true"><span class="pf-number">06</span><span class="pf-paper-rule"></span><span class="pf-stamp">RHINO COUNT</span></span><span class="pf-front"><b>能力</b><span>Content × Product × Marketing</span></span></button><a class="pf-file" href="notes/why-rhino-count.html" data-profile-file="6" style="--col:2;--row:1;--mobile-col:0;--mobile-row:3;--i:6;--tone:#526b61;--angle:3deg" aria-label="坐标：一头恋爱的犀牛，一位远征的伯爵"><span class="pf-back"></span><span class="pf-paper" aria-hidden="true"><span class="pf-number">07</span><span class="pf-paper-rule"></span><span class="pf-stamp">RHINO COUNT</span></span><span class="pf-front"><b>坐标</b><span>一头恋爱的犀牛，一位远征的伯爵</span></span></a><a class="pf-file" href="https://www.xiaohongshu.com/user/profile/60572004000000000101ce41" data-profile-file="7" style="--col:3;--row:1;--mobile-col:1;--mobile-row:3;--i:7;--tone:#547492;--angle:-2deg" aria-label="频道：小红书 · 1147661654"><span class="pf-back"></span><span class="pf-paper" aria-hidden="true"><span class="pf-number">08</span><span class="pf-paper-rule"></span><span class="pf-stamp">RHINO COUNT</span></span><span class="pf-front"><b>频道</b><span>小红书 · 1147661654 ↗</span></span></a>
       </div>
+      <div class="pf-root">
+        <span class="pf-root-back" aria-hidden="true"><span>profile</span></span>
+        <span class="pf-root-paper pf-root-paper-one" aria-hidden="true"><b>犀牛伯爵</b><span>THINK · BUILD · SHARE</span></span>
+        <span class="pf-root-paper pf-root-paper-two" aria-hidden="true"></span>
+        <button class="pf-root-front" type="button" aria-expanded="false" aria-controls="identity-files"><b>Profile</b><span>犀牛伯爵 · 8 个侧面</span></button>
+      </div>
+      <p class="pf-instruction" aria-live="polite">点击，或向上抽开文件夹</p>
     </div>
-  </section>
-    </section>
+</section>
     <section id="now">
           <div class="container">
             <div class="now-wrap fade-in">
@@ -6524,7 +6413,8 @@
       if (numEl) numEl.textContent = 'ISSUE ' + issueNum;
     })();
   </script>
-  <script src="data.js?v=20260910-picks"></script>
+  <script src="data.js?v=20261025"></script>
+  <script src="profile-folders.js?v=20261025"></script>
   <script src="builds-catalog.js?v=20260908"></script>
   <script>
     /* Fallback: force-show page after 3s if JS hasn't completed */
@@ -6690,12 +6580,7 @@
         `;
       }
 
-      /* Profile — guscastillo.com 设计迁移（2026-10）：巨幅名字 + 大编号行 + 视频注脚弹层 */
-      /* Profile：完全复用 guscastillo Videos 板块（静态原文） */
-
-      /* Journal：完全复用 jintao Works 板块（静态原文） */
-
-
+      window.RhinoProfile.init(D);
 
       /* Rhino Picks — 犀牛精选（首页限量展示 + 查看全部入口 + 平台筛选） */
       const pk = D.picks;
@@ -7573,187 +7458,6 @@
 
 
   <script>
-  /* ===== 完全复用板块交互 V2：视频播放器 + 软盘打印机 ===== */
-  (function () {
-    /* Profile 文件夹抽出（身份信息直接写在分支文件夹上） */
-    var P = document.getElementById('profile');
-    if (P) {
-      var ff = P.querySelector('.ff');
-      var front = P.querySelector('.ff-front');
-      if (front && ff) front.addEventListener('click', function () {
-        if (ff.hasAttribute('data-open')) ff.removeAttribute('data-open');
-        else ff.setAttribute('data-open', '');
-      });
-    }
-    })();
-  </script>
-
-  <script>
-  /* ===== guscastillo 文件夹引擎（原文移植）：动态电路板 + 扇形排布 ===== */
-  (function () {
-    var P = document.getElementById('profile');
-    if (!P) return;
-    var ff = P.querySelector('.ff');
-    if (!ff) return;
-    var folder = ff.querySelector('.ff-folder');
-    var bay = ff.querySelector('.ff-bay');
-    var board = bay ? bay.querySelector('.bay-floor') : null;
-    var traceSvg = board ? board.querySelector('svg') : null;
-    if (!board || !traceSvg) return;
-    var pulseKeys = document.createElement('style');
-    bay.appendChild(pulseKeys);
-    var front = ff.querySelector('.ff-front');
-
-    var jit = function (i) { var x = Math.sin(i * 12.9898 + 4.1414) * 43758.5453; return x - Math.floor(x); };
-    var clamp = function (v, a, b) { return Math.max(a, Math.min(b, v)); };
-
-    function drawBay() {
-      var PW = 2000, PH = 1300, P = 900, TILT = clamp(50 + (640 - ff.clientHeight) / 10, 50, 60), CX = PW / 2, SPEED = 330, TONES = ['banana', 'squish', 'taxi', 'night'];
-      var sin = Math.sin(TILT * Math.PI / 180), cos = Math.cos(TILT * Math.PI / 180);
-      var back = function (h) { return h * P / (P * cos - h * sin); };
-      var base = ff.clientHeight - folder.offsetTop - folder.offsetHeight;
-      var sBase = back(base), sEnd = back(base + Math.min(60, folder.offsetHeight * .3));
-      var Y = function (sv) { return +(PH - sv).toFixed(1); };
-      board.style.transform = 'perspective(' + P + 'px) rotateX(' + TILT + 'deg)';
-      bay.style.setProperty('--hz', (PH * cos * P / (P + PH * sin)).toFixed(1) + 'px');
-      bay.style.setProperty('--wc', (50 * P / (P + PH * sin)).toFixed(2) + 'px');
-      var T = [], chips = [];
-      for (var sideI = 0; sideI < 2; sideI++) for (var j = 0; j < 6; j++) {
-        var side = sideI ? 1 : -1;
-        var sv = sEnd + 70 + j * 110 + (side > 0 ? 45 : 0) + jit(j * 3 + side + 5) * 30;
-        var px = CX + side * (34 + (5 - j) * 22), k = 40 + jit(j + 9 + side) * 50;
-        var chip = j >= 1 && j <= 3, via = !chip && jit(j * 5 + side + 2) > .3;
-        var x0 = chip ? CX + side * 600 : via ? CX + side * (560 + jit(j * 7 + side * 2) * 300) : side < 0 ? -10 : PW + 10;
-        T.push({ pts: [[x0, Y(sv)], [px + side * k, Y(sv)], [px, Y(sv - k)], [px, Y(sEnd)]], tone: TONES[(j + (side > 0 ? 2 : 0)) % 4], via: via });
-        if (j === 2) chips.push({ x: side < 0 ? CX - 820 : CX + 600, y: Y(sv) - 170, w: 220, h: 340 });
-      }
-      [-1, 0, 1].forEach(function (j) { T.push({ pts: [[CX + j * 18, Y(PH - 80 - Math.abs(j) * 70)], [CX + j * 18, Y(sEnd)]], tone: TONES[j + 1], via: true }); });
-      for (var s2 = 0; s2 < 2; s2++) for (var j2 = 0; j2 < 2; j2++) {
-        var sd = s2 ? 1 : -1;
-        var x0b = CX + sd * (150 + j2 * 72), pxb = CX + sd * (60 + j2 * 44);
-        var s1 = Math.max(0, sBase - (x0b - pxb) * sd - 24);
-        T.push({ pts: [[x0b, PH + 10], [x0b, Y(s1)], [pxb, Y(Math.max(s1, sBase - 24))], [pxb, Y(sBase)]], tone: TONES[(j2 * 2 + (sd > 0 ? 1 : 0)) % 4], via: false });
-      }
-      var svg = '', keys = '';
-      for (var i = 0; i < 26; i++) {
-        var x = jit(i * 11 + 3) * PW, sv2 = sEnd + jit(i * 13 + 7) * (PH - sEnd - 60);
-        if (Math.abs(x - CX) > 300) svg += '<circle class="dot" cx="' + x.toFixed(0) + '" cy="' + Y(sv2) + '" r="5"/>';
-      }
-      chips.forEach(function (c) {
-        for (var q = c.y + 26; q < c.y + c.h - 16; q += 26) svg += '<path class="pin" d="M' + (c.x - 14) + ' ' + q + 'H' + c.x + 'M' + (c.x + c.w) + ' ' + q + 'H' + (c.x + c.w + 14) + '"/>';
-        svg += '<rect class="chip" x="' + c.x + '" y="' + c.y + '" width="' + c.w + '" height="' + c.h + '" rx="12"/><rect class="die" x="' + (c.x + 50) + '" y="' + (c.y + 90) + '" width="' + (c.w - 100) + '" height="' + (c.h - 180) + '" rx="6"/>';
-      });
-      T.forEach(function (t, i) {
-        var cls = ' class="t-' + t.tone + '"';
-        svg += '<path' + cls + ' d="M' + t.pts.map(function (p2) { return p2.join(' '); }).join('L') + '"/>';
-        if (t.via) svg += '<circle' + cls + ' cx="' + t.pts[0][0].toFixed(0) + '" cy="' + t.pts[0][1] + '" r="8"/>';
-        var seg = t.pts.slice(1).map(function (p2, k2) { return Math.hypot(p2[0] - t.pts[k2][0], p2[1] - t.pts[k2][1]); });
-        var len = seg.reduce(function (a, b) { return a + b; }, 0);
-        var RUN = 64, at = 0;
-        keys += '@keyframes bp' + i + '{' + t.pts.map(function (p2, k2) {
-          if (k2) at += seg[k2 - 1];
-          return (at / len * RUN).toFixed(2) + '%{transform:translate(' + p2[0].toFixed(0) + 'px,' + p2[1] + 'px)' + (k2 ? '' : ';opacity:0') + '}';
-        }).join('') + '3%{opacity:1}' + (RUN - 2) + '%{opacity:1}' + RUN + '%,100%{opacity:0;transform:translate(' + t.pts[t.pts.length - 1][0].toFixed(0) + 'px,' + t.pts[t.pts.length - 1][1] + 'px)}}';
-        t.dur = len / SPEED / (RUN / 100);
-      });
-      traceSvg.setAttribute('viewBox', '0 0 ' + PW + ' ' + PH);
-      traceSvg.innerHTML = svg;
-      pulseKeys.textContent = keys;
-      Array.prototype.forEach.call(board.querySelectorAll('.bay-pulse'), function (e) { e.remove(); });
-      T.forEach(function (t, i) {
-        var d = document.createElement('i');
-        d.className = 'bay-pulse t-' + t.tone;
-        d.style.animationName = 'bp' + i;
-        d.style.animationDuration = t.dur.toFixed(2) + 's';
-        d.style.animationDelay = (-jit(i * 17 + 1) * t.dur).toFixed(2) + 's';
-        board.appendChild(d);
-      });
-    }
-
-    /* —— 扇形排布（原文 layout/fit） —— */
-    var LIFT = 46, GAP = 14;
-    var els = Array.prototype.slice.call(ff.querySelectorAll('.ff-dir'));
-    var spread = 200;
-    function layout(sz) {
-      function pack(cap) {
-        var rows = [], row = [], w = 0;
-        sz.forEach(function (sw, i) {
-          if (row.length && (row.length >= cap || w + GAP + sw.w > spread * 2)) { rows.push({ row: row, w: w }); row = []; w = 0; }
-          row.push(i); w += (row.length > 1 ? GAP : 0) + sw.w;
-        });
-        if (row.length) rows.push({ row: row, w: w });
-        return rows;
-      }
-      var rows = pack(Infinity);
-      rows = pack(Math.ceil(sz.length / rows.length));
-      var out = [];
-      var y = -LIFT;
-      rows.forEach(function (r, ri) {
-        var h = Math.max.apply(null, r.row.map(function (i) { return sz[i].h; }));
-        var shift = (ri % 2 ? 1 : -1) * Math.min(14, spread * .08);
-        var x = -r.w / 2;
-        r.row.forEach(function (i) {
-          var j = jit(i + 5 * 7), hw = sz[i].w / 2;
-          out[i] = { x: clamp(x + hw + shift + (j - .5) * 8, -spread + hw, spread - hw), y: y - h / 2 - j * 6, r: 5 * (j * 2 - 1) };
-          x += sz[i].w + GAP;
-        });
-        y -= h + GAP;
-      });
-      return out;
-    }
-    function fit() {
-      spread = clamp(ff.clientWidth / 2 - 10, 120, 520);
-      var sizes = els.map(function (el) { return { w: el.offsetWidth, h: el.offsetHeight }; });
-      var pos = layout(sizes);
-      els.forEach(function (el, i) { place(el, pos[i]); });
-    }
-    function place(el, p2) {
-      el.style.setProperty('--x', p2.x.toFixed(1) + 'px');
-      el.style.setProperty('--y', p2.y.toFixed(1) + 'px');
-      el.style.setProperty('--r', p2.r.toFixed(2) + 'deg');
-    }
-    function redrawAll() { fit(); drawBay(); }
-    if (document.readyState === 'complete') redrawAll();
-    else window.addEventListener('load', redrawAll);
-    window.addEventListener('resize', redrawAll);
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { redrawAll(); });
-    /* 名字拆字 + hover 字母流光（JS 驱动，内联样式） */
-    var nameB = ff.querySelector('.ff-name');
-    if (nameB && !nameB.dataset.split) {
-      var baseColor = getComputedStyle(nameB).color;
-      var txt = nameB.textContent;
-      nameB.textContent = '';
-      var letterEls = [];
-      String(txt).split('').forEach(function (ch, i) {
-        var sp = document.createElement('span');
-        sp.textContent = ch;
-        sp.style.transition = 'color .35s ease, text-shadow .35s ease';
-        sp.style.color = baseColor;
-        letterEls.push(sp);
-        nameB.appendChild(sp);
-      });
-      var GLOW = ['#39D0C4', '#7FA8FF', '#E8B54A', '#FF8FA3', '#C9A0FF'];
-      nameB.dataset.split = '1';
-      nameB.parentElement.addEventListener('pointerenter', function () {
-        letterEls.forEach(function (sp, i) {
-          setTimeout(function () {
-            var c = GLOW[i % GLOW.length];
-            sp.style.color = c;
-            sp.style.textShadow = '0 0 .45em ' + c;
-          }, i * 45);
-        });
-      });
-      nameB.parentElement.addEventListener('pointerleave', function () {
-        letterEls.forEach(function (sp, i) {
-          setTimeout(function () { sp.style.color = baseColor; sp.style.textShadow = 'none'; }, i * 30);
-        });
-      });
-    }
-    if (front) front.addEventListener('click', function () {
-      [80, 300, 800, 1600].forEach(function (t) { setTimeout(redrawAll, t); });
-    });
-  })();
-
   /* ===== Signals 软盘打印机：左右切换 + 方向键 + 页码同步 ===== */
   (function () {
     var stage = document.querySelector('#notes .github-archive-stage');
