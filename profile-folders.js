@@ -5,11 +5,30 @@
   const colors = ['#39766e','#486581','#79704d','#66577c','#3d787b','#70516b','#526b61','#547492'];
   const identityKeys = ['主理人','学历','勋章','履历','关注','能力','坐标','频道'];
   const identities = data => identityKeys.map(k => data.profile.cells.find(c => c.k === k)).filter(Boolean);
+  function backdrop() {
+    const paths = [
+      ['#70b5ae','M690 245V354L595 402H230L155 460H70'],
+      ['#b8a55b','M708 245V388L650 443H244L170 530H42'],
+      ['#9b709e','M730 245V402L830 457H1165L1245 520H1400'],
+      ['#7192c0','M748 245V342L845 385H1200L1260 438H1370'],
+      ['#70b5ae','M695 420V540L565 610L495 780'],
+      ['#b8a55b','M720 450V566L650 630L625 780'],
+      ['#9b709e','M748 420V548L855 624L900 780'],
+      ['#bc925b','M770 450V565L965 690L1000 780']
+    ];
+    const rays = Array.from({length:35},(_,i)=>{const x=-800+i*90;return `<path d="M${720+(x-720)*.22} 230L${x} 780"/>`;}).join('');
+    const rows = [240,253,269,290,317,351,395,450,520,608,718,778].map(y=>`<path d="M0 ${y}H1440"/>`).join('');
+    return `<div class="pf-world" aria-hidden="true"><div class="pf-horizon"></div>
+      <svg class="pf-board" viewBox="0 0 1440 780" preserveAspectRatio="none"><defs><radialGradient id="pf-board-fade"><stop offset="20%" stop-color="white"/><stop offset="75%" stop-color="#aaa"/><stop offset="100%" stop-color="black"/></radialGradient><mask id="pf-board-mask"><rect width="1440" height="780" fill="url(#pf-board-fade)"/></mask></defs>
+      <g mask="url(#pf-board-mask)"><g class="pf-grid-lines" fill="none" stroke="#60799f" stroke-width="1">${rays}${rows}</g>
+      <g fill="none" stroke-width="1.7">${paths.map(([color,d],i)=>`<path stroke="${color}" opacity=".4" d="${d}"/><path class="pf-current" pathLength="100" stroke="${color}" d="${d}" style="--delay:-${i*1.7}s;--duration:${8+i%3*2}s"/>`).join('')}</g>
+      <g class="pf-chips" stroke="#546987" fill="#0b1019"><path d="M156 355H312L263 460H84Z"/><path d="M1180 370H1300L1384 480H1240Z"/><path d="M174 375H281L253 433H135Z"/><path d="M1208 391H1287L1329 452H1251Z"/></g>
+      <g fill="#8dacc8" opacity=".45">${[[320,510],[354,520],[390,510],[1080,555],[1110,555],[1060,575],[520,350],[895,365]].map(([x,y])=>`<ellipse cx="${x}" cy="${y}" rx="3" ry="1.5"/>`).join('')}</g></g></svg><div class="pf-ambient"></div></div>`;
+  }
   function profile(data) {
     const items = identities(data);
     return `<div class="pf-stage" aria-label="Profile · 犀牛伯爵的八个侧面">
-      <div class="pf-horizon" aria-hidden="true"></div><div class="pf-floor" aria-hidden="true"></div>
-      <svg class="pf-traces" viewBox="0 0 1440 560" preserveAspectRatio="none" aria-hidden="true"><g fill="none" stroke-width="1.3"><path stroke="#72b7ad" d="M718 0V160L520 260V360L270 560M690 0V200L250 290V410L90 560M744 0V200L1070 290V410L1290 560"/><path stroke="#8b80b3" d="M708 0V240L430 330V430L350 560M734 0V180L900 290V430L1080 560"/></g><g fill="#a6ded3"><circle cx="520" cy="330" r="3"/><circle cx="250" cy="380" r="2"/><circle cx="1070" cy="370" r="3"/></g></svg>
+      ${backdrop()}
       <div class="pf-files" id="identity-files" inert>
       ${items.map((c,i)=>{
         const href=c.href;
@@ -33,6 +52,17 @@
     const master = profileEl.querySelector('.pf-root-front');
     const rootFolder = profileEl.querySelector('.pf-root');
     const files = profileEl.querySelector('.pf-files');
+    // CSS animations stop outside the viewport; no continuous JavaScript render loop.
+    const visibility = new IntersectionObserver(([entry]) => scene.classList.toggle('is-visible', entry.isIntersecting));
+    visibility.observe(scene);
+    const motion = matchMedia('(prefers-reduced-motion: reduce)');
+    scene.addEventListener('pointermove', e => {
+      if (motion.matches || e.pointerType !== 'mouse') return;
+      const r = scene.getBoundingClientRect();
+      scene.style.setProperty('--look-x', ((e.clientX-r.left)/r.width-.5)*10+'px');
+      scene.style.setProperty('--look-y', ((e.clientY-r.top)/r.height-.5)*5+'px');
+    });
+    scene.addEventListener('pointerleave', () => {scene.style.setProperty('--look-x','0px');scene.style.setProperty('--look-y','0px');});
     let opened = false;
     function setOpen(value) {
       opened=value;

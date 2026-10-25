@@ -7,3 +7,4 @@
 - 实现与样式分别在 `profile-folders.js`、`profile-folders.css`，独立实现参考视觉。不要把参考站全站代码粘贴进首页。
 - 修改后运行 `node scripts/render-profile.mjs` 和 `node scripts/check-profile.mjs`；发布时自动同步与检查，避免静态首屏与交互后的内容不一致。
 - 验收 1440、1024、390 像素宽度；检查完整顺序、实际拖拽、展开/收起、小红书链接以及无视频。不要改动 Signals 或 Builds 来修复 Profile。
+- 背景采用统一消失线的透视网格、电路流光和轻微鼠标视差；离开视口时暂停循环动画，遵守 reduced-motion，不引入视频或重型渲染库。

@@ -1,0 +1,22 @@
+/* Signals is a single visual archive; the legacy duplicate card console is hidden.
+   Keep the computer near the top and use viewport-aware, bounded stage height. */
+#notes.jin{padding:28px 0 42px;scroll-margin-top:72px}
+#notes.jin .works-section{display:none}
+#notes.jin>.container{margin:0 auto!important;width:100%;max-width:1440px;padding:0 24px}
+#notes .github-archive-stage{height:clamp(640px,calc(100svh - 130px),820px);min-height:0}
+#notes .portable-computer{width:min(88%,1100px);top:-38px;left:-8%}
+#notes .floppy-coverflow{width:76%;height:620px;bottom:8px;right:-2%}
+@media(min-width:701px) and (max-width:1000px){
+  #notes .github-archive-stage{height:670px}
+  #notes .portable-computer{width:108%;left:-20%;top:-32px}
+  #notes .floppy-coverflow{width:91%;height:560px;right:-9%;bottom:8px}
+}
+@media(max-width:700px){
+  #notes.jin{padding:10px 0 28px}
+  #notes.jin>.container{padding:0 10px}
+  #notes .github-archive-stage{height:auto;padding:0 0 42px;min-height:0}
+  #notes .portable-computer{position:relative;width:min(110%,520px);max-width:none;left:50%;top:0;transform:translateX(-50%);margin:0}
+  #notes .floppy-coverflow{position:relative;width:min(100%,390px);height:345px;right:0;bottom:0;margin:-30px auto 0}
+}
+@media(min-width:701px){#notes .coverflow-next{right:110px}}
+@media(max-width:700px){#notes .coverflow-control{bottom:80px}}

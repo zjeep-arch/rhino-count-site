@@ -4,9 +4,17 @@
 /* Profile: full-bleed folder stage. Eight identity values, no video or detached title. */
 #profile.gc{padding:0;background:#070b11;min-height:calc(100svh - 72px)}
 .pf-stage{position:relative;width:100%;height:max(780px,calc(100svh - 72px));overflow:hidden;perspective:1100px;background:radial-gradient(ellipse at 50% 72%,#20383e66,transparent 57%),radial-gradient(ellipse at 50% 35%,#25203930,transparent 65%);color:#eef4f3}
-.pf-horizon{position:absolute;left:4%;right:4%;top:24%;height:38%;background:linear-gradient(#8aa1cb1a 1px,transparent 1px),linear-gradient(90deg,#8aa1cb1a 1px,transparent 1px);background-size:28px 28px;mask-image:linear-gradient(transparent,#000 75%);border-bottom:1px solid #91a6dd60;box-shadow:0 10px 20px -16px #96b7ff}
-.pf-floor{position:absolute;width:150%;left:-25%;height:80%;top:59%;transform:rotateX(65deg);transform-origin:top center;background:linear-gradient(#a3afca26 1px,transparent 1px),linear-gradient(90deg,#a3afca26 1px,transparent 1px);background-size:42px 42px;mask-image:radial-gradient(ellipse at 50% 5%,#000,transparent 66%)}
-.pf-traces{position:absolute;left:0;bottom:0;width:100%;height:48%;opacity:.5;filter:drop-shadow(0 0 5px #75b9ad77);pointer-events:none}
+/* One coherent horizon and circuit plane, inspired by the supplied reference. */
+.pf-world{position:absolute;inset:-6px;pointer-events:none;transform:translate3d(var(--look-x,0px),var(--look-y,0px),0);transition:transform .5s ease-out;mask-image:linear-gradient(#000 85%,transparent)}
+.pf-horizon{position:absolute;left:0;right:0;top:0;height:29.5%;background:linear-gradient(#708aaf20 1px,transparent 1px),linear-gradient(90deg,#708aaf20 1px,transparent 1px);background-size:28px 28px;border-bottom:1px solid #a2b8ec70;mask-image:radial-gradient(ellipse at 50% 100%,#000 10%,transparent 72%);box-shadow:0 7px 22px #7194e444}
+.pf-board{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.pf-grid-lines{opacity:.36}.pf-chips{stroke-width:1.4;opacity:.55}
+.pf-current{stroke-dasharray:3 97;stroke-linecap:round;filter:drop-shadow(0 0 3px currentColor);animation:pf-signal var(--duration) linear infinite;animation-delay:var(--delay);animation-play-state:paused;opacity:.85}
+.is-visible .pf-current{animation-play-state:running}
+.pf-ambient{position:absolute;inset:15% 5% 0;background:radial-gradient(ellipse at 50% 62%,#68b7bc15,transparent 43%);animation:pf-breathe 8s ease-in-out infinite;animation-play-state:paused}
+.is-visible .pf-ambient{animation-play-state:running}
+@keyframes pf-signal{from{stroke-dashoffset:100}to{stroke-dashoffset:0}}
+@keyframes pf-breathe{50%{opacity:.35}}
 .pf-root{position:absolute;width:330px;height:245px;left:calc(50% - 165px);bottom:115px;transform:translateY(var(--pull,0px));transition:bottom .65s cubic-bezier(.2,.8,.2,1);perspective:900px;z-index:20}
 .pf-root-back{position:absolute;inset:30px 8px 0;background:linear-gradient(115deg,#335b60,#464667);border:1px solid #8fb9ba55;border-radius:10px 15px 18px 18px;box-shadow:0 35px 55px #0008}
 .pf-root-back>span{position:absolute;left:-1px;top:-23px;background:#365b60;padding:5px 18px 8px;border-radius:9px 11px 0 0;font:11px ui-monospace,monospace;letter-spacing:.04em;color:#cce3de}
@@ -29,6 +37,7 @@
 .pf-instruction{position:absolute;bottom:45px;left:20px;right:20px;text-align:center;color:#809b9d;font:12px/1.8 var(--sans);letter-spacing:.05em;margin:0}
 @media(min-width:1500px){.pf-file{width:250px;height:185px}.is-open .pf-file{left:calc(50% - 535px + var(--col)*275px);top:calc(100px + var(--row)*225px)}.pf-front{top:65px}.pf-front>span{font-size:14px}}
 @media(max-width:1060px) and (min-width:701px){.pf-file{width:180px;height:160px}.is-open .pf-file{left:calc(50% - 380px + var(--col)*195px)}.pf-front{padding:12px}.pf-front>span{font-size:12px}.pf-front b{font-size:21px}}
-@media(max-width:700px){.pf-stage{height:1040px;min-height:calc(100svh - 72px)}.pf-file{width:calc(50vw - 38px);max-width:230px;height:154px}.is-open .pf-file{left:calc(50% - min(46vw,245px) + var(--mobile-col)*min(50vw,260px));top:calc(50px + var(--mobile-row)*173px)}.pf-front{inset:55px 0 0;padding:12px}.pf-front b{font-size:21px}.pf-front>span{font-size:12px;line-height:1.5;margin-top:7px}.pf-root{width:290px;height:215px;left:calc(50% - 145px);bottom:150px;transition:bottom .65s}.pf-root-front{inset:72px 0 0;padding:24px}.pf-root-front b{font-size:39px}.pf-root-paper{width:240px;left:25px;height:145px}.is-open .pf-root{bottom:75px;transform:translateY(var(--pull,0px)) scale(.8);transform-origin:bottom}.pf-horizon{top:15%;height:50%}.pf-floor{top:65%}.pf-instruction{bottom:27px;font-size:10px}.pf-stage:not(.is-open){height:calc(100svh - 72px);min-height:650px}}
+@media(max-width:700px){.pf-stage{height:1040px;min-height:calc(100svh - 72px)}.pf-file{width:calc(50vw - 38px);max-width:230px;height:154px}.is-open .pf-file{left:calc(50% - min(46vw,245px) + var(--mobile-col)*min(50vw,260px));top:calc(50px + var(--mobile-row)*173px)}.pf-front{inset:55px 0 0;padding:12px}.pf-front b{font-size:21px}.pf-front>span{font-size:12px;line-height:1.5;margin-top:7px}.pf-root{width:290px;height:215px;left:calc(50% - 145px);bottom:150px;transition:bottom .65s}.pf-root-front{inset:72px 0 0;padding:24px}.pf-root-front b{font-size:39px}.pf-root-paper{width:240px;left:25px;height:145px}.is-open .pf-root{bottom:75px;transform:translateY(var(--pull,0px)) scale(.8);transform-origin:bottom}.pf-horizon{top:0;height:29.5%}.pf-instruction{bottom:27px;font-size:10px}.pf-stage:not(.is-open){height:calc(100svh - 72px);min-height:650px}}
 @media(prefers-reduced-motion:reduce){.pf-stage *{transition:none!important;animation:none!important}}
 @media(min-width:701px){.is-open .pf-root{bottom:55px}.pf-instruction{bottom:20px}}
+@media(min-width:701px){.pf-stage:not(.is-open) .pf-root{bottom:clamp(115px,22svh,240px)}}
