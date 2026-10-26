@@ -1,46 +1,25 @@
 {
   "events": [
     {
-      "city": "San Jose",
-      "date_end": "2026-10-21",
-      "date_start": "2026-10-20",
+      "city": "Burlingame",
+      "date_end": "2026-10-29",
+      "date_start": "2026-10-27",
       "fit": {
         "free": false,
         "networking": true,
-        "note": "开发者生态，适合技术布道与 sponsor 展台",
+        "note": "virtual 通道可选；湾区本地场",
         "speak": true,
         "sponsor": true
       },
-      "highlights": "PyTorch 官方开发者大会，模型与推理生态核心人群聚集；AI 围栏技术布道与开发者关系的好场子。",
-      "name": "PyTorch Conference 2026",
-      "organizer": "PyTorch / Linux Foundation",
-      "scale": "",
-      "tags": [
-        "开发者生态"
-      ],
-      "url": "https://pytorch.org/event/pytorch-conference-2026/",
-      "venue": ""
-    },
-    {
-      "name": "ODSC AI West 2026",
-      "date_start": "2026-10-27",
-      "date_end": "2026-10-29",
-      "city": "Burlingame",
-      "venue": "",
-      "organizer": "ODSC",
-      "tags": [
-        "开发者生态"
-      ],
       "highlights": "数据科学/AI 实战大会西海岸站，含企业级展区与培训 track；湾区数据与 AI 工程人群聚集，设 virtual 通道。",
+      "name": "ODSC AI West 2026",
+      "organizer": "ODSC",
       "scale": "",
-      "fit": {
-        "sponsor": true,
-        "speak": true,
-        "free": false,
-        "networking": true,
-        "note": "virtual 通道可选；湾区本地场"
-      },
-      "url": "https://odsc.ai"
+      "tags": [
+        "开发者生态"
+      ],
+      "url": "https://odsc.ai",
+      "venue": ""
     },
     {
       "city": "San Francisco",
@@ -64,25 +43,25 @@
       "venue": ""
     },
     {
-      "name": "MLOps World | GenAI Summit 2026",
-      "date_start": "2026-11-16",
-      "date_end": "2026-11-18",
       "city": "Austin",
-      "venue": "",
+      "date_end": "2026-11-18",
+      "date_start": "2026-11-16",
+      "fit": {
+        "free": false,
+        "networking": true,
+        "note": "virtual 通道可选",
+        "speak": true,
+        "sponsor": true
+      },
+      "highlights": "MLOps 与 GenAI 落地实战大会，Agent 部署与评测议题集中；企业 ML 工程团队与厂商集中，设 virtual 通道。",
+      "name": "MLOps World | GenAI Summit 2026",
       "organizer": "",
+      "scale": "",
       "tags": [
         "开发者生态"
       ],
-      "highlights": "MLOps 与 GenAI 落地实战大会，Agent 部署与评测议题集中；企业 ML 工程团队与厂商集中，设 virtual 通道。",
-      "scale": "",
-      "fit": {
-        "sponsor": true,
-        "speak": true,
-        "free": false,
-        "networking": true,
-        "note": "virtual 通道可选"
-      },
-      "url": "https://mlopsworld.com"
+      "url": "https://mlopsworld.com",
+      "venue": ""
     },
     {
       "city": "San Francisco",
@@ -127,25 +106,25 @@
       "venue": "The Venetian 及 Strip 沿线场馆"
     },
     {
-      "name": "ODSC AI NYC 2026",
-      "date_start": "2026-12-02",
-      "date_end": "2026-12-03",
       "city": "New York",
-      "venue": "",
+      "date_end": "2026-12-03",
+      "date_start": "2026-12-02",
+      "fit": {
+        "free": false,
+        "networking": true,
+        "note": "东海岸数据团队场",
+        "speak": true,
+        "sponsor": true
+      },
+      "highlights": "ODSC 东海岸站，数据科学与 AI 实战；纽约金融/企业数据团队浓度高。",
+      "name": "ODSC AI NYC 2026",
       "organizer": "ODSC",
+      "scale": "",
       "tags": [
         "开发者生态"
       ],
-      "highlights": "ODSC 东海岸站，数据科学与 AI 实战；纽约金融/企业数据团队浓度高。",
-      "scale": "",
-      "fit": {
-        "sponsor": true,
-        "speak": true,
-        "free": false,
-        "networking": true,
-        "note": "东海岸数据团队场"
-      },
-      "url": "https://summit.ai"
+      "url": "https://summit.ai",
+      "venue": ""
     },
     {
       "city": "New York",
@@ -213,6 +192,27 @@
     },
     {
       "city": "San Francisco",
+      "date_end": "2027-02-25",
+      "date_start": "2027-02-25",
+      "fit": {
+        "free": false,
+        "networking": true,
+        "note": "首届；演讲征集已开放，部分圆桌为邀约制",
+        "speak": true,
+        "sponsor": true
+      },
+      "highlights": "首届 AI 平台团队大会，聚焦企业级 Agent 共享基础设施：网关与运行时、上下文与检索、评测门禁、Agent 身份与审计链；Agent 身份治理与可观测性议题与数美 Agent 安全方向高度对口。",
+      "name": "AgenticCon San Francisco 2027",
+      "organizer": "Weave Intelligence",
+      "scale": "",
+      "tags": [
+        "AI安全"
+      ],
+      "url": "https://weaveintelligence.io/blog/announcing-agenticcon-san-francisco",
+      "venue": "Convene 100 Stockton"
+    },
+    {
+      "city": "San Francisco",
       "date_end": "2027-03-05",
       "date_start": "2027-03-01",
       "fit": {
@@ -235,7 +235,7 @@
     {
       "city": "Las Vegas",
       "date_end": "2027-03-10",
-      "date_start": "2027-03-07",
+      "date_start": "2027-03-08",
       "fit": {
         "free": false,
         "networking": true,
@@ -319,25 +319,25 @@
       "venue": "Mandalay Bay Convention Center"
     },
     {
-      "name": "Confidential Computing Summit 2027",
-      "date_start": "2027-04-19",
-      "date_end": "2027-04-20",
       "city": "San Francisco",
-      "venue": "场地未公布",
+      "date_end": "2027-04-20",
+      "date_start": "2027-04-19",
+      "fit": {
+        "free": false,
+        "networking": true,
+        "note": "企业 AI/数据/安全负责人聚集",
+        "speak": true,
+        "sponsor": true
+      },
+      "highlights": "Linux Foundation 主办的机密计算峰会，聚焦安全 AI 部署；前届有展区（Microsoft、Intel、VMware、Arm 等参展），AI Trust & Safety 高贴合。",
+      "name": "Confidential Computing Summit 2027",
       "organizer": "Linux Foundation",
+      "scale": "",
       "tags": [
         "AI安全"
       ],
-      "highlights": "Linux Foundation 主办的机密计算峰会，聚焦安全 AI 部署；前届有展区（Microsoft、Intel、VMware、Arm 等参展），AI Trust & Safety 高贴合。",
-      "scale": "",
-      "fit": {
-        "sponsor": true,
-        "speak": true,
-        "free": false,
-        "networking": true,
-        "note": "企业 AI/数据/安全负责人聚集"
-      },
-      "url": "https://events.linuxfoundation.org/confidential-computing-summit/"
+      "url": "https://events.linuxfoundation.org/confidential-computing-summit/",
+      "venue": "场地未公布"
     },
     {
       "city": "Boston",
@@ -382,68 +382,68 @@
       "venue": "Bellagio"
     },
     {
-      "name": "ODSC AI East 2027",
-      "date_start": "2027-05-10",
-      "date_end": "2027-05-12",
       "city": "Boston",
-      "venue": "",
+      "date_end": "2027-05-12",
+      "date_start": "2027-05-10",
+      "fit": {
+        "free": false,
+        "networking": true,
+        "note": "virtual 通道可选",
+        "speak": true,
+        "sponsor": true
+      },
+      "highlights": "ODSC 东海岸站，含 AI X 高管峰会 + 展区；数据/AI 开发者与企业技术负责人聚集，设 virtual 通道。",
+      "name": "ODSC AI East 2027",
       "organizer": "ODSC",
+      "scale": "",
       "tags": [
         "开发者生态"
       ],
-      "highlights": "ODSC 东海岸站，含 AI X 高管峰会 + 展区；数据/AI 开发者与企业技术负责人聚集，设 virtual 通道。",
-      "scale": "",
-      "fit": {
-        "sponsor": true,
-        "speak": true,
-        "free": false,
-        "networking": true,
-        "note": "virtual 通道可选"
-      },
-      "url": "https://odsc.ai"
+      "url": "https://odsc.ai",
+      "venue": ""
     },
     {
-      "name": "Agent Conference 2027",
-      "date_start": "2027-05-17",
-      "date_end": "2027-05-18",
       "city": "New York",
-      "venue": "New York Hilton Midtown",
+      "date_end": "2027-05-18",
+      "date_start": "2027-05-17",
+      "fit": {
+        "free": false,
+        "networking": true,
+        "note": "演讲征集页面已上线，可投稿演讲",
+        "speak": true,
+        "sponsor": true
+      },
+      "highlights": "原 AI Agent Conference 更名；4000+ 参会 / 100+ 展商，十大主题含 Agentic Security（面向 CISOs），企业 Agent 落地与安全议题集中。",
+      "name": "Agent Conference 2027",
       "organizer": "",
+      "scale": "4000+ 参会 / 100+ 展商",
       "tags": [
         "AI安全"
       ],
-      "highlights": "原 AI Agent Conference 更名；4000+ 参会 / 100+ 展商，十大主题含 Agentic Security（面向 CISOs），企业 Agent 落地与安全议题集中。",
-      "scale": "4000+ 参会 / 100+ 展商",
-      "fit": {
-        "sponsor": true,
-        "speak": true,
-        "free": false,
-        "networking": true,
-        "note": "演讲征集页面已上线，可投稿演讲"
-      },
-      "url": "https://www.agentconference.com/call-for-proposals"
+      "url": "https://www.agentconference.com/call-for-proposals",
+      "venue": "New York Hilton Midtown"
     },
     {
-      "name": "AI+ Expo 2027",
-      "date_start": "2027-05-24",
-      "date_end": "2027-05-25",
       "city": "Washington, D.C.",
-      "venue": "",
+      "date_end": "2027-05-25",
+      "date_start": "2027-05-24",
+      "fit": {
+        "free": false,
+        "networking": true,
+        "note": "联邦与产业双轨；展区规模大",
+        "speak": true,
+        "sponsor": true
+      },
+      "highlights": "SCSP 主办的 AI 技术博览，1.8万+ 参会 / 200+ 展商，含 Cybersecurity / National Security Technology 分支，联邦与产业双轨人群。",
+      "name": "AI+ Expo 2027",
       "organizer": "SCSP",
+      "scale": "1.8万+ 参会 / 200+ 展商",
       "tags": [
         "头部科技大会",
         "AI安全"
       ],
-      "highlights": "SCSP 主办的 AI 技术博览，1.8万+ 参会 / 200+ 展商，含 Cybersecurity / National Security Technology 分支，联邦与产业双轨人群。",
-      "scale": "1.8万+ 参会 / 200+ 展商",
-      "fit": {
-        "sponsor": true,
-        "speak": true,
-        "free": false,
-        "networking": true,
-        "note": "联邦与产业双轨；展区规模大"
-      },
-      "url": "http://expo.scsp.ai"
+      "url": "http://expo.scsp.ai",
+      "venue": ""
     },
     {
       "city": "New York",
@@ -467,68 +467,68 @@
       "venue": "全城去中心化场地"
     },
     {
-      "name": "AI & Big Data Expo North America 2027",
-      "date_start": "2027-06-16",
-      "date_end": "2027-06-17",
       "city": "San Jose",
-      "venue": "McEnery Convention Center",
+      "date_end": "2027-06-17",
+      "date_start": "2027-06-16",
+      "fit": {
+        "free": false,
+        "networking": true,
+        "note": "企业买家浓度高",
+        "speak": true,
+        "sponsor": true
+      },
+      "highlights": "企业 AI 展销会（TechEx 系列），AI 落地与数据平台议题为主；湾区企业买家与厂商集中。",
+      "name": "AI & Big Data Expo North America 2027",
       "organizer": "TechEx",
+      "scale": "",
       "tags": [
         "开发者生态"
       ],
-      "highlights": "企业 AI 展销会（TechEx 系列），AI 落地与数据平台议题为主；湾区企业买家与厂商集中。",
-      "scale": "",
-      "fit": {
-        "sponsor": true,
-        "speak": true,
-        "free": false,
-        "networking": true,
-        "note": "企业买家浓度高"
-      },
-      "url": "https://www.ai-expo.net"
+      "url": "https://www.ai-expo.net",
+      "venue": "McEnery Convention Center"
     },
     {
-      "name": "QCon AI Boston 2027",
-      "date_start": "2027-07-08",
-      "date_end": "2027-07-09",
       "city": "Boston",
-      "venue": "Boston University",
+      "date_end": "2027-07-09",
+      "date_start": "2027-07-08",
+      "fit": {
+        "free": false,
+        "networking": true,
+        "note": "工程师浓度高",
+        "speak": true,
+        "sponsor": true
+      },
+      "highlights": "InfoQ 旗下 AI 技术大会，议程含 zero-trust agent security；工程师浓度高，AI 安全议题对口。",
+      "name": "QCon AI Boston 2027",
       "organizer": "C4Media (InfoQ/QCon)",
+      "scale": "",
       "tags": [
         "AI安全",
         "开发者生态"
       ],
-      "highlights": "InfoQ 旗下 AI 技术大会，议程含 zero-trust agent security；工程师浓度高，AI 安全议题对口。",
-      "scale": "",
-      "fit": {
-        "sponsor": true,
-        "speak": true,
-        "free": false,
-        "networking": true,
-        "note": "工程师浓度高"
-      },
-      "url": "https://boston.qcon.ai"
+      "url": "https://boston.qcon.ai",
+      "venue": "Boston University"
     },
     {
-      "name": "Creator Economy Live East 2027",
-      "date_start": "2027-07-28",
-      "date_end": "2027-07-28",
       "city": "New York",
-      "venue": "",
+      "date_end": "2027-07-28",
+      "date_start": "2027-07-28",
+      "fit": {
+        "free": false,
+        "networking": true,
+        "note": "品牌主导的 B2B 场",
+        "speak": true,
+        "sponsor": true
+      },
+      "highlights": "品牌主导的创作者经济 B2B 大会（单日），500+ 品牌 / 50+ 演讲者；广告主与平台方集中，内容安全场景触点多。",
+      "name": "Creator Economy Live East 2027",
       "organizer": "Creator Economy Live",
+      "scale": "500+ 品牌 / 50+ 演讲者",
       "tags": [
         "创作者经济"
       ],
-      "highlights": "品牌主导的创作者经济 B2B 大会（单日），500+ 品牌 / 50+ 演讲者；广告主与平台方集中，内容安全场景触点多。",
-      "scale": "500+ 品牌 / 50+ 演讲者",
-      "fit": {
-        "sponsor": true,
-        "speak": true,
-        "free": false,
-        "networking": true,
-        "note": "品牌主导的 B2B 场"
-      },
-      "url": "https://www.creatoreconomylive.com/east"
+      "url": "https://www.creatoreconomylive.com/east",
+      "venue": ""
     },
     {
       "city": "Las Vegas",
@@ -552,69 +552,90 @@
       "venue": "Mandalay Bay Convention Center"
     },
     {
-      "name": "Ai4 2027",
-      "date_start": "2027-08-02",
-      "date_end": "2027-08-05",
       "city": "Las Vegas",
-      "venue": "The Venetian",
+      "date_end": "2027-08-05",
+      "date_start": "2027-08-02",
+      "fit": {
+        "free": false,
+        "networking": true,
+        "note": "AI 产业展销旗舰；展区规模大",
+        "speak": true,
+        "sponsor": true
+      },
+      "highlights": "北美最大 AI 产业大会之一，含 AI Policy Summit；企业买家集中，展区与赞助通道规模大。",
+      "name": "Ai4 2027",
       "organizer": "CloserStill / Ai4",
+      "scale": "",
       "tags": [
         "头部科技大会"
       ],
-      "highlights": "北美最大 AI 产业大会之一，含 AI Policy Summit；企业买家集中，展区与赞助通道规模大。",
-      "scale": "",
-      "fit": {
-        "sponsor": true,
-        "speak": true,
-        "free": false,
-        "networking": true,
-        "note": "AI 产业展销旗舰；展区规模大"
-      },
-      "url": "https://ai4.com"
+      "url": "https://ai4.com",
+      "venue": "The Venetian"
     },
     {
-      "name": "Agentic AI Summit 2027",
-      "date_start": "2027-08-20",
-      "date_end": "2027-08-21",
       "city": "San Francisco",
-      "venue": "",
+      "date_end": "2027-08-21",
+      "date_start": "2027-08-20",
+      "fit": {
+        "free": false,
+        "networking": true,
+        "note": "Agent 安全/治理议题显著",
+        "speak": true,
+        "sponsor": true
+      },
+      "highlights": "伯克利 RDI 主办的 Agentic AI 峰会，2026 届约 4000 人现场；Agent 安全与治理议题显著，AI 研究与产业交叉人群。",
+      "name": "Agentic AI Summit 2027",
       "organizer": "RDI Foundation & Berkeley RDI",
+      "scale": "约4000 人现场（2026 届）",
       "tags": [
         "AI安全"
       ],
-      "highlights": "伯克利 RDI 主办的 Agentic AI 峰会，2026 届约 4000 人现场；Agent 安全与治理议题显著，AI 研究与产业交叉人群。",
-      "scale": "约4000 人现场（2026 届）",
-      "fit": {
-        "sponsor": true,
-        "speak": true,
-        "free": false,
-        "networking": true,
-        "note": "Agent 安全/治理议题显著"
-      },
-      "url": "https://rdi.berkeley.edu/events/agentic-ai-summit-2027"
+      "url": "https://rdi.berkeley.edu/events/agentic-ai-summit-2027",
+      "venue": ""
     },
     {
-      "name": "National Cyber Summit 2027",
-      "date_start": "2027-09-21",
-      "date_end": "2027-09-23",
       "city": "Huntsville",
-      "venue": "Von Braun Center",
+      "date_end": "2027-09-23",
+      "date_start": "2027-09-21",
+      "fit": {
+        "free": false,
+        "networking": true,
+        "note": "展区 + 撮合会面",
+        "speak": true,
+        "sponsor": true
+      },
+      "highlights": "网络安全展销大会，含展区与撮合会面；美国南方安全产业人群聚集。",
+      "name": "National Cyber Summit 2027",
       "organizer": "",
+      "scale": "",
       "tags": [
         "AI安全"
       ],
-      "highlights": "网络安全展销大会，含展区与撮合会面；美国南方安全产业人群聚集。",
-      "scale": "",
+      "url": "https://www.nationalcybersummit.com/",
+      "venue": "Von Braun Center"
+    },
+    {
+      "city": "San Jose",
+      "date_end": "2027-10-07",
+      "date_start": "2027-10-06",
       "fit": {
-        "sponsor": true,
-        "speak": true,
         "free": false,
         "networking": true,
-        "note": "展区 + 撮合会面"
+        "note": "2027 官网事件页未上线，暂用官方博客公告链接，待替换",
+        "speak": true,
+        "sponsor": true
       },
-      "url": "https://www.nationalcybersummit.com/"
+      "highlights": "PyTorch 官方开发者大会 2027 届，官方博客已公布档期回归 San Jose；开源 AI 生态（PyTorch / vLLM / DeepSpeed / Ray 等）核心人群聚集。",
+      "name": "PyTorch Conference 2027",
+      "organizer": "PyTorch / Linux Foundation",
+      "scale": "",
+      "tags": [
+        "开发者生态"
+      ],
+      "url": "https://pytorch.org/blog/pytorch-conference-north-america-2026-accelerating-open-intelligence-together/",
+      "venue": ""
     }
   ],
   "update_cycle": "weekly",
-  "updated_at": "2026-10-19"
+  "updated_at": "2026-10-26"
 }
