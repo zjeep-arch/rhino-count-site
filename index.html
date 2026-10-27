@@ -6235,7 +6235,7 @@
         <div class="container manifesto-container">
           <div class="quote-mark" aria-hidden="true" style="">“</div>
           <div class="manifesto-kicker">A WORKING PRINCIPLE <span>工作方式</span></div>
-          <blockquote class="pull" style="">输出不是作品的全部。真正的工作，发生在观察、判断、拆解和反复迭代里。</blockquote>
+          <blockquote class="pull" style="">输出不是作品的全部。真正的工作，<br class="manifesto-break">发生在观察、判断、拆解和反复迭代里。</blockquote>
           <div class="quote-attr" style="">— 犀牛伯爵 · 2026</div>
         </div>
       </section>
@@ -6675,11 +6675,12 @@
 
       /* Quote */
       const q = D.quote;
+      const quoteText = esc(q.text).replace('真正的工作，发生在', '真正的工作，<br class="manifesto-break">发生在');
       document.getElementById('manifesto').innerHTML = `
         <div class="container manifesto-container">
           <div class="quote-mark" aria-hidden="true">\u201C</div>
           <div class="manifesto-kicker">A WORKING PRINCIPLE <span>工作方式</span></div>
-          <blockquote class="pull">${esc(q.text)}</blockquote>
+          <blockquote class="pull">${quoteText}</blockquote>
           <div class="quote-attr">${esc(q.attr)}</div>
         </div>
       `;
