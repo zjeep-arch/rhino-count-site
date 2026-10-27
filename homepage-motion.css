@@ -33,3 +33,13 @@ body{background:#0b1011}
 .motion-ready .motion-reveal.is-revealed{opacity:1;transform:none}
 @media(max-width:700px){.motion-ready .motion-reveal{transform:translateY(10px);transition-duration:.55s}.editorial-portrait{box-shadow:none}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.motion-ready .motion-reveal{opacity:1;transform:none;transition:none}.editorial-portrait img,.editorial-portrait video,.editorial-index a:after{transition:none}}
+/* Blend the portrait video into the same muted green-black environment. */
+.editorial-portrait{isolation:isolate;background:#111b1b}
+.editorial-portrait img,.editorial-portrait video{filter:saturate(.42) brightness(.82) sepia(.08)}
+.editorial-portrait::after{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(110deg,rgba(23,50,43,.32),transparent 43%),linear-gradient(0deg,rgba(8,17,16,.45),transparent 48%),radial-gradient(ellipse at center,transparent 36%,rgba(10,24,21,.35) 100%);mix-blend-mode:normal}
+.editorial-portrait figcaption{z-index:2}
+@media(hover:hover){.editorial-portrait:hover img,.editorial-portrait:hover video{filter:saturate(.48) brightness(.86) sepia(.07)}}
+/* Localized response follows the cursor, with the original text retained for assistive technology. */
+.rh-char,.editorial-intro h1 .rh-char{display:inline-block;color:inherit;transition:color .48s ease,text-shadow .48s ease,transform .48s cubic-bezier(.2,.8,.2,1)}
+.rh-char.rh-lit,.editorial-intro h1 .rh-char.rh-lit{color:#c8f3e5;text-shadow:0 0 .32em rgba(144,224,200,.64),0 0 .08em rgba(205,255,240,.8);transform:translateY(-.035em);transition-duration:.12s}
+@media(prefers-reduced-motion:reduce){.rh-char{transition:none!important}.rh-char.rh-lit{color:inherit;text-shadow:none;transform:none}}
