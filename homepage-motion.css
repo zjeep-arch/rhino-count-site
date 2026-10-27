@@ -1,0 +1,35 @@
+/* A shared, quiet visual rhythm across the site's distinctive scenes. */
+:root{--rhino-accent:#a9d6ca;--rhino-muted:#9baaaa;--rhino-line:rgba(190,218,208,.16);--rhino-ease:cubic-bezier(.22,1,.36,1)}
+html{scroll-behavior:smooth}
+body{background:#0b1011}
+#hero-section.hero{background:radial-gradient(ellipse at 73% 35%,rgba(102,151,145,.075),transparent 44%),#0b1011}
+#now{background:linear-gradient(120deg,#111a19,#111719 70%)}
+#notes.jin{background:radial-gradient(ellipse at 47% 26%,rgba(115,152,137,.09),transparent 48%),#171b19}
+#picks{background:linear-gradient(180deg,#0c1112,#0f1515)}
+#builds{background:radial-gradient(ellipse at 12% 30%,rgba(96,149,138,.065),transparent 45%),#111719}
+#daily{background:linear-gradient(130deg,#101818,#0c1112)}
+#manifesto{background:linear-gradient(120deg,#151c1b,#111719)}
+#contact{background:#0c1112}
+#profile.gc{background:#090f13}
+.pf-stage{background:radial-gradient(ellipse at 50% 68%,#284b464d,transparent 55%),radial-gradient(ellipse at 50% 30%,#202b3938,transparent 62%)}
+.site-header{border-bottom:1px solid var(--rhino-line)}
+.nav-links a,.editorial-textlink,.editorial-index a,.reading-card h3,.reading-link,.pick-card h3,.follow-item,.lab-link,.contact-channel,.coverflow-control,.btn{transition:color .28s ease,background-color .28s ease,border-color .28s ease,box-shadow .28s ease,opacity .28s ease}
+.nav-links a:hover,.editorial-index a:hover,.editorial-textlink:hover,.reading-card:hover h3,.pick-card:hover h3,.follow-item:hover strong,.lab-card:hover .lab-link{color:#d6eee6}
+.editorial-textlink:hover{border-color:var(--rhino-accent)}
+.editorial-index a{position:relative}.editorial-index a:after{content:'';position:absolute;bottom:-1px;left:0;width:0;height:1px;background:var(--rhino-accent);transition:width .45s var(--rhino-ease)}.editorial-index a:hover:after,.editorial-index a:focus-visible:after{width:80%}
+.editorial-portrait{box-shadow:0 22px 70px -45px rgba(103,198,182,.4);transition:border-color .4s ease,box-shadow .4s ease}
+.editorial-portrait:hover{border-color:rgba(169,214,202,.45);box-shadow:0 28px 85px -42px rgba(103,198,182,.45)}
+.editorial-portrait img,.editorial-portrait video{transition:filter .6s ease,transform .8s var(--rhino-ease)}
+@media(hover:hover){.editorial-portrait:hover img,.editorial-portrait:hover video{filter:saturate(.7) brightness(.86);transform:scale(1.025)}}
+.reading-card{position:relative;transition:border-color .3s ease}.reading-card:hover,.reading-card:focus-visible{border-color:var(--rhino-accent)}
+.reading-link{display:inline-block;transition:color .3s ease,letter-spacing .3s ease}.reading-card:hover .reading-link{color:#d6eee6;letter-spacing:.025em}
+.pick-card{transition:border-color .3s ease}.pick-card:hover{border-color:var(--rhino-accent)}
+.lab-card{transition:border-color .3s ease,box-shadow .3s ease}.lab-card:hover{border-color:rgba(169,214,202,.55);box-shadow:0 16px 40px -30px rgba(128,202,186,.36)}
+.lab-hero-cover,.lab-med-cover{transition:filter .5s ease}.lab-card:hover .lab-hero-cover,.lab-card:hover .lab-med-cover{filter:brightness(1.12)}
+#notes .coverflow-control:hover{filter:brightness(1.1)}
+.contact-channel:hover{border-color:var(--rhino-accent);background:rgba(169,214,202,.07)}
+/* Reveal is progressive enhancement; static pages remain readable without JS. */
+.motion-ready .motion-reveal{opacity:0;transform:translateY(16px);transition:opacity .7s var(--rhino-ease),transform .7s var(--rhino-ease);transition-delay:var(--reveal-delay,0ms)}
+.motion-ready .motion-reveal.is-revealed{opacity:1;transform:none}
+@media(max-width:700px){.motion-ready .motion-reveal{transform:translateY(10px);transition-duration:.55s}.editorial-portrait{box-shadow:none}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.motion-ready .motion-reveal{opacity:1;transform:none;transition:none}.editorial-portrait img,.editorial-portrait video,.editorial-index a:after{transition:none}}
