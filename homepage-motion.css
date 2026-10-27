@@ -43,3 +43,20 @@ body{background:#0b1011}
 .rh-char,.editorial-intro h1 .rh-char{display:inline-block;color:inherit;transition:color .48s ease,text-shadow .48s ease,transform .48s cubic-bezier(.2,.8,.2,1)}
 .rh-char.rh-lit,.editorial-intro h1 .rh-char.rh-lit{color:#c8f3e5;text-shadow:0 0 .32em rgba(144,224,200,.64),0 0 .08em rgba(205,255,240,.8);transform:translateY(-.035em);transition-duration:.12s}
 @media(prefers-reduced-motion:reduce){.rh-char{transition:none!important}.rh-char.rh-lit{color:inherit;text-shadow:none;transform:none}}
+
+/* Restore the cinematic full-bleed hero video while keeping the current editorial copy. */
+#hero-section.hero{position:relative;display:block;min-height:100svh!important;height:auto;padding:0!important;overflow:hidden;background:#04060a!important;isolation:isolate}
+#hero-section .editorial-hero{position:relative;z-index:3;display:flex;align-items:center;min-height:calc(100svh - 86px);padding-top:110px;padding-bottom:130px;pointer-events:none}
+#hero-section .editorial-intro{max-width:720px;pointer-events:auto}
+#hero-section .editorial-eyebrow{color:#c3d8ce;text-shadow:0 1px 18px #000}
+#hero-section .editorial-intro h1{color:#f2f1eb;text-shadow:0 2px 24px rgba(0,0,0,.55)}
+#hero-section .editorial-intro h1 span{color:#c4ddd0}
+#hero-section .editorial-deck,#hero-section .editorial-credentials{color:#e0e3dc;text-shadow:0 1px 14px rgba(0,0,0,.85)}
+#hero-section .editorial-portrait{position:absolute;z-index:0;inset:0;margin:0;min-height:0;border:0;border-radius:0;background:#111b1b;overflow:hidden;box-shadow:none;pointer-events:none}
+#hero-section .editorial-portrait img,#hero-section .editorial-portrait video{width:100%;height:100%;object-fit:cover;object-position:center 38%;filter:saturate(.72) brightness(.68);transform:none}
+#hero-section .editorial-portrait::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(4,8,9,.82) 0%,rgba(4,8,9,.62) 34%,rgba(4,8,9,.18) 72%,rgba(4,8,9,.12) 100%),linear-gradient(0deg,rgba(4,8,9,.82) 0%,transparent 38%,rgba(4,8,9,.18) 100%);pointer-events:none}
+#hero-section .editorial-portrait figcaption{z-index:2;left:auto;right:clamp(24px,5vw,76px);bottom:100px;width:auto;padding:0;background:none;color:#e0e3dc;gap:20px;text-shadow:0 1px 12px #000;pointer-events:auto}
+#hero-section .editorial-index{position:absolute;z-index:3;left:50%;bottom:0;transform:translateX(-50%);width:min(100%,1240px);padding-inline:40px;border-color:rgba(230,238,232,.24);pointer-events:auto}
+#hero-section .editorial-index a{color:#e0e3dc;text-shadow:0 1px 12px #000}
+@media(max-width:700px){#hero-section.hero{min-height:100svh!important;padding:0!important}#hero-section .editorial-hero{min-height:calc(100svh - 76px);padding-top:125px;padding-bottom:150px}#hero-section .editorial-intro{max-width:100%}#hero-section .editorial-intro h1{font-size:clamp(30px,8vw,42px)}#hero-section .editorial-deck{max-width:34ch}#hero-section .editorial-portrait img,#hero-section .editorial-portrait video{object-position:62% center}#hero-section .editorial-portrait::after{background:linear-gradient(90deg,rgba(4,8,9,.66),rgba(4,8,9,.12)),linear-gradient(0deg,rgba(4,8,9,.86),transparent 48%,rgba(4,8,9,.24))}#hero-section .editorial-portrait figcaption{right:22px;bottom:124px}#hero-section .editorial-index{padding-inline:22px;grid-template-columns:repeat(2,1fr)}#hero-section .editorial-index a{padding:12px 0;font-size:12px}}
+@media(prefers-reduced-motion:reduce){#hero-section .editorial-motion{display:none}}
