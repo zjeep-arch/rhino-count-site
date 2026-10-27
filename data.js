@@ -127,6 +127,13 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "马斯克警告，200 多家 AI 云公司要“小鱼式死亡”",
+        desc: "马斯克发帖称债市关闭了对数据中心之外无实质收入公司的融资，SpaceX 同日拿到 400 亿美元 GPU 债。Gartner 预测 2030 年前 80% 以上的 neocloud 停止独立运营。判断：AI 基建进入信用分化阶段，钱按数据中心之外的收入分配。本周破圈实验位。",
+        href: "notes/2026-10-27-musk-neocloud-guppy.html"
+      },
+
+      {
+        type: "Essay",
         title: "马斯克说，以后的钱要按瓦特算",
         desc: "人物转译：马斯克在 Isaacson 新播客说货币将按瓦特、吨位计价，只有 AI 和机器人能解 40 万亿美元国债。二十年失败史撑起他的方向感，跳票记录提醒时间表打折。周日破圈实验位，与黄仁勋篇同属能源母题。",
         href: "notes/2026-10-25-musk-watt-currency.html"
@@ -646,6 +653,13 @@ window.SITE_DATA = {
         excerpt: "名字来自两部作品：恋爱的犀牛教我不计成败地热爱，基督山伯爵教我不动声色地等待。2022年底ChatGPT像一头灰犀牛从地平线走来，Count就是把它的轨迹从噪音里算出来——然后与各位同行者一起远征。",
         img: "assets/note-05.svg",
         href: "notes/why-rhino-count.html"
+      },
+      {
+        cat: "观察", num: "N° 143",
+        title: "马斯克警告，200 多家 AI 云公司要“小鱼式死亡”",
+        excerpt: "马斯克 10 月 25 日发帖称，债市几乎完全关闭了对数据中心之外无实质收入公司的融资，200 多家 neocloud 将面临小鱼级别的死亡与整合。SpaceX 同日拿到 400 亿美元 GPU 债，Gartner 预测 2030 年前 80% 以上的 neocloud 停止独立运营。判断：AI 股下跌和债市关门是同一件事的两个表征，前者是估值修正，后者是生存问题。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-10-27-musk-neocloud-guppy.html"
       },
       {
         cat: "观察", num: "N° 141",
