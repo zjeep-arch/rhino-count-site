@@ -95,3 +95,20 @@ body{background:#0b1011}
 /* Extend the nested hero video beyond the centered copy container to the viewport edges. */
 #hero-section .editorial-portrait{left:50%;width:100vw;transform:translateX(-50%)}
 @media(max-width:700px){#hero-section .editorial-portrait{left:50%;width:100vw;transform:translateX(-50%)}}
+
+/* A quieter editorial manifesto with a cursor-following field of light. */
+#manifesto.quote-section{position:relative;isolation:isolate;overflow:hidden;padding:clamp(72px,9vw,124px) 0;background:#101615}
+#manifesto.quote-section::before{display:none!important}
+#manifesto.quote-section::after{z-index:0;opacity:.45;background:radial-gradient(430px circle at var(--spot-x,50%) var(--spot-y,50%),rgba(169,214,202,.17),transparent 72%),linear-gradient(115deg,rgba(169,214,202,.035),transparent 48%,rgba(169,214,202,.025));transition:opacity .35s ease}
+#manifesto.quote-section.pointer-active::after{opacity:1}
+#manifesto .manifesto-container{max-width:1120px;text-align:left}
+#manifesto .manifesto-kicker{display:flex;align-items:center;gap:14px;margin:0 0 clamp(22px,3vw,38px);font:600 10px/1.4 var(--sans);letter-spacing:.2em;color:#91aa9f}
+#manifesto .manifesto-kicker::before{content:"";display:block;width:30px;height:1px;background:#91aa9f}
+#manifesto .manifesto-kicker span{color:#73857e;letter-spacing:.12em}
+#manifesto blockquote.pull{max-width:980px;margin:0;font:500 clamp(28px,3.3vw,46px)/1.5 var(--sans);font-style:normal;letter-spacing:-.045em;color:#eef1e9;text-wrap:balance}
+#manifesto .quote-attr{display:flex;align-items:center;gap:12px;margin-top:clamp(28px,4vw,46px);font:500 11px/1.5 var(--sans);letter-spacing:.22em;color:#9aa9a2}
+#manifesto .quote-attr::before{content:"";width:22px;height:1px;background:#9aa9a2}
+#manifesto .rh-char{display:inline-block;transition:color .3s ease,text-shadow .3s ease,transform .3s cubic-bezier(.2,.8,.2,1)}
+#manifesto .rh-char.rh-lit{color:#d9eee4;text-shadow:0 0 .45em rgba(169,214,202,.75);transform:translateY(-.045em)}
+@media(max-width:700px){#manifesto.quote-section{padding:64px 0}#manifesto .manifesto-container{max-width:100%}#manifesto blockquote.pull{font-size:clamp(25px,7vw,34px);line-height:1.58;letter-spacing:-.035em}#manifesto .manifesto-kicker{font-size:9px;margin-bottom:22px}}
+@media(prefers-reduced-motion:reduce){#manifesto.quote-section::after{transition:none}#manifesto .rh-char{transition:none!important}#manifesto .rh-char.rh-lit{transform:none;text-shadow:none}}
