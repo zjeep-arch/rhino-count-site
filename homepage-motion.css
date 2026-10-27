@@ -83,3 +83,7 @@ body{background:#0b1011}
 #hero-section .editorial-intro h1 > span:not(.rh-char){display:block}
 #hero-section .editorial-intro h1 .rh-char{display:inline-block!important}
 #hero-section .editorial-intro h1 .rh-char.rh-lit{display:inline-block!important}
+/* Fit the video hero into the visible area beneath the fixed site header. */
+#hero-section.hero{height:calc(100svh - 80px)!important;min-height:0!important;max-height:none}
+#hero-section .editorial-hero{height:100%;min-height:0;padding-top:clamp(72px,12vh,116px);padding-bottom:clamp(132px,18vh,168px)}
+@media(max-width:700px){#hero-section.hero{height:auto!important;min-height:calc(100svh - 76px)!important}#hero-section .editorial-hero{height:auto;min-height:calc(100svh - 76px);padding-top:108px;padding-bottom:142px}}
