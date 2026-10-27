@@ -5891,7 +5891,7 @@
   </script>
 <link rel="stylesheet" href="profile-folders.css?v=20261025b">
 <link rel="stylesheet" href="signals-layout.css?v=20261025b">
-<link rel="stylesheet" href="homepage-editorial.css?v=20261026">
+<link rel="stylesheet" href="homepage-editorial.css?v=20261027b">
 </head>
 <body>
   <div class="scroll-progress" id="scrollProgress" aria-hidden="true" style="transform: scaleX(0);"></div>
@@ -5933,7 +5933,7 @@
 
   <main id="top" class="render-target ready">
     <section class="hero in-view" id="hero-section">
-<div class="container editorial-hero"><div class="editorial-intro"><p class="editorial-eyebrow">RHINO COUNT / 犀牛伯爵</p><h1>在 AI 的噪音里，<br><span>寻找真正重要的变化。</span></h1><p class="editorial-deck">AI 大厂从业者，内容与产品的实践者。<br>记录模型、Agent 与商业的变化，也把判断做成可以体验的作品。</p><div class="editorial-actions"><a class="btn" href="#notes">阅读我的观察 <span aria-hidden="true">↗</span></a><a class="editorial-textlink" href="#builds">探索作品 <span aria-hidden="true">↗</span></a></div><div class="editorial-credentials"><span>北京大学 · 本科</span><span>Content × Product × Marketing</span></div></div><figure class="editorial-portrait"><img src="assets/hero-portrait.jpg" alt="犀牛伯爵的数字形象" width="720" height="405" fetchpriority="high"><figcaption><span>观察 / 思考 / 创作</span><a href="#profile">我的八个侧面 ↗</a></figcaption></figure></div><div class="container editorial-index"><a href="#notes"><span>01 / SIGNALS</span>独立观察</a><a href="#builds"><span>02 / BUILDS</span>交互作品</a><a href="#picks"><span>03 / PICKS</span>阅读书签</a><a href="#contact"><span>04 / CONTACT</span>建立联系</a></div>
+<div class="container editorial-hero"><div class="editorial-intro"><p class="editorial-eyebrow">RHINO COUNT / 犀牛伯爵</p><h1>在 AI 的噪音里，<br><span>寻找真正重要的变化。</span></h1><p class="editorial-deck">AI 大厂从业者，内容与产品的实践者。<br>记录模型、Agent 与商业的变化，也把判断做成可以体验的作品。</p><div class="editorial-actions"><a class="btn" href="#notes">阅读我的观察 <span aria-hidden="true">↗</span></a><a class="editorial-textlink" href="#builds">探索作品 <span aria-hidden="true">↗</span></a></div><div class="editorial-credentials"><span>北京大学 · 本科</span><span>Content × Product × Marketing</span></div></div><figure class="editorial-portrait"><img src="assets/hero-portrait.jpg" alt="犀牛伯爵的数字形象" width="720" height="405" fetchpriority="high"><video class="editorial-motion" autoplay muted loop playsinline preload="metadata" poster="assets/hero-portrait.jpg" aria-hidden="true"><source src="assets/hero-portrait-motion.mp4" type="video/mp4"></video><figcaption><span>观察 / 思考 / 创作</span><a href="#profile">我的八个侧面 ↗</a></figcaption></figure></div><div class="container editorial-index"><a href="#notes"><span>01 / SIGNALS</span>独立观察</a><a href="#builds"><span>02 / BUILDS</span>交互作品</a><a href="#picks"><span>03 / PICKS</span>阅读书签</a><a href="#contact"><span>04 / CONTACT</span>建立联系</a></div>
 </section>
     <section id="profile" class="gc">
 <div class="pf-stage" aria-label="Profile · 犀牛伯爵的八个侧面">
@@ -6263,21 +6263,6 @@
       </section>
   </main>
 
-  <!-- Subscription -->
-  <section id="subscribe" class="subscribe-section">
-    <div class="container">
-      <div class="subscribe-inner">
-        <h2>订阅每日时评</h2>
-        <p>把新的观察，送到你的邮箱。关于 AI、商业与人的变化。</p>
-        <form class="subscribe-form" action="https://formspree.io/f/meoekkrv" method="POST">
-          <input type="email" name="email" placeholder="你的邮箱" aria-label="订阅邮箱" autocomplete="email" required="">
-          <button type="submit">订阅</button>
-        </form>
-        <p class="subscribe-note">每周不超过 7 封，随时可退订。</p>
-      </div>
-    </div>
-  </section>
-
   <!-- Back to top -->
   <button id="backToTop" class="back-to-top" aria-label="回到顶部">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"></path></svg>
@@ -6358,7 +6343,7 @@
   </script>
   <script src="data.js?v=20261027"></script>
   <script src="profile-folders.js?v=20261025b"></script>
-<script src="homepage-editorial.js?v=20261026"></script>
+<script src="homepage-editorial.js?v=20261027b"></script>
   <script src="builds-catalog.js?v=20260908"></script>
   <script>
     /* Fallback: force-show page after 3s if JS hasn't completed */
@@ -6458,6 +6443,15 @@
       }
 
       document.getElementById('hero-section').innerHTML = window.RhinoEditorial.hero(D);
+
+      const portraitVideo = document.querySelector('.editorial-motion');
+      if (portraitVideo) {
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+        const syncMotion = () => { if (reduceMotion.matches) portraitVideo.pause(); else if (!document.hidden) portraitVideo.play().catch(() => {}); };
+        reduceMotion.addEventListener('change', syncMotion);
+        document.addEventListener('visibilitychange', () => { if (document.hidden) portraitVideo.pause(); else syncMotion(); });
+        syncMotion();
+      }
 
       const _isMobile = window.matchMedia('(max-width: 860px)').matches;
 
