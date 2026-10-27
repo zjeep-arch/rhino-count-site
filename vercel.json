@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "buildCommand": "node scripts/render-profile.mjs && node scripts/check-profile.mjs && node scripts/check-builds-layout.mjs",
+  "buildCommand": "node scripts/render-editorial.mjs && node scripts/render-profile.mjs && node scripts/check-profile.mjs && node scripts/check-builds-layout.mjs",
   "outputDirectory": ".",
   "framework": null,
   "redirects": [

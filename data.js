@@ -533,8 +533,8 @@ window.SITE_DATA = {
     ],
     latest: [
       {
-        tag: "LATEST",
-        title: "GPT-5.6 正式发布：中国模型、开放生态与产品分发的新信号",
+        tag: "ARCHIVE",
+        title: "浏览 AI 早报档案",
         desc: "用一份早报快速扫描模型发布、产品更新、资本动向和产业变化。",
         href: "ai-daily/"
       }
@@ -579,8 +579,8 @@ window.SITE_DATA = {
   /* ---------- 犀牛精选 Picks ---------- */
   picks: {
     label: "RHINO PICKS · 犀牛精选",
-    headingLine1: "我最近，",
-    headingLine2: "在看什么。",
+    headingLine1: "值得反复，",
+    headingLine2: "回看的内容。",
     blurb: "我每天看很多关于 AI、产品和商业的内容。这里留下的，是我真正看完、并且觉得值得你花时间的东西。",
     updated: "2026.08.23",
     reasonLabel: "WHY I PICKED IT · 为什么值得看",
@@ -606,19 +606,19 @@ window.SITE_DATA = {
       {
         type: "X",
         author: "Andrej Karpathy",
-        title: "Software Is Changing (Again)",
+        title: "Andrej Karpathy 的公开分享",
         tag: "Agent Software",
-        reason: "这条 Thread 很好地解释了为什么 Agent 会改变软件的交互界面。",
-        meta: "12 posts · X",
+        reason: "持续关注他对模型能力、软件开发与 AI 教育的解释。此链接前往个人主页。",
+        meta: "作者主页 · X",
         href: "https://x.com/karpathy"
       },
       {
         type: "ARTICLE",
         author: "Dwarkesh Patel",
-        title: "The Scaling Era",
+        title: "Dwarkesh Podcast",
         tag: "Models Scaling",
-        reason: "理解下一阶段模型竞争，这篇比大部分二手解读都有价值。",
-        meta: "15 min read · Article",
+        reason: "通过长访谈理解模型、算力与社会变化。此链接前往播客主页。",
+        meta: "播客主页 · Website",
         href: "https://www.dwarkesh.com"
       }
     ]
@@ -1685,9 +1685,9 @@ window.SITE_DATA = {
   /* ---------- 联络 Contact ---------- */
   contact: {
     label: "REACH · 联络",
-    headingLine1: "递一张",
-    headingLine2: "名片给伯爵。",
-    blurb: "欢迎在小红书私信交流 AI、学习方法、职业选择，或仅仅是想吐槽今天的模型又抽风了。",
+    headingLine1: "关于 AI 与创作，",
+    headingLine2: "继续聊聊。",
+    blurb: "欢迎交流 AI 产品、内容创作与商业观察。如果你也在把想法变成作品，可以在小红书找到我。",
     channel: {
       title: "小红书 · XIAOHONGSHU",
       handle: "@犀牛伯爵 · 小红书号 1147661654",
