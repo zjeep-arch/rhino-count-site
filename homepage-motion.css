@@ -43,3 +43,30 @@ body{background:#0b1011}
 .rh-char,.editorial-intro h1 .rh-char{display:inline-block;color:inherit;transition:color .48s ease,text-shadow .48s ease,transform .48s cubic-bezier(.2,.8,.2,1)}
 .rh-char.rh-lit,.editorial-intro h1 .rh-char.rh-lit{color:#c8f3e5;text-shadow:0 0 .32em rgba(144,224,200,.64),0 0 .08em rgba(205,255,240,.8);transform:translateY(-.035em);transition-duration:.12s}
 @media(prefers-reduced-motion:reduce){.rh-char{transition:none!important}.rh-char.rh-lit{color:inherit;text-shadow:none;transform:none}}
+/* Brighter blue-green palette with warm accents, while keeping the dark scenes legible. */
+:root{--bg:#14262b;--bg-soft:#1a3033;--surface:#1b3435;--surface-strong:#213c3c;--ink:#f8f5e9;--ink-soft:#d8e5dd;--muted:#b1c9c2;--accent:#b4edda;--accent-2:#f1ab91;--gold:#f2d398;--electric:#accde5;--line:rgba(213,238,224,.21);--line-2:rgba(213,238,224,.36);--rhino-accent:#b4edda;--rhino-line:rgba(213,238,224,.2)}
+body{background:#14262b}
+#hero-section.hero{background:radial-gradient(ellipse at 72% 40%,rgba(118,194,175,.18),transparent 47%),linear-gradient(145deg,#172c31,#193c3d 60%,#163032)}
+#now{background:linear-gradient(120deg,#203c39,#1c3336)}
+#notes.jin{background:radial-gradient(ellipse at 48% 18%,rgba(213,186,130,.13),transparent 52%),#263634}
+#picks{background:linear-gradient(160deg,#172f32,#1a3637)}
+#builds{background:radial-gradient(ellipse at 15% 25%,rgba(150,207,181,.13),transparent 45%),#203a38}
+#daily{background:linear-gradient(130deg,#1d3938,#193133)}
+#manifesto{background:linear-gradient(110deg,#27433e,#203a39)}
+#contact{background:#193235}
+#profile.gc{background:#132c30}
+.pf-stage{background:radial-gradient(ellipse at 50% 70%,rgba(86,155,142,.28),transparent 55%),radial-gradient(ellipse at 50% 25%,rgba(81,122,145,.18),transparent 65%),#122930}
+.site-header{background:rgba(20,38,42,.95)}
+.editorial-portrait{background:#263c41;border-color:rgba(215,238,226,.26);box-shadow:0 22px 70px -40px rgba(132,217,187,.48)}
+.editorial-portrait img,.editorial-portrait video{filter:saturate(.82) brightness(.97)}
+.editorial-portrait::after{background:linear-gradient(110deg,rgba(31,86,73,.13),transparent 44%),linear-gradient(0deg,rgba(18,48,43,.38),transparent 43%),radial-gradient(ellipse at center,transparent 42%,rgba(27,70,61,.2) 100%)}
+.editorial-portrait figcaption{background:linear-gradient(transparent,rgba(18,48,43,.87));color:#f5f8ea}
+@media(hover:hover){.editorial-portrait:hover img,.editorial-portrait:hover video{filter:saturate(.95) brightness(1)}}
+.btn{background:#b4edda;color:#163c37;border-color:#b4edda}.btn:hover{background:#d1f7e7}
+.editorial-eyebrow,.label{color:#bee9d4}.editorial-intro h1 span{color:#c4f0dd}.editorial-index span,.reading-meta,.pick-meta,.pick-author{color:#bfd0c7}
+.reading-card p,.editorial-deck,.pick-reason,.section-head .blurb{color:#d4e2da}
+.reading-card:nth-child(2){border-top-color:#ecc499}.reading-card:nth-child(3){border-top-color:#edab96}
+.rh-char.rh-lit,.editorial-intro h1 .rh-char.rh-lit{color:#fff1bd;text-shadow:0 0 .32em rgba(255,205,142,.62),0 0 .08em rgba(255,245,215,.85)}
+#hero-section.hero{background:radial-gradient(ellipse at 72% 40%,rgba(118,194,175,.18),transparent 47%),linear-gradient(145deg,#172c31,#193c3d 60%,#163032)!important}
+.editorial-portrait::after{background:linear-gradient(90deg,rgba(33,103,90,.32),transparent 36%,transparent 65%,rgba(24,74,78,.24)),linear-gradient(0deg,rgba(18,48,43,.38),transparent 43%),radial-gradient(ellipse at center,transparent 38%,rgba(25,78,68,.28) 100%)}
+[data-theme="dark"] .site-header{background:rgba(21,45,47,.96);border-color:rgba(213,238,224,.18)}
