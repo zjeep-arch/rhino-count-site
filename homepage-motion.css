@@ -79,3 +79,7 @@ body{background:#0b1011}
 #hero-section .editorial-actions .editorial-textlink{color:#fffdf6;border-bottom-color:rgba(255,255,255,.42);}
 #hero-section .editorial-index{bottom:0;}
 @media(max-width:700px){#hero-section.hero{height:100svh!important;min-height:680px!important;max-height:none}#hero-section .editorial-hero{height:100%;min-height:100svh;padding-top:148px;padding-bottom:168px;align-items:center}#hero-section .editorial-intro h1{font-size:clamp(32px,9vw,46px);line-height:1.28}#hero-section .editorial-deck{font-size:14px;max-width:34ch}#hero-section .editorial-portrait video{object-position:64% center}#hero-section .editorial-portrait::after{background:linear-gradient(90deg,rgba(4,8,9,.5),rgba(4,8,9,.08)),linear-gradient(0deg,rgba(4,8,9,.74),transparent 42%,rgba(4,8,9,.16))}#hero-section .editorial-portrait figcaption{bottom:140px}}
+/* The accent phrase remains a block; hover-split graphemes stay inline. */
+#hero-section .editorial-intro h1 > span:not(.rh-char){display:block}
+#hero-section .editorial-intro h1 .rh-char{display:inline-block!important}
+#hero-section .editorial-intro h1 .rh-char.rh-lit{display:inline-block!important}
