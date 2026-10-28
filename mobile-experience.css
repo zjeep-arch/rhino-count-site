@@ -136,6 +136,8 @@
   #manifesto .manifesto-step {
     width: 100%;
     min-height: 52px;
+    display: flex;
+    align-items: center;
     justify-content: flex-start;
     gap: 12px;
     padding: 10px 14px;
@@ -152,9 +154,9 @@
     background: color-mix(in oklab, var(--accent) 16%, var(--bg));
     transform: translateX(3px);
   }
-  #manifesto .manifesto-step small { min-width: 22px; font-size: 9px; }
+  #manifesto .manifesto-step small { position: static; top: auto; min-width: 22px; font-size: 9px; }
   #manifesto .manifesto-ending { display: block; margin-top: 3px; font-size: 20px; }
-  #manifesto .manifesto-annotation { grid-template-columns: 30px 1fr; gap: 8px; margin-top: 16px; }
+  #manifesto .manifesto-annotation { display: grid; grid-template-columns: 30px 1fr; align-items: center; gap: 8px; margin-top: 16px; }
   #manifesto .manifesto-hint { grid-column: 2; font-size: 9px; }
   #manifesto .manifesto-instrument { width: min(100%, 180px); justify-self: center; margin: 0 auto; }
   #contact .contact-card { display: grid; gap: 16px; }
