@@ -194,3 +194,19 @@
     object-position: 58% 35%;
   }
 }
+
+/* More expressive Capy loops and gesture reactions. */
+.rhino-pet[data-pose="work"] .rhino-sapling { animation: capyWork 1.8s ease-in-out infinite; }
+.rhino-pet[data-pose="sleep"] .rhino-sapling { animation: capySleep 3.4s ease-in-out infinite; }
+.rhino-pet[data-pose="celebrate"] .rhino-sapling { animation: capyHop .58s cubic-bezier(.2,.8,.25,1.15) 2; }
+.rhino-pet[data-pose="walk"] .rhino-sapling { animation: capyWalk .72s steps(2,end) infinite; }
+.rhino-pet[data-pose="think"] .rhino-sapling { animation: capyThink 1.5s ease-in-out infinite; }
+.rhino-pet[data-pose="heart"] .rhino-sapling { animation: capyHeart 1.1s ease-in-out infinite; }
+.rhino-pet[data-pose="coffee"] .rhino-sapling { animation: capyCoffee 1.9s ease-in-out infinite; }
+.rhino-pet.fidget .rhino-sapling { animation: capyFidget .72s cubic-bezier(.2,.8,.2,1); }
+.rhino-pet.dragging .rhino-sapling { animation: none !important; }
+@keyframes capyWalk { 0%,100% { transform: translateX(-3px) translateY(0); } 50% { transform: translateX(3px) translateY(-2px); } }
+@keyframes capyThink { 0%,100% { transform: rotate(-2deg) translateY(0); } 50% { transform: rotate(2deg) translateY(-2px); } }
+@keyframes capyHeart { 0%,100% { transform: scale(1); } 38% { transform: scale(1.04); } 68% { transform: scale(.99); } }
+@keyframes capyCoffee { 0%,100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-2px) rotate(-1.5deg); } }
+@keyframes capyFidget { 0%,100% { transform: translateY(0) rotate(0); } 28% { transform: translateY(-4px) rotate(-4deg); } 58% { transform: translateY(1px) rotate(3deg); } 78% { transform: rotate(-1deg); } }
