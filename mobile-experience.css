@@ -110,11 +110,6 @@
   #hero-section .editorial-index { grid-template-columns: 1fr 1fr; }
   #hero-section .editorial-index a { min-height: 60px; padding: 12px 4px; gap: 4px; font-size: 12px; }
   #hero-section .editorial-index a span { font-size: 8px; }
-  #profile .pf-world { opacity: .55; }
-  #profile .pf-board { opacity: .72; }
-  #profile .pf-grid-lines { display: none; }
-  #profile .pf-current { opacity: .55; }
-  #profile .pf-instruction { max-width: calc(100% - 32px); text-align: center; line-height: 1.5; }
   #notes .github-archive-stage { overflow: clip; }
   #notes .portable-computer { width: min(100%, 500px); }
   #notes .floppy-coverflow { width: min(100%, 360px); }
