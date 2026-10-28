@@ -1,0 +1,73 @@
+/* Shared editorial grid: align section copy to one quiet, repeatable page edge. */
+:root {
+  --layout-content-width: 1240px;
+  --layout-gutter: clamp(18px, 3.2vw, 40px);
+  --layout-section-space: clamp(64px, 7vw, 92px);
+  --maxw: var(--layout-content-width);
+  --pad: var(--layout-gutter);
+}
+
+.container {
+  width: 100%;
+  max-width: var(--layout-content-width);
+  margin-inline: auto;
+  padding-inline: var(--layout-gutter);
+  box-sizing: border-box;
+}
+
+/* Hero copy, navigation, and its index share the same inset as section copy. */
+#hero-section.hero > .container,
+.site-header > .container,
+.site-footer > .container,
+#subscribe > .container {
+  width: 100%;
+  max-width: var(--layout-content-width);
+  padding-inline: var(--layout-gutter);
+}
+#hero-section .editorial-index {
+  width: min(100%, var(--layout-content-width));
+  padding-inline: var(--layout-gutter);
+}
+.hero-cine-content {
+  max-width: var(--layout-content-width);
+  padding-inline: var(--layout-gutter);
+}
+
+/* Keep deliberate section treatments, while bringing their outer edges back
+   to the shared grid. Art inside Signals may still bleed beyond this frame. */
+#notes.jin > .container,
+#daily.daily-desk > .container,
+#manifesto .manifesto-container {
+  width: 100%;
+  max-width: var(--layout-content-width);
+  margin-inline: auto;
+  padding-inline: var(--layout-gutter);
+}
+
+/* The paper manifesto remains an editorial spread: the copy is a readable
+   column, and its instrument occupies the aligned outer column. */
+#manifesto .manifesto-copy,
+#manifesto blockquote.pull {
+  min-width: 0;
+}
+
+/* Standard sections use the same vertical cadence; compact feature scenes
+   retain their own authored spacing. */
+#picks,
+#builds {
+  padding-block: var(--layout-section-space);
+}
+
+@media (max-width: 900px) {
+  :root { --layout-gutter: clamp(20px, 3.2vw, 29px); }
+}
+@media (max-width: 700px) {
+  :root { --layout-gutter: clamp(18px, 5.65vw, 22px); }
+  #picks,
+  #builds { padding-block: 56px; }
+  #hero-section .editorial-index {
+    width: 100%;
+    padding-inline: var(--layout-gutter);
+  }
+  #manifesto blockquote.pull { max-width: none; }
+}
