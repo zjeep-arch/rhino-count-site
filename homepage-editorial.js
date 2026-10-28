@@ -6,7 +6,7 @@
   function daily(d){
     const x=d.daily;
     const latest=x.latest&&x.latest[0];
-    const compactTitle=value=>String(value??'').replace(/\s*[|｜]\s*20\d{2}年.*$/,'').trim();
+    const compactTitle=value=>{const title=String(value??'').replace(/\s*[|｜]\s*20\d{2}年.*$/,'').trim();return title==='AI大模型及安全动态日报'?'AI 大模型与安全动态':title;};
     const events=[
       {month:'NOV',days:'12—13',name:'SGLang Summit',place:'Fort Mason · San Francisco',end:'2026-11-13',url:'https://www.nvidia.com/en-us/events/sglang-summit/'},
       {month:'NOV—DEC',days:'30—04',name:'AWS re:Invent',place:'Las Vegas · Cloud & AI',end:'2026-12-04',url:'https://aws.amazon.com/events/reinvent/'},
