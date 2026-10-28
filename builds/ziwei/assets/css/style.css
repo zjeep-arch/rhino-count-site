@@ -421,7 +421,7 @@ body{font-family:var(--font-body); padding-bottom:calc(104px + env(safe-area-ins
   .modal-card.wide{max-width:560px;}
 
   /* 命盘页：左盘右读双栏，左侧网格吸附视口 */
-  #view-chart{display:grid; grid-template-columns:minmax(0,7fr) minmax(0,5fr); column-gap:44px; align-items:start;}
+  #view-chart.active{display:grid; grid-template-columns:minmax(0,7fr) minmax(0,5fr); column-gap:44px; align-items:start;}
   .chart-left{grid-column:1; align-self:stretch;}
   .chart-right{grid-column:2; min-width:0;}
   #chart-grid-wrap{position:sticky; top:86px;}
@@ -1129,3 +1129,28 @@ body{color:var(--ink);
 .ly-cell.now{box-shadow:0 0 0 2px #C9A96A;}
 .ly-cell:hover{border-color:#DFE3FB; transform:translateY(-1px);}
 @media(max-width:640px){ .ly-cell{width:26px; height:19px; font-size:9px;} }
+
+/* v13：四化盘（北派） */
+.sp-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:6px;}
+.sp-cell{min-height:86px; padding:8px 7px; font-size:11.5px; border-radius:10px;}
+.sp-cell .pname{font-size:13px;}
+.sp-cell .stars{margin-top:3px; line-height:1.6;}
+.sp-cell .star-chip{font-size:11px; padding:0 6px;}
+.sp-cell .sihua{min-width:16px; height:16px; line-height:16px; font-size:10px;}
+.sp-cell.born{border:1.5px solid var(--gold); box-shadow:0 0 0 3px rgba(201,169,106,.12);}
+.sp-cell.laiyin{background:linear-gradient(180deg,rgba(201,169,106,.16),rgba(201,169,106,.06));}
+.sp-cell .sp-lai{display:inline-block; margin-left:5px; font-size:9.5px; color:#D9B36A; border:1px solid rgba(201,169,106,.5); border-radius:4px; padding:0 5px; vertical-align:2px;}
+.sp-center{display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; cursor:default;}
+.sp-center .gz{font-size:10.5px;}
+.fx-table .fx-star.fx-quan{color:#A9BCF2; background:rgba(134,162,255,.13);}
+.fx-table .fx-star.fx-ke{color:#9FCBAF; background:rgba(117,133,95,.14);}
+.chain-row{border-top:1px solid rgba(42,51,88,.6); padding:9px 0;}
+.chain-row:first-of-type{border-top:none;}
+.chain-head{display:flex; align-items:baseline; gap:8px; flex-wrap:wrap;}
+.chain-head b{color:#F0F2FB; font-size:13.5px;}
+.chain-gz{font-size:10.5px; color:#8A93C2;}
+.chain-flow{font-size:12.5px; color:#D9B36A;}
+.chain-say{font-size:12.5px; color:#B9C0E3; line-height:1.8; margin-top:3px;}
+.chain-more{margin-top:10px;}
+.chain-more summary{cursor:pointer; color:#A9BCF2; font-size:13px;}
+.sp-empty{background:transparent; border-color:transparent; box-shadow:none;}
