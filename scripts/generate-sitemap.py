@@ -110,6 +110,16 @@ def get_file_lastmod(filepath, filename=None):
     return datetime.fromtimestamp(stat.st_mtime).strftime("%Y-%m-%d")
 
 
+def get_section_index_lastmod(section, rel_path):
+    """Include live data dependencies when an index page renders them."""
+    dates = [get_file_lastmod(rel_path)]
+    if section == "notes" and (REPO_ROOT / "data.js").exists():
+        dates.append(get_file_lastmod("data.js"))
+    elif section == "ai-daily" and (REPO_ROOT / "ai-daily" / "feed.json").exists():
+        dates.append(get_file_lastmod("ai-daily/feed.json"))
+    return max(dates)
+
+
 def collect_urls():
     """Collect all URLs with their lastmod dates."""
     urls = []
@@ -136,7 +146,7 @@ def collect_urls():
             rel_path = f"{section}/index.html"
             urls.append({
                 "loc": f"{SITE_URL}/{section}/",
-                "lastmod": get_file_lastmod(rel_path),
+                "lastmod": get_section_index_lastmod(section, rel_path),
                 "changefreq": "daily",
                 "priority": "0.9"
             })
