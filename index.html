@@ -21,6 +21,7 @@
   <meta property="og:description" content="犀牛伯爵（RHINO COUNT）· AI Native Studio。记录 AI 如何改变技术、商业与人的工作方式。">
   <meta property="og:url" content="https://rhinocount.cn/">
   <meta property="og:image" content="https://rhinocount.cn/temple-of-heaven.png">
+  <meta property="og:image:alt" content="犀牛伯爵 · AI 创作与观察">
   <meta property="og:locale" content="zh_CN">
 
   <meta name="twitter:card" content="summary_large_image">
@@ -35,7 +36,9 @@
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "犀牛伯爵",
-    "description": "AI-native builder，记录 Agent 工作流、AI 写作、宏观科技观察与内容产品化实验。",
+    "description": "AI 大厂从业者，内容与产品的实践者。记录模型、Agent、商业变化与创作实验。",
+    "jobTitle": "AI 大厂从业者 · 内容与产品实践者",
+    "knowsAbout": ["AI 模型与 Agent", "AI 产品与内容创作", "商业与产业观察"],
     "url": "https://rhinocount.cn/",
     "image": "https://rhinocount.cn/temple-of-heaven.png",
     "alumniOf": { "@type": "CollegeOrUniversity", "name": "北京大学" },
@@ -5884,6 +5887,7 @@
   <meta property="og:site_name" content="犀牛伯爵 · AI 创作实验室">
   <meta property="article:author" content="犀牛伯爵">
   <meta name="twitter:image" content="https://rhinocount.cn/temple-of-heaven.png">
+  <meta name="twitter:image:alt" content="犀牛伯爵 · AI 创作与观察">
 
   <!-- WebSite Schema -->
   <script type="application/ld+json">
@@ -5905,6 +5909,7 @@
 <link rel="stylesheet" href="signals-layout.css?v=20261025b">
 <link rel="stylesheet" href="homepage-editorial.css?v=20261028a">
 <link rel="stylesheet" href="homepage-motion.css?v=20261028e">
+<link rel="stylesheet" href="mobile-experience.css?v=20261028a">
 </head>
 <body>
   <div class="scroll-progress" id="scrollProgress" aria-hidden="true" style="transform: scaleX(0);"></div>
@@ -6288,50 +6293,39 @@
   <!-- Floating rhino pet -->
   <div class="rhino-pet" id="rhinoPet" aria-live="polite">
     <div class="rhino-bubble" id="rhinoBubble">页面巡逻中。</div>
-    <button class="rhino-pet-btn" id="rhinoPetBtn" type="button" aria-label="唤醒小犀牛" title="小犀牛">
+    <button class="rhino-pet-btn" id="rhinoPetBtn" type="button" aria-label="唤醒小树苗" title="小树苗">
       <span class="rhino-pet-label" id="rhinoCombo">x2</span>
-      <svg class="rhino-svg" viewBox="0 0 160 160" aria-hidden="true">
-        <defs>
-          <linearGradient id="rhinoVinyl" x1="28" y1="22" x2="136" y2="142" gradientUnits="userSpaceOnUse">
-            <stop stop-color="#F7FDFF"></stop>
-            <stop offset="0.42" stop-color="#9FF3EA"></stop>
-            <stop offset="1" stop-color="#7B8DFF"></stop>
-          </linearGradient>
-          <linearGradient id="rhinoFace" x1="38" y1="28" x2="122" y2="124" gradientUnits="userSpaceOnUse">
-            <stop stop-color="#FFFFFF"></stop>
-            <stop offset="1" stop-color="#CBFBF5"></stop>
-          </linearGradient>
-          <linearGradient id="rhinoHornCute" x1="84" y1="22" x2="124" y2="54" gradientUnits="userSpaceOnUse">
-            <stop stop-color="#FFFBE9"></stop>
-            <stop offset="1" stop-color="#D7FF55"></stop>
-          </linearGradient>
-          <radialGradient id="rhinoBlush" cx="50%" cy="50%" r="50%">
-            <stop stop-color="#FF8FC5" stop-opacity="0.88"></stop>
-            <stop offset="1" stop-color="#FF8FC5" stop-opacity="0"></stop>
-          </radialGradient>
-        </defs>
-        <ellipse cx="80" cy="129" rx="42" ry="10" fill="#000" opacity="0.18"></ellipse>
-        <path class="rhino-ear" d="M48 43c-13-13-24-15-31-8-8 8 0 25 18 35Z" fill="#8ADFD8"></path>
-        <path class="rhino-ear" d="M112 43c13-13 24-15 31-8 8 8 0 25-18 35Z" fill="#8B9AFF"></path>
-        <path d="M37 106c0-26 18-45 43-45s43 19 43 45c0 24-17 38-43 38s-43-14-43-38Z" fill="url(#rhinoVinyl)"></path>
-        <path d="M24 72c0-34 24-57 56-57s56 23 56 57c0 35-23 56-56 56S24 107 24 72Z" fill="url(#rhinoFace)"></path>
-        <path d="M82 18c10 8 22 18 31 31L86 58Z" fill="url(#rhinoHornCute)"></path>
-        <path d="M75 19c-3 15-8 25-17 36l28 3Z" fill="#F3F7FF"></path>
-        <circle cx="54" cy="74" r="15" fill="#111827"></circle>
-        <circle cx="106" cy="74" r="15" fill="#111827"></circle>
-        <circle class="rhino-eye" cx="59" cy="69" r="5" fill="#FFFFFF"></circle>
-        <circle class="rhino-eye" cx="111" cy="69" r="5" fill="#FFFFFF"></circle>
-        <circle cx="51" cy="79" r="3" fill="#FFFFFF" opacity="0.58"></circle>
-        <circle cx="103" cy="79" r="3" fill="#FFFFFF" opacity="0.58"></circle>
-        <ellipse class="rhino-cheek" cx="43" cy="92" rx="16" ry="10" fill="url(#rhinoBlush)"></ellipse>
-        <ellipse class="rhino-cheek" cx="117" cy="92" rx="16" ry="10" fill="url(#rhinoBlush)"></ellipse>
-        <path d="M66 96c4 5 8 7 14 7s10-2 14-7" fill="none" stroke="#101421" stroke-width="5" stroke-linecap="round"></path>
-        <path d="M76 84h8l-4 7Z" fill="#101421" opacity="0.62"></path>
-        <path class="rhino-arm" d="M36 111c-15 0-23-7-25-17" fill="none" stroke="#8ADFD8" stroke-width="14" stroke-linecap="round"></path>
-        <path class="rhino-arm" d="M124 111c15 0 23-7 25-17" fill="none" stroke="#8B9AFF" stroke-width="14" stroke-linecap="round"></path>
-        <path d="M59 136v11M101 136v11" stroke="#172033" stroke-width="11" stroke-linecap="round"></path>
-        <circle cx="45" cy="40" r="7" fill="#FFFFFF" opacity="0.26"></circle>
-        <path d="M36 58c8-21 26-31 48-29" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" opacity="0.34"></path>
+      <svg class="rhino-sapling" viewBox="0 0 128 144" shape-rendering="crispEdges" aria-hidden="true">
+        <ellipse cx="64" cy="137" rx="31" ry="4" fill="#152218" opacity=".22"></ellipse>
+        <g class="sapling-leaf-left">
+          <path d="M59 23H44V17H31V11H17V17H8V29H20V35H39V30H53V27H61Z" fill="#8DD64E"></path>
+          <path d="M8 17H19V23H32V29H19V25H8Z" fill="#C8F05B"></path>
+          <path d="M18 11H33V17H44V22H31V18H18Z" fill="#B6E94F"></path>
+        </g>
+        <g class="sapling-leaf-right">
+          <path d="M66 23H80V17H94V11H109V17H120V29H108V35H89V30H75V27H64Z" fill="#90D94E"></path>
+          <path d="M120 17H108V23H95V29H108V25H120Z" fill="#D1F568"></path>
+          <path d="M109 11H95V17H82V22H95V18H109Z" fill="#B7EB55"></path>
+        </g>
+        <path d="M61 25H67V54H61Z" fill="#805A35"></path>
+        <path d="M57 40H63V47H57Z" fill="#805A35"></path>
+        <path d="M64 35H71V41H64Z" fill="#805A35"></path>
+        <path d="M33 63V55H39V49H45V44H84V49H91V55H97V63H103V96H97V103H91V108H39V103H33V96H27V63Z" fill="#735239"></path>
+        <path d="M39 57V51H46V47H82V51H89V57H95V64H99V94H93V100H87V103H42V99H36V93H31V65H36V57Z" fill="#F3E8CC"></path>
+        <path d="M43 57H85V61H90V91H85V97H43V93H38V63H43Z" fill="#FFF1D5"></path>
+        <path d="M47 73H57V83H47Z" fill="#24352C"></path>
+        <path d="M72 73H82V83H72Z" fill="#24352C"></path>
+        <path d="M43 84H49V89H43Z" fill="#E99A91"></path>
+        <path d="M80 84H86V89H80Z" fill="#E99A91"></path>
+        <path d="M61 85H67V88H61Z" fill="#7A5B42"></path>
+        <path d="M57 89H61V92H57Z" fill="#7A5B42"></path>
+        <path d="M67 89H71V92H67Z" fill="#7A5B42"></path>
+        <path d="M45 107H83V112H89V127H82V131H72V124H56V131H46V127H39V112H45Z" fill="#79603F"></path>
+        <path d="M49 111H79V116H83V124H75V120H54V124H46V116H49Z" fill="#DCE8B3"></path>
+        <path d="M58 111H70V120H58Z" fill="#8FC84D"></path>
+        <path d="M31 111H45V117H38V123H32V118H28V114H31Z" fill="#B6D778"></path>
+        <path d="M83 111H97V114H100V118H96V123H90V117H83Z" fill="#B6D778"></path>
+        <path d="M61 112H67V117H61Z" fill="#D4F56A"></path>
       </svg>
     </button>
   </div>
@@ -6363,6 +6357,7 @@
 <script src="homepage-editorial.js?v=20261027c"></script>
 <script defer src="homepage-motion.js?v=20261028e"></script>
 <script defer src="text-hover.js?v=20261028e"></script>
+<script defer src="pet-companion.js?v=20261028a"></script>
   <script src="builds-catalog.js?v=20260908"></script>
   <script>
     /* Fallback: force-show page after 3s if JS hasn't completed */
@@ -6903,233 +6898,7 @@
       }
     })();
 
-    /* Floating rhino pet */
-    (function () {
-      const pet = document.getElementById('rhinoPet');
-      const btn = document.getElementById('rhinoPetBtn');
-      const bubble = document.getElementById('rhinoBubble');
-      const comboBadge = document.getElementById('rhinoCombo');
-      if (!pet || !btn || !bubble) return;
-
-      const lines = [
-        '我变萌了。',
-        '今天也要追信号。',
-        '日报别忘了看。',
-        '我替你守着页面。',
-        '点我一下，充电完成。',
-        '新想法来了就往前冲。',
-        '我正在扫描 AI 世界。',
-        '这页现在由我守护。',
-        '别急，慢慢把作品做漂亮。',
-        '小伯爵在线营业。'
-      ];
-      const idleLines = [
-        '我还在这儿。',
-        '要不要去看一眼日报？',
-        '今天也适合写点东西。',
-        '我在等你的下一个灵感。',
-        '页面巡逻中。'
-      ];
-      const comboLines = [
-        '连击成功。',
-        '手速不错。',
-        '我被点醒了。',
-        '能量上涨中。',
-        '小犀牛进入工作状态。'
-      ];
-      const holdLines = [
-        '脸要被揉圆了。',
-        '这样会更萌吗？',
-        '收到，开始蓄力。',
-        '别捏太久，我会害羞。'
-      ];
-      let lineIndex = -1;
-      let bubbleTimer = null;
-      let drag = null;
-      let clickTimer = null;
-      let holdTimer = null;
-      let idleTimer = null;
-      let combo = 0;
-      let comboTimer = null;
-      let longPressed = false;
-
-      function showBubble(text, duration) {
-        clearTimeout(bubbleTimer);
-        bubble.textContent = text;
-        bubble.classList.add('show');
-        bubbleTimer = setTimeout(() => bubble.classList.remove('show'), duration || 2600);
-      }
-
-      function resetIdle() {
-        return; // Idle prompts distract from long-form reading.
-
-        clearTimeout(idleTimer);
-        idleTimer = setTimeout(() => {
-          if (!pet.classList.contains('dragging')) {
-            showBubble(idleLines[Math.floor(Math.random() * idleLines.length)], 3000);
-            pet.classList.add('sleepy');
-            setTimeout(() => pet.classList.remove('sleepy'), 1100);
-          }
-          resetIdle();
-        }, 11000 + Math.random() * 9000);
-      }
-
-      function pulse(className, duration) {
-        pet.classList.remove(className);
-        void pet.offsetWidth;
-        pet.classList.add(className);
-        setTimeout(() => pet.classList.remove(className), duration || 700);
-      }
-
-      function spark(count, mode) {
-        const rect = btn.getBoundingClientRect();
-        const colors = ['var(--accent)', 'var(--accent-2)', 'var(--gold)', 'var(--electric)'];
-        for (let i = 0; i < count; i += 1) {
-          const dot = document.createElement('span');
-          const shape = mode === 'soft' ? ' soft' : (i % 3 === 0 ? ' star' : '');
-          dot.className = 'rhino-spark' + shape;
-          dot.style.left = (rect.width * (0.28 + Math.random() * 0.48)) + 'px';
-          dot.style.top = (rect.height * (0.28 + Math.random() * 0.44)) + 'px';
-          dot.style.setProperty('--spark-x', (Math.random() * 82 - 41) + 'px');
-          dot.style.setProperty('--spark-y', (-24 - Math.random() * 56) + 'px');
-          dot.style.setProperty('--spark-r', (Math.random() * 180 - 90) + 'deg');
-          dot.style.setProperty('--spark-color', colors[i % colors.length]);
-          btn.appendChild(dot);
-          setTimeout(() => dot.remove(), 950);
-        }
-      }
-
-      function setPetPosition(x, y) {
-        const margin = 12;
-        const rect = pet.getBoundingClientRect();
-        const maxX = window.innerWidth - rect.width - margin;
-        const maxY = window.innerHeight - rect.height - margin;
-        pet.style.left = Math.max(margin, Math.min(maxX, x)) + 'px';
-        pet.style.top = Math.max(margin, Math.min(maxY, y)) + 'px';
-        pet.style.right = 'auto';
-        pet.style.bottom = 'auto';
-      }
-
-      function updateCombo() {
-        combo += 1;
-        clearTimeout(comboTimer);
-        if (comboBadge) comboBadge.textContent = 'x' + combo;
-        if (combo >= 2) pet.classList.add('combo');
-        if (combo >= 4) {
-          showBubble(comboLines[Math.floor(Math.random() * comboLines.length)], 2600);
-          spark(12, 'soft');
-        }
-        comboTimer = setTimeout(() => {
-          combo = 0;
-          pet.classList.remove('combo');
-        }, 1800);
-      }
-
-      function doClick() {
-        if (drag && drag.moved) return;
-        pulse('excited', 720);
-        spark(8);
-        updateCombo();
-        lineIndex = (lineIndex + 1) % lines.length;
-        showBubble(lines[lineIndex]);
-        resetIdle();
-      }
-
-      btn.addEventListener('click', () => {
-        clearTimeout(clickTimer);
-        if (longPressed) {
-          longPressed = false;
-          return;
-        }
-        clickTimer = setTimeout(doClick, 180);
-      });
-
-      btn.addEventListener('dblclick', event => {
-        event.preventDefault();
-        clearTimeout(clickTimer);
-        pulse('twirl', 900);
-        spark(14);
-        updateCombo();
-        showBubble('双击收到，转一圈给你看。', 2600);
-        resetIdle();
-      });
-
-      btn.addEventListener('pointerdown', event => {
-        if (event.pointerType === 'mouse' && event.button !== 0) return;
-        longPressed = false;
-        drag = {
-          startX: event.clientX,
-          startY: event.clientY,
-          left: pet.getBoundingClientRect().left,
-          top: pet.getBoundingClientRect().top,
-          moved: false
-        };
-        try { btn.setPointerCapture(event.pointerId); } catch (e) {}
-        clearTimeout(holdTimer);
-        holdTimer = setTimeout(() => {
-          if (!drag || drag.moved) return;
-          longPressed = true;
-          pulse('squish', 800);
-          spark(10, 'soft');
-          showBubble(holdLines[Math.floor(Math.random() * holdLines.length)], 2800);
-          resetIdle();
-        }, 720);
-      });
-
-      btn.addEventListener('pointermove', event => {
-        if (!drag) return;
-        const dx = event.clientX - drag.startX;
-        const dy = event.clientY - drag.startY;
-        if (!drag.moved && Math.hypot(dx, dy) > 7) {
-          drag.moved = true;
-          clearTimeout(holdTimer);
-          pet.classList.add('dragging');
-          showBubble('换个位置继续守着。', 2200);
-        }
-        if (drag.moved) {
-          event.preventDefault();
-          setPetPosition(drag.left + dx, drag.top + dy);
-        }
-      });
-
-      btn.addEventListener('pointerup', event => {
-        clearTimeout(holdTimer);
-        if (!drag) return;
-        try { btn.releasePointerCapture(event.pointerId); } catch (e) {}
-        pet.classList.remove('dragging');
-        if (drag.moved) {
-          spark(5);
-          showBubble('这里视野不错。', 2200);
-        }
-        setTimeout(() => { drag = null; }, 0);
-        resetIdle();
-      });
-
-      btn.addEventListener('pointercancel', () => {
-        clearTimeout(holdTimer);
-        drag = null;
-        pet.classList.remove('dragging');
-        resetIdle();
-      });
-
-      window.addEventListener('resize', () => {
-        if (pet.style.left && pet.style.top) {
-          setPetPosition(parseFloat(pet.style.left), parseFloat(pet.style.top));
-        }
-      }, { passive: true });
-
-      window.visualViewport?.addEventListener('resize', () => {
-        if (pet.style.left && pet.style.top) {
-          setPetPosition(parseFloat(pet.style.left), parseFloat(pet.style.top));
-        }
-      }, { passive: true });
-
-      setTimeout(() => {
-        showBubble('我换了新造型。', 3000);
-        spark(6, 'soft');
-      }, 1200);
-      resetIdle();
-    })();
+    /* Pet interaction moved to pet-companion.js. */
     } catch(e) {
       console.error('Render error:', e);
       document.querySelector('main').classList.add('ready');
