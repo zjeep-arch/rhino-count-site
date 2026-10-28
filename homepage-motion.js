@@ -28,14 +28,18 @@
     activateStep(0);
   }
   if(reduce.matches || !('IntersectionObserver' in window)) return;
-  const selectors=['.reading-heading','.reading-card','.editorial-daily > div','.manifesto-container','.editorial-index a'];
+  const dailyIntroSelectors=['#daily .daily-intro-index','#daily .daily-headline-line','#daily .daily-desk-intro > p','#daily .daily-all-link','#daily .daily-index-note'];
+  const selectors=['.reading-heading','.reading-card','.editorial-daily > div','.manifesto-container','.editorial-index a','#daily .daily-desk-head','#daily .daily-desk-sheet'].concat(dailyIntroSelectors);
   const elements=Array.from(document.querySelectorAll(selectors.join(',')));
   const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{
     if(entry.isIntersecting){entry.target.classList.add('is-revealed');observer.unobserve(entry.target);}
   }),{threshold:.08,rootMargin:'0px 0px -24px 0px'});
+  const dailyOrder=new Map(dailyIntroSelectors.map((selector,index)=>[selector,index]));
   elements.forEach((el,i)=>{
     el.classList.add('motion-reveal');
-    el.style.setProperty('--reveal-delay',`${Math.min(i%3*55,110)}ms`);
+    const selector=dailyIntroSelectors.find(item=>el.matches(item));
+    const delay=selector!==undefined?dailyOrder.get(selector)*105:Math.min(i%3*55,110);
+    el.style.setProperty('--reveal-delay',`${delay}ms`);
     observer.observe(el);
   });
   if(manifesto && !reduce.matches){
