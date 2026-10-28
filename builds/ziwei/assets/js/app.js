@@ -798,6 +798,7 @@ function renderChartBody(){
   renderFeixingCard(chart);
   renderOverlayGrid(chart, ov);
   renderKoujingCard(rec);
+  renderBriefCard(chart);
   applyCollapseState();
 }
 /* ---------- 节气与八字大运（Meeus 低精度太阳黄经，日界级精度足够） ---------- */
@@ -2078,10 +2079,6 @@ function renderLifeView(){
     `<div class="card"><div class="card-kicker">十二层 · 全展开</div>` +
     `<p class="hint" style="margin:0 0 6px">当前 ${curDx.startAge || '—'}–${curDx.endAge || '—'} 岁走【${curDx.palaceName ? disp(curDx.palaceName) : ''}】大限${nextMark ? `，下一个换挡年是 <b style="color:#D9B36A">${nextMark} 年</b>` : ''}。</p>` +
     sections + `</div>`;
-  box.onclick = e => {
-    const t = e.target.closest('[data-year]');
-    if(t) jumpToYear(+t.dataset.year);
-  };
 }
 const ANSWER_SCENES = [
   { k:'job', q:'现在适合跳槽 / 转行吗？', w:{ '官禄宫':.4, '迁移宫':.25, '命宫':.2, '财帛宫':.15 },
@@ -2149,6 +2146,36 @@ const LAIYIN_SAY = {
   '福德':'带着精神世界的命题而来：快乐、爱好、福分深浅，向内求',
   '父母':'带着长辈缘的命题而来：父母、师长、权威与平台，关系一生走向',
 };
+/* ---------- 飞星象义句式生成（梁派六内六外规则，白话克制版） ---------- */
+const GONG_SHORT = { '命宫':'自我与活法','兄弟宫':'同辈与合伙','夫妻宫':'亲密关系','子女宫':'晚辈与作品','财帛宫':'钱与价值','疾厄宫':'身体与情绪','迁移宫':'外部世界','交友宫':'人际圈层','官禄宫':'事业','田宅宫':'家与安稳','福德宫':'精神世界','父母宫':'长辈与平台' };
+const NEI6 = ['命宫','夫妻宫','财帛宫','疾厄宫','官禄宫','田宅宫']; // 六内：忌入为收藏
+const SELF_HUA_SAY = {
+  '禄':'得到的不太守得住——来得快散得也快，落袋为安最实在',
+  '权':'容易自作主张、用力过猛，事后常觉得没必要',
+  '科':'习惯报喜不报忧，把体面留在外面，压力自己咽',
+  '忌':'自己跟自己较劲——想到就做、不管后果，是漏也是功课',
+};
+function flySay(fromName, hua, toName){
+  const nei = NEI6.includes(toName);
+  const A = GONG_SHORT[fromName] || fromName, B = GONG_SHORT[toName] || toName;
+  if(fromName === toName) return hua === '忌'
+    ? `这份${A}的在意全压在本宫——想放放不下，是这一宫最重的功课`
+    : hua === '禄' ? `这份${A}的福气在本宫坐拥——得到不难，守住才见本事` : `这份${A}的能量在本宫自我加强`;
+  if(hua === '忌') return nei
+    ? `这份${A}的在意，最后落在自己的${B}上——操心是操心，但都记在自己账上，付出有数`
+    : `这份${A}的牵挂流向${B}——容易为${B}的人与事费心，付出未必记着回报`;
+  if(hua === '禄') return nei
+    ? `${A}的福气会流回自己${B}——越经营越顺，机会愿意找你`
+    : `${A}的机会撒向${B}——要主动去接，坐等不来`;
+  if(hua === '权') return nei
+    ? `在${B}这件事上你天生想说了算——是掌控力，也容易用力过猛`
+    : `你的${A}会去主导${B}——能量外放，注意分寸`;
+  return `在${B}上你习惯留体面、给台阶——贵人和好名声藏在细节里`;
+}
+function selfSay(palName, hua){
+  const A = GONG_SHORT[palName] || palName;
+  return `${A}上${SELF_HUA_SAY[hua].split('——')[0]}——${SELF_HUA_SAY[hua].split('——')[1]}`;
+}
 function renderSihuaPan(){
   const rec = cur();
   const box = $('#sihuapan-body');
@@ -2231,19 +2258,63 @@ function renderSihuaPan(){
       <p class="hint" style="margin:0 0 8px">${yGan}干四化：<b>禄·${starPal['禄'].star}（${starPal['禄'].pal}）</b>｜<b>权·${starPal['权'].star}（${starPal['权'].pal}）</b>｜<b>科·${starPal['科'].star}（${starPal['科'].pal}）</b>｜<b>忌·${starPal['忌'].star}（${starPal['忌'].pal}）</b>——金框宫是四化落点，四化是这张盘的"总开关"。</p>
       <div class="sp-grid">${grid}</div>
     </div>
+    <div class="card"><div class="card-kicker">宫位剧本 · 选一宫读它的四化故事</div>
+      <div class="scr-chips">${chart.palaces.map(p =>
+        `<button class="chip${p.isMingGong ? ' on' : ''}" data-scr="${p.branch}">${disp(p.name).replace('宫','')}</button>`).join('')}</div>
+      <div id="scr-body"></div>
+    </div>
     <div class="card"><div class="card-kicker">来因宫</div>
       <p style="margin:0 0 6px">你的来因宫是 <b style="color:#D9B36A">${laiyin ? disp(laiyin.name) : ''}（${laiyin ? ST[laiyin.stem] + BR[laiyin.branch] : ''}）</b>——生年${yGan}干落在此宫。</p>
       <p class="p-say" style="margin:0">${esc(LAIYIN_SAY[laiyin ? disp(laiyin.name).replace('宫','') : ''] || '')}。来因宫是北派立命的第一把钥匙：看这一生"为什么而来"，先从来因宫的星曜和它的四化读起。</p>
     </div>
     <div class="card"><div class="card-kicker">宫干四化矩阵 · 十二宫全览</div>
-      <table class="fx-table"><tr><th>宫（干）</th><th>禄</th><th>权</th><th>科</th><th>忌</th></tr>${matrixRows}</table>
-      <p class="hint" style="margin:8px 0 0">读法：行是"谁在飞"（宫干），格子里是"飞到哪宫、哪颗星"。禄=送资源，权=给掌控，科=给名声，忌=挂牵挂。</p>
+      <details class="chain-more" open><summary>展开 / 收起对照表</summary>
+        <table class="fx-table" style="margin-top:8px"><tr><th>宫（干）</th><th>禄</th><th>权</th><th>科</th><th>忌</th></tr>${matrixRows}</table>
+      </details>
+      <p class="hint" style="margin:8px 0 0">读法：行是"谁在飞"（宫干），格子里是"飞到哪宫、哪颗星"。想看某一宫的完整剧本，用上面的「宫位剧本」。</p>
     </div>
     <div class="card"><div class="card-kicker">禄转忌 · 因果链（命宫三方四正）</div>
       <p class="hint" style="margin:0 0 8px">北派看"得到的背后要还什么"：A 宫化禄→禄星落 B 宫→B 宫干再化忌＝这笔福气的代价记在哪。</p>
       ${coreChains.map(chainRow).join('') || '<p class="hint">这几宫的干未飞禄或禄星未入十二宫，无链可转。</p>'}
       <details class="chain-more"><summary>展开全部十二宫因果链</summary>${allChains.map(chainRow).join('')}</details>
     </div>`;
+  const renderScript = b => {
+    const p = palaceByBranch(chart, b);
+    box.querySelectorAll('.scr-chips .chip').forEach(c => c.classList.toggle('on', +c.dataset.scr === b));
+    const name = disp(p.name);
+    const sh = E.getSiHuaByStem(p.stem) || {};
+    const rows = [];
+    const born = ['禄','权','科','忌'].filter(h => chart.palaces.find(pl2 => pl2.branch === p.branch && pl2.stars.some(st => st.name === ySh[h])));
+    if(born.length) rows.push({ tag:'先天', cls:'born', text:`生年${born.map(h => ySh[h] + h).join('、')}坐${name}——${GONG_SHORT[name] || name}是你先天注定要面对的场域，躲不掉；化忌也意味着最深的功课修完最值钱` });
+    if(sh['忌']){ const to = chart.palaces.find(pl => pl.stars.some(st => st.name === sh['忌']));
+      if(to) rows.push({ tag:'执念', cls:'ji', text:`${name}的${sh['忌']}化忌飞入${disp(to.name)}——${flySay(name, '忌', disp(to.name))}` }); }
+    if(sh['禄']){ const to = chart.palaces.find(pl => pl.stars.some(st => st.name === sh['禄']));
+      if(to) rows.push({ tag:'机会', cls:'lu', text:`${name}的${sh['禄']}化禄飞入${disp(to.name)}——${flySay(name, '禄', disp(to.name))}` }); }
+    const qk = [];
+    if(sh['权']){ const to = chart.palaces.find(pl => pl.stars.some(st => st.name === sh['权'])); if(to) qk.push(`${sh['权']}权→${disp(to.name).replace('宫','')}`); }
+    if(sh['科']){ const to = chart.palaces.find(pl => pl.stars.some(st => st.name === sh['科'])); if(to) qk.push(`${sh['科']}科→${disp(to.name).replace('宫','')}`); }
+    if(qk.length){ const wTo = chart.palaces.find(pl => pl.stars.some(st => st.name === sh['权']));
+      rows.push({ tag:'助力', cls:'', text:`${qk.join('，')}——${flySay(name, '权', disp(wTo.name))}` }); }
+    (p.selfSihua || []).forEach(x => rows.push({ tag:'自化', cls:'ji', text:`${name}${x.starName}自化${x.siHua}——${selfSay(name, x.siHua)}` }));
+    chart.palaces.forEach(src => {
+      if(src.branch === p.branch) return;
+      const ssh = E.getSiHuaByStem(src.stem) || {};
+      if(ssh['忌'] && p.stars.some(st => st.name === ssh['忌'])){
+        rows.push({ tag:'压力', cls:'', text:`${disp(src.name)}的${ssh['忌']}化忌飞进${name}——${GONG_SHORT[disp(src.name)] || ''}上的牵扯，会直接搅动你的${GONG_SHORT[name] || name}` });
+      }
+    });
+    $('#scr-body').innerHTML =
+      `<div class="scr-title">${name}<span>${ST[p.stem]}${BR[p.branch]} · ${GONG_SHORT[name] || ''}</span></div>` +
+      rows.map(r => `<div class="scr-row"><span class="scr-tag ${r.cls}">${r.tag}</span><span class="scr-text">${esc(r.text)}</span></div>`).join('') +
+      `<p class="hint" style="margin:8px 0 0">忌＝在意与功课，不是判决。飞星说的是能量流向，怎么做仍是你的事。</p>`;
+  };
+  box.addEventListener('click', e => {
+    const scr = e.target.closest('[data-scr]');
+    if(scr) renderScript(+scr.dataset.scr);
+    const t = e.target.closest('[data-year]');
+    if(t) jumpToYear(+t.dataset.year);
+  });
+  renderScript(chart.mingGongBranch);
 }
 /* ---------- 择日助手：未来 30 天按事项推荐 ---------- */
 const ZERI_TYPES = [
@@ -2474,6 +2545,21 @@ function renderHome(){
     return `<div class="palace-card" data-palace="${p.name}"><span class="num">${i+1}</span>${starsLine}`
       + `<div><span class="modern">${p.modern}</span></div><div class="kw">${p.keywords}</div></div>`;
   }).join('');
+}
+/* 四化总纲：来因宫 + 生年忌，两句话定调（速览组顶部） */
+function renderBriefCard(chart){
+  const card = $('#brief-card'), body = $('#brief-body');
+  if(!card) return;
+  const li = chart.lunarInfo || {};
+  const yGan = ST[li.yearStem];
+  const laiyin = chart.palaces.find(p => ST[p.stem] === yGan);
+  const ySh = E.getSiHuaByStem(li.yearStem) || {};
+  const jiPal = chart.palaces.find(p => p.stars.some(x => x.name === ySh['忌']));
+  const jiName = jiPal ? disp(jiPal.name) : '';
+  body.innerHTML =
+    `<p style="margin:0 0 6px">你带着「<b>${esc(GONG_SHORT[laiyin ? disp(laiyin.name) : ''] || '')}</b>」的命题而来（来因宫${laiyin ? ' ' + ST[laiyin.stem] + BR[laiyin.branch] : ''}）——这一生的主线绕不开它。</p>` +
+    (jiName ? `<p style="margin:0">生年<b>${esc(ySh['忌'])}忌</b>落在<b>${esc(jiName)}</b>：${esc(JI_SOFTSPOT[jiName] || '这一块是你这辈子的功课')}。看清它，功课就过了一半。</p>` : '');
+  card.hidden = false;
 }
 /* 右栏页签与折叠记忆 */
 function setRGroup(rg){

@@ -1210,3 +1210,15 @@ body{color:var(--ink);
 .sp-bar.mk{height:18px; background:#C9A96A;}
 .sp-bar.ji{background:#A9604A;}
 .sp-bar.mk.ji{background:#8C5A3F;}
+
+/* v15：宫位剧本阅读器 + 四化总纲 */
+.scr-chips{display:flex; flex-wrap:wrap; gap:6px; margin:4px 0 10px;}
+.scr-chips .chip{padding:5px 14px; font-size:12.5px;}
+.scr-title{font-family:var(--font-title); font-size:18px; color:#F0F2FB; margin-bottom:8px;}
+.scr-title span{font-size:11px; color:#8A93C2; margin-left:8px; letter-spacing:.08em;}
+.scr-row{display:flex; gap:10px; padding:8px 0; border-top:1px solid rgba(42,51,88,.6); align-items:flex-start;}
+.scr-tag{flex:none; font-size:10.5px; font-weight:700; border-radius:4px; padding:1px 8px; letter-spacing:.1em; margin-top:2px;}
+.scr-tag.ji{background:rgba(201,106,74,.18); color:#E09B7E;}
+.scr-tag.lu{background:rgba(201,169,106,.16); color:#D9B36A;}
+.scr-tag.born{background:rgba(134,162,255,.16); color:#A9BCF2;}
+.scr-text{flex:1; font-size:13px; color:#C9D1F2; line-height:1.85; min-width:0;}
