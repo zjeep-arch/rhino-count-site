@@ -3048,6 +3048,7 @@
       gap: 9px;
       pointer-events: none;
       touch-action: none;
+      isolation: isolate;
     }
     .rhino-bubble {
       max-width: 218px;
@@ -3089,6 +3090,10 @@
       place-items: center;
       pointer-events: auto;
       cursor: grab;
+      touch-action: none;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+      -webkit-user-select: none;
       transform-origin: 50% 90%;
       animation: rhinoFloat 4.6s ease-in-out infinite;
       transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
@@ -3337,22 +3342,29 @@
       .subscribe-form { flex-direction: column; }
       .subscribe-form button { width: 100%; }
       .rhino-pet {
-        right: 14px;
-        bottom: 84px;
+        right: max(12px, env(safe-area-inset-right));
+        bottom: calc(16px + env(safe-area-inset-bottom));
+        z-index: 120;
+        gap: 6px;
       }
       .rhino-pet-btn {
-        width: 76px;
-        height: 76px;
-        border-radius: 22px;
+        width: 64px;
+        height: 64px;
+        border-radius: 19px;
       }
       .rhino-svg {
-        width: 66px;
-        height: 66px;
+        width: 58px;
+        height: 58px;
       }
       .rhino-bubble {
-        max-width: 168px;
+        max-width: min(190px, calc(100vw - 104px));
         font-size: 11px;
       }
+    }
+
+    @media (max-width: 360px) {
+      .rhino-pet-btn { width: 56px; height: 56px; border-radius: 17px; }
+      .rhino-svg { width: 50px; height: 50px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -7043,6 +7055,7 @@
       });
 
       btn.addEventListener('pointerdown', event => {
+        if (event.pointerType === 'mouse' && event.button !== 0) return;
         longPressed = false;
         drag = {
           startX: event.clientX,
@@ -7051,7 +7064,7 @@
           top: pet.getBoundingClientRect().top,
           moved: false
         };
-        btn.setPointerCapture(event.pointerId);
+        try { btn.setPointerCapture(event.pointerId); } catch (e) {}
         clearTimeout(holdTimer);
         holdTimer = setTimeout(() => {
           if (!drag || drag.moved) return;
@@ -7073,7 +7086,10 @@
           pet.classList.add('dragging');
           showBubble('换个位置继续守着。', 2200);
         }
-        if (drag.moved) setPetPosition(drag.left + dx, drag.top + dy);
+        if (drag.moved) {
+          event.preventDefault();
+          setPetPosition(drag.left + dx, drag.top + dy);
+        }
       });
 
       btn.addEventListener('pointerup', event => {
@@ -7097,6 +7113,12 @@
       });
 
       window.addEventListener('resize', () => {
+        if (pet.style.left && pet.style.top) {
+          setPetPosition(parseFloat(pet.style.left), parseFloat(pet.style.top));
+        }
+      }, { passive: true });
+
+      window.visualViewport?.addEventListener('resize', () => {
         if (pet.style.left && pet.style.top) {
           setPetPosition(parseFloat(pet.style.left), parseFloat(pet.style.top));
         }
