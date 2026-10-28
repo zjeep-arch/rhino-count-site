@@ -677,6 +677,31 @@ $('#luck-tabs').addEventListener('click', e => {
   renderLuckPicker(); renderChartBody();
 });
 
+/* 盘心中枢：罗盘环 + 十二地支刻度 + 大字主星（命盘页/四化盘共用） */
+function hubHTML(chart, rec, kind, ySh){
+  const li = chart.lunarInfo || {}, bi = chart.birthInfo || {};
+  const ring = '<div class="hub-ring" aria-hidden="true">' + [...BR].map((ch, i) => `<i style="--a:${i * 30}deg">${ch}</i>`).join('') + '</div>';
+  const seal = '<div class="ci-seal" aria-hidden="true">問星</div>';
+  if(kind === 'sihua'){
+    const row = h => `<div class="hub-hua">${shBadge(h)}<b>${esc(ySh[h] || '—')}</b><span class="to">→ ${esc(sihuaStarPalace(chart, ySh[h]) || '—')}</span></div>`;
+    return `<div class="cell sp-hub">${ring}<div class="hub-core">
+      <div class="hub-brand">生年四化 · ${ST[chart.lunarInfo.yearStem]}干</div>
+      ${['禄','权','科','忌'].map(row).join('')}
+    </div>${seal}</div>`;
+  }
+  const mingP = chart.palaces.find(p => p.isMingGong);
+  const majors = mingP.stars.filter(x => x.type === 'major').map(x => x.name).join(' · ') || '空宫';
+  const lx = li.lunarMonth ? `农历${li.isLeapMonth ? '闰' : ''}${li.lunarMonth}月${li.lunarDay}日` : '';
+  const fp = (li.fourPillars || []).join(' ');
+  return `<div class="cell sp-hub">${ring}<div class="hub-core">
+    <div class="hub-brand">✦ 问星</div>
+    <div class="hub-stars">${esc(majors)}</div>
+    <div class="hub-name">${esc(rec.name)} · ${bi.gender === 'male' ? '男命' : '女命'}</div>
+    <div class="hub-meta">${bi.year}.${String(bi.month).padStart(2, '0')}.${String(bi.day).padStart(2, '0')} · ${BR[bi.hour]}时</div>
+    ${lx ? `<div class="hub-meta">${esc(lx)} · ${esc(chart.wuxingJuName || '')}</div>` : ''}
+    ${fp ? `<div class="hub-meta gz">${esc(fp)}</div>` : ''}
+  </div>${seal}</div>`;
+}
 function renderChartBody(){
   const rec = cur(); if(!rec) return;
   const chart = rec.chart;
@@ -701,18 +726,7 @@ function renderChartBody(){
       // 中枢信息卡只渲染一次，第二个占位 div 隐藏（保持自动流占位）
       if(centerDone){ h += '<div class="cell center-dup"></div>'; return; }
       centerDone = true;
-      const li = chart.lunarInfo || {}, bi = chart.birthInfo || {};
-      const fp = (li.fourPillars || []).join('　');
-      const lx = li.lunarMonth ? `农历${li.isLeapMonth ? '闰' : ''}${li.lunarMonth}月${li.lunarDay}日` : '';
-      h += `<div class="cell center-info">
-        <div class="ci-brand">✦ 问星</div>
-        <div class="ci-name">${esc(rec.name)}</div>
-        <div class="ci-row">${bi.year}年${bi.month}月${bi.day}日 · ${BR[bi.hour]}时 · ${bi.gender === 'male' ? '男' : '女'}</div>
-        ${lx ? `<div class="ci-row">${esc(lx)}</div>` : ''}
-        ${fp ? `<div class="ci-row gzline">${esc(fp)}</div>` : ''}
-        <div class="ci-row">${esc(chart.wuxingJuName || '')} · 命主${esc(chart.mingZhu || '—')} · 身主${esc(chart.shenZhu || '—')}</div>
-        <div class="ci-seal" aria-hidden="true">問星</div>
-      </div>`;
+      h += hubHTML(chart, rec, 'chart');
       return;
     }
     const p = palaceByBranch(chart, b);
@@ -2267,8 +2281,7 @@ function renderSihuaPan(){
   let grid = '', spCenterDone = false;
   order.forEach(b => {
     if(b === -1){
-      grid += spCenterDone ? '<div class="cell sp-empty"></div>'
-        : '<div class="cell center sp-center"><div style="font-size:20px">✦</div><div class="gz">生年四化 · ' + yGan + '干</div></div>';
+      grid += spCenterDone ? '<div class="cell center-dup"></div>' : hubHTML(chart, rec, 'sihua', ySh);
       spCenterDone = true;
       return;
     }

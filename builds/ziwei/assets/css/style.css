@@ -1154,3 +1154,42 @@ body{color:var(--ink);
 .chain-more{margin-top:10px;}
 .chain-more summary{cursor:pointer; color:#A9BCF2; font-size:13px;}
 .sp-empty{background:transparent; border-color:transparent; box-shadow:none;}
+
+/* ═══ v13.1：罗盘式盘心（命盘页 + 四化盘共用） ═══ */
+.sp-hub{grid-area:2/2/4/4; position:relative; overflow:hidden; cursor:default;
+  display:flex; align-items:center; justify-content:center;
+  background:
+    radial-gradient(circle at 50% 44%, rgba(134,162,255,.13), transparent 62%),
+    linear-gradient(180deg, rgba(26,32,70,.94), rgba(15,20,48,.96));
+  border:1px solid rgba(201,169,106,.55); border-radius:12px;
+  box-shadow:inset 0 0 0 4px rgba(15,20,48,.92), inset 0 0 0 5px rgba(201,169,106,.32), 0 0 34px rgba(134,162,255,.07);
+  --hub-r:84px;}
+.sp-hub::before{content:""; position:absolute; left:50%; top:50%;
+  width:calc(var(--hub-r)*2); height:calc(var(--hub-r)*2);
+  border:1px dashed rgba(201,169,106,.32); border-radius:50%; transform:translate(-50%,-50%);}
+.sp-hub::after{content:""; position:absolute; left:50%; top:50%;
+  width:calc(var(--hub-r)*1.32); height:calc(var(--hub-r)*1.32);
+  border:1px solid rgba(134,162,255,.20); border-radius:50%; transform:translate(-50%,-50%);}
+.sp-hub .hub-ring{position:absolute; inset:0; pointer-events:none;}
+.sp-hub .hub-ring i{position:absolute; left:50%; top:50%; font-style:normal;
+  font-family:var(--font-title); font-size:10px; color:rgba(201,169,106,.78);
+  transform:translate(-50%,-50%) rotate(var(--a)) translateY(var(--hub-r)) rotate(calc(-1*var(--a)));}
+.hub-core{position:relative; z-index:1; display:flex; flex-direction:column; align-items:center; gap:4px;
+  padding:10px 12px; text-align:center; max-width:100%;}
+.hub-brand{font-size:10.5px; letter-spacing:.42em; text-indent:.42em; color:#D9B36A;}
+.hub-stars{font-family:var(--font-title); font-weight:700; font-size:clamp(19px,2vw,26px);
+  color:#F0F2FB; letter-spacing:.1em; line-height:1.3; text-shadow:0 2px 18px rgba(7,11,30,.6);}
+.hub-name{font-size:12.5px; color:#E9EBF8; letter-spacing:.16em;}
+.hub-meta{font-size:10.5px; color:#9AA3CE; letter-spacing:.06em;}
+.hub-meta.gz{font-family:var(--font-title); color:#C9B98F; letter-spacing:.16em; font-size:10px;}
+.hub-hua{display:flex; align-items:center; gap:7px; font-size:13px; color:#DFE3FB;}
+.hub-hua b{color:#F0F2FB; letter-spacing:.06em;}
+.hub-hua .to{color:#8A93C2; font-size:11px;}
+.hub-hua .sihua{min-width:17px; height:17px; line-height:17px; font-size:10px;}
+@media(max-width:640px){
+  .sp-hub{--hub-r:56px;}
+  .hub-stars{font-size:17px;}
+  .hub-name{font-size:11.5px;}
+  .hub-meta{font-size:9.5px;}
+  .hub-hua{font-size:12px;}
+}
