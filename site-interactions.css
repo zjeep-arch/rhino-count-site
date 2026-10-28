@@ -210,3 +210,8 @@
 @keyframes capyHeart { 0%,100% { transform: scale(1); } 38% { transform: scale(1.04); } 68% { transform: scale(.99); } }
 @keyframes capyCoffee { 0%,100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-2px) rotate(-1.5deg); } }
 @keyframes capyFidget { 0%,100% { transform: translateY(0) rotate(0); } 28% { transform: translateY(-4px) rotate(-4deg); } 58% { transform: translateY(1px) rotate(3deg); } 78% { transform: rotate(-1deg); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .rhino-pet[data-pose] .rhino-sapling,
+  .rhino-pet.fidget .rhino-sapling { animation: none !important; }
+}
