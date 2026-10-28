@@ -1,0 +1,186 @@
+/* Narrow-screen art direction and a floating, movable pixel sapling. */
+:root { --pet-safe-bottom: env(safe-area-inset-bottom, 0px); --pet-safe-right: env(safe-area-inset-right, 0px); --pet-safe-left: env(safe-area-inset-left, 0px); }
+
+.rhino-pet {
+  position: fixed;
+  right: max(16px, var(--pet-safe-right));
+  bottom: calc(24px + var(--pet-safe-bottom));
+  left: auto;
+  top: auto;
+  z-index: 120;
+  width: auto;
+  margin: 0;
+  transform: none;
+  pointer-events: none;
+  isolation: isolate;
+}
+.rhino-pet-btn {
+  width: 112px;
+  height: 126px;
+  padding: 0;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  pointer-events: auto;
+  touch-action: none;
+  cursor: grab;
+  display: grid;
+  place-items: center;
+  overflow: visible;
+  transition: transform .22s cubic-bezier(.2,.8,.2,1);
+}
+.rhino-pet-btn::before,
+.rhino-pet-btn::after { content: none !important; display: none !important; }
+.rhino-pet-btn:hover { border: 0 !important; background: transparent !important; box-shadow: none !important; transform: translateY(-4px) rotate(-2deg) scale(1.03); }
+.rhino-pet-btn:focus-visible { outline: 2px dashed var(--accent); outline-offset: 4px; }
+.rhino-pet.dragging .rhino-pet-btn { cursor: grabbing; transform: scale(1.08) rotate(2deg); }
+.rhino-sapling {
+  display: block;
+  width: 112px;
+  height: 126px;
+  overflow: visible;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 5px 6px rgba(21,30,18,.22));
+}
+.rhino-sapling .sapling-leaf-left { transform-box: fill-box; transform-origin: 100% 100%; animation: saplingSway 3.6s ease-in-out infinite; }
+.rhino-sapling .sapling-leaf-right { transform-box: fill-box; transform-origin: 0 100%; animation: saplingSway 3.6s ease-in-out -1.8s infinite; }
+.rhino-pet.excited .rhino-sapling { animation: saplingBounce .48s ease; }
+.rhino-pet.twirl .rhino-sapling { animation: saplingTurn .72s cubic-bezier(.2,.9,.25,1.1); }
+.rhino-pet.squish .rhino-sapling { animation: saplingSquish .6s ease; }
+.rhino-bubble { max-width: min(220px, calc(100vw - 32px)); }
+
+@keyframes saplingSway { 0%,100% { transform: rotate(-2deg); } 50% { transform: rotate(3deg); } }
+@keyframes saplingBounce { 0%,100% { transform: translateY(0); } 35% { transform: translateY(-9px) rotate(-4deg); } 68% { transform: translateY(2px) rotate(3deg); } }
+@keyframes saplingTurn { to { transform: rotate(360deg) scale(1.04); } }
+@keyframes saplingSquish { 0%,100% { transform: scale(1); } 38% { transform: scale(1.09,.88); } 70% { transform: scale(.96,1.04); } }
+
+@media (max-width: 700px) {
+  html { scroll-padding-top: 76px; }
+  main > section { padding-block: clamp(38px, 7svh, 54px); }
+  .container { padding-inline: 18px; }
+  .section-head { margin-bottom: 28px; }
+  .section-head h2 { font-size: clamp(27px, 7.4vw, 34px); line-height: 1.2; }
+  .section-head .blurb { font-size: 13px; line-height: 1.75; }
+  #hero-section.hero { padding-top: 22px !important; }
+  #hero-section .editorial-hero {
+    grid-template-columns: minmax(0,1fr);
+    gap: 20px;
+    padding-bottom: 22px;
+  }
+  #hero-section .editorial-portrait {
+    order: -1;
+    height: clamp(220px, 32svh, 300px);
+    min-height: 0;
+    align-self: auto;
+    border: 0;
+    border-radius: 22px 22px 4px 4px;
+    background: #111714;
+    box-shadow: inset 0 0 0 1px rgba(169,214,202,.1);
+  }
+  #hero-section .editorial-portrait img {
+    object-fit: cover;
+    object-position: 55% 40%;
+    filter: blur(13px) saturate(.72) brightness(.48);
+    transform: scale(1.08);
+  }
+  #hero-section .editorial-portrait video {
+    object-fit: contain;
+    object-position: center 45%;
+    filter: saturate(.9) brightness(1.02) contrast(1.02);
+  }
+  #hero-section .editorial-portrait figcaption { padding: 20px 12px 12px; font-size: 10px; }
+  #hero-section .editorial-intro { order: 1; }
+  #hero-section .editorial-eyebrow { margin-bottom: 13px; font-size: 9px; letter-spacing: .16em; }
+  #hero-section .editorial-intro h1 {
+    max-width: 15ch;
+    margin-bottom: 14px;
+    font-size: clamp(28px, 7.5vw, 36px);
+    line-height: 1.2;
+    letter-spacing: -.055em;
+    text-wrap: balance;
+  }
+  #hero-section .editorial-intro h1 span { display: inline; }
+  #hero-section .editorial-deck { max-width: 34ch; font-size: 13px; line-height: 1.7; }
+  #hero-section .editorial-actions { gap: 16px; flex-wrap: wrap; margin: 18px 0 14px; }
+  #hero-section .editorial-actions .btn { min-height: 44px; padding: 12px 16px; }
+  #hero-section .editorial-textlink { min-height: 44px; display: inline-flex; align-items: center; }
+  #hero-section .editorial-credentials { gap: 6px 10px; font-size: 10px; }
+  #hero-section .editorial-credentials span+span { padding-left: 10px; }
+  #hero-section .editorial-index { grid-template-columns: 1fr 1fr; }
+  #hero-section .editorial-index a { min-height: 60px; padding: 12px 4px; gap: 4px; font-size: 12px; }
+  #hero-section .editorial-index a span { font-size: 8px; }
+  #notes .github-archive-stage { overflow: clip; }
+  #notes .portable-computer { width: min(100%, 500px); }
+  #notes .floppy-coverflow { width: min(100%, 360px); }
+  #notes .coverflow-control { min-width: 44px; min-height: 44px; }
+  #manifesto.quote-section { padding: 44px 0; }
+  #manifesto .manifesto-topline { align-items: flex-start; }
+  #manifesto .manifesto-spread { grid-template-columns: minmax(0,1fr); gap: 24px; padding-top: 24px; }
+  #manifesto blockquote.pull { font-size: clamp(26px, 7.4vw, 34px); line-height: 1.28; letter-spacing: -.06em; }
+  #manifesto .manifesto-thesis { display: block; font-size: clamp(29px, 8vw, 38px); line-height: 1.16; }
+  #manifesto .manifesto-bridge { display: block; margin-top: 12px; font-size: 16px; }
+  #manifesto .manifesto-process-inline {
+    display: grid;
+    grid-template-columns: minmax(0,1fr);
+    gap: 8px;
+    margin-top: 12px;
+  }
+  #manifesto .manifesto-separator,
+  #manifesto .manifesto-conjunction { display: none; }
+  #manifesto .manifesto-step {
+    width: 100%;
+    min-height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
+    padding: 10px 14px;
+    border: 1px solid color-mix(in oklab, var(--accent) 26%, var(--line));
+    border-radius: 10px;
+    background: color-mix(in oklab, var(--bg) 86%, var(--accent) 14%);
+    text-align: left;
+    font-size: 19px;
+    line-height: 1.25;
+    transition: background .2s ease, border-color .2s ease, transform .2s ease;
+  }
+  #manifesto .manifesto-step[aria-pressed="true"] {
+    border-color: var(--accent);
+    background: color-mix(in oklab, var(--accent) 16%, var(--bg));
+    transform: translateX(3px);
+  }
+  #manifesto .manifesto-step small { position: static; top: auto; min-width: 22px; font-size: 9px; }
+  #manifesto .manifesto-ending { display: block; margin-top: 3px; font-size: 20px; }
+  #manifesto .manifesto-annotation { display: grid; grid-template-columns: 30px 1fr; align-items: center; gap: 8px; margin-top: 16px; }
+  #manifesto .manifesto-hint { grid-column: 2; font-size: 9px; }
+  #manifesto .manifesto-instrument { width: min(100%, 180px); justify-self: center; margin: 0 auto; }
+  #contact .contact-card { display: grid; gap: 16px; }
+  .rhino-pet {
+    position: fixed;
+    right: max(12px, var(--pet-safe-right));
+    bottom: calc(68px + var(--pet-safe-bottom));
+    left: auto;
+    top: auto;
+    margin: 0;
+    z-index: 120;
+  }
+  .rhino-pet-btn { width: 76px; height: 86px; }
+  .rhino-sapling { width: 76px; height: 86px; }
+  .rhino-bubble { max-width: min(190px, calc(100vw - 92px)); font-size: 11px; }
+  .back-to-top { right: max(12px, var(--pet-safe-right)); bottom: calc(12px + var(--pet-safe-bottom)); }
+}
+@media (max-width: 380px) {
+  #hero-section .editorial-index a { min-height: 56px; }
+  #manifesto .manifesto-kicker { letter-spacing: .08em; }
+  .rhino-pet-btn { width: 66px; height: 76px; }
+  .rhino-sapling { width: 66px; height: 76px; }
+}
+@media (hover:none) {
+  #manifesto .manifesto-step:hover { transform: none; }
+  #hero-section .editorial-portrait:hover { transform: none; }
+}
+@media (prefers-reduced-motion:reduce) {
+  .rhino-sapling *,
+  .rhino-sapling,
+  .rhino-pet-btn { animation: none !important; transition: none !important; }
+}

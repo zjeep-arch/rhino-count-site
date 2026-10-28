@@ -1,0 +1,70 @@
+/* Pointer-led editorial details for desktop; touch layouts stay calm and direct. */
+@media (hover:hover) and (pointer:fine) and (min-width:701px) {
+  #picks .pick-card {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    transition: transform .32s cubic-bezier(.2,.8,.2,1), background-color .28s ease, border-color .28s ease, box-shadow .32s ease;
+    transform-style: preserve-3d;
+  }
+  #picks .pick-card::before {
+    content: "";
+    display: block;
+    position: absolute;
+    z-index: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--rhino-rust-dark, #c96d52);
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform .32s cubic-bezier(.2,.8,.2,1);
+    pointer-events: none;
+  }
+  #picks .pick-card::after {
+    content: "";
+    display: block;
+    position: absolute;
+    z-index: 0;
+    inset: 0;
+    background: radial-gradient(230px circle at var(--spot-x,50%) var(--spot-y,50%), rgba(201,109,82,.13), transparent 76%);
+    opacity: 0;
+    transition: opacity .25s ease;
+    pointer-events: none;
+  }
+  #picks .pick-card > * { position: relative; z-index: 1; }
+  #picks .pick-card.pointer-lit {
+    z-index: 2;
+    transform: perspective(900px) rotateX(var(--tilt-x,0deg)) rotateY(var(--tilt-y,0deg)) translateY(-4px);
+    background-color: rgba(255,255,255,.42);
+    border-top-color: var(--rhino-rust-dark, #c96d52);
+    box-shadow: 0 18px 34px -28px rgba(45,37,30,.5);
+  }
+  #picks .pick-card.pointer-lit::before { transform: scaleY(1); }
+  #picks .pick-card.pointer-lit::after { opacity: 1; }
+  #picks .pick-card:focus-visible { outline: 2px solid var(--rhino-rust-dark, #c96d52); outline-offset: 4px; }
+
+  #notes .reading-card,
+  #builds .lab-card {
+    transform-style: preserve-3d;
+    transition: transform .34s cubic-bezier(.2,.8,.2,1), border-color .28s ease, box-shadow .34s ease;
+  }
+  #notes .reading-card.pointer-lit {
+    z-index: 2;
+    transform: perspective(1000px) rotateX(var(--tilt-x,0deg)) rotateY(var(--tilt-y,0deg)) translateY(-4px);
+    box-shadow: 0 18px 40px -30px rgba(11,25,20,.48);
+  }
+  #notes .reading-card.pointer-lit::after { opacity: 1; }
+  #builds .lab-card.pointer-lit {
+    z-index: 2;
+    transform: perspective(1100px) rotateX(var(--tilt-x,0deg)) rotateY(var(--tilt-y,0deg)) translateY(-5px);
+    border-color: color-mix(in oklab, var(--tint) 52%, var(--line));
+    box-shadow: var(--shadow-1), 0 22px 48px -30px color-mix(in oklab, var(--tint) 48%, transparent);
+  }
+}
+@media (prefers-reduced-motion:reduce) {
+  #picks .pick-card,
+  #notes .reading-card,
+  #builds .lab-card { transition: none !important; }
+}
