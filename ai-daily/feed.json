@@ -1,6 +1,13 @@
 {
-  "updated": "2026-10-27T09:45:00+08:00",
+  "updated": "2026-10-28T09:45:00+08:00",
   "articles": [
+    {
+      "title": "AI大模型及安全动态日报 | 2026年10月28日（星期三）",
+      "date": "2026年10月28日（星期三）",
+      "slug": "2026-10-28",
+      "url": "ai-daily/2026-10-28-ai-daily.html",
+      "excerpt": "Google发布世界模型Genie 4、苹果办公套件迎来AI助手与MCP、OpenAI发布低价模型Terra、Anthropic S-1治理细节浮出、Disruptive设100亿美元新基金、Tonic合成数据进美国公共采购、OpenCode披露密钥外泄。"
+    },
     {
       "title": "AI大模型及安全动态日报 | 2026年10月27日（星期二）",
       "date": "2026年10月27日（星期二）",
