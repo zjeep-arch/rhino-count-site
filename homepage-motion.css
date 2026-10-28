@@ -293,18 +293,6 @@ body{background:#0b1011}
 #builds .lab-card:hover .lab-cover::after{animation:exhibit-hover 3s ease-in-out infinite}
 @media(max-width:700px){#builds .lab-hero .lab-cover{min-height:230px}#builds .lab-med .lab-cover{height:160px}}
 
-/* Daily brief gets a living masthead and the feel of a fresh printed issue. */
-#daily .editorial-daily #dailyLatestBox{padding:0;border:0}
-#daily .daily-latest{position:relative;overflow:hidden;padding:158px clamp(18px,2.5vw,30px) 24px;border:1px solid rgba(240,234,220,.18);border-radius:4px;background:linear-gradient(145deg,#202d27,#151c19);box-shadow:0 16px 48px rgba(0,0,0,.18);transition:transform .4s var(--rhino-ease),border-color .3s,box-shadow .3s}
-#daily .daily-latest::before{content:"DAILY SIGNALS     /     08:00     /     2026";position:absolute;inset:0 0 auto;height:132px;padding:14px 18px;display:flex;align-items:flex-end;box-sizing:border-box;color:#f0eadc;font:600 9px/1.3 ui-monospace,monospace;letter-spacing:.18em;background-color:#202b27;background-image:radial-gradient(circle at 80% 31%,rgba(213,223,131,.9) 0 2px,transparent 3px),radial-gradient(circle at 80% 31%,transparent 0 30px,rgba(86,104,216,.65) 31px 33px,transparent 34px),linear-gradient(90deg,transparent 0 16%,rgba(201,109,82,.72) 16.1% 16.5%,transparent 16.6% 42%,rgba(213,223,131,.74) 42.1% 42.5%,transparent 42.6% 67%,rgba(86,104,216,.72) 67.1% 67.5%,transparent 67.6%),repeating-linear-gradient(0deg,rgba(240,234,220,.08) 0 1px,transparent 1px 12px),linear-gradient(125deg,#253b34,#1b2228 72%);}
-#daily .daily-latest>*{position:relative;z-index:1}
-#daily .daily-latest b{display:inline-flex;align-self:flex-start;padding:5px 8px;border:1px solid rgba(213,223,131,.4);background:rgba(17,24,21,.64);color:var(--rhino-lime);font:600 9px/1.25 ui-monospace,monospace;letter-spacing:.06em}
-#daily .daily-latest strong{font-size:clamp(17px,1.7vw,22px);line-height:1.45}
-#daily .daily-latest span{font-size:13px;line-height:1.75}
-#daily .daily-latest:hover,#daily .daily-latest:focus-visible{transform:translateY(-4px);border-color:rgba(86,104,216,.65);box-shadow:0 20px 46px rgba(35,43,105,.18)}
-#daily .daily-latest:hover::before{filter:saturate(1.25)}
-@media(max-width:700px){#daily .daily-latest{padding:150px 17px 19px}#daily .daily-latest::before{height:126px}}
-
 /* A typographic exhibition wall and an invitation card finish the route. */
 #manifesto .manifesto-container{position:relative}
 #manifesto .quote-mark{display:block;position:absolute;right:2%;top:-.55em;color:rgba(201,109,82,.16);font:700 clamp(180px,25vw,360px)/1 Georgia,serif;pointer-events:none;transition:color .5s,transform .8s var(--rhino-ease)}
@@ -1060,4 +1048,57 @@ body{background:#0b1011}
 }
 @media (max-width: 520px) {
   #daily .daily-desk-intro h2 { font-size: clamp(31px, 9vw, 38px); }
+}
+
+/* The issue artwork lives only inside its thumbnail; no second masthead layer. */
+#daily .daily-latest::before { content: none; display: none; }
+#daily .daily-latest strong {
+  font-size: clamp(18px, 1.5vw, 22px);
+  line-height: 1.38;
+  letter-spacing: -.02em;
+  -webkit-line-clamp: 1;
+  white-space: nowrap;
+}
+#daily .daily-latest-summary {
+  font-size: 11px;
+  line-height: 1.7;
+  -webkit-line-clamp: 2;
+}
+#daily .daily-latest-copy { gap: 8px; }
+#daily .daily-latest-cta { margin-top: 2px; }
+#daily .daily-headline-line {
+  position: relative;
+  transition: transform .48s cubic-bezier(.2,.75,.25,1), color .35s ease;
+}
+#daily .daily-headline-line::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: -.06em;
+  left: 0;
+  height: 1px;
+  background: currentColor;
+  opacity: .42;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .48s cubic-bezier(.2,.75,.25,1);
+}
+#daily .daily-headline-accent::after { background: #a9513b; }
+@media (hover: hover) and (pointer: fine) {
+  #daily .daily-desk-intro:hover .daily-headline-line:first-child,
+  #daily .daily-desk-intro:focus-within .daily-headline-line:first-child { transform: translateX(4px); }
+  #daily .daily-desk-intro:hover .daily-headline-accent,
+  #daily .daily-desk-intro:focus-within .daily-headline-accent { transform: translateX(12px); }
+  #daily .daily-desk-intro:hover .daily-headline-line::after,
+  #daily .daily-desk-intro:focus-within .daily-headline-line::after { transform: scaleX(1); }
+  #daily .daily-all-link:hover,
+  #daily .daily-all-link:focus-visible { gap: 28px; }
+}
+@media (max-width: 520px) {
+  #daily .daily-latest strong { font-size: 16px; white-space: normal; -webkit-line-clamp: 2; }
+  #daily .daily-latest-summary { font-size: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #daily .daily-headline-line,
+  #daily .daily-headline-line::after { transition: none !important; }
 }
