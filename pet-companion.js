@@ -194,6 +194,7 @@
     if (!drag || (event && event.pointerId !== undefined && event.pointerId !== drag.pointerId)) return;
     window.clearTimeout(holdTimer);
     const moved = drag.moved;
+    if (moved) longPressed = false;
     drag = null;
     pet.classList.remove('dragging');
     if (moved) {
