@@ -2,28 +2,28 @@
 (function (root) {
   'use strict';
   const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const colors = ['#39766e','#486581','#79704d','#66577c','#3d787b','#70516b','#526b61','#547492'];
+  const colors = ['#4b7466','#66776f','#a98754','#9b5f4c','#647d76','#866d5a','#737665','#aa7055'];
   const identityKeys = ['主理人','学历','勋章','履历','关注','能力','坐标','频道'];
   const identities = data => identityKeys.map(k => data.profile.cells.find(c => c.k === k)).filter(Boolean);
   function backdrop() {
     const paths = [
-      ['#70b5ae','M690 245V354L595 402H230L155 460H70'],
-      ['#b8a55b','M708 245V388L650 443H244L170 530H42'],
-      ['#9b709e','M730 245V402L830 457H1165L1245 520H1400'],
-      ['#7192c0','M748 245V342L845 385H1200L1260 438H1370'],
-      ['#70b5ae','M695 420V540L565 610L495 780'],
-      ['#b8a55b','M720 450V566L650 630L625 780'],
-      ['#9b709e','M748 420V548L855 624L900 780'],
-      ['#bc925b','M770 450V565L965 690L1000 780']
+      ['#a9d6ca','M690 245V354L595 402H230L155 460H70'],
+      ['#c6a66d','M708 245V388L650 443H244L170 530H42'],
+      ['#c96d52','M730 245V402L830 457H1165L1245 520H1400'],
+      ['#8fa0ad','M748 245V342L845 385H1200L1260 438H1370'],
+      ['#91b8a8','M695 420V540L565 610L495 780'],
+      ['#c6a66d','M720 450V566L650 630L625 780'],
+      ['#bd765f','M748 420V548L855 624L900 780'],
+      ['#a9d6ca','M770 450V565L965 690L1000 780']
     ];
     const rays = Array.from({length:35},(_,i)=>{const x=-800+i*90;return `<path d="M${720+(x-720)*.22} 230L${x} 780"/>`;}).join('');
     const rows = [240,253,269,290,317,351,395,450,520,608,718,778].map(y=>`<path d="M0 ${y}H1440"/>`).join('');
     return `<div class="pf-world" aria-hidden="true"><div class="pf-horizon"></div>
       <svg class="pf-board" viewBox="0 0 1440 780" preserveAspectRatio="none"><defs><radialGradient id="pf-board-fade"><stop offset="20%" stop-color="white"/><stop offset="75%" stop-color="#aaa"/><stop offset="100%" stop-color="black"/></radialGradient><mask id="pf-board-mask"><rect width="1440" height="780" fill="url(#pf-board-fade)"/></mask></defs>
-      <g mask="url(#pf-board-mask)"><g class="pf-grid-lines" fill="none" stroke="#60799f" stroke-width="1">${rays}${rows}</g>
+      <g mask="url(#pf-board-mask)"><g class="pf-grid-lines" fill="none" stroke="#7d9384" stroke-width="1">${rays}${rows}</g>
       <g fill="none" stroke-width="1.7">${paths.map(([color,d],i)=>`<path stroke="${color}" opacity=".4" d="${d}"/><path class="pf-current" pathLength="100" stroke="${color}" d="${d}" style="--delay:-${i*1.7}s;--duration:${8+i%3*2}s"/>`).join('')}</g>
-      <g class="pf-chips" stroke="#546987" fill="#0b1019"><path d="M156 355H312L263 460H84Z"/><path d="M1180 370H1300L1384 480H1240Z"/><path d="M174 375H281L253 433H135Z"/><path d="M1208 391H1287L1329 452H1251Z"/></g>
-      <g fill="#8dacc8" opacity=".45">${[[320,510],[354,520],[390,510],[1080,555],[1110,555],[1060,575],[520,350],[895,365]].map(([x,y])=>`<ellipse cx="${x}" cy="${y}" rx="3" ry="1.5"/>`).join('')}</g></g></svg><div class="pf-ambient"></div></div>`;
+      <g class="pf-chips" stroke="#60776a" fill="#101714"><path d="M156 355H312L263 460H84Z"/><path d="M1180 370H1300L1384 480H1240Z"/><path d="M174 375H281L253 433H135Z"/><path d="M1208 391H1287L1329 452H1251Z"/></g>
+      <g fill="#d2b987" opacity=".42">${[[320,510],[354,520],[390,510],[1080,555],[1110,555],[1060,575],[520,350],[895,365]].map(([x,y])=>`<ellipse cx="${x}" cy="${y}" rx="3" ry="1.5"/>`).join('')}</g></g></svg><div class="pf-ambient"></div></div>`;
   }
   function profile(data) {
     const items = identities(data);

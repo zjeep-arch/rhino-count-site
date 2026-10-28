@@ -112,3 +112,106 @@ body{background:#0b1011}
 #manifesto .rh-char.rh-lit{color:#d9eee4;text-shadow:0 0 .45em rgba(169,214,202,.75);transform:translateY(-.045em)}
 @media(max-width:700px){#manifesto.quote-section{padding:64px 0}#manifesto .manifesto-container{max-width:100%}#manifesto blockquote.pull{font-size:clamp(25px,7vw,34px);line-height:1.58;letter-spacing:-.035em}#manifesto .manifesto-kicker{font-size:9px;margin-bottom:22px}}
 @media(prefers-reduced-motion:reduce){#manifesto.quote-section::after{transition:none}#manifesto .rh-char{transition:none!important}#manifesto .rh-char.rh-lit{transform:none;text-shadow:none}}
+
+/* Editorial contrast system: pine ink, warm paper, restrained vermilion. */
+:root{
+  --rhino-paper:#f0eadc;
+  --rhino-paper-edge:#ddd3c0;
+  --rhino-paper-ink:#202b26;
+  --rhino-paper-muted:#66716a;
+  --rhino-rust:#c96d52;
+  --rhino-rust-dark:#a94f39;
+  --rhino-pine:#121b18;
+  --rhino-pine-soft:#1a2420;
+  --rhino-slate:#8fa0ad;
+  --rhino-ochre:#c6a66d;
+}
+
+/* Warm paper openings make a clear editorial beat between the dark scenes. */
+#now{background:var(--rhino-paper);color:var(--rhino-paper-ink);border-color:var(--rhino-paper-edge)}
+#now .now-wrap{color:inherit}
+#now .now-head .label,#now .now-num{color:var(--rhino-rust-dark);-webkit-text-fill-color:currentColor;background:none}
+#now .now-head .label::before{background:var(--rhino-rust)}
+#now .now-head h2,#now .now-item p{color:var(--rhino-paper-ink)}
+#now .now-item{border-bottom-color:#c9beaa}
+#now .now-item::before{background:var(--rhino-rust)}
+#now .now-item::after{background:radial-gradient(circle at var(--spot-x,50%) var(--spot-y,50%),rgba(201,109,82,.13),transparent 34%)}
+#now .now-foot{color:var(--rhino-paper-muted)}
+
+/* Signals keeps the archive-room atmosphere; its warm hardware remains the accent. */
+#notes.jin{background:radial-gradient(ellipse at 77% 20%,rgba(201,109,82,.07),transparent 38%),#191b18}
+#notes .reading-meta,#notes .reading-heading .label{color:#c9a17f}
+#notes .reading-card{border-top-color:rgba(226,213,189,.34)}
+#notes .reading-card:hover,#notes .reading-card:focus-visible{border-color:var(--rhino-rust)}
+#notes .reading-card:hover h3{color:#e3a087}
+#notes .reading-link{color:#d8b49a}
+#notes .reading-card::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:radial-gradient(260px circle at var(--spot-x,50%) var(--spot-y,50%),rgba(201,109,82,.12),transparent 76%);opacity:0;transition:opacity .28s ease}
+#notes .reading-card.pointer-lit::after{opacity:1}
+#notes .reading-card>*{position:relative;z-index:1}
+
+/* Picks is the main printed spread: dark ink typography, paper surface, rust details. */
+#picks{background:var(--rhino-paper);color:var(--rhino-paper-ink);border-color:var(--rhino-paper-edge)}
+#picks .section-head h2,#picks .pick-card h3,#picks .pick-author,#picks .pick-reason,#picks .pick-meta{color:var(--rhino-paper-ink)}
+#picks .section-head .label,#picks .pick-type,#picks .pick-tag{color:var(--rhino-rust-dark)}
+#picks .section-head .blurb,#picks .pick-author,#picks .pick-meta{color:var(--rhino-paper-muted)}
+#picks .picks-filters{border-color:var(--rhino-paper-edge)}
+#picks .pick-filter{color:#626d66;border-color:#bdb4a3}
+#picks .pick-filter:hover{color:var(--rhino-paper-ink);border-color:var(--rhino-rust)}
+#picks .pick-filter.active{color:#fffaf2;background:var(--rhino-rust);border-color:var(--rhino-rust)}
+#picks .pick-card{position:relative;border-top-color:#c5baa6;isolation:isolate}
+#picks .pick-card:hover,#picks .pick-card:focus-visible{border-color:var(--rhino-rust)}
+#picks .pick-card:hover h3{color:var(--rhino-rust-dark)}
+#picks .pick-reason{border-left-color:#c8a18c}
+#picks .pick-card::after{content:"";display:block;position:absolute;inset:0;z-index:0;pointer-events:none;background:radial-gradient(300px circle at var(--spot-x,50%) var(--spot-y,50%),rgba(201,109,82,.11),transparent 76%);opacity:0;transition:opacity .28s ease}
+#picks .pick-card.pointer-lit::after{opacity:1}
+#picks .pick-card>*{position:relative;z-index:1}
+#picks .follows-wrap{border-top-color:#c8bead}
+#picks .follow-item strong{color:var(--rhino-paper-ink)}
+#picks .follow-item span{color:var(--rhino-paper-muted)}
+
+/* Builds retains its cover-story hierarchy; category colors now share one quiet family. */
+#builds{background:radial-gradient(ellipse at 85% 12%,rgba(201,109,82,.055),transparent 32%),var(--rhino-pine)}
+#builds .section-head .label,#builds .lab-index-head{color:#b7c9be}
+#builds .lab-card[data-tag="PLAY"],#builds .lab-card[data-tag="3D"]{--tint:#a9d6ca}
+#builds .lab-card[data-tag="TOOL"],#builds .lab-card[data-tag="LAB"]{--tint:var(--rhino-slate)}
+#builds .lab-card[data-tag="GAME"],#builds .lab-card[data-tag="EXPERIMENT"]{--tint:var(--rhino-rust)}
+#builds .lab-card{background:linear-gradient(145deg,rgba(255,255,255,.025),transparent 56%),#17211d;border-color:rgba(216,226,213,.14)}
+#builds .lab-card[data-tag="GAME"] .lab-cover,#builds .lab-card[data-tag="EXPERIMENT"] .lab-cover{background-color:#241c18}
+#builds .lab-row:hover{background:color-mix(in oklab,var(--tint) 8%,transparent)}
+#builds .lab-card.pointer-lit::before{opacity:.95}
+
+/* The daily brief stays dark and quiet; a small rust rule marks the live edition. */
+#daily{background:linear-gradient(120deg,#17211d,var(--rhino-pine) 72%)}
+#daily .editorial-daily #dailyLatestBox{border-left-color:rgba(201,109,82,.52)}
+#daily .daily-latest b{color:#e29a7d}
+#daily .daily-latest:hover strong{color:#d7eee4}
+
+/* A paper pull-quote provides a warm, typographic pause before contact. */
+#manifesto.quote-section{background:var(--rhino-paper);border-color:var(--rhino-paper-edge)}
+#manifesto.quote-section::after{background:radial-gradient(430px circle at var(--spot-x,50%) var(--spot-y,50%),rgba(201,109,82,.12),transparent 72%),linear-gradient(115deg,rgba(201,109,82,.035),transparent 48%,rgba(169,214,202,.07));opacity:.6}
+#manifesto.quote-section.pointer-active::after{opacity:1}
+#manifesto .manifesto-kicker,#manifesto .manifesto-kicker span,#manifesto .quote-attr{color:var(--rhino-rust-dark)}
+#manifesto .manifesto-kicker::before,#manifesto .quote-attr::before{background:var(--rhino-rust)}
+#manifesto blockquote.pull{color:var(--rhino-paper-ink)}
+#manifesto .rh-char.rh-lit{color:var(--rhino-rust-dark);text-shadow:0 0 .45em rgba(201,109,82,.32)}
+
+/* Pointer light belongs to the content under the cursor; touch stays still. */
+@media(hover:hover) and (pointer:fine){
+  #notes .reading-card,#picks .pick-card,#builds .lab-card{--spot-x:50%;--spot-y:50%}
+  #builds .lab-card::before{background:radial-gradient(280px circle at var(--spot-x,50%) var(--spot-y,50%),rgba(169,214,202,.14),transparent 74%),linear-gradient(135deg,color-mix(in oklab,var(--tint) 10%,transparent),transparent 38%),radial-gradient(circle at 86% 12%,color-mix(in oklab,var(--electric) 14%,transparent),transparent 34%)}
+}
+
+@media(max-width:700px){
+  #now{padding-block:46px}
+  #picks{padding-block:58px}
+  #manifesto.quote-section{padding-block:64px}
+  #daily .editorial-daily #dailyLatestBox{border-left:0;border-top-color:rgba(201,109,82,.52)}
+}
+@media(prefers-reduced-motion:reduce){
+  #notes .reading-card::after,#picks .pick-card::after{display:none}
+  #manifesto.quote-section::after{background:linear-gradient(115deg,rgba(201,109,82,.035),transparent 48%,rgba(169,214,202,.04))}
+}
+
+/* Keep the moving portrait crisp while softening its blue-purple cast. */
+#hero-section .editorial-portrait video{filter:saturate(.96) contrast(1.04) brightness(.98) sepia(.035)}
+#hero-section .editorial-portrait::after{background:linear-gradient(90deg,rgba(4,8,9,.56) 0%,rgba(4,8,9,.38) 36%,rgba(4,8,9,.08) 72%,rgba(4,8,9,.06) 100%),linear-gradient(0deg,rgba(4,8,9,.66),transparent 34%,rgba(4,8,9,.12)),linear-gradient(112deg,rgba(19,39,31,.13),transparent 58%,rgba(173,102,76,.035))}

@@ -41,3 +41,23 @@
 @media(prefers-reduced-motion:reduce){.pf-stage *{transition:none!important;animation:none!important}}
 @media(min-width:701px){.is-open .pf-root{bottom:55px}.pf-instruction{bottom:20px}}
 @media(min-width:701px){.pf-stage:not(.is-open) .pf-root{bottom:clamp(115px,22svh,240px)}}
+
+/* Archive palette: pine shadow, mineral green, paper and aged vermilion. */
+#profile.gc{background:#101714}
+.pf-stage{background:radial-gradient(ellipse at 50% 72%,rgba(89,125,104,.28),transparent 58%),radial-gradient(ellipse at 50% 34%,rgba(114,72,53,.09),transparent 66%);color:#f2eee4}
+.pf-horizon{background:linear-gradient(rgba(169,214,202,.075) 1px,transparent 1px),linear-gradient(90deg,rgba(169,214,202,.075) 1px,transparent 1px);border-bottom-color:rgba(201,109,82,.48);box-shadow:0 7px 22px rgba(201,109,82,.12)}
+.pf-ambient{background:radial-gradient(ellipse at 50% 62%,rgba(169,214,202,.09),transparent 43%)}
+.pf-root-back{background:linear-gradient(115deg,#365b50,#765847);border-color:rgba(220,198,162,.3)}
+.pf-root-back>span{background:#45675a;color:#e8ddc5}
+.pf-root-paper{background:linear-gradient(145deg,#eee6d7,#b7c3b2);border-color:rgba(240,234,220,.8);color:#26332d}
+.pf-root-paper span{color:#596b5e}
+.pf-root-paper-two{background:linear-gradient(145deg,#bd8060,#655b4d)}
+.pf-root-front{background:repeating-linear-gradient(0deg,#ffffff02 0 1px,transparent 1px 3px),linear-gradient(115deg,#345b4e,#514f40 52%,#765344);border-color:rgba(201,109,82,.48)}
+.pf-root-front span{color:#e3d9c5}
+.pf-paper{background:linear-gradient(145deg,#f0eadc,#d6cbb7);border-color:rgba(249,244,231,.8);color:#385648}
+.pf-paper-rule{background:rgba(98,113,93,.34)}
+.pf-back{border-color:rgba(240,234,220,.3)}
+.pf-front{border-color:rgba(240,234,220,.28);color:#fffaf0}
+.pf-front>span{color:#f0e7d6}
+.pf-file:focus-visible,.pf-root-front:focus-visible{outline-color:#e38c6d}
+.pf-instruction{color:#c7ae8b}
