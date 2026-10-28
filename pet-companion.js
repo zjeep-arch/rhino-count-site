@@ -5,15 +5,30 @@
   const bubble = document.getElementById('rhinoBubble');
   const comboBadge = document.getElementById('rhinoCombo');
   if (!pet || !btn || !bubble) return;
+  const petImage = btn.querySelector('.rhino-sapling');
+  const petSprites = {
+    idle: '/assets/capybara-companion.png',
+    work: '/assets/capybara-work.png',
+    sleep: '/assets/capybara-sleep.png',
+    celebrate: '/assets/capybara-celebrate.png'
+  };
+  Object.values(petSprites).forEach(src => { const image = new Image(); image.src = src; });
+  let poseIndex = -1;
+  let poseTimer = 0;
+  function setPose(pose, duration = 2600) {
+    if (petImage && petSprites[pose]) petImage.src = petSprites[pose];
+    pet.dataset.pose = pose;
+    window.clearTimeout(poseTimer);
+    if (pose !== 'idle' && duration > 0) poseTimer = window.setTimeout(() => setPose('idle', 0), duration);
+  }
 
   const lines = [
-    '新芽上线，继续向前。',
-    '今天也要追踪真正重要的信号。',
-    '慢慢长大，也持续迭代。',
-    '点我一下，收下这份能量。',
-    '我在这里陪你把想法做出来。'
+    '小目标完成，卡皮给你鼓掌！',
+    '进入专注状态，陪你把想法做出来。',
+    '补充一点能量，再继续出发。',
+    '卡皮在这里陪你。'
   ];
-  const holdLines = ['收到，开始蓄力。', '再给我一点阳光。', '新想法正在发芽。'];
+  const holdLines = ['卡皮开始休息啦。', '慢一点也没关系～', '休息一下，再继续。'];
   const comboLines = ['连击成功，能量上涨。', '手速不错。', '今天的灵感很旺。'];
   let lineIndex = -1;
   let drag = null;
@@ -141,6 +156,8 @@
 
   function doClick() {
     pulse('excited', 620);
+    poseIndex = (poseIndex + 1) % 4;
+    setPose(['celebrate', 'work', 'sleep', 'idle'][poseIndex]);
     spark(7);
     combo += 1;
     if (comboBadge) comboBadge.textContent = 'x' + combo;
@@ -168,6 +185,7 @@
       if (!drag || drag.moved) return;
       longPressed = true;
       pulse('squish', 700);
+      setPose('sleep', 4200);
       spark(9);
       showBubble(holdLines[Math.floor(Math.random() * holdLines.length)]);
     }, 680);
@@ -182,6 +200,7 @@
       userMovedPet = true;
       window.clearTimeout(holdTimer);
       pet.classList.add('dragging');
+      setPose('idle', 0);
       showBubble('放在你顺手的位置。', 1800);
     }
     if (drag.moved) {
