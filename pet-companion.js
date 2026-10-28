@@ -26,16 +26,17 @@
     window.clearTimeout(poseTimer);
     if (pose !== 'idle' && duration > 0) poseTimer = window.setTimeout(() => setPose('idle', 0), duration);
   }
+  setPose('idle', 0);
 
   const lines = [
     '小目标完成，卡皮给你鼓掌！',
     '进入专注状态，陪你把想法做出来。',
-    '补充一点能量，再继续出发。',
-    '卡皮在这里陪你。',
-    '卡皮出发巡游一圈。',
     '嗯……让我想一想。',
     '送你一颗小心心。',
-    '来一杯咖啡，继续加油。'
+    '来一杯咖啡，继续加油。',
+    '卡皮出发巡游一圈。',
+    '卡皮开始休息啦。',
+    '卡皮在这里陪你。'
   ];
   const holdLines = ['卡皮开始休息啦。', '慢一点也没关系～', '休息一下，再继续。'];
   const comboLines = ['连击成功，能量上涨。', '手速不错。', '今天的灵感很旺。'];
