@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;700;900&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=20261024q">
+<link rel="stylesheet" href="assets/css/style.css?v=20261024r">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <meta name="theme-color" content="#0B1026">
@@ -141,8 +141,6 @@
         <button data-mode="natal" class="on">本命</button>
         <button data-mode="daxian">大限</button>
         <button data-mode="liunian">流年</button>
-        <button data-mode="liuyue">流月</button>
-        <button data-mode="liuri">流日</button>
       </div>
       <div id="luck-picker"></div>
       <div id="sihua-strip"></div>
@@ -209,20 +207,12 @@
     <article id="reading-body" class="reading-body"></article>
   </section>
 
-  <!-- 专题 -->
-  <section class="view" id="view-topics">
-    <button class="back-link" data-nav="menu">‹ 返回解读菜单</button>
-    <h2 class="view-title">一键专题</h2>
-    <p class="view-sub">跨宫位综合：不只看一宫，看一组宫位的合力。</p>
-    <div class="tabs" id="topic-tabs"></div>
-    <article id="topic-body" class="reading-body"></article>
-  </section>
 
   <!-- 问星答 -->
   <section class="view" id="view-answer">
     <button class="back-link" data-nav="menu">‹ 返回解读菜单</button>
-    <h2 class="view-title">问星答</h2>
-    <p class="view-sub">把盘面翻译成人话：每个问题给倾向、条件与行动清单。倾向描述，不替你做决定。</p>
+    <h2 class="view-title">问运</h2>
+    <p class="view-sub">今年怎么走、感情什么剧本、钱从哪来到哪去、事业何时该动——先结论后依据，全部按你的盘面实算。</p>
     <div id="answer-list"></div>
     <div class="card"><div class="card-kicker">择日助手 · 未来 30 天</div><div id="zeri-body"></div></div>
   </section>
@@ -258,25 +248,14 @@
     <div id="archive-list"></div>
     <div class="row-2">
       <button class="btn-ghost" data-nav="input">＋ 新排一张</button>
-      <button class="btn-ghost" data-nav="compare">双人合盘</button>
+
     </div>
     <div class="row-2">
-      <button class="btn-ghost" data-nav="favorites">我的收藏</button>
+
       <button class="btn-ghost" data-nav="dingpan">时辰不确定？定盘辅助</button>
     </div>
   </section>
 
-  <!-- 合盘 -->
-  <section class="view" id="view-compare">
-    <button class="back-link" data-nav="archive">‹ 返回我的命盘</button>
-    <h2 class="view-title">双人合盘</h2>
-    <p class="view-sub">选存档里的两张盘对照看看。娱乐参考，别拿它做决定。</p>
-    <div class="date-row">
-      <select id="cmp-a"></select><select id="cmp-b"></select>
-    </div>
-    <button class="btn-primary btn-block" id="btn-compare">开始合盘</button>
-    <div id="compare-result"></div>
-  </section>
 
   <!-- 定盘验证辅助 -->
   <section class="view" id="view-dingpan">
@@ -306,12 +285,6 @@
     </div>
   </section>
 
-  <!-- 收藏 -->
-  <section class="view" id="view-favorites">
-    <button class="back-link" data-nav="archive">‹ 返回我的命盘</button>
-    <h2 class="view-title">我的收藏</h2>
-    <div id="fav-list"></div>
-  </section>
 </main>
 
 <!-- 星曜解释弹窗 -->
@@ -330,8 +303,6 @@
     <h3>分享给朋友</h3>
     <div class="tabs" id="share-tabs">
       <button data-k="chart" class="on">命盘图</button>
-      <button data-k="quote">金句卡</button>
-      <button data-k="year">年度运势卡</button>
       <button data-k="persona">主星人格卡</button>
       <button data-k="sign">签文卡</button>
       <button data-k="link">链接</button>
@@ -382,6 +353,6 @@
 <script src="assets/js/ziwei-engine.js"></script>
 <script src="assets/js/data.js"></script>
 <script src="assets/js/data-v2.js"></script>
-<script src="assets/js/app.js?v=20261024q"></script>
+<script src="assets/js/app.js?v=20261024r"></script>
 </body>
 </html>

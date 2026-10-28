@@ -1222,3 +1222,11 @@ body{color:var(--ink);
 .scr-tag.lu{background:rgba(201,169,106,.16); color:#D9B36A;}
 .scr-tag.born{background:rgba(134,162,255,.16); color:#A9BCF2;}
 .scr-text{flex:1; font-size:13px; color:#C9D1F2; line-height:1.85; min-width:0;}
+
+/* v16：问运四块 */
+.ans-card.wy{margin:14px 0;}
+.wy-concl{font-family:var(--font-title); font-size:16.5px; color:#F0F2FB; line-height:1.9; letter-spacing:.04em;
+  padding:10px 14px; background:rgba(134,162,255,.09); border-left:3px solid #C9A96A; border-radius:0 10px 10px 0; margin:8px 0;}
+.wy-rows{margin:6px 0 2px;}
+.wy-time{font-size:12.5px; color:#D9B36A; background:rgba(201,169,106,.09); border-radius:8px; padding:6px 10px; margin:8px 0 2px; line-height:1.7;}
+.wy-act{margin:8px 0 0; padding-left:18px; font-size:13px; color:#B9C0E3; line-height:1.9;}
