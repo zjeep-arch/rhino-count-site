@@ -1,0 +1,26 @@
+name: Validate static site build
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  static-site-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Run production build checks
+        run: |
+          node scripts/render-editorial.mjs
+          node scripts/render-profile.mjs
+          node scripts/check-profile.mjs
+          node scripts/check-builds-layout.mjs
