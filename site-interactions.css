@@ -168,3 +168,29 @@
 @media (prefers-reduced-motion: reduce) {
   .rhino-sapling, .rhino-pet-btn, .rhino-pet[data-pose]::before { animation: none !important; transition: none !important; }
 }
+
+/* iPhone Safari fix: homepage-motion.css centers this nested figure with a translate.
+   In the full-bleed mobile hero, reset that transform or half the video sits off-canvas. */
+@media (max-width: 700px) {
+  #hero-section .editorial-portrait {
+    position: absolute !important;
+    inset: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    transform: none !important;
+    translate: none !important;
+    margin: 0 !important;
+  }
+  #hero-section .editorial-motion {
+    position: absolute !important;
+    inset: 0 !important;
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: none !important;
+    object-fit: cover;
+    object-position: 58% 35%;
+  }
+}
