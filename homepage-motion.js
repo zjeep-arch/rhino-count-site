@@ -1,6 +1,32 @@
 /* One-shot, viewport-aware reveals; content is visible by default if JS is unavailable. */
 (function(){
   const reduce=window.matchMedia('(prefers-reduced-motion: reduce)');
+  const manifesto=document.getElementById('manifesto');
+  const manifestoNotes=['捕捉变化，找到值得追踪的信号。','把信号放进现实里，形成自己的判断。','拆开问题，辨认真正起作用的变量。','把判断做成作品，再根据反馈继续推进。'];
+  if(manifesto){
+    const noteIndex=manifesto.querySelector('.manifesto-note-index');
+    const noteCopy=manifesto.querySelector('.manifesto-note-copy');
+    const steps=Array.from(manifesto.querySelectorAll('[data-manifesto-step]'));
+    const activateStep=index=>{
+      const step=steps[index];
+      if(!step)return;
+      manifesto.dataset.stepIndex=String(index);
+      manifesto.style.setProperty('--process-turn',`${index*90}deg`);
+      if(noteIndex)noteIndex.textContent=`0${index+1}`;
+      if(noteCopy)noteCopy.textContent=manifestoNotes[index];
+      steps.forEach((item,itemIndex)=>{
+        const active=itemIndex===index;
+        item.classList.toggle('is-active',active);
+        item.setAttribute('aria-pressed',String(active));
+      });
+    };
+    steps.forEach((step,index)=>{
+      step.addEventListener('focus',()=>activateStep(index));
+      step.addEventListener('click',()=>activateStep(index));
+      step.addEventListener('pointerenter',event=>{if(event.pointerType==='mouse')activateStep(index);},{passive:true});
+    });
+    activateStep(0);
+  }
   if(reduce.matches || !('IntersectionObserver' in window)) return;
   const selectors=['.reading-heading','.reading-card','.editorial-daily > div','.manifesto-container','.editorial-index a'];
   const elements=Array.from(document.querySelectorAll(selectors.join(',')));
@@ -12,7 +38,6 @@
     el.style.setProperty('--reveal-delay',`${Math.min(i%3*55,110)}ms`);
     observer.observe(el);
   });
-  const manifesto=document.getElementById('manifesto');
   if(manifesto && !reduce.matches){
     let frame=0;
     manifesto.addEventListener('pointermove',event=>{

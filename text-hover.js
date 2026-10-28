@@ -6,7 +6,7 @@
   if(reduce.matches || !pointer.matches || !('Intl' in window)) return;
   const split = typeof Intl.Segmenter === 'function' ? new Intl.Segmenter(undefined,{granularity:'grapheme'}) : null;
   const segments = text => split ? Array.from(split.segment(text),x=>x.segment) : Array.from(text);
-  const targets=document.querySelectorAll('.editorial-intro h1,.quote-section blockquote.pull,.section-head h2,.now-head h2,.reading-heading h2,.editorial-daily h2,.reading-card h3,.pick-card h3,.lab-card h3,#navLinks a');
+  const targets=document.querySelectorAll('.editorial-intro h1,#manifesto .manifesto-thesis,.section-head h2,.now-head h2,.reading-heading h2,.editorial-daily h2,.reading-card h3,.pick-card h3,.lab-card h3,#navLinks a');
   targets.forEach(target=>{
     const label=target.innerText.trim().replace(/\s+/g,' ');
     if(!label || target.dataset.rhText) return;

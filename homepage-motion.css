@@ -342,3 +342,51 @@ body{background:#0b1011}
 #contact .contact-card>*{position:relative;z-index:1}
 @media(max-width:700px){#contact .contact-card::before{top:4px}#contact .contact-card::after{right:8px;left:auto;top:36px;width:58px;height:58px}}
 @media(prefers-reduced-motion:reduce){#now .now-head::after{transform:none!important}#contact .contact-card:hover::after{transform:none}}
+
+/* Manifesto as an interactive printed process study. */
+#manifesto.quote-section{padding:clamp(68px,8vw,112px) 0;background:var(--rhino-paper);border-block:1px solid var(--rhino-paper-edge)}
+#manifesto.quote-section::before{display:block!important;inset:0;opacity:.42;transform:none;background:linear-gradient(90deg,transparent 0 7.5%,rgba(169,214,202,.27) 7.55% 7.62%,transparent 7.68%),repeating-linear-gradient(90deg,transparent 0 159px,rgba(32,43,38,.035) 160px,transparent 161px),linear-gradient(0deg,transparent 0 94%,rgba(201,109,82,.11) 94.1% 94.25%,transparent 94.35%);pointer-events:none}
+#manifesto.quote-section::after{background:radial-gradient(380px circle at var(--spot-x,78%) var(--spot-y,44%),rgba(201,109,82,.14),transparent 74%),linear-gradient(115deg,rgba(201,109,82,.035),transparent 48%,rgba(169,214,202,.08));opacity:.5}
+#manifesto .manifesto-container{max-width:1380px}
+#manifesto .manifesto-topline{position:relative;z-index:1;display:flex;justify-content:space-between;align-items:center;padding-bottom:16px;border-bottom:1px solid rgba(32,43,38,.2)}
+#manifesto .manifesto-kicker{margin:0;color:var(--rhino-rust-dark)}
+#manifesto .manifesto-kicker::before{background:var(--rhino-rust)}
+#manifesto .manifesto-kicker span{color:var(--rhino-rust-dark)}
+#manifesto .manifesto-edition{font:600 9px/1.2 ui-monospace,monospace;letter-spacing:.18em;color:#788078}
+#manifesto .manifesto-spread{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1fr) clamp(205px,22vw,286px);align-items:center;gap:clamp(28px,6vw,96px);padding-top:clamp(30px,5vw,68px)}
+#manifesto .manifesto-copy{min-width:0}
+#manifesto .quote-mark{display:none}
+#manifesto blockquote.pull{max-width:980px;margin:0;color:var(--rhino-paper-ink);font:500 clamp(42px,5.4vw,76px)/1.12 var(--serif);font-style:normal;letter-spacing:-.065em;text-wrap:pretty}
+#manifesto .manifesto-thesis{display:block;margin-bottom:.16em;font-weight:600}
+#manifesto .manifesto-bridge{display:block;margin:0 0 .18em;color:#747a71;font:500 clamp(20px,2vw,28px)/1.4 var(--sans);letter-spacing:-.025em}
+#manifesto .manifesto-process-inline{display:flex;align-items:baseline;flex-wrap:wrap;gap:clamp(2px,.45vw,7px)}
+#manifesto .manifesto-step{position:relative;display:inline-flex;align-items:baseline;gap:8px;min-height:48px;padding:0 2px 5px;border:0;border-bottom:1px solid rgba(32,43,38,.24);border-radius:0;background:transparent;color:var(--rhino-paper-ink);font:600 clamp(25px,3.2vw,43px)/1.2 var(--serif);letter-spacing:-.05em;cursor:pointer;transition:color .25s,transform .3s var(--rhino-ease),border-color .25s}
+#manifesto .manifesto-step small{position:relative;top:-.85em;color:#878b81;font:600 9px/1 ui-monospace,monospace;letter-spacing:.04em}
+#manifesto .manifesto-step::after{content:"";position:absolute;left:0;right:100%;bottom:-2px;height:2px;background:var(--rhino-rust);transition:right .35s var(--rhino-ease)}
+#manifesto .manifesto-step:hover,#manifesto .manifesto-step:focus-visible,#manifesto .manifesto-step.is-active{color:var(--rhino-rust-dark);border-color:rgba(169,79,57,.48);outline:none;transform:translateY(-3px)}
+#manifesto .manifesto-step:hover::after,#manifesto .manifesto-step:focus-visible::after,#manifesto .manifesto-step.is-active::after{right:0}
+#manifesto .manifesto-separator,#manifesto .manifesto-conjunction{color:#a8a091;font:400 clamp(19px,2vw,27px)/1 var(--serif)}
+#manifesto .manifesto-ending{font:500 clamp(21px,2.2vw,29px)/1.2 var(--serif);letter-spacing:-.03em}
+#manifesto .manifesto-annotation{display:flex;align-items:center;gap:13px;max-width:860px;margin-top:clamp(28px,4vw,48px);padding:13px 0;border-top:1px solid rgba(32,43,38,.18);border-bottom:1px solid rgba(32,43,38,.18);color:#59645d}
+#manifesto .manifesto-note-index{display:grid;place-items:center;width:27px;height:27px;flex:none;border:1px solid rgba(201,109,82,.55);border-radius:50%;color:var(--rhino-rust-dark);font:600 9px/1 ui-monospace,monospace}
+#manifesto .manifesto-note-copy{font:500 13px/1.6 var(--sans);letter-spacing:.01em;transition:opacity .2s}
+#manifesto .manifesto-hint{margin-left:auto;color:#85877d;font:500 9px/1.4 ui-monospace,monospace;letter-spacing:.1em;white-space:nowrap}
+#manifesto .quote-attr{margin-top:20px;color:var(--rhino-rust-dark);font-size:10px;letter-spacing:.2em}
+#manifesto .quote-attr::before{background:var(--rhino-rust)}
+#manifesto .manifesto-instrument{position:relative;display:grid;place-items:center;justify-self:center;width:min(100%,270px);aspect-ratio:1;border:1px solid rgba(32,43,38,.18);border-radius:50%;background:radial-gradient(circle at 50% 50%,rgba(201,109,82,.09),transparent 57%),repeating-radial-gradient(circle at 50% 50%,transparent 0 24px,rgba(32,43,38,.08) 25px,transparent 26px 47px);color:var(--rhino-paper-ink)}
+#manifesto .manifesto-instrument::before{content:"";position:absolute;inset:11%;border:1px dashed rgba(169,79,57,.32);border-radius:50%;animation:manifesto-orbit 44s linear infinite}
+#manifesto .manifesto-instrument::after{content:"";position:absolute;inset:20%;border:1px solid rgba(32,43,38,.16);border-radius:50%;background:repeating-conic-gradient(from 0deg,rgba(32,43,38,.31) 0deg .5deg,transparent .6deg 15deg);mask:radial-gradient(circle,transparent 0 76%,#000 77% 79%,transparent 80%)}
+#manifesto .instrument-ring{position:absolute;inset:0;border-radius:50%;transform:rotate(var(--process-turn,0deg));transition:transform .75s var(--rhino-ease)}
+#manifesto .instrument-ring::after{content:"";position:absolute;top:7%;left:calc(50% - 4px);width:8px;height:8px;border:2px solid var(--rhino-paper);border-radius:50%;background:var(--rhino-rust);box-shadow:0 0 0 4px rgba(201,109,82,.15),0 0 20px rgba(201,109,82,.3)}
+#manifesto .instrument-label,#manifesto .instrument-coordinate{position:absolute;z-index:2;color:#7b8379;font:600 8px/1.4 ui-monospace,monospace;letter-spacing:.16em}
+#manifesto .instrument-label{top:16%;left:50%;transform:translateX(-50%);white-space:nowrap}
+#manifesto .instrument-number{position:relative;z-index:1;color:rgba(32,43,38,.84);font:500 clamp(82px,10vw,136px)/.8 Georgia,serif;letter-spacing:-.09em;transition:color .35s,transform .55s var(--rhino-ease)}
+#manifesto[data-step-index="1"] .instrument-number{color:var(--rhino-rust-dark);transform:rotate(-3deg)}
+#manifesto[data-step-index="2"] .instrument-number{color:#5668d8;transform:rotate(3deg)}
+#manifesto[data-step-index="3"] .instrument-number{color:#9d7638;transform:rotate(-2deg)}
+#manifesto .instrument-caption{position:absolute;z-index:2;bottom:18%;color:#6d746b;text-align:center;font:600 8px/1.6 ui-monospace,monospace;letter-spacing:.2em}
+#manifesto .instrument-coordinate{bottom:8%;letter-spacing:.08em}
+@keyframes manifesto-orbit{to{transform:rotate(360deg)}}
+@media(max-width:800px){#manifesto .manifesto-spread{grid-template-columns:minmax(0,1fr) 170px;gap:24px}#manifesto .manifesto-instrument{width:170px}#manifesto blockquote.pull{font-size:clamp(36px,5.7vw,50px)}#manifesto .manifesto-step{font-size:clamp(22px,3vw,30px)}}
+@media(max-width:620px){#manifesto.quote-section{padding:54px 0}#manifesto .manifesto-topline{align-items:center;gap:8px}#manifesto .manifesto-kicker{flex-wrap:nowrap;gap:7px;white-space:nowrap;font-size:8px;letter-spacing:.1em}#manifesto .manifesto-kicker::before{width:18px;flex:none}#manifesto .manifesto-edition{padding-top:0;font-size:7px;white-space:nowrap;letter-spacing:.1em}#manifesto .manifesto-spread{grid-template-columns:1fr;gap:26px;padding-top:30px}#manifesto blockquote.pull{font-size:clamp(31px,8vw,38px);line-height:1.16;letter-spacing:-.07em}#manifesto .manifesto-thesis{font-size:clamp(27px,8vw,38px);line-height:1.2;letter-spacing:-.075em}#manifesto .manifesto-bridge{margin-top:8px;font-size:18px}#manifesto .manifesto-process-inline{gap:3px 5px}#manifesto .manifesto-step{min-height:44px;font-size:clamp(23px,6vw,32px)}#manifesto .manifesto-step small{font-size:8px}#manifesto .manifesto-annotation{margin-top:26px;gap:10px}#manifesto .manifesto-note-copy{font-size:12px}#manifesto .manifesto-hint{font-size:8px}#manifesto .quote-attr{margin-top:14px}#manifesto .manifesto-instrument{width:142px;justify-self:center;margin-top:0}#manifesto .instrument-number{font-size:82px}#manifesto .instrument-caption{bottom:18%;font-size:7px}#manifesto .instrument-coordinate{bottom:7%;font-size:7px}#manifesto .instrument-label{font-size:7px}}
+@media(prefers-reduced-motion:reduce){#manifesto .manifesto-instrument::before{animation:none}#manifesto .manifesto-step,#manifesto .instrument-ring,#manifesto .instrument-number{transition:none!important}}

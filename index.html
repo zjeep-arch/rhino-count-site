@@ -5892,7 +5892,7 @@
 <link rel="stylesheet" href="profile-folders.css?v=20261028a">
 <link rel="stylesheet" href="signals-layout.css?v=20261025b">
 <link rel="stylesheet" href="homepage-editorial.css?v=20261028a">
-<link rel="stylesheet" href="homepage-motion.css?v=20261028b">
+<link rel="stylesheet" href="homepage-motion.css?v=20261028e">
 </head>
 <body>
   <div class="scroll-progress" id="scrollProgress" aria-hidden="true" style="transform: scaleX(0);"></div>
@@ -6231,14 +6231,17 @@
     <section id="daily">
 <div class="container editorial-daily"><div><span class="label">AI MORNING BRIEF · 日报</span><h2>给信息做减法。<br>给判断留时间。</h2><p>精选 AI 大模型、产品更新、资本动向与产业洞察，把昨夜最值得关注的变化压缩成一份早间速览。</p><a class="editorial-textlink" href="ai-daily/">查看全部早报 ↗</a></div><div id="dailyLatestBox"><a class="daily-latest" href="ai-daily/2026-10-28-ai-daily.html"><b>LATEST · 2026年10月28日（星期三）</b><strong>AI大模型及安全动态日报 | 2026年10月28日（星期三）</strong><span>Google发布世界模型Genie 4、苹果办公套件迎来AI助手与MCP、OpenAI发布低价模型Terra、Anthropic S-1治理细节浮出、Disruptive设100亿美元新基金、Tonic合成数据进美国公共采购、OpenCode披露密钥外泄。</span></a></div></div>
 </section>
-    <section id="manifesto" class="quote-section assembled"><canvas class="manifesto-particle-canvas"></canvas>
-        <div class="container manifesto-container">
-          <div class="quote-mark" aria-hidden="true" style="">“</div>
-          <div class="manifesto-kicker">A WORKING PRINCIPLE <span>工作方式</span></div>
-          <blockquote class="pull" style="">输出不是作品的全部。真正的工作，<br class="manifesto-break">发生在观察、判断、拆解和反复迭代里。</blockquote>
-          <div class="quote-attr" style="">— 犀牛伯爵 · 2026</div>
+    <section id="manifesto" class="quote-section assembled"><div class="container manifesto-container">
+      <div class="manifesto-topline"><div class="manifesto-kicker">A WORKING PRINCIPLE <span>工作方式</span></div><span class="manifesto-edition">FIELD GUIDE&nbsp; / &nbsp;001</span></div>
+      <div class="manifesto-spread">
+        <div class="manifesto-copy">
+          <blockquote class="pull" aria-label="输出不是作品的全部。真正的工作，发生在观察、判断、拆解和反复迭代里。"><span class="manifesto-thesis">输出不是作品的全部。</span><span class="manifesto-bridge">真正的工作，发生在</span><span class="manifesto-process-inline"><button class="manifesto-step" type="button" data-manifesto-step="0" aria-pressed="true"><small>01</small><span>观察</span></button><span class="manifesto-separator" aria-hidden="true">、</span><button class="manifesto-step" type="button" data-manifesto-step="1" aria-pressed="false"><small>02</small><span>判断</span></button><span class="manifesto-separator" aria-hidden="true">、</span><button class="manifesto-step" type="button" data-manifesto-step="2" aria-pressed="false"><small>03</small><span>拆解</span></button><span class="manifesto-conjunction" aria-hidden="true">和</span><button class="manifesto-step" type="button" data-manifesto-step="3" aria-pressed="false"><small>04</small><span>反复迭代</span></button><span class="manifesto-ending">里。</span></span></blockquote>
+          <div class="manifesto-annotation" aria-live="polite"><span class="manifesto-note-index">01</span><span class="manifesto-note-copy">捕捉变化，找到值得追踪的信号。</span><span class="manifesto-hint">悬停或点选步骤</span></div>
+          <div class="quote-attr">— 犀牛伯爵 · 2026</div>
         </div>
-      </section>
+        <div class="manifesto-instrument" aria-hidden="true"><span class="instrument-label">STUDIO PROCESS</span><span class="instrument-ring"></span><span class="instrument-number">04</span><span class="instrument-caption">STEPS<br>ONE PRACTICE</span><span class="instrument-coordinate">SIGNAL&nbsp; / &nbsp;WORK</span></div>
+      </div>
+    </div></section>
     <section id="contact">
         <div class="container">
           <div class="section-head fade-in">
@@ -6346,8 +6349,8 @@
   <script src="data.js?v=20261027"></script>
   <script src="profile-folders.js?v=20261028a"></script>
 <script src="homepage-editorial.js?v=20261027c"></script>
-<script defer src="homepage-motion.js?v=20261028b"></script>
-<script defer src="text-hover.js?v=20261027b"></script>
+<script defer src="homepage-motion.js?v=20261028e"></script>
+<script defer src="text-hover.js?v=20261028e"></script>
   <script src="builds-catalog.js?v=20260908"></script>
   <script>
     /* Fallback: force-show page after 3s if JS hasn't completed */
@@ -6675,13 +6678,25 @@
 
       /* Quote */
       const q = D.quote;
-      const quoteText = esc(q.text).replace('真正的工作，发生在', '真正的工作，<br class="manifesto-break">发生在');
+      const quoteSteps = [
+        { word: '观察', note: '捕捉变化，找到值得追踪的信号。' },
+        { word: '判断', note: '把信号放进现实里，形成自己的判断。' },
+        { word: '拆解', note: '拆开问题，辨认真正起作用的变量。' },
+        { word: '反复迭代', note: '把判断做成作品，再根据反馈继续推进。' }
+      ];
+      const quoteMatch = q.text.match(/^(输出不是作品的全部。)(真正的工作，发生在)(观察)、(判断)、(拆解)和(反复迭代)(里。)$/);
+      const quoteText = esc(q.text);
       document.getElementById('manifesto').innerHTML = `
         <div class="container manifesto-container">
-          <div class="quote-mark" aria-hidden="true">\u201C</div>
-          <div class="manifesto-kicker">A WORKING PRINCIPLE <span>工作方式</span></div>
-          <blockquote class="pull">${quoteText}</blockquote>
-          <div class="quote-attr">${esc(q.attr)}</div>
+          <div class="manifesto-topline"><div class="manifesto-kicker">A WORKING PRINCIPLE <span>工作方式</span></div><span class="manifesto-edition">FIELD GUIDE&nbsp; / &nbsp;001</span></div>
+          <div class="manifesto-spread">
+            <div class="manifesto-copy">
+              <blockquote class="pull" aria-label="${quoteText}">${quoteMatch ? `<span class="manifesto-thesis">${esc(quoteMatch[1])}</span><span class="manifesto-bridge">${esc(quoteMatch[2])}</span><span class="manifesto-process-inline">${quoteSteps.map((step, index) => `${index ? `<span class="manifesto-separator" aria-hidden="true">${index === 3 ? '和' : '、'}</span>` : ''}<button class="manifesto-step" type="button" data-manifesto-step="${index}" aria-pressed="${index === 0}"><small>0${index + 1}</small><span>${esc(step.word)}</span></button>`).join('')}<span class="manifesto-ending">${esc(quoteMatch[7])}</span></span>` : quoteText}</blockquote>
+              <div class="manifesto-annotation" aria-live="polite"><span class="manifesto-note-index">01</span><span class="manifesto-note-copy">${esc(quoteSteps[0].note)}</span><span class="manifesto-hint">悬停或点选步骤</span></div>
+              <div class="quote-attr">${esc(q.attr)}</div>
+            </div>
+            <div class="manifesto-instrument" aria-hidden="true"><span class="instrument-label">STUDIO PROCESS</span><span class="instrument-ring"></span><span class="instrument-number">04</span><span class="instrument-caption">STEPS<br>ONE PRACTICE</span><span class="instrument-coordinate">SIGNAL&nbsp; / &nbsp;WORK</span></div>
+          </div>
         </div>
       `;
 
