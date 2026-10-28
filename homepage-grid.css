@@ -71,3 +71,64 @@
   }
   #manifesto blockquote.pull { max-width: none; }
 }
+
+
+/* Picks editorial cards share the same text baselines on desktop. Two-line
+   title slots, a single author line, and a three-line summary keep the grid
+   aligned despite different title lengths; the final track pins metadata. */
+@media (min-width: 901px) {
+  #picks .pick-card {
+    grid-template-rows: auto auto minmax(4.8em, auto) 1fr;
+    align-content: stretch;
+  }
+  #picks .pick-card h3 {
+    height: calc(2 * 1.42em);
+    min-height: calc(2 * 1.42em);
+    max-height: calc(2 * 1.42em);
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+  #picks .pick-author { min-height: 1.5em; }
+  #picks .pick-reason { min-height: 4.8em; -webkit-line-clamp: 3; }
+  #picks .pick-meta { align-self: end; }
+  #picks .pick-card h3::after { bottom: 0; }
+}
+@media (min-width: 701px) and (max-width: 900px) {
+  #picks .pick-card {
+    grid-template-rows: auto auto minmax(4.8em, auto) 1fr;
+    align-content: stretch;
+  }
+  #picks .pick-card h3 {
+    height: calc(3 * 1.42em);
+    min-height: calc(3 * 1.42em);
+    max-height: calc(3 * 1.42em);
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
+  #picks .pick-author { min-height: 1.5em; }
+  #picks .pick-reason { min-height: 4.8em; -webkit-line-clamp: 3; }
+  #picks .pick-meta { align-self: end; }
+  #picks .pick-card h3::after { bottom: 0; }
+}
+@media (max-width: 700px) {
+  #picks .pick-card {
+    grid-template-rows: auto auto auto auto;
+    align-content: start;
+  }
+  #picks .pick-card h3 {
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    display: block;
+    overflow: visible;
+    -webkit-line-clamp: unset;
+  }
+  #picks .pick-author { min-height: 0; }
+  #picks .pick-reason { min-height: 0; -webkit-line-clamp: 2; }
+  #picks .pick-meta { align-self: start; }
+  #picks .pick-card h3::after { bottom: -5px; }
+}
