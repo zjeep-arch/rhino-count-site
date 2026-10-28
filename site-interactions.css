@@ -106,3 +106,65 @@
 @media (prefers-reduced-motion: reduce) {
   .rhino-sapling, .rhino-pet-btn { animation: none !important; transition: none !important; }
 }
+
+/* Archive cover balance: lower and slightly scale back the active disk against the computer. */
+@media (min-width: 701px) {
+  #notes .floppy-disk { top: 52%; left: 50%; width: min(64%, 550px); }
+}
+
+/* Capy poses are real character variants; the outer button remains invisible. */
+.rhino-pet-btn {
+  width: 112px !important;
+  height: 124px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  overflow: visible !important;
+}
+.rhino-pet-btn::before, .rhino-pet-btn::after { content: none !important; display: none !important; }
+.rhino-pet-btn:hover { border: 0 !important; background: transparent !important; box-shadow: none !important; }
+.rhino-sapling {
+  width: 108px;
+  height: 120px;
+  max-width: none;
+  object-fit: contain;
+  image-rendering: pixelated;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  filter: drop-shadow(0 7px 9px rgba(18,20,26,.32));
+  transform-origin: 50% 88%;
+}
+.rhino-pet-label { display: none !important; }
+.rhino-pet[data-pose="work"] .rhino-sapling { animation: capyWork 1.8s ease-in-out infinite; }
+.rhino-pet[data-pose="sleep"] .rhino-sapling { animation: capySleep 3.4s ease-in-out infinite; }
+.rhino-pet[data-pose="celebrate"] .rhino-sapling { animation: capyHop .58s cubic-bezier(.2,.8,.25,1.15) 2; }
+.rhino-pet[data-pose="celebrate"]::before {
+  content: "✦  ·  ✧";
+  position: absolute;
+  top: -3px;
+  left: 50%;
+  color: #e9c46a;
+  font-size: 17px;
+  letter-spacing: 8px;
+  white-space: nowrap;
+  transform: translateX(-50%);
+  animation: capySpark 1s ease-out both;
+}
+@keyframes capyWork { 0%,100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(1px) rotate(-2deg); } }
+@keyframes capySleep { 0%,100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(2px) rotate(2deg); } }
+@keyframes capyHop { 0%,100% { transform: translateY(0) scale(1); } 36% { transform: translateY(-9px) scale(.98,1.035); } 68% { transform: translateY(1px) scale(1.025,.975); } }
+@keyframes capySpark { from { opacity: 0; transform: translate(-50%,8px) scale(.7); } 35% { opacity: 1; } to { opacity: 0; transform: translate(-50%,-10px) scale(1.1); } }
+@media (max-width: 700px) {
+  .rhino-pet-btn { width: 84px !important; height: 96px !important; }
+  .rhino-sapling { width: 82px; height: 92px; }
+}
+@media (max-width: 380px) {
+  .rhino-pet-btn { width: 72px !important; height: 84px !important; }
+  .rhino-sapling { width: 70px; height: 80px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rhino-sapling, .rhino-pet-btn, .rhino-pet[data-pose]::before { animation: none !important; transition: none !important; }
+}
