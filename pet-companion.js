@@ -10,9 +10,14 @@
     idle: '/assets/capybara-companion.png',
     work: '/assets/capybara-work.png',
     sleep: '/assets/capybara-sleep.png',
-    celebrate: '/assets/capybara-celebrate.png'
+    celebrate: '/assets/capybara-celebrate.png',
+    walk: '/assets/capybara-walk.png',
+    think: '/assets/capybara-think.png',
+    heart: '/assets/capybara-heart.png',
+    coffee: '/assets/capybara-coffee.png'
   };
   Object.values(petSprites).forEach(src => { const image = new Image(); image.src = src; });
+  const poseOrder = ['celebrate', 'work', 'think', 'heart', 'coffee', 'walk', 'sleep', 'idle'];
   let poseIndex = -1;
   let poseTimer = 0;
   function setPose(pose, duration = 2600) {
@@ -21,11 +26,16 @@
     window.clearTimeout(poseTimer);
     if (pose !== 'idle' && duration > 0) poseTimer = window.setTimeout(() => setPose('idle', 0), duration);
   }
+  setPose('idle', 0);
 
   const lines = [
     '小目标完成，卡皮给你鼓掌！',
     '进入专注状态，陪你把想法做出来。',
-    '补充一点能量，再继续出发。',
+    '嗯……让我想一想。',
+    '送你一颗小心心。',
+    '来一杯咖啡，继续加油。',
+    '卡皮出发巡游一圈。',
+    '卡皮开始休息啦。',
     '卡皮在这里陪你。'
   ];
   const holdLines = ['卡皮开始休息啦。', '慢一点也没关系～', '休息一下，再继续。'];
@@ -148,6 +158,19 @@
     avoidFrame = window.requestAnimationFrame(avoidReadingControls);
   }
 
+
+  function scheduleFidget() {
+    window.setTimeout(() => {
+      if (!drag && pet.dataset.pose === 'idle' && document.visibilityState === 'visible' &&
+          !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        pet.classList.add('fidget');
+        window.setTimeout(() => pet.classList.remove('fidget'), 760);
+      }
+      scheduleFidget();
+    }, 8500 + Math.random() * 5500);
+  }
+  scheduleFidget();
+
   function resetCombo() {
     combo = 0;
     pet.classList.remove('combo');
@@ -156,15 +179,15 @@
 
   function doClick() {
     pulse('excited', 620);
-    poseIndex = (poseIndex + 1) % 4;
-    setPose(['celebrate', 'work', 'sleep', 'idle'][poseIndex]);
+    poseIndex = (poseIndex + 1) % poseOrder.length;
+    setPose(poseOrder[poseIndex]);
     spark(7);
     combo += 1;
     if (comboBadge) comboBadge.textContent = 'x' + combo;
     if (combo > 1) pet.classList.add('combo');
-    if (combo >= 4) showBubble(comboLines[Math.floor(Math.random() * comboLines.length)]);
     lineIndex = (lineIndex + 1) % lines.length;
-    if (combo < 4) showBubble(lines[lineIndex]);
+    if (combo >= 4) showBubble(comboLines[Math.floor(Math.random() * comboLines.length)]);
+    else showBubble(lines[lineIndex]);
     window.clearTimeout(comboTimer);
     comboTimer = window.setTimeout(resetCombo, 1900);
   }
