@@ -5959,7 +5959,7 @@
 <link rel="stylesheet" href="profile-folders.css?v=20261028a">
 <link rel="stylesheet" href="signals-layout.css?v=20261025b">
 <link rel="stylesheet" href="homepage-editorial.css?v=20261028a">
-<link rel="stylesheet" href="homepage-motion.css?v=20261028f">
+<link rel="stylesheet" href="homepage-motion.css?v=20261028g">
 <link rel="stylesheet" href="mobile-experience.css?v=20261028b">
 <link rel="stylesheet" href="site-interactions.css?v=20261028e">
 </head>
@@ -6447,7 +6447,7 @@
   </script>
   <script src="data.js?v=20261027"></script>
   <script src="profile-folders.js?v=20261028a"></script>
-<script src="homepage-editorial.js?v=20261028g"></script>
+<script src="homepage-editorial.js?v=20261028h"></script>
   <script defer src="daily-events.js?v=20261028a"></script>
 <script defer src="homepage-motion.js?v=20261028e"></script>
 <script defer src="text-hover.js?v=20261028e"></script>
@@ -6755,12 +6755,17 @@
       document.getElementById('daily').innerHTML = window.RhinoEditorial.daily(D);
       document.getElementById('signals-reading').innerHTML = window.RhinoEditorial.reading(D);
 
-      /* Daily latest — auto-refresh from ai-daily/feed.json so LATEST is always the newest issue */
+      /* Daily latest — refresh the cover content without replacing its artwork or layout. */
       (function () {
         var box = document.getElementById('dailyLatestBox');
         if (!box) return;
+        var card = box.querySelector('.daily-latest');
+        var label = box.querySelector('.daily-latest-label');
+        var title = box.querySelector('.daily-latest-copy strong');
+        var summary = box.querySelector('.daily-latest-summary');
+        if (!card || !label || !title || !summary) return;
         var xhr = new XMLHttpRequest();
-        xhr.open('GET', (D.siteConfig && D.siteConfig.articlesFeed ? '' : '') + 'ai-daily/feed.json?t=' + Date.now(), true);
+        xhr.open('GET', 'ai-daily/feed.json?t=' + Date.now(), true);
         xhr.onload = function () {
           if (xhr.status !== 200) return;
           try {
@@ -6769,11 +6774,11 @@
             if (!arts.length) return;
             arts.sort(function (a, b) { return (b.slug || b.date || '').localeCompare(a.slug || a.date || ''); });
             var top = arts[0];
-            box.innerHTML = '<a class="daily-latest" href="' + esc(top.url || ('ai-daily/' + (top.href || ''))) + '">' +
-              '<b>LATEST · ' + esc((top.date || '').slice(5)) + '</b>' +
-              '<strong>' + esc(top.title || '') + '</strong>' +
-              '<span>' + esc(top.excerpt || '') + '</span></a>';
-          } catch (e) { /* keep static fallback */ }
+            card.href = top.url || ('ai-daily/' + (top.href || ''));
+            label.innerHTML = '<i aria-hidden="true"></i> LATEST · ' + esc((top.date || '').slice(5));
+            title.textContent = top.title || '';
+            summary.textContent = top.excerpt || '';
+          } catch (e) { /* keep the statically rendered issue */ }
         };
         xhr.send();
       })();
