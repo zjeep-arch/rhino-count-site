@@ -215,3 +215,130 @@ body{background:#0b1011}
 /* Keep the moving portrait crisp while softening its blue-purple cast. */
 #hero-section .editorial-portrait video{filter:saturate(.96) contrast(1.04) brightness(.98) sepia(.035)}
 #hero-section .editorial-portrait::after{background:linear-gradient(90deg,rgba(4,8,9,.56) 0%,rgba(4,8,9,.38) 36%,rgba(4,8,9,.08) 72%,rgba(4,8,9,.06) 100%),linear-gradient(0deg,rgba(4,8,9,.66),transparent 34%,rgba(4,8,9,.12)),linear-gradient(112deg,rgba(19,39,31,.13),transparent 58%,rgba(173,102,76,.035))}
+
+/* Archive exhibition layer: tactile covers, signal marks and restrained motion. */
+:root{--rhino-cobalt:#5668d8;--rhino-cobalt-ink:#4353b3;--rhino-lime:#d5df83;--rhino-ease:cubic-bezier(.2,.8,.2,1)}
+.scroll-progress{background:linear-gradient(90deg,#a9d6ca 0%,#d5df83 42%,#5668d8 72%,#c96d52 100%);box-shadow:0 0 12px rgba(86,104,216,.32)}
+
+/* NOW becomes a signal desk: a plotted waveform and tactile numbered entries. */
+#now .now-head{position:relative;padding-bottom:clamp(88px,10vw,126px)}
+#now .now-head::after{content:"";position:absolute;left:0;right:8%;bottom:12px;height:76px;opacity:.9;background:linear-gradient(180deg,transparent 0 46%,rgba(86,104,216,.12) 47% 48%,transparent 49%),repeating-linear-gradient(90deg,rgba(86,104,216,.17) 0 1px,transparent 1px 24px),linear-gradient(90deg,transparent 0 3%,rgba(86,104,216,.9) 3.2% 3.45%,transparent 3.7% 10%,rgba(201,109,82,.9) 10.2% 10.45%,transparent 10.7% 18%,rgba(86,104,216,.9) 18.2% 18.45%,transparent 18.7% 28%,rgba(86,104,216,.9) 28.2% 28.45%,transparent 28.7% 34%,rgba(201,109,82,.9) 34.2% 34.45%,transparent 34.7% 46%,rgba(86,104,216,.9) 46.2% 46.45%,transparent 46.7% 59%,rgba(86,104,216,.9) 59.2% 59.45%,transparent 59.7% 67%,rgba(201,109,82,.9) 67.2% 67.45%,transparent 67.7% 78%,rgba(86,104,216,.9) 78.2% 78.45%,transparent 78.7%);clip-path:polygon(0 56%,4% 56%,6% 38%,8% 72%,11% 54%,16% 54%,18% 22%,20% 83%,23% 54%,31% 54%,33% 35%,35% 72%,39% 54%,45% 54%,47% 14%,49% 86%,52% 54%,58% 54%,60% 32%,62% 72%,66% 54%,73% 54%,75% 24%,77% 80%,80% 54%,88% 54%,90% 36%,92% 70%,95% 54%,100% 54%,100% 58%,95% 58%,92% 74%,90% 40%,88% 58%,80% 58%,77% 84%,75% 28%,73% 58%,66% 58%,62% 76%,60% 36%,58% 58%,52% 58%,49% 90%,47% 18%,45% 58%,39% 58%,35% 76%,33% 39%,31% 58%,23% 58%,20% 87%,18% 26%,16% 58%,11% 58%,8% 76%,6% 42%,4% 58%,0 58%);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 90%,transparent)}
+#now .now-list{position:relative;gap:10px}
+#now .now-item{position:relative;padding:13px 18px;border:1px solid transparent;border-bottom-color:#c9beaa;border-radius:8px;transition:background .35s,border-color .35s,transform .35s,opacity .45s;}
+#now .now-item:hover,#now .now-item:focus-within{background:rgba(86,104,216,.055);border-color:rgba(86,104,216,.25);transform:translateX(5px)}
+#now .now-num{display:grid;place-items:center;width:30px;height:30px;min-width:30px;border:1px solid rgba(86,104,216,.5);border-radius:50%;color:var(--rhino-cobalt-ink);font:600 10px/1 ui-monospace,monospace;transition:color .3s,background .3s,transform .3s}
+#now .now-item:hover .now-num{color:#fff;background:var(--rhino-cobalt);transform:rotate(-10deg)}
+@media(max-width:700px){#now .now-head{padding-bottom:94px}#now .now-head::after{right:0;height:58px}#now .now-item{padding:12px 8px}}
+
+/* Signals reading cards gain original archive plates without borrowed imagery. */
+#notes .reading-grid{gap:clamp(18px,2.4vw,34px)}
+#notes .reading-card{position:relative;overflow:hidden;padding:0 0 18px;border:0;border-bottom:1px solid rgba(226,213,189,.24);isolation:isolate}
+#notes .reading-card::before{content:"";position:relative;display:block;height:clamp(118px,13vw,168px);margin-bottom:18px;overflow:hidden;border:1px solid rgba(226,213,189,.22);border-radius:4px;background-color:#24322d;background-image:radial-gradient(circle at 76% 25%,rgba(213,223,131,.65) 0 1px,transparent 2px),radial-gradient(circle at 77% 25%,transparent 0 22px,rgba(86,104,216,.8) 23px 24px,transparent 25px),linear-gradient(135deg,transparent 49.7%,rgba(201,109,82,.9) 50%,transparent 50.4%),repeating-linear-gradient(0deg,rgba(240,234,220,.08) 0 1px,transparent 1px 12px),linear-gradient(125deg,#273833,#111a19 70%);box-shadow:inset 0 0 44px rgba(10,14,13,.35);transition:transform .55s var(--rhino-ease),filter .4s}
+#notes .reading-card::before{font:600 9px/1.2 ui-monospace,monospace;letter-spacing:.18em;color:#f0eadc;padding:14px;box-sizing:border-box;display:flex;align-items:flex-end}
+#notes .reading-card:nth-child(1)::before{content:"FIELD NOTE  /  THE ORIGIN";background-image:radial-gradient(circle at 74% 36%,rgba(201,109,82,.5) 0 2px,transparent 3px),radial-gradient(circle at 74% 36%,transparent 0 32px,rgba(201,109,82,.52) 33px 34px,transparent 35px),linear-gradient(140deg,transparent 48%,rgba(240,234,220,.28) 48.2% 48.6%,transparent 48.8%),repeating-linear-gradient(90deg,rgba(240,234,220,.07) 0 1px,transparent 1px 26px),linear-gradient(135deg,#41342e,#17201c 72%)}
+#notes .reading-card:nth-child(2)::before{content:"SIGNAL 143  /  COMPUTE";background-image:radial-gradient(ellipse at 72% 54%,rgba(86,104,216,.42),transparent 40%),linear-gradient(90deg,transparent 0 15%,rgba(213,223,131,.72) 15.2% 15.6%,transparent 15.8% 32%,rgba(201,109,82,.8) 32.2% 32.6%,transparent 32.8% 66%,rgba(213,223,131,.72) 66.2% 66.6%,transparent 66.8%),repeating-linear-gradient(0deg,rgba(240,234,220,.08) 0 1px,transparent 1px 15px),linear-gradient(125deg,#292c3e,#131a18 78%)}
+#notes .reading-card:nth-child(3)::before{content:"SIGNAL 141  /  ENERGY";background-image:repeating-radial-gradient(ellipse at 74% 44%,transparent 0 15px,rgba(201,109,82,.3) 16px 17px,transparent 18px 28px),linear-gradient(125deg,rgba(86,104,216,.22),transparent 48%),linear-gradient(135deg,#38312b,#151c19 78%)}
+#notes .reading-meta{position:absolute;top:12px;left:12px;z-index:2;padding:6px 8px;background:rgba(12,16,15,.74);border:1px solid rgba(240,234,220,.22);border-radius:2px;backdrop-filter:blur(8px)}
+#notes .reading-card h3{margin:0 0 10px;min-height:0;font-size:clamp(18px,1.65vw,23px);line-height:1.42}
+#notes .reading-card p{min-height:0;margin-bottom:18px;-webkit-line-clamp:3}
+#notes .reading-card:hover::before,#notes .reading-card:focus-visible::before{transform:translateY(-3px) scale(1.015);filter:saturate(1.22)}
+@media(max-width:700px){#notes .reading-card::before{height:156px;margin-bottom:15px}#notes .reading-card h3{font-size:21px}}
+
+/* Picks opens like a set of independent magazine covers; copy stays on paper. */
+#picks .picks-grid{gap:22px;align-items:stretch}
+#picks .pick-card{position:relative;overflow:hidden;display:grid;grid-template-rows:auto auto auto auto;align-content:start;gap:0;min-height:390px;padding:176px 20px 20px;border:1px solid #cfc4b1;border-radius:5px;background:linear-gradient(150deg,#f7f1e5,#eee7d9);box-shadow:0 8px 24px rgba(49,43,31,.055);isolation:isolate;transition:transform .4s var(--rhino-ease),border-color .3s,box-shadow .3s}
+#picks .pick-card::before{content:"READ / WATCH / KEEP";position:absolute;inset:0 0 auto;height:148px;display:flex;align-items:flex-end;padding:14px 16px;box-sizing:border-box;color:#f5f0e4;font:600 9px/1.3 ui-monospace,monospace;letter-spacing:.2em;background-color:#27322f;background-image:radial-gradient(circle at 78% 30%,rgba(213,223,131,.82) 0 2px,transparent 3px),radial-gradient(circle at 78% 30%,transparent 0 28px,rgba(213,223,131,.4) 29px 30px,transparent 31px),repeating-linear-gradient(0deg,rgba(255,255,255,.08) 0 1px,transparent 1px 11px),linear-gradient(130deg,#5668d8 0%,#252a49 34%,#17211d 100%);transition:transform .65s var(--rhino-ease),filter .4s}
+#picks .pick-card:has(.pick-type-youtube)::before{content:"YOUTUBE  /  LONG FORM";background-image:radial-gradient(ellipse at 72% 42%,rgba(201,109,82,.8),transparent 24%),radial-gradient(circle at 72% 42%,transparent 0 26px,rgba(240,234,220,.72) 27px 28px,transparent 29px),linear-gradient(110deg,transparent 48%,rgba(213,223,131,.8) 48.2% 48.5%,transparent 48.7%),repeating-linear-gradient(90deg,rgba(240,234,220,.08) 0 1px,transparent 1px 22px),linear-gradient(135deg,#3a2e2a,#17201d 75%)}
+#picks .pick-card:has(.pick-type-x)::before{content:"X  /  FIELD NOTES";background-image:radial-gradient(circle at 76% 35%,rgba(86,104,216,.78) 0 2px,transparent 3px),linear-gradient(135deg,transparent 40%,rgba(240,234,220,.2) 40.2% 40.7%,transparent 41%),repeating-linear-gradient(0deg,rgba(240,234,220,.09) 0 1px,transparent 1px 13px),linear-gradient(125deg,#273b36,#17201c 72%)}
+#picks .pick-card:has(.pick-type-article)::before{content:"ARTICLE  /  INTERVIEW";background-image:repeating-radial-gradient(ellipse at 75% 34%,transparent 0 13px,rgba(201,109,82,.36) 14px 15px,transparent 16px 25px),linear-gradient(125deg,rgba(86,104,216,.3),transparent 48%),linear-gradient(135deg,#37312d,#17201c 78%)}
+#picks .pick-card:nth-child(2)::before{background-image:radial-gradient(ellipse at 74% 45%,rgba(86,104,216,.78),transparent 24%),radial-gradient(circle at 74% 45%,transparent 0 31px,rgba(240,234,220,.6) 32px 33px,transparent 34px),repeating-linear-gradient(0deg,rgba(240,234,220,.08) 0 1px,transparent 1px 12px),linear-gradient(130deg,#514a70,#202b31 72%)}
+#picks .pick-top{position:absolute;z-index:2;top:14px;left:16px;right:16px;display:flex;justify-content:space-between;align-items:center}
+#picks .pick-type,#picks .pick-tag{padding:5px 7px;border:1px solid rgba(240,234,220,.32);border-radius:2px;background:rgba(15,20,18,.45);color:#f4eddf;font:600 9px/1 ui-monospace,monospace;letter-spacing:.1em;backdrop-filter:blur(7px)}
+#picks .pick-card h3{min-height:0;margin:0 0 7px;font-size:clamp(18px,1.55vw,22px);line-height:1.42}
+#picks .pick-author{min-height:0;margin-bottom:13px;font-size:12px}
+#picks .pick-reason{min-height:0;margin:0 0 15px;padding-left:12px;border-left:2px solid rgba(201,109,82,.55);font-size:13px;line-height:1.7;-webkit-line-clamp:3}
+#picks .pick-meta{padding-top:12px;border-top:1px solid #d3c8b7;font:10px/1.4 ui-monospace,monospace;letter-spacing:.04em}
+#picks .pick-card.pointer-lit::after{z-index:1}
+#picks .pick-card:hover,#picks .pick-card:focus-visible{transform:translateY(-5px);border-color:var(--rhino-cobalt);box-shadow:0 18px 38px rgba(48,57,117,.14)}
+#picks .pick-card:hover::before,#picks .pick-card:focus-visible::before{transform:scale(1.035);filter:saturate(1.2)}
+#picks .pick-card>*{position:relative;z-index:2}
+#picks .pick-top{z-index:3}
+#picks .pick-card>.pick-top{position:absolute;top:14px;left:16px;right:16px}
+@media(max-width:700px){#picks .picks-grid{gap:14px}#picks .pick-card{min-height:0;padding:174px 16px 18px}#picks .pick-card::before{height:146px}#picks .pick-card h3{font-size:20px}}
+
+/* Builds covers turn into little interactive exhibits, without tilting whole cards. */
+#builds .lab-cover{position:relative;isolation:isolate;overflow:hidden;background-color:#17211d;transition:filter .5s,background-color .4s}
+#builds .lab-cover::after{content:"";position:absolute;z-index:0;left:50%;top:47%;width:min(46%,210px);aspect-ratio:1;transform:translate(-50%,-50%);border:1px solid rgba(240,234,220,.46);border-radius:50%;background:radial-gradient(circle at 36% 31%,rgba(240,234,220,.85) 0 1px,transparent 3px),radial-gradient(circle at 67% 65%,rgba(213,223,131,.86) 0 2px,transparent 4px),radial-gradient(circle at 50% 50%,color-mix(in srgb,var(--tint) 62%,transparent),transparent 68%);box-shadow:0 0 40px color-mix(in srgb,var(--tint) 22%,transparent),inset 0 0 28px rgba(240,234,220,.08);opacity:.92;transition:transform .6s var(--rhino-ease),filter .45s;pointer-events:none}
+#builds .lab-cover::before{z-index:1;color:rgba(240,234,220,.19);font-family:Georgia,"Songti SC",serif;font-style:italic;font-weight:500}
+#builds .lab-word{z-index:2;font-family:Georgia,"Songti SC",serif;font-style:italic;font-weight:600;letter-spacing:-.04em;color:#f0eadc;text-shadow:0 2px 12px rgba(12,16,15,.65)}
+#builds .lab-card:hover .lab-cover{filter:saturate(1.14)}
+#builds .lab-card:hover .lab-cover::after,#builds .lab-card.pointer-lit .lab-cover::after{transform:translate(calc(-50% + var(--scene-dx,0px)),calc(-50% - 6px)) scale(1.07);filter:brightness(1.22)}
+#builds .lab-cover[data-initial="J"]{background-image:radial-gradient(ellipse at 65% 35%,rgba(213,223,131,.22),transparent 24%),radial-gradient(ellipse at 36% 68%,rgba(86,104,216,.28),transparent 32%),repeating-linear-gradient(0deg,rgba(240,234,220,.04) 0 1px,transparent 1px 9px),linear-gradient(135deg,#1b332b,#111917 72%)}
+#builds .lab-cover[data-initial="J"]::after{width:min(40%,180px);border-radius:44% 56% 63% 37% / 47% 41% 59% 53%;background:radial-gradient(ellipse at 33% 28%,#f0eadc 0 1px,transparent 4px),radial-gradient(ellipse at 68% 66%,rgba(213,223,131,.95),transparent 13%),radial-gradient(ellipse at 42% 58%,rgba(86,104,216,.8),transparent 62%);border-color:rgba(213,223,131,.62)}
+#builds .lab-cover[data-initial="Z"]{background-image:repeating-radial-gradient(circle at 58% 44%,transparent 0 17px,rgba(213,223,131,.16) 18px 19px,transparent 20px 31px),repeating-conic-gradient(from 2deg at 58% 44%,rgba(240,234,220,.16) 0 1deg,transparent 1.2deg 15deg),linear-gradient(135deg,#443d2d,#17211d 72%)}
+#builds .lab-cover[data-initial="Z"]::after{border-radius:50%;background:repeating-conic-gradient(from 0deg,rgba(213,223,131,.82) 0 1deg,transparent 1deg 30deg);mask-image:radial-gradient(circle,transparent 0 53%,#000 54% 57%,transparent 58%);border:0;box-shadow:none}
+#builds .lab-cover[data-initial="W"]{background-image:repeating-linear-gradient(0deg,rgba(240,234,220,.13) 0 1px,transparent 1px 22px),repeating-linear-gradient(90deg,rgba(240,234,220,.13) 0 1px,transparent 1px 22px),linear-gradient(135deg,#283b43,#16201d 72%)}
+#builds .lab-cover[data-initial="W"]::after{width:55%;height:42%;aspect-ratio:auto;border-radius:2px;transform:translate(-50%,-50%) rotate(-8deg);background:linear-gradient(145deg,transparent 0 36%,rgba(213,223,131,.9) 36.5% 37%,transparent 37.5% 61%,rgba(201,109,82,.9) 61.5% 62%,transparent 62.5%),linear-gradient(90deg,transparent 49%,rgba(240,234,220,.85) 50%,transparent 51%);box-shadow:0 10px 26px rgba(0,0,0,.28)}
+#builds .lab-cover[data-initial="D"]{background-image:radial-gradient(circle at 75% 35%,rgba(201,109,82,.54),transparent 23%),repeating-linear-gradient(135deg,rgba(240,234,220,.08) 0 2px,transparent 2px 18px),linear-gradient(135deg,#84553a,#28221c 76%)}
+#builds .lab-cover[data-initial="D"]::after{width:28%;border-radius:47% 47% 43% 43%;background:radial-gradient(circle at 65% 39%,#20251e 0 3px,transparent 4px),radial-gradient(ellipse at 42% 64%,#d5df83 0 16%,transparent 18%),linear-gradient(130deg,#f0eadc,#b36f43 72%);box-shadow:0 12px 25px rgba(0,0,0,.35)}
+#builds .lab-card[data-tag="PLAY"] .lab-cover:not([data-initial="J"])::after{background:radial-gradient(circle,rgba(213,223,131,.98) 0 4%,transparent 5% 18%,rgba(86,104,216,.85) 19% 20%,transparent 21% 35%,rgba(240,234,220,.58) 36% 37%,transparent 38%),radial-gradient(circle at 50% 50%,rgba(201,109,82,.75),transparent 68%);border:0}
+#builds .lab-card[data-tag="LAB"] .lab-cover{background-image:repeating-linear-gradient(45deg,rgba(240,234,220,.08) 0 1px,transparent 1px 15px),linear-gradient(135deg,#30344d,#161e1b 74%)}
+#builds .lab-card[data-tag="LAB"] .lab-cover::after{width:26%;border-radius:14% 50% 14% 50%;transform:translate(-50%,-50%) rotate(45deg);background:linear-gradient(135deg,rgba(240,234,220,.9),rgba(86,104,216,.76) 45%,rgba(169,214,202,.5));box-shadow:0 0 42px rgba(86,104,216,.42)}
+#builds .lab-card[data-tag="EXPERIMENT"] .lab-cover{background-image:radial-gradient(ellipse at 70% 25%,rgba(86,104,216,.24),transparent 33%),linear-gradient(145deg,#302a35,#161d1a 78%)}
+#builds .lab-card[data-tag="EXPERIMENT"] .lab-cover::after{width:70%;height:1px;aspect-ratio:auto;border:0;border-radius:0;background:repeating-linear-gradient(90deg,rgba(213,223,131,.9) 0 1px,transparent 1px 13px);box-shadow:0 0 18px rgba(213,223,131,.6);transform:translate(-50%,-50%) rotate(-21deg)}
+#builds .lab-card[data-tag="3D"] .lab-cover{background-image:repeating-radial-gradient(ellipse at 50% 90%,transparent 0 18px,rgba(169,214,202,.25) 19px 20px,transparent 21px 33px),linear-gradient(150deg,#223947,#171e1c 72%)}
+#builds .lab-card[data-tag="3D"] .lab-cover::after{width:48%;height:35%;aspect-ratio:auto;border-radius:50% 50% 8% 8%;border-bottom:2px solid rgba(213,223,131,.8);background:repeating-linear-gradient(90deg,transparent 0 15%,rgba(240,234,220,.45) 15.5% 16%,transparent 16.5% 31%),linear-gradient(180deg,transparent 0 68%,rgba(86,104,216,.5));}
+#builds .lab-card.pointer-lit .lab-cover::after{filter:brightness(1.28) drop-shadow(0 0 10px rgba(213,223,131,.32))}
+@keyframes exhibit-hover{0%,100%{translate:0 0}50%{translate:0 -7px}}
+#builds .lab-card:hover .lab-cover::after{animation:exhibit-hover 3s ease-in-out infinite}
+@media(max-width:700px){#builds .lab-hero .lab-cover{min-height:230px}#builds .lab-med .lab-cover{height:160px}}
+
+/* Daily brief gets a living masthead and the feel of a fresh printed issue. */
+#daily .editorial-daily #dailyLatestBox{padding:0;border:0}
+#daily .daily-latest{position:relative;overflow:hidden;padding:158px clamp(18px,2.5vw,30px) 24px;border:1px solid rgba(240,234,220,.18);border-radius:4px;background:linear-gradient(145deg,#202d27,#151c19);box-shadow:0 16px 48px rgba(0,0,0,.18);transition:transform .4s var(--rhino-ease),border-color .3s,box-shadow .3s}
+#daily .daily-latest::before{content:"DAILY SIGNALS     /     08:00     /     2026";position:absolute;inset:0 0 auto;height:132px;padding:14px 18px;display:flex;align-items:flex-end;box-sizing:border-box;color:#f0eadc;font:600 9px/1.3 ui-monospace,monospace;letter-spacing:.18em;background-color:#202b27;background-image:radial-gradient(circle at 80% 31%,rgba(213,223,131,.9) 0 2px,transparent 3px),radial-gradient(circle at 80% 31%,transparent 0 30px,rgba(86,104,216,.65) 31px 33px,transparent 34px),linear-gradient(90deg,transparent 0 16%,rgba(201,109,82,.72) 16.1% 16.5%,transparent 16.6% 42%,rgba(213,223,131,.74) 42.1% 42.5%,transparent 42.6% 67%,rgba(86,104,216,.72) 67.1% 67.5%,transparent 67.6%),repeating-linear-gradient(0deg,rgba(240,234,220,.08) 0 1px,transparent 1px 12px),linear-gradient(125deg,#253b34,#1b2228 72%);}
+#daily .daily-latest>*{position:relative;z-index:1}
+#daily .daily-latest b{display:inline-flex;align-self:flex-start;padding:5px 8px;border:1px solid rgba(213,223,131,.4);background:rgba(17,24,21,.64);color:var(--rhino-lime);font:600 9px/1.25 ui-monospace,monospace;letter-spacing:.06em}
+#daily .daily-latest strong{font-size:clamp(17px,1.7vw,22px);line-height:1.45}
+#daily .daily-latest span{font-size:13px;line-height:1.75}
+#daily .daily-latest:hover,#daily .daily-latest:focus-visible{transform:translateY(-4px);border-color:rgba(86,104,216,.65);box-shadow:0 20px 46px rgba(35,43,105,.18)}
+#daily .daily-latest:hover::before{filter:saturate(1.25)}
+@media(max-width:700px){#daily .daily-latest{padding:150px 17px 19px}#daily .daily-latest::before{height:126px}}
+
+/* A typographic exhibition wall and an invitation card finish the route. */
+#manifesto .manifesto-container{position:relative}
+#manifesto .quote-mark{display:block;position:absolute;right:2%;top:-.55em;color:rgba(201,109,82,.16);font:700 clamp(180px,25vw,360px)/1 Georgia,serif;pointer-events:none;transition:color .5s,transform .8s var(--rhino-ease)}
+#manifesto.pointer-active .quote-mark{color:rgba(86,104,216,.15);transform:translateY(-8px) rotate(-4deg)}
+#manifesto blockquote.pull{position:relative;z-index:1;max-width:950px;font-size:clamp(30px,4vw,56px);line-height:1.42;letter-spacing:-.055em}
+#manifesto .manifesto-kicker,#manifesto .quote-attr{position:relative;z-index:1}
+#manifesto .rh-char.rh-lit{color:var(--rhino-cobalt-ink);text-shadow:0 0 .5em rgba(86,104,216,.32)}
+#contact .contact-card{position:relative;overflow:hidden;padding:30px 0 22px;border-top-color:rgba(201,109,82,.42)}
+#contact .contact-card::before{content:"RHINO COUNT   /   OPEN CHANNEL";display:block;position:absolute;top:8px;left:0;margin:0;color:#9f573f;font:600 9px/1.3 ui-monospace,monospace;letter-spacing:.22em;z-index:1}
+#contact .contact-card::after{content:"";display:block;position:absolute;right:clamp(250px,26vw,340px);top:20px;width:84px;height:84px;border:1px solid rgba(201,109,82,.44);border-radius:50%;background:radial-gradient(circle,rgba(201,109,82,.18) 0 2px,transparent 3px),repeating-radial-gradient(circle,transparent 0 12px,rgba(201,109,82,.18) 13px 14px,transparent 15px 22px);pointer-events:none;transition:transform .6s var(--rhino-ease),border-color .4s;z-index:0}
+#contact .contact-card>*{position:relative;z-index:1}
+#contact .contact-card:hover::after{transform:rotate(18deg) scale(1.08);border-color:var(--rhino-cobalt)}
+@media(max-width:700px){#manifesto .quote-mark{right:-4%;top:-.3em;font-size:160px;opacity:.5}#manifesto blockquote.pull{font-size:clamp(27px,7.4vw,38px)}#contact .contact-card::before{top:4px}#contact .contact-card::after{right:8px;top:36px;width:58px;height:58px}#contact .contact-card h3,#contact .contact-card p{max-width:75%}}
+
+/* Pointer response shifts artwork only; content, links and card geometry stay still. */
+@media(hover:hover) and (pointer:fine){
+  #notes .reading-card.pointer-lit::before,#picks .pick-card.pointer-lit::before{transform:translateY(-3px) scale(1.015);filter:saturate(1.16)}
+  #builds .lab-card.pointer-lit .lab-cover{filter:saturate(1.18)}
+}
+@media(prefers-reduced-motion:reduce){
+  #now .now-item,#notes .reading-card::before,#picks .pick-card,#picks .pick-card::before,#daily .daily-latest,#builds .lab-cover::after,#contact .contact-card::after,#manifesto .quote-mark{transition:none!important;animation:none!important}
+  #builds .lab-card:hover .lab-cover::after{animation:none!important}
+}
+
+#now .now-head::after{transform:translateX(var(--wave-shift,0px));transition:transform .25s ease-out}
+.signal-reveal-ready .now-item:not(.signal-visible){opacity:0;transform:translateX(16px)}
+.signal-reveal-ready .now-item.signal-visible{opacity:1;transform:translateX(0)}
+.signal-reveal-ready .now-item:nth-child(2){transition-delay:80ms}.signal-reveal-ready .now-item:nth-child(3){transition-delay:160ms}
+#notes .reading-card.pointer-lit::before{transform:perspective(700px) rotateX(var(--tilt-x,0deg)) rotateY(var(--tilt-y,0deg)) translateY(-3px) scale(1.015)}
+#picks .pick-card.pointer-lit::before{transform:perspective(700px) rotateX(var(--tilt-x,0deg)) rotateY(var(--tilt-y,0deg)) scale(1.035)}
+#hero-section .editorial-portrait::after{background:radial-gradient(480px circle at var(--hero-x,72%) var(--hero-y,42%),rgba(86,104,216,.14),transparent 76%),linear-gradient(90deg,rgba(4,8,9,.56) 0%,rgba(4,8,9,.38) 36%,rgba(4,8,9,.08) 72%,rgba(4,8,9,.06) 100%),linear-gradient(0deg,rgba(4,8,9,.66),transparent 34%,rgba(4,8,9,.12)),linear-gradient(112deg,rgba(19,39,31,.13),transparent 58%,rgba(173,102,76,.035))}
+#now .now-head::after{background-color:rgba(86,104,216,.25);filter:drop-shadow(0 0 5px rgba(86,104,216,.3));opacity:1}
+#contact .contact-card::before{position:absolute;top:8px;right:0;bottom:auto;left:0;width:auto;height:auto;margin:0;color:#9f573f;text-align:left;z-index:1}
+#contact .contact-card::after{display:block;top:20px;right:clamp(250px,26vw,340px);bottom:auto;left:auto;z-index:0}
+#contact .contact-card>*{position:relative;z-index:1}
+@media(max-width:700px){#contact .contact-card::before{top:4px}#contact .contact-card::after{right:8px;left:auto;top:36px;width:58px;height:58px}}
+@media(prefers-reduced-motion:reduce){#now .now-head::after{transform:none!important}#contact .contact-card:hover::after{transform:none}}
