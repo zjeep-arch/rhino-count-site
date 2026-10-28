@@ -50,9 +50,6 @@
 #manifesto blockquote.pull {
   min-width: 0;
 }
-#manifesto blockquote.pull {
-  max-width: 58ch;
-}
 
 /* Standard sections use the same vertical cadence; compact feature scenes
    retain their own authored spacing. */
