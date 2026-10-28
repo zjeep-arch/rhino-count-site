@@ -127,6 +127,13 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "OpenAI最贵的安全，败给了一卷卫生纸",
+        desc: "9 月 30 日，OpenAI 安全团队在高管会议室电视机后发现一个藏在卫生纸里的加密窃听设备，FBI 随后逮捕了一名工程师，OpenAI 说是自家模型追溯来源锁定了嫌疑人。判断：AI 安全的战场正在从模型转向人，最贵的护栏防住了外部攻击，却防不住一个有门禁卡的内鬼。",
+        href: "notes/2026-10-28-openai-窃听器.html"
+      },
+
+      {
+        type: "Essay",
         title: "马斯克警告，200 多家 AI 云公司要“小鱼式死亡”",
         desc: "马斯克发帖称债市关闭了对数据中心之外无实质收入公司的融资，SpaceX 同日拿到 400 亿美元 GPU 债。Gartner 预测 2030 年前 80% 以上的 neocloud 停止独立运营。判断：AI 基建进入信用分化阶段，钱按数据中心之外的收入分配。本周破圈实验位。",
         href: "notes/2026-10-27-musk-neocloud-guppy.html"
@@ -653,6 +660,13 @@ window.SITE_DATA = {
         excerpt: "名字来自两部作品：恋爱的犀牛教我不计成败地热爱，基督山伯爵教我不动声色地等待。2022年底ChatGPT像一头灰犀牛从地平线走来，Count就是把它的轨迹从噪音里算出来——然后与各位同行者一起远征。",
         img: "assets/note-05.svg",
         href: "notes/why-rhino-count.html"
+      },
+      {
+        cat: "观察", num: "N° 144",
+        title: "OpenAI最贵的安全，败给了一卷卫生纸",
+        excerpt: "9 月 30 日，OpenAI 安全团队在高管会议室电视机后发现一个藏在卫生纸里的加密窃听设备。FBI 随后逮捕了一名工程师，OpenAI 说，是自家模型分析设备、追溯来源，才锁定到这个人。判断：AI 安全的战场正在从模型转向人，最贵的护栏防住了外部攻击，却防不住一个有门禁卡的内鬼。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-10-28-openai-窃听器.html"
       },
       {
         cat: "观察", num: "N° 143",
