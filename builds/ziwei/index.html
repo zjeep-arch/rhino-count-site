@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;700;900&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=20261024m">
+<link rel="stylesheet" href="assets/css/style.css?v=20261024p">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <meta name="theme-color" content="#0B1026">
@@ -153,23 +153,32 @@
       <div id="chart-list"></div>
     </div>
     <div class="chart-right">
-      <div class="card" id="retro-card" hidden></div>
-      <div class="sec-head"><h3>十二宫</h3><span class="more hint">结合你的命盘 · 点宫看详解</span></div>
-      <div id="chart-palaces" class="palace-grid"></div>
-      <div class="card"><div class="card-kicker">格局</div><div id="pattern-list"></div></div>
-      <div class="card" id="shengong-card" hidden><div class="card-kicker">身宫</div><div id="shengong-body"></div></div>
-      <div class="card" id="wuxingju-card" hidden><div class="card-kicker">五行局</div><div id="wuxingju-body"></div></div>
-    <div class="card" id="huaji-card" hidden><div class="card-kicker">化忌化解</div><div id="huaji-body"></div></div>
-    <div class="card" id="bazi-card" hidden><div class="card-kicker">八字四柱</div><div id="bazi-body"></div></div>
-    <div class="card" id="dayun-card" hidden><div class="card-kicker">八字大运</div><div id="dayun-body"></div></div>
-    <div class="card" id="strength-card" hidden><div class="card-kicker">十二宫强度</div><div id="strength-body"></div></div>
-    <div class="card" id="timeline-card" hidden><div class="card-kicker">人生时间轴</div><div id="timeline-body"></div></div>
-    <div class="card" id="heat-card" hidden><div class="card-kicker">流月热力 · 今年十二月</div><div id="heat-body"></div></div>
-    <div class="card" id="feixing-card" hidden><div class="card-kicker">宫干飞星 · 禄忌速查</div><div id="feixing-body"></div></div>
-    <div class="card" id="koujing-card" hidden><div class="card-kicker">本次排盘口径</div><div id="koujing-body" class="hint"></div></div>
-      <div class="card" style="margin-top:14px"><div class="card-kicker">下一步</div>
-        <p class="hint" style="margin:0 0 10px">十二宫已在上面逐宫展开。13 维深度解读、专题报告等更多解读在"解读"菜单里。</p>
-        <button class="btn-primary btn-block" data-nav="menu">去解读菜单 →</button>
+      <div class="rtabs" id="rtabs">
+        <button data-rg="overview" class="on">速览</button>
+        <button data-rg="palaces">十二宫</button>
+        <button data-rg="pro">进阶 · 四化八字</button>
+      </div>
+      <div class="rgroup" data-rg="overview">
+        <div class="card" id="retro-card" hidden></div>
+        <div class="card"><div class="card-kicker">格局</div><div id="pattern-list"></div></div>
+        <div class="card" id="shengong-card" hidden><div class="card-kicker">身宫</div><div id="shengong-body"></div></div>
+        <div class="card" id="wuxingju-card" hidden><div class="card-kicker">五行局</div><div id="wuxingju-body"></div></div>
+        <div class="card" id="huaji-card" hidden><div class="card-kicker">化忌化解</div><div id="huaji-body"></div></div>
+        <div class="card" id="koujing-card" hidden><div class="card-kicker">本次排盘口径</div><div id="koujing-body" class="hint"></div></div>
+        <div class="card" style="margin-top:14px"><div class="card-kicker">下一步</div>
+          <p class="hint" style="margin:0 0 10px">十二宫、四化、时间轴都在旁边的页签里。13 维深度解读、专题报告等更多解读在"解读"菜单。</p>
+          <button class="btn-primary btn-block" data-nav="menu">去解读菜单 →</button>
+        </div>
+      </div>
+      <div class="rgroup" data-rg="palaces" hidden>
+        <div class="sec-head"><h3>十二宫</h3><span class="more hint">结合你的命盘 · 点宫看详解</span></div>
+        <div id="chart-palaces" class="palace-grid"></div>
+      </div>
+      <div class="rgroup" data-rg="pro" hidden>
+        <div class="card collapsible" id="bazi-card" data-collapse="bazi" hidden><button class="card-kicker as-btn" type="button">八字四柱</button><div class="card-body"><div id="bazi-body"></div></div></div>
+        <div class="card collapsible" id="dayun-card" data-collapse="dayun" hidden><button class="card-kicker as-btn" type="button">八字大运</button><div class="card-body"><div id="dayun-body"></div></div></div>
+        <div class="card collapsible" id="timeline-card" data-collapse="timeline" hidden><button class="card-kicker as-btn" type="button">人生时间轴</button><div class="card-body"><div id="timeline-body"></div></div></div>
+        <div class="card collapsible" id="feixing-card" data-collapse="feixing" hidden><button class="card-kicker as-btn" type="button">宫干飞星 · 四化速查</button><div class="card-body"><div id="feixing-body"></div></div></div>
       </div>
     </div>
   </section>
@@ -372,6 +381,6 @@
 <script src="assets/js/ziwei-engine.js"></script>
 <script src="assets/js/data.js"></script>
 <script src="assets/js/data-v2.js"></script>
-<script src="assets/js/app.js?v=20261024m"></script>
+<script src="assets/js/app.js?v=20261024p"></script>
 </body>
 </html>

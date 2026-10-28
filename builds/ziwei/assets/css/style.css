@@ -1193,3 +1193,20 @@ body{color:var(--ink);
   .hub-meta{font-size:9.5px;}
   .hub-hua{font-size:12px;}
 }
+
+/* v14：右栏页签 + 折叠卡 */
+.rtabs{display:flex; gap:4px; margin:14px 0 6px; background:rgba(223,227,251,.07); border-radius:999px; padding:4px;}
+.rtabs button{flex:1; border:none; background:transparent; color:#8A93C2; border-radius:999px; padding:8px 4px; font-size:13px; cursor:pointer; white-space:nowrap;}
+.rtabs button.on{background:#E5E9FC; color:#141B42; font-weight:700;}
+.card.collapsible{padding-bottom:16px;}
+.card.collapsible>.card-kicker.as-btn{width:100%; text-align:left; background:none; border:none; cursor:pointer;
+  display:flex; justify-content:space-between; align-items:center; padding:0; font-size:13px; letter-spacing:.24em; color:var(--gold); font-weight:600;}
+.card.collapsible>.card-kicker.as-btn::after{content:"展开 ▾"; color:#8A93C2; font-size:11px; letter-spacing:.05em;}
+.card.collapsible.open>.card-kicker.as-btn::after{content:"收起 ▴";}
+.card.collapsible>.card-body{display:none; margin-top:10px;}
+.card.collapsible.open>.card-body{display:block;}
+/* 时间轴柱：金=换挡 红=忌入命 蓝=常规 */
+.sp-bar{width:9px; height:10px; border-radius:2px; background:#3E4F99;}
+.sp-bar.mk{height:18px; background:#C9A96A;}
+.sp-bar.ji{background:#A9604A;}
+.sp-bar.mk.ji{background:#8C5A3F;}
