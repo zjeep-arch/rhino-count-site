@@ -5879,7 +5879,58 @@
     .hero-video-play {
       display: none;
     }
-  </style>
+  
+    /* Capy pixel companion: keep the character floating without a surrounding tile. */
+    .rhino-pet-btn {
+      width: 112px !important;
+      height: 124px !important;
+      padding: 0 !important;
+      border: 0 !important;
+      border-radius: 0 !important;
+      background: transparent !important;
+      box-shadow: none !important;
+      overflow: visible !important;
+      animation: none !important;
+      transition: transform .22s ease !important;
+    }
+    .rhino-pet-btn::before, .rhino-pet-btn::after { content: none !important; display: none !important; }
+    .rhino-pet-btn:hover { border: 0 !important; background: transparent !important; box-shadow: none !important; transform: translateY(-3px) scale(1.03) !important; }
+    .rhino-pet-btn:focus-visible { outline: 2px dashed var(--accent); outline-offset: 4px; }
+    .rhino-pet.dragging .rhino-pet-btn { transform: scale(1.06) rotate(2deg) !important; }
+    .rhino-sapling {
+      display: block;
+      width: 108px;
+      height: 120px;
+      max-width: none;
+      overflow: visible;
+      object-fit: contain;
+      image-rendering: pixelated;
+      pointer-events: none;
+      user-select: none;
+      -webkit-user-drag: none;
+      filter: drop-shadow(0 7px 9px rgba(18,20,26,.32));
+      transform-origin: 50% 88%;
+      animation: capyIdle 3.8s ease-in-out infinite;
+    }
+    .rhino-pet.excited .rhino-pet-btn { animation: none !important; }
+    .rhino-pet.excited .rhino-sapling { animation: capyHop .58s cubic-bezier(.2,.8,.25,1.15) !important; }
+    .rhino-pet.twirl .rhino-sapling { animation: rhinoTwirl .78s cubic-bezier(.2,.9,.25,1.1) !important; }
+    .rhino-pet.squish .rhino-sapling { animation: capySquish .62s ease !important; }
+    @keyframes capyIdle { 0%,100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-2px) scale(1.012,.992); } }
+    @keyframes capyHop { 0%,100% { transform: translateY(0) scale(1); } 36% { transform: translateY(-9px) scale(.98,1.035); } 68% { transform: translateY(1px) scale(1.025,.975); } }
+    @keyframes capySquish { 0%,100% { transform: scale(1); } 38% { transform: scale(1.08,.9); } 70% { transform: scale(.96,1.035); } }
+    @media (max-width: 700px) {
+      .rhino-pet-btn { width: 84px !important; height: 96px !important; }
+      .rhino-sapling { width: 82px; height: 92px; }
+    }
+    @media (max-width: 380px) {
+      .rhino-pet-btn { width: 72px !important; height: 84px !important; }
+      .rhino-sapling { width: 70px; height: 80px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .rhino-sapling, .rhino-pet-btn { animation: none !important; transition: none !important; }
+    }
+</style>
 
   <!-- SEO Optimization -->
   <meta property="og:image:width" content="1200">
