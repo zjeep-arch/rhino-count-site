@@ -1247,3 +1247,8 @@ body{color:var(--ink);
 .pal-badge.pd-mid{background:rgba(134,162,255,.15); color:#A9BCF2;}
 .pal-badge.pd-lo{background:rgba(201,106,74,.15); color:#E09B7E;}
 #hecard{border:1px solid rgba(201,169,106,.5); background:linear-gradient(160deg,rgba(201,169,106,.10),rgba(17,23,54,.7));}
+
+/* v19：引动标记 */
+.ly-cell.dbl{background:#4A1F16; color:#F2C9BC; border-color:rgba(224,155,126,.5);}
+.sp-bar.dbl{height:18px; background:#5C2A1E;}
+.tl-table td, .tl-table tr.now td{white-space:normal;}
