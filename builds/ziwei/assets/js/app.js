@@ -774,6 +774,7 @@ function renderChartBody(){
   renderOverlayGrid(chart, ov);
   renderKoujingCard(rec);
   renderBriefCard(chart);
+  renderHeCard();
   applyCollapseState();
 }
 /* ---------- 节气与八字大运（Meeus 低精度太阳黄经，日界级精度足够） ---------- */
@@ -920,6 +921,17 @@ const SHI_SHEN_SAY = {
 const WX_FAVOR_SAY = {
   '金':'金','木':'木','水':'水','火':'火','土':'土',
 };
+/* 宫位三档评级：palaceStrength 归一化（结构提示，非吉凶分数） */
+function palaceVerdicts(chart){
+  const list = PALACE_ORDER.map(n => ({ n, raw: palaceStrength(chart, palaceByName(chart, n)) }));
+  const vals = list.map(x => x.raw), lo = Math.min(...vals), hi = Math.max(...vals);
+  list.forEach(x => { x.score = Math.round(18 + (x.raw - lo) / Math.max(0.01, hi - lo) * 78); });
+  return list;
+}
+function verdictBadge(score){
+  const lv = score >= 70 ? { t: '有底气', c: 'pd-hi' } : score >= 40 ? { t: '有底色', c: 'pd-mid' } : { t: '是功课', c: 'pd-lo' };
+  return `<span class="pal-badge ${lv.c}" title="按主星庙旺＋四化＋辅煞三方合参的结构强弱，相对本盘而言">${lv.t}</span>`;
+}
 function renderBaziCard(chart){
   const card = $('#bazi-card'), body = $('#bazi-body');
   const fp = chart.lunarInfo && chart.lunarInfo.fourPillars;
@@ -1011,23 +1023,29 @@ function renderKoujingCard(rec){
 }
 /* 身宫卡 */
 function renderShengongCard(chart){
-  const card = $('#shengong-card'), body = $('#shengong-body');
+  const card = $('#mingshen-card'), body = $('#shengong-body');
   const G = window.GXG_SHENGONG;
   const sp = chart.palaces.find(p => p.isShenGong);
-  if(!sp || !G){ card.hidden = true; return; }
+  if(!sp || !G){ if(body) body.innerHTML = ''; syncMingshenCard(); return; }
   const name = disp(sp.name);
-  body.innerHTML = `<p style="margin:0 0 8px">${esc(G.intro || '')}</p>
+  body.innerHTML = `<p class="bz-sec" style="margin-top:0">身宫 · 后半程的发力点</p><p style="margin:0 0 6px">${esc(G.intro || '')}</p>
     <p style="margin:0"><b>你的身宫在${esc(name)}</b>：${esc((G.palaces || {})[name] || '')}</p>`;
-  card.hidden = false;
+  syncMingshenCard();
+}
+function syncMingshenCard(){
+  const card = $('#mingshen-card');
+  if(!card) return;
+  const a = $('#shengong-body')?.innerHTML.trim(), b = $('#wuxingju-body')?.innerHTML.trim();
+  card.hidden = !(a || b);
 }
 /* 五行局卡 */
 function renderWuxingjuCard(chart){
-  const card = $('#wuxingju-card'), body = $('#wuxingju-body');
+  const body = $('#wuxingju-body');
   const G = window.GXG_WUXINGJU;
-  if(!G || !chart.wuxingJuName){ card.hidden = true; return; }
-  body.innerHTML = `<p style="margin:0 0 8px">${esc(G.intro || '')}</p>
+  if(!G || !chart.wuxingJuName){ if(body) body.innerHTML = ''; syncMingshenCard(); return; }
+  body.innerHTML = `<p class="bz-sec" style="margin-top:10px">五行局 · 你的节奏单位</p><p style="margin:0 0 6px">${esc(G.intro || '')}</p>
     <p style="margin:0"><b>你是${esc(chart.wuxingJuName)}</b>：${esc((G.jus || {})[chart.wuxingJuName] || '')}</p>`;
-  card.hidden = false;
+  syncMingshenCard();
 }
 /* 化忌化解卡 */
 function renderHuajiCard(chart){
@@ -1224,11 +1242,13 @@ function palaceCardHTML(p, i, chart){
   const pl = palaceByName(chart, p.name);
   const tags = (pl.isMingGong ? '<span class="p-tag">命宫</span>' : '')
     + (pl.isShenGong ? '<span class="p-tag">身宫</span>' : '');
+  const vds = palaceVerdicts(chart).find(x => x.n === p.name);
+  const vBadge = vds ? verdictBadge(vds.score) : '';
   const majors = pl.stars.filter(s => s.type === 'major');
   const minors = pl.stars.filter(s => s.type !== 'major');
   const dx = pl.daXianAge ? ` · 大限 ${pl.daXianAge[0]}–${pl.daXianAge[1]} 岁` : '';
   let h = `<div class="palace-card" data-palace="${p.name}" style="--i:${i}">`
-    + `<div class="p-top"><h4>${p.name}</h4>${tags}<span class="p-gz">${ST[pl.stem]}${BR[pl.branch]}${dx}</span></div>`
+    + `<div class="p-top"><h4>${p.name}</h4>${tags}${vBadge}<span class="p-gz">${ST[pl.stem]}${BR[pl.branch]}${dx}</span></div>`
     + (pl.isMingGong ? mingPortraitHTML(chart) : '')
     + `<div style="margin:2px 0 4px"><span class="modern">${p.modern}</span></div>`;
   // 疾厄宫专属：体质一句话
@@ -1250,7 +1270,7 @@ function palaceCardHTML(p, i, chart){
     h += `<div class="p-sec">主星</div><div class="p-stars">${majors.map(s =>
       `${esc(s.name)}${s.siHua ? shBadge(s.siHua) : ''}${s.brightnessRaw ? `<span style="color:var(--gold);font-size:12px">【${s.brightnessRaw}】</span>` : ''}`
     ).join('　')}</div>`;
-    majors.forEach(st => { if(D.stars[st.name]) h += `<p class="p-say"><b>${esc(st.name)}</b>：${esc(D.stars[st.name])}</p>`; });
+    majors.forEach(st => { if(D.stars[st.name]) h += `<p class="p-say"><b>${esc(st.name)}</b>：${withTerms(D.stars[st.name])}</p>`; });
     const dual = dualStarText(pl);
     if(dual) h += `<p class="p-say"><b>双星同宫</b>：${esc(dual)}</p>`;
   } else {
@@ -1274,7 +1294,7 @@ function palaceCardHTML(p, i, chart){
     return `${disp(q.name)}${qm}`;
   });
   h += `<p class="p-line">三方四正：${sf.map(esc).join(' · ')}</p>`;
-  h += `<p class="p-line" style="margin-top:8px">${p.desc}</p>`;
+  h += `<p class="p-line" style="margin-top:8px">${withTerms(p.desc)}</p>`;
   return h + `</div>`;
 }
 function renderPalaceCards(){
@@ -2319,9 +2339,11 @@ function renderSihuaPan(){
     box.querySelectorAll('.scr-chips .chip').forEach(c => c.classList.toggle('on', +c.dataset.scr === b));
     const name = disp(p.name);
     const sh = E.getSiHuaByStem(p.stem) || {};
+    const vds = palaceVerdicts(chart).find(x => x.n === name);
     const rows = [];
     const born = ['禄','权','科','忌'].filter(h => chart.palaces.find(pl2 => pl2.branch === p.branch && pl2.stars.some(st => st.name === ySh[h])));
     if(born.length) rows.push({ tag:'先天', cls:'born', text:`生年${born.map(h => ySh[h] + h).join('、')}坐${name}——${GONG_SHORT[name] || name}是你先天注定要面对的场域，躲不掉；化忌也意味着最深的功课修完最值钱` });
+    if(vds) rows.unshift({ tag:'评级', cls: vds.score >= 70 ? 'lu' : vds.score >= 40 ? '' : 'ji', text:`这一宫在你盘里属于「${vds.score >= 70 ? '有底气' : vds.score >= 40 ? '有底色' : '是功课'}」——按主星庙旺＋四化＋辅煞三方合参的相对结构，不判吉凶` });
     if(sh['忌']){ const to = chart.palaces.find(pl => pl.stars.some(st => st.name === sh['忌']));
       if(to) rows.push({ tag:'执念', cls:'ji', text:`${name}的${sh['忌']}化忌飞入${disp(to.name)}——${flySay(name, '忌', disp(to.name))}` }); }
     if(sh['禄']){ const to = chart.palaces.find(pl => pl.stars.some(st => st.name === sh['禄']));
@@ -2340,7 +2362,7 @@ function renderSihuaPan(){
       }
     });
     $('#scr-body').innerHTML =
-      `<div class="scr-title">${name}<span>${ST[p.stem]}${BR[p.branch]} · ${GONG_SHORT[name] || ''}</span></div>` +
+      `<div class="scr-title">${name}<span>${ST[p.stem]}${BR[p.branch]} · ${GONG_SHORT[name] || ''}</span>${vds ? verdictBadge(vds.score) : ''}</div>` +
       rows.map(r => `<div class="scr-row"><span class="scr-tag ${r.cls}">${r.tag}</span><span class="scr-text">${withTerms(r.text)}</span></div>`).join('') +
       `<p class="hint" style="margin:8px 0 0">忌＝在意与功课，不是判决。飞星说的是能量流向，怎么做仍是你的事。</p>`;
   };
@@ -2582,6 +2604,60 @@ function renderHome(){
     return `<div class="palace-card" data-palace="${p.name}"><span class="num">${i+1}</span>${starsLine}`
       + `<div><span class="modern">${p.modern}</span></div><div class="kw">${p.keywords}</div></div>`;
   }).join('');
+}
+/* 轻合拍：分享链接打开对方的盘时，与本机「我」的盘快评（日柱合/生肖/紫微互飞） */
+const GAN5_HE = { '甲':'己','乙':'庚','丙':'辛','丁':'壬','戊':'癸','己':'甲','庚':'乙','辛':'丙','壬':'丁','癸':'戊' };
+const ZHI6_HE = { '子':'丑','丑':'子','寅':'亥','亥':'寅','卯':'戌','戌':'卯','辰':'酉','酉':'辰','巳':'申','申':'巳','午':'未','未':'午' };
+const ZHI3_HE = [['申','子','辰'],['寅','午','戌'],['巳','酉','丑'],['亥','卯','未']];
+function heCardData(chartA, chartB, nameA, nameB){
+  const gzA = chartA.lunarInfo.fourPillars[2], gzB = chartB.lunarInfo.fourPillars[2];
+  const rows = []; let score = 60;
+  const sA = BR.indexOf(gzA[1]), sB = BR.indexOf(gzB[1]);
+  const zodiac = b => '鼠牛虎兔龙蛇马羊猴鸡狗猪'[b];
+  if(GAN5_HE[gzA[0]] === gzB[0]){ score += 10; rows.push({ tag:'日干五合', cls:'lu', text:`你们日柱天干${gzA[0]}${gzB[0]}相合（天干五合）——天然互相吸引，气场对得上` }); }
+  if(ZHI6_HE[gzA[1]] === gzB[1]){ score += 10; rows.push({ tag:'日支六合', cls:'lu', text:`日支${gzA[1]}${gzB[1]}六合——过日子默契度高，生活习惯容易对齐` }); }
+  else if(sA === sB){ score += 5; rows.push({ tag:'同日支', cls:'', text:`两人同属${gzA[1]}日支——节奏像，但容易较着劲，谁让一步谁赢` }); }
+  else if(ZHI3_HE.some(g => g.includes(gzA[1]) && g.includes(gzB[1]))){ score += 8; rows.push({ tag:'生肖三合', cls:'lu', text:`生肖${zodiac(sA)}与${zodiac(sB)}三合——相处自带润滑，圈子也合得来` }); }
+  else if((sA + 6) % 12 === sB){ score -= 5; rows.push({ tag:'生肖相冲', cls:'ji', text:`生肖${zodiac(sA)}与${zodiac(sB)}相冲——吸引力强但摩擦也多，聚少离多反而是保鲜法` }); }
+  // 紫微互飞：A命宫忌入B夫妻宫 / B命宫忌入A夫妻宫 / 命宫主星同
+  const mingA = chartA.palaces.find(p => p.isMingGong), mingB = chartB.palaces.find(p => p.isMingGong);
+  const fuA = chartA.palaces.find(p => p.name === '夫妻' || disp(p.name) === '夫妻宫');
+  const fuB = chartB.palaces.find(p => p.name === '夫妻' || disp(p.name) === '夫妻宫');
+  const flyJi = (from, toFu, fromName, toName) => {
+    const sh = E.getSiHuaByStem(from.stem) || {};
+    if(sh['忌'] && toFu.stars.some(x => x.name === sh['忌']))
+      rows.push({ tag:'在意', cls:'ji', text:`${fromName}的命宫化忌飞进${toName}的夫妻宫——${fromName}对这段关系的在意是实打实的，牵挂也是` });
+  };
+  flyJi(mingA, fuB, nameA, nameB); flyJi(mingB, fuA, nameB, nameA);
+  const mA = mingA.stars.filter(x => x.type === 'major').map(x => x.name);
+  const mB = fuB.stars.filter(x => x.type === 'major').map(x => x.name);
+  const same = mA.find(n => mB.includes(n));
+  if(same) rows.push({ tag:'同频', cls:'lu', text:`${nameA}的命宫主星与${nameB}的夫妻宫主星都有${same}——${nameB}要的正是${nameA}身上有的` });
+  const fuLu = (() => {
+    const sh = E.getSiHuaByStem(mingB.stem) || {};
+    if(sh['禄'] && fuA.stars.some(x => x.name === sh['禄'])) return { tag:'送禄', cls:'lu', text:`${nameB}的命宫化禄飞进${nameA}的夫妻宫——${nameB}是给这段关系带资源、带顺的那一个` };
+    const sh2 = E.getSiHuaByStem(mingA.stem) || {};
+    if(sh2['禄'] && fuB.stars.some(x => x.name === sh2['禄'])) return { tag:'送禄', cls:'lu', text:`${nameA}的命宫化禄飞进${nameB}的夫妻宫——${nameA}是给这段关系带资源、带顺的那一个` };
+    return null;
+  })();
+  if(fuLu) rows.push(fuLu);
+  score = Math.max(45, Math.min(95, score));
+  const level = score >= 85 ? '很合拍' : score >= 72 ? '有默契' : score >= 58 ? '要磨合' : '相处靠修炼';
+  return { score, level, rows: rows.slice(0, 4) };
+}
+function renderHeCard(){
+  const rec = cur();
+  const card = $('#hecard'), body = $('#he-body');
+  if(!card) return;
+  if(!rec || rec.tag !== '分享'){ card.hidden = true; return; }
+  const mine = archive.find(a => a.tag !== '分享' && a.id !== rec.id);
+  if(!mine){ card.hidden = true; return; }
+  const d = heCardData(rec.chart, mine.chart, rec.name || 'TA', mine.name || '我');
+  body.innerHTML =
+    `<div class="wy-concl">${esc(mine.name || '我')} 与 ${esc(rec.name || 'TA')}：${d.level}（${d.score} 分段）</div>` +
+    d.rows.map(r => `<div class="scr-row"><span class="scr-tag ${r.cls}">${r.tag}</span><span class="scr-text">${withTerms(r.text)}</span></div>`).join('') +
+    `<p class="hint" style="margin:8px 0 0">快评只看日柱与命宫飞化，是破冰不是判决。把你的盘链接发给对方，对方打开也能看到与你的一版。</p>`;
+  card.hidden = false;
 }
 /* 四化总纲：来因宫 + 生年忌，两句话定调（速览组顶部） */
 function renderBriefCard(chart){
