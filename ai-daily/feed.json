@@ -1,6 +1,13 @@
 {
-  "updated": "2026-10-28T09:45:00+08:00",
+  "updated": "2026-10-29T09:45:00+08:00",
   "articles": [
+    {
+      "title": "AI大模型及安全动态日报 | 2026年10月29日（星期四）",
+      "date": "2026年10月29日（星期四）",
+      "slug": "2026-10-29",
+      "url": "ai-daily/2026-10-29-ai-daily.html",
+      "excerpt": "Google发布Gemini 4 Carbon先开放给防守方、Alphabet云收入翻倍至307亿美元、英伟达投Meta 30亿美元、Upwind获4亿美元C轮、Oracle推AI Security Mesh、景烁获pre-A轮押注具身数据基础设施。"
+    },
     {
       "title": "AI大模型及安全动态日报 | 2026年10月28日（星期三）",
       "date": "2026年10月28日（星期三）",
