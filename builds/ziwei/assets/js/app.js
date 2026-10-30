@@ -2631,25 +2631,12 @@ function renderHome(){
     else phc.hidden = true;
   } else if(phc) phc.hidden = true;
   $('#daily-date').textContent = `${bd.m} 月 ${bd.d} 日${gz2}${custom ? '' : ' · 排一张盘，签与解按你的命盘定制'}`;
-  // 十二宫预览：有盘则每张小卡填上该盘的主星，没盘保持通用版
-  $('#palace-preview').innerHTML = D.palaces.map((p, i) => {
-    let starsLine = '';
-    if(rec && rec.chart){
-      const pl = palaceByName(rec.chart, p.name);
-      if(pl){
-        const tags = (pl.isMingGong ? '<span class="p-tag sm">命</span>' : '')
-          + (pl.isShenGong ? '<span class="p-tag sm">身</span>' : '');
-        const majors = pl.stars.filter(s => s.type === 'major');
-        const ms = majors.length
-          ? majors.map(s => `${esc(s.name)}${s.siHua ? shBadge(s.siHua) : ''}`).join(' ')
-          : '<span class="hint">空宫</span>';
-        starsLine = `<div class="pv-head"><h4>${p.name}</h4>${tags}</div><div class="pv-stars">${ms}</div>`;
-      }
-    }
-    if(!starsLine) starsLine = `<h4>${p.name}</h4>`;
-    return `<div class="palace-card" data-palace="${p.name}"><span class="num">${i+1}</span>${starsLine}`
-      + `<div><span class="modern">${p.modern}</span></div><div class="kw">${p.keywords}</div></div>`;
-  }).join('');
+  // hero 主按钮智能化：有盘→查看命盘，无盘→开始排盘
+  const cta = document.querySelector('.hn-cta');
+  if(cta){
+    if(rec){ cta.textContent = '查看命盘 →'; cta.dataset.nav = 'chart'; }
+    else { cta.textContent = '开始排盘 →'; cta.dataset.nav = 'input'; }
+  }
 }
 /* 轻合拍：分享链接打开对方的盘时，与本机「我」的盘快评（日柱合/生肖/紫微互飞） */
 const GAN5_HE = { '甲':'己','乙':'庚','丙':'辛','丁':'壬','戊':'癸','己':'甲','庚':'乙','辛':'丙','壬':'丁','癸':'戊' };
