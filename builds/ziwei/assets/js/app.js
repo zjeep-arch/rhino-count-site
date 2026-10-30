@@ -1690,7 +1690,34 @@ function openUnlock(){
   $('#unlock-code').value = '';
   $('#unlock-err').textContent = '';
   $('#unlock-modal').hidden = false;
+  setTimeout(() => $('#unlock-code')?.focus(), 80);
 }
+async function doUnlockVerify(){
+  const rec = cur(); if(!rec) return;
+  const key = readingKeyOf(rec.chart);
+  const code = $('#unlock-code').value.replace(/\s+/g,'');
+  if(!code){ $('#unlock-err').textContent = '先输入口令或解锁码。'; return; }
+  let ok = await verifyUnlockCode(key, code) || await verifyKouling(code);
+  let kamiKey = '';
+  if(!ok && await verifyKami(code)){
+    kamiKey = 'gxg_kami_used_' + code.toUpperCase();
+    const usedFor = store.get(kamiKey, null);
+    ok = !usedFor || usedFor === key; // 同一卡密在本机只解一张盘
+  }
+  if(ok){
+    store.set('gxg_unlock_' + key, true);
+    if(kamiKey) store.set(kamiKey, key);
+    $('#unlock-modal').hidden = true;
+    renderReading();
+  } else {
+    $('#unlock-err').textContent = '口令不对，请检查后重试（口令/8位解锁码/卡密都可以）。';
+  }
+}
+$('#unlock-code')?.addEventListener('keydown', e => { if(e.key === 'Enter') doUnlockVerify(); });
+$('#unlock-code')?.addEventListener('paste', () => setTimeout(() => {
+  const v = $('#unlock-code').value.replace(/\s+/g,'');
+  if(v.length >= 6) doUnlockVerify();
+}, 60));
 document.addEventListener('click', async e => {
   if(e.target.closest('#reading-retry')){ const rec = cur(); if(rec) tryLoadFull(rec); return; }
   if(e.target.closest('[data-unlock-open]')){ openUnlock(); return; }
@@ -1701,24 +1728,7 @@ document.addEventListener('click', async e => {
     return;
   }
   if(e.target.closest('#unlock-verify')){
-    const rec = cur(); if(!rec) return;
-    const key = readingKeyOf(rec.chart);
-    const code = $('#unlock-code').value.replace(/\s+/g,'');
-    let ok = await verifyUnlockCode(key, code) || await verifyKouling(code);
-    let kamiKey = '';
-    if(!ok && await verifyKami(code)){
-      kamiKey = 'gxg_kami_used_' + code.toUpperCase();
-      const usedFor = store.get(kamiKey, null);
-      ok = !usedFor || usedFor === key; // 同一卡密在本机只解一张盘
-    }
-    if(ok){
-      store.set('gxg_unlock_' + key, true);
-      if(kamiKey) store.set(kamiKey, key);
-      $('#unlock-modal').hidden = true;
-      renderReading();
-    } else {
-      $('#unlock-err').textContent = '口令不对，请检查后重试。';
-    }
+    doUnlockVerify();
   }
 });
 document.addEventListener('click', e => {
@@ -3232,6 +3242,7 @@ function openSharedChart(){
 /* ---------- 启动 ---------- */
 initForm();
 wireDisclaimer();
+if(currentId && !cur()){ currentId = archive.length ? archive[0].id : null; store.set('gxg_current', currentId); } // 自愈：current 指向已删存档
 renderHome();
 heroEntrance();
 initRightTabs();
