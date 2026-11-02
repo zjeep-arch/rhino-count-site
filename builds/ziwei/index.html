@@ -17,7 +17,7 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
 {"@type":"Question","name":"紫微斗数的四化是什么意思？","acceptedAnswer":{"@type":"Answer","text":"化禄、化权、化科、化忌是天干给星曜加的四种标记：禄主资源机会，权主掌控能力，科主名声贵人，忌主在意与功课。忌不是凶，是这辈子花心血最多的地方。"}},
-{"@type":"Question","name":"晚子时（23点后）出生怎么排盘？","acceptedAnswer":{"@type":"Answer","text":"本站默认晚子时不换日（与测测、问真等主流工具一致），也有换日派开关可选。选精确时间到分钟即可。"}},
+{"@type":"Question","name":"晚子时（23点后）出生怎么排盘？","acceptedAnswer":{"@type":"Answer","text":"本站默认晚子时不换日；不同排盘流派对换日时刻的处理不尽相同，可通过选项切换并查看本次排盘口径。"}},
 {"@type":"Question","name":"为什么不同排盘工具排出来的结果不一样？","acceptedAnswer":{"@type":"Answer","text":"通常是口径差异：是否做真太阳时校正、晚子时是否换日、闰月怎么算。本站默认关闭真太阳时校正且排盘日按公历出生日不变，每次排盘的口径卡都会写明所用口径。"}},
 {"@type":"Question","name":"什么是来因宫？","acceptedAnswer":{"@type":"Answer","text":"生年天干所在的宫位，代表你这一生带着什么命题而来，是飞星派立命的第一把钥匙。四化盘页面会自动标出你的来因宫并给出白话解释。"}},
 {"@type":"Question","name":"排盘需要付费吗？数据会上传吗？","acceptedAnswer":{"@type":"Answer","text":"排盘和全部分析功能免费。所有计算在浏览器本地完成，出生信息只存在你的设备里，不上传任何服务器。"}},
@@ -118,14 +118,14 @@
           <select id="f-exmin"><option value="">分（可选）</option></select>
         </div>
         <div class="hint" id="boundary-hint"></div>
-        <label class="check" id="latezi-row" hidden><input type="checkbox" id="f-latezi-next"> 晚子时按次日排盘（换日派口径；不勾选＝同多数工具，不换日）</label>
+        <label class="check" id="latezi-row" hidden><input type="checkbox" id="f-latezi-next"> 晚子时按次日排盘（换日口径选项；不勾选＝本站默认不换日）</label>
         <label class="check"><input type="checkbox" id="f-unknown-hour"> 时辰不确定（去定盘验证辅助）</label>
       </div>
       <div class="field"><span>出生地（真太阳时校正）</span>
         <div class="date-row">
           <select id="f-province"></select><select id="f-city"></select>
         </div>
-        <label class="check"><input type="checkbox" id="f-true-solar"> 按出生地校正真太阳时（默认关闭，与测测/问真等主流排盘一致；开启后只定时辰、出生日不变）</label>
+        <label class="check"><input type="checkbox" id="f-true-solar"> 按出生地校正真太阳时（默认关闭；开启后用于确定时辰，排盘日期仍按公历出生日）</label>
         <div class="hint" id="dst-hint"></div>
       </div>
       <div class="field"><span>存为</span>
