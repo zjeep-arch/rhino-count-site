@@ -61,8 +61,13 @@ const uid = () => 'c' + Date.now().toString(36) + Math.floor(Math.random()*1e4).
 const cur = () => archive.find(a => a.id === currentId) || null;
 
 /* ---------- 导航 ---------- */
-const VIEWS = ['home','input','chart','menu','palaces','reading','answer','life','sihuapan','guide','archive','dingpan'];
+const VIEWS = ['home','input','chart','reading','guide','archive','dingpan'];
+let insightPanel = 'palaces';
 function nav(name){
+  if(name === 'menu'){ insightPanel = 'palaces'; name = 'reading'; }
+  else if(name === 'palaces'){ insightPanel = 'palaces'; name = 'reading'; }
+  else if(name === 'answer'){ insightPanel = 'forecast'; name = 'reading'; }
+  else if(name === 'life' || name === 'sihuapan') return;
   if(!VIEWS.includes(name)) return;
   if(name === 'chart' && !cur()) name = 'input'; // 还没排过盘时，"命盘"入口直接引导去排盘
   $$('.view').forEach(v => v.classList.remove('active'));
@@ -73,8 +78,7 @@ function nav(name){
   if(name==='chart') renderChart();
   if(name==='input') renderInputHistory();
   if(name==='archive') renderArchive();
-  if(name==='palaces') renderPalaceCards();
-  if(name==='menu') renderMenu();
+  if(name==='reading') activateInsightPanel(insightPanel);
   if(name==='guide') renderGuide();
 }
 document.addEventListener('click', e => {
@@ -396,16 +400,21 @@ function sanfangBranches(b){
 function palaceByName(chart, name){ return chart.palaces.find(p => p.name === name || disp(p.name) === name); }
 function palaceByBranch(chart, b){ return chart.palaces.find(p => p.branch === ((b%12)+12)%12); }
 
-function starHtml(s){
-  const sihua = s.siHua ? shBadge(s.siHua) : '';
+function starHtml(s, activeSihua){
+  const natal = s.siHua ? shBadge(s.siHua) : '';
+  const liveMap = activeSihua ? { '禄': activeSihua.lu, '权': activeSihua.quan, '科': activeSihua.ke, '忌': activeSihua.ji } : {};
+  const live = Object.entries(liveMap).filter(([, star]) => star === s.name).map(([hua]) => {
+    const cls = { '禄': 'sh-lu', '权': 'sh-quan', '科': 'sh-ke', '忌': 'sh-ji' }[hua] || '';
+    return `<span class="sihua sihua-live ${cls}" title="当前运限化${hua}">运${hua}</span>`;
+  }).join('');
   const br = s.brightnessRaw ? `<span class="br br-${s.brightnessRaw}">${s.brightnessRaw}</span>` : '';
-  return `<span class="star-chip" data-star="${esc(s.name)}">${esc(s.name)}${sihua}${br}</span>`;
+  return `<span class="star-chip" data-star="${esc(s.name)}">${esc(s.name)}${natal}${live}${br}</span>`;
 }
-function palaceStarsHtml(p){
+function palaceStarsHtml(p, activeSihua){
   const majors = p.stars.filter(s => s.type==='major');
   const others = p.stars.filter(s => s.type!=='major');
-  let h = majors.map(starHtml).join('');
-  if(others.length) h += '<br>' + others.map(starHtml).join('');
+  let h = majors.map(s => starHtml(s, activeSihua)).join('');
+  if(others.length) h += '<br>' + others.map(s => starHtml(s, activeSihua));
   if(p.isEmpty && p.borrowedStars && p.borrowedStars.length)
     h += `<div class="hint">空宫，借对宫：${p.borrowedStars.map(esc).join('、')}</div>`;
   return h || '<span class="hint">—</span>';
@@ -715,7 +724,7 @@ function renderChartBody(){
       ? `<span class="ov-tag">${LUCK_PREFIX[luckMode] || '流'}${ovNameG.replace('宫','')}</span>` : '';
     h += `<div class="cell${hl}${sf}" data-branch="${b}">${tags.join('')}${ovTagG}
       <div class="pname">${disp(p.name)}</div><div class="gz">${ST[p.stem]}${BR[p.branch]}</div>
-      <div class="stars">${palaceStarsHtml(p)}</div>
+      <div class="stars">${palaceStarsHtml(p, ov.sihua)}</div>
       ${p.daXianAge ? `<div class="dx">大限 ${p.daXianAge[0]}–${p.daXianAge[1]}</div>` : ''}</div>`;
   });
   grid.innerHTML = h;
@@ -734,7 +743,7 @@ function renderChartBody(){
       <div class="palace-row-head"><div><span class="t">${disp(p.name)}</span>${tags?` <span class="star-chip">${tags}宫</span>`:''}${ovTagL}
         <div class="s">${ST[p.stem]}${BR[p.branch]}${p.daXianAge?` · 大限${p.daXianAge[0]}–${p.daXianAge[1]}`:''} · ${majors0}</div></div>
         <span class="arrow">›</span></div>
-      <div class="palace-row-body">${palaceStarsHtml(p)}
+      <div class="palace-row-body">${palaceStarsHtml(p, ov.sihua)}
         ${p.selfSihua && p.selfSihua.length ? `<div class="hint">自化：${p.selfSihua.map(s=>s.starName+s.siHua).join('、')}</div>` : ''}
         <div style="margin-top:8px"><button class="btn-ghost" data-palace-detail="${esc(disp(p.name))}">看${esc(disp(p.name))}解读 →</button>
         <button class="btn-ghost" data-sanfang="${p.branch}">看三方四正</button></div>
@@ -1040,10 +1049,10 @@ function renderChartSihua(chart){
   box.innerHTML =
     '<section class="card sihua-core-card"><div class="card-kicker">生年四化 · ' + yearGan + '干落点</div>' +
       '<div class="sihua-flow-grid">' + flows + '</div>' +
-      '<p class="hint sihua-instruction">点击一项，在左侧十二宫盘中定位它的落宫。四化代表传统术数中的象意线索，不是对现实结果的保证。</p></section>' +
+      '<p class="hint sihua-instruction">点击一项，命盘会定位对应落宫；切换大限或流年时，相关运限四化会直接标在星曜旁。四化属于传统术数解释线索，不代表现实结果保证。</p></section>' +
     '<section class="card sihua-overlay-card"><div class="card-kicker">叠盘对照 · ' + esc(active.label || '本命盘') + '</div>' +
       (activeItems ? '<div class="active-sihua-list">' + activeItems + '</div>' : '<p class="hint" style="margin:0">当前为本命模式。切换左侧「大限 / 流年」后，这里会同步显示对应层的四化星与落宫。</p>') + '</section>' +
-    '<div class="sihua-next-step"><span>想看某一宫完整的飞化关系与禄转忌链？</span><button type="button" class="link-btn" data-nav="sihuapan">打开完整四化盘 →</button></div>';
+    '<div class="sihua-next-step"><span>宫干飞化矩阵已并入这张命盘。</span><span>切换本命、大限与流年查看动态标记。</span></div>';
 }
 document.addEventListener('click', e => {
   const btn = e.target.closest('.sihua-flow-btn');
@@ -1802,16 +1811,6 @@ document.addEventListener('click', e => {
     f.textContent = '★';
   }
 });
-// 进入解读页时加载
-const _nav = nav;
-nav = function(name){
-  _nav(name);
-  if(name === 'reading') renderReading();
-  if(name === 'answer'){ renderWenyun(); renderZeri(); }
-  if(name === 'life') renderLifeView();
-  if(name === 'sihuapan') renderSihuaPan();
-};
-
 /* ---------- 新手导览 ---------- */
 const GUIDE6_FALLBACK = [
   ['命身为本', '先看命宫定你是什么人，再看身宫定你后半程想成为什么人。'],
@@ -2047,103 +2046,9 @@ function renderTimelineCard(chart){
   body.innerHTML =
     `<p class="hint" style="margin:0 0 8px">柱状是这一年忙什么：<b style="color:#D9B36A">金柱＝换挡年</b>（十年主题切换）、<b style="color:#E09B7E">红柱＝化忌入你命宫三方</b>（费心之年）、蓝柱＝平稳年。悬停柱子看那年的具体事项，点每一层展开逐年明细。</p>` + rows +
     `<p class="hint" style="margin:10px 0 0">当前 ${curDx.startAge || '—'}–${curDx.endAge || '—'} 岁走【${curDx.palaceName ? disp(curDx.palaceName) : ''}】大限${nextMark ? `，下一个换挡年是 <b style="color:#D9B36A">${nextMark} 年</b>` : ''}。走势是"动静与主题"，不是吉凶判决。</p>` +
-    `<button class="btn-ghost btn-block" data-nav="life" style="margin-top:12px">展开人生全景 · 十二层＋流年热力 →</button>`;
+    '';
   body.querySelectorAll('.tl-row').forEach(r => r.addEventListener('click', () => r.classList.toggle('open')));
   card.hidden = false;
-}
-/* ---------- 人生全景：十二层全展开 + 120 年流年热力 + 年份联动 ---------- */
-function jumpToYear(y){
-  if(!y || y < 1900 || y > 2200) return;
-  luckMode = 'liunian'; luckParam = y;
-  nav('chart');
-}
-function lifeYearsOf(chart, dx, keyBranches, mingFangSet, dxSh){
-  const birthY = chart.birthInfo.year;
-  const y1 = birthY + dx.startAge, y2 = birthY + dx.endAge;
-  const years = [];
-  for(let y = y1; y <= y2; y++){
-    const yb = ((y - 4) % 12 + 12) % 12;
-    let lsh = null;
-    try{ lsh = normSihua(E.getLiuNianSiHua(y)); }catch(e){}
-    const jiP = lsh && lsh.ji ? chart.palaces.find(pl => pl.stars.some(x => x.name === lsh.ji)) : null;
-    const luPal = lsh && lsh.lu ? sihuaStarPalace(chart, lsh.lu) : '';
-    const jiPal = lsh && lsh.ji ? sihuaStarPalace(chart, lsh.ji) : '';
-    const dxJiPal = dxSh && dxSh.ji ? sihuaStarPalace(chart, dxSh.ji) : '';
-    const dxLuPal = dxSh && dxSh.lu ? sihuaStarPalace(chart, dxSh.lu) : '';
-    years.push({
-      y,
-      isMark: keyBranches.includes(yb),
-      luPal,
-      jiPal,
-      jiHit: !!(jiP && mingFangSet.has(jiP.branch)),
-      liuPal: palaceByBranch(chart, yb),
-      dblJi: !!(dxJiPal && jiPal === dxJiPal),
-      jiaoZhan: !!(dxJiPal && luPal === dxJiPal),
-      dblLu: !!(dxLuPal && luPal === dxLuPal),
-    });
-  }
-  return years;
-}
-function renderLifeView(){
-  const rec = cur();
-  const box = $('#life-body');
-  if(!box) return;
-  if(!rec){ box.innerHTML = '<div class="empty">先排一张盘，再看人生全景。</div>'; return; }
-  const chart = rec.chart;
-  const birthY = chart.birthInfo.year;
-  const nowY = new Date().getFullYear();
-  const keyBranches = ['命宫','官禄宫','财帛宫','夫妻宫'].map(n => palaceByName(chart, n).branch);
-  const mingFangSet = new Set(sanfangBranches(chart.mingGongBranch));
-  // 顶部：120 年流年热力（行=大限，列=年）
-  let heat = '', sections = '';
-  chart.daXians.forEach((dx, i) => {
-    const { sh, pal, lvl } = decadeQuality(chart, i, dx);
-    const name = disp(pal.name);
-    const majors = pal.stars.filter(x => x.type === 'major').map(x => x.name).join('·') || '空宫';
-    const years = lifeYearsOf(chart, dx, keyBranches, mingFangSet, sh);
-    const marks = years.filter(o => o.isMark).map(o => o.y);
-    const dblYears = years.filter(o => o.dblJi).map(o => o.y);
-    const jzYears = years.filter(o => o.jiaoZhan).map(o => o.y);
-    heat += `<div class="ly-row${i === chart.currentDaXianIndex ? ' cur' : ''}"><span class="ly-lab">${dx.startAge}–${dx.endAge}</span><div class="ly-cells">` +
-      years.map(o => `<button class="ly-cell${o.isMark ? ' mk' : ''}${o.jiHit ? ' ji' : ''}${o.dblJi ? ' dbl' : ''}${o.y === nowY ? ' now' : ''}" data-year="${o.y}" title="${o.y}：流年命宫进${disp(o.liuPal.name).replace('宫','')}${o.isMark ? '，换挡之年' : ''}${o.dblJi ? '，与大限忌同宫——双忌叠压，最要稳的一年' : ''}${o.jiaoZhan ? '，禄忌交战——机会与牵扯同来' : ''}${o.jiHit ? '，化忌入命方，费心' : ''}${o.luPal ? '，' + o.luPal.replace('宫','') + '有顺风' : ''}">${String(o.y).slice(2)}</button>`).join('') +
-      '</div></div>';
-    const spark = years.map(o =>
-      `<i class="sp-bar${o.isMark ? ' mk' : ''}${o.jiHit ? ' ji' : ''}" title="${o.y}：流年命宫进${disp(o.liuPal.name).replace('宫','')}${o.isMark ? '，换挡之年' : ''}${o.jiHit ? '，化忌入命方，费心' : ''}${o.luPal ? '，' + o.luPal.replace('宫','') + '有顺风' : ''}"></i>`).join('');
-    const detail = years.map(o =>
-      `<tr${o.y === nowY ? ' class="now"' : ''}><td class="ly-y" data-year="${o.y}">${o.y}</td>` +
-      `<td>${disp(o.liuPal.name).replace('宫','')}${o.isMark ? ' ◆换挡' : ''}${o.dblJi ? ' ⛔双忌' : ''}${o.jiaoZhan ? ' ⚡交战' : ''}</td>` +
-      `<td>${o.luPal ? '禄→' + o.luPal : '—'}</td>` +
-      `<td>${o.jiPal ? '忌→' + o.jiPal + (o.jiHit ? '（命方）' : '') : '—'}</td>` +
-      `<td>${withTerms(yearStory(o))}</td>` +
-      `<td><button class="link-btn" data-year="${o.y}">看流年盘 →</button></td></tr>`).join('');
-    sections += `<div class="tl-row open${i === chart.currentDaXianIndex ? ' cur' : ''}">
-      <div class="tl-age">${dx.startAge}–${dx.endAge}<span>${birthY + dx.startAge}–${birthY + dx.endAge}</span></div>
-      <div class="tl-body">
-        <div class="tl-line1"><b>${name}</b><span class="tl-stars">${esc(majors)}</span>
-          <span class="tl-lvl lv-${lvl === '旺限' ? 'hi' : lvl === '平顺' ? 'mid' : 'lo'}">${lvl}</span></div>
-        <div class="tl-theme">${esc(DX_THEME[name] || '')}</div>
-        <div class="tl-line2">
-          ${sh && sh.lu ? `<span class="tl-sh">限禄 ${esc(sh.lu)}→${esc(sihuaStarPalace(chart, sh.lu))}</span>` : ''}
-          ${sh && sh.ji ? `<span class="tl-sh ji">限忌 ${esc(sh.ji)}→${esc(sihuaStarPalace(chart, sh.ji))}</span>` : ''}
-          ${marks.length ? `<span class="tl-mk">换挡 ${marks.slice(0, 3).join('、')}${marks.length > 3 ? '…' : ''}</span>` : ''}
-        </div>
-        <div class="tl-spark">${spark}</div>
-        <div class="tl-expand"><table class="tl-table"><tr><th>年</th><th>流年命宫</th><th>禄</th><th>忌</th><th>这一年</th><th></th></tr>${detail}</table></div>
-      </div></div>`;
-  });
-  const curDx = chart.daXians[chart.currentDaXianIndex] || {};
-  let nextMark = null;
-  for(let y = nowY + 1; y <= birthY + (curDx.endAge || 0); y++){
-    if(keyBranches.includes(((y - 4) % 12 + 12) % 12)){ nextMark = y; break; }
-  }
-  box.innerHTML =
-    `<div class="card"><div class="card-kicker">120 年流年热力</div>` +
-    `<div class="ly-heat">${heat}</div>` +
-    `<div class="heat-legend"><span>静</span><i style="background:#262F5E"></i><i style="background:#5F74C4"></i><i style="background:#C9A96A"></i><span>动</span>` +
-    `<span class="hint" style="margin-left:8px">描边=换挡年 · 红=忌入命方 · 深红=双忌叠压 · 点年份直达流年盘</span></div></div>` +
-    `<div class="card"><div class="card-kicker">十二层 · 全展开</div>` +
-    `<p class="hint" style="margin:0 0 6px">当前 ${curDx.startAge || '—'}–${curDx.endAge || '—'} 岁走【${curDx.palaceName ? disp(curDx.palaceName) : ''}】大限${nextMark ? `，下一个换挡年是 <b style="color:#D9B36A">${nextMark} 年</b>` : ''}。</p>` +
-    sections + `</div>`;
 }
 /* ---------- 问运：今年运势 / 感情 / 财运 / 事业（先结论后依据，全部盘面实算） ---------- */
 function wyYearsOf(chart, targetPalName){
@@ -2336,149 +2241,6 @@ function selfSay(palName, hua){
   const A = GONG_SHORT[palName] || palName;
   return `${A}上${SELF_HUA_SAY[hua].split('——')[0]}——${SELF_HUA_SAY[hua].split('——')[1]}`;
 }
-function renderSihuaPan(){
-  const rec = cur();
-  const box = $('#sihuapan-body');
-  if(!box) return;
-  if(!rec){ box.innerHTML = '<div class="empty">先排一张盘，四化盘才有得看。</div>'; return; }
-  const chart = rec.chart;
-  const yStem = chart.lunarInfo.yearStem;
-  const yGan = ST[yStem];
-  const ySh = E.getSiHuaByStem(yStem) || {};
-  const natal = natalSihuaMap(chart);
-  // 来因宫：生年干所落之宫（可能有两个，取先出现的）
-  const laiyins = chart.palaces.filter(p => ST[p.stem] === yGan);
-  const laiyin = laiyins[0];
-  // 生年四化星 → 落宫
-  const starPal = {};
-  ['禄','权','科','忌'].forEach(h => {
-    const p = chart.palaces.find(pl => pl.stars.some(s => s.name === ySh[h]));
-    starPal[h] = { star: ySh[h], pal: p ? disp(p.name) : '' };
-  });
-  // 生年四化落宫图（4x4）
-  const order = [5,6,7,8, 4,-1,-1,9, 3,-1,-1,10, 2,1,0,11];
-  const bornCells = new Set();
-  Object.values(starPal).forEach(v => { if(v.pal) bornCells.add(v.pal); });
-  let grid = '', spCenterDone = false;
-  order.forEach(b => {
-    if(b === -1){
-      grid += spCenterDone ? '<div class="cell center-dup"></div>' : hubHTML(chart, rec, 'sihua', ySh);
-      spCenterDone = true;
-      return;
-    }
-    const p = palaceByBranch(chart, b);
-    const nm = disp(p.name);
-    const isBorn = bornCells.has(nm);
-    const isLaiyin = laiyin && p.branch === laiyin.branch;
-    const tags = (p.isMingGong ? '<span class="tag">命</span>' : '') + (p.isShenGong ? '<span class="tag">身</span>' : '');
-    grid += `<div class="cell sp-cell${isBorn ? ' born' : ''}${isLaiyin ? ' laiyin' : ''}" data-branch="${b}">${tags}
-      <div class="pname">${nm}${isLaiyin ? '<span class="sp-lai">来因</span>' : ''}</div>
-      <div class="gz">${ST[p.stem]}${BR[p.branch]}</div>
-      <div class="stars">${p.stars.filter(s => s.type === 'major').map(s =>
-        `<span class="star-chip" data-star="${esc(s.name)}">${esc(s.name)}${s.siHua ? shBadge(s.siHua) : ''}</span>`).join('') || '<span class="hint">空宫</span>'}</div>
-    </div>`;
-  });
-  // 宫干四化矩阵（全四化）
-  const findPal = star => { const q = chart.palaces.find(pl => pl.stars.some(s => s.name === star)); return q ? disp(q.name).replace('宫','') : '命外'; };
-  const matrixRows = chart.palaces.map(p => {
-    const sh = E.getSiHuaByStem(p.stem) || {};
-    const cell = (star, hua, cls) => star ? `${findPal(star)}<span class="fx-star ${cls || ''}">${star}${hua}</span>` : '—';
-    return `<tr><td class="fx-g"><b>${disp(p.name).replace('宫','')}</b><span class="fx-gz">${ST[p.stem]}</span></td>` +
-      `<td>${cell(sh['禄'],'禄')}</td><td>${cell(sh['权'],'权','fx-quan')}</td><td>${cell(sh['科'],'科','fx-ke')}</td><td>${cell(sh['忌'],'忌','fx-ji')}</td></tr>`;
-  }).join('');
-  // 禄转忌链：命宫三方四正默认，展开全部
-  const mingP = chart.palaces.find(p => p.isMingGong);
-  const coreBranches = sanfangBranches(mingP.branch);
-  const shenP = chart.palaces.find(p => p.isShenGong);
-  if(shenP && !coreBranches.includes(shenP.branch)) coreBranches.push(shenP.branch);
-  const chainOf = p => {
-    const sh1 = E.getSiHuaByStem(p.stem) || {};
-    const lu = sh1['禄'];
-    if(!lu) return null;
-    const luPal = chart.palaces.find(pl => pl.stars.some(s => s.name === lu));
-    if(!luPal) return null;
-    const sh2 = E.getSiHuaByStem(luPal.stem) || {};
-    const ji = sh2['忌'];
-    const jiPal = ji ? chart.palaces.find(pl => pl.stars.some(s => s.name === ji)) : null;
-    const same = jiPal && jiPal.branch === luPal.branch;
-    const luName = disp(luPal.name).replace('宫',''), jiName = jiPal ? disp(jiPal.name).replace('宫','') : '';
-    const say = same
-      ? `福气流向【${luName}】又记在同一处——禄忌同宫，得到与代价绑在一起，拿的时候多留一分清醒`
-      : `福气流向【${luName}】（${esc(DX_THEME[disp(luPal.name)] || '')}），而账记在【${jiName}】（${esc(DX_THEME[jiPal ? disp(jiPal.name) : ''] || '')}）`;
-    return { from: p, lu, luName, ji, jiName, same, say };
-  };
-  const chainRow = c => c ? `<div class="chain-row">
-      <div class="chain-head"><b>${disp(c.from.name).replace('宫','')}</b><span class="chain-gz">${ST[c.from.stem]}干</span>
-        <span class="chain-flow">${esc(c.lu)}禄→${esc(c.luName)}　⇢　${esc(c.ji)}忌→${esc(c.jiName)}</span></div>
-      <div class="chain-say">${c.say}</div></div>` : '';
-  const coreChains = coreBranches.map(b => chainOf(palaceByBranch(chart, b))).filter(Boolean);
-  const allChains = chart.palaces.map(chainOf).filter(Boolean);
-  box.innerHTML = `
-    <div class="card"><div class="card-kicker">生年四化落宫</div>
-      <p class="hint" style="margin:0 0 8px">${yGan}干四化：<b>禄·${starPal['禄'].star}（${starPal['禄'].pal}）</b>｜<b>权·${starPal['权'].star}（${starPal['权'].pal}）</b>｜<b>科·${starPal['科'].star}（${starPal['科'].pal}）</b>｜<b>忌·${starPal['忌'].star}（${starPal['忌'].pal}）</b>——金框宫是四化落点，四化是这张盘的"总开关"。</p>
-      <div class="sp-grid">${grid}</div>
-    </div>
-    <div class="card"><div class="card-kicker">宫位剧本 · 选一宫读它的四化故事</div>
-      <div class="scr-chips">${chart.palaces.map(p =>
-        `<button class="chip${p.isMingGong ? ' on' : ''}" data-scr="${p.branch}">${disp(p.name).replace('宫','')}</button>`).join('')}</div>
-      <div id="scr-body"></div>
-    </div>
-    <div class="card"><div class="card-kicker">来因宫</div>
-      <p style="margin:0 0 6px">你的来因宫是 <b style="color:#D9B36A">${laiyin ? disp(laiyin.name) : ''}（${laiyin ? ST[laiyin.stem] + BR[laiyin.branch] : ''}）</b>——生年${yGan}干落在此宫。</p>
-      <p class="p-say" style="margin:0">${esc(LAIYIN_SAY[laiyin ? disp(laiyin.name).replace('宫','') : ''] || '')}。来因宫是北派立命的第一把钥匙：看这一生"为什么而来"，先从来因宫的星曜和它的四化读起。</p>
-    </div>
-    <div class="card"><div class="card-kicker">宫干四化矩阵 · 十二宫全览</div>
-      <details class="chain-more" open><summary>展开 / 收起对照表</summary>
-        <table class="fx-table" style="margin-top:8px"><tr><th>宫（干）</th><th>禄</th><th>权</th><th>科</th><th>忌</th></tr>${matrixRows}</table>
-      </details>
-      <p class="hint" style="margin:8px 0 0">读法：行是"谁在飞"（宫干），格子里是"飞到哪宫、哪颗星"。想看某一宫的完整剧本，用上面的「宫位剧本」。</p>
-    </div>
-    <div class="card"><div class="card-kicker">禄转忌 · 因果链（命宫三方四正）</div>
-      <p class="hint" style="margin:0 0 8px">北派看"得到的背后要还什么"：A 宫化禄→禄星落 B 宫→B 宫干再化忌＝这笔福气的代价记在哪。</p>
-      ${coreChains.map(chainRow).join('') || '<p class="hint">这几宫的干未飞禄或禄星未入十二宫，无链可转。</p>'}
-      <details class="chain-more"><summary>展开全部十二宫因果链</summary>${allChains.map(chainRow).join('')}</details>
-    </div>`;
-  const renderScript = b => {
-    const p = palaceByBranch(chart, b);
-    box.querySelectorAll('.scr-chips .chip').forEach(c => c.classList.toggle('on', +c.dataset.scr === b));
-    const name = disp(p.name);
-    const sh = E.getSiHuaByStem(p.stem) || {};
-    const vds = palaceVerdicts(chart).find(x => x.n === name);
-    const rows = [];
-    const born = ['禄','权','科','忌'].filter(h => chart.palaces.find(pl2 => pl2.branch === p.branch && pl2.stars.some(st => st.name === ySh[h])));
-    if(born.length) rows.push({ tag:'先天', cls:'born', text:`生年${born.map(h => ySh[h] + h).join('、')}坐${name}——${GONG_SHORT[name] || name}是你先天注定要面对的场域，躲不掉；化忌也意味着最深的功课修完最值钱` });
-    if(vds) rows.unshift({ tag:'评级', cls: vds.score >= 70 ? 'lu' : vds.score >= 40 ? '' : 'ji', text:`这一宫在你盘里属于「${vds.score >= 70 ? '有底气' : vds.score >= 40 ? '有底色' : '是功课'}」——按主星庙旺＋四化＋辅煞三方合参的相对结构，不判吉凶` });
-    if(sh['忌']){ const to = chart.palaces.find(pl => pl.stars.some(st => st.name === sh['忌']));
-      if(to) rows.push({ tag:'执念', cls:'ji', text:`${name}的${sh['忌']}化忌飞入${disp(to.name)}——${flySay(name, '忌', disp(to.name))}` }); }
-    if(sh['禄']){ const to = chart.palaces.find(pl => pl.stars.some(st => st.name === sh['禄']));
-      if(to) rows.push({ tag:'机会', cls:'lu', text:`${name}的${sh['禄']}化禄飞入${disp(to.name)}——${flySay(name, '禄', disp(to.name))}` }); }
-    const qk = [];
-    if(sh['权']){ const to = chart.palaces.find(pl => pl.stars.some(st => st.name === sh['权'])); if(to) qk.push(`${sh['权']}权→${disp(to.name).replace('宫','')}`); }
-    if(sh['科']){ const to = chart.palaces.find(pl => pl.stars.some(st => st.name === sh['科'])); if(to) qk.push(`${sh['科']}科→${disp(to.name).replace('宫','')}`); }
-    if(qk.length){ const wTo = chart.palaces.find(pl => pl.stars.some(st => st.name === sh['权']));
-      rows.push({ tag:'助力', cls:'', text:`${qk.join('，')}——${flySay(name, '权', disp(wTo.name))}` }); }
-    (p.selfSihua || []).forEach(x => rows.push({ tag:'自化', cls:'ji', text:`${name}${x.starName}自化${x.siHua}——${selfSay(name, x.siHua)}` }));
-    chart.palaces.forEach(src => {
-      if(src.branch === p.branch) return;
-      const ssh = E.getSiHuaByStem(src.stem) || {};
-      if(ssh['忌'] && p.stars.some(st => st.name === ssh['忌'])){
-        rows.push({ tag:'压力', cls:'', text:`${disp(src.name)}的${ssh['忌']}化忌飞进${name}——${GONG_SHORT[disp(src.name)] || ''}上的牵扯，会直接搅动你的${GONG_SHORT[name] || name}` });
-      }
-    });
-    $('#scr-body').innerHTML =
-      `<div class="scr-title">${name}<span>${ST[p.stem]}${BR[p.branch]} · ${GONG_SHORT[name] || ''}</span>${vds ? verdictBadge(vds.score) : ''}</div>` +
-      rows.map(r => `<div class="scr-row"><span class="scr-tag ${r.cls}">${r.tag}</span><span class="scr-text">${withTerms(r.text)}</span></div>`).join('') +
-      `<p class="hint" style="margin:8px 0 0">忌＝在意与功课，不是判决。飞星说的是能量流向，怎么做仍是你的事。</p>`;
-  };
-  box.addEventListener('click', e => {
-    const scr = e.target.closest('[data-scr]');
-    if(scr) renderScript(+scr.dataset.scr);
-    const t = e.target.closest('[data-year]');
-    if(t) jumpToYear(+t.dataset.year);
-  });
-  renderScript(chart.mingGongBranch);
-}
-
 /* ---------- 择日助手：未来 30 天按事项推荐 ---------- */
 const ZERI_TYPES = [
   { k:'sign', name:'签约 · 面试', good:['官禄宫','父母宫'], bad:['官禄宫'] },
@@ -2776,6 +2538,8 @@ function renderBriefCard(chart){
 }
 /* 右栏页签与折叠记忆 */
 function setRGroup(rg){
+  const available = $$('#rtabs button').map(b => b.dataset.rg);
+  if(!available.includes(rg)) rg = available.includes('bazi') ? 'bazi' : available[0];
   $$('#rtabs button').forEach(b => b.classList.toggle('on', b.dataset.rg === rg));
   $$('.chart-right .rgroup').forEach(g => { g.hidden = g.dataset.rg !== rg; });
   store.set('gxg_rtab_v2', rg);
@@ -3204,40 +2968,27 @@ $('#btn-save-img').addEventListener('click', () => {
   a.click();
 });
 
-const MENU_ITEMS = [
-  { k: 'palaces', t: '十二宫解读', d: '十二宫结合你的命盘，一宫一卡：星曜、四化、干支大限全填上', need: true },
-  { k: 'reading', t: '13维深度解读', d: '67.5 万张命盘语料库 · 每盘三万字长解读：性格、事业、感情……共十三维度，关注公众号免费解锁', need: true },
-  { k: 'answer', t: '问运 · 今年/感情/财/事业', d: '按你盘面直接回答最常问的四件事：今年忙什么、感情剧本、财来财去、事业时机', need: true },
-  { k: 'life', t: '人生全景 · 时间轴', d: '十二层大限全展开：十年成色、限四化流向、逐年明细与 120 年流年热力，点年份直达流年盘', need: true },
-  { k: 'sihuapan', t: '四化盘 · 北派飞星', d: '生年四化落宫、来因宫、十二宫干四化矩阵、禄转忌因果链——四化派看盘主线', need: true },
-  { k: 'share', t: '生成分享图', d: '命盘图、签文卡，带问星落款，保存发朋友圈', need: true },
-];
-function renderMenu(){
-  const rec = cur();
-  const head = rec
-    ? `<div class="card" style="margin-bottom:12px"><div class="card-kicker">当前命盘</div><p style="margin:0">${esc(rec.name)} · 命宫${esc(rec.chart.palaces.find(p=>p.isMingGong).stars.filter(s=>s.type==='major').map(s=>s.name).join('、') || '空宫')} · <button class="btn-ghost" data-nav="chart" style="padding:4px 10px">查看命盘 →</button> <button class="btn-ghost" data-nav="archive" style="padding:4px 10px">换一张</button></p></div>`
-    : `<div class="card" style="margin-bottom:12px"><div class="card-kicker">先排一张盘</div><p style="margin:0 0 10px">下面的解读都要基于你的命盘，先花 1 分钟排一张。</p><button class="btn-primary" data-nav="input">去排盘 →</button></div>`;
-  $('#menu-list').innerHTML = head + MENU_ITEMS.map((m, i) =>
-    `<div class="card menu-item" data-menu="${m.k}" style="cursor:pointer;--i:${i}">
-       <div style="display:flex;justify-content:space-between;align-items:center">
-         <b style="font-size:16px">${m.t}</b><span style="color:var(--muted)">→</span>
-       </div>
-       <p class="hint" style="margin:6px 0 0">${m.d}</p>
-     </div>`
-  ).join('');
+document.addEventListener('click', e => {
+  if(e.target.closest('[data-share-chart]')) openShare('chart');
+});
+
+function activateInsightPanel(key){
+  const allowed = ['palaces','topics','forecast'];
+  insightPanel = allowed.includes(key) ? key : 'palaces';
+  const map = { palaces: 'insight-palaces', topics: 'insight-topics', forecast: 'insight-forecast' };
+  $$('#insight-tabs [data-insight-tab]').forEach(btn => {
+    const active = btn.dataset.insightTab === insightPanel;
+    btn.classList.toggle('on', active);
+    btn.setAttribute('aria-selected', String(active));
+  });
+  Object.entries(map).forEach(([panel, id]) => { const el = $('#'+id); if(el) el.hidden = panel !== insightPanel; });
+  if(insightPanel === 'palaces') renderPalaceCards();
+  else if(insightPanel === 'topics') renderReading();
+  else { renderWenyun(); renderZeri(); }
 }
 document.addEventListener('click', e => {
-  const m = e.target.closest('[data-menu]');
-  if(!m) return;
-  const k = m.dataset.menu;
-  const needChart = (MENU_ITEMS.find(x => x.k === k) || {}).need;
-  if(needChart && !cur()){ nav('input'); return; }
-  if(k === 'palaces') nav('palaces');
-  else if(k === 'answer') nav('answer');
-  else if(k === 'life') nav('life');
-  else if(k === 'sihuapan') nav('sihuapan');
-  else if(k === 'reading') nav('reading');
-  else if(k === 'share') openShare('chart');
+  const tab = e.target.closest('[data-insight-tab]');
+  if(tab) activateInsightPanel(tab.dataset.insightTab);
 });
 
 /* ---------- 免责声明接入 ---------- */
