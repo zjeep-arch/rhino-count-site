@@ -1310,3 +1310,60 @@ body{color:var(--ink);
   #chart-grid .cell.sihua-focus{animation:none}
   .sihua-flow-btn{transition:none}
 }
+
+
+/* Unified chart-reading surface and embedded Four Transformations */
+.insight-tabs{margin:14px 0 18px;position:sticky;top:8px;z-index:4;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(12px);padding:6px;border:1px solid var(--line);border-radius:14px}
+.insight-tabs button{min-width:96px;flex:1}
+.insight-pane[hidden]{display:none!important}
+.chart-sihua-drawer{margin:16px 0 4px;border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden}
+.chart-sihua-drawer>summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;cursor:pointer;font-weight:700;color:var(--ink)}
+.chart-sihua-drawer>summary::-webkit-details-marker{display:none}
+.chart-sihua-drawer>summary:after{content:'＋';font-size:18px;color:var(--primary);margin-left:auto}
+.chart-sihua-drawer[open]>summary:after{content:'−'}
+.chart-sihua-drawer>summary small{font-weight:400;color:var(--muted);font-size:12px}
+.chart-sihua-drawer-body{padding:0 12px 12px;border-top:1px solid var(--line)}
+.sihua-live{font-size:.75em;padding:0 3px;border:1px dashed currentColor;margin-left:2px}
+@media(max-width:700px){.insight-tabs{top:4px;margin:10px 0 14px}.insight-tabs button{min-width:84px}.chart-sihua-drawer>summary{align-items:flex-start;flex-wrap:wrap}.chart-sihua-drawer>summary small{flex-basis:100%;padding-right:22px}}
+@media(prefers-reduced-motion:reduce){.insight-tabs{backdrop-filter:none}}
+
+.reading-workbench-actions{display:flex;justify-content:flex-end;margin:-8px 0 10px}
+
+/* Unified Ask Fortune reading flow */
+.reading-workbench-actions{display:flex;justify-content:flex-end;margin:-8px 0 18px}
+.insight-flow-section{display:block;margin:28px 0 0}
+.reading-section-heading{display:flex;align-items:flex-start;gap:14px;margin:0 0 14px}
+.reading-section-index{display:inline-grid;place-items:center;flex:none;width:34px;height:34px;border:1px solid var(--line);border-radius:50%;font:600 12px/1 "IBM Plex Mono",monospace;color:var(--accent,#d8b76a)}
+.reading-section-heading h3{margin:0 0 5px;font-size:clamp(18px,2vw,23px);line-height:1.3}
+.reading-section-heading p{margin:0;color:var(--ink-soft);font-size:14px;line-height:1.7}
+.reading-topic-picker{display:flex;align-items:center;gap:14px;padding:14px 16px;margin:0 0 14px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.025)}
+.reading-topic-picker label{color:var(--ink-soft);font-size:13px;white-space:nowrap}
+.reading-topic-picker select{flex:1;min-width:0;padding:10px 36px 10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--panel,#10162d);color:var(--ink);font:inherit}
+.reading-evidence{border:1px solid var(--line);border-radius:14px;padding:0 18px;background:rgba(255,255,255,.02)}
+.reading-evidence>summary{display:flex;align-items:center;gap:14px;padding:16px 0;cursor:pointer;list-style:none}
+.reading-evidence>summary::-webkit-details-marker{display:none}
+.reading-evidence>summary>span:last-child{display:grid;gap:4px}
+.reading-evidence>summary small{color:var(--ink-soft);font-size:13px}
+.reading-evidence[open]>summary{border-bottom:1px solid var(--line)}
+.reading-evidence .palace-grid{padding-top:14px}
+@media(max-width:640px){
+ .reading-workbench-actions{margin:0 0 14px}
+ .insight-flow-section{margin-top:22px}
+ .reading-section-heading{gap:10px}
+ .reading-section-heading p{font-size:13px}
+ .reading-topic-picker{align-items:flex-start;flex-direction:column;gap:8px}
+ .reading-topic-picker select{width:100%}
+ .reading-evidence{padding:0 12px}
+}
+
+.fourhua-settings{margin:14px 0;padding:0 14px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.02)}
+.fourhua-settings>summary{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:14px 0;cursor:pointer;font-weight:700;list-style:none}
+.fourhua-settings>summary::-webkit-details-marker{display:none}
+.fourhua-settings>summary small{font-size:12px;color:var(--ink-soft);font-weight:400}
+.sihua-settings-grid{display:grid;gap:6px;margin:12px 0}
+.sihua-settings-row{display:grid;grid-template-columns:54px repeat(4,minmax(0,1fr));gap:6px;align-items:center}
+.sihua-settings-row>b{font-size:13px;color:var(--ink-soft)}
+.sihua-settings-row label{display:flex;align-items:center;gap:4px;min-width:0}
+.sihua-settings-row label>span{color:var(--ink-soft);font-size:12px}
+.sihua-settings-row select{min-width:0;width:100%;padding:7px 5px;border:1px solid var(--line);border-radius:7px;background:var(--panel,#10162d);color:var(--ink);font:inherit;font-size:12px}
+@media(max-width:520px){.fourhua-settings{padding:0 10px}.sihua-settings-row{grid-template-columns:42px repeat(4,minmax(0,1fr));gap:3px}.sihua-settings-row select{padding:7px 2px;font-size:11px}}

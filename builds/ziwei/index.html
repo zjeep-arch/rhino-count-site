@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>问星 · 紫微斗数在线排盘</title>
-<meta name="description" content="问星：免费紫微斗数在线排盘。输入生日时辰，浏览器本地排出紫微命盘：十二宫现代语解读、四化格局、大限流年、13维深度解读。数据只存手机，不上传。">
+<meta name="description" content="问星：免费紫微斗数在线排盘。浏览器本地生成命盘，在十二宫盘面查看生年四化、宫干飞化和大限流年叠加，并提供统一的命盘解读。">
 <meta name="keywords" content="紫微斗数排盘,紫微斗数在线排盘,紫微命盘,免费排盘,紫微斗数算命,问星">
 <meta property="og:title" content="问星 · 紫微斗数在线排盘">
 <meta property="og:description" content="输入生日时辰，本地排出你的紫微命盘：十二宫解读、四化格局、大限流年。">
@@ -12,22 +12,22 @@
 <meta property="og:url" content="https://rhinocount.cn/builds/ziwei/">
 <meta property="og:site_name" content="问星">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebApplication","name":"问星 · 紫微斗数在线排盘","alternateName":"问星","url":"https://rhinocount.cn/builds/ziwei/","applicationCategory":"LifestyleApplication","operatingSystem":"Web","browserRequirements":"Requires JavaScript","inLanguage":"zh-CN","description":"免费紫微斗数在线排盘：输入生日时辰本地排出命盘，十二宫白话解读、北派四化飞星、大限流年应期、八字合参。数据不上传。","offers":{"@type":"Offer","price":"0","priceCurrency":"CNY"},"featureList":["紫微斗数排盘","四化飞星分析","八字四柱大运","流年逐月运势","命盘链接分享"]}
+{"@context":"https://schema.org","@type":"WebApplication","name":"问星 · 紫微斗数在线排盘","alternateName":"问星","url":"https://rhinocount.cn/builds/ziwei/","applicationCategory":"LifestyleApplication","operatingSystem":"Web","browserRequirements":"Requires JavaScript","inLanguage":"zh-CN","description":"免费紫微斗数在线排盘：输入生日时辰本地排出命盘，在十二宫盘面查看四化飞星、大限流年与四柱信息。数据不上传。","offers":{"@type":"Offer","price":"0","priceCurrency":"CNY"},"featureList":["紫微斗数排盘","四化飞星分析","八字四柱大运","流年逐月运势","命盘链接分享"]}
 </script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
 {"@type":"Question","name":"紫微斗数的四化是什么意思？","acceptedAnswer":{"@type":"Answer","text":"化禄、化权、化科、化忌是天干给星曜加的四种标记：禄主资源机会，权主掌控能力，科主名声贵人，忌主在意与功课。忌不是凶，是这辈子花心血最多的地方。"}},
 {"@type":"Question","name":"晚子时（23点后）出生怎么排盘？","acceptedAnswer":{"@type":"Answer","text":"本站默认晚子时不换日；不同排盘流派对换日时刻的处理不尽相同，可通过选项切换并查看本次排盘口径。"}},
 {"@type":"Question","name":"为什么不同排盘工具排出来的结果不一样？","acceptedAnswer":{"@type":"Answer","text":"通常是口径差异：是否做真太阳时校正、晚子时是否换日、闰月怎么算。本站默认关闭真太阳时校正且排盘日按公历出生日不变，每次排盘的口径卡都会写明所用口径。"}},
-{"@type":"Question","name":"什么是来因宫？","acceptedAnswer":{"@type":"Answer","text":"生年天干所在的宫位，代表你这一生带着什么命题而来，是飞星派立命的第一把钥匙。四化盘页面会自动标出你的来因宫并给出白话解释。"}},
+{"@type":"Question","name":"什么是来因宫？","acceptedAnswer":{"@type":"Answer","text":"生年天干所在的宫位，代表你这一生带着什么命题而来。问星会在命盘四化信息中标出对应宫位，具体含义仍需结合所用流派理解。"}},
 {"@type":"Question","name":"排盘需要付费吗？数据会上传吗？","acceptedAnswer":{"@type":"Answer","text":"排盘和全部分析功能免费。所有计算在浏览器本地完成，出生信息只存在你的设备里，不上传任何服务器。"}},
-{"@type":"Question","name":"什么是大限和流年？","acceptedAnswer":{"@type":"Answer","text":"大限是约十年一段的运势主题，流年是某一年的具体表现。大限定调子、流年看动静，人生全景页可以把一百二十年的流年走势一次看全。"}}
+{"@type":"Question","name":"什么是大限和流年？","acceptedAnswer":{"@type":"Answer","text":"大限是约十年一段的运势主题，流年是某一年的具体表现。可在命盘中切换大限或流年，查看相应时间层的宫位与四化叠加。"}}
 ]}
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;700;900&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=20261102-ziwei-core">
+<link rel="stylesheet" href="assets/css/style.css?v=20261102-wenmo-compatible-rules">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <meta name="theme-color" content="#0B1026">
@@ -45,7 +45,7 @@
       <button data-nav="home">首页</button>
       <button data-nav="input">排盘</button>
       <button data-nav="chart">命盘</button>
-      <button data-nav="menu">解读</button>
+      <button data-nav="reading">问运</button>
       <button data-nav="archive">我的命盘</button>
     </nav>
     <button id="nav-archive" class="icon-btn" data-nav="archive" aria-label="我的命盘">☰</button>
@@ -135,6 +135,12 @@
           <button type="button" data-v="朋友">朋友</button>
         </div>
       </div>
+      <details class="fourhua-settings">
+        <summary><span>四化规则</span><small>按文墨天机当前配置逐干校准</small></summary>
+        <p class="hint">每个天干对应禄、权、科、忌所化星曜。默认沿用当前标准表；如需与文墨天机一致，可按其设置逐项选择。此配置会用于本命、大限、流年、流月与流日四化。</p>
+        <div id="sihua-settings-grid" class="sihua-settings-grid"></div>
+        <button type="button" id="sihua-settings-reset" class="btn-ghost btn-sm">恢复默认四化表</button>
+      </details>
       <button type="submit" class="btn-primary btn-block">排出命盘 ✦</button>
       <div class="form-error" id="form-error"></div>
     </form>
@@ -160,11 +166,17 @@
       <div id="chart-grid-wrap"><div id="chart-grid"></div></div>
       <div id="overlay-grid-wrap" hidden><div class="sec-mini"></div><div id="overlay-grid"></div></div>
       <div id="chart-list"></div>
+      <details class="chart-sihua-drawer">
+        <summary><span>本命四化 · 宫干飞化</span><small>星曜标记已显示在命盘中；展开查看落宫与十二宫飞化矩阵</small></summary>
+        <div class="chart-sihua-drawer-body">
+          <div id="chart-sihua-summary"></div>
+          <div class="card core-data-card" id="feixing-card" hidden><div class="card-kicker">宫干四化矩阵 · 十二宫全览</div><div id="feixing-body"></div></div>
+        </div>
+      </details>
     </div>
     <div class="chart-right">
       <div class="rtabs" id="rtabs" role="tablist" aria-label="命盘内容">
         <button data-rg="bazi" class="on" role="tab">四柱八字</button>
-        <button data-rg="sihua" role="tab">四化飞星</button>
         <button data-rg="overview" role="tab">命盘速览</button>
         <button data-rg="palaces" role="tab">十二宫</button>
       </div>
@@ -178,7 +190,7 @@
         <div class="card" id="koujing-card" hidden><div class="card-kicker">本次排盘口径</div><div id="koujing-body" class="hint"></div></div>
         <div class="card" style="margin-top:14px"><div class="card-kicker">下一步</div>
           <p class="hint" style="margin:0 0 10px">十二宫、四化、时间轴都在旁边的页签里。13 维深度解读、专题报告等更多解读在"解读"菜单。</p>
-          <button class="btn-primary btn-block" data-nav="menu">去解读菜单 →</button>
+          <button class="btn-primary btn-block" data-nav="reading">开始问运 →</button>
         </div>
       </div>
       <div class="rgroup" data-rg="palaces" hidden>
@@ -191,63 +203,37 @@
         <div class="card core-data-card" id="dayun-card" hidden><div class="card-kicker">八字大运 · 起运岁数与顺逆</div><div id="dayun-body"></div></div>
         <div class="card collapsible" id="timeline-card" data-collapse="timeline" hidden><button class="card-kicker as-btn" type="button">人生时间轴</button><div class="card-body"><div id="timeline-body"></div></div></div>
       </div>
-      <div class="rgroup" data-rg="sihua" hidden>
-        <div class="chart-data-heading"><span class="eyebrow">FLYING TRANSFORMATIONS</span><h3>四化飞星</h3><p>先看生年四化落点，再切换左侧大限或流年观察盘面叠化。点任一落点，可在十二宫盘中定位对应宫位。</p></div>
-        <div id="chart-sihua-summary"></div>
-        <div class="card core-data-card" id="feixing-card" hidden><div class="card-kicker">宫干四化矩阵 · 十二宫全览</div><div id="feixing-body"></div></div>
       </div>
     </div>
   </section>
 
   <!-- 解读 · 功能菜单 -->
-  <section class="view" id="view-menu">
-    <h2 class="view-title">解读</h2>
-    <p class="view-sub">排盘是底子，解读在这里选。先排一张盘，再进来看。</p>
-    <div id="menu-list"></div>
-  </section>
-
-  <!-- 十二宫 -->
-  <section class="view" id="view-palaces">
-    <button class="back-link" data-nav="menu">‹ 返回解读菜单</button>
-    <h2 class="view-title">紫微斗数十二宫</h2>
-    <p class="view-sub">十二宫对应人生的 12 个生活领域。宫位并非孤立存在，需结合星曜与整张命盘理解。</p>
-    <div id="palace-cards" class="palace-grid"></div>
-  </section>
-
-  <!-- 13维解读 -->
   <section class="view" id="view-reading">
-    <button class="back-link" data-nav="menu">‹ 返回解读菜单</button>
-    <h2 class="view-title">13 维深度解读</h2>
-    <div class="card" id="reading-disclaimer-card"><div class="card-kicker">先看这段</div><p class="hint" id="reading-disclaimer" style="margin:0"></p></div>
-    <p class="view-sub" id="reading-status">正在按出生年份加载解读数据…</p>
-    <div class="tabs tabs-scroll" id="reading-tabs"></div>
-    <article id="reading-body" class="reading-body"></article>
-  </section>
-
-
-  <!-- 问星答 -->
-  <section class="view" id="view-answer">
-    <button class="back-link" data-nav="menu">‹ 返回解读菜单</button>
     <h2 class="view-title">问运</h2>
-    <p class="view-sub">今年怎么走、感情什么剧本、钱从哪来到哪去、事业何时该动——先结论后依据，全部按你的盘面实算。</p>
-    <div id="answer-list"></div>
-    <div class="card"><div class="card-kicker">择日助手 · 未来 30 天</div><div id="zeri-body"></div></div>
-  </section>
+    <p class="view-sub">把本命十二宫、四化与当前运限放在同一条判断里：先看全年走势，再按你关心的问题细读，最后回到命盘依据。</p>
+    <div class="reading-workbench-actions"><button class="btn-ghost" type="button" data-share-chart>分享命盘 ↗</button></div>
 
-  <!-- 人生全景 -->
-  <section class="view" id="view-life">
-    <button class="back-link" data-nav="menu">‹ 返回解读菜单</button>
-    <h2 class="view-title">人生全景</h2>
-    <p class="view-sub">十二层大限全部展开：每层十年成色、限四化流向与逐年明细；顶部是 120 年流年热力——点任意年份，直达那一年的流年盘。</p>
-    <div id="life-body"></div>
-  </section>
+    <section class="insight-pane insight-flow-section" id="insight-forecast">
+      <div class="reading-section-heading"><span class="reading-section-index">01</span><div><h3>今年整体怎么走</h3><p>先看年度主线，再看感情、财运与事业的具体变化。</p></div></div>
+      <div id="answer-list"></div>
+      <div class="card"><div class="card-kicker">择日参考 · 未来 30 天</div><div id="zeri-body"></div></div>
+    </section>
 
-  <!-- 四化盘 -->
-  <section class="view" id="view-sihuapan">
-    <button class="back-link" data-nav="menu">‹ 返回解读菜单</button>
-    <h2 class="view-title">四化盘 · 北派飞星</h2>
-    <p class="view-sub">四化是整张盘的总开关：生年四化定格局底色，宫干四化看流转，禄转忌看因果。点星曜可看释义。</p>
-    <div id="sihuapan-body"></div>
+    <section class="insight-pane insight-flow-section" id="insight-topics">
+      <div class="reading-section-heading"><span class="reading-section-index">02</span><div><h3>你想问哪件事</h3><p>选择一个具体问题，系统会结合相关宫位、四化和运限展开解读。</p></div></div>
+      <div class="reading-topic-picker"><label for="reading-topic">选择关心的问题</label><select id="reading-topic" aria-label="选择问运主题"></select></div>
+      <div class="card" id="reading-disclaimer-card"><div class="card-kicker">阅读说明</div><p class="hint" id="reading-disclaimer" style="margin:0"></p></div>
+      <p class="view-sub" id="reading-status">正在按出生年份加载解读数据…</p>
+      <article id="reading-body" class="reading-body"></article>
+    </section>
+
+    <section class="insight-pane insight-flow-section" id="insight-palaces">
+      <details class="reading-evidence">
+        <summary><span class="reading-section-index">03</span><span><b>回到十二宫，看判断依据</b><small>展开本命十二宫与星曜细节</small></span></summary>
+        <p class="view-sub">宫位并非孤立存在；结合星曜、四化与三方四正，才能看到问题在整张盘里的位置。</p>
+        <div id="palace-cards" class="palace-grid"></div>
+      </details>
+    </section>
   </section>
 
   <!-- 新手导览 -->
@@ -357,7 +343,7 @@
   <button data-nav="home" class="on"><span>✦</span>首页</button>
   <button data-nav="input"><span>◉</span>排盘</button>
   <button data-nav="chart"><span>✧</span>命盘</button>
-  <button data-nav="menu"><span>▦</span>解读</button>
+  <button data-nav="reading"><span>▦</span>问运</button>
   <button data-nav="archive"><span>☰</span>我的</button>
 </nav>
 
@@ -370,6 +356,6 @@
 <script src="assets/js/ziwei-engine.js"></script>
 <script src="assets/js/data.js"></script>
 <script src="assets/js/data-v2.js"></script>
-<script src="assets/js/app.js?v=20261102-ziwei-core"></script>
+<script src="assets/js/app.js?v=20261102-wenmo-compatible-rules"></script>
 </body>
 </html>
