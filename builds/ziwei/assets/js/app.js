@@ -54,6 +54,80 @@ const store = {
   get(k, d){ try{ const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; }catch(e){ return d; } },
   set(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} },
 };
+const SIHUA_ORDER = ['禄','权','科','忌'];
+const SIHUA_RULE_KEY = 'gxg_sihua_table_v1';
+const ENGINE_SIHUA = {
+  getSiHuaByStem: E.getSiHuaByStem.bind(E),
+  getDaXianSiHua: E.getDaXianSiHua.bind(E),
+  getLiuNianSiHua: E.getLiuNianSiHua.bind(E),
+  getLiuYueSiHua: E.getLiuYueSiHua.bind(E),
+  getLiuRiSiHua: E.getLiuRiSiHua.bind(E),
+};
+function cloneSihuaTable(table){
+  const out={};
+  for(let i=0;i<10;i++){
+    const row=Array.isArray(table?.[i])?table[i]:E.SI_HUA_TABLE[i];
+    if(!Array.isArray(row)||row.length!==4) return null;
+    out[i]=row.map(String);
+  }
+  return out;
+}
+function getStoredSihuaTable(){ return cloneSihuaTable(store.get(SIHUA_RULE_KEY, E.SI_HUA_TABLE)) || cloneSihuaTable(E.SI_HUA_TABLE); }
+let activeSihuaTable = getStoredSihuaTable();
+function transformsForStem(stem){
+  const row=activeSihuaTable?.[stem] || E.SI_HUA_TABLE[stem] || [];
+  return { '禄':row[0]||'', '权':row[1]||'', '科':row[2]||'', '忌':row[3]||'' };
+}
+function withConfiguredTransforms(result){
+  if(!result) return result;
+  const transforms=transformsForStem(result.stemIndex);
+  return {...result, transforms, lu:transforms['禄'], quan:transforms['权'], ke:transforms['科'], ji:transforms['忌']};
+}
+function setActiveSihuaTable(table){
+  activeSihuaTable=cloneSihuaTable(table)||cloneSihuaTable(E.SI_HUA_TABLE);
+  E.getSiHuaByStem = stem => transformsForStem(stem);
+  E.getDaXianSiHua = (...args) => withConfiguredTransforms(ENGINE_SIHUA.getDaXianSiHua(...args));
+  E.getLiuNianSiHua = (...args) => withConfiguredTransforms(ENGINE_SIHUA.getLiuNianSiHua(...args));
+  E.getLiuYueSiHua = (...args) => withConfiguredTransforms(ENGINE_SIHUA.getLiuYueSiHua(...args));
+  E.getLiuRiSiHua = (...args) => withConfiguredTransforms(ENGINE_SIHUA.getLiuRiSiHua(...args));
+}
+setActiveSihuaTable(activeSihuaTable);
+function applySihuaTableToChart(chart){
+  if(!chart?.palaces?.length) return;
+  chart.palaces.forEach(p => p.stars.forEach(s => { delete s.siHua; }));
+  const natal=transformsForStem(chart.lunarInfo?.yearStem);
+  for(const hua of SIHUA_ORDER){
+    const star=natal[hua];
+    const pal=chart.palaces.find(p=>p.stars.some(s=>s.name===star));
+    const target=pal?.stars.find(s=>s.name===star);
+    if(target) target.siHua=hua;
+  }
+  chart.sihuaTable=cloneSihuaTable(activeSihuaTable);
+}
+function renderSihuaSettings(){
+  const box=$('#sihua-settings-grid'); if(!box) return;
+  const table=getStoredSihuaTable();
+  const stars=[...new Set(Object.values(E.SI_HUA_TABLE).flat())].sort((a,b)=>a.localeCompare(b,'zh-CN'));
+  box.innerHTML=E.STEMS.map((stem,i)=>'<div class="sihua-settings-row"><b>'+esc(stem)+'干</b>'+SIHUA_ORDER.map((hua,col)=>
+    '<label><span>'+hua+'</span><select data-sihua-stem="'+i+'" data-sihua-col="'+col+'" aria-label="'+stem+'干化'+hua+'">'+
+    stars.map(star=>'<option value="'+esc(star)+'" '+(table[i][col]===star?'selected':'')+'>'+esc(star)+'</option>').join('')+
+    '</select></label>').join('')+'</div>').join('');
+}
+document.addEventListener('change',e=>{
+  if(!e.target.matches('#sihua-settings-grid select[data-sihua-stem]')) return;
+  const table=getStoredSihuaTable();
+  table[+e.target.dataset.sihuaStem][+e.target.dataset.sihuaCol]=e.target.value;
+  store.set(SIHUA_RULE_KEY,table);
+  setActiveSihuaTable(table);
+  if(cur()) { const rec=cur(); rec.chart.sihuaTable=cloneSihuaTable(table); rec.input.sihuaTable=cloneSihuaTable(table); applySihuaTableToChart(rec.chart); attachSelfSihua(rec.chart); store.set('gxg_archive',archive); renderChart(); }
+});
+document.addEventListener('click',e=>{
+  if(!e.target.closest('#sihua-settings-reset')) return;
+  store.set(SIHUA_RULE_KEY,E.SI_HUA_TABLE);
+  renderSihuaSettings();
+  setActiveSihuaTable(E.SI_HUA_TABLE);
+  const rec=cur(); if(rec){ rec.chart.sihuaTable=cloneSihuaTable(E.SI_HUA_TABLE); rec.input.sihuaTable=cloneSihuaTable(E.SI_HUA_TABLE); applySihuaTableToChart(rec.chart); attachSelfSihua(rec.chart); store.set('gxg_archive',archive); renderChart(); }
+});
 let archive = store.get('gxg_archive', []);   // [{id, name, tag, gender, input, chart, createdAt}]
 archive.forEach(r => { if(r && r.chart && r.chart.palaces) attachSelfSihua(r.chart); }); // 存量盘补挂自化
 let currentId = store.get('gxg_current', null);
@@ -313,6 +387,7 @@ function computeChart(input){
   }
   const pd = shiftDate(input.year, input.month, input.day, dayOffset);
   if(dayOffset !== 0 && input.shichen !== 12 && input.trueSolar) note.push('排盘日顺延至 ' + pd.m + '月' + pd.d + '日');
+  setActiveSihuaTable(input.sihuaTable || getStoredSihuaTable());
   const chart = E.generateChart({
     year: pd.y, month: pd.m, day: pd.d, hour: branch, gender: input.gender,
     name: input.name || undefined,
@@ -320,15 +395,16 @@ function computeChart(input){
     longitude: input.longitude,
     origInput: { year: input.year, month: input.month, day: input.day, clockHour, clockMinute },
   });
+  applySihuaTableToChart(chart);
   attachSelfSihua(chart);
   return { chart, note };
 }
 /* 引擎 generateChart 不挂自化，这里统一补上：buildAllSelfSihua 返回 {branch:[{siHua,starName}]} */
 function attachSelfSihua(chart){
-  try{
-    const all = E.buildAllSelfSihua(chart) || {};
-    chart.palaces.forEach(p => { p.selfSihua = all[p.branch] || []; });
-  }catch(e){ chart.palaces.forEach(p => { if(!p.selfSihua) p.selfSihua = []; }); }
+  chart.palaces.forEach(p=>{
+    const byStar=transformsForStem(p.stem);
+    p.selfSihua=SIHUA_ORDER.filter(h=>p.stars.some(s=>s.name===byStar[h])).map(h=>({siHua:h,starName:byStar[h]}));
+  });
 }
 function onSubmit(e){
   e.preventDefault();
@@ -366,6 +442,7 @@ function onSubmit(e){
     trueSolar: $('#f-true-solar').checked && longitude != null,
     lateZiNextDay: $('#f-latezi-next').checked,
     tag: segVal('f-tag') || '我',
+    sihuaTable: getStoredSihuaTable(),
   };
   try{
     const { chart, note } = computeChart(input);
@@ -554,6 +631,9 @@ function renderOverlayStrip(chart, ov){
 
 function renderChart(){
   const rec = cur(); if(!rec){ nav('input'); return; }
+  setActiveSihuaTable(rec.chart.sihuaTable || rec.input?.sihuaTable || getStoredSihuaTable());
+  applySihuaTableToChart(rec.chart);
+  attachSelfSihua(rec.chart);
   const chart = rec.chart;
   sanfangBranch = null;
   const ming = palaceByBranch(chart, chart.mingGongBranch);
@@ -3009,6 +3089,7 @@ function openSharedChart(){
       trueSolar: !!p.ts && p.ln !== '' && p.ln != null,
       lateZiNextDay: !!p.lz,
       tag: '分享',
+      sihuaTable: getStoredSihuaTable(),
     };
     const { chart, note } = computeChart(input);
     const rec = { id: uid(), name: input.name || '分享的盘', tag: '分享', gender: input.gender,
@@ -3027,6 +3108,7 @@ function openSharedChart(){
 
 /* ---------- 启动 ---------- */
 initForm();
+renderSihuaSettings();
 wireDisclaimer();
 if(currentId && !cur()){ currentId = archive.length ? archive[0].id : null; store.set('gxg_current', currentId); } // 自愈：current 指向已删存档
 renderHome();
