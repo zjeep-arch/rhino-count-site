@@ -674,7 +674,7 @@ function hubHTML(chart, rec, kind, ySh){
     <div class="hub-name">${esc(rec.name)} · ${bi.gender === 'male' ? '男命' : '女命'}</div>
     <div class="hub-meta">${bi.year}.${String(bi.month).padStart(2, '0')}.${String(bi.day).padStart(2, '0')} · ${BR[bi.hour]}时</div>
     ${lx ? `<div class="hub-meta">${esc(lx)} · ${esc(chart.wuxingJuName || '')}</div>` : ''}
-    ${fp ? `<div class="hub-meta gz">${esc(fp)}</div>` : ''}
+    ${fp ? `<div class="hub-meta gz hub-four-pillars"><span>四柱</span><b>${esc(fp)}</b></div>` : ''}
   </div>${seal}</div>`;
 }
 function renderChartBody(){
@@ -771,6 +771,7 @@ function renderChartBody(){
   renderDayunCard(chart);
   renderTimelineCard(chart);
   renderFeixingCard(chart);
+  renderChartSihua(chart);
   renderOverlayGrid(chart, ov);
   renderKoujingCard(rec);
   renderBriefCard(chart);
@@ -883,6 +884,7 @@ function renderTaisuiCard(){
 const WX_OF_STEM = ['木','木','火','火','土','土','金','金','水','水'];   // 甲乙丙丁戊己庚辛壬癸
 const YANG_STEM  = [1,0,1,0,1,0,1,0,1,0];
 const HIDDEN_MAIN = [9,5,0,1,4,2,3,5,6,7,4,8]; // 支本气：子癸 丑己 寅甲 卯乙 辰戊 巳丙 午丁 未己 申庚 酉辛 戌戊 亥壬
+const HIDDEN_STEMS = [[9],[5,9,7],[0,2,4],[1],[4,1,9],[2,4,6],[3,5],[5,3,1],[6,8,4],[7],[4,7,3],[8,0]]; // 常用子平藏干表
 const NA_YIN = ['海中金','炉中火','大林木','路旁土','剑锋金','山头火','涧下水','城头土','白蜡金','杨柳木',
   '泉中水','屋上土','霹雳火','松柏木','长流水','沙中金','山下火','平地木','壁上土','金箔金',
   '覆灯火','天河水','大驿土','钗钏金','桑柘木','大溪水','沙中土','天上火','石榴木','大海水'];
@@ -945,6 +947,8 @@ function renderBaziCard(chart){
     `<td><b class="gz-b">${fp[i][0]}</b><span class="ss">${i === 2 ? '日主' : shiShen(dayS, c.s)}</span></td>`).join('') + '</tr>';
   h += '<tr><td class="lab">地支</td>' + cols.map((c, i) =>
     `<td><b class="gz-b">${fp[i][1]}</b><span class="ss">${shiShen(dayS, HIDDEN_MAIN[c.b])}</span></td>`).join('') + '</tr>';
+  h += '<tr class="hidden-stem-row"><td class="lab">藏干</td>' + cols.map(c =>
+    `<td><div class="hidden-stems">${HIDDEN_STEMS[c.b].map(s => `<span><b>${ST[s]}</b><i>${shiShen(dayS, s)}</i></span>`).join('')}</div></td>`).join('') + '</tr>';
   h += '<tr><td class="lab">纳音</td>' + cols.map((c, i) =>
     `<td><span class="ny">${NA_YIN[Math.floor(gz60(c.s, c.b) / 2)]}</span></td>`).join('') + '</tr></table>';
   // 五行分布：四柱八字（干 + 支本气）
@@ -1006,6 +1010,57 @@ function renderFeixingCard(chart){
     card.hidden = false;
   }catch(e){ card.hidden = true; }
 }
+/* 本次排盘口径：把已有的 note + 历法信息整理成固定尾注块 */
+function renderChartSihua(chart){
+  const box = $('#chart-sihua-summary');
+  if(!box || !chart || !chart.lunarInfo) return;
+  const yearStem = chart.lunarInfo.yearStem;
+  const yearGan = ST[yearStem];
+  const born = E.getSiHuaByStem(yearStem) || {};
+  const labels = ['禄','权','科','忌'];
+  const meanings = { '禄':'资源与机会', '权':'推动与掌控', '科':'名声与助力', '忌':'牵挂与课题' };
+  const flows = labels.map(h => {
+    const star = born[h] || '';
+    const palace = sihuaStarPalace(chart, star);
+    const target = chart.palaces.find(p => p.stars.some(s => s.name === star));
+    const branch = target ? target.branch : '';
+    return '<button type="button" class="sihua-flow-btn" data-sihua-focus="' + branch + '" aria-pressed="false" ' + (branch === '' ? 'disabled' : '') + '>' +
+      '<span class="sihua-flow-top">' + shBadge(h) + '<small>' + meanings[h] + '</small></span>' +
+      '<strong>' + esc(star || '未能匹配') + '</strong>' +
+      '<span class="sihua-flow-dest">' + (palace ? '→ ' + esc(palace) : '未落入十二宫') + '</span>' +
+      '<span class="sihua-flow-source">生年 ' + yearGan + ' 干</span></button>';
+  }).join('');
+  const active = luckOverlay(chart);
+  const activeItems = active.sihua ? labels.map((h, i) => {
+    const key = ['lu','quan','ke','ji'][i];
+    const star = active.sihua[key];
+    const palace = sihuaStarPalace(chart, star);
+    return star ? '<span class="active-sihua-item">' + shBadge(h) + '<b>' + esc(star) + '</b><span>→ ' + esc(palace || '命外') + '</span></span>' : '';
+  }).filter(Boolean).join('') : '';
+  box.innerHTML =
+    '<section class="card sihua-core-card"><div class="card-kicker">生年四化 · ' + yearGan + '干落点</div>' +
+      '<div class="sihua-flow-grid">' + flows + '</div>' +
+      '<p class="hint sihua-instruction">点击一项，在左侧十二宫盘中定位它的落宫。四化代表传统术数中的象意线索，不是对现实结果的保证。</p></section>' +
+    '<section class="card sihua-overlay-card"><div class="card-kicker">叠盘对照 · ' + esc(active.label || '本命盘') + '</div>' +
+      (activeItems ? '<div class="active-sihua-list">' + activeItems + '</div>' : '<p class="hint" style="margin:0">当前为本命模式。切换左侧「大限 / 流年」后，这里会同步显示对应层的四化星与落宫。</p>') + '</section>' +
+    '<div class="sihua-next-step"><span>想看某一宫完整的飞化关系与禄转忌链？</span><button type="button" class="link-btn" data-nav="sihuapan">打开完整四化盘 →</button></div>';
+}
+document.addEventListener('click', e => {
+  const btn = e.target.closest('.sihua-flow-btn');
+  if(!btn) return;
+  const branch = btn.dataset.sihuaFocus;
+  if(branch === '') return;
+  const wasOn = btn.getAttribute('aria-pressed') === 'true';
+  $('.sihua-flow-btn').forEach(b => b.setAttribute('aria-pressed', 'false'));
+  $('#chart-grid .cell, #chart-list .palace-row').forEach(el => el.classList.remove('sihua-focus'));
+  if(wasOn) return;
+  btn.setAttribute('aria-pressed', 'true');
+  const targets = $('#chart-grid .cell[data-branch="' + branch + '"], #chart-list .palace-row[data-branch="' + branch + '"]');
+  targets.forEach(el => el.classList.add('sihua-focus'));
+  const target = targets.find(el => el.closest('#chart-grid-wrap') && getComputedStyle(el.closest('#chart-grid-wrap')).display !== 'none') || targets[0];
+  if(target) target.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' });
+});
+
 /* 本次排盘口径：把已有的 note + 历法信息整理成固定尾注块 */
 function renderKoujingCard(rec){
   const card = $('#koujing-card'), body = $('#koujing-body');
@@ -2720,7 +2775,7 @@ function renderBriefCard(chart){
 function setRGroup(rg){
   $$('#rtabs button').forEach(b => b.classList.toggle('on', b.dataset.rg === rg));
   $$('.chart-right .rgroup').forEach(g => { g.hidden = g.dataset.rg !== rg; });
-  store.set('gxg_rtab', rg);
+  store.set('gxg_rtab_v2', rg);
 }
 function initRightTabs(){
   const bar = $('#rtabs');
@@ -2730,7 +2785,7 @@ function initRightTabs(){
     const b = e.target.closest('button[data-rg]');
     if(b) setRGroup(b.dataset.rg);
   });
-  setRGroup(store.get('gxg_rtab', 'overview'));
+  setRGroup(store.get('gxg_rtab_v2', 'bazi'));
 }
 function applyCollapseState(){
   const open = store.get('gxg_rcards', []);
