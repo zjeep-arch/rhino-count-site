@@ -307,7 +307,7 @@ function computeChart(input){
     if(hasExact && exBranch !== shichenBranch) note.push('你填的精确时间与所选时辰不一致，已按精确时间（' + branchName(branch) + '）排盘');
     if(input.shichen === 12 || (hasExact && clockHour === 23)){
       if(input.lateZiNextDay){ dayOffset = 1; note.push('晚子时按次日排盘（换日派）'); }
-      else note.push('晚子时不换日（与多数排盘工具一致；换日派可勾选对应开关）');
+      else note.push('晚子时默认不换日；需要次日换日口径时可在设置中勾选');
     }
   }
   const pd = shiftDate(input.year, input.month, input.day, dayOffset);
@@ -1069,10 +1069,10 @@ function renderKoujingCard(rec){
   const inp = rec.input || {};
   const items = [];
   if(rec.note && rec.note.length) items.push(rec.note.join('；'));
-  items.push((inp.lateZiNextDay ? '晚子时按次日排盘（换日派）' : '晚子时不换日（与多数排盘工具一致）')
+  items.push((inp.lateZiNextDay ? '晚子时按次日排盘（换日口径）' : '晚子时默认不换日')
     + (li.isLeapMonth ? '；闰月按十五分界（十五及以前归本月，之后归下月）' : ''));
   items.push('大限起法：按五行局对应岁数起运，阳男阴女顺行、阴男阳女逆行');
-  items.push('与其他工具排盘对不上时先核对三处：①是否开启真太阳时校正（本站默认关闭，与测测/问真等一致；开启后只定时辰、排盘日仍按公历出生日）②晚子时是否换日 ③闰月口径是否一致');
+  items.push('与其他工具结果不同时，先核对三处：①是否开启真太阳时校正（本站默认关闭；开启后用于确定时辰，排盘日仍按公历出生日）②晚子时是否换日 ③闰月口径是否一致');
   body.innerHTML = items.map(esc).join('<br>');
   card.hidden = false;
 }
