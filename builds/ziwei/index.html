@@ -27,7 +27,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;700;900&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=20261102-ziwei-unified-reading">
+<link rel="stylesheet" href="assets/css/style.css?v=20261102-ziwei-ask-fortune">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <meta name="theme-color" content="#0B1026">
@@ -45,7 +45,7 @@
       <button data-nav="home">首页</button>
       <button data-nav="input">排盘</button>
       <button data-nav="chart">命盘</button>
-      <button data-nav="reading">解读</button>
+      <button data-nav="reading">问运</button>
       <button data-nav="archive">我的命盘</button>
     </nav>
     <button id="nav-archive" class="icon-btn" data-nav="archive" aria-label="我的命盘">☰</button>
@@ -184,7 +184,7 @@
         <div class="card" id="koujing-card" hidden><div class="card-kicker">本次排盘口径</div><div id="koujing-body" class="hint"></div></div>
         <div class="card" style="margin-top:14px"><div class="card-kicker">下一步</div>
           <p class="hint" style="margin:0 0 10px">十二宫、四化、时间轴都在旁边的页签里。13 维深度解读、专题报告等更多解读在"解读"菜单。</p>
-          <button class="btn-primary btn-block" data-nav="reading">打开命盘解读 →</button>
+          <button class="btn-primary btn-block" data-nav="reading">开始问运 →</button>
         </div>
       </div>
       <div class="rgroup" data-rg="palaces" hidden>
@@ -203,28 +203,32 @@
 
   <!-- 解读 · 功能菜单 -->
   <section class="view" id="view-reading">
-    <h2 class="view-title">命盘解读</h2>
-    <p class="view-sub">从十二宫看结构，进入主题深读，再按年份查看运势；同一张命盘里完成主要解读。</p>
+    <h2 class="view-title">问运</h2>
+    <p class="view-sub">把本命十二宫、四化与当前运限放在同一条判断里：先看全年走势，再按你关心的问题细读，最后回到命盘依据。</p>
     <div class="reading-workbench-actions"><button class="btn-ghost" type="button" data-share-chart>分享命盘 ↗</button></div>
-    <div class="tabs tabs-scroll insight-tabs" id="insight-tabs" role="tablist" aria-label="命盘解读方式">
-      <button type="button" data-insight-tab="palaces" class="on" role="tab" aria-selected="true">十二宫</button>
-      <button type="button" data-insight-tab="topics" role="tab" aria-selected="false">主题深读</button>
-      <button type="button" data-insight-tab="forecast" role="tab" aria-selected="false">问运</button>
-    </div>
-    <section class="insight-pane" id="insight-palaces"><p class="view-sub">十二宫对应人生的 12 个生活领域。宫位并非孤立存在，需结合星曜与整张命盘理解。</p>
-    <div id="palace-cards" class="palace-grid"></div>
-  </section>
-    <section class="insight-pane" id="insight-topics" hidden><div class="card" id="reading-disclaimer-card"><div class="card-kicker">先看这段</div><p class="hint" id="reading-disclaimer" style="margin:0"></p></div>
-    <p class="view-sub" id="reading-status">正在按出生年份加载解读数据…</p>
-    <div class="tabs tabs-scroll" id="reading-tabs"></div>
-    <article id="reading-body" class="reading-body"></article>
-  </section>
-    <section class="insight-pane" id="insight-forecast" hidden><p class="view-sub">今年怎么走、感情什么剧本、钱从哪来到哪去、事业何时该动——先结论后依据，全部按你的盘面实算。</p>
-    <div id="answer-list"></div>
-    <div class="card"><div class="card-kicker">择日助手 · 未来 30 天</div><div id="zeri-body"></div></div>
-  </section>
-  </section>
 
+    <section class="insight-pane insight-flow-section" id="insight-forecast">
+      <div class="reading-section-heading"><span class="reading-section-index">01</span><div><h3>今年整体怎么走</h3><p>先看年度主线，再看感情、财运与事业的具体变化。</p></div></div>
+      <div id="answer-list"></div>
+      <div class="card"><div class="card-kicker">择日参考 · 未来 30 天</div><div id="zeri-body"></div></div>
+    </section>
+
+    <section class="insight-pane insight-flow-section" id="insight-topics">
+      <div class="reading-section-heading"><span class="reading-section-index">02</span><div><h3>你想问哪件事</h3><p>选择一个具体问题，系统会结合相关宫位、四化和运限展开解读。</p></div></div>
+      <div class="reading-topic-picker"><label for="reading-topic">选择关心的问题</label><select id="reading-topic" aria-label="选择问运主题"></select></div>
+      <div class="card" id="reading-disclaimer-card"><div class="card-kicker">阅读说明</div><p class="hint" id="reading-disclaimer" style="margin:0"></p></div>
+      <p class="view-sub" id="reading-status">正在按出生年份加载解读数据…</p>
+      <article id="reading-body" class="reading-body"></article>
+    </section>
+
+    <section class="insight-pane insight-flow-section" id="insight-palaces">
+      <details class="reading-evidence">
+        <summary><span class="reading-section-index">03</span><span><b>回到十二宫，看判断依据</b><small>展开本命十二宫与星曜细节</small></span></summary>
+        <p class="view-sub">宫位并非孤立存在；结合星曜、四化与三方四正，才能看到问题在整张盘里的位置。</p>
+        <div id="palace-cards" class="palace-grid"></div>
+      </details>
+    </section>
+  </section>
 
   <!-- 新手导览 -->
   <section class="view" id="view-guide">
@@ -333,7 +337,7 @@
   <button data-nav="home" class="on"><span>✦</span>首页</button>
   <button data-nav="input"><span>◉</span>排盘</button>
   <button data-nav="chart"><span>✧</span>命盘</button>
-  <button data-nav="reading"><span>▦</span>解读</button>
+  <button data-nav="reading"><span>▦</span>问运</button>
   <button data-nav="archive"><span>☰</span>我的</button>
 </nav>
 
@@ -346,6 +350,6 @@
 <script src="assets/js/ziwei-engine.js"></script>
 <script src="assets/js/data.js"></script>
 <script src="assets/js/data-v2.js"></script>
-<script src="assets/js/app.js?v=20261102-ziwei-unified-reading"></script>
+<script src="assets/js/app.js?v=20261102-ziwei-ask-fortune"></script>
 </body>
 </html>
