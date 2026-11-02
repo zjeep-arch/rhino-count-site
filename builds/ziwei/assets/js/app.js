@@ -62,11 +62,8 @@ const cur = () => archive.find(a => a.id === currentId) || null;
 
 /* ---------- 导航 ---------- */
 const VIEWS = ['home','input','chart','reading','guide','archive','dingpan'];
-let insightPanel = 'palaces';
 function nav(name){
-  if(name === 'menu'){ insightPanel = 'palaces'; name = 'reading'; }
-  else if(name === 'palaces'){ insightPanel = 'palaces'; name = 'reading'; }
-  else if(name === 'answer'){ insightPanel = 'forecast'; name = 'reading'; }
+  if(['menu','palaces','answer'].includes(name)) name = 'reading';
   else if(name === 'life' || name === 'sihuapan') return;
   if(!VIEWS.includes(name)) return;
   if(name === 'chart' && !cur()) name = 'input'; // 还没排过盘时，"命盘"入口直接引导去排盘
@@ -78,7 +75,7 @@ function nav(name){
   if(name==='chart') renderChart();
   if(name==='input') renderInputHistory();
   if(name==='archive') renderArchive();
-  if(name==='reading') activateInsightPanel(insightPanel);
+  if(name==='reading') renderUnifiedReading();
   if(name==='guide') renderGuide();
 }
 document.addEventListener('click', e => {
@@ -1680,12 +1677,17 @@ function softenFullText(t){
 }
 let readingTopic = 'overview';
 function renderReadingTabs(){
-  $('#reading-tabs').innerHTML = Object.entries(D.datasetTopics).map(([k, v]) =>
-    `<button data-t="${k}" class="${k===readingTopic?'on':''}">${v}</button>`).join('');
+  const picker = $('#reading-topic');
+  if(!picker) return;
+  picker.innerHTML = Object.entries(D.datasetTopics).map(([k, v]) =>
+    `<option value="${esc(k)}">${esc(v)}</option>`).join('');
+  picker.value = readingTopic;
 }
-$('#reading-tabs').addEventListener('click', e => {
-  const b = e.target.closest('button'); if(!b) return;
-  readingTopic = b.dataset.t; renderReadingTabs(); renderReadingBody();
+document.addEventListener('change', e => {
+  if(e.target && e.target.id === 'reading-topic'){
+    readingTopic = e.target.value;
+    renderReadingBody();
+  }
 });
 function md2html(md){
   return esc(md)
@@ -2972,24 +2974,12 @@ document.addEventListener('click', e => {
   if(e.target.closest('[data-share-chart]')) openShare('chart');
 });
 
-function activateInsightPanel(key){
-  const allowed = ['palaces','topics','forecast'];
-  insightPanel = allowed.includes(key) ? key : 'palaces';
-  const map = { palaces: 'insight-palaces', topics: 'insight-topics', forecast: 'insight-forecast' };
-  $$('#insight-tabs [data-insight-tab]').forEach(btn => {
-    const active = btn.dataset.insightTab === insightPanel;
-    btn.classList.toggle('on', active);
-    btn.setAttribute('aria-selected', String(active));
-  });
-  Object.entries(map).forEach(([panel, id]) => { const el = $('#'+id); if(el) el.hidden = panel !== insightPanel; });
-  if(insightPanel === 'palaces') renderPalaceCards();
-  else if(insightPanel === 'topics') renderReading();
-  else { renderWenyun(); renderZeri(); }
+function renderUnifiedReading(){
+  renderWenyun();
+  renderReading();
+  renderPalaceCards();
+  renderZeri();
 }
-document.addEventListener('click', e => {
-  const tab = e.target.closest('[data-insight-tab]');
-  if(tab) activateInsightPanel(tab.dataset.insightTab);
-});
 
 /* ---------- 免责声明接入 ---------- */
 function wireDisclaimer(){
