@@ -1328,3 +1328,30 @@ body{color:var(--ink);
 @media(prefers-reduced-motion:reduce){.insight-tabs{backdrop-filter:none}}
 
 .reading-workbench-actions{display:flex;justify-content:flex-end;margin:-8px 0 10px}
+
+/* Unified Ask Fortune reading flow */
+.reading-workbench-actions{display:flex;justify-content:flex-end;margin:-8px 0 18px}
+.insight-flow-section{display:block;margin:28px 0 0}
+.reading-section-heading{display:flex;align-items:flex-start;gap:14px;margin:0 0 14px}
+.reading-section-index{display:inline-grid;place-items:center;flex:none;width:34px;height:34px;border:1px solid var(--line);border-radius:50%;font:600 12px/1 "IBM Plex Mono",monospace;color:var(--accent,#d8b76a)}
+.reading-section-heading h3{margin:0 0 5px;font-size:clamp(18px,2vw,23px);line-height:1.3}
+.reading-section-heading p{margin:0;color:var(--ink-soft);font-size:14px;line-height:1.7}
+.reading-topic-picker{display:flex;align-items:center;gap:14px;padding:14px 16px;margin:0 0 14px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.025)}
+.reading-topic-picker label{color:var(--ink-soft);font-size:13px;white-space:nowrap}
+.reading-topic-picker select{flex:1;min-width:0;padding:10px 36px 10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--panel,#10162d);color:var(--ink);font:inherit}
+.reading-evidence{border:1px solid var(--line);border-radius:14px;padding:0 18px;background:rgba(255,255,255,.02)}
+.reading-evidence>summary{display:flex;align-items:center;gap:14px;padding:16px 0;cursor:pointer;list-style:none}
+.reading-evidence>summary::-webkit-details-marker{display:none}
+.reading-evidence>summary>span:last-child{display:grid;gap:4px}
+.reading-evidence>summary small{color:var(--ink-soft);font-size:13px}
+.reading-evidence[open]>summary{border-bottom:1px solid var(--line)}
+.reading-evidence .palace-grid{padding-top:14px}
+@media(max-width:640px){
+ .reading-workbench-actions{margin:0 0 14px}
+ .insight-flow-section{margin-top:22px}
+ .reading-section-heading{gap:10px}
+ .reading-section-heading p{font-size:13px}
+ .reading-topic-picker{align-items:flex-start;flex-direction:column;gap:8px}
+ .reading-topic-picker select{width:100%}
+ .reading-evidence{padding:0 12px}
+}
