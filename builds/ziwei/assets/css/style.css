@@ -1310,3 +1310,21 @@ body{color:var(--ink);
   #chart-grid .cell.sihua-focus{animation:none}
   .sihua-flow-btn{transition:none}
 }
+
+
+/* Unified chart-reading surface and embedded Four Transformations */
+.insight-tabs{margin:14px 0 18px;position:sticky;top:8px;z-index:4;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(12px);padding:6px;border:1px solid var(--line);border-radius:14px}
+.insight-tabs button{min-width:96px;flex:1}
+.insight-pane[hidden]{display:none!important}
+.chart-sihua-drawer{margin:16px 0 4px;border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden}
+.chart-sihua-drawer>summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;cursor:pointer;font-weight:700;color:var(--ink)}
+.chart-sihua-drawer>summary::-webkit-details-marker{display:none}
+.chart-sihua-drawer>summary:after{content:'＋';font-size:18px;color:var(--primary);margin-left:auto}
+.chart-sihua-drawer[open]>summary:after{content:'−'}
+.chart-sihua-drawer>summary small{font-weight:400;color:var(--muted);font-size:12px}
+.chart-sihua-drawer-body{padding:0 12px 12px;border-top:1px solid var(--line)}
+.sihua-live{font-size:.75em;padding:0 3px;border:1px dashed currentColor;margin-left:2px}
+@media(max-width:700px){.insight-tabs{top:4px;margin:10px 0 14px}.insight-tabs button{min-width:84px}.chart-sihua-drawer>summary{align-items:flex-start;flex-wrap:wrap}.chart-sihua-drawer>summary small{flex-basis:100%;padding-right:22px}}
+@media(prefers-reduced-motion:reduce){.insight-tabs{backdrop-filter:none}}
+
+.reading-workbench-actions{display:flex;justify-content:flex-end;margin:-8px 0 10px}
