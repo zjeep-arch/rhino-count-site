@@ -1057,7 +1057,10 @@ document.addEventListener('click', e => {
   btn.setAttribute('aria-pressed', 'true');
   const targets = $('#chart-grid .cell[data-branch="' + branch + '"], #chart-list .palace-row[data-branch="' + branch + '"]');
   targets.forEach(el => el.classList.add('sihua-focus'));
-  const target = targets.find(el => el.closest('#chart-grid-wrap') && getComputedStyle(el.closest('#chart-grid-wrap')).display !== 'none') || targets[0];
+  const gridVisible = getComputedStyle($('#chart-grid')).display !== 'none';
+  const target = gridVisible
+    ? (targets.find(el => el.closest('#chart-grid-wrap')) || targets[0])
+    : (targets.find(el => el.closest('#chart-list')) || targets[0]);
   if(target) target.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' });
 });
 
