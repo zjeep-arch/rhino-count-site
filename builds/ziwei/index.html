@@ -27,7 +27,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;700;900&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=20261026a">
+<link rel="stylesheet" href="assets/css/style.css?v=20261102-ziwei-core">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <meta name="theme-color" content="#0B1026">
@@ -162,10 +162,11 @@
       <div id="chart-list"></div>
     </div>
     <div class="chart-right">
-      <div class="rtabs" id="rtabs">
-        <button data-rg="overview" class="on">速览</button>
-        <button data-rg="palaces">十二宫</button>
-        <button data-rg="pro">进阶 · 四化八字</button>
+      <div class="rtabs" id="rtabs" role="tablist" aria-label="命盘内容">
+        <button data-rg="bazi" class="on" role="tab">四柱八字</button>
+        <button data-rg="sihua" role="tab">四化飞星</button>
+        <button data-rg="overview" role="tab">命盘速览</button>
+        <button data-rg="palaces" role="tab">十二宫</button>
       </div>
       <div class="rgroup" data-rg="overview">
         <div class="card" id="brief-card" hidden><div class="card-kicker">四化总纲</div><div id="brief-body"></div></div>
@@ -184,11 +185,16 @@
         <div class="sec-head"><h3>十二宫</h3><span class="more hint">结合你的命盘 · 点宫看详解</span></div>
         <div id="chart-palaces" class="palace-grid"></div>
       </div>
-      <div class="rgroup" data-rg="pro" hidden>
-        <div class="card collapsible" id="bazi-card" data-collapse="bazi" hidden><button class="card-kicker as-btn" type="button">八字四柱</button><div class="card-body"><div id="bazi-body"></div></div></div>
-        <div class="card collapsible" id="dayun-card" data-collapse="dayun" hidden><button class="card-kicker as-btn" type="button">八字大运</button><div class="card-body"><div id="dayun-body"></div></div></div>
+      <div class="rgroup" data-rg="bazi" hidden>
+        <div class="chart-data-heading"><span class="eyebrow">BAZI / FOUR PILLARS</span><h3>四柱八字</h3><p>天干、地支、藏干与十神同屏对照；下方查看五行分布和大运。具体起运与换日口径请以本次排盘口径说明为准。</p></div>
+        <div class="card core-data-card" id="bazi-card" hidden><div class="card-kicker">四柱排布 · 年 / 月 / 日 / 时</div><div id="bazi-body"></div></div>
+        <div class="card core-data-card" id="dayun-card" hidden><div class="card-kicker">八字大运 · 起运岁数与顺逆</div><div id="dayun-body"></div></div>
         <div class="card collapsible" id="timeline-card" data-collapse="timeline" hidden><button class="card-kicker as-btn" type="button">人生时间轴</button><div class="card-body"><div id="timeline-body"></div></div></div>
-        <div class="card collapsible" id="feixing-card" data-collapse="feixing" hidden><button class="card-kicker as-btn" type="button">宫干飞星 · 四化速查</button><div class="card-body"><div id="feixing-body"></div></div></div>
+      </div>
+      <div class="rgroup" data-rg="sihua" hidden>
+        <div class="chart-data-heading"><span class="eyebrow">FLYING TRANSFORMATIONS</span><h3>四化飞星</h3><p>先看生年四化落点，再切换左侧大限或流年观察盘面叠化。点任一落点，可在十二宫盘中定位对应宫位。</p></div>
+        <div id="chart-sihua-summary"></div>
+        <div class="card core-data-card" id="feixing-card" hidden><div class="card-kicker">宫干四化矩阵 · 十二宫全览</div><div id="feixing-body"></div></div>
       </div>
     </div>
   </section>
@@ -364,6 +370,6 @@
 <script src="assets/js/ziwei-engine.js"></script>
 <script src="assets/js/data.js"></script>
 <script src="assets/js/data-v2.js"></script>
-<script src="assets/js/app.js?v=20261026a"></script>
+<script src="assets/js/app.js?v=20261102-ziwei-core"></script>
 </body>
 </html>
