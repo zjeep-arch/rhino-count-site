@@ -1367,3 +1367,60 @@ body{color:var(--ink);
 .sihua-settings-row label>span{color:var(--ink-soft);font-size:12px}
 .sihua-settings-row select{min-width:0;width:100%;padding:7px 5px;border:1px solid var(--line);border-radius:7px;background:var(--panel,#10162d);color:var(--ink);font:inherit;font-size:12px}
 @media(max-width:520px){.fourhua-settings{padding:0 10px}.sihua-settings-row{grid-template-columns:42px repeat(4,minmax(0,1fr));gap:3px}.sihua-settings-row select{padding:7px 2px;font-size:11px}}
+
+/* Full chart view: Wenmo-style 4x4 palace chart with the four pillars in the center */
+@media(min-width:768px){
+  #view-chart.active{display:block}
+  #view-chart .chart-left,#view-chart .chart-right{width:100%;min-width:0}
+  #chart-grid-wrap{position:relative;top:auto;overflow:visible}
+  #chart-grid{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:repeat(4,minmax(150px,auto));gap:8px;width:100%;margin:12px 0}
+  #chart-grid .sp-hub{grid-area:2/2/4/4;min-height:100%;padding:14px;--hub-r:120px}
+  #chart-grid .cell:not(.sp-hub){min-height:150px;height:100%;padding:10px 9px}
+  .chart-right{margin-top:22px}
+}
+@media(max-width:767px){
+  #view-chart.active{display:block}
+  #chart-grid-wrap{width:100%;overflow-x:auto;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;padding:2px 0 10px}
+  #chart-grid{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:repeat(4,142px);gap:6px;width:800px;min-width:800px;margin:10px 0}
+  #chart-grid .sp-hub{grid-area:2/2/4/4;padding:8px;--hub-r:82px}
+  #chart-grid .cell:not(.sp-hub){min-height:0;height:100%;padding:7px 6px;border-radius:9px;font-size:11px}
+  #chart-grid .cell .pname{font-size:12px}
+  #chart-grid .cell .star-chip{font-size:10.5px;padding:1px 4px}
+  #chart-list{display:block!important}
+}
+.sp-hub .hub-core{width:100%;gap:7px;padding:8px 10px}
+.hub-bazi{width:100%;padding:8px 10px;border:1px solid rgba(201,169,106,.3);border-radius:9px;background:rgba(255,255,255,.035);text-align:left}
+.hub-bazi-title{display:flex;justify-content:space-between;align-items:center;margin:0 0 5px;color:#E5D6B1;font-size:12px;font-weight:700;letter-spacing:.12em}
+.hub-bazi-title span{font:500 9px/1 var(--font-mono);color:#8A93C2;letter-spacing:.14em}
+.hub-bazi-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px}
+.hub-pillar{display:flex;flex-direction:column;align-items:center;gap:2px;padding:4px 2px;border-right:1px solid rgba(201,169,106,.15);text-align:center}
+.hub-pillar:last-child{border-right:0}
+.hub-pillar>small:first-child{font-size:9px;color:#9BA4CA;letter-spacing:.08em}
+.hub-pillar .pillar-stem,.hub-pillar .pillar-branch{font-family:var(--font-title);font-size:clamp(17px,1.5vw,22px);line-height:1.05;color:#F1EBDD}
+.hub-pillar .pillar-branch{color:#D8B870}
+.hub-pillar>span{font-size:9px;color:#AEB5D2;white-space:nowrap}
+.hub-pillar .pillar-hidden{font-size:8px;color:#8D96BC;white-space:nowrap}
+.hub-pillar.is-day{background:rgba(201,169,106,.07);border-radius:6px}
+.hub-stars{font-size:clamp(13px,1.2vw,17px)}
+.chart-list-details{margin:14px 0;border:1px solid var(--line);border-radius:12px;padding:0 14px;background:rgba(255,255,255,.02)}
+.chart-list-details>summary{padding:12px 0;cursor:pointer;color:var(--ink-soft);font-size:13px}
+#chart-list{display:none!important}
+.chart-list-details[open] #chart-list{display:block!important}
+
+.chart-map-caption{margin:5px 0 8px;color:var(--ink-soft);font-size:12px;letter-spacing:.04em}
+@media(min-width:768px){
+  #view-chart .chart-left{max-width:1500px;margin-inline:auto}
+  #view-chart .chart-right{max-width:1500px;margin-inline:auto}
+  #chart-head{padding:18px 20px 8px}
+  #chart-grid .cell .stars{max-height:none}
+}
+@media(max-width:767px){
+  .chart-map-caption{font-size:11px}
+  .hub-bazi{padding:5px 4px}
+  .hub-bazi-grid{gap:1px}
+  .hub-pillar{padding:3px 1px}
+  .hub-pillar .pillar-stem,.hub-pillar .pillar-branch{font-size:18px}
+  .hub-pillar .pillar-hidden{font-size:7.5px}
+  .hub-name{font-size:12px}
+  .hub-meta{font-size:9px}
+}
