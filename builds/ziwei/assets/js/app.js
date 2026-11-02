@@ -640,7 +640,7 @@ function renderChart(){
   const mingMajors = ming.stars.filter(s=>s.type==='major').map(s=>s.name).join('、') || '（空宫）';
   const bi = chart.birthInfo;
   $('#chart-head').innerHTML =
-    `<h3>${esc(rec.name)}的命盘</h3>
+    `<h3>${esc(rec.name)}的完整命盘</h3>
      <div class="meta">公历 ${bi.year} 年 ${bi.month} 月 ${bi.day} 日 · ${BR[bi.hour]}时 · ${bi.gender==='male'?'男':'女'} · ${esc(chart.wuxingJuName)} · 命主${esc(chart.mingZhu||'')} / 身主${esc(chart.shenZhu||'')}</div>
      <div class="meta">命宫主星：${esc(mingMajors)}${rec.note && rec.note.length ? ' · ' + esc(rec.note.join('；')) : ''}</div>`;
   renderLuckPicker();
@@ -753,14 +753,22 @@ function hubHTML(chart, rec, kind, ySh){
   const mingP = chart.palaces.find(p => p.isMingGong);
   const majors = mingP.stars.filter(x => x.type === 'major').map(x => x.name).join(' · ') || '空宫';
   const lx = li.lunarMonth ? `农历${li.isLeapMonth ? '闰' : ''}${li.lunarMonth}月${li.lunarDay}日` : '';
-  const fp = (li.fourPillars || []).join(' ');
+  const fp = li.fourPillars || [];
+  const dayStem = fp.length === 4 ? ST.indexOf(fp[2][0]) : -1;
+  const pillarLabels = ['年','月','日','时'];
+  const pillarHTML = fp.length === 4 ? '<div class="hub-bazi"><div class="hub-bazi-title">四柱八字 <span>BAZI</span></div><div class="hub-bazi-grid">' + fp.map((gz,i)=>{
+    const s=ST.indexOf(gz[0]), b=BR.indexOf(gz[1]);
+    if(s<0||b<0) return '<div class="hub-pillar"><small>'+pillarLabels[i]+'柱</small><b>—</b></div>';
+    const hidden=(HIDDEN_STEMS[b]||[]).map(x=>ST[x]).join(' ');
+    return '<div class="hub-pillar '+(i===2?'is-day':'')+'"><small>'+pillarLabels[i]+'柱</small><b class="pillar-stem">'+gz[0]+'</b><b class="pillar-branch">'+gz[1]+'</b><span>'+ (i===2?'日主':shiShen(dayStem,s)) +'</span><small class="pillar-hidden">藏 '+hidden+'</small></div>';
+  }).join('')+'</div></div>' : '<div class="hub-bazi hub-bazi-empty">四柱信息暂不可用</div>';
   return `<div class="cell sp-hub">${ring}<div class="hub-core">
-    <div class="hub-brand">✦ 问星</div>
-    <div class="hub-stars">${esc(majors)}</div>
+    <div class="hub-brand">✦ 问星 · 本命命盘</div>
     <div class="hub-name">${esc(rec.name)} · ${bi.gender === 'male' ? '男命' : '女命'}</div>
-    <div class="hub-meta">${bi.year}.${String(bi.month).padStart(2, '0')}.${String(bi.day).padStart(2, '0')} · ${BR[bi.hour]}时</div>
-    ${lx ? `<div class="hub-meta">${esc(lx)} · ${esc(chart.wuxingJuName || '')}</div>` : ''}
-    ${fp ? `<div class="hub-meta gz hub-four-pillars"><span>四柱</span><b>${esc(fp)}</b></div>` : ''}
+    <div class="hub-meta">${bi.year}.${String(bi.month).padStart(2, '0')}.${String(bi.day).padStart(2, '0')} · ${BR[bi.hour]}时 · ${esc(lx)} · ${esc(chart.wuxingJuName || '')}</div>
+    <div class="hub-meta">命主 ${esc(chart.mingZhu || '—')} · 身主 ${esc(chart.shenZhu || '—')}</div>
+    ${pillarHTML}
+    <div class="hub-stars">命宫主星 · ${esc(majors)}</div>
   </div>${seal}</div>`;
 }
 function renderChartBody(){
@@ -776,16 +784,15 @@ function renderChartBody(){
     sfb.innerHTML = `<div class="sf-hint">正在看 <b>${esc(disp(p0.name))}</b> 的三方四正（本宫＋对宫＋三合两宫）——看一宫要合看四宫。<button class="btn-ghost" data-palace-detail="${esc(disp(p0.name))}" style="margin-left:8px">看${esc(disp(p0.name))}解读 →</button><br><span class="hint">再点一次宫位取消</span></div>`;
   } else sfb.innerHTML = '<div class="hint" style="margin:6px 0">点任意一宫，高亮它的三方四正一起看。</div>';
   const sfSet = sanfangBranch != null ? new Set(sanfangBranches(sanfangBranch)) : null;
-  // 桌面 4x4
+  // 十二宫田字格；中宫跨 2×2，并承载完整四柱
   const grid = $('#chart-grid');
-  // 传统田字格：巳午未申 / 辰··酉 / 卯··戌 / 寅丑子亥（子=0…亥=11）
+  // 巳午未申 / 辰·中宫·酉 / 卯·中宫·戌 / 寅丑子亥（子=0…亥=11）
   const order = [5,6,7,8, 4,-1,-1,9, 3,-1,-1,10, 2,1,0,11];
   let h = '';
   let centerDone = false;
   order.forEach(b => {
     if(b === -1){
-      // 中枢信息卡只渲染一次，第二个占位 div 隐藏（保持自动流占位）
-      if(centerDone){ h += '<div class="cell center-dup"></div>'; return; }
+      if(centerDone) return;
       centerDone = true;
       h += hubHTML(chart, rec, 'chart');
       return;
