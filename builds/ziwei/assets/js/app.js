@@ -645,7 +645,9 @@ function renderChart(){
 }
 /* ---------- 过往流年回溯卡：用已发生的年份锚定信任 ---------- */
 function retroYears(chart){
-  const nowY = currentLunarContext(chart).year;
+  const context = currentLunarContext(chart);
+  if(!context.valid) return [];
+  const nowY = context.year;
   const birthY = chart.birthInfo.year;
   const natal = natalSihuaMap(chart);
   const natalJiStar = ((natal['忌'] || [])[0] || {}).star;
@@ -673,6 +675,7 @@ function retroYears(chart){
 function renderRetroCard(){
   const rec = cur(); const box = $('#retro-card');
   if(!rec){ box.hidden = true; return; }
+  if(!currentLunarContext(rec.chart).valid){box.hidden=false;box.innerHTML='<p class="hint">当前日期的农历换算暂不可用，过往流年回看已暂停。</p>';return;}
   const years = retroYears(rec.chart);
   if(!years.length){ box.hidden = true; return; }
   const done = store.get('gxg_retro_' + rec.id, '');
@@ -688,8 +691,9 @@ function renderRetroCard(){
          </div>`}`;
   const hit = $('#btn-retro-hit'), miss = $('#btn-retro-miss');
   if(hit) hit.addEventListener('click', () => {
+    const context=currentLunarContext(rec.chart); if(!context.valid) return;
     store.set('gxg_retro_' + rec.id, 'hit');
-    luckMode = 'liunian'; luckParam = currentLunarContext(rec.chart).year;
+    luckMode = 'liunian'; luckParam = context.year;
     renderChart();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
@@ -714,7 +718,9 @@ function renderLuckPicker(){
     box.appendChild(sel);
   } else if(luckMode === 'liunian'){
     const sel = document.createElement('select');
-    const thisY = currentLunarContext(chart).year;
+    const context = currentLunarContext(chart);
+    if(!context.valid){ box.innerHTML='<p class="hint">当前日期的农历换算暂不可用，流年选择器已暂停，避免显示错误年份。请稍后重试。</p>'; return; }
+    const thisY = context.year;
     const bi = chart.birthInfo || {};
     const yMin = Math.min(thisY - 60, bi.year || thisY);
     const yMax = Math.max(thisY + 30, (bi.year || thisY) + 121);
@@ -949,7 +955,9 @@ function taisuiOf(year){
 function renderTaisuiCard(){
   const card = $('#taisui-card'), body = $('#taisui-body');
   if(!card) return;
-  const year = currentLunarContext(cur()&&cur().chart).year;
+  const current=currentLunarContext(cur()&&cur().chart);
+  if(!current.valid){card.hidden=false;body.innerHTML='<p class="hint">当前日期的农历换算暂不可用，太岁年份暂不显示。</p>';return;}
+  const year = current.year;
   const ts = taisuiOf(year);
   const rec = cur();
   let mine = '';
@@ -1321,7 +1329,7 @@ document.addEventListener('click', e => {
   if(c && !e.target.closest('[data-star]')) glossary('palace', c.dataset.palace);
 });
 
-/* ---------- 13维解读（v4.0 数据集按需加载，走自建 CDN 月包，双镜像） ---------- */
+/* ---------- 13维解读：按当前命盘在本地生成 ---------- */
 function readingKeyOf(chart, input){
   const bi=chart.birthInfo;
   const settings = [
@@ -1448,7 +1456,9 @@ const LOCAL_READING_GUIDANCE = {
 function topicTimeLine(chart, topicCn, palNames){
   const dx = chart.daXians[chart.currentDaXianIndex] || {};
   const dxName = disp(dx.palaceName || '');
-  const y = currentLunarContext(chart).year;
+  const context = currentLunarContext(chart);
+  if(!context.valid) return '当前日期的农历换算暂不可用，暂不生成流年时间线；命盘本身仍可查看。';
+  const y = context.year;
   const lp = palaceByBranch(chart, ((y - 4) % 12 + 12) % 12);
   let s = `时间维度：当前大限 ${dx.startAge || '—'}–${dx.endAge || '—'} 岁在${dxName}；${y} 年流年命宫在${disp(lp.name)}。`;
   if(palNames.includes(dxName)) s += `当前大限宫位与${topicCn}专题的取用宫位重合，可把它作为这十年的观察线索之一；不代表该主题必然出现重大事件。`;
@@ -1478,9 +1488,11 @@ function buildLocalReading(chart){
       parts.push(`盘面事实：命宫${mingSay}，五行局为${chart.wuxingJuName}；身宫在${shen ? disp(shen.name) : '—'}。传统解读会把命宫、身宫用于观察自我定位和行动落点，但不存在一个固定年龄后才“进入身宫”的统一规则。`);
       try{
         const dx = chart.daXians[chart.currentDaXianIndex] || {};
-        const y = currentLunarContext(chart).year;
-        const lp = palaceByBranch(chart, ((y - 4) % 12 + 12) % 12);
-        parts.push(`时间盘面：当前大限显示为${dx.startAge || '—'}–${dx.endAge || '—'}岁，落${disp(dx.palaceName || '')}；农历${y}年流年命宫落${disp(lp.name)}。这是按当前排盘规则得到的位置，不是事件预测。`);
+        const context = currentLunarContext(chart);
+        if(context.valid){
+          const y = context.year, lp = palaceByBranch(chart, ((y - 4) % 12 + 12) % 12);
+          parts.push(`时间盘面：当前大限显示为${dx.startAge || '—'}–${dx.endAge || '—'}岁，落${disp(dx.palaceName || '')}；农历${y}年流年命宫落${disp(lp.name)}。这是按当前排盘规则得到的位置，不是事件预测。`);
+        }else parts.push('当前日期的农历换算暂不可用，暂不显示流年时间线；命盘本身仍可查看。');
       }catch(e){}
       let pats = [];
       try{ pats = E.detectPatterns(chart).slice(0, 3); }catch(e){}
@@ -1679,7 +1691,9 @@ function renderTimelineCard(chart){
   const card = $('#timeline-card'), body = $('#timeline-body');
   if(!card) return;
   const birthY = chart.birthInfo.year;
-  const nowY = currentLunarContext(chart).year;
+  const currentContext=currentLunarContext(chart);
+  if(!currentContext.valid){card.hidden=false;body.innerHTML='<p class="hint">当前日期的农历换算暂不可用，流年时间轴已暂停，避免生成错误年份；命盘本身仍可查看。</p>';return;}
+  const nowY = currentContext.year;
   const keyBranches = ['命宫','官禄宫','财帛宫','夫妻宫'].map(n => palaceByName(chart, n).branch);
   const rows = chart.daXians.map((dx, i) => {
     const { sh, pal, lvl } = decadeQuality(chart, i, dx);
@@ -1749,19 +1763,24 @@ function renderTimelineCard(chart){
   body.querySelectorAll('.tl-row').forEach(r => r.addEventListener('click', () => r.classList.toggle('open')));
   card.hidden = false;
 }
-/* ---------- 问运：今年运势 / 感情 / 财运 / 事业（先结论后依据，全部盘面实算） ---------- */
+/* ---------- 问运：盘面时间线与现实议题复盘 ---------- */
 function currentLunarContext(chart){
   const today = bjDate();
   try{
     const gender = chart && chart.birthInfo && chart.birthInfo.gender || 'male';
     const dayChart = E.generateChart({year:today.y,month:today.m,day:today.d,hour:0,gender});
     const li = dayChart && dayChart.lunarInfo;
-    if(li && li.lunarYear) return {year:li.lunarYear, month:li.lunarMonth, day:li.lunarDay, yearStem:li.yearStem, yearBranch:li.yearBranch, date:today};
+    if(li && Number.isInteger(li.lunarYear) && Number.isInteger(li.lunarMonth) &&
+       Number.isInteger(li.lunarDay) && Number.isInteger(li.yearStem) && Number.isInteger(li.yearBranch)){
+      return {year:li.lunarYear, month:li.lunarMonth, day:li.lunarDay, yearStem:li.yearStem, yearBranch:li.yearBranch, date:today, valid:true};
+    }
   }catch(e){}
-  return {year:today.y, month:null, day:null, yearStem:null, yearBranch:((today.y-4)%12+12)%12, date:today};
+  return {year:null, month:null, day:null, yearStem:null, yearBranch:null, date:today, valid:false};
 }
 function wyYearsOf(chart, targetPalName){
-  const nowY = currentLunarContext(chart).year, out = [];
+  const now = currentLunarContext(chart), out = [];
+  if(!now.valid) return out;
+  const nowY = now.year;
   for(let y = nowY - 5; y <= nowY + 7; y++){
     let lsh = null; try{ lsh = normSihua(E.getLiuNianSiHua(y)); }catch(e){}
     if(!lsh) continue;
@@ -1778,7 +1797,9 @@ function renderWenyun(){
   const rec = cur(), box = $('#answer-list');
   if(!box) return;
   if(!rec){box.innerHTML='<div class="empty">先排一张盘，问运会结合你的宫位和四化线索展开。</div>';return;}
-  const chart=rec.chart, now=currentLunarContext(chart), year=now.year;
+  const chart=rec.chart, now=currentLunarContext(chart);
+  if(!now.valid){box.innerHTML='<div class="empty">当前日期的农历换算暂不可用，问运内容已暂停流年与流月推算，避免显示错误年份。命盘本身仍可查看；请稍后重试。</div>';return;}
+  const year=now.year;
   const lsh=normSihua(E.getLiuNianSiHua(year))||{};
   const yb=((year-4)%12+12)%12, lp=palaceByBranch(chart,yb);
   const blocks=[];
