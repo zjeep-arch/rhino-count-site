@@ -1482,3 +1482,43 @@ body{color:var(--ink);
 .star-glossary-note{padding:12px 14px;border-left:3px solid var(--gold);background:var(--primary-soft);color:var(--muted);font-size:13px;line-height:1.75}
 .star-glossary-note b{display:inline-block;margin-bottom:3px;color:var(--primary-deep)}
 .star-glossary-source{color:var(--muted);font-size:11px;line-height:1.6}
+
+
+/* Trust-first reading controls: generous tap targets and stable narrow layouts. */
+.wy-month-picker{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;margin:10px 0}
+.wy-month-btn{min-height:44px;padding:8px 6px;border:1px solid var(--line);border-radius:10px;background:var(--surface-2,rgba(255,255,255,.04));color:var(--ink);font:inherit;cursor:pointer;touch-action:manipulation}
+.wy-month-btn:hover,.wy-month-btn:focus-visible{border-color:var(--accent);outline:2px solid transparent}
+.wy-month-btn.on{background:var(--accent-soft,rgba(255,255,255,.1));border-color:var(--accent);color:var(--ink);font-weight:700}
+.wy-month-detail{margin-top:10px;padding:12px;border:1px solid var(--line);border-radius:12px}
+.wy-month-row{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:8px 0;border-bottom:1px solid var(--line)}
+.wy-month-row:last-of-type{border-bottom:0}
+.wy-act-title{margin-top:12px;font-weight:700}
+.reading-scope-note{margin-top:12px;padding:12px 14px;border-left:3px solid var(--accent);background:var(--surface-2,rgba(255,255,255,.04));color:var(--muted);line-height:1.7}
+.zeri-note{margin:10px 0}
+.zeri-calendar{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}
+.zeri-day{min-width:0;padding:14px;border:1px solid var(--line);border-radius:12px;background:var(--surface-2,rgba(255,255,255,.03))}
+.zeri-day header{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.zeri-day header span{color:var(--muted);font-size:.92em}
+.zeri-focus{margin:8px 0;font-weight:600}
+.zeri-hua{display:flex;flex-wrap:wrap;gap:8px 12px;line-height:1.7}
+.zeri-hua span{min-width:calc(50% - 6px)}
+.zeri-hua b{color:var(--accent)}
+.zeri-label{display:block;margin:0 0 6px;font-weight:700}
+@media(max-width:680px){
+  .wy-month-picker{grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}
+  .wy-month-btn{min-height:46px;font-size:.92rem}
+  .wy-month-detail{padding:10px}
+  .wy-month-row{grid-template-columns:44px minmax(0,1fr);gap:8px}
+  .zeri-calendar{grid-template-columns:minmax(0,1fr)}
+  .zeri-day{padding:12px}
+  .zeri-hua span{min-width:100%}
+}
+@media(prefers-reduced-motion:reduce){
+  .wy-month-btn{scroll-behavior:auto}
+}
+
+/* 完整参考语料与当前命盘补充分层展示 */
+.reading-personal-expansion{margin-top:22px;padding:18px 20px;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:12px;background:var(--surface-2,rgba(255,255,255,.035))}
+.reading-personal-expansion h3{margin:0 0 8px;font-size:1.08rem}
+.reading-personal-expansion>p:not(.hint){margin:12px 0;line-height:1.85}
+@media(max-width:680px){.reading-personal-expansion{margin-top:16px;padding:14px}}
