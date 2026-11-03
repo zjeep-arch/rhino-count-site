@@ -27,7 +27,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;700;900&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=20261103-mobile-full-chart">
+<link rel="stylesheet" href="assets/css/style.css?v=20261103-mobile-touch-targets">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <meta name="theme-color" content="#0B1026">
@@ -165,6 +165,11 @@
       <div id="overlay-strip"></div>
       <div id="sanfang-hint"></div>
       <div id="chart-grid-wrap" role="region" aria-label="十二宫与四柱完整命盘" tabindex="0"><div id="chart-grid"></div></div>
+      <div class="mobile-palace-picker">
+  <label for="mobile-palace-picker">精准选宫</label>
+  <select id="mobile-palace-picker" aria-label="快速定位十二宫"><option value="">选择宫位…</option></select>
+  <span>选择后直接高亮该宫和三方四正</span>
+</div>
       <div id="overlay-grid-wrap" hidden><div class="sec-mini"></div><div id="overlay-grid"></div></div>
       <details class="chart-list-details"><summary>逐宫列表 · 适合手机阅读</summary><div id="chart-list"></div></details>
       <details class="chart-sihua-drawer">
@@ -357,6 +362,6 @@
 <script src="assets/js/ziwei-engine.js"></script>
 <script src="assets/js/data.js"></script>
 <script src="assets/js/data-v2.js"></script>
-<script src="assets/js/app.js?v=20261102-wenmo-compatible-rules"></script>
+<script src="assets/js/app.js?v=20261103-mobile-touch-controls"></script>
 </body>
 </html>
