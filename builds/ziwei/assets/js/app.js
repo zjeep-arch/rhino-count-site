@@ -2277,7 +2277,7 @@ $('#btn-dingpan-run').addEventListener('click', () => {
     province:$('#f-province').value||'',city:cityParts[0]||'',
     longitude:Number.isFinite(formLongitude)?formLongitude:null,
     trueSolar:$('#f-true-solar').checked&&Number.isFinite(formLongitude),
-    lateZiNextDay:$('#latezi-next').checked,sihuaTable:getStoredSihuaTable(),exHour:'',exMin:''
+    lateZiNextDay:$('#f-latezi-next').checked,sihuaTable:getStoredSihuaTable(),exHour:'',exMin:''
   };
   if(!E.isValidGregorianDate(+baseInput.year,+baseInput.month,+baseInput.day)){
     $('#dingpan-result').innerHTML='<div class="empty">出生日期不完整或不存在，请先回到排盘页核对年月日。</div>';return;
