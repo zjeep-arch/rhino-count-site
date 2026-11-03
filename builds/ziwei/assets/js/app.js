@@ -803,15 +803,26 @@ function renderChartBody(){
     if(p.isShenGong) tags.push('<span class="tag">身</span>');
     const hl = ov.hlBranch === b ? ' hl' : '';
     const sf = (sfSet && sfSet.has(b)) ? ' sf' : '';
+    const selected = sanfangBranch === b ? ' selected' : '';
+    const pressed = sanfangBranch === b ? 'true' : 'false';
     const ovNameG = ov.hlBranch != null ? overlayPalaceAt(ov.hlBranch, b) : '';
     const ovTagG = ovNameG && ['命宫','官禄宫','财帛宫','夫妻宫'].includes(ovNameG)
       ? `<span class="ov-tag">${LUCK_PREFIX[luckMode] || '流'}${ovNameG.replace('宫','')}</span>` : '';
-    h += `<div class="cell${hl}${sf}" data-branch="${b}">${tags.join('')}${ovTagG}
+    h += `<div class="cell${hl}${sf}${selected}" data-branch="${b}" role="button" tabindex="0" aria-pressed="${pressed}" aria-label="选择${disp(p.name)}">${tags.join('')}${ovTagG}
       <div class="pname">${disp(p.name)}</div><div class="gz">${ST[p.stem]}${BR[p.branch]}</div>
       <div class="stars">${palaceStarsHtml(p, ov.sihua)}</div>
       ${p.daXianAge ? `<div class="dx">大限 ${p.daXianAge[0]}–${p.daXianAge[1]}</div>` : ''}</div>`;
   });
   grid.innerHTML = h;
+  const picker = $('#mobile-palace-picker');
+  if(picker){
+    const options = PALACE_ORDER.map(name => {
+      const palace = palaceByName(chart, name);
+      return '<option value="' + palace.branch + '">' + disp(name) + '</option>';
+    }).join('');
+    picker.innerHTML = '<option value="">选择宫位…</option>' + options;
+    picker.value = sanfangBranch == null ? '' : String(sanfangBranch);
+  }
   // 移动列表（十二宫顺序）
   const list = $('#chart-list');
   list.innerHTML = PALACE_ORDER.map(name => {
@@ -1230,7 +1241,21 @@ function renderHuajiCard(chart){
   card.hidden = false;
 }
 // 点击星/格局/宫：解释弹窗
+$('#mobile-palace-picker').addEventListener('change', e => {
+  const value = e.target.value;
+  sanfangBranch = value === '' ? null : +value;
+  renderChartBody();
+});
+function toggleSanfangBranch(branch){
+  sanfangBranch = sanfangBranch === branch ? null : branch;
+  renderChartBody();
+}
 document.addEventListener('click', e => {
+  const touchCell = e.target.closest('#chart-grid .cell[data-branch]');
+  if(touchCell && matchMedia('(pointer: coarse)').matches){
+    toggleSanfangBranch(+touchCell.dataset.branch);
+    return;
+  }
   const s = e.target.closest('[data-star]');
   if(s){ glossary('star', s.dataset.star); return; }
   const p = e.target.closest('[data-pattern]');
@@ -1240,8 +1265,7 @@ document.addEventListener('click', e => {
   const sfb2 = e.target.closest('[data-sanfang]');
   if(sfb2){
     const b = +sfb2.dataset.sanfang;
-    sanfangBranch = (sanfangBranch === b) ? null : b;
-    renderChartBody();
+    toggleSanfangBranch(b);
     return;
   }
   const row = e.target.closest('.palace-row-head');
@@ -1256,6 +1280,16 @@ document.addEventListener('click', e => {
   const lv = e.target.closest('.lvl');
   if(lv){ /* 级别标签不弹窗 */ return; }
 });
+document.addEventListener('keydown', e => {
+  const cell = e.target.closest('#chart-grid .cell[data-branch]');
+  if(!cell || (e.key !== 'Enter' && e.key !== ' ')) return;
+  e.preventDefault();
+  const branch = +cell.dataset.branch;
+  toggleSanfangBranch(branch);
+  const next = document.querySelector('#chart-grid .cell[data-branch="' + branch + '"]');
+  if(next) next.focus({ preventScroll: true });
+});
+
 function showPalaceDetail(name){
   $('#modal').hidden = true;
   renderPalaceCards();
