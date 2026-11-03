@@ -12,7 +12,7 @@
 <meta property="og:url" content="https://rhinocount.cn/builds/ziwei/">
 <meta property="og:site_name" content="问星">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebApplication","name":"问星 · 紫微斗数在线排盘","alternateName":"问星","url":"https://rhinocount.cn/builds/ziwei/","applicationCategory":"LifestyleApplication","operatingSystem":"Web","browserRequirements":"Requires JavaScript","inLanguage":"zh-CN","description":"免费紫微斗数在线排盘：输入生日时辰本地排出命盘，在十二宫盘面查看四化飞星、大限流年与四柱信息。数据不上传。","offers":{"@type":"Offer","price":"0","priceCurrency":"CNY"},"featureList":["紫微斗数排盘","四化飞星分析","八字四柱大运","流年逐月运势","命盘链接分享"]}
+{"@context":"https://schema.org","@type":"WebApplication","name":"问星 · 紫微斗数在线排盘","alternateName":"问星","url":"https://rhinocount.cn/builds/ziwei/","applicationCategory":"LifestyleApplication","operatingSystem":"Web","browserRequirements":"Requires JavaScript","inLanguage":"zh-CN","description":"免费紫微斗数在线排盘：输入生日时辰本地排出命盘，在十二宫盘面查看四化飞星、大限流年与四柱信息。数据不上传。","offers":{"@type":"Offer","price":"0","priceCurrency":"CNY"},"featureList":["紫微斗数排盘","四化飞星分析","八字四柱大运","流年逐月盘面线索","命盘链接分享"]}
 </script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
@@ -21,7 +21,7 @@
 {"@type":"Question","name":"为什么不同排盘工具排出来的结果不一样？","acceptedAnswer":{"@type":"Answer","text":"通常是口径差异：是否做真太阳时校正、晚子时是否换日、闰月怎么算。本站默认关闭真太阳时校正且排盘日按公历出生日不变，每次排盘的口径卡都会写明所用口径。"}},
 {"@type":"Question","name":"什么是来因宫？","acceptedAnswer":{"@type":"Answer","text":"部分流派以生年天干所在宫位作为“来因宫”，并赋予特定主题解释。它不是所有紫微体系共有的概念，也不能证明人生目的；本工具仅按当前规则标注位置。"}},
 {"@type":"Question","name":"排盘需要付费吗？数据会上传吗？","acceptedAnswer":{"@type":"Answer","text":"排盘和全部分析功能免费。所有计算在浏览器本地完成，出生信息只存在你的设备里，不上传任何服务器。"}},
-{"@type":"Question","name":"什么是大限和流年？","acceptedAnswer":{"@type":"Answer","text":"大限是约十年一段的运势主题，流年是某一年的具体表现。可在命盘中切换大限或流年，查看相应时间层的宫位与四化叠加。"}}
+{"@type":"Question","name":"什么是大限和流年？","acceptedAnswer":{"@type":"Answer","text":"大限按所选规则划分时间段，流年按年度规则显示宫位与四化位置。它们是传统盘面观察层，不代表该时间段必然发生某类事件。可在命盘中切换时间层，核对相应位置。"}}
 ]}
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -78,12 +78,12 @@
       </div>
     </div>
     <div class="card daily-card" id="daily-card">
-      <div class="card-kicker">☾ <span id="daily-kicker">每日一签</span></div>
+      <div class="card-kicker">☾ <span id="daily-kicker">每日复盘提示</span></div>
       <div id="daily-text">正在翻开今天的星语…</div>
-      <div id="daily-lucky-hours" class="hint"></div>
+      
       <div class="card-foot" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
         <span class="date-pill" id="daily-date"></span>
-        <button class="btn-ghost btn-sm" data-share-sign style="margin-top:0;padding:8px 16px;font-size:13px">⚑ 签文做成卡片</button>
+        <button class="btn-ghost btn-sm" data-share-sign style="margin-top:0;padding:8px 16px;font-size:13px">⚑ 复盘提示做成卡片</button>
       </div>
     </div>
     <div class="card" id="taisui-card" hidden><div class="card-kicker">太岁提醒</div><div id="taisui-body"></div></div>
@@ -217,17 +217,17 @@
   <!-- 解读 · 功能菜单 -->
   <section class="view" id="view-reading">
     <h2 class="view-title">问运</h2>
-    <p class="view-sub">把本命十二宫、四化与当前运限放在同一条判断里：先看全年走势，再按你关心的问题细读，最后回到命盘依据。</p>
+    <p class="view-sub">把本命十二宫、四化与当前运限作为传统观察线索：先核对流年宫位，再按关心的问题查看对应盘面，最后回到出生资料与排盘设置确认依据。</p>
     <div class="reading-workbench-actions"><button class="btn-ghost" type="button" data-share-chart>分享命盘 ↗</button></div>
 
     <section class="insight-pane insight-flow-section" id="insight-forecast">
       <div class="reading-section-heading"><span class="reading-section-index">01</span><div><h3>今年的盘面线索</h3><p>先看流年宫位与四化落点，再分别核对关系、资源和工作议题；这些是传统观察入口，不是事件预测。</p></div></div>
       <div id="answer-list"></div>
-      <div class="card"><div class="card-kicker">择日参考 · 未来 30 天</div><div id="zeri-body"></div></div>
+      <div class="card"><div class="card-kicker">流日象意日历 · 未来 30 天</div><div id="zeri-body"></div></div>
     </section>
 
     <section class="insight-pane insight-flow-section" id="insight-topics">
-      <div class="reading-section-heading"><span class="reading-section-index">02</span><div><h3>你想问哪件事</h3><p>选择一个具体问题，系统会结合相关宫位、四化和运限展开解读。</p></div></div>
+      <div class="reading-section-heading"><span class="reading-section-index">02</span><div><h3>你想问哪件事</h3><p>选择一个具体问题，查看相关宫位、四化和运限的规则位置，并结合现实经历复盘。</p></div></div>
       <div class="reading-topic-picker"><label for="reading-topic">选择关心的问题</label><select id="reading-topic" aria-label="选择问运主题"></select></div>
       <div class="card" id="reading-disclaimer-card"><div class="card-kicker">阅读说明</div><p class="hint" id="reading-disclaimer" style="margin:0"></p></div>
       <p class="view-sub" id="reading-status">排盘后可查看按当前设置生成的本地解读与 13 个主题。</p>
@@ -314,7 +314,7 @@
     <div class="tabs" id="share-tabs">
       <button data-k="chart" class="on">命盘图</button>
       <button data-k="persona">主星人格卡</button>
-      <button data-k="sign">签文卡</button>
+      <button data-k="sign">提示卡</button>
       <button data-k="link">链接</button>
     </div>
     <canvas id="share-canvas" width="1080" height="1440"></canvas>
@@ -338,13 +338,13 @@
 
 <footer id="app-footer">
   <p>问星 · 紫微斗数在线排盘</p>
-  <p class="fine" id="footer-disclaimer">命理说的是倾向，不是你的判决书。内容为传统文化参考，不构成人生决策建议。</p>
-  <p class="fine">出生信息只保存在你的浏览器本地，不上传。涉及父母、兄弟、子女的推断仅供参考。本站不是医疗、法律、金融、心理或博彩建议渠道。</p>
+  <p class="fine" id="footer-disclaimer">紫微斗数属于传统文化解释框架，内容是规则位置与象意参考，不是经过科学验证的个人预测。</p>
+  <p class="fine">出生信息只保存在你的浏览器本地，不上传。涉及亲友关系的内容仅作主题整理，不用于给他人贴标签。本站不是医疗、法律、金融、心理或博彩建议渠道。</p>
 </footer>
 
 <script src="assets/js/ziwei-engine.js"></script>
 <script src="assets/js/data.js"></script>
 <script src="assets/js/data-v2.js"></script>
-<script src="assets/js/app.js?v=20261103-local-reading-v3"></script>
+<script src="assets/js/app.js?v=20261103-local-reading-v5"></script>
 </body>
 </html>
