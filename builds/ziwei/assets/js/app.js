@@ -167,19 +167,11 @@ $('#modal-x').addEventListener('click', () => $('#modal').hidden = true);
 $('#modal').addEventListener('click', e => { if(e.target.id==='modal') $('#modal').hidden = true; });
 /* "星化X入宫"家族的合成词条：V2 未收录时按星性+化性+落宫生成，不留空白 */
 function patternFamilyText(name){
-  const m = /^(.{2})化(禄|权|科|忌)入(命|迁|官|财|身|福|夫|疾)$/.exec(name || '');
-  if(!m) return null;
-  const star = m[1], hua = m[2], pal = { '命': '命宫', '迁': '迁移宫', '官': '官禄宫', '财': '财帛宫', '身': '身宫', '福': '福德宫', '夫': '夫妻宫', '疾': '疾厄宫' }[m[3]];
-  const huaSay = { '禄': '得到与顺遂的力', '权': '掌控与扛事的力', '科': '名声与贵人的力', '忌': '在意与执念的课题' }[hua];
-  const palSay = { '命': '在你这个人本身', '迁': '在你外出与对外的场合', '官': '在你的事业上', '财': '在你的钱财上', '身': '在你后半程的重心上', '福': '在你的内心状态上', '夫': '在你的感情关系里', '疾': '在你的身体课题上' }[m[3]];
-  return {
-    text: `${star}化${hua}落${pal}：${star}带着${huaSay}，落在${palSay}。具体怎么应，合看${pal}的主星庙旺与三方四正。`,
-    condition: `生年${star}化${hua}飞入${pal}`,
-    breaker: hua === '忌' ? '若该宫再见煞星或主星落陷，课题更明显，宜提前留预案' : '若该宫见煞忌同宫，则这份力要费些周折才拿得稳',
-    source: '本馆白话转述',
-    caution: '仍须合看宫内主星与三方四正',
-  };
+  const m=/^(.{2})化(禄|权|科|忌)入(命|迁|官|财|身|福|夫|疾)$/.exec(name||'');if(!m)return null;
+  const palace={'命':'命宫','迁':'迁移宫','官':'官禄宫','财':'财帛宫','身':'身宫','福':'福德宫','夫':'夫妻宫','疾':'疾厄宫'}[m[3]];
+  return {text:`${m[1]}化${m[2]}落${palace}的传统组合标签`,condition:`生年${m[1]}化${m[2]}飞入${palace}`,source:'本站当前规则整理',caution:'只说明规则匹配，不代表现实事件结果'};
 }
+function safeSihuaNote(star, hua, palace){const meanings={'禄':'资源、回应与投入','权':'推动、责任与掌控','科':'表达、规范与可见度','忌':'牵挂、反复投入与需要核对的部分'};return `${star}化${hua}落在${palace}，按本站所选规则得到这一传统盘面对应。可把“${meanings[hua]||'主题变化'}”当作复盘问题，再核对现实情况；它不表示收益、损失、疾病或关系结果必然发生。`;}
 function glossary(kind, name){
   let html = '', isHtml = false;
   if(kind==='star'){
@@ -198,25 +190,18 @@ function glossary(kind, name){
     isHtml = true;
   }
   else if(kind==='sihua'){
-    html = esc(D.sihua[name] || '');
+    html = esc(D.sihua[name] || '') + '<br><br><span class="hint">以上是传统象义摘要，不是对某项事件或结果的保证。四化规则依你选择的流派与设置而变。</span>';
     if(window.GXG_SIHUA_WUXING) html += '<br>' + esc(window.GXG_SIHUA_WUXING);
   }
   else if(kind==='pattern'){
-    const v2 = (window.GXG_PATTERNS_V2 || {})[name] || patternFamilyText(name);
-    if(v2){
-      html = `<b>${esc(v2.text)}</b><br><br>成立条件：${esc(v2.condition || '—')}` +
-        (v2.breaker ? `<br><br>破格提醒：${esc(v2.breaker)}` : '') +
-        `<br><br>出处：${esc(v2.source || '本馆白话转述')}` +
-        (v2.caution ? `<br><br>${esc(v2.caution)}` : '');
-      isHtml = true;
-    } else {
-      html = esc(D.patterns[name] || (window.GXG_PATTERNS||{})[name] || D.patternDefault);
-    }
+    const v2=(window.GXG_PATTERNS_V2||{})[name]||patternFamilyText(name);
+    if(v2){html=`<b>${esc(name)}</b> 是按本站规则检测到的传统星曜组合标签。成立条件：${esc(v2.condition||'见当前格局检测规则')}。<br><br>不同流派的组合边界、权重和名称可能不同；识别到标签只说明满足一组规则，不表示格局等级、个性定论或现实成败。建议回到具体宫位、四化和现实问题逐项核对。`;isHtml=true;}
+    else{html=esc(D.patterns[name]||(window.GXG_PATTERNS||{})[name]||D.patternDefault)+'<br><br><span class="hint">传统组合标签只描述所采用的匹配规则，不用于预测成败。</span>';}
   }
-  else if(kind==='brightness') html = esc(D.brightness[name] || '');
+  else if(kind==='brightness') html = esc(D.brightness[name] || '') + '<br><br><span class="hint">亮度只是所采用传统表格中的分类，不是客观测量结果；请在设置中核对排盘体系。</span>'; 
   else if(kind==='palace'){
     const p = D.palaces.find(p => p.name === name);
-    html = p ? `<b>${esc(p.modern)}</b> · ${esc(p.keywords)}<br><br>${esc(p.desc)}` : '';
+    html = p ? `<b>${esc(p.modern)}</b> · ${esc(p.keywords)}<br><br>${esc(p.desc)}<br><br><span class="hint">宫位是传统解读的主题分类，不代表相关事情必然发生，也不能用来给家人或伴侣下定论。</span>` : '';
     // 有盘时：加上命主此宫的具体信息
     const rec0 = cur();
     if(rec0){
@@ -242,11 +227,7 @@ function glossary(kind, name){
         html += `<br><br>三方四正：${sf0.map(esc).join(' · ')}`;
       }
       // 四化入宫断语（有盘时）：本宫的化星各一句
-      const SP = window.GXG_SIHUA_PALACE || {};
-      const hits = pl ? pl.stars.filter(s => s.siHua).map(s => {
-        const say = (SP[s.siHua] || {})[name];
-        return say ? `${esc(s.name)}化${esc(s.siHua)}：${esc(say)}` : '';
-      }).filter(Boolean) : [];
+      const hits = pl ? pl.stars.filter(s => s.siHua).map(s => `${esc(s.name)}化${esc(s.siHua)}：${esc(safeSihuaNote(s.name,s.siHua,name))}`) : [];
       if(hits.length) html += '<br><br>' + hits.join('<br>');
     }
     isHtml = true;
@@ -277,7 +258,7 @@ function fillSelect(sel, items, placeholder){
   items.forEach(([v,t]) => { const o = document.createElement('option'); o.value = v; o.textContent = t; sel.appendChild(o); });
 }
 function initForm(){
-  const nowY = new Date().getFullYear();
+  const nowY = bjDate().y;
   const years = []; for(let y=nowY; y>=1950; y--) years.push([y, y+'年']);
   fillSelect($('#f-year'), years, '年');
   fillSelect($('#f-month'), Array.from({length:12},(_,i)=>[i+1,(i+1)+'月']), '月');
@@ -425,10 +406,10 @@ function onSubmit(e){
   const err = $('#form-error'); err.textContent = '';
   const y = +$('#f-year').value, m = +$('#f-month').value, d = +$('#f-day').value;
   const shichen = $('#f-hour').value === '' ? null : +$('#f-hour').value;
-  if(!y || !m || !d){ err.textContent = '请把生日选完整。'; return; }
+  if(!y || !m || !d){ err.textContent = '请把公历生日选完整。'; return; }
+  if(!segVal('f-gender')){err.textContent='请先选择排盘使用的性别口径；传统大限顺逆按此设置计算。';return;}
   // 防止 new Date 静默滚日（如 2 月 30 日变成 3 月 2 日）：先验日期真实存在
-  const chk = new Date(y, m - 1, d);
-  if(chk.getFullYear() !== y || chk.getMonth() !== m - 1 || chk.getDate() !== d){
+  if(!E.isValidGregorianDate(y,m,d)){
     err.textContent = '这天不存在，请检查日期（比如 2 月没有 30 日）。'; return;
   }
   if(shichen == null){ err.textContent = '请选择出生时辰（实在不知道可以去定盘辅助）。'; return; }
@@ -447,7 +428,7 @@ function onSubmit(e){
   const exHour = $('#f-exhour').value, exMin = $('#f-exmin').value;
   const input = {
     name: $('#f-name').value.trim(),
-    gender: segVal('f-gender') || 'male',
+    gender: segVal('f-gender'),
     year: y, month: m, day: d, shichen,
     exHour: exHour === '' ? '' : exHour, exMin: exMin === '' ? '' : exMin,
     province: $('#f-province').value || '',
@@ -510,30 +491,40 @@ function palaceStarsHtml(p, activeSihua){
 
 /* 运势叠加：返回 {hlBranch, sihua:{禄,权,科,忌}[], label} */
 function luckOverlay(chart){
+  const invalidOverlay = label => ({hlBranch:-1,sihua:null,label});
+  const completeSihua = sh => !!sh && ['lu','quan','ke','ji'].every(k => typeof sh[k] === 'string' && sh[k].length > 0);
   if(luckMode === 'natal') return { hlBranch: -1, sihua: null, label: '本命盘' };
   if(luckMode === 'daxian'){
     const dx = chart.daXians[luckParam];
-    if(!dx) return { hlBranch: -1, sihua: null, label: '' };
+    if(!dx || !Number.isInteger(dx.palaceBranch) || dx.palaceBranch < 0 || dx.palaceBranch > 11) return invalidOverlay('大限宫位资料不可用，已暂停叠盘');
     const sh = normSihua(E.getDaXianSiHua(chart, luckParam));
+    if(!completeSihua(sh)) return invalidOverlay('大限四化资料不完整，已暂停叠盘');
     return { hlBranch: dx.palaceBranch, sihua: sh, label: `大限 ${dx.startAge}–${dx.endAge} 岁（${disp(dx.palaceName)}）` };
   }
   if(luckMode === 'liunian'){
-    const y = luckParam;
+    const context = currentLunarContext(chart);
+    const y = Number(luckParam);
+    if(!context.valid || luckParam == null || !Number.isInteger(y) || y < 1800 || y > 2200) return invalidOverlay('当前农历换算或流年年份不可用，已暂停叠盘');
     const stem = ((y - 4) % 10 + 10) % 10, branch = ((y - 4) % 12 + 12) % 12;
     const sh = normSihua(E.getLiuNianSiHua(y));
+    if(!completeSihua(sh)) return invalidOverlay('流年四化资料不完整，已暂停叠盘');
     lastLiuNianYear = y;
     return { hlBranch: branch, sihua: sh, label: `${y} 年流年（${ST[stem]}${BR[branch]}年）命宫在${disp(palaceByBranch(chart,branch).name)}` };
   }
   if(luckMode === 'liuyue'){
-    const { y, lm } = luckParam; // lm: 农历月 1-12
+    const { y, lm } = luckParam || {}; // lm: 农历月 1-12
+    if(!currentLunarContext(chart).valid || !Number.isInteger(y) || y < 1800 || y > 2200 || !Number.isInteger(lm) || lm < 1 || lm > 12) return invalidOverlay('农历年月信息不可用，已暂停流月叠盘');
     const yearStem = ((y - 4) % 10 + 10) % 10;
     const sh = normSihua(E.getLiuYueSiHua(yearStem, lm));
+    if(!completeSihua(sh)) return invalidOverlay('流月四化资料不完整，已暂停叠盘');
     const hl = (doujunBranch(chart, y) + (lm - 1)) % 12; // 流月以斗君起正月顺排
     return { hlBranch: hl, sihua: sh, label: `${y} 年农历 ${lm} 月流月 · 流月命宫${disp(palaceByBranch(chart, hl).name)}` };
   }
   if(luckMode === 'liuri'){
-    const { y, lm, ld } = luckParam;
+    const { y, lm, ld } = luckParam || {};
+    if(!currentLunarContext(chart).valid || !Number.isInteger(y) || y < 1800 || y > 2200 || !Number.isInteger(lm) || !Number.isInteger(ld) || lm < 1 || lm > 12 || ld < 1 || ld > 30) return invalidOverlay('农历日期信息不可用，已暂停流日叠盘');
     const sh = normSihua(E.getLiuRiSiHua(y, lm, ld));
+    if(!completeSihua(sh)) return invalidOverlay('流日四化资料不完整，已暂停叠盘');
     const lyueHl = (doujunBranch(chart, y) + (lm - 1)) % 12;
     const hl = (lyueHl + (ld - 1)) % 12; // 流日以流月命宫起初一顺排
     return { hlBranch: hl, sihua: sh, label: `农历 ${lm} 月 ${ld} 日流日 · 流日命宫${disp(palaceByBranch(chart, hl).name)}` };
@@ -569,78 +560,70 @@ function overlayPalaceAt(hlBranch, branch){
   const off = ((hlBranch - branch) % 12 + 12) % 12;
   return PALACE_ORDER[off];
 }
-const STACK_THEME = {
-  '命宫': '这一年的重心是找回自己的节奏', '兄弟宫': '重心在同辈、合伙与团队关系',
-  '夫妻宫': '重心围绕感情与核心合伙人展开', '子女宫': '重心在孩子、下属或自己的作品产出上',
-  '财帛宫': '重心是钱：收入结构和花钱方式要动一动', '疾厄宫': '重心在身体与作息，先养人再做事',
-  '迁移宫': '重心在外：奔波、搬迁、对外拓展的事多', '交友宫': '重心在人脉圈层，筛选朋友就是筛选运气',
-  '官禄宫': '重心压在事业上，是要冲的一年', '田宅宫': '重心在安顿：房子、家人与资产配置',
-  '福德宫': '重心向内：适合休整、学习，想清楚再出发', '父母宫': '重心在长辈与平台：跟上级、体制打交道多',
-};
 const LUCK_PREFIX = { daxian: '限', liunian: '流', liuyue: '流月', liuri: '流日' };
-function stackSayHTML(chart, ov){
-  if(!ov || ov.hlBranch == null) return '';
-  const pre = luckMode === 'daxian' ? '大限' : luckMode === 'liunian' ? '流年' : luckMode === 'liuyue' ? '流月' : '流日';
-  const natalAt = palaceByBranch(chart, ov.hlBranch);
-  const natalName = natalAt ? disp(natalAt.name) : '';
-  let s = `<b>叠盘看</b>：${pre}命宫落在你的本命【${esc(natalName)}】——${esc(STACK_THEME[natalName] || '')}。`;
-  if(ov.sihua && ov.sihua.ji){
-    const jiPal = sihuaStarPalace(chart, ov.sihua.ji);
-    if(jiPal) s += `${pre}${esc(ov.sihua.ji)}化忌落你的本命【${esc(jiPal)}】，这一块是今年的功课，提前留心。`;
-  }
-  if(ov.sihua && ov.sihua.lu){
-    const luPal = sihuaStarPalace(chart, ov.sihua.lu);
-    if(luPal) s += `${pre}${esc(ov.sihua.lu)}化禄落【${esc(luPal)}】，顺风在这一块。`;
-  }
-  return `<div class="overlay-bar" style="margin-bottom:8px"><div>${s}</div></div>`;
+function validOverlayBranch(ov){
+  return !!ov && Number.isInteger(ov.hlBranch) && ov.hlBranch >= 0 && ov.hlBranch < 12;
 }
-/* 大限/流年四化叠加提示：双禄/双忌/禄忌交战/化禄解化忌/多层集中 */
+function stackSayHTML(chart, ov){
+  if(!ov)return '';
+  if(!validOverlayBranch(ov)){
+    return ov.label&&ov.label.includes('暂停')
+      ? '<div class="overlay-bar" style="margin-bottom:8px"><div>'+esc(ov.label)+'；本次不显示叠盘宫位和四化。</div></div>'
+      : '';
+  }
+  const pre=luckMode==='daxian'?'大限':luckMode==='liunian'?'流年':luckMode==='liuyue'?'流月':'流日';
+  const natalAt=palaceByBranch(chart,ov.hlBranch);
+  if(!natalAt)return '<div class="overlay-bar" style="margin-bottom:8px"><div>当前时间层的宫位无法定位，已暂停叠盘显示。</div></div>';
+  const natalName=disp(natalAt.name), rows=[`${pre}命宫按当前规则对应本命【${natalName}】（位置映射）。`];
+  if(ov.sihua){
+    [['禄','lu'],['权','quan'],['科','ke'],['忌','ji']].forEach(([hua,key])=>{
+      const star=ov.sihua[key],pal=star?sihuaStarPalace(chart,star):'';
+      if(star)rows.push(`${pre}化${hua}为${esc(star)}${pal?'，该星在本命【'+esc(pal)+'】':''}。`);
+    });
+  }
+  return '<div class="overlay-bar" style="margin-bottom:8px"><div><b>规则位置</b>：'+rows.join(' ')+'<span class="hint">这些是传统盘面映射，不表示吉凶、事件发生或行动建议。</span></div></div>';
+}
 function renderOverlayStrip(chart, ov){
-  const box = $('#overlay-strip'); box.innerHTML = stackSayHTML(chart, ov);
-  if(luckMode !== 'daxian' && luckMode !== 'liunian') return;
-  const natal = natalSihuaMap(chart);
-  const layers = [{ name: '本命', map: natal }];
-  if(luckMode === 'daxian' || luckMode === 'liunian'){
-    const dxIdx = (luckMode === 'daxian') ? luckParam : chart.currentDaXianIndex;
-    const dxSh = normSihua(E.getDaXianSiHua(chart, dxIdx));
+  const box=$('#overlay-strip');
+  box.innerHTML=stackSayHTML(chart,ov);
+  if(!validOverlayBranch(ov)||!['daxian','liunian'].includes(luckMode))return;
+  const natal=natalSihuaMap(chart),layers=[{name:'本命',map:natal}];
+  if(luckMode==='daxian'||luckMode==='liunian'){
+    const dxIdx=luckMode==='daxian'?luckParam:chart.currentDaXianIndex;
+    const dxSh=normSihua(E.getDaXianSiHua(chart,dxIdx));
     if(dxSh){
-      const m = {};
-      ['lu','quan','ke','ji'].forEach(k => {
-        const star = dxSh[k]; if(!star) return;
-        const key = {lu:'禄',quan:'权',ke:'科',ji:'忌'}[k];
-        (m[key] = m[key] || []).push({ star, palace: sihuaStarPalace(chart, star) });
+      const m={};
+      [['禄','lu'],['权','quan'],['科','ke'],['忌','ji']].forEach(([name,key])=>{
+        const star=dxSh[key];if(!star)return;
+        (m[name]=m[name]||[]).push({star,palace:sihuaStarPalace(chart,star)});
       });
-      layers.push({ name: '大限', map: m });
+      layers.push({name:'大限',map:m});
     }
   }
-  if(luckMode === 'liunian' && ov.sihua){
-    const m = {};
-    ['lu','quan','ke','ji'].forEach(k => {
-      const star = ov.sihua[k]; if(!star) return;
-      const key = {lu:'禄',quan:'权',ke:'科',ji:'忌'}[k];
-      (m[key] = m[key] || []).push({ star, palace: sihuaStarPalace(chart, star) });
+  if(luckMode==='liunian'&&ov.sihua){
+    const m={};
+    [['禄','lu'],['权','quan'],['科','ke'],['忌','ji']].forEach(([name,key])=>{
+      const star=ov.sihua[key];if(!star)return;
+      (m[name]=m[name]||[]).push({star,palace:sihuaStarPalace(chart,star)});
     });
-    layers.push({ name: '流年', map: m });
+    layers.push({name:'流年',map:m});
   }
-  // 按宫聚合：palace -> {禄:[layer], 忌:[layer]}
-  const agg = {};
-  layers.forEach(L => ['禄','忌'].forEach(k => (L.map[k]||[]).forEach(e => {
-    if(!e.palace) return;
-    const a = agg[e.palace] = agg[e.palace] || { '禄': [], '忌': [] };
-    a[k].push(L.name);
+  const agg={};
+  layers.forEach(layer=>Object.keys(layer.map).forEach(hua=>(layer.map[hua]||[]).forEach(item=>{
+    if(!item.palace)return;
+    const row=agg[item.palace]=agg[item.palace]||{};
+    (row[hua]=row[hua]||[]).push(layer.name);
   })));
-  const msgs = [];
-  Object.keys(agg).forEach(pl => {
-    const lu = agg[pl]['禄'], ji = agg[pl]['忌'];
-    const uniq = a => [...new Set(a)];
-    if(uniq(ji).length >= 2) msgs.push({ w: 0, t: `<b>${esc(pl)}双忌叠压</b>（${uniq(ji).map(esc).join('＋')}）：这是这段时间要花心力的地方，别硬扛，慢一点、留余地。` });
-    else if(uniq(lu).length >= 1 && uniq(ji).length >= 1) msgs.push({ w: 1, t: `<b>${esc(pl)}禄忌交战</b>（${uniq(lu).map(esc).join('＋')}禄、${uniq(ji).map(esc).join('＋')}忌）：得到和牵挂撞在同一处，好事里掺着功课，拿好处时多留一眼代价。` });
-    else if(uniq(lu).length >= 2) msgs.push({ w: 2, t: `<b>${esc(pl)}双禄临门</b>（${uniq(lu).map(esc).join('＋')}）：这段时间${esc(pl)}方面的顺风比较多，适合把重要的事往前排。` });
-    else if(uniq(lu).some(l => l !== '本命') && (natal['忌']||[]).some(e => e.palace === pl)) msgs.push({ w: 3, t: `<b>化禄解化忌</b>：运年化禄飞到本命化忌所在的${esc(pl)}，难处里有转机，凶中见吉。` });
-    else if(uniq(lu).length + uniq(ji).length >= 3) msgs.push({ w: 4, t: `<b>${esc(pl)}是这段时间的焦点</b>：多层四化落在这里，事情会比较多，值得多分一点注意力。` });
+  const lines=[];
+  Object.keys(agg).forEach(pal=>{
+    const entries=Object.entries(agg[pal]).filter(([,names])=>new Set(names).size>1);
+    if(entries.length)lines.push('<b>'+esc(pal)+'</b>：'+entries.map(([hua,names])=>'化'+hua+'在'+[...new Set(names)].map(esc).join('与')+'层均指向此宫').join('；')+'（位置重合）。');
+    else{
+      const across=Object.values(agg[pal]).flat();
+      if(new Set(across).size>1&&Object.keys(agg[pal]).length>1)lines.push('<b>'+esc(pal)+'</b>：不同层的四化标记落在同一宫位（'+Object.keys(agg[pal]).map(x=>'化'+x).join('、')+'），仅表示位置汇聚。');
+    }
   });
-  msgs.sort((a,b) => a.w - b.w);
-  if(msgs.length) box.innerHTML += `<div class="overlay-bar">${msgs.slice(0,3).map(m => `<div>${m.t}</div>`).join('')}</div>`;
+  if(lines.length)box.innerHTML+='<div class="overlay-bar">'+lines.slice(0,3).join('<br>')+'<p class="hint" style="margin:8px 0 0">此处仅比较本命、大限与流年的四化落点，不判断吉凶，也不据此建议推进、回避或改变现实计划。</p></div>';
 }
 
 function renderChart(){
@@ -664,7 +647,9 @@ function renderChart(){
 }
 /* ---------- 过往流年回溯卡：用已发生的年份锚定信任 ---------- */
 function retroYears(chart){
-  const nowY = new Date().getFullYear();
+  const context = currentLunarContext(chart);
+  if(!context.valid) return [];
+  const nowY = context.year;
   const birthY = chart.birthInfo.year;
   const natal = natalSihuaMap(chart);
   const natalJiStar = ((natal['忌'] || [])[0] || {}).star;
@@ -678,11 +663,11 @@ function retroYears(chart){
     let score = 0; const reasons = [];
     const jiPal = ySh.ji ? sihuaStarPalace(chart, ySh.ji) : '';
     if(jiPal && KEY.includes(jiPal)){ score += 3; reasons.push(`流年${ySh.ji}化忌落进你的【${jiPal}】`); }
-    if(ySh.ji && natalJiStar && ySh.ji === natalJiStar){ score += 3; reasons.push(`流年化忌与你的本命化忌同为${ySh.ji}，双忌同星、引动更明显`); }
+    if(ySh.ji && natalJiStar && ySh.ji === natalJiStar){ score += 3; reasons.push(`流年化忌与本命化忌同星，按该流派可作为重复关注主题`); }
     if(liuP){
       const ln = disp(liuP.name);
-      if(ln === '命宫'){ score += 2; reasons.push('流年命宫回到你的本命命宫，是重新洗牌、变动多的一年'); }
-      else if(KEY.includes(ln)){ score += 2; reasons.push(`流年命宫踩进你的【${ln}】，全年重心压在这里`); }
+      if(ln === '命宫'){ score += 2; reasons.push('流年命宫回到本命命宫，是传统上关注自我定位的一个线索'); }
+      else if(KEY.includes(ln)){ score += 2; reasons.push(`流年命宫落入本命【${ln}】，可作为该主题的年度观察入口`); }
     }
     if(score >= 3 && reasons.length) out.push({ y, score, text: reasons.slice(0, 2).join('；') });
   }
@@ -692,23 +677,25 @@ function retroYears(chart){
 function renderRetroCard(){
   const rec = cur(); const box = $('#retro-card');
   if(!rec){ box.hidden = true; return; }
+  if(!currentLunarContext(rec.chart).valid){box.hidden=false;box.innerHTML='<p class="hint">当前日期的农历换算暂不可用，过往流年回看已暂停。</p>';return;}
   const years = retroYears(rec.chart);
   if(!years.length){ box.hidden = true; return; }
   const done = store.get('gxg_retro_' + rec.id, '');
   box.hidden = false;
-  box.innerHTML = `<div class="card-kicker">先验准不准 · 过往应期回溯</div>
-    <p style="margin:0 0 8px">不用先信。回想一下这两年——按你的盘，这两年流年四化引动了关键宫位，大概率不太平静：</p>
+  box.innerHTML = `<div class="card-kicker">过往流年 · 象意回看</div>
+    <p style="margin:0 0 8px">下面年份由传统流年命宫与四化规则筛出，只是盘面触发线索，不表示当年一定有大事，也不能用来证明出生时辰准确。请只对照你愿意分享的真实经历：</p>
     ${years.map(it => `<p style="margin:0 0 6px"><b>${it.y} 年</b>：${esc(it.text)}。</p>`).join('')}
-    ${done === 'hit' ? '<p class="hint" style="margin:8px 0 0">✓ 你标记过「对上了」。今年的流年叠盘在命盘上方「流年」页签里，13 维解读也有逐年拆解。</p>'
-      : done === 'miss' ? '<p class="hint" style="margin:8px 0 0">你标记过「不太准」。如果大事年份确实对不上，多半是出生时辰卡在了交界——可以去定盘辅助核对一下。</p>'
+    ${done === 'hit' ? '<p class="hint" style="margin:8px 0 0">✓ 已记录你的主观反馈。共鸣不等于算法验证；今年流年页签显示的是盘面规则线索，解读仍需对照现实信息。</p>'
+      : done === 'miss' ? '<p class="hint" style="margin:8px 0 0">你标记过「不太吻合」。这并不能推出出生时辰有误。若需核对，请先查原始出生记录、时区、出生地、真太阳时开关、晚子时换日与闰月口径；不要用事件是否“对上”反向修改出生资料。</p>'
       : `<div style="display:flex;gap:10px;margin-top:10px">
-           <button class="btn-primary" id="btn-retro-hit" style="flex:1">🎯 对上了，看今年</button>
-           <button class="btn-ghost" id="btn-retro-miss" style="flex:1;margin-top:0">🤔 不太准，去校准</button>
+           <button class="btn-primary" id="btn-retro-hit" style="flex:1">这些主题与经历有共鸣</button>
+           <button class="btn-ghost" id="btn-retro-miss" style="flex:1;margin-top:0">不吻合？核对出生口径</button>
          </div>`}`;
   const hit = $('#btn-retro-hit'), miss = $('#btn-retro-miss');
   if(hit) hit.addEventListener('click', () => {
+    const context=currentLunarContext(rec.chart); if(!context.valid) return;
     store.set('gxg_retro_' + rec.id, 'hit');
-    luckMode = 'liunian'; luckParam = new Date().getFullYear();
+    luckMode = 'liunian'; luckParam = context.year;
     renderChart();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
@@ -733,7 +720,9 @@ function renderLuckPicker(){
     box.appendChild(sel);
   } else if(luckMode === 'liunian'){
     const sel = document.createElement('select');
-    const thisY = new Date().getFullYear();
+    const context = currentLunarContext(chart);
+    if(!context.valid){ box.innerHTML='<p class="hint">当前日期的农历换算暂不可用，流年选择器已暂停，避免显示错误年份。请稍后重试。</p>'; return; }
+    const thisY = context.year;
     const bi = chart.birthInfo || {};
     const yMin = Math.min(thisY - 60, bi.year || thisY);
     const yMax = Math.max(thisY + 30, (bi.year || thisY) + 121);
@@ -789,6 +778,7 @@ function renderChartBody(){
   const rec = cur(); if(!rec) return;
   const chart = rec.chart;
   const ov = luckOverlay(chart);
+  const ovValid = validOverlayBranch(ov);
   $('#sihua-strip').innerHTML = (ov.label ? `<div class="hint" style="margin-bottom:6px">${esc(ov.label)}</div>` : '') + sihuaStripHtml(ov.sihua);
   renderOverlayStrip(chart, ov);
   // 三方四正提示条
@@ -815,11 +805,11 @@ function renderChartBody(){
     const tags = [];
     if(p.isMingGong) tags.push('<span class="tag">命</span>');
     if(p.isShenGong) tags.push('<span class="tag">身</span>');
-    const hl = ov.hlBranch === b ? ' hl' : '';
+    const hl = ovValid && ov.hlBranch === b ? ' hl' : '';
     const sf = (sfSet && sfSet.has(b)) ? ' sf' : '';
     const selected = sanfangBranch === b ? ' selected' : '';
     const pressed = sanfangBranch === b ? 'true' : 'false';
-    const ovNameG = ov.hlBranch != null ? overlayPalaceAt(ov.hlBranch, b) : '';
+    const ovNameG = ovValid ? overlayPalaceAt(ov.hlBranch, b) : '';
     const ovTagG = ovNameG && ['命宫','官禄宫','财帛宫','夫妻宫'].includes(ovNameG)
       ? `<span class="ov-tag">${LUCK_PREFIX[luckMode] || '流'}${ovNameG.replace('宫','')}</span>` : '';
     h += `<div class="cell${hl}${sf}${selected}" data-branch="${b}" role="button" tabindex="0" aria-pressed="${pressed}" aria-label="选择${disp(p.name)}">${tags.join('')}${ovTagG}
@@ -841,11 +831,11 @@ function renderChartBody(){
   const list = $('#chart-list');
   list.innerHTML = PALACE_ORDER.map(name => {
     const p = palaceByName(chart, name);
-    const hl = ov.hlBranch === p.branch ? ' style="border:2px solid var(--primary)"' : '';
+    const hl = ovValid && ov.hlBranch === p.branch ? ' style="border:2px solid var(--primary)"' : '';
     const sfAttr = (sfSet && sfSet.has(p.branch)) ? ' data-sf="1"' : '';
     const tags = (p.isMingGong?'命':'') + (p.isShenGong?'身':'');
     const majors0 = p.stars.filter(s => s.type === 'major').map(s => s.name).join('、') || '空宫';
-    const ovNameL = ov.hlBranch != null ? overlayPalaceAt(ov.hlBranch, p.branch) : '';
+    const ovNameL = ovValid ? overlayPalaceAt(ov.hlBranch, p.branch) : '';
     const ovTagL = ovNameL && ['命宫','官禄宫','财帛宫','夫妻宫'].includes(ovNameL)
       ? ` <span class="star-chip">${LUCK_PREFIX[luckMode] || '流'}${ovNameL.replace('宫','')}</span>` : '';
     return `<div class="palace-row"${hl}${sfAttr} data-branch="${p.branch}">
@@ -863,23 +853,11 @@ function renderChartBody(){
   try{ pats = E.detectPatterns(chart); }catch(e){}
   window.GXG_PATTERNS = {};
   pats.forEach(pt => { if(pt.description) window.GXG_PATTERNS[pt.name] = pt.description; });
-  const V2 = window.GXG_PATTERNS_V2 || {};
-  // 破格成色：命宫三方四正的煞星数，吉格的光芒要打折扣看
-  const mingP0 = chart.palaces.find(p => p.isMingGong);
-  let shaCount = 0;
-  if(mingP0) sanfangBranches(mingP0.branch).forEach(b => {
-    palaceByBranch(chart, b).stars.forEach(s => { if(s.type === 'sha') shaCount++; });
-  });
-  const chengse = shaCount >= 4 ? '命宫三方煞星比较集中，吉格的光芒要打些折扣看，课题也会更明显。'
-    : shaCount >= 2 ? '命宫三方有煞星同行，吉格的发挥会打些折扣。' : '';
-  $('#pattern-list').innerHTML =
-    (chengse ? `<p class="hint" style="margin:0 0 8px">破格检查：${esc(chengse)}</p>` : '') +
-    (pats.length ? pats.map(pt => {
-      const v2 = V2[pt.name];
-      const txt = v2 ? v2.text : (D.patterns[pt.name] || pt.description || D.patternDefault);
-      const src = v2 && v2.source ? `<div class="hint">出处：${esc(v2.source)}</div>` : '';
-      return `<div class="pat" data-pattern="${esc(pt.name)}"><h5>${esc(pt.name)}<span class="lvl ${pt.level}">${{excellent:'上佳',good:'吉利',neutral:'中性',caution:'留意'}[pt.level]||''}</span></h5><p>${esc(txt)}</p>${src}</div>`;
-    }).join('') : '<div class="empty">这张盘没有触发常见格局——无格局也是一种格局，日子照样过。');
+  $('#pattern-list').innerHTML = pats.length ? pats.map(pt => {
+      const v2=window.GXG_PATTERNS_V2&&window.GXG_PATTERNS_V2[pt.name];
+      const condition=v2&&v2.condition?'识别条件：'+v2.condition+'。':'识别条件见本站当前规则定义。';
+      return `<div class="pat" data-pattern="${esc(pt.name)}"><h5>${esc(pt.name)}<span class="lvl">组合标签</span></h5><p>${esc(condition)}命中标签只表示满足一组传统组合条件，不代表命格等级、个人能力或现实成败；请结合盘面事实和现实经历阅读。</p></div>`;
+    }).join('') : '<div class="empty">当前规则下未识别到已收录的组合标签；这不代表命盘缺少特点。</div>';
   // 当前解读上下文
   window.GXG_CTX = { chart, rec };
   renderShengongCard(chart);
@@ -968,24 +946,26 @@ function taisuiOf(year){
   const yb = ((year - 4) % 12 + 12) % 12;
   const zodiac = b => E.ZODIAC_CN ? E.ZODIAC_CN[b] : '鼠牛虎兔龙蛇马羊猴鸡狗猪'[b];
   const out = { year, ygz: ST[((year - 4) % 10 + 10) % 10] + BR[yb], items: [] };
-  out.items.push({ k:'值太岁', branches:[yb], say:'本命年，民俗里宜拜太岁、穿红、多行善事——当作"这一年多留一分心"的自我提醒就好' });
-  out.items.push({ k:'冲太岁', branches:[(yb + 6) % 12], say:'与太岁相冲，民俗认为变动较多：搬迁、换工作这类大事，多备一手方案' });
+  out.items.push({ k:'值太岁', branches:[yb], say:'本命年是民俗分类之一；是否参与相关仪式由个人选择，不代表现实风险增加' });
+  out.items.push({ k:'冲太岁', branches:[(yb + 6) % 12], say:'民俗将其称为“冲太岁”，属于传统文化说法；不表示当年必有变动' });
   const xg = XING_GROUPS.find(g => g.includes(yb));
   const xb = xg ? xg.filter(x => x !== yb) : (ZIXING.includes(yb) ? [yb] : []);
-  if(xb.length) out.items.push({ k:'刑太岁', branches:xb, say:'民俗称"刑"为磨合与纠缠：人际关系里少较劲，法务合约类多看两遍' });
+  if(xb.length) out.items.push({ k:'刑太岁', branches:xb, say:'“刑太岁”是民俗标签，不构成冲突预告；合同和人际问题一贯应按事实与条款处理' });
   const hai = (HAI_PAIRS.find(p => p.includes(yb)) || []).filter(x => x !== yb);
-  if(hai.length) out.items.push({ k:'害太岁', branches:hai, say:'民俗称"害"为暗损：少掺和是非，健康上别拖小病' });
+  if(hai.length) out.items.push({ k:'害太岁', branches:hai, say:'“害太岁”是民俗标签，不预示暗损或疾病；健康问题请依据医疗建议处理' });
   return out;
 }
 function renderTaisuiCard(){
   const card = $('#taisui-card'), body = $('#taisui-body');
   if(!card) return;
-  const year = new Date().getFullYear();
+  const current=currentLunarContext(cur()&&cur().chart);
+  if(!current.valid){card.hidden=false;body.innerHTML='<p class="hint">当前日期的农历换算暂不可用，太岁年份暂不显示。</p>';return;}
+  const year = current.year;
   const ts = taisuiOf(year);
   const rec = cur();
   let mine = '';
   if(rec){
-    const myB = ((rec.chart.birthInfo.year - 4) % 12 + 12) % 12;
+    const myB = (rec.chart.lunarInfo&&Number.isInteger(rec.chart.lunarInfo.yearBranch))?rec.chart.lunarInfo.yearBranch:((rec.chart.birthInfo.year-4)%12+12)%12;
     const hits = [];
     ts.items.forEach(it => { if(it.branches.includes(myB)) hits.push(it.k); });
     if(hits.length) mine = `<p style="margin:8px 0 0"><b style="color:var(--gold)">你属${'鼠牛虎兔龙蛇马羊猴鸡狗猪'[myB]}，今年${hits.join('＋')}</b>——民俗做法参考即可，心态上当作"今年谨慎些、好事多做些"。</p>`;
@@ -1018,92 +998,24 @@ function shiShen(dayStem, t){
 }
 function gz60(stem, branch){ for(let k = 0; k < 60; k++){ if(k % 10 === stem && k % 12 === branch) return k; } return 0; }
 /* 八字人话字典：日主 + 十神 + 五行强弱（粗断，克制表述） */
-const RI_ZHU_SAY = {
-  '甲':'参天大树——正直有担当，吃软不吃硬，认准的路不轻易回头',
-  '乙':'藤蔓花草——柔韧务实，借力生长，适应力是最好的武器',
-  '丙':'太阳之火——光明外放，热情坦荡，存在感藏不住',
-  '丁':'灯烛之火——细腻专注，静水深流，暗处也能发光',
-  '戊':'高山城墙——厚重可靠，说到做到，是朋友的定心丸',
-  '己':'田园湿土——包容务实，擅长默默积累，慢就是你的快',
-  '庚':'刀剑顽金——讲义气、行动快，磨过之后才见锋芒',
-  '辛':'珠玉之金——精致敏锐，自尊心强，细节里见真章',
-  '壬':'江河之水——聪明善变通，格局大，闲不住',
-  '癸':'雨露之水——心思细腻，共情力强，润物无声',
-};
 const SHI_SHEN_GROUP = { '比肩':'比劫','劫财':'比劫','食神':'食伤','伤官':'食伤','偏财':'财星','正财':'财星','七杀':'官杀','正官':'官杀','偏印':'印星','正印':'印星' };
-const SHI_SHEN_SAY = {
-  '比劫':'自我与同伴的能量旺——主意自己拿，但也容易倔；合作时分清账',
-  '食伤':'表达与创造的能量旺——点子多、才华藏不住，适合靠专业吃饭',
-  '财星':'与钱打交道的能量旺——对数字和机会敏感，实务型选手',
-  '官杀':'规则与责任的能量旺——自我要求高，适合有章法的环境',
-  '印星':'学习与庇护的能量旺——爱读书、有贵人缘，想得多是天赋也是功课',
-};
-const WX_FAVOR_SAY = {
-  '金':'金','木':'木','水':'水','火':'火','土':'土',
-};
-/* 宫位三档评级：palaceStrength 归一化（结构提示，非吉凶分数） */
-function palaceVerdicts(chart){
-  const list = PALACE_ORDER.map(n => ({ n, raw: palaceStrength(chart, palaceByName(chart, n)) }));
-  const vals = list.map(x => x.raw), lo = Math.min(...vals), hi = Math.max(...vals);
-  list.forEach(x => { x.score = Math.round(18 + (x.raw - lo) / Math.max(0.01, hi - lo) * 78); });
-  return list;
-}
-function verdictBadge(score){
-  const lv = score >= 70 ? { t: '有底气', c: 'pd-hi' } : score >= 40 ? { t: '有底色', c: 'pd-mid' } : { t: '是功课', c: 'pd-lo' };
-  return `<span class="pal-badge ${lv.c}" title="按主星庙旺＋四化＋辅煞三方合参的结构强弱，相对本盘而言">${lv.t}</span>`;
-}
+/* 旧版性格与评级断语已移除；页面仅保留可核对的四柱、十神和五行计数。 */
 function renderBaziCard(chart){
-  const card = $('#bazi-card'), body = $('#bazi-body');
-  const fp = chart.lunarInfo && chart.lunarInfo.fourPillars;
-  if(!fp || fp.length !== 4){ card.hidden = true; return; }
-  const cols = fp.map(gz => ST.indexOf(gz[0]) !== -1 ? { s: ST.indexOf(gz[0]), b: BR.indexOf(gz[1]) } : null);
-  if(cols.some(c => c == null || c.s < 0 || c.b < 0)){ card.hidden = true; return; }
-  const dayS = cols[2].s;
-  const pillarNames = ['年柱','月柱','日柱','时柱'];
-  let h = '<table class="bazi-table"><tr><th></th>' + pillarNames.map(n => `<th>${n}</th>`).join('') + '</tr>';
-  h += '<tr><td class="lab">天干</td>' + cols.map((c, i) =>
-    `<td><b class="gz-b">${fp[i][0]}</b><span class="ss">${i === 2 ? '日主' : shiShen(dayS, c.s)}</span></td>`).join('') + '</tr>';
-  h += '<tr><td class="lab">地支</td>' + cols.map((c, i) =>
-    `<td><b class="gz-b">${fp[i][1]}</b><span class="ss">${shiShen(dayS, HIDDEN_MAIN[c.b])}</span></td>`).join('') + '</tr>';
-  h += '<tr class="hidden-stem-row"><td class="lab">藏干</td>' + cols.map(c =>
-    `<td><div class="hidden-stems">${HIDDEN_STEMS[c.b].map(s => `<span><b>${ST[s]}</b><i>${shiShen(dayS, s)}</i></span>`).join('')}</div></td>`).join('') + '</tr>';
-  h += '<tr><td class="lab">纳音</td>' + cols.map((c, i) =>
-    `<td><span class="ny">${NA_YIN[Math.floor(gz60(c.s, c.b) / 2)]}</span></td>`).join('') + '</tr></table>';
-  // 五行分布：四柱八字（干 + 支本气）
-  const wx = {金:0, 木:0, 水:0, 火:0, 土:0};
-  cols.forEach(c => { wx[WX_OF_STEM[c.s]]++; wx[WX_OF_STEM[HIDDEN_MAIN[c.b]]]++; });
-  const total = 8, WXC = {金:'#8C6D3F', 木:'#75855F', 水:'#5F6E7A', 火:'#B0523A', 土:'#8B8477'};
-  h += `<div class="wx-bars">` + Object.keys(wx).map(k =>
-    `<div class="wx-row"><span class="wx-name">${k}</span><div class="wx-track"><div class="wx-fill" style="width:${wx[k] / total * 100}%;background:${WXC[k]}"></div></div><span class="wx-n">${wx[k]}</span></div>`).join('') + '</div>';
-  // 日主人话
-  const dzName = fp[2][0];
-  h += `<div class="bz-sec">日主 · 你是什么底色</div>`;
-  h += `<p class="p-say" style="margin:4px 0"><b>${dzName}（${WX_OF_STEM[dayS]}）</b>：${RI_ZHU_SAY[dzName] || ''}。</p>`;
-  // 十神分布（8 字各字相对日主）
-  const sgCount = {};
-  cols.forEach((c, i) => {
-    const t = i === 2 ? '日主' : shiShen(dayS, c.s);
-    if(t !== '日主') sgCount[SHI_SHEN_GROUP[t]] = (sgCount[SHI_SHEN_GROUP[t]] || 0) + 1;
-  });
-  const sgKeys = ['比劫','食伤','财星','官杀','印星'];
-  const topG = sgKeys.slice().sort((a, b) => (sgCount[b] || 0) - (sgCount[a] || 0))[0];
-  h += `<div class="bz-sec">十神分布 · 能量都点在哪</div>`;
-  h += `<div class="wx-bars">` + sgKeys.map(k => {
-    const n = sgCount[k] || 0;
-    return `<div class="wx-row"><span class="wx-name" style="width:32px">${k}</span><div class="wx-track"><div class="wx-fill" style="width:${n / 7 * 100}%;background:#5F74C4"></div></div><span class="wx-n">${n}</span></div>`;
-  }).join('') + '</div>';
-  h += `<p class="p-say" style="margin:4px 0">${topG && sgCount[topG] ? `最旺的是<b>${topG}</b>：${SHI_SHEN_SAY[topG]}` : '十神分布均匀——能量不偏科，路子宽'}</p>`;
-  // 五行强弱 → 喜忌粗断（身强喜克泄耗，身弱喜生扶）
-  const dayW = WX_OF_STEM[dayS];
-  const SHENG = {木:'水',火:'木',土:'火',金:'土',水:'金'}, KE = {木:'土',土:'水',水:'火',火:'金',金:'木'}, KE_BY = {木:'金',金:'火',火:'水',水:'土',土:'木'};
-  const sameW = wx[dayW], oppW = (wx[KE_BY[dayW]] || 0) + (wx[SHENG[dayW]] || 0) + (wx[KE[dayW]] || 0);
-  const strong = sameW >= 4 && sameW > oppW;
-  const favor = strong ? [KE[dayW], KE_BY[dayW]] : [SHENG[dayW], dayW];
-  h += `<div class="bz-sec">五行喜忌 · 粗断参考</div>`;
-  h += `<p class="p-say" style="margin:4px 0">日主${dayW}得${sameW}字、异类${oppW}字——偏${strong ? '强' : '弱'}。粗断喜<b>${favor[0]}、${favor[1]}</b>${strong ? `（旺者宜${KE[dayW]}克、${KE_BY[dayW]}耗，收敛锋芒）` : `（弱者宜${SHENG[dayW]}生、同类帮扶，借势而上）`}。真正的用神要看月令与全局，此条只当方向感。</p>`;
-  h += `<p class="hint" style="margin:10px 0 0">紫微看宫位格局，八字看干支生克，两张盘互相印证着看。</p>`;
-  body.innerHTML = h;
-  card.hidden = false;
+  const card=$('#bazi-card'),body=$('#bazi-body'),fp=chart.lunarInfo&&chart.lunarInfo.fourPillars;
+  if(!fp||fp.length!==4){card.hidden=true;return;}
+  const cols=fp.map(gz=>ST.indexOf(gz[0])!==-1?{s:ST.indexOf(gz[0]),b:BR.indexOf(gz[1])}:null);
+  if(cols.some(c=>!c||c.s<0||c.b<0)){card.hidden=true;return;}
+  const dayS=cols[2].s,pillarNames=['年柱','月柱','日柱','时柱'];let h='<table class="bazi-table"><tr><th></th>'+pillarNames.map(n=>'<th>'+n+'</th>').join('')+'</tr>';
+  h+='<tr><td class="lab">天干</td>'+cols.map((c,i)=>'<td><b class="gz-b">'+fp[i][0]+'</b><span class="ss">'+(i===2?'日主':shiShen(dayS,c.s))+'</span></td>').join('')+'</tr>';
+  h+='<tr><td class="lab">地支</td>'+cols.map(c=>'<td><b class="gz-b">'+BR[c.b]+'</b><span class="ss">'+shiShen(dayS,HIDDEN_MAIN[c.b])+'</span></td>').join('')+'</tr>';
+  h+='<tr class="hidden-stem-row"><td class="lab">藏干</td>'+cols.map(c=>'<td><div class="hidden-stems">'+HIDDEN_STEMS[c.b].map(s=>'<span><b>'+ST[s]+'</b><i>'+shiShen(dayS,s)+'</i></span>').join('')+'</div></td>').join('')+'</tr>';
+  h+='<tr><td class="lab">纳音</td>'+cols.map(c=>'<td><span class="ny">'+NA_YIN[Math.floor(gz60(c.s,c.b)/2)]+'</span></td>').join('')+'</tr></table>';
+  const wx={金:0,木:0,水:0,火:0,土:0};cols.forEach(c=>{wx[WX_OF_STEM[c.s]]++;wx[WX_OF_STEM[HIDDEN_MAIN[c.b]]]++;});const WXC={金:'#8C6D3F',木:'#75855F',水:'#5F6E7A',火:'#B0523A',土:'#8B8477'};
+  h+='<div class="bz-sec">五行计数 · 干与支主气</div><div class="wx-bars">'+Object.keys(wx).map(k=>'<div class="wx-row"><span class="wx-name">'+k+'</span><div class="wx-track"><div class="wx-fill" style="width:'+wx[k]/8*100+'%;background:'+WXC[k]+'"></div></div><span class="wx-n">'+wx[k]+'</span></div>').join('')+'</div>';
+  const sgCount={'比劫':0,'食伤':0,'财星':0,'官杀':0,'印星':0};cols.forEach((c,i)=>{if(i!==2){const t=shiShen(dayS,c.s);sgCount[SHI_SHEN_GROUP[t]]++;}const bt=shiShen(dayS,HIDDEN_MAIN[c.b]);sgCount[SHI_SHEN_GROUP[bt]]++;});
+  h+='<div class="bz-sec">十神简化计数 · 可展开查看藏干</div><div class="wx-bars">'+Object.keys(sgCount).map(k=>'<div class="wx-row"><span class="wx-name" style="width:32px">'+k+'</span><div class="wx-track"><div class="wx-fill" style="width:'+sgCount[k]/7*100+'%;background:#5F74C4"></div></div><span class="wx-n">'+sgCount[k]+'</span></div>').join('')+'</div>';
+  h+='<p class="hint" style="margin:8px 0 0">五行计数只统计四个天干与四个地支的主气；十神计数统计非日主天干和各支主气，未按藏干权重、月令、节气深浅等规则加权。它们是可见信息摘要，不能据此判断日主强弱、喜用神、性格、职业或财富。若要做专业子平分析，需明确流派和完整旺衰取用规则。</p><p class="hint">四柱按节气口径计算；紫微斗数的农历年柱可能与四柱年柱不同，尤其在春节与立春前后。纳音和十神均按本站当前表格转换显示。</p>';
+  body.innerHTML=h;card.hidden=false;
 }
 /* ---------- 宫干飞星卡：十二宫天干各自飞出的禄/忌落在哪 ---------- */
 function renderFeixingCard(chart){
@@ -1124,7 +1036,7 @@ function renderFeixingCard(chart){
     }).join('');
     body.innerHTML =
       `<table class="fx-table"><tr><th>宫（干）</th><th>禄</th><th>权</th><th>科</th><th>忌</th></tr>${rows}</table>` +
-      `<p class="hint" style="margin:10px 0 0">看法：A 宫天干让某星化禄、该星落在 B 宫，就是「A 宫把禄送给 B 宫」——A 的人事给 B 那边送顺、送资源；忌是牵挂与较真的流向，权是掌控、科是名声。例：夫妻宫化忌飞入命宫，感情上的在意直接落在你身上。自化（宫干化在本宫）已在各宫标注。</p>`;
+      `<p class="hint" style="margin:10px 0 0">看法：本表列出各宫宫干按当前四化表所化出的星曜，以及该星在本命盘的位置。它是规则关系的可视化；“飞入”只表示星曜落点，不等于该宫主动给另一宫带来顺逆结果。不同飞星派别对自化、向心/离心和飞化链条有不同定义，本站不把它简化成因果断语。点选落点可回到盘面核对。</p>`;
     card.hidden = false;
   }catch(e){ card.hidden = true; }
 }
@@ -1136,7 +1048,7 @@ function renderChartSihua(chart){
   const yearGan = ST[yearStem];
   const born = E.getSiHuaByStem(yearStem) || {};
   const labels = ['禄','权','科','忌'];
-  const meanings = { '禄':'资源与机会', '权':'推动与掌控', '科':'名声与助力', '忌':'牵挂与课题' };
+  const meanings = { '禄':'资源／回应观察', '权':'推动／责任观察', '科':'表达／规范观察', '忌':'牵挂／反复观察' };
   const flows = labels.map(h => {
     const star = born[h] || '';
     const palace = sihuaStarPalace(chart, star);
@@ -1189,6 +1101,9 @@ function renderKoujingCard(rec){
   const chart = rec.chart, li = chart.lunarInfo || {};
   const inp = rec.input || {};
   const items = [];
+  const pillars=li.fourPillars||[];
+  items.push('本盘四柱（按节气口径）：'+(pillars.length?pillars.join(' · '):'当前引擎未返回四柱'));
+  if(li.yearStem!=null&&li.yearBranch!=null)items.push('紫微年干支（按农历年）：'+ST[li.yearStem]+BR[li.yearBranch]+'。接近春节或立春时，紫微农历年与四柱节气年柱可能不同；这是历法口径差异，不应只因两者不同就判为排盘错误。');
   if(rec.note && rec.note.length) items.push(rec.note.join('；'));
   items.push((inp.lateZiNextDay ? '晚子时按次日排盘（换日口径）' : '晚子时默认不换日')
     + (li.isLeapMonth ? '；闰月按十五分界（十五及以前归本月，之后归下月）' : ''));
@@ -1198,16 +1113,7 @@ function renderKoujingCard(rec){
   card.hidden = false;
 }
 /* 身宫卡 */
-function renderShengongCard(chart){
-  const card = $('#mingshen-card'), body = $('#shengong-body');
-  const G = window.GXG_SHENGONG;
-  const sp = chart.palaces.find(p => p.isShenGong);
-  if(!sp || !G){ if(body) body.innerHTML = ''; syncMingshenCard(); return; }
-  const name = disp(sp.name);
-  body.innerHTML = `<p class="bz-sec" style="margin-top:0">身宫 · 后半程的发力点</p><p style="margin:0 0 6px">${esc(G.intro || '')}</p>
-    <p style="margin:0"><b>你的身宫在${esc(name)}</b>：${esc((G.palaces || {})[name] || '')}</p>`;
-  syncMingshenCard();
-}
+function renderShengongCard(chart){const body=$('#shengong-body'),sp=chart.palaces.find(p=>p.isShenGong);if(!sp){if(body)body.innerHTML='';syncMingshenCard();return;}const name=disp(sp.name);body.innerHTML=`<p class="bz-sec" style="margin-top:0">身宫 · 行动落点</p><p style="margin:0 0 6px">身宫是紫微斗数中的盘面标记之一，常与命宫合看，用于讨论行动重心；不同流派解释有差异，不代表某个年龄后才开始改变。</p><p style="margin:0"><b>你的身宫在${esc(name)}</b>。可把该宫主题与现实中的持续投入、角色责任和选择相互核对。</p>`;syncMingshenCard();}
 function syncMingshenCard(){
   const card = $('#mingshen-card');
   if(!card) return;
@@ -1215,45 +1121,9 @@ function syncMingshenCard(){
   card.hidden = !(a || b);
 }
 /* 五行局卡 */
-function renderWuxingjuCard(chart){
-  const body = $('#wuxingju-body');
-  const G = window.GXG_WUXINGJU;
-  if(!G || !chart.wuxingJuName){ if(body) body.innerHTML = ''; syncMingshenCard(); return; }
-  body.innerHTML = `<p class="bz-sec" style="margin-top:10px">五行局 · 你的节奏单位</p><p style="margin:0 0 6px">${esc(G.intro || '')}</p>
-    <p style="margin:0"><b>你是${esc(chart.wuxingJuName)}</b>：${esc((G.jus || {})[chart.wuxingJuName] || '')}</p>`;
-  syncMingshenCard();
-}
+function renderWuxingjuCard(chart){const body=$('#wuxingju-body');if(!chart.wuxingJuName){if(body)body.innerHTML='';syncMingshenCard();return;}body.innerHTML=`<p class="bz-sec" style="margin-top:10px">五行局 · 排盘参数</p><p style="margin:0 0 6px">五行局是紫微斗数安星与大限起法所用的规则参数。它不是心理测量，也不能单独用于判断性格、运势或人生节奏。</p><p style="margin:0"><b>本盘五行局：${esc(chart.wuxingJuName)}</b>。若与其他排盘结果不同，请核对历法、时区、出生时辰与流派设置。</p>`;syncMingshenCard();}
 /* 化忌化解卡 */
-function renderHuajiCard(chart){
-  const card = $('#huaji-card'), body = $('#huaji-body');
-  const G = window.GXG_HUAJI;
-  const natal = natalSihuaMap(chart);
-  const jiList = natal['忌'] || [];
-  if(!G || !jiList.length){ card.hidden = true; return; }
-  const jiDesc = jiList.map(e => `${e.star}在${e.palace}`).join('、');
-  const starSays = {
-    '太阳':'容易对「付出没被看见」格外在意——把期待值调低半档，付出本身就有价值；与男性长辈、上级的磨合多让半步',
-    '太阴':'夜里容易想太多、和「钱与安全感」较劲——睡前不谈钱不做决定；安全感一半来自余额，一半来自规律作息',
-    '廉贞':'感情与规则容易撞车——桃花和是非都从「边界不清」来，把界限画清楚就化解了大半',
-    '巨门':'口舌是非是主战场——少接话茬、不传话，白纸黑字替代口头承诺',
-    '天机':'想太多、计划赶不上变化——把大计划拆成小步子，走一步验一步',
-    '文曲':'容易被「说错话、被误解」困扰——重要沟通落在文字里，情绪上头时不开口',
-    '天同':'舒服日子里有隐形焦虑——别用「再玩一天」拖延，把享受放在完成之后',
-    '文昌':'文书合同是雷区——签字前多读一遍，考试证件类提前核对',
-    '武曲':'与钱的拉扯最直接——现金流留出六个月缓冲，别碰杠杆',
-    '贪狼':'欲望多线作战容易全落空——一段时间只追一个目标，戒多策略戒上头',
-  };
-  const myJi = jiList[0] ? jiList[0].star : '';
-  const mySay = starSays[myJi];
-  body.innerHTML = `<p style="margin:0 0 8px">${esc(G.intro || '')}</p>
-    <p style="margin:0 0 8px">你的本命化忌：<b>${esc(jiDesc)}</b></p>
-    ${mySay ? `<p class="p-say" style="margin:0 0 8px"><b>针对你的解法</b>：${withTerms(mySay)}</p>` : ''}
-    <div class="hint" style="margin-bottom:6px">化解思路（不代表能"改命"，只是把功课做顺的姿势）：</div>
-    <ul style="margin:0;padding-left:20px;font-size:14px">${(G.resolves || []).map(r => `<li>${esc(r)}</li>`).join('')}</ul>
-    <div class="hint" style="margin:8px 0 4px">操作原则：</div>
-    <ul style="margin:0;padding-left:20px;font-size:14px">${(G.principles || []).map(r => `<li>${esc(r)}</li>`).join('')}</ul>`;
-  card.hidden = false;
-}
+function renderHuajiCard(chart){const card=$('#huaji-card'),body=$('#huaji-body'),natal=natalSihuaMap(chart),list=natal['忌']||[];if(!list.length){card.hidden=true;return;}const items=list.map(e=>`<li><b>${esc(e.star)}化忌落${esc(e.palace)}</b>：按本盘规则得到的传统对应。可记录你在该领域反复投入注意力的具体情境，再观察哪些环节能通过沟通、流程或资源安排改善。</li>`).join('');body.innerHTML='<p style="margin:0 0 8px">化忌是四化体系中的一种标记，不能简单等同于凶兆、疾病、破财或关系失败。下面只列盘面位置和适合自我核对的问题。</p><ul style="margin:0;padding-left:20px;font-size:14px">'+items+'</ul><p class="hint" style="margin:8px 0 0">处理建议应来自现实问题本身：先定义目标、收集事实、拆分可控步骤；医疗、财务、法律和关系重大决定请结合相应专业意见与当事人沟通。</p>';card.hidden=false;}
 // 点击星/格局/宫：解释弹窗
 $('#mobile-palace-picker').addEventListener('change', e => {
   const value = e.target.value;
@@ -1325,26 +1195,26 @@ let palaceDetailName = null;
 /* ---------- 十二宫卡片（结合命主命盘的专属展示） ---------- */
 /* 命宫专属：命主画像 —— 综合主星、四化、身宫、官禄，回答"我是谁/天赋/人生方向" */
 const STAR_GIFT = {
-  '紫微': ['天生的组织者和定盘的人，适合当主心骨', '往管理、平台、能说了算的位置走'],
-  '天机': ['脑子快、点子多，适合谋划和参谋', '往策划、咨询、技术型路线走'],
-  '太阳': ['发光体，适合需要露脸、带团队的事', '往外走、往高处走，名声就是资产'],
-  '武曲': ['执行力强，对钱和资源敏感', '往实业、金融、能直接看到结果的事走'],
-  '天同': ['亲和力强，适合让人舒服的事', '往与人打交道、偏安稳可持续的路线走'],
-  '廉贞': ['魅力与原则并存，适合需要个人风格的事', '往有发挥空间、能建立个人品牌的领域走'],
-  '天府': ['守成与整合的高手，适合管钱管事', '往稳定平台、资源整合型位置走'],
-  '太阴': ['细腻周到，适合幕后、财务、服务', '往需要耐心和审美的领域走，细水长流'],
-  '贪狼': ['欲望即动力，适合开拓、社交、跨界', '往人多的地方走，舞台越大越来劲'],
-  '巨门': ['嘴和脑子是武器，适合表达、研究、深挖', '往内容、表达、专业深耕的路线走'],
-  '天相': ['天生的协调者，适合当关键的二把手', '往平台型、服务型位置走，辅佐也能成事'],
-  '天梁': ['老成持重，适合需要经验和公信力的事', '往专业、公益、越老越吃香的路线走'],
-  '七杀': ['开路先锋，适合攻坚、开拓、从零到一', '往有挑战、能独立负责的领域走'],
-  '破军': ['破局者，适合变革、创新、不走寻常路', '往变化快、能折腾的领域走，安稳反而埋没你'],
+  '紫微':['统筹、承担与决策是传统取象的观察方向，需用实际经历验证','盘面不指定管理岗位；比较你在组织、专业和独立工作中的真实表现'],
+  '天机':['规划、学习与调整是传统取象的观察方向','先试一个小项目，记录拆解问题与持续交付的表现'],
+  '太阳':['外显表达、承担与服务是传统取象的观察方向','检查你是否喜欢公开表达，以及责任边界是否清楚'],
+  '武曲':['执行、资源管理与纪律是传统取象的观察方向','用结果记录检验效率、准确度和沟通协作'],
+  '天同':['协作、感受与生活品质是传统取象的观察方向','观察自己如何处理冲突和不确定性，不贴“怕吃苦”标签'],
+  '廉贞':['原则、边界和表达是传统取象的观察方向','用真实反馈审视规则意识与情绪沟通'],
+  '天府':['统筹、承接与资源保存是传统取象的观察方向','检验自己在稳定维护和尝试新机会之间的平衡'],
+  '太阴':['细致观察、积累和感受是传统取象的观察方向','用作品和数据验证细节能力，不把情绪状态定型'],
+  '贪狼':['兴趣、社交与拓展是传统取象的观察方向','记录注意力如何分配，再看哪些兴趣能转成持续能力'],
+  '巨门':['表达、辨析与追问是传统取象的观察方向','核对观点是否有证据，也练习倾听和表达边界'],
+  '天相':['协调、规范与支持是传统取象的观察方向','观察自己如何处理分工、公平和职责边界'],
+  '天梁':['经验、照料与原则是传统取象的观察方向','留意支持他人的同时是否也给自己留出边界'],
+  '七杀':['独立决断和压力下行动是传统取象的观察方向','做重大决定前评估信息、风险和协作支持'],
+  '破军':['拆解旧方案、试验和重组是传统取象的观察方向','用小范围试验测成本与收益，避免把变化当成宿命'],
 };
 const SIHUA_GIFT = {
-  '禄': '化禄在命宫：天生的福气，来财和机会相对顺，适合把"顺"变成积累',
-  '权': '化权在命宫：能扛事、说了算，一生多半有实权或主导权',
-  '科': '化科在命宫：名声和专业是你的护城河，适合把本事变成招牌',
-  '忌': '化忌在命宫：这辈子有个反复要做的功课，多半和"放不下"有关，看清它就过了一半',
+  '禄':'化禄落命宫：传统象义可联想到资源、兴趣或回应；它不保证财运或机会，宜观察资源如何获得与维护。',
+  '权':'化权落命宫：传统象义可联想到承担、推动和主导；不保证现实职位或权力。',
+  '科':'化科落命宫：传统象义可联想到学习、表达、规范与声誉经营；不保证考试或名声结果。',
+  '忌':'化忌落命宫：传统象义可联想到牵挂、反复关注或需要处理的议题；不是凶兆，也不是人生必须完成的功课。',
 };
 /* 外在人设（命宫/迁移宫主星）与内心世界（福德宫主星）的反差句库 */
 const STAR_OUTER = {
@@ -1381,56 +1251,20 @@ const JI_SOFTSPOT = {
   '父母宫': '和长辈、权威的关系是课题：既想被认可，又怕被束缚',
 };
 function mingPortraitHTML(chart){
-  const ming = chart.palaces.find(p => p.isMingGong);
-  const shen = chart.palaces.find(p => p.isShenGong);
-  const majors = ming.stars.filter(s => s.type === 'major');
-  const L = [];
-  // 一、外人眼里的你：命宫（人设）+ 迁移宫（在外表现）
-  let outer;
-  if(majors.length){
-    outer = `你的命宫是${majors.map(s => s.name).join('、')}——${STAR_OUTER[majors[0].name] || ''}`;
-    const traps = majors.filter(s => s.brightnessRaw === '陷');
-    if(traps.length) outer += `（${traps.map(s => s.name).join('、')}落陷，这份外相打了些折扣，没看上去那么稳）`;
-    else if(majors.every(s => s.brightnessRaw === '庙' || s.brightnessRaw === '旺')) outer += '，主星庙旺，这份气场是实打实的';
-  } else {
-    outer = `你的命宫无主星，没有固定的外在标签——什么环境就长成什么样，适应力就是你的人设`;
-  }
-  const qian = palaceByName(chart, '迁移宫');
-  const qm = qian ? qian.stars.filter(s => s.type === 'major') : [];
-  if(qm.length && STAR_OUTER[qm[0].name]) outer += `；走出去到【迁移宫】，${qm[0].name}让你${STAR_OUTER[qm[0].name]}`;
-  L.push(`<p class="p-say"><b>外人眼里的你：</b>${esc(outer)}。</p>`);
-  // 二、关起门来的你：福德宫（内心世界）
-  const fu = palaceByName(chart, '福德宫');
-  const fm = fu ? fu.stars.filter(s => s.type === 'major') : [];
-  let inner;
-  if(fm.length && STAR_INNER[fm[0].name]) inner = `你的【福德宫】是${fm.map(s => s.name).join('、')}——${STAR_INNER[fm[0].name]}`;
-  else inner = '你的【福德宫】无主星，内心世界随际遇走，年轻时起伏大些，年岁渐长反而越活越明白';
-  L.push(`<p class="p-say"><b>关起门来的你：</b>${esc(inner)}。</p>`);
-  // 三、最拧巴的软肋：生年化忌落宫
-  const natal = natalSihuaMap(chart);
-  const ji = (natal['忌'] || [])[0];
-  if(ji && JI_SOFTSPOT[ji.palace]) L.push(`<p class="p-say"><b>最拧巴的软肋：</b>生年${esc(ji.star)}化忌落在${esc(ji.palace)}——${esc(JI_SOFTSPOT[ji.palace])}。这不是缺陷，是你这辈子反复要修的一课。</p>`);
-  // 四、天赋与方向（原画像精华收束）
-  const gifts = [];
-  ming.stars.forEach(s => { if(s.siHua && SIHUA_GIFT[s.siHua]) gifts.push(SIHUA_GIFT[s.siHua].replace('在命宫', `（${s.name}化${s.siHua}）`)); });
-  let pats = []; try{ pats = E.detectPatterns(chart).slice(0, 2); }catch(e){}
-  if(pats.length){
-    const v2 = (window.GXG_PATTERNS_V2 || {})[pats[0].name] || patternFamilyText(pats[0].name);
-    const say = v2 ? v2.text.split('。')[0] : '';
-    gifts.push(`格局加持：${pats.map(p => p.name).join('、')}${say ? '——' + say : ''}`);
-  }
-  if(majors.length && STAR_GIFT[majors[0].name]) gifts.push(`方向感：事业上${STAR_GIFT[majors[0].name][1]}`);
-  if(shen){
-    const sg = (window.GXG_SHENGONG && window.GXG_SHENGONG.palaces && window.GXG_SHENGONG.palaces[disp(shen.name)]) || '';
-    if(sg) gifts.push(`身宫在${disp(shen.name)}：${sg}`);
-  }
-  if(gifts.length) L.push(`<p class="p-say"><b>天赋与方向：</b>${esc(gifts.map(g => g.replace(/。+$/, '')).join('；'))}。</p>`);
-  if(!L.length) return '';
-  return `<div class="portrait-card"><div class="p-sec">✦ 命主画像</div>${L.join('')}</div>`;
+  const ming=chart.palaces.find(p=>p.isMingGong),shen=chart.palaces.find(p=>p.isShenGong);
+  const majors=ming.stars.filter(s=>s.type==='major').map(s=>s.name),natal=natalSihuaMap(chart),items=[];
+  ['禄','权','科','忌'].forEach(h=>(natal[h]||[]).forEach(x=>items.push(`<li><b>生年化${h}</b>：${esc(x.star)}落${esc(x.palace)}。这是所选四化规则下的盘面位置，可结合该宫主题做事实核对；不作吉凶定论。</li>`)));
+  let pats=[];try{pats=E.detectPatterns(chart).slice(0,3).map(x=>x.name);}catch(e){}
+  return '<div class="portrait-card"><div class="p-sec">✦ 命盘摘要 · 可核对的结构</div>'+ 
+    '<p><b>命宫主星：</b>'+esc(majors.join('、')||'空宫（可合看对宫及三方四正）')+'。<b>身宫：</b>'+esc(shen?disp(shen.name):'未定位')+'。这些是盘面事实，不等同于人格测验或人生结论。</p>'+ 
+    '<p><b>怎么读：</b>查看星曜说明与亮度表，再结合命宫、迁移宫、福德宫及三方四正。若与自己的长期经历不符，先核对出生时间、时区和排盘设置，不要为了迎合描述而勉强解释。</p>'+ 
+    (items.length?'<p><b>生年四化位置：</b></p><ul>'+items.join('')+'</ul>':'<p><b>四化位置：</b>当前规则未返回可展示项目，请核对规则设置。</p>')+
+    '<p><b>传统组合标签：</b>'+esc(pats.join('、')||'当前规则未识别到已收录组合')+'。仅表示匹配本站条件，不是命格高低或成败判断。</p>'+ 
+    '<p><b>把读盘变成行动：</b>选一个你真正关心的议题，写下盘面线索、支持它的现实证据、相反证据和一个低成本验证行动；观察一段时间后再复盘。</p>'+ 
+    '<p class="hint">紫微斗数属于传统文化解释框架，不能验证具体事件、诊断健康问题或替代专业建议；资料不完整时结论应保留。</p></div>';
 }
 /* 十二宫阅读卡：单列排版，命盘页与十二宫页复用 */
 function palaceCardHTML(p, i, chart){
-  const SP = window.GXG_SIHUA_PALACE || {};
   if(!chart){
     return `<div class="palace-card" data-palace="${p.name}" style="--i:${i}">`
       + `<div class="p-top"><h4>${p.name}</h4></div>`
@@ -1441,8 +1275,7 @@ function palaceCardHTML(p, i, chart){
   const pl = palaceByName(chart, p.name);
   const tags = (pl.isMingGong ? '<span class="p-tag">命宫</span>' : '')
     + (pl.isShenGong ? '<span class="p-tag">身宫</span>' : '');
-  const vds = palaceVerdicts(chart).find(x => x.n === p.name);
-  const vBadge = vds ? verdictBadge(vds.score) : '';
+  const vBadge = '';
   const majors = pl.stars.filter(s => s.type === 'major');
   const minors = pl.stars.filter(s => s.type !== 'major');
   const dx = pl.daXianAge ? ` · 大限 ${pl.daXianAge[0]}–${pl.daXianAge[1]} 岁` : '';
@@ -1450,20 +1283,8 @@ function palaceCardHTML(p, i, chart){
     + `<div class="p-top"><h4>${p.name}</h4>${tags}${vBadge}<span class="p-gz">${ST[pl.stem]}${BR[pl.branch]}${dx}</span></div>`
     + (pl.isMingGong ? mingPortraitHTML(chart) : '')
     + `<div style="margin:2px 0 4px"><span class="modern">${p.modern}</span></div>`;
-  // 疾厄宫专属：体质一句话
-  if(p.name === '疾厄宫' && majors.length){
-    const JIE_SAY = {
-      '紫微':'体质底子不差，但容易「过劳而不自知」——别把身体当永动机','天机':'思虑型体质：脑子累比身体累更明显——睡眠是第一养生',
-      '太阳':'能量外放耗得快——眼睛与心血管要留意，晒太阳反而补你','武曲':'行动型体质：硬扛是习惯——呼吸道与筋骨劳损要早防',
-      '天同':'福气型体质底子好——怕的是太安逸，代谢类问题靠动起来','廉贞':'情绪直接影响身体——压力最先写在皮肤和睡眠上',
-      '天府':'底盘稳——但管住嘴比进补重要，脾胃是你的镜子','太阴':'阴柔体质：眼睛、情绪、内分泌是三关——夜熬不得',
-      '贪狼':'欲望型消耗——肝胆与作息是主战场，少酒少夜','巨门':'消化道是晴雨表——情绪化进食要留意，细嚼慢咽养你',
-      '天相':'自律型体质，整体平稳——保持规律就赢过大多数人','天梁':'底子厚实，恢复力强——小病别拖，老来更健旺',
-      '七杀':'冲劲型体质：外伤与炎症比慢性病更需要防','破军':'消耗型体质——透支后恢复慢，把休息排进日程表',
-    };
-    const say0 = JIE_SAY[majors[0].name];
-    if(say0) h += `<p class="p-say"><b>体质提示</b>：${esc(say0)}。</p>`;
-  }
+  // 疾厄宫不作疾病、器官或寿命推断。
+  if(p.name === '疾厄宫') h += '<p class="p-say"><b>阅读边界</b>：此宫属于传统身心主题分类，不能用于诊断疾病、判断器官风险或寿命。身体不适请咨询医疗专业人员。</p>';
   // 主星 + 白话
   if(majors.length){
     h += `<div class="p-sec">主星</div><div class="p-stars">${majors.map(s =>
@@ -1480,12 +1301,8 @@ function palaceCardHTML(p, i, chart){
   if(minors.length){
     h += `<p class="p-line">辅煞：${minors.map(s => esc(s.name) + (s.siHua ? shBadge(s.siHua) : '')).join('、')}</p>`;
   }
-  // 四化入宫断语（取前两条）
-  const says = pl.stars.filter(s => s.siHua).map(s => {
-    const say = (SP[s.siHua] || {})[p.name];
-    return say ? `<p class="p-say"><b>化${esc(s.siHua)}在${esc(p.name)}</b>：${esc(say)}</p>` : '';
-  }).filter(Boolean).slice(0, 2).join('');
-  h += says;
+  // 四化只说明所选规则下的盘面位置，配合复盘问题阅读。
+  h += pl.stars.filter(s=>s.siHua).slice(0,2).map(s=>'<p class="p-say"><b>化'+esc(s.siHua)+'在'+esc(p.name)+'</b>：'+esc(safeSihuaNote(s.name,s.siHua,p.name))+'</p>').join('');
   // 三方四正
   const sf = [pl.branch, (pl.branch + 6) % 12, (pl.branch + 4) % 12, (pl.branch + 8) % 12].map(b => {
     const q = palaceByBranch(chart, b);
@@ -1515,118 +1332,21 @@ document.addEventListener('click', e => {
   if(c && !e.target.closest('[data-star]')) glossary('palace', c.dataset.palace);
 });
 
-/* ---------- 13维解读（v4.0 数据集按需加载，走自建 CDN 月包，双镜像） ---------- */
-const DATA_MIRRORS = [
-  'https://cdn.jsdelivr.net/gh/zjeep-arch/ziwei-data@main/data',
-  'https://cdn.statically.io/gh/zjeep-arch/ziwei-data@main/data',
-];
-const ZSTD_MIRRORS = [
-  ['https://cdn.jsdelivr.net/npm/@bokuweb/zstd-wasm@0.0.27/dist/esm/index.web.js',
-   'https://cdn.jsdelivr.net/npm/@bokuweb/zstd-wasm@0.0.27/dist/esm/zstd.wasm'],
-  ['https://unpkg.com/@bokuweb/zstd-wasm@0.0.27/dist/esm/index.web.js',
-   'https://unpkg.com/@bokuweb/zstd-wasm@0.0.27/dist/esm/zstd.wasm'],
-];
-/* 解锁码：SALT|chartKey 的 SHA-256 取 8 位数字。SALT 公开在前端，仅防君子（0.9 元内容此强度足够）。 */
-const GXG_UNLOCK_SALT = 'ae8f94fe28773c4be2cf110caac7f535';
-const GXG_CONTACT = ''; // 站长微信（用户提供后填入，解锁弹窗第 2 步会显示）
-/* 公众号口令解锁：用户关注后回复「解锁」获取口令。只存 SHA-256 哈希比对，不落明文。 */
-const GXG_KOULING_HASH = '5d0f8482808c7fc8d94274191ca8356608ee4d88ba041fcf51d1c61ab9a60478';
-async function verifyKouling(code){
-  const norm = String(code).replace(/\s+/g,'');
-  if(!norm) return false;
-  try{ return (await sha256hex(norm)) === GXG_KOULING_HASH; }catch(e){ return false; }
+/* ---------- 13维解读：按当前命盘在本地生成 ---------- */
+function readingKeyOf(chart, input){
+  const bi=chart.birthInfo;
+  const settings = [
+    !!(input && input.trueSolar), !!(input && input.lateZiNextDay),
+    input && input.longitude != null ? input.longitude : null,
+    input && input.shichen != null ? input.shichen : null,
+    input && input.exHour != null ? input.exHour : null,
+    input && input.exMin != null ? input.exMin : null,
+    input && input.province || '',
+    chart.sihuaTable || (input && input.sihuaTable) || null
+  ];
+  return bi.year+'-'+pad2(bi.month)+'-'+pad2(bi.day)+'-'+bi.hour+'-'+bi.gender+'-'+encodeURIComponent(JSON.stringify(settings));
 }
-/* 卡密体系（发卡平台全自动）：WX- + 6位序列 + 2位校验，可离线验证，不依赖服务端 */
-const GXG_KAMI_URL = ''; // 发卡平台商品链接（用户提供后填入）
-const GXG_KAMI_SECRET = 'e957886927d41e3bd32c6531cb687e02';
-const GXG_KAMI_ABC = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789';
-async function verifyKami(code){
-  const m = /^WX-([A-Z2-9]{6})([A-Z2-9]{2})$/.exec(String(code).trim().toUpperCase());
-  if(!m) return false;
-  const h = await sha256hex(GXG_KAMI_SECRET + '|' + m[1]);
-  const b0 = parseInt(h.slice(0, 2), 16), b1 = parseInt(h.slice(2, 4), 16);
-  return GXG_KAMI_ABC[b0 % GXG_KAMI_ABC.length] + GXG_KAMI_ABC[b1 % GXG_KAMI_ABC.length] === m[2];
-}
-function readingKeyOf(chart){
-  const bi = chart.birthInfo;
-  return `${bi.year}-${pad2(bi.month)}-${pad2(bi.day)}-${bi.hour}-${bi.gender}`;
-}
-async function sha256hex(s){
-  const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s));
-  return [...new Uint8Array(b)].map(x => x.toString(16).padStart(2, '0')).join('');
-}
-async function makeUnlockCode(key){
-  const h = await sha256hex(GXG_UNLOCK_SALT + '|' + key);
-  return (h.replace(/\D/g, '') + '00000000').slice(0, 8);
-}
-async function verifyUnlockCode(key, code){
-  return (String(code).trim() === await makeUnlockCode(key));
-}
-function isUnlocked(key){ return !!store.get('gxg_unlock_' + key, false); }
-let zstdApi = null, readingCache = {}; // key -> {topic: text}
-async function getZstd(){
-  if(zstdApi) return zstdApi;
-  let last = null;
-  for(const [esmUrl, wasmUrl] of ZSTD_MIRRORS){
-    try{
-      const mod = await import(esmUrl);
-      await mod.init(wasmUrl);
-      zstdApi = mod; // { decompress }
-      return zstdApi;
-    }catch(e){ last = e; }
-  }
-  throw last || new Error('解压组件加载失败');
-}
-/* 在字节层面找 key，避免把 700MB+ 全转成 JS 字符串（省一半内存） */
-function findLineBytes(raw, needleBytes){
-  const n = raw.length, m = needleBytes.length;
-  outer: for(let i = 0; i <= n - m; i++){
-    if(raw[i] !== needleBytes[0]) continue;
-    for(let j = 1; j < m; j++){ if(raw[i+j] !== needleBytes[j]) continue outer; }
-    let s = i; while(s > 0 && raw[s-1] !== 10) s--;
-    let e = i + m; while(e < n && raw[e] !== 10) e++;
-    return raw.slice(s, e);
-  }
-  return null;
-}
-/* 多镜像轮询下载：一个 CDN 不通自动换下一个 */
-async function fetchFirst(urls, tries, onStep){
-  let last = null;
-  for(let u = 0; u < urls.length; u++){
-    for(let i = 0; i < tries; i++){
-      try{
-        if(onStep) onStep(`正在下载解读数据（约 2MB）${urls.length > 1 ? ' · 线路' + (u + 1) : ''}…`);
-        const ctl = new AbortController();
-        const timer = setTimeout(() => ctl.abort(), 20000);
-        const res = await fetch(urls[u], { signal: ctl.signal });
-        clearTimeout(timer);
-        if(!res.ok) throw new Error('数据文件加载失败（' + res.status + '）');
-        return res;
-      }catch(e){ last = e; await new Promise(r => setTimeout(r, 700)); }
-    }
-  }
-  throw last;
-}
-async function loadReading(chart, onStep){
-  const bi = chart.birthInfo;
-  const key = readingKeyOf(chart);
-  if(readingCache[key]) return { key, data: readingCache[key], local: false };
-  const cached = store.get('gxg_reading_' + key, null);
-  if(cached){ readingCache[key] = cached; return { key, data: cached, local: false }; }
-  const urls = DATA_MIRRORS.map(m => `${m}/${bi.year}/${pad2(bi.month)}.jsonl.zst`);
-  const res = await fetchFirst(urls, 2, onStep);
-  const buf = new Uint8Array(await res.arrayBuffer());
-  if(onStep) onStep('下载完成，正在解压并匹配你的命盘…');
-  const zstd = await getZstd();
-  const raw = zstd.decompress(buf);
-  const lineBytes = findLineBytes(raw, new TextEncoder().encode(`"k":"${key}"`));
-  if(!lineBytes) throw new Error('这张盘暂无深度解读数据');
-  const rec = JSON.parse(new TextDecoder().decode(lineBytes));
-  readingCache[key] = rec.c;
-  store.set('gxg_reading_' + key, rec.c);
-  return { key, data: rec.c, local: false };
-}
-/* 本地精编版：远程语料库加载失败时的兜底，按命主命盘实时生成 13 维解读 */
+/* 按当前命盘实时生成 13 个主题的本地解读 */
 const LOCAL_READING_PALACES = {
   overview: ['命宫'], personality: ['命宫'],
   love: ['夫妻宫', '命宫', '福德宫'], career: ['官禄宫', '命宫', '财帛宫'],
@@ -1636,57 +1356,48 @@ const LOCAL_READING_PALACES = {
   home: ['田宅宫', '命宫'], spirit: ['福德宫', '命宫'], parents: ['父母宫', '命宫'],
 };
 /* 双星同宫专属断语（合成化学反应），无专属词条返回空 */
-function dualStarText(p){
-  const majors = p.stars.filter(s => s.type === 'major');
-  if(majors.length !== 2) return '';
-  const T = window.GXG_DUAL_STAR || {};
-  return T[majors[0].name + majors[1].name] || T[majors[1].name + majors[0].name] || '';
-}
+function dualStarText(p){const majors=p.stars.filter(s=>s.type==='major');if(majors.length!==2)return '';return `本宫有${majors[0].name}、${majors[1].name}两颗主星。传统合参会结合两星各自象义、落宫和四化；此处先列盘面组合，不把组合直接翻译成固定性格或人生结果。`;}
 /* 辅煞落关键宫的场景化短句：让煞星吉星进断语正文，而不是只罗列名字 */
 const SHA_SCENE = {
   '财帛宫': {
-    '地空': '财帛宫见地空：账面来钱不慢，但存钱罐容易漏，突发人情和冲动消费是常见漏口，适合钱一到账就转定期或换成实物资产。',
-    '地劫': '财帛宫见地劫：最怕熟人画饼和一时上头的投入，大额支出先过夜再决定。',
-    '天马': '财帛宫见天马：钱要动起来才生钱，适合异地、线上、出差跑动型的收入。',
-    '禄存': '财帛宫见禄存：自带存钱罐，财上有托底，越稳越能滚大。',
+    '地空':'财帛宫见地空：传统上可讨论预期与实际资源之间的差距。可以核对现金流、合同和支出计划；不据此推断漏财或指定投资方式。',
+    '地劫':'财帛宫见地劫：可把它作为检查预算、应急储备和风险边界的提醒，不代表必然破财或遭遇欺骗。',
+    '天马':'财帛宫见天马：传统取象涉及流动、跨地域或多元资源；是否适合某种收入模式要看技能、成本、市场和实际记录。',
+    '禄存':'财帛宫见禄存：传统取象常谈资源保存与持续积累；不表示自带财库，仍需看收入、支出和资产负债。',
   },
   '命宫': {
-    '地空': '命宫见地空：想法不走寻常路，得失心放淡一点，反而走得更远。',
-    '地劫': '命宫见地劫：人生容易有"忽然清零重来"的段落，老本别全押在一处。',
-    '擎羊': '命宫见擎羊：自带锋芒、行动力强，是你的武器；硬碰硬之前先算代价。',
-    '红鸾': '命宫见红鸾：人缘与桃花都旺，第一印象天然加分。',
-    '天喜': '命宫见天喜：自带喜气，亲和力强，适合站在人前。',
+    '地空':'命宫见地空：可反思抽象思考、理想与落实之间的平衡；不代表人生会“清零重来”。',
+    '地劫':'命宫见地劫：传统上可讨论变化、资源分配和不确定性；结合真实经历检查风险管理，不作灾祸预言。',
+    '擎羊':'命宫见擎羊：可观察直接表达、决断和冲突处理；不是冲动或攻击性的诊断。',
+    '红鸾':'命宫见红鸾：传统上常与关系、社交或喜庆主题相连；不代表桃花必旺或某人就是正缘。',
+    '天喜':'命宫见天喜：传统上可关联愉悦、庆祝和关系互动；不保证好消息或特定喜事。',
   },
   '官禄宫': {
-    '天马': '官禄宫见天马：事业带奔波属性，动中求发展，坐办公室坐不住反而对。',
-    '擎羊': '官禄宫见擎羊：适合竞争激烈的赛道，拼劲就是你的入场券。',
-    '禄存': '官禄宫见禄存：事业上有稳定的资源托底，适合在体制或大平台里滚雪球。',
+    '天马':'官禄宫见天马：可讨论工作内容的流动性、变化和跨团队协作，不据此判断应否出差或换工作。',
+    '擎羊':'官禄宫见擎羊：可观察执行中的竞争、边界和决策成本；行业选择应依据能力与市场证据。',
+    '禄存':'官禄宫见禄存：可讨论组织资源与稳定性；不能据此断定体制内更适合或事业有托底。',
   },
   '夫妻宫': {
-    '擎羊': '夫妻宫见擎羊：感情里摩擦来得快，冷静期是刚需，别在气头上定去留。',
-    '陀罗': '夫妻宫见陀罗：感情容易拖和磨，问题别攒着，定期摊开说。',
-    '地空': '夫妻宫见地空：容易把对方理想化，落差大时先看事实、再下结论。',
-    '地劫': '夫妻宫见地劫：感情里防"忽然清零"式的冲动决定，分手/闪婚都先过夜。',
-    '红鸾': '夫妻宫见红鸾：正缘信号强，多从熟人圈和正式场合出现。',
-    '天喜': '夫妻宫见天喜：喜事临门的配置，相处里笑声多，矛盾也化得快。',
+    '擎羊':'夫妻宫见擎羊：可反思分歧出现时的表达方式与修复能力；不代表关系必有冲突。',
+    '陀罗':'夫妻宫见陀罗：可讨论犹豫、推进节奏和未说开的议题；不代表关系注定拖延。',
+    '地空':'夫妻宫见地空：可核对期待与对方真实表达之间的差异；不代表容易遇到虚假关系。',
+    '地劫':'夫妻宫见地劫：可提醒关系重大决定留出沟通与冷静时间；不预测分手、闪婚或损失。',
+    '红鸾':'夫妻宫见红鸾：传统关系象意之一；不能据此断“正缘”来源或相遇时间。',
+    '天喜':'夫妻宫见天喜：传统上关联愉悦、庆祝等关系主题，不代表婚喜必然发生。',
   },
   '福德宫': {
-    '地空': '福德宫见地空：精神世界丰富，也容易想太多，留一个能固定放空的爱好很有用。',
-    '地劫': '福德宫见地劫：心里容易忽然空一下，情绪低谷时别做重大决定。',
-    '天马': '福德宫见天马：闲不下来的命，旅行和移动本身就是你的充电方式。',
+    '地空':'福德宫见地空：可观察独处、想象与注意力之间的关系；若持续困扰生活，应寻求现实支持。',
+    '地劫':'福德宫见地劫：可作为检查压力来源、恢复方式和支持网络的提示，不用于心理诊断。',
+    '天马':'福德宫见天马：传统上可讨论兴趣、环境变化与休息方式；不代表只有旅行才能恢复。',
   },
 };
+
 function palaceTextBrief(chart, p, skipJi){
-  const SP = window.GXG_SIHUA_PALACE || {};
   const L = [];
   const head = `${disp(p.name)}（${ST[p.stem]}${BR[p.branch]}）`;
   const majors = p.stars.filter(s => s.type === 'major');
   /* 亮度定调：同一颗星，庙旺和落陷完全是两回事，不写就是"对不上"的主要来源 */
-  const brightSay = b => {
-    if(b === '庙' || b === '旺') return '这颗星在你盘里是庙旺状态，能量足，上面的特质会表现得更明显。';
-    if(b === '陷') return '这颗星在你盘里落陷，能量偏弱，上面的优点要打折看，短板那面更容易冒头——后天的选择比先天更重要。';
-    return '这颗星在你盘里能量中平，特质发挥得温和，关键看组合与后天。';
-  };
+  const brightSay = b => '当前亮度标记为'+(b||'未标注')+'，仅对应所选传统亮度表；各派表格可能不同，不代表客观能力或现实结果。';
   if(majors.length){
     L.push(head + '主星：' + majors.map(s => `${s.name}${s.siHua ? '化' + s.siHua : ''}`).join('、') + '。');
     const dual = dualStarText(p);
@@ -1695,15 +1406,12 @@ function palaceTextBrief(chart, p, skipJi){
   } else {
     const bstars = ((p.borrowedStars && p.borrowedStars.length) ? p.borrowedStars : []).filter(nm => (D.stars || {})[nm]);
     const bname = (p.borrowedStars && p.borrowedStars.length) ? p.borrowedStars.join('、') : '对宫';
-    L.push(`${head}无主星（空宫），借对宫（${bname}）来看，力量打些折扣。空宫的体感是：这一块没有出厂预设，容易被环境和身边人带着走，早年可能迷茫，但换个角度看，可塑性也是最强的——别人被星定死了，你还有得选。`);
+    L.push(`${head}无主星（空宫）。按常见读法可参考对宫（${bname}）及三方四正；不同流派对借星方法有差异。空宫不代表缺陷、少主见或人生空白。`);
     bstars.forEach(nm => L.push(`借来的${nm}：${D.stars[nm]}`));
   }
   p.stars.filter(s => s.siHua).forEach(s => {
-    const say = (SP[s.siHua] || {})[disp(p.name)];
-    if(say){
-      L.push(`${s.name}化${s.siHua}在${disp(p.name)}：${say}`);
-      if(skipJi) skipJi.add(s.name + '@' + disp(p.name));
-    }
+    L.push(`${s.name}化${s.siHua}在${disp(p.name)}：${safeSihuaNote(s.name,s.siHua,disp(p.name))}`);
+    if(skipJi) skipJi.add(s.name + '@' + disp(p.name));
   });
   // 辅煞场景句：关键宫 × 关键辅煞星
   const sceneMap = SHA_SCENE[disp(p.name)] || {};
@@ -1719,27 +1427,44 @@ function palaceTextBrief(chart, p, skipJi){
 }
 /* 13维本地精编版：每个维度的总述（一句话定调） */
 const LOCAL_READING_INTROS = {
-  personality: '性格看命宫：命宫是你的出厂设置，身宫是你后半程想成为的样子。两宫一起看，才是完整的你。',
-  love: '感情看夫妻宫，合看命宫（你的相处打法）和福德宫（你的精神底色）。',
-  career: '事业看官禄宫，合看命宫（你的打法）和财帛宫（回报）。',
-  wealth: '财运看财帛宫，合看命宫和福德宫：怎么赚钱、怎么花钱、存不存得住。',
-  health: '健康看疾厄宫，合看命宫（体质底子）和福德宫（压力与恢复节奏）。只提示倾向，不做医疗判断。',
-  family: '家庭看三宫：父母宫（原生关系）、田宅宫（安稳基地）、兄弟宫（同辈缘）。',
-  children: '子女宫看孩子，也看你的作品、表达与创造力投射。',
-  move: '迁移宫看你和外部世界的关系：异地、外出、发展环境。',
-  friends: '交友宫看你的社交圈：朋友、团队、人际资源。',
-  home: '田宅宫是你的安稳基地：家庭、房产、居住环境。',
-  spirit: '福德宫是精神宫：快乐来源、内在电量、兴趣所向。',
-  parents: '父母宫看你与长辈的关系：支持方式、期待与课题。',
+  personality: '性格专题：从命宫观察传统盘面如何描述表达、决策和适应方式；它不是心理测验，也不能替代你对自身经历的判断。',
+  love: '关系专题：夫妻宫是传统观察入口，合看命宫的互动方式与福德宫的情绪需求；不预测“正缘”、结婚或分手时间。',
+  career: '工作专题：官禄宫结合命宫、财帛宫看传统职业取象；结论不指定职业或跳槽时机，需与能力、兴趣和市场信息交叉验证。',
+  wealth: '财务专题：财帛宫合看命宫与福德宫，讨论资源、价值交换和管理习惯；不预测收入、投资结果或财务安全。',
+  health: '身心专题：疾厄宫等只用于传统文化观察，不判断体质、疾病、寿命或疗效。身体不适请咨询医疗专业人员。',
+  family: '家庭专题：父母、田宅、兄弟宫提供传统观察角度；现实关系需以当事人表达、边界和共同经历为准。',
+  children: '子女与创造专题：子女宫在传统体系中也会延伸到作品、项目和表达；不判断生育、子女健康或亲子结果。',
+  move: '迁移专题：观察外部环境、出行与适应方式的传统象意；不替代交通、签证、天气或安全信息。',
+  friends: '人际专题：交友宫是团队、朋友和合作网络的传统观察入口；不推断某个人是否可信，合作仍要核实权责与条款。',
+  home: '居住与资产专题：田宅宫传统上关联居所、家庭空间和资产议题；不预测房产价格、置业时机或资产回报。',
+  spirit: '情绪与休息专题：福德宫用于讨论兴趣、恢复方式和内在体验的传统取象；不是心理诊断或人格量表。',
+  parents: '长辈与支持专题：父母宫传统上观察长辈、师长和制度支持；不把盘面解释当作对家人的事实判断。',
+};
+const LOCAL_READING_GUIDANCE = {
+  overview: '使用建议：先核对出生日期、时辰和排盘口径，再看十二宫事实；把象意当成提出问题的方式，而非既定人生结论。若关键出生时间未知，先保留多个可能时辰。',
+  personality: '可以这样使用：挑出你认同与不认同的描述各一条，分别回想具体场景。描述不吻合时不必硬套，也不要把星曜标签当成性格诊断。',
+  love: '可以这样使用：把“我期待什么、我能提供什么、哪些边界不能退让”写清楚。讨论关系时优先看尊重、安全、沟通和持续行为；不根据命盘替他人定性。',
+  career: '可以这样使用：盘面只提供反思方向。列出你的技能证据、喜欢的工作内容、现金储备和岗位机会，再用访谈、作品或小项目验证职业选择。',
+  wealth: '可以这样使用：用真实账目核对收入来源、固定支出、负债与应急储备。任何投资、贷款或担保，都应看合同、风险和专业意见，不用星曜决定买卖。',
+  health: '可以这样使用：把睡眠、压力、运动等生活观察与专业检查分开记录。命盘不具有诊断能力；有症状或用药问题时，及时联系医生。',
+  family: '可以这样使用：把“盘面象意”与家人实际说过、做过的事分开。沟通可从具体需求、分工和边界开始，不让盘面替任何家庭成员下结论。',
+  children: '可以这样使用：育儿以孩子的真实需要和专业建议为准；若把这一宫用于作品或项目，可列出目标、受众、迭代反馈和资源约束。',
+  move: '可以这样使用：搬迁、旅行或求学应核对预算、合同、交通、签证、当地安全与支持网络。传统象意不能预测行程结果。',
+  friends: '可以这样使用：合作前明确目标、分工、权责、交付、数据边界与退出机制；不把“贵人/小人”标签套在真实的人身上。',
+  home: '可以这样使用：置业和租住重点核对产权、合同、预算、利率、维护成本和家庭需求；盘面不能提供房价或回报预测。',
+  spirit: '可以这样使用：记录哪些活动让你恢复、哪些情境持续消耗。若长期情绪困扰影响生活，请寻找可信赖的人或专业心理支持。',
+  parents: '可以这样使用：把期待说具体、把可提供的帮助说清楚。家人关系是双方长期互动形成的，盘面不能证明某位长辈的性格或行为。',
 };
 /* 每个维度的时间维度：当前大限 + 今年流年，大限若落在主题宫位上则点出来 */
 function topicTimeLine(chart, topicCn, palNames){
   const dx = chart.daXians[chart.currentDaXianIndex] || {};
   const dxName = disp(dx.palaceName || '');
-  const y = new Date().getFullYear();
+  const context = currentLunarContext(chart);
+  if(!context.valid) return '当前日期的农历换算暂不可用，暂不生成流年时间线；命盘本身仍可查看。';
+  const y = context.year;
   const lp = palaceByBranch(chart, ((y - 4) % 12 + 12) % 12);
   let s = `时间维度：当前大限 ${dx.startAge || '—'}–${dx.endAge || '—'} 岁在${dxName}；${y} 年流年命宫在${disp(lp.name)}。`;
-  if(palNames.includes(dxName)) s += `大限正好走在${topicCn}相关的宫位上，这十年这个主题的动静会比较大，大限的四化值得细看。`;
+  if(palNames.includes(dxName)) s += `当前大限宫位与${topicCn}专题的取用宫位重合，可把它作为这十年的观察线索之一；不代表该主题必然出现重大事件。`;
   return s;
 }
 /* 每个维度的化忌功课：主题宫位里有化忌就点出来；宫位详述里已讲过的不重复 */
@@ -1749,8 +1474,7 @@ function topicJiLine(chart, palNames, skip){
     if(st.siHua === '忌' && palNames.includes(disp(p.name)) && !(skip && skip.has(st.name + '@' + disp(p.name)))) hits.push(`${st.name}在${disp(p.name)}`);
   }));
   if(!hits.length) return '';
-  const intro = (window.GXG_HUAJI || {}).intro || '';
-  return `功课题：${hits.join('、')}化忌。${intro}`;
+  return `观察线索：${hits.join('、')}化忌。化忌是传统四化标记，可用于定位反复关注的主题；不代表凶兆或必然发生的损失。可记录对应领域的具体事实、投入和可调整环节。`;
 }
 function buildLocalReading(chart){
   const out = {};
@@ -1764,18 +1488,20 @@ function buildLocalReading(chart){
     const palNames = LOCAL_READING_PALACES[topic] || ['命宫'];
     const topicCn = D.datasetTopics[topic];
     if(topic === 'overview'){
-      parts.push(`你的命宫${mingSay}，${chart.wuxingJuName}。命宫定一生的底色，身宫（在${shen ? disp(shen.name) : '—'}）定中年后发力的方向。`);
+      parts.push(`盘面事实：命宫${mingSay}，五行局为${chart.wuxingJuName}；身宫在${shen ? disp(shen.name) : '—'}。传统解读会把命宫、身宫用于观察自我定位和行动落点，但不存在一个固定年龄后才“进入身宫”的统一规则。`);
       try{
         const dx = chart.daXians[chart.currentDaXianIndex] || {};
-        const y = new Date().getFullYear();
-        const lp = palaceByBranch(chart, ((y - 4) % 12 + 12) % 12);
-        parts.push(`时间上：当前大限 ${dx.startAge || '—'}–${dx.endAge || '—'} 岁（${disp(dx.palaceName || '')}）是这十年的大背景；${y} 年流年命宫在${disp(lp.name)}。大限定调子，流年看动静。`);
+        const context = currentLunarContext(chart);
+        if(context.valid){
+          const y = context.year, lp = palaceByBranch(chart, ((y - 4) % 12 + 12) % 12);
+          parts.push(`时间盘面：当前大限显示为${dx.startAge || '—'}–${dx.endAge || '—'}岁，落${disp(dx.palaceName || '')}；农历${y}年流年命宫落${disp(lp.name)}。这是按当前排盘规则得到的位置，不是事件预测。`);
+        }else parts.push('当前日期的农历换算暂不可用，暂不显示流年时间线；命盘本身仍可查看。');
       }catch(e){}
       let pats = [];
       try{ pats = E.detectPatterns(chart).slice(0, 3); }catch(e){}
       pats.forEach(pt => {
-        const v2 = (window.GXG_PATTERNS_V2 || {})[pt.name];
-        parts.push(`${pt.name}：${v2 ? v2.text : (pt.description || '')}`);
+        const v2=(window.GXG_PATTERNS_V2||{})[pt.name];
+        parts.push(`${pt.name}：检测到本站规则定义的传统组合标签（${v2&&v2.condition?v2.condition:'可在格局说明中查看识别条件'}）。该标签不表示人生等级或必然结果。`);
       });
     } else if(LOCAL_READING_INTROS[topic]){
       parts.push(LOCAL_READING_INTROS[topic]);
@@ -1789,26 +1515,12 @@ function buildLocalReading(chart){
       const ji = topicJiLine(chart, palNames, jiCovered);
       if(ji) parts.push(ji);
     } else {
-      parts.push('以上是本地精编版：根据你的命盘实时生成，离线可用。完整版（三万字语料库解读）在有网络时会自动加载。命理说的是概率性倾向，约六七成或然律，地图不是导航。');
+      parts.push(LOCAL_READING_GUIDANCE.overview);
     }
+    if(LOCAL_READING_GUIDANCE[topic]) parts.push(LOCAL_READING_GUIDANCE[topic]);
     out[topic] = parts.join('\n\n');
   });
   return out;
-}
-/* 上游语料去绝对化：人格类绝对断语是"一望即知真假"的高危区，转为外界视角+或然表述。
-   只作用于完整版（上游预生成语料），本地版文案已按此标准写。规则按用户反馈持续加。 */
-const GXG_SOFTEN = [
-  [/麻烦的是脾气硬、爱争，情绪起伏大/g, '要留意的是，在不熟的人眼里，你容易显得脾气硬、爱争，情绪起伏也不小'],
-  [/压力一来或者感情出事，反应容易走极端，不是爆发就是把自己整个关起来/g, '压力一大或感情出状况、情绪上头时，反应容易偏极端——要么爆发，要么把自己关起来'],
-  [/你脾气硬/g, '外人容易觉得你脾气硬'],
-  [/脾气臭/g, '外人容易觉得你脾气急'],
-  [/你就是个急脾气/g, '外人看你是个急脾气'],
-];
-function softenFullText(t){
-  if(!t) return t;
-  let s = t;
-  for(const [re, rep] of GXG_SOFTEN) s = s.replace(re, rep);
-  return s;
 }
 let readingTopic = 'overview';
 function renderReadingTabs(){
@@ -1836,7 +1548,7 @@ async function renderReading(){
   const rec = cur();
   if(!rec){ $('#reading-status').textContent = '先排一张盘，才能看深度解读。'; $('#reading-body').innerHTML = ''; return; }
   renderReadingTabs();
-  // 本地优先：先瞬间渲染本地精编版（离线可用），完整版在后台静默尝试
+  // 所有解读均依据当前命盘在本地生成，免费解锁后展开 13 个主题的行动清单
   const setStep = setReadingStep;
   try{
     const localData = buildLocalReading(rec.chart);
@@ -1848,92 +1560,59 @@ async function renderReading(){
     $('#reading-body').innerHTML = '';
     return;
   }
-  setStep('本地精编版 · 已按你的命盘生成');
-  const key = readingKeyOf(rec.chart);
+  setStep('本地解读 · 已按你的排盘口径生成');
+  const key = readingKeyOf(rec.chart, rec.input);
   if(isUnlocked(key)) tryLoadFull(rec);
-  else setStep('本地精编版 · 已按你的命盘生成 <button class="link-btn" data-unlock-open>免费解锁 3 万字完整版 →</button>');
+  else setStep('本地解读已按你的排盘设置生成 <button class="link-btn" data-unlock-free>一键免费展开 13 个主题 →</button>');
 }
-async function tryLoadFull(rec){
-  const setStep = setReadingStep;
-  const key = readingKeyOf(rec.chart);
-  setStep('本地精编版 · 已按你的命盘生成 <span class="hint">· 正在加载完整版…</span>');
-  try{
-    const { data } = await loadReading(rec.chart, null);
-    window.GXG_READING = data;
-    window.GXG_READING_LOCAL = false;
-    renderReadingBody();
-    setStep('已加载完整版 · 命宫主星' + esc(rec.chart.palaces.find(p=>p.isMingGong).stars.filter(s=>s.type==='major').map(s=>s.name).join('、') || '（空宫）'));
-  }catch(err){
-    setStep('本地精编版 · 已按你的命盘生成 <span class="hint">· 完整版加载失败（' + esc(String(err && err.message || err)).slice(0, 60) + '）</span> <button class="link-btn" id="reading-retry">点此重试</button>');
-  }
+function tryLoadFull(rec){
+  if(!rec) return;
+  window.GXG_READING = buildLocalReading(rec.chart);
+  window.GXG_READING_LOCAL = true;
+  renderReadingBody();
+  setReadingStep('已解锁 13 个主题的现实核对与行动清单');
+}
+const LOCAL_READING_EXPANSIONS = {
+  overview: ['把本次排盘口径记下来：出生地、时区、是否采用真太阳时、晚子时规则与四化设定；口径变化时先比较盘面差异。','从命宫、身宫和本次解读引用的宫位中，各挑一条与你近三年经历相符、一条不相符的描述，避免只记住命中的部分。','写下当前最想解决的一个现实问题，并列出可验证的信息来源与下一步行动。'],
+  personality: ['记录一个最近真实发生的选择：当时看重什么、依据是什么、结果如何；用行为记录代替固定性格标签。','找一位熟悉你的同事或朋友核对：哪些描述符合具体情境，哪些只是泛化印象。','选一个想改善的行为，设定一周内可观察的指标，例如完成次数、沟通时长或休息时间。'],
+  love: ['回想一次近期沟通：双方各自表达了什么需求，哪些信息被假设而没有确认？','把关系里的期待改写成可以直接讨论的请求，并为双方保留拒绝、协商和调整的空间。','遇到安全、控制或持续伤害问题时，以现实支持和专业帮助为先，不用命盘替代判断。'],
+  career: ['列出当前岗位的核心任务、可迁移技能、可证明成果和仍需补足的能力，分别用事实核对。','把职业选择拆成可比较条件：职责、成长、收入、团队、地点和风险承受度，再决定下一步访谈或尝试。','为未来两周设一个低成本验证动作，例如完成作品样例、约一次信息访谈或测试一个新流程。'],
+  wealth: ['先盘点现金流、固定支出、债务和近期目标；本命盘不含这些现实数据，不能据此判断财务结果。','将想做的财务决定写成假设，核对合同、费用、期限、最坏情景与退出条件；不因吉凶标记下注。','若涉及投资、税务或借贷，使用合规公开信息并咨询相应专业人士。'],
+  health: ['记录睡眠、活动、压力和症状的实际变化及发生时间，避免用星曜推断病因。','把需要解决的健康问题整理成清单，向医疗专业人员描述症状、持续时间、用药和既往检查。','若出现急性或持续不适，及时寻求医疗帮助；本解读不提供诊断、治疗或预后。'],
+  family: ['挑一个近期家庭议题，分别写下事实、各方需求、资源限制和仍需确认的信息。','将“应该怎样”换成可以协商的安排：谁负责、何时完成、如何复盘，以及出现变化时如何调整。','涉及财产、照护或法律责任时，核对文件与现实条件，必要时咨询专业人士。'],
+  children: ['把对子女或照护对象的观察聚焦在具体需要、兴趣和支持条件，不用命盘给孩子贴固定标签。','如果主题指向创作或项目，列出当前阶段、资源缺口与下一步可完成的小成果。','涉及生育、发育或教育决策时，以当事人意愿、专业意见和实际信息为依据。'],
+  move: ['列出迁居或出行的真实约束：时间、预算、证件、工作、照护责任与备选方案。','先做可逆的小验证，例如短住、实地考察或试运行，再评估适配度和成本。','涉及签证、合同、保险或安全时，逐项核对官方与专业信息；命盘不预测迁动结果。'],
+  friends: ['回顾最近一次合作：目标、分工、交付标准、沟通频率和退出条件是否明确？','区分对方的实际行为与自己对“贵人/小人”的预设，用证据和边界处理合作。','对重要合作留下可追溯的书面约定，并在阶段节点复盘。'],
+  home: ['把居住或家庭资源议题拆成预算、位置、时间、产权/租约、维护成本和家庭成员需求。','在购买、租赁、装修或搬迁前，对照合同与现金流，核验信息来源并预留应急方案。','命盘不能判断房产涨跌、继承或家庭事件；重大决定以法律、财务和现场信息为准。'],
+  spirit: ['记录哪些活动确实让你恢复精力，哪些只是暂时转移注意力，并观察一周后的状态。','为休息安排具体时段和边界，减少把持续疲惫解释成命盘定论。','若情绪困扰持续影响生活或安全，尽早联系可信任的人或专业支持。'],
+  parents: ['回顾与长辈或制度资源有关的具体经历，区分已经发生的事实、个人感受和未核实的猜测。','把需要沟通的事项整理成清楚的问题、所需材料与可接受的边界。','涉及医疗、财务、法律或照护安排时，确认当事人意愿并寻求相应专业支持。']
+};
+function renderUnlockedExpansion(topic){
+  const items = LOCAL_READING_EXPANSIONS[topic] || LOCAL_READING_EXPANSIONS.overview;
+  return '<section class="reading-personal-expansion"><h3>完整版 · 现实复盘与行动清单</h3><p class="hint">下面不是额外的命理断语，而是把本主题转成可核对、可执行的问题。本主题正文依据当前命盘整理；本清单是通用的现实核对与行动提示，不是命理断语。</p><ol>'+items.map(item=>'<li>'+esc(item)+'</li>').join('')+'</ol><p class="hint">建议保留“盘面依据—现实证据—待确认问题—下一步行动”四栏记录；不吻合的内容也要记下，避免只挑符合预期的部分。</p></section>';
 }
 function renderReadingBody(){
   const data = window.GXG_READING; if(!data) return;
-  const rawText = data[readingTopic] || '暂无';
-  const text = window.GXG_READING_LOCAL ? rawText : softenFullText(rawText);
+  const text = data[readingTopic] || '本主题暂无可显示内容。';
   const paras = text.split(/\n\n+/);
   const rec = cur();
-  const key = rec ? readingKeyOf(rec.chart) : '';
-  const unlocked = key && isUnlocked(key);
-  const upsell = (!window.GXG_READING_LOCAL || unlocked) ? '' :
-    `<div class="unlock-card"><div><b>想要更详细的完整版？</b><br>
-     <span class="hint">67.5 万张命盘语料库 · 13 个维度 · 全文约 3 万字，关注公众号免费解锁，永久可看。</span></div>
-     <button class="btn-primary" data-unlock-open>免费解锁</button></div>`;
-  $('#reading-body').innerHTML = paras.map((p, i) =>
-    `<p>${md2html(p)}</p>`
-  ).join('') + upsell +
-  `<div class="hint" style="margin-top:16px">${
-    window.GXG_READING_LOCAL
-      ? '本地精编版：按你的命盘实时生成，离线可用。'
-      : '完整版解读数据：紫微斗数开源解读数据集 v4.0（CC BY 4.0），已获解锁。'
-  }</div>`;
+  const key = rec ? readingKeyOf(rec.chart, rec.input) : '';
+  const unlocked = !!(key && isUnlocked(key));
+  const expansionHtml = unlocked ? renderUnlockedExpansion(readingTopic) : '';
+  const upsell = unlocked ? '' :
+    '<div class="unlock-card"><div><b>免费解锁 13 个主题的现实行动手册</b><br><span class="hint">解锁后会在当前主题下增加现实核对与行动清单，不隐藏盘面正文。所有内容在本地生成，出生资料不会上传。</span></div><button class="btn-primary" data-unlock-free>免费解锁完整版</button></div>';
+  $('#reading-body').innerHTML = paras.map(p => '<p>'+md2html(p)+'</p>').join('') + expansionHtml + upsell +
+  '<div class="hint" style="margin-top:16px">本地生成：依据当前命盘、排盘规则和本主题对应宫位整理，可离线查看；不调用远程解读语料，也不上传出生信息。</div><div class="reading-scope-note">紫微斗数属于传统文化取象。排盘展示规则计算结果，文字内容用于整理问题与自我复盘，不是经过临床、心理、金融或预测准确率验证的结论。重大健康、财务、法律和人生决定请结合现实证据及专业意见。</div>';
 }
-/* ---------- 解锁弹窗 ---------- */
-function openUnlock(){
-  if(!cur()){ nav('input'); return; }
-  $('#unlock-code').value = '';
-  $('#unlock-err').textContent = '';
-  $('#unlock-modal').hidden = false;
-  setTimeout(() => $('#unlock-code')?.focus(), 80);
+function unlockFreeReading(){
+  const rec=cur();
+  if(!rec){ nav('input'); return; }
+  const key=readingKeyOf(rec.chart, rec.input);
+  store.set('gxg_unlock_'+key,true);
+  tryLoadFull(rec);
 }
-async function doUnlockVerify(){
-  const rec = cur(); if(!rec) return;
-  const key = readingKeyOf(rec.chart);
-  const code = $('#unlock-code').value.replace(/\s+/g,'');
-  if(!code){ $('#unlock-err').textContent = '先输入口令或解锁码。'; return; }
-  let ok = await verifyUnlockCode(key, code) || await verifyKouling(code);
-  let kamiKey = '';
-  if(!ok && await verifyKami(code)){
-    kamiKey = 'gxg_kami_used_' + code.toUpperCase();
-    const usedFor = store.get(kamiKey, null);
-    ok = !usedFor || usedFor === key; // 同一卡密在本机只解一张盘
-  }
-  if(ok){
-    store.set('gxg_unlock_' + key, true);
-    if(kamiKey) store.set(kamiKey, key);
-    $('#unlock-modal').hidden = true;
-    renderReading();
-  } else {
-    $('#unlock-err').textContent = '口令不对，请检查后重试（口令/8位解锁码/卡密都可以）。';
-  }
-}
-$('#unlock-code')?.addEventListener('keydown', e => { if(e.key === 'Enter') doUnlockVerify(); });
-$('#unlock-code')?.addEventListener('paste', () => setTimeout(() => {
-  const v = $('#unlock-code').value.replace(/\s+/g,'');
-  if(v.length >= 6) doUnlockVerify();
-}, 60));
-document.addEventListener('click', async e => {
-  if(e.target.closest('#reading-retry')){ const rec = cur(); if(rec) tryLoadFull(rec); return; }
-  if(e.target.closest('[data-unlock-open]')){ openUnlock(); return; }
-  if(e.target.closest('[data-unlock-close]')){ $('#unlock-modal').hidden = true; return; }
-  if(e.target.closest('#unlock-copy')){
-    try{ await navigator.clipboard.writeText($('#unlock-key').textContent); $('#unlock-copy').textContent = '已复制'; }
-    catch(err){ $('#unlock-copy').textContent = '长按复制'; }
-    return;
-  }
-  if(e.target.closest('#unlock-verify')){
-    doUnlockVerify();
-  }
+document.addEventListener('click', e => {
+  if(e.target.closest('[data-unlock-free]')){ unlockFreeReading(); return; }
 });
 document.addEventListener('click', e => {
   const f = e.target.closest('[data-fav]');
@@ -1950,15 +1629,15 @@ document.addEventListener('click', e => {
 });
 /* ---------- 新手导览 ---------- */
 const GUIDE6_FALLBACK = [
-  ['命身为本', '先看命宫定你是什么人，再看身宫定你后半程想成为什么人。'],
-  ['三方四正', '看任何一宫，都要合看它的对宫和三合两宫，四宫一起看才完整。'],
-  ['庙旺辅煞', '星有亮度（庙旺利陷），还有辅星帮忙、煞星捣乱，组合才决定吉凶。'],
-  ['四化飞动', '禄是得到、权是掌控、科是名声、忌是功课。四化落在哪宫，哪宫就有动静。'],
-  ['逐宫细看', '十二宫是人生的 12 个领域，一个一个看，每个宫都有白话解释。'],
-  ['格局总览', '最后看格局：它是整张盘的总结标签，接近某格就说"带有某格意味"。'],
+  ['先核对出生资料','确认使用公历还是农历、日期、时辰、出生地与时区；接近换日或节气边界时，查看本站排盘口径和备选时辰。'],
+  ['看命宫与身宫','先读盘面位置和星曜，再把传统象意与自己的真实经历对照；身宫没有统一的“某岁后才生效”界线。'],
+  ['合看三方四正','观察本宫、对宫和三合宫的关系。只看一颗星或一个宫位容易过度简化。'],
+  ['再看四化与时间层','分清生年、大限、流年、流月所用天干及规则。禄权科忌是传统符号，不直接等同获利、权力、考试成功或灾祸。'],
+  ['读十二宫专题','关系、工作、财务、健康等内容是传统问题框架；每个主题都要回到当事人和现实证据。'],
+  ['把结论变成可验证问题','记录事实、反例与下一步行动。不用命盘诊断疾病、判断他人、替代合同审查或作重大人生决定。'],
 ];
 function renderGuide(){
-  const steps = (window.GXG_GUIDE6 || GUIDE6_FALLBACK).map((s, i) => {
+  const steps = GUIDE6_FALLBACK.map((s, i) => {
     const t = s.t || s[0], d = s.d || s[1];
     return [String(i+1), t, d];
   });
@@ -1969,7 +1648,7 @@ function renderGuide(){
 /* ---------- 大限/流年 整盘叠视图 ---------- */
 function renderOverlayGrid(chart, ov){
   const wrap = $('#overlay-grid-wrap'), grid = $('#overlay-grid');
-  if(!wrap || !ov || ov.hlBranch == null || ov.hlBranch < 0){ wrap.hidden = true; return; }
+  if(!wrap || !validOverlayBranch(ov)){ wrap.hidden = true; return; }
   const pre = luckMode === 'daxian' ? '大限' : luckMode === 'liunian' ? '流年' : '流';
   const ovSi = {};
   if(ov.sihua) [['lu','禄'],['quan','权'],['ke','科'],['ji','忌']].forEach(([k, cn]) => { if(ov.sihua[k]) ovSi[ov.sihua[k]] = cn; });
@@ -1993,131 +1672,31 @@ function renderOverlayGrid(chart, ov){
 }
 /* ---------- 流月日历热力图 ---------- */
 /* 农历月初一的公历日期（按年缓存）。首次定位约需几十次引擎查询——分片异步执行，不冻结页面 */
-function lunarMonthStartsAsync(year, onProgress){
-  return new Promise(resolve => {
-    const key = 'gxg_lunar_' + year;
-    const cached = store.get(key, null);
-    if(cached && cached.length){ resolve(cached.map(Number).map(t => new Date(t))); return; }
-    const infoOf = d => E.generateChart({ year: d.getFullYear(), month: d.getMonth() + 1, day: d.getDate(), hour: 0, gender: 'male' }).lunarInfo;
-    const starts = [];
-    let probe = null, scanned = 0;
-    const step = () => {
-      const t0 = Date.now();
-      while(Date.now() - t0 < 55){
-        if(!probe){
-          if(!starts.length){
-            if(scanned >= 40) break;
-            probe = { phase: 1, d: new Date(year, 0, 21 + scanned) }; scanned++;
-          } else if(starts.length < 12){
-            probe = { phase: 2, base: starts[starts.length - 1], d: new Date(+starts[starts.length - 1] + 29 * 864e5) };
-          } else break;
-        }
-        const li = infoOf(probe.d);
-        if(probe.phase === 1){
-          if(li.lunarYear === year && li.lunarMonth === 1 && li.lunarDay === 1 && !li.isLeapMonth) starts.push(probe.d);
-          probe = null;
-        } else if(li.lunarDay === 1 && !li.isLeapMonth){
-          starts.push(probe.d); probe = null;
-        } else {
-          // 逐日找月首；若踩到闰月初一，直接跳过整个闰月（至少 29 天）
-          probe = { phase: 2, base: probe.base, d: new Date(+probe.d + ((li.lunarDay === 1 && li.isLeapMonth) ? 29 : 1) * 864e5) };
-        }
-      }
-      if(onProgress) onProgress(Math.min(.95, (scanned + starts.length * 4) / 55));
-      if(starts.length >= 12 || scanned >= 40){
-        if(starts.length >= 12) store.set(key, starts.map(x => +x));
-        if(onProgress) onProgress(1);
-        resolve(starts);
-        return;
-      }
-      setTimeout(step, 0);
-    };
-    setTimeout(step, 0);
-  });
-}
 /* 30 支签：克制白话+古风意象，不做宿命断言。同一张盘（或无盘）同一天抽同一支，明早自动换。 */
-/* ---------- 十二宫强度量化：把庙旺/四化/辅煞折成分数，三方四正加权 ---------- */
-const BRIGHT_SCORE = { '庙':3, '旺':2.5, '得':2, '得地':2, '利益':1.5, '利':1.5, '平和':1, '平':1, '不':0.5, '陷':-1 };
-const SHA_LIST = ['擎羊','陀罗','火星','铃星','地空','地劫','天刑'];
-const LUCKY6 = ['左辅','右弼','天魁','天钺','文昌','文曲'];
-function palaceScore(p){
-  let s = 0;
-  const majors = p.stars.filter(x => x.type === 'major');
-  if(!majors.length) s -= 1.5; // 空宫减分（借对宫力量已含在三方加权里）
-  majors.forEach(m => { s += BRIGHT_SCORE[m.brightnessRaw] != null ? BRIGHT_SCORE[m.brightnessRaw] : 0.5; });
-  p.stars.forEach(st => {
-    if(st.siHua) s += ({ '禄':2, '权':1.5, '科':1, '忌':-2 })[st.siHua] || 0;
-    if(SHA_LIST.includes(st.name)) s += (st.name === '地空' || st.name === '地劫') ? -1.2 : -0.8;
-    if(LUCKY6.includes(st.name)) s += 0.8;
-    if(st.name === '禄存') s += 1.2;
-    if(st.name === '天马') s += 0.3;
-  });
-  (p.selfSihua || []).forEach(x => { s += x.siHua === '忌' ? -1 : 0.5; });
-  return s;
-}
-function palaceStrength(chart, p){
-  const self = palaceScore(p);
-  const opp = palaceScore(palaceByBranch(chart, (p.branch + 6) % 12));
-  const t1 = palaceScore(palaceByBranch(chart, (p.branch + 4) % 12));
-  const t2 = palaceScore(palaceByBranch(chart, (p.branch + 8) % 12));
-  return self + 0.3 * opp + 0.2 * t1 + 0.2 * t2; // 看一宫要合看三方四正
-}
 /* ---------- 人生时间轴：大限主题 + 换挡流年 ---------- */
-function yearSay(o){
-  if(o.isMark && o.jiHit) return '换挡＋忌入命方，大事费心';
-  if(o.isMark) return '换挡 · 主题切换';
-  if(o.jiHit) return '忌入命方 · 费心之年';
-  if(o.luPal) return '禄落' + o.luPal + ' · 有顺风';
-  return '平稳';
-}
+function yearSay(o){const notes=[];if(o.isMark)notes.push('流年命宫进入本命重点主题宫位');if(o.jiHit)notes.push('化忌落本命命宫三方四正');if(o.luPal)notes.push('化禄对应本命'+o.luPal);return notes.length?notes.join(' · '):'未触发以上标记';}
 /* 逐年断语：把换挡/费心/顺风拼成一句人话（时间轴与全景共用） */
-function yearStory(o){
-  const parts = [];
-  if(o.isMark) parts.push(`主题切到「${GONG_SHORT[disp(o.liuPal.name)] || ''}」`);
-  else parts.push(`流年命宫进${disp(o.liuPal.name).replace('宫','')}`);
-  if(o.jiHit) parts.push(`${o.jiPal ? o.jiPal.replace('宫','') + '上的事' : '命宫三方'}要费心，少做不可逆决定`);
-  if(o.luPal) parts.push(`${o.luPal.replace('宫','')}有顺风${o.jiHit ? '可以对冲一半' : ''}`);
-  if(!o.jiHit && !o.luPal && !o.isMark) parts.push('平稳过渡，适合练内功');
-  return parts.join('；');
-}
-/* 逐年断语：把换挡/费心/顺风拼成一句人话（时间轴与全景共用） */
-function yearStory(o){
-  const parts = [];
-  if(o.isMark) parts.push(`主题切到「${GONG_SHORT[disp(o.liuPal.name)] || ''}」`);
-  else parts.push(`流年命宫进${disp(o.liuPal.name).replace('宫','')}`);
-  if(o.jiHit) parts.push(`${o.jiPal ? o.jiPal.replace('宫','') + '上的事' : '命宫三方'}要费心，少做不可逆决定`);
-  if(o.luPal && (!o.jiHit || true)) parts.push(`${o.luPal.replace('宫','')}有顺风${o.jiHit ? '可以对冲一半' : ''}`);
-  if(!o.jiHit && !o.luPal && !o.isMark) parts.push('平稳过渡，适合练内功');
-  return parts.join('；');
-}
+function yearStory(o){const parts=[`流年命宫落${disp(o.liuPal.name)}`];if(o.jiPal)parts.push(`流年化忌对应本命${o.jiPal}，可作为复盘时关注反复投入与沟通成本的提示`);if(o.luPal)parts.push(`流年化禄对应本命${o.luPal}，可观察资源与回应如何流动`);if(o.isMark)parts.push('该年流年命宫进入本命命、官、财、夫主题宫位之一');return parts.join('；')+'。以上为规则位置说明，不是吉凶或事件预测。'}
 const DX_THEME = {
-  '命宫':'做自己、立人设的十年', '兄弟宫':'同辈与合伙的十年', '夫妻宫':'感情与深度绑定的十年',
-  '子女宫':'作品与下一代的十年', '财帛宫':'赚钱与花钱方式升级的十年', '疾厄宫':'身体亮牌、调整作息的十年',
-  '迁移宫':'往外走、见世面的十年', '交友宫':'人脉圈层洗牌的十年', '官禄宫':'事业主战场、最出成绩的十年',
-  '田宅宫':'安家置业的十年', '福德宫':'向内修、攒后劲的十年', '父母宫':'与长辈和平台打交道的十年',
+  '命宫':'以自我定位与个人选择为复盘主题','兄弟宫':'以同辈、手足与协作关系为复盘主题','夫妻宫':'以亲密关系、承诺与沟通为复盘主题',
+  '子女宫':'以创作、项目与照护责任为复盘主题','财帛宫':'以收入结构、资源安排与价值交换为复盘主题','疾厄宫':'以身心照护与生活节律为传统主题；不作健康判断',
+  '迁移宫':'以外部环境、迁动与对外协作为复盘主题','交友宫':'以社群、人际网络与合作边界为复盘主题','官禄宫':'以工作角色、组织协作与职业选择为复盘主题',
+  '田宅宫':'以居住环境、家庭资源与空间安排为复盘主题','福德宫':'以休息方式、兴趣与内在体验为复盘主题','父母宫':'以长辈互动、教育经历与制度资源为复盘主题',
 };
 /* 大限十年成色：宫位强度 + 限禄权科入命三方加分、限忌入命三方减分 */
 function decadeQuality(chart, i, dx){
   const pal = palaceByBranch(chart, dx.palaceBranch);
-  let s = palaceStrength(chart, pal);
   let sh = null;
   try{ sh = normSihua(E.getDaXianSiHua(chart, i)); }catch(e){}
-  const mingFang = new Set(sanfangBranches(chart.mingGongBranch));
-  if(sh){
-    ['lu','quan','ke'].forEach(k => {
-      const p = chart.palaces.find(pl => pl.stars.some(x => x.name === sh[k]));
-      if(p && mingFang.has(p.branch)) s += 1.2;
-    });
-    const jiP = chart.palaces.find(pl => pl.stars.some(x => x.name === sh.ji));
-    if(jiP && mingFang.has(jiP.branch)) s -= 1.5;
-  }
-  return { s, sh, pal, lvl: s > 4 ? '旺限' : s > 1.5 ? '平顺' : '辛劳' };
+  return { sh, pal, lvl: '主题观察' };
 }
 function renderTimelineCard(chart){
   const card = $('#timeline-card'), body = $('#timeline-body');
   if(!card) return;
   const birthY = chart.birthInfo.year;
-  const nowY = new Date().getFullYear();
+  const currentContext=currentLunarContext(chart);
+  if(!currentContext.valid){card.hidden=false;body.innerHTML='<p class="hint">当前日期的农历换算暂不可用，流年时间轴已暂停，避免生成错误年份；命盘本身仍可查看。</p>';return;}
+  const nowY = currentContext.year;
   const keyBranches = ['命宫','官禄宫','财帛宫','夫妻宫'].map(n => palaceByName(chart, n).branch);
   const rows = chart.daXians.map((dx, i) => {
     const { sh, pal, lvl } = decadeQuality(chart, i, dx);
@@ -2145,7 +1724,7 @@ function renderTimelineCard(chart){
     const dblYears = years.filter(o => o.dblJi).map(o => o.y);
     const jzYears = years.filter(o => o.jiaoZhan).map(o => o.y);
     const spark = years.map(o =>
-      `<i class="sp-bar${o.isMark ? ' mk' : ''}${o.jiHit ? ' ji' : ''}${o.dblJi ? ' dbl' : ''}" title="${o.y}：流年命宫进${disp(o.liuPal.name).replace('宫','')}${o.isMark ? '，换挡之年' : ''}${o.dblJi ? '，双忌叠压，最要稳' : ''}${o.jiaoZhan ? '，禄忌交战' : ''}${o.jiHit ? '，化忌入命方，费心' : ''}${o.luPal ? '，' + o.luPal.replace('宫','') + '有顺风' : ''}"></i>`).join('');
+      `<i class="sp-bar${o.isMark ? ' mk' : ''}${o.jiHit ? ' ji' : ''}${o.dblJi ? ' dbl' : ''}" title="${o.y}年：流年命宫进${disp(o.liuPal.name).replace('宫','')}${o.isMark ? '；进入本命重点主题宫位' : ''}${o.dblJi ? '；流年与大限化忌对应同一宫位' : ''}${o.jiaoZhan ? '；流年禄与大限忌对应同一宫位' : ''}${o.jiHit ? '；流年化忌落本命命宫三方四正' : ''}${o.luPal ? '；流年化禄对应本命' + o.luPal : ''}。仅为位置关系，不代表吉凶。"></i>`).join('');
     const cur = i === chart.currentDaXianIndex;
     // 展开层：逐年明细
     const detail = years.map(o => {
@@ -2159,7 +1738,7 @@ function renderTimelineCard(chart){
       <div class="tl-age">${dx.startAge}–${dx.endAge}<span>${y1}–${y2}</span></div>
       <div class="tl-body">
         <div class="tl-line1"><b>${name}</b><span class="tl-stars">${esc(majors)}</span>
-          <span class="tl-lvl lv-${lvl === '旺限' ? 'hi' : lvl === '平顺' ? 'mid' : 'lo'}">${lvl}</span></div>
+          <span class="tl-lvl">${lvl}</span></div>
         <div class="tl-theme">${esc(DX_THEME[name] || '')}</div>
         <div class="tl-line2">
           ${sh && sh.lu ? `<span class="tl-sh">限禄 ${esc(sh.lu)}→${esc(sihuaStarPalace(chart, sh.lu))}</span>` : ''}
@@ -2170,7 +1749,7 @@ function renderTimelineCard(chart){
         </div>
         <div class="tl-spark" title="金柱＝换挡年 · 红柱＝化忌入命方 · 深红＝双忌叠压 · 蓝柱＝平稳年">${spark}</div>
         <div class="tl-expand"><table class="tl-table"><tr><th>年</th><th>流年命宫</th><th>禄</th><th>忌</th><th>这一年</th></tr>${detail}</table>
-          <p class="hint">◆换挡＝流年命宫踩进命/官/财/夫；"忌入命方"＝流年化忌落本命命宫三方四正，该年功课重。</p></div>
+          <p class="hint">◆主题宫位＝流年命宫进入本命命、官、财、夫之一；“忌入命方”表示流年化忌落在本命命宫三方四正。两者只描述规则位置，不代表当年吉凶。</p></div>
       </div></div>`;
   }).join('');
   const curDx = chart.daXians[chart.currentDaXianIndex] || {};
@@ -2181,162 +1760,154 @@ function renderTimelineCard(chart){
     return null;
   })();
   body.innerHTML =
-    `<p class="hint" style="margin:0 0 8px">柱状是这一年忙什么：<b style="color:#D9B36A">金柱＝换挡年</b>（十年主题切换）、<b style="color:#E09B7E">红柱＝化忌入你命宫三方</b>（费心之年）、蓝柱＝平稳年。悬停柱子看那年的具体事项，点每一层展开逐年明细。</p>` + rows +
-    `<p class="hint" style="margin:10px 0 0">当前 ${curDx.startAge || '—'}–${curDx.endAge || '—'} 岁走【${curDx.palaceName ? disp(curDx.palaceName) : ''}】大限${nextMark ? `，下一个换挡年是 <b style="color:#D9B36A">${nextMark} 年</b>` : ''}。走势是"动静与主题"，不是吉凶判决。</p>` +
+    `<p class="hint" style="margin:0 0 8px">时间轴列出大限宫位、对应星曜、四化落点和逐年流年命宫，供复盘与核对。金柱表示流年命宫进入本命重点主题宫位；红柱表示化忌落本命命宫三方四正；蓝柱表示未触发这两类标记。颜色只区分盘面位置，不代表吉凶或事件概率。点击各层查看逐年明细。</p>` + rows +
+    `<p class="hint" style="margin:10px 0 0">当前 ${curDx.startAge || '—'}–${curDx.endAge || '—'} 岁大限落【${curDx.palaceName ? disp(curDx.palaceName) : ''}】。当前大限主题是盘面定位，不表示必然事件；未来时间节点是按规则排出的主题切换点，不宜据此单独决定工作、投资、关系或健康事项。</p>` +
     '';
   body.querySelectorAll('.tl-row').forEach(r => r.addEventListener('click', () => r.classList.toggle('open')));
   card.hidden = false;
 }
-/* ---------- 问运：今年运势 / 感情 / 财运 / 事业（先结论后依据，全部盘面实算） ---------- */
+/* ---------- 问运：盘面时间线与现实议题复盘 ---------- */
+function currentLunarContext(chart){
+  const today = bjDate();
+  try{
+    const gender = chart && chart.birthInfo && chart.birthInfo.gender || 'male';
+    const dayChart = E.generateChart({year:today.y,month:today.m,day:today.d,hour:0,gender});
+    const li = dayChart && dayChart.lunarInfo;
+    if(li && Number.isInteger(li.lunarYear) && li.lunarYear >= 1 &&
+       Number.isInteger(li.lunarMonth) && li.lunarMonth >= 1 && li.lunarMonth <= 12 &&
+       Number.isInteger(li.lunarDay) && li.lunarDay >= 1 && li.lunarDay <= 30 &&
+       Number.isInteger(li.yearStem) && li.yearStem >= 0 && li.yearStem < 10 &&
+       Number.isInteger(li.yearBranch) && li.yearBranch >= 0 && li.yearBranch < 12){
+      return {year:li.lunarYear, month:li.lunarMonth, day:li.lunarDay, yearStem:li.yearStem, yearBranch:li.yearBranch, date:today, valid:true};
+    }
+  }catch(e){}
+  return {year:null, month:null, day:null, yearStem:null, yearBranch:null, date:today, valid:false};
+}
 function wyYearsOf(chart, targetPalName){
-  const nowY = new Date().getFullYear(), out = [];
+  const now = currentLunarContext(chart), out = [];
+  if(!now.valid) return out;
+  const nowY = now.year;
   for(let y = nowY - 5; y <= nowY + 7; y++){
     let lsh = null; try{ lsh = normSihua(E.getLiuNianSiHua(y)); }catch(e){}
     if(!lsh) continue;
-    const jiP = lsh.ji ? chart.palaces.find(pl => pl.stars.some(x => x.name === lsh.ji)) : null;
-    const luP = lsh.lu ? chart.palaces.find(pl => pl.stars.some(x => x.name === lsh.lu)) : null;
+    const jiPal = lsh.ji ? sihuaStarPalace(chart, lsh.ji) : '';
+    const luPal = lsh.lu ? sihuaStarPalace(chart, lsh.lu) : '';
+    const quanPal = lsh.quan ? sihuaStarPalace(chart, lsh.quan) : '';
+    const kePal = lsh.ke ? sihuaStarPalace(chart, lsh.ke) : '';
     const yb = ((y - 4) % 12 + 12) % 12;
-    out.push({ y, jiHit: !!(jiP && disp(jiP.name) === targetPalName), luHit: !!(luP && disp(luP.name) === targetPalName), cmd: yb === chart.mingGongBranch });
+    out.push({y,jiHit:jiPal===targetPalName,luHit:luPal===targetPalName,quanHit:quanPal===targetPalName,keHit:kePal===targetPalName,cmd:yb===chart.mingGongBranch,jiPal,luPal,quanPal,kePal});
   }
   return out;
 }
 function renderWenyun(){
-  const rec = cur();
-  const box = $('#answer-list');
+  const rec = cur(), box = $('#answer-list');
   if(!box) return;
-  if(!rec){ box.innerHTML = '<div class="empty">先排一张盘，问运按你的盘面作答。</div>'; return; }
-  const chart = rec.chart;
-  const year = new Date().getFullYear();
-  const yb = ((year - 4) % 12 + 12) % 12;
-  const lsh = normSihua(E.getLiuNianSiHua(year)) || {};
-  const lp = palaceByBranch(chart, yb);
-  const blocks = [];
-  const block = (icon, title, concl, rows, act, time) => blocks.push(
-    `<div class="ans-card wy"><div class="ans-head"><b>${icon} ${title}</b></div>` +
-    `<div class="wy-concl">${withTerms(concl)}</div>` +
-    (rows.length ? `<div class="wy-rows">${rows.map(r => `<div class="scr-row"><span class="scr-tag ${r.cls || ''}">${r.tag}</span><span class="scr-text">${r.html != null ? r.html : withTerms(r.text)}</span></div>`).join('')}</div>` : '') +
-    (time ? `<div class="wy-time">⏳ ${withTerms(time)}</div>` : '') +
-    (act && act.length ? `<ul class="wy-act">${act.map(a => `<li>${esc(a)}</li>`).join('')}</ul>` : '') +
-    `</div>`);
-  const luTo = lsh.lu ? sihuaStarPalace(chart, lsh.lu) : '';
-  const jiTo = lsh.ji ? sihuaStarPalace(chart, lsh.ji) : '';
-  const lpMajors = lp.stars.filter(x => x.type === 'major').map(x => x.name).join('·') || '空宫（借对宫看）';
-  // ① 今年运势
-  // 逐月：流月命宫 + 流月禄忌引动
-  const yStemLunar = chart.lunarInfo.yearStem;
-  const dj = doujunBranch(chart, year);
-  const mfSetW = new Set(sanfangBranches(chart.mingGongBranch));
-  const monthCells = [], hotMonths = [];
-  for(let m = 1; m <= 12; m++){
-    let msh = null; try{ msh = E.getLiuYueSiHua(yStemLunar, m); }catch(e){}
-    const mJi = msh && msh.ji ? chart.palaces.find(pl => pl.stars.some(x => x.name === msh.ji)) : null;
-    const mLu = msh && msh.lu ? chart.palaces.find(pl => pl.stars.some(x => x.name === msh.lu)) : null;
-    const mJiPal = msh && msh.ji ? sihuaStarPalace(chart, msh.ji) : '';
-    const mLuPal = msh && msh.lu ? sihuaStarPalace(chart, msh.lu) : '';
-    const mJiHit = !!(mJi && mfSetW.has(mJi.branch));
-    const mLuHit = !!(mLu && mfSetW.has(mLu.branch));
-    const hot = mJiHit ? 'ji' : mLuHit ? 'lu' : '';
-    if(mJiHit) hotMonths.push({ m, pal: mJiPal });
-    monthCells.push(`<i class="mo-cell ${hot}" title="农历${m}月${mJiPal ? ' · 忌落' + mJiPal + (mJiHit ? '（入命方）' : '') : ''}${mLuPal ? ' · 禄落' + mLuPal : ''}">${m}</i>`);
-  }
-  const hotLine = hotMonths.length
-    ? `${hotMonths.map(o => o.m + '月').join('，')}流忌引动命宫三方${hotMonths.some(o => o.pal === '财帛宫' || o.pal === '官禄宫') ? '（含财官，钱与工作的事多留心）' : ''}——这几月节奏放慢、少做不可逆决定`
-    : '全年无流忌引动命宫方——节奏平顺的一年，适合把基础打厚';
-  block('🌤', `今年运势 · ${year}`,
-    `今年你忙【${disp(lp.name).replace('宫','')}】——${GONG_SHORT[disp(lp.name)] || ''}是全年的主旋律`,
-    [
-      { tag: '顺', cls: 'lu', text: luTo ? `流年${lsh.lu}化禄落【${luTo}】——${GONG_SHORT[luTo] || ''}上有顺风，主动一点能拿到` : '今年流禄未入十二宫主星，顺风在暗处，稳着走' },
-      { tag: '卡', cls: 'ji', text: jiTo ? `流年${lsh.ji}化忌落【${jiTo}】——${JI_SOFTSPOT[jiTo] || '这一块要多费心'}（费心≠坏事，是今年的功课）` : '今年没有流忌压宫，节奏偏平——适合蓄力，不适合豪赌' },
-      { tag: '放大', cls: '', text: `流年命宫落在本命【${disp(lp.name)}】，主星${lpMajors}——这一宫的主题会被放大一整年` },
-      { tag: '逐月', cls: '', html: `<span class="mo-strip">${monthCells.join('')}</span><br>${withTerms(hotLine)}` },
-    ],
-    [jiTo ? `把${GONG_SHORT[jiTo] || ''}相关的事提前列预案，别等出状况再补` : '平年宜蓄力：把基础打厚，来年好发力', `顺着${GONG_SHORT[luTo] || '顺风'}的方向多走一步，机会是动出来的`],
+  if(!rec){box.innerHTML='<div class="empty">先排一张盘，问运会结合你的宫位和四化线索展开。</div>';return;}
+  const chart=rec.chart, now=currentLunarContext(chart);
+  if(!now.valid){box.innerHTML='<div class="empty">当前日期的农历换算暂不可用，问运内容已暂停流年与流月推算，避免显示错误年份。命盘本身仍可查看；请稍后重试。</div>';return;}
+  const year=now.year;
+  const lsh=normSihua(E.getLiuNianSiHua(year))||{};
+  const yb=((year-4)%12+12)%12, lp=palaceByBranch(chart,yb);
+  const blocks=[];
+  const block=(icon,title,concl,rows,act,time)=>blocks.push(
+    '<div class="ans-card wy"><div class="ans-head"><b>'+icon+' '+esc(title)+'</b></div>'+
+    '<div class="wy-concl">'+withTerms(concl)+'</div>'+
+    (rows.length?'<div class="wy-rows">'+rows.map(r=>'<div class="scr-row"><span class="scr-tag '+(r.cls||'')+'">'+esc(r.tag)+'</span><span class="scr-text">'+(r.html!=null?r.html:withTerms(r.text))+'</span></div>').join('')+'</div>':'')+
+    (time?'<div class="wy-time">时间线索：'+withTerms(time)+'</div>':'')+
+    (act&&act.length?'<div class="wy-act-title">可以带走的问题</div><ul class="wy-act">'+act.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul>':'')+'</div>');
+  const sihuaNames=[['lu','禄','资源与回应'],['quan','权','推动与责任'],['ke','科','表达与规范'],['ji','忌','牵挂与反复投入']];
+  const palaceOfStar=star=>star?sihuaStarPalace(chart,star):'';
+  const annualRows=sihuaNames.map(([k,label,meaning])=>{
+    const star=lsh[k], target=palaceOfStar(star);
+    return {tag:'化'+label,cls:'',text:star?'流年'+star+'化'+label+'，落在本命'+(target||'未定位')+'。传统象义可作为“'+meaning+'”的观察提示，不表示事件必然发生。':'当前规则未返回'+label+'星，建议核对流年规则设置。'};
+  });
+  const lpMajors=lp.stars.filter(x=>x.type==='major').map(x=>x.name).join('、')||'空宫（可合看对宫）';
+  block('◉','本流年 · '+year,
+    '按当前日期换算，本页使用农历'+year+'年作为流年口径。流年命宫落在本命'+disp(lp.name)+'，主星：'+lpMajors+'。这是传统盘面定位，代表观察入口，不是全年事件清单。',
+    [{tag:'流年命宫',text:'本命'+disp(lp.name)+'（'+(GONG_SHORT[disp(lp.name)]||'该宫主题')+'）被放到年度观察位置。可以对照这一年真实发生的项目、关系与责任变化。'},...annualRows],
+    ['今年你实际新增了哪些责任、资源或协作？哪些来自事实，哪些只是预期？','选一个可调整的小行动验证判断，不因盘面符号仓促辞职、借贷、投资或结束关系。'],
     null);
-  // ② 感情
-  const fuq = palaceByName(chart, '夫妻宫');
-  const fuqMajors = fuq.stars.filter(x => x.type === 'major');
-  const fuqSh = E.getSiHuaByStem(fuq.stem) || {};
-  const jiToFuq = fuqSh['忌'] ? chart.palaces.find(pl => pl.stars.some(x => x.name === fuqSh['忌'])) : null;
-  const hongLuan = chart.palaces.find(p => p.stars.some(x => x.name === '红鸾' || x.name === '天喜'));
-  const fuqYears = wyYearsOf(chart, '夫妻宫').filter(o => o.cmd || o.jiHit);
-  block('💜', '感情 · 正缘与剧本',
-    fuqMajors.length ? `你的感情剧本：${fuqMajors.map(x => x.name + (x.brightnessRaw ? '【' + x.brightnessRaw + '】' : '')).join('·')}坐守夫妻宫——${fuqMajors.length > 1 ? '双星同宫，感情浓度高' : '这一星定基调'}` : '夫妻宫无主星——感情上没有固定模板，遇什么人、成什么形，选人比努力重要',
-    [
-      ...(jiToFuq ? [{ tag: '执念', cls: 'ji', text: `夫妻宫${fuqSh['忌']}化忌飞入${disp(jiToFuq.name)}——${flySay(disp(fuq.name), '忌', disp(jiToFuq.name))}` }] : []),
-      ...(hongLuan ? [{ tag: '桃花', cls: 'lu', text: `红鸾天喜坐【${disp(hongLuan.name)}】——${GONG_SHORT[disp(hongLuan.name)] || ''}场合最容易遇到对的人` }] : []),
-    ],
-    ['感情里先把自己调稳，再谈绑定', '重要决定（表白/分手/结婚）别在情绪峰值时做'],
-    fuqYears.length ? `流年命宫踩进夫妻宫或引动它的年份：${fuqYears.slice(0, 3).map(o => o.y + (o.cmd ? '（换挡）' : '')).join('、')}——婚恋大事多发生在附近` : null);
-  // ③ 财运
-  const cai = palaceByName(chart, '财帛宫');
-  const caiMajors = cai.stars.filter(x => x.type === 'major');
-  const caiSh = E.getSiHuaByStem(cai.stem) || {};
-  const jiToCai = caiSh['忌'] ? chart.palaces.find(pl => pl.stars.some(x => x.name === caiSh['忌'])) : null;
-  const caiYears = wyYearsOf(chart, '财帛宫');
-  const lossYears = caiYears.filter(o => o.jiHit).slice(0, 3), gainYears = caiYears.filter(o => o.luHit).slice(0, 3);
-  const caiHua = ['禄','权','科','忌'].filter(h => caiSh[h]).map(h => caiSh[h] + h).join('');
-  block('💰', '财运 · 来路与去处',
-    caiMajors.length ? `你的来财方式：${caiMajors.map(x => x.name).join('·')}坐财帛——${STAR_GIFT[caiMajors[0].name] ? STAR_GIFT[caiMajors[0].name][0] : '靠本事换钱'}` : '财帛宫无主星——来财方式不固定，多渠道更稳',
-    [
-      { tag: '模式', cls: '', text: caiHua ? `财帛宫生年四化（${caiHua}）——这四化定你与钱的相处模式` : '财帛宫无生年四化——财上平淡是真，稳字当头' },
-      ...(jiToCai ? [{ tag: '流向', cls: 'ji', text: `财帛宫${caiSh['忌']}化忌飞入${disp(jiToCai.name)}——${flySay(disp(cai.name), '忌', disp(jiToCai.name))}` }] : []),
-    ],
-    ['大额支出先过夜再决定', gainYears.length ? `${gainYears.map(o => o.y).join('、')}年流禄入财——进攻的好年份` : '来财靠积累，别指望暴击'],
-    lossYears.length ? `破财预警年（流忌入财帛）：${lossYears.map(o => o.y).join('、')}——大额投入格外谨慎` : null);
-  // ④ 事业
-  const guan = palaceByName(chart, '官禄宫');
-  const guanMajors = guan.stars.filter(x => x.type === 'major');
-  const guanGift = guanMajors.length && STAR_GIFT[guanMajors[0].name] ? STAR_GIFT[guanMajors[0].name][1] : '方向感靠试出来，多轮岗多试错';
-  const guanYears = wyYearsOf(chart, '官禄宫').filter(o => o.cmd || o.luHit);
-  block('🧭', '事业 · 方向与时机',
-    guanMajors.length ? `事业底色：${guanMajors.map(x => x.name).join('·')}坐官禄——${guanGift}` : '官禄宫无主星——事业方向不设限，环境造就你',
-    [
-      { tag: '方向', cls: '', text: guanMajors.length && STAR_GIFT[guanMajors[0].name] ? `天赋指向：${STAR_GIFT[guanMajors[0].name][0]}` : '先在真实项目里试，方向是做出来的不是想出来的' },
-      { tag: '今年', cls: 'lu', text: `今年流年命宫进【${disp(lp.name).replace('宫','')}】${disp(lp.name) === '官禄宫' ? '——正踩在事业宫上，是该冲的一年' : '——事业是配菜，今年主线在' + (GONG_SHORT[disp(lp.name)] || '')}` },
-    ],
-    ['跳槽时机看两点：换挡年（主题切换）＋流禄入官禄——两者重叠的年份最值得动', '能力升级永远不亏：化科/文昌强的人考证比硬跳划算'],
-    guanYears.length ? `事业换挡/顺风年：${guanYears.slice(0, 3).map(o => o.y + (o.cmd ? '（换挡）' : '')).join('、')}` : null);
-  box.innerHTML =
-    blocks.join('') +
-    `<p class="hint" style="margin:12px 0 0">以上全部由盘面四化与宫位实算生成：先结论、后依据。命理是概率性描述（约六七成或然律），地图不是导航。</p>`;
-}
-const LAIYIN_SAY = {
-  '命宫':'这一生的主轴是「把自己活明白」：身份、形象、活法，都是从自己开始长出来的',
-  '兄弟':'带着同辈的缘分而来：兄弟姐妹、朋友合伙人，是你今生的重要课题与资源',
-  '夫妻':'带着感情婚姻的命题而来：亲密关系会深刻塑造你这一生的走向',
-  '子女':'带着创造与传承的命题而来：孩子、作品、学生，都是你的延续',
-  '财帛':'带着钱与价值的命题而来：赚钱、花钱、价值感，是你反复修的功课',
-  '疾厄':'带着身体与习气的命题而来：健康、作息、情绪惯性要多上心',
-  '迁移':'带着外部世界的命题而来：远方、变动、大环境，是你一生的舞台',
-  '交友':'带着人际圈层的命题而来：众生缘、人脉组织，是你的道场',
-  '官禄':'带着事业成就的命题而来：做事、成就、社会位置，是主旋律',
-  '田宅':'带着安身立命的命题而来：家、房子、内心的安稳，是此生主线之一',
-  '福德':'带着精神世界的命题而来：快乐、爱好、福分深浅，向内求',
-  '父母':'带着长辈缘的命题而来：父母、师长、权威与平台，关系一生走向',
+  const monthCards=[];
+  for(let m=1;m<=12;m++){
+    let msh=null;try{msh=now.yearStem!=null?normSihua(E.getLiuYueSiHua(now.yearStem,m)):null;}catch(e){}
+    const monthPal=palaceByBranch(chart,((doujunBranch(chart,year)+m-1)%12+12)%12);
+    monthCards.push({m,msh,monthPal});
+  }
+  const monthButtons=monthCards.map(x=>'<button type="button" class="wy-month-btn'+(x.m===now.month?' on':'')+'" data-wy-month="'+x.m+'" aria-pressed="'+(x.m===now.month?'true':'false')+'">农历'+x.m+'月</button>').join('');
+  block('◷','逐月查看 · 流月四化',
+    '点选月份查看传统流月干星与本命宫位的对应。月份按农历显示；闰月的流派拆分方式可能不同，本页按引擎默认规则合并为十二个序号。',
+    [{tag:'月份',html:'<div class="wy-month-picker" role="group" aria-label="选择农历月份">'+monthButtons+'</div><div id="wy-month-detail" class="wy-month-detail" aria-live="polite"></div>'}],
+    ['把象意当作复盘提纲：该月实际面对什么议题？有哪些客观信息可以验证？','出生日期、时辰或流派设置不同，流月解读会变化；不把“禄/忌”直接翻译成获利/损失。'],null);
+  const relationship=palaceByName(chart,'夫妻宫'),relationshipMajors=relationship.stars.filter(x=>x.type==='major');
+  const relationshipStem=E.getSiHuaByStem(relationship.stem)||{};
+  const relationshipLine=['禄','权','科','忌'].filter(h=>relationshipStem[h]).map(h=>relationshipStem[h]+'化'+h).join('、');
+  const fuqYears=wyYearsOf(chart,'夫妻宫').filter(x=>x.cmd||x.luHit||x.jiHit);
+  block('♡','关系与亲密议题',
+    relationshipMajors.length?'夫妻宫主星为'+relationshipMajors.map(x=>x.name+(x.brightnessRaw?'（亮度表：'+x.brightnessRaw+'）':'')).join('、')+'。传统解读会把它与命宫的相处方式、福德宫的情绪需求合看；它不能判断是否有“正缘”或何时结婚。':'夫妻宫无主星，按常见做法需参看对宫及三方四正；这不代表缺少关系机会，也不代表关系没有固定模式。',
+    [{tag:'盘面依据',text:'夫妻宫宫干四化星：'+(relationshipLine||'当前未显示四化星')+'。需继续看这些星落在哪一宫、是否有同宫或会照关系。'}, {tag:'流年',text:fuqYears.length?'这些农历年出现夫妻宫主题的传统盘面触发线索：'+fuqYears.slice(0,4).map(x=>x.y).join('、')+'。它们不等于恋爱、结婚或分手年份。':'未来若未见明显触发线索，也不能据此断言关系不会变化。'}],
+    ['回想近期关系中的沟通、边界和投入是否平衡；需要时直接确认对方想法。','择偶和关系决定看现实中的尊重、安全、价值观与持续行为，盘面不能替代双方沟通。'],
+    '流年线索按农历年列示，仅适合作为回看问题的时间索引。');
+  const wealth=palaceByName(chart,'财帛宫'),wealthMajors=wealth.stars.filter(x=>x.type==='major');
+  const wealthStem=E.getSiHuaByStem(wealth.stem)||{};
+  const wealthFour=['禄','权','科','忌'].filter(h=>wealthStem[h]).map(h=>wealthStem[h]+'化'+h+'飞'+palaceOfStar(wealthStem[h])).join('；');
+  block('◇','收入、资源与财务习惯',
+    wealthMajors.length?'财帛宫主星为'+wealthMajors.map(x=>x.name).join('、')+'。传统取象可用于讨论资源获取、价值交换和管理习惯，不是收入水平或财富结果的预测。':'财帛宫无主星，可合看对宫及三方四正；这不意味着财务能力不足或收入来源受限。',
+    [{tag:'宫干四化',text:wealthFour||'财帛宫宫干四化未形成可展示的落点。可结合实际收入结构、稳定性和支出责任看。'}, {tag:'现实核对',text:'先区分现金流、资产、负债和风险承受能力。命盘不包含你的账户、合同、行业或税务信息。'}],
+    ['设定应急储备和可承受损失上限；投资决策依据公开信息、风险评估与专业意见。','涉及借贷、担保、大额消费或投资时，先阅读合同并独立核实，不以“流年顺逆”作决策依据。'],
+    null);
+  const career=palaceByName(chart,'官禄宫'),careerMajors=career.stars.filter(x=>x.type==='major');
+  const careerStem=E.getSiHuaByStem(career.stem)||{};
+  const careerFour=['禄','权','科','忌'].filter(h=>careerStem[h]).map(h=>careerStem[h]+'化'+h+'飞'+palaceOfStar(careerStem[h])).join('；');
+  const careerYears=wyYearsOf(chart,'官禄宫').filter(x=>x.cmd||x.luHit||x.jiHit);
+  block('⌁','工作方式与职业议题',
+    careerMajors.length?'官禄宫主星为'+careerMajors.map(x=>x.name).join('、')+'。本站只把传统星曜象义转成反思问题，不据此指定职业、跳槽时机或事业成败。':'官禄宫无主星，需结合对宫、三方四正及现实经历；这不代表没有职业方向。',
+    [{tag:'宫干四化',text:careerFour||'官禄宫宫干四化未形成可展示的落点。'}, {tag:'年度线索',text:careerYears.length?'以下年份只表示传统盘面的主题触发：'+careerYears.slice(0,4).map(x=>x.y).join('、')+'。并非“该跳槽/该冲刺”的建议。':'当前规则未列出明显年度触发点，不代表事业静止。'}],
+    ['列出你擅长、愿意持续做、市场愿意付费的交集，再用小项目或访谈验证。','跳槽、创业或谈薪以岗位信息、现金储备、合同条件、团队与家庭情况为准。'],
+    null);
+  box.innerHTML=blocks.join('')+
+    '<div class="hint" style="margin:14px 0 0">读法说明：本页以当前本地命盘、引擎默认流年/流月规则生成传统象意线索。星曜落宫与四化计算是盘面规则结果；象意解释属于文化框架，不能验证现实事件，也没有可靠的命中率数据。大事请结合事实与专业意见。</div>';
+  const drawMonth=m=>{
+    const item=monthCards.find(x=>x.m===m)||monthCards[0], target=$('#wy-month-detail');
+    if(!target)return;
+    const names=['禄','权','科','忌'];
+    const rows=names.map(name=>{
+      const k={禄:'lu',权:'quan',科:'ke',忌:'ji'}[name], star=item.msh&&item.msh[k], place=palaceOfStar(star);
+      return '<div class="wy-month-row"><b>化'+name+'</b><span>'+(star?esc(star)+' → 本命'+esc(place||'未定位'):'当前规则未返回对应星曜')+'</span></div>';
+    }).join('');
+    target.innerHTML='<b>农历'+m+'月 · 流月命宫参考落在'+esc(disp(item.monthPal.name))+'</b>'+rows+
+      '<p class="hint">以上列的是传统规则对应关系，不是该月必然发生的事。闰月拆分、起月口径可能因流派而异。</p>';
+  };
+  box.querySelectorAll('[data-wy-month]').forEach(btn=>btn.addEventListener('click',()=>{
+    const m=+btn.dataset.wyMonth;
+    box.querySelectorAll('[data-wy-month]').forEach(b=>{const on=+b.dataset.wyMonth===m;b.classList.toggle('on',on);b.setAttribute('aria-pressed',String(on));});
+    drawMonth(m);
+  }));
+  drawMonth(now.month||1);
 }
 
 /* 术语词典：分析句内术语可点解释（痛点：看不懂术语） */
 const TERM_DICT = {
-  '化禄':'天干给星曜加的「顺风」标记：主资源、机会、来财——飞到哪宫，哪宫得利',
-  '化权':'「掌控」标记：主能力、话语权、压力——落在哪宫，哪宫有得拼',
-  '化科':'「名声」标记：主贵人、考试、体面——落点常是雪中送炭的力量',
-  '化忌':'「功课」标记：主在意、执着、亏欠——不是凶，是你这辈子花心血最多的地方',
-  '三方四正':'看任何一个宫，都要把它自己＋对宫＋两个三合宫一起看——四宫合参才作数',
-  '大限':'十年运势段，约每十年换一宫——定这十年的大主题',
-  '流年':'某一年的运势——大限定调子，流年看动静',
-  '流月':'某一年的农历各月细分——看节奏什么时候快什么时候慢',
-  '自化':'宫自己的天干又化到本宫的星——能量「漏」出去了，得到的不太守得住',
-  '来因宫':'生年天干所在的宫——你「为什么而来」的命题宫，北派立命第一把钥匙',
-  '庙旺':'星曜处在能量最强的状态——优点发挥得充分',
-  '落陷':'星曜能量最弱的状态——优点打折、短板易冒头',
-  '空宫':'宫里没有主星——借对宫的星来看，可塑性强但少主见',
-  '命宫':'整张盘的核心：你的性格、活法与人生主轴',
-  '身宫':'后天发力点：约35岁后越来越像身宫的样子',
-  '五行局':'由命宫干支定的节奏单位（水二局/木三局…），也决定几岁起大限',
-  '禄转忌':'飞星技法：A宫化禄→禄星落B宫→B宫干再化忌——看「得到的东西最终代价记在哪」',
-  '十神':'八字术语：日主与其他字的生克关系名——比劫/食伤/财星/官杀/印星，代表你的能量分布',
-  '日主':'八字日柱的天干——就是「你自己」的五行属性',
+  '化禄':'四化之一。传统象义常取资源、连接、兴趣或较易获得回应的方向。它落在某宫是该宫的观察线索，不等于收入、感情或机会一定增加；需合看星曜、宫位、三方四正、时间层与流派。',
+  '化权':'四化之一。传统象义常取推动、主导、责任和执行，也可能提示控制感或压力。它不是现实权力、升职或成功的保证。',
+  '化科':'四化之一。传统象义常取学习、表达、规范、名誉与缓冲。它不保证考试通过、贵人出现或问题自动解决。',
+  '化忌':'四化之一。传统象义常取牵挂、反复投入、受阻或需要处理的议题。不是灾祸判定；需看具体星曜、宫位、会照、时间层和所用流派。',
+  '三方四正':'以一个宫位为中心，同时参考本宫、对宫和两个三合宫的星曜与四化。各家对星曜范围、权重和会照规则有差异，本站采用当前排盘规则，不代表唯一标准。',
+  '大限':'按五行局、顺逆等规则划分的十年时间段。页面显示的是排盘规则下的年龄与宫位，不是十年内一定发生的事件。',
+  '流年':'按年度规则观察命宫、四化等位置变化。紫微流年常按农历年干支取值；公历与农历新年交界时需明确口径。流年象意不是事件清单。',
+  '流月':'按农历月份与采用的起月规则观察四化和宫位变化。闰月拆分、起月法存在流派差异；本站的月份序号是引擎默认实现。',
+  '自化':'宫干使宫内星曜出现四化的盘面关系。不同流派对自化、离心/向心及飞化链的定义不完全一致，本站按当前规则展示，不把它简化成“能量漏掉”或损失。',
+  '来因宫':'部分流派使用的宫位概念，常按生年天干等规则定位，并赋予个人主题解释。它不是所有紫微体系共有的核心，也不能证明人生目的。',
+  '庙旺':'部分亮度体系给星曜的状态标记。亮度表的来源、适用星曜和等级划分依流派而异，不是客观能量或能力测量。',
+  '落陷':'传统亮度表中的状态标记之一。不能单凭它判定星曜“无力”、人格缺点或现实不顺，需核对所用表格和全盘组合。',
+  '空宫':'某宫没有主星。部分流派会借看对宫主星及三方四正；空宫不是缺陷，也不代表少主见、人生空白或没有相关主题。',
+  '命宫':'紫微盘十二宫之一，是传统排盘的重要观察位。其星曜组合属于象意解释，不等同于完整人格、心理量表或人生定论。',
+  '身宫':'按出生时辰等规则定位的观察宫位，传统上常用于讨论行动落点或后天关注。不存在各派都认可的固定年龄界线，也不是“中年后才生效”。',
+  '五行局':'由命盘规则推得的水二局、木三局等分类，参与安星与大限起法。它是体系内部的计算参数，不是科学测得的个人属性。',
+  '禄转忌':'部分飞星技法追踪化禄落点与该宫宫干再次化忌的关系。属于特定流派的推演方法，口径和成立条件应单独说明，不宜直接写成“得到必付代价”。',
+  '十神':'八字体系以日主与其他天干地支的生克关系建立的分类。十神取象随性别、格局和流派有不同解法，不是稳定的人格或职业标签。',
+  '日主':'八字日柱的天干，是许多八字分析的参照中心。日主五行由排盘规则决定；解读还要看月令、通根、组合与采用的流派。',
 };
+
 function withTerms(text){
   let out = esc(text);
   Object.keys(TERM_DICT).forEach(t => {
@@ -2352,173 +1923,126 @@ document.addEventListener('click', e => {
 const GONG_SHORT = { '命宫':'自我与活法','兄弟宫':'同辈与合伙','夫妻宫':'亲密关系','子女宫':'晚辈与作品','财帛宫':'钱与价值','疾厄宫':'身体与情绪','迁移宫':'外部世界','交友宫':'人际圈层','官禄宫':'事业','田宅宫':'家与安稳','福德宫':'精神世界','父母宫':'长辈与平台' };
 const NEI6 = ['命宫','夫妻宫','财帛宫','疾厄宫','官禄宫','田宅宫']; // 六内：忌入为收藏
 const SELF_HUA_SAY = {
-  '禄':'得到的不太守得住——来得快散得也快，落袋为安最实在',
-  '权':'容易自作主张、用力过猛，事后常觉得没必要',
-  '科':'习惯报喜不报忧，把体面留在外面，压力自己咽',
-  '忌':'自己跟自己较劲——想到就做、不管后果，是漏也是功课',
+  '禄':'传统上可观察资源如何回流、是否容易重复投入；不表示资源必然流失',
+  '权':'传统上可观察主导与责任如何落在自己身上；不等于控制欲判断',
+  '科':'传统上可观察表达、规范与对外呈现；不代表必须隐藏情绪',
+  '忌':'传统上可观察牵挂与反复处理的议题；不是缺点或必然受阻',
 };
 function flySay(fromName, hua, toName){
-  const nei = NEI6.includes(toName);
-  const A = GONG_SHORT[fromName] || fromName, B = GONG_SHORT[toName] || toName;
-  if(fromName === toName) return hua === '忌'
-    ? `这份${A}的在意全压在本宫——想放放不下，是这一宫最重的功课`
-    : hua === '禄' ? `这份${A}的福气在本宫坐拥——得到不难，守住才见本事` : `这份${A}的能量在本宫自我加强`;
-  if(hua === '忌') return nei
-    ? `这份${A}的在意，最后落在自己的${B}上——操心是操心，但都记在自己账上，付出有数`
-    : `这份${A}的牵挂流向${B}——容易为${B}的人与事费心，付出未必记着回报`;
-  if(hua === '禄') return nei
-    ? `${A}的福气会流回自己${B}——越经营越顺，机会愿意找你`
-    : `${A}的机会撒向${B}——要主动去接，坐等不来`;
-  if(hua === '权') return nei
-    ? `在${B}这件事上你天生想说了算——是掌控力，也容易用力过猛`
-    : `你的${A}会去主导${B}——能量外放，注意分寸`;
-  return `在${B}上你习惯留体面、给台阶——贵人和好名声藏在细节里`;
+  const A=GONG_SHORT[fromName]||fromName,B=GONG_SHORT[toName]||toName;
+  const meaning={'禄':'资源、连接或回应','权':'推动、责任或主导','科':'表达、规范或认可','忌':'牵挂、反复投入或待处理议题'}[hua]||'传统象意';
+  return '按本站采用的飞化规则，'+A+'相关的化'+hua+'落在'+B+'。传统解读可把它作为“'+meaning+'”的观察线索；它不说明现实中一定发生什么，需结合全盘、时间层和实际情况。';
 }
 function selfSay(palName, hua){
-  const A = GONG_SHORT[palName] || palName;
-  return `${A}上${SELF_HUA_SAY[hua].split('——')[0]}——${SELF_HUA_SAY[hua].split('——')[1]}`;
+  const A=GONG_SHORT[palName]||palName;
+  return A+'宫自化'+hua+'：'+(SELF_HUA_SAY[hua]||'按本站规则显示的传统象意线索')+'。不同流派定义可能不同，不能单独断吉凶。';
 }
 /* ---------- 择日助手：未来 30 天按事项推荐 ---------- */
 const ZERI_TYPES = [
-  { k:'sign', name:'签约 · 面试', good:['官禄宫','父母宫'], bad:['官禄宫'] },
-  { k:'love', name:'告白 · 求婚', good:['夫妻宫','福德宫'], bad:['夫妻宫'] },
-  { k:'move', name:'出行 · 搬家', good:['迁移宫','田宅宫'], bad:['迁移宫'] },
-  { k:'open', name:'开业 · 启动', good:['官禄宫','财帛宫'], bad:['官禄宫','财帛宫'] },
+  { k:'sign', name:'签约 · 面试', palaces:['官禄宫','父母宫'], prompt:'核对职责、薪酬、交付范围、试用期与退出条款；面试则确认岗位要求、流程和双方预期。' },
+  { k:'love', name:'关系沟通', palaces:['夫妻宫','福德宫'], prompt:'确认双方意愿与边界；重要承诺留给充分沟通，不以盘面替代对方明确表达。' },
+  { k:'move', name:'出行 · 搬家', palaces:['迁移宫','田宅宫'], prompt:'核对交通、天气、证件、预算、合同与备选方案；安全和现实条件优先。' },
+  { k:'open', name:'开业 · 项目启动', palaces:['官禄宫','财帛宫'], prompt:'确认目标用户、预算、责任人、交付标准和风险预案；先做可逆的小规模验证。' },
 ];
-function solarToLunarIn(dateMs, starts){
-  const d = new Date(dateMs);
-  for(let i = starts.length - 1; i >= 0; i--){
-    const diff = Math.floor((d - starts[i]) / 864e5);
-    if(diff >= 0){
-      const len = i + 1 < starts.length ? Math.floor((starts[i + 1] - starts[i]) / 864e5) : 30;
-      if(diff < len) return { lm: i + 1, ld: diff + 1 };
-    }
-  }
-  return null;
-}
 function renderZeri(){
-  const rec = cur();
-  const box = $('#zeri-body');
-  if(!box) return;
-  if(!rec){ box.innerHTML = '<div class="empty">先排一张盘，择日按你的命盘算。</div>'; return; }
-  const chart = rec.chart;
-  const year = new Date().getFullYear();
-  box.innerHTML = '<p class="hint">正在按农历推日…</p>';
-  setTimeout(async () => {
-    const starts = await lunarMonthStartsAsync(year, p => { box.innerHTML = `<p class="hint">推算农历月界… ${Math.round(p * 100)}%</p>`; });
-    if(!starts.length){ box.innerHTML = '<div class="empty">农历数据暂缺，稍后再试。</div>'; return; }
-    box.innerHTML = `<select id="zeri-type">${ZERI_TYPES.map(t => `<option value="${t.k}">${t.name}</option>`).join('')}</select><div id="zeri-out"></div>`;
-    const sel = box.querySelector('#zeri-type'), out = box.querySelector('#zeri-out');
-    const draw = () => {
-      const t = ZERI_TYPES.find(x => x.k === sel.value) || ZERI_TYPES[0];
-      const goodB = t.good.map(n => palaceByName(chart, n).branch);
-      const badB = t.bad.map(n => palaceByName(chart, n).branch);
-      const mingB = chart.mingGongBranch;
-      const dj = doujunBranch(chart, year);
-      const days = [];
-      const today = new Date(); today.setHours(0, 0, 0, 0);
-      for(let i = 1; i <= 30; i++){
-        const dm = +today + i * 864e5;
-        const ll = solarToLunarIn(dm, starts);
-        if(!ll) continue;
-        let sh = null; try{ sh = E.getLiuRiSiHua(year, ll.lm, ll.ld); }catch(e){ sh = null; }
-        if(!sh) continue;
-        const starPal = k => { const pal = chart.palaces.find(p => p.stars.some(s => s.name === sh[k])); return pal ? pal.branch : -1; };
-        let sc = 0; const why = [];
-        const luB = starPal('lu');
-        if(luB >= 0 && goodB.includes(luB)){ sc += 3; why.push('流日禄入' + t.good[goodB.indexOf(luB)]); }
-        const keB = starPal('ke');
-        if(keB >= 0 && goodB.includes(keB)){ sc += 1.5; why.push('科入关键宫'); }
-        const jiB = starPal('ji');
-        if(jiB >= 0 && badB.includes(jiB)){ sc -= 3; why.push('忌落' + t.bad[badB.indexOf(jiB)]); }
-        if(jiB >= 0 && jiB === (mingB + 6) % 12){ sc -= 2; why.push('忌冲命宫'); }
-        const hl = ((dj + ll.lm - 1 + ll.ld - 1) % 12 + 12) % 12;
-        if(goodB.includes(hl)){ sc += 1; why.push('流日命宫行至关键宫'); }
-        days.push({ dm: new Date(dm), lm: ll.lm, ld: ll.ld, sc, why: why.slice(0, 2) });
+  const rec=cur(),box=$('#zeri-body');
+  if(!box)return;
+  if(!rec){box.innerHTML='<div class="empty">先排一张盘，再查看按当前规则生成的流日四化参考。</div>';return;}
+  const chart=rec.chart,today=bjDate();
+  box.innerHTML='<p class="hint">正在核对未来 30 天的农历日期与流日四化…</p>';
+  setTimeout(()=>{
+    try{
+      const days=[];
+      for(let offset=1;offset<=30;offset++){
+        const utc=new Date(Date.UTC(today.y,today.m-1,today.d+offset));
+        const y=utc.getUTCFullYear(),m=utc.getUTCMonth()+1,d=utc.getUTCDate();
+        const dc=E.generateChart({year:y,month:m,day:d,hour:0,gender:'male'}),li=dc&&dc.lunarInfo;
+        if(!li||!Number.isInteger(li.lunarYear)||!Number.isInteger(li.lunarMonth)||!Number.isInteger(li.lunarDay)||li.lunarMonth<1||li.lunarMonth>12||li.lunarDay<1||li.lunarDay>30){
+          throw new Error('lunar-date-unavailable-'+offset);
+        }
+        const sh=normSihua(E.getLiuRiSiHua(li.lunarYear,li.lunarMonth,li.lunarDay));
+        if(!sh||!sh.lu||!sh.quan||!sh.ke||!sh.ji)throw new Error('liu-ri-sihua-unavailable-'+offset);
+        const dest={};
+        [['禄','lu'],['权','quan'],['科','ke'],['忌','ji']].forEach(([name,key])=>{dest[name]=sihuaStarPalace(chart,sh[key]);});
+        const dj=doujunBranch(chart,li.lunarYear);
+        if(!Number.isInteger(dj)||dj<0||dj>11)throw new Error('doujun-unavailable-'+offset);
+        const focus=palaceByBranch(chart,((dj+li.lunarMonth-1+li.lunarDay-1)%12+12)%12);
+        if(!focus)throw new Error('flow-palace-unavailable-'+offset);
+        days.push({y,m,d,lm:li.lunarMonth,ld:li.lunarDay,sh,dest,focus:disp(focus.name)});
       }
-      days.sort((a, b) => b.sc - a.sc);
-      const top = days.slice(0, 3), worst = days.slice(-3).filter(d => d.sc < 0).slice(0, 2);
-      const fmtD = d => `${d.getMonth() + 1}月${d.getDate()}日`;
-      out.innerHTML =
-        `<div class="zeri-block"><b class="z-title ok">优先考虑</b>` + top.map(d =>
-          `<div class="z-row"><span class="z-date">${fmtD(d.dm)}</span><span class="z-lunar">农历${d.lm}月${d.ld}</span><span class="z-why">${d.why.join('，') || '综合平稳'}</span></div>`).join('') + '</div>' +
-        (worst.length ? `<div class="zeri-block"><b class="z-title bad">缓一缓</b>` + worst.map(d =>
-          `<div class="z-row"><span class="z-date">${fmtD(d.dm)}</span><span class="z-lunar">农历${d.lm}月${d.ld}</span><span class="z-why">${d.why.join('，') || '杂事多'}</span></div>`).join('') + '</div>' : '') +
-        `<p class="hint" style="margin:8px 0 0">按流日四化落入事项相关宫位、忌冲命宫与流日命宫行止打分。择日是挑顺风，不是成败开关。</p>`;
-    };
-    sel.addEventListener('change', draw);
-    draw();
-  }, 30);
+      if(days.length!==30)throw new Error('incomplete-calendar');
+      box.innerHTML='<label class="zeri-label" for="zeri-type">选择现实议题</label><select id="zeri-type">'+ZERI_TYPES.map(t=>'<option value="'+esc(t.k)+'">'+esc(t.name)+'</option>').join('')+'</select>'+
+        '<p class="hint zeri-note">此处不是择吉工具：不评吉凶、不排序日期、不预测成功率。下列内容只展示当前排盘规则下的传统流日命宫与四化落点，并附现实核对清单。</p><div id="zeri-out" class="zeri-calendar"></div>';
+      const sel=box.querySelector('#zeri-type'),out=box.querySelector('#zeri-out');
+      const draw=()=>{
+        const t=ZERI_TYPES.find(x=>x.k===sel.value)||ZERI_TYPES[0];
+        out.innerHTML=days.map(day=>{
+          const date=new Date(Date.UTC(day.y,day.m-1,day.d));
+          const dateLabel=new Intl.DateTimeFormat('zh-CN',{timeZone:'Asia/Shanghai',month:'long',day:'numeric',weekday:'short'}).format(date);
+          const details=[['禄','lu'],['权','quan'],['科','ke'],['忌','ji']].map(([name,key])=>'<span><b>化'+name+'</b> '+esc(day.sh[key])+' → '+esc(day.dest[name]||'本命盘未见该星')+'</span>').join('');
+          return '<article class="zeri-day"><header><b>'+dateLabel+'</b><span>农历'+day.lm+'月'+day.ld+'日</span></header>'+
+            '<p class="zeri-focus">流日命宫参考：'+esc(day.focus)+'<br>议题相关宫位：'+esc(t.palaces.join('、'))+'</p><div class="zeri-hua">'+details+'</div>'+
+            '<p class="hint">现实核对：'+esc(t.prompt)+'</p><p class="hint">四化落点仅是传统符号对应，不表示当天更适合或不适合该事项；流派和排盘口径不同，结果可能不同。</p></article>';
+        }).join('');
+      };
+      sel.addEventListener('change',draw);draw();
+    }catch(err){box.innerHTML='<div class="empty">未来 30 天的日期或流日规则未能完整核实，因此暂不显示部分日历，避免遗漏造成误读。请稍后重试或核对排盘口径。</div>';}
+  },30);
 }
 const SIGN_LIB = [
-  { lv:'吉', t:'云开月明', s:'浮云散尽月当空，守得安静自光明。', yi:'静候 · 复盘', jie:'急事缓办，答案会自己浮上来' },
-  { lv:'吉', t:'春风渡水', s:'春风不问来时路，渡水穿林自有时。', yi:'启动 · 联络', jie:'该开口的事，今天就开口' },
-  { lv:'吉', t:'灯下有米', s:'灯下有米灶有烟，寻常日子最养人。', yi:'归家 · 好好吃饭', jie:'别把近处的安稳看轻了' },
-  { lv:'吉', t:'星垂平野', s:'星垂平野阔，路是走宽的。', yi:'远行 · 见世面', jie:'把视野放大，事就变小' },
-  { lv:'吉', t:'静水流深', s:'静水流深处，暗自用力时。', yi:'深耕 · 打磨手艺', jie:'不响，并不代表没有在涨' },
-  { lv:'吉', t:'贵人指路', s:'山重水复处，恰好有人提灯来。', yi:'请教 · 合作', jie:'张口问一句，少走三天弯路' },
-  { lv:'吉', t:'瓜熟蒂落', s:'瓜熟自然落，功到自然成。', yi:'收尾 · 交付', jie:'临门一脚别慌，稳稳送出去' },
-  { lv:'吉', t:'旧友重逢', s:'旧友一席话，胜读十年书。', yi:'叙旧 · 道谢', jie:'有个该联系的人，今天就联系' },
-  { lv:'吉', t:'月满则近', s:'月将满时最好看，事将成时最要稳。', yi:'守成 · 查漏', jie:'最后一公里，慢就是快' },
-  { lv:'吉', t:'雪后初晴', s:'雪压枝头终有时，一朝晴日照新姿。', yi:'翻身 · 恢复', jie:'低谷不是句号，是逗号' },
-  { lv:'中', t:'雾里看山', s:'雾里看山山不远，等风来时自分明。', yi:'观察 · 暂缓表态', jie:'看不清的事，先不急着下结论' },
-  { lv:'中', t:'磨刀待时', s:'磨刀不误砍柴工，慢工细活见真章。', yi:'准备 · 学习', jie:'还没到出手的时候，先把刀磨快' },
-  { lv:'中', t:'小舟过滩', s:'小舟过滩水声急，掌稳了篙不回头。', yi:'专注 · 单点突破', jie:'这段水急，别左顾右盼' },
-  { lv:'中', t:'半盏茶', s:'半盏茶凉半盏温，世间事多半留一半。', yi:'降低期待 · 接受不完美', jie:'七八分好，就是很好' },
-  { lv:'中', t:'移树问土', s:'移树先问土，换轨先问心。', yi:'权衡 · 调研', jie:'大动作之前，先做小调研' },
-  { lv:'中', t:'补屋趁晴', s:'补屋要趁天晴时，未雨绸缪是聪明。', yi:'体检 · 排险 · 备份', jie:'顺手把隐患处理了' },
-  { lv:'中', t:'同舟共渡', s:'一人摇橹慢，同舟渡水宽。', yi:'求助 · 分工', jie:'能分担的，别一个人扛' },
-  { lv:'中', t:'种豆得豆', s:'种豆得豆种瓜瓜，功夫不负种田人。', yi:'投入 · 积累', jie:'今天撒的种，秋后见分晓' },
-  { lv:'中', t:'借风使船', s:'好风凭借力，送我上青云。', yi:'借势 · 用工具', jie:'有现成的顺风，何必硬顶风走' },
-  { lv:'中', t:'纸上行舟', s:'纸上得来终觉浅，绝知此事要躬行。', yi:'动手 · 试错', jie:'想清楚了就去试，别再纸上演算' },
-  { lv:'中', t:'巷口灯昏', s:'巷口灯昏路仍明，走慢一点也到家。', yi:'休息 · 早睡', jie:'累了的信号，别用咖啡盖过去' },
-  { lv:'中', t:'秤上称心', s:'人心如秤自称心，公道自在 明白人。', yi:'公正 · 说明白话', jie:'把话说清楚，误会就少一半' },
-  { lv:'平', t:'逆水行舟', s:'逆水行舟用力撑，一篙松劲退千寻。', yi:'坚持 · 别松手', jie:'这段费劲，但退一步更亏' },
-  { lv:'平', t:'独木桥', s:'独木桥上让三分，不是怕来是格局。', yi:'退让 · 避争', jie:'争赢一口气，输掉一局棋' },
-  { lv:'平', t:'叶落知秋', s:'一叶落而知秋，见微知著早调头。', yi:'复盘 · 及时止损', jie:'坏消息越早面对，代价越小' },
-  { lv:'平', t:'井底观天', s:'井底观天天亦小，出去走走再说话。', yi:'换个环境 · 换个脑子', jie:'困住你的可能是视角不是处境' },
-  { lv:'平', t:'多歧路', s:'岔路多时莫赶路，坐下画张图再走。', yi:'暂停 · 理优先级', jie:'选择焦虑的解药是排序' },
-  { lv:'平', t:'酒逢知己', s:'酒逢知己千杯少，话不投机半句多。', yi:'筛选社交 · 少凑热闹', jie:'无效的局，推了就推了' },
-  { lv:'平', t:'悬而未决', s:'悬而未决最磨人，设个期限安己心。', yi:'给拖延的事定截止日', jie:'悬着的事，今天推它一步' },
-  { lv:'平', t:'守拙', s:'藏巧于拙用处大，锋芒收在鞘中藏。', yi:'低调 · 蓄力', jie:'这一阵，让作品替你说话' },
+  { t:'先看事实', s:'把手头最重要的一件事写成一句可核对的事实。', yi:'整理信息', jie:'不确定的部分先标出来，不急着补成结论' },
+  { t:'留出余地', s:'给今天的安排留一点缓冲，避免把每一分钟都排满。', yi:'安排缓冲', jie:'计划要能容纳变化' },
+  { t:'小步验证', s:'把一个大问题拆成今天能验证的小步骤。', yi:'先做小实验', jie:'先观察结果，再决定要不要扩大' },
+  { t:'把话说清', s:'沟通前先写下目的、事实和希望对方确认的事项。', yi:'明确表达', jie:'确认彼此理解一致' },
+  { t:'检查边界', s:'看看近期承诺是否超出时间、预算或精力范围。', yi:'核对承诺', jie:'必要时及时协商调整' },
+  { t:'回看进度', s:'用十分钟记录已完成、待解决和需要求助的事项。', yi:'复盘进度', jie:'把下一步写具体' },
+  { t:'补充证据', s:'对重要判断再找一条可靠信息来源，核对日期和条件。', yi:'查证信息', jie:'观点与事实分开记录' },
+  { t:'照顾节奏', s:'给工作、休息和必要的生活事务各留出时间。', yi:'调整节奏', jie:'身体不适请寻求专业医疗建议' },
+  { t:'明确优先级', s:'从待办中选出最重要的一项，暂缓一件低优先级任务。', yi:'做减法', jie:'清晰比忙碌更有用' },
+  { t:'确认条件', s:'涉及金钱、合同或合作时，逐项确认金额、责任和期限。', yi:'核对条款', jie:'不清楚的地方先问明白' },
+  { t:'记录灵感', s:'把新想法记下来，并补上一条最低成本的验证办法。', yi:'形成假设', jie:'灵感先验证，不急着下结论' },
+  { t:'建立备份', s:'为一个重要文件、日程或项目进度准备可恢复的副本。', yi:'留好备份', jie:'重要安排同时确认替代方案' },
+  { t:'主动求助', s:'找一位相关的人确认你卡住的具体问题。', yi:'提出具体请求', jie:'把背景、目标和所需帮助说清楚' },
+  { t:'听完再答', s:'遇到分歧时先复述对方的意思，再表达自己的判断。', yi:'确认理解', jie:'避免用猜测代替对话' },
+  { t:'观察变化', s:'记录一项正在变化的指标，并确认它的统计口径。', yi:'留意趋势', jie:'单次波动不等于长期结论' },
+  { t:'复用经验', s:'从过去做成的一件事里提炼一个可以复用的步骤。', yi:'沉淀方法', jie:'保留适用条件' },
+  { t:'做一次收尾', s:'把一项接近完成的工作补上验收、归档或交接。', yi:'完成闭环', jie:'交付标准要让双方都清楚' },
+  { t:'检查预算', s:'看看本月支出与计划的差异，确认是否需要调整。', yi:'核对预算', jie:'不依据运势做投资或借贷决定' },
+  { t:'整理空间', s:'整理一个常用位置，让下一步更容易开始。', yi:'减少阻力', jie:'一次只改一个小地方' },
+  { t:'重新估时', s:'根据实际进度调整一项任务的时间预期。', yi:'更新计划', jie:'把依赖条件也写进去' },
+  { t:'设定边界', s:'为一段高频打断设一个可执行的回应时间。', yi:'保护专注', jie:'提前告知相关的人' },
+  { t:'主动感谢', s:'对一项具体帮助表达感谢，并说明它带来的实际作用。', yi:'建立连接', jie:'具体而真诚即可' },
+  { t:'删掉噪音', s:'从信息源中暂停一个低价值提醒或重复通知。', yi:'减少打扰', jie:'给注意力留出空间' },
+  { t:'练习一次', s:'为面试、演讲或考试做一轮计时练习并复盘。', yi:'模拟练习', jie:'用反馈改进下一轮' },
+  { t:'确认需求', s:'开始新任务前，先确认目标、受众和完成标准。', yi:'对齐预期', jie:'避免返工从提问开始' },
+  { t:'梳理风险', s:'写下一个方案最可能遇到的阻碍和应对办法。', yi:'预想风险', jie:'让预案具体到负责人和时间' },
+  { t:'允许暂停', s:'如果状态不适合做重大决定，可以先记录问题并设定复查时间。', yi:'暂缓不可逆决定', jie:'必要时向可信赖的人求助' },
+  { t:'兑现承诺', s:'完成一项已经答应的小事，或及时告知无法按期完成。', yi:'及时同步', jie:'尽早沟通有助于重新安排' },
+  { t:'留存来源', s:'把一条重要信息的出处、日期和适用范围一并记下。', yi:'保存证据', jie:'转述前再次核实' },
+  { t:'安排下一步', s:'今天结束前，写下明天启动工作所需的第一个动作。', yi:'降低启动成本', jie:'让计划足够小、足够明确' },
 ];
-const SIGN_LV_CLS = { '吉':'lv-ji', '中':'lv-zhong', '平':'lv-ping' };
-const CN_NUM = ['一','二','三','四','五','六','七','八','九','十','十一','十二','十三','十四','十五','十六','十七','十八','十九','二十','二十一','二十二','二十三','二十四','二十五','二十六','二十七','二十八','二十九','三十'];
 function dailySign(rec){
   const bd = bjDate();
-  const seed = (rec ? rec.id : 'guest') + '|' + bd.y + '-' + bd.m + '-' + bd.d;
+  const seed = 'daily-review|' + bd.y + '-' + bd.m + '-' + bd.d;
   const rnd = mulberry([...seed].reduce((a, c) => (a * 31 + c.charCodeAt(0)) | 0, 7));
   const idx = Math.floor(rnd() * SIGN_LIB.length);
-  return { no: '第' + CN_NUM[idx] + '签', ...SIGN_LIB[idx], lvCls: SIGN_LVCls(SIGN_LIB[idx].lv) };
+  return {no:'今日 '+String(idx+1).padStart(2,'0'),...SIGN_LIB[idx],lv:'复盘问题',lvCls:'lv-zhong'};
 }
 function SIGN_LVCls(lv){ return { '吉':'lv-ji', '中':'lv-zhong', '平':'lv-ping' }[lv] || 'lv-zhong'; }
-/* 今日顺时：日支的三合/六合时支（硬规则，不装神弄鬼） */
-function luckyHoursToday(){
-  const li = todayLunar();
-  const dayGz = li && li.fourPillars && li.fourPillars[2];
-  if(!dayGz) return null;
-  const b = BR.indexOf(dayGz[1]);
-  if(b < 0) return null;
-  const liuHe = (b + 6) % 12;                       // 六合
-  const groups = [[0,4,8],[1,5,9],[2,6,10],[3,7,11]]; // 三合局
-  const g = groups.find(gr => gr.includes(b));
-  const picks = [...new Set([liuHe, ...g.filter(x => x !== b)])];
-  return picks.map(x => `${BR[x]}时（${SHICHEN[x === 0 ? 0 : x].range}）`).join(' · ');
-}
 /* 今日小运 · 流日定制版：流日命宫点亮本命哪一宫＋流日四化飞到哪＝每天每人都不一样 */
 const DAILY_FOCUS_SAY = {
-  '命宫': '今天是你自己的主场，适合主动推进重要的事',
-  '兄弟宫': '今天适合跟朋友、同辈多走动，有人能搭把手',
-  '夫妻宫': '今天感情和人际的事会被放大，对人多点耐心',
-  '子女宫': '今天适合陪孩子/晚辈，也适合给创意留点时间',
-  '财帛宫': '今天和钱有关的事多留一眼，进出都算清楚点',
-  '疾厄宫': '今天身体在说话，别硬扛，早点休息不丢人',
-  '迁移宫': '今天适合出门、见人、换个环境，动起来有收获',
-  '交友宫': '今天人脉有动静，主动组个局、回个人情',
-  '官禄宫': '今天正事运在线，最重要的事排在最前面',
-  '田宅宫': '今天适合处理家里、房子、家人的事，宜安内',
-  '福德宫': '今天给自己留点空白，别把日程排太满',
-  '父母宫': '今天适合跟长辈、上级通个气，开口比想的顺',
+  '命宫':'今天可自问：最重要的一件事是什么？',
+  '兄弟宫':'今天可自问：哪些合作需要把分工说得更清楚？',
+  '夫妻宫':'今天可自问：我是否把猜测当成了对方的真实想法？',
+  '子女宫':'今天可自问：是否给创作、学习或照料留出合适时间？',
+  '财帛宫':'今天可自问：这项支出是否符合预算与实际需要？',
+  '疾厄宫':'今天可自问：身体状态是否需要休息或专业关注？',
+  '迁移宫':'今天可自问：出行与环境变化的事实条件是否核对完整？',
+  '交友宫':'今天可自问：合作边界、承诺和信息是否说清楚？',
+  '官禄宫':'今天可自问：当前最重要的工作目标和验收标准是什么？',
+  '田宅宫':'今天可自问：家庭空间或待办事项中，什么最值得先处理？',
+  '福德宫':'今天可自问：什么活动能帮助我恢复精力？',
+  '父母宫':'今天可自问：与长辈或组织沟通时，需求是否表达具体？',
 };
 /* 今日的农历信息：借引擎排一张"今日盘"读 lunarInfo（本地计算，不存档） */
 function todayLunar(){
@@ -2530,50 +2054,38 @@ function todayLunar(){
 }
 /* 按命盘定制的今日小运文本；无盘或算不出时返回 null（调用方用通用版兜底） */
 function dailyFortuneFor(chart){
-  if(!chart) return null;
-  const li = todayLunar(); if(!li || !li.lunarMonth || !li.lunarDay) return null;
-  let sh = null;
-  try{ sh = normSihua(E.getLiuRiSiHua(li.lunarYear, li.lunarMonth, li.lunarDay)); }catch(e){}
-  if(!sh) return null;
-  const dj = doujunBranch(chart, li.lunarYear);
-  const hl = (((dj + (li.lunarMonth - 1) + (li.lunarDay - 1)) % 12) + 12) % 12;
-  const focusP = palaceByBranch(chart, hl);
-  const focusName = disp(focusP.name);
-  let focusSay = DAILY_FOCUS_SAY[focusName] || '今天这块多分一点注意力';
-  if(focusP.isMingGong){
-    const ms = focusP.stars.filter(s => s.type === 'major').map(s => s.name).join('、') || '空宫';
-    focusSay = `流日命宫回到你的命宫（${ms}坐镇），${DAILY_FOCUS_SAY['命宫']}`;
-  }
-  const natal = natalSihuaMap(chart);
-  const natalJiPal = (natal['忌'] || []).map(e => e.palace);
-  const parts = [`今天流日命宫点亮你的【${focusName}】：${focusSay}`];
-  const luPal = sh.lu ? sihuaStarPalace(chart, sh.lu) : '';
-  const jiPal = sh.ji ? sihuaStarPalace(chart, sh.ji) : '';
-  if(luPal) parts.push(`流日化禄在【${luPal}】，这块有小顺风，适合把好事往前推`);
-  if(jiPal){
-    const dbl = natalJiPal.includes(jiPal) ? '，又和你的本命化忌叠在一处，今天这块别硬扛' : '';
-    parts.push(`要留神的是流日化忌在【${jiPal}】${dbl}，慢半拍、留余地`);
-  }
-  return parts.join('；') + '。';
+  if(!chart)return null;
+  const li=todayLunar();if(!li||!Number.isInteger(li.lunarYear)||!Number.isInteger(li.lunarMonth)||!Number.isInteger(li.lunarDay)||li.lunarMonth<1||li.lunarMonth>12||li.lunarDay<1||li.lunarDay>30)return null;
+  let sh=null;try{sh=normSihua(E.getLiuRiSiHua(li.lunarYear,li.lunarMonth,li.lunarDay));}catch(e){}
+  if(!sh)return null;
+  const dj=doujunBranch(chart,li.lunarYear);
+  const branch=((dj+li.lunarMonth-1+li.lunarDay-1)%12+12)%12;
+  const focus=palaceByBranch(chart,branch),focusName=focus?disp(focus.name):'命宫';
+  const parts=['按当前传统流日规则，今天的观察焦点落在本命'+focusName+'；可用这个主题提出一个问题：'+(DAILY_FOCUS_SAY[focusName]||'今天哪些事实值得核对？')];
+  [['禄','lu'],['权','quan'],['科','ke'],['忌','ji']].forEach(([name,key])=>{
+    const star=sh[key],palace=star?sihuaStarPalace(chart,star):'';
+    if(star)parts.push('流日化'+name+'为'+star+(palace?'，落本命'+palace:'')+'。这是传统符号对应，不代表当天发生好事或坏事');
+  });
+  return parts.join('；')+'。';
 }
 function renderHome(){
-  // 每日一签：同盘同日固定一支，明早自动换；有盘附流日小运作"解曰"
+  // 每日复盘提示：固定行动问题；盘面部分仅呈现传统流日象意
   const bd = bjDate();
   const rec = cur();
   const custom = rec ? dailyFortuneFor(rec.chart) : null;
   const key = bd.y*372 + bd.m*31 + bd.d;
   const generic = D.dailyFortunes[key % D.dailyFortunes.length];
   const sign = dailySign(rec);
-  $('#daily-kicker').textContent = rec ? `${rec.name}的每日一签` : '每日一签';
+  $('#daily-kicker').textContent = rec ? `${rec.name}的每日复盘提示` : '每日复盘提示';
   $('#daily-text').innerHTML =
     `<div class="sign-head"><span class="sign-no">${sign.no}</span>` +
     `<span class="sign-lvl ${sign.lvCls}">${sign.lv}</span><span class="sign-title">${esc(sign.t)}</span></div>` +
     `<div class="sign-text">${esc(sign.s)}</div>` +
     `<p class="sign-yi" style="margin:2px 0 6px"><b>宜</b> ${esc(sign.yi)}　<b>提醒</b> ${esc(sign.jie)}</p>` +
-    `<p class="hint" style="margin:6px 0 0">解曰：${esc(custom || generic)}</p>`;
-  // 今日顺时（地支三合/六合）
-  const lh = luckyHoursToday();
-  $('#daily-lucky-hours').textContent = lh ? `今日顺时：${lh} ｜ 按日支合气推的顺时，供参考` : '';
+    `<p class="hint" style="margin:6px 0 0">盘面反思线索（传统象意，不是事件预测）：${esc(custom || generic)}</p>`;
+  // 不按民俗合支生成“吉时”建议；今日四柱信息已在日期与命盘口径中展示。
+  const luckyHours = $('#daily-lucky-hours');
+  if(luckyHours) luckyHours.textContent = ''; 
   // hero 今日一行 + 犯太岁
   renderTaisuiCard();
   const li2 = todayLunar();
@@ -2587,7 +2099,7 @@ function renderHome(){
     if(mp){ phc.hidden = false; $('#portrait-home-body').innerHTML = mp; }
     else phc.hidden = true;
   } else if(phc) phc.hidden = true;
-  $('#daily-date').textContent = `${bd.m} 月 ${bd.d} 日${gz2}${custom ? '' : ' · 排一张盘，签与解按你的命盘定制'}`;
+  $('#daily-date').textContent = `${bd.m} 月 ${bd.d} 日${gz2}${custom ? '' : ' · 排盘后可查看传统流日参考'}`;
   // hero 主按钮智能化：有盘→查看命盘，无盘→开始排盘
   const cta = document.querySelector('.hn-cta');
   if(cta){
@@ -2595,83 +2107,62 @@ function renderHome(){
     else { cta.textContent = '开始排盘 →'; cta.dataset.nav = 'input'; }
   }
 }
-/* 轻合拍：分享链接打开对方的盘时，与本机「我」的盘快评（日柱合/生肖/紫微互飞） */
+/* 命盘交叉参考：只列规则结构对应，不计算适配度或关系结论 */
 const GAN5_HE = { '甲':'己','乙':'庚','丙':'辛','丁':'壬','戊':'癸','己':'甲','庚':'乙','辛':'丙','壬':'丁','癸':'戊' };
 const ZHI6_HE = { '子':'丑','丑':'子','寅':'亥','亥':'寅','卯':'戌','戌':'卯','辰':'酉','酉':'辰','巳':'申','申':'巳','午':'未','未':'午' };
 const ZHI3_HE = [['申','子','辰'],['寅','午','戌'],['巳','酉','丑'],['亥','卯','未']];
 function heCardData(chartA, chartB, nameA, nameB){
-  const gzA = chartA.lunarInfo.fourPillars[2], gzB = chartB.lunarInfo.fourPillars[2];
-  const rows = []; let score = 60;
-  const sA = BR.indexOf(gzA[1]), sB = BR.indexOf(gzB[1]);
-  const zodiac = b => '鼠牛虎兔龙蛇马羊猴鸡狗猪'[b];
-  if(GAN5_HE[gzA[0]] === gzB[0]){ score += 10; rows.push({ tag:'日干五合', cls:'lu', text:`你们日柱天干${gzA[0]}${gzB[0]}相合（天干五合）——天然互相吸引，气场对得上` }); }
-  if(ZHI6_HE[gzA[1]] === gzB[1]){ score += 10; rows.push({ tag:'日支六合', cls:'lu', text:`日支${gzA[1]}${gzB[1]}六合——过日子默契度高，生活习惯容易对齐` }); }
-  else if(sA === sB){ score += 5; rows.push({ tag:'同日支', cls:'', text:`两人同属${gzA[1]}日支——节奏像，但容易较着劲，谁让一步谁赢` }); }
-  else if(ZHI3_HE.some(g => g.includes(gzA[1]) && g.includes(gzB[1]))){ score += 8; rows.push({ tag:'生肖三合', cls:'lu', text:`生肖${zodiac(sA)}与${zodiac(sB)}三合——相处自带润滑，圈子也合得来` }); }
-  else if((sA + 6) % 12 === sB){ score -= 5; rows.push({ tag:'生肖相冲', cls:'ji', text:`生肖${zodiac(sA)}与${zodiac(sB)}相冲——吸引力强但摩擦也多，聚少离多反而是保鲜法` }); }
-  // 紫微互飞：A命宫忌入B夫妻宫 / B命宫忌入A夫妻宫 / 命宫主星同
-  const mingA = chartA.palaces.find(p => p.isMingGong), mingB = chartB.palaces.find(p => p.isMingGong);
-  const fuA = chartA.palaces.find(p => p.name === '夫妻' || disp(p.name) === '夫妻宫');
-  const fuB = chartB.palaces.find(p => p.name === '夫妻' || disp(p.name) === '夫妻宫');
-  const flyJi = (from, toFu, fromName, toName) => {
-    const sh = E.getSiHuaByStem(from.stem) || {};
-    if(sh['忌'] && toFu.stars.some(x => x.name === sh['忌']))
-      rows.push({ tag:'在意', cls:'ji', text:`${fromName}的命宫化忌飞进${toName}的夫妻宫——${fromName}对这段关系的在意是实打实的，牵挂也是` });
+  const rows=[];
+  const gzA=chartA&&chartA.lunarInfo&&chartA.lunarInfo.fourPillars&&chartA.lunarInfo.fourPillars[2];
+  const gzB=chartB&&chartB.lunarInfo&&chartB.lunarInfo.fourPillars&&chartB.lunarInfo.fourPillars[2];
+  if(gzA&&gzB&&gzA.length===2&&gzB.length===2){
+    if(GAN5_HE[gzA[0]]===gzB[0]) rows.push({tag:'日干五合',cls:'',text:`日柱天干${gzA[0]}与${gzB[0]}在传统五合表中构成对应。仅记录术数分类，不推断吸引力、性格或关系结果。`});
+    if(ZHI6_HE[gzA[1]]===gzB[1]) rows.push({tag:'日支六合',cls:'',text:`日柱地支${gzA[1]}与${gzB[1]}在传统分类中为六合。不同体系权重不同，不据此判断相处默契或关系结局。`});
+    else if(ZHI3_HE.some(g=>g.includes(gzA[1])&&g.includes(gzB[1]))) rows.push({tag:'日支三合',cls:'',text:`日柱地支${gzA[1]}与${gzB[1]}同属传统三合组。它是符号分类，不代表两人现实中必然合拍。`});
+    else if((BR.indexOf(gzA[1])+6)%12===BR.indexOf(gzB[1])) rows.push({tag:'日支相冲',cls:'',text:`日柱地支${gzA[1]}与${gzB[1]}在传统分类中相冲。此标签不等同于冲突预测，也不建议据此决定关系去留。`});
+  }
+  const palaces=c=>c&&Array.isArray(c.palaces)?c.palaces:[];
+  const mingA=palaces(chartA).find(p=>p.isMingGong),mingB=palaces(chartB).find(p=>p.isMingGong);
+  const fuA=palaces(chartA).find(p=>p.name==='夫妻'||disp(p.name)==='夫妻宫');
+  const fuB=palaces(chartB).find(p=>p.name==='夫妻'||disp(p.name)==='夫妻宫');
+  const cross=(from,to,fromName,toName)=>{
+    if(!from||!to||!Array.isArray(from.stars)||!Array.isArray(to.stars))return;
+    const sh=E.getSiHuaByStem(from.stem)||{},ji=sh['忌'];
+    if(ji&&to.stars.some(x=>x.name===ji)) rows.push({tag:'四化交叉',cls:'',text:`${fromName}命宫宫干按当前四化表对应化忌星${ji}，该星也见于${toName}夫妻宫。仅是两张盘的位置重合，不表示在意、冲突或关系走向。`});
+    const lu=sh['禄'];
+    if(lu&&to.stars.some(x=>x.name===lu)) rows.push({tag:'四化交叉',cls:'',text:`${fromName}命宫宫干按当前四化表对应化禄星${lu}，该星也见于${toName}夫妻宫。仅记录规则映射，不代表带来资源或关系获益。`});
   };
-  flyJi(mingA, fuB, nameA, nameB); flyJi(mingB, fuA, nameB, nameA);
-  const mA = mingA.stars.filter(x => x.type === 'major').map(x => x.name);
-  const mB = fuB.stars.filter(x => x.type === 'major').map(x => x.name);
-  const same = mA.find(n => mB.includes(n));
-  if(same) rows.push({ tag:'同频', cls:'lu', text:`${nameA}的命宫主星与${nameB}的夫妻宫主星都有${same}——${nameB}要的正是${nameA}身上有的` });
-  const fuLu = (() => {
-    const sh = E.getSiHuaByStem(mingB.stem) || {};
-    if(sh['禄'] && fuA.stars.some(x => x.name === sh['禄'])) return { tag:'送禄', cls:'lu', text:`${nameB}的命宫化禄飞进${nameA}的夫妻宫——${nameB}是给这段关系带资源、带顺的那一个` };
-    const sh2 = E.getSiHuaByStem(mingA.stem) || {};
-    if(sh2['禄'] && fuB.stars.some(x => x.name === sh2['禄'])) return { tag:'送禄', cls:'lu', text:`${nameA}的命宫化禄飞进${nameB}的夫妻宫——${nameA}是给这段关系带资源、带顺的那一个` };
-    return null;
-  })();
-  if(fuLu) rows.push(fuLu);
-  // 日主五行关系：相生=滋养 相克=推动（克制措辞，不下判断）
-  const wxA = WX_OF_STEM[ST.indexOf(gzA[0])], wxB = WX_OF_STEM[ST.indexOf(gzB[0])];
-  const SHENGW = {木:'水',火:'木',土:'火',金:'土',水:'金'}, KEW = {木:'土',土:'水',水:'火',火:'金',金:'木'};
-  if(SHENGW[wxA] === wxB) rows.push({ tag:'五行', cls:'lu', text:`${nameA}日主${wxA}生${nameB}日主${wxB}——${nameA}天然愿意滋养${nameB}，注意别只输出不充电` });
-  else if(SHENGW[wxB] === wxA) rows.push({ tag:'五行', cls:'lu', text:`${nameB}日主${wxB}生${nameA}日主${wxA}——${nameB}是那个默默托底的人` });
-  else if(KEW[wxA] === wxB) rows.push({ tag:'五行', cls:'', text:`${nameA}日主${wxA}克${nameB}日主${wxB}——${nameA}推着${nameB}成长，力度是关键` });
-  else if(KEW[wxB] === wxA) rows.push({ tag:'五行', cls:'', text:`${nameB}日主${wxB}克${nameA}日主${wxA}——${nameB}对${nameA}是鞭策型存在` });
-  score = Math.max(45, Math.min(95, score));
-  const level = score >= 85 ? '很合拍' : score >= 72 ? '有默契' : score >= 58 ? '要磨合' : '相处靠修炼';
-  return { score, level, rows: rows.slice(0, 4) };
+  cross(mingA,fuB,nameA,nameB);cross(mingB,fuA,nameB,nameA);
+  const aMaj=mingA&&mingA.stars?mingA.stars.filter(x=>x.type==='major').map(x=>x.name):[];
+  const bMaj=fuB&&fuB.stars?fuB.stars.filter(x=>x.type==='major').map(x=>x.name):[];
+  const shared=aMaj.find(n=>bMaj.includes(n));
+  if(shared) rows.push({tag:'星曜重合',cls:'',text:`一方命宫与另一方夫妻宫都出现${shared}。这是星曜名称的重合，不表示一方符合另一方的理想伴侣类型。`});
+  return {rows:rows.slice(0,6)};
 }
 function renderHeCard(){
-  const rec = cur();
-  const card = $('#hecard'), body = $('#he-body');
-  if(!card) return;
-  if(!rec || rec.tag !== '分享'){ card.hidden = true; return; }
-  const mine = archive.find(a => a.tag !== '分享' && a.id !== rec.id);
-  if(!mine){ card.hidden = true; return; }
-  const d = heCardData(rec.chart, mine.chart, rec.name || 'TA', mine.name || '我');
-  body.innerHTML =
-    `<div class="wy-concl">${esc(mine.name || '我')} 与 ${esc(rec.name || 'TA')}：${d.level}（${d.score} 分段）</div>` +
-    d.rows.map(r => `<div class="scr-row"><span class="scr-tag ${r.cls}">${r.tag}</span><span class="scr-text">${withTerms(r.text)}</span></div>`).join('') +
-    `<p class="hint" style="margin:8px 0 0">快评只看日柱与命宫飞化，是破冰不是判决。</p>
-     <button class="btn-ghost btn-block" id="btn-he-share" style="margin-top:8px">把这张盘回传给 TA →</button>`;
-  card.hidden = false;
-  $('#btn-he-share')?.addEventListener('click', () => openShare('link'));
+  const rec=cur(),card=$('#hecard'),body=$('#he-body');
+  if(!card)return;
+  if(!rec||rec.tag!=='分享'){card.hidden=true;return;}
+  const mine=archive.find(x=>x.tag!=='分享'&&x.id!==rec.id);
+  if(!mine){card.hidden=true;return;}
+  const d=heCardData(rec.chart,mine.chart,rec.name||'TA',mine.name||'我');
+  body.innerHTML=
+    '<div class="wy-concl">两张命盘的传统规则交叉参考</div>'+
+    (d.rows.length?d.rows.map(r=>`<div class="scr-row"><span class="scr-tag">${esc(r.tag)}</span><span class="scr-text">${esc(r.text)}</span></div>`).join(''):'<p class="hint">当前展示的规则中未发现可列出的对应项；这不能说明关系好坏，也不代表缺少情感。</p>')+
+    '<p class="hint" style="margin:8px 0 0">这里不计算关系分数、适配度或未来结果。关系判断以双方意愿、沟通、尊重与实际相处为准。</p>'+
+    '<button class="btn-ghost btn-block" id="btn-he-share" style="margin-top:8px">把这张盘回传给 TA →</button>';
+  card.hidden=false;
+  $('#btn-he-share')?.addEventListener('click',()=>openShare('link'));
 }
 /* 四化总纲：来因宫 + 生年忌，两句话定调（速览组顶部） */
 function renderBriefCard(chart){
-  const card = $('#brief-card'), body = $('#brief-body');
-  if(!card) return;
-  const li = chart.lunarInfo || {};
-  const yGan = ST[li.yearStem];
-  const laiyin = chart.palaces.find(p => ST[p.stem] === yGan);
-  const ySh = E.getSiHuaByStem(li.yearStem) || {};
-  const jiPal = chart.palaces.find(p => p.stars.some(x => x.name === ySh['忌']));
-  const jiName = jiPal ? disp(jiPal.name) : '';
-  body.innerHTML =
-    `<p style="margin:0 0 6px">你带着「<b>${esc(GONG_SHORT[laiyin ? disp(laiyin.name) : ''] || '')}</b>」的命题而来（来因宫${laiyin ? ' ' + ST[laiyin.stem] + BR[laiyin.branch] : ''}）——这一生的主线绕不开它。</p>` +
-    (jiName ? `<p style="margin:0">生年<b>${esc(ySh['忌'])}忌</b>落在<b>${esc(jiName)}</b>：${esc(JI_SOFTSPOT[jiName] || '这一块是你这辈子的功课')}。看清它，功课就过了一半。</p>` : '');
-  card.hidden = false;
+  const card=$('#brief-card'),body=$('#brief-body');if(!card||!body)return;
+  const li=chart.lunarInfo||{},yearStem=Number.isInteger(li.yearStem)?ST[li.yearStem]:'';
+  const lai=yearStem?chart.palaces.find(p=>ST[p.stem]===yearStem):null;
+  const sh=Number.isInteger(li.yearStem)?(E.getSiHuaByStem(li.yearStem)||{}):{};
+  const items=['禄','权','科','忌'].filter(h=>sh[h]).map(h=>{const target=chart.palaces.find(p=>p.stars.some(x=>x.name===sh[h]));return `<li>按生年天干规则，${esc(sh[h])}化${h}落在${esc(target?disp(target.name):'待核对宫位')}。这是传统盘面关系，不是人生主线或结果保证。</li>`;}).join('');
+  body.innerHTML='<p style="margin:0 0 6px"><b>来因宫（部分流派术语）：</b>'+(lai?esc(disp(lai.name))+'，按本站当前规则由生年天干定位。不同派别用法不一，不表示人生目的或“绕不开”的命题。':'当前资料未能定位。')+'</p><p style="margin:0 0 6px"><b>生年四化：</b>依据本盘农历年干与当前四化表得到的盘面落点：</p><ul style="margin-top:0">'+(items||'<li>当前规则未返回可展示项目，请检查出生资料和四化设置。</li>')+'</ul><p class="hint" style="margin:0">可以把这些位置作为复盘索引：分别写下现实事实、不同解释和可验证的问题。它们不能证明命运、性格或事件因果。</p>';
+  card.hidden=false;
 }
 /* 右栏页签与折叠记忆 */
 function setRGroup(rg){
@@ -2756,7 +2247,7 @@ function renderDingpan(){
   $('#dingpan-hours').innerHTML = SHICHEN.filter(s=>s.v!==12).map(s =>
     `<button class="chip${dpHours.includes(s.v)?' on':''}" data-h="${s.v}">${s.label}</button>`).join('') +
     `<button class="chip${dpHours.includes(12)?' on':''}" data-h="12">晚子时</button>`;
-  const ys = []; const thisY = new Date().getFullYear();
+  const ys = []; const thisY = bjDate().y;
   for(let y=thisY; y>=1950; y--) ys.push(y);
   $('#dp-year').innerHTML = ys.map(y=>`<option value="${y}">${y} 年</option>`).join('');
 }
@@ -2770,65 +2261,67 @@ $('#btn-dingpan-next').addEventListener('click', () => {
   if(dpHours.length < 2){ $('#dingpan-result').innerHTML = '<div class="empty">至少选 2 个候选时辰才有得比。</div>'; return; }
   $('#dingpan-step1').hidden = true; $('#dingpan-step2').hidden = false;
 });
-/* 候选时辰在某年的"动静"启发值：流年命宫三方四正内的四化/煞星/天马计数。
- * 纯属粗糙提示，不作定盘依据——标注清楚，不伪装成精确评分。 */
-function yearActivity(chart, y){
-  const yBranch = ((y - 4) % 12 + 12) % 12;
-  const sfs = sanfangBranches(yBranch);
-  const ySh = normSihua(E.getLiuNianSiHua(y));
-  const yStars = [ySh.lu, ySh.quan, ySh.ke, ySh.ji].filter(Boolean);
-  let score = 0; const hits = [];
-  sfs.forEach(b => {
-    const p = palaceByBranch(chart, b);
-    p.stars.forEach(s => {
-      if(s.siHua){ score += 2; hits.push(`${disp(p.name)}${s.name}化${s.siHua}`); }
-      if(yStars.includes(s.name)){ score += 2; hits.push(`${disp(p.name)}${s.name}（流年四化到）`); }
-      if(s.type === 'sha'){ score += 1; hits.push(`${disp(p.name)}${s.name}`); }
-      if(s.name === '天马'){ score += 1; hits.push(`${disp(p.name)}天马`); }
-    });
-  });
-  const level = score >= 8 ? '高' : score >= 4 ? '中' : '低';
-  return { score, level, hits: [...new Set(hits)].slice(0, 6) };
-}
+/* 候选时辰并列对照：展示规则计算位置，不按经历共鸣计分或反推出生时辰 */
 $('#btn-dingpan-run').addEventListener('click', () => {
-  const y = +$('#dp-year').value, ev = $('#dp-event').value;
-  const evName = $('#dp-event').selectedOptions[0].textContent;
-  const yBranch = ((y - 4) % 12 + 12) % 12;
-  // 生日来源：优先当前命主的存档 input（年月日/性别/出生地/经度全套），没有才读表单
-  const baseRec = cur();
-  const baseInput = (baseRec && baseRec.input) ? baseRec.input : {
-    name: '', gender: segVal('f-gender') || 'male',
-    year: +($('#f-year').value || 1990), month: +($('#f-month').value || 1), day: +($('#f-day').value || 1),
-    province: $('#f-province').value || '', city: '', longitude: null, trueSolar: false, lateZiNextDay: false,
-    exHour: '', exMin: '',
+  const y=+$('#dp-year').value,ev=$('#dp-event').value;
+  const evName=$('#dp-event').selectedOptions[0].textContent;
+  if(!Number.isInteger(y)||y<1800||y>2200){
+    $('#dingpan-result').innerHTML='<div class="empty">所选年份不可用，请核对后重试。</div>';return;
+  }
+  const baseRec=cur();
+  const formCity=$('#f-city').value||'',cityParts=formCity.split('|');
+  const formLongitude=cityParts.length>1?parseFloat(cityParts[1]):null;
+  const baseInput=(baseRec&&baseRec.input)?baseRec.input:{
+    name:'',gender:segVal('f-gender'),
+    year:+($('#f-year').value||0),month:+($('#f-month').value||0),day:+($('#f-day').value||0),
+    province:$('#f-province').value||'',city:cityParts[0]||'',
+    longitude:Number.isFinite(formLongitude)?formLongitude:null,
+    trueSolar:$('#f-true-solar').checked,
+    lateZiNextDay:$('#f-latezi-next').checked,sihuaTable:getStoredSihuaTable(),exHour:'',exMin:''
   };
-  const rows = dpHours.map(h => {
-    // 统一走 computeChart：夏令时、真太阳时、晚子时顺延日都与正式排盘同口径
-    const inp = Object.assign({}, baseInput, { shichen: h, exHour: '', exMin: '' });
-    let chart;
-    try{ chart = computeChart(inp).chart; }
-    catch(err){ return null; }
-    const ming = chart.palaces.find(p=>p.isMingGong);
-    const majors = ming.stars.filter(s=>s.type==='major').map(s=>s.name).join('、') || '空宫';
-    const liuPalace = palaceByBranch(chart, yBranch);
-    const liuMajors = liuPalace.stars.filter(s=>s.type==='major').map(s=>s.name).join('、') || '空宫';
-    const sh = normSihua(E.getLiuNianSiHua(y));
-    const jiStar = sh.ji, jiPalace = chart.palaces.find(p=>p.stars.some(s=>s.name===jiStar));
-    const act = yearActivity(chart, y);
-    return { h, label: SHICHEN.find(s=>s.v===h).label, majors, shen: disp(chart.palaces.find(p=>p.isShenGong).name),
-      liu: `${disp(liuPalace.name)}（${liuMajors}）`, ji: `${jiPalace?disp(jiPalace.name):''}${jiStar}化忌`, act };
-  }).filter(Boolean);
-  const allLow = rows.length && rows.every(r => r.act.level === '低');
-  const baseDesc = baseRec ? `${esc(baseRec.name)}（${baseInput.year} 年 ${baseInput.month} 月 ${baseInput.day} 日生）` : `表单日期（${baseInput.year} 年 ${baseInput.month} 月 ${baseInput.day} 日）`;
-  $('#dingpan-result').innerHTML =
-    `<div class="card"><div class="card-kicker">验证结果 · ${y} 年 · ${evName}</div>
-     <p class="hint">正在验的生日：${baseDesc}。各候选时辰的盘与正式排盘同口径（夏令时、真太阳时、晚子时顺延都算在内）。</p>
-     <p class="hint">下面是各候选时辰在那一年的"动静"对照。"非稽其已往，无以测其将来"——哪张盘和你记忆里那年的动静最对得上，哪个时辰就更可能是你的。但这只是验证的起点，不是结论。</p>
-     ${rows.map(r=>`<div class="arch-item"><div><div class="t">${r.label} <span class="star-chip">吻合启发：${r.act.level}</span></div>
-       <div class="s">命宫：${esc(r.majors)} · 身宫在${esc(r.shen)}<br>流年命宫：${esc(r.liu)}<br>流年化忌：${esc(r.ji)}${r.act.hits.length?`<br>当年动静：${esc(r.act.hits.join('、'))}`:''}</div></div></div>`).join('')}
-     <p class="hint">「吻合启发」只是一个粗糙的动静计数（流年命宫三方内的四化/煞星/天马），不能当作定盘依据。真正有用的是你自己的记忆：那年有没有大事、动静大不大。</p>
-     ${allLow ? `<div class="card" style="border:2px solid var(--gold)"><div class="card-kicker">证伪出口</div><p style="margin:0">几个候选时辰在这一年都没什么动静——那很可能<strong>候选时辰都不对</strong>。建议扩大候选范围（比如把相邻时辰也加进来），或找人工命理师当面定盘。不要硬选一个"最高分"当答案，硬凑比不知道更有害。</p></div>` : ''}
-    </div>`;
+  if(baseInput.trueSolar&&!Number.isFinite(baseInput.longitude)){
+    $('#dingpan-result').innerHTML='<div class="empty">已开启真太阳时校正，但尚未选择出生地（校正需要经度）。请返回补选出生地，或主动关闭真太阳时校正后再继续。</div>';return;
+  }
+  if(!E.isValidGregorianDate(+baseInput.year,+baseInput.month,+baseInput.day)){
+    $('#dingpan-result').innerHTML='<div class="empty">出生日期不完整或不存在，请先回到排盘页核对年月日。</div>';return;
+  }
+  if(!['male','female'].includes(baseInput.gender)){
+    $('#dingpan-result').innerHTML='<div class="empty">请先回到排盘页选择排盘使用的性别口径，再进行候选时辰对照。</div>';return;
+  }
+  const sh=normSihua(E.getLiuNianSiHua(y));
+  if(!sh||!['lu','quan','ke','ji'].every(k=>sh[k])){
+    $('#dingpan-result').innerHTML='<div class="empty">所选年份的流年四化资料不完整，暂不能生成对照。</div>';return;
+  }
+  const rows=dpHours.map(h=>{
+    try{
+      const inp=Object.assign({},baseInput,{shichen:h,exHour:'',exMin:''});
+      const result=computeChart(inp),chart=result&&result.chart;
+      if(!chart||!Array.isArray(chart.palaces)||chart.palaces.length!==12)return null;
+      const ming=chart.palaces.find(p=>p.isMingGong),shen=chart.palaces.find(p=>p.isShenGong);
+      const annualBranch=((y-4)%12+12)%12,liuPalace=palaceByBranch(chart,annualBranch);
+      if(!ming||!shen||!liuPalace)return null;
+      const majors=ming.stars.filter(p=>p.type==='major').map(p=>p.name).join('、')||'空宫';
+      const liuMajors=liuPalace.stars.filter(p=>p.type==='major').map(p=>p.name).join('、')||'空宫';
+      const fourhua=[['禄','lu'],['权','quan'],['科','ke'],['忌','ji']].map(([name,key])=>{
+        const star=sh[key],palace=chart.palaces.find(p=>p.stars.some(x=>x.name===star));
+        return {name,star,palace:palace?disp(palace.name):'本命盘未见该星'};
+      });
+      return {label:(SHICHEN.find(x=>x.v===h)||{}).label||String(h),majors,shen:disp(shen.name),liu:disp(liuPalace.name)+'（'+liuMajors+'）',fourhua};
+    }catch(err){return null;}
+  });
+  const baseDesc=baseRec?esc(baseRec.name)+'（'+baseInput.year+' 年 '+baseInput.month+' 月 '+baseInput.day+' 日生）':'表单日期（'+baseInput.year+' 年 '+baseInput.month+' 月 '+baseInput.day+' 日）';
+  if(rows.length!==dpHours.length||rows.some(x=>!x)){
+    $('#dingpan-result').innerHTML='<div class="empty">候选时辰中有命盘资料未能完整生成，因此不显示部分对照，避免遗漏影响理解。请检查出生资料、排盘口径后重试。</div>';return;
+  }
+  $('#dingpan-result').innerHTML=
+    '<div class="card"><div class="card-kicker">候选盘结构对照 · '+y+' 年 · '+esc(evName)+'</div>'+
+    '<p class="hint">出生资料：'+baseDesc+'。各候选时辰均按正式排盘所选口径分别计算。</p>'+
+    '<p class="hint">所选事件仅供你回忆和记录，不参与任何评分或算法匹配。以下只并列展示候选盘的命宫、身宫、流年宫位与四化位置差异；这些差异不是“吻合程度”，不能据此判断哪个时辰更可能正确，也不能替代出生记录。</p>'+
+    rows.map(r=>'<article class="arch-item"><div><div class="t">'+esc(r.label)+'</div>'+
+      '<div class="s">命宫主星：'+esc(r.majors)+' · 身宫：'+esc(r.shen)+'<br>流年命宫：'+esc(r.liu)+'<br>'+
+      r.fourhua.map(x=>'化'+x.name+'：'+esc(x.star)+' → '+esc(x.palace)).join('<br>')+
+      '</div></div></article>').join('')+
+    '<p class="hint">核对顺序：出生证明或家人原始记录、出生地与当时当地时间/时区、精确时分、是否启用真太阳时、晚子时换日规则。资料不确定时建议保留多个候选，不要为让描述“对上”而修改出生时间。</p></div>';
 });
 // 进定盘页时初始化
 const _nav3 = nav;
@@ -2944,7 +2437,7 @@ function drawSeal(ctx, x, y, size, text){
   chars.forEach((ch, i) => ctx.fillText(ch, 0, (i - (chars.length - 1) / 2) * size * .4));
   ctx.restore();
 }
-/* 竖排签文卡 */
+/* 每日复盘提示分享卡 */
 function drawSignCard(){
   const rec = cur();
   const sign = dailySign(rec);
@@ -2954,18 +2447,18 @@ function drawSignCard(){
   ctx.textAlign = 'center';
   drawNightBG(ctx, W, H, rnd);
   ctx.fillStyle = '#B9C4EA'; ctx.font = '30px "IBM Plex Mono","PingFang SC",monospace';
-  ctx.fillText('每日一签 · 问星', W / 2, 130);
+  ctx.fillText('每日复盘提示 · 问星', W / 2, 130);
   ctx.strokeStyle = 'rgba(132,146,255,.4)'; ctx.lineWidth = 1.5;
   ctx.beginPath(); ctx.moveTo(W / 2 - 150, 165); ctx.lineTo(W / 2 + 150, 165); ctx.stroke();
-  // 签号 + 级别
+  // 提示序号 + 类型
   ctx.fillStyle = '#F5F2EA'; ctx.font = '600 46px "Songti SC","Noto Serif SC",serif';
   ctx.fillText(`${sign.no} · ${sign.lv}`, W / 2, 232);
-  // 竖排签题（右起第一列，字大）
+  // 竖排提示主题（右起第一列，字大）
   const titleChars = [...sign.t];
   ctx.font = '700 66px "Songti SC","Noto Serif SC",serif';
   const tX = W / 2 + 150, tY0 = 330;
   titleChars.forEach((ch, i) => { ctx.fillStyle = '#E9DFC8'; ctx.fillText(ch, tX, tY0 + i * 86); });
-  // 竖排签文（两列，右起）："，"分句
+  // 竖排提示内容（两列，右起）："，"分句
   const parts = sign.s.split(/[，。；]/).filter(Boolean);
   ctx.font = '600 44px "Songti SC","Noto Serif SC",serif';
   parts.slice(0, 3).forEach((part, col) => {
@@ -2974,7 +2467,7 @@ function drawSignCard(){
   });
   // 宜 / 提醒
   ctx.fillStyle = '#B9C4EA'; ctx.font = '26px "IBM Plex Mono","PingFang SC",monospace';
-  ctx.fillText(`宜  ${sign.yi}`, W / 2, 1030);
+  ctx.fillText(`行动  ${sign.yi}`, W / 2, 1030);
   ctx.fillStyle = '#9AA5D6';
   wrapText(ctx, `提醒：${sign.jie}`, W / 2, 1082, 700, 40);
   // 印章 + 落款
@@ -2995,7 +2488,7 @@ function drawPersonaCard(rec){
   ctx.textAlign = 'center';
   drawNightBG(ctx, W, H, rnd);
   ctx.fillStyle = '#B9C4EA'; ctx.font = '30px "IBM Plex Mono","PingFang SC",monospace';
-  ctx.fillText('YOUR PALACE PERSONA · 命宫主星人格', W / 2, 150);
+  ctx.fillText('PALACE NOTES · 命宫结构参考', W / 2, 150);
   ctx.strokeStyle = 'rgba(132,146,255,.4)'; ctx.lineWidth = 1.5;
   ctx.beginPath(); ctx.moveTo(W / 2 - 200, 186); ctx.lineTo(W / 2 + 200, 186); ctx.stroke();
   const name = majors.length ? majors.map(s => s.name).join(' · ') : '空 宫';
@@ -3005,14 +2498,14 @@ function drawPersonaCard(rec){
   ctx.fillText(name, W / 2, 460);
   ctx.shadowBlur = 0;
   // 人设标签（STAR_GIFT 第一条）
-  const gift = majors.length && STAR_GIFT[majors[0].name] ? STAR_GIFT[majors[0].name][0] : '没有固定的外在标签——什么环境就长成什么样，可塑性就是你的出厂设置';
-  const outer = majors.length && STAR_OUTER[majors[0].name] ? STAR_OUTER[majors[0].name] : '让人捉摸不透，也让人过目不忘';
+  const gift = majors.length && STAR_GIFT[majors[0].name] ? STAR_GIFT[majors[0].name][1] : '先从自己的真实经历和反馈中寻找可验证的线索';
+  const outer = majors.length ? '传统象意观察：'+(D.stars[majors[0].name]||'以命宫主星作为讨论线索，不单独判断性格或人生结果') : '命宫无主星；可结合对宫和三方四正查看盘面结构';
   ctx.fillStyle = '#DFE3FB'; ctx.font = '600 40px "Songti SC","Noto Serif SC",serif';
   wrapText(ctx, `在外人眼里：${outer}`, W / 2, 640, 780, 66);
   ctx.fillStyle = '#E9DFC8'; ctx.font = '600 38px "Songti SC","Noto Serif SC",serif';
   wrapText(ctx, gift, W / 2, 810, 800, 66);
   ctx.fillStyle = '#7583BD'; ctx.font = '26px "IBM Plex Mono","PingFang SC",monospace';
-  ctx.fillText(`${rec.name} · 命宫主星人格卡`, W / 2, 1080);
+  ctx.fillText(`${rec.name} · 命宫传统象意参考`, W / 2, 1080);
   drawSeal(ctx, W - 170, H - 210, 92, '問星');
   ctx.fillStyle = '#E9DFC8'; ctx.font = '600 34px "Songti SC","Noto Serif SC",serif';
   ctx.fillText('✦ 问星 · 紫微斗数在线排盘', W / 2, H - 110);
