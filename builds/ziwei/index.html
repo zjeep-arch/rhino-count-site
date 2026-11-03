@@ -271,15 +271,15 @@
   <section class="view" id="view-dingpan">
     <button class="back-link" data-nav="archive">‹ 返回我的命盘</button>
     <h2 class="view-title">定盘验证辅助</h2>
-    <p class="view-sub">时辰拿不准？先圈出候选时辰，再用人生大事帮你对一对。<br>「非稽其已往，无以测其将来。」——陈素庵</p>
-    <div class="card"><div class="card-kicker">怎么用</div><p class="hint" style="margin:0">用<strong>已经发生、年份明确</strong>的大事，去验证哪个候选时辰的盘更吻合。这叫"验证"，不是"反推"：如果几个时辰都不吻合，我们会直说，而不是硬凑一个答案。你填的大事只保存在本机，不上传。</p></div>
+    <p class="view-sub">时辰拿不准？可并列查看不同候选时辰排出的盘面结构。对照只展示规则位置，不为候选盘打分或推断哪个更可能正确。</p>
+    <div class="card"><div class="card-kicker">怎么用</div><p class="hint" style="margin:0">输入一个你想回忆的年份和议题，仅作为个人记录。系统会并列显示每个候选时辰的命宫、身宫、流年宫位和四化落点，不判断吻合程度，也不建议根据描述更改出生时间。资料只在本机处理，不上传。</p></div>
     <div id="dingpan-step1">
-      <div class="card-kicker">第一步：选出候选时辰（2–3 个）</div>
+      <div class="card-kicker">第一步：选择候选时辰（2–3 个）</div>
       <div id="dingpan-hours" class="chip-row"></div>
-      <button class="btn-primary btn-block" id="btn-dingpan-next">下一步：对照人生大事</button>
+      <button class="btn-primary btn-block" id="btn-dingpan-next">下一步：查看候选盘结构</button>
     </div>
     <div id="dingpan-step2" hidden>
-      <div class="card-kicker">第二步：选一件大事发生的年份</div>
+      <div class="card-kicker">第二步：选一个回顾年份与议题（不参与评分）</div>
       <div class="date-row">
         <select id="dp-year"></select>
         <select id="dp-event">
@@ -290,7 +290,7 @@
           <option value="study">升学/考试</option>
         </select>
       </div>
-      <button class="btn-primary btn-block" id="btn-dingpan-run">对照看看</button>
+      <button class="btn-primary btn-block" id="btn-dingpan-run">并列查看</button>
       <div id="dingpan-result"></div>
     </div>
   </section>
