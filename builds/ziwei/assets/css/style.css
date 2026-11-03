@@ -1424,3 +1424,35 @@ body{color:var(--ink);
   .hub-name{font-size:12px}
   .hub-meta{font-size:9px}
 }
+
+
+/* Mobile full-chart layout: fit the complete 4x4 chart inside the viewport */
+@media(max-width:767px){
+  #chart-grid-wrap{width:100%;overflow:visible!important;padding:0 0 8px}
+  #chart-grid{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:repeat(4,minmax(106px,auto));gap:3px;width:100%;min-width:0!important;margin:8px 0}
+  #chart-grid .sp-hub{grid-area:2/2/4/4;min-width:0;padding:5px 3px;--hub-r:0px}
+  #chart-grid .cell:not(.sp-hub){min-width:0;min-height:106px;height:100%;padding:5px 3px;border-radius:8px;font-size:9px;overflow:hidden}
+  #chart-grid .cell .pname{font-size:10.5px;line-height:1.2}
+  #chart-grid .cell .gz{font-size:9px}
+  #chart-grid .cell .stars{max-height:46px;overflow:hidden;line-height:1.2;font-size:9px}
+  #chart-grid .star-chip{font-size:8.5px;padding:1px 3px;border-radius:5px;margin:1px 1px 1px 0}
+  #chart-grid .sihua{min-width:13px;height:13px;line-height:13px;font-size:8px}
+  #chart-grid .cell .dx{font-size:8px;margin-top:2px}
+  .sp-hub::before,.sp-hub::after,.sp-hub .hub-ring,.sp-hub .ci-seal{display:none!important}
+  .sp-hub .hub-core{width:100%;max-height:100%;gap:3px;padding:4px;overflow:hidden}
+  .hub-brand{font-size:8px;letter-spacing:.14em;text-indent:.14em;white-space:nowrap}
+  .hub-name{font-size:10px;letter-spacing:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+  .hub-meta{display:none}
+  .hub-bazi{padding:4px 2px}
+  .hub-bazi-title{font-size:9px;letter-spacing:.04em;margin-bottom:2px}
+  .hub-bazi-grid{gap:0}
+  .hub-pillar{gap:1px;padding:2px 0;border:0}
+  .hub-pillar>small:first-child{font-size:7px}
+  .hub-pillar .pillar-stem,.hub-pillar .pillar-branch{font-size:15px;line-height:1}
+  .hub-pillar>span{font-size:7px;white-space:normal}
+  .hub-pillar .pillar-hidden{display:none}
+  .hub-stars{font-size:9px;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+  #chart-list{display:none!important}
+  .chart-list-details[open] #chart-list{display:block!important}
+  .chart-map-caption{font-size:11px}
+}
