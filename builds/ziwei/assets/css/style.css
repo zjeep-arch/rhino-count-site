@@ -1456,3 +1456,20 @@ body{color:var(--ink);
   .chart-list-details[open] #chart-list{display:block!important}
   .chart-map-caption{font-size:11px}
 }
+
+
+/* Touch-first chart controls */
+.mobile-palace-picker{display:none}
+#chart-grid .cell.selected{outline:2px solid var(--primary-deep);outline-offset:-3px;z-index:3}
+#chart-grid .cell[role="button"]:focus-visible{outline:3px solid var(--gold);outline-offset:-3px}
+@media(max-width:767px){
+  #chart-grid{gap:5px}
+  #chart-grid .cell:not(.sp-hub){min-height:112px}
+  #chart-grid .cell[data-branch]{touch-action:manipulation;-webkit-user-select:none;user-select:none}
+  #chart-grid .star-chip{pointer-events:none;min-height:22px}
+  #chart-grid .cell.selected{outline:3px solid var(--primary-deep);outline-offset:-4px}
+  .mobile-palace-picker{display:grid;grid-template-columns:auto minmax(0,1fr);gap:8px;align-items:center;margin:10px 0 16px;padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:var(--card)}
+  .mobile-palace-picker label{font-size:12px;font-weight:700;color:var(--primary-deep);white-space:nowrap}
+  .mobile-palace-picker select{width:100%;min-height:48px;padding:0 12px;border:1px solid var(--line);border-radius:9px;background:var(--bg);color:var(--ink);font:inherit;font-size:14px}
+  .mobile-palace-picker span{grid-column:1/-1;font-size:11px;color:var(--muted)}
+}
