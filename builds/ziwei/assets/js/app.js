@@ -182,7 +182,21 @@ function patternFamilyText(name){
 }
 function glossary(kind, name){
   let html = '', isHtml = false;
-  if(kind==='star') html = esc(D.stars[name] || '这颗星的信息正在整理中。');
+  if(kind==='star'){
+    const rec = cur();
+    const star = rec && rec.chart && rec.chart.palaces
+      ? rec.chart.palaces.flatMap(p => p.stars || []).find(s => s.name === name)
+      : null;
+    const category = ({major:'十四主星',lucky:'辅曜',sha:'煞曜',minor:'杂曜'})[star && star.type] || '星曜';
+    const description = D.stars[name] || '本站尚未整理该星条目。单星不足以判断吉凶，请结合落宫、同宫星曜、四化与运限阅读。';
+    html = `<div class="star-glossary">
+      <span class="star-glossary-category">${esc(category)}</span>
+      <p class="star-glossary-description">${esc(description)}</p>
+      <div class="star-glossary-note"><b>读盘提示</b><br>单星只提供传统取象，需结合落宫、同宫主辅星、三方四正、四化和大限流年；不同流派对辅曜与杂曜的权重、取法可能不同。</div>
+      <div class="star-glossary-source">本站独立白话整理，用作文化参考，不作确定性预言、医疗诊断或现实决策依据。</div>
+    </div>`;
+    isHtml = true;
+  }
   else if(kind==='sihua'){
     html = esc(D.sihua[name] || '');
     if(window.GXG_SIHUA_WUXING) html += '<br>' + esc(window.GXG_SIHUA_WUXING);
