@@ -2261,65 +2261,64 @@ $('#btn-dingpan-next').addEventListener('click', () => {
   if(dpHours.length < 2){ $('#dingpan-result').innerHTML = '<div class="empty">至少选 2 个候选时辰才有得比。</div>'; return; }
   $('#dingpan-step1').hidden = true; $('#dingpan-step2').hidden = false;
 });
-/* 候选时辰在某年的"动静"启发值：流年命宫三方四正内的四化/煞星/天马计数。
- * 纯属粗糙提示，不作定盘依据——标注清楚，不伪装成精确评分。 */
-function yearActivity(chart, y){
-  const yBranch = ((y - 4) % 12 + 12) % 12;
-  const sfs = sanfangBranches(yBranch);
-  const ySh = normSihua(E.getLiuNianSiHua(y));
-  const yStars = [ySh.lu, ySh.quan, ySh.ke, ySh.ji].filter(Boolean);
-  let score = 0; const hits = [];
-  sfs.forEach(b => {
-    const p = palaceByBranch(chart, b);
-    p.stars.forEach(s => {
-      if(s.siHua){ score += 2; hits.push(`${disp(p.name)}${s.name}化${s.siHua}`); }
-      if(yStars.includes(s.name)){ score += 2; hits.push(`${disp(p.name)}${s.name}（流年四化到）`); }
-      if(s.type === 'sha'){ score += 1; hits.push(`${disp(p.name)}${s.name}`); }
-      if(s.name === '天马'){ score += 1; hits.push(`${disp(p.name)}天马`); }
-    });
-  });
-  const level = score >= 8 ? '高' : score >= 4 ? '中' : '低';
-  return { score, level, hits: [...new Set(hits)].slice(0, 6) };
-}
+/* 候选时辰并列对照：展示规则计算位置，不按经历共鸣计分或反推出生时辰 */
 $('#btn-dingpan-run').addEventListener('click', () => {
-  const y = +$('#dp-year').value, ev = $('#dp-event').value;
-  const evName = $('#dp-event').selectedOptions[0].textContent;
-  const yBranch = ((y - 4) % 12 + 12) % 12;
-  // 生日来源：优先当前命主的存档 input（年月日/性别/出生地/经度全套），没有才读表单
-  const baseRec = cur();
-  const baseInput = (baseRec && baseRec.input) ? baseRec.input : {
-    name: '', gender: segVal('f-gender'),
-    year: +($('#f-year').value || 1990), month: +($('#f-month').value || 1), day: +($('#f-day').value || 1),
-    province: $('#f-province').value || '', city: '', longitude: null, trueSolar: false, lateZiNextDay: false,
-    exHour: '', exMin: '',
+  const y=+$('#dp-year').value,ev=$('#dp-event').value;
+  const evName=$('#dp-event').selectedOptions[0].textContent;
+  if(!Number.isInteger(y)||y<1800||y>2200){
+    $('#dingpan-result').innerHTML='<div class="empty">所选年份不可用，请核对后重试。</div>';return;
+  }
+  const baseRec=cur();
+  const formCity=$('#f-city').value||'',cityParts=formCity.split('|');
+  const formLongitude=cityParts.length>1?parseFloat(cityParts[1]):null;
+  const baseInput=(baseRec&&baseRec.input)?baseRec.input:{
+    name:'',gender:segVal('f-gender'),
+    year:+($('#f-year').value||0),month:+($('#f-month').value||0),day:+($('#f-day').value||0),
+    province:$('#f-province').value||'',city:cityParts[0]||'',
+    longitude:Number.isFinite(formLongitude)?formLongitude:null,
+    trueSolar:$('#f-true-solar').checked&&Number.isFinite(formLongitude),
+    lateZiNextDay:$('#latezi-next').checked,sihuaTable:getStoredSihuaTable(),exHour:'',exMin:''
   };
-  const rows = dpHours.map(h => {
-    // 统一走 computeChart：夏令时、真太阳时、晚子时顺延日都与正式排盘同口径
-    const inp = Object.assign({}, baseInput, { shichen: h, exHour: '', exMin: '' });
-    let chart;
-    try{ chart = computeChart(inp).chart; }
-    catch(err){ return null; }
-    const ming = chart.palaces.find(p=>p.isMingGong);
-    const majors = ming.stars.filter(s=>s.type==='major').map(s=>s.name).join('、') || '空宫';
-    const liuPalace = palaceByBranch(chart, yBranch);
-    const liuMajors = liuPalace.stars.filter(s=>s.type==='major').map(s=>s.name).join('、') || '空宫';
-    const sh = normSihua(E.getLiuNianSiHua(y));
-    const jiStar = sh.ji, jiPalace = chart.palaces.find(p=>p.stars.some(s=>s.name===jiStar));
-    const act = yearActivity(chart, y);
-    return { h, label: SHICHEN.find(s=>s.v===h).label, majors, shen: disp(chart.palaces.find(p=>p.isShenGong).name),
-      liu: `${disp(liuPalace.name)}（${liuMajors}）`, ji: `${jiPalace?disp(jiPalace.name):''}${jiStar}化忌`, act };
-  }).filter(Boolean);
-  const allLow = rows.length && rows.every(r => r.act.level === '低');
-  const baseDesc = baseRec ? `${esc(baseRec.name)}（${baseInput.year} 年 ${baseInput.month} 月 ${baseInput.day} 日生）` : `表单日期（${baseInput.year} 年 ${baseInput.month} 月 ${baseInput.day} 日）`;
-  $('#dingpan-result').innerHTML =
-    `<div class="card"><div class="card-kicker">验证结果 · ${y} 年 · ${evName}</div>
-     <p class="hint">正在验的生日：${baseDesc}。各候选时辰的盘与正式排盘同口径（夏令时、真太阳时、晚子时顺延都算在内）。</p>
-     <p class="hint">下面是各候选时辰在那一年的"动静"对照。"非稽其已往，无以测其将来"——哪张盘和你记忆里那年的动静最对得上，哪个时辰就更可能是你的。但这只是验证的起点，不是结论。</p>
-     ${rows.map(r=>`<div class="arch-item"><div><div class="t">${r.label} <span class="star-chip">吻合启发：${r.act.level}</span></div>
-       <div class="s">命宫：${esc(r.majors)} · 身宫在${esc(r.shen)}<br>流年命宫：${esc(r.liu)}<br>流年化忌：${esc(r.ji)}${r.act.hits.length?`<br>当年动静：${esc(r.act.hits.join('、'))}`:''}</div></div></div>`).join('')}
-     <p class="hint">「吻合启发」只是一个粗糙的动静计数（流年命宫三方内的四化/煞星/天马），不能当作定盘依据。真正有用的是你自己的记忆：那年有没有大事、动静大不大。</p>
-     ${allLow ? `<div class="card" style="border:2px solid var(--gold)"><div class="card-kicker">证伪出口</div><p style="margin:0">几个候选时辰在这一年都没什么动静——那很可能<strong>候选时辰都不对</strong>。建议扩大候选范围（比如把相邻时辰也加进来），或找人工命理师当面定盘。不要硬选一个"最高分"当答案，硬凑比不知道更有害。</p></div>` : ''}
-    </div>`;
+  if(!E.isValidGregorianDate(+baseInput.year,+baseInput.month,+baseInput.day)){
+    $('#dingpan-result').innerHTML='<div class="empty">出生日期不完整或不存在，请先回到排盘页核对年月日。</div>';return;
+  }
+  if(!['male','female'].includes(baseInput.gender)){
+    $('#dingpan-result').innerHTML='<div class="empty">请先回到排盘页选择排盘使用的性别口径，再进行候选时辰对照。</div>';return;
+  }
+  const sh=normSihua(E.getLiuNianSiHua(y));
+  if(!sh||!['lu','quan','ke','ji'].every(k=>sh[k])){
+    $('#dingpan-result').innerHTML='<div class="empty">所选年份的流年四化资料不完整，暂不能生成对照。</div>';return;
+  }
+  const rows=dpHours.map(h=>{
+    try{
+      const inp=Object.assign({},baseInput,{shichen:h,exHour:'',exMin:''});
+      const result=computeChart(inp),chart=result&&result.chart;
+      if(!chart||!Array.isArray(chart.palaces)||chart.palaces.length!==12)return null;
+      const ming=chart.palaces.find(p=>p.isMingGong),shen=chart.palaces.find(p=>p.isShenGong);
+      const annualBranch=((y-4)%12+12)%12,liuPalace=palaceByBranch(chart,annualBranch);
+      if(!ming||!shen||!liuPalace)return null;
+      const majors=ming.stars.filter(p=>p.type==='major').map(p=>p.name).join('、')||'空宫';
+      const liuMajors=liuPalace.stars.filter(p=>p.type==='major').map(p=>p.name).join('、')||'空宫';
+      const fourhua=[['禄','lu'],['权','quan'],['科','ke'],['忌','ji']].map(([name,key])=>{
+        const star=sh[key],palace=chart.palaces.find(p=>p.stars.some(x=>x.name===star));
+        return {name,star,palace:palace?disp(palace.name):'本命盘未见该星'};
+      });
+      return {label:(SHICHEN.find(x=>x.v===h)||{}).label||String(h),majors,shen:disp(shen.name),liu:disp(liuPalace.name)+'（'+liuMajors+'）',fourhua};
+    }catch(err){return null;}
+  });
+  const baseDesc=baseRec?esc(baseRec.name)+'（'+baseInput.year+' 年 '+baseInput.month+' 月 '+baseInput.day+' 日生）':'表单日期（'+baseInput.year+' 年 '+baseInput.month+' 月 '+baseInput.day+' 日）';
+  if(rows.length!==dpHours.length||rows.some(x=>!x)){
+    $('#dingpan-result').innerHTML='<div class="empty">候选时辰中有命盘资料未能完整生成，因此不显示部分对照，避免遗漏影响理解。请检查出生资料、排盘口径后重试。</div>';return;
+  }
+  $('#dingpan-result').innerHTML=
+    '<div class="card"><div class="card-kicker">候选盘结构对照 · '+y+' 年 · '+esc(evName)+'</div>'+
+    '<p class="hint">出生资料：'+baseDesc+'。各候选时辰均按正式排盘所选口径分别计算。</p>'+
+    '<p class="hint">所选事件仅供你回忆和记录，不参与任何评分或算法匹配。以下只并列展示候选盘的命宫、身宫、流年宫位与四化位置差异；这些差异不是“吻合程度”，不能据此判断哪个时辰更可能正确，也不能替代出生记录。</p>'+
+    rows.map(r=>'<article class="arch-item"><div><div class="t">'+esc(r.label)+'</div>'+
+      '<div class="s">命宫主星：'+esc(r.majors)+' · 身宫：'+esc(r.shen)+'<br>流年命宫：'+esc(r.liu)+'<br>'+
+      r.fourhua.map(x=>'化'+x.name+'：'+esc(x.star)+' → '+esc(x.palace)).join('<br>')+
+      '</div></div></article>').join('')+
+    '<p class="hint">核对顺序：出生证明或家人原始记录、出生地与当时当地时间/时区、精确时分、是否启用真太阳时、晚子时换日规则。资料不确定时建议保留多个候选，不要为让描述“对上”而修改出生时间。</p></div>';
 });
 // 进定盘页时初始化
 const _nav3 = nav;
