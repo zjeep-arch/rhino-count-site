@@ -499,21 +499,25 @@ function luckOverlay(chart){
     return { hlBranch: dx.palaceBranch, sihua: sh, label: `大限 ${dx.startAge}–${dx.endAge} 岁（${disp(dx.palaceName)}）` };
   }
   if(luckMode === 'liunian'){
-    const y = luckParam;
+    const context = currentLunarContext(chart);
+    const y = Number(luckParam);
+    if(!context.valid || !Number.isInteger(y)) return { hlBranch: -1, sihua: null, label: '当前农历换算或流年年份不可用，已暂停叠盘' };
     const stem = ((y - 4) % 10 + 10) % 10, branch = ((y - 4) % 12 + 12) % 12;
     const sh = normSihua(E.getLiuNianSiHua(y));
     lastLiuNianYear = y;
     return { hlBranch: branch, sihua: sh, label: `${y} 年流年（${ST[stem]}${BR[branch]}年）命宫在${disp(palaceByBranch(chart,branch).name)}` };
   }
   if(luckMode === 'liuyue'){
-    const { y, lm } = luckParam; // lm: 农历月 1-12
+    const { y, lm } = luckParam || {}; // lm: 农历月 1-12
+    if(!currentLunarContext(chart).valid || !Number.isInteger(y) || !Number.isInteger(lm) || lm < 1 || lm > 12) return { hlBranch: -1, sihua: null, label: '农历年月信息不可用，已暂停流月叠盘' };
     const yearStem = ((y - 4) % 10 + 10) % 10;
     const sh = normSihua(E.getLiuYueSiHua(yearStem, lm));
     const hl = (doujunBranch(chart, y) + (lm - 1)) % 12; // 流月以斗君起正月顺排
     return { hlBranch: hl, sihua: sh, label: `${y} 年农历 ${lm} 月流月 · 流月命宫${disp(palaceByBranch(chart, hl).name)}` };
   }
   if(luckMode === 'liuri'){
-    const { y, lm, ld } = luckParam;
+    const { y, lm, ld } = luckParam || {};
+    if(!currentLunarContext(chart).valid || !Number.isInteger(y) || !Number.isInteger(lm) || !Number.isInteger(ld) || lm < 1 || lm > 12 || ld < 1 || ld > 30) return { hlBranch: -1, sihua: null, label: '农历日期信息不可用，已暂停流日叠盘' };
     const sh = normSihua(E.getLiuRiSiHua(y, lm, ld));
     const lyueHl = (doujunBranch(chart, y) + (lm - 1)) % 12;
     const hl = (lyueHl + (ld - 1)) % 12; // 流日以流月命宫起初一顺排
@@ -1933,17 +1937,17 @@ function selfSay(palName, hua){
 }
 /* ---------- 择日助手：未来 30 天按事项推荐 ---------- */
 const ZERI_TYPES = [
-  { k:'sign', name:'签约 · 面试', good:['官禄宫','父母宫'], bad:['官禄宫'] },
-  { k:'love', name:'告白 · 求婚', good:['夫妻宫','福德宫'], bad:['夫妻宫'] },
-  { k:'move', name:'出行 · 搬家', good:['迁移宫','田宅宫'], bad:['迁移宫'] },
-  { k:'open', name:'开业 · 启动', good:['官禄宫','财帛宫'], bad:['官禄宫','财帛宫'] },
+  { k:'sign', name:'签约 · 面试', palaces:['官禄宫','父母宫'], prompt:'核对职责、薪酬、交付范围、试用期与退出条款；面试则确认岗位要求、流程和双方预期。' },
+  { k:'love', name:'关系沟通', palaces:['夫妻宫','福德宫'], prompt:'确认双方意愿与边界；重要承诺留给充分沟通，不以盘面替代对方明确表达。' },
+  { k:'move', name:'出行 · 搬家', palaces:['迁移宫','田宅宫'], prompt:'核对交通、天气、证件、预算、合同与备选方案；安全和现实条件优先。' },
+  { k:'open', name:'开业 · 项目启动', palaces:['官禄宫','财帛宫'], prompt:'确认目标用户、预算、责任人、交付标准和风险预案；先做可逆的小规模验证。' },
 ];
 function renderZeri(){
   const rec=cur(),box=$('#zeri-body');
   if(!box)return;
-  if(!rec){box.innerHTML='<div class="empty">先排一张盘，再查看传统流日四化的象意日历。</div>';return;}
+  if(!rec){box.innerHTML='<div class="empty">先排一张盘，再查看按当前规则生成的流日四化参考。</div>';return;}
   const chart=rec.chart,today=bjDate();
-  box.innerHTML='<p class="hint">正在生成未来 30 天的农历象意索引…</p>';
+  box.innerHTML='<p class="hint">正在核对未来 30 天的农历日期与流日四化…</p>';
   setTimeout(()=>{
     try{
       const days=[];
@@ -1951,89 +1955,78 @@ function renderZeri(){
         const utc=new Date(Date.UTC(today.y,today.m-1,today.d+offset));
         const y=utc.getUTCFullYear(),m=utc.getUTCMonth()+1,d=utc.getUTCDate();
         const dc=E.generateChart({year:y,month:m,day:d,hour:0,gender:'male'}),li=dc&&dc.lunarInfo;
-        if(!li||!li.lunarYear||!li.lunarMonth||!li.lunarDay)continue;
+        if(!li||!Number.isInteger(li.lunarYear)||!Number.isInteger(li.lunarMonth)||!Number.isInteger(li.lunarDay)||li.lunarMonth<1||li.lunarMonth>12||li.lunarDay<1||li.lunarDay>30){
+          throw new Error('lunar-date-unavailable-'+offset);
+        }
         const sh=normSihua(E.getLiuRiSiHua(li.lunarYear,li.lunarMonth,li.lunarDay));
-        if(!sh)continue;
+        if(!sh||!sh.lu||!sh.quan||!sh.ke||!sh.ji)throw new Error('liu-ri-sihua-unavailable-'+offset);
         const dest={};
-        [['禄','lu'],['权','quan'],['科','ke'],['忌','ji']].forEach(([name,key])=>{dest[name]=sh[key]?sihuaStarPalace(chart,sh[key]):'';});
+        [['禄','lu'],['权','quan'],['科','ke'],['忌','ji']].forEach(([name,key])=>{dest[name]=sihuaStarPalace(chart,sh[key]);});
         const dj=doujunBranch(chart,li.lunarYear);
+        if(!Number.isInteger(dj)||dj<0||dj>11)throw new Error('doujun-unavailable-'+offset);
         const focus=palaceByBranch(chart,((dj+li.lunarMonth-1+li.lunarDay-1)%12+12)%12);
-        days.push({y,m,d,lm:li.lunarMonth,ld:li.lunarDay,sh,dest,focus:focus?disp(focus.name):'—'});
+        if(!focus)throw new Error('flow-palace-unavailable-'+offset);
+        days.push({y,m,d,lm:li.lunarMonth,ld:li.lunarDay,sh,dest,focus:disp(focus.name)});
       }
-      if(!days.length){box.innerHTML='<div class="empty">农历日期暂不可用，请稍后重试。</div>';return;}
-      box.innerHTML='<label class="zeri-label" for="zeri-type">查看主题</label><select id="zeri-type">'+ZERI_TYPES.map(t=>'<option value="'+esc(t.k)+'">'+esc(t.name)+'</option>').join('')+'</select>'+
-        '<p class="hint zeri-note">下面按日期排列，不评“吉日/凶日”，也不计算适合度分数。选择事项后仅提示传统流日四化落点，供文化研究和自我提问。</p><div id="zeri-out" class="zeri-calendar"></div>';
+      if(days.length!==30)throw new Error('incomplete-calendar');
+      box.innerHTML='<label class="zeri-label" for="zeri-type">选择现实议题</label><select id="zeri-type">'+ZERI_TYPES.map(t=>'<option value="'+esc(t.k)+'">'+esc(t.name)+'</option>').join('')+'</select>'+
+        '<p class="hint zeri-note">此处不是择吉工具：不评吉凶、不排序日期、不预测成功率。下列内容只展示当前排盘规则下的传统流日命宫与四化落点，并附现实核对清单。</p><div id="zeri-out" class="zeri-calendar"></div>';
       const sel=box.querySelector('#zeri-type'),out=box.querySelector('#zeri-out');
       const draw=()=>{
-        const t=ZERI_TYPES.find(x=>x.k===sel.value)||ZERI_TYPES[0],themes=t.focus||[];
+        const t=ZERI_TYPES.find(x=>x.k===sel.value)||ZERI_TYPES[0];
         out.innerHTML=days.map(day=>{
           const date=new Date(Date.UTC(day.y,day.m-1,day.d));
           const dateLabel=new Intl.DateTimeFormat('zh-CN',{timeZone:'Asia/Shanghai',month:'long',day:'numeric',weekday:'short'}).format(date);
-          const details=[['禄','lu'],['权','quan'],['科','ke'],['忌','ji']].map(([name,key])=>'<span><b>化'+name+'</b> '+(day.sh[key]?esc(day.sh[key])+' → '+esc(day.dest[name]||'未定位'):'未返回')).join('　');
+          const details=[['禄','lu'],['权','quan'],['科','ke'],['忌','ji']].map(([name,key])=>'<span><b>化'+name+'</b> '+esc(day.sh[key])+' → '+esc(day.dest[name]||'本命盘未见该星')+'</span>').join('');
           return '<article class="zeri-day"><header><b>'+dateLabel+'</b><span>农历'+day.lm+'月'+day.ld+'日</span></header>'+
-            '<p class="zeri-focus">流日命宫参考：'+esc(day.focus)+'</p><div class="zeri-hua">'+details+'</div>'+
-            '<p class="hint">所选主题：'+esc(t.name)+'；相关宫位：'+esc(themes.join('、')||'请以问题本身为准')+'。落点是传统象意，不表示该事项当天更容易成功或失败。</p></article>';
+            '<p class="zeri-focus">流日命宫参考：'+esc(day.focus)+'<br>议题相关宫位：'+esc(t.palaces.join('、'))+'</p><div class="zeri-hua">'+details+'</div>'+
+            '<p class="hint">现实核对：'+esc(t.prompt)+'</p><p class="hint">四化落点仅是传统符号对应，不表示当天更适合或不适合该事项；流派和排盘口径不同，结果可能不同。</p></article>';
         }).join('');
       };
       sel.addEventListener('change',draw);draw();
-    }catch(err){box.innerHTML='<div class="empty">日历生成暂时失败。请核对日期与流日规则设置后重试。</div>';}
+    }catch(err){box.innerHTML='<div class="empty">未来 30 天的日期或流日规则未能完整核实，因此暂不显示部分日历，避免遗漏造成误读。请稍后重试或核对排盘口径。</div>';}
   },30);
 }
 const SIGN_LIB = [
-  { lv:'吉', t:'云开月明', s:'浮云散尽月当空，守得安静自光明。', yi:'静候 · 复盘', jie:'急事缓办，答案会自己浮上来' },
-  { lv:'吉', t:'春风渡水', s:'春风不问来时路，渡水穿林自有时。', yi:'启动 · 联络', jie:'该开口的事，今天就开口' },
-  { lv:'吉', t:'灯下有米', s:'灯下有米灶有烟，寻常日子最养人。', yi:'归家 · 好好吃饭', jie:'别把近处的安稳看轻了' },
-  { lv:'吉', t:'星垂平野', s:'星垂平野阔，路是走宽的。', yi:'远行 · 见世面', jie:'把视野放大，事就变小' },
-  { lv:'吉', t:'静水流深', s:'静水流深处，暗自用力时。', yi:'深耕 · 打磨手艺', jie:'不响，并不代表没有在涨' },
-  { lv:'吉', t:'贵人指路', s:'山重水复处，恰好有人提灯来。', yi:'请教 · 合作', jie:'张口问一句，少走三天弯路' },
-  { lv:'吉', t:'瓜熟蒂落', s:'瓜熟自然落，功到自然成。', yi:'收尾 · 交付', jie:'临门一脚别慌，稳稳送出去' },
-  { lv:'吉', t:'旧友重逢', s:'旧友一席话，胜读十年书。', yi:'叙旧 · 道谢', jie:'有个该联系的人，今天就联系' },
-  { lv:'吉', t:'月满则近', s:'月将满时最好看，事将成时最要稳。', yi:'守成 · 查漏', jie:'最后一公里，慢就是快' },
-  { lv:'吉', t:'雪后初晴', s:'雪压枝头终有时，一朝晴日照新姿。', yi:'翻身 · 恢复', jie:'低谷不是句号，是逗号' },
-  { lv:'中', t:'雾里看山', s:'雾里看山山不远，等风来时自分明。', yi:'观察 · 暂缓表态', jie:'看不清的事，先不急着下结论' },
-  { lv:'中', t:'磨刀待时', s:'磨刀不误砍柴工，慢工细活见真章。', yi:'准备 · 学习', jie:'还没到出手的时候，先把刀磨快' },
-  { lv:'中', t:'小舟过滩', s:'小舟过滩水声急，掌稳了篙不回头。', yi:'专注 · 单点突破', jie:'这段水急，别左顾右盼' },
-  { lv:'中', t:'半盏茶', s:'半盏茶凉半盏温，世间事多半留一半。', yi:'降低期待 · 接受不完美', jie:'七八分好，就是很好' },
-  { lv:'中', t:'移树问土', s:'移树先问土，换轨先问心。', yi:'权衡 · 调研', jie:'大动作之前，先做小调研' },
-  { lv:'中', t:'补屋趁晴', s:'补屋要趁天晴时，未雨绸缪是聪明。', yi:'体检 · 排险 · 备份', jie:'顺手把隐患处理了' },
-  { lv:'中', t:'同舟共渡', s:'一人摇橹慢，同舟渡水宽。', yi:'求助 · 分工', jie:'能分担的，别一个人扛' },
-  { lv:'中', t:'种豆得豆', s:'种豆得豆种瓜瓜，功夫不负种田人。', yi:'投入 · 积累', jie:'今天撒的种，秋后见分晓' },
-  { lv:'中', t:'借风使船', s:'好风凭借力，送我上青云。', yi:'借势 · 用工具', jie:'有现成的顺风，何必硬顶风走' },
-  { lv:'中', t:'纸上行舟', s:'纸上得来终觉浅，绝知此事要躬行。', yi:'动手 · 试错', jie:'想清楚了就去试，别再纸上演算' },
-  { lv:'中', t:'巷口灯昏', s:'巷口灯昏路仍明，走慢一点也到家。', yi:'休息 · 早睡', jie:'累了的信号，别用咖啡盖过去' },
-  { lv:'中', t:'秤上称心', s:'人心如秤自称心，公道自在 明白人。', yi:'公正 · 说明白话', jie:'把话说清楚，误会就少一半' },
-  { lv:'平', t:'逆水行舟', s:'逆水行舟用力撑，一篙松劲退千寻。', yi:'坚持 · 别松手', jie:'这段费劲，但退一步更亏' },
-  { lv:'平', t:'独木桥', s:'独木桥上让三分，不是怕来是格局。', yi:'退让 · 避争', jie:'争赢一口气，输掉一局棋' },
-  { lv:'平', t:'叶落知秋', s:'一叶落而知秋，见微知著早调头。', yi:'复盘 · 及时止损', jie:'坏消息越早面对，代价越小' },
-  { lv:'平', t:'井底观天', s:'井底观天天亦小，出去走走再说话。', yi:'换个环境 · 换个脑子', jie:'困住你的可能是视角不是处境' },
-  { lv:'平', t:'多歧路', s:'岔路多时莫赶路，坐下画张图再走。', yi:'暂停 · 理优先级', jie:'选择焦虑的解药是排序' },
-  { lv:'平', t:'酒逢知己', s:'酒逢知己千杯少，话不投机半句多。', yi:'筛选社交 · 少凑热闹', jie:'无效的局，推了就推了' },
-  { lv:'平', t:'悬而未决', s:'悬而未决最磨人，设个期限安己心。', yi:'给拖延的事定截止日', jie:'悬着的事，今天推它一步' },
-  { lv:'平', t:'守拙', s:'藏巧于拙用处大，锋芒收在鞘中藏。', yi:'低调 · 蓄力', jie:'这一阵，让作品替你说话' },
+  { t:'先看事实', s:'把手头最重要的一件事写成一句可核对的事实。', yi:'整理信息', jie:'不确定的部分先标出来，不急着补成结论' },
+  { t:'留出余地', s:'给今天的安排留一点缓冲，避免把每一分钟都排满。', yi:'安排缓冲', jie:'计划要能容纳变化' },
+  { t:'小步验证', s:'把一个大问题拆成今天能验证的小步骤。', yi:'先做小实验', jie:'先观察结果，再决定要不要扩大' },
+  { t:'把话说清', s:'沟通前先写下目的、事实和希望对方确认的事项。', yi:'明确表达', jie:'确认彼此理解一致' },
+  { t:'检查边界', s:'看看近期承诺是否超出时间、预算或精力范围。', yi:'核对承诺', jie:'必要时及时协商调整' },
+  { t:'回看进度', s:'用十分钟记录已完成、待解决和需要求助的事项。', yi:'复盘进度', jie:'把下一步写具体' },
+  { t:'补充证据', s:'对重要判断再找一条可靠信息来源，核对日期和条件。', yi:'查证信息', jie:'观点与事实分开记录' },
+  { t:'照顾节奏', s:'给工作、休息和必要的生活事务各留出时间。', yi:'调整节奏', jie:'身体不适请寻求专业医疗建议' },
+  { t:'明确优先级', s:'从待办中选出最重要的一项，暂缓一件低优先级任务。', yi:'做减法', jie:'清晰比忙碌更有用' },
+  { t:'确认条件', s:'涉及金钱、合同或合作时，逐项确认金额、责任和期限。', yi:'核对条款', jie:'不清楚的地方先问明白' },
+  { t:'记录灵感', s:'把新想法记下来，并补上一条最低成本的验证办法。', yi:'形成假设', jie:'灵感先验证，不急着下结论' },
+  { t:'建立备份', s:'为一个重要文件、日程或项目进度准备可恢复的副本。', yi:'留好备份', jie:'重要安排同时确认替代方案' },
+  { t:'主动求助', s:'找一位相关的人确认你卡住的具体问题。', yi:'提出具体请求', jie:'把背景、目标和所需帮助说清楚' },
+  { t:'听完再答', s:'遇到分歧时先复述对方的意思，再表达自己的判断。', yi:'确认理解', jie:'避免用猜测代替对话' },
+  { t:'观察变化', s:'记录一项正在变化的指标，并确认它的统计口径。', yi:'留意趋势', jie:'单次波动不等于长期结论' },
+  { t:'复用经验', s:'从过去做成的一件事里提炼一个可以复用的步骤。', yi:'沉淀方法', jie:'保留适用条件' },
+  { t:'做一次收尾', s:'把一项接近完成的工作补上验收、归档或交接。', yi:'完成闭环', jie:'交付标准要让双方都清楚' },
+  { t:'检查预算', s:'看看本月支出与计划的差异，确认是否需要调整。', yi:'核对预算', jie:'不依据运势做投资或借贷决定' },
+  { t:'整理空间', s:'整理一个常用位置，让下一步更容易开始。', yi:'减少阻力', jie:'一次只改一个小地方' },
+  { t:'重新估时', s:'根据实际进度调整一项任务的时间预期。', yi:'更新计划', jie:'把依赖条件也写进去' },
+  { t:'设定边界', s:'为一段高频打断设一个可执行的回应时间。', yi:'保护专注', jie:'提前告知相关的人' },
+  { t:'主动感谢', s:'对一项具体帮助表达感谢，并说明它带来的实际作用。', yi:'建立连接', jie:'具体而真诚即可' },
+  { t:'删掉噪音', s:'从信息源中暂停一个低价值提醒或重复通知。', yi:'减少打扰', jie:'给注意力留出空间' },
+  { t:'练习一次', s:'为面试、演讲或考试做一轮计时练习并复盘。', yi:'模拟练习', jie:'用反馈改进下一轮' },
+  { t:'确认需求', s:'开始新任务前，先确认目标、受众和完成标准。', yi:'对齐预期', jie:'避免返工从提问开始' },
+  { t:'梳理风险', s:'写下一个方案最可能遇到的阻碍和应对办法。', yi:'预想风险', jie:'让预案具体到负责人和时间' },
+  { t:'允许暂停', s:'如果状态不适合做重大决定，可以先记录问题并设定复查时间。', yi:'暂缓不可逆决定', jie:'必要时向可信赖的人求助' },
+  { t:'兑现承诺', s:'完成一项已经答应的小事，或及时告知无法按期完成。', yi:'及时同步', jie:'尽早沟通有助于重新安排' },
+  { t:'留存来源', s:'把一条重要信息的出处、日期和适用范围一并记下。', yi:'保存证据', jie:'转述前再次核实' },
+  { t:'安排下一步', s:'今天结束前，写下明天启动工作所需的第一个动作。', yi:'降低启动成本', jie:'让计划足够小、足够明确' },
 ];
-const SIGN_LV_CLS = { '吉':'lv-ji', '中':'lv-zhong', '平':'lv-ping' };
-const CN_NUM = ['一','二','三','四','五','六','七','八','九','十','十一','十二','十三','十四','十五','十六','十七','十八','十九','二十','二十一','二十二','二十三','二十四','二十五','二十六','二十七','二十八','二十九','三十'];
 function dailySign(rec){
   const bd = bjDate();
-  const seed = (rec ? rec.id : 'guest') + '|' + bd.y + '-' + bd.m + '-' + bd.d;
+  const seed = 'daily-review|' + bd.y + '-' + bd.m + '-' + bd.d;
   const rnd = mulberry([...seed].reduce((a, c) => (a * 31 + c.charCodeAt(0)) | 0, 7));
   const idx = Math.floor(rnd() * SIGN_LIB.length);
-  return {no:'提示 '+String(idx+1).padStart(2,'0'),...SIGN_LIB[idx],lv:'行动提示',lvCls:'lv-zhong'};
+  return {no:'今日 '+String(idx+1).padStart(2,'0'),...SIGN_LIB[idx],lv:'复盘问题',lvCls:'lv-zhong'};
 }
 function SIGN_LVCls(lv){ return { '吉':'lv-ji', '中':'lv-zhong', '平':'lv-ping' }[lv] || 'lv-zhong'; }
-/* 今日顺时：日支的三合/六合时支（硬规则，不装神弄鬼） */
-function luckyHoursToday(){
-  const li = todayLunar();
-  const dayGz = li && li.fourPillars && li.fourPillars[2];
-  if(!dayGz) return null;
-  const b = BR.indexOf(dayGz[1]);
-  if(b < 0) return null;
-  const liuHe = (b + 6) % 12;                       // 六合
-  const groups = [[0,4,8],[1,5,9],[2,6,10],[3,7,11]]; // 三合局
-  const g = groups.find(gr => gr.includes(b));
-  const picks = [...new Set([liuHe, ...g.filter(x => x !== b)])];
-  return picks.map(x => `${BR[x]}时（${SHICHEN[x === 0 ? 0 : x].range}）`).join(' · ');
-}
 /* 今日小运 · 流日定制版：流日命宫点亮本命哪一宫＋流日四化飞到哪＝每天每人都不一样 */
 const DAILY_FOCUS_SAY = {
   '命宫':'今天可自问：最重要的一件事是什么？',
@@ -2060,7 +2053,7 @@ function todayLunar(){
 /* 按命盘定制的今日小运文本；无盘或算不出时返回 null（调用方用通用版兜底） */
 function dailyFortuneFor(chart){
   if(!chart)return null;
-  const li=todayLunar();if(!li||!li.lunarMonth||!li.lunarDay)return null;
+  const li=todayLunar();if(!li||!Number.isInteger(li.lunarYear)||!Number.isInteger(li.lunarMonth)||!Number.isInteger(li.lunarDay)||li.lunarMonth<1||li.lunarMonth>12||li.lunarDay<1||li.lunarDay>30)return null;
   let sh=null;try{sh=normSihua(E.getLiuRiSiHua(li.lunarYear,li.lunarMonth,li.lunarDay));}catch(e){}
   if(!sh)return null;
   const dj=doujunBranch(chart,li.lunarYear);
@@ -2088,9 +2081,9 @@ function renderHome(){
     `<div class="sign-text">${esc(sign.s)}</div>` +
     `<p class="sign-yi" style="margin:2px 0 6px"><b>宜</b> ${esc(sign.yi)}　<b>提醒</b> ${esc(sign.jie)}</p>` +
     `<p class="hint" style="margin:6px 0 0">盘面反思线索（传统象意，不是事件预测）：${esc(custom || generic)}</p>`;
-  // 今日顺时（地支三合/六合）
-  const lh = luckyHoursToday();
-  $('#daily-lucky-hours').textContent = lh ? `传统日支合气参考时段：${lh} ｜ 民俗象意，不代表实际事项成功率` : ''; 
+  // 不按民俗合支生成“吉时”建议；今日四柱信息已在日期与命盘口径中展示。
+  const luckyHours = $('#daily-lucky-hours');
+  if(luckyHours) luckyHours.textContent = ''; 
   // hero 今日一行 + 犯太岁
   renderTaisuiCard();
   const li2 = todayLunar();
@@ -2104,7 +2097,7 @@ function renderHome(){
     if(mp){ phc.hidden = false; $('#portrait-home-body').innerHTML = mp; }
     else phc.hidden = true;
   } else if(phc) phc.hidden = true;
-  $('#daily-date').textContent = `${bd.m} 月 ${bd.d} 日${gz2}${custom ? '' : ' · 排一张盘，签与解按你的命盘定制'}`;
+  $('#daily-date').textContent = `${bd.m} 月 ${bd.d} 日${gz2}${custom ? '' : ' · 排盘后可查看传统流日参考'}`;
   // hero 主按钮智能化：有盘→查看命盘，无盘→开始排盘
   const cta = document.querySelector('.hn-cta');
   if(cta){
@@ -2112,68 +2105,52 @@ function renderHome(){
     else { cta.textContent = '开始排盘 →'; cta.dataset.nav = 'input'; }
   }
 }
-/* 轻合拍：分享链接打开对方的盘时，与本机「我」的盘快评（日柱合/生肖/紫微互飞） */
+/* 命盘交叉参考：只列规则结构对应，不计算适配度或关系结论 */
 const GAN5_HE = { '甲':'己','乙':'庚','丙':'辛','丁':'壬','戊':'癸','己':'甲','庚':'乙','辛':'丙','壬':'丁','癸':'戊' };
 const ZHI6_HE = { '子':'丑','丑':'子','寅':'亥','亥':'寅','卯':'戌','戌':'卯','辰':'酉','酉':'辰','巳':'申','申':'巳','午':'未','未':'午' };
 const ZHI3_HE = [['申','子','辰'],['寅','午','戌'],['巳','酉','丑'],['亥','卯','未']];
 function heCardData(chartA, chartB, nameA, nameB){
-  const gzA = chartA.lunarInfo.fourPillars[2], gzB = chartB.lunarInfo.fourPillars[2];
-  const rows = []; let score = 60;
-  const sA = BR.indexOf(gzA[1]), sB = BR.indexOf(gzB[1]);
-  const zodiac = b => '鼠牛虎兔龙蛇马羊猴鸡狗猪'[b];
-  if(GAN5_HE[gzA[0]] === gzB[0]){ score += 10; rows.push({ tag:'日干五合', cls:'lu', text:`你们日柱天干${gzA[0]}${gzB[0]}相合（天干五合）——天然互相吸引，气场对得上` }); }
-  if(ZHI6_HE[gzA[1]] === gzB[1]){ score += 10; rows.push({ tag:'日支六合', cls:'lu', text:`日支${gzA[1]}${gzB[1]}六合——过日子默契度高，生活习惯容易对齐` }); }
-  else if(sA === sB){ score += 5; rows.push({ tag:'同日支', cls:'', text:`两人同属${gzA[1]}日支——节奏像，但容易较着劲，谁让一步谁赢` }); }
-  else if(ZHI3_HE.some(g => g.includes(gzA[1]) && g.includes(gzB[1]))){ score += 8; rows.push({ tag:'生肖三合', cls:'lu', text:`生肖${zodiac(sA)}与${zodiac(sB)}三合——相处自带润滑，圈子也合得来` }); }
-  else if((sA + 6) % 12 === sB){ score -= 5; rows.push({ tag:'生肖相冲', cls:'ji', text:`生肖${zodiac(sA)}与${zodiac(sB)}相冲——吸引力强但摩擦也多，聚少离多反而是保鲜法` }); }
-  // 紫微互飞：A命宫忌入B夫妻宫 / B命宫忌入A夫妻宫 / 命宫主星同
-  const mingA = chartA.palaces.find(p => p.isMingGong), mingB = chartB.palaces.find(p => p.isMingGong);
-  const fuA = chartA.palaces.find(p => p.name === '夫妻' || disp(p.name) === '夫妻宫');
-  const fuB = chartB.palaces.find(p => p.name === '夫妻' || disp(p.name) === '夫妻宫');
-  const flyJi = (from, toFu, fromName, toName) => {
-    const sh = E.getSiHuaByStem(from.stem) || {};
-    if(sh['忌'] && toFu.stars.some(x => x.name === sh['忌']))
-      rows.push({ tag:'在意', cls:'ji', text:`${fromName}的命宫化忌飞进${toName}的夫妻宫——${fromName}对这段关系的在意是实打实的，牵挂也是` });
+  const rows=[];
+  const gzA=chartA&&chartA.lunarInfo&&chartA.lunarInfo.fourPillars&&chartA.lunarInfo.fourPillars[2];
+  const gzB=chartB&&chartB.lunarInfo&&chartB.lunarInfo.fourPillars&&chartB.lunarInfo.fourPillars[2];
+  if(gzA&&gzB&&gzA.length===2&&gzB.length===2){
+    if(GAN5_HE[gzA[0]]===gzB[0]) rows.push({tag:'日干五合',cls:'',text:`日柱天干${gzA[0]}与${gzB[0]}在传统五合表中构成对应。仅记录术数分类，不推断吸引力、性格或关系结果。`});
+    if(ZHI6_HE[gzA[1]]===gzB[1]) rows.push({tag:'日支六合',cls:'',text:`日柱地支${gzA[1]}与${gzB[1]}在传统分类中为六合。不同体系权重不同，不据此判断相处默契或关系结局。`});
+    else if(ZHI3_HE.some(g=>g.includes(gzA[1])&&g.includes(gzB[1]))) rows.push({tag:'日支三合',cls:'',text:`日柱地支${gzA[1]}与${gzB[1]}同属传统三合组。它是符号分类，不代表两人现实中必然合拍。`});
+    else if((BR.indexOf(gzA[1])+6)%12===BR.indexOf(gzB[1])) rows.push({tag:'日支相冲',cls:'',text:`日柱地支${gzA[1]}与${gzB[1]}在传统分类中相冲。此标签不等同于冲突预测，也不建议据此决定关系去留。`});
+  }
+  const palaces=c=>c&&Array.isArray(c.palaces)?c.palaces:[];
+  const mingA=palaces(chartA).find(p=>p.isMingGong),mingB=palaces(chartB).find(p=>p.isMingGong);
+  const fuA=palaces(chartA).find(p=>p.name==='夫妻'||disp(p.name)==='夫妻宫');
+  const fuB=palaces(chartB).find(p=>p.name==='夫妻'||disp(p.name)==='夫妻宫');
+  const cross=(from,to,fromName,toName)=>{
+    if(!from||!to||!Array.isArray(from.stars)||!Array.isArray(to.stars))return;
+    const sh=E.getSiHuaByStem(from.stem)||{},ji=sh['忌'];
+    if(ji&&to.stars.some(x=>x.name===ji)) rows.push({tag:'四化交叉',cls:'',text:`${fromName}命宫宫干按当前四化表对应化忌星${ji}，该星也见于${toName}夫妻宫。仅是两张盘的位置重合，不表示在意、冲突或关系走向。`});
+    const lu=sh['禄'];
+    if(lu&&to.stars.some(x=>x.name===lu)) rows.push({tag:'四化交叉',cls:'',text:`${fromName}命宫宫干按当前四化表对应化禄星${lu}，该星也见于${toName}夫妻宫。仅记录规则映射，不代表带来资源或关系获益。`});
   };
-  flyJi(mingA, fuB, nameA, nameB); flyJi(mingB, fuA, nameB, nameA);
-  const mA = mingA.stars.filter(x => x.type === 'major').map(x => x.name);
-  const mB = fuB.stars.filter(x => x.type === 'major').map(x => x.name);
-  const same = mA.find(n => mB.includes(n));
-  if(same) rows.push({ tag:'同频', cls:'lu', text:`${nameA}的命宫主星与${nameB}的夫妻宫主星都有${same}——${nameB}要的正是${nameA}身上有的` });
-  const fuLu = (() => {
-    const sh = E.getSiHuaByStem(mingB.stem) || {};
-    if(sh['禄'] && fuA.stars.some(x => x.name === sh['禄'])) return { tag:'送禄', cls:'lu', text:`${nameB}的命宫化禄飞进${nameA}的夫妻宫——${nameB}是给这段关系带资源、带顺的那一个` };
-    const sh2 = E.getSiHuaByStem(mingA.stem) || {};
-    if(sh2['禄'] && fuB.stars.some(x => x.name === sh2['禄'])) return { tag:'送禄', cls:'lu', text:`${nameA}的命宫化禄飞进${nameB}的夫妻宫——${nameA}是给这段关系带资源、带顺的那一个` };
-    return null;
-  })();
-  if(fuLu) rows.push(fuLu);
-  // 日主五行关系：相生=滋养 相克=推动（克制措辞，不下判断）
-  const wxA = WX_OF_STEM[ST.indexOf(gzA[0])], wxB = WX_OF_STEM[ST.indexOf(gzB[0])];
-  const SHENGW = {木:'水',火:'木',土:'火',金:'土',水:'金'}, KEW = {木:'土',土:'水',水:'火',火:'金',金:'木'};
-  if(SHENGW[wxA] === wxB) rows.push({ tag:'五行', cls:'lu', text:`${nameA}日主${wxA}生${nameB}日主${wxB}——${nameA}天然愿意滋养${nameB}，注意别只输出不充电` });
-  else if(SHENGW[wxB] === wxA) rows.push({ tag:'五行', cls:'lu', text:`${nameB}日主${wxB}生${nameA}日主${wxA}——${nameB}是那个默默托底的人` });
-  else if(KEW[wxA] === wxB) rows.push({ tag:'五行', cls:'', text:`${nameA}日主${wxA}克${nameB}日主${wxB}——${nameA}推着${nameB}成长，力度是关键` });
-  else if(KEW[wxB] === wxA) rows.push({ tag:'五行', cls:'', text:`${nameB}日主${wxB}克${nameA}日主${wxA}——${nameB}对${nameA}是鞭策型存在` });
-  score = Math.max(45, Math.min(95, score));
-  const level = score >= 85 ? '很合拍' : score >= 72 ? '有默契' : score >= 58 ? '要磨合' : '相处靠修炼';
-  return { score, level, rows: rows.slice(0, 4) };
+  cross(mingA,fuB,nameA,nameB);cross(mingB,fuA,nameB,nameA);
+  const aMaj=mingA&&mingA.stars?mingA.stars.filter(x=>x.type==='major').map(x=>x.name):[];
+  const bMaj=fuB&&fuB.stars?fuB.stars.filter(x=>x.type==='major').map(x=>x.name):[];
+  const shared=aMaj.find(n=>bMaj.includes(n));
+  if(shared) rows.push({tag:'星曜重合',cls:'',text:`一方命宫与另一方夫妻宫都出现${shared}。这是星曜名称的重合，不表示一方符合另一方的理想伴侣类型。`});
+  return {rows:rows.slice(0,6)};
 }
 function renderHeCard(){
-  const rec = cur();
-  const card = $('#hecard'), body = $('#he-body');
-  if(!card) return;
-  if(!rec || rec.tag !== '分享'){ card.hidden = true; return; }
-  const mine = archive.find(a => a.tag !== '分享' && a.id !== rec.id);
-  if(!mine){ card.hidden = true; return; }
-  const d = heCardData(rec.chart, mine.chart, rec.name || 'TA', mine.name || '我');
-  body.innerHTML =
-    `<div class="wy-concl">${esc(mine.name || '我')} 与 ${esc(rec.name || 'TA')}：${d.level}（${d.score} 分段）</div>` +
-    d.rows.map(r => `<div class="scr-row"><span class="scr-tag ${r.cls}">${r.tag}</span><span class="scr-text">${withTerms(r.text)}</span></div>`).join('') +
-    `<p class="hint" style="margin:8px 0 0">快评只看日柱与命宫飞化，是破冰不是判决。</p>
-     <button class="btn-ghost btn-block" id="btn-he-share" style="margin-top:8px">把这张盘回传给 TA →</button>`;
-  card.hidden = false;
-  $('#btn-he-share')?.addEventListener('click', () => openShare('link'));
+  const rec=cur(),card=$('#hecard'),body=$('#he-body');
+  if(!card)return;
+  if(!rec||rec.tag!=='分享'){card.hidden=true;return;}
+  const mine=archive.find(x=>x.tag!=='分享'&&x.id!==rec.id);
+  if(!mine){card.hidden=true;return;}
+  const d=heCardData(rec.chart,mine.chart,rec.name||'TA',mine.name||'我');
+  body.innerHTML=
+    '<div class="wy-concl">两张命盘的传统规则交叉参考</div>'+
+    (d.rows.length?d.rows.map(r=>`<div class="scr-row"><span class="scr-tag">${esc(r.tag)}</span><span class="scr-text">${esc(r.text)}</span></div>`).join(''):'<p class="hint">当前展示的规则中未发现可列出的对应项；这不能说明关系好坏，也不代表缺少情感。</p>')+
+    '<p class="hint" style="margin:8px 0 0">这里不计算关系分数、适配度或未来结果。关系判断以双方意愿、沟通、尊重与实际相处为准。</p>'+
+    '<button class="btn-ghost btn-block" id="btn-he-share" style="margin-top:8px">把这张盘回传给 TA →</button>';
+  card.hidden=false;
+  $('#btn-he-share')?.addEventListener('click',()=>openShare('link'));
 }
 /* 四化总纲：来因宫 + 生年忌，两句话定调（速览组顶部） */
 function renderBriefCard(chart){
@@ -2456,7 +2433,7 @@ function drawSeal(ctx, x, y, size, text){
   chars.forEach((ch, i) => ctx.fillText(ch, 0, (i - (chars.length - 1) / 2) * size * .4));
   ctx.restore();
 }
-/* 竖排签文卡 */
+/* 每日复盘提示分享卡 */
 function drawSignCard(){
   const rec = cur();
   const sign = dailySign(rec);
@@ -2469,15 +2446,15 @@ function drawSignCard(){
   ctx.fillText('每日复盘提示 · 问星', W / 2, 130);
   ctx.strokeStyle = 'rgba(132,146,255,.4)'; ctx.lineWidth = 1.5;
   ctx.beginPath(); ctx.moveTo(W / 2 - 150, 165); ctx.lineTo(W / 2 + 150, 165); ctx.stroke();
-  // 签号 + 级别
+  // 提示序号 + 类型
   ctx.fillStyle = '#F5F2EA'; ctx.font = '600 46px "Songti SC","Noto Serif SC",serif';
   ctx.fillText(`${sign.no} · ${sign.lv}`, W / 2, 232);
-  // 竖排签题（右起第一列，字大）
+  // 竖排提示主题（右起第一列，字大）
   const titleChars = [...sign.t];
   ctx.font = '700 66px "Songti SC","Noto Serif SC",serif';
   const tX = W / 2 + 150, tY0 = 330;
   titleChars.forEach((ch, i) => { ctx.fillStyle = '#E9DFC8'; ctx.fillText(ch, tX, tY0 + i * 86); });
-  // 竖排签文（两列，右起）："，"分句
+  // 竖排提示内容（两列，右起）："，"分句
   const parts = sign.s.split(/[，。；]/).filter(Boolean);
   ctx.font = '600 44px "Songti SC","Noto Serif SC",serif';
   parts.slice(0, 3).forEach((part, col) => {
@@ -2486,7 +2463,7 @@ function drawSignCard(){
   });
   // 宜 / 提醒
   ctx.fillStyle = '#B9C4EA'; ctx.font = '26px "IBM Plex Mono","PingFang SC",monospace';
-  ctx.fillText(`宜  ${sign.yi}`, W / 2, 1030);
+  ctx.fillText(`行动  ${sign.yi}`, W / 2, 1030);
   ctx.fillStyle = '#9AA5D6';
   wrapText(ctx, `提醒：${sign.jie}`, W / 2, 1082, 700, 40);
   // 印章 + 落款
