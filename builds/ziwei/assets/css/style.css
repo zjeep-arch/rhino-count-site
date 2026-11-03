@@ -1473,3 +1473,12 @@ body{color:var(--ink);
   .mobile-palace-picker select{width:100%;min-height:48px;padding:0 12px;border:1px solid var(--line);border-radius:9px;background:var(--bg);color:var(--ink);font:inherit;font-size:14px}
   .mobile-palace-picker span{grid-column:1/-1;font-size:11px;color:var(--muted)}
 }
+
+
+/* Star glossary: readable, complete entries with clear interpretive context */
+.star-glossary{display:grid;gap:14px}
+.star-glossary-category{justify-self:start;padding:4px 9px;border:1px solid var(--line);border-radius:999px;background:var(--primary-soft);color:var(--primary-deep);font-size:12px;font-weight:700;letter-spacing:.04em}
+.star-glossary-description{margin:0;color:var(--ink);line-height:1.9}
+.star-glossary-note{padding:12px 14px;border-left:3px solid var(--gold);background:var(--primary-soft);color:var(--muted);font-size:13px;line-height:1.75}
+.star-glossary-note b{display:inline-block;margin-bottom:3px;color:var(--primary-deep)}
+.star-glossary-source{color:var(--muted);font-size:11px;line-height:1.6}
