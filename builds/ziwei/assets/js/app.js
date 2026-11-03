@@ -1354,16 +1354,6 @@ document.addEventListener('click', e => {
 });
 
 /* ---------- 13维解读（v4.0 数据集按需加载，走自建 CDN 月包，双镜像） ---------- */
-const DATA_MIRRORS = [
-  'https://cdn.jsdelivr.net/gh/zjeep-arch/ziwei-data@main/data',
-  'https://cdn.statically.io/gh/zjeep-arch/ziwei-data@main/data',
-];
-const ZSTD_MIRRORS = [
-  ['https://cdn.jsdelivr.net/npm/@bokuweb/zstd-wasm@0.0.27/dist/esm/index.web.js',
-   'https://cdn.jsdelivr.net/npm/@bokuweb/zstd-wasm@0.0.27/dist/esm/zstd.wasm'],
-  ['https://unpkg.com/@bokuweb/zstd-wasm@0.0.27/dist/esm/index.web.js',
-   'https://unpkg.com/@bokuweb/zstd-wasm@0.0.27/dist/esm/zstd.wasm'],
-];
 /* 解锁码：SALT|chartKey 的 SHA-256 取 8 位数字。SALT 公开在前端，仅防君子（0.9 元内容此强度足够）。 */
 const GXG_UNLOCK_SALT = 'ae8f94fe28773c4be2cf110caac7f535';
 const GXG_CONTACT = ''; // 站长微信（用户提供后填入，解锁弹窗第 2 步会显示）
@@ -1389,20 +1379,6 @@ function readingKeyOf(chart){
   const bi=chart.birthInfo;
   return bi.year+'-'+pad2(bi.month)+'-'+pad2(bi.day)+'-'+bi.hour+'-'+bi.gender;
 }
-function stableValue(value){
-  if(Array.isArray(value))return '['+value.map(stableValue).join(',')+']';
-  if(value&&typeof value==='object')return '{'+Object.keys(value).sort().map(k=>JSON.stringify(k)+':'+stableValue(value[k])).join(',')+'}';
-  return JSON.stringify(value);
-}
-function readingDatasetCompatible(rec){
-  const input=rec&&rec.input||{};
-  if(input.trueSolar||input.lateZiNextDay)return false;
-  const custom=input.sihuaTable, standard=E.SI_HUA_TABLE;
-  return !custom||stableValue(custom)===stableValue(standard);
-}
-function validReadingCorpus(data){
-  return !!data&&typeof data==='object'&&Object.keys(D.datasetTopics).every(k=>typeof data[k]==='string'&&data[k].trim().length>=80&&data[k].length<=30000);
-}
 async function sha256hex(s){
   const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s));
   return [...new Uint8Array(b)].map(x => x.toString(16).padStart(2, '0')).join('');
@@ -1415,71 +1391,7 @@ async function verifyUnlockCode(key, code){
   return (String(code).trim() === await makeUnlockCode(key));
 }
 function isUnlocked(key){ return !!store.get('gxg_unlock_' + key, false); }
-let zstdApi = null, readingCache = {}; // key -> {topic: text}
-async function getZstd(){
-  if(zstdApi) return zstdApi;
-  let last = null;
-  for(const [esmUrl, wasmUrl] of ZSTD_MIRRORS){
-    try{
-      const mod = await import(esmUrl);
-      await mod.init(wasmUrl);
-      zstdApi = mod; // { decompress }
-      return zstdApi;
-    }catch(e){ last = e; }
-  }
-  throw last || new Error('解压组件加载失败');
-}
-/* 在字节层面找 key，避免把 700MB+ 全转成 JS 字符串（省一半内存） */
-function findLineBytes(raw, needleBytes){
-  const n = raw.length, m = needleBytes.length;
-  outer: for(let i = 0; i <= n - m; i++){
-    if(raw[i] !== needleBytes[0]) continue;
-    for(let j = 1; j < m; j++){ if(raw[i+j] !== needleBytes[j]) continue outer; }
-    let s = i; while(s > 0 && raw[s-1] !== 10) s--;
-    let e = i + m; while(e < n && raw[e] !== 10) e++;
-    return raw.slice(s, e);
-  }
-  return null;
-}
-/* 多镜像轮询下载：一个 CDN 不通自动换下一个 */
-async function fetchFirst(urls, tries, onStep){
-  let last = null;
-  for(let u = 0; u < urls.length; u++){
-    for(let i = 0; i < tries; i++){
-      try{
-        if(onStep) onStep(`正在下载解读数据（约 2MB）${urls.length > 1 ? ' · 线路' + (u + 1) : ''}…`);
-        const ctl = new AbortController();
-        const timer = setTimeout(() => ctl.abort(), 20000);
-        const res = await fetch(urls[u], { signal: ctl.signal });
-        clearTimeout(timer);
-        if(!res.ok) throw new Error('数据文件加载失败（' + res.status + '）');
-        return res;
-      }catch(e){ last = e; await new Promise(r => setTimeout(r, 700)); }
-    }
-  }
-  throw last;
-}
-async function loadReading(chart, onStep){
-  const bi = chart.birthInfo;
-  const key = readingKeyOf(chart);
-  if(readingCache[key]&&validReadingCorpus(readingCache[key])) return {key,data:readingCache[key],local:false};
-  const cached=store.get('gxg_reading_'+key,null);
-  if(validReadingCorpus(cached)){readingCache[key]=cached;return {key,data:cached,local:false};}
-  const urls = DATA_MIRRORS.map(m => `${m}/${bi.year}/${pad2(bi.month)}.jsonl.zst`);
-  const res = await fetchFirst(urls, 2, onStep);
-  const buf = new Uint8Array(await res.arrayBuffer());
-  if(onStep) onStep('下载完成，正在解压并匹配你的命盘…');
-  const zstd = await getZstd();
-  const raw = zstd.decompress(buf);
-  const lineBytes = findLineBytes(raw, new TextEncoder().encode(`"k":"${key}"`));
-  if(!lineBytes) throw new Error('这张盘暂无深度解读数据');
-  const rec = JSON.parse(new TextDecoder().decode(lineBytes));
-  if(!validReadingCorpus(rec.c)) throw new Error('语料字段不完整，已保留本地精编解读');
-  readingCache[key] = rec.c;
-  store.set('gxg_reading_' + key, rec.c);
-  return { key, data: rec.c, local: false };
-}
-/* 本地精编版：远程语料库加载失败时的兜底，按命主命盘实时生成 13 维解读 */
+/* 按当前命盘实时生成 13 个主题的本地解读 */
 const LOCAL_READING_PALACES = {
   overview: ['命宫'], personality: ['命宫'],
   love: ['夫妻宫', '命宫', '福德宫'], career: ['官禄宫', '命宫', '财帛宫'],
@@ -1692,7 +1604,7 @@ async function renderReading(){
   const rec = cur();
   if(!rec){ $('#reading-status').textContent = '先排一张盘，才能看深度解读。'; $('#reading-body').innerHTML = ''; return; }
   renderReadingTabs();
-  // 本地优先：先瞬间渲染本地精编版（离线可用），完整版在后台静默尝试
+  // 所有解读均依据当前命盘在本地生成，免费解锁后展开 13 个主题的行动清单
   const setStep = setReadingStep;
   try{
     const localData = buildLocalReading(rec.chart);
@@ -1707,48 +1619,46 @@ async function renderReading(){
   setStep('本地精编版 · 已按你的排盘口径生成');
   const key = readingKeyOf(rec.chart);
   if(isUnlocked(key)) tryLoadFull(rec);
-  else setStep('本地精编版 · 已按你的排盘设置生成 <button class="link-btn" data-unlock-open>免费查看扩展参考语料 →</button>');
+  else setStep('本地完整解读 · 已按你的排盘设置生成 <button class="link-btn" data-unlock-open>免费解锁 13 个主题的行动清单 →</button>');
 }
-async function tryLoadFull(rec){
-  const setStep = setReadingStep;
-  const key = readingKeyOf(rec.chart);
-  if(!readingDatasetCompatible(rec)){
-    window.GXG_READING=buildLocalReading(rec.chart);window.GXG_READING_LOCAL=true;renderReadingBody();
-    setStep('已展示本地完整解读 · 当前真太阳时、晚子时或自定义四化设置与公开参考语料口径不同');return;
-  }
-  setStep('正在检查扩展参考语料…<span class="hint">· 个人本地解读持续保留</span>');
-  try{
-    const { data } = await loadReading(rec.chart, null);
-    window.GXG_READING = data;
-    window.GXG_READING_LOCAL = false;
-    renderReadingBody();
-    setStep('已加载扩展参考语料 · 命宫主星' + esc(rec.chart.palaces.find(p=>p.isMingGong).stars.filter(s=>s.type==='major').map(s=>s.name).join('、') || '（空宫）'));
-  }catch(err){
-    setStep('本地完整解读已保留 · 参考语料暂不可用（'+esc(String(err&&err.message||err)).slice(0,60)+'） <button class="link-btn" id="reading-retry">重试加载</button>');
-  }
+function tryLoadFull(rec){
+  if(!rec) return;
+  window.GXG_READING = buildLocalReading(rec.chart);
+  window.GXG_READING_LOCAL = true;
+  renderReadingBody();
+  setReadingStep('已解锁完整个人解读 · 13 个主题按当前命盘与设置在本地生成');
+}
+const LOCAL_READING_EXPANSIONS = {
+  overview: ['把本次排盘口径记下来：出生地、时区、是否采用真太阳时、晚子时规则与四化设定；口径变化时先比较盘面差异。','从命宫、身宫和本次解读引用的宫位中，各挑一条与你近三年经历相符、一条不相符的描述，避免只记住命中的部分。','写下当前最想解决的一个现实问题，并列出可验证的信息来源与下一步行动。'],
+  personality: ['记录一个最近真实发生的选择：当时看重什么、依据是什么、结果如何；用行为记录代替固定性格标签。','找一位熟悉你的同事或朋友核对：哪些描述符合具体情境，哪些只是泛化印象。','选一个想改善的行为，设定一周内可观察的指标，例如完成次数、沟通时长或休息时间。'],
+  love: ['回想一次近期沟通：双方各自表达了什么需求，哪些信息被假设而没有确认？','把关系里的期待改写成可以直接讨论的请求，并为双方保留拒绝、协商和调整的空间。','遇到安全、控制或持续伤害问题时，以现实支持和专业帮助为先，不用命盘替代判断。'],
+  career: ['列出当前岗位的核心任务、可迁移技能、可证明成果和仍需补足的能力，分别用事实核对。','把职业选择拆成可比较条件：职责、成长、收入、团队、地点和风险承受度，再决定下一步访谈或尝试。','为未来两周设一个低成本验证动作，例如完成作品样例、约一次信息访谈或测试一个新流程。'],
+  wealth: ['先盘点现金流、固定支出、债务和近期目标；本命盘不含这些现实数据，不能据此判断财务结果。','将想做的财务决定写成假设，核对合同、费用、期限、最坏情景与退出条件；不因吉凶标记下注。','若涉及投资、税务或借贷，使用合规公开信息并咨询相应专业人士。'],
+  health: ['记录睡眠、活动、压力和症状的实际变化及发生时间，避免用星曜推断病因。','把需要解决的健康问题整理成清单，向医疗专业人员描述症状、持续时间、用药和既往检查。','若出现急性或持续不适，及时寻求医疗帮助；本解读不提供诊断、治疗或预后。'],
+  family: ['挑一个近期家庭议题，分别写下事实、各方需求、资源限制和仍需确认的信息。','将“应该怎样”换成可以协商的安排：谁负责、何时完成、如何复盘，以及出现变化时如何调整。','涉及财产、照护或法律责任时，核对文件与现实条件，必要时咨询专业人士。'],
+  children: ['把对子女或照护对象的观察聚焦在具体需要、兴趣和支持条件，不用命盘给孩子贴固定标签。','如果主题指向创作或项目，列出当前阶段、资源缺口与下一步可完成的小成果。','涉及生育、发育或教育决策时，以当事人意愿、专业意见和实际信息为依据。'],
+  move: ['列出迁居或出行的真实约束：时间、预算、证件、工作、照护责任与备选方案。','先做可逆的小验证，例如短住、实地考察或试运行，再评估适配度和成本。','涉及签证、合同、保险或安全时，逐项核对官方与专业信息；命盘不预测迁动结果。'],
+  friends: ['回顾最近一次合作：目标、分工、交付标准、沟通频率和退出条件是否明确？','区分对方的实际行为与自己对“贵人/小人”的预设，用证据和边界处理合作。','对重要合作留下可追溯的书面约定，并在阶段节点复盘。'],
+  home: ['把居住或家庭资源议题拆成预算、位置、时间、产权/租约、维护成本和家庭成员需求。','在购买、租赁、装修或搬迁前，对照合同与现金流，核验信息来源并预留应急方案。','命盘不能判断房产涨跌、继承或家庭事件；重大决定以法律、财务和现场信息为准。'],
+  spirit: ['记录哪些活动确实让你恢复精力，哪些只是暂时转移注意力，并观察一周后的状态。','为休息安排具体时段和边界，减少把持续疲惫解释成命盘定论。','若情绪困扰持续影响生活或安全，尽早联系可信任的人或专业支持。'],
+  parents: ['回顾与长辈或制度资源有关的具体经历，区分已经发生的事实、个人感受和未核实的猜测。','把需要沟通的事项整理成清楚的问题、所需材料与可接受的边界。','涉及医疗、财务、法律或照护安排时，确认当事人意愿并寻求相应专业支持。']
+};
+function renderUnlockedExpansion(topic){
+  const items = LOCAL_READING_EXPANSIONS[topic] || LOCAL_READING_EXPANSIONS.overview;
+  return '<section class="reading-personal-expansion"><h3>完整版 · 现实复盘与行动清单</h3><p class="hint">下面不是额外的命理断语，而是把本主题转成可核对、可执行的问题。解读引用的宫位和星曜仍以当前排盘设置为准。</p><ol>'+items.map(item=>'<li>'+esc(item)+'</li>').join('')+'</ol><p class="hint">建议保留“盘面依据—现实证据—待确认问题—下一步行动”四栏记录；不吻合的内容也要记下，避免只挑符合预期的部分。</p></section>';
 }
 function renderReadingBody(){
   const data = window.GXG_READING; if(!data) return;
-  const rawText = data[readingTopic] || '暂无';
-  const text = window.GXG_READING_LOCAL ? rawText : softenFullText(rawText);
+  const text = data[readingTopic] || '本主题暂无可显示内容。';
   const paras = text.split(/\n\n+/);
-  const localSupplement = (!window.GXG_READING_LOCAL && cur()) ? buildLocalReading(cur().chart)[readingTopic] : '';
-  const supplementHtml = localSupplement ? '<section class="reading-personal-expansion"><h3>按当前命盘补充的逐项核对</h3><p class="hint">以下内容按当前本地排盘字段实时生成；与上方公开通用参考语料分开呈现。它提供盘面位置、主题依据和现实复盘问题，不构成事件预测。</p>'+localSupplement.split(/\n\n+/).map(p=>'<p>'+md2html(p)+'</p>').join('')+'</section>' : '';
   const rec = cur();
   const key = rec ? readingKeyOf(rec.chart) : '';
-  const unlocked = key && isUnlocked(key);
-  const upsell = (!window.GXG_READING_LOCAL || unlocked) ? '' :
-    `<div class="unlock-card"><div><b>展开 13 个主题的完整参考内容</b><br>
-     <span class="hint">免费解锁的是公开参考语料与扩展主题说明，不等同于逐项校准的个人预测。你的完整本地解读始终可查看；出生资料保留在当前设备，不上传。</span></div>
-     <button class="btn-primary" data-unlock-open>免费解锁</button></div>`;
-  $('#reading-body').innerHTML = paras.map((p, i) =>
-    `<p>${md2html(p)}</p>`
-  ).join('') + supplementHtml + upsell +
-  `<div class="hint" style="margin-top:16px">${
-    window.GXG_READING_LOCAL
-      ? (unlocked?'本地完整解读：按当前命盘与排盘设置生成，可离线查看。':'本地精编版：按当前命盘实时生成，可离线查看。')
-      : '参考语料：匹配公开紫微斗数解读数据集 v4.0（CC BY 4.0）；为通用样例，不代表模型已验证，也不覆盖所有自定义规则。'
-  }</div><div class="reading-scope-note">命盘排布结果由所选日期、时辰、地点与规则决定；文字解读是传统文化取象，不是经过临床、心理、金融或预测准确率验证的结论。请将描述当作自我提问，不用来替代专业意见。</div>`;
+  const unlocked = !!(key && isUnlocked(key));
+  const expansionHtml = unlocked ? renderUnlockedExpansion(readingTopic) : '';
+  const upsell = unlocked ? '' :
+    '<div class="unlock-card"><div><b>免费解锁 13 个主题的完整个人解读</b><br><span class="hint">解锁后增加按主题整理的现实核对与行动清单。排盘依据和解读在本地生成；出生资料不会上传。</span></div><button class="btn-primary" data-unlock-open>免费解锁完整版</button></div>';
+  $('#reading-body').innerHTML = paras.map(p => '<p>'+md2html(p)+'</p>').join('') + expansionHtml + upsell +
+  '<div class="hint" style="margin-top:16px">本地生成：依据当前命盘、排盘规则和本主题对应宫位整理，可离线查看；不调用远程解读语料，也不上传出生信息。</div><div class="reading-scope-note">紫微斗数属于传统文化取象。排盘展示规则计算结果，文字内容用于整理问题与自我复盘，不是经过临床、心理、金融或预测准确率验证的结论。重大健康、财务、法律和人生决定请结合现实证据及专业意见。</div>';
 }
 /* ---------- 解锁弹窗 ---------- */
 function openUnlock(){
@@ -2090,21 +2000,6 @@ function renderWenyun(){
     drawMonth(m);
   }));
   drawMonth(now.month||1);
-}
-
-const LAIYIN_SAY = {
-  '命宫':'这一生的主轴是「把自己活明白」：身份、形象、活法，都是从自己开始长出来的',
-  '兄弟':'带着同辈的缘分而来：兄弟姐妹、朋友合伙人，是你今生的重要课题与资源',
-  '夫妻':'带着感情婚姻的命题而来：亲密关系会深刻塑造你这一生的走向',
-  '子女':'带着创造与传承的命题而来：孩子、作品、学生，都是你的延续',
-  '财帛':'带着钱与价值的命题而来：赚钱、花钱、价值感，是你反复修的功课',
-  '疾厄':'带着身体与习气的命题而来：健康、作息、情绪惯性要多上心',
-  '迁移':'带着外部世界的命题而来：远方、变动、大环境，是你一生的舞台',
-  '交友':'带着人际圈层的命题而来：众生缘、人脉组织，是你的道场',
-  '官禄':'带着事业成就的命题而来：做事、成就、社会位置，是主旋律',
-  '田宅':'带着安身立命的命题而来：家、房子、内心的安稳，是此生主线之一',
-  '福德':'带着精神世界的命题而来：快乐、爱好、福分深浅，向内求',
-  '父母':'带着长辈缘的命题而来：父母、师长、权威与平台，关系一生走向',
 }
 
 /* 术语词典：分析句内术语可点解释（痛点：看不懂术语） */
