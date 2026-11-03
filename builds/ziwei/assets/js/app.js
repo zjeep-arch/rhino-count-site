@@ -987,40 +987,8 @@ function shiShen(dayStem, t){
 }
 function gz60(stem, branch){ for(let k = 0; k < 60; k++){ if(k % 10 === stem && k % 12 === branch) return k; } return 0; }
 /* 八字人话字典：日主 + 十神 + 五行强弱（粗断，克制表述） */
-const RI_ZHU_SAY = {
-  '甲':'参天大树——正直有担当，吃软不吃硬，认准的路不轻易回头',
-  '乙':'藤蔓花草——柔韧务实，借力生长，适应力是最好的武器',
-  '丙':'太阳之火——光明外放，热情坦荡，存在感藏不住',
-  '丁':'灯烛之火——细腻专注，静水深流，暗处也能发光',
-  '戊':'高山城墙——厚重可靠，说到做到，是朋友的定心丸',
-  '己':'田园湿土——包容务实，擅长默默积累，慢就是你的快',
-  '庚':'刀剑顽金——讲义气、行动快，磨过之后才见锋芒',
-  '辛':'珠玉之金——精致敏锐，自尊心强，细节里见真章',
-  '壬':'江河之水——聪明善变通，格局大，闲不住',
-  '癸':'雨露之水——心思细腻，共情力强，润物无声',
-};
 const SHI_SHEN_GROUP = { '比肩':'比劫','劫财':'比劫','食神':'食伤','伤官':'食伤','偏财':'财星','正财':'财星','七杀':'官杀','正官':'官杀','偏印':'印星','正印':'印星' };
-const SHI_SHEN_SAY = {
-  '比劫':'自我与同伴的能量旺——主意自己拿，但也容易倔；合作时分清账',
-  '食伤':'表达与创造的能量旺——点子多、才华藏不住，适合靠专业吃饭',
-  '财星':'与钱打交道的能量旺——对数字和机会敏感，实务型选手',
-  '官杀':'规则与责任的能量旺——自我要求高，适合有章法的环境',
-  '印星':'学习与庇护的能量旺——爱读书、有贵人缘，想得多是天赋也是功课',
-};
-const WX_FAVOR_SAY = {
-  '金':'金','木':'木','水':'水','火':'火','土':'土',
-};
-/* 宫位三档评级：palaceStrength 归一化（结构提示，非吉凶分数） */
-function palaceVerdicts(chart){
-  const list = PALACE_ORDER.map(n => ({ n, raw: palaceStrength(chart, palaceByName(chart, n)) }));
-  const vals = list.map(x => x.raw), lo = Math.min(...vals), hi = Math.max(...vals);
-  list.forEach(x => { x.score = Math.round(18 + (x.raw - lo) / Math.max(0.01, hi - lo) * 78); });
-  return list;
-}
-function verdictBadge(score){
-  const lv = score >= 70 ? { t: '有底气', c: 'pd-hi' } : score >= 40 ? { t: '有底色', c: 'pd-mid' } : { t: '是功课', c: 'pd-lo' };
-  return `<span class="pal-badge ${lv.c}" title="按主星庙旺＋四化＋辅煞三方合参的结构强弱，相对本盘而言">${lv.t}</span>`;
-}
+/* 旧版性格与评级断语已移除；页面仅保留可核对的四柱、十神和五行计数。 */
 function renderBaziCard(chart){
   const card=$('#bazi-card'),body=$('#bazi-body'),fp=chart.lunarInfo&&chart.lunarInfo.fourPillars;
   if(!fp||fp.length!==4){card.hidden=true;return;}
@@ -1354,43 +1322,19 @@ document.addEventListener('click', e => {
 });
 
 /* ---------- 13维解读（v4.0 数据集按需加载，走自建 CDN 月包，双镜像） ---------- */
-/* 解锁码：SALT|chartKey 的 SHA-256 取 8 位数字。SALT 公开在前端，仅防君子（0.9 元内容此强度足够）。 */
-const GXG_UNLOCK_SALT = 'ae8f94fe28773c4be2cf110caac7f535';
-const GXG_CONTACT = ''; // 站长微信（用户提供后填入，解锁弹窗第 2 步会显示）
-/* 公众号口令解锁：用户关注后回复「解锁」获取口令。只存 SHA-256 哈希比对，不落明文。 */
-const GXG_KOULING_HASH = '5d0f8482808c7fc8d94274191ca8356608ee4d88ba041fcf51d1c61ab9a60478';
-async function verifyKouling(code){
-  const norm = String(code).replace(/\s+/g,'');
-  if(!norm) return false;
-  try{ return (await sha256hex(norm)) === GXG_KOULING_HASH; }catch(e){ return false; }
-}
-/* 卡密体系（发卡平台全自动）：WX- + 6位序列 + 2位校验，可离线验证，不依赖服务端 */
-const GXG_KAMI_URL = ''; // 发卡平台商品链接（用户提供后填入）
-const GXG_KAMI_SECRET = 'e957886927d41e3bd32c6531cb687e02';
-const GXG_KAMI_ABC = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789';
-async function verifyKami(code){
-  const m = /^WX-([A-Z2-9]{6})([A-Z2-9]{2})$/.exec(String(code).trim().toUpperCase());
-  if(!m) return false;
-  const h = await sha256hex(GXG_KAMI_SECRET + '|' + m[1]);
-  const b0 = parseInt(h.slice(0, 2), 16), b1 = parseInt(h.slice(2, 4), 16);
-  return GXG_KAMI_ABC[b0 % GXG_KAMI_ABC.length] + GXG_KAMI_ABC[b1 % GXG_KAMI_ABC.length] === m[2];
-}
-function readingKeyOf(chart){
+function readingKeyOf(chart, input){
   const bi=chart.birthInfo;
-  return bi.year+'-'+pad2(bi.month)+'-'+pad2(bi.day)+'-'+bi.hour+'-'+bi.gender;
+  const settings = [
+    !!(input && input.trueSolar), !!(input && input.lateZiNextDay),
+    input && input.longitude != null ? input.longitude : null,
+    input && input.shichen != null ? input.shichen : null,
+    input && input.exHour != null ? input.exHour : null,
+    input && input.exMin != null ? input.exMin : null,
+    input && input.province || '',
+    chart.sihuaTable || (input && input.sihuaTable) || null
+  ];
+  return bi.year+'-'+pad2(bi.month)+'-'+pad2(bi.day)+'-'+bi.hour+'-'+bi.gender+'-'+encodeURIComponent(JSON.stringify(settings));
 }
-async function sha256hex(s){
-  const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s));
-  return [...new Uint8Array(b)].map(x => x.toString(16).padStart(2, '0')).join('');
-}
-async function makeUnlockCode(key){
-  const h = await sha256hex(GXG_UNLOCK_SALT + '|' + key);
-  return (h.replace(/\D/g, '') + '00000000').slice(0, 8);
-}
-async function verifyUnlockCode(key, code){
-  return (String(code).trim() === await makeUnlockCode(key));
-}
-function isUnlocked(key){ return !!store.get('gxg_unlock_' + key, false); }
 /* 按当前命盘实时生成 13 个主题的本地解读 */
 const LOCAL_READING_PALACES = {
   overview: ['命宫'], personality: ['命宫'],
@@ -1563,21 +1507,6 @@ function buildLocalReading(chart){
   });
   return out;
 }
-/* 上游语料去绝对化：人格类绝对断语是"一望即知真假"的高危区，转为外界视角+或然表述。
-   只作用于完整版（上游预生成语料），本地版文案已按此标准写。规则按用户反馈持续加。 */
-const GXG_SOFTEN = [
-  [/麻烦的是脾气硬、爱争，情绪起伏大/g, '要留意的是，在不熟的人眼里，你容易显得脾气硬、爱争，情绪起伏也不小'],
-  [/压力一来或者感情出事，反应容易走极端，不是爆发就是把自己整个关起来/g, '压力一大或感情出状况、情绪上头时，反应容易偏极端——要么爆发，要么把自己关起来'],
-  [/你脾气硬/g, '外人容易觉得你脾气硬'],
-  [/脾气臭/g, '外人容易觉得你脾气急'],
-  [/你就是个急脾气/g, '外人看你是个急脾气'],
-];
-function softenFullText(t){
-  if(!t) return t;
-  let s = t;
-  for(const [re, rep] of GXG_SOFTEN) s = s.replace(re, rep);
-  return s;
-}
 let readingTopic = 'overview';
 function renderReadingTabs(){
   const picker = $('#reading-topic');
@@ -1616,17 +1545,17 @@ async function renderReading(){
     $('#reading-body').innerHTML = '';
     return;
   }
-  setStep('本地精编版 · 已按你的排盘口径生成');
-  const key = readingKeyOf(rec.chart);
+  setStep('本地解读 · 已按你的排盘口径生成');
+  const key = readingKeyOf(rec.chart, rec.input);
   if(isUnlocked(key)) tryLoadFull(rec);
-  else setStep('本地完整解读 · 已按你的排盘设置生成 <button class="link-btn" data-unlock-open>免费解锁 13 个主题的行动清单 →</button>');
+  else setStep('本地解读已按你的排盘设置生成 <button class="link-btn" data-unlock-free>一键免费展开 13 个主题 →</button>');
 }
 function tryLoadFull(rec){
   if(!rec) return;
   window.GXG_READING = buildLocalReading(rec.chart);
   window.GXG_READING_LOCAL = true;
   renderReadingBody();
-  setReadingStep('已解锁完整个人解读 · 13 个主题按当前命盘与设置在本地生成');
+  setReadingStep('已解锁 13 个主题的现实核对与行动清单');
 }
 const LOCAL_READING_EXPANSIONS = {
   overview: ['把本次排盘口径记下来：出生地、时区、是否采用真太阳时、晚子时规则与四化设定；口径变化时先比较盘面差异。','从命宫、身宫和本次解读引用的宫位中，各挑一条与你近三年经历相符、一条不相符的描述，避免只记住命中的部分。','写下当前最想解决的一个现实问题，并列出可验证的信息来源与下一步行动。'],
@@ -1645,67 +1574,30 @@ const LOCAL_READING_EXPANSIONS = {
 };
 function renderUnlockedExpansion(topic){
   const items = LOCAL_READING_EXPANSIONS[topic] || LOCAL_READING_EXPANSIONS.overview;
-  return '<section class="reading-personal-expansion"><h3>完整版 · 现实复盘与行动清单</h3><p class="hint">下面不是额外的命理断语，而是把本主题转成可核对、可执行的问题。解读引用的宫位和星曜仍以当前排盘设置为准。</p><ol>'+items.map(item=>'<li>'+esc(item)+'</li>').join('')+'</ol><p class="hint">建议保留“盘面依据—现实证据—待确认问题—下一步行动”四栏记录；不吻合的内容也要记下，避免只挑符合预期的部分。</p></section>';
+  return '<section class="reading-personal-expansion"><h3>完整版 · 现实复盘与行动清单</h3><p class="hint">下面不是额外的命理断语，而是把本主题转成可核对、可执行的问题。本主题正文依据当前命盘整理；本清单是通用的现实核对与行动提示，不是命理断语。</p><ol>'+items.map(item=>'<li>'+esc(item)+'</li>').join('')+'</ol><p class="hint">建议保留“盘面依据—现实证据—待确认问题—下一步行动”四栏记录；不吻合的内容也要记下，避免只挑符合预期的部分。</p></section>';
 }
 function renderReadingBody(){
   const data = window.GXG_READING; if(!data) return;
   const text = data[readingTopic] || '本主题暂无可显示内容。';
   const paras = text.split(/\n\n+/);
   const rec = cur();
-  const key = rec ? readingKeyOf(rec.chart) : '';
+  const key = rec ? readingKeyOf(rec.chart, rec.input) : '';
   const unlocked = !!(key && isUnlocked(key));
   const expansionHtml = unlocked ? renderUnlockedExpansion(readingTopic) : '';
   const upsell = unlocked ? '' :
-    '<div class="unlock-card"><div><b>免费解锁 13 个主题的完整个人解读</b><br><span class="hint">解锁后增加按主题整理的现实核对与行动清单。排盘依据和解读在本地生成；出生资料不会上传。</span></div><button class="btn-primary" data-unlock-open>免费解锁完整版</button></div>';
+    '<div class="unlock-card"><div><b>免费解锁 13 个主题的现实行动手册</b><br><span class="hint">解锁后会在当前主题下增加现实核对与行动清单，不隐藏盘面正文。所有内容在本地生成，出生资料不会上传。</span></div><button class="btn-primary" data-unlock-free>免费解锁完整版</button></div>';
   $('#reading-body').innerHTML = paras.map(p => '<p>'+md2html(p)+'</p>').join('') + expansionHtml + upsell +
   '<div class="hint" style="margin-top:16px">本地生成：依据当前命盘、排盘规则和本主题对应宫位整理，可离线查看；不调用远程解读语料，也不上传出生信息。</div><div class="reading-scope-note">紫微斗数属于传统文化取象。排盘展示规则计算结果，文字内容用于整理问题与自我复盘，不是经过临床、心理、金融或预测准确率验证的结论。重大健康、财务、法律和人生决定请结合现实证据及专业意见。</div>';
 }
-/* ---------- 解锁弹窗 ---------- */
-function openUnlock(){
-  if(!cur()){ nav('input'); return; }
-  $('#unlock-code').value = '';
-  $('#unlock-err').textContent = '';
-  $('#unlock-modal').hidden = false;
-  setTimeout(() => $('#unlock-code')?.focus(), 80);
+function unlockFreeReading(){
+  const rec=cur();
+  if(!rec){ nav('input'); return; }
+  const key=readingKeyOf(rec.chart, rec.input);
+  store.set('gxg_unlock_'+key,true);
+  tryLoadFull(rec);
 }
-async function doUnlockVerify(){
-  const rec = cur(); if(!rec) return;
-  const key = readingKeyOf(rec.chart);
-  const code = $('#unlock-code').value.replace(/\s+/g,'');
-  if(!code){ $('#unlock-err').textContent = '先输入口令或解锁码。'; return; }
-  let ok = await verifyUnlockCode(key, code) || await verifyKouling(code);
-  let kamiKey = '';
-  if(!ok && await verifyKami(code)){
-    kamiKey = 'gxg_kami_used_' + code.toUpperCase();
-    const usedFor = store.get(kamiKey, null);
-    ok = !usedFor || usedFor === key; // 同一卡密在本机只解一张盘
-  }
-  if(ok){
-    store.set('gxg_unlock_' + key, true);
-    if(kamiKey) store.set(kamiKey, key);
-    $('#unlock-modal').hidden = true;
-    renderReading();
-  } else {
-    $('#unlock-err').textContent = '口令不对，请检查后重试（口令/8位解锁码/卡密都可以）。';
-  }
-}
-$('#unlock-code')?.addEventListener('keydown', e => { if(e.key === 'Enter') doUnlockVerify(); });
-$('#unlock-code')?.addEventListener('paste', () => setTimeout(() => {
-  const v = $('#unlock-code').value.replace(/\s+/g,'');
-  if(v.length >= 6) doUnlockVerify();
-}, 60));
-document.addEventListener('click', async e => {
-  if(e.target.closest('#reading-retry')){ const rec = cur(); if(rec) tryLoadFull(rec); return; }
-  if(e.target.closest('[data-unlock-open]')){ openUnlock(); return; }
-  if(e.target.closest('[data-unlock-close]')){ $('#unlock-modal').hidden = true; return; }
-  if(e.target.closest('#unlock-copy')){
-    try{ await navigator.clipboard.writeText($('#unlock-key').textContent); $('#unlock-copy').textContent = '已复制'; }
-    catch(err){ $('#unlock-copy').textContent = '长按复制'; }
-    return;
-  }
-  if(e.target.closest('#unlock-verify')){
-    doUnlockVerify();
-  }
+document.addEventListener('click', e => {
+  if(e.target.closest('[data-unlock-free]')){ unlockFreeReading(); return; }
 });
 document.addEventListener('click', e => {
   const f = e.target.closest('[data-fav]');
@@ -1766,32 +1658,6 @@ function renderOverlayGrid(chart, ov){
 /* ---------- 流月日历热力图 ---------- */
 /* 农历月初一的公历日期（按年缓存）。首次定位约需几十次引擎查询——分片异步执行，不冻结页面 */
 /* 30 支签：克制白话+古风意象，不做宿命断言。同一张盘（或无盘）同一天抽同一支，明早自动换。 */
-/* ---------- 十二宫强度量化：把庙旺/四化/辅煞折成分数，三方四正加权 ---------- */
-const BRIGHT_SCORE = { '庙':3, '旺':2.5, '得':2, '得地':2, '利益':1.5, '利':1.5, '平和':1, '平':1, '不':0.5, '陷':-1 };
-const SHA_LIST = ['擎羊','陀罗','火星','铃星','地空','地劫','天刑'];
-const LUCKY6 = ['左辅','右弼','天魁','天钺','文昌','文曲'];
-function palaceScore(p){
-  let s = 0;
-  const majors = p.stars.filter(x => x.type === 'major');
-  if(!majors.length) s -= 1.5; // 空宫减分（借对宫力量已含在三方加权里）
-  majors.forEach(m => { s += BRIGHT_SCORE[m.brightnessRaw] != null ? BRIGHT_SCORE[m.brightnessRaw] : 0.5; });
-  p.stars.forEach(st => {
-    if(st.siHua) s += ({ '禄':2, '权':1.5, '科':1, '忌':-2 })[st.siHua] || 0;
-    if(SHA_LIST.includes(st.name)) s += (st.name === '地空' || st.name === '地劫') ? -1.2 : -0.8;
-    if(LUCKY6.includes(st.name)) s += 0.8;
-    if(st.name === '禄存') s += 1.2;
-    if(st.name === '天马') s += 0.3;
-  });
-  (p.selfSihua || []).forEach(x => { s += x.siHua === '忌' ? -1 : 0.5; });
-  return s;
-}
-function palaceStrength(chart, p){
-  const self = palaceScore(p);
-  const opp = palaceScore(palaceByBranch(chart, (p.branch + 6) % 12));
-  const t1 = palaceScore(palaceByBranch(chart, (p.branch + 4) % 12));
-  const t2 = palaceScore(palaceByBranch(chart, (p.branch + 8) % 12));
-  return self + 0.3 * opp + 0.2 * t1 + 0.2 * t2; // 看一宫要合看三方四正
-}
 /* ---------- 人生时间轴：大限主题 + 换挡流年 ---------- */
 function yearSay(o){const notes=[];if(o.isMark)notes.push('流年命宫进入本命重点主题宫位');if(o.jiHit)notes.push('化忌落本命命宫三方四正');if(o.luPal)notes.push('化禄对应本命'+o.luPal);return notes.length?notes.join(' · '):'未触发以上标记';}
 /* 逐年断语：把换挡/费心/顺风拼成一句人话（时间轴与全景共用） */
@@ -1805,19 +1671,9 @@ const DX_THEME = {
 /* 大限十年成色：宫位强度 + 限禄权科入命三方加分、限忌入命三方减分 */
 function decadeQuality(chart, i, dx){
   const pal = palaceByBranch(chart, dx.palaceBranch);
-  let s = palaceStrength(chart, pal);
   let sh = null;
   try{ sh = normSihua(E.getDaXianSiHua(chart, i)); }catch(e){}
-  const mingFang = new Set(sanfangBranches(chart.mingGongBranch));
-  if(sh){
-    ['lu','quan','ke'].forEach(k => {
-      const p = chart.palaces.find(pl => pl.stars.some(x => x.name === sh[k]));
-      if(p && mingFang.has(p.branch)) s += 1.2;
-    });
-    const jiP = chart.palaces.find(pl => pl.stars.some(x => x.name === sh.ji));
-    if(jiP && mingFang.has(jiP.branch)) s -= 1.5;
-  }
-  return { s, sh, pal, lvl: '主题观察' };
+  return { sh, pal, lvl: '主题观察' };
 }
 function renderTimelineCard(chart){
   const card = $('#timeline-card'), body = $('#timeline-body');
