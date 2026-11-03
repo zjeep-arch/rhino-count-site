@@ -1522,3 +1522,5 @@ body{color:var(--ink);
 .reading-personal-expansion h3{margin:0 0 8px;font-size:1.08rem}
 .reading-personal-expansion>p:not(.hint){margin:12px 0;line-height:1.85}
 @media(max-width:680px){.reading-personal-expansion{margin-top:16px;padding:14px}}
+
+.reading-personal-expansion ol{margin:14px 0;padding-left:1.45rem}.reading-personal-expansion li{padding:.28rem 0 .45rem;line-height:1.8}.reading-personal-expansion li::marker{color:var(--accent)}
