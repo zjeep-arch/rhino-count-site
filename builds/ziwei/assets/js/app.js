@@ -491,34 +491,40 @@ function palaceStarsHtml(p, activeSihua){
 
 /* 运势叠加：返回 {hlBranch, sihua:{禄,权,科,忌}[], label} */
 function luckOverlay(chart){
+  const invalidOverlay = label => ({hlBranch:-1,sihua:null,label});
+  const completeSihua = sh => !!sh && ['lu','quan','ke','ji'].every(k => typeof sh[k] === 'string' && sh[k].length > 0);
   if(luckMode === 'natal') return { hlBranch: -1, sihua: null, label: '本命盘' };
   if(luckMode === 'daxian'){
     const dx = chart.daXians[luckParam];
-    if(!dx) return { hlBranch: -1, sihua: null, label: '' };
+    if(!dx || !Number.isInteger(dx.palaceBranch) || dx.palaceBranch < 0 || dx.palaceBranch > 11) return invalidOverlay('大限宫位资料不可用，已暂停叠盘');
     const sh = normSihua(E.getDaXianSiHua(chart, luckParam));
+    if(!completeSihua(sh)) return invalidOverlay('大限四化资料不完整，已暂停叠盘');
     return { hlBranch: dx.palaceBranch, sihua: sh, label: `大限 ${dx.startAge}–${dx.endAge} 岁（${disp(dx.palaceName)}）` };
   }
   if(luckMode === 'liunian'){
     const context = currentLunarContext(chart);
     const y = Number(luckParam);
-    if(!context.valid || !Number.isInteger(y)) return { hlBranch: -1, sihua: null, label: '当前农历换算或流年年份不可用，已暂停叠盘' };
+    if(!context.valid || luckParam == null || !Number.isInteger(y) || y < 1800 || y > 2200) return invalidOverlay('当前农历换算或流年年份不可用，已暂停叠盘');
     const stem = ((y - 4) % 10 + 10) % 10, branch = ((y - 4) % 12 + 12) % 12;
     const sh = normSihua(E.getLiuNianSiHua(y));
+    if(!completeSihua(sh)) return invalidOverlay('流年四化资料不完整，已暂停叠盘');
     lastLiuNianYear = y;
     return { hlBranch: branch, sihua: sh, label: `${y} 年流年（${ST[stem]}${BR[branch]}年）命宫在${disp(palaceByBranch(chart,branch).name)}` };
   }
   if(luckMode === 'liuyue'){
     const { y, lm } = luckParam || {}; // lm: 农历月 1-12
-    if(!currentLunarContext(chart).valid || !Number.isInteger(y) || !Number.isInteger(lm) || lm < 1 || lm > 12) return { hlBranch: -1, sihua: null, label: '农历年月信息不可用，已暂停流月叠盘' };
+    if(!currentLunarContext(chart).valid || !Number.isInteger(y) || y < 1800 || y > 2200 || !Number.isInteger(lm) || lm < 1 || lm > 12) return invalidOverlay('农历年月信息不可用，已暂停流月叠盘');
     const yearStem = ((y - 4) % 10 + 10) % 10;
     const sh = normSihua(E.getLiuYueSiHua(yearStem, lm));
+    if(!completeSihua(sh)) return invalidOverlay('流月四化资料不完整，已暂停叠盘');
     const hl = (doujunBranch(chart, y) + (lm - 1)) % 12; // 流月以斗君起正月顺排
     return { hlBranch: hl, sihua: sh, label: `${y} 年农历 ${lm} 月流月 · 流月命宫${disp(palaceByBranch(chart, hl).name)}` };
   }
   if(luckMode === 'liuri'){
     const { y, lm, ld } = luckParam || {};
-    if(!currentLunarContext(chart).valid || !Number.isInteger(y) || !Number.isInteger(lm) || !Number.isInteger(ld) || lm < 1 || lm > 12 || ld < 1 || ld > 30) return { hlBranch: -1, sihua: null, label: '农历日期信息不可用，已暂停流日叠盘' };
+    if(!currentLunarContext(chart).valid || !Number.isInteger(y) || y < 1800 || y > 2200 || !Number.isInteger(lm) || !Number.isInteger(ld) || lm < 1 || lm > 12 || ld < 1 || ld > 30) return invalidOverlay('农历日期信息不可用，已暂停流日叠盘');
     const sh = normSihua(E.getLiuRiSiHua(y, lm, ld));
+    if(!completeSihua(sh)) return invalidOverlay('流日四化资料不完整，已暂停叠盘');
     const lyueHl = (doujunBranch(chart, y) + (lm - 1)) % 12;
     const hl = (lyueHl + (ld - 1)) % 12; // 流日以流月命宫起初一顺排
     return { hlBranch: hl, sihua: sh, label: `农历 ${lm} 月 ${ld} 日流日 · 流日命宫${disp(palaceByBranch(chart, hl).name)}` };
@@ -554,78 +560,70 @@ function overlayPalaceAt(hlBranch, branch){
   const off = ((hlBranch - branch) % 12 + 12) % 12;
   return PALACE_ORDER[off];
 }
-const STACK_THEME = {
-  '命宫': '这一年的重心是找回自己的节奏', '兄弟宫': '重心在同辈、合伙与团队关系',
-  '夫妻宫': '重心围绕感情与核心合伙人展开', '子女宫': '重心在孩子、下属或自己的作品产出上',
-  '财帛宫': '重心是钱：收入结构和花钱方式要动一动', '疾厄宫': '重心在身体与作息，先养人再做事',
-  '迁移宫': '重心在外：奔波、搬迁、对外拓展的事多', '交友宫': '重心在人脉圈层，筛选朋友就是筛选运气',
-  '官禄宫': '重心压在事业上，是要冲的一年', '田宅宫': '重心在安顿：房子、家人与资产配置',
-  '福德宫': '重心向内：适合休整、学习，想清楚再出发', '父母宫': '重心在长辈与平台：跟上级、体制打交道多',
-};
 const LUCK_PREFIX = { daxian: '限', liunian: '流', liuyue: '流月', liuri: '流日' };
-function stackSayHTML(chart, ov){
-  if(!ov || ov.hlBranch == null) return '';
-  const pre = luckMode === 'daxian' ? '大限' : luckMode === 'liunian' ? '流年' : luckMode === 'liuyue' ? '流月' : '流日';
-  const natalAt = palaceByBranch(chart, ov.hlBranch);
-  const natalName = natalAt ? disp(natalAt.name) : '';
-  let s = `<b>叠盘看</b>：${pre}命宫落在你的本命【${esc(natalName)}】——${esc(STACK_THEME[natalName] || '')}。`;
-  if(ov.sihua && ov.sihua.ji){
-    const jiPal = sihuaStarPalace(chart, ov.sihua.ji);
-    if(jiPal) s += `${pre}${esc(ov.sihua.ji)}化忌落你的本命【${esc(jiPal)}】，这一块是今年的功课，提前留心。`;
-  }
-  if(ov.sihua && ov.sihua.lu){
-    const luPal = sihuaStarPalace(chart, ov.sihua.lu);
-    if(luPal) s += `${pre}${esc(ov.sihua.lu)}化禄落【${esc(luPal)}】，顺风在这一块。`;
-  }
-  return `<div class="overlay-bar" style="margin-bottom:8px"><div>${s}</div></div>`;
+function validOverlayBranch(ov){
+  return !!ov && Number.isInteger(ov.hlBranch) && ov.hlBranch >= 0 && ov.hlBranch < 12;
 }
-/* 大限/流年四化叠加提示：双禄/双忌/禄忌交战/化禄解化忌/多层集中 */
+function stackSayHTML(chart, ov){
+  if(!ov)return '';
+  if(!validOverlayBranch(ov)){
+    return ov.label&&ov.label.includes('暂停')
+      ? '<div class="overlay-bar" style="margin-bottom:8px"><div>'+esc(ov.label)+'；本次不显示叠盘宫位和四化。</div></div>'
+      : '';
+  }
+  const pre=luckMode==='daxian'?'大限':luckMode==='liunian'?'流年':luckMode==='liuyue'?'流月':'流日';
+  const natalAt=palaceByBranch(chart,ov.hlBranch);
+  if(!natalAt)return '<div class="overlay-bar" style="margin-bottom:8px"><div>当前时间层的宫位无法定位，已暂停叠盘显示。</div></div>';
+  const natalName=disp(natalAt.name), rows=[`${pre}命宫按当前规则对应本命【${natalName}】（位置映射）。`];
+  if(ov.sihua){
+    [['禄','lu'],['权','quan'],['科','ke'],['忌','ji']].forEach(([hua,key])=>{
+      const star=ov.sihua[key],pal=star?sihuaStarPalace(chart,star):'';
+      if(star)rows.push(`${pre}化${hua}为${esc(star)}${pal?'，该星在本命【'+esc(pal)+'】':''}。`);
+    });
+  }
+  return '<div class="overlay-bar" style="margin-bottom:8px"><div><b>规则位置</b>：'+rows.join(' ')+'<span class="hint">这些是传统盘面映射，不表示吉凶、事件发生或行动建议。</span></div></div>';
+}
 function renderOverlayStrip(chart, ov){
-  const box = $('#overlay-strip'); box.innerHTML = stackSayHTML(chart, ov);
-  if(luckMode !== 'daxian' && luckMode !== 'liunian') return;
-  const natal = natalSihuaMap(chart);
-  const layers = [{ name: '本命', map: natal }];
-  if(luckMode === 'daxian' || luckMode === 'liunian'){
-    const dxIdx = (luckMode === 'daxian') ? luckParam : chart.currentDaXianIndex;
-    const dxSh = normSihua(E.getDaXianSiHua(chart, dxIdx));
+  const box=$('#overlay-strip');
+  box.innerHTML=stackSayHTML(chart,ov);
+  if(!validOverlayBranch(ov)||!['daxian','liunian'].includes(luckMode))return;
+  const natal=natalSihuaMap(chart),layers=[{name:'本命',map:natal}];
+  if(luckMode==='daxian'||luckMode==='liunian'){
+    const dxIdx=luckMode==='daxian'?luckParam:chart.currentDaXianIndex;
+    const dxSh=normSihua(E.getDaXianSiHua(chart,dxIdx));
     if(dxSh){
-      const m = {};
-      ['lu','quan','ke','ji'].forEach(k => {
-        const star = dxSh[k]; if(!star) return;
-        const key = {lu:'禄',quan:'权',ke:'科',ji:'忌'}[k];
-        (m[key] = m[key] || []).push({ star, palace: sihuaStarPalace(chart, star) });
+      const m={};
+      [['禄','lu'],['权','quan'],['科','ke'],['忌','ji']].forEach(([name,key])=>{
+        const star=dxSh[key];if(!star)return;
+        (m[name]=m[name]||[]).push({star,palace:sihuaStarPalace(chart,star)});
       });
-      layers.push({ name: '大限', map: m });
+      layers.push({name:'大限',map:m});
     }
   }
-  if(luckMode === 'liunian' && ov.sihua){
-    const m = {};
-    ['lu','quan','ke','ji'].forEach(k => {
-      const star = ov.sihua[k]; if(!star) return;
-      const key = {lu:'禄',quan:'权',ke:'科',ji:'忌'}[k];
-      (m[key] = m[key] || []).push({ star, palace: sihuaStarPalace(chart, star) });
+  if(luckMode==='liunian'&&ov.sihua){
+    const m={};
+    [['禄','lu'],['权','quan'],['科','ke'],['忌','ji']].forEach(([name,key])=>{
+      const star=ov.sihua[key];if(!star)return;
+      (m[name]=m[name]||[]).push({star,palace:sihuaStarPalace(chart,star)});
     });
-    layers.push({ name: '流年', map: m });
+    layers.push({name:'流年',map:m});
   }
-  // 按宫聚合：palace -> {禄:[layer], 忌:[layer]}
-  const agg = {};
-  layers.forEach(L => ['禄','忌'].forEach(k => (L.map[k]||[]).forEach(e => {
-    if(!e.palace) return;
-    const a = agg[e.palace] = agg[e.palace] || { '禄': [], '忌': [] };
-    a[k].push(L.name);
+  const agg={};
+  layers.forEach(layer=>Object.keys(layer.map).forEach(hua=>(layer.map[hua]||[]).forEach(item=>{
+    if(!item.palace)return;
+    const row=agg[item.palace]=agg[item.palace]||{};
+    (row[hua]=row[hua]||[]).push(layer.name);
   })));
-  const msgs = [];
-  Object.keys(agg).forEach(pl => {
-    const lu = agg[pl]['禄'], ji = agg[pl]['忌'];
-    const uniq = a => [...new Set(a)];
-    if(uniq(ji).length >= 2) msgs.push({ w: 0, t: `<b>${esc(pl)}双忌叠压</b>（${uniq(ji).map(esc).join('＋')}）：这是这段时间要花心力的地方，别硬扛，慢一点、留余地。` });
-    else if(uniq(lu).length >= 1 && uniq(ji).length >= 1) msgs.push({ w: 1, t: `<b>${esc(pl)}禄忌交战</b>（${uniq(lu).map(esc).join('＋')}禄、${uniq(ji).map(esc).join('＋')}忌）：得到和牵挂撞在同一处，好事里掺着功课，拿好处时多留一眼代价。` });
-    else if(uniq(lu).length >= 2) msgs.push({ w: 2, t: `<b>${esc(pl)}双禄临门</b>（${uniq(lu).map(esc).join('＋')}）：这段时间${esc(pl)}方面的顺风比较多，适合把重要的事往前排。` });
-    else if(uniq(lu).some(l => l !== '本命') && (natal['忌']||[]).some(e => e.palace === pl)) msgs.push({ w: 3, t: `<b>化禄解化忌</b>：运年化禄飞到本命化忌所在的${esc(pl)}，难处里有转机，凶中见吉。` });
-    else if(uniq(lu).length + uniq(ji).length >= 3) msgs.push({ w: 4, t: `<b>${esc(pl)}是这段时间的焦点</b>：多层四化落在这里，事情会比较多，值得多分一点注意力。` });
+  const lines=[];
+  Object.keys(agg).forEach(pal=>{
+    const entries=Object.entries(agg[pal]).filter(([,names])=>new Set(names).size>1);
+    if(entries.length)lines.push('<b>'+esc(pal)+'</b>：'+entries.map(([hua,names])=>'化'+hua+'在'+[...new Set(names)].map(esc).join('与')+'层均指向此宫').join('；')+'（位置重合）。');
+    else{
+      const across=Object.values(agg[pal]).flat();
+      if(new Set(across).size>1&&Object.keys(agg[pal]).length>1)lines.push('<b>'+esc(pal)+'</b>：不同层的四化标记落在同一宫位（'+Object.keys(agg[pal]).map(x=>'化'+x).join('、')+'），仅表示位置汇聚。');
+    }
   });
-  msgs.sort((a,b) => a.w - b.w);
-  if(msgs.length) box.innerHTML += `<div class="overlay-bar">${msgs.slice(0,3).map(m => `<div>${m.t}</div>`).join('')}</div>`;
+  if(lines.length)box.innerHTML+='<div class="overlay-bar">'+lines.slice(0,3).join('<br>')+'<p class="hint" style="margin:8px 0 0">此处仅比较本命、大限与流年的四化落点，不判断吉凶，也不据此建议推进、回避或改变现实计划。</p></div>';
 }
 
 function renderChart(){
@@ -780,6 +778,7 @@ function renderChartBody(){
   const rec = cur(); if(!rec) return;
   const chart = rec.chart;
   const ov = luckOverlay(chart);
+  const ovValid = validOverlayBranch(ov);
   $('#sihua-strip').innerHTML = (ov.label ? `<div class="hint" style="margin-bottom:6px">${esc(ov.label)}</div>` : '') + sihuaStripHtml(ov.sihua);
   renderOverlayStrip(chart, ov);
   // 三方四正提示条
@@ -806,11 +805,11 @@ function renderChartBody(){
     const tags = [];
     if(p.isMingGong) tags.push('<span class="tag">命</span>');
     if(p.isShenGong) tags.push('<span class="tag">身</span>');
-    const hl = ov.hlBranch === b ? ' hl' : '';
+    const hl = ovValid && ov.hlBranch === b ? ' hl' : '';
     const sf = (sfSet && sfSet.has(b)) ? ' sf' : '';
     const selected = sanfangBranch === b ? ' selected' : '';
     const pressed = sanfangBranch === b ? 'true' : 'false';
-    const ovNameG = ov.hlBranch != null ? overlayPalaceAt(ov.hlBranch, b) : '';
+    const ovNameG = ovValid ? overlayPalaceAt(ov.hlBranch, b) : '';
     const ovTagG = ovNameG && ['命宫','官禄宫','财帛宫','夫妻宫'].includes(ovNameG)
       ? `<span class="ov-tag">${LUCK_PREFIX[luckMode] || '流'}${ovNameG.replace('宫','')}</span>` : '';
     h += `<div class="cell${hl}${sf}${selected}" data-branch="${b}" role="button" tabindex="0" aria-pressed="${pressed}" aria-label="选择${disp(p.name)}">${tags.join('')}${ovTagG}
@@ -832,11 +831,11 @@ function renderChartBody(){
   const list = $('#chart-list');
   list.innerHTML = PALACE_ORDER.map(name => {
     const p = palaceByName(chart, name);
-    const hl = ov.hlBranch === p.branch ? ' style="border:2px solid var(--primary)"' : '';
+    const hl = ovValid && ov.hlBranch === p.branch ? ' style="border:2px solid var(--primary)"' : '';
     const sfAttr = (sfSet && sfSet.has(p.branch)) ? ' data-sf="1"' : '';
     const tags = (p.isMingGong?'命':'') + (p.isShenGong?'身':'');
     const majors0 = p.stars.filter(s => s.type === 'major').map(s => s.name).join('、') || '空宫';
-    const ovNameL = ov.hlBranch != null ? overlayPalaceAt(ov.hlBranch, p.branch) : '';
+    const ovNameL = ovValid ? overlayPalaceAt(ov.hlBranch, p.branch) : '';
     const ovTagL = ovNameL && ['命宫','官禄宫','财帛宫','夫妻宫'].includes(ovNameL)
       ? ` <span class="star-chip">${LUCK_PREFIX[luckMode] || '流'}${ovNameL.replace('宫','')}</span>` : '';
     return `<div class="palace-row"${hl}${sfAttr} data-branch="${p.branch}">
@@ -1649,7 +1648,7 @@ function renderGuide(){
 /* ---------- 大限/流年 整盘叠视图 ---------- */
 function renderOverlayGrid(chart, ov){
   const wrap = $('#overlay-grid-wrap'), grid = $('#overlay-grid');
-  if(!wrap || !ov || ov.hlBranch == null || ov.hlBranch < 0){ wrap.hidden = true; return; }
+  if(!wrap || !validOverlayBranch(ov)){ wrap.hidden = true; return; }
   const pre = luckMode === 'daxian' ? '大限' : luckMode === 'liunian' ? '流年' : '流';
   const ovSi = {};
   if(ov.sihua) [['lu','禄'],['quan','权'],['ke','科'],['ji','忌']].forEach(([k, cn]) => { if(ov.sihua[k]) ovSi[ov.sihua[k]] = cn; });
@@ -1774,8 +1773,11 @@ function currentLunarContext(chart){
     const gender = chart && chart.birthInfo && chart.birthInfo.gender || 'male';
     const dayChart = E.generateChart({year:today.y,month:today.m,day:today.d,hour:0,gender});
     const li = dayChart && dayChart.lunarInfo;
-    if(li && Number.isInteger(li.lunarYear) && Number.isInteger(li.lunarMonth) &&
-       Number.isInteger(li.lunarDay) && Number.isInteger(li.yearStem) && Number.isInteger(li.yearBranch)){
+    if(li && Number.isInteger(li.lunarYear) && li.lunarYear >= 1 &&
+       Number.isInteger(li.lunarMonth) && li.lunarMonth >= 1 && li.lunarMonth <= 12 &&
+       Number.isInteger(li.lunarDay) && li.lunarDay >= 1 && li.lunarDay <= 30 &&
+       Number.isInteger(li.yearStem) && li.yearStem >= 0 && li.yearStem < 10 &&
+       Number.isInteger(li.yearBranch) && li.yearBranch >= 0 && li.yearBranch < 12){
       return {year:li.lunarYear, month:li.lunarMonth, day:li.lunarDay, yearStem:li.yearStem, yearBranch:li.yearBranch, date:today, valid:true};
     }
   }catch(e){}
