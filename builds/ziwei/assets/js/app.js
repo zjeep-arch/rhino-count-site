@@ -2276,9 +2276,12 @@ $('#btn-dingpan-run').addEventListener('click', () => {
     year:+($('#f-year').value||0),month:+($('#f-month').value||0),day:+($('#f-day').value||0),
     province:$('#f-province').value||'',city:cityParts[0]||'',
     longitude:Number.isFinite(formLongitude)?formLongitude:null,
-    trueSolar:$('#f-true-solar').checked&&Number.isFinite(formLongitude),
+    trueSolar:$('#f-true-solar').checked,
     lateZiNextDay:$('#f-latezi-next').checked,sihuaTable:getStoredSihuaTable(),exHour:'',exMin:''
   };
+  if(baseInput.trueSolar&&!Number.isFinite(baseInput.longitude)){
+    $('#dingpan-result').innerHTML='<div class="empty">已开启真太阳时校正，但尚未选择出生地（校正需要经度）。请返回补选出生地，或主动关闭真太阳时校正后再继续。</div>';return;
+  }
   if(!E.isValidGregorianDate(+baseInput.year,+baseInput.month,+baseInput.day)){
     $('#dingpan-result').innerHTML='<div class="empty">出生日期不完整或不存在，请先回到排盘页核对年月日。</div>';return;
   }
