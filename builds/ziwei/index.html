@@ -100,11 +100,12 @@
     <p class="view-sub">所有计算都在你的手机/浏览器里完成，不上传。</p>
     <form id="birth-form" autocomplete="off">
       <label class="field"><span>称呼（可选）</span><input id="f-name" type="text" maxlength="12" placeholder="怎么称呼你"></label>
-      <div class="field"><span>性别</span>
+      <div class="field"><span>性别口径（传统大限顺逆计算参数）</span>
         <div class="seg" id="f-gender">
-          <button type="button" data-v="male" class="on">男</button>
+          <button type="button" data-v="male">男</button>
           <button type="button" data-v="female">女</button>
         </div>
+        <span class="hint">请按排盘所采用的传统参数选择；这只是算法口径，不代表对性别身份的定义。</span>
       </div>
       <div class="field"><span>公历生日</span>
         <div class="date-row">
@@ -330,18 +331,18 @@
 <div id="unlock-modal" class="modal" hidden>
   <div class="modal-card">
     <button class="modal-x" data-unlock-close>×</button>
-    <h3>免费解锁完整版</h3>
-    <p class="hint">1950–2026 年 67.5 万张命盘 · 13 个维度 · 每盘约 3 万字解读<br>任选其一关注，解锁后这张盘永久可看。</p>
+    <h3>免费解锁完整参考内容</h3>
+    <p class="hint">解锁公开参考语料中的 13 个主题。内容来自通用命盘样例，不等同于针对你的出生口径逐项校准；无匹配或自定义规则时，仍可查看按当前命盘生成的本地完整解读。</p>
     <div class="channel-card">
       <img class="qr-img sm" src="assets/img/gzh-qr.jpg" alt="公众号二维码">
-      <div><b>微信公众号</b><br><span class="hint">扫码关注 → 回复「解锁」获取口令</span></div>
+      <div><b>微信公众号</b><br><span class="hint">扫码关注 → 回复「解锁」查看免费解锁说明</span></div>
     </div>
     <div class="unlock-row">
       <input id="unlock-code" maxlength="12" placeholder="输入口令" autocorrect="off" autocomplete="off" autocapitalize="none" spellcheck="false">
       <button class="btn-primary" id="unlock-verify">验证并解锁</button>
     </div>
     <p class="form-error" id="unlock-err"></p>
-    <p class="hint">已有卡密或 8 位解锁码？直接在上方输入同样有效。</p>
+    <p class="hint">口令只用于本机解锁体验，参考语料本身为公开数据，不作为账户或隐私安全凭证；出生资料与个人命盘保存在当前浏览器本地，不上传。</p>
   </div>
 </div>
 
@@ -362,6 +363,6 @@
 <script src="assets/js/ziwei-engine.js"></script>
 <script src="assets/js/data.js"></script>
 <script src="assets/js/data-v2.js"></script>
-<script src="assets/js/app.js?v=20261103-star-glossary"></script>
+<script src="assets/js/app.js?v=20261103-trust-reading"></script>
 </body>
 </html>
