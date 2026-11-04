@@ -180,7 +180,7 @@ function glossary(kind, name){
       ? rec.chart.palaces.flatMap(p => p.stars || []).find(s => s.name === name)
       : null;
     const category = ({major:'十四主星',lucky:'辅曜',sha:'煞曜',minor:'杂曜'})[star && star.type] || '星曜';
-    const description = D.stars[name] || '本站尚未整理该星条目。单星不足以判断吉凶，请结合落宫、同宫星曜、四化与运限阅读。';
+    const description = D.stars[name] || '当前资料未提供这颗星的独立释义，因此不补写未经核实的星性断语。你仍可核对它在本盘的落宫、星曜类别、四化标记及三方四正；单星不能独立推出吉凶或现实事件。';
     html = `<div class="star-glossary">
       <span class="star-glossary-category">${esc(category)}</span>
       <p class="star-glossary-description">${esc(description)}</p>
@@ -190,18 +190,19 @@ function glossary(kind, name){
     isHtml = true;
   }
   else if(kind==='sihua'){
-    html = esc(D.sihua[name] || '') + '<br><br><span class="hint">以上是传统象义摘要，不是对某项事件或结果的保证。四化规则依你选择的流派与设置而变。</span>';
+    const meanings={'禄':'资源、回应与投入','权':'推动、责任与掌控','科':'表达、规范与可见度','忌':'牵挂、反复投入与需要核对的部分'};
+    html = esc(D.sihua[name] || (meanings[name] ? '传统四化中的'+name+'，本站将其作为“'+meanings[name]+'”的观察线索；具体含义需结合化星、落宫、三方四正和所选规则。' : '当前资料没有该四化条目的可核验释义。')) + '<br><br><span class="hint">以上是传统象义摘要，不是对某项事件或结果的保证。四化规则依你选择的流派与设置而变。</span>';
     if(window.GXG_SIHUA_WUXING) html += '<br>' + esc(window.GXG_SIHUA_WUXING);
   }
   else if(kind==='pattern'){
     const v2=(window.GXG_PATTERNS_V2||{})[name]||patternFamilyText(name);
     if(v2){html=`<b>${esc(name)}</b> 是按本站规则检测到的传统星曜组合标签。成立条件：${esc(v2.condition||'见当前格局检测规则')}。<br><br>不同流派的组合边界、权重和名称可能不同；识别到标签只说明满足一组规则，不表示格局等级、个性定论或现实成败。建议回到具体宫位、四化和现实问题逐项核对。`;isHtml=true;}
-    else{html=esc(D.patterns[name]||(window.GXG_PATTERNS||{})[name]||D.patternDefault)+'<br><br><span class="hint">传统组合标签只描述所采用的匹配规则，不用于预测成败。</span>';}
+    else{html=esc(D.patterns[name]||(window.GXG_PATTERNS||{})[name]||D.patternDefault||'本站没有该组合的完整释义；请以盘面实际星曜和当前匹配条件为准。')+'<br><br><span class="hint">传统组合标签只描述所采用的匹配规则，不用于预测成败。</span>';}
   }
-  else if(kind==='brightness') html = esc(D.brightness[name] || '') + '<br><br><span class="hint">亮度只是所采用传统表格中的分类，不是客观测量结果；请在设置中核对排盘体系。</span>'; 
+  else if(kind==='brightness') html = esc(D.brightness[name] || '当前资料未返回该星的亮度等级；本站不据此补写庙旺平陷。') + '<br><br><span class="hint">亮度只是所采用传统表格中的分类，不是客观测量结果；请在设置中核对排盘体系。</span>'; 
   else if(kind==='palace'){
     const p = D.palaces.find(p => p.name === name);
-    html = p ? `<b>${esc(p.modern)}</b> · ${esc(p.keywords)}<br><br>${esc(p.desc)}<br><br><span class="hint">宫位是传统解读的主题分类，不代表相关事情必然发生，也不能用来给家人或伴侣下定论。</span>` : '';
+    html = p ? `<b>${esc(p.modern)}</b> · ${esc(p.keywords)}<br><br>${esc(p.desc)}<br><br><span class="hint">宫位是传统解读的主题分类，不代表相关事情必然发生，也不能用来给家人或伴侣下定论。</span>` : '<span class="hint">未找到该宫位的说明条目；请以命盘中显示的宫名、宫干和星曜为准，不据此补写解释。</span>';
     // 有盘时：加上命主此宫的具体信息
     const rec0 = cur();
     if(rec0){
@@ -997,6 +998,33 @@ function shiShen(dayStem, t){
   return same ? '偏印' : '正印';
 }
 function gz60(stem, branch){ for(let k = 0; k < 60; k++){ if(k % 10 === stem && k % 12 === branch) return k; } return 0; }
+
+const BAZI_SEASONAL_ORDER=[['水','木','金','土','火'],['土','水','金','木','火'],['木','火','水','金','土'],['木','火','水','金','土'],['土','金','火','木','水'],['火','土','木','水','金'],['火','土','木','水','金'],['土','金','火','水','木'],['金','水','土','火','木'],['金','水','土','火','木'],['土','金','火','木','水'],['水','木','金','土','火']];
+const BAZI_SEASON_FACTOR={'旺':1.4,'相':1.2,'休':1,'囚':.7,'死':.4},BAZI_HIDDEN_WEIGHT=[1,.6,.3],BAZI_GENERATES={木:'火',火:'土',土:'金',金:'水',水:'木'};
+function calculateDayMasterBalance(cols,dayS){
+ if(!Array.isArray(cols)||cols.length!==4||!cols[1]||!Number.isInteger(dayS))return null;
+ const dayWx=WX_OF_STEM[dayS],monthBranch=cols[1].b,order=BAZI_SEASONAL_ORDER[monthBranch];
+ if(!dayWx||!order)return null;
+ const season=['旺','相','休','囚','死'][order.indexOf(dayWx)];let support=0,pressure=0,roots=[],supportStems=[],pressureStems=[];
+ cols.forEach((col,i)=>{
+  if(i!==2){const wx=WX_OF_STEM[col.s],state=['旺','相','休','囚','死'][order.indexOf(wx)]||'休',w=BAZI_SEASON_FACTOR[state];
+   if(wx===dayWx||BAZI_GENERATES[wx]===dayWx){support+=w;supportStems.push(ST[col.s]);}else{pressure+=w;pressureStems.push(ST[col.s]);}}
+  (HIDDEN_STEMS[col.b]||[]).forEach((stem,j)=>{const wx=WX_OF_STEM[stem],state=['旺','相','休','囚','死'][order.indexOf(wx)]||'休',w=(BAZI_HIDDEN_WEIGHT[j]||.2)*BAZI_SEASON_FACTOR[state];
+   if(wx===dayWx)roots.push({branch:BR[col.b],stem:ST[stem],main:j===0});
+   if(wx===dayWx||BAZI_GENERATES[wx]===dayWx)support+=w;else pressure+=w;});
+ });
+ const total=support+pressure;if(!total)return null;const ratio=support/total;
+ let label,boundary=false;if(ratio>=.62){label='偏强倾向';boundary=ratio<.65;}else if(ratio<=.38){label='偏弱倾向';boundary=ratio>.35;}else{label='中和区间';boundary=(ratio>.35&&ratio<.41)||(ratio>.59&&ratio<.65);}
+ const mainRoots=roots.filter(r=>r.main),rootText=mainRoots.length?'地支主气见日主同五行（'+mainRoots.map(r=>r.branch+'藏'+r.stem).join('、')+'）':roots.length?'地支余气见日主同五行（'+roots.map(r=>r.branch+'藏'+r.stem).join('、')+'），根气较浅':'四支藏干未见日主同五行根气';
+ return{label,boundary,season,dayWx,rootText,supportStems,pressureStems,ratio};
+}
+function renderDayMasterBalance(cols,dayS){
+ const r=calculateDayMasterBalance(cols,dayS);
+ if(!r)return'<section class="bazi-strength"><div class="bz-sec">日主旺衰参考</div><p class="hint">当前四柱资料不完整，暂不判定身强身弱。请核对出生日期、时辰与节气口径。</p></section>';
+ const support=r.supportStems.length?r.supportStems.join('、'):'未见明显透干',pressure=r.pressureStems.length?r.pressureStems.join('、'):'未见明显克泄耗透干';
+ return'<section class="bazi-strength"><div class="strength-top"><div><div class="bz-sec">日主旺衰参考</div><p class="strength-caption">日主 '+ST[dayS]+'（'+r.dayWx+'）· '+r.label+(r.boundary?' · 临界附近':'')+'</p></div><span class="strength-mark" aria-hidden="true">日</span></div><div class="strength-evidence"><div><b>月令</b><span>'+BR[cols[1].b]+'月 · '+r.season+(r.season==='旺'?'，得令':r.season==='相'?'，得时气':'')+'</span></div><div><b>根气</b><span>'+esc(r.rootText)+'</span></div><div><b>天干</b><span>扶助：'+esc(support)+'；克泄耗：'+esc(pressure)+'</span></div></div><details class="strength-method"><summary>查看本站判定规则与适用边界</summary><p>这是本站独立的传统旺衰参考模型，参考测测把身强身弱与五行信息并列展示的产品方式。测测未公开算法细节，本站不声称与其结论一致。模型对月令旺相休囚死赋权（旺1.4、相1.2、休1、囚0.7、死0.4），天干按月令状态计分，地支藏干主气/中气/余气按1/0.6/0.3计分；把日主同五行与生扶计入支持，其他五行计入非支持。支持占比≥62%显示偏强倾向，≤38%显示偏弱倾向，其余显示中和区间；35%–41%或59%–65%标注临界附近。这些是本站自设参数，未经测测算法对照或样本准确率验证，不是行业统一标准。</p><p>当前模型未完整计算天干合化、地支合冲刑害、从格、调候及各派取格差异；靠近分界时标为临界，不作绝对结论。身强弱不是身体强弱，也不代表命好坏；不能单凭此项推出喜用神、性格或现实结果。出生时辰、节气或换日口径变化会影响结果。</p></details></section>';
+}
+
 /* 八字人话字典：日主 + 十神 + 五行强弱（粗断，克制表述） */
 const SHI_SHEN_GROUP = { '比肩':'比劫','劫财':'比劫','食神':'食伤','伤官':'食伤','偏财':'财星','正财':'财星','七杀':'官杀','正官':'官杀','偏印':'印星','正印':'印星' };
 /* 旧版性格与评级断语已移除；页面仅保留可核对的四柱、十神和五行计数。 */
@@ -1010,6 +1038,7 @@ function renderBaziCard(chart){
   h+='<tr><td class="lab">地支</td>'+cols.map(c=>'<td><b class="gz-b">'+BR[c.b]+'</b><span class="ss">'+shiShen(dayS,HIDDEN_MAIN[c.b])+'</span></td>').join('')+'</tr>';
   h+='<tr class="hidden-stem-row"><td class="lab">藏干</td>'+cols.map(c=>'<td><div class="hidden-stems">'+HIDDEN_STEMS[c.b].map(s=>'<span><b>'+ST[s]+'</b><i>'+shiShen(dayS,s)+'</i></span>').join('')+'</div></td>').join('')+'</tr>';
   h+='<tr><td class="lab">纳音</td>'+cols.map(c=>'<td><span class="ny">'+NA_YIN[Math.floor(gz60(c.s,c.b)/2)]+'</span></td>').join('')+'</tr></table>';
+  h+=renderDayMasterBalance(cols,dayS);
   const wx={金:0,木:0,水:0,火:0,土:0};cols.forEach(c=>{wx[WX_OF_STEM[c.s]]++;wx[WX_OF_STEM[HIDDEN_MAIN[c.b]]]++;});const WXC={金:'#8C6D3F',木:'#75855F',水:'#5F6E7A',火:'#B0523A',土:'#8B8477'};
   h+='<div class="bz-sec">五行计数 · 干与支主气</div><div class="wx-bars">'+Object.keys(wx).map(k=>'<div class="wx-row"><span class="wx-name">'+k+'</span><div class="wx-track"><div class="wx-fill" style="width:'+wx[k]/8*100+'%;background:'+WXC[k]+'"></div></div><span class="wx-n">'+wx[k]+'</span></div>').join('')+'</div>';
   const sgCount={'比劫':0,'食伤':0,'财星':0,'官杀':0,'印星':0};cols.forEach((c,i)=>{if(i!==2){const t=shiShen(dayS,c.s);sgCount[SHI_SHEN_GROUP[t]]++;}const bt=shiShen(dayS,HIDDEN_MAIN[c.b]);sgCount[SHI_SHEN_GROUP[bt]]++;});
@@ -1556,8 +1585,9 @@ async function renderReading(){
     window.GXG_READING_LOCAL = true;
     renderReadingBody();
   }catch(e){
-    $('#reading-status').textContent = '解读生成失败，请稍后重试。';
-    $('#reading-body').innerHTML = '';
+    console.error('[问运]本地解读生成失败', e);
+    $('#reading-status').textContent = '本次解读未能生成。命盘数据仍可查看；请核对排盘资料，重新进入问运后重试。';
+    $('#reading-body').innerHTML = '<div class="reading-scope-note">系统没有用通用文案替代本命盘分析，也不会输出未经生成的判断。若持续出现，请先检查出生日期、时间与排盘口径。</div>';
     return;
   }
   setStep('本地解读 · 已按你的排盘口径生成');
@@ -1614,6 +1644,90 @@ function unlockFreeReading(){
 document.addEventListener('click', e => {
   if(e.target.closest('[data-unlock-free]')){ unlockFreeReading(); return; }
 });
+
+document.addEventListener('keydown',e=>{
+ const current=e.target.closest('.reading-section-tabs [data-reading-tab]');if(!current)return;
+ const tabs=$('.reading-section-tabs [data-reading-tab]'),i=tabs.indexOf(current);let next=null;
+ if(e.key==='ArrowRight')next=tabs[(i+1)%tabs.length];else if(e.key==='ArrowLeft')next=tabs[(i-1+tabs.length)%tabs.length];else if(e.key==='Home')next=tabs[0];else if(e.key==='End')next=tabs[tabs.length-1];
+ if(next){e.preventDefault();next.focus();next.click();}
+});
+document.addEventListener('click',e=>{
+ const tab=e.target.closest('[data-reading-tab]');
+ if(tab){const id=tab.dataset.readingTab;$('.reading-section-tabs [data-reading-tab]').forEach(b=>{const on=b===tab;b.classList.toggle('is-active',on);b.setAttribute('aria-selected',String(on));});$('.insight-flow-section').forEach(s=>s.classList.toggle('is-active',s.id===id));return;}
+ if(e.target.closest('#divination-reset')){resetDivination();return;}
+ if(e.target.closest('#divination-throw')){throwDivinationLine();return;}
+ if(e.target.closest('#divination-auto')){autoThrowDivination();return;}
+});
+const TRIGRAMS_BY_BITS={0:{name:'坤',image:'地',tone:'承接、包容'},1:{name:'震',image:'雷',tone:'启动、惊动'},2:{name:'坎',image:'水',tone:'风险、流动'},3:{name:'兑',image:'泽',tone:'交流、取悦'},4:{name:'艮',image:'山',tone:'停顿、边界'},5:{name:'离',image:'火',tone:'照见、辨明'},6:{name:'巽',image:'风',tone:'进入、渗透'},7:{name:'乾',image:'天',tone:'行动、推动'}};
+const HEXAGRAM_ORDER=['乾','兑','离','震','巽','坎','艮','坤'];
+const HEXAGRAM_ROWS={乾:['乾','夬','大有','大壮','小畜','需','大畜','泰'],兑:['履','兑','睽','归妹','中孚','节','损','临'],离:['同人','革','离','丰','家人','既济','贲','明夷'],震:['无妄','随','噬嗑','震','益','屯','颐','复'],巽:['姤','大过','鼎','恒','巽','井','蛊','升'],坎:['讼','困','未济','解','涣','坎','蒙','师'],艮:['遁','咸','旅','小过','渐','蹇','艮','谦'],坤:['否','萃','晋','豫','观','比','剥','坤']};
+function hexagramName(lines){
+ if(!Array.isArray(lines)||lines.length!==6||lines.some(v=>v!==0&&v!==1))throw new TypeError('六爻必须按初爻至上爻提供六个阴阳值');
+ const lo=lines.slice(0,3).reduce((n,v,i)=>n|(v<<i),0),up=lines.slice(3,6).reduce((n,v,i)=>n|(v<<i),0);
+ const lower=TRIGRAMS_BY_BITS[lo],upper=TRIGRAMS_BY_BITS[up];
+ return{name:HEXAGRAM_ROWS[lower.name][HEXAGRAM_ORDER.indexOf(upper.name)],lower,upper};
+}
+let divinationTosses=[],divinationPending=false,divinationAutoRunning=false,divinationTimer=0,divinationRun=0;
+
+function renderDivinationResult(){
+ const out=$('#divination-result');if(!out||divinationTosses.length!==6)return;
+ const original=divinationTosses.map(x=>x.yang?1:0),changed=divinationTosses.map((x,i)=>x.moving?1-original[i]:original[i]);
+ const a=hexagramName(original),b=hexagramName(changed),moves=divinationTosses.map((x,i)=>x.moving?i+1:null).filter(Boolean),question=($('#divination-question')?.value||'').trim();
+ const moveText=moves.length?'第'+moves.map(n=>['','初','二','三','四','五','上'][n]).join('、')+'爻变化。':'本卦没有动爻，结构保持不变。';
+ out.innerHTML='<div class="hexagram-summary"><span>本卦</span><b>'+esc(a.name)+'</b><small>'+esc(a.upper.name+'上'+a.lower.name+'下 · '+a.upper.image+'上'+a.lower.image+'下')+'</small></div><p class="hexagram-change">'+esc(moveText)+(moves.length?' 变卦为 <b>'+esc(b.name)+'</b>（'+esc(b.upper.name)+'上'+esc(b.lower.name)+'下）。':'')+'</p><p class="hexagram-question">'+(question?'本次记录的问题：'+esc(question):'本次未填写问题；可将它作为一次观察练习。')+'</p><div class="hexagram-reflection"><b>把卦象转成复盘</b><ol><li>先列出已经确认的事实，以及仍待核实的假设。</li><li>'+esc('上卦取'+a.upper.image+'象（'+a.upper.tone+'），下卦取'+a.lower.image+'象（'+a.lower.tone+'）；这只是观察视角，不代表事情走向。')+'</li><li>'+esc(moves.length?'动爻位置为'+moves.map(n=>['','初','二','三','四','五','上'][n]).join('、')+'；写下哪些条件正在变化，以及哪些在你可控范围内。':'没有动爻；先检查当前方案是否缺少新信息，再决定是否需要调整。')+'</li><li>选一个低风险、可逆的小行动验证判断，并设定回看时间。</li></ol></div><p class="hint">卦名与上下卦按通行六十四卦结构表生成；本页不编造卦辞或爻辞，也不把卦象译成吉凶、成败或确定预言。不同起卦法与解释流派可能有差异。</p>';
+}
+function tossThreeCoins(){
+ const bytes=new Uint8Array(3);
+ if(window.crypto&&window.crypto.getRandomValues)window.crypto.getRandomValues(bytes);
+ else bytes.forEach((_,i)=>bytes[i]=Math.floor(Math.random()*256));
+ const faces=Array.from(bytes,x=>x%2===0),heads=faces.filter(Boolean).length;
+ const value=({0:6,1:8,2:7,3:9})[heads];
+ return{value,faces,yang:value===7||value===9,moving:value===6||value===9,label:({6:'老阴',7:'少阳',8:'少阴',9:'老阳'})[value]};
+}
+function throwDivinationLine(fromAuto){
+ if(divinationTosses.length>=6||divinationPending||(divinationAutoRunning&&!fromAuto))return false;
+ divinationPending=true;
+ const stage=$('#coin-stage'),go=$('#divination-throw');
+ if(go)go.disabled=true;
+ if(stage){stage.innerHTML='<span class="coin is-tossing">易</span><span class="coin is-tossing">易</span><span class="coin is-tossing">易</span>';stage.setAttribute('aria-label','钱币正在转动');}
+ const run=divinationRun;
+ divinationTimer=window.setTimeout(()=>{
+  divinationTimer=0;
+  if(run!==divinationRun)return;
+  const t=tossThreeCoins();divinationTosses.push(t);divinationPending=false;
+  if(stage){stage.innerHTML=t.faces.map(face=>'<span class="coin coin-face-'+(face?'yang':'yin')+'">'+(face?'阳':'阴')+'</span>').join('');stage.setAttribute('aria-label','三枚钱币已落定，'+t.label);}
+  divinationMarkup();
+ },520);
+ return true;
+}
+function autoThrowDivination(){
+ if(divinationTosses.length>=6||divinationPending||divinationAutoRunning)return;
+ const run=++divinationRun;divinationAutoRunning=true;
+ const next=()=>{
+  if(run!==divinationRun)return;
+  if(divinationTosses.length>=6){divinationAutoRunning=false;divinationMarkup();return;}
+  if(throwDivinationLine(true))window.setTimeout(next,620);
+ };
+ next();
+}
+function resetDivination(){
+ divinationRun++;
+ if(divinationTimer){window.clearTimeout(divinationTimer);divinationTimer=0;}
+ divinationPending=false;divinationAutoRunning=false;divinationTosses=[];
+ const out=$('#divination-result');if(out)out.innerHTML='';
+ const stage=$('#coin-stage');if(stage){stage.innerHTML='<span class="coin">易</span><span class="coin">易</span><span class="coin">易</span>';stage.setAttribute('aria-label','三枚虚拟钱币');}
+ divinationMarkup();
+}
+function divinationMarkup(){
+ const box=$('#divination-lines');if(!box)return;
+ box.innerHTML=divinationTosses.map((t,i)=>({t,i})).reverse().map(({t,i})=>'<div class="divination-line '+(t.moving?'is-moving':'')+'"><span>'+(['初','二','三','四','五','上'][i])+'爻</span><i class="'+(t.yang?'yang':'yin')+'">'+(t.yang?'━━━━━━':'━━　━━')+'</i><b>'+t.label+(t.moving?' · 动':'')+'</b></div>').join('');
+ $('#divination-count').textContent=divinationTosses.length+' / 6';
+ $('#divination-progress').textContent=divinationTosses.length===6?'六爻完成 · 自下而上读取':(divinationTosses.length===0?'尚未起卦 · 由初爻开始':'正在起第'+['初','二','三','四','五','上'][divinationTosses.length]+'爻');
+ const go=$('#divination-throw'),auto=$('#divination-auto'),reset=$('#divination-reset');
+ if(go){go.disabled=divinationTosses.length>=6||divinationPending||divinationAutoRunning;go.textContent=divinationTosses.length>=6?'已完成六爻':'掷出'+['初','二','三','四','五','上'][divinationTosses.length]+'爻';}
+ if(auto)auto.disabled=divinationTosses.length>=6||divinationPending||divinationAutoRunning;if(reset)reset.hidden=divinationTosses.length<6;
+ if(divinationTosses.length===6)renderDivinationResult();
+}
 document.addEventListener('click', e => {
   const f = e.target.closest('[data-fav]');
   if(f){
@@ -1976,14 +2090,15 @@ function renderZeri(){
       const sel=box.querySelector('#zeri-type'),out=box.querySelector('#zeri-out');
       const draw=()=>{
         const t=ZERI_TYPES.find(x=>x.k===sel.value)||ZERI_TYPES[0];
-        out.innerHTML=days.map(day=>{
+        const renderDay=day=>{
           const date=new Date(Date.UTC(day.y,day.m-1,day.d));
           const dateLabel=new Intl.DateTimeFormat('zh-CN',{timeZone:'Asia/Shanghai',month:'long',day:'numeric',weekday:'short'}).format(date);
           const details=[['禄','lu'],['权','quan'],['科','ke'],['忌','ji']].map(([name,key])=>'<span><b>化'+name+'</b> '+esc(day.sh[key])+' → '+esc(day.dest[name]||'本命盘未见该星')+'</span>').join('');
           return '<article class="zeri-day"><header><b>'+dateLabel+'</b><span>农历'+day.lm+'月'+day.ld+'日</span></header>'+
             '<p class="zeri-focus">流日命宫参考：'+esc(day.focus)+'<br>议题相关宫位：'+esc(t.palaces.join('、'))+'</p><div class="zeri-hua">'+details+'</div>'+
             '<p class="hint">现实核对：'+esc(t.prompt)+'</p><p class="hint">四化落点仅是传统符号对应，不表示当天更适合或不适合该事项；流派和排盘口径不同，结果可能不同。</p></article>';
-        }).join('');
+        };
+        out.innerHTML=renderDay(days[0])+'<details class="zeri-more"><summary>展开未来 30 天中的另外 29 天</summary><div>'+days.slice(1).map(renderDay).join('')+'</div></details>';
       };
       sel.addEventListener('change',draw);draw();
     }catch(err){box.innerHTML='<div class="empty">未来 30 天的日期或流日规则未能完整核实，因此暂不显示部分日历，避免遗漏造成误读。请稍后重试或核对排盘口径。</div>';}
@@ -2607,6 +2722,8 @@ function renderUnifiedReading(){
   renderReading();
   renderPalaceCards();
   renderZeri();
+  const active=document.querySelector('.reading-section-tabs [data-reading-tab].is-active');
+  if(active){$('.insight-flow-section').forEach(s=>s.classList.toggle('is-active',s.id===active.dataset.readingTab));}
 }
 
 /* ---------- 免责声明接入 ---------- */
