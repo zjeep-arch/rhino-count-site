@@ -1720,7 +1720,18 @@ function resetDivination(){
 }
 function divinationMarkup(){
  const box=$('#divination-lines');if(!box)return;
- box.innerHTML=divinationTosses.map((t,i)=>({t,i})).reverse().map(({t,i})=>'<div class="divination-line '+(t.moving?'is-moving':'')+'"><span>'+(['初','二','三','四','五','上'][i])+'爻</span><i class="'+(t.yang?'yang':'yin')+'">'+(t.yang?'━━━━━━':'━━　━━')+'</i><b>'+t.label+(t.moving?' · 动':'')+'</b></div>').join('');
+ const positions=['初','二','三','四','五','上'];
+ const rows=Array.from({length:6},(_,rowIndex)=>{
+  const lineIndex=5-rowIndex,hasTossed=lineIndex<divinationTosses.length,t=hasTossed?divinationTosses[lineIndex]:null;
+  const position=positions[lineIndex],classes=['divination-line',hasTossed?'is-'+(t.yang?'yang':'yin'):'is-empty',t&&t.moving?'is-moving':'',lineIndex===divinationTosses.length-1&&hasTossed?'is-latest':''].filter(Boolean).join(' ');
+  const symbol=hasTossed
+   ? '<span class="divination-yao-symbol" role="img" aria-label="'+(t.yang?'阳':'阴')+'爻">'+(t.yang?'<i></i>':'<i></i><i></i>')+'</span>'
+   : '<span class="divination-yao-symbol is-placeholder" aria-hidden="true"><i></i></span>';
+  return '<div class="'+classes+'"'+(hasTossed?' aria-label="'+position+'爻，'+(t.yang?'阳':'阴')+'爻，'+t.label+(t.moving?'，动爻':'，静爻')+'"':' aria-label="'+position+'爻，待掷"')+'>'+
+   '<span class="divination-line-position"><b>'+position+'爻</b><small>0'+(lineIndex+1)+'</small></span>'+symbol+
+   '<span class="divination-line-state">'+(hasTossed?'<b>'+t.label+'</b><small class="'+(t.moving?'is-moving':'')+'">'+(t.moving?'动爻':'静爻')+'</small>':'<b>待掷</b>')+'</span></div>';
+ }).join('');
+ box.innerHTML='<div class="divination-board-head"><span><small>HEXAGRAM</small><b>六爻卦图</b></span><span>上爻在上 · 初爻在下</span></div><div class="divination-board-rows">'+rows+'</div>';
  $('#divination-count').textContent=divinationTosses.length+' / 6';
  $('#divination-progress').textContent=divinationTosses.length===6?'六爻完成 · 自下而上读取':(divinationTosses.length===0?'尚未起卦 · 由初爻开始':'正在起第'+['初','二','三','四','五','上'][divinationTosses.length]+'爻');
  const go=$('#divination-throw'),auto=$('#divination-auto'),reset=$('#divination-reset');
