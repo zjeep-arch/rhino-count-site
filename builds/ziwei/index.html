@@ -219,14 +219,15 @@
     <h2 class="view-title">问运</h2>
     <p class="view-sub">把本命十二宫、四化与当前运限作为传统观察线索：先核对流年宫位，再按关心的问题查看对应盘面，最后回到出生资料与排盘设置确认依据。</p>
     <div class="reading-workbench-actions"><button class="btn-ghost" type="button" data-share-chart>分享命盘 ↗</button></div>
+    <div class="reading-section-tabs" role="tablist" aria-label="问运内容切换"><button type="button" role="tab" aria-selected="true" class="is-active" data-reading-tab="insight-forecast" aria-controls="insight-forecast" id="tab-insight-forecast">流年与流日</button><button type="button" role="tab" aria-selected="false" data-reading-tab="insight-topics" aria-controls="insight-topics" id="tab-insight-topics">主题问运</button><button type="button" role="tab" aria-selected="false" data-reading-tab="insight-divination" aria-controls="insight-divination" id="tab-insight-divination">电子摇卦</button><button type="button" role="tab" aria-selected="false" data-reading-tab="insight-palaces" aria-controls="insight-palaces" id="tab-insight-palaces">盘面依据</button></div>
 
-    <section class="insight-pane insight-flow-section" id="insight-forecast">
+    <section class="insight-pane insight-flow-section is-active" id="insight-forecast" role="tabpanel" aria-labelledby="tab-insight-forecast">
       <div class="reading-section-heading"><span class="reading-section-index">01</span><div><h3>今年的盘面线索</h3><p>先看流年宫位与四化落点，再分别核对关系、资源和工作议题；这些是传统观察入口，不是事件预测。</p></div></div>
       <div id="answer-list"></div>
       <div class="card"><div class="card-kicker">流日象意日历 · 未来 30 天</div><div id="zeri-body"></div></div>
     </section>
 
-    <section class="insight-pane insight-flow-section" id="insight-topics">
+    <section class="insight-pane insight-flow-section" id="insight-topics" role="tabpanel" aria-labelledby="tab-insight-topics">
       <div class="reading-section-heading"><span class="reading-section-index">02</span><div><h3>你想问哪件事</h3><p>选择一个具体问题，查看相关宫位、四化和运限的规则位置，并结合现实经历复盘。</p></div></div>
       <div class="reading-topic-picker"><label for="reading-topic">选择关心的问题</label><select id="reading-topic" aria-label="选择问运主题"></select></div>
       <div class="card" id="reading-disclaimer-card"><div class="card-kicker">阅读说明</div><p class="hint" id="reading-disclaimer" style="margin:0"></p></div>
@@ -234,9 +235,9 @@
       <article id="reading-body" class="reading-body"></article>
     </section>
 
-    <section class="insight-pane insight-flow-section" id="insight-palaces">
+    <section class="insight-pane insight-flow-section" id="insight-divination" role="tabpanel" aria-labelledby="tab-insight-divination"><div class="reading-section-heading"><span class="reading-section-index">03</span><div><h3>电子摇卦</h3><p>写下一个具体问题，以三枚虚拟钱币起六爻；过程在本机完成，不上传问题或出生资料。</p></div></div><div class="divination-card"><label class="divination-label" for="divination-question">这次想梳理什么问题？</label><textarea id="divination-question" maxlength="120" rows="2" aria-describedby="divination-note" placeholder="例如：我在做这个选择时，最需要核实的条件是什么？"></textarea><p class="divination-note" id="divination-note">结果是随机生成的传统卦象结构与复盘提示，不是事件预测。相同问题不建议反复起卦；涉及健康、法律、投资或安全的决定，请以事实和专业意见为准。</p><div class="coin-stage" id="coin-stage" aria-label="三枚虚拟钱币"><span class="coin">易</span><span class="coin">易</span><span class="coin">易</span></div><div class="divination-progress"><span id="divination-progress">尚未起卦 · 由初爻开始</span><span id="divination-count">0 / 6</span></div><div id="divination-lines" class="divination-lines" aria-live="polite"></div><div class="divination-actions"><button class="btn-primary" type="button" id="divination-throw">掷出初爻</button><button class="btn-ghost" type="button" id="divination-auto">连续掷完六爻</button><button class="btn-ghost" type="button" id="divination-reset" hidden>重新起卦</button></div><div id="divination-result" class="divination-result" aria-live="polite"></div></div></section><section class="insight-pane insight-flow-section" id="insight-palaces" role="tabpanel" aria-labelledby="tab-insight-palaces">
       <details class="reading-evidence">
-        <summary><span class="reading-section-index">03</span><span><b>回到十二宫，看判断依据</b><small>展开本命十二宫与星曜细节</small></span></summary>
+        <summary><span class="reading-section-index">04</span><span><b>回到十二宫，看判断依据</b><small>展开本命十二宫与星曜细节</small></span></summary>
         <p class="view-sub">宫位并非孤立存在；结合星曜、四化与三方四正，才能看到问题在整张盘里的位置。</p>
         <div id="palace-cards" class="palace-grid"></div>
       </details>
@@ -345,6 +346,6 @@
 <script src="assets/js/ziwei-engine.js"></script>
 <script src="assets/js/data.js"></script>
 <script src="assets/js/data-v2.js"></script>
-<script src="assets/js/app.js?v=20261103-local-reading-v5"></script>
+<script src="assets/js/app.js?v=20261104-bazi-divination-v1"></script>
 </body>
 </html>
