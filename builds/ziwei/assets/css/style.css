@@ -1578,3 +1578,31 @@ body{color:var(--ink);
  .divination-line-state{gap:4px}.divination-line-state b{font-size:11px}.divination-line-state small{padding:3px 5px;font-size:9px}
 }
 @media(prefers-reduced-motion:reduce){.divination-line.is-latest{animation:none}.divination-line{transition:none}}
+
+/* Qianlong Tongbao inspired cast coins for the divination interaction. */
+.coin-stage{gap:clamp(4px,2vw,18px);min-height:126px;padding:14px 4px;perspective:1000px;overflow:visible}
+.qianlong-coin{position:relative;display:block;flex:0 0 auto;width:clamp(64px,20vw,86px);aspect-ratio:1;filter:drop-shadow(0 9px 9px rgba(0,0,0,.38));transform:rotate(var(--coin-tilt,0deg));}
+.qianlong-coin::before{content:"";position:absolute;z-index:0;left:9%;right:9%;bottom:1%;height:92%;border-radius:50%;background:linear-gradient(145deg,#4d3422,#947043 38%,#4a3223);box-shadow:0 4px 0 rgba(4,7,19,.8)}
+.qianlong-coin-rotor{position:absolute;z-index:1;inset:0;transform-style:preserve-3d;transition:transform .68s cubic-bezier(.2,.78,.24,1)}
+.qianlong-coin.is-obverse .qianlong-coin-rotor{transform:rotateY(0)}
+.qianlong-coin.is-reverse .qianlong-coin-rotor{transform:rotateY(180deg)}
+.qianlong-coin.is-tossing .qianlong-coin-rotor{animation:qianlong-coin-toss .52s cubic-bezier(.36,.05,.52,.95) infinite}
+.qianlong-coin-side{position:absolute;inset:0;display:block;overflow:hidden;border:2px solid #dbba6b;border-radius:50%;backface-visibility:hidden;background:radial-gradient(circle at 28% 20%,#f1d997 0,#d5ae5e 30%,#a6743b 67%,#644327 100%);box-shadow:inset 0 2px 2px rgba(255,246,203,.76),inset 0 -5px 8px rgba(58,35,16,.65),inset 0 0 0 2px rgba(99,65,29,.35),0 2px 0 #68472a}
+.qianlong-coin-side::before{content:"";position:absolute;inset:5px;border:1px solid rgba(255,232,168,.7);border-radius:50%;box-shadow:inset 0 0 0 1px rgba(91,58,28,.35),0 0 0 1px rgba(87,57,30,.3)}
+.qianlong-coin-side::after{content:"";position:absolute;inset:9px;border-radius:50%;background:repeating-conic-gradient(from 3deg,rgba(255,233,176,.28) 0deg 1deg,transparent 1deg 10deg);mask:radial-gradient(circle,transparent 58%,#000 60% 74%,transparent 76%);pointer-events:none}
+.coin-reverse{transform:rotateY(180deg);background:radial-gradient(circle at 30% 20%,#e4cb8b,#b98b4e 38%,#785032 78%,#513822)}
+.coin-inner-rim{position:absolute;inset:13px;border:1px solid rgba(94,59,28,.58);border-radius:50%;box-shadow:inset 0 1px 2px rgba(255,235,180,.5),0 0 0 1px rgba(255,225,154,.32)}
+.coin-character{position:absolute;z-index:2;color:#62411f;font-family:"Songti SC","Noto Serif SC",serif;font-weight:900;line-height:1;text-shadow:0 1px 0 rgba(255,236,174,.72),0 -1px 0 rgba(68,42,20,.25)}
+.char-top{top:10%;left:50%;transform:translateX(-50%);font-size:clamp(10px,2.5vw,14px)}
+.char-right{right:10%;top:50%;transform:translateY(-50%);font-size:clamp(10px,2.5vw,14px)}
+.char-bottom{bottom:10%;left:50%;transform:translateX(-50%);font-size:clamp(10px,2.5vw,14px)}
+.char-left{left:10%;top:50%;transform:translateY(-50%);font-size:clamp(10px,2.5vw,14px)}
+.coin-square-hole{position:absolute;z-index:3;left:50%;top:50%;width:24%;aspect-ratio:1;transform:translate(-50%,-50%);border:2px solid rgba(103,69,34,.95);border-radius:3px;background:linear-gradient(145deg,#11182d,#242033 56%,#0a1023);box-shadow:inset 0 2px 5px rgba(0,0,0,.86),0 1px 0 rgba(255,230,171,.55),0 0 0 2px rgba(239,207,130,.28)}
+.coin-patina{position:absolute;inset:0;z-index:1;border-radius:50%;pointer-events:none;background:radial-gradient(ellipse at 18% 78%,rgba(76,111,83,.3),transparent 27%),radial-gradient(ellipse at 82% 25%,rgba(73,105,75,.22),transparent 22%),radial-gradient(ellipse at 70% 82%,rgba(88,111,83,.18),transparent 18%);mix-blend-mode:multiply}
+.coin-reverse-mark{position:absolute;z-index:2;left:50%;top:50%;transform:translate(-50%,-50%);display:grid;place-items:center;width:34%;aspect-ratio:1;border:1px solid rgba(97,62,30,.55);border-radius:50%;color:#674626;font-family:"Songti SC","Noto Serif SC",serif;font-size:clamp(12px,3vw,17px);font-weight:800;text-shadow:0 1px 0 rgba(255,235,174,.72);box-shadow:inset 0 0 0 2px rgba(247,221,160,.22),0 0 0 1px rgba(247,221,160,.2)}
+.coin-reverse-dot{position:absolute;z-index:2;width:4px;height:4px;border-radius:50%;background:#74502f;box-shadow:0 1px 0 rgba(255,231,170,.7)}
+.reverse-dot-a{left:50%;top:16%}.reverse-dot-b{right:16%;top:50%}.reverse-dot-c{left:50%;bottom:16%}.reverse-dot-d{left:16%;top:50%}
+.coin-sequence-1{--coin-tilt:-8deg}.coin-sequence-2{--coin-tilt:3deg;transform:translateY(-5px) rotate(var(--coin-tilt))}.coin-sequence-3{--coin-tilt:9deg}
+@keyframes qianlong-coin-toss{0%{transform:translateY(0) rotateX(0) rotateY(0)}42%{transform:translateY(-18px) rotateX(18deg) rotateY(540deg)}100%{transform:translateY(0) rotateX(0) rotateY(1080deg)}}
+@media(max-width:640px){.coin-stage{min-height:108px;gap:clamp(2px,1.8vw,10px);padding:12px 0}.qianlong-coin{width:clamp(62px,20vw,76px)}.coin-sequence-2{transform:translateY(-4px) rotate(var(--coin-tilt))}.coin-inner-rim{inset:12px}}
+@media(prefers-reduced-motion:reduce){.qianlong-coin-rotor{transition:none}.qianlong-coin.is-tossing .qianlong-coin-rotor{animation:none}}

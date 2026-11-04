@@ -1684,18 +1684,29 @@ function tossThreeCoins(){
  const value=({0:6,1:8,2:7,3:9})[heads];
  return{value,faces,yang:value===7||value===9,moving:value===6||value===9,label:({6:'老阴',7:'少阳',8:'少阴',9:'老阳'})[value]};
 }
+function qianlongCoinMarkup(face, tossing, index){
+ const side=face===null?'is-tossing':(face?'is-obverse':'is-reverse'),coinNo='coin-sequence-'+(index+1);
+ return '<span class="qianlong-coin '+coinNo+' '+side+'" aria-hidden="true"><span class="qianlong-coin-rotor">'+
+  '<span class="qianlong-coin-side coin-obverse"><span class="coin-inner-rim"></span>'+
+   '<span class="coin-character char-top">乾</span><span class="coin-character char-right">隆</span><span class="coin-character char-bottom">通</span><span class="coin-character char-left">宝</span>'+
+   '<span class="coin-square-hole"></span><span class="coin-patina"></span></span>'+
+  '<span class="qianlong-coin-side coin-reverse"><span class="coin-inner-rim"></span>'+
+   '<span class="coin-reverse-mark" aria-hidden="true">泉</span><span class="coin-reverse-dot reverse-dot-a"></span><span class="coin-reverse-dot reverse-dot-b"></span><span class="coin-reverse-dot reverse-dot-c"></span><span class="coin-reverse-dot reverse-dot-d"></span>'+
+   '<span class="coin-square-hole"></span><span class="coin-patina"></span></span>'+
+ '</span></span>';
+}
 function throwDivinationLine(fromAuto){
  if(divinationTosses.length>=6||divinationPending||(divinationAutoRunning&&!fromAuto))return false;
  divinationPending=true;
  const stage=$('#coin-stage'),go=$('#divination-throw');
  if(go)go.disabled=true;
- if(stage){stage.innerHTML='<span class="coin is-tossing">易</span><span class="coin is-tossing">易</span><span class="coin is-tossing">易</span>';stage.setAttribute('aria-label','钱币正在转动');}
+ if(stage){stage.innerHTML=Array.from({length:3},(_,i)=>qianlongCoinMarkup(null,true,i)).join('');stage.setAttribute('aria-label','三枚乾隆通宝风格古钱正在翻转');}
  const run=divinationRun;
  divinationTimer=window.setTimeout(()=>{
   divinationTimer=0;
   if(run!==divinationRun)return;
   const t=tossThreeCoins();divinationTosses.push(t);divinationPending=false;
-  if(stage){stage.innerHTML=t.faces.map(face=>'<span class="coin coin-face-'+(face?'yang':'yin')+'">'+(face?'阳':'阴')+'</span>').join('');stage.setAttribute('aria-label','三枚钱币已落定，'+t.label);}
+  if(stage){stage.innerHTML=t.faces.map((face,i)=>qianlongCoinMarkup(face,false,i)).join('');stage.setAttribute('aria-label','三枚古钱落定：'+t.faces.map(face=>face?'阳面':'背面').join('、')+'；本爻'+t.label);}
   divinationMarkup();
  },520);
  return true;
@@ -1715,7 +1726,7 @@ function resetDivination(){
  if(divinationTimer){window.clearTimeout(divinationTimer);divinationTimer=0;}
  divinationPending=false;divinationAutoRunning=false;divinationTosses=[];
  const out=$('#divination-result');if(out)out.innerHTML='';
- const stage=$('#coin-stage');if(stage){stage.innerHTML='<span class="coin">易</span><span class="coin">易</span><span class="coin">易</span>';stage.setAttribute('aria-label','三枚虚拟钱币');}
+ const stage=$('#coin-stage');if(stage){stage.innerHTML=Array.from({length:3},(_,i)=>qianlongCoinMarkup(true,false,i)).join('');stage.setAttribute('aria-label','三枚乾隆通宝风格古钱，阳面朝上');}
  divinationMarkup();
 }
 function divinationMarkup(){
