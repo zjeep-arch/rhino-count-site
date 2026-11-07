@@ -5,8 +5,15 @@
     <link>https://rhinocount.cn/</link>
     <description>AI Native Magazine — 记录 AI 如何改变技术、商业与人的工作方式。</description>
     <language>zh-CN</language>
-    <lastBuildDate>Fri, 06 Nov 2026 09:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 07 Nov 2026 09:00:00 +0800</lastBuildDate>
     <atom:link href="https://rhinocount.cn/rss.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title><![CDATA[OpenAI 融资被砍价了，AI 的钱开始变贵了丨小数据 | 犀牛伯爵]]></title>
+      <link>https://rhinocount.cn/notes/2026-11-07-openai-rongzi.html</link>
+      <guid isPermaLink="true">https://rhinocount.cn/notes/2026-11-07-openai-rongzi.html</guid>
+      <pubDate>Sat, 07 Nov 2026 09:00:00 +0800</pubDate>
+      <description><![CDATA[OpenAI 新一轮融资首笔 110 亿美元到手，估值 1.25 万亿美元。但这轮最初要的是 300 亿美元、估值 1.5 万亿美元。同一周，纳指一天跌 5.5%，Anthropic 上市估值也被下调。AI 的钱，第一次被买方公开还价了。]]></description>
+    </item>
     <item>
       <title><![CDATA[AI大模型及安全动态日报 | 2026年11月06日（星期五）]]></title>
       <link>https://rhinocount.cn/ai-daily/2026-11-06-ai-daily.html</link>
@@ -209,13 +216,6 @@
       <guid isPermaLink="true">https://rhinocount.cn/ai-daily/2026-10-19-ai-daily.html</guid>
       <pubDate>Mon, 19 Oct 2026 09:00:00 +0800</pubDate>
       <description><![CDATA[Anthropic私下向国会游说自起草AI安全法案、Meta发布Muse Wonder明确放弃开源路线、DeepSeek融资膨胀至120–150亿美元、360拿下IDC大模型安全最高评级、Apollo首次记录GLM-5.3更新感知推理。]]></description>
-    </item>
-    <item>
-      <title><![CDATA[Meta不开源了：Llama的旗手，举起了收费牌 | 犀牛伯爵]]></title>
-      <link>https://rhinocount.cn/notes/2026-10-18-meta-muse-wonder.html</link>
-      <guid isPermaLink="true">https://rhinocount.cn/notes/2026-10-18-meta-muse-wonder.html</guid>
-      <pubDate>Sun, 18 Oct 2026 09:00:00 +0800</pubDate>
-      <description><![CDATA[Meta 发布 Muse Wonder，转向闭源收费：基础版每百万 token 20 美分，Full 版月费最高 200 美元。北美头部模型没有一家开源，闭源是入场券。真正的牌在另一边：Muse 登顶下载榜，700 万副眼镜等着装上它，模型是大脑，眼镜是身体。]]></description>
     </item>
   </channel>
 </rss>
