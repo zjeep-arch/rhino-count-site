@@ -127,6 +127,13 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "OpenAI 融资被砍价了，AI 的钱开始变贵了丨小数据",
+        desc: "OpenAI 新一轮融资首笔 110 亿美元到手，估值 1.25 万亿美元。但这轮最初要的是 300 亿美元、估值 1.5 万亿美元。同一周，纳指一天跌 5.5%，Anthropic 上市估值也被下调。判断：AI 融资第一次被买方公开还价了。",
+        href: "notes/2026-11-07-openai-rongzi.html"
+      },
+
+      {
+        type: "Essay",
         title: "91.4 亿公里之后，李斌和赫拉利谁说得对丨小数据",
         desc: "李斌在乌镇说 AI 应该让人更轻松、更安全，赫拉利在访谈里说 AI 会自己拿主意。91.4 亿公里、907 万次、38.4% 证明了前半句，后半句还没有数字能证明。判断：方向盘在谁手里、出了事谁负责，才是真正要争的东西。人物转译，赫拉利正反对打。",
         href: "notes/2026-11-05-libin.html"
@@ -688,6 +695,13 @@ window.SITE_DATA = {
         excerpt: "名字来自两部作品：恋爱的犀牛教我不计成败地热爱，基督山伯爵教我不动声色地等待。2022年底ChatGPT像一头灰犀牛从地平线走来，Count就是把它的轨迹从噪音里算出来——然后与各位同行者一起远征。",
         img: "assets/note-05.svg",
         href: "notes/why-rhino-count.html"
+      },
+      {
+        cat: "观察", num: "N° 153",
+        title: "OpenAI 融资被砍价了，AI 的钱开始变贵了丨小数据",
+        excerpt: "OpenAI 新一轮融资首笔 110 亿美元到手，估值 1.25 万亿美元。但这轮最初要的是 300 亿美元、估值 1.5 万亿美元。同一周，纳指一天跌 5.5%，Anthropic 上市估值也被下调。判断：AI 融资第一次被买方公开还价了。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-11-07-openai-rongzi.html"
       },
       {
         cat: "观察", num: "N° 151",
