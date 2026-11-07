@@ -6447,7 +6447,7 @@
       if (numEl) numEl.textContent = 'ISSUE ' + issueNum;
     })();
   </script>
-  <script src="data.js?v=20261027"></script>
+  <script src="data.js?v=20261107-seo-fallback"></script>
   <script src="profile-folders.js?v=20261028a"></script>
 <script src="homepage-editorial.js?v=20261028k"></script>
   <script defer src="daily-events.js?v=20261028a"></script>
@@ -6523,12 +6523,11 @@
       /* ---------- Render from data.js ---------- */
       const D = window.SITE_DATA;
       if (!D) {
-        document.querySelector('main').innerHTML =
-          '<div class="container" style="padding:60px 0">' +
-          '<p style="padding:24px;border:1px solid var(--line-2);border-radius:14px;color:var(--muted)">' +
-          'data.js \u6ca1\u6709\u6b63\u786e\u52a0\u8f7d\u3002\u8bf7\u786e\u8ba4 data.js \u4e0e index.html \u5728\u540c\u4e00\u76ee\u5f55\u3002' +
-          '</p></div>';
-        document.querySelector('main').classList.add('ready');
+        // Keep the pre-rendered page visible when the data script cannot load.
+        // The HTML snapshot remains readable to visitors and search crawlers.
+        const main = document.querySelector('main');
+        if (main) main.classList.add('ready');
+        console.warn('SITE_DATA unavailable; keeping the pre-rendered homepage.');
         return;
       }
 
