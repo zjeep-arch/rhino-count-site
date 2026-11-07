@@ -193,7 +193,16 @@ def collect_urls():
                 "changefreq": changefreq,
                 "priority": priority
             })
-    
+    # Keep the flagship astrology application discoverable outside the journal.
+    ziwei_index = REPO_ROOT / "builds" / "ziwei" / "index.html"
+    if ziwei_index.exists():
+        urls.append({
+            "loc": f"{SITE_URL}/builds/ziwei/",
+            "lastmod": get_file_lastmod("builds/ziwei/index.html"),
+            "changefreq": "monthly",
+            "priority": "0.7"
+        })
+
     return urls
 
 
