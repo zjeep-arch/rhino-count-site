@@ -256,6 +256,27 @@
       "venue": "San Jose McEnery Convention Center"
     },
     {
+      "name": "Nutanix .NEXT 2027",
+      "date_start": "2027-03-29",
+      "date_end": "2027-04-01",
+      "city": "Las Vegas",
+      "venue": "The Venetian Las Vegas",
+      "organizer": "Nutanix",
+      "tags": [
+        "头部科技大会"
+      ],
+      "highlights": "Nutanix 旗舰企业 IT 大会；2027 主题含 Agentic AI、混合云与企业 AI 落地，5000+ IT 负责人参会，展台与演讲通道开放。",
+      "scale": "5000+ IT 负责人",
+      "fit": {
+        "sponsor": true,
+        "speak": true,
+        "free": false,
+        "networking": true,
+        "note": "超早鸟 11 月 13 日截止，早鸟 2027 年 1 月 15 日截止"
+      },
+      "url": "https://www.nutanix.com/next"
+    },
+    {
       "city": "San Francisco",
       "date_end": "2027-04-08",
       "date_start": "2027-04-05",
@@ -585,7 +606,7 @@
         "speak": true,
         "sponsor": true
       },
-      "highlights": "全球最硬核的安全技术大会（Briefings + Trainings + Business Hall）；AI 安全研究展示与 CISO 闭门社交是关键触点。",
+      "highlights": "全球最硬核的安全技术大会（Briefings + Trainings + Business Hall）；2027 年 8 月 3 日设 AI Summit，AI 安全研究展示与 CISO 闭门社交是关键触点。",
       "name": "Black Hat USA 2027",
       "organizer": "Black Hat / Informa",
       "scale": "",
@@ -638,6 +659,27 @@
       "venue": ""
     },
     {
+      "name": "LA Tech Week 2027",
+      "date_start": "2027-09-13",
+      "date_end": "2027-09-19",
+      "city": "Los Angeles",
+      "venue": "全城去中心化场地",
+      "organizer": "a16z",
+      "tags": [
+        "去中心化社群"
+      ],
+      "highlights": "a16z Tech Week 洛杉矶站（2027 四城档期之一）；去中心化、免费为主，可自办 AI 安全边会触达洛杉矶创作者与应用生态。",
+      "scale": "",
+      "fit": {
+        "sponsor": false,
+        "speak": false,
+        "free": true,
+        "networking": true,
+        "note": "免费为主；可自办边会"
+      },
+      "url": "https://tech-week.com/"
+    },
+    {
       "city": "Huntsville",
       "date_end": "2027-09-23",
       "date_start": "2027-09-21",
@@ -657,6 +699,69 @@
       ],
       "url": "https://www.nationalcybersummit.com/",
       "venue": "Von Braun Center"
+    },
+    {
+      "name": "Dreamforce 2027",
+      "date_start": "2027-09-21",
+      "date_end": "2027-09-23",
+      "city": "San Francisco",
+      "venue": "Moscone Center",
+      "organizer": "Salesforce",
+      "tags": [
+        "头部科技大会"
+      ],
+      "highlights": "Salesforce 旗舰大会；Agentforce / Agentic Enterprise 为主线，企业买家与合作伙伴生态集中，展台与演讲通道 2027 年春季开放。",
+      "scale": "4.5万+ 现场参会",
+      "fit": {
+        "sponsor": true,
+        "speak": true,
+        "free": false,
+        "networking": true,
+        "note": "注册与演讲征集 2027 年春季开放"
+      },
+      "url": "https://www.salesforce.com/dreamforce/"
+    },
+    {
+      "name": "VidSummit 2027",
+      "date_start": "2027-09-28",
+      "date_end": "2027-09-30",
+      "city": "Dallas",
+      "venue": "Irving Convention Center",
+      "organizer": "VidSummit",
+      "tags": [
+        "创作者经济"
+      ],
+      "highlights": "视频创作者经济 B2B 大会（YouTube 商业化/变现策略主线）；2026 届 3000+ 创作者参会，AI 视频与内容安全场景触点多，普通票 $895。",
+      "scale": "3000+ 创作者（2026 届）",
+      "fit": {
+        "sponsor": true,
+        "speak": true,
+        "free": false,
+        "networking": true,
+        "note": "普通票 $895；品牌与平台方集中"
+      },
+      "url": "https://www.vidsummit.com/schedule"
+    },
+    {
+      "name": "SF Tech Week 2027",
+      "date_start": "2027-10-04",
+      "date_end": "2027-10-10",
+      "city": "San Francisco",
+      "venue": "全城去中心化场地",
+      "organizer": "a16z",
+      "tags": [
+        "去中心化社群"
+      ],
+      "highlights": "a16z Tech Week 旧金山站（2027 四城档期 11 月 3 日官宣）；去中心化、免费为主，可自办 AI 安全边会触达湾区生态。",
+      "scale": "",
+      "fit": {
+        "sponsor": false,
+        "speak": false,
+        "free": true,
+        "networking": true,
+        "note": "免费为主；可自办边会"
+      },
+      "url": "https://tech-week.com/"
     },
     {
       "city": "San Jose",
@@ -681,5 +786,5 @@
     }
   ],
   "update_cycle": "weekly",
-  "updated_at": "2026-11-02"
+  "updated_at": "2026-11-09"
 }
