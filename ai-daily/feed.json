@@ -1,6 +1,13 @@
 {
-  "updated": "2026-11-13T09:41:06+08:00",
+  "updated": "2026-11-16T09:45:00+08:00",
   "articles": [
+    {
+      "title": "AI大模型及安全动态日报 | 2026年11月16日（星期一）",
+      "date": "2026年11月16日（星期一）",
+      "slug": "2026-11-16",
+      "url": "ai-daily/2026-11-16-ai-daily.html",
+      "excerpt": "美团 LongCat-2.5 开源、阿里 Qwen4-Max 与百度文心 5.5 Flash 同日上新，ChatGPT Wallet 与 Poppy 1.0 让智能体开始替用户花钱，Cursor 恶意扩展事件牵出 Fireworks 密钥泄露。"
+    },
     {
       "title": "AI大模型及安全动态日报 | 2026年11月13日（星期五）",
       "date": "2026年11月13日（星期五）",
