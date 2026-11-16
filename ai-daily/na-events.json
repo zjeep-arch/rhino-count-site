@@ -240,11 +240,11 @@
       "fit": {
         "free": true,
         "networking": true,
-        "note": "AI 安全主题对口；poster 投稿截止 11 月 10 日，抓紧",
+        "note": "AI 安全主题对口；海报征集已截止，注册待开放",
         "speak": true,
         "sponsor": true
       },
-      "highlights": "AI 行业年度 keynote；2027 主题含 Cybersecurity and AI Safety；poster 征集截止 2026-11-10，演讲/海报通道开放中；线上免费。",
+      "highlights": "AI 行业年度 keynote；2027 主题含 Cybersecurity and AI Safety；海报征集已截止，注册尚未开放；线上免费。",
       "name": "NVIDIA GTC 2027",
       "organizer": "NVIDIA",
       "scale": "",
@@ -254,6 +254,28 @@
       ],
       "url": "https://www.nvidia.com/gtc/",
       "venue": "San Jose McEnery Convention Center"
+    },
+    {
+      "name": "AI Council 2027",
+      "date_start": "2027-03-23",
+      "date_end": "2027-03-24",
+      "city": "San Francisco",
+      "venue": "Palace Hotel",
+      "organizer": "Zero Prime",
+      "tags": [
+        "开发者生态",
+        "AI安全"
+      ],
+      "highlights": "社区主导的技术型 AI 基建与工程大会；8 条技术线含 AI Security & Safety，演讲申请 12 月 11 日截止。",
+      "scale": "",
+      "fit": {
+        "sponsor": true,
+        "speak": true,
+        "free": false,
+        "networking": true,
+        "note": "演讲申请截止 2026-12-11；赞助通道以官网为准"
+      },
+      "url": "https://www.zeroprime.vc/resources/ai-council-2027"
     },
     {
       "name": "Nutanix .NEXT 2027",
@@ -305,7 +327,7 @@
       "fit": {
         "free": false,
         "networking": true,
-        "note": "云厂商生态；报名开放后第一时间锁早鸟",
+        "note": "注册 12 月开放，可官网订阅提醒",
         "speak": true,
         "sponsor": true
       },
@@ -339,6 +361,27 @@
       ],
       "url": "https://events.linuxfoundation.org/confidential-computing-summit/",
       "venue": "场地未公布"
+    },
+    {
+      "name": "Intelligence 2027 (i27)",
+      "date_start": "2027-04-22",
+      "date_end": "2027-04-23",
+      "city": "San Francisco",
+      "venue": "Palace of Fine Arts",
+      "organizer": "Nakamoto",
+      "tags": [
+        "创业与投资"
+      ],
+      "highlights": "Nakamoto 新办 AI 经济旗舰论坛（首届）；覆盖企业采纳、消费产品、开发者工具、安全与基础设施，创始人/投资人/企业高管同场。",
+      "scale": "",
+      "fit": {
+        "sponsor": true,
+        "speak": true,
+        "free": false,
+        "networking": true,
+        "note": "首届；议程、演讲人与票价待公布"
+      },
+      "url": "https://i27.ai"
     },
     {
       "city": "Boston",
@@ -426,6 +469,27 @@
       "venue": ""
     },
     {
+      "name": "Human+Tech Week 2027",
+      "date_start": "2027-05-10",
+      "date_end": "2027-05-14",
+      "city": "San Francisco",
+      "venue": "The Hibernia",
+      "organizer": "Human+Tech Week",
+      "tags": [
+        "创业与投资"
+      ],
+      "highlights": "人本 AI 年度场外峰会（Work / Healthspan / Cities 三大峰会 + 创新实验室与创业竞赛）；2026 届 5000+ 创始人、研究者、投资人与政策制定者同场，2027 目标 1 万人。",
+      "scale": "5000+ 参与（2026 届）",
+      "fit": {
+        "sponsor": true,
+        "speak": true,
+        "free": false,
+        "networking": true,
+        "note": "主峰会位于 The Hibernia；普通票 $399；赞助/演讲通道以官网为准"
+      },
+      "url": "https://www.humantechweek.com"
+    },
+    {
       "city": "San Mateo",
       "date_end": "2027-05-12",
       "date_start": "2027-05-11",
@@ -445,6 +509,27 @@
       ],
       "url": "https://www.saastr.com/sponsor-saastr-ai-annual-2027-walk-out-with-85-customer-meetings-set/",
       "venue": "San Mateo County Event Center"
+    },
+    {
+      "name": "Innovate Cybersecurity Summit 2027",
+      "date_start": "2027-05-16",
+      "date_end": "2027-05-18",
+      "city": "Marco Island",
+      "venue": "JW Marriott Marco Island Beach Resort",
+      "organizer": "Innovate Cybersecurity Summit",
+      "tags": [
+        "AI安全"
+      ],
+      "highlights": "邀约制网络安全高管闭门峰会（春季场）；赞助商主导的 1 对 1 会面与闭门社交，企业 CISO 与安全决策者集中。",
+      "scale": "",
+      "fit": {
+        "sponsor": true,
+        "speak": true,
+        "free": false,
+        "networking": true,
+        "note": "邀约制；赞助/演讲通道以官网为准"
+      },
+      "url": "https://www.innovatecybersecuritysummit.com/marco-island-summit"
     },
     {
       "city": "New York",
@@ -511,6 +596,27 @@
       "venue": "全城去中心化场地"
     },
     {
+      "name": "Snowflake Summit 2027",
+      "date_start": "2027-06-07",
+      "date_end": "2027-06-10",
+      "city": "San Francisco",
+      "venue": "Moscone Center",
+      "organizer": "Snowflake",
+      "tags": [
+        "头部科技大会"
+      ],
+      "highlights": "Snowflake 旗舰数据云大会；AI 数据平台与企业 AI 落地议题集中，演讲征集截止 2027-01-22，注册 2027 年 1 月中旬开放。",
+      "scale": "",
+      "fit": {
+        "sponsor": true,
+        "speak": true,
+        "free": false,
+        "networking": true,
+        "note": "演讲征集截止 2027-01-22"
+      },
+      "url": "https://www.snowflake.com/en/events/summit/call-for-papers/"
+    },
+    {
       "city": "San Jose",
       "date_end": "2027-06-17",
       "date_start": "2027-06-16",
@@ -573,6 +679,27 @@
       ],
       "url": "https://boston.qcon.ai",
       "venue": "Boston University"
+    },
+    {
+      "name": "West Coast AI + Data Security World 2027",
+      "date_start": "2027-07-15",
+      "date_end": "2027-07-15",
+      "city": "San Francisco",
+      "venue": "Hyatt Regency San Francisco",
+      "organizer": "AI + Data Security World",
+      "tags": [
+        "AI安全"
+      ],
+      "highlights": "西海岸最大 AI 安全与数据保护专场（单日）；500+ 安全、数据与隐私负责人同场，议题直指 AI 安全与数据防护。",
+      "scale": "500+ 安全/数据/隐私负责人",
+      "fit": {
+        "sponsor": true,
+        "speak": true,
+        "free": false,
+        "networking": true,
+        "note": "单日专场；演讲/赞助通道以官网为准"
+      },
+      "url": "https://www.aidatasecurityworld.com/san-francisco/attend"
     },
     {
       "city": "New York",
@@ -783,8 +910,29 @@
       ],
       "url": "https://pytorch.org/blog/pytorch-conference-north-america-2026-accelerating-open-intelligence-together/",
       "venue": ""
+    },
+    {
+      "name": "The AI Conference 2027",
+      "date_start": "2027-10-12",
+      "date_end": "2027-10-14",
+      "city": "San Francisco",
+      "venue": "Moscone West",
+      "organizer": "The AI Conference",
+      "tags": [
+        "头部科技大会"
+      ],
+      "highlights": "旧金山年度 AI 大会（2027 移师 Moscone West）；议程含基础模型、Agent、AI 伦理与对齐、AI 创业与投资，演讲征集即将开放。",
+      "scale": "",
+      "fit": {
+        "sponsor": true,
+        "speak": true,
+        "free": false,
+        "networking": true,
+        "note": "演讲征集即将开放；早鸟票订阅制"
+      },
+      "url": "https://aiconference.com/the-ai-conference-2027/"
     }
   ],
   "update_cycle": "weekly",
-  "updated_at": "2026-11-09"
+  "updated_at": "2026-11-16"
 }
