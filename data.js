@@ -127,6 +127,13 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "一天跌 20%，东南亚数据中心热凉了吗？",
+        desc: "11 月 17 日，东南亚数据中心股大跌，YTL Power 跌 9%，MN Holdings 跌 18%。导火索是美国 11 月 16 日的芯片新规。但暴跌是情绪，不是基本面。服务美国云厂商的园区不受影响，只有依赖中国客户的设施才会被卡。90 天是窗口，不是死刑。判断：暴跌是情绪，不是基本面。",
+        href: "notes/2026-11-17-dongnanya.html"
+      },
+
+      {
+        type: "Essay",
         title: "41 项公投 40 项反对，AI 还建得下去吗？",
         desc: "11 月 16 日，奥特曼在 Semafor 峰会上承认，硅谷推销 AI 的那套说法搞砸了。两周前的中期选举，41 项地方数据中心公投里 40 项投向了限制。AI 的瓶颈不再是芯片和钱，是选票。判断：AI 的瓶颈不再是芯片和钱，是选票。",
         href: "notes/2026-11-17-xuanpiao.html"
@@ -723,6 +730,13 @@ window.SITE_DATA = {
         excerpt: "名字来自两部作品：恋爱的犀牛教我不计成败地热爱，基督山伯爵教我不动声色地等待。2022年底ChatGPT像一头灰犀牛从地平线走来，Count就是把它的轨迹从噪音里算出来——然后与各位同行者一起远征。",
         img: "assets/note-05.svg",
         href: "notes/why-rhino-count.html"
+      },
+      {
+        cat: "观察", num: "N° 165",
+        title: "一天跌 20%，东南亚数据中心热凉了吗？",
+        excerpt: "11 月 17 日，东南亚数据中心股大跌，YTL Power 跌 9%，MN Holdings 跌 18%。导火索是美国 11 月 16 日的芯片新规。但暴跌是情绪，不是基本面。服务美国云厂商的园区不受影响，只有依赖中国客户的设施才会被卡。90 天是窗口，不是死刑。判断：暴跌是情绪，不是基本面。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-11-17-dongnanya.html"
       },
       {
         cat: "观察", num: "N° 164",
