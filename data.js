@@ -127,7 +127,7 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
-        title: "第一批算清16亿股解禁的人，不看7倍认购",
+        title: "7个人出走，7倍认购，情绪不是定价",
         desc: "11 月 18 日，Anthropic 今晚定价，认购接近 7 倍。但 7 倍是情绪，不是定价。260 亿美元私募的买家是供应商自己，锁定期里还站着 16.1 亿股。RSI 让顶级模型越跑越快，铁路和光纤都走过这条路。判断：超额认购是情绪，不是定价。",
         href: "notes/2026-11-18-anthropic-dingjia.html"
       },
@@ -740,7 +740,7 @@ window.SITE_DATA = {
       },
       {
         cat: "观察", num: "N° 167",
-        title: "第一批算清16亿股解禁的人，不看7倍认购",
+        title: "7个人出走，7倍认购，情绪不是定价",
         excerpt: "11 月 18 日，Anthropic 今晚定价，认购接近 7 倍。但 7 倍是情绪，不是定价。260 亿美元私募的买家是供应商自己，锁定期里还站着 16.1 亿股。RSI 让顶级模型越跑越快，铁路和光纤都走过这条路。判断：超额认购是情绪，不是定价。",
         img: "assets/note-05.svg",
         href: "notes/2026-11-18-anthropic-dingjia.html"
