@@ -127,6 +127,13 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "北大AI课 | Manus 张涛讲 AI 时代怎么做产品",
+        desc: "11 月 18 日，Manus 联合创始人、首席产品官张涛走进北大 AI 课，讲 AI 时代怎么做产品：Chatbot 装不下模型的本事，停掉做了七个月的 AI 浏览器，为六个月后的模型做设计，用付费识别真实价值。附 Manus、Muse 与龙虾 OpenClaw 三条背景线。",
+        href: "notes/2026-11-19-manus-zhangtao-beida.html"
+      },
+
+      {
+        type: "Essay",
         title: "当年出走OpenAI的七剑客，这次拿到了大结果吗",
         desc: "11 月 18 日，Anthropic 今晚定价，认购接近 7 倍。但 7 倍是情绪，不是定价。260 亿美元私募的买家是供应商自己，锁定期里还站着 16.1 亿股。RSI 让顶级模型越跑越快，铁路和光纤都走过这条路。判断：超额认购是情绪，不是定价。",
         href: "notes/2026-11-18-anthropic-dingjia.html"
@@ -737,6 +744,13 @@ window.SITE_DATA = {
         excerpt: "名字来自两部作品：恋爱的犀牛教我不计成败地热爱，基督山伯爵教我不动声色地等待。2022年底ChatGPT像一头灰犀牛从地平线走来，Count就是把它的轨迹从噪音里算出来——然后与各位同行者一起远征。",
         img: "assets/note-05.svg",
         href: "notes/why-rhino-count.html"
+      },
+      {
+        cat: "观察", num: "N° 168",
+        title: "北大AI课 | Manus 张涛讲 AI 时代怎么做产品",
+        excerpt: "11 月 18 日，Manus 联合创始人、首席产品官张涛走进北大 AI 课，讲 AI 时代怎么做产品：Chatbot 装不下模型的本事，停掉做了七个月的 AI 浏览器，为六个月后的模型做设计，用付费识别真实价值。附 Manus、Muse 与龙虾 OpenClaw 三条背景线。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-11-19-manus-zhangtao-beida.html"
       },
       {
         cat: "观察", num: "N° 167",

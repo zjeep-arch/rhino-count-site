@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>北大AI课 | Manus 张涛讲 AI 时代怎么做产品 | 犀牛伯爵</title>
+<meta name="description" content="Manus 联合创始人、首席产品官张涛 2026 年 11 月 18 日北大 AI 课分享全文整理：Chatbot 装不下模型的本事，停掉做了七个月的 AI 浏览器，为六个月后的模型做设计，用付费识别真实价值。附 Manus、Muse 与龙虾 OpenClaw 三条背景线。">
+<meta name="keywords" content="Manus, 张涛, 北大, AI Agent, 通用 Agent, Muse, OpenClaw, 龙虾, AI创业">
+</head>
+<body style="margin:0;padding:0;font-family:-apple-system,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;color:#1a1a1a;">
+<section style="max-width:680px;margin:0 auto;padding:36px 22px 60px 22px;">
+
+<p style="font-size:12px;letter-spacing:0.28em;color:#999999;text-align:center;line-height:1.6;margin:0 0 18px 0;">N°168 · 犀牛伯爵 · 人物转译</p>
+
+<h1 style="font-size:28px;line-height:1.5;text-align:center;color:#1a1a1a;margin:0 0 14px 0;font-weight:bold;">北大AI课 | Manus 张涛讲 AI 时代怎么做产品</h1>
+
+<p style="font-size:13px;color:#999999;text-align:center;line-height:1.8;margin:0 0 6px 0;">2026年11月19日 · 约2.1万字 · 整理自2026年11月18日北大 AI 课张涛现场分享</p>
+<p style="font-size:14px;color:#666666;text-align:center;line-height:1.8;margin:0;">整理｜犀牛伯爵</p>
+
+<p style="text-align:center;color:#dddddd;line-height:1.6;margin:26px 0;font-size:14px;letter-spacing:0.5em;">···</p>
+
+<section style="background:#fdf6ec;border:1px solid #f0dfc8;border-radius:12px;padding:20px 22px;margin:24px 0;">
+<p style="margin:0 0 10px 0;line-height:1.6;"><span style="display:inline-block;font-size:12px;color:#8a5b1e;background:#f5e7d0;border-radius:4px;padding:2px 8px;letter-spacing:1px;line-height:1.6;">犀牛伯爵导读</span></p>
+<p style="font-size:15px;line-height:1.9;color:#555555;margin:0 0 8px 0;">11 月 18 日，Manus 联合创始人、首席产品官张涛走进北大 AI 课，做了一场分享。他的开场白很直接：Chatbot 这个产品形态本身，限制了模型能力的表达。</p>
+<p style="font-size:15px;line-height:1.9;color:#555555;margin:0 0 8px 0;">整场分享就围绕这一个判断展开：AI 产品的终极形态，是不需要人持续输入、能 7×24 小时自己推理、自己干活的东西。从停掉已经做好的 AI 浏览器，到从 Cursor 里看到通用 Agent 的机会，再到为六个月后的模型能力设计产品，他讲的每一步，几乎都是在为这个判断下注。</p>
+<p style="font-size:15px;line-height:1.9;color:#555555;margin:0 0 8px 0;">现场还留了一段圆桌，聊通用 Agent 还有多少机会、个人 Agent、企业 Agent 和一秒生成视频。以下是全文整理。</p>
+</section>
+
+<h2 style="font-size:20px;line-height:1.6;color:#1a1a1a;margin:40px 0 16px 0;padding-left:12px;border-left:4px solid #8b2635;">一、开场：聊天窗口装不下模型的本事</h2>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">很高兴来北大跟大家聊聊 AI 时代怎么做产品。先说说我自己，我是公司管理团队里年纪最大的，其他几位合伙人是 1992、1993 年出生的，我是 1986 年的，下个月就 40 岁了。在座各位都是学生，看一个快 40 岁的人，大概觉得这就是典型的中年人。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">我进入这个行业比较早，本科毕业就出来做事，没有读研。后来我把研究中遇到的核心问题归结为一点：Chatbot 这个产品形态本身，限制了 AI 模型的能力表达。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">这话什么意思？你做了一款产品，产品价值的上限却被用户限制住了：用户必须既会提问、又有意愿提问，才能把产品的价值激发出来。用户不会提问怎么办？那产品的价值就变得极小。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">在加入团队之前，我一直想做一款能 7×24 小时不间断运行的产品：不需要人持续输入，它就能不断推理、不断产生输出。我当时甚至没有想清楚具体形态，但很想做，因为我觉得模型的智能上限已经超过了人类。我们需要一种合理的产品形态，主动、自动地激发模型，让它持续产生输出。不管最终是什么应用场景，我认为这才是 AI 产品应该有的终极形态。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">这也是我决定加入的一个重要原因。当时 Red 找我，说想做 AI 浏览器，我直观上觉得这个方向对了。浏览器是一个典型场景：你不需要持续输入提示词，写邮件、搜索、浏览网页，这些行为本身就是意图的表达，都可以成为模型输入，在背后产生大量推理需求。我和我们的首席科学家愿意加入，还有一个原因：Red 不仅是一位非常厉害的产品经理，也非常懂公司经营。</p>
+
+<h2 style="font-size:20px;line-height:1.6;color:#1a1a1a;margin:40px 0 16px 0;padding-left:12px;border-left:4px solid #8b2635;">二、停掉 AI 浏览器：时间比沉没成本贵得多</h2>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">到了 2024 年 10 月，我们的 AI 浏览器其实已经准备好了。内部测试总能找出一两个特别亮眼的功能。但推荐给家人朋友时，严重的问题出现了：大家太熟悉浏览器了，体验时问的第一个问题往往是：“我在 Safari 或 Chrome 里的那个功能，在你这里去哪儿找？”</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">这就是把新体验嫁接在旧体验上会遇到的最大问题：用户永远会拿旧体验的基准线来对标你。可那并不是你的亮点所在，你希望他们关注的是 AI 部分，但大家最先关心的却是浏览器基础体验做得如何。作为一个初创团队，想在一个有 20 多年成熟基准的产品上，在基础体验上对齐苹果、Google 这样的大厂几乎是不可能的；强行去做，就会投入过多额外精力，从而忽略 AI 部分的开发。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">当时我觉得产品其实很有亮点，发出去应该会有硬核用户喜欢，再迭代几轮说不定能火。但 Red 在 9、10 月份时就已经非常纠结。他一方面觉得把新体验架在旧体验上在逻辑上说不通；另一方面他特别担心的是，产品一旦发出去，整个团队可能会耗费 3 到 6 个月陷在里面。因为作为创始人往往舍不得放弃，第一版表现不好总会想着“也许是还不够好，再去迭代一下”，半年时间就这么进去了。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">在学校里大家可能对时间没什么概念，但对于创业来说，钱反而是最容易解决的，只要方向对了永远能融到资；最宝贵且不能浪费的资源是时间。浪费时间不仅是消耗个人精力，更可怕的是会错过阶段性的市场窗口和风口。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">当时的情况是：2024 年 10 月，我们整个公司只有 30 个人，在真格的支持下只融了天使轮和 Pre-A，账上并没有多少钱。在一个新项目上投入了 7 个月，而且已经做得很完善、发出来应该会让市场惊艳的前提下，Red 最终拍板把这个项目停掉了。现在回头看，那是至关重要的一个决定，因为如果不停掉浏览器，就没有后来的 Manus。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">去年刚发布这个故事时，行业里还有批评声音说我们自己不做 AI 浏览器就别唱衰这个赛道。但今天可以很自信地说，AI 浏览器赛道确实没有真正跑出来的产品。本质原因就是：要做新体验，最好就去创造一个全新的体验，不要老想着做“AI + 旧体验”。</p>
+
+<section style="background:#fdf6ec;border:1px solid #f0dfc8;border-radius:12px;padding:20px 22px;margin:24px 0;">
+<p style="margin:0 0 10px 0;line-height:1.6;"><span style="display:inline-block;font-size:12px;color:#8a5b1e;background:#f5e7d0;border-radius:4px;padding:2px 8px;letter-spacing:1px;line-height:1.6;">背景补充</span></p>
+<p style="font-size:15px;line-height:1.9;color:#555555;margin:0 0 8px 0;">张涛说 AI 浏览器赛道没有真正跑出来的产品，两年之后，这句话又被验证了一次。OpenAI 的 ChatGPT Atlas 2025 年 10 月上线，不到十个月就于 2026 年 8 月 9 日停服，能力并回 ChatGPT 桌面端与 Codex。还活着的几条路线已经分化：Perplexity 的 Comet 从 2025 年 7 月只向 200 美元月费用户开放，到 2026 年 3 月四端全部免费，主打“浏览器就是工作台”；The Browser Company 的 Dia 走了另一条路，AI 只是新壳里的一个模块，明确不做自主执行的 Agent Mode；Google 则在 2026 年 1 月把 Gemini 侧栏和 Auto Browse 直接塞进 Chrome，用默认浏览器的地位反打。Manus 自己的后续答案也不是再做一个浏览器：2026 年 4 月 30 日上线的 Cloud Computer，直接给每个项目一台 7×24 小时在线的云电脑，Agent 在里面接着干活，浏览器只是它手里的一个工具。（据 OpenAI 官方帮助页、多家 2026 年 AI 浏览器横向评测，及 Manus 2.0 发布报道）</p>
+</section>
+
+<h2 style="font-size:20px;line-height:1.6;color:#1a1a1a;margin:40px 0 16px 0;padding-left:12px;border-left:4px solid #8b2635;">三、从编程工具里看到通用 Agent 的机会</h2>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">2024 年 10 月停掉浏览器之后，团队开始思考下一个产品该做什么。当时北京团队特别小，在共享办公空间里只有一间小办公室，一共五个人。我作为 CPO 负责产品，首席科学家负责模型，还有一位做全栈开发的同学阿斌。我们三个人虽然职责不同，但都有代码背景。我从小学三年级就开始写代码。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">2024 年最现象级的产品是 7 月份爆火的 Cursor，我们天天都在用，但在使用过程中用出了一些不一样的感觉。尤其是我作为一个非专业程序员，开始拿 Cursor 干很多别的事：处理报销、帮我老婆做 MP4 转 MP3、辅助写小说等等。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">在这个过程中，我们越来越感受到 Cursor 背后的 Claude 3.5 Sonnet 模型的威力。尤其是后续版本推出后，Cursor 和 Windsurf 的能力都有很大提升。当时国内外很多创业公司都在模仿 Cursor，出现了大量编程工具，那时还不太叫编程 Agent。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">而我们在其中看到的真正机会在于：Sonnet 3.5 v2 解锁的，远不止编程能力。它解锁的是自主规划与行动能力。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">所谓自主规划与行动能力，主要体现在两个方面。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">第一，长程规划能力，也就是 Long-horizon Planning。现在看，这或许已经是常识，但在 2024 年底并非如此。当时我感觉 OpenAI 的模型很难做到这一点，它们更习惯 ChatGPT 那种一轮轮对话的方式，在一轮交互内直接解决问题。而从 Claude 3.5 Sonnet 开始，并在后续版本中大幅增强的能力，是对任务进行长程规划：它知道不应该在一轮内草率完成任务，会主动调用工具，或者向用户提问、获取更多信息，等有足够把握之后再执行。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">第二，工具调用能力，也就是 Tool Use。Cursor 做的是让更多人能够成为工程师的工具。但我们的判断是，这个世界不需要更多工程师，工程师也不需要更多花哨的工具，因为他们已经有足够多的工具了。如果在座有人常年写代码，我相信你的电脑上一定装了很多工具，而且整天都在换、都在评测。工程师就是这样。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">我们认为这个能力解锁之后，其实是给普通人解锁了一个通用能力。当时全世界都在押注编程 Agent，而我们看到的机会，是通过编程作为中介去解决普通用户的通用场景问题，所以我们切入的视角完全不同。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">2024 年 12 月立项时，我其实非常慌，因为我觉得肯定不止我们看到了这个未来。我们特别紧张，集结了公司能集结的所有力量，希望尽快开发出来，生怕被别人抢先。后来开发了两个多月，到 2025 年 3 月 5 日发布时，我们才发现：在我们的观察里，当时几乎只有我们在做这个方向，大家还在做编程工具。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">我们在 2024 年底看到了拐点，敏锐地在模型能力边界上发现了它的长程规划和工具调用能力。之后我们经过了多轮探索，不断尝试什么样的产品形态才是对的。</p>
+
+<section style="background:#fdf6ec;border:1px solid #f0dfc8;border-radius:12px;padding:20px 22px;margin:24px 0;">
+<p style="margin:0 0 10px 0;line-height:1.6;"><span style="display:inline-block;font-size:12px;color:#8a5b1e;background:#f5e7d0;border-radius:4px;padding:2px 8px;letter-spacing:1px;line-height:1.6;">背景补充</span></p>
+<p style="font-size:15px;line-height:1.9;color:#555555;margin:0 0 8px 0;">Manus 搭上的这条模型线，在 3.7 之后一路往前走了：Sonnet 4 与 Opus 4（2025 年 5 月 22 日）、Sonnet 4.5（2025 年 9 月 29 日）、Opus 4.5（2025 年 11 月 24 日），再到 2026 年 9 月的 Opus 5.5、Sonnet 5.5，以及 11 月 9 日发布的旗舰 Fable 5.2——Anthropic 给它的定位就是“高强度推理与长程 Agent 工作”，上下文 100 万 token。张涛说的“不改框架、只换模型就能涨分”，在这条线上反复上演。代价也在账上：据 The Information 报道，Manus 平均完成一项任务要向 Anthropic 支付约 2 美元。2026 年 9 月底，Manus 还推出了 Flex，允许用户接入自己的模型 API Key，不再只押一条模型线。（据 Anthropic 官方模型时间线整理、The Information 相关报道，及 Manus 官方博客更新列表）</p>
+</section>
+
+<h2 style="font-size:20px;line-height:1.6;color:#1a1a1a;margin:40px 0 16px 0;padding-left:12px;border-left:4px solid #8b2635;">四、面向非技术用户：先让智能被看见</h2>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">早期的 Manus 长得特别像 Cursor，很像一个编程工具。中间有一次真格的投资人雨森来办公室看早期原型，他说：“这个三栏布局看起来是不是太专业了，有点拒人于门外的感觉。”我们规划这个产品时的判断，就是面向非技术人群。既然面向非技术人群，给人的第一观感却太专业，这肯定有问题。于是我们把界面从三栏改成了两栏。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">在这个过程中，针对目标市场我们做了很多创新。因为 Agent 太新了，普通人很难相信它真的能做到。在研发那两个半月里，我每天回到家嗓子都是哑的。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">2025 年 1 月 5 日调通第一版原型后，我在朋友圈发了一条动态，请身边朋友告诉我：如果你有一个大学本科水平的实习生，你会交代什么事情给他做？我从 100 多位朋友那里收集了 400 多个任务，这批任务就成了 Manus 最早的评测数据集。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">从第一版原型调通开始，随着 Agent 执行框架，也就是后来所说的 Harness，不断进步，那批任务每天都带来惊喜。去掉 100 多道需要具身智能的任务，比如帮我买奶茶，剩下的 300 多条任务，它会用完全超出想象的方式完成。我每天在办公室忍不住大喊，晚上回家嗓子都是哑的。我太太问我，上班怎么上成这样？但那种智能跳出屏幕、扑面而来的感觉无法抗拒，你知道这就是未来。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">但这种冲击太强烈了，如果只把结果交给用户，用户可能会觉得是假的。所以我们做了一个判断：透明度本身，必须成为产品功能。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">在 Manus 的第一版发布里，有两个非常关键的产品设计，后来几乎成了所有 AI Agent 的设计范式：</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">第一，逐步展示执行过程。让用户看到 Agent 如何推进任务、调用工具、访问网页、写笔记和写代码。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">第二，会话回放，也就是 Session Replay。把会话分享给别人时，对方可以回看完整的执行过程。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">产品本身的智能表现可能占八成，但这两个面向增长的界面设计，对初期引爆也至关重要。很多人起初不相信 AI Agent，但当他一步步看到它怎样推进任务、调用工具、访问网页、写笔记、写代码，就会发现它像人一样在工作，从而建立信任。有了会话回放，用户不需要邀请码、不需要充值，只看朋友分享的会话，也能感受到那个令人惊喜的瞬间。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">这些设计都源于我们想清楚了目标用户是非技术人群：不能假设他们懂技术背景，必须通过产品创新帮他们理解正在发生什么，建立信任。</p>
+
+<section style="background:#fdf6ec;border:1px solid #f0dfc8;border-radius:12px;padding:20px 22px;margin:24px 0;">
+<p style="margin:0 0 10px 0;line-height:1.6;"><span style="display:inline-block;font-size:12px;color:#8a5b1e;background:#f5e7d0;border-radius:4px;padding:2px 8px;letter-spacing:1px;line-height:1.6;">背景补充</span></p>
+<p style="font-size:15px;line-height:1.9;color:#555555;margin:0 0 8px 0;">同一种“让 Agent 被看见”的思路，在 2026 年走到了另一面。Meta 在 2026 年 9 月 8 日推出了个人 AI Agent 产品 Muse，和嵌在 Facebook、Instagram、WhatsApp 里的聊天助手 Meta AI 是两个产品：Muse 有自己的 App 和云端虚拟电脑，替用户跨应用办事，不只在对话框里回答问题。但就在同月，亚马逊以 Muse 没有向对方表明自己是 AI 身份为由，把它挡在了站外。Agent 替人办事，第一步就得先说清楚自己是谁，这和 Manus 当年把执行过程摊开给用户看，是同一个信任问题。（据 Meta 官方发布及 CNBC、路透等报道；亚马逊屏蔽一事据公开报道）</p>
+</section>
+
+<h2 style="font-size:20px;line-height:1.6;color:#1a1a1a;margin:40px 0 16px 0;padding-left:12px;border-left:4px solid #8b2635;">五、那次发布真正的原因：产品创新，加上创始人自己讲出来</h2>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">关于 3 月份的发布，去年 11 月我在清华做活动时，有同学提问说很多人觉得我们 3 月份买了很多 KOL、做了一次营销事件。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">行业里一位做营销的朋友曾跟我说：“就算给我批两三千万预算，让我照着 Manus 搞一场营销，我也搞不出这个效果。”很多年轻同学容易把营销污名化，觉得搞营销是错的。如果你想创业却觉得搞营销是错的，这是非常糟糕的认知。怎么讲好一个故事，恰恰是中国创始人一直很欠缺的能力，这也是我过去两年在硅谷体会很深的一点。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">大家往往低估了营销的难度，以为营销就是砸钱。如果真那么简单，创业公司永远没有机会，因为你的钱不可能比大厂多。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">我以前常说 3 月份的发布成本是 0 元，但后来发现这个说法不够严谨：2025 年 2 月 28 日，网站做好了，CEO Red 看完后跟我说：“涛哥，这个网站是不是有点素？要不要加个视频？”当时距离 3 月 5 日发布只剩几天。我问了北京两三家视频制作公司，对方都说，发布视频的工期至少两周。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">最后没办法，视频是我自己拍的，用的是索尼 A7C II 相机。因为镜头不够好，还找真格的雨森借了一支 50 毫米、f/1.2 的 GM 镜头。我剪了两天两夜，最后要导出到 YouTube 时，才发现导出 4K 要收费。于是花了大概 12 或 15 美元，买了一个月的 CapCut 会员。这是我们那次发布唯一额外花的钱，而且买完就立刻取消了续订。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">视频火了之后，大家可能觉得这肯定是一家很会营销的公司，拍了个非常厉害的视频。我之所以反复讲这件事，是想给在座年轻的创业者或潜在创业者提个醒：如果你从一个现象级产品里学到的收获是“他们很会营销”，那你一定学错了，事情从来没有这么简单。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">首先，Manus 的出现，是在合适的时间，用合适的产品形态，告诉世界模型的能力边界已经到了哪里。现在大家把相关框架叫作 Harness，那时候还不流行这个说法。我认为我们是最早做这类框架的团队之一，把模型的能力边界逼到了极限。产品发布后，我在 3 月去旧金山与 Anthropic 团队交流，他们甚至不相信我们只用了他们的模型，因为他们内部测试的表现没有我们做出来的强。我当时说，我真的非常喜欢他们的模型。后来 Claude Code 的代码有过一次泄露，我们也看了看，觉得其中有一些我们早期架构设计的影子。所以我认为，发布成功最核心的根本，是产品本身做出了一次重要的创新。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">如果没有好的产品创新，只想着依赖拍视频，那是本末倒置。后来那段时间我非常无奈：看到满大街的创业公司发布时，都喜欢让创始人坐在沙发上，背后顶着两棵绿植。大家太像东亚小孩做卷子了，非得照着一个标准模板来，没有卷子就不知道该怎么做。这其实很好笑，因为我们当时选那个机位，纯粹是因为在共享办公园区里，那是唯一能找到背景相对干净、没有其他公司、坐在那里不嘈杂的角落。仔细看视频的话，中间其实有一帧跳了一下，就是因为我们的首席科学家在讲的时候，背后有个保洁阿姨正拖着地走过去。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">真正重要的从来都是产品，视频只是个载体。但回头来看，那个视频依然非常重要，原因在于它是我们亲自做的。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">Manus 火了之后，很多团队内部下属要面对老板的质问，老板要面对投资人的质问：“你们为什么做不出 Manus？”这时最安全的借口往往是：“我们是一支很踏实的技术团队，不像他们那么会营销。”这样说听上去很踏实，把搞不过归咎于自己“不会营销”。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">大家忽略了最本质的东西：我是做产品的，另一位负责模型，是公司的首席科学家。我们都不是营销出身，只是做了一款自己非常骄傲、非常满意的产品，然后用自己的语言把它向世界表达出来。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">创业公司早期的营销和推广，一定要创始人亲自参与。外包给机构，或者找一个所谓的营销高手，中间的信息失真都可能很严重。早期只有创始人才最清楚，这个故事究竟该怎么讲。所以回头看，那个视频重要，是因为它是我们亲自做的，跟视频形式本身没有关系。</p>
+
+<h2 style="font-size:20px;line-height:1.6;color:#1a1a1a;margin:40px 0 16px 0;padding-left:12px;border-left:4px solid #8b2635;">六、为六个月后的模型能力设计产品</h2>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">做 AI 应用创新，要面向六个月后的模型能力去设计产品。我觉得明年，也就是 2027 年，会是 AI 应用大年。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">什么叫面向六个月后？不要今天早上看到一篇文章，说某个模型更新了、增加了什么能力，才想着基于它做应用。等到那个时候，可能已经晚了。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">在我们团队里，首席科学家带来了非常重要的输入。他做了十几年自然语言处理研究，能敏锐地从模型当下的表现，以及公开和非公开的信息中，感知前沿模型实验室的演进方向。比如，我们从 Claude 3.5 Sonnet 身上看到 AGI，也就是通用人工智能的能力开始冒头，到 V2 又上了一个台阶。我们判断，他们一定在这个方向上下了功夫。如果三四个月后，这方面再上一个台阶，我们的产品不是就会非常厉害吗？所以我们决定立刻开始做。原本以为模型会从 3.5 直接跳到 4.0，打算等 4.0 发布时再发布产品，但中间先出了 3.7。3.7 发布的那个晚上，我在即刻发了一条动态：“信仰充值的一晚。”为什么？那天晚上，我们的 Harness 一行代码都没改，只把模型接口从 3.5 V2 切到 3.7。在我们自己的评测集上，表现大幅提升，剩余未解决的问题里，大约有 20% 到 30% 一下就解决了。那时我们知道，自己赌对了。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">我们的首席科学家一直强调一句话：Less structure, more intelligence，也就是少一些预设结构，多一些模型自主智能。发布后，我在硅谷和国内讲这个，很多人不以为然。那时候更常见的做法，是由人设计工作流、教 AI 做事：哪里容易错，就写一条强制规则或者条件分支来兜底。但我们第一版 Agent 执行框架，没有用固定工作流规定每一步，由模型自己决定下一步做什么。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">无论做研究、做幻灯片、做网站，还是做数据分析，都由模型决定下一步，不用固定流程把每一步串死。当时多智能体也很受关注，但我们一直坚持单智能体的路线。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">为什么坚持这个方向？少一些预设结构，最大的好处就是产品能随着模型能力上升而水涨船高。如果写了很多僵硬的工作流，就可能享受不到模型更新带来的红利。在 3.7 发布前，我们其实也不知道这个判断到底对不对。但发布当晚，我们确认了：不改执行框架，只要模型能力提升，产品表现就跟着提升。这意味着不仅是这一次，未来也可能持续享受到模型进步的红利。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">所以作为 AI 创业者，非常重要的一点是不要老去为现在模型表现不好的地方修修补补，因为这些问题最终都会被解决。你应该想的是：6 个月之后模型会变成什么样？如果是那个样子，我该用一个怎样适合的产品形态去匹配那时候的模型？</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">你现在开始做，3 个月后产品做出来大家可能觉得表现很差，但你心里要有很强的认知：这只是因为模型还没跟上。只要模型跟上了，产品形态的优势立刻就会体现出来。等到模型真正达到那一步时，你就会是市面上唯一处在那个位置、并且已经准备得非常充分的人。</p>
+
+<h3 style="font-size:17px;line-height:1.6;color:#1a1a1a;margin:28px 0 12px 0;font-weight:bold;">一个前瞻例子：一秒延迟的生成式体验</h3>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">大家可能觉得这听起来很玄乎，那到底能做点什么？除了我们已经做的事情，还有没有别的机会？我可以现场分享一个机会，我自己不会去做了：</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">我一直在等待一个时刻：像 Seedance 这样的视频生成模型，从输入提示词到看到画面的延迟，降到一秒以内。我认为那会是这一轮 AI 应用创业非常重要的转折点。因为在我看来，一秒延迟的视频生成模型已经超出了视频生成工具的范畴，它是新一代的操作系统。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">当这个未来到来，软件应该长什么样？用户应该怎样与一秒延迟的生成式产品交互？我的判断是，这些变化在六个月内一定会发生，围绕这个方向提前准备，是很好的创业机会。这只是一个例子。很多模型都在不同领域进步，三个月、六个月后会变成什么样？普通人该怎样驾驭这些能力？这才是 AI 应用创业的核心机会。</p>
+
+<h2 style="font-size:20px;line-height:1.6;color:#1a1a1a;margin:40px 0 16px 0;padding-left:12px;border-left:4px solid #8b2635;">七、降低输入门槛，用付费识别真实价值</h2>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">接下来谈第二个判断：为什么我们不做 Chatbot？因为它的上限容易被用户的提示词限制，只有很懂的用户才能充分用出价值，产品非常挑人。未来的新产品尝试，我们希望尽量降低用户的输入成本，让用户在日常生活中不断感受到模型智能带来的价值。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">在 AI 时代，产品最重要的价值就是让用户感受到智能。很多人没有意识到这一点，觉得产品的价值在于免费。从来都不是免费，免费补贴反而是 AI 时代最大的陷阱。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">回看过去两三年中国 AI 应用创业，最大的陷阱就是被上一代移动互联网的免费补贴思维给迷惑了，以为这一代还能这么做，完全错了：</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">第一，只要智能表现足够好，就有人愿意付费。比如，我们平台上一些核心用户每月会花 4000 到 5000 美元。这个金额很高，但他愿意花，说明找到了对应的价值。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">第二，免费补贴容易让团队陷入无效反馈。做产品当然要听反馈，但免费用户也会提出很多“我想要这个、我想要那个”的要求。这些需求并非毫无价值，但它们可能分散创业者的注意力。去看不该看的需求、思考不该思考的方向，本质上都在消耗时间。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">第三，坚持付费，留下来提反馈的用户，就是已经感受到价值、用钱和行为投过票的人。围绕他们的真实需求去做，更有机会吸引其他愿意付费的人。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">过去两三年，国内不管是做编程 Agent 还是其他方向，想靠早期免费补贴做起来的，最后基本都没做成。大家以为是品牌力不够强，其实核心原因就是做了免费。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">这在大厂里尤其突出：因为资源丰富，上线第一天就能拿出一两千万预算去补贴用户，结果反而走上了一条邪路。我去做免费是不可能的。因为如果第一个月做了 10 万 DAU，它就会变成你的 KPI，你下个月只想让它越做越高，没有人敢做转收费这个判断。然后你就会一直背着这个免费 DAU，拖累你对真实用户市场的感知能力。这是一个非常关键的点：让用户感受到真正的智能表现，才是 AI 时代做产品最重要的事。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">我们发布时没有上线付费功能，直到 2025 年 3 月底才开始收费。按我们当时的口径，4 月第一个月，年度经常性收入指标，也就是 ARR，就超过 4000 万、接近 5000 万。为什么？因为产品确实让用户感受到了扑面而来的智能。这才是关键。</p>
+
+<section style="background:#fdf6ec;border:1px solid #f0dfc8;border-radius:12px;padding:20px 22px;margin:24px 0;">
+<p style="margin:0 0 10px 0;line-height:1.6;"><span style="display:inline-block;font-size:12px;color:#8a5b1e;background:#f5e7d0;border-radius:4px;padding:2px 8px;letter-spacing:1px;line-height:1.6;">背景补充</span></p>
+<p style="font-size:15px;line-height:1.9;color:#555555;margin:0 0 8px 0;">“付费识别价值”这句话，放在两家的价目表上看得更清楚。Manus 卖的是积分：免费档每天刷新 300 积分、只能用轻量版，付费三档是每月 20 美元 4000 积分、40 美元 8000 积分、200 美元 40000 积分，另有每座位 20 美元起的团队版，积分当月不用完不结转。Muse 卖的是每周 token 额度：免费档有每周用量上限，Power 每月 20 美元、每周 5 亿 token，Maximum 每月 100 美元、每周 30 亿 token，付费买的是容量不是功能。两边的共同点是“用多少付多少”，和免费补贴的逻辑正好反过来；不同点是天花板：Muse 一个月顶格 100 美元，而 Manus 平台上核心用户一个月能花掉 4000 到 5000 美元——通用 Agent 的重度用户，付费深度现在还远在个人助手之上。（据多家价格追踪站 2026 年 9 月读取的 Manus 官网定价页，及 Meta 官方订阅帮助页与相关报道）</p>
+</section>
+
+<section style="background:#fdf6ec;border:1px solid #f0dfc8;border-radius:12px;padding:20px 22px;margin:24px 0;">
+<p style="margin:0 0 10px 0;line-height:1.6;"><span style="display:inline-block;font-size:12px;color:#8a5b1e;background:#f5e7d0;border-radius:4px;padding:2px 8px;letter-spacing:1px;line-height:1.6;">背景补充</span></p>
+<p style="font-size:15px;line-height:1.9;color:#555555;margin:0 0 8px 0;">Manus 发布之后：2025 年 3 月 6 日正式发布后，一周内有 200 万人加入等候名单，发布约 8 个月后年化订阅收入突破 1 亿美元。2025 年 12 月，Meta 以 20 多亿美元收购 Manus 的消息公布；2026 年 4 月 27 日，中国国家发改委以外商投资安全审查为由要求撤销这笔交易，Meta 从 6 月起着手分拆，Manus 在 8 月 11 日宣布恢复独立运营，9 月 1 日正式恢复独立。9 月 28 日，Manus 推出 2.0 版本和个人助手新产品 Cue；10 月 8 日，母公司蝴蝶效应完成超 5 亿美元新一轮融资，由博裕、IDG 领投，腾讯、HSG、真格参与；11 月 10 日，Manus 在里斯本以独立公司身份重新亮相。（据新浪科技 2026 年 11 月 10 日里斯本报道，及公开报道整理的交易时间线）</p>
+</section>
+
+<h2 style="font-size:20px;line-height:1.6;color:#1a1a1a;margin:40px 0 16px 0;padding-left:12px;border-left:4px solid #8b2635;">八、为什么坚持通用：用户心智与长尾需求</h2>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">第三个判断，是坚持通用。发布 Manus 时，我们称自己是全世界第一个通用 AI Agent。为什么一定要强调通用？</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">发布早期我们听了不少投资人的意见，比如修改产品界面等，但唯独有一个意见我们没听。很多投资人问：“你这个产品到底能干嘛？每次过来都演示一大堆稀奇古怪的长尾任务。”我当时给他们展示各种内部、外部测的评测结果，他们就说：“你能不能讲一个最实在、最能说明价值的场景？”我说我确实讲不出来。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">他们接着建议：“那你们能不能专注一点，比如做个网站生成工具，或者做个幻灯片生成工具？”做网站或 PPT 确实也能做，但我们当时没有做。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">我现在回过头讲可能有点马后炮，显得当时深思熟虑，其实那时没想那么多。单纯是在研发 Manus 的两个半月时间里，我自己被那种智能反复冲击，每天都处在极度兴奋的状态中。我知道这个东西太厉害了，它做的所有长尾任务、所有的表现都太像一个人。我想把那两个月感受到的喜悦与惊喜分享给全世界。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">当时就是一个非常单纯的做产品的心态，倒不是一开始就想清楚了要走通用路线。但现在回头看，坚持做通用是我们在 Manus 过程中做出的一个非常关键的战略判断。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">原因在于：品牌心智是很难花钱买到的。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">你在用户心中的认知是什么，花几亿美金都很难改变。因为我们一开始就打出通用 Agent，所以后来顺势推出网站开发、幻灯片、视频等各种指令时，一切都顺理成章，用户会觉得“Manus 什么都能干，能做这个很正常”。而当时一些垂类竞品想要拓展通用任务时，用户就会觉得很奇怪：“你不是做网站的吗，怎么现在开始帮我搞数据分析了？”大家不要小看这一点。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">一个产品在用户心中对认知的占据，通常一辈子只有一次机会。要改变它巨难无比，可能要等到公司好不容易生存下来，再花很多年进行重大的战略和产品调整，才有可能改变用户的认知。因为坚持了通用方向，我们在接下来每一轮 AI 浪潮里都能享受到红利，一直持续到今天。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">另外还有一个很重要的点：我们内部有一个矩阵，横轴是用户付给我们的钱，纵轴是用户满意度。在这个坐标系里，最右上角，也就是付钱最多、满意度最高的用户群体，大家知道职业画像是什么吗？</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">不是码农。我们是一个面向非技术人群的产品，码农用户有，但相对较少。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">最满意的其实是企业的管理者：CEO、小老板、部门主管。为什么？因为在公司里，老板的杂事最多，今天想这个、明天想那个，他们发现用 Manus 实在太爽了。在 Manus 之前，从来没有哪个 AI 工具能帮他们把什么事都解决了、什么事都能商量。以前那些垂类 AI，比如营销 Agent 之类，功能非常局限，只有 Manus 是什么都能干。所以 CEO 群体用得非常爽，成为我们非常忠诚的高端用户群。坚持通用不仅帮我们拿下了高端客户群，也在用户心智中建立了壁垒，让我们能撑过这一两年的技术迭代而不被淘汰。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">当然，并不是每个人都要去做通用。我们当时能做成，是因为在那个时间点还没有人做，我们抢先占住了这个心智，后面再想做其实很难了。</p>
+
+<h2 style="font-size:20px;line-height:1.6;color:#1a1a1a;margin:40px 0 16px 0;padding-left:12px;border-left:4px solid #8b2635;">九、围绕用户生活设计产品</h2>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">第四个判断，是理解用户。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">正如前面提到的，我们一开始就定义清楚：用户是非技术人群。我们希望把模型爆发出的惊人能力赋能给所有普通人，而不是只赋能给程序员。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">因此我们在 UX 上做了很多工作：</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">第一，通过透明的执行过程建立信任。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">第二，异步、云端执行。程序员用 Cursor，输入命令后一路点击确认，可能觉得很爽。但普通人不会整天盯着电脑，他们可能在用手机，也可能在忙别的事。因此，我们给每个任务配备云端沙箱，让任务在云端运行。最常见的场景是：掏出手机布置一个任务，然后把手机放回口袋，不需要一直亮屏，等任务完成后再看结果。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">第三，让过程本身具有传播能力。我们把会话回放设计得很有叙事感。早期很多人受邀请码限制，用不了产品，但通过回放也能理解它的价值。</p>
+
+<h3 style="font-size:17px;line-height:1.6;color:#1a1a1a;margin:28px 0 12px 0;font-weight:bold;">邀请码背后：资金和推理容量的约束</h3>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">顺便提一下，早期为什么一定要用邀请码？</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">其实原因非常简单。这跟我们拍沙发视频一样：我们拍了，大家跟着拍；我们搞邀请码，其他人也跟着搞。但如果了解背后的原因，就会觉得很多模仿者的动作挺滑稽。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">当时用邀请码纯粹是因为公司账上大概只剩八九百万美金。我们刚融完一轮，但依然是一家很穷的公司。在做 Manus 之前，国内很多 VC 并不看好我们，相比其他光鲜亮丽的 AI 同行，我们账上的资金非常少。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">即使有邀请码限制，高峰期一天也要花掉 50 万美元。如果完全放开，我当时甚至担心，从 3 月 5 日发布算起，一个星期后公司就可能撑不住了。我们没有大厂的资源，也完全没想到发布会这么火，所以只能用邀请码控制节奏，随后再上线付费功能。在尚未收费的那段时间，邀请码是我们控制消耗的办法。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">一个是这个原因，第二个原因是什么？很多不在行业里面的人是不知道的：如果你今天创业，去 AWS 或者 Google Cloud Platform 这样的云平台买 API、要 token，通常不是什么问题，你想要多少有多少，当然也是因为绝大部分产品没有那么大的量。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">我们当时面临的难题是什么？Manus 是全球第一个真正面向消费者使用的通用 Agent。在此之前，所有的云平台厂商接的客户都是做 Chatbot、做情感陪伴的。在我们初期测试里面，Manus 作为一个 Agent 产品，和我们同事做的 Monica 对比下来，一个 Agent 产品和一个 Chatbot 产品，单个 DAU 消耗的 token 数量相差 200 到 1000 倍。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">这个数字有多大？向云厂商采购模型调用吞吐额度，通常会用 TPM，也就是每分钟可处理的 token 数，来描述。M 代表百万。那时在亚太地区，比较大的聊天或陪伴类产品，如果要 10M、20M TPM，已经算是头部客户。而我们上线三天时，如果把拿到邀请码的人全部放开使用，需求大约会到 800M TPM。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">这是什么概念？我打电话给某家云厂商，这里不方便点名，我说我们现在需要 500M 的 TPM。他们见惯了创业公司来夸大需求以获得折扣，就问：“你们这个是预计一年之后的量吗？”</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">我说不是未来，我现在就要 500M。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">他们根本给不出来。当时所有云厂商的算力都没那么充足，大家的算力储备都是互相看着一点点增长起来的。所以早期一方面是我们确实烧不起那么多钱，另一方面是当时的云服务厂商还没有为 AI Agent 的爆发做好算力储备。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">我们后来很凑巧地在一家云平台拿到了几百 M 的 TPM 额度，撑过了最初一个月。之后，我们不断跟各家云厂商沟通，告诉他们 Agent 会爆发，应该提前储备更多容量。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">到 5 月取消邀请码时，很多云平台已经能给创业者提供三五十 M 的 TPM 额度，因为此前已经开始增加储备。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">所以 5、6 月份我再出去讲这个事情的时候，大家都不相信，觉得我们在吹牛，说：“我们创业从来没遇到过这种问题，去找他们要 10M 随时都能给。”</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">我心想：首先，两个月前未必拿得到；其次，10M 和 1000M 之间相差 100 倍。大家可能没意识到，Manus 发布时的需求规模，在供应链上带来了多少问题。云资源、基础设施、支付，这些都需要我们作为先行者不断解决。后来再做 Agent 创业的人，未必还会遇到同样的问题。</p>
+
+<section style="background:#fdf6ec;border:1px solid #f0dfc8;border-radius:12px;padding:20px 22px;margin:24px 0;">
+<p style="margin:0 0 10px 0;line-height:1.6;"><span style="display:inline-block;font-size:12px;color:#8a5b1e;background:#f5e7d0;border-radius:4px;padding:2px 8px;letter-spacing:1px;line-height:1.6;">背景补充</span></p>
+<p style="font-size:15px;line-height:1.9;color:#555555;margin:0 0 8px 0;">当年 800M TPM 几乎把云厂商要穿了，Manus 后来的答案一部分在框架里。2026 年 9 月 28 日发布的 2.0 换上了自研执行框架 Cascade：官方口径是在一组测试配置下，比上一代少用 23.2% 的 token、任务完成时间缩短 28.2%、运行成本降低 32%——这是 Manus 自己的测量，没有第三方独立验证，读的时候要打折扣。另一部分答案在 2026 年 4 月 30 日上线的 Cloud Computer：给每个项目挂一台常驻云端的电脑，文件、软件、正在跑的进程都留在上面，合上笔记本 Agent 照样干活。有意思的是，36氪在 2.0 报道里写了一句：云电脑这部分“看起来非常像 Meta 的 Muse”，但贯彻的还是 Manus 自己的思路——Agent 要的是一个能一直待着的地方，不是更好用的聊天框。（据 Manus 官方 2.0 发布及 36氪相关报道）</p>
+</section>
+
+<h2 style="font-size:20px;line-height:1.6;color:#1a1a1a;margin:40px 0 16px 0;padding-left:12px;border-left:4px solid #8b2635;">十、给年轻创业者的建议</h2>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">最后，在座很多同学可能会成为 AI 原生创业者，我想给大家几个建议。</p>
+
+<h3 style="font-size:17px;line-height:1.6;color:#1a1a1a;margin:28px 0 12px 0;font-weight:bold;">从第一天起看见全球，而不只看见欧美</h3>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">第一个就是全球化视野。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">什么叫全球化视野？去年 6 月份的时候，法国有一个欧洲比较大的科技峰会叫 VivaTech，邀请我们去参会。当时我们挺开心的，觉得做了一个全球级的现象级产品，有峰会邀请去发言很荣幸。出发前三天，大会组委会跟我说会给我一个惊喜。当天晚上我的 Gmail 就收到了一封来自 elysee.fr，也就是法国总统府爱丽舍宫域名的邮件，说法国总统马克龙邀请我去吃晚餐。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">我第一反应是诈骗。正常人肯定都觉得是诈骗，对吧？后来组委会跟我确认，我才发现这就是他们说的惊喜。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">去法国参加完峰会，当天晚上我就去爱丽舍宫跟马克龙吃了顿饭。这两天我发小红书莫名其妙蹭了老黄的流量，就是因为当时马克龙坐我右手边，老黄坐我对面。老黄现场做了一个特别精彩的演讲，我记录下来发到小红书，这两天还特别火。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">我为什么讲这个？因为当时产品才发布三个多月，我们就被邀请到这样高规格的场合。现场有十几桌人，很多是欧洲的创始人和投资人。饭后交流时，我听他们谈创业，觉得有些思路不太对。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">我发现欧洲整个创业生态是远远不如中国的，他们是一种防御心态，讲的是“Build in Europe, build for Europe”。很多人在提这个，甚至给总统建言，说应该大力加强欧洲本土的 AI 开发，让欧洲的公司和政府都用欧洲的 AI，要不然中美太强大了。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">我听着就觉得很不对劲。当时身边还有一些美国的创始人，大家聊起来也觉得不可思议。因为场合比较正式，我说话没太挑明，但我心里想：如果我们当时是“Build in China, and build only for China”，那我今天根本不会坐在这个位置上。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">我们觉得，大语言模型最重要的价值之一，就是大幅降低了语言障碍。团队三个人里，我和 Red 在创业前都没有海外留学或生活经历，Red 之前甚至没去过美国，只有我们的首席科学家小时候在海外生活过几年。正因为语言障碍被降低，我们才能在营销、服务和思考方式上面向全球，做出这样的产品。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">但我发现欧洲很多年轻的创始人却在想怎么把自己锁在欧洲里面，我觉得这种思路是不对的。当时跟他们交流，我也提到了这点。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">今天面对国内年轻一代 AI 原生创始人，我鼓励大家从第一天就应该考虑产品如何走向全球、如何服务更多国家和地区的用户。在语言障碍已经被彻底移除的当下，出海绝对不再是个问题。我们内部所有的体系、客服等全部都是多语言的，因为语言障碍本身已经不存在了。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">AI 是上天送给中国创业者最好的礼物。以前做科技产品出海，跟美国厂商竞争非常吃力，因为他们说英文，英语在全世界仍是主导力量，导致我们在文化和语言上吃了很多亏。但在 AI 这件事上，我们有极强的能力通过产品和各维度的创新去赢得更多全球市场。所以，全球化视野是 AI 创业最应该着眼的一点。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">我还要强调，全球化不等于只做欧美。世界很大，全球南方也有很多机会。我们的收入贡献最大的市场确实是美国，但用户最多的地区是巴西。中东、欧洲、日韩、东南亚，甚至非洲，都有我们的用户。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">当你去做全球化的时候，千万不要说“国外”。我一直在纠正团队同学的用词，在内部严禁使用这个词，因为“国外”太模糊了。有了“国外”，对应的概念就是“国内”，这就把世界简单划分成二元对立，但全世界的分布极其复杂，无论是区域、语言还是文化，不同地方都有不同的机会。当你拥有真正的全球化视野，不再只盯着欧美，会看到各个区域市场的机会，从这个视角看待创业想法，一定会产生很多新东西。</p>
+
+<h3 style="font-size:17px;line-height:1.6;color:#1a1a1a;margin:28px 0 12px 0;font-weight:bold;">亲自使用产品，不用情绪化叙事代替判断</h3>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">第二点，给想做产品的同学一个建议：一定要少看自媒体。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">先声明，这不是针对在座做自媒体的朋友，大家可能属于质量较高的一批。但做产品的同学，如果每天只读自媒体文章，很容易陷入虚无感：今天“核弹级炸裂”，明天某个行业又“完了”。Manus 发布以来，不知道被说过多少次“被颠覆了”“没人用了”，但实际上，我们的业务一直在增长。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">绝大部分自媒体没有行业经验，驱动写作的核心是流量。他们需要迎合你的情绪，刺激你的多巴胺，让你开心、愤怒、疑惑、不解，从而操纵和支配你。如果你通过这种方式感知 AI 的发展，就会与现实产生极大的割裂感。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">比如在我们产品发布两三个月后，TPM 就冲到了八九百 M。我相信当时全世界范围内，除了 Cursor 和 Windsurf 等几家，没有几家 AI 创业公司烧过的 token 有我们多。在这样的情况下，很多自媒体还在教怎么做 Agent。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">语言是一种权力和工具。观点一旦写下来，看起来似乎彼此对等，但背后的依据并不一样。有些人没有接触真实市场，没有做过用户调研，也没有被线上大规模使用检验过，很多观点只是凭空想象。如果每天看这些，很容易被拖进情绪。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">真正做产品的感觉全在细节当中。大家经常听人说“OpenAI 发了什么，这个行业就死了、被颠覆了”，但你真正去用一用就会发现，OpenAI 做的很多产品其实很烂。他做十个产品可能就成功一个，只是因为他们人多、钱多，底层确实厉害，做成一个就够了，剩下九个并不好。如果你只看自媒体文章，觉得大厂已经做了、赛道没法做了就放弃，会损失掉非常多的机会。所有东西都必须自己上手去摸、去用、去实操。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">我这几年面试 AI PM 的观感特别差。很多校招同学来面试 AI PM，我问平时用什么 AI 工具，对方说了一个，我说拿出来看看最近聊了什么，最夸张的是手机上根本没装这个软件，或者打开后任务列表里只有两三个任务，显然是面试前突击应付一下。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">AI 冲击行业已经有三四年了，来面试 AI PM 竟然还不会用 AI。虽然这说明我们前期的简历筛选机制有问题，后来已经要求把实际使用经验加入筛选环节，但这件事情本身非常可怕：大家根本没意识到，做 AI 的前提是自己必须深度使用 AI。只有亲自去用，才能感受到当前模型的能力边界、产品边界到底在哪里，新的机会到底在哪里。看别人咀嚼、消化过的内容，你永远感受不到。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">你可以自己去写文章、做自媒体影响别人，我们团队也有同学写，我自己偶尔也写；但绝不能只通过自媒体获取养料，否则你对行业的认知会非常畸形，它代表不了真实情况。</p>
+
+<h3 style="font-size:17px;line-height:1.6;color:#1a1a1a;margin:28px 0 12px 0;font-weight:bold;">发现问题，拥抱未知，在行动中修正</h3>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">第三点，不单针对 AI PM，这是我从十几年前开始给所有想成为优秀产品经理的同学的建议：</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">在我看来，当前模型和技术能力已经很丰富，最缺的是发现问题、定义问题的能力。能发现问题、定义问题，清楚描述它被解决后应该是什么样，这种能力才稀缺。它不是只听创业分享就能获得的。大家还年轻、还在校园里，压力没有那么大，可以多理解社会和生活，观察身边的同学、实习公司的同事，看看有什么真实问题等待解决。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">到底社会中的这个东西是怎么运行的、那个东西是怎么运作的？到底哪个地方 AI 可以去提效？这些东西全部来自于你对生活的观察。我希望大家对生活本身有更多的好奇心：你要对这个世界感到好奇，才会想去弄明白，去琢磨这个为什么是这样、能不能变得更好一点。但我发现大家现在很多时候缺乏好奇心。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">在发了 Manus 之后接近两年的时间里，很多年轻创业者来找我，问的问题都是“你们是怎么成功的”。他们特别想让我给他们一张确定性的卷子，照着做十道题考了 100 分，就觉得该成功了。其实从来都不是这样，创业是一个高度不确定性的行当。我们在做出绝大部分决策的那一刻，其实都没有想明白，只是愿意在没想明白之前就先行动起来，然后动态调整我们的动作。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">这就是创业者跟 VC 思考非常不一样的地方。VC 需要做很长时间的研究，因为他的决策非常重，是不能后悔的，钱投出去就投出去了，所以要做大量事前的研究来保证准确率稍微高一点点。VC 喜欢问终局是什么、怎么考虑，这是他的工作，他要让胜率变高。但创业者不能这么思考，如果在开始创业之前就已经把什么事情都想清楚了、认定了所谓最佳路径，那绝对不是最佳路径。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">创业者永远是动态地活在战场里面，动态观测当下的每一天发生什么，去理解这个世界、市场和技术的变化，每一天动态做出新的决策，这样才是一个优秀的创业者。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">过去这两三年间，我确实有很强烈的感受：越来越多的年轻创业者不敢去拥抱未知，而是希望你教他一个一劳永逸的答案，教他这一枪该怎么打，营销、产品、技术该怎么做，出海怎么才能成功。他特别想知道一个确定性的答案，当我说不出确定性答案的时候，他就会觉得你肯定藏着什么秘密不让他知道；你跟他说没有秘密、必须先动手做，他又会觉得你是不愿意分享。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">所以我觉得一定要对这个世界感到好奇，未知是最美妙的东西。所有大的机会都在未知里面，不在确定性里面。如果真在确定性里面，我们也就不会做现在的事，而是会去做 AI 浏览器了。</p>
+
+<h2 style="font-size:20px;line-height:1.6;color:#1a1a1a;margin:40px 0 16px 0;padding-left:12px;border-left:4px solid #8b2635;">十一、结语：让头脑长出双手</h2>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">最后，可能很多人不一定知道 Manus 这个名字的来源。它来自 MIT 的校训 Mens et Manus，是一句拉丁语，意思是 Mind and Hand。我们为什么选这个名字？因为我们觉得所有大模型厂商都在做 Mind，也就是头脑，但在 2024 年年底那个时间点，为什么那么强的头脑仍然没办法产生很大的影响？就是因为它只有大脑，没有手。Manus 就是大模型的手，可以让大脑所有的思考都作用到真实世界里，去解决真正的问题。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">这句话同样适用于今天分享的主题：所有的思考都需要实践。创业最重要的就是要去实践，而不是仅仅停留在创业计划大赛的 PPT 推演上，或者去应对投资人那些搞得很花哨的融资演示文稿上。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">敢不敢于去实践、去面对真实社会、对世界感到好奇、去解决这个世界还没有解决的问题，这是真正的企业家精神，是创始人该干的事情，而不是过家家去扮演一个创业者的角色。这是今天想跟大家分享的主题，谢谢大家。</p>
+
+<h2 style="font-size:20px;line-height:1.6;color:#1a1a1a;margin:40px 0 16px 0;padding-left:12px;border-left:4px solid #8b2635;">十二、圆桌精选：通用 Agent 还有多少机会</h2>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">主题演讲之后是圆桌和现场问答，我把最有信息量的几段留下来，其余一笔带过。</p>
+
+<h3 style="font-size:17px;line-height:1.6;color:#1a1a1a;margin:28px 0 12px 0;font-weight:bold;">通用 Agent 的渗透率还不到 5%</h3>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">现场有人问，通用 Agent 还有多少机会。我的看法是，AI 还在早期。我用几组数字说明这个判断：现在 ChatGPT 的月活大约十亿，Codex 的月活大约两千多万。我把 Codex 也看作一种通用 Agent。如果把 ChatGPT 用户近似看成全球 AI 用户，那么仅看这套体系，Agent 的渗透率仍然不到 5%。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">即使暂时不考虑市场增长，AI 的使用人群也肯定不止十亿。假设未来覆盖约三十五亿人，基础人群就还有大约三倍的增长；Agent 渗透率从不到 5% 提升到 20% 或 30%，又有七八倍左右的空间。把两者相乘，我认为整个市场还有二三十倍的增长空间。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">现场也有不同声音，值得一并记下来：怎么定义通用 Agent 很重要。如果只是每天跟豆包聊两句、解决生活琐事，那 35 亿人群没问题；但如果真要大家每月为每个 AI 支付 100 美元，挑战非常大。现阶段 AI 更容易服务那些能显著提升生产效率的人，对大多数普通人，通用 Agent 还没有拿出超越豆包和红果以外的能力。</p>
+
+<h3 style="font-size:17px;line-height:1.6;color:#1a1a1a;margin:28px 0 12px 0;font-weight:bold;">个人 Agent 可能长成区域化产品</h3>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">关于个人 Agent，我们最近在做一款新产品叫 Q，这是我们对个人 Agent 交出的答卷。有两个观点：</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">第一，如果不是之前长期在海外生活，我们可能没有信心进入这个赛道。这个需求在中国未必那么容易理解：中国互联网发展较晚，许多基础设施直接进入了移动互联网，很多日常事务都可以在微信里完成。但如果你在海外生活过一年以上，会发现发达国家因为 IT 发展得早，保留了大量旧系统：独立的网站、邮件、电话系统、WhatsApp 预约等。比如我两个小朋友在新加坡读书，两所学校有三个不同的系统需要日常登录查看通知、提交作业；带孩子看病还要核对诊所是否在公司医保网络内，预约时这家要网站、那家要电话、有的要邮件或 WhatsApp。每天处于大量的情境切换之中，会产生强烈的烦躁和焦虑。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">第二，我认为个人 Agent 可能具有很强的区域运营属性。ChatGPT 和 Manus 所代表的聊天与通用任务产品，更容易面向全球；而个人 Agent 要处理现实生活里的服务，每个国家、甚至每座城市，都可能需要很多本地运营工作。所以这个赛道可能诞生多个区域性产品，就像打车软件没有被一家企业统一一样。这是我的个人判断。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">现场也有人提醒，个人 Agent 要先还原到需求端：并不是每个人都需要一个个人助理。有人拿 Facebook M 举例，说旅行预订会是很大的场景，但身边很多朋友在自己做旅游规划时其实非常享受。对于觉得繁琐的人来说 Agent 很有价值，但对于享受规划过程的人而言，根本不需要被替代。</p>
+
+<section style="background:#fdf6ec;border:1px solid #f0dfc8;border-radius:12px;padding:20px 22px;margin:24px 0;">
+<p style="margin:0 0 10px 0;line-height:1.6;"><span style="display:inline-block;font-size:12px;color:#8a5b1e;background:#f5e7d0;border-radius:4px;padding:2px 8px;letter-spacing:1px;line-height:1.6;">背景补充</span></p>
+<p style="font-size:15px;line-height:1.9;color:#555555;margin:0 0 8px 0;">个人 Agent 这条线，2026 年还有第三条路：开源 AI 智能体框架 OpenClaw，俗称“龙虾”。2025 年 11 月，奥地利开发者 Peter Steinberger 推出这个开源框架，因红色龙虾钳图标得名；它能直接接管电脑——读本地文件、操作浏览器、跑脚本、调 API，2026 年 1 月成了全球最火的 AI 工具之一，春节期间很多人开始在手机上“养龙虾”，3 月 6 日腾讯大厦门口还排起近千人的长龙，在腾讯云工程师协助下把 OpenClaw 装上云。用《中国新闻周刊》的说法，用户相当于“雇佣了一位个人助理，整理文件、收发邮件，只需要一句话”。它和 Manus 的对照点很干净：Manus 的 Q 与 9 月 28 日发布的 Cue 走的是云端通用路线，Cue 里每个 Agent 配邮箱、电话、钱包和独立电脑；Muse 是大厂做的个人助手；龙虾是开源、本地、自己养——本地部署保数据主权、多渠道网关、持久记忆、分层 Skill、开源免费、多模型兼容。国内厂商跟进得很快：腾讯 QClaw、字节 ArkClaw、科大讯飞 AstronClaw、阶跃星辰 StepClaw，国内版本普遍深度适配钉钉、飞书、企业微信、微信；Meta 则收购了由 OpenClaw 智能体衍生的社交平台 Moltbook。另一面也要写清楚：工信部已发布安全建议，要求禁止在内部网络使用未经审批的龙虾智能体终端；国家互联网应急中心监测到超 3 万个 OpenClaw 实例暴露在公网，CNNVD 已收录相关漏洞 82 个，其中超危 12 个。（据北京市人民政府官网、掘金横向盘点，及《中国新闻周刊》相关报道）</p>
+</section>
+
+<section style="background:#fdf6ec;border:1px solid #f0dfc8;border-radius:12px;padding:20px 22px;margin:24px 0;">
+<p style="margin:0 0 10px 0;line-height:1.6;"><span style="display:inline-block;font-size:12px;color:#8a5b1e;background:#f5e7d0;border-radius:4px;padding:2px 8px;letter-spacing:1px;line-height:1.6;">背景补充</span></p>
+<p style="font-size:15px;line-height:1.9;color:#555555;margin:0 0 8px 0;">个人 Agent 这条线，2026 年也有大厂在同一方向下注。Meta 在 2026 年 9 月 8 日推出的 Muse，定位就是“个人 AI Agent”，按 Meta 的说法，它替用户跨应用办事，从邮件、日历到订票和购物，而不是只在对话框里回答问题。扎克伯格把这条路叫作“个人超级智能”。Manus 的 Q 和 Meta 的 Muse 走的是同一条判断：个人 Agent 的价值不在聊天，而在替人把分散在各处的琐事办完。（据 Meta 官方发布及 CNBC、路透等报道）</p>
+</section>
+
+<h3 style="font-size:17px;line-height:1.6;color:#1a1a1a;margin:28px 0 12px 0;font-weight:bold;">AI 应用爆发的成本拐点</h3>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">AI 应用什么时候会真正爆发？现场讨论里，一个核心信号是整个 AI 行业的利润分布：目前整个行业的钱几乎都被英伟达、内存厂商以及数据中心赚走了。创业就像一个雨林生态，土壤和空气相当于创业的摩擦成本。移动时代的基础设施成本极低，每个人一个月几十块钱的套餐，流量几乎用不完，边际使用成本基本为零。但现在的 AI 领域完全不同，算力和内存依然极其昂贵，对所有做 AI 应用的创业者都不太友好。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">所以最关键的转折点在于硬件生态的变化：如果需求跟不上，过度投资导致硬件泡沫破裂，算力和供应端的成本就会大幅下降。如果使用成本能降到目前的十分之一，用户规模就可能迎来成百上千倍的爆发。观察 AI 应用何时爆发，核心的动态指标正是硬件与算力成本的走向。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">低延迟是另一个被反复提到的信号。一秒钟延迟就是 C 端时刻的转折点：现在可能要两万块以上月收入的人才会用 AI 产品，但未来到来时，一个月只赚三千块钱的人都会愿意花三百块钱去买。现场还有一个自下而上的例子：两位北大、清华本科毕业的真格前实习生，去年离职创业，今年发布了一个叫 hype.ai 的产品，发布十天就拿到了一万五千个 GitHub 星标。机会属于现在就在动手的人。</p>
+
+<h3 style="font-size:17px;line-height:1.6;color:#1a1a1a;margin:28px 0 12px 0;font-weight:bold;">企业 Agent：只服务老板的那一个 DAU</h3>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">今年年中时我做过一些深度思考。目前企业落地 AI 遇到了几个很大的阻力：第一，员工缺乏使用 AI 的动力和能力；第二，与企业内部系统打通很困难，集成本身有成本，接通之后，权限管理又是一系列问题；第三，成本，在国内一些场景里，老板可能会算，员工月薪 5000 元，再配 500 元 AI 额度，相当于雇佣成本增加 10%，心理上不容易接受。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">这个局其实蛮难解的。所以我最近在想一些非常大胆的想法：比如在一家公司内部，做一个只有一个 DAU 的产品，专门给老板用。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">为什么这么想？回到刚才那三个难题：第一是动力，老板通常是公司里最有动力把业务做好的人，每天都有很多问题和任务；第二是权限，老板本身就拥有全部权限，把他的电脑配好、所有系统登录好，就可以直接用，不需要复杂的权限配置；第三是成本，算在老板自己头上，可以通过咨询、培训、管理等不同预算来解决，基本上可以放开使用 token。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">我们在自己组织内部实践时发现，AI 要么不用，要用就得彻底放开；最难受的就是收着用，给每个员工配个 50 块额度，用不好大家还纠结。但现实情况是，目前企业里可能只有老板或高管层具备放开使用的条件。换到这个视角来看，解法就完全不同了：不一定非得像豆包办公或者 Work Buddy 那样，去做让普通员工做 PPT、写周报的工具。如果把目标定为一家公司只服务一个 DAU，只服务老板，整个产品的设计逻辑和可能性就会完全不同。</p>
+
+<section style="background:#fdf6ec;border:1px solid #f0dfc8;border-radius:12px;padding:20px 22px;margin:24px 0;">
+<p style="margin:0 0 10px 0;line-height:1.6;"><span style="display:inline-block;font-size:12px;color:#8a5b1e;background:#f5e7d0;border-radius:4px;padding:2px 8px;letter-spacing:1px;line-height:1.6;">背景补充</span></p>
+<p style="font-size:15px;line-height:1.9;color:#555555;margin:0 0 8px 0;">张涛想的是“一家公司只服务老板一个 DAU”，Meta 在 2026 年 9 月 29 日给出了同一个问题的另一个答案：Muse for Small Business。不是一个新 App，是加进 Muse 里的一套商业技能与连接器——Asana、Box、Canva、Dropbox、Figma、QuickBooks、Shopify、Slack、Stripe、Zoom 等 15 个工具，外加 Facebook 主页、Instagram 专业账号与 Meta 广告账户，小店老板可以在里面回客户、做报价、排内容、开发票，任何发布、发送、花钱的动作都要先经过本人批准。同一套办公 AI 的思路，在国内走的是另一条路：龙虾类产品直接住进了钉钉、飞书、企业微信、微信——科大讯飞的 AstronClaw 打通钉钉、飞书、企业微信三大办公平台，腾讯的 QClaw 原生在微信里下指令操控本地设备。大厂做连接器，龙虾做渠道适配，Manus 做通用，三条线都在抢同一批老板的时间。（据 Meta 官方 2026 年 9 月 29 日发布及相关报道，及掘金横向盘点）</p>
+</section>
+
+<h3 style="font-size:17px;line-height:1.6;color:#1a1a1a;margin:28px 0 12px 0;font-weight:bold;">一秒生成视频：软件和游戏都会变样</h3>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">从去年底我就开始讲这件事，当时很多 VC 都不相信。他们觉得视频生成只是少数人制作、多数人消费，需求并不会因为变快就爆发。我觉得他们没有理解一秒钟生成的视频模型真正意味着什么。大家还在用短剧的思维去套：生成变快了，无非就是短剧出得更快一点。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">完全不是这样。当延迟降低到一秒钟以内，未来的形态会彻底改变。举个场景：比如 GTA 即将发布，但未来可能根本不需要传统的 GTA 了。可能某个游戏主播说：“我今天想出了一个特别好玩的玩法，在重庆玩 GTA。”他设定了一些游戏规则和基础背景，你在他的直播间里就能迅速进入那个世界：那是一个以重庆为背景的 GTA，但玩的人不是主播，是房间里的每个人拿着手柄自己玩自己的，往前推摇杆角色就往前走。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">玩法基于 GTA，但背景是整个重庆。另一个人可能觉得好玩，在此基础上增加规则，再把场景切到武汉或西安。这已经超出了单纯的一人制作、多人消费，每个人都自主参与到内容的互动与创作中。游戏如此，未来的软件会不会也是这样？</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">之前伊隆找我们聊了三个小时，有一个观点给我很大启发。他认为，最终一切都会归结为视觉，包括现在的语言模型和视频模型。所以他会说，软件和游戏都会消失，因为它们的形态会彻底改变。在他的设想里，人眼能接收的信息量是一个固定的比特率，这个比特率乘以人口，就是他估算全世界推理需求上限的出发点。由此他判断，推理算力和能源远远不够。他的很多决定都基于这个判断，非常第一性原理。</p>
+
+<h3 style="font-size:17px;line-height:1.6;color:#1a1a1a;margin:28px 0 12px 0;font-weight:bold;">品味就是创始人不肯让渡的价值观</h3>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">品味这件事，现场也有人问我。我在外面一般不提这个词，因为它在国内已经被毁掉了——大家觉得做 AI 的创始人就必须有品味，天天挂在嘴边宣传，反而最没有品味。品味真正的意思，是创始人坚持什么、信仰什么、什么是绝对不能忍受的：取名字、设计 logo、每一次产品决策和设计选型，背后都是这些底层价值观，战场会变，战局也会变，但它们不会变。面对大厂竞争，先想清楚最终服务谁，再为他们设计产品和市场策略。校园 Agent 不必执念于靠它出道，拿来练手、理解真实需求、把需求转成产品形态，就是它的价值。出海不只是语言问题，要靠本地志愿者和当地员工去理解文化。品牌在 AI 的“宗教时代”比技术参数更值钱，因为用户信的是你这个人、这家公司。产品经理的底层信仰，是把科技进步和人的生活连起来。这些都没有一张确定性的卷子。先做起来，边做边改。</p>
+
+</section>
+</body>
+</html>
