@@ -16,7 +16,7 @@ from html import escape
 
 REPO = Path(__file__).resolve().parent.parent
 SITE_URL = "https://rhinocount.cn"
-DEFAULT_OG_IMAGE = f"{SITE_URL}/temple-of-heaven.png"
+DEFAULT_OG_IMAGE = f"{SITE_URL}/og-image.jpg"
 
 # ---------- helpers ----------
 
