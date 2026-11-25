@@ -1,6 +1,13 @@
 {
-  "updated": "2026-11-24T09:45:00+08:00",
+  "updated": "2026-11-25T10:00:00+08:00",
   "articles": [
+    {
+      "title": "AI大模型及安全动态日报 | 2026年11月25日（星期三）",
+      "date": "2026年11月25日（星期三）",
+      "slug": "2026-11-25",
+      "url": "ai-daily/2026-11-25-ai-daily.html",
+      "excerpt": "Genesis AI 5亿美元A轮估值35亿、至简动力1亿美元Pre-A轮；Cairn智能体11分钟发现MONAI零日、CISA列入KEV；Dante与Vero两家智能体安全新锐同周出炉；Claude Ship与Google Personal Intelligence上新。"
+    },
     {
       "title": "AI大模型及安全动态日报 | 2026年11月24日（星期二）",
       "date": "2026年11月24日（星期二）",
