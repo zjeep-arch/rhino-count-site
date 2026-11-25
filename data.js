@@ -127,6 +127,13 @@ window.SITE_DATA = {
     featured: [
       {
         type: "Essay",
+        title: "小鹏的机器人明年上班，机器人时代还没到",
+        desc: "11 月 25 日，小鹏 AI Day，IRON 新版登台。明年一季度先进门店上班，二季度对外卖，63 亿美元的机器人业务第一次有了上班时间表。但演示还没有第三方说法，量产表往后滑了一个月，价格和买家都没影。判断：别急着替小鹏宣布机器人时代来了。",
+        href: "notes/2026-11-25-小鹏IRON.html"
+      },
+
+      {
+        type: "Essay",
         title: "北大AI课 | Manus 张涛讲 AI 时代怎么做产品",
         desc: "11 月 18 日，Manus 联合创始人、首席产品官张涛走进北大 AI 课，讲 AI 时代怎么做产品：Chatbot 装不下模型的本事，停掉做了七个月的 AI 浏览器，为六个月后的模型做设计，用付费识别真实价值。附 Manus、Muse 与龙虾 OpenClaw 三条背景线。",
         href: "notes/2026-11-19-manus-zhangtao-beida.html"
@@ -744,6 +751,13 @@ window.SITE_DATA = {
         excerpt: "名字来自两部作品：恋爱的犀牛教我不计成败地热爱，基督山伯爵教我不动声色地等待。2022年底ChatGPT像一头灰犀牛从地平线走来，Count就是把它的轨迹从噪音里算出来——然后与各位同行者一起远征。",
         img: "assets/note-05.svg",
         href: "notes/why-rhino-count.html"
+      },
+      {
+        cat: "观察", num: "N° 174",
+        title: "小鹏的机器人明年上班，机器人时代还没到",
+        excerpt: "11 月 25 日，小鹏 AI Day，IRON 新版登台。明年一季度先进门店上班，二季度对外卖，63 亿美元的机器人业务第一次有了上班时间表。但演示还没有第三方说法，量产表往后滑了一个月，价格和买家都没影。判断：别急着替小鹏宣布机器人时代来了。",
+        img: "assets/note-05.svg",
+        href: "notes/2026-11-25-小鹏IRON.html"
       },
       {
         cat: "观察", num: "N° 168",
