@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>英伟达的卡进不来，285B 的模型训出来了 | 犀牛伯爵</title>
+<meta name="description" content="11 月 17 日英伟达宣布停供 H200，同一天，中国电信星辰实验室论文挂上 arXiv，285B 模型 Xing4.1 在 8192 张国产昇腾 910C 上训出来了，一张英伟达的卡没用。中等规模已经能做复杂任务，这条路从长远看是必然。">
+<meta name="keywords" content="中国电信 Xing4, 昇腾 910C, 不用英伟达, 开源大模型, 出口管制">
+</head>
+<body style="margin:0;padding:0;font-family:-apple-system,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;color:#1a1a1a;">
+<section style="max-width:680px;margin:0 auto;padding:36px 22px 60px 22px;">
+
+<p style="font-size:12px;letter-spacing:0.28em;color:#999999;text-align:center;line-height:1.6;margin:0 0 18px 0;">N°175 · 犀牛伯爵 · 深观察</p>
+
+<h1 style="font-size:28px;line-height:1.5;text-align:center;color:#1a1a1a;margin:0 0 14px 0;font-weight:bold;">英伟达的卡进不来，285B 的模型训出来了</h1>
+
+<p style="font-size:13px;color:#999999;text-align:center;line-height:1.8;margin:0 0 6px 0;">2026年11月26日 · 约4400字 · 信源，arXiv、中国电信 Hugging Face 模型卡、月之暗面 Hugging Face 模型卡、中国日报网、36氪、IT之家、The Register、腾讯云开发者社区、搜狐财经、中国电信天翼 AI 开放平台</p>
+<p style="font-size:14px;color:#666666;text-align:center;line-height:1.8;margin:0;">撰文｜犀牛伯爵</p>
+
+<p style="text-align:center;color:#dddddd;line-height:1.6;margin:26px 0;font-size:14px;letter-spacing:0.5em;">···</p>
+
+<section style="border:1px solid #ececec;border-left:3px solid #8b2635;padding:20px 22px;margin:0 0 8px 0;">
+<p style="margin:0 0 12px 0;line-height:1.6;"><span style="display:inline-block;color:#8b2635;border:1px solid #8b2635;font-size:12px;padding:3px 14px;border-radius:20px;line-height:1.6;">核心判断</span></p>
+<p style="font-size:15px;line-height:1.9;color:#333333;margin:0;">英伟达的卡进不来，285B 模型在国产芯片上训出来了，中等规模已经能做复杂任务，这条路从长远看是必然。</p>
+</section>
+
+<h2 style="font-size:20px;line-height:1.6;color:#1a1a1a;margin:40px 0 16px 0;padding-left:12px;border-left:4px solid #8b2635;">一、11 月 17 日那天，英伟达停供，星辰发论文</h2>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:24px 0 16px 0;text-align:justify;"><span style="float:left;font-family:宋体,SimSun,serif;font-size:54px;line-height:1;color:#8b2635;padding:6px 10px 0 0;font-weight:bold;">2</span>026 年 11 月 16 日，美国商务部出台新规，堵上了海外数据中心向中国企业远程提供算力的口子。新规 11 月 19 日刊登《联邦公报》，当天生效。11 月 17 日，英伟达临时 CEO 科莱特·克雷斯在财报电话会上确认，公司已停止向中国出货获批的 Hopper 数据中心产品。上一季这部分卖了 24 亿美元，下一季的指引里一分钱也没留。美国财长 11 月 20 日说，暂不打算再收紧，但停供和堵口子这两件事已经发生了。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">这不是第一次收紧。2022 年 10 月 7 日，A100、H100 对华断供，英伟达推降配版 A800、H800 顶上去。2023 年 10 月 17 日，A800、H800 也被禁，英伟达又推更低配的 H20。2025 年 4 月，H20 也被要求许可，实际禁售。四年里，管制的逻辑没有变过，卡住芯片，就卡住中国 AI。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">11 月 17 日那天，中国电信星辰实验室把一篇 138 位作者的论文挂上 arXiv。论文的标题很直白，在国产芯片和国产框架上推进前沿智能体模型。11 月 23 日，285B 模型的权重上了 Hugging Face，Apache 2.0 许可证，任何人都能下载。管制令想卡住的那条路，有人走通了，还把路标公开了。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;"><span style="color:#8b2635;font-weight:700;">英伟达的卡进不来，285B 模型在国产芯片上训出来了，中等规模已经能做复杂任务，这条路从长远看是必然。</span></p>
+
+<h2 style="font-size:20px;line-height:1.6;color:#1a1a1a;margin:40px 0 16px 0;padding-left:12px;border-left:4px solid #8b2635;">二、11 月 23 日，权重上架那天，路通没通不用听谁说</h2>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:24px 0 16px 0;text-align:justify;">先说 11 月 17 日那篇论文写了什么。星辰实验室的 Xing4 系列，从 TeleChat 一脉下来，模型架构和训练基础设施一起为昇腾芯片改。285B 的模型用 8192 张昇腾 910C 训出来，框架是华为的 MindSpore HyperParallel。整条训练栈不用英伟达，从芯片到框架都是国产的。论文还开源了一个 29B 的小模型。29B 总参数，每 token 只激活 4B，原生支持 25.6 万 token 上下文。论文里没有能力榜，没有 MMLU，没有 SWE-bench。给的数字全是系统工程口径，预填充吞吐最高是纯 MLA 基线 4.68 倍，推测解码快 2.67 到 3.77 倍，去掉流水线并行又快了 16.1%。论文自己也写了，这些数来自仿真，没算进真实服务的全部开销，实际可能比仿真乐观。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">11 月 23 日公开的，是 285B 的旗舰权重，名字叫 Xing4.1-Preview。总参数 285B，每 token 激活约 17B，45 层。256 个路由专家，每 token 走其中 8 个，再加 1 个共享专家。原生上下文 100 万 token，换算成中文大约 70 多万字，差不多一部《红楼梦》一次读完。权重是 BF16 格式，约 521 GiB，分 261 个文件，光权重就要 8 张 80GB 的卡才装得下。许可证是 Apache 2.0，商用、修改、再分发都不另收费。训练用的 8192 张卡，来自一个生产级集群。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">285B 这个数，放在国内的牌桌上看，是中等规模。月之暗面 7 月 16 日发布 Kimi K3，总参数 2.8 万亿，每 token 激活 104B。Kimi K3 是目前全球参数量最大的开源模型，总参数是 Xing4.1 的近 10 倍，激活参数是 6 倍多。阿里 7 月 19 日发布旗舰模型，约 2.4 万亿。百度 1 月的文心 5.0 也是 2.4 万亿，DeepSeek 4 月的 V4-Pro 是 1.6 万亿。万亿是今年国内头部的起跑线，285B 不在这个档位里。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">这 8192 张卡是什么卡，也值得说一句。昇腾 910C 是华为旗舰 AI 加速卡，双芯片封装。第三方分析口径，每张约 752 TFLOPS BF16 稠密算力，128GB 显存，3.2TB 每秒带宽。华为没有公开过这张卡的完整参数表，这些数来自 The Register 和 SemiAnalysis 等第三方分析。8192 张卡按这个口径折算，总算力约 6.16 EFLOPS。单卡算力按第三方口径，比英伟达对华合规主力 H20 的浮点算力高出一倍还多，显存也多出三分之一。短板在 FP8 支持和软件生态，数量和互联补回来，是这条路的基本打法。华为和硅基流动 6 月那篇论文里，384 张 910C 组成 CloudMatrix 超节点跑 DeepSeek-R1。单位算力推理效率超过 H100 和 H800 公开数据。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">光有卡还不够，跑通一次 285B 的训练，框架和系统才是难处。论文花了大篇幅写这个，拓扑感知的混合分片、优化器按属主分片执行、长序列的显存管理，CPU 亲和性隔离调度干扰。训练后智能体部分，用星辰自己的 TeleGym 平台。执行、评测、轨迹构造、策略优化接在一起，异步执行、有限过采样、部分展开，适配长短不一的任务。这篇论文真正的货，是在一套国产芯片加国产框架上，把大模型从头训到尾的方法论。</p>
+
+<h2 style="font-size:20px;line-height:1.6;color:#1a1a1a;margin:40px 0 16px 0;padding-left:12px;border-left:4px solid #8b2635;">三、跑分那张表，星辰自己也没藏着掖着</h2>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:24px 0 16px 0;text-align:justify;">路通了，名次呢。模型卡上有一张跑分表，是星辰自己测的，注脚写得明白，没标来源的分数都是自测。MMLU-Pro 85.2 分，GPQA Diamond 89.34 分，AIME 2026 92 分。编码和智能体那几项，SWE-Bench Pro V2 74.5 分，Terminal-Bench 2.1 80.8 分。Terminal-Bench 4.0 28.7 分，HLE-diamond 52.3 分。分数本身不说明问题，对照才说明问题。同一张表上，GLM-5.3 的 MMLU-Pro 是 88 分，SWE-Bench Pro V2 是 84.3 分。DeepSeek-V4.1-Flash 的 AIME 2026 是 100 分，SWE-Bench Pro V2 是 88.2 分。跟同档的 Flash 版比，星辰有输有赢，跟 DeepSeek-V4.1-Flash 这样的满血旗舰比，一行也没赢。跟 GLM-5.3 比，16 项里赢了 4 项。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">中等规模能不能做复杂任务，看这张表上最难的那几项。SWE-Bench Pro V2 考智能体写代码，74.5 分。Terminal-Bench 2.1 考在终端里完成真实任务，80.8 分。AIME 2026 考竞赛数学，92 分。这三项都是星辰自己测的，第三方复核还没有，分数要打折看。但分数的量级说明一件事，285B 这个规模，复杂任务已经做得起来了。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">还有一层要说清楚，这张表是星辰自己测的。模型卡的注脚写了，没标来源的分数都是自测。对照模型分数，来源有官方技术报告、Artificial Analysis 排行榜、第三方评测三处。同一张表上，不同行的分数来自不同的尺子，严格说不能直接比。星辰把自测和别人的数放在一张表上，本身就是一种表态。第三方独立复核现在还没有，下载权重的人多了，复核自然会来。模型卡还提醒，官方公布前的第三方数字要谨慎对待。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">论文那边更谨慎。138 位作者的论文，通篇不提 MMLU，不提 SWE-bench，不跟任何一家美国前沿模型比。论文标题里有“前沿”两个字，指规模和方法，在国产芯片上把前沿规模模型训出来，榜单名次不在论文讨论范围里。路和名次，是两件事。</p>
+
+<h2 style="font-size:20px;line-height:1.6;color:#1a1a1a;margin:40px 0 16px 0;padding-left:12px;border-left:4px solid #8b2635;">四、管制越收越紧，替代品越做越真</h2>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:24px 0 16px 0;text-align:justify;">管制越收越紧，替代品越做越真，背后是经济学里一个老机制。1932 年，英国经济学家希克斯在《工资理论》里写过，生产要素的相对价格变了，技术创新就会被诱导着去节约那个变贵的要素。这叫诱致性创新。英伟达的卡对中国已经买不到了，价格等于无穷大。被诱导的方向只有一个，绕开它。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">Xing4 的架构，就是被诱导出来的样子。昇腾 910C 的长处是矩阵计算，短处是向量计算和显存带宽。模型架构围着这个长短来改，MLA 加 DSA 注意力组合，45 层宽而浅的骨架，推测解码 DSpark，都是为了让矩阵计算单元少闲着，让向量计算少拖后腿。论文里写得明白，DSA 比其他注意力方案更依赖矩阵乘法，正好对上 910C 的 Cube 计算单元。混合线性注意力理论上更省，但门控和状态更新要吃向量性能，在 910C 的软件栈上兑现不了。架构是围着芯片的短板长出来的。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">必然这个词，要用三件事托住。管制把英伟达的卡变成了买不到的东西，需求没有消失，只会换地方。910C 和 CloudMatrix 384 把国产芯片从单卡做成了超节点。2025 年 4 月发布的 CloudMatrix 384，384 颗 910C 连在一起。Xing4 是第三件，证明不用英伟达的卡，这套东西真能训出 285B 的模型。三件事各有各的出处，叠在一起，路就通了。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">这个框架有个边界，它只解释替代路线为什么会出现，不解释替代品好不好用。管制能逼出一套能跑的训练方法，逼不出一个榜单第一名。能力高低要看跑分，跑分那张表在上一节，星辰排在中间。路通了，不等于追上了，两件事得分开看。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">反方也要写进来，路通了不等于没有短板。软件生态是最大的短板。论文自己也写了，有些架构在 910C 的软件栈上兑现不了。MindSpore 和 CANN 对 CUDA 的差距，一篇论文补不上。开发者用惯了 CUDA 的工具链，迁移要花时间。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">单卡也有代差。910C 是 7nm 级的工艺，约 752 TFLOPS 的算力，第三方分析口径里没有 FP8 支持。对上 2022 年的 H100，台积电 4nm 工艺，BF16 稠密算力 989 TFLOPS，还原生支持 FP8。工艺和单卡算力，910C 都还在后面。数量和互联补回来，是这条路的基本打法，代价是更高的成本。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">还有一个数字能说明这条路的规模不小。Epoch AI 按卫星影像和制冷模型估算，华为呼和浩特一个数据中心就有约 10.5 万张 910C，约合 8.1 万张 H100 的算力。估算本身上下浮动很大。8192 张卡训一个模型，只是这张网里的一小块。管制卡住了芯片买卖，没卡住把卡连成集群、把集群跑出模型这件事。</p>
+
+<h2 style="font-size:20px;line-height:1.6;color:#1a1a1a;margin:40px 0 16px 0;padding-left:12px;border-left:4px solid #8b2635;">五、同一个月，腾讯的开源换了许可证，星辰的没有</h2>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:24px 0 16px 0;text-align:justify;">11 月下半月，中国大模型开源接连放了两个大家伙。11 月 4 日，腾讯发布 Hy4，770B 总参数，49B 激活，100 万上下文。11 月 20 日，Hy4 的权重上架，BF16 一份约 1.5TB。11 月 23 日，星辰的 Xing4.1 权重上架。参数量上，星辰的 285B 不到 Hy4 的四成，排不到最大。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">但“开源”两个字，含金量不一样。Hy4 预览版用 Apache 2.0，正式版换成腾讯自定义的 Hy License 1.0。以 Apache 2.0 为底，另加商业条款。MaaS 业务年收入超过 5000 万美元，或者产品月活超过 1 亿，就要另行拿腾讯的书面许可。星辰这份是纯 Apache 2.0，商用不用再拿谁的书面许可。权重免费，显存不免费。Hy4 的 BF16 要 1.5TB，星辰这份 521 GiB，8 张 80GB 卡能装下，比 Hy4 好搬得多。<span style="color:#8b2635;font-weight:700;">开源这件事，星辰做得比腾讯彻底。</span></p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">这也是后来者开源的打法。星辰的模型在跑分表上排在中间，论文和跑分都说明了这一点。它开源的底气不在模型最强，在路能走通。权重公开，任何人都能下载、部署、复核，质疑不需要等下一场发布会，下载一次就知道。开源在这里既是证据，也是招募，招募开发者到自己的芯片和框架上来。</p>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">万亿参数的模型，论文里写了，已经在训了。超节点是让这件事成为可能的基础设施。2025 年 4 月，华为发布 CloudMatrix 384。384 颗昇腾 910C 连成一个超节点，约 300 PFLOPS 的 BF16 算力。首个商用节点 4 月 26 日落在电信自己的韶关集群。但万亿模型还没发布，超节点只是让这件事有了可能，离做出来还有一步。</p>
+
+<h2 style="font-size:20px;line-height:1.6;color:#1a1a1a;margin:40px 0 16px 0;padding-left:12px;border-left:4px solid #8b2635;">六、读一次模型发布，看四样东西</h2>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:24px 0 16px 0;text-align:justify;">读一次模型发布，看四样东西就够了。权重开没开，跑分谁测，架构为国产卡改没改，有没有地方真的在用。这四样东西，星辰这篇全有答案，答案不全是满分。</p>
+
+<table style="width:100%;border-collapse:collapse;margin:24px 0 8px 0;">
+<tr>
+<td style="font-size:13px;color:#999999;line-height:1.8;padding:10px 8px 10px 0;border-bottom:2px solid #1a1a1a;white-space:nowrap;"></td>
+<td style="font-size:13px;color:#999999;line-height:1.8;padding:10px 8px;border-bottom:2px solid #1a1a1a;">星辰这次</td>
+<td style="font-size:13px;color:#999999;line-height:1.8;padding:10px 8px;border-bottom:2px solid #1a1a1a;">怎么读</td>
+</tr>
+<tr>
+<td style="font-size:13px;color:#999999;line-height:1.8;padding:10px 8px 10px 0;border-bottom:1px solid #e5e5e5;white-space:nowrap;">权重开没开</td>
+<td style="font-size:14px;line-height:1.8;padding:10px 8px;border-bottom:1px solid #e5e5e5;">285B 权重 Apache 2.0 公开，521 GiB 可下载</td>
+<td style="font-size:14px;line-height:1.8;padding:10px 8px;border-bottom:1px solid #e5e5e5;">开了就是开了，下载一次就能验</td>
+</tr>
+<tr>
+<td style="font-size:13px;color:#999999;line-height:1.8;padding:10px 8px 10px 0;border-bottom:1px solid #e5e5e5;white-space:nowrap;">跑分谁测的</td>
+<td style="font-size:14px;line-height:1.8;padding:10px 8px;border-bottom:1px solid #e5e5e5;">模型卡自测，对照 GLM-5.3 与 DeepSeek-V4.1-Flash</td>
+<td style="font-size:14px;line-height:1.8;padding:10px 8px;border-bottom:1px solid #e5e5e5;">自测要打折，第三方复核还没来</td>
+</tr>
+<tr>
+<td style="font-size:13px;color:#999999;line-height:1.8;padding:10px 8px 10px 0;border-bottom:1px solid #e5e5e5;white-space:nowrap;">架构为谁改的</td>
+<td style="font-size:14px;line-height:1.8;padding:10px 8px;border-bottom:1px solid #e5e5e5;">MLA 加 DSA，45 层宽而浅，为 910C 的矩阵计算改的</td>
+<td style="font-size:14px;line-height:1.8;padding:10px 8px;border-bottom:1px solid #e5e5e5;">架构跟着芯片走，照短板改</td>
+</tr>
+<tr>
+<td style="font-size:13px;color:#999999;line-height:1.8;padding:10px 8px 10px 0;border-bottom:2px solid #1a1a1a;white-space:nowrap;">有没有地方用</td>
+<td style="font-size:14px;line-height:1.8;padding:10px 8px;border-bottom:2px solid #1a1a1a;">TokenHub 日调用超万亿，TeleAgent 用户 118 万</td>
+<td style="font-size:14px;line-height:1.8;padding:10px 8px;border-bottom:2px solid #1a1a1a;">模型有地方去，不只是论文里的数</td>
+</tr>
+</table>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:24px 0 16px 0;text-align:justify;">四样东西里，权重开了是满分，跑分是中间，架构和落地是加分。结论要等四样东西看完再下。TokenHub 那个数是中国电信三季报的口径，日调用量超万亿，汇聚了 170 多个大模型。TeleAgent 的用户到 9 月下旬突破了 118 万，日均 Token 消耗超 8000 亿。这两组数说明一件事，星辰的模型有地方去，训出来是要落地的。</p>
+
+<h2 style="font-size:20px;line-height:1.6;color:#1a1a1a;margin:40px 0 16px 0;padding-left:12px;border-left:4px solid #8b2635;">七、四年过去，门关上了，路已经绕过去了</h2>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:24px 0 16px 0;text-align:justify;">2022 年 10 月 7 日那道管制令，想卡住的是中国 AI 的路。四年里，管制收了四次，A100、H100、A800、H800、H20，一张一张禁过去。2026 年 1 月，H200 改成逐案审查，门开了一条缝；11 月 17 日，英伟达宣布停供 H200，门缝又关上了。不用英伟达的卡，路已经绕过去了。</p>
+
+<section style="border:1px solid #ececec;border-left:3px solid #8b2635;padding:20px 22px;margin:24px 0 16px 0;">
+<p style="font-size:17px;line-height:1.9;color:#1a1a1a;margin:0;">“基于国产芯片训练国际一流模型。”</p>
+<p style="font-size:13px;line-height:1.8;color:#999999;margin:12px 0 0 0;">星辰 AGI Lab，中国电信星辰基础大模型研发单位，2026 年 8 月</p>
+</section>
+
+<p style="font-size:16px;line-height:1.9;color:#333333;margin:0 0 16px 0;text-align:justify;">四年管制，芯片买卖卡住了，模型照样训出来了。英伟达的卡进不来，285B 模型在国产芯片上训出来了，中等规模已经能做复杂任务，这条路从长远看是必然。</p>
+
+<p style="border-top:1px solid #e5e5e5;margin:40px 0 0 0;padding:20px 0 0 0;font-size:13px;line-height:1.9;color:#999999;">数据来源，arXiv 2611.22115 论文原文（2026 年 11 月 17 日提交，11 月 23 日修订）确认 Xing4 系列、285B 模型、8192 张昇腾 910C、MindSpore HyperParallel、TeleGym 与万亿参数模型在训，中国电信 Hugging Face 模型卡（2026 年 11 月 23 日发布）确认 Xing4.1-Preview 规格、Apache 2.0 许可、评测表与自测注脚，IT之家 2026 年 11 月 20 日确认腾讯 Hy4 权重上架，腾讯云开发者社区与掘金确认 Hy4 正式版改用 Hy License 1.0 及商业门槛，The Register 与 SemiAnalysis 确认昇腾 910C 约 752 TFLOPS、128GB 显存、3.2TB 每秒带宽及与 H20 的对照，华为与硅基流动论文（arXiv 2506.12708）确认 CloudMatrix 384 跑 DeepSeek-R1 的效率对照，Epoch AI 确认呼和浩特数据中心约 10.5 万张 910C 的卫星影像估算，搜狐财经 2026 年 10 月 22 日与网易 2026 年中期业绩问答确认 TokenHub 日调用量超万亿、TeleAgent 用户 118 万，中国电信天翼 AI 开放平台确认星辰实验室使命与 TeleChat 发展历程，锦天城律师事务所确认 2022 年 10 月 7 日至 2026 年 1 月出口管制时间线，美国商务部工业与安全局临时最终规则《Addressing Remote Access to Advanced Semiconductors》（2026 年 11 月 16 日提交，11 月 19 日刊登《联邦公报》）确认远程算力限制与五国许可要求，中国日报网 2026 年 11 月 19 日确认 11 月 17 日临时 CEO 科莱特·克雷斯在财报电话会上确认停供、上一季获批 Hopper 产品对华销售额 24 亿美元、第四季度指引不含中国 Hopper 收入，美国财长贝森特 11 月 20 日接受 CNBC 采访（转引三立新闻网）确认暂不打算再收紧，月之暗面 Hugging Face 模型卡确认 Kimi K3 总参数 2.8T、激活 104B，新浪财经 2026 年 8 月 2 日确认 Kimi K3 7 月 16 日发布、阿里旗舰模型约 2.4 万亿、文心 5.0 2.4 万亿、DeepSeek V4-Pro 1.6 万亿，36氪（智东西）确认 CloudMatrix 384 于 2025 年 4 月发布、384 颗昇腾 910C、约 300 PFLOPS BF16 算力，民生证券研报（转引韶关发布）确认首个商用超节点 2025 年 4 月 26 日在中国电信韶关集群上线，英伟达 H100 官方参数表（转引 Spheron 与 GPU Smith）确认台积电 4nm 工艺、BF16 稠密算力 989 TFLOPS、原生支持 FP8。全部核心数字均为据报道，910C 算力参数为第三方分析口径，华为未公开完整参数表。</p>
+
+<p style="font-size:13px;line-height:1.9;color:#999999;margin:12px 0 0 0;">本文为行业观察，不构成投资建议。</p>
+
+<p style="font-size:13px;line-height:1.9;color:#999999;margin:12px 0 0 0;">如需引用，请注明出处，犀牛伯爵 rhinocount.cn</p>
+
+</section>
+</body>
+</html>
