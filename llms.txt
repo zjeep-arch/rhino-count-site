@@ -6,14 +6,18 @@
 
 - [首页](https://rhinocount.cn/): 站点总入口
 - [观察笔记](https://rhinocount.cn/notes/): 精选笔记列表（N° 编号）
-- [观察笔记归档](https://rhinocount.cn/notes/archive/): 全部 156 篇笔记，按月份分组
+- [观察笔记归档](https://rhinocount.cn/notes/archive/): 全部 158 篇笔记，按月份分组
 - [AI 日报](https://rhinocount.cn/ai-daily/): 每日 AI 大模型与产业动态速览
-- [AI 日报归档](https://rhinocount.cn/ai-daily/archive/): 全部 87 期日报，按月份分组
+- [AI 日报归档](https://rhinocount.cn/ai-daily/archive/): 全部 92 期日报，按月份分组
+- [果冻实验室](https://rhinocount.cn/builds/jelly-baby/): WebGPU 软体物理互动体验
+- [问星](https://rhinocount.cn/builds/ziwei/): 紫微斗数在线排盘与命盘解读工具
 - [RSS](https://rhinocount.cn/rss.xml): 全站最新 30 条内容
 - [sitemap](https://rhinocount.cn/sitemap.xml): 全站 URL 清单
 
 ## 最新观察笔记
 
+- [英伟达的卡进不来，285B 的模型训出来了](https://rhinocount.cn/notes/2026-11-26-中国电信Xing4.html): 11 月 17 日英伟达宣布停供 H200，同一天，中国电信星辰实验室论文挂上 arXiv，285B 模型 Xing4.1 在 8192 张国产昇腾 910C 上训出来了，一张英伟达的卡没用。中等规模已经能做复杂任务，这
+- [小鹏的机器人明年上班，机器人时代还没到](https://rhinocount.cn/notes/2026-11-25-小鹏IRON.html): 小鹏 IRON 明年一季度先进门店上班，二季度对外卖，63 亿美元的机器人业务第一次有了上班时间表。但现场演示只是对话没有干活，量产表往后滑了一个月，价格和买家还没影，全球同行也一样没跑通。小鹏机器人明年上班，时代还没到
 - [北大AI课 | Manus 张涛讲 AI 时代怎么做产品](https://rhinocount.cn/notes/2026-11-19-manus-zhangtao-beida.html): Manus 联合创始人、首席产品官张涛 2026 年 11 月 18 日北大 AI 课分享全文整理：Chatbot 装不下模型的本事，停掉做了七个月的 AI 浏览器，为六个月后的模型做设计，用付费识别真实价值。附 Man
 - [当年出走OpenAI的七剑客，这次拿到了大结果吗](https://rhinocount.cn/notes/2026-11-18-anthropic-dingjia.html): Anthropic今晚定价，认购接近7倍。但7倍是情绪，不是定价。260亿美元私募的买家是供应商自己，锁定期一到，16亿股就能卖。RSI让顶级模型越跑越快，历史说安装期的钱先修路，回报后到。
 - [41 项公投 40 项反对，AI 还建得下去吗？](https://rhinocount.cn/notes/2026-11-17-xuanpiao.html): 11 月 16 日，奥特曼在 Semafor 峰会上承认，硅谷推销 AI 的那套说法搞砸了。两周前的中期选举，41 项地方数据中心公投里 40 项投向了限制。AI 的瓶颈不再是芯片和钱，是选票。
@@ -32,8 +36,6 @@
 - [马斯克说，以后的钱要按瓦特算](https://rhinocount.cn/notes/2026-10-25-musk-watt-currency.html): 马斯克在 Isaacson 新播客《The Builders》首期说，货币将按瓦特、吨位等物理量计价，只有 AI 和机器人能解美国国债。美国联邦债务 40.3 万亿美元，年净利息 1.05 万亿美元已超国防开支。判断，他
 - [智元的机器人，已经在武汉夜市上班了](https://rhinocount.cn/notes/2026-10-24-zhiyuan-jiangtan.html): 智元远征 A3 Ultra 在武汉汉口江滩夜市连续卖了 18 天零食，827 单，抓取成功率 97% 以上。这家公司三年累计下线 2 万台通用具身机器人，2025 年出货全球第一。判断，出货量是入场券，出货之后的连续工时
 - [黄仁勋说，AI 卡在了水管工手里](https://rhinocount.cn/notes/2026-10-23-huangrenxun-shuigong.html): 黄仁勋在 Dwarkesh 访谈中说 AI 的瓶颈是水管工和电工。美国制造业就业占比从 22% 降到 8%，电工年均缺口 8 万，数据中心用电 2030 年将占全美 11.8%。判断，AI 的瓶颈从硅变成了人，四十年的产
-- [AI 一周挖出藏了 14 年的漏洞，全世界连夜打补丁](https://rhinocount.cn/notes/2026-10-22-php2shell-ai.html): PHP2Shell 事件，藏在 PHP 核心十几年的两个 9.2 分漏洞被 AI 一周挖出，补丁却走了两个月，细节提前泄露逼多国政府网站下线。判断，攻防用同一套模型，拼的是补丁速度和信息的公私域边界。
-- [万科还在水里，保利已经上岸了](https://rhinocount.cn/notes/2026-10-21-fangjia-fenceng.html): 9 月 70 城房价发布，一线二手连涨 7 个月，上海同比率先转正；同一周房企榜出炉，千亿房企只剩 5 家。判断，这不是回暖，是分层上岸，价格表和房企榜说的是同一件事，能上岸的名单在收缩。
 
 ## 常读笔记
 
@@ -47,14 +49,14 @@
 
 ## 最新 AI 日报
 
+- [AI大模型及安全动态日报 | 2026年11月27日（星期五）](https://rhinocount.cn/ai-daily/2026-11-27-ai-daily.html)
+- [AI大模型及安全动态日报 | 2026年11月26日（星期四）](https://rhinocount.cn/ai-daily/2026-11-26-ai-daily.html)
+- [AI大模型及安全动态日报 | 2026年11月25日（星期三）](https://rhinocount.cn/ai-daily/2026-11-25-ai-daily.html)
+- [AI大模型及安全动态日报 | 2026年11月24日（星期二）](https://rhinocount.cn/ai-daily/2026-11-24-ai-daily.html)
+- [AI大模型及安全动态日报 | 2026年11月23日（星期一）](https://rhinocount.cn/ai-daily/2026-11-23-ai-daily.html)
 - [AI大模型及安全动态日报 | 2026年11月20日（星期五）](https://rhinocount.cn/ai-daily/2026-11-20-ai-daily.html)
 - [AI大模型及安全动态日报 | 2026年11月19日（星期四）](https://rhinocount.cn/ai-daily/2026-11-19-ai-daily.html)
 - [AI大模型及安全动态日报 | 2026年11月18日（星期三）](https://rhinocount.cn/ai-daily/2026-11-18-ai-daily.html)
-- [AI大模型及安全动态日报 | 2026年11月17日（星期二）](https://rhinocount.cn/ai-daily/2026-11-17-ai-daily.html)
-- [AI大模型及安全动态日报 | 2026年11月16日（星期一）](https://rhinocount.cn/ai-daily/2026-11-16-ai-daily.html)
-- [AI大模型及安全动态日报 | 2026年11月13日（星期五）](https://rhinocount.cn/ai-daily/2026-11-13-ai-daily.html)
-- [AI大模型及安全动态日报 | 2026年11月12日（星期四）](https://rhinocount.cn/ai-daily/2026-11-12-ai-daily.html)
-- [AI大模型及安全动态日报 | 2026年11月11日（星期三）](https://rhinocount.cn/ai-daily/2026-11-11-ai-daily.html)
 
 ## 关于主理人
 
