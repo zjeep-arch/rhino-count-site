@@ -21,9 +21,9 @@ window.SITE_DATA = {
 
   /* ---------- 浏览器标签 + SEO ---------- */
   meta: {
-    title: "犀牛伯爵 · RHINO COUNT — 在 AI 的噪音里，寻找真正重要的变化",
-    description: "犀牛伯爵（RHINO COUNT）· AI Native Studio。记录 AI 如何改变技术、商业与人的工作方式。Agent 工作流、模型观察、产业判断与内容实验。",
-    keywords: "犀牛伯爵, AI, Agent, AI-native, 大模型, 学习方法, 北大, 小红书, AI 大厂, Prompt, 时评, 宏观分析, 创作实验室",
+    title: "犀牛伯爵 RHINO COUNT｜AI 模型、Agent 与科技商业观察",
+    description: "犀牛伯爵（RHINO COUNT）是 AI 内容与产品实践者的个人创作站，持续观察 AI 模型、Agent、科技商业与工作方式，并将判断做成交互作品。",
+    keywords: "犀牛伯爵, RHINO COUNT, AI模型, AI Agent, 大模型, 科技商业, AI产品观察",
     author: "犀牛伯爵",
     siteUrl: "https://rhinocount.cn/",
     ogImage: "assets/og-card.svg"

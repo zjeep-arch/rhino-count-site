@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Generate sitemap.xml for rhinocount.cn with real lastmod from git history."""
 import os
+import re
 import subprocess
 import xml.sax.saxutils as saxutils
 from datetime import datetime
@@ -56,6 +57,14 @@ EXCLUDE_PATTERNS = [
     "-wechat.html",
 ]
 
+# Only list public, canonical product pages that are intentionally meant to be
+# discovered in search. Experimental pages remain excluded until they have
+# durable, useful landing-page content.
+PUBLIC_BUILD_PAGES = [
+    ("builds/jelly-baby/index.html", "/builds/jelly-baby/", "0.7"),
+    ("builds/ziwei/index.html", "/builds/ziwei/", "0.7"),
+]
+
 
 def should_exclude(filename):
     """Check if a file should be excluded from sitemap."""
@@ -70,6 +79,12 @@ def should_exclude(filename):
 def get_git_lastmod(filepath):
     """Get the last modified date from git log for a file."""
     try:
+        working_tree = subprocess.run(
+            ["git", "diff", "--quiet", "HEAD", "--", filepath],
+            cwd=REPO_ROOT
+        )
+        if working_tree.returncode == 1:
+            return datetime.now().strftime("%Y-%m-%d")
         result = subprocess.run(
             ["git", "log", "-1", "--format=%ad", "--date=short", "--", filepath],
             capture_output=True, text=True, cwd=REPO_ROOT
@@ -193,14 +208,24 @@ def collect_urls():
                 "changefreq": changefreq,
                 "priority": priority
             })
-    # Keep the flagship astrology application discoverable outside the journal.
-    ziwei_index = REPO_ROOT / "builds" / "ziwei" / "index.html"
-    if ziwei_index.exists():
+    # Keep selected public applications discoverable outside the journal.
+    for rel_path, url_path, priority in PUBLIC_BUILD_PAGES:
+        build_page = REPO_ROOT / rel_path
+        if not build_page.exists():
+            continue
+        html = build_page.read_text(encoding="utf-8", errors="ignore")
+        head = html.split("</head>", 1)[0]
+        if re.search(r'<meta\b[^>]*\bname=["\']robots["\'][^>]*\bnoindex', head, re.I):
+            continue
+        canonical = re.search(r'<link\b[^>]*\brel=["\']canonical["\'][^>]*\bhref=["\']([^"\']+)', head, re.I)
+        expected = f"{SITE_URL}{url_path}"
+        if not canonical or canonical.group(1).rstrip("/") != expected.rstrip("/"):
+            continue
         urls.append({
-            "loc": f"{SITE_URL}/builds/ziwei/",
-            "lastmod": get_file_lastmod("builds/ziwei/index.html"),
+            "loc": expected,
+            "lastmod": get_file_lastmod(rel_path),
             "changefreq": "monthly",
-            "priority": "0.7"
+            "priority": priority
         })
 
     return urls

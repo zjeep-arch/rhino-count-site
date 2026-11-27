@@ -111,6 +111,8 @@ def main() -> int:
         f"- [观察笔记归档]({SITE}/notes/archive/): 全部 {len(notes)} 篇笔记，按月份分组",
         f"- [AI 日报]({SITE}/ai-daily/): 每日 AI 大模型与产业动态速览",
         f"- [AI 日报归档]({SITE}/ai-daily/archive/): 全部 {len(dailies)} 期日报，按月份分组",
+        f"- [果冻实验室]({SITE}/builds/jelly-baby/): WebGPU 软体物理互动体验",
+        f"- [问星]({SITE}/builds/ziwei/): 紫微斗数在线排盘与命盘解读工具",
         f"- [RSS]({SITE}/rss.xml): 全站最新 30 条内容",
         f"- [sitemap]({SITE}/sitemap.xml): 全站 URL 清单",
         "",
